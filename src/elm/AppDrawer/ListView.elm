@@ -1,4 +1,4 @@
-module AppDrawer.List exposing (..)
+module AppDrawer.ListView exposing (..)
 
 import AppColors
 import X.Html exposing (onClickStopPropagation)
@@ -6,7 +6,7 @@ import Material
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Entity
-import OldGroupEntity.ViewModel
+import AppDrawer.GroupViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -18,7 +18,7 @@ import Model exposing (..)
 import View.Shared exposing (..)
 
 
-view appVM model =
+init appVM model =
     let
         { contexts, projects } =
             appVM
@@ -140,7 +140,7 @@ archivedItems vm =
         ]
 
 
-entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
+entityListItem : AppDrawer.GroupViewModel.DocumentWithNameViewModel -> Html Msg
 entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)

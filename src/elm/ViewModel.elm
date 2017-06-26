@@ -6,17 +6,11 @@ import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
 import Entity
-
-import OldGroupEntity.ViewModel exposing (DocumentWithNameViewModel)
-
+import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Model exposing (Msg)
 import Project
 import Set exposing (Set)
 import Time exposing (Time)
-
-
-
-
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
@@ -25,8 +19,8 @@ import Model exposing (ViewType(..))
 
 
 type alias Model =
-    { contexts : OldGroupEntity.ViewModel.ViewModel
-    , projects : OldGroupEntity.ViewModel.ViewModel
+    { contexts : AppDrawer.GroupViewModel.ViewModel
+    , projects : AppDrawer.GroupViewModel.ViewModel
     , viewName : String
     , header : { backgroundColor : Color.Color }
     , now : Time
@@ -40,10 +34,10 @@ create : Model.Model -> Model
 create model =
     let
         contextsVM =
-            OldGroupEntity.ViewModel.contexts model
+            AppDrawer.GroupViewModel.contexts model
 
         projectsVM =
-            OldGroupEntity.ViewModel.projects model
+            AppDrawer.GroupViewModel.projects model
 
         mainViewType =
             model.mainViewType

@@ -1,4 +1,4 @@
-module OldGroupEntity.ViewModel exposing (..)
+module AppDrawer.GroupViewModel exposing (..)
 
 import AppColors
 import AppDrawer.Model
@@ -7,24 +7,14 @@ import Context
 import Dict
 import Dict.Extra
 import Document
-
 import Entity exposing (Entity)
-
 import GroupDoc
-
 import Model exposing (EntityListViewType, ViewType(..))
 import Model exposing (Msg, commonMsg)
 import Todo
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import Model
 import Project
-
-
 import X.Maybe
 
 

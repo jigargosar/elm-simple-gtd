@@ -1,36 +1,17 @@
 module View.AppDrawer exposing (..)
 
 import AppColors
-import AppDrawer.List
+import AppDrawer.ListView
 import AppUrl
-
-
 import X.Html exposing (boolProperty)
-
-
 import Html exposing (Attribute, Html, a, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
 import Html.Events exposing (..)
-
 import Model exposing (Msg(OnSetViewType), commonMsg)
-
-
-
-
-
-
-
-
-
-
 import Model exposing (..)
-
-
 import Polymer.App as App
-
 import X.Function.Infix exposing (..)
 import Model exposing (..)
-
 import ViewModel
 import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
@@ -67,7 +48,7 @@ view appVM model =
                     , leftHeader model
                     ]
                 ]
-            , AppDrawer.List.view appVM model
+            , AppDrawer.ListView.init appVM model
             ]
         ]
 

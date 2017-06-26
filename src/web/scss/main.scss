@@ -59,11 +59,6 @@ $background: #fff;
 //$brand-text-color: darken($primary-color, 5%);
 $brand-text-color: $background;
 
-a.primary-action {
-  @extend .btn;
-  //background-color: $primary-color;
-}
-
 #landing {
   background-color: $background;
   width: 100vw;

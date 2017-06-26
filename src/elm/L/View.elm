@@ -44,7 +44,7 @@ navHeader =
                          ,
                       -}
                       li [] [ a [] [ text "Sign In" ] ]
-                    , li [] [ a [ class "primary-action", href AppUrl.getStarted ] [ text "Get Started" ] ]
+                    , li [] [ a [ class "btn primary-action", href AppUrl.getStarted ] [ text "Get Started" ] ]
                     ]
                 ]
             ]
@@ -58,7 +58,7 @@ banner =
                 [ div [ class "col s12 m6" ]
                     [ h3 [] [ text "Simply Get To Done" ]
                     , h5 [] [ text "Achieve more, with mind like water" ]
-                    , a [ class "primary-action", href AppUrl.getStarted ] [ text "Get Started - It's Free" ]
+                    , a [ class "btn primary-action", href AppUrl.getStarted ] [ text "Get Started - It's Free" ]
                     , p [ class "" ] [ text "No sign up required!" ]
                     ]
                 ]

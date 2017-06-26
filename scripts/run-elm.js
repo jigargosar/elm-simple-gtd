@@ -30,3 +30,7 @@ export const removeUnusedImports = function() {
         }
     });
 }
+
+export const parseWPD = function() {
+    run("tail -F wp-dev-server.log")
+}

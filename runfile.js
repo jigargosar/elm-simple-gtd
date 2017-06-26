@@ -1,4 +1,3 @@
-"use strict"
 import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"

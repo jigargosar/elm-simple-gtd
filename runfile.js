@@ -105,7 +105,7 @@ export const hot = runF(`webpack-dev-server --hot --inline`, {
 })
 
 export const hotmon = () => {
-    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json \
+    run(`nodemon --watch runfile.js --watch src/elm/Native/** --watch webpack.config.babel.js --watch package.json \
             --watch elm-package.json --exec "run hot"`)
 }
 

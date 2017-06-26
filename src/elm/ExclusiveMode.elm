@@ -1,25 +1,14 @@
 module ExclusiveMode exposing (..)
 
 import ActionList
-
 import GroupDoc.EditForm
-
 import Entity
-
 import LaunchBar.Form
-
 import GroupDoc.EditForm
-
 import Todo.Menu
 import Todo.NewForm
 import Todo.GroupForm
-
-
-
 import X.Function.Infix exposing (..)
-
-
-
 import Todo.Form
 import Todo.ReminderForm
 

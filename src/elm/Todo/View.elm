@@ -2,32 +2,18 @@ module Todo.View exposing (..)
 
 import Context
 import Date
-
 import Dict
 import Document
-
-
 import Entity
-
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
-
-
-
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
-
 import Material
-
-
 import Model
 import Model exposing (Msg, commonMsg)
-
-
 import Project
 import Regex
-
-
 import RegexHelper
 import Set
 import String.Extra as String
@@ -39,9 +25,7 @@ import Todo.Msg
 import Todo.NewForm
 import Todo.ReminderForm
 import Todo.View.Menu
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -51,9 +35,6 @@ import Polymer.Paper as Paper
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import ViewModel
 import WebComponents exposing (..)
-
-
-
 
 
 type alias TodoViewModel =

@@ -3,12 +3,8 @@ module Entity.Tree exposing (..)
 import Context
 import Entity
 import Todo
-
 import Toolkit.Operators exposing (..)
-
-
 import List.Extra as List
-
 import Project
 
 

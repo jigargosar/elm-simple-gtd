@@ -6,16 +6,8 @@ import Menu
 import Model exposing (commonMsg)
 import Project
 import Todo
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import Html exposing (..)
-
-
-
 import Todo.GroupForm
 
 

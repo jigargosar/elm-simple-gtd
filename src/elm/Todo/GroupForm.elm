@@ -4,12 +4,6 @@ import Menu
 import Todo
 
 
-
-
-
-
-
-
 type alias Model =
     { todo : Todo.Model
     , menuState : Menu.State

@@ -3,23 +3,14 @@ module GroupDoc.ViewModel exposing (..)
 import AppColors
 import Color
 import Context
-
 import Document
-
 import Entity exposing (Entity)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Html
-
 import Model exposing (EntityListViewType, ViewType(..))
 import Model exposing (Msg, commonMsg)
 import Todo
-
-
-
-
-
-
 import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)

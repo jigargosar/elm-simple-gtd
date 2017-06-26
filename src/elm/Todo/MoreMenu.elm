@@ -3,12 +3,6 @@ module Todo.MoreMenu exposing (..)
 import Html
 import Menu
 import Todo.Menu
-
-
-
-
-
-
 import Model
 
 

@@ -5,22 +5,15 @@ import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
 import X.Record exposing (over, set)
-
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Maybe.Extra as Maybe
-
-
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-
 import List
-
-
-
 import Time exposing (Time)
 import Project
 import Store

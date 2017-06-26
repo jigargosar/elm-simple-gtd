@@ -3,12 +3,6 @@ module View.GetStarted exposing (..)
 import AppUrl
 import Model
 import Todo.Msg
-
-
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

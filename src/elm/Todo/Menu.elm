@@ -1,14 +1,7 @@
 module Todo.Menu exposing (..)
 
-
 import Menu
 import Todo
-
-
-
-
-
-
 
 
 type alias Model =

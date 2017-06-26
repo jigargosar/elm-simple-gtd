@@ -1,16 +1,6 @@
 module Todo.NewForm exposing (..)
 
-
-
 import Entity
-
-
-
-
-
-
-
-
 import Todo
 
 

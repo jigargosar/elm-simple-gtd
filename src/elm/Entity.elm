@@ -4,12 +4,8 @@ import Context
 import Document
 import X.List as List
 import RouteUrl.Builder
-
-
-
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
-
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Project

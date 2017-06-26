@@ -4,17 +4,12 @@ import X.Time
 import Material
 import Model
 import Todo.TimeTracker exposing (State(..))
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
 import Todo
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
 
 
 -- View

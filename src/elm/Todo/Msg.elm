@@ -1,15 +1,8 @@
 module Todo.Msg exposing (..)
 
-
 import Notification exposing (Response)
 import Todo
 import Todo.NewForm
-
-
-
-
-
-
 import Todo.ReminderForm
 
 

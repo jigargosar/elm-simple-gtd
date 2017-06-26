@@ -5,7 +5,6 @@ import DomPorts
 import ExclusiveMode
 import Entity
 import Todo.NewForm
-
 import X.Record as Record exposing (set)
 import X.Return
 import X.Time
@@ -18,7 +17,6 @@ import Todo.Msg exposing (Msg(..))
 import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe

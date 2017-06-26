@@ -5,12 +5,7 @@ import Document
 import Menu
 import Time exposing (Time)
 import Time.Format
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import Todo
 
 

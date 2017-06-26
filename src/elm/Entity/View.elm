@@ -1,4 +1,4 @@
-module EntityList.View exposing (..)
+module Entity.View exposing (..)
 
 import Entity exposing (Entity)
 import Entity.Tree
@@ -18,8 +18,8 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
-listView viewType model appViewModel =
+list : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
+list viewType model appViewModel =
     let
         grouping =
             Model.createGrouping viewType model

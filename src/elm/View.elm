@@ -2,7 +2,7 @@ module View exposing (init)
 
 import ActionList.View
 import CustomSync
-import EntityList.View
+import Entity.View
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
@@ -119,7 +119,7 @@ mainContent viewModel model =
     div [ id "main-content" ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
-                EntityList.View.listView viewType model viewModel
+                Entity.View.list viewType model viewModel
 
             SyncView ->
                 CustomSync.view model

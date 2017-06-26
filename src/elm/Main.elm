@@ -420,10 +420,7 @@ logMsg msg model =
                 _ ->
                     let
                         _ =
-                            X.Debug.log "X.Debug.log" ("msg4")
-
-                        _ =
-                            Debug.log "Debug.log" ("msg4")
+                            X.Debug.log "X.Debug.log" (msg)
                     in
                         Nothing
     in

@@ -1,7 +1,7 @@
 import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
-import runElm from "./scripts/run-elm"
+import * as runElm from "./scripts/run-elm"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)
 
@@ -95,8 +95,10 @@ const prod = () => {
     }
 }
 
-export const hot = runF(`webpack-dev-server --hot --inline | tee -a \\
-        >( sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' >> wp.txt )`, {
+const refCmd = `webpack-dev-server --hot --inline | tee -a \\
+        >( sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' >> wp-dev-server.log )`
+
+export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.log`, {
     env: {
         NODE_ENV: "development",
         npm_package_version: fetchPackageJson().version,
@@ -191,4 +193,4 @@ export function dummy2(...args) {
 
 dummy.help = 'logs all options and args to console'
 
-export const removeUnusedImports = runElm
+export const removeUnusedImports = runElm.removeUnusedImports

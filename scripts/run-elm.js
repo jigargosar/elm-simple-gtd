@@ -2,7 +2,7 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import LineDriver from "line-driver"
 
-export default function () {
+export const removeUnusedImports = function() {
     run("elm-make --warn src/elm/Main.elm --output /dev/null 2> /tmp/main-warn.txt")
     LineDriver.read({
         in: '/tmp/main-warn.txt',

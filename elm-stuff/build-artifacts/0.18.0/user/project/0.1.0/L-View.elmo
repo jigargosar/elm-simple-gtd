@@ -511,41 +511,23 @@ var _user$project$L_View$navHeader = A2(
 											ctor: '::',
 											_0: A2(
 												_elm_lang$html$Html$a,
-												{ctor: '[]'},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Sign In'),
+													_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$getStarted),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Get Started'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
 										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$li,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$a,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$getStarted),
-															_1: {ctor: '[]'}
-														}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Get Started'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
+									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
 						}

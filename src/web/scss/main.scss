@@ -64,8 +64,6 @@ $brand-text-color: $background;
 }
 
 #landing nav {
-  //box-shadow: unset;
-  //background-color: transparent;
 
   .brand-logo {
     .logo-font-icon {
@@ -99,16 +97,6 @@ $brand-text-color: $background;
     }
   }
 
-  ul li {
-    a {
-      color: $background;
-    }
-    a.primary-action {
-      //@extend .btn-flat;
-      color: $background;
-      //background-color: $primary-color;
-    }
-  }
 }
 
 #landing .banner {

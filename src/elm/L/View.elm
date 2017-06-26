@@ -40,11 +40,7 @@ navHeader =
                         ]
                     ]
                 , ul [ class "right hide-on-med-and-down" ]
-                    [ {- li [] [ a [] [ text "Open Source" ] ]
-                         ,
-                      -}
-                      li [] [ a [] [ text "Sign In" ] ]
-                    , li [] [ a [ class "btn primary-action", href AppUrl.getStarted ] [ text "Get Started" ] ]
+                    [ li [] [ a [ class "btn primary-action", href AppUrl.getStarted ] [ text "Get Started" ] ]
                     ]
                 ]
             ]

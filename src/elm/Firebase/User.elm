@@ -1,14 +1,7 @@
 module Firebase.User exposing (..)
 
-
-
-
-
-
-
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
-
 
 
 type alias Model =

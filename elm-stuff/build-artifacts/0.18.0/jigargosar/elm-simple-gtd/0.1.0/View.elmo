@@ -38,7 +38,7 @@ var _jigargosar$elm_simple_gtd$View$mainContent = F2(
 				_0: function () {
 					var _p0 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
 					if (_p0.ctor === 'EntityListView') {
-						return A3(_jigargosar$elm_simple_gtd$EntityList_View$listView, _p0._0, model, viewModel);
+						return A3(_jigargosar$elm_simple_gtd$Entity_View$list, _p0._0, model, viewModel);
 					} else {
 						return _jigargosar$elm_simple_gtd$CustomSync$view(model);
 					}

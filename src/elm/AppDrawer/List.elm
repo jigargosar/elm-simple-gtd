@@ -1,41 +1,21 @@
 module AppDrawer.List exposing (..)
 
 import AppColors
-
 import X.Html exposing (onClickStopPropagation)
 import Material
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
-
 import Entity
 import OldGroupEntity.ViewModel
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
 import Model exposing (Msg(OnSetViewType), commonMsg)
-
-
-
 import Toolkit.Operators exposing (..)
-
-
-
-
-
 import Model exposing (..)
-
-
 import X.Function.Infix exposing (..)
 import Model exposing (..)
 import View.Shared exposing (..)
-
-
 
 
 view appVM model =

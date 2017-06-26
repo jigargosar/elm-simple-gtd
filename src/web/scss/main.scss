@@ -58,21 +58,5 @@ $text-color: $off-black;
 $background: #fff;
 
 @import "landing";
-
-#app-view {
-  background-color: color("grey", "lighten-4");
-}
-
-
-.google-sign-up.btn{
-  background-color: $google-primary-color;
-  text-transform: none;
-  padding-left: 0;
-
-  img.google-logo{
-    width: 36px;
-    height: 36px;
-    margin-right: 1rem;
-  }
-}
+@import "app";
 

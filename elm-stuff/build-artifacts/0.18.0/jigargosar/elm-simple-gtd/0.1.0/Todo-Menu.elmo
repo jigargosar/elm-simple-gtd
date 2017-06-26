@@ -1,0 +1,13 @@
+var _jigargosar$elm_simple_gtd$Todo_Menu$setMenuState = F2(
+	function (menuState, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{menuState: menuState});
+	});
+var _jigargosar$elm_simple_gtd$Todo_Menu$init = function (taskId) {
+	return {taskId: taskId, menuState: _jigargosar$elm_simple_gtd$Menu$initState};
+};
+var _jigargosar$elm_simple_gtd$Todo_Menu$Model = F2(
+	function (a, b) {
+		return {taskId: a, menuState: b};
+	});

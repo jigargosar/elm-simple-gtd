@@ -1,0 +1,309 @@
+var _jigargosar$elm_simple_gtd$View_Header$itemLink = F2(
+	function (url, content) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$itemBody,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$target('_blank'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(url),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(content),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
+	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
+	var userAccountAttribute = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			maybeUserProfile,
+			function (_p0) {
+				return A2(
+					_elm_lang$html$Html_Attributes$attribute,
+					'src',
+					_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p0));
+			}),
+		_jigargosar$elm_simple_gtd$WebComponents$iconA('account-circle'));
+	var userSignInLink = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			maybeUserProfile,
+			function (_p1) {
+				return A2(
+					_edvail$elm_polymer$Polymer_Paper$item,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnSignOut),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('SignOut'),
+						_1: {ctor: '[]'}
+					});
+			}),
+		A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnSignIn),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('SignIn'),
+				_1: {ctor: '[]'}
+			}));
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$menuButton,
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$WebComponents$dynamicAlign,
+			_1: {
+				ctor: '::',
+				_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'noOverlap', true),
+				_1: {
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'closeOnActivate', true),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'iron-icon',
+				{
+					ctor: '::',
+					_0: userAccountAttribute,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('account'),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger,
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$listbox,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class(''),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownContent,
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: userSignInLink,
+						_1: {
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$View_Header$itemLink, _jigargosar$elm_simple_gtd$AppUrl$forumsURL, 'Forums/Discuss'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_jigargosar$elm_simple_gtd$View_Header$itemLink,
+									_jigargosar$elm_simple_gtd$AppUrl$changeLogURL,
+									A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', m.appVersion)),
+								_1: {
+									ctor: '::',
+									_0: A2(_jigargosar$elm_simple_gtd$View_Header$itemLink, _jigargosar$elm_simple_gtd$AppUrl$github, 'Github'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
+	function (content, m) {
+		return {
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$WebComponents$paperIconButton,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$WebComponents$iconA('menu'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$ToggleDrawer),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('hide-when-wide'),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'max-width', '80%'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					},
+					content),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$View_Header$menu(m),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+	});
+var _jigargosar$elm_simple_gtd$View_Header$titleHeaderContent = F2(
+	function (viewModel, m) {
+		var titleText = viewModel.viewName;
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h5,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis title'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$title(titleText),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(titleText),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _jigargosar$elm_simple_gtd$View_Header$headerView = F2(
+	function (viewModel, m) {
+		var content = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_jigargosar$elm_simple_gtd$Todo_TimeTracker_View$maybe(m),
+				_jigargosar$elm_simple_gtd$XList$singleton),
+			A2(_jigargosar$elm_simple_gtd$View_Header$titleHeaderContent, viewModel, m));
+		return A2(_jigargosar$elm_simple_gtd$View_Header$headerWithContent, content, m);
+	});
+var _jigargosar$elm_simple_gtd$View_Header$init = F2(
+	function (viewModel, m) {
+		var layoutAttributes = _jigargosar$elm_simple_gtd$Model$isLayoutAutoNarrow(m) ? {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'condenses', ''),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'reveals', ''),
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fixed', ''),
+			_1: {ctor: '[]'}
+		};
+		var attributes = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('main-header'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'effects', 'waterfall'),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			layoutAttributes);
+		return A2(
+			_edvail$elm_polymer$Polymer_App$header,
+			attributes,
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_App$toolbar,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'color', 'white'),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+										'background-color',
+										_jigargosar$elm_simple_gtd$AppColors$encode(viewModel.header.backgroundColor)),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					A2(_jigargosar$elm_simple_gtd$View_Header$headerView, viewModel, m)),
+				_1: {ctor: '[]'}
+			});
+	});

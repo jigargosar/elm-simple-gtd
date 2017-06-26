@@ -71,20 +71,21 @@ export default {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: function (fileName) {
-                    return !_.test(/crypto-random-string/, fileName)
-                           && _.test(/(node_modules|bower_components)/, fileName)
-                },
-                use: 'babel-loader',
-            },
-            {
                 test: /\.elm$/,
                 exclude: [/elm-stuff/, /node_modules/],
                 // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&warn=true"],
                 use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
                 // use: ["elm-hot-loader", "elm-webpack-loader"],
+            },
+
+            {
+                test: /\.js$/,
+                exclude: function (fileName) {
+                    return !_.test(/crypto-random-string/, fileName)
+                           && _.test(/(node_modules|bower_components)/, fileName)
+                },
+                use: 'babel-loader',
             },
             /*{
                 test: /\.scss$/,
@@ -145,7 +146,7 @@ export default {
             },
         ],
 
-        noParse: [/\.elm$/],
+        // noParse: [/\.elm$/],
 
     },
 

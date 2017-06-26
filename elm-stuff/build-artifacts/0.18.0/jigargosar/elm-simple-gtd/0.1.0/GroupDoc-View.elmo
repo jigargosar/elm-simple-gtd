@@ -1,0 +1,138 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem = function (vm) {
+	var archiveButton = A2(
+		_jigargosar$elm_simple_gtd$Material$iconButton,
+		vm.archive.iconName,
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(vm.archive.onClick),
+			_1: {
+				ctor: '::',
+				_0: vm.tabindexAV,
+				_1: {ctor: '[]'}
+			}
+		});
+	var editButton = vm.isEditable ? A2(
+		_jigargosar$elm_simple_gtd$Material$iconButton,
+		'create',
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(vm.startEditingMsg),
+			_1: {
+				ctor: '::',
+				_0: vm.tabindexAV,
+				_1: {ctor: '[]'}
+			}
+		}) : A2(
+		_elm_lang$html$Html$span,
+		{ctor: '[]'},
+		{ctor: '[]'});
+	var editOrArchiveButton = vm.archive.isArchived ? archiveButton : editButton;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: vm.tabindexAV,
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(vm.onKeyDownMsg),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'entity-item focusable-list-item collection-item', true),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified center'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h5,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('font-nowrap ellipsis'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_jigargosar$elm_simple_gtd$View_Shared$badge,
+								A2(_elm_lang$core$Basics_ops['++'], vm.namePrefix, vm.name),
+								vm.count),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('layout horizontal center'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: editOrArchiveButton,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$GroupDoc_View$initHeaderKeyed = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.id,
+		_1: _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem(vm)
+	};
+};
+var _jigargosar$elm_simple_gtd$GroupDoc_View$item = F2(
+	function (todoView, vm) {
+		var getTabIndexAVForTodo = function (_p0) {
+			return vm.getTabIndexAVForEntity(
+				_jigargosar$elm_simple_gtd$Entity$Task(_p0));
+		};
+		return A3(
+			_elm_lang$html$Html_Keyed$node,
+			'div',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('collection'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: vm.id,
+					_1: _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem(vm)
+				},
+				_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.todoList, todoView)
+			});
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_View$initKeyed = F2(
+	function (todoView, vm) {
+		return {
+			ctor: '_Tuple2',
+			_0: vm.id,
+			_1: A2(_jigargosar$elm_simple_gtd$GroupDoc_View$item, todoView, vm)
+		};
+	});

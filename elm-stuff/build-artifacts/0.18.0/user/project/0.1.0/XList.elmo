@@ -1,7 +1,0 @@
-var _user$project$XList$singleton = function (item) {
-	return {
-		ctor: '::',
-		_0: item,
-		_1: {ctor: '[]'}
-	};
-};

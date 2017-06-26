@@ -1,5 +1,6 @@
 module X.Keyboard exposing (..)
 
+import X.Debug
 import X.Decode exposing (traceDecoder)
 import X.Html
 import Html exposing (Attribute)
@@ -76,7 +77,7 @@ succeedIfDecodedKeyEquals key msg =
             (\actualKey ->
                 let
                     _ =
-                        Debug.log "actualKey, expectedKey" ( actualKey, key )
+                        X.Debug.log "actualKey, expectedKey" ( actualKey, key )
                 in
                     if key == actualKey then
                         D.succeed msg
@@ -96,7 +97,7 @@ onEnter msg =
 
 
 ups toMsg =
-    Keyboard.ups (toMsg << KX.fromCode {- << Debug.log "global key code" -})
+    Keyboard.ups (toMsg << KX.fromCode {- << X.Debug.log "global key code" -})
 
 
 downs =

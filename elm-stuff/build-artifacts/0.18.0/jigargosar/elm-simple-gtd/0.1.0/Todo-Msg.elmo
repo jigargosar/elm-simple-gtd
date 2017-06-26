@@ -1,0 +1,37 @@
+var _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick = {ctor: 'OnProcessPendingNotificationCronTick'};
+var _jigargosar$elm_simple_gtd$Todo_Msg$OnShowMoreMenu = function (a) {
+	return {ctor: 'OnShowMoreMenu', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm = F2(
+	function (a, b) {
+		return {ctor: 'UpdateReminderForm', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Msg$Upsert = function (a) {
+	return {ctor: 'Upsert', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateSetupFormTaskText = F2(
+	function (a, b) {
+		return {ctor: 'UpdateSetupFormTaskText', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker = {ctor: 'UpdateTimeTracker'};
+var _jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning = {ctor: 'GotoRunning'};
+var _jigargosar$elm_simple_gtd$Todo_Msg$ShowReminderOverlayForTodoId = function (a) {
+	return {ctor: 'ShowReminderOverlayForTodoId', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$OnReminderNotificationClicked = function (a) {
+	return {ctor: 'OnReminderNotificationClicked', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$RunningNotificationResponse = function (a) {
+	return {ctor: 'RunningNotificationResponse', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$TogglePaused = {ctor: 'TogglePaused'};
+var _jigargosar$elm_simple_gtd$Todo_Msg$StopRunning = {ctor: 'StopRunning'};
+var _jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning = function (a) {
+	return {ctor: 'SwitchOrStartRunning', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$InitRunning = function (a) {
+	return {ctor: 'InitRunning', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Msg$ToggleRunning = function (a) {
+	return {ctor: 'ToggleRunning', _0: a};
+};

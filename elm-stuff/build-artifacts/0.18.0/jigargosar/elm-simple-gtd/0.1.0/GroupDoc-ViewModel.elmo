@@ -1,0 +1,157 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor = _jigargosar$elm_simple_gtd$AppColors$nullContextColor;
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
+	function (config, todoList, groupDoc) {
+		var name = groupDoc.name;
+		var isNull = config.isNull(groupDoc);
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: config.defaultColor};
+		var appHeader = {
+			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
+			backgroundColor: icon.color
+		};
+		var onEntityAction = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
+			config.toEntity(groupDoc));
+		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$NOOP : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$NOOP : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);
+		var onKeyDownMsg = function (_p0) {
+			var _p1 = _p0;
+			var _p2 = _p1.key;
+			switch (_p2.ctor) {
+				case 'CharE':
+					return startEditingMsg;
+				case 'Delete':
+					return toggleDeleteMsg;
+				case 'CharG':
+					return onEntityAction(_jigargosar$elm_simple_gtd$Entity$Goto);
+				default:
+					return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+			}
+		};
+		var archive = function () {
+			var isArchived = _jigargosar$elm_simple_gtd$GroupDoc$isArchived(groupDoc);
+			var iconName = isArchived ? 'unarchive' : 'archive';
+			return {
+				iconName: iconName,
+				onClick: onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleArchived),
+				isArchived: isArchived
+			};
+		}();
+		var id = _jigargosar$elm_simple_gtd$Document$getId(groupDoc);
+		return {
+			id: id,
+			name: name,
+			namePrefix: config.namePrefix,
+			count: _elm_lang$core$List$length(todoList),
+			isEditable: !isNull,
+			isDeleted: _jigargosar$elm_simple_gtd$Document$isDeleted(groupDoc),
+			archive: archive,
+			startEditingMsg: startEditingMsg,
+			onDeleteClicked: toggleDeleteMsg,
+			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity$Save),
+			onNameChanged: function (_p3) {
+				return onEntityAction(
+					_jigargosar$elm_simple_gtd$Entity$NameChanged(_p3));
+			},
+			onCancelClicked: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+			icon: icon,
+			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity$OnFocusIn),
+			onKeyDownMsg: onKeyDownMsg,
+			tabindexAV: config.getTabIndexAVForEntity(
+				config.toEntity(groupDoc)),
+			todoList: todoList,
+			getTabIndexAVForEntity: config.getTabIndexAVForEntity
+		};
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup = F3(
+	function (getTabIndexAVForEntity, todoList, context) {
+		var config = {
+			groupByFn: _jigargosar$elm_simple_gtd$Todo$getContextId,
+			namePrefix: '@',
+			toEntity: _jigargosar$elm_simple_gtd$Entity$fromContext,
+			nullEntity: _jigargosar$elm_simple_gtd$Context$null,
+			isNull: _jigargosar$elm_simple_gtd$Context$isNull,
+			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
+			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _jigargosar$elm_simple_gtd$Entity$ContextView,
+			getTabIndexAVForEntity: getTabIndexAVForEntity
+		};
+		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, context);
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup = F3(
+	function (getTabIndexAVForEntity, todoList, project) {
+		var config = {
+			groupByFn: _jigargosar$elm_simple_gtd$Todo$getProjectId,
+			namePrefix: '#',
+			toEntity: _jigargosar$elm_simple_gtd$Entity$fromProject,
+			nullEntity: _jigargosar$elm_simple_gtd$Project$null,
+			isNull: _jigargosar$elm_simple_gtd$Project$isNull,
+			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
+			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _jigargosar$elm_simple_gtd$Entity$ProjectView,
+			getTabIndexAVForEntity: getTabIndexAVForEntity
+		};
+		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, project);
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$IconVM = F2(
+	function (a, b) {
+		return {name: a, color: b};
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$ViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, archive: f, isEditable: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o, tabindexAV: p, todoList: q, getTabIndexAVForEntity: r};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {groupByFn: a, namePrefix: b, toEntity: c, nullEntity: d, isNull: e, nullIcon: f, defaultColor: g, defaultIconName: h, getViewType: i, getTabIndexAVForEntity: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

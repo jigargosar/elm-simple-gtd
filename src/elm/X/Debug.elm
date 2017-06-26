@@ -1,11 +1,6 @@
-module X.Debug exposing (tap, tapLog)
+module X.Debug exposing (tap, tapLog, log)
 
 import Logger
-import Logger
-
-
--- Only needed when using nativeLog to print logs:
-
 import Native.Logger
 
 
@@ -34,7 +29,7 @@ loggerConfig =
     -- To use elm logger:
     -- Logger.defaultConfig Logger.Info
     -- This uses colored console output via native logger
-    Logger.customConfig Logger.Info nativeLog
+    Logger.customConfig Logger.Debug nativeLog
 
 
 

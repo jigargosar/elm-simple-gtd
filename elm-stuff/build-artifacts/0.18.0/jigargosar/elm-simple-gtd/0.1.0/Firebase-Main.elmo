@@ -1,0 +1,75 @@
+var _jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$signInModel);
+var _jigargosar$elm_simple_gtd$Firebase_Main$signIn = _elm_lang$core$Native_Platform.outgoingPort(
+	'signIn',
+	function (v) {
+		return null;
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Main$signOut = _elm_lang$core$Native_Platform.outgoingPort(
+	'signOut',
+	function (v) {
+		return null;
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
+	function (andThenUpdate, now, msg) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'OnSignIn':
+				return _Fresheyeball$elm_return$Return$command(
+					_jigargosar$elm_simple_gtd$Firebase_Main$signIn(
+						{ctor: '_Tuple0'}));
+			case 'OnSkipSignIn':
+				return function (_p1) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup,
+						A2(
+							andThenUpdate,
+							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+							A2(
+								_Fresheyeball$elm_return$Return$map,
+								_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setSkipSignIn),
+								_p1)));
+				};
+			case 'OnSignOut':
+				return function (_p2) {
+					return A2(
+						_Fresheyeball$elm_return$Return$command,
+						_elm_lang$navigation$Navigation$load(_jigargosar$elm_simple_gtd$AppUrl$landing),
+						A2(
+							andThenUpdate,
+							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+							A2(
+								_Fresheyeball$elm_return$Return$map,
+								_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToTriedSignOut),
+								A2(
+									_Fresheyeball$elm_return$Return$command,
+									_jigargosar$elm_simple_gtd$Firebase_Main$signOut(
+										{ctor: '_Tuple0'}),
+									_p2))));
+				};
+			default:
+				return _Fresheyeball$elm_return$Return$andThen(
+					function (model) {
+						return function () {
+							var _p3 = model.user;
+							if (_p3.ctor === 'SignedOut') {
+								return _elm_lang$core$Basics$identity;
+							} else {
+								return function (_p4) {
+									return A2(
+										andThenUpdate,
+										_jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup,
+										A2(
+											andThenUpdate,
+											_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+											A2(
+												_Fresheyeball$elm_return$Return$map,
+												_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToSignInSuccess),
+												_p4)));
+								};
+							}
+						}()(
+							_Fresheyeball$elm_return$Return$singleton(model));
+					});
+		}
+	});

@@ -48,6 +48,7 @@ import Json.Encode as E
 import LaunchBar
 import Todo.GroupForm
 import Todo.TimeTracker
+import X.Debug
 
 
 type Msg
@@ -318,7 +319,7 @@ init flags =
 
         localPref =
             D.decodeValue localPrefDecoder flags.localPref
-                |> Result.mapError (Debug.log "Unable to decode localPref")
+                |> Result.mapError (X.Debug.log "Unable to decode localPref")
                 != defaultLocalPref
 
         editMode =

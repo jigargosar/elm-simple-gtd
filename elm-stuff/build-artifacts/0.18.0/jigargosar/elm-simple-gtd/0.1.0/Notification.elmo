@@ -1,0 +1,34 @@
+var _jigargosar$elm_simple_gtd$Notification$startAlarm = _elm_lang$core$Native_Platform.outgoingPort(
+	'startAlarm',
+	function (v) {
+		return null;
+	});
+var _jigargosar$elm_simple_gtd$Notification$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
+	'stopAlarm',
+	function (v) {
+		return null;
+	});
+var _jigargosar$elm_simple_gtd$Notification$closeNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'closeNotification',
+	function (v) {
+		return v;
+	});
+var _jigargosar$elm_simple_gtd$Notification$Response = F2(
+	function (a, b) {
+		return {action: a, data: b};
+	});
+var _jigargosar$elm_simple_gtd$Notification$Request = F5(
+	function (a, b, c, d, e) {
+		return {tag: a, title: b, body: c, actions: d, data: e};
+	});
+var _jigargosar$elm_simple_gtd$Notification$TodoNotification = F3(
+	function (a, b, c) {
+		return {title: a, tag: b, data: c};
+	});
+var _jigargosar$elm_simple_gtd$Notification$TodoNotificationData = function (a) {
+	return {id: a};
+};
+var _jigargosar$elm_simple_gtd$Notification$TodoNotificationEvent = F2(
+	function (a, b) {
+		return {action: a, data: b};
+	});

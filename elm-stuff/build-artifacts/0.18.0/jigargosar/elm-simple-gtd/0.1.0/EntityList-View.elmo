@@ -1,0 +1,156 @@
+var _jigargosar$elm_simple_gtd$EntityList_View$flatTodoListView = F2(
+	function (title, todoListView) {
+		var truncatedList = A2(_elm_lang$core$List$take, 75, todoListView);
+		var count = _elm_lang$core$List$length(todoListView);
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: title,
+				_1: A3(
+					_elm_lang$html$Html_Keyed$node,
+					'div',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('todo-list collection'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: title,
+							_1: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('collection-item'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h5,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(_jigargosar$elm_simple_gtd$View_Shared$badge, title, count),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								})
+						},
+						_1: truncatedList
+					})
+			},
+			_1: {ctor: '[]'}
+		};
+	});
+var _jigargosar$elm_simple_gtd$EntityList_View$groupHeaderView = function (vm) {
+	return _jigargosar$elm_simple_gtd$GroupDoc_View$initHeaderKeyed(vm);
+};
+var _jigargosar$elm_simple_gtd$EntityList_View$groupView = F2(
+	function (todoView, vm) {
+		return A2(_jigargosar$elm_simple_gtd$GroupDoc_View$initKeyed, todoView, vm);
+	});
+var _jigargosar$elm_simple_gtd$EntityList_View$keyedViewList = F3(
+	function (grouping, maybeFocusInEntity, appViewModel) {
+		var hasFocusIn = function (entity) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					maybeFocusInEntity,
+					_jigargosar$elm_simple_gtd$Entity$equalById(entity)),
+				false);
+		};
+		var getTabIndexAVForEntity = function (entity) {
+			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
+			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		};
+		var createContextVM = function (_p0) {
+			var _p1 = _p0;
+			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.context);
+		};
+		var createProjectVM = function (_p2) {
+			var _p3 = _p2;
+			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
+		};
+		var todoView = function (todo) {
+			var canBeFocused = hasFocusIn(
+				_jigargosar$elm_simple_gtd$Entity$Task(todo));
+			return _jigargosar$elm_simple_gtd$Todo_View$keyedItem(
+				A3(_jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel, appViewModel, canBeFocused, todo));
+		};
+		var multiContextView = function (list) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				list,
+				function (_p4) {
+					return A2(
+						_jigargosar$elm_simple_gtd$EntityList_View$groupView,
+						todoView,
+						createContextVM(_p4));
+				});
+		};
+		var multiProjectView = function (list) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				list,
+				function (_p5) {
+					return A2(
+						_jigargosar$elm_simple_gtd$EntityList_View$groupView,
+						todoView,
+						createProjectVM(_p5));
+				});
+		};
+		var todoListView = _elm_lang$core$List$map(todoView);
+		var _p6 = grouping;
+		switch (_p6.ctor) {
+			case 'ContextRoot':
+				var header = _jigargosar$elm_simple_gtd$EntityList_View$groupHeaderView(
+					createContextVM(_p6._0));
+				return {
+					ctor: '::',
+					_0: header,
+					_1: multiProjectView(_p6._1)
+				};
+			case 'ProjectRoot':
+				var header = _jigargosar$elm_simple_gtd$EntityList_View$groupHeaderView(
+					createProjectVM(_p6._0));
+				return {
+					ctor: '::',
+					_0: header,
+					_1: multiContextView(_p6._1)
+				};
+			case 'ContextForest':
+				return multiContextView(_p6._0);
+			case 'ProjectForest':
+				return multiProjectView(_p6._0);
+			default:
+				return A2(
+					_jigargosar$elm_simple_gtd$EntityList_View$flatTodoListView,
+					_p6._0,
+					todoListView(_p6._1));
+		}
+	});
+var _jigargosar$elm_simple_gtd$EntityList_View$listView = F3(
+	function (viewType, model, appViewModel) {
+		var grouping = A2(_jigargosar$elm_simple_gtd$Model$createGrouping, viewType, model);
+		var entityList = _jigargosar$elm_simple_gtd$Entity_Tree$flatten(grouping);
+		var maybeFocusInEntity = A2(_jigargosar$elm_simple_gtd$Model$getMaybeFocusInEntity, entityList, model);
+		return A3(
+			_elm_lang$html$Html_Keyed$node,
+			'div',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('entity-list focusable-list'),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(
+						_jigargosar$elm_simple_gtd$Model$OnEntityListKeyDown(entityList)),
+					_1: {ctor: '[]'}
+				}
+			},
+			A3(_jigargosar$elm_simple_gtd$EntityList_View$keyedViewList, grouping, maybeFocusInEntity, appViewModel));
+	});

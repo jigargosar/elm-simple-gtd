@@ -1,0 +1,75 @@
+var _jigargosar$elm_simple_gtd$ExclusiveMode$SyncForm = function (a) {
+	return {uri: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$None = {ctor: 'None'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$none = _jigargosar$elm_simple_gtd$ExclusiveMode$None;
+var _jigargosar$elm_simple_gtd$ExclusiveMode$Setup = function (a) {
+	return {ctor: 'Setup', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$SignInOverlay = {ctor: 'SignInOverlay'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay = _jigargosar$elm_simple_gtd$ExclusiveMode$SignInOverlay;
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditSyncSettings = function (a) {
+	return {ctor: 'EditSyncSettings', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$ActionList = function (a) {
+	return {ctor: 'ActionList', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$initActionList = _jigargosar$elm_simple_gtd$ExclusiveMode$ActionList(_jigargosar$elm_simple_gtd$ActionList$init);
+var _jigargosar$elm_simple_gtd$ExclusiveMode$LaunchBar = function (a) {
+	return {ctor: 'LaunchBar', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoProject = function (a) {
+	return {ctor: 'EditTodoProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoContext = function (a) {
+	return {ctor: 'EditTodoContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoReminder = function (a) {
+	return {ctor: 'EditTodoReminder', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$TaskMoreMenu = function (a) {
+	return {ctor: 'TaskMoreMenu', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$taskMoreMenu = function (_p0) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$TaskMoreMenu(
+		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p0));
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditProject = function (a) {
+	return {ctor: 'EditProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editProject = function (_p1) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$EditProject(
+		_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject(_p1));
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode$EditProject);
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditContext = function (a) {
+	return {ctor: 'EditContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editContext = function (_p2) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$EditContext(
+		_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p2));
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode$EditContext);
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTask = function (a) {
+	return {ctor: 'EditTask', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editTask = function (_p3) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$EditTask(
+		_jigargosar$elm_simple_gtd$Todo_Form$create(_p3));
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (entity) {
+	var _p4 = entity;
+	if (_p4.ctor === 'Group') {
+		var _p5 = _p4._0;
+		if (_p5.ctor === 'Context') {
+			return _jigargosar$elm_simple_gtd$ExclusiveMode$editContext(_p5._0);
+		} else {
+			return _jigargosar$elm_simple_gtd$ExclusiveMode$editProject(_p5._0);
+		}
+	} else {
+		return _jigargosar$elm_simple_gtd$ExclusiveMode$editTask(_p4._0);
+	}
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo = function (a) {
+	return {ctor: 'NewTodo', _0: a};
+};

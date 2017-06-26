@@ -1,0 +1,307 @@
+var _jigargosar$elm_simple_gtd$Entity$getPathFromViewType = function (viewType) {
+	var _p0 = viewType;
+	switch (_p0.ctor) {
+		case 'ContextsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'contexts',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'projects',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectView':
+			var _p1 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p1) ? {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: 'NotAssigned',
+					_1: {ctor: '[]'}
+				}
+			} : {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: _p1,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ContextView':
+			var _p2 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p2) ? {
+				ctor: '::',
+				_0: 'Inbox',
+				_1: {ctor: '[]'}
+			} : {
+				ctor: '::',
+				_0: 'context',
+				_1: {
+					ctor: '::',
+					_0: _p2,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'BinView':
+			return {
+				ctor: '::',
+				_0: 'bin',
+				_1: {ctor: '[]'}
+			};
+		case 'DoneView':
+			return {
+				ctor: '::',
+				_0: 'done',
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'recent',
+				_1: {ctor: '[]'}
+			};
+	}
+};
+var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
+	function (e1, e2) {
+		var eq = _jigargosar$elm_simple_gtd$Document$equalById;
+		var _p3 = {ctor: '_Tuple2', _0: e1, _1: e2};
+		_v1_2:
+		do {
+			if (_p3.ctor === '_Tuple2') {
+				if (_p3._0.ctor === 'Group') {
+					if (_p3._1.ctor === 'Group') {
+						var _p4 = {ctor: '_Tuple2', _0: _p3._0._0, _1: _p3._1._0};
+						_v2_2:
+						do {
+							if (_p4.ctor === '_Tuple2') {
+								if (_p4._0.ctor === 'Project') {
+									if (_p4._1.ctor === 'Project') {
+										return A2(eq, _p4._0._0, _p4._1._0);
+									} else {
+										break _v2_2;
+									}
+								} else {
+									if (_p4._1.ctor === 'Context') {
+										return A2(eq, _p4._0._0, _p4._1._0);
+									} else {
+										break _v2_2;
+									}
+								}
+							} else {
+								break _v2_2;
+							}
+						} while(false);
+						return false;
+					} else {
+						break _v1_2;
+					}
+				} else {
+					if (_p3._1.ctor === 'Task') {
+						return A2(eq, _p3._0._0, _p3._1._0);
+					} else {
+						break _v1_2;
+					}
+				}
+			} else {
+				break _v1_2;
+			}
+		} while(false);
+		return false;
+	});
+var _jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn = F3(
+	function (offsetIndex, entityList, fromEntity) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElse,
+			_elm_lang$core$List$head(entityList),
+			A2(
+				_jigargosar$elm_simple_gtd$X_List$atIndexIn,
+				entityList,
+				A2(
+					_jigargosar$elm_simple_gtd$X_List$clampIndexIn,
+					entityList,
+					A2(
+						_jigargosar$elm_simple_gtd$X_Function$add,
+						offsetIndex,
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_elm_community$list_extra$List_Extra$findIndex,
+								_jigargosar$elm_simple_gtd$Entity$equalById(fromEntity),
+								entityList),
+							0)))));
+	});
+var _jigargosar$elm_simple_gtd$Entity$getId = function (entity) {
+	var _p5 = entity;
+	if (_p5.ctor === 'Task') {
+		return _jigargosar$elm_simple_gtd$Document$getId(_p5._0);
+	} else {
+		var _p6 = _p5._0;
+		if (_p6.ctor === 'Project') {
+			return _jigargosar$elm_simple_gtd$Document$getId(_p6._0);
+		} else {
+			return _jigargosar$elm_simple_gtd$Document$getId(_p6._0);
+		}
+	}
+};
+var _jigargosar$elm_simple_gtd$Entity$Context = function (a) {
+	return {ctor: 'Context', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$initContextGroup = _jigargosar$elm_simple_gtd$Entity$Context;
+var _jigargosar$elm_simple_gtd$Entity$Project = function (a) {
+	return {ctor: 'Project', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$initProjectGroup = _jigargosar$elm_simple_gtd$Entity$Project;
+var _jigargosar$elm_simple_gtd$Entity$Task = function (a) {
+	return {ctor: 'Task', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$fromTask = _jigargosar$elm_simple_gtd$Entity$Task;
+var _jigargosar$elm_simple_gtd$Entity$Group = function (a) {
+	return {ctor: 'Group', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$fromContext = function (_p7) {
+	return _jigargosar$elm_simple_gtd$Entity$Group(
+		_jigargosar$elm_simple_gtd$Entity$Context(_p7));
+};
+var _jigargosar$elm_simple_gtd$Entity$fromProject = function (_p8) {
+	return _jigargosar$elm_simple_gtd$Entity$Group(
+		_jigargosar$elm_simple_gtd$Entity$Project(_p8));
+};
+var _jigargosar$elm_simple_gtd$Entity$RecentView = {ctor: 'RecentView'};
+var _jigargosar$elm_simple_gtd$Entity$DoneView = {ctor: 'DoneView'};
+var _jigargosar$elm_simple_gtd$Entity$BinView = {ctor: 'BinView'};
+var _jigargosar$elm_simple_gtd$Entity$ProjectView = function (a) {
+	return {ctor: 'ProjectView', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$ProjectsView = {ctor: 'ProjectsView'};
+var _jigargosar$elm_simple_gtd$Entity$ContextView = function (a) {
+	return {ctor: 'ContextView', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$ContextsView = {ctor: 'ContextsView'};
+var _jigargosar$elm_simple_gtd$Entity$defaultListView = _jigargosar$elm_simple_gtd$Entity$ContextsView;
+var _jigargosar$elm_simple_gtd$Entity$routeUrlBuilderToMaybeListViewType = function (builder) {
+	var _p9 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+	_v5_9:
+	do {
+		if (_p9.ctor === '::') {
+			if (_p9._1.ctor === '[]') {
+				switch (_p9._0) {
+					case 'bin':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity$BinView);
+					case 'done':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity$DoneView);
+					case 'recent':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity$RecentView);
+					case 'Inbox':
+						return _elm_lang$core$Maybe$Just(
+							_jigargosar$elm_simple_gtd$Entity$ContextView(''));
+					default:
+						break _v5_9;
+				}
+			} else {
+				if (_p9._1._1.ctor === '[]') {
+					switch (_p9._0) {
+						case 'lists':
+							switch (_p9._1._0) {
+								case 'contexts':
+									return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity$ContextsView);
+								case 'projects':
+									return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity$ProjectsView);
+								default:
+									break _v5_9;
+							}
+						case 'context':
+							return _elm_lang$core$Maybe$Just(
+								_jigargosar$elm_simple_gtd$Entity$ContextView(_p9._1._0));
+						case 'project':
+							if (_p9._1._0 === 'NotAssigned') {
+								return _elm_lang$core$Maybe$Just(
+									_jigargosar$elm_simple_gtd$Entity$ProjectView(''));
+							} else {
+								return _elm_lang$core$Maybe$Just(
+									_jigargosar$elm_simple_gtd$Entity$ProjectView(_p9._1._0));
+							}
+						default:
+							break _v5_9;
+					}
+				} else {
+					break _v5_9;
+				}
+			}
+		} else {
+			break _v5_9;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
+var _jigargosar$elm_simple_gtd$Entity$getTodoGotoGroupView = F2(
+	function (todo, prevView) {
+		var projectView = _jigargosar$elm_simple_gtd$Entity$ProjectView(
+			_jigargosar$elm_simple_gtd$Todo$getProjectId(todo));
+		var contextView = _jigargosar$elm_simple_gtd$Entity$ContextView(
+			_jigargosar$elm_simple_gtd$Todo$getContextId(todo));
+		var _p10 = prevView;
+		switch (_p10.ctor) {
+			case 'ProjectsView':
+				return contextView;
+			case 'ProjectView':
+				return contextView;
+			case 'ContextsView':
+				return projectView;
+			case 'ContextView':
+				return projectView;
+			case 'BinView':
+				return _jigargosar$elm_simple_gtd$Entity$ContextsView;
+			case 'DoneView':
+				return _jigargosar$elm_simple_gtd$Entity$ContextsView;
+			default:
+				return _jigargosar$elm_simple_gtd$Entity$ContextsView;
+		}
+	});
+var _jigargosar$elm_simple_gtd$Entity$toViewType = F2(
+	function (maybePrevView, entity) {
+		var _p11 = entity;
+		if (_p11.ctor === 'Group') {
+			var _p12 = _p11._0;
+			if (_p12.ctor === 'Context') {
+				return _jigargosar$elm_simple_gtd$Entity$ContextView(
+					_jigargosar$elm_simple_gtd$Document$getId(_p12._0));
+			} else {
+				return _jigargosar$elm_simple_gtd$Entity$ProjectView(
+					_jigargosar$elm_simple_gtd$Document$getId(_p12._0));
+			}
+		} else {
+			var _p13 = _p11._0;
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					maybePrevView,
+					_jigargosar$elm_simple_gtd$Entity$getTodoGotoGroupView(_p13)),
+				_jigargosar$elm_simple_gtd$Entity$ContextView(
+					_jigargosar$elm_simple_gtd$Todo$getContextId(_p13)));
+		}
+	});
+var _jigargosar$elm_simple_gtd$Entity$Goto = {ctor: 'Goto'};
+var _jigargosar$elm_simple_gtd$Entity$ToggleSelected = {ctor: 'ToggleSelected'};
+var _jigargosar$elm_simple_gtd$Entity$OnFocusIn = {ctor: 'OnFocusIn'};
+var _jigargosar$elm_simple_gtd$Entity$NameChanged = function (a) {
+	return {ctor: 'NameChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity$Save = {ctor: 'Save'};
+var _jigargosar$elm_simple_gtd$Entity$ToggleArchived = {ctor: 'ToggleArchived'};
+var _jigargosar$elm_simple_gtd$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
+var _jigargosar$elm_simple_gtd$Entity$StartEditing = {ctor: 'StartEditing'};

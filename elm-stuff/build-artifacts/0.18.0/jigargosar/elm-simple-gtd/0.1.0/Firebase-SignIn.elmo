@@ -1,0 +1,93 @@
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn = function (model) {
+	var _p0 = model.state;
+	switch (_p0.ctor) {
+		case 'SignInSuccess':
+			return true;
+		case 'SkipSignIn':
+			return true;
+		default:
+			return false;
+	}
+};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$encode = function (model) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+				'state',
+				_elm_lang$core$Json_Encode$string(
+					_elm_lang$core$Basics$toString(model.state))),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$state = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.state;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{state: s});
+		}));
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$Model = function (a) {
+	return {state: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToTriedSignOut = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$TriedSignOut);
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToSignInSuccess = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess);
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$updateStateAfterUserChanged = F2(
+	function (user, state) {
+		var _p1 = user;
+		if (_p1.ctor === 'SignedIn') {
+			return _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess;
+		} else {
+			return state;
+		}
+	});
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$updateAfterUserChanged = function (user) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$over,
+		_jigargosar$elm_simple_gtd$Firebase_SignIn$state,
+		_jigargosar$elm_simple_gtd$Firebase_SignIn$updateStateAfterUserChanged(user));
+};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn = {ctor: 'SkipSignIn'};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$setSkipSignIn = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn);
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$FirstVisitNotSignedIn = {ctor: 'FirstVisitNotSignedIn'};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$stringToMaybeState = function (string) {
+	var _p2 = string;
+	switch (_p2) {
+		case 'SkipSignIn':
+			return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn);
+		case 'TriedSignOut':
+			return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Firebase_SignIn$TriedSignOut);
+		case 'SignInSuccess':
+			return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess);
+		case 'FirstVisitNotSignedIn':
+			return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Firebase_SignIn$FirstVisitNotSignedIn);
+		default:
+			return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$stateDecoder = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (string) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_jigargosar$elm_simple_gtd$Firebase_SignIn$stringToMaybeState(string),
+				_elm_lang$core$Json_Decode$succeed),
+			_elm_lang$core$Json_Decode$fail(
+				A2(_elm_lang$core$Basics_ops['++'], 'Unknown State: ', string)));
+	},
+	_elm_lang$core$Json_Decode$string);
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'state',
+	_jigargosar$elm_simple_gtd$Firebase_SignIn$stateDecoder,
+	_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_SignIn$Model));
+var _jigargosar$elm_simple_gtd$Firebase_SignIn$default = {state: _jigargosar$elm_simple_gtd$Firebase_SignIn$FirstVisitNotSignedIn};

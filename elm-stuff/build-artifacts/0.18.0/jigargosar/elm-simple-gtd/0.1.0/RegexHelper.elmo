@@ -1,0 +1,14 @@
+var _jigargosar$elm_simple_gtd$RegexHelper$urlPrefixRegexString = '[A-Za-z]+://';
+var _jigargosar$elm_simple_gtd$RegexHelper$stripUrlPrefix = function () {
+	var urlPrefix = _elm_lang$core$Regex$regex(
+		A2(_elm_lang$core$Basics_ops['++'], '^', _jigargosar$elm_simple_gtd$RegexHelper$urlPrefixRegexString));
+	return A3(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		urlPrefix,
+		function (_p0) {
+			return '';
+		});
+}();
+var _jigargosar$elm_simple_gtd$RegexHelper$url = _elm_lang$core$Regex$regex(
+	A2(_elm_lang$core$Basics_ops['++'], _jigargosar$elm_simple_gtd$RegexHelper$urlPrefixRegexString, '\\S+'));

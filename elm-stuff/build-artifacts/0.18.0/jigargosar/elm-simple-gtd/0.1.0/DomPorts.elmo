@@ -1,0 +1,29 @@
+var _jigargosar$elm_simple_gtd$DomPorts$focusInput = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusInput',
+	function (v) {
+		return v;
+	});
+var _jigargosar$elm_simple_gtd$DomPorts$focusInputCmd = function (_p0) {
+	return _Fresheyeball$elm_return$Return$command(
+		_jigargosar$elm_simple_gtd$DomPorts$focusInput(_p0));
+};
+var _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd = _jigargosar$elm_simple_gtd$DomPorts$focusInputCmd('.auto-focus');
+var _jigargosar$elm_simple_gtd$DomPorts$focusSelector = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusSelector',
+	function (v) {
+		return v;
+	});
+var _jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocus = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusSelectorIfNoFocus',
+	function (v) {
+		return v;
+	});
+var _jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocusCmd = function (_p1) {
+	return _Fresheyeball$elm_return$Return$command(
+		_jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocus(_p1));
+};
+var _jigargosar$elm_simple_gtd$DomPorts$positionPopupMenu = _elm_lang$core$Native_Platform.outgoingPort(
+	'positionPopupMenu',
+	function (v) {
+		return v;
+	});

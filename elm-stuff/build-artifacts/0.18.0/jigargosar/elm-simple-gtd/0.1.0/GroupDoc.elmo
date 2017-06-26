@@ -1,0 +1,151 @@
+var _jigargosar$elm_simple_gtd$GroupDoc$isArchived = function (_) {
+	return _.archived;
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$isNotArchived = function (_p0) {
+	return !_jigargosar$elm_simple_gtd$GroupDoc$isArchived(_p0);
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$isActive = _jigargosar$elm_simple_gtd$X_Predicate$all(
+	{
+		ctor: '::',
+		_0: _jigargosar$elm_simple_gtd$Document$isNotDeleted,
+		_1: {
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$GroupDoc$isNotArchived,
+			_1: {ctor: '[]'}
+		}
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc$archivedButNotDeletedPred = _jigargosar$elm_simple_gtd$X_Predicate$all(
+	{
+		ctor: '::',
+		_0: _jigargosar$elm_simple_gtd$Document$isNotDeleted,
+		_1: {
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$GroupDoc$isArchived,
+			_1: {ctor: '[]'}
+		}
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc$getName = function (_) {
+	return _.name;
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$compareNotNulls = function (tuple) {
+	var compareModifiedAt = function (_p1) {
+		return A2(
+			_elm_lang$core$Basics$uncurry,
+			_elm_lang$core$Basics$compare,
+			A2(
+				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
+				function (_p2) {
+					return _elm_lang$core$Basics$negate(
+						_jigargosar$elm_simple_gtd$Document$getModifiedAt(_p2));
+				},
+				_p1));
+	};
+	var compareName = function (_p3) {
+		return A2(
+			_elm_lang$core$Basics$uncurry,
+			_elm_lang$core$Basics$compare,
+			A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _jigargosar$elm_simple_gtd$GroupDoc$getName, _p3));
+	};
+	return function (archivedTuple) {
+		var _p4 = archivedTuple;
+		if (_p4._0 === true) {
+			if (_p4._1 === false) {
+				return _elm_lang$core$Basics$LT;
+			} else {
+				return compareModifiedAt(tuple);
+			}
+		} else {
+			if (_p4._1 === true) {
+				return _elm_lang$core$Basics$GT;
+			} else {
+				return compareName(tuple);
+			}
+		}
+	}(
+		A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _jigargosar$elm_simple_gtd$GroupDoc$isArchived, tuple));
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$sort = function (isNull) {
+	return _elm_lang$core$List$sortWith(
+		F2(
+			function (v1, v2) {
+				var _p5 = {
+					ctor: '_Tuple2',
+					_0: isNull(v1),
+					_1: isNull(v2)
+				};
+				if (_p5._0 === true) {
+					if (_p5._1 === false) {
+						return _elm_lang$core$Basics$LT;
+					} else {
+						return _elm_lang$core$Basics$EQ;
+					}
+				} else {
+					if (_p5._1 === true) {
+						return _elm_lang$core$Basics$GT;
+					} else {
+						return _jigargosar$elm_simple_gtd$GroupDoc$compareNotNulls(
+							{ctor: '_Tuple2', _0: v1, _1: v2});
+					}
+				}
+			}));
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$encodeRecordFields = function (model) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+			'name',
+			_elm_lang$core$Json_Encode$string(model.name)),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+				'archived',
+				_elm_lang$core$Json_Encode$bool(model.archived)),
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$constructor = F8(
+	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name, archived) {
+		return {
+			id: id,
+			rev: rev,
+			deviceId: deviceId,
+			createdAt: createdAt,
+			modifiedAt: modifiedAt,
+			deleted: false,
+			archived: deleted ? true : archived,
+			name: name
+		};
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc$decoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'archived',
+	_elm_lang$core$Json_Decode$bool,
+	false,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'name',
+		_elm_lang$core$Json_Decode$string,
+		_jigargosar$elm_simple_gtd$Document$documentFieldsDecoder(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_jigargosar$elm_simple_gtd$GroupDoc$constructor))));
+var _jigargosar$elm_simple_gtd$GroupDoc$storeGenerator = function (dbName) {
+	return A3(_jigargosar$elm_simple_gtd$Store$generator, dbName, _jigargosar$elm_simple_gtd$GroupDoc$encodeRecordFields, _jigargosar$elm_simple_gtd$GroupDoc$decoder);
+};
+var _jigargosar$elm_simple_gtd$GroupDoc$archived = A2(
+	_jigargosar$elm_simple_gtd$X_Record$bool,
+	function (_) {
+		return _.archived;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{archived: s});
+		}));
+var _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$GroupDoc$archived);
+var _jigargosar$elm_simple_gtd$GroupDoc$Record = F2(
+	function (a, b) {
+		return {name: a, archived: b};
+	});

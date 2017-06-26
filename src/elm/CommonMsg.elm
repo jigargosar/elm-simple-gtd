@@ -8,6 +8,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Return
+import X.Debug
 
 
 type Msg
@@ -27,7 +28,7 @@ update msg =
         LogString string ->
             let
                 _ =
-                    Debug.log "CM:LogString" (string)
+                    X.Debug.log "CM:LogString" (string)
             in
                 update NoOp
 

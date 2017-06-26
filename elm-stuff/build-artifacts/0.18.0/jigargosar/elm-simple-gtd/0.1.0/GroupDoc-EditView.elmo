@@ -1,0 +1,123 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
+	var fireCancel = _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
+	var fireSaveForm = _jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm;
+	var toMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(form.entity);
+	var fireNameChanged = function (_p0) {
+		return toMsg(
+			_jigargosar$elm_simple_gtd$Entity$NameChanged(_p0));
+	};
+	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity$ToggleArchived);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(fireCancel),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+						function (_p1) {
+							return _jigargosar$elm_simple_gtd$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {
+										ctor: '::',
+										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+											function (_p2) {
+												return _jigargosar$elm_simple_gtd$Model$NOOP;
+											}),
+										_1: {
+											ctor: '::',
+											_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
+													_1: {
+														ctor: '::',
+														_0: _jigargosar$elm_simple_gtd$X_Keyboard$onEnter(fireSaveForm),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(fireNameChanged),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(form.nameLabel),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(_jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelArchiveButtons, form.isArchived, fireToggleArchive),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

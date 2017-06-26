@@ -2,6 +2,7 @@ module X.Decode exposing (..)
 
 import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (..)
+import X.Debug
 
 
 traceDecoder : String -> Decoder msg -> Decoder msg
@@ -14,5 +15,5 @@ traceDecoder message decoder =
                         succeed decoded
 
                     Err err ->
-                        fail <| Debug.log message <| err
+                        fail <| X.Debug.log message <| err
             )

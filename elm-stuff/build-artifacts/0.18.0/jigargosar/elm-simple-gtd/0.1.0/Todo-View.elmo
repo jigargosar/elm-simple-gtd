@@ -1,0 +1,963 @@
+var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
+	var updateReminderForm = function (_p0) {
+		return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm, form, _p0));
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+						function (_p1) {
+							return _jigargosar$elm_simple_gtd$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('z-depth-4 static'),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$commonMsg.noOp),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Select date and time'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('input-field'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('date'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(form.date),
+												_1: {
+													ctor: '::',
+													_0: _jigargosar$elm_simple_gtd$WebComponents$onChange(
+														function (_p2) {
+															return updateReminderForm(
+																_jigargosar$elm_simple_gtd$Todo_ReminderForm$SetDate(_p2));
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$label,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('active'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Date'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$type_('time'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(form.time),
+												_1: {
+													ctor: '::',
+													_0: _jigargosar$elm_simple_gtd$WebComponents$onChange(
+														function (_p3) {
+															return updateReminderForm(
+																_jigargosar$elm_simple_gtd$Todo_ReminderForm$SetTime(_p3));
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Time'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelButtons,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$contextMenu = _jigargosar$elm_simple_gtd$Todo_View_Menu$context;
+var _jigargosar$elm_simple_gtd$Todo_View$projectMenu = _jigargosar$elm_simple_gtd$Todo_View_Menu$project;
+var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
+var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
+	function (form, appModel) {
+		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Model$OnEntityAction, form.entity, _jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var fireTextChanged = function (_p4) {
+			return A2(
+				_jigargosar$elm_simple_gtd$Model$UpdateTodoForm,
+				form,
+				_jigargosar$elm_simple_gtd$Todo_Form$SetText(_p4));
+		};
+		var todoText = form.todoText;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('overlay'),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Todo_View$fireCancel),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+							function (_p5) {
+								return _jigargosar$elm_simple_gtd$Model$NOOP;
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('input-field'),
+										_1: {
+											ctor: '::',
+											_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+												function (_p6) {
+													return _jigargosar$elm_simple_gtd$Model$NOOP;
+												}),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$textarea,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(todoText),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(fireTextChanged),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Task'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelDeleteButtons(fireToggleDelete),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Todo_View$fireCancel),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
+						function (_p7) {
+							return _jigargosar$elm_simple_gtd$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$textarea,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(
+													_jigargosar$elm_simple_gtd$Model$NewTodoTextChanged(form)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(
+														_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
+													_1: {ctor: '[]'}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('New Task'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelButtons,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel = F2(
+	function (now, todo) {
+		var overDueText = 'Overdue';
+		var formatReminderTime = function (time) {
+			var nowDate = _elm_lang$core$Date$fromTime(now);
+			var dueDate = _elm_lang$core$Date$fromTime(time);
+			return (_elm_lang$core$Native_Utils.cmp(time, now) < 0) ? overDueText : A2(_jigargosar$elm_simple_gtd$X_Time$smartFormat, now, time);
+		};
+		var displayText = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_jigargosar$elm_simple_gtd$Todo$getMaybeTime(todo),
+				formatReminderTime),
+			'');
+		return {
+			displayText: displayText,
+			isOverDue: _elm_lang$core$Native_Utils.eq(displayText, overDueText),
+			startEditingMsg: _jigargosar$elm_simple_gtd$Model$StartEditingReminder(todo)
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-schedule-button-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.reminder.startEditingMsg),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'overdue', vm.reminder.isOverDue),
+							_1: {
+								ctor: '::',
+								_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'reminder-text', true),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.reminder.displayText),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_jigargosar$elm_simple_gtd$Material$smallIconButton,
+					'schedule',
+					{
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$projectProjectButton = function (vm) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-project-button-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.projectDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$editContextButton = function (vm) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-context-button-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.contextDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Material$smallIconButton,
+		'more_vert',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Material$iconButton,
+		'done',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'done-icon', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'is-done', vm.isDone),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (displayText) {
+	var nonLinkStrings = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, displayText),
+		_elm_lang$html$Html$text);
+	var createLink = function (url) {
+		return A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$href(url),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_elm_lang$core$String$toLower(
+						A2(
+							_elm_community$string_extra$String_Extra$ellipsis,
+							30,
+							_jigargosar$elm_simple_gtd$RegexHelper$stripUrlPrefix(url)))),
+				_1: {ctor: '[]'}
+			});
+	};
+	var linkStrings = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, displayText),
+		function (_p8) {
+			return createLink(
+				function (_) {
+					return _.match;
+				}(_p8));
+		});
+	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
+};
+var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'selected', vm.isSelected),
+						_1: {
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'can-be-focused', vm.canBeFocused),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+				_1: {
+					ctor: '::',
+					_0: vm.tabindexAV,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(vm.onKeyDownMsg),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('display-text-container layout horizontal'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onMouseDown(vm.startEditingMsg),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('self-start'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$Todo_View$doneIconButton(vm),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('display-text'),
+								_1: {ctor: '[]'}
+							},
+							_jigargosar$elm_simple_gtd$Todo_View$parseDisplayText(vm.displayText)),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('self-start'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$Todo_View$moreIconButton(vm),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'margin', '0 8px'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton(vm),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$Todo_View$editContextButton(vm),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _jigargosar$elm_simple_gtd$Todo_View$projectProjectButton(vm),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_View$keyedItem = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.key,
+		_1: _jigargosar$elm_simple_gtd$Todo_View$item(vm)
+	};
+};
+var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
+	var trimAndReplaceEmptyWithDefault = A2(
+		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
+		function (_p9) {
+			return _elm_community$string_extra$String_Extra$nonEmpty(
+				_elm_lang$core$String$trim(_p9));
+		},
+		'< empty >');
+	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$AtMost(1),
+		tripleNewLineAndRestRegex,
+		function (match) {
+			return '\n...';
+		},
+		trimAndReplaceEmptyWithDefault(
+			_jigargosar$elm_simple_gtd$Todo$getText(todo)));
+};
+var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
+	function (appVM, canBeFocused, todo) {
+		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTaskMsg;
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
+			_jigargosar$elm_simple_gtd$Entity$Task(todo));
+		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$NOOP;
+		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);
+		var projectId = _jigargosar$elm_simple_gtd$Todo$getProjectId(todo);
+		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
+		var projectDisplayName = A2(
+			_elm_lang$core$String$append,
+			'#',
+			truncateName(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.projectByIdDict),
+						_jigargosar$elm_simple_gtd$Project$getName)(projectId),
+					'')));
+		var contextDisplayName = truncateName(
+			A2(
+				_elm_lang$core$String$append,
+				'@',
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.contextByIdDict),
+						_jigargosar$elm_simple_gtd$Context$getName)(contextId),
+					'Inbox')));
+		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
+		var toggleDoneMsg = _jigargosar$elm_simple_gtd$Model$ToggleTodoDone(todoId);
+		var now = appVM.now;
+		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
+		var onKeyDownMsg = function (_p10) {
+			var _p11 = _p10;
+			if (_jigargosar$elm_simple_gtd$X_Keyboard$isNoSoftKeyDown(_p11)) {
+				var _p12 = _p11.key;
+				switch (_p12.ctor) {
+					case 'Space':
+						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleSelected);
+					case 'CharE':
+						return startEditingMsg;
+					case 'CharD':
+						return toggleDoneMsg;
+					case 'Delete':
+						return toggleDeleteMsg;
+					case 'CharP':
+						return _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo);
+					case 'CharC':
+						return _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo);
+					case 'CharR':
+						return reminder.startEditingMsg;
+					case 'CharG':
+						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$Goto);
+					case 'CharS':
+						return onTodoMsg(
+							_jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning(todoId));
+					default:
+						return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+				}
+			} else {
+				return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+			}
+		};
+		var tabindexAV = function () {
+			var tabindexValue = canBeFocused ? 0 : -1;
+			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		}();
+		return {
+			isDone: _jigargosar$elm_simple_gtd$Todo$isDone(todo),
+			key: todoId,
+			isDeleted: _jigargosar$elm_simple_gtd$Todo$getDeleted(todo),
+			onKeyDownMsg: onKeyDownMsg,
+			displayText: _jigargosar$elm_simple_gtd$Todo_View$getDisplayText(todo),
+			projectDisplayName: projectDisplayName,
+			contextDisplayName: contextDisplayName,
+			showContextDropdownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo),
+			showProjectDropdownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo),
+			startEditingMsg: startEditingMsg,
+			canBeFocused: canBeFocused,
+			toggleDoneMsg: toggleDoneMsg,
+			reminder: reminder,
+			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$OnFocusIn),
+			tabindexAV: tabindexAV,
+			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet),
+			onMoreMenuClicked: onTodoMsg(
+				_jigargosar$elm_simple_gtd$Todo_Msg$OnShowMoreMenu(todoId))
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_View$TodoViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropdownMsg: k, showProjectDropdownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p, onMoreMenuClicked: q};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _jigargosar$elm_simple_gtd$Todo_View$ScheduleViewModel = F3(
+	function (a, b, c) {
+		return {displayText: a, isOverDue: b, startEditingMsg: c};
+	});

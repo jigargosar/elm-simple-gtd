@@ -1,0 +1,140 @@
+var _jigargosar$elm_simple_gtd$X_Function$add = F2(
+	function (x, y) {
+		return x + y;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$subtract = F2(
+	function (x, y) {
+		return x - y;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$andThenSubtract = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$X_Function$subtract);
+var _jigargosar$elm_simple_gtd$X_Function$notEquals = F2(
+	function (x, y) {
+		return !_elm_lang$core$Native_Utils.eq(x, y);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$equals = F2(
+	function (x, y) {
+		return _elm_lang$core$Native_Utils.eq(x, y);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$and = F2(
+	function (x, y) {
+		return x && y;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$or = F2(
+	function (x, y) {
+		return x || y;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$lte = F2(
+	function (x, y) {
+		return _elm_lang$core$Native_Utils.cmp(x, y) < 1;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$isLTE = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$X_Function$lte);
+var _jigargosar$elm_simple_gtd$X_Function$lt = F2(
+	function (x, y) {
+		return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$isLT = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$X_Function$lt);
+var _jigargosar$elm_simple_gtd$X_Function$gt = F2(
+	function (x, y) {
+		return _elm_lang$core$Native_Utils.cmp(x, y) > 0;
+	});
+var _jigargosar$elm_simple_gtd$X_Function$reject = F2(
+	function (pred, xs) {
+		var conditionalCons = F2(
+			function (front, back) {
+				return pred(front) ? back : {ctor: '::', _0: front, _1: back};
+			});
+		return A3(
+			_elm_lang$core$List$foldr,
+			conditionalCons,
+			{ctor: '[]'},
+			xs);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$ifElse = F4(
+	function (pred, onTrue, onFalse, value) {
+		return pred(value) ? onTrue(value) : onFalse(value);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$when = F3(
+	function (pred, onTrue, value) {
+		return A4(
+			_jigargosar$elm_simple_gtd$X_Function$ifElse,
+			pred,
+			onTrue,
+			function (_p0) {
+				return value;
+			},
+			value);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$whenBool = function (bool) {
+	return _jigargosar$elm_simple_gtd$X_Function$when(
+		_elm_lang$core$Basics$always(bool));
+};
+var _jigargosar$elm_simple_gtd$X_Function$unless = function (pred) {
+	return _jigargosar$elm_simple_gtd$X_Function$when(
+		function (_p1) {
+			return !pred(_p1);
+		});
+};
+var _jigargosar$elm_simple_gtd$X_Function$apply3Uncurry = F3(
+	function (f1, f2, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$uncurry3,
+			f2,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$apply3, f1, model));
+	});
+var _jigargosar$elm_simple_gtd$X_Function$apply2Uncurry = F3(
+	function (f1, f2, model) {
+		return A2(
+			_elm_lang$core$Basics$uncurry,
+			f2,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$apply2, f1, model));
+	});
+var _jigargosar$elm_simple_gtd$X_Function$applyMaybeWith = F3(
+	function (f1, f2, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				f1(model),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], f2, model)),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$apply2With = F3(
+	function (_p2, f, model) {
+		var _p3 = _p2;
+		return A3(
+			_jigargosar$elm_simple_gtd$X_Function$apply3Uncurry,
+			{ctor: '_Tuple3', _0: _p3._0, _1: _p3._1, _2: _elm_lang$core$Basics$identity},
+			f,
+			model);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$applyWith = F3(
+	function (f1, f2, model) {
+		return A2(
+			f2,
+			f1(model),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$apply = F2(
+	function (a, f) {
+		return f(a);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$allPass = F2(
+	function (predicates, model) {
+		return A2(
+			_elm_lang$core$List$all,
+			_jigargosar$elm_simple_gtd$X_Function$apply(model),
+			predicates);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$anyPass = F2(
+	function (predicates, model) {
+		return A2(
+			_elm_lang$core$List$any,
+			_jigargosar$elm_simple_gtd$X_Function$apply(model),
+			predicates);
+	});
+var _jigargosar$elm_simple_gtd$X_Function$decrement = function (num) {
+	return num - 1;
+};
+var _jigargosar$elm_simple_gtd$X_Function$increment = function (num) {
+	return num + 1;
+};

@@ -1,0 +1,147 @@
+var _jigargosar$elm_simple_gtd$WebComponents$onChange = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _jigargosar$elm_simple_gtd$WebComponents$onStringPropertyChanged = F2(
+	function (propertyName, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$string)));
+	});
+var _jigargosar$elm_simple_gtd$WebComponents$onPropertyChanged = F3(
+	function (propertyName, decoder, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					decoder)));
+	});
+var _jigargosar$elm_simple_gtd$WebComponents$onBoolPropertyChanged = F2(
+	function (propertyName, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$bool)));
+	});
+var _jigargosar$elm_simple_gtd$WebComponents$noLabelFloatP = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'noLabelFloatP', true);
+var _jigargosar$elm_simple_gtd$WebComponents$selectedA = _elm_lang$html$Html_Attributes$attribute('selected');
+var _jigargosar$elm_simple_gtd$WebComponents$labelA = _elm_lang$html$Html_Attributes$attribute('label');
+var _jigargosar$elm_simple_gtd$WebComponents$slotDropdownContent = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content');
+var _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-trigger');
+var _jigargosar$elm_simple_gtd$WebComponents$dynamicAlign = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'dynamicAlign', true);
+var _jigargosar$elm_simple_gtd$WebComponents$secondaryA = A2(_elm_lang$html$Html_Attributes$attribute, 'secondary', 'true');
+var _jigargosar$elm_simple_gtd$WebComponents$paperIconButton = _elm_lang$html$Html$node('paper-icon-button');
+var _jigargosar$elm_simple_gtd$WebComponents$iconA = _elm_lang$html$Html_Attributes$attribute('icon');
+var _jigargosar$elm_simple_gtd$WebComponents$iconButton = F2(
+	function (iconName, attributes) {
+		return A2(
+			_jigargosar$elm_simple_gtd$WebComponents$paperIconButton,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				attributes,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$WebComponents$iconA(iconName),
+					_1: {ctor: '[]'}
+				}),
+			{ctor: '[]'});
+	});
+var _jigargosar$elm_simple_gtd$WebComponents$doneAllIconP = _jigargosar$elm_simple_gtd$WebComponents$iconA('done-all');
+var _jigargosar$elm_simple_gtd$WebComponents$ironIcon = _elm_lang$html$Html$node('iron-icon');
+var _jigargosar$elm_simple_gtd$WebComponents$icon = F2(
+	function (iconName, attributes) {
+		return A2(
+			_jigargosar$elm_simple_gtd$WebComponents$ironIcon,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				attributes,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$WebComponents$iconA(iconName),
+					_1: {ctor: '[]'}
+				}),
+			{ctor: '[]'});
+	});
+var _jigargosar$elm_simple_gtd$WebComponents$iconTextButton = F3(
+	function (iconName, text_, clickHandler) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('icon-text font-caption'),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_jigargosar$elm_simple_gtd$WebComponents$icon,
+					iconName,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('big'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(text_),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

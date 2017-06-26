@@ -1,0 +1,22 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init = F3(
+	function (toEntity, nameLabel, groupDoc) {
+		return {
+			id: _jigargosar$elm_simple_gtd$Document$getId(groupDoc),
+			name: _jigargosar$elm_simple_gtd$GroupDoc$getName(groupDoc),
+			entity: toEntity(groupDoc),
+			isArchived: _jigargosar$elm_simple_gtd$GroupDoc$isArchived(groupDoc),
+			nameLabel: nameLabel
+		};
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$Entity$fromContext, 'Context Name');
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$Entity$fromProject, 'Project Name');
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$Model = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, entity: c, isArchived: d, nameLabel: e};
+	});

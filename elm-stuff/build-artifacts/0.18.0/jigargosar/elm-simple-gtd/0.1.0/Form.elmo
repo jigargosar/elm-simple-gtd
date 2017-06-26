@@ -1,0 +1,44 @@
+var _jigargosar$elm_simple_gtd$Form$setFields = F2(
+	function (fields, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{fields: fields});
+	});
+var _jigargosar$elm_simple_gtd$Form$updateFieldsM = F2(
+	function (updater, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Form$setFields,
+			updater(model),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Form$getFields = function (_) {
+	return _.fields;
+};
+var _jigargosar$elm_simple_gtd$Form$updateFields = F2(
+	function (updater, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Form$setFields,
+			updater(
+				_jigargosar$elm_simple_gtd$Form$getFields(model)),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Form$get = function (name) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
+		function (_p0) {
+			return A2(
+				_elm_lang$core$Dict$get,
+				name,
+				_jigargosar$elm_simple_gtd$Form$getFields(_p0));
+		},
+		'');
+};
+var _jigargosar$elm_simple_gtd$Form$set = F2(
+	function (name, value) {
+		return _jigargosar$elm_simple_gtd$Form$updateFields(
+			A2(_elm_lang$core$Dict$insert, name, value));
+	});
+var _jigargosar$elm_simple_gtd$Form$init = {fields: _elm_lang$core$Dict$empty};
+var _jigargosar$elm_simple_gtd$Form$Model = function (a) {
+	return {fields: a};
+};

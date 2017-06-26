@@ -1,0 +1,12 @@
+var _jigargosar$elm_simple_gtd$X_Maybe$toList = function (maybe) {
+	var _p0 = maybe;
+	if (_p0.ctor === 'Just') {
+		return {
+			ctor: '::',
+			_0: _p0._0,
+			_1: {ctor: '[]'}
+		};
+	} else {
+		return {ctor: '[]'};
+	}
+};

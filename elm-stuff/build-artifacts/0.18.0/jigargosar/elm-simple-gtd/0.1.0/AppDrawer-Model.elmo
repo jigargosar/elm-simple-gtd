@@ -1,0 +1,164 @@
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived = A2(
+	_jigargosar$elm_simple_gtd$X_Record$bool,
+	function (_) {
+		return _.showArchived;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{showArchived: s});
+		}));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleShowArchived = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived);
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$setShowArchived = function (bool) {
+	return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived, bool);
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$hideArchived = function (groupModel) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$over,
+		groupModel,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$setShowArchived(false));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$expanded = A2(
+	_jigargosar$elm_simple_gtd$X_Record$bool,
+	function (_) {
+		return _.expanded;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{expanded: s});
+		}));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleExpanded = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$AppDrawer_Model$expanded);
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$projects = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.projects;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{projects: s});
+		}));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$isProjectListExpanded = function (_p0) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$get,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$expanded,
+		A2(_jigargosar$elm_simple_gtd$X_Record$get, _jigargosar$elm_simple_gtd$AppDrawer_Model$projects, _p0));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectListExpanded = function (_p1) {
+	return A3(
+		_jigargosar$elm_simple_gtd$X_Function$unless,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$isProjectListExpanded,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$hideArchived(_jigargosar$elm_simple_gtd$AppDrawer_Model$projects),
+		A3(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$AppDrawer_Model$projects, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleExpanded, _p1));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$getShowArchivedForProjects = function (_p2) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$get,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived,
+		A2(_jigargosar$elm_simple_gtd$X_Record$get, _jigargosar$elm_simple_gtd$AppDrawer_Model$projects, _p2));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectShowArchived = A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$AppDrawer_Model$projects, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleShowArchived);
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.contexts;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{contexts: s});
+		}));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$isContextListExpanded = function (_p3) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$get,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$expanded,
+		A2(_jigargosar$elm_simple_gtd$X_Record$get, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _p3));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextListExpanded = function (_p4) {
+	return A3(
+		_jigargosar$elm_simple_gtd$X_Function$unless,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$isContextListExpanded,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$hideArchived(_jigargosar$elm_simple_gtd$AppDrawer_Model$contexts),
+		A3(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleExpanded, _p4));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$getShowArchivedForContexts = function (_p5) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$get,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived,
+		A2(_jigargosar$elm_simple_gtd$X_Record$get, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _p5));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived = A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleShowArchived);
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel = {expanded: true, showArchived: false};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$default = {contexts: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel, projects: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$encodeGroupModel = function (model) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+				'expanded',
+				_elm_lang$core$Json_Encode$bool(model.expanded)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+					'showArchived',
+					_elm_lang$core$Json_Encode$bool(model.showArchived)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$encode = function (model) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+				'contexts',
+				_jigargosar$elm_simple_gtd$AppDrawer_Model$encodeGroupModel(model.contexts)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+					'projects',
+					_jigargosar$elm_simple_gtd$AppDrawer_Model$encodeGroupModel(model.projects)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$GroupModel = F2(
+	function (a, b) {
+		return {expanded: a, showArchived: b};
+	});
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'showArchived',
+	_elm_lang$core$Json_Decode$bool,
+	false,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'expanded',
+		_elm_lang$core$Json_Decode$bool,
+		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$GroupModel)));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$Model = F2(
+	function (a, b) {
+		return {contexts: a, projects: b};
+	});
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$decode = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'projects',
+	_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'contexts',
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
+		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$Model)));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleShowArchivedProjects = {ctor: 'OnToggleShowArchivedProjects'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleShowArchivedContexts = {ctor: 'OnToggleShowArchivedContexts'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleExpandContextList = {ctor: 'OnToggleExpandContextList'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleExpandProjectList = {ctor: 'OnToggleExpandProjectList'};

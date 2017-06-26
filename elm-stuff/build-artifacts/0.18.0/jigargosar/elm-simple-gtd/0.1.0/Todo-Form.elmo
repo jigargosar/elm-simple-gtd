@@ -1,0 +1,21 @@
+var _jigargosar$elm_simple_gtd$Todo_Form$set = F2(
+	function (action, model) {
+		var _p0 = action;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{todoText: _p0._0});
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$create = function (todo) {
+	return {
+		id: _jigargosar$elm_simple_gtd$Document$getId(todo),
+		todoText: _jigargosar$elm_simple_gtd$Todo$getText(todo),
+		entity: _jigargosar$elm_simple_gtd$Entity$Task(todo)
+	};
+};
+var _jigargosar$elm_simple_gtd$Todo_Form$Model = F3(
+	function (a, b, c) {
+		return {id: a, todoText: b, entity: c};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$SetText = function (a) {
+	return {ctor: 'SetText', _0: a};
+};

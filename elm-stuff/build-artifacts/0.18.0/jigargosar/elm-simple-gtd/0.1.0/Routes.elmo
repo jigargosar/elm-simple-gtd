@@ -1,0 +1,53 @@
+var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
+	return A3(
+		_elm_community$maybe_extra$Maybe_Extra$unpack,
+		function (_p0) {
+			var _p1 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+			if (((_p1.ctor === '::') && (_p1._0 === 'custom-sync')) && (_p1._1.ctor === '[]')) {
+				return {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Model$OnSetViewType(_jigargosar$elm_simple_gtd$Model$SyncView),
+					_1: {ctor: '[]'}
+				};
+			} else {
+				return {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Model$OnSetViewType(_jigargosar$elm_simple_gtd$Model$defaultView),
+					_1: {ctor: '[]'}
+				};
+			}
+		},
+		function (_p2) {
+			return _jigargosar$elm_simple_gtd$XList$singleton(
+				_jigargosar$elm_simple_gtd$Model$OnSetEntityListView(_p2));
+		},
+		_jigargosar$elm_simple_gtd$Entity$routeUrlBuilderToMaybeListViewType(builder));
+};
+var _jigargosar$elm_simple_gtd$Routes$hash2messages = function (location) {
+	return _jigargosar$elm_simple_gtd$Routes$builder2messages(
+		_rgrempel$elm_route_url$RouteUrl_Builder$fromHash(location.href));
+};
+var _jigargosar$elm_simple_gtd$Routes$getPathFromModel = function (model) {
+	var _p3 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
+	if (_p3.ctor === 'EntityListView') {
+		return _jigargosar$elm_simple_gtd$Entity$getPathFromViewType(_p3._0);
+	} else {
+		return {
+			ctor: '::',
+			_0: 'custom-sync',
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _jigargosar$elm_simple_gtd$Routes$delta2builder = F2(
+	function (previous, current) {
+		return _elm_lang$core$Maybe$Just(
+			A2(
+				_rgrempel$elm_route_url$RouteUrl_Builder$replacePath,
+				_jigargosar$elm_simple_gtd$Routes$getPathFromModel(current),
+				_rgrempel$elm_route_url$RouteUrl_Builder$builder));
+	});
+var _jigargosar$elm_simple_gtd$Routes$delta2hash = A2(
+	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
+	_jigargosar$elm_simple_gtd$Routes$delta2builder,
+	_elm_lang$core$Maybe$map(_rgrempel$elm_route_url$RouteUrl_Builder$toHashChange));

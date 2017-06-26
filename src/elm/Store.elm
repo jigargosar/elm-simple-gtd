@@ -66,7 +66,7 @@ decodeList decoder =
                     Err x ->
                         let
                             _ =
-                                Debug.log "Error while decoding Project" x
+                                X.Debug.log "Error while decoding Project" x
                         in
                             Nothing
             )
@@ -197,7 +197,7 @@ updateAndPersist pred now updateFn_ store =
 decode : D.Value -> Store x -> Maybe (Document x)
 decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc
-        |> Result.mapError (Debug.log ("Store " ++ store.name))
+        |> Result.mapError (X.Debug.log ("Store " ++ store.name))
         |> Result.toMaybe
 
 

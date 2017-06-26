@@ -1,0 +1,14 @@
+var _jigargosar$elm_simple_gtd$AppColors$encode = function (_p0) {
+	return _danielnarey$elm_css_basics$CssBasics$encodeCssValue(
+		_danielnarey$elm_css_basics$CssBasics$Col(_p0));
+};
+var _jigargosar$elm_simple_gtd$AppColors$mixNullGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(6.0e-2);
+var _jigargosar$elm_simple_gtd$AppColors$mixDefaultGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(6.0e-2);
+var _jigargosar$elm_simple_gtd$AppColors$nullProjectColor = A3(_elm_lang$core$Color$rgb, 179, 157, 219);
+var _jigargosar$elm_simple_gtd$AppColors$projectsColor = A3(_elm_lang$core$Color$rgb, 124, 77, 255);
+var _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor = _jigargosar$elm_simple_gtd$AppColors$mixDefaultGroupColor(_jigargosar$elm_simple_gtd$AppColors$projectsColor);
+var _jigargosar$elm_simple_gtd$AppColors$sgtdBlue = A3(_elm_lang$core$Color$rgb, 33, 150, 243);
+var _jigargosar$elm_simple_gtd$AppColors$nullContextColor = _jigargosar$elm_simple_gtd$AppColors$sgtdBlue;
+var _jigargosar$elm_simple_gtd$AppColors$primaryColor = A3(_elm_lang$core$Color$rgb, 68, 138, 255);
+var _jigargosar$elm_simple_gtd$AppColors$contextsColor = _jigargosar$elm_simple_gtd$AppColors$primaryColor;
+var _jigargosar$elm_simple_gtd$AppColors$defaultContextColor = _jigargosar$elm_simple_gtd$AppColors$mixDefaultGroupColor(_jigargosar$elm_simple_gtd$AppColors$contextsColor);

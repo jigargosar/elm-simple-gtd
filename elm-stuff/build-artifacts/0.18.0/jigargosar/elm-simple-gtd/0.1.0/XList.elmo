@@ -1,0 +1,7 @@
+var _jigargosar$elm_simple_gtd$XList$singleton = function (item) {
+	return {
+		ctor: '::',
+		_0: item,
+		_1: {ctor: '[]'}
+	};
+};

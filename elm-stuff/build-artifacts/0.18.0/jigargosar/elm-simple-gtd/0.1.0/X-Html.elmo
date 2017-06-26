@@ -1,0 +1,122 @@
+var _jigargosar$elm_simple_gtd$X_Html$nthParent = F2(
+	function (count, decoder) {
+		return _debois$elm_dom$DOM$target(
+			A3(
+				_elm_lang$core$List$foldl,
+				F2(
+					function (_p0, acc) {
+						return _debois$elm_dom$DOM$parentElement(acc);
+					}),
+				decoder,
+				A2(_elm_lang$core$List$range, 0, count)));
+	});
+var _jigargosar$elm_simple_gtd$X_Html$domIdDecoder = A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string);
+var _jigargosar$elm_simple_gtd$X_Html$targetAncestorIdsHelp = F2(
+	function (target, ids) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (domId) {
+						var parentIndex = _elm_lang$core$List$length(ids);
+						return A2(
+							_jigargosar$elm_simple_gtd$X_Html$targetAncestorIdsHelp,
+							A2(_jigargosar$elm_simple_gtd$X_Html$nthParent, parentIndex, _jigargosar$elm_simple_gtd$X_Html$domIdDecoder),
+							{ctor: '::', _0: domId, _1: ids});
+					},
+					target),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Json_Decode$succeed(ids),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _jigargosar$elm_simple_gtd$X_Html$targetAncestorIds = A2(
+	_jigargosar$elm_simple_gtd$X_Html$targetAncestorIdsHelp,
+	_debois$elm_dom$DOM$target(_jigargosar$elm_simple_gtd$X_Html$domIdDecoder),
+	{ctor: '[]'});
+var _jigargosar$elm_simple_gtd$X_Html$onClickPathIds = function (toMsg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		A2(_elm_lang$core$Json_Decode$map, toMsg, _jigargosar$elm_simple_gtd$X_Html$targetAncestorIds));
+};
+var _jigargosar$elm_simple_gtd$X_Html$targetPathHavingIds = F2(
+	function (domIds, toMsg) {
+		var successFn = function (_p1) {
+			return _elm_lang$core$Json_Decode$succeed(toMsg);
+		};
+		var failFn = function (_p2) {
+			return _elm_lang$core$Json_Decode$fail(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'domIds not found in event target path: ',
+					_elm_lang$core$Basics$toString(domIds)));
+		};
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (_p3) {
+				return A3(
+					_elm_community$maybe_extra$Maybe_Extra$unpack,
+					successFn,
+					failFn,
+					A2(
+						_elm_community$list_extra$List_Extra$find,
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$List$member, domIds),
+						_p3));
+			},
+			_jigargosar$elm_simple_gtd$X_Html$targetAncestorIds);
+	});
+var _jigargosar$elm_simple_gtd$X_Html$onClickTargetPathHavingIds = A2(
+	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
+	_jigargosar$elm_simple_gtd$X_Html$targetPathHavingIds,
+	_elm_lang$html$Html_Events$on('click'));
+var _jigargosar$elm_simple_gtd$X_Html$boolProperty = F2(
+	function (name, value) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(value));
+	});
+var _jigargosar$elm_simple_gtd$X_Html$boolProp = _jigargosar$elm_simple_gtd$X_Html$boolProperty;
+var _jigargosar$elm_simple_gtd$X_Html$stringProperty = F2(
+	function (name, value) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(value));
+	});
+var _jigargosar$elm_simple_gtd$X_Html$prop = _jigargosar$elm_simple_gtd$X_Html$stringProperty;
+var _jigargosar$elm_simple_gtd$X_Html$attr = _elm_lang$html$Html_Attributes$attribute;
+var _jigargosar$elm_simple_gtd$X_Html$stopAll = {stopPropagation: true, preventDefault: true};
+var _jigargosar$elm_simple_gtd$X_Html$onStopAll = function (eventName) {
+	return A2(_elm_lang$html$Html_Events$onWithOptions, eventName, _jigargosar$elm_simple_gtd$X_Html$stopAll);
+};
+var _jigargosar$elm_simple_gtd$X_Html$onClickStopAll = function (_p4) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Html$onStopAll,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(_p4));
+};
+var _jigargosar$elm_simple_gtd$X_Html$preventDefault = {stopPropagation: false, preventDefault: true};
+var _jigargosar$elm_simple_gtd$X_Html$onPreventDefault = function (eventName) {
+	return A2(_elm_lang$html$Html_Events$onWithOptions, eventName, _jigargosar$elm_simple_gtd$X_Html$preventDefault);
+};
+var _jigargosar$elm_simple_gtd$X_Html$stopPropagation = {stopPropagation: true, preventDefault: false};
+var _jigargosar$elm_simple_gtd$X_Html$onStopPropagation = function (eventName) {
+	return A2(_elm_lang$html$Html_Events$onWithOptions, eventName, _jigargosar$elm_simple_gtd$X_Html$stopPropagation);
+};
+var _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation = function (_p5) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Html$onStopPropagation,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(_p5));
+};
+var _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation = function (_p6) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Html$onStopPropagation,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(_p6));
+};

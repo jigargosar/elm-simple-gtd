@@ -1,0 +1,30 @@
+var _jigargosar$elm_simple_gtd$Project$nullId = '';
+var _jigargosar$elm_simple_gtd$Project$isNullId = _jigargosar$elm_simple_gtd$X_Function$equals(_jigargosar$elm_simple_gtd$Project$nullId);
+var _jigargosar$elm_simple_gtd$Project$constructor = _jigargosar$elm_simple_gtd$GroupDoc$constructor;
+var _jigargosar$elm_simple_gtd$Project$init = F4(
+	function (name, now, deviceId, id) {
+		return A8(_jigargosar$elm_simple_gtd$Project$constructor, id, '', now, now, false, deviceId, name, false);
+	});
+var _jigargosar$elm_simple_gtd$Project$null = A8(_jigargosar$elm_simple_gtd$Project$constructor, _jigargosar$elm_simple_gtd$Project$nullId, '', 0, 0, false, '', 'No Project', false);
+var _jigargosar$elm_simple_gtd$Project$filterNull = function (pred) {
+	return A2(
+		_elm_lang$core$List$filter,
+		pred,
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Project$null,
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Project$isNull = _jigargosar$elm_simple_gtd$X_Function$equals(_jigargosar$elm_simple_gtd$Project$null);
+var _jigargosar$elm_simple_gtd$Project$sort = _jigargosar$elm_simple_gtd$GroupDoc$sort(_jigargosar$elm_simple_gtd$Project$isNull);
+var _jigargosar$elm_simple_gtd$Project$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _jigargosar$elm_simple_gtd$Project$getName = function (_) {
+	return _.name;
+};
+var _jigargosar$elm_simple_gtd$Project$storeGenerator = _jigargosar$elm_simple_gtd$GroupDoc$storeGenerator('project-db');

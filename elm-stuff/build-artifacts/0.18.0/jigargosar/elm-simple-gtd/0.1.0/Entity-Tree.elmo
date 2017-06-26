@@ -1,0 +1,166 @@
+var _jigargosar$elm_simple_gtd$Entity_Tree$initProjectNode = F2(
+	function (getTodoList, project) {
+		return {
+			project: project,
+			todoList: getTodoList(project),
+			groupEntity: _jigargosar$elm_simple_gtd$Entity$initProjectGroup(project)
+		};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$createProjectSubGroups = F2(
+	function (findProjectById, tcg) {
+		var filterTodoForProject = function (project) {
+			return A2(
+				_elm_lang$core$List$filter,
+				_jigargosar$elm_simple_gtd$Todo$hasProject(project),
+				tcg.todoList);
+		};
+		var projects = _jigargosar$elm_simple_gtd$Project$sort(
+			A2(
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					_elm_community$list_extra$List_Extra$unique(
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.todoList, _jigargosar$elm_simple_gtd$Todo$getProjectId)),
+					findProjectById)));
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			projects,
+			_jigargosar$elm_simple_gtd$Entity_Tree$initProjectNode(filterTodoForProject));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$initContextNode = F2(
+	function (getTodoList, context) {
+		return {
+			context: context,
+			todoList: getTodoList(context),
+			groupEntity: _jigargosar$elm_simple_gtd$Entity$initContextGroup(context)
+		};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$createContextSubGroups = F2(
+	function (findContextById, tcg) {
+		var filterTodoForContext = function (context) {
+			return A2(
+				_elm_lang$core$List$filter,
+				_jigargosar$elm_simple_gtd$Todo$contextFilter(context),
+				tcg.todoList);
+		};
+		var contexts = _jigargosar$elm_simple_gtd$Context$sort(
+			A2(
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					_elm_community$list_extra$List_Extra$unique(
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.todoList, _jigargosar$elm_simple_gtd$Todo$getContextId)),
+					findContextById)));
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			contexts,
+			_jigargosar$elm_simple_gtd$Entity_Tree$initContextNode(filterTodoForContext));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$ContextNode = F3(
+	function (a, b, c) {
+		return {context: a, todoList: b, groupEntity: c};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$ProjectNode = F3(
+	function (a, b, c) {
+		return {project: a, todoList: b, groupEntity: c};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$TodoForest = F2(
+	function (a, b) {
+		return {ctor: 'TodoForest', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$initTodoForest = _jigargosar$elm_simple_gtd$Entity_Tree$TodoForest;
+var _jigargosar$elm_simple_gtd$Entity_Tree$ProjectForest = function (a) {
+	return {ctor: 'ProjectForest', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Tree$initProjectForest = F2(
+	function (getTodoList, projects) {
+		return _jigargosar$elm_simple_gtd$Entity_Tree$ProjectForest(
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				projects,
+				_jigargosar$elm_simple_gtd$Entity_Tree$initProjectNode(getTodoList)));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$ContextForest = function (a) {
+	return {ctor: 'ContextForest', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Tree$initContextForest = F2(
+	function (getTodoList, contexts) {
+		return _jigargosar$elm_simple_gtd$Entity_Tree$ContextForest(
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				contexts,
+				_jigargosar$elm_simple_gtd$Entity_Tree$initContextNode(getTodoList)));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$flatten = function (tree) {
+	var _p0 = tree;
+	switch (_p0.ctor) {
+		case 'ContextRoot':
+			return {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Entity$fromContext(_p0._0.context),
+				_1: _jigargosar$elm_simple_gtd$Entity_Tree$flatten(
+					_jigargosar$elm_simple_gtd$Entity_Tree$ProjectForest(_p0._1))
+			};
+		case 'ProjectRoot':
+			return {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Entity$fromProject(_p0._0.project),
+				_1: _jigargosar$elm_simple_gtd$Entity_Tree$flatten(
+					_jigargosar$elm_simple_gtd$Entity_Tree$ContextForest(_p0._1))
+			};
+		case 'ContextForest':
+			return A2(
+				_elm_lang$core$List$concatMap,
+				function (node) {
+					return {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Entity$fromContext(node.context),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], node.todoList, _jigargosar$elm_simple_gtd$Entity$Task)
+					};
+				},
+				_p0._0);
+		case 'ProjectForest':
+			return A2(
+				_elm_lang$core$List$concatMap,
+				function (g) {
+					return {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Entity$fromProject(g.project),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _jigargosar$elm_simple_gtd$Entity$Task)
+					};
+				},
+				_p0._0);
+		default:
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p0._1, _jigargosar$elm_simple_gtd$Entity$Task);
+	}
+};
+var _jigargosar$elm_simple_gtd$Entity_Tree$ProjectRoot = F2(
+	function (a, b) {
+		return {ctor: 'ProjectRoot', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$initProjectRoot = F3(
+	function (getTodoList, findProjectById, project) {
+		return function (tcg) {
+			return A2(
+				_jigargosar$elm_simple_gtd$Entity_Tree$ProjectRoot,
+				tcg,
+				A2(_jigargosar$elm_simple_gtd$Entity_Tree$createContextSubGroups, findProjectById, tcg));
+		}(
+			A2(_jigargosar$elm_simple_gtd$Entity_Tree$initProjectNode, getTodoList, project));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$ContextRoot = F2(
+	function (a, b) {
+		return {ctor: 'ContextRoot', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Tree$initContextRoot = F3(
+	function (getTodoList, findContextById, context) {
+		return function (tcg) {
+			return A2(
+				_jigargosar$elm_simple_gtd$Entity_Tree$ContextRoot,
+				tcg,
+				A2(_jigargosar$elm_simple_gtd$Entity_Tree$createProjectSubGroups, findContextById, tcg));
+		}(
+			A2(_jigargosar$elm_simple_gtd$Entity_Tree$initContextNode, getTodoList, context));
+	});

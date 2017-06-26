@@ -10,6 +10,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import X.Debug
 
 
 type State
@@ -74,8 +75,11 @@ initRunning todoId now =
 
 switchOrStartRunning : Todo.Id -> Time -> Model -> Model
 switchOrStartRunning todoId now =
-    Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
-        |> Debug.log "switchOrStartRunning"
+    let
+        _ =
+            X.Debug.log "switchOrStartRunning" "foo"
+    in
+        Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
 
 
 togglePause : Time -> Model -> Model

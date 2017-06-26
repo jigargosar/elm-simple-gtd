@@ -1,6 +1,5 @@
 // Make sure to change the function name to match your project.
-var  _user$project$Native_Logger = function() {
-
+var  _jigargosar$elm_simple_gtd$Native_Logger = function() {
 
     /* The implementation is similar to
      https://github.com/elm-lang/core/blob/5.0.0/src/Native/Debug.js

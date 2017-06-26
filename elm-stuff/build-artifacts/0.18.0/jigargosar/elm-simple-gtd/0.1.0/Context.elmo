@@ -1,0 +1,30 @@
+var _jigargosar$elm_simple_gtd$Context$storeGenerator = _jigargosar$elm_simple_gtd$GroupDoc$storeGenerator('context-db');
+var _jigargosar$elm_simple_gtd$Context$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _jigargosar$elm_simple_gtd$Context$getName = function (_) {
+	return _.name;
+};
+var _jigargosar$elm_simple_gtd$Context$nullId = '';
+var _jigargosar$elm_simple_gtd$Context$isNullId = _jigargosar$elm_simple_gtd$X_Function$equals(_jigargosar$elm_simple_gtd$Context$nullId);
+var _jigargosar$elm_simple_gtd$Context$constructor = _jigargosar$elm_simple_gtd$GroupDoc$constructor;
+var _jigargosar$elm_simple_gtd$Context$init = F4(
+	function (name, now, deviceId, id) {
+		return A8(_jigargosar$elm_simple_gtd$Context$constructor, id, '', now, now, false, deviceId, name, false);
+	});
+var _jigargosar$elm_simple_gtd$Context$null = A8(_jigargosar$elm_simple_gtd$Context$constructor, _jigargosar$elm_simple_gtd$Context$nullId, '', 0, 0, false, '', 'Inbox', false);
+var _jigargosar$elm_simple_gtd$Context$filterNull = function (pred) {
+	return A2(
+		_elm_lang$core$List$filter,
+		pred,
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Context$null,
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Context$isNull = _jigargosar$elm_simple_gtd$X_Function$equals(_jigargosar$elm_simple_gtd$Context$null);
+var _jigargosar$elm_simple_gtd$Context$sort = _jigargosar$elm_simple_gtd$GroupDoc$sort(_jigargosar$elm_simple_gtd$Context$isNull);

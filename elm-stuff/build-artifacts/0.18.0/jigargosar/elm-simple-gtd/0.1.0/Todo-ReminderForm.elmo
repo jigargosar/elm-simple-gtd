@@ -1,0 +1,61 @@
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime = function (_p0) {
+	var _p1 = _p0;
+	var dateTimeString = A2(
+		_elm_lang$core$Basics_ops['++'],
+		_p1.date,
+		A2(_elm_lang$core$Basics_ops['++'], ' ', _p1.time));
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['!|>'],
+			_elm_lang$core$Date$fromString(dateTimeString),
+			function (_p2) {
+				return _elm_lang$core$Maybe$Just(
+					_elm_lang$core$Date$toTime(_p2));
+			}),
+		_elm_lang$core$Maybe$Nothing);
+};
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$update = F2(
+	function (action, model) {
+		var _p3 = action;
+		switch (_p3.ctor) {
+			case 'SetDate':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{date: _p3._0});
+			case 'SetTime':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{time: _p3._0});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{menuState: _p3._0});
+		}
+	});
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$create = F2(
+	function (todo, now) {
+		var timeInMilli = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(todo),
+			now + _elm_lang$core$Time$hour);
+		return {
+			id: _jigargosar$elm_simple_gtd$Document$getId(todo),
+			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
+			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
+			menuState: _jigargosar$elm_simple_gtd$Menu$initState
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$Model = F4(
+	function (a, b, c, d) {
+		return {id: a, date: b, time: c, menuState: d};
+	});
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetMenuState = function (a) {
+	return {ctor: 'SetMenuState', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetTime = function (a) {
+	return {ctor: 'SetTime', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetDate = function (a) {
+	return {ctor: 'SetDate', _0: a};
+};

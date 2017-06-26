@@ -211,7 +211,7 @@ update msg =
                 OnCreateDefaultEntitiesWithResult result ->
                     let
                         _ =
-                            Debug.log "result" (result)
+                            X.Debug.log "result" (result)
                     in
                         identity
 
@@ -420,9 +420,10 @@ logMsg msg model =
                 _ ->
                     let
                         _ =
-                            1
+                            X.Debug.log "X.Debug.log" ("msg4")
 
-                        --                            Debug.log "msg" (msg)
+                        _ =
+                            Debug.log "Debug.log" ("msg4")
                     in
                         Nothing
     in

@@ -1,4 +1,4 @@
-module View.ReminderOverlay exposing (..)
+module Task.ReminderOverlay exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

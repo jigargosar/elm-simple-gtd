@@ -1,11 +1,8 @@
 module View exposing (init)
 
-
 import ActionList.View
-
 import CustomSync
 import EntityList.View
-
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
@@ -20,8 +17,7 @@ import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
 import Polymer.App as App
-
-import View.ReminderOverlay exposing (maybe)
+import Task.ReminderOverlay exposing (maybe)
 import Todo.View
 import ViewModel
 import WebComponents exposing (onBoolPropertyChanged)
@@ -94,7 +90,7 @@ overlayViews appModel =
                     span [] []
     in
         [ Just editModeOverlayView
-        , View.ReminderOverlay.maybe appModel
+        , Task.ReminderOverlay.maybe appModel
         ]
             |> List.filterMap identity
 

@@ -2,17 +2,10 @@ module View.ReminderOverlay exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
 import X.Html exposing (onClickStopPropagation)
 import Model
 import ReminderOverlay
 import Time
-
-
-
-
-
-
 import WebComponents exposing (..)
 
 

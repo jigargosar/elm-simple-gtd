@@ -2,15 +2,8 @@ module ReminderOverlay exposing (..)
 
 import Date
 import Date.Extra as Date
-
 import Document
 import Todo
-
-
-
-
-
-
 import Time exposing (Time)
 
 

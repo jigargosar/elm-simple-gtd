@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-// Mixins
-// @import "components/prefixer";
 @import "material/components/mixins";
 @import "material/components/color";
 
@@ -11,8 +9,6 @@ $google-primary-color: color("blue", "darken-2");
 
 // Variables;
 @import "material/components/variables";
-
-$navbar-font-color: $off-black;
 
 // Reset
 @import "material/components/normalize";

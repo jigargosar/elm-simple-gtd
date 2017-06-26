@@ -207,37 +207,6 @@ updateInner msg =
             Return.map (Model.deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnCreateDefaultEntitiesWithResult result ->
-            let
-                _ =
-                    X.Debug.log "result" (result)
-            in
-                identity
-
-        OnCreateDefaultEntities ->
-            let
-                cmd =
-                    Http.get welcomeEntitiesURL D.value
-                        |> Http.send OnCreateDefaultEntitiesWithResult
-            in
-                map
-                    (Model.createProject "Explore SimpleGTD.com"
-                        >> Model.createProject "GTD: Learn"
-                        >> Model.createContext "1 Now"
-                        >> Model.createContext "2 Next Actions"
-                        >> Model.createContext "3 Waiting For"
-                        >> Model.createContext "zz SomeDay/Maybe"
-                        >> Model.createTodo "Click `+` or press `q` for quick add"
-                        >> Model.createTodo "press `i` to create and add to Inbox"
-                        >> Model.createTodo "press `e` to edit text"
-                        >> Model.createTodo "press `c` to set context"
-                        >> Model.createTodo "press `p` to set project"
-                        >> Model.createTodo "press `r` to set schedule/reminder"
-                        >> Model.createTodo "use `ArrowUp` and `ArrowDown` keys to focus item"
-                    )
-                    >> andThenUpdate OnDeactivateEditingMode
-                    >> command cmd
-
         StartEditingReminder todo ->
             Return.map (Model.startEditingReminder todo)
                 >> Return.command (positionScheduleMenuCmd todo)

@@ -79,8 +79,6 @@ type Msg
     | OnDeactivateEditingMode
     | OnCheckForFirstTimeSetup
     | OnSkipSignIn
-    | OnCreateDefaultEntities
-    | OnCreateDefaultEntitiesWithResult (Result Http.Error D.Value)
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model

@@ -17,7 +17,7 @@ import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
 import Polymer.App as App
-import Task.Notification.View exposing (maybe)
+import Task.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel
 import WebComponents exposing (onBoolPropertyChanged)
@@ -90,7 +90,7 @@ overlayViews appModel =
                     span [] []
     in
         [ Just editModeOverlayView
-        , Task.Notification.View.maybe appModel
+        , Task.Notification.View.maybeOverlay appModel
         ]
             |> List.filterMap identity
 

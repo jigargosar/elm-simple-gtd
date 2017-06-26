@@ -9,7 +9,7 @@ import Time
 import WebComponents exposing (..)
 
 
-maybe m =
+maybeOverlay m =
     case m.reminderOverlay of
         ReminderOverlay.Active activeView todoDetails ->
             reminderOverlayActiveView activeView todoDetails |> Just

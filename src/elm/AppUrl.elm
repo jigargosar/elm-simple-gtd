@@ -33,7 +33,7 @@ contact =
 
 
 getStarted =
-    "/app/#!/lists/contexts"
+    "/app/index.html#!/lists/contexts"
 
 
 landing =

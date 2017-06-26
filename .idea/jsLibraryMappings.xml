@@ -3,6 +3,7 @@
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{materialize}" />
     <file url="file://$PROJECT_DIR$/node_modules" libraries="{materialize}" />
+    <file url="PROJECT" libraries="{firebase-DefinitelyTyped, jquery-DefinitelyTyped, jqueryui-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>

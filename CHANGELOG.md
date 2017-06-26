@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.64 - 2017-06-26
 * centralize and fix app colors.
 * landing page
 * remove get started page, add sign in model to ensure user preferences are saved and appropriate sign in prompt is displayed. 

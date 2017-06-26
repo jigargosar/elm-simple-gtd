@@ -110,7 +110,7 @@ var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
 						break _v1_2;
 					}
 				} else {
-					if (_p3._1.ctor === 'Task') {
+					if (_p3._1.ctor === 'Todo') {
 						return A2(eq, _p3._0._0, _p3._1._0);
 					} else {
 						break _v1_2;
@@ -146,7 +146,7 @@ var _jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn = F3(
 	});
 var _jigargosar$elm_simple_gtd$Entity$getId = function (entity) {
 	var _p5 = entity;
-	if (_p5.ctor === 'Task') {
+	if (_p5.ctor === 'Todo') {
 		return _jigargosar$elm_simple_gtd$Document$getId(_p5._0);
 	} else {
 		var _p6 = _p5._0;
@@ -165,10 +165,10 @@ var _jigargosar$elm_simple_gtd$Entity$Project = function (a) {
 	return {ctor: 'Project', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Entity$initProjectGroup = _jigargosar$elm_simple_gtd$Entity$Project;
-var _jigargosar$elm_simple_gtd$Entity$Task = function (a) {
-	return {ctor: 'Task', _0: a};
+var _jigargosar$elm_simple_gtd$Entity$Todo = function (a) {
+	return {ctor: 'Todo', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Entity$fromTask = _jigargosar$elm_simple_gtd$Entity$Task;
+var _jigargosar$elm_simple_gtd$Entity$fromTodo = _jigargosar$elm_simple_gtd$Entity$Todo;
 var _jigargosar$elm_simple_gtd$Entity$Group = function (a) {
 	return {ctor: 'Group', _0: a};
 };

@@ -763,7 +763,7 @@ var _jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId = F2(
 						_0: A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 							A2(_jigargosar$elm_simple_gtd$Model$findTodoById, todoId, model),
-							_jigargosar$elm_simple_gtd$Entity$Task),
+							_jigargosar$elm_simple_gtd$Entity$Todo),
 						_1: _elm_lang$core$Maybe$Just(model)
 					}),
 				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Model$setFocusInEntity)),
@@ -1098,7 +1098,7 @@ var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
 							_jigargosar$elm_simple_gtd$Model$updateTodo,
 							function () {
 								var _p42 = form.referenceEntity;
-								if (_p42.ctor === 'Task') {
+								if (_p42.ctor === 'Todo') {
 									return _jigargosar$elm_simple_gtd$Todo$CopyProjectAndContextId(_p42._0);
 								} else {
 									var _p43 = _p42._0;
@@ -1204,7 +1204,7 @@ var _jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnPouchDBChange = F2(
 						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
 						_jigargosar$elm_simple_gtd$Model$todoStore,
 						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromTask));
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromTodo));
 			case 'project-db':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
@@ -1252,7 +1252,7 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 				_p49.id,
 				_jigargosar$elm_simple_gtd$Project$setName(_p49.name),
 				model);
-		case 'EditTask':
+		case 'EditTodo':
 			var _p50 = _p47._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
@@ -1271,7 +1271,7 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'EditTodoProject':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'TaskMoreMenu':
+		case 'TodoMoreMenu':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'NewTodo':
 			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p47._0, model);
@@ -1482,24 +1482,24 @@ var _jigargosar$elm_simple_gtd$Model$OnFirebaseMsgWithTime = F2(
 var _jigargosar$elm_simple_gtd$Model$OnFirebaseMsg = function (a) {
 	return {ctor: 'OnFirebaseMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnTaskMsgWithTime = F2(
+var _jigargosar$elm_simple_gtd$Model$OnTodoMsgWithTime = F2(
 	function (a, b) {
-		return {ctor: 'OnTaskMsgWithTime', _0: a, _1: b};
+		return {ctor: 'OnTodoMsgWithTime', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Model$OnTaskMsg = function (a) {
-	return {ctor: 'OnTaskMsg', _0: a};
+var _jigargosar$elm_simple_gtd$Model$OnTodoMsg = function (a) {
+	return {ctor: 'OnTodoMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Model$onTodoToggleRunning = function (_p57) {
-	return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+	return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 		_jigargosar$elm_simple_gtd$Todo_Msg$ToggleRunning(_p57));
 };
 var _jigargosar$elm_simple_gtd$Model$onTodoInitRunning = function (_p58) {
-	return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+	return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 		_jigargosar$elm_simple_gtd$Todo_Msg$InitRunning(_p58));
 };
-var _jigargosar$elm_simple_gtd$Model$onTodoStopRunning = _jigargosar$elm_simple_gtd$Model$OnTaskMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
-var _jigargosar$elm_simple_gtd$Model$onTodoTogglePaused = _jigargosar$elm_simple_gtd$Model$OnTaskMsg(_jigargosar$elm_simple_gtd$Todo_Msg$TogglePaused);
-var _jigargosar$elm_simple_gtd$Model$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Model$OnTaskMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
+var _jigargosar$elm_simple_gtd$Model$onTodoStopRunning = _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
+var _jigargosar$elm_simple_gtd$Model$onTodoTogglePaused = _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$TogglePaused);
+var _jigargosar$elm_simple_gtd$Model$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
 var _jigargosar$elm_simple_gtd$Model$keyboardCombos = {
 	ctor: '::',
 	_0: A2(

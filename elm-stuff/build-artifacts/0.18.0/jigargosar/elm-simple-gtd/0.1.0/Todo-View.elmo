@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 	var updateReminderForm = function (_p0) {
-		return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+		return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm, form, _p0));
 	};
 	return A2(
@@ -257,7 +257,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 												{ctor: '[]'},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Task'),
+													_0: _elm_lang$html$Html$text('Todo'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
@@ -355,7 +355,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('New Task'),
+												_0: _elm_lang$html$Html$text('New Todo'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -832,9 +832,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 	function (appVM, canBeFocused, todo) {
-		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTaskMsg;
+		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
-			_jigargosar$elm_simple_gtd$Entity$Task(todo));
+			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$NOOP;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);

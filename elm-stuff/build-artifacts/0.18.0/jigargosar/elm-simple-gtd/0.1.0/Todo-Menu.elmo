@@ -4,10 +4,10 @@ var _jigargosar$elm_simple_gtd$Todo_Menu$setMenuState = F2(
 			form,
 			{menuState: menuState});
 	});
-var _jigargosar$elm_simple_gtd$Todo_Menu$init = function (taskId) {
-	return {taskId: taskId, menuState: _jigargosar$elm_simple_gtd$Menu$initState};
+var _jigargosar$elm_simple_gtd$Todo_Menu$init = function (todoId) {
+	return {todoId: todoId, menuState: _jigargosar$elm_simple_gtd$Menu$initState};
 };
 var _jigargosar$elm_simple_gtd$Todo_Menu$Model = F2(
 	function (a, b) {
-		return {taskId: a, menuState: b};
+		return {todoId: a, menuState: b};
 	});

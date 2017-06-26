@@ -27,11 +27,11 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoContext = function (a) {
 var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoReminder = function (a) {
 	return {ctor: 'EditTodoReminder', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode$TaskMoreMenu = function (a) {
-	return {ctor: 'TaskMoreMenu', _0: a};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$TodoMoreMenu = function (a) {
+	return {ctor: 'TodoMoreMenu', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode$taskMoreMenu = function (_p0) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode$TaskMoreMenu(
+var _jigargosar$elm_simple_gtd$ExclusiveMode$todoMoreMenu = function (_p0) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$TodoMoreMenu(
 		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p0));
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode$EditProject = function (a) {
@@ -50,11 +50,11 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$editContext = function (_p2) {
 		_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p2));
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode$EditContext);
-var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTask = function (a) {
-	return {ctor: 'EditTask', _0: a};
+var _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodo = function (a) {
+	return {ctor: 'EditTodo', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editTask = function (_p3) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode$EditTask(
+var _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo = function (_p3) {
+	return _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodo(
 		_jigargosar$elm_simple_gtd$Todo_Form$create(_p3));
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (entity) {
@@ -67,7 +67,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (en
 			return _jigargosar$elm_simple_gtd$ExclusiveMode$editProject(_p5._0);
 		}
 	} else {
-		return _jigargosar$elm_simple_gtd$ExclusiveMode$editTask(_p4._0);
+		return _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo(_p4._0);
 	}
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo = function (a) {

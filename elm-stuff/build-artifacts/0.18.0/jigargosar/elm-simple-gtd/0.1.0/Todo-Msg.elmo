@@ -9,9 +9,9 @@ var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm = F2(
 var _jigargosar$elm_simple_gtd$Todo_Msg$Upsert = function (a) {
 	return {ctor: 'Upsert', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateSetupFormTaskText = F2(
+var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateSetupFormTodoText = F2(
 	function (a, b) {
-		return {ctor: 'UpdateSetupFormTaskText', _0: a, _1: b};
+		return {ctor: 'UpdateSetupFormTodoText', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker = {ctor: 'UpdateTimeTracker'};
 var _jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning = {ctor: 'GotoRunning'};

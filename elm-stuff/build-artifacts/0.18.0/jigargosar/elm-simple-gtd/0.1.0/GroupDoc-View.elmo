@@ -108,7 +108,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_View$item = F2(
 	function (todoView, vm) {
 		var getTabIndexAVForTodo = function (_p0) {
 			return vm.getTabIndexAVForEntity(
-				_jigargosar$elm_simple_gtd$Entity$Task(_p0));
+				_jigargosar$elm_simple_gtd$Entity$Todo(_p0));
 		};
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

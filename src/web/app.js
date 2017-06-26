@@ -1,6 +1,6 @@
 "use strict";
 
-import "./entry"
+import {withDevTools} from "./entry"
 import "./vendor"
 import sound from "./sound"
 import Fire from "./fire"
@@ -13,14 +13,7 @@ import autosize from "autosize"
 import localforage from "localforage"
 
 
-//noinspection JSUnresolvedVariable
-const isDevelopmentMode = IS_DEVELOPMENT_ENV
-
-
 const env = process.env
-
-// console.log("env", env)
-
 const npmPackageVersion = env["npm_package_version"]
 
 window.appBoot= async function appBoot() {
@@ -79,7 +72,7 @@ window.appBoot= async function appBoot() {
         // encodedProjectList: [],
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        developmentMode: isDevelopmentMode,
+        developmentMode: IS_DEVELOPMENT_ENV,
         appVersion: npmPackageVersion,
         deviceId,
         config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},

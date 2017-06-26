@@ -32,5 +32,31 @@ export const removeUnusedImports = function() {
 }
 
 export const parseWPD = function() {
-    run("tail -F wp-dev-server.log")
+    LineDriver.read({
+        in: 'wp-dev-server.log',
+        line: function (props, parser) {
+            const line = parser.line
+            // console.log(parser.line);
+
+            if (props.fileName) {
+                const lineNumRegexp = /^([0-9]+)\|/
+                const match = lineNumRegexp.exec(line)
+                if (match) {
+                    // run("line-replace " + props.fileName + ":" + match[1] + " > /dev/null")
+                    props.fileName = null
+                }
+
+            } else {
+                // const unusedImportRegexp = /^-- PORT ERROR -+ ([./a-zA-Z0-9]+)$/
+                const unusedImportRegexp = /^-- PORT ERROR -+ (.+)$/
+                const match = unusedImportRegexp.exec(line)
+                if (match) {
+                    props.fileName = match[1]
+                    console.error(props.fileName+":1-3 -- Error: Foo");
+                    // console.log("fileName", props.fileName)
+                }
+            }
+        }
+    })
+    // run("tail -F wp-dev-server.log")
 }

@@ -45,7 +45,7 @@
       <option name="workingDir" value="" />
       <envs />
     </TaskOptions>
-    <TaskOptions isEnabled="true">
+    <TaskOptions isEnabled="false">
       <option name="arguments" value="$FilePathRelativeToProjectRoot$ --yes --output /dev/null" />
       <option name="checkSyntaxErrors" value="true" />
       <option name="description" />

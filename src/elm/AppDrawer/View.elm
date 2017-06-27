@@ -23,7 +23,7 @@ sidebarContent appVM model =
         { contexts, projects } =
             appVM
     in
-        div [ class "app-drawer-list-container" ]
+        div [ class "sidebar-content app-drawer-list-container" ]
             [ ul []
                 ([]
                     ++ entityGroupView contexts model.mainViewType

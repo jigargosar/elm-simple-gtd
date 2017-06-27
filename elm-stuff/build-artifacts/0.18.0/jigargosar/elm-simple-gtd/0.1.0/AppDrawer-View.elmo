@@ -426,7 +426,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$toggleDeletedItem = function (mode
 			}
 		});
 };
-var _jigargosar$elm_simple_gtd$AppDrawer_View$list = F2(
+var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent = F2(
 	function (appVM, model) {
 		var _p2 = appVM;
 		var contexts = _p2.contexts;
@@ -435,7 +435,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$list = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('app-drawer-list-container'),
+				_0: _elm_lang$html$Html_Attributes$class('sidebar-content app-drawer-list-container'),
 				_1: {ctor: '[]'}
 			},
 			{

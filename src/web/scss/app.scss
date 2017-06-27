@@ -1,4 +1,4 @@
-@import "material/components/color";
+//@import "material/components/color";
 #app-view {
   background-color: color("grey", "lighten-4");
 
@@ -13,4 +13,11 @@
       margin-right: 1rem;
     }
   }
+}
+
+#app-view #app-header{
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  min-height: 4rem;
 }

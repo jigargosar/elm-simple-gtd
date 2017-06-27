@@ -55,7 +55,14 @@ headerView viewModel m =
                 ?|> X.List.singleton
                 ?= titleHeaderContent viewModel m
     in
-        div [ id "app-header" ] (headerWithContent content m)
+        div
+            [ id "app-header"
+            , style
+                [ "color" => "white"
+                , "background-color" => AppColors.encode viewModel.header.backgroundColor
+                ]
+            ]
+            (headerWithContent content m)
 
 
 titleHeaderContent viewModel m =

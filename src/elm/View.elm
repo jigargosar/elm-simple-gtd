@@ -118,8 +118,8 @@ appDrawerLayoutView m =
     in
         Ui.Layout.app
             [ text "sidebar" ]
-            [ text "toolbar" ]
-            [ text "content" ]
+            (View.Header.headerView viewModel m)
+            [ mainContent viewModel m ]
 
 
 appDrawerLayoutView1 m =

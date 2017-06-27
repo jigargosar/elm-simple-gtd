@@ -130,14 +130,10 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 			_0: _elm_lang$html$Html$text('sidebar'),
 			_1: {ctor: '[]'}
 		},
+		A2(_jigargosar$elm_simple_gtd$View_Header$headerView, viewModel, m),
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('toolbar'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('content'),
+			_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, viewModel, m),
 			_1: {ctor: '[]'}
 		});
 };

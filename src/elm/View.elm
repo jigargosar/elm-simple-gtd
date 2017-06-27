@@ -117,7 +117,7 @@ appDrawerLayoutView m =
                 ]
     in
         Ui.Layout.app
-            [ View.AppDrawer.leftHeader appVM m ]
+            [ div [ id "app-sidebar" ] [ View.AppDrawer.leftHeader appVM m ] ]
             [ View.Header.headerView appVM m ]
             [ mainContent appVM m ]
 

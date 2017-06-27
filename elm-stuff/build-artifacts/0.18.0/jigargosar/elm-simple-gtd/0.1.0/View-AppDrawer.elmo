@@ -37,16 +37,20 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = F2(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h5,
+					_jigargosar$elm_simple_gtd$Material$iconButton,
+					'menu',
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(t1),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('menu-btn'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$ToggleDrawer),
+								_1: {ctor: '[]'}
+							}
+						}
 					}),
 				_1: {
 					ctor: '::',
@@ -54,78 +58,104 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = F2(
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('small layout horizontal '),
+							_0: _elm_lang$html$Html_Attributes$class('detail'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$a,
+								_elm_lang$html$Html$h5,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$target('_blank'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$changeLogURL),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-											_1: {ctor: '[]'}
-										}
-									}
+									_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
+									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(
-										A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)),
+									_0: _elm_lang$html$Html$text(t1),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
 								_0: A2(
-									_elm_lang$html$Html$a,
+									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$target('_blank'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$newPostURL),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-												_1: {ctor: '[]'}
-											}
-										}
+										_0: _elm_lang$html$Html_Attributes$class('small layout horizontal '),
+										_1: {ctor: '[]'}
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Discuss'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$a,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$target('_blank'),
-											_1: {
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$contact),
+												_0: _elm_lang$html$Html_Attributes$target('_blank'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-													_1: {ctor: '[]'}
+													_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$changeLogURL),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+														_1: {ctor: '[]'}
+													}
 												}
-											}
-										},
-										{
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Feedback'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$target('_blank'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$newPostURL),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+															_1: {ctor: '[]'}
+														}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Discuss'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$a,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$target('_blank'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$contact),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+																_1: {ctor: '[]'}
+															}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Feedback'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
 							}
 						}),
 					_1: {ctor: '[]'}

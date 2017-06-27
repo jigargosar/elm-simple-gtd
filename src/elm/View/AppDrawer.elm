@@ -3,6 +3,7 @@ module View.AppDrawer exposing (..)
 import AppColors
 import AppDrawer.View
 import AppUrl
+import Material
 import X.Html exposing (boolProperty)
 import Html exposing (Attribute, Html, a, div, h5, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
@@ -68,13 +69,20 @@ leftHeader appVM m =
                 , "background-color" => AppColors.encode appVM.header.backgroundColor
                 ]
             ]
-            [ h5 [ href AppUrl.landing ] [ text t1 ]
-            , div [ class "small layout horizontal " ]
-                [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
-                    [ "v" ++ m.appVersion |> text ]
-                , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
-                    [ text "Discuss" ]
-                , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
-                    [ text "Feedback" ]
+            [ Material.iconButton "menu"
+                [ class "menu-btn"
+                , tabindex -1
+                , onClick Model.ToggleDrawer
+                ]
+            , div [ class "detail" ]
+                [ h5 [ href AppUrl.landing ] [ text t1 ]
+                , div [ class "small layout horizontal " ]
+                    [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
+                        [ "v" ++ m.appVersion |> text ]
+                    , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
+                        [ text "Discuss" ]
+                    , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
+                        [ text "Feedback" ]
+                    ]
                 ]
             ]

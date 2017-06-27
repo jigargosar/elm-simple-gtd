@@ -127,7 +127,18 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 		_gdotdesign$elm_ui$Ui_Layout$app,
 		{
 			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, m),
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('app-sidebar'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, m),
+					_1: {ctor: '[]'}
+				}),
 			_1: {ctor: '[]'}
 		},
 		{

@@ -30,11 +30,7 @@
 <script src="/landing.bundle.js"></script>
 <script>
     document.addEventListener('WebComponentsReady', () => {
-//        if(window.location.search === "?landing=true"){
             window.landingBoot().catch(console.error)
-//        }else{
-//            window.appBoot().catch(console.error)
-//        }
     });
 </script>
 <script async src="/app.bundle.js"></script>

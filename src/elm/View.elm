@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import ActionList.View
+import AppDrawer.View
 import CustomSync
 import Entity.View
 import Ui.Layout
@@ -117,7 +118,11 @@ appDrawerLayoutView m =
                 ]
     in
         Ui.Layout.app
-            [ div [ id "app-sidebar" ] [ View.AppDrawer.leftHeader appVM m ] ]
+            [ div [ id "app-sidebar" ]
+                [ View.AppDrawer.leftHeader appVM m
+                , AppDrawer.View.list appVM m
+                ]
+            ]
             [ View.Header.headerView appVM m ]
             [ mainContent appVM m ]
 

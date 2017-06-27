@@ -1578,10 +1578,6 @@ var _jigargosar$elm_simple_gtd$Model$StartEditingContext = function (a) {
 var _jigargosar$elm_simple_gtd$Model$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnCreateDefaultEntitiesWithResult = function (a) {
-	return {ctor: 'OnCreateDefaultEntitiesWithResult', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnCreateDefaultEntities = {ctor: 'OnCreateDefaultEntities'};
 var _jigargosar$elm_simple_gtd$Model$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup = {ctor: 'OnCheckForFirstTimeSetup'};
 var _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};

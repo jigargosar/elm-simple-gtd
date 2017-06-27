@@ -23,13 +23,13 @@
       "name": "unbundled",
       "bundle": true,
       "js": {
-        "minify": true
+        "minify": false
       },
       "css": {
         "minify": false
       },
       "html": {
-        "minify": true
+        "minify": false
       },
       "addServiceWorker": true,
       "swPrecacheConfig": "sw-precache-config.js"

@@ -20,4 +20,12 @@
   align-items: center;
   padding: 0 1rem;
   min-height: 4rem;
+
+  .menu-btn{
+    @extend .hide-on-med-and-up;
+  }
+
+  i{
+    color:white;
+  }
 }

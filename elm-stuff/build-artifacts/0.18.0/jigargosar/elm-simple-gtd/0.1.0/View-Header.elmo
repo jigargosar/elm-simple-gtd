@@ -149,32 +149,25 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
-		return {
-			ctor: '::',
-			_0: A2(
-				_jigargosar$elm_simple_gtd$WebComponents$paperIconButton,
-				{
+		var menuButton = A2(
+			_jigargosar$elm_simple_gtd$Material$iconButton,
+			'menu',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('menu-btn'),
+				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$WebComponents$iconA('menu'),
+					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$ToggleDrawer),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('hide-when-wide'),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
+						_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$ToggleDrawer),
+						_1: {ctor: '[]'}
 					}
-				},
-				{ctor: '[]'}),
+				}
+			});
+		return {
+			ctor: '::',
+			_0: menuButton,
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -182,33 +175,13 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'max-width', '80%'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					},
 					content),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
-							_1: {ctor: '[]'}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$View_Header$menu(m),
-						_1: {ctor: '[]'}
-					}
+					_0: _jigargosar$elm_simple_gtd$View_Header$menu(m),
+					_1: {ctor: '[]'}
 				}
 			}
 		};

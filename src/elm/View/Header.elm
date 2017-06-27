@@ -2,6 +2,7 @@ module View.Header exposing (..)
 
 import AppColors
 import AppUrl
+import Material
 import X.Html exposing (boolProperty)
 import Firebase
 import Model
@@ -75,18 +76,26 @@ titleHeaderContent viewModel m =
 
 
 headerWithContent content m =
-    [ paperIconButton
-        [ iconA "menu"
-        , tabindex -1
-        , attribute "drawer-toggle" ""
-        , onClick Model.ToggleDrawer
-        , class "hide-when-wide"
+    let
+        menuButton =
+            --            paperIconButton
+            --                    [ iconA "menu"
+            --                    , tabindex -1
+            --                    , attribute "drawer-toggle" ""
+            --                    , onClick Model.ToggleDrawer
+            --                    , class "hide-when-wide"
+            --                    ]
+            --                    []
+            Material.iconButton "menu"
+                [ class "menu-btn"
+                , tabindex -1
+                , onClick Model.ToggleDrawer
+                ]
+    in
+        [ menuButton
+        , div [ class "flex-auto" ] content
+        , menu m
         ]
-        []
-    , div [ class "flex-auto", style [ "max-width" => "80%" ] ] content
-    , div [ class "flex-auto" ] []
-    , menu m
-    ]
 
 
 menu m =

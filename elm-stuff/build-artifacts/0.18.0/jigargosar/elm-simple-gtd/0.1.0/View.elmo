@@ -46,7 +46,7 @@ var _jigargosar$elm_simple_gtd$View$mainContent = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
+var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView1 = function (m) {
 	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
 	var viewModel = _jigargosar$elm_simple_gtd$ViewModel$create(m);
 	return A2(
@@ -85,34 +85,90 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 			}
 		});
 };
+var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
+	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
+	var viewModel = _jigargosar$elm_simple_gtd$ViewModel$create(m);
+	var _p1 = A2(
+		_edvail$elm_polymer$Polymer_App$drawerLayout,
+		{
+			ctor: '::',
+			_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'forceNarrow', forceNarrow),
+			_1: {
+				ctor: '::',
+				_0: A2(_jigargosar$elm_simple_gtd$WebComponents$onBoolPropertyChanged, 'narrow', _jigargosar$elm_simple_gtd$Model$OnLayoutNarrowChanged),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$view, viewModel, m),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_App$headerLayout,
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'has-scrolling-region', ''),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, viewModel, m),
+						_1: {
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, viewModel, m),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	return A3(
+		_gdotdesign$elm_ui$Ui_Layout$app,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('sidebar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('toolbar'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('content'),
+			_1: {ctor: '[]'}
+		});
+};
 var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 	var editModeOverlayView = function () {
-		var _p1 = _jigargosar$elm_simple_gtd$Model$getEditMode(appModel);
-		switch (_p1.ctor) {
+		var _p2 = _jigargosar$elm_simple_gtd$Model$getEditMode(appModel);
+		switch (_p2.ctor) {
 			case 'LaunchBar':
-				return A2(_jigargosar$elm_simple_gtd$LaunchBar_View$init, _p1._0, appModel);
+				return A2(_jigargosar$elm_simple_gtd$LaunchBar_View$init, _p2._0, appModel);
 			case 'TodoMoreMenu':
-				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
+				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p2._0);
 			case 'EditTodoContext':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p1._0, appModel);
+				return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p2._0, appModel);
 			case 'EditTodoProject':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p1._0, appModel);
+				return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p2._0, appModel);
 			case 'EditTodoReminder':
-				return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p1._0);
+				return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p2._0);
 			case 'SignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
 			case 'Setup':
-				return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p1._0);
+				return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p2._0);
 			case 'ActionList':
-				return A2(_jigargosar$elm_simple_gtd$ActionList_View$init, appModel, _p1._0);
+				return A2(_jigargosar$elm_simple_gtd$ActionList_View$init, appModel, _p2._0);
 			case 'EditProject':
-				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
+				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p2._0);
 			case 'EditContext':
-				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
+				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p2._0);
 			case 'EditTodo':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p1._0, appModel);
+				return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p2._0, appModel);
 			case 'NewTodo':
-				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
+				return _jigargosar$elm_simple_gtd$Todo_View$new(_p2._0);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

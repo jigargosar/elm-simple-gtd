@@ -249,8 +249,8 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 									_jigargosar$elm_simple_gtd$Model$setUser(_p14),
 									_p13)))));
 			};
-		case 'OnCheckForFirstTimeSetup':
-			return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$checkAndUpdateSetupMode);
+		case 'OnSwitchToNewUserSetupModeIfNeeded':
+			return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded);
 		case 'AfterUserChanged':
 			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(
 				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged));

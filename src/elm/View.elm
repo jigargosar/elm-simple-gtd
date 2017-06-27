@@ -3,6 +3,7 @@ module View exposing (init)
 import ActionList.View
 import CustomSync
 import Entity.View
+import Ui.Layout
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
@@ -96,6 +97,32 @@ overlayViews appModel =
 
 
 appDrawerLayoutView m =
+    let
+        viewModel =
+            ViewModel.create m
+
+        forceNarrow =
+            Model.getLayoutForceNarrow m
+
+        _ =
+            App.drawerLayout
+                [ boolProperty "forceNarrow" forceNarrow
+                , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
+                ]
+                [ View.AppDrawer.view viewModel m
+                , App.headerLayout [ attribute "has-scrolling-region" "" ]
+                    [ View.Header.init viewModel m
+                    , mainContent viewModel m
+                    ]
+                ]
+    in
+        Ui.Layout.app
+            [ text "sidebar" ]
+            [ text "toolbar" ]
+            [ text "content" ]
+
+
+appDrawerLayoutView1 m =
     let
         viewModel =
             ViewModel.create m

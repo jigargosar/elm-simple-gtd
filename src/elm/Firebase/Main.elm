@@ -6,15 +6,8 @@ import Firebase.SignIn
 import Model
 import Navigation
 import Return
-
-
-
-
-
-
 import Time
 import X.Record
-
 
 
 port signIn : () -> Cmd msg
@@ -40,7 +33,7 @@ update andThenUpdate now msg =
         Firebase.OnSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
-                >> andThenUpdate Model.OnCheckForFirstTimeSetup
+                >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
 
         Firebase.OnSignOut ->
             Return.command (signOut ())
@@ -60,5 +53,5 @@ update andThenUpdate now msg =
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
-                                    >> andThenUpdate Model.OnCheckForFirstTimeSetup
+                                    >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
                 )

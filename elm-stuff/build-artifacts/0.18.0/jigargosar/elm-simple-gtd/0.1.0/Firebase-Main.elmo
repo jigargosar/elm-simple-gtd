@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
 				return function (_p1) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup,
+						_jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded,
 						A2(
 							andThenUpdate,
 							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
@@ -58,7 +58,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
 								return function (_p4) {
 									return A2(
 										andThenUpdate,
-										_jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup,
+										_jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded,
 										A2(
 											andThenUpdate,
 											_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,

@@ -140,8 +140,8 @@ updateInner msg =
                 >> Return.maybeEffect firebaseSetupOnDisconnectCmd
                 >> startSyncWithFirebase user
 
-        OnCheckForFirstTimeSetup ->
-            Return.map (Model.checkAndUpdateSetupMode)
+        OnSwitchToNewUserSetupModeIfNeeded ->
+            Return.map (Model.switchToNewUserSetupModeIfNeeded)
 
         AfterUserChanged ->
             OnFirebaseMsg Firebase.AfterUserChanged |> andThenUpdate

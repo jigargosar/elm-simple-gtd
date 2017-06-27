@@ -77,7 +77,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
-    | OnCheckForFirstTimeSetup
+    | OnSwitchToNewUserSetupModeIfNeeded
     | OnSkipSignIn
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
@@ -647,7 +647,7 @@ isShowDetailsKeyPressed =
     .keyboardState >> Keyboard.isAltDown >> not
 
 
-checkAndUpdateSetupMode model =
+switchToNewUserSetupModeIfNeeded model =
     if Store.isEmpty model.todoStore then
         setEditMode createSetupExclusiveMode model
     else

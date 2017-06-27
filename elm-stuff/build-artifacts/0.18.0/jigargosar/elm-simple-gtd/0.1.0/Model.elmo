@@ -717,7 +717,7 @@ var _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile = function (_p28) {
 var _jigargosar$elm_simple_gtd$Model$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode$Setup(
 	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, ''));
-var _jigargosar$elm_simple_gtd$Model$checkAndUpdateSetupMode = function (model) {
+var _jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded = function (model) {
 	return _jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? A2(_jigargosar$elm_simple_gtd$Model$setEditMode, _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode, model) : _jigargosar$elm_simple_gtd$Model$deactivateEditingMode(model);
 };
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
@@ -1579,7 +1579,7 @@ var _jigargosar$elm_simple_gtd$Model$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Model$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
-var _jigargosar$elm_simple_gtd$Model$OnCheckForFirstTimeSetup = {ctor: 'OnCheckForFirstTimeSetup'};
+var _jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
 var _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoTextChanged = F2(
 	function (a, b) {

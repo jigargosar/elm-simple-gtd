@@ -148,18 +148,11 @@ export default {
         port: 8020,
         overlay: true,
         watchContentBase: true,
-        // open:true,
-        // inline: false,
+        open:true,
+        inline: false,
         contentBase: ["static/",],
-        host: "0.0.0.0",
-
+        host: "localhost",
     },
-
-
-    // performance: {
-    //     hints: "warning"
-    // },
-
 };
 
 

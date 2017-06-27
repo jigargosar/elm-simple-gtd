@@ -132,9 +132,9 @@ export default {
                     {
                         loader: 'url-loader',
                         query: {
-                            name: "[name].[ext]",
-                            outputPath: "/assets/fonts/",
-                            useRelativePath: isWebPackDevServer,
+                            name: "[path]/[name].[ext]",
+                            // outputPath: "/assets/fonts/",
+                            // useRelativePath: isWebPackDevServer,
                             "limit": 10000,
                             "mimetype": "application/font-woff",
                         }

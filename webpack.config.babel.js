@@ -33,7 +33,7 @@ export default {
     // devtool: isDevEnv ? "inline" : 'source-map',
     // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
-    context:path.resolve(__dirname, "src/web/"),
+    context: path.resolve(__dirname, "src/web/"),
     entry: {
         // "vendor":["./src/web/vendor.js"],
         "app": ["./app.js"],
@@ -74,12 +74,18 @@ export default {
             {
                 test: /\.elm$/,
                 exclude: [/elm-stuff/, /node_modules/],
-                // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&warn=true"],
-                use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
-                // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
-                // use: ["elm-hot-loader", "elm-webpack-loader"],
+                use: [
+                    "elm-hot-loader",
+                    {
+                        loader: "elm-webpack-loader",
+                        options: {
+                            verbose: true,
+                            warn: false,
+                            debug: false,
+                        },
+                    }
+                ],
             },
-
             {
                 test: /\.js$/,
                 exclude: function (fileName) {
@@ -89,26 +95,26 @@ export default {
                 use: 'babel-loader',
             },
             /*{
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        "css-loader",
-                        "sass-loader",
-                    ],
-                })
-            },
-            {
-                test: /\.(pcss|css)$/,
+             test: /\.scss$/,
+             use: ExtractTextPlugin.extract({
+             fallback: 'style-loader',
+             use: [
+             "css-loader",
+             "sass-loader",
+             ],
+             })
+             },
+             {
+             test: /\.(pcss|css)$/,
 
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        'css-loader',
-                        'postcss-loader',
-                    ],
-                })
-            },*/
+             use: ExtractTextPlugin.extract({
+             fallback: 'style-loader',
+             use: [
+             'css-loader',
+             'postcss-loader',
+             ],
+             })
+             },*/
             {
                 test: /\.(pcss|css)$/,
 
@@ -131,12 +137,12 @@ export default {
                 use: [
                     {
                         loader: 'url-loader',
-                        query: {
-                            name: "[path]/[name].[ext]",
-                            // outputPath: "/assets/fonts/",
-                            // useRelativePath: isWebPackDevServer,
-                            "limit": 10000,
-                            "mimetype": "application/font-woff",
+                        options: {
+                            name: "[path][name].[ext]",
+                            outputPath: "/assets/",
+                            useRelativePath: false,
+                            limit: 10000,
+                            mimetype: "application/font-woff",
                         }
                     }
                 ]

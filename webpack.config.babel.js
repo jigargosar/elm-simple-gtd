@@ -30,9 +30,6 @@ export default {
     resolve: {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
     },
-    // devtool: isDevEnv ? "inline" : 'source-map',
-    // devtool: isDevEnv? "": "source-map",
-    // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     context: path.resolve(__dirname, "src/web/"),
     entry: {
         // "vendor":["./src/web/vendor.js"],
@@ -94,27 +91,6 @@ export default {
                 },
                 use: 'babel-loader',
             },
-            /*{
-             test: /\.scss$/,
-             use: ExtractTextPlugin.extract({
-             fallback: 'style-loader',
-             use: [
-             "css-loader",
-             "sass-loader",
-             ],
-             })
-             },
-             {
-             test: /\.(pcss|css)$/,
-
-             use: ExtractTextPlugin.extract({
-             fallback: 'style-loader',
-             use: [
-             'css-loader',
-             'postcss-loader',
-             ],
-             })
-             },*/
             {
                 test: /\.(pcss|css)$/,
 

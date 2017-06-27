@@ -1,7 +1,7 @@
 import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
-import * as runElm from "./scripts/run-elm"
+import * as elm from "./tasks/elm"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)
 
@@ -193,5 +193,5 @@ export function dummy2(...args) {
 
 dummy.help = 'logs all options and args to console'
 
-export const removeUnusedImports = runElm.removeUnusedImports
-export const parseWPD = runElm.parseWPD
+export const removeUnusedImports = elm.removeUnusedImports
+export const parseWPD = elm.parseWPD

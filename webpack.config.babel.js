@@ -39,7 +39,7 @@ export default {
 
     output: {
         path: outputPath,
-        filename: '[name].js',
+        filename: '[name].bundle.js',
     },
 
     plugins: [

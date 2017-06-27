@@ -1,69 +1,63 @@
-var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = function (m) {
-	var _p0 = m.developmentMode ? {
-		ctor: '_Tuple2',
-		_0: A2(_elm_lang$core$Basics_ops['++'], 'Dev v', m.appVersion),
-		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
-	} : {
-		ctor: '_Tuple2',
-		_0: 'SimpleGTD.com',
-		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
-	};
-	var t1 = _p0._0;
-	var t2 = _p0._1;
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('left-header'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$a,
-				{
+var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = F2(
+	function (appVM, m) {
+		var _p0 = m.developmentMode ? {
+			ctor: '_Tuple2',
+			_0: A2(_elm_lang$core$Basics_ops['++'], 'Dev v', m.appVersion),
+			_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
+		} : {
+			ctor: '_Tuple2',
+			_0: 'SimpleGTD.com',
+			_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
+		};
+		var t1 = _p0._0;
+		var t2 = _p0._1;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('left-header'),
+				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'color', 'white'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+									'background-color',
+									_jigargosar$elm_simple_gtd$AppColors$encode(appVM.header.backgroundColor)),
+								_1: {ctor: '[]'}
+							}
+						}),
 					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(t1),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
+				}
+			},
+			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
+					_elm_lang$html$Html$h5,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('small layout horizontal '),
+						_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$a,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$target('_blank'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$changeLogURL),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						_0: _elm_lang$html$Html$text(t1),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('small layout horizontal '),
+							_1: {ctor: '[]'}
+						},
+						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$a,
@@ -72,7 +66,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = function (m) {
 									_0: _elm_lang$html$Html_Attributes$target('_blank'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$newPostURL),
+										_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$changeLogURL),
 										_1: {
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$tabindex(-1),
@@ -82,7 +76,8 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = function (m) {
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Discuss'),
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -94,7 +89,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = function (m) {
 										_0: _elm_lang$html$Html_Attributes$target('_blank'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$contact),
+											_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$newPostURL),
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$tabindex(-1),
@@ -104,17 +99,39 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = function (m) {
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Feedback'),
+										_0: _elm_lang$html$Html$text('Discuss'),
 										_1: {ctor: '[]'}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$target('_blank'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$contact),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+													_1: {ctor: '[]'}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Feedback'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 	function (appVM, model) {
 		return A2(
@@ -206,7 +223,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader(model),
+											_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, model),
 											_1: {ctor: '[]'}
 										}
 									}),

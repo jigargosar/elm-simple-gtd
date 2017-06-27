@@ -98,7 +98,7 @@ overlayViews appModel =
 
 appDrawerLayoutView m =
     let
-        viewModel =
+        appVM =
             ViewModel.create m
 
         forceNarrow =
@@ -109,17 +109,17 @@ appDrawerLayoutView m =
                 [ boolProperty "forceNarrow" forceNarrow
                 , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
                 ]
-                [ View.AppDrawer.view viewModel m
+                [ View.AppDrawer.view appVM m
                 , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                    [ View.Header.init viewModel m
-                    , mainContent viewModel m
+                    [ View.Header.init appVM m
+                    , mainContent appVM m
                     ]
                 ]
     in
         Ui.Layout.app
-            [ text "sidebar" ]
-            [ View.Header.headerView viewModel m ]
-            [ mainContent viewModel m ]
+            [ View.AppDrawer.leftHeader appVM m ]
+            [ View.Header.headerView appVM m ]
+            [ mainContent appVM m ]
 
 
 appDrawerLayoutView1 m =

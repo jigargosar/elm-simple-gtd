@@ -29,3 +29,19 @@
     color:white;
   }
 }
+
+#app-view #left-header{
+  display: flex;
+  flex-direction:column;
+  //align-content:center;
+  justify-content:center;
+
+  min-height: 4rem;
+  padding: 0 1rem;
+  i{
+    color:white;
+  }
+  h5{
+    margin: 0;
+  }
+}

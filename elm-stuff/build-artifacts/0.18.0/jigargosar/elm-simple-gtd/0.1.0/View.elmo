@@ -87,7 +87,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView1 = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
-	var viewModel = _jigargosar$elm_simple_gtd$ViewModel$create(m);
+	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
 	var v = A2(
 		_edvail$elm_polymer$Polymer_App$drawerLayout,
 		{
@@ -101,7 +101,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$view, viewModel, m),
+			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$view, appVM, m),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -113,10 +113,10 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 					},
 					{
 						ctor: '::',
-						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, viewModel, m),
+						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, appVM, m),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, viewModel, m),
+							_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, appVM, m),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -127,17 +127,17 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 		_gdotdesign$elm_ui$Ui_Layout$app,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('sidebar'),
+			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, m),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_Header$headerView, viewModel, m),
+			_0: A2(_jigargosar$elm_simple_gtd$View_Header$headerView, appVM, m),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, viewModel, m),
+			_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, appVM, m),
 			_1: {ctor: '[]'}
 		});
 };

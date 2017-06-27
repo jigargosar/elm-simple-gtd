@@ -4,7 +4,7 @@ import AppColors
 import AppDrawer.View
 import AppUrl
 import X.Html exposing (boolProperty)
-import Html exposing (Attribute, Html, a, div, hr, node, span, text)
+import Html exposing (Attribute, Html, a, div, h5, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
 import Html.Events exposing (..)
 import Model exposing (Msg(OnSetViewType), commonMsg)
@@ -45,7 +45,7 @@ view appVM model =
                             ]
                             []
                         ]
-                    , leftHeader model
+                    , leftHeader appVM model
                     ]
                 ]
             , AppDrawer.View.list appVM model
@@ -53,7 +53,7 @@ view appVM model =
         ]
 
 
-leftHeader m =
+leftHeader appVM m =
     let
         ( t1, t2 ) =
             if m.developmentMode then
@@ -61,8 +61,14 @@ leftHeader m =
             else
                 ( "SimpleGTD.com", "v" ++ m.appVersion )
     in
-        div [ id "left-header" ]
-            [ a [ href AppUrl.landing ] [ text t1 ]
+        div
+            [ id "left-header"
+            , style
+                [ "color" => "white"
+                , "background-color" => AppColors.encode appVM.header.backgroundColor
+                ]
+            ]
+            [ h5 [ href AppUrl.landing ] [ text t1 ]
             , div [ class "small layout horizontal " ]
                 [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
                     [ "v" ++ m.appVersion |> text ]

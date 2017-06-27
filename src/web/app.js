@@ -1,6 +1,5 @@
 "use strict";
 
-import "./entry"
 import "./vendor"
 import sound from "./sound"
 import Fire from "./fire"

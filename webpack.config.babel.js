@@ -33,10 +33,11 @@ export default {
     // devtool: isDevEnv ? "inline" : 'source-map',
     // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
+    context:path.resolve(__dirname, "src/web/"),
     entry: {
         // "vendor":["./src/web/vendor.js"],
-        "app": ["./src/web/app.js"],
-        "landing": ["./src/web/landing.js"],
+        "app": ["./app.js"],
+        "landing": ["./landing.js"],
     },
 
     output: {
@@ -56,7 +57,7 @@ export default {
             "process.env": JSON.stringify(process.env)
         }),
         new ServiceWorkerWebpackPlugin({
-            entry: './src/web/notification-sw.js',
+            entry: './notification-sw.js',
             filename: "notification-sw.js",
             template: function () {
                 return Promise.resolve(serviceWorkerTemplate)
@@ -158,7 +159,7 @@ export default {
         watchContentBase: true,
         // open:true,
         // inline: false,
-        contentBase: ["src/web/", "static/",],
+        contentBase: ["static/",],
         host: "0.0.0.0",
 
     },

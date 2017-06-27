@@ -8,12 +8,10 @@
     "*.png",
     "*.ico",
     "*.js.map",
-    "firebase-messaging-sw.js",
     "manifest.json",
-    "app/index.html",
-    "common.js",
-    "app.js",
-    "landing.js",
+    "app/**",
+    "*.bundle.js",
+    "firebase-messaging-sw.js",
     "CNAME"
   ],
   "extraDependencies": [

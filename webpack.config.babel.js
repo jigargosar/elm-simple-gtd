@@ -28,13 +28,16 @@ const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
 export default {
     resolve: {
-        alias: {elm: path.resolve(__dirname, 'src/elm/')}
+        alias: {
+            elm: path.resolve(__dirname, 'src/elm/'),
+            bower_components: path.resolve(__dirname, 'bower_components/')
+        }
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
         "common": [
             "babel-polyfill",
-            "./bower_components/webcomponentsjs/webcomponents-loader",
+            "bower_components/webcomponentsjs/webcomponents-loader",
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",

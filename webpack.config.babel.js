@@ -123,8 +123,8 @@ export default {
                     {
                         loader: 'url-loader',
                         options: {
-                            name: "[path][name].[ext]",
-                            outputPath: "/assets/",
+                            name: "[name].[ext]",
+                            outputPath: "/assets/fonts/",
                             useRelativePath: false,
                             limit: 10000,
                             mimetype: "application/font-woff",

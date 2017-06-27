@@ -15,7 +15,7 @@
   }
 }
 
-#app-view #app-header{
+#app-view #app-main-header{
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -34,7 +34,7 @@
   min-width: 18rem;
 }
 
-#app-view #app-sidebar #left-header{
+#app-view #sidebar-header{
   width: 100%;
   display: flex;
   align-items: center;

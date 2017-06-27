@@ -113,18 +113,20 @@ appDrawerLayoutView m =
                 [ View.AppDrawer.view appVM m
                 , App.headerLayout [ attribute "has-scrolling-region" "" ]
                     [ View.Header.init appVM m
-                    , mainContent appVM m
+                    , appMainContent appVM m
                     ]
                 ]
     in
-        Ui.Layout.app
+        div [ id "app-layout" ]
             [ div [ id "app-sidebar" ]
-                [ View.AppDrawer.leftHeader appVM m
-                , AppDrawer.View.list appVM m
+                [ View.AppDrawer.sidebarHeader appVM m
+                , AppDrawer.View.sidebarContent appVM m
+                ]
+            , div [ id "app-main" ]
+                [ View.Header.appMainHeader appVM m
+                , appMainContent appVM m
                 ]
             ]
-            [ View.Header.headerView appVM m ]
-            [ mainContent appVM m ]
 
 
 appDrawerLayoutView1 m =
@@ -142,13 +144,13 @@ appDrawerLayoutView1 m =
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ View.Header.init viewModel m
-                , mainContent viewModel m
+                , appMainContent viewModel m
                 ]
             ]
 
 
-mainContent viewModel model =
-    div [ id "main-content" ]
+appMainContent viewModel model =
+    div [ id "app-main-content" ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
                 Entity.View.list viewType model viewModel

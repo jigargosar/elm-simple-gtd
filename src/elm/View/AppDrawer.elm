@@ -29,7 +29,7 @@ view appVM model =
             [ App.header
                 [ boolProperty "fixed" True
                 , attribute "slot" "header"
-                , class "app-header"
+                , class "app-main-header"
                 ]
                 [ App.toolbar
                     [ style
@@ -46,15 +46,15 @@ view appVM model =
                             ]
                             []
                         ]
-                    , leftHeader appVM model
+                    , sidebarHeader appVM model
                     ]
                 ]
-            , AppDrawer.View.list appVM model
+            , AppDrawer.View.sidebarContent appVM model
             ]
         ]
 
 
-leftHeader appVM m =
+sidebarHeader appVM m =
     let
         ( t1, t2 ) =
             if m.developmentMode then
@@ -63,7 +63,7 @@ leftHeader appVM m =
                 ( "SimpleGTD.com", "v" ++ m.appVersion )
     in
         div
-            [ id "left-header"
+            [ id "sidebar-header"
             , style
                 [ "color" => "white"
                 , "background-color" => AppColors.encode appVM.header.backgroundColor

@@ -18,7 +18,7 @@ import Model exposing (..)
 import View.Shared exposing (..)
 
 
-list appVM model =
+sidebarContent appVM model =
     let
         { contexts, projects } =
             appVM

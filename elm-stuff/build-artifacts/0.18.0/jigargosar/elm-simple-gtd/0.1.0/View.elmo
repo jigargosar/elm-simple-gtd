@@ -24,13 +24,13 @@ var _jigargosar$elm_simple_gtd$View$addTodoFab = function (m) {
 		},
 		{ctor: '[]'});
 };
-var _jigargosar$elm_simple_gtd$View$mainContent = F2(
+var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 	function (viewModel, model) {
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('main-content'),
+				_0: _elm_lang$html$Html_Attributes$id('app-main-content'),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -77,7 +77,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView1 = function (m) {
 						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, viewModel, m),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, viewModel, m),
+							_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, viewModel, m),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -116,15 +116,20 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, appVM, m),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, appVM, m),
+							_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
 							_1: {ctor: '[]'}
 						}
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
-	return A3(
-		_gdotdesign$elm_ui$Ui_Layout$app,
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('app-layout'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
@@ -136,24 +141,33 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				},
 				{
 					ctor: '::',
-					_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, m),
+					_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$sidebarHeader, appVM, m),
 					_1: {
 						ctor: '::',
-						_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$list, appVM, m),
+						_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent, appVM, m),
 						_1: {ctor: '[]'}
 					}
 				}),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_Header$headerView, appVM, m),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View$mainContent, appVM, m),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('app-main'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$View_Header$appMainHeader, appVM, m),
+						_1: {
+							ctor: '::',
+							_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {

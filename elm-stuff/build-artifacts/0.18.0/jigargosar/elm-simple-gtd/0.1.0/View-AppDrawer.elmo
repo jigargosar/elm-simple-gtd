@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = F2(
+var _jigargosar$elm_simple_gtd$View_AppDrawer$sidebarHeader = F2(
 	function (appVM, m) {
 		var _p0 = m.developmentMode ? {
 			ctor: '_Tuple2',
@@ -15,7 +15,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('left-header'),
+				_0: _elm_lang$html$Html_Attributes$id('sidebar-header'),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$style(
@@ -196,7 +196,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('app-header'),
+										_0: _elm_lang$html$Html_Attributes$class('app-main-header'),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -253,7 +253,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$leftHeader, appVM, model),
+											_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$sidebarHeader, appVM, model),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -261,7 +261,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 							}),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$list, appVM, model),
+							_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent, appVM, model),
 							_1: {ctor: '[]'}
 						}
 					}),

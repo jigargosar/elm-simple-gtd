@@ -45,11 +45,11 @@ init viewModel m =
                     , "background-color" => AppColors.encode viewModel.header.backgroundColor
                     ]
                 ]
-                [ headerView viewModel m ]
+                [ appMainHeader viewModel m ]
             ]
 
 
-headerView viewModel m =
+appMainHeader viewModel m =
     let
         content =
             Todo.TimeTracker.View.maybe m
@@ -57,7 +57,7 @@ headerView viewModel m =
                 ?= titleHeaderContent viewModel m
     in
         div
-            [ id "app-header"
+            [ id "app-main-header"
             , style
                 [ "color" => "white"
                 , "background-color" => AppColors.encode viewModel.header.backgroundColor

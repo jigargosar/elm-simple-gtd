@@ -50,14 +50,10 @@ $sidebar-width:18rem;
   #app-sidebar , #sidebar-header{
     width: $sidebar-width;
   }
+
   #app-sidebar{
-
-
     #sidebar-header{
       padding-right: 1rem;
-
-
-
       h5{
         margin: 0;
       }
@@ -82,13 +78,11 @@ $sidebar-width:18rem;
   #app-main{
 
     #app-main-header{
-
       padding: 0 1rem;
 
       .menu-btn{
         @extend .hide-on-med-and-up;
       }
-
       
     }
 

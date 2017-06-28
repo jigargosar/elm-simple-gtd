@@ -3,11 +3,15 @@ module AppDrawer.Main exposing (..)
 import AppDrawer.Model exposing (..)
 import Model
 import Return
-import X.Record
+import X.Record exposing (over, toggle)
 
 
 map =
-    X.Record.over Model.appDrawerModel >> Return.map
+    over Model.appDrawerModel >> Return.map
+
+
+mapToggle =
+    toggle >> map
 
 
 update :
@@ -23,12 +27,12 @@ update andThenUpdate msg =
             map toggleProjects
 
         OnToggleArchivedContexts ->
-            map toggleArchivedContexts
+            map (toggleGroupArchivedListExpanded contexts)
 
         OnToggleArchivedProjects ->
-            map toggleArchivedProjects
+            map (toggleGroupArchivedListExpanded projects)
 
         OnToggleOverlay ->
-            map toggleOverlay
+            mapToggle isOverlayOpen
     )
         >> andThenUpdate Model.OnPersistLocalPref

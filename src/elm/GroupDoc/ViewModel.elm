@@ -75,13 +75,13 @@ create config todoList groupDoc =
 
         toggleDeleteMsg =
             if isNull then
-                Model.NOOP
+                Model.noop
             else
                 onEntityAction Entity.ToggleDeleted
 
         startEditingMsg =
             if isNull then
-                Model.NOOP
+                Model.noop
             else
                 onEntityAction Entity.StartEditing
 

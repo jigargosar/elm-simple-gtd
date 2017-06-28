@@ -51,8 +51,7 @@ import X.Debug
 
 
 type Msg
-    = NOOP
-    | OnCommonMsg CommonMsg.Msg
+    = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value

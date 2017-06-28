@@ -164,7 +164,7 @@ createTodoViewModel appVM canBeFocused todo =
             if canBeFocused then
                 createEntityActionMsg Entity.StartEditing
             else
-                Model.NOOP
+                Model.noop
 
         toggleDeleteMsg =
             createEntityActionMsg Entity.ToggleDeleted
@@ -239,7 +239,7 @@ parseDisplayText displayText =
             a
                 [ href url
                 , target "_blank"
-                , onMouseDownStopPropagation Model.NOOP
+                , onMouseDownStopPropagation Model.noop
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
 
@@ -259,7 +259,7 @@ doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Material.iconButton "done"
         [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
-        , onMouseDownStopPropagation (Model.NOOP)
+        , onMouseDownStopPropagation (Model.noop)
         , onClick (vm.toggleDoneMsg)
         , vm.tabindexAV
         ]
@@ -269,7 +269,7 @@ moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
     Material.smallIconButton "more_vert"
         [ "todo-more-menu-button-" ++ vm.key |> id
-        , onMouseDownStopPropagation (Model.NOOP)
+        , onMouseDownStopPropagation (Model.noop)
         , onClick (vm.onMoreMenuClicked)
         , vm.tabindexAV
         ]
@@ -370,11 +370,11 @@ edit form appModel =
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Model.NOOP)
+            , onKeyDownStopPropagation (\_ -> Model.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
                 [ div [ class "modal-content" ]
-                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
+                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.noop) ]
                         [ textarea
                             [ class "materialize-textarea auto-focus"
                             , defaultValue todoText
@@ -393,9 +393,9 @@ new form =
     div
         [ class "overlay"
         , onClickStopPropagation fireCancel
-        , onKeyDownStopPropagation (\_ -> Model.NOOP)
+        , onKeyDownStopPropagation (\_ -> Model.noop)
         ]
-        [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
+        [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
             [ div [ class "modal-content" ]
                 [ div [ class "input-field" ]
                     [ textarea
@@ -428,7 +428,7 @@ reminderPopup form =
         div
             [ class "overlay"
             , onClickStopPropagation Model.OnDeactivateEditingMode
-            , onKeyDownStopPropagation (\_ -> Model.NOOP)
+            , onKeyDownStopPropagation (\_ -> Model.noop)
             ]
             [ div
                 [ id "popup-menu"

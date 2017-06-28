@@ -100,9 +100,6 @@ update msg =
 
 updateInner msg =
     case msg of
-        NOOP ->
-            identity
-
         OnCommonMsg msg ->
             CommonMsg.update msg
 

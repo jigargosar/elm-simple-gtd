@@ -68,6 +68,7 @@ sidebarHeader appVM m =
                 [ "color" => "white"
                 , "background-color" => AppColors.encode appVM.header.backgroundColor
                 ]
+            , X.Html.onClickStopPropagation Model.noop
             ]
             [ {- Material.iconButton "menu"
                      [ class "menu-btn"

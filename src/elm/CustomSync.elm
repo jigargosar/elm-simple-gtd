@@ -3,16 +3,9 @@ module CustomSync exposing (..)
 import X.Keyboard exposing (onKeyDownStopPropagation)
 import Material
 import Model
-
-
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
 import Polymer.Paper
 
 
@@ -25,7 +18,7 @@ view model =
             [ div [ class "z-depth-2 static layout vertical " ]
                 [ h5 [ class "layout horizontal center" ] [ Material.icon "settings", text "Advance Settings" ]
                 , p [] [ text "Sync your data with any CouchDB compatible server" ]
-                , div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
+                , div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.noop) ]
                     [ input
                         [ defaultValue form.uri
                         , autofocus True

@@ -4,13 +4,6 @@ import Entity
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import GroupDoc.EditForm
 import Model
-
-
-
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -39,14 +32,14 @@ init form =
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Model.NOOP)
+            , onKeyDownStopPropagation (\_ -> Model.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
                 [ div [ class "modal-content" ]
                     [ div
                         [ class "input-field"
-                        , onKeyDownStopPropagation (\_ -> Model.NOOP)
-                        , onClickStopPropagation Model.NOOP
+                        , onKeyDownStopPropagation (\_ -> Model.noop)
+                        , onClickStopPropagation Model.noop
                         ]
                         [ input
                             [ class "auto-focus"

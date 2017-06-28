@@ -19,13 +19,13 @@ type ItemType
 
 moreMenuConfig : Todo.Menu.Model -> Menu.Config String Model.Msg
 moreMenuConfig model =
-    { onSelect = (\_ -> Model.NOOP)
+    { onSelect = (\_ -> Model.noop)
     , isSelected = (\_ -> False)
     , itemKey = identity
     , itemSearchText = identity
     , itemView = Html.text
-    , onStateChanged = (\_ -> Model.NOOP)
-    , noOp = Model.NOOP
+    , onStateChanged = (\_ -> Model.noop)
+    , noOp = Model.noop
     , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }
 

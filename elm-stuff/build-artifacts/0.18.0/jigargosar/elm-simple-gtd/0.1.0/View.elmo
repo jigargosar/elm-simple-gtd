@@ -46,45 +46,6 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView1 = function (m) {
-	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
-	var viewModel = _jigargosar$elm_simple_gtd$ViewModel$create(m);
-	return A2(
-		_edvail$elm_polymer$Polymer_App$drawerLayout,
-		{
-			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'forceNarrow', forceNarrow),
-			_1: {
-				ctor: '::',
-				_0: A2(_jigargosar$elm_simple_gtd$WebComponents$onBoolPropertyChanged, 'narrow', _jigargosar$elm_simple_gtd$Model$OnLayoutNarrowChanged),
-				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$view, viewModel, m),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_App$headerLayout,
-					{
-						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'has-scrolling-region', ''),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(_jigargosar$elm_simple_gtd$View_Header$init, viewModel, m),
-						_1: {
-							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, viewModel, m),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
 	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
@@ -101,7 +62,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$view, appVM, m),
+			_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$view, appVM, m),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -150,7 +111,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				},
 				{
 					ctor: '::',
-					_0: A2(_jigargosar$elm_simple_gtd$View_AppDrawer$sidebarHeader, appVM, m),
+					_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarHeader, appVM, m),
 					_1: {
 						ctor: '::',
 						_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent, appVM, m),

@@ -1,28 +1,34 @@
 module AppDrawer.Main exposing (..)
 
-import AppDrawer.Model
+import AppDrawer.Model exposing (..)
 import Model
+import Return
+import X.Record
+
+
+map =
+    X.Record.over Model.appDrawerModel >> Return.map
 
 
 update :
     (Model.Msg -> Model.ReturnF)
-    -> AppDrawer.Model.Msg
+    -> Msg
     -> Model.ReturnF
 update andThenUpdate msg =
     (case msg of
-        AppDrawer.Model.OnToggleExpandContextList ->
-            Model.mapOverAppDrawerModel AppDrawer.Model.toggleContextListExpanded
+        OnToggleExpandContextList ->
+            map toggleContextListExpanded
 
-        AppDrawer.Model.OnToggleExpandProjectList ->
-            Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectListExpanded
+        OnToggleExpandProjectList ->
+            map toggleProjectListExpanded
 
-        AppDrawer.Model.OnToggleShowArchivedContexts ->
-            Model.mapOverAppDrawerModel AppDrawer.Model.toggleContextShowArchived
+        OnToggleShowArchivedContexts ->
+            map toggleContextShowArchived
 
-        AppDrawer.Model.OnToggleShowArchivedProjects ->
-            Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectShowArchived
+        OnToggleShowArchivedProjects ->
+            map toggleProjectShowArchived
 
-        AppDrawer.Model.OnToggleOverlay ->
-            Model.mapOverAppDrawerModel AppDrawer.Model.toggleOverlay
+        OnToggleOverlay ->
+            map toggleOverlay
     )
         >> andThenUpdate Model.OnPersistLocalPref

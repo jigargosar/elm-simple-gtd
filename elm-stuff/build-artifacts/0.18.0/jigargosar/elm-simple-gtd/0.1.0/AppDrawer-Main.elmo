@@ -1,23 +1,27 @@
+var _jigargosar$elm_simple_gtd$AppDrawer_Main$map = function (_p0) {
+	return _Fresheyeball$elm_return$Return$map(
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p0));
+};
 var _jigargosar$elm_simple_gtd$AppDrawer_Main$update = F2(
 	function (andThenUpdate, msg) {
-		return function (_p0) {
+		return function (_p1) {
 			return A2(
 				andThenUpdate,
 				_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
 				function () {
-					var _p1 = msg;
-					switch (_p1.ctor) {
+					var _p2 = msg;
+					switch (_p2.ctor) {
 						case 'OnToggleExpandContextList':
-							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextListExpanded);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextListExpanded);
 						case 'OnToggleExpandProjectList':
-							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectListExpanded);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectListExpanded);
 						case 'OnToggleShowArchivedContexts':
-							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived);
 						case 'OnToggleShowArchivedProjects':
-							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectShowArchived);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectShowArchived);
 						default:
-							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
 					}
-				}()(_p0));
+				}()(_p1));
 		};
 	});

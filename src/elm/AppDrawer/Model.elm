@@ -91,11 +91,11 @@ showArchived =
 
 
 isOverlayOpen =
-    X.Record.field .isOverlayOpen (\s b -> { b | isOverlayOpen = s })
+    X.Record.bool .isOverlayOpen (\s b -> { b | isOverlayOpen = s })
 
 
 toggleOverlay =
-    X.Record.over isOverlayOpen
+    X.Record.toggle isOverlayOpen
 
 
 toggleExpanded =

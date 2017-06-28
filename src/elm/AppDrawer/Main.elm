@@ -28,3 +28,4 @@ update andThenUpdate msg =
 
         AppDrawer.Model.OnToggleOverlay ->
             Model.mapOverAppDrawerModel AppDrawer.Model.toggleOverlay
+                >> andThenUpdate Model.OnPersistLocalPref

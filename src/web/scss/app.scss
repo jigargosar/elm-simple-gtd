@@ -56,8 +56,27 @@ $sidebar-width: 18rem;
     }
   }
 
+  @media #{$small-and-down}{
+    #app-sidebar:not(.open) {
+      display: none;
+    }
+
+    #app-sidebar.open  {
+      margin-top: 0;
+      height: 100%;
+      box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+      position: fixed;
+      z-index: 100;
+      background-color: white;
+
+      #sidebar-header{
+        position: static;
+      }
+    }
+  }
+
   #app-sidebar {
-    @extend .hide-on-small-only;
+
     #sidebar-header {
       h5 {
         margin: 0;
@@ -83,7 +102,6 @@ $sidebar-width: 18rem;
   #app-main {
 
     #app-main-header {
-
 
       .menu-btn {
         @extend .hide-on-med-and-up;

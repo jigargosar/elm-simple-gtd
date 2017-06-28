@@ -137,7 +137,16 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$id('app-sidebar'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'open', _1: true},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',

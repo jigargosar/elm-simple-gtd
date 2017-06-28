@@ -9,8 +9,8 @@ import Json.Encode as E
 
 
 type Msg
-    = OnToggleProjects
-    | OnToggleContexts
+    = OnToggleProjectsExpanded
+    | OnToggleContextsExpanded
     | OnToggleArchivedContexts
     | OnToggleArchivedProjects
     | OnToggleOverlay
@@ -125,20 +125,12 @@ toggleArchivedForGroup groupField =
     over groupField toggleArchivedExpanded
 
 
-toggleGroupList groupField =
+toggleGroupListExpanded groupField =
     over groupField (toggleExpanded >> unless isExpanded (setArchivedExpandedTo False))
 
 
 isGroupListExpanded groupField =
     get groupField >> isExpanded
-
-
-toggleProjects =
-    toggleGroupList projects
-
-
-toggleContexts =
-    toggleGroupList contexts
 
 
 getProjectsExpanded =
@@ -163,11 +155,3 @@ getArchivedProjectsExpanded =
 
 toggleGroupArchivedListExpanded groupField =
     over groupField toggleArchivedExpanded
-
-
-toggleArchivedContexts =
-    toggleGroupArchivedListExpanded contexts
-
-
-toggleArchivedProjects =
-    toggleGroupArchivedListExpanded projects

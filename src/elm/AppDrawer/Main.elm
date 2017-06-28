@@ -20,11 +20,11 @@ update :
     -> Model.ReturnF
 update andThenUpdate msg =
     (case msg of
-        OnToggleContexts ->
-            map toggleContexts
+        OnToggleContextsExpanded ->
+            map (toggleGroupListExpanded contexts)
 
-        OnToggleProjects ->
-            map toggleProjects
+        OnToggleProjectsExpanded ->
+            map (toggleGroupListExpanded projects)
 
         OnToggleArchivedContexts ->
             map (toggleGroupArchivedListExpanded contexts)

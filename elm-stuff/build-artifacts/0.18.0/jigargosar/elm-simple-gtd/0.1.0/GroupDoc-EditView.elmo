@@ -19,7 +19,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 						function (_p1) {
-							return _jigargosar$elm_simple_gtd$Model$NOOP;
+							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
 				}
@@ -34,7 +34,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -58,11 +58,11 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 										ctor: '::',
 										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 											function (_p2) {
-												return _jigargosar$elm_simple_gtd$Model$NOOP;
+												return _jigargosar$elm_simple_gtd$Model$noop;
 											}),
 										_1: {
 											ctor: '::',
-											_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+											_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 											_1: {ctor: '[]'}
 										}
 									}

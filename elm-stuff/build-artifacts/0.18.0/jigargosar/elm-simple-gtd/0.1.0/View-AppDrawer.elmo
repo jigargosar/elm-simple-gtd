@@ -31,7 +31,11 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$sidebarHeader = F2(
 								_1: {ctor: '[]'}
 							}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			{

@@ -112,7 +112,6 @@ var _jigargosar$elm_simple_gtd$Main$updateTodoAndMaybeAlsoSelected = F2(
 				action,
 				_jigargosar$elm_simple_gtd$Document$getId(todo)));
 	});
-var _jigargosar$elm_simple_gtd$Main$modelTapLog = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
 var _jigargosar$elm_simple_gtd$Main$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Main$logMsg = F2(
 	function (msg, model) {
@@ -196,8 +195,6 @@ var _jigargosar$elm_simple_gtd$Main$persistLocalPref = _elm_lang$core$Native_Pla
 var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 	var _p11 = msg;
 	switch (_p11.ctor) {
-		case 'NOOP':
-			return _elm_lang$core$Basics$identity;
 		case 'OnCommonMsg':
 			return _jigargosar$elm_simple_gtd$CommonMsg$update(_p11._0);
 		case 'OnPouchDBChange':

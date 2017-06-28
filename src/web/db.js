@@ -27,7 +27,27 @@ export default async function () {
         encodedContextList: await allDocsPMap["context-db"],
     }
 
+    function setupApp(app) {
+        _.mapObjIndexed((db, name) => db.onChange(
+            (doc) => {
+                // console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
+                return app.ports["pouchDBChanges"].send([name, doc])
+            }
+        ))(dbMap)
 
-    return dbMap
+        app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
+            localStorage.setItem("pouchdb.remote-sync-uri", uri)
+            _.map(db => db.startRemoteSync(uri, "sgtd2-"))(dbMap)
+        })
+
+
+        app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
+            dbMap[dbName].upsert(id, doc).catch(console.error)
+        });
+
+    }
+
+
+    return {list:_.values(dbMap), allDocsMap, setupApp}
 
 }

@@ -15,7 +15,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 						function (_p1) {
-							return _jigargosar$elm_simple_gtd$Model$NOOP;
+							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
 				}
@@ -188,7 +188,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 							function (_p5) {
-								return _jigargosar$elm_simple_gtd$Model$NOOP;
+								return _jigargosar$elm_simple_gtd$Model$noop;
 							}),
 						_1: {ctor: '[]'}
 					}
@@ -203,7 +203,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -227,7 +227,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 											ctor: '::',
 											_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 												function (_p6) {
-													return _jigargosar$elm_simple_gtd$Model$NOOP;
+													return _jigargosar$elm_simple_gtd$Model$noop;
 												}),
 											_1: {ctor: '[]'}
 										}
@@ -287,7 +287,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 						function (_p7) {
-							return _jigargosar$elm_simple_gtd$Model$NOOP;
+							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
 				}
@@ -302,7 +302,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -551,7 +551,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
 				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
@@ -582,7 +582,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
@@ -611,7 +611,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (displayTex
 					_0: _elm_lang$html$Html_Attributes$target('_blank'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$NOOP),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -835,7 +835,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
 			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
-		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$NOOP;
+		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$noop;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);
 		var projectId = _jigargosar$elm_simple_gtd$Todo$getProjectId(todo);

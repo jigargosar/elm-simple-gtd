@@ -10,8 +10,8 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 		};
 		var onEntityAction = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
 			config.toEntity(groupDoc));
-		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$NOOP : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
-		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$NOOP : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);
+		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;

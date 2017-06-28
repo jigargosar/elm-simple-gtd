@@ -1,3 +1,4 @@
+var _jigargosar$elm_simple_gtd$X_Return$mapTapLog = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
 var _jigargosar$elm_simple_gtd$X_Return$andThenMaybe = function (f) {
 	return _Fresheyeball$elm_return$Return$andThen(
 		function (m) {

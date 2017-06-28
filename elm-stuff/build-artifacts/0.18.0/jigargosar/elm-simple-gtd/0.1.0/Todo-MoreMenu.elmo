@@ -1,7 +1,7 @@
 var _jigargosar$elm_simple_gtd$Todo_MoreMenu$moreMenuConfig = function (model) {
 	return {
 		onSelect: function (_p0) {
-			return _jigargosar$elm_simple_gtd$Model$NOOP;
+			return _jigargosar$elm_simple_gtd$Model$noop;
 		},
 		isSelected: function (_p1) {
 			return false;
@@ -10,9 +10,9 @@ var _jigargosar$elm_simple_gtd$Todo_MoreMenu$moreMenuConfig = function (model) {
 		itemSearchText: _elm_lang$core$Basics$identity,
 		itemView: _elm_lang$html$Html$text,
 		onStateChanged: function (_p2) {
-			return _jigargosar$elm_simple_gtd$Model$NOOP;
+			return _jigargosar$elm_simple_gtd$Model$noop;
 		},
-		noOp: _jigargosar$elm_simple_gtd$Model$NOOP,
+		noOp: _jigargosar$elm_simple_gtd$Model$noop,
 		onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
 	};
 };

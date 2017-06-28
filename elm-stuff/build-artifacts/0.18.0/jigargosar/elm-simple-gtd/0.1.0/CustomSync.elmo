@@ -55,7 +55,7 @@ var _jigargosar$elm_simple_gtd$CustomSync$view = function (model) {
 										ctor: '::',
 										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
 											function (_p0) {
-												return _jigargosar$elm_simple_gtd$Model$NOOP;
+												return _jigargosar$elm_simple_gtd$Model$noop;
 											}),
 										_1: {ctor: '[]'}
 									}

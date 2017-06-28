@@ -3,7 +3,7 @@
 import "./vendor"
 import sound from "./sound"
 import Fire from "./fire"
-import DB from "./lib/pouchdb-wrapper"
+import DB from "./db"
 import $ from "jquery"
 import _ from "ramda"
 import Notifications from "./notifications"
@@ -52,12 +52,7 @@ window.appBoot = async function appBoot() {
         }
     }, true)
 
-    const dbMap = {
-        "todo-db": await DB("todo-db"),
-        "project-db": await DB("project-db"),
-        "context-db": await DB("context-db")
-    }
-    const allDocsMap = _.map(db => db.findAll())(dbMap)
+    const db = await DB()
 
     const store = localforage.createInstance({
         name: "SimpleGTD.com offline store"
@@ -66,11 +61,11 @@ window.appBoot = async function appBoot() {
     const localPref = await store.getItem("local-pref")
 
 
-    const flags = {
+    const flags = _.merge({
         now: Date.now(),
-        encodedTodoList: await allDocsMap["todo-db"],
-        encodedProjectList: await allDocsMap["project-db"],
-        encodedContextList: await allDocsMap["context-db"],
+        // encodedTodoList: await allDocsMap["todo-db"],
+        // encodedProjectList: await allDocsMap["project-db"],
+        // encodedContextList: await allDocsMap["context-db"],
         // encodedTodoList: [],
         // encodedProjectList: [],
         // encodedContextList: [],
@@ -80,31 +75,16 @@ window.appBoot = async function appBoot() {
         deviceId,
         config: {isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
         localPref: localPref
-    }
+    }, db.allDocsMap)
+
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
         .embed(document.getElementById("elm-container"), flags)
 
 
-    const fire = Fire.setup(app, _.values(dbMap), deviceId)
+    const fire = Fire.setup(app, _.values(db.list), deviceId)
 
-    _.mapObjIndexed((db, name) => db.onChange(
-        (doc) => {
-            // console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
-            return app.ports["pouchDBChanges"].send([name, doc])
-        }
-    ))(dbMap)
-
-    app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
-        localStorage.setItem("pouchdb.remote-sync-uri", uri)
-        _.map(db => db.startRemoteSync(uri, "sgtd2-"))(dbMap)
-    })
-
-
-    app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
-        dbMap[dbName].upsert(id, doc).catch(console.error)
-    });
-
+    db.setupApp(app)
 
     app.ports["persistLocalPref"].subscribe(async (localPref) => {
         store.setItem("local-pref", localPref)

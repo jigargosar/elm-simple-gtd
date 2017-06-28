@@ -13,6 +13,7 @@ type Msg
     | OnToggleExpandContextList
     | OnToggleShowArchivedContexts
     | OnToggleShowArchivedProjects
+    | OnToggleOverlay
 
 
 type alias GroupModel =
@@ -87,6 +88,14 @@ expanded =
 
 showArchived =
     X.Record.bool .showArchived (\s b -> { b | showArchived = s })
+
+
+isOverlayOpen =
+    X.Record.field .isOverlayOpen (\s b -> { b | isOverlayOpen = s })
+
+
+toggleOverlay =
+    X.Record.over isOverlayOpen
 
 
 toggleExpanded =

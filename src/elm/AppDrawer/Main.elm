@@ -1,15 +1,7 @@
 module AppDrawer.Main exposing (..)
 
 import AppDrawer.Model
-
-
-
-
-
-
-
 import Model
-
 
 
 update :
@@ -33,3 +25,6 @@ update andThenUpdate msg =
         AppDrawer.Model.OnToggleShowArchivedProjects ->
             Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectShowArchived
                 >> andThenUpdate Model.OnPersistLocalPref
+
+        AppDrawer.Model.OnToggleOverlay ->
+            Model.mapOverAppDrawerModel AppDrawer.Model.toggleOverlay

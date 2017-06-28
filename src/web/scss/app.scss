@@ -23,8 +23,19 @@ $header-height:4rem;
   width: 100vw;
 
   #app-sidebar, #app-main{
-    height: 100%;
+    margin-top:$header-height;
+    height: calc( 100% - #{$header-height});
     overflow: scroll;
+
+    #sidebar-header, #app-main-header{
+      height: $header-height;
+      position:fixed;
+      top:0;
+    }
+
+    #sidebar-content, #app-main-content{
+
+    }
 
   }
 
@@ -51,7 +62,6 @@ $header-height:4rem;
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  height: $header-height;
 
   .menu-btn{
     @extend .hide-on-med-and-up;
@@ -66,7 +76,6 @@ $header-height:4rem;
   width: 100%;
   display: flex;
   align-items: center;
-  height: $header-height;
   padding-right: 1rem;
 
   i{

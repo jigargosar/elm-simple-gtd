@@ -9,10 +9,10 @@ import Json.Encode as E
 
 
 type Msg
-    = OnToggleExpandProjectList
-    | OnToggleExpandContextList
-    | OnToggleShowArchivedContexts
-    | OnToggleShowArchivedProjects
+    = OnToggleProjects
+    | OnToggleContexts
+    | OnToggleArchivedContexts
+    | OnToggleArchivedProjects
     | OnToggleOverlay
 
 
@@ -114,12 +114,12 @@ hideArchived groupModel =
     X.Record.over groupModel (setShowArchived False)
 
 
-toggleProjectListExpanded =
+toggleProjects =
     X.Record.over projects (toggleExpanded)
         >> unless isProjectListExpanded (hideArchived projects)
 
 
-toggleContextListExpanded =
+toggleContexts =
     X.Record.over contexts (toggleExpanded)
         >> unless isContextListExpanded (hideArchived contexts)
 
@@ -136,11 +136,11 @@ getShowArchivedForContexts =
     X.Record.get contexts >> X.Record.get showArchived
 
 
-getShowArchivedForProjects =
+toggleArchivedContexts =
     X.Record.get projects >> X.Record.get showArchived
 
 
-toggleContextShowArchived =
+toggleArchivedProjects =
     X.Record.over contexts (toggleShowArchived)
 
 

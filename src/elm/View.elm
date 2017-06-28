@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import ActionList.View
+import AppDrawer.Model
 import AppDrawer.View
 import CustomSync
 import Entity.View
@@ -116,7 +117,10 @@ appDrawerLayoutView m =
                     ]
                 ]
     in
-        div [ id "app-layout", classList [ ( "_sidebar-overlay", True ) ] ]
+        div
+            [ id "app-layout"
+            , classList [ ( "_sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel ) ]
+            ]
             [ div [ id "app-sidebar" ]
                 [ AppDrawer.View.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m

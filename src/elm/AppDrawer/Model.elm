@@ -121,6 +121,10 @@ toggleOverlay =
     toggle isOverlayOpen
 
 
+getIsOverlayOpen =
+    get isOverlayOpen
+
+
 
 --
 

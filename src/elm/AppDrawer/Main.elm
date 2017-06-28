@@ -10,10 +10,6 @@ map =
     over Model.appDrawerModel >> Return.map
 
 
-mapToggle =
-    toggle >> map
-
-
 update :
     (Model.Msg -> Model.ReturnF)
     -> Msg
@@ -33,6 +29,6 @@ update andThenUpdate msg =
             map (toggleGroupArchivedListExpanded projects)
 
         OnToggleOverlay ->
-            mapToggle isOverlayOpen
+            map toggleOverlay
     )
         >> andThenUpdate Model.OnPersistLocalPref

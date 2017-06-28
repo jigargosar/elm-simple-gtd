@@ -29,9 +29,14 @@ $sidebar-width:18rem;
     overflow: scroll;
 
     #sidebar-header, #app-main-header{
-      height: $header-height;
       position:fixed;
       top:0;
+      height: $header-height;
+      display: flex;
+      align-items: center;
+      i{
+        color:white;
+      }
     }
 
     #sidebar-content, #app-main-content{
@@ -49,7 +54,23 @@ $sidebar-width:18rem;
 
 
     #sidebar-header{
-      
+      padding-right: 1rem;
+
+
+
+      h5{
+        margin: 0;
+      }
+
+      .detail{
+        display: flex;
+        flex-direction:column;
+        justify-content:center;
+        a {
+          color: white;
+          margin-right: 1rem;
+        }
+      }
     }
 
     #sidebar-content{
@@ -62,48 +83,17 @@ $sidebar-width:18rem;
 
     #app-main-header{
 
+      padding: 0 1rem;
+
+      .menu-btn{
+        @extend .hide-on-med-and-up;
+      }
+
+      
     }
 
     #app-main-content{
       
-    }
-  }
-}
-
-#app-view #app-main-header{
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-
-  .menu-btn{
-    @extend .hide-on-med-and-up;
-  }
-
-  i{
-    color:white;
-  }
-}
-
-#app-view #sidebar-header{
-  display: flex;
-  align-items: center;
-  padding-right: 1rem;
-
-  i{
-    color:white;
-  }
-
-  h5{
-    margin: 0;
-  }
-
-  .detail{
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-    a {
-      color: white;
-      margin-right: 1rem;
     }
   }
 }

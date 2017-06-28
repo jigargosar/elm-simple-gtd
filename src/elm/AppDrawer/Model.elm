@@ -136,13 +136,13 @@ getShowArchivedForContexts =
     X.Record.get contexts >> X.Record.get showArchived
 
 
-toggleArchivedContexts =
+getShowArchivedForProjects =
     X.Record.get projects >> X.Record.get showArchived
 
 
-toggleArchivedProjects =
+toggleArchivedContexts =
     X.Record.over contexts (toggleShowArchived)
 
 
-toggleProjectShowArchived =
+toggleArchivedProjects =
     X.Record.over projects (toggleShowArchived)

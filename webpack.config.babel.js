@@ -35,14 +35,14 @@ export default {
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
-        "analytics":"./analytics.js",
         "common": [
             "babel-polyfill",
             "bower_components/webcomponentsjs/webcomponents-loader",
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",
-            "./font-loader"
+            "./font-loader",
+            "./analytics.js",
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],

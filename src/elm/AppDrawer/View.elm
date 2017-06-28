@@ -2,7 +2,6 @@ module AppDrawer.View exposing (..)
 
 import AppColors
 import AppUrl
-import Polymer.App
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Material
 import Toolkit.Operators exposing (..)
@@ -20,43 +19,6 @@ import Model exposing (..)
 import View.Shared exposing (..)
 import ViewModel
 import WebComponents exposing (paperIconButton)
-
-
-view : ViewModel.Model -> Model.Model -> Html Msg
-view appVM model =
-    Polymer.App.drawer
-        [ boolProperty "swipeOpen" True
-        , attribute "slot" "drawer"
-        ]
-        [ Polymer.App.headerLayout
-            [ attribute "has-scrolling-region" ""
-            ]
-            [ Polymer.App.header
-                [ boolProperty "fixed" True
-                , attribute "slot" "header"
-                , class "app-main-header"
-                ]
-                [ Polymer.App.toolbar
-                    [ style
-                        [ "color" => "white"
-                        , "background-color" => AppColors.encode appVM.header.backgroundColor
-                        ]
-                    ]
-                    [ div []
-                        [ paperIconButton
-                            [ WebComponents.iconA "menu"
-                            , tabindex -1
-                            , attribute "drawer-toggle" ""
-                            , onClick Model.ToggleDrawer
-                            ]
-                            []
-                        ]
-                    , sidebarHeader appVM model
-                    ]
-                ]
-            , sidebarContent appVM model
-            ]
-        ]
 
 
 sidebarHeader appVM m =

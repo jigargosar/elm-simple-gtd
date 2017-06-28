@@ -18,7 +18,6 @@ import Model exposing (Msg, commonMsg)
 import View.Header
 import Model exposing (..)
 import Polymer.Paper as Paper
-import Polymer.App as App
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel
@@ -104,18 +103,6 @@ appDrawerLayoutView m =
 
         forceNarrow =
             Model.getLayoutForceNarrow m
-
-        v =
-            App.drawerLayout
-                [ boolProperty "forceNarrow" forceNarrow
-                , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
-                ]
-                [ AppDrawer.View.view appVM m
-                , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                    [ View.Header.init appVM m
-                    , appMainContent appVM m
-                    ]
-                ]
     in
         div
             [ id "app-layout"

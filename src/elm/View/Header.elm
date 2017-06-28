@@ -9,7 +9,6 @@ import Firebase
 import Model
 import Model exposing (Model)
 import Model exposing (Msg)
-import Polymer.App as App
 import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -19,35 +18,6 @@ import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import WebComponents exposing (..)
 import X.List
-
-
-init viewModel m =
-    let
-        layoutAttributes =
-            if Model.isLayoutAutoNarrow m then
-                [ attribute "condenses" ""
-                , attribute "reveals" ""
-                ]
-            else
-                [ attribute "fixed" "" ]
-
-        attributes =
-            [ id "main-header"
-            , attribute "slot" "header"
-            , attribute "effects" "waterfall"
-            ]
-                ++ layoutAttributes
-    in
-        App.header
-            attributes
-            [ App.toolbar
-                [ style
-                    [ "color" => "white"
-                    , "background-color" => AppColors.encode viewModel.header.backgroundColor
-                    ]
-                ]
-                [ appMainHeader viewModel m ]
-            ]
 
 
 appMainHeader viewModel m =
@@ -80,14 +50,6 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            --            paperIconButton
-            --                    [ iconA "menu"
-            --                    , tabindex -1
-            --                    , attribute "drawer-toggle" ""
-            --                    , onClick Model.ToggleDrawer
-            --                    , class "hide-when-wide"
-            --                    ]
-            --                    []
             Material.iconButton "menu"
                 [ class "menu-btn"
                 , tabindex -1

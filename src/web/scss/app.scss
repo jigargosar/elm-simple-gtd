@@ -16,6 +16,7 @@
 }
 
 $header-height:4rem;
+$sidebar-width:18rem;
 
 #app-layout{
   display: flex;
@@ -36,15 +37,19 @@ $header-height:4rem;
     #sidebar-content, #app-main-content{
 
     }
-
   }
 
+  #app-main, #app-main-header{
+    width: calc(100vw - #{$sidebar-width});
+  }
+  #app-sidebar , #sidebar-header{
+    width: $sidebar-width;
+  }
   #app-sidebar{
-    width: 18rem;
 
 
     #sidebar-header{
-
+      
     }
 
     #sidebar-content{
@@ -55,6 +60,9 @@ $header-height:4rem;
 
   #app-main{
 
+    #app-main-header{
+
+    }
   }
 }
 
@@ -73,7 +81,6 @@ $header-height:4rem;
 }
 
 #app-view #sidebar-header{
-  width: 100%;
   display: flex;
   align-items: center;
   padding-right: 1rem;

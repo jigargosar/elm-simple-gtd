@@ -1361,7 +1361,7 @@ var _jigargosar$elm_simple_gtd$Model$encodeLocalPref = function (model) {
 			_0: A2(
 				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
 				'appDrawer',
-				_jigargosar$elm_simple_gtd$AppDrawer_Model$encode(model.appDrawerModel)),
+				_jigargosar$elm_simple_gtd$AppDrawer_Model$encoder(model.appDrawerModel)),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -1440,7 +1440,7 @@ var _jigargosar$elm_simple_gtd$Model$localPrefDecoder = A4(
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 		'appDrawer',
-		_jigargosar$elm_simple_gtd$AppDrawer_Model$decode,
+		_jigargosar$elm_simple_gtd$AppDrawer_Model$decoder,
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$default,
 		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Model$LocalPref)));
 var _jigargosar$elm_simple_gtd$Model$Flags = function (a) {

@@ -76,7 +76,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewContext,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$contextsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleContexts),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleContextsExpanded),
 		onToggleShowArchived: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedContexts),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getContextExpanded(model.appDrawerModel)
 	};
@@ -114,7 +114,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewProject,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$projectsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleProjects),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleProjectsExpanded),
 		onToggleShowArchived: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedProjects),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getProjectsExpanded(model.appDrawerModel)
 	};

@@ -31,7 +31,11 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$id('app-main-content'),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
@@ -94,7 +98,11 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				_0: _elm_lang$html$Html_Attributes$classList(
 					{
 						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: '_sidebar-overlay', _1: true},
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'sidebar-overlay',
+							_1: _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel)
+						},
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -107,7 +115,11 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$id('app-sidebar'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',
@@ -125,7 +137,12 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$id('app-main'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',

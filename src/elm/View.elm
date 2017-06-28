@@ -119,13 +119,16 @@ appDrawerLayoutView m =
     in
         div
             [ id "app-layout"
-            , classList [ ( "_sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel ) ]
+            , classList
+                [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+                ]
             ]
-            [ div [ id "app-sidebar" ]
+            [ div
+                [ id "app-sidebar", X.Html.onClickStopPropagation Model.noop ]
                 [ AppDrawer.View.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m
                 ]
-            , div [ id "app-main" ]
+            , div [ id "app-main", onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay) ]
                 [ View.Header.appMainHeader appVM m
                 , appMainContent appVM m
                 ]
@@ -133,7 +136,7 @@ appDrawerLayoutView m =
 
 
 appMainContent viewModel model =
-    div [ id "app-main-content" ]
+    div [ id "app-main-content", X.Html.onClickStopPropagation Model.noop ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
                 Entity.View.list viewType model viewModel

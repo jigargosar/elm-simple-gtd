@@ -160,7 +160,8 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$ToggleDrawer),
+						_0: _elm_lang$html$Html_Events$onClick(
+							_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -239,7 +240,11 @@ var _jigargosar$elm_simple_gtd$View_Header$appMainHeader = F2(
 								_1: {ctor: '[]'}
 							}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			A2(_jigargosar$elm_simple_gtd$View_Header$headerWithContent, content, m));

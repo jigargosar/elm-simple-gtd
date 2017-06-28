@@ -11,15 +11,20 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Main$update = F2(
 				function () {
 					var _p2 = msg;
 					switch (_p2.ctor) {
-						case 'OnToggleContexts':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContexts);
-						case 'OnToggleProjects':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjects);
+						case 'OnToggleContextsExpanded':
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$contexts));
+						case 'OnToggleProjectsExpanded':
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$projects));
 						case 'OnToggleArchivedContexts':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleArchivedContexts);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupArchivedListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$contexts));
 						case 'OnToggleArchivedProjects':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleArchivedProjects);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupArchivedListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$projects));
 						default:
+							var _p3 = A2(_elm_lang$core$Debug$log, '\"called\"', 'called');
 							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
 					}
 				}()(_p1));

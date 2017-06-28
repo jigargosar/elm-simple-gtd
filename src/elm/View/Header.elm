@@ -1,6 +1,7 @@
 module View.Header exposing (..)
 
 import AppColors
+import AppDrawer.Model
 import AppUrl
 import Material
 import X.Html exposing (boolProperty)
@@ -62,6 +63,7 @@ appMainHeader viewModel m =
                 [ "color" => "white"
                 , "background-color" => AppColors.encode viewModel.header.backgroundColor
                 ]
+            , X.Html.onClickStopPropagation Model.noop
             ]
             (headerWithContent content m)
 
@@ -89,7 +91,7 @@ headerWithContent content m =
             Material.iconButton "menu"
                 [ class "menu-btn"
                 , tabindex -1
-                , onClick Model.ToggleDrawer
+                , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                 ]
     in
         [ menuButton

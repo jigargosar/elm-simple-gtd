@@ -29,6 +29,10 @@ update andThenUpdate msg =
             map (toggleGroupArchivedListExpanded projects)
 
         OnToggleOverlay ->
-            map toggleOverlay
+            let
+                _ =
+                    Debug.log "\"called\"" ("called")
+            in
+                map toggleOverlay
     )
         >> andThenUpdate Model.OnPersistLocalPref

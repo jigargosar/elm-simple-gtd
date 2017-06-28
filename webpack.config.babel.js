@@ -35,6 +35,7 @@ export default {
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
+        "analytics":"./analytics.js",
         "common": [
             "babel-polyfill",
             "bower_components/webcomponentsjs/webcomponents-loader",

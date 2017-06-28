@@ -25,11 +25,8 @@ update andThenUpdate msg =
         OnToggleArchivedContexts ->
             map toggleArchivedContexts
 
-        OnToggleArchivedContexts ->
-            map toggleArchivedContexts
-
         OnToggleArchivedProjects ->
-            map toggleProjectShowArchived
+            map toggleArchivedProjects
 
         OnToggleOverlay ->
             map toggleOverlay

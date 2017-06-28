@@ -178,12 +178,12 @@ contexts model =
         , title = "Contexts"
         , className = "contexts"
         , showDeleted = model.showDeleted
-        , showArchived = AppDrawer.Model.getShowArchivedForContexts model.appDrawerModel
+        , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = AppColors.contextsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleContexts
         , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedContexts
-        , isExpanded = AppDrawer.Model.isContextListExpanded model.appDrawerModel
+        , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
         }
 
 
@@ -227,10 +227,10 @@ projects model =
         , title = "Projects"
         , className = "projects"
         , showDeleted = model.showDeleted
-        , showArchived = AppDrawer.Model.getShowArchivedForProjects model.appDrawerModel
+        , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
         , onAddClicked = Model.NewProject
         , icon = { name = "group_work", color = AppColors.projectsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleProjects
         , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedProjects
-        , isExpanded = AppDrawer.Model.isProjectListExpanded model.appDrawerModel
+        , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
         }

@@ -1,6 +1,6 @@
 module AppDrawer.Model exposing (..)
 
-import X.Record
+import X.Record exposing (get, over, set)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
@@ -102,47 +102,57 @@ toggleExpanded =
     X.Record.toggle expanded
 
 
-toggleShowArchived =
+toggleArchivedExpanded =
     X.Record.toggle showArchived
 
 
-setShowArchived bool =
-    X.Record.set showArchived bool
+setArchivedExpandedTo bool =
+    set showArchived bool
 
 
 hideArchived groupModel =
-    X.Record.over groupModel (setShowArchived False)
+    over groupModel (setArchivedExpandedTo False)
+
+
+toggleArchivedForGroup groupField =
+    over groupField toggleArchivedExpanded
+
+
+toggleGroupField groupField =
+    over groupField (toggleExpanded >> unless (get expanded) (setArchivedExpandedTo False))
+
+
+isGroupExpanded groupField =
+    get groupField >> get expanded
 
 
 toggleProjects =
-    X.Record.over projects (toggleExpanded)
-        >> unless isProjectListExpanded (hideArchived projects)
+    toggleGroupField projects
 
 
 toggleContexts =
-    X.Record.over contexts (toggleExpanded)
-        >> unless isContextListExpanded (hideArchived contexts)
+    toggleGroupField contexts
 
 
-isProjectListExpanded =
-    X.Record.get projects >> X.Record.get expanded
+getProjectsExpanded =
+    isGroupExpanded projects
 
 
-isContextListExpanded =
-    X.Record.get contexts >> X.Record.get expanded
+getContextExpanded =
+    isGroupExpanded contexts
 
 
-getShowArchivedForContexts =
-    X.Record.get contexts >> X.Record.get showArchived
+getArchivedContextsExpanded =
+    get contexts >> get showArchived
 
 
-getShowArchivedForProjects =
-    X.Record.get projects >> X.Record.get showArchived
+getArchivedProjectsExpanded =
+    get projects >> get showArchived
 
 
 toggleArchivedContexts =
-    X.Record.over contexts (toggleShowArchived)
+    over contexts (toggleArchivedExpanded)
 
 
 toggleArchivedProjects =
-    X.Record.over projects (toggleShowArchived)
+    over projects (toggleArchivedExpanded)

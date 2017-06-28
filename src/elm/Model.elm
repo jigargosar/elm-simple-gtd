@@ -203,13 +203,13 @@ type alias LocalPref =
 
 localPrefDecoder =
     D.succeed LocalPref
-        |> D.optional "appDrawer" AppDrawer.Model.decode AppDrawer.Model.default
+        |> D.optional "appDrawer" AppDrawer.Model.decoder AppDrawer.Model.default
         |> D.optional "signIn" Firebase.SignIn.decoder Firebase.SignIn.default
 
 
 encodeLocalPref model =
     E.object
-        [ "appDrawer" => AppDrawer.Model.encode model.appDrawerModel
+        [ "appDrawer" => AppDrawer.Model.encoder model.appDrawerModel
         , "signIn" => Firebase.SignIn.encode model.signInModel
         ]
 

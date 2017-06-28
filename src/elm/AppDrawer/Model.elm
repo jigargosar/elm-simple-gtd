@@ -78,14 +78,14 @@ defaultIsOverlayOpen =
     False
 
 
-decode =
+decoder =
     D.succeed Model
         |> D.required "contexts" groupModelDecoder
         |> D.required "projects" groupModelDecoder
         |> D.optional "isOverlayOpen" D.bool defaultIsOverlayOpen
 
 
-encode model =
+encoder model =
     E.object
         [ "contexts" => groupModelEncoder model.contexts
         , "projects" => groupModelEncoder model.projects
@@ -109,6 +109,10 @@ projects =
     X.Record.field .projects (\s b -> { b | projects = s })
 
 
+
+--
+
+
 isOverlayOpen =
     X.Record.bool .isOverlayOpen (\s b -> { b | isOverlayOpen = s })
 
@@ -117,16 +121,8 @@ toggleOverlay =
     toggle isOverlayOpen
 
 
-hideArchived groupModel =
-    over groupModel (setArchivedExpandedTo False)
 
-
-toggleArchivedForGroup groupField =
-    over groupField toggleArchivedExpanded
-
-
-toggleGroupListExpanded groupField =
-    over groupField (toggleExpanded >> unless isExpanded (setArchivedExpandedTo False))
+--
 
 
 isGroupListExpanded groupField =
@@ -139,6 +135,14 @@ getProjectsExpanded =
 
 getContextExpanded =
     isGroupListExpanded contexts
+
+
+toggleGroupListExpanded groupField =
+    over groupField (toggleExpanded >> unless isExpanded (setArchivedExpandedTo False))
+
+
+
+--
 
 
 isGroupArchivedListExpanded groupField =

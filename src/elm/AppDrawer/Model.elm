@@ -1,6 +1,6 @@
 module AppDrawer.Model exposing (..)
 
-import X.Record exposing (get, over, set)
+import X.Record exposing (get, over, set, toggle)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
@@ -22,22 +22,45 @@ type alias GroupModel =
     }
 
 
-groupModelDecoder =
-    D.succeed GroupModel
-        |> D.required "expanded" D.bool
-        |> D.optional "showArchived" D.bool False
-
-
-encodeGroupModel model =
-    E.object
-        [ "expanded" => E.bool model.expanded
-        , "showArchived" => E.bool model.showArchived
-        ]
-
-
 defaultGroupModel : GroupModel
 defaultGroupModel =
     { expanded = True, showArchived = False }
+
+
+expanded =
+    X.Record.bool .expanded (\s b -> { b | expanded = s })
+
+
+showArchived =
+    X.Record.bool .showArchived (\s b -> { b | showArchived = s })
+
+
+( groupModelDecoder, groupModelEncoder ) =
+    ( D.succeed GroupModel
+        |> D.required "expanded" D.bool
+        |> D.optional "showArchived" D.bool False
+    , \model ->
+        E.object
+            [ "expanded" => E.bool model.expanded
+            , "showArchived" => E.bool model.showArchived
+            ]
+    )
+
+
+setArchivedExpandedTo bool =
+    set showArchived bool
+
+
+toggleArchivedExpanded =
+    toggle showArchived
+
+
+toggleExpanded =
+    toggle expanded
+
+
+isExpanded =
+    get expanded
 
 
 type alias Model =
@@ -60,8 +83,8 @@ decode =
 
 encode model =
     E.object
-        [ "contexts" => encodeGroupModel model.contexts
-        , "projects" => encodeGroupModel model.projects
+        [ "contexts" => groupModelEncoder model.contexts
+        , "projects" => groupModelEncoder model.projects
         , "isOverlayOpen" => E.bool model.isOverlayOpen
         ]
 
@@ -82,32 +105,12 @@ projects =
     X.Record.field .projects (\s b -> { b | projects = s })
 
 
-expanded =
-    X.Record.bool .expanded (\s b -> { b | expanded = s })
-
-
-showArchived =
-    X.Record.bool .showArchived (\s b -> { b | showArchived = s })
-
-
 isOverlayOpen =
     X.Record.bool .isOverlayOpen (\s b -> { b | isOverlayOpen = s })
 
 
 toggleOverlay =
-    X.Record.toggle isOverlayOpen
-
-
-toggleExpanded =
-    X.Record.toggle expanded
-
-
-toggleArchivedExpanded =
-    X.Record.toggle showArchived
-
-
-setArchivedExpandedTo bool =
-    set showArchived bool
+    toggle isOverlayOpen
 
 
 hideArchived groupModel =
@@ -118,28 +121,28 @@ toggleArchivedForGroup groupField =
     over groupField toggleArchivedExpanded
 
 
-toggleGroupField groupField =
+toggleGroupList groupField =
     over groupField (toggleExpanded >> unless (get expanded) (setArchivedExpandedTo False))
 
 
-isGroupExpanded groupField =
+isGroupListExpanded groupField =
     get groupField >> get expanded
 
 
 toggleProjects =
-    toggleGroupField projects
+    toggleGroupList projects
 
 
 toggleContexts =
-    toggleGroupField contexts
+    toggleGroupList contexts
 
 
 getProjectsExpanded =
-    isGroupExpanded projects
+    isGroupListExpanded projects
 
 
 getContextExpanded =
-    isGroupExpanded contexts
+    isGroupListExpanded contexts
 
 
 getArchivedContextsExpanded =

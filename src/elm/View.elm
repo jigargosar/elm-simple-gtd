@@ -15,7 +15,6 @@ import Html.Events exposing (..)
 import Model
 import Model exposing (Msg, commonMsg)
 import View.Header
-import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
 import Polymer.App as App
@@ -110,7 +109,7 @@ appDrawerLayoutView m =
                 [ boolProperty "forceNarrow" forceNarrow
                 , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
                 ]
-                [ View.AppDrawer.view appVM m
+                [ AppDrawer.View.view appVM m
                 , App.headerLayout [ attribute "has-scrolling-region" "" ]
                     [ View.Header.init appVM m
                     , appMainContent appVM m
@@ -119,32 +118,12 @@ appDrawerLayoutView m =
     in
         div [ id "app-layout", classList [ ( "_sidebar-overlay", True ) ] ]
             [ div [ id "app-sidebar" ]
-                [ View.AppDrawer.sidebarHeader appVM m
+                [ AppDrawer.View.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m
                 ]
             , div [ id "app-main" ]
                 [ View.Header.appMainHeader appVM m
                 , appMainContent appVM m
-                ]
-            ]
-
-
-appDrawerLayoutView1 m =
-    let
-        viewModel =
-            ViewModel.create m
-
-        forceNarrow =
-            Model.getLayoutForceNarrow m
-    in
-        App.drawerLayout
-            [ boolProperty "forceNarrow" forceNarrow
-            , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
-            ]
-            [ View.AppDrawer.view viewModel m
-            , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                [ View.Header.init viewModel m
-                , appMainContent viewModel m
                 ]
             ]
 

@@ -1,7 +1,9 @@
 module AppDrawer.View exposing (..)
 
 import AppColors
-import X.Html exposing (onClickStopPropagation)
+import AppUrl
+import Polymer.App
+import X.Html exposing (boolProperty, onClickStopPropagation)
 import Material
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -16,6 +18,82 @@ import Model exposing (..)
 import X.Function.Infix exposing (..)
 import Model exposing (..)
 import View.Shared exposing (..)
+import ViewModel
+import WebComponents exposing (paperIconButton)
+
+
+view : ViewModel.Model -> Model.Model -> Html Msg
+view appVM model =
+    Polymer.App.drawer
+        [ boolProperty "swipeOpen" True
+        , attribute "slot" "drawer"
+        ]
+        [ Polymer.App.headerLayout
+            [ attribute "has-scrolling-region" ""
+            ]
+            [ Polymer.App.header
+                [ boolProperty "fixed" True
+                , attribute "slot" "header"
+                , class "app-main-header"
+                ]
+                [ Polymer.App.toolbar
+                    [ style
+                        [ "color" => "white"
+                        , "background-color" => AppColors.encode appVM.header.backgroundColor
+                        ]
+                    ]
+                    [ div []
+                        [ paperIconButton
+                            [ WebComponents.iconA "menu"
+                            , tabindex -1
+                            , attribute "drawer-toggle" ""
+                            , onClick Model.ToggleDrawer
+                            ]
+                            []
+                        ]
+                    , sidebarHeader appVM model
+                    ]
+                ]
+            , sidebarContent appVM model
+            ]
+        ]
+
+
+sidebarHeader appVM m =
+    let
+        ( t1, t2 ) =
+            if m.developmentMode then
+                ( "Dev v" ++ m.appVersion, "v" ++ m.appVersion )
+            else
+                ( "SimpleGTD.com", "v" ++ m.appVersion )
+    in
+        div
+            [ id "sidebar-header"
+            , style
+                [ "color" => "white"
+                , "background-color" => AppColors.encode appVM.header.backgroundColor
+                ]
+            , X.Html.onClickStopPropagation Model.noop
+            ]
+            [ {- Material.iconButton "menu"
+                     [ class "menu-btn"
+                     , tabindex -1
+                     , onClick Model.ToggleDrawer
+                     ]
+                 ,
+              -}
+              div [ class "detail" ]
+                [ h5 [ href AppUrl.landing ] [ text t1 ]
+                , div [ class "small layout horizontal " ]
+                    [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
+                        [ "v" ++ m.appVersion |> text ]
+                    , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
+                        [ text "Discuss" ]
+                    , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
+                        [ text "Feedback" ]
+                    ]
+                ]
+            ]
 
 
 sidebarContent appVM model =

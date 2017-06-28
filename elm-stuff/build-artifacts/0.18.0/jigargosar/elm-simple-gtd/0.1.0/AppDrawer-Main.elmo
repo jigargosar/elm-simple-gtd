@@ -1,34 +1,23 @@
 var _jigargosar$elm_simple_gtd$AppDrawer_Main$update = F2(
 	function (andThenUpdate, msg) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'OnToggleExpandContextList':
-				return function (_p1) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
-						A2(_jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextListExpanded, _p1));
-				};
-			case 'OnToggleExpandProjectList':
-				return function (_p2) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
-						A2(_jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectListExpanded, _p2));
-				};
-			case 'OnToggleShowArchivedContexts':
-				return function (_p3) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
-						A2(_jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived, _p3));
-				};
-			default:
-				return function (_p4) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
-						A2(_jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectShowArchived, _p4));
-				};
-		}
+		return function (_p0) {
+			return A2(
+				andThenUpdate,
+				_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+				function () {
+					var _p1 = msg;
+					switch (_p1.ctor) {
+						case 'OnToggleExpandContextList':
+							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextListExpanded);
+						case 'OnToggleExpandProjectList':
+							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectListExpanded);
+						case 'OnToggleShowArchivedContexts':
+							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived);
+						case 'OnToggleShowArchivedProjects':
+							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleProjectShowArchived);
+						default:
+							return _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
+					}
+				}()(_p0));
+		};
 	});

@@ -1,3 +1,15 @@
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen = A2(
+	_jigargosar$elm_simple_gtd$X_Record$bool,
+	function (_) {
+		return _.isOverlayOpen;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{isOverlayOpen: s});
+		}));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen);
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$showArchived = A2(
 	_jigargosar$elm_simple_gtd$X_Record$bool,
 	function (_) {
@@ -93,8 +105,9 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$getShowArchivedForContexts = func
 		A2(_jigargosar$elm_simple_gtd$X_Record$get, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _p5));
 };
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleContextShowArchived = A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts, _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleShowArchived);
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultIsOverlayOpen = false;
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel = {expanded: true, showArchived: false};
-var _jigargosar$elm_simple_gtd$AppDrawer_Model$default = {contexts: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel, projects: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$default = {contexts: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel, projects: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultGroupModel, isOverlayOpen: _jigargosar$elm_simple_gtd$AppDrawer_Model$defaultIsOverlayOpen};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$encodeGroupModel = function (model) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -127,7 +140,14 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$encode = function (model) {
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
 					'projects',
 					_jigargosar$elm_simple_gtd$AppDrawer_Model$encodeGroupModel(model.projects)),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+						'isOverlayOpen',
+						_elm_lang$core$Json_Encode$bool(model.isOverlayOpen)),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
@@ -145,19 +165,25 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder = A4(
 		'expanded',
 		_elm_lang$core$Json_Decode$bool,
 		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$GroupModel)));
-var _jigargosar$elm_simple_gtd$AppDrawer_Model$Model = F2(
-	function (a, b) {
-		return {contexts: a, projects: b};
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$Model = F3(
+	function (a, b, c) {
+		return {contexts: a, projects: b, isOverlayOpen: c};
 	});
-var _jigargosar$elm_simple_gtd$AppDrawer_Model$decode = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'projects',
-	_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$decode = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'isOverlayOpen',
+	_elm_lang$core$Json_Decode$bool,
+	_jigargosar$elm_simple_gtd$AppDrawer_Model$defaultIsOverlayOpen,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'contexts',
+		'projects',
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
-		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$Model)));
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'contexts',
+			_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
+			_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$Model))));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay = {ctor: 'OnToggleOverlay'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleShowArchivedProjects = {ctor: 'OnToggleShowArchivedProjects'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleShowArchivedContexts = {ctor: 'OnToggleShowArchivedContexts'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleExpandContextList = {ctor: 'OnToggleExpandContextList'};

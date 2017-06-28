@@ -55,6 +55,10 @@ toggleArchivedExpanded =
     toggle showArchived
 
 
+isArchivedExpanded =
+    get showArchived
+
+
 toggleExpanded =
     toggle expanded
 
@@ -122,11 +126,11 @@ toggleArchivedForGroup groupField =
 
 
 toggleGroupList groupField =
-    over groupField (toggleExpanded >> unless (get expanded) (setArchivedExpandedTo False))
+    over groupField (toggleExpanded >> unless isExpanded (setArchivedExpandedTo False))
 
 
 isGroupListExpanded groupField =
-    get groupField >> get expanded
+    get groupField >> isExpanded
 
 
 toggleProjects =
@@ -145,17 +149,25 @@ getContextExpanded =
     isGroupListExpanded contexts
 
 
+isGroupArchivedListExpanded groupField =
+    get groupField >> isArchivedExpanded
+
+
 getArchivedContextsExpanded =
-    get contexts >> get showArchived
+    isGroupArchivedListExpanded contexts
 
 
 getArchivedProjectsExpanded =
-    get projects >> get showArchived
+    isGroupArchivedListExpanded projects
+
+
+toggleGroupArchivedListExpanded groupField =
+    over groupField toggleArchivedExpanded
 
 
 toggleArchivedContexts =
-    over contexts (toggleArchivedExpanded)
+    toggleGroupArchivedListExpanded contexts
 
 
 toggleArchivedProjects =
-    over projects (toggleArchivedExpanded)
+    toggleGroupArchivedListExpanded projects

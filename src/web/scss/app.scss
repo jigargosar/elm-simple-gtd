@@ -2,12 +2,12 @@
 #app-view {
   background-color: color("grey", "lighten-4");
 
-  .google-sign-up.btn{
+  .google-sign-up.btn {
     background-color: $google-primary-color;
     text-transform: none;
     padding-left: 0;
 
-    img.google-logo{
+    img.google-logo {
       width: 36px;
       height: 36px;
       margin-right: 1rem;
@@ -15,53 +15,58 @@
   }
 }
 
-$header-height:4rem;
-$sidebar-width:18rem;
+$header-height: 4rem;
+$sidebar-width: 18rem;
 
-#app-layout{
+#app-layout {
   display: flex;
   height: 100vh;
   width: 100vw;
 
-  #app-sidebar, #app-main{
-    margin-top:$header-height;
-    height: calc( 100% - #{$header-height});
+  #app-sidebar, #app-main {
+    margin-top: $header-height;
+    height: calc(100% - #{$header-height});
     overflow: scroll;
 
-    #sidebar-header, #app-main-header{
-      position:fixed;
-      top:0;
+    #sidebar-header, #app-main-header {
+      position: fixed;
+      top: 0;
       height: $header-height;
       display: flex;
       align-items: center;
-      i{
-        color:white;
+      i {
+        color: white;
       }
     }
 
-    #sidebar-content, #app-main-content{
+    #sidebar-content, #app-main-content {
 
     }
   }
 
-  #app-main, #app-main-header{
-    width: calc(100vw - #{$sidebar-width});
-  }
-  #app-sidebar , #sidebar-header{
+  #app-sidebar, #sidebar-header {
     width: $sidebar-width;
   }
 
-  #app-sidebar{
-    #sidebar-header{
+  #app-main, #app-main-header {
+    width: calc(100vw - #{$sidebar-width});
+    @media #{$small-and-down} {
+      width: 100%;
+    }
+  }
+
+  #app-sidebar {
+    @extend .hide-on-small-only;
+    #sidebar-header {
       padding-right: 1rem;
-      h5{
+      h5 {
         margin: 0;
       }
 
-      .detail{
+      .detail {
         display: flex;
-        flex-direction:column;
-        justify-content:center;
+        flex-direction: column;
+        justify-content: center;
         a {
           color: white;
           margin-right: 1rem;
@@ -69,25 +74,25 @@ $sidebar-width:18rem;
       }
     }
 
-    #sidebar-content{
+    #sidebar-content {
 
     }
 
   }
 
-  #app-main{
+  #app-main {
 
-    #app-main-header{
+    #app-main-header {
       padding: 0 1rem;
 
-      .menu-btn{
+      .menu-btn {
         @extend .hide-on-med-and-up;
       }
-      
+
     }
 
-    #app-main-content{
-      
+    #app-main-content {
+
     }
   }
 }

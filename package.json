@@ -59,6 +59,7 @@
     "pouchdb-browser": "6.2.0",
     "pouchdb-find": "6.2.0",
     "pouchdb-upsert": "2.2.0",
-    "ramda": "0.23.0"
+    "ramda": "0.23.0",
+    "webfontloader": "1.6.28"
   }
 }

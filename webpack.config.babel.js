@@ -41,6 +41,7 @@ export default {
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",
+            "./font-loader"
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],

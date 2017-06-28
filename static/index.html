@@ -4,28 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest.json">
 
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-349746-5', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
-    <script>
-        WebFont.load({
-            custom: {
-                families: ['Roboto-Regular']
-            }
-        });
-    </script>
-
-
-
     <title>SimpleGTD - alpha </title>
 
 </head>
@@ -37,7 +15,7 @@
 <script src="/landing.bundle.js"></script>
 <script>
     document.addEventListener('WebComponentsReady', () => {
-            window.landingBoot().catch(console.error)
+        window.landingBoot().catch(console.error)
     });
 </script>
 <script async src="/app.bundle.js"></script>

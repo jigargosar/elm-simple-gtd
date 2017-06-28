@@ -1,12 +1,8 @@
 module AppDrawer.Model exposing (..)
 
 import X.Record
-
-
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-
-
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -46,19 +42,26 @@ defaultGroupModel =
 type alias Model =
     { contexts : GroupModel
     , projects : GroupModel
+    , isOverlayOpen : Bool
     }
+
+
+defaultIsOverlayOpen =
+    False
 
 
 decode =
     D.succeed Model
         |> D.required "contexts" groupModelDecoder
         |> D.required "projects" groupModelDecoder
+        |> D.optional "isOverlayOpen" D.bool defaultIsOverlayOpen
 
 
 encode model =
     E.object
         [ "contexts" => encodeGroupModel model.contexts
         , "projects" => encodeGroupModel model.projects
+        , "isOverlayOpen" => E.bool model.isOverlayOpen
         ]
 
 
@@ -66,6 +69,7 @@ default : Model
 default =
     { contexts = defaultGroupModel
     , projects = defaultGroupModel
+    , isOverlayOpen = defaultIsOverlayOpen
     }
 
 

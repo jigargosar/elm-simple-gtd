@@ -3,7 +3,7 @@
 import "./vendor"
 import sound from "./sound"
 import Fire from "./fire"
-import DB from "./pouchdb-wrapper"
+import DB from "./lib/pouchdb-wrapper"
 import $ from "jquery"
 import _ from "ramda"
 import Notifications from "./notifications"

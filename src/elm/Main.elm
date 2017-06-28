@@ -395,10 +395,6 @@ map =
     Return.map
 
 
-modelTapLog =
-    X.Debug.tapLog >>> Return.map
-
-
 updateTodoAndMaybeAlsoSelected action todo =
     Return.andThen (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
 

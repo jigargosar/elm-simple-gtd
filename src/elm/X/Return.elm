@@ -1,9 +1,8 @@
 module X.Return exposing (..)
 
-
 import Return exposing (Return, ReturnF)
-
 import Toolkit.Operators exposing (..)
+import X.Debug
 import X.Function as F exposing (..)
 
 
@@ -64,3 +63,7 @@ andThenMaybe f =
         (\m ->
             f m ?= Return.singleton m
         )
+
+
+mapTapLog =
+    X.Debug.tapLog >>> Return.map

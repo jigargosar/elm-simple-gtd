@@ -15,13 +15,22 @@
   }
 }
 
+$header-height:4rem;
+
 #app-layout{
   display: flex;
   height: 100vh;
   width: 100vw;
 
+  #app-sidebar, #app-main{
+    height: 100%;
+    overflow: scroll;
+
+  }
+
   #app-sidebar{
     width: 18rem;
+
 
     #sidebar-header{
 
@@ -42,7 +51,7 @@
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  min-height: 4rem;
+  height: $header-height;
 
   .menu-btn{
     @extend .hide-on-med-and-up;
@@ -57,7 +66,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  min-height: 4rem;
+  height: $header-height;
   padding-right: 1rem;
 
   i{

@@ -4,6 +4,7 @@ import Return exposing (Return, ReturnF)
 import Toolkit.Operators exposing (..)
 import X.Debug
 import X.Function as F exposing (..)
+import X.Function.Infix exposing (..)
 
 
 withMaybe :

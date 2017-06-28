@@ -32,6 +32,7 @@ $sidebar-width: 18rem;
       position: fixed;
       top: 0;
       height: $header-height;
+      padding: 0 1rem;
       display: flex;
       align-items: center;
       i {
@@ -58,7 +59,6 @@ $sidebar-width: 18rem;
   #app-sidebar {
     @extend .hide-on-small-only;
     #sidebar-header {
-      padding-right: 1rem;
       h5 {
         margin: 0;
       }
@@ -83,7 +83,7 @@ $sidebar-width: 18rem;
   #app-main {
 
     #app-main-header {
-      padding: 0 1rem;
+
 
       .menu-btn {
         @extend .hide-on-med-and-up;

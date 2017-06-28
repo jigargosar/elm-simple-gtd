@@ -117,8 +117,8 @@ appDrawerLayoutView m =
                     ]
                 ]
     in
-        div [ id "app-layout" ]
-            [ div [ id "app-sidebar", classList [ ( "open", True ) ] ]
+        div [ id "app-layout", classList [ ( "sidebar-overlay", True ) ] ]
+            [ div [ id "app-sidebar" ]
                 [ View.AppDrawer.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m
                 ]

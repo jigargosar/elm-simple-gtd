@@ -12,8 +12,8 @@ import Todo.GroupForm
 
 
 createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
-createProjectMenuConfig ({ todo, todoId, projectId } as form) model =
-    { onSelect = Model.SetTodoProject # todo
+createProjectMenuConfig ({ todoId, projectId } as form) model =
+    { onSelect = Model.SetTodoProject # todoId
     , isSelected = Document.hasId projectId
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
@@ -25,8 +25,8 @@ createProjectMenuConfig ({ todo, todoId, projectId } as form) model =
 
 
 createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
-createContextMenuConfig ({ todo, todoId, contextId } as form) model =
-    { onSelect = Model.SetTodoContext # todo
+createContextMenuConfig ({ todoId, contextId } as form) model =
+    { onSelect = Model.SetTodoContext # todoId
     , isSelected = Document.hasId contextId
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName

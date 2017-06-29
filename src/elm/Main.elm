@@ -70,12 +70,14 @@ type alias ReturnF =
 subscriptions : Model -> Sub Model.Msg
 subscriptions m =
     Sub.batch
-        [ Time.every (Time.second * 1) OnNowChanged
-        , Keyboard.subscription OnKeyboardMsg
-        , Keyboard.ups OnGlobalKeyUp
-        , Store.onChange OnPouchDBChange
-        , Firebase.onChange OnFirebaseDatabaseChange
-        , Keyboard.Combo.subscriptions m.keyComboModel
+        [ Sub.batch
+            [ Time.every (Time.second * 1) OnNowChanged
+            , Keyboard.subscription OnKeyboardMsg
+            , Keyboard.ups OnGlobalKeyUp
+            , Store.onChange OnPouchDBChange
+            , Firebase.onChange OnFirebaseDatabaseChange
+            , Keyboard.Combo.subscriptions m.keyComboModel
+            ]
         , Todo.Main.subscriptions m
         ]
 

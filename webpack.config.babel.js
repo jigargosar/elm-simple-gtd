@@ -154,7 +154,7 @@ export default {
         watchContentBase: true,
         // open:true,
         inline: true,
-        contentBase: ["static/",],
+        contentBase:  [path.join(__dirname, "static")],
         host: "localhost",
         watchOptions: {
             aggregateTimeout: 300,

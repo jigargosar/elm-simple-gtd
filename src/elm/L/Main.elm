@@ -16,7 +16,8 @@ main =
         { init = init
         , view = L.View.view
         , update = update
-        , subscriptions = (\_ -> Sub.none)
+        , subscriptions =
+            (\_ -> Sub.none)
         }
 
 

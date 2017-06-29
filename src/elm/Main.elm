@@ -168,9 +168,6 @@ updateInner msg =
         ToggleShowDeletedEntity ->
             Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
 
-        TodoAction action id ->
-            identity
-
         ReminderOverlayAction action ->
             reminderOverlayAction action
 

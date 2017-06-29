@@ -59,7 +59,6 @@ type Msg
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
     | RemotePouchSync ExclusiveMode.SyncForm
-    | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
     | ToggleDrawer

@@ -121,9 +121,6 @@ updateInner msg =
         OnFirebaseChange dbName encodedDoc ->
             Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
-        OnSkipSignIn ->
-            OnFirebaseMsg Firebase.OnSkipSignIn |> andThenUpdate
-
         OnUserChanged user ->
             Return.map (Model.setUser user)
                 >> andThenUpdate AfterUserChanged

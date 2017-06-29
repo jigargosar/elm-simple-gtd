@@ -10,7 +10,8 @@ import Json.Encode.Extra as E
 
 
 type Msg
-    = OnSignIn
+    = NOOP
+    | OnSignIn
     | OnSignOut
     | AfterUserChanged
     | OnSkipSignIn

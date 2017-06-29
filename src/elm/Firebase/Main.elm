@@ -27,6 +27,9 @@ update :
     -> Model.ReturnF
 update andThenUpdate now msg =
     case msg of
+        Firebase.NOOP ->
+            identity
+
         Firebase.OnSignIn ->
             Return.command (signIn ())
 

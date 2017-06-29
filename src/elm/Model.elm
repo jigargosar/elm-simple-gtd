@@ -75,7 +75,6 @@ type Msg
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
     | OnSwitchToNewUserSetupModeIfNeeded
-    | OnSkipSignIn
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model

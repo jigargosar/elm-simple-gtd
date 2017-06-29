@@ -15,10 +15,6 @@ iconA =
     attribute "icon"
 
 
-paperIconButton =
-    Html.node "paper-icon-button"
-
-
 dynamicAlign =
     boolProperty "dynamicAlign" True
 

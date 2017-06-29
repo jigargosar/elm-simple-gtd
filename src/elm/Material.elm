@@ -23,8 +23,8 @@ iconButton name attributes =
 
 bigIconTextButton iconName textV clickHandler =
     div [ class "icon-text font-caption", onClickStopPropagation clickHandler ]
-        [ a [ class "btn-flat btn-floating", style [ "z-index" => "0" ] ]
-            [ i [ class "material-icons", style [ "font-size" => "6rem" ] ] [ text iconName ] ]
+        [ a [ class "btn-flat btn-floating x64", style [ "z-index" => "0" ] ]
+            [ i [ class "material-icons", style [] ] [ text iconName ] ]
         , div [] [ text textV ]
         ]
 

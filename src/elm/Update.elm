@@ -109,14 +109,6 @@ updateInner msg =
         ToggleTodoDone todoId ->
             Return.andThen (Model.updateTodo Todo.ToggleDone todoId)
 
-        SetTodoContext todoId context ->
-            updateTodoAndMaybeAlsoSelected (Todo.SetContext context) todoId
-                >> andThenUpdate OnDeactivateEditingMode
-
-        SetTodoProject todoId project ->
-            updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todoId
-                >> andThenUpdate OnDeactivateEditingMode
-
         NewTodoTextChanged form text ->
             Return.map (Model.updateNewTodoText form text)
 

@@ -1,12 +1,4 @@
 :root {
-  --overlay: {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-  };
-
   --layout-vertical: {
     display: flex;
     align-items: stretch;
@@ -161,7 +153,12 @@ i {
 /*mat css END*/
 
 .overlay {
-  @apply --overlay;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
   background-color: rgba(0, 0, 0, 0.3);
 }
 

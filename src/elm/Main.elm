@@ -67,6 +67,7 @@ type alias ReturnF =
     Return -> Return
 
 
+subscriptions : Model -> Sub Model.Msg
 subscriptions m =
     Sub.batch
         [ Time.every (Time.second * 1) OnNowChanged

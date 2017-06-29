@@ -470,7 +470,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$projectProjectButton = function (vm) {
 						_0: vm.tabindexAV,
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropdownMsg),
+							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropDownMsg),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -517,7 +517,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$editContextButton = function (vm) {
 						_0: vm.tabindexAV,
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropdownMsg),
+							_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropDownMsg),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -837,6 +837,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$noop;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleArchived);
 		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);
 		var projectId = _jigargosar$elm_simple_gtd$Todo$getProjectId(todo);
 		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
@@ -863,7 +864,6 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 						_jigargosar$elm_simple_gtd$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
-		var toggleDoneMsg = _jigargosar$elm_simple_gtd$Model$ToggleTodoDone(todoId);
 		var now = appVM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p10) {
@@ -909,8 +909,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			displayText: _jigargosar$elm_simple_gtd$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			showContextDropdownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo),
-			showProjectDropdownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo),
+			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo),
+			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,
@@ -939,7 +939,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$TodoViewModel = function (a) {
 														return function (o) {
 															return function (p) {
 																return function (q) {
-																	return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropdownMsg: k, showProjectDropdownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p, onMoreMenuClicked: q};
+																	return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropDownMsg: k, showProjectDropDownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p, onMoreMenuClicked: q};
 																};
 															};
 														};

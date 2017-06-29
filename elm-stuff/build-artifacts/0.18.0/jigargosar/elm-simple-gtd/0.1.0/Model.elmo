@@ -1573,9 +1573,6 @@ var _jigargosar$elm_simple_gtd$Model$NewContext = {ctor: 'NewContext'};
 var _jigargosar$elm_simple_gtd$Model$NewProject = {ctor: 'NewProject'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
 var _jigargosar$elm_simple_gtd$Model$NewTodo = {ctor: 'NewTodo'};
-var _jigargosar$elm_simple_gtd$Model$ToggleTodoDone = function (a) {
-	return {ctor: 'ToggleTodoDone', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Model$ToggleShowDeletedEntity = {ctor: 'ToggleShowDeletedEntity'};
 var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 	return {ctor: 'ReminderOverlayAction', _0: a};
@@ -1657,25 +1654,26 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		appDrawerModel: localPref.appDrawer,
 		signInModel: localPref.signIn
 	};
+	var _p59 = 1;
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };
-var _jigargosar$elm_simple_gtd$Model$projectView = function (_p59) {
+var _jigargosar$elm_simple_gtd$Model$projectView = function (_p60) {
 	return _jigargosar$elm_simple_gtd$Model$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity$ProjectView(
-			_jigargosar$elm_simple_gtd$Document$getId(_p59)));
+			_jigargosar$elm_simple_gtd$Document$getId(_p60)));
 };
-var _jigargosar$elm_simple_gtd$Model$switchToProjectView = function (_p60) {
+var _jigargosar$elm_simple_gtd$Model$switchToProjectView = function (_p61) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$projectView(_p60));
+		_jigargosar$elm_simple_gtd$Model$projectView(_p61));
 };
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
-	return function (_p61) {
-		var _p62 = _p61;
-		var _p63 = _p62._0;
+	return function (_p62) {
+		var _p63 = _p62;
+		var _p64 = _p63._0;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromProject(_p63),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p63, _p62._1));
+			_jigargosar$elm_simple_gtd$Entity$fromProject(_p64),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p64, _p63._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1685,23 +1683,23 @@ var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) 
 				A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
 				model.projectStore)));
 };
-var _jigargosar$elm_simple_gtd$Model$contextView = function (_p64) {
+var _jigargosar$elm_simple_gtd$Model$contextView = function (_p65) {
 	return _jigargosar$elm_simple_gtd$Model$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity$ContextView(
-			_jigargosar$elm_simple_gtd$Document$getId(_p64)));
+			_jigargosar$elm_simple_gtd$Document$getId(_p65)));
 };
-var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p65) {
+var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p66) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$contextView(_p65));
+		_jigargosar$elm_simple_gtd$Model$contextView(_p66));
 };
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
-	return function (_p66) {
-		var _p67 = _p66;
-		var _p68 = _p67._0;
+	return function (_p67) {
+		var _p68 = _p67;
+		var _p69 = _p68._0;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromContext(_p68),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p68, _p67._1));
+			_jigargosar$elm_simple_gtd$Entity$fromContext(_p69),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p69, _p68._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1713,9 +1711,9 @@ var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) 
 };
 var _jigargosar$elm_simple_gtd$Model$switchToContextsView = _jigargosar$elm_simple_gtd$Model$switchToView(
 	_jigargosar$elm_simple_gtd$Model$EntityListView(_jigargosar$elm_simple_gtd$Entity$ContextsView));
-var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p69) {
+var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p70) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$EntityListView(_p69));
+		_jigargosar$elm_simple_gtd$Model$EntityListView(_p70));
 };
 var _jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {

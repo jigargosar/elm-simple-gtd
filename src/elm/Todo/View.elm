@@ -48,8 +48,8 @@ type alias TodoViewModel =
     , startEditingMsg : Msg
     , toggleDoneMsg : Msg
     , canBeFocused : Bool
-    , showContextDropdownMsg : Msg
-    , showProjectDropdownMsg : Msg
+    , showContextDropDownMsg : Msg
+    , showProjectDropDownMsg : Msg
     , reminder : ScheduleViewModel
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
@@ -170,7 +170,7 @@ createTodoViewModel appVM canBeFocused todo =
             createEntityActionMsg Entity.ToggleDeleted
 
         toggleDoneMsg =
-            Model.ToggleTodoDone todoId
+            createEntityActionMsg Entity.ToggleArchived
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -179,8 +179,8 @@ createTodoViewModel appVM canBeFocused todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , showContextDropdownMsg = Model.StartEditingContext todo
-        , showProjectDropdownMsg = Model.StartEditingProject todo
+        , showContextDropDownMsg = Model.StartEditingContext todo
+        , showProjectDropDownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
@@ -281,7 +281,7 @@ editContextButton vm =
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV
-        , onClick vm.showContextDropdownMsg
+        , onClick vm.showContextDropDownMsg
         ]
         [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
         ]
@@ -293,7 +293,7 @@ projectProjectButton vm =
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV
-        , onClick vm.showProjectDropdownMsg
+        , onClick vm.showProjectDropDownMsg
         ]
         [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
         ]

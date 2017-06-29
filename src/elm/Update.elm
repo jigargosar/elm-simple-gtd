@@ -106,9 +106,6 @@ updateInner msg =
             Return.map (Model.startEditingTodoProject todo)
                 >> Return.command (positionProjectMenuCmd todo)
 
-        ToggleTodoDone todoId ->
-            Return.andThen (Model.updateTodo Todo.ToggleDone todoId)
-
         NewTodoTextChanged form text ->
             Return.map (Model.updateNewTodoText form text)
 

@@ -189,9 +189,6 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Model$startEditingTodoProject(_p19),
 						_p18));
 			};
-		case 'ToggleTodoDone':
-			return _Fresheyeball$elm_return$Return$andThen(
-				A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$ToggleDone, _p8._0));
 		case 'NewTodoTextChanged':
 			return _Fresheyeball$elm_return$Return$map(
 				A2(_jigargosar$elm_simple_gtd$Model$updateNewTodoText, _p8._0, _p8._1));

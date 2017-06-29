@@ -104,6 +104,8 @@ menu m =
                 , slotDropdownTrigger
                 ]
                 []
+
+            {- menuIcon -}
             , Paper.listbox [ class "", slotDropdownContent ]
                 [ userSignInLink
                 , itemLink AppUrl.forumsURL "Forums/Discuss"

@@ -5,7 +5,7 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$activeViewShell = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('full-view fixed-top'),
+				_0: _elm_lang$html$Html_Attributes$class('notification overlay'),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(onOutsideMouseDown),
@@ -19,17 +19,17 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$activeViewShell = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('fixed-bottom top-shadow static'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('font-headline'),
-								_1: {ctor: '[]'}
-							},
+							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html$text(todoDetails.text),
@@ -41,7 +41,7 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$activeViewShell = F2(
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('layout horizontal flex-auto-children'),
+									_0: _elm_lang$html$Html_Attributes$class('layout horizontal wrap flex-auto-children '),
 									_1: {ctor: '[]'}
 								},
 								children),

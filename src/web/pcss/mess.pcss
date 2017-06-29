@@ -142,7 +142,7 @@ i {
   line-height: 24px;
 }
 
-.btn-floating.x64, .btn-floating.x64 i {
+.x64, .btn-floating.x64, .btn-floating.x64 i {
   width: 64px;
   height: 64px;
   font-size: 56px;
@@ -160,6 +160,13 @@ i {
   height: 100vh;
   
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.notification.overlay{
+  background-color: transparent;
+  & .flex-auto-children > * {
+    flex: 1 1 auto;
+  }
 }
 
 .overlay .modal {
@@ -445,9 +452,4 @@ textarea.materialize-textarea {
     max-width: 10rem;
     overflow-x: hidden;
   }
-}
-
-
-.static{
-  padding: 1rem;
 }

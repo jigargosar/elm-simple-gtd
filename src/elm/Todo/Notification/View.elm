@@ -60,10 +60,10 @@ activeViewShell todoDetails children =
         onOutsideMouseDown =
             Model.ReminderOverlayAction Todo.Notification.Model.Close
     in
-        div [ class "full-view fixed-top", onClickStopPropagation onOutsideMouseDown ]
-            [ div [ class "fixed-bottom top-shadow static" ]
-                [ div [ class "font-headline" ] [ text todoDetails.text ]
-                , div [ class "layout horizontal flex-auto-children" ]
+        div [ class "notification overlay", onClickStopPropagation onOutsideMouseDown ]
+            [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation Model.noop ]
+                [ h5 [] [ text todoDetails.text ]
+                , div [ class "layout horizontal wrap flex-auto-children " ]
                     children
                 ]
             ]

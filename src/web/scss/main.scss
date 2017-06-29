@@ -66,3 +66,28 @@ $background: #fff;
 .btn.btn-flat:hover{
   color:color("indigo", "darken-1")
 }
+
+
+.static{
+  background-color: white;
+  padding: 1rem;
+}
+
+.top-shadow{
+  box-shadow: 0 -0.1rem 1rem color("grey","base");
+}
+
+.upper-case{
+  text-transform: uppercase;
+}
+
+
+.big-button{
+  padding: 0.5rem;
+  text-transform: uppercase;
+  color:darken($primary-color, 10%);
+}
+
+.big-button:hover{
+  background-color: color("grey","lighten-4");
+}

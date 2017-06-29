@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode
+import Material
 import Polymer.Attributes exposing (boolProperty)
 import Polymer.Paper
 import String.Extra

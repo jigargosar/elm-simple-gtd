@@ -2,6 +2,7 @@ module Todo.Notification.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Material
 import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model
@@ -29,9 +30,9 @@ reminderOverlayActiveView activeView todoDetails =
                     }
             in
                 activeViewShell todoDetails
-                    [ iconTextButton "notification:do-not-disturb" "dismiss" vm.onDismissClicked
-                    , iconTextButton "av:snooze" "snooze" vm.onSnoozeClicked
-                    , iconTextButton "done" "done!" vm.onDoneClicked
+                    [ Material.bigIconTextButton "not_interested" "dismiss" vm.onDismissClicked
+                    , Material.bigIconTextButton "snooze" "snooze" vm.onSnoozeClicked
+                    , Material.bigIconTextButton "done" "done!" vm.onDoneClicked
                     ]
 
         Todo.Notification.Model.SnoozeView ->
@@ -47,10 +48,10 @@ reminderOverlayActiveView activeView todoDetails =
                     }
             in
                 activeViewShell todoDetails
-                    [ iconTextButton "av:snooze" "15 min" vm.snoozeFor15Min
-                    , iconTextButton "av:snooze" "1 hour" vm.snoozeFor1Hour
-                    , iconTextButton "av:snooze" "3 hour" vm.snoozeFor3Hours
-                    , iconTextButton "av:snooze" "tomorrow" vm.snoozeTillTomorrow
+                    [ Material.bigIconTextButton "snooze" "15 min" vm.snoozeFor15Min
+                    , Material.bigIconTextButton "snooze" "1 hour" vm.snoozeFor1Hour
+                    , Material.bigIconTextButton "snooze" "3 hour" vm.snoozeFor3Hours
+                    , Material.bigIconTextButton "snooze" "tomorrow" vm.snoozeTillTomorrow
                     ]
 
 

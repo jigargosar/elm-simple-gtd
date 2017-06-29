@@ -65,13 +65,13 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$reminderOverlayActiveView 
 				todoDetails,
 				{
 					ctor: '::',
-					_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'notification:do-not-disturb', 'dismiss', vm.onDismissClicked),
+					_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'not_interested', 'dismiss', vm.onDismissClicked),
 					_1: {
 						ctor: '::',
-						_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'av:snooze', 'snooze', vm.onSnoozeClicked),
+						_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'snooze', 'snooze', vm.onSnoozeClicked),
 						_1: {
 							ctor: '::',
-							_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'done', 'done!', vm.onDoneClicked),
+							_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'done', 'done!', vm.onDoneClicked),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -95,16 +95,16 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$reminderOverlayActiveView 
 				todoDetails,
 				{
 					ctor: '::',
-					_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'av:snooze', '15 min', vm.snoozeFor15Min),
+					_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'snooze', '15 min', vm.snoozeFor15Min),
 					_1: {
 						ctor: '::',
-						_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'av:snooze', '1 hour', vm.snoozeFor1Hour),
+						_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'snooze', '1 hour', vm.snoozeFor1Hour),
 						_1: {
 							ctor: '::',
-							_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'av:snooze', '3 hour', vm.snoozeFor3Hours),
+							_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'snooze', '3 hour', vm.snoozeFor3Hours),
 							_1: {
 								ctor: '::',
-								_0: A3(_jigargosar$elm_simple_gtd$WebComponents$iconTextButton, 'av:snooze', 'tomorrow', vm.snoozeTillTomorrow),
+								_0: A3(_jigargosar$elm_simple_gtd$Material$bigIconTextButton, 'snooze', 'tomorrow', vm.snoozeTillTomorrow),
 								_1: {ctor: '[]'}
 							}
 						}

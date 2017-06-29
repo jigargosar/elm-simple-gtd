@@ -25,10 +25,9 @@ overSignInModel =
 
 update :
     (Model.Msg -> Model.ReturnF)
-    -> Time.Time
     -> Firebase.Msg
     -> Model.ReturnF
-update andThenUpdate now msg =
+update andThenUpdate msg =
     case msg of
         NOOP ->
             identity

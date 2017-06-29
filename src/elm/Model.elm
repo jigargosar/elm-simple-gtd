@@ -92,7 +92,6 @@ type Msg
     | OnTodoMsg Todo.Msg.Msg
     | OnTodoMsgWithTime Todo.Msg.Msg Time
     | OnFirebaseMsg Firebase.Msg
-    | OnFirebaseMsgWithTime Firebase.Msg Time
     | OnKeyCombo Combo.Msg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Model.Msg

@@ -231,7 +231,7 @@ updateInner msg =
                 >> autoFocusInputCmd
 
         OnEntityMsg entity entityMsg ->
-            Entity.Main.update entity entityMsg
+            Entity.Main.update andThenUpdate entity entityMsg
 
         OnLaunchBarMsgWithNow msg now ->
             case msg of
@@ -272,10 +272,7 @@ updateInner msg =
             Todo.Main.update andThenUpdate now todoMsg
 
         OnFirebaseMsg firebaseMsg ->
-            withNow (OnFirebaseMsgWithTime firebaseMsg)
-
-        OnFirebaseMsgWithTime firebaseMsg now ->
-            Firebase.Main.update andThenUpdate now firebaseMsg
+            Firebase.Main.update andThenUpdate firebaseMsg
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg

@@ -36,7 +36,6 @@ export default {
     context: path.resolve(__dirname, "src/web/"),
     entry: {
         "common": [
-            "hacktimer",
             "babel-polyfill",
             "bower_components/webcomponentsjs/webcomponents-loader",
             "materialize-css/dist/js/materialize.min",

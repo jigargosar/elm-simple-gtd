@@ -20,7 +20,6 @@
         "danielnarey/elm-color-math": "1.0.0 <= v < 2.0.0",
         "danielnarey/elm-css-basics": "3.0.0 <= v < 4.0.0",
         "debois/elm-dom": "1.2.3 <= v < 2.0.0",
-        "edvail/elm-polymer": "3.0.0 <= v < 4.0.0",
         "elm-community/dict-extra": "1.4.0 <= v < 2.0.0",
         "elm-community/json-extra": "2.1.0 <= v < 3.0.0",
         "elm-community/list-extra": "4.0.0 <= v < 7.0.0",

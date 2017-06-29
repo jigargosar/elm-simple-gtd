@@ -140,7 +140,7 @@ var _jigargosar$elm_simple_gtd$Material$bigIconTextButton = F3(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('icon-text font-caption'),
+				_0: _elm_lang$html$Html_Attributes$class('layout vertical center font-caption'),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),

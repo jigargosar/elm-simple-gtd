@@ -109,12 +109,12 @@ updateInner msg =
         ToggleTodoDone todoId ->
             Return.andThen (Model.updateTodo Todo.ToggleDone todoId)
 
-        SetTodoContext todoContext todo ->
-            updateTodoAndMaybeAlsoSelected (Todo.SetContext todoContext) todo
+        SetTodoContext todoContext contextId ->
+            updateTodoAndMaybeAlsoSelected (Todo.SetContext todoContext) contextId
                 >> andThenUpdate OnDeactivateEditingMode
 
-        SetTodoProject project todo ->
-            updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todo
+        SetTodoProject project todoId ->
+            updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todoId
                 >> andThenUpdate OnDeactivateEditingMode
 
         NewTodoTextChanged form text ->
@@ -220,8 +220,8 @@ map =
     Return.map
 
 
-updateTodoAndMaybeAlsoSelected action todo =
-    Return.andThen (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
+updateTodoAndMaybeAlsoSelected action todoId =
+    Return.andThen (Model.updateTodoAndMaybeAlsoSelected action todoId)
 
 
 andThenUpdate =

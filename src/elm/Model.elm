@@ -65,8 +65,8 @@ type Msg
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
     | ToggleTodoDone Todo.Id
-    | SetTodoContext Context.Model Todo.Model
-    | SetTodoProject Project.Model Todo.Model
+    | SetTodoContext Context.Model Todo.Id
+    | SetTodoProject Project.Model Todo.Id
     | NewTodo
     | NewTodoForInbox
     | NewProject

@@ -83,14 +83,14 @@ menu m =
                 Nothing ->
                     Material.iconA "account_circle"
                         [ class "account"
-                        , slotDropdownTrigger
+                        , slotDropDownTrigger
                         ]
 
                 Just profile ->
                     img
                         [ profile |> Firebase.getPhotoURL >> src
                         , class "account"
-                        , slotDropdownTrigger
+                        , slotDropDownTrigger
                         ]
                         []
     in
@@ -102,7 +102,7 @@ menu m =
             [ Html.node "iron-icon"
                 [ userAccountAttribute
                 , class "account"
-                , slotDropdownTrigger
+                , slotDropDownTrigger
                 ]
                 []
 

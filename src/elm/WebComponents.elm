@@ -17,7 +17,7 @@ dynamicAlign =
     X.Html.boolProperty "dynamicAlign" True
 
 
-slotDropdownTrigger =
+slotDropDownTrigger =
     attribute "slot" "dropdown-trigger"
 
 

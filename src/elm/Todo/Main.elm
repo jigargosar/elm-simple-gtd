@@ -65,13 +65,12 @@ maybeMapToCmd fn =
 
 subscriptions m =
     Sub.batch
-        [ notificationClicked (OnReminderNotificationClicked >> Model.OnTodoMsg)
-        , onRunningTodoNotificationClicked (RunningNotificationResponse >> Model.OnTodoMsg)
-        , Time.every (Time.second * 1)
-            (\_ -> Model.OnTodoMsg UpdateTimeTracker)
-        , Time.every (Time.second * 30)
-            (\_ -> Model.OnTodoMsg OnProcessPendingNotificationCronTick)
+        [ notificationClicked OnReminderNotificationClicked
+        , onRunningTodoNotificationClicked RunningNotificationResponse
+        , Time.every (Time.second * 1) (\_ -> UpdateTimeTracker)
+        , Time.every (Time.second * 30) (\_ -> OnProcessPendingNotificationCronTick)
         ]
+        |> Sub.map Model.OnTodoMsg
 
 
 update :

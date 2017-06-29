@@ -71,12 +71,13 @@ subscriptions : Model -> Sub Model.Msg
 subscriptions m =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1) OnNowChanged |> Sub.map OnSubMsg
+            [ Time.every (Time.second * 1) OnNowChanged
             , Keyboard.subscription OnKeyboardMsg
             , Keyboard.ups OnGlobalKeyUp
             , Store.onChange OnPouchDBChange
             , Firebase.onChange OnFirebaseDatabaseChange
             ]
+            |> Sub.map OnSubMsg
         , Keyboard.Combo.subscriptions m.keyComboModel
         , Todo.Main.subscriptions m
         ]
@@ -106,16 +107,7 @@ updateInner msg =
             CommonMsg.update msg
 
         OnSubMsg subMsg ->
-            case subMsg of
-                OnNowChanged now ->
-                    Return.map (Model.setNow now)
-
-        OnPouchDBChange dbName encodedDoc ->
-            Return.andThenMaybe
-                (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                    >>? Tuple.mapFirst OnEntityUpsert
-                    >>? uncurry update
-                )
+            onSubMsg subMsg
 
         OnEntityUpsert entity ->
             case entity of
@@ -124,9 +116,6 @@ updateInner msg =
 
                 _ ->
                     identity
-
-        OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
         OnSwitchToNewUserSetupModeIfNeeded ->
             Return.map (Model.switchToNewUserSetupModeIfNeeded)
@@ -220,10 +209,6 @@ updateInner msg =
         OnSetEntityListView viewType ->
             Return.map (Model.setEntityListViewType viewType)
 
-        OnKeyboardMsg msg ->
-            Return.map (Model.updateKeyboardState (Keyboard.update msg))
-                >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
-
         OnSaveCurrentForm ->
             Return.andThen Model.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
@@ -301,9 +286,6 @@ updateInner msg =
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
-
-        OnGlobalKeyUp key ->
-            onGlobalKeyUp key
 
         OnKeyCombo comboMsg ->
             Return.andThen (Model.updateCombo comboMsg)
@@ -393,6 +375,29 @@ reminderOverlayAction action =
 
 command =
     Return.command
+
+
+onSubMsg subMsg =
+    case subMsg of
+        OnNowChanged now ->
+            Return.map (Model.setNow now)
+
+        OnKeyboardMsg msg ->
+            Return.map (Model.updateKeyboardState (Keyboard.update msg))
+                >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
+
+        OnGlobalKeyUp key ->
+            onGlobalKeyUp key
+
+        OnPouchDBChange dbName encodedDoc ->
+            Return.andThenMaybe
+                (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
+                    >>? Tuple.mapFirst OnEntityUpsert
+                    >>? uncurry update
+                )
+
+        OnFirebaseDatabaseChange dbName encodedDoc ->
+            Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
 
 onGlobalKeyUp : Key -> ReturnF

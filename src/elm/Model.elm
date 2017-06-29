@@ -52,14 +52,16 @@ import X.Debug
 
 type SubMsg
     = OnNowChanged Time
+    | OnKeyboardMsg Keyboard.Msg
+    | OnGlobalKeyUp Keyboard.Key
+    | OnPouchDBChange String D.Value
+    | OnFirebaseDatabaseChange String D.Value
 
 
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnSubMsg SubMsg
-    | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
-    | OnFirebaseDatabaseChange String D.Value
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
@@ -84,8 +86,6 @@ type Msg
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | OnSetViewType ViewType
     | OnSetEntityListView EntityListViewType
-    | OnKeyboardMsg Keyboard.Msg
-    | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity Entity.Action
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time

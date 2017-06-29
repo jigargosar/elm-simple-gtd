@@ -5,6 +5,7 @@ import AppDrawer.Model
 import AppDrawer.View
 import CustomSync
 import Entity.View
+import Material
 import Ui.Layout
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
@@ -134,11 +135,8 @@ appMainContent viewModel model =
 
 
 addTodoFab m =
-    Paper.fab
+    Material.fab "add"
         [ id "add-fab"
-        , attribute "icon" "add"
-        , attribute "mini" ""
         , onClick Model.NewTodo
         , tabindex -1
         ]
-        []

@@ -1,15 +1,8 @@
 module Material exposing (..)
 
-
-
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
-
+import X.Function.Infix exposing (..)
 
 
 --smallIcon name =
@@ -28,6 +21,13 @@ iconButton name attributes =
     div attributes
         [ a [ class "btn-flat btn-floating" ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
+        ]
+
+
+fab name attributes =
+    div attributes
+        [ a [ class "btn-floating" ]
+            [ i [ class "material-icons", style [ "color" => "white" ] ] [ text name ] ]
         ]
 
 

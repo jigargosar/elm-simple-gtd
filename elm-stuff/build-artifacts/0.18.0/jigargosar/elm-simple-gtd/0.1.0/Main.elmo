@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Main$subscriptions2 = function (m) {
+var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
@@ -39,7 +39,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions2 = function (m) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
-	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions2})(
+	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (appVersion) {

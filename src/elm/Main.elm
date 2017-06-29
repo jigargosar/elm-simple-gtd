@@ -2,9 +2,9 @@ module Main exposing (..)
 
 import Firebase
 import Keyboard.Combo
-import Model exposing (Flags)
+import Model
 import Return
-import RouteUrl exposing (RouteUrlProgram)
+import RouteUrl
 import Routes
 import Store
 import Time
@@ -14,7 +14,7 @@ import View
 import X.Keyboard
 
 
-main : RouteUrlProgram Flags Model.Model Model.Msg
+main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Model.Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
@@ -22,12 +22,12 @@ main =
         , init = Model.init
         , update = Update.update
         , view = View.init
-        , subscriptions = subscriptions2
+        , subscriptions = subscriptions
         }
 
 
-subscriptions2 : Model.Model -> Sub Model.Msg
-subscriptions2 m =
+subscriptions : Model.Model -> Sub Model.Msg
+subscriptions m =
     Sub.batch
         [ Sub.batch
             [ Time.every (Time.second * 1) Model.OnNowChanged

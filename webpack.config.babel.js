@@ -46,7 +46,6 @@ export default {
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],
-        "landing2": ["./landing.js"],
     },
 
     output: {
@@ -91,6 +90,7 @@ export default {
                             verbose: true,
                             warn: false,
                             debug: false,
+                            cwd:path.resolve(__dirname),
                         },
                     }
                 ],
@@ -148,7 +148,7 @@ export default {
 
     devServer: {
         // stats: {colors: false, "errors-only":true},
-        stats: "normal",
+        stats: "errors-only",
         port: 8020,
         overlay: true,
         watchContentBase: true,
@@ -156,9 +156,9 @@ export default {
         inline: true,
         contentBase:  [path.join(__dirname, "static")],
         host: "localhost",
-        watchOptions: {
-            aggregateTimeout: 300,
-        },
+        /*watchOptions: {
+            aggregateTimeout: 700,
+        },*/
     },
 };
 

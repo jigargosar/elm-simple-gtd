@@ -100,8 +100,12 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnShowMainMenu),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$id('main-menu-button'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnShowMainMenu),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',

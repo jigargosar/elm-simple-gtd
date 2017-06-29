@@ -98,7 +98,11 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 	}();
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnShowMainMenu),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: menuIcon,

@@ -142,6 +142,8 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 				return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p1._0, appModel);
 			case 'NewTodo':
 				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
+			case 'MainMenu':
+				return A2(_jigargosar$elm_simple_gtd$View_MainMenu$init, _p1._0, appModel);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

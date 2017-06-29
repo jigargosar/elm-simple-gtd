@@ -72,7 +72,7 @@ updateInner msg =
             onSubMsg subMsg
 
         OnShowMainMenu ->
-            map Model.startEditingTodoContext
+            map Model.showMainMenu
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of

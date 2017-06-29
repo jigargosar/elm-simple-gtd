@@ -77,6 +77,6 @@ var _jigargosar$elm_simple_gtd$WebComponents$onBoolPropertyChanged = F2(
 					_elm_lang$core$Json_Decode$bool)));
 	});
 var _jigargosar$elm_simple_gtd$WebComponents$slotDropdownContent = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content');
-var _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-trigger');
-var _jigargosar$elm_simple_gtd$WebComponents$dynamicAlign = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'dynamicAlign', true);
+var _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-trigger');
+var _jigargosar$elm_simple_gtd$WebComponents$dynamicAlign = A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'dynamicAlign', true);
 var _jigargosar$elm_simple_gtd$WebComponents$iconA = _elm_lang$html$Html_Attributes$attribute('icon');

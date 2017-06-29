@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Firebase$customSw = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'customSw', true);
+var _jigargosar$elm_simple_gtd$Firebase$customSw = A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'customSw', true);
 var _jigargosar$elm_simple_gtd$Firebase$updateToken = F2(
 	function (token, client) {
 		return _elm_lang$core$Native_Utils.update(

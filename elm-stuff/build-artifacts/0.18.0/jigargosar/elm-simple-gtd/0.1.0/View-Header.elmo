@@ -90,7 +90,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 					_0: _elm_lang$html$Html_Attributes$class('account'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger,
+						_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
 						_1: {ctor: '[]'}
 					}
 				});
@@ -108,7 +108,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 						_0: _elm_lang$html$Html_Attributes$class('account'),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger,
+							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -144,7 +144,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 						_0: _elm_lang$html$Html_Attributes$class('account'),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownTrigger,
+							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
 							_1: {ctor: '[]'}
 						}
 					}

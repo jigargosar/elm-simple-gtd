@@ -77,22 +77,21 @@ menu m =
                 ?|> (\_ -> Paper.item [ onClick Model.OnSignOut ] [ text "SignOut" ])
                 ?= Paper.item [ onClick Model.OnSignIn ] [ text "SignIn" ]
 
-        {- menuIcon =
-           case maybeUserProfile of
-               Nothing ->
-                   Material.iconA "account_circle"
-                       [ class "account"
-                       , slotDropdownTrigger
-                       ]
+        menuIcon =
+            case maybeUserProfile of
+                Nothing ->
+                    Material.iconA "account_circle"
+                        [ class "account"
+                        , slotDropdownTrigger
+                        ]
 
-               Just profile ->
-                   img
-                       [ profile |> Firebase.getPhotoURL >> src
-                       , class "account"
-                       , slotDropdownTrigger
-                       ]
-                       []
-        -}
+                Just profile ->
+                    img
+                        [ profile |> Firebase.getPhotoURL >> src
+                        , class "account"
+                        , slotDropdownTrigger
+                        ]
+                        []
     in
         Paper.menuButton
             [ dynamicAlign

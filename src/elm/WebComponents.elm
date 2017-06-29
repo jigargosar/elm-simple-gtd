@@ -9,22 +9,6 @@ import String.Extra
 import X.Html exposing (onClickStopPropagation)
 
 
-iconA =
-    attribute "icon"
-
-
-dynamicAlign =
-    X.Html.boolProperty "dynamicAlign" True
-
-
-slotDropDownTrigger =
-    attribute "slot" "dropdown-trigger"
-
-
-slotDropdownContent =
-    attribute "slot" "dropdown-content"
-
-
 onBoolPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.bool))

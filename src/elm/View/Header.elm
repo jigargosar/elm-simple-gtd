@@ -67,11 +67,6 @@ menu m =
         maybeUserProfile =
             Model.getMaybeUserProfile m
 
-        userAccountAttribute =
-            maybeUserProfile
-                ?|> (Firebase.getPhotoURL >> attribute "src")
-                ?= iconA "account-circle"
-
         userSignInLink =
             maybeUserProfile
                 ?|> (\_ -> Paper.item [ onClick Firebase.OnSignOut ] [ text "SignOut" ])
@@ -81,40 +76,43 @@ menu m =
         menuIcon =
             case maybeUserProfile of
                 Nothing ->
-                    Material.iconA "account_circle"
+                    Material.iconButton "account_circle"
                         [ class "account"
-                        , slotDropDownTrigger
                         ]
 
                 Just profile ->
                     img
                         [ profile |> Firebase.getPhotoURL >> src
                         , class "account"
-                        , slotDropDownTrigger
                         ]
                         []
     in
-        Paper.menuButton
-            [ dynamicAlign
-            , boolProperty "noOverlap" True
-            , boolProperty "closeOnActivate" True
-            ]
-            [ Html.node "iron-icon"
-                [ userAccountAttribute
-                , class "account"
-                , slotDropDownTrigger
-                ]
-                []
+        a [] [ menuIcon ]
 
-            {- menuIcon -}
-            , Paper.listbox [ class "", slotDropdownContent ]
-                [ userSignInLink
-                , itemLink AppUrl.forumsURL "Forums/Discuss"
-                , itemLink AppUrl.changeLogURL
-                    ("Changelog v" ++ m.appVersion)
-                , itemLink AppUrl.github "Github"
-                ]
-            ]
+
+
+{- Paper.menuButton
+   [ dynamicAlign
+   , boolProperty "noOverlap" True
+   , boolProperty "closeOnActivate" True
+   ]
+   [ {- Html.node "iron-icon"
+        [ userAccountAttribute
+        , class "account"
+        , slotDropDownTrigger
+        ]
+        []
+     -}
+     menuIcon
+   , Paper.listbox [ class "", slotDropdownContent ]
+       [ userSignInLink
+       , itemLink AppUrl.forumsURL "Forums/Discuss"
+       , itemLink AppUrl.changeLogURL
+           ("Changelog v" ++ m.appVersion)
+       , itemLink AppUrl.github "Github"
+       ]
+   ]
+-}
 
 
 itemLink url content =

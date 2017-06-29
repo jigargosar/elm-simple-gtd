@@ -33,18 +33,6 @@ var _jigargosar$elm_simple_gtd$View_Header$itemLink = F2(
 	});
 var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
-	var userAccountAttribute = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			maybeUserProfile,
-			function (_p0) {
-				return A2(
-					_elm_lang$html$Html_Attributes$attribute,
-					'src',
-					_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p0));
-			}),
-		_jigargosar$elm_simple_gtd$WebComponents$iconA('account-circle'));
 	var userSignInLink = A2(
 		_elm_lang$html$Html$map,
 		_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg,
@@ -53,7 +41,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				maybeUserProfile,
-				function (_p1) {
+				function (_p0) {
 					return A2(
 						_edvail$elm_polymer$Polymer_Paper$item,
 						{
@@ -80,111 +68,41 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 					_1: {ctor: '[]'}
 				})));
 	var menuIcon = function () {
-		var _p2 = maybeUserProfile;
-		if (_p2.ctor === 'Nothing') {
+		var _p1 = maybeUserProfile;
+		if (_p1.ctor === 'Nothing') {
 			return A2(
-				_jigargosar$elm_simple_gtd$Material$iconA,
+				_jigargosar$elm_simple_gtd$Material$iconButton,
 				'account_circle',
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('account'),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				});
 		} else {
 			return A2(
 				_elm_lang$html$Html$img,
 				{
 					ctor: '::',
-					_0: function (_p3) {
+					_0: function (_p2) {
 						return _elm_lang$html$Html_Attributes$src(
-							_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p3));
-					}(_p2._0),
+							_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p2));
+					}(_p1._0),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('account'),
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				},
 				{ctor: '[]'});
 		}
 	}();
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$menuButton,
+		_elm_lang$html$Html$a,
+		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$WebComponents$dynamicAlign,
-			_1: {
-				ctor: '::',
-				_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'noOverlap', true),
-				_1: {
-					ctor: '::',
-					_0: A2(_jigargosar$elm_simple_gtd$X_Html$boolProperty, 'closeOnActivate', true),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_elm_lang$html$Html$node,
-				'iron-icon',
-				{
-					ctor: '::',
-					_0: userAccountAttribute,
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('account'),
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropDownTrigger,
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class(''),
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$WebComponents$slotDropdownContent,
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: userSignInLink,
-						_1: {
-							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View_Header$itemLink, _jigargosar$elm_simple_gtd$AppUrl$forumsURL, 'Forums/Discuss'),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_jigargosar$elm_simple_gtd$View_Header$itemLink,
-									_jigargosar$elm_simple_gtd$AppUrl$changeLogURL,
-									A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', m.appVersion)),
-								_1: {
-									ctor: '::',
-									_0: A2(_jigargosar$elm_simple_gtd$View_Header$itemLink, _jigargosar$elm_simple_gtd$AppUrl$github, 'Github'),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
+			_0: menuIcon,
+			_1: {ctor: '[]'}
 		});
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(

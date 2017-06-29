@@ -103,7 +103,6 @@ var _jigargosar$elm_simple_gtd$Main$onUpdateNow = function (now) {
 	return _Fresheyeball$elm_return$Return$map(
 		_jigargosar$elm_simple_gtd$Model$setNow(now));
 };
-var _jigargosar$elm_simple_gtd$Main$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
 var _jigargosar$elm_simple_gtd$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
 		return _Fresheyeball$elm_return$Return$andThen(
@@ -217,15 +216,6 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 		case 'OnFirebaseChange':
 			return _Fresheyeball$elm_return$Return$effect_(
 				A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnFirebaseChange, _p11._0, _p11._1));
-		case 'OnSignIn':
-			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$OnSignIn));
-		case 'OnSignOut':
-			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$OnSignOut));
-		case 'OnSkipSignIn':
-			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$OnSkipSignIn));
 		case 'OnUserChanged':
 			var _p14 = _p11._0;
 			return function (_p13) {
@@ -240,7 +230,7 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 							_jigargosar$elm_simple_gtd$Main$firebaseUpdateClientCmd,
 							A2(
 								_jigargosar$elm_simple_gtd$Main$andThenUpdate,
-								_jigargosar$elm_simple_gtd$Model$AfterUserChanged,
+								_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_jigargosar$elm_simple_gtd$Model$setUser(_p14),
@@ -248,9 +238,6 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 			};
 		case 'OnSwitchToNewUserSetupModeIfNeeded':
 			return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded);
-		case 'AfterUserChanged':
-			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged));
 		case 'OnFCMTokenChanged':
 			return function (_p15) {
 				return A2(
@@ -271,8 +258,6 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Model$updateFirebaseConnection(_p11._0),
 						_p16));
 			};
-		case 'OnSetDomFocusToFocusInEntity':
-			return _jigargosar$elm_simple_gtd$Main$andThenUpdate(_jigargosar$elm_simple_gtd$Main$setDomFocusToFocusInEntityCmd);
 		case 'OnEntityListKeyDown':
 			var _p20 = _p11._0;
 			var _p17 = _p11._1.key;
@@ -281,7 +266,7 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 					return function (_p18) {
 						return A2(
 							_jigargosar$elm_simple_gtd$Main$andThenUpdate,
-							_jigargosar$elm_simple_gtd$Model$OnSetDomFocusToFocusInEntity,
+							_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 							A2(
 								_Fresheyeball$elm_return$Return$map,
 								A2(_jigargosar$elm_simple_gtd$Model$moveFocusBy, -1, _p20),
@@ -291,7 +276,7 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 					return function (_p19) {
 						return A2(
 							_jigargosar$elm_simple_gtd$Main$andThenUpdate,
-							_jigargosar$elm_simple_gtd$Model$OnSetDomFocusToFocusInEntity,
+							_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 							A2(
 								_Fresheyeball$elm_return$Return$map,
 								A2(_jigargosar$elm_simple_gtd$Model$moveFocusBy, 1, _p20),
@@ -300,11 +285,6 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 				default:
 					return _elm_lang$core$Basics$identity;
 			}
-		case 'ToggleDrawer':
-			return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$toggleLayoutForceNarrow);
-		case 'OnLayoutNarrowChanged':
-			return _Fresheyeball$elm_return$Return$map(
-				_jigargosar$elm_simple_gtd$Model$setLayoutNarrow(_p11._0));
 		case 'RemotePouchSync':
 			return function (_p21) {
 				return A2(
@@ -324,8 +304,6 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 						m,
 						{showDeleted: !m.showDeleted});
 				});
-		case 'TodoAction':
-			return _elm_lang$core$Basics$identity;
 		case 'ReminderOverlayAction':
 			return _jigargosar$elm_simple_gtd$Main$reminderOverlayAction(_p11._0);
 		case 'ToggleTodoDone':
@@ -360,7 +338,7 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 			return function (_p25) {
 				return A2(
 					_jigargosar$elm_simple_gtd$Main$andThenUpdate,
-					_jigargosar$elm_simple_gtd$Main$setDomFocusToFocusInEntityCmd,
+					_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 					A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$deactivateEditingMode, _p25));
 			};
 		case 'StartEditingReminder':

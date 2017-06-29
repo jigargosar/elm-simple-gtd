@@ -139,18 +139,15 @@ updateInner msg =
             Return.map (Model.updateFirebaseConnection connected)
                 >> Return.maybeEffect firebaseUpdateClientCmd
 
-        OnSetDomFocusToFocusInEntity ->
-            andThenUpdate setDomFocusToFocusInEntityCmd
-
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->
                     Return.map (Model.moveFocusBy -1 entityList)
-                        >> andThenUpdate OnSetDomFocusToFocusInEntity
+                        >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
                     Return.map (Model.moveFocusBy 1 entityList)
-                        >> andThenUpdate OnSetDomFocusToFocusInEntity
+                        >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 _ ->
                     identity
@@ -384,10 +381,6 @@ andThenUpdate =
 
 andThenTodoMsg =
     OnTodoMsg >> andThenUpdate
-
-
-setDomFocusToFocusInEntityCmd =
-    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")
 
 
 onUpdateNow now =

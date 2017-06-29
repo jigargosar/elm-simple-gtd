@@ -127,6 +127,7 @@ var _jigargosar$elm_simple_gtd$Firebase$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _jigargosar$elm_simple_gtd$Firebase$AfterUserChanged = {ctor: 'AfterUserChanged'};
 var _jigargosar$elm_simple_gtd$Firebase$OnSignOut = {ctor: 'OnSignOut'};
 var _jigargosar$elm_simple_gtd$Firebase$OnSignIn = {ctor: 'OnSignIn'};
+var _jigargosar$elm_simple_gtd$Firebase$NOOP = {ctor: 'NOOP'};
 var _jigargosar$elm_simple_gtd$Firebase$SignedIn = function (a) {
 	return {ctor: 'SignedIn', _0: a};
 };

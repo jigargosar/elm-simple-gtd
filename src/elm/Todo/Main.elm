@@ -116,7 +116,7 @@ update andThenUpdate now todoMsg =
 
         GotoRunning ->
             map (gotoRunningTodo)
-                >> andThenUpdate Model.OnSetDomFocusToFocusInEntity
+                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         UpdateTimeTracker ->
             updateTimeTracker now

@@ -94,7 +94,6 @@ type Msg
     | OnFirebaseMsgWithTime Firebase.Msg Time
     | OnKeyCombo Combo.Msg
     | OnCloseNotification String
-    | OnSetDomFocusToFocusInEntity
     | OnAppDrawerMsg AppDrawer.Model.Msg
     | OnPersistLocalPref
 
@@ -1350,3 +1349,11 @@ updateCombo comboMsg =
     overReturn
         keyComboModel
         (Keyboard.Combo.update comboMsg)
+
+
+
+-- common cmds
+
+
+setDomFocusToFocusInEntityCmd =
+    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")

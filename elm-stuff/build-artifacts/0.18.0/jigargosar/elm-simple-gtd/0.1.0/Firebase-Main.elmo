@@ -13,6 +13,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
 	function (andThenUpdate, now, msg) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
+			case 'NOOP':
+				return _elm_lang$core$Basics$identity;
 			case 'OnSignIn':
 				return _Fresheyeball$elm_return$Return$command(
 					_jigargosar$elm_simple_gtd$Firebase_Main$signIn(

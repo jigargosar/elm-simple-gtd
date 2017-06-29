@@ -1468,7 +1468,6 @@ var _jigargosar$elm_simple_gtd$Model$OnPersistLocalPref = {ctor: 'OnPersistLocal
 var _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg = function (a) {
 	return {ctor: 'OnAppDrawerMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnSetDomFocusToFocusInEntity = {ctor: 'OnSetDomFocusToFocusInEntity'};
 var _jigargosar$elm_simple_gtd$Model$OnCloseNotification = function (a) {
 	return {ctor: 'OnCloseNotification', _0: a};
 };
@@ -1578,7 +1577,6 @@ var _jigargosar$elm_simple_gtd$Model$StartEditingContext = function (a) {
 var _jigargosar$elm_simple_gtd$Model$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
 var _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoTextChanged = F2(
@@ -1600,30 +1598,19 @@ var _jigargosar$elm_simple_gtd$Model$SetTodoContext = F2(
 var _jigargosar$elm_simple_gtd$Model$ToggleTodoDone = function (a) {
 	return {ctor: 'ToggleTodoDone', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnLayoutNarrowChanged = function (a) {
-	return {ctor: 'OnLayoutNarrowChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$ToggleDrawer = {ctor: 'ToggleDrawer'};
 var _jigargosar$elm_simple_gtd$Model$ToggleShowDeletedEntity = {ctor: 'ToggleShowDeletedEntity'};
 var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 	return {ctor: 'ReminderOverlayAction', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$TodoAction = F2(
-	function (a, b) {
-		return {ctor: 'TodoAction', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnSignOut = {ctor: 'OnSignOut'};
-var _jigargosar$elm_simple_gtd$Model$OnSignIn = {ctor: 'OnSignIn'};
 var _jigargosar$elm_simple_gtd$Model$OnFirebaseConnectionChanged = function (a) {
 	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Model$OnFCMTokenChanged = function (a) {
 	return {ctor: 'OnFCMTokenChanged', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$AfterUserChanged = {ctor: 'AfterUserChanged'};
 var _jigargosar$elm_simple_gtd$Model$OnUserChanged = function (a) {
 	return {ctor: 'OnUserChanged', _0: a};
 };
@@ -1643,6 +1630,7 @@ var _jigargosar$elm_simple_gtd$Model$OnCommonMsg = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Model$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Model$OnCommonMsg);
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+var _jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
 var _jigargosar$elm_simple_gtd$Model$SyncView = {ctor: 'SyncView'};
 var _jigargosar$elm_simple_gtd$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};

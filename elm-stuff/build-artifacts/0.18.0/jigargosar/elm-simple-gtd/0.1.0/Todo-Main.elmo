@@ -242,7 +242,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return function (_p12) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnSetDomFocusToFocusInEntity,
+						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 						A2(_jigargosar$elm_simple_gtd$Todo_Main$map, _jigargosar$elm_simple_gtd$Todo_Main$gotoRunningTodo, _p12));
 				};
 			case 'UpdateTimeTracker':

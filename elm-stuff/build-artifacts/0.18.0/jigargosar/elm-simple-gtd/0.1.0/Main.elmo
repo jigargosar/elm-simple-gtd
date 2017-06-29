@@ -306,11 +306,40 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 				});
 		case 'ReminderOverlayAction':
 			return _jigargosar$elm_simple_gtd$Main$reminderOverlayAction(_p11._0);
+		case 'OnDeactivateEditingMode':
+			return function (_p23) {
+				return A2(
+					_jigargosar$elm_simple_gtd$Main$andThenUpdate,
+					_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
+					A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$deactivateEditingMode, _p23));
+			};
+		case 'StartEditingContext':
+			var _p25 = _p11._0;
+			return function (_p24) {
+				return A2(
+					_Fresheyeball$elm_return$Return$command,
+					_jigargosar$elm_simple_gtd$Main$positionContextMenuCmd(_p25),
+					A2(
+						_Fresheyeball$elm_return$Return$map,
+						_jigargosar$elm_simple_gtd$Model$startEditingTodoContext(_p25),
+						_p24));
+			};
+		case 'StartEditingProject':
+			var _p27 = _p11._0;
+			return function (_p26) {
+				return A2(
+					_Fresheyeball$elm_return$Return$command,
+					_jigargosar$elm_simple_gtd$Main$positionProjectMenuCmd(_p27),
+					A2(
+						_Fresheyeball$elm_return$Return$map,
+						_jigargosar$elm_simple_gtd$Model$startEditingTodoProject(_p27),
+						_p26));
+			};
 		case 'ToggleTodoDone':
 			return _Fresheyeball$elm_return$Return$andThen(
 				A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$ToggleDone, _p11._0));
 		case 'SetTodoContext':
-			return function (_p23) {
+			return function (_p28) {
 				return A2(
 					_jigargosar$elm_simple_gtd$Main$andThenUpdate,
 					_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
@@ -318,10 +347,10 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Main$updateTodoAndMaybeAlsoSelected,
 						_jigargosar$elm_simple_gtd$Todo$SetContext(_p11._0),
 						_p11._1,
-						_p23));
+						_p28));
 			};
 		case 'SetTodoProject':
-			return function (_p24) {
+			return function (_p29) {
 				return A2(
 					_jigargosar$elm_simple_gtd$Main$andThenUpdate,
 					_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
@@ -329,49 +358,20 @@ var _jigargosar$elm_simple_gtd$Main$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Main$updateTodoAndMaybeAlsoSelected,
 						_jigargosar$elm_simple_gtd$Todo$SetProject(_p11._0),
 						_p11._1,
-						_p24));
+						_p29));
 			};
 		case 'NewTodoTextChanged':
 			return _Fresheyeball$elm_return$Return$map(
 				A2(_jigargosar$elm_simple_gtd$Model$updateNewTodoText, _p11._0, _p11._1));
-		case 'OnDeactivateEditingMode':
-			return function (_p25) {
-				return A2(
-					_jigargosar$elm_simple_gtd$Main$andThenUpdate,
-					_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
-					A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$deactivateEditingMode, _p25));
-			};
 		case 'StartEditingReminder':
-			var _p27 = _p11._0;
-			return function (_p26) {
-				return A2(
-					_Fresheyeball$elm_return$Return$command,
-					_jigargosar$elm_simple_gtd$Main$positionScheduleMenuCmd(_p27),
-					A2(
-						_Fresheyeball$elm_return$Return$map,
-						_jigargosar$elm_simple_gtd$Model$startEditingReminder(_p27),
-						_p26));
-			};
-		case 'StartEditingContext':
-			var _p29 = _p11._0;
-			return function (_p28) {
-				return A2(
-					_Fresheyeball$elm_return$Return$command,
-					_jigargosar$elm_simple_gtd$Main$positionContextMenuCmd(_p29),
-					A2(
-						_Fresheyeball$elm_return$Return$map,
-						_jigargosar$elm_simple_gtd$Model$startEditingTodoContext(_p29),
-						_p28));
-			};
-		case 'StartEditingProject':
 			var _p31 = _p11._0;
 			return function (_p30) {
 				return A2(
 					_Fresheyeball$elm_return$Return$command,
-					_jigargosar$elm_simple_gtd$Main$positionProjectMenuCmd(_p31),
+					_jigargosar$elm_simple_gtd$Main$positionScheduleMenuCmd(_p31),
 					A2(
 						_Fresheyeball$elm_return$Return$map,
-						_jigargosar$elm_simple_gtd$Model$startEditingTodoProject(_p31),
+						_jigargosar$elm_simple_gtd$Model$startEditingReminder(_p31),
 						_p30));
 			};
 		case 'UpdateTodoForm':

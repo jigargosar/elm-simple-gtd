@@ -162,6 +162,18 @@ updateInner msg =
         ReminderOverlayAction action ->
             reminderOverlayAction action
 
+        OnDeactivateEditingMode ->
+            Return.map (Model.deactivateEditingMode)
+                >> andThenUpdate setDomFocusToFocusInEntityCmd
+
+        StartEditingContext todo ->
+            Return.map (Model.startEditingTodoContext todo)
+                >> Return.command (positionContextMenuCmd todo)
+
+        StartEditingProject todo ->
+            Return.map (Model.startEditingTodoProject todo)
+                >> Return.command (positionProjectMenuCmd todo)
+
         ToggleTodoDone todoId ->
             Return.andThen (Model.updateTodo Todo.ToggleDone todoId)
 
@@ -176,21 +188,9 @@ updateInner msg =
         NewTodoTextChanged form text ->
             Return.map (Model.updateNewTodoText form text)
 
-        OnDeactivateEditingMode ->
-            Return.map (Model.deactivateEditingMode)
-                >> andThenUpdate setDomFocusToFocusInEntityCmd
-
         StartEditingReminder todo ->
             Return.map (Model.startEditingReminder todo)
                 >> Return.command (positionScheduleMenuCmd todo)
-
-        StartEditingContext todo ->
-            Return.map (Model.startEditingTodoContext todo)
-                >> Return.command (positionContextMenuCmd todo)
-
-        StartEditingProject todo ->
-            Return.map (Model.startEditingTodoProject todo)
-                >> Return.command (positionProjectMenuCmd todo)
 
         UpdateTodoForm form action ->
             Return.map

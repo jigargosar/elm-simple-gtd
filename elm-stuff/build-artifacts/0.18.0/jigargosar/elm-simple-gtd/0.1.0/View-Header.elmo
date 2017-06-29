@@ -46,36 +46,39 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 			}),
 		_jigargosar$elm_simple_gtd$WebComponents$iconA('account-circle'));
 	var userSignInLink = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		_elm_lang$html$Html$map,
+		_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg,
 		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			maybeUserProfile,
-			function (_p1) {
-				return A2(
-					_edvail$elm_polymer$Polymer_Paper$item,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnSignOut),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('SignOut'),
-						_1: {ctor: '[]'}
-					});
-			}),
-		A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnSignIn),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('SignIn'),
-				_1: {ctor: '[]'}
-			}));
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeUserProfile,
+				function (_p1) {
+					return A2(
+						_edvail$elm_polymer$Polymer_Paper$item,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase$OnSignOut),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('SignOut'),
+							_1: {ctor: '[]'}
+						});
+				}),
+			A2(
+				_edvail$elm_polymer$Polymer_Paper$item,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase$OnSignIn),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('SignIn'),
+					_1: {ctor: '[]'}
+				})));
 	var menuIcon = function () {
 		var _p2 = maybeUserProfile;
 		if (_p2.ctor === 'Nothing') {

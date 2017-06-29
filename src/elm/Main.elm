@@ -121,12 +121,6 @@ updateInner msg =
         OnFirebaseChange dbName encodedDoc ->
             Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
-        OnSignIn ->
-            OnFirebaseMsg Firebase.OnSignIn |> andThenUpdate
-
-        OnSignOut ->
-            OnFirebaseMsg Firebase.OnSignOut |> andThenUpdate
-
         OnSkipSignIn ->
             OnFirebaseMsg Firebase.OnSkipSignIn |> andThenUpdate
 

@@ -59,8 +59,6 @@ type Msg
     | AfterUserChanged
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
-    | OnSignIn
-    | OnSignOut
     | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction Todo.Notification.Model.Action

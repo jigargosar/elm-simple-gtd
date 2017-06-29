@@ -123,16 +123,13 @@ updateInner msg =
 
         OnUserChanged user ->
             Return.map (Model.setUser user)
-                >> andThenUpdate AfterUserChanged
+                >> andThenUpdate (OnFirebaseMsg Firebase.AfterUserChanged)
                 >> Return.maybeEffect firebaseUpdateClientCmd
                 >> Return.maybeEffect firebaseSetupOnDisconnectCmd
                 >> startSyncWithFirebase user
 
         OnSwitchToNewUserSetupModeIfNeeded ->
             Return.map (Model.switchToNewUserSetupModeIfNeeded)
-
-        AfterUserChanged ->
-            OnFirebaseMsg Firebase.AfterUserChanged |> andThenUpdate
 
         OnFCMTokenChanged token ->
             Return.map (Model.setFCMToken token)

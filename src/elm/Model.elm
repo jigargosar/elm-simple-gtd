@@ -56,7 +56,6 @@ type Msg
     | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value
     | OnUserChanged Firebase.User
-    | AfterUserChanged
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
     | RemotePouchSync ExclusiveMode.SyncForm

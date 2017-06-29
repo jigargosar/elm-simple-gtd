@@ -812,26 +812,6 @@ toggleDeleteEntity entity model =
                     updateTodo (Todo.ToggleDeleted) entityId
 
 
-toggleArchiveEntity : Entity -> ModelReturnF msg
-toggleArchiveEntity entity model =
-    let
-        entityId =
-            getEntityId entity
-    in
-        model
-            |> case entity of
-                Entity.Group g ->
-                    case g of
-                        Entity.Context context ->
-                            updateContext entityId GroupDoc.toggleArchived
-
-                        Entity.Project project ->
-                            updateProject entityId GroupDoc.toggleArchived
-
-                Entity.Todo todo ->
-                    updateTodo (Todo.ToggleDone) entityId
-
-
 getMaybeEditTodoReminderForm model =
     case model.editMode of
         ExclusiveMode.EditTodoReminder form ->

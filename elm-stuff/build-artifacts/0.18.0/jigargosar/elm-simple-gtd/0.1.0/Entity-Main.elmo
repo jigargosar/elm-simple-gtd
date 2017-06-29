@@ -26,14 +26,30 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 							_p2));
 				};
 			case 'ToggleArchived':
-				return function (_p3) {
+				var toggleArchivedEntity = function (entity) {
+					var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
+					var _p3 = entity;
+					if (_p3.ctor === 'Group') {
+						return _Fresheyeball$elm_return$Return$andThen(
+							function () {
+								var _p4 = _p3._0;
+								if (_p4.ctor === 'Context') {
+									return A2(_jigargosar$elm_simple_gtd$Model$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
+								} else {
+									return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
+								}
+							}());
+					} else {
+						return andThenUpdate(
+							_jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+								A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelected, entityId, _jigargosar$elm_simple_gtd$Todo$ToggleDone)));
+					}
+				};
+				return function (_p5) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
-						A2(
-							_Fresheyeball$elm_return$Return$andThen,
-							_jigargosar$elm_simple_gtd$Model$toggleArchiveEntity(entity),
-							_p3));
+						A2(toggleArchivedEntity, entity, _p5));
 				};
 			case 'OnFocusIn':
 				return _Fresheyeball$elm_return$Return$map(

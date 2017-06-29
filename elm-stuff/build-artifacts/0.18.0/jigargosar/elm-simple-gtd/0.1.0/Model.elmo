@@ -1309,23 +1309,6 @@ var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
-var _jigargosar$elm_simple_gtd$Model$toggleArchiveEntity = F2(
-	function (entity, model) {
-		var entityId = _jigargosar$elm_simple_gtd$Model$getEntityId(entity);
-		return function () {
-			var _p54 = entity;
-			if (_p54.ctor === 'Group') {
-				var _p55 = _p54._0;
-				if (_p55.ctor === 'Context') {
-					return A2(_jigargosar$elm_simple_gtd$Model$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
-				} else {
-					return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
-				}
-			} else {
-				return A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$ToggleDone, entityId);
-			}
-		}()(model);
-	});
 var _jigargosar$elm_simple_gtd$Model$signInModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -1349,9 +1332,9 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				{appDrawerModel: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$overAppDrawerModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$appDrawerModel);
-var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p56) {
+var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p54) {
 	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p56));
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p54));
 };
 var _jigargosar$elm_simple_gtd$Model$defaultLocalPref = {appDrawer: _jigargosar$elm_simple_gtd$AppDrawer_Model$default, signIn: _jigargosar$elm_simple_gtd$Firebase_SignIn$default};
 var _jigargosar$elm_simple_gtd$Model$encodeLocalPref = function (model) {
@@ -1501,13 +1484,13 @@ var _jigargosar$elm_simple_gtd$Model$OnTodoMsgWithTime = F2(
 var _jigargosar$elm_simple_gtd$Model$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$onTodoToggleRunning = function (_p57) {
+var _jigargosar$elm_simple_gtd$Model$onTodoToggleRunning = function (_p55) {
 	return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
-		_jigargosar$elm_simple_gtd$Todo_Msg$ToggleRunning(_p57));
+		_jigargosar$elm_simple_gtd$Todo_Msg$ToggleRunning(_p55));
 };
-var _jigargosar$elm_simple_gtd$Model$onTodoInitRunning = function (_p58) {
+var _jigargosar$elm_simple_gtd$Model$onTodoInitRunning = function (_p56) {
 	return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
-		_jigargosar$elm_simple_gtd$Todo_Msg$InitRunning(_p58));
+		_jigargosar$elm_simple_gtd$Todo_Msg$InitRunning(_p56));
 };
 var _jigargosar$elm_simple_gtd$Model$onTodoStopRunning = _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
 var _jigargosar$elm_simple_gtd$Model$onTodoTogglePaused = _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$TogglePaused);
@@ -1590,14 +1573,6 @@ var _jigargosar$elm_simple_gtd$Model$NewContext = {ctor: 'NewContext'};
 var _jigargosar$elm_simple_gtd$Model$NewProject = {ctor: 'NewProject'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
 var _jigargosar$elm_simple_gtd$Model$NewTodo = {ctor: 'NewTodo'};
-var _jigargosar$elm_simple_gtd$Model$SetTodoProject = F2(
-	function (a, b) {
-		return {ctor: 'SetTodoProject', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Model$SetTodoContext = F2(
-	function (a, b) {
-		return {ctor: 'SetTodoContext', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Model$ToggleTodoDone = function (a) {
 	return {ctor: 'ToggleTodoDone', _0: a};
 };
@@ -1631,12 +1606,12 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Model$localPrefDecoder, flags.localPref)),
 		_jigargosar$elm_simple_gtd$Model$defaultLocalPref);
 	var firebaseClient = _jigargosar$elm_simple_gtd$Firebase$initClient(flags.deviceId);
-	var _p59 = flags;
-	var now = _p59.now;
-	var encodedTodoList = _p59.encodedTodoList;
-	var encodedProjectList = _p59.encodedProjectList;
-	var encodedContextList = _p59.encodedContextList;
-	var pouchDBRemoteSyncURI = _p59.pouchDBRemoteSyncURI;
+	var _p57 = flags;
+	var now = _p57.now;
+	var encodedTodoList = _p57.encodedTodoList;
+	var encodedProjectList = _p57.encodedProjectList;
+	var encodedContextList = _p57.encodedContextList;
+	var pouchDBRemoteSyncURI = _p57.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -1646,14 +1621,14 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p60 = A2(
+	var _p58 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
-	var todoStore = _p60._0._0;
-	var projectStore = _p60._0._1;
-	var contextStore = _p60._0._2;
-	var seed = _p60._1;
+	var todoStore = _p58._0._0;
+	var projectStore = _p58._0._1;
+	var contextStore = _p58._0._2;
+	var seed = _p58._1;
 	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
 	var model = {
 		now: now,
@@ -1684,23 +1659,23 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 	};
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };
-var _jigargosar$elm_simple_gtd$Model$projectView = function (_p61) {
+var _jigargosar$elm_simple_gtd$Model$projectView = function (_p59) {
 	return _jigargosar$elm_simple_gtd$Model$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity$ProjectView(
-			_jigargosar$elm_simple_gtd$Document$getId(_p61)));
+			_jigargosar$elm_simple_gtd$Document$getId(_p59)));
 };
-var _jigargosar$elm_simple_gtd$Model$switchToProjectView = function (_p62) {
+var _jigargosar$elm_simple_gtd$Model$switchToProjectView = function (_p60) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$projectView(_p62));
+		_jigargosar$elm_simple_gtd$Model$projectView(_p60));
 };
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
-	return function (_p63) {
-		var _p64 = _p63;
-		var _p65 = _p64._0;
+	return function (_p61) {
+		var _p62 = _p61;
+		var _p63 = _p62._0;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromProject(_p65),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p65, _p64._1));
+			_jigargosar$elm_simple_gtd$Entity$fromProject(_p63),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p63, _p62._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1710,23 +1685,23 @@ var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) 
 				A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
 				model.projectStore)));
 };
-var _jigargosar$elm_simple_gtd$Model$contextView = function (_p66) {
+var _jigargosar$elm_simple_gtd$Model$contextView = function (_p64) {
 	return _jigargosar$elm_simple_gtd$Model$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity$ContextView(
-			_jigargosar$elm_simple_gtd$Document$getId(_p66)));
+			_jigargosar$elm_simple_gtd$Document$getId(_p64)));
 };
-var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p67) {
+var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p65) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$contextView(_p67));
+		_jigargosar$elm_simple_gtd$Model$contextView(_p65));
 };
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
-	return function (_p68) {
-		var _p69 = _p68;
-		var _p70 = _p69._0;
+	return function (_p66) {
+		var _p67 = _p66;
+		var _p68 = _p67._0;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromContext(_p70),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p70, _p69._1));
+			_jigargosar$elm_simple_gtd$Entity$fromContext(_p68),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p68, _p67._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1738,9 +1713,9 @@ var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) 
 };
 var _jigargosar$elm_simple_gtd$Model$switchToContextsView = _jigargosar$elm_simple_gtd$Model$switchToView(
 	_jigargosar$elm_simple_gtd$Model$EntityListView(_jigargosar$elm_simple_gtd$Entity$ContextsView));
-var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p71) {
+var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p69) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Model$EntityListView(_p71));
+		_jigargosar$elm_simple_gtd$Model$EntityListView(_p69));
 };
 var _jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {

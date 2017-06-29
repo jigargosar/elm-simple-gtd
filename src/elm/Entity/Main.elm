@@ -2,8 +2,10 @@ module Entity.Main exposing (..)
 
 import DomPorts
 import Entity
+import GroupDoc
 import Model
 import Return
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -11,6 +13,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Time
+import Todo.Msg
 
 
 update :
@@ -35,8 +38,30 @@ update andThenUpdate entity msg =
                 >> andThenUpdate Model.OnDeactivateEditingMode
 
         Entity.ToggleArchived ->
-            Return.andThen (Model.toggleArchiveEntity entity)
-                >> andThenUpdate Model.OnDeactivateEditingMode
+            let
+                toggleArchivedEntity entity =
+                    let
+                        entityId =
+                            Entity.getId entity
+                    in
+                        case entity of
+                            Entity.Group g ->
+                                (case g of
+                                    Entity.Context context ->
+                                        Model.updateContext entityId GroupDoc.toggleArchived
+
+                                    Entity.Project project ->
+                                        Model.updateProject entityId GroupDoc.toggleArchived
+                                )
+                                    |> Return.andThen
+
+                            Entity.Todo todo ->
+                                Todo.Msg.OnUpdateTodoAndMaybeSelected entityId Todo.ToggleDone
+                                    |> Model.OnTodoMsg
+                                    |> andThenUpdate
+            in
+                toggleArchivedEntity entity
+                    >> andThenUpdate Model.OnDeactivateEditingMode
 
         Entity.OnFocusIn ->
             Return.map (Model.setFocusInEntity entity)

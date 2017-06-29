@@ -81,15 +81,13 @@ menu m =
                         ]
 
                 Just profile ->
-                    a []
-                        [ img
-                            [ profile |> Firebase.getPhotoURL >> src
-                            , class "account"
-                            ]
-                            []
+                    img
+                        [ profile |> Firebase.getPhotoURL >> src
+                        , class "account"
                         ]
+                        []
     in
-        menuIcon
+        div [] [ menuIcon ]
 
 
 

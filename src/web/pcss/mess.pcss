@@ -287,24 +287,7 @@ paper-item, .has-hover-elements {
   }
 }
 
-paper-listbox {
-  background-color: transparent;
-}
-
 .focusable-list .entity-item {
-  /*&[tabindex="0"] .title {
-    font-weight: bolder;
-    color: rgba(0, 0, 172, 0.44);
-  }
-
-  &:focus[tabindex="0"] .title {
-    font-weight: bolder;
-    color: rgba(0, 0, 172, 0.77)
-  }
-  &.edit[tabindex="0"]:before {
-      background-color: transparent;
-      opacity: 1;
-  }*/
   padding: 0.5rem 1rem;
   border-left: 2px solid transparent;
   background-color: white;
@@ -372,12 +355,6 @@ paper-listbox {
     background-color: transparent;
   }
 
-  & paper-button.small .title {
-    text-transform: none;
-    font-size: 14px;
-    line-height: 20px;
-  }
-
   &[tabindex="0"] {
     border-left: 2px solid rgba(0, 0, 172, 0.44);
   }
@@ -389,13 +366,6 @@ paper-listbox {
   &.editing {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  & paper-icon-button {
-    width: 24px;
-    height: 24px;
-    padding: 2px;
-    /*transform: scale(0.7);*/
   }
 
   & .display-text {
@@ -437,10 +407,6 @@ paper-listbox {
 
 .margin-0 {
   margin: 0;
-}
-
-app-drawer-layout:not([narrow]) .hide-when-wide {
-  display: none;
 }
 
 #app-main-content {

@@ -18,7 +18,6 @@ import X.Function.Infix exposing (..)
 import Model exposing (..)
 import View.Shared exposing (..)
 import ViewModel
-import WebComponents exposing (paperIconButton)
 
 
 sidebarHeader appVM m =

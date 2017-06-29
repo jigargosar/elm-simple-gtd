@@ -2,11 +2,11 @@ port module Firebase exposing (..)
 
 import Firebase.User
 import Json.Decode
-import Polymer.Attributes exposing (boolProperty)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Json.Encode.Extra as E
+import X.Html
 
 
 type Msg
@@ -131,7 +131,7 @@ updateToken token client =
 
 
 customSw =
-    boolProperty "customSw" True
+    X.Html.boolProperty "customSw" True
 
 
 type alias AppAttributes =

@@ -31,7 +31,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
-import Polymer.Paper as Paper
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import ViewModel
 import WebComponents exposing (..)

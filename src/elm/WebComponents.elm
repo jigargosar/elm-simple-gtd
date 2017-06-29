@@ -5,8 +5,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode
 import Material
-import Polymer.Attributes exposing (boolProperty)
-import Polymer.Paper
 import String.Extra
 import X.Html exposing (onClickStopPropagation)
 
@@ -16,7 +14,7 @@ iconA =
 
 
 dynamicAlign =
-    boolProperty "dynamicAlign" True
+    X.Html.boolProperty "dynamicAlign" True
 
 
 slotDropdownTrigger =

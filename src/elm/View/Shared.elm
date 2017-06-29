@@ -6,7 +6,6 @@ import Html.Events exposing (onClick)
 import Material
 import Model
 import Model
-import Polymer.Paper as Paper exposing (badge)
 import X.Function.Infix exposing (..)
 import Model exposing (Model)
 

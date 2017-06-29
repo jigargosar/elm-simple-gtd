@@ -18,7 +18,6 @@ import Model
 import Model exposing (Msg, commonMsg)
 import View.Header
 import Model exposing (..)
-import Polymer.Paper as Paper
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel

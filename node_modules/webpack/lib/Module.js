@@ -4,19 +4,17 @@
 */
 "use strict";
 
+const util = require("util");
 const DependenciesBlock = require("./DependenciesBlock");
 const ModuleReason = require("./ModuleReason");
 const Template = require("./Template");
 
-function addToSet(set, items) {
-	for(let item of items) {
-		if(set.indexOf(item) < 0)
-			set.push(item);
-	}
-}
-
 function byId(a, b) {
 	return a.id - b.id;
+}
+
+function byDebugId(a, b) {
+	return a.debugId - b.debugId;
 }
 
 let debugId = 1000;
@@ -36,13 +34,17 @@ class Module extends DependenciesBlock {
 		this.used = null;
 		this.usedExports = null;
 		this.providedExports = null;
-		this.chunks = [];
+		this._chunks = new Set();
+		this._chunksIsSorted = true;
+		this._chunksIsSortedByDebugId = true;
+		this._chunksDebugIdent = undefined;
 		this.warnings = [];
 		this.dependenciesWarnings = [];
 		this.errors = [];
 		this.dependenciesErrors = [];
 		this.strict = false;
 		this.meta = {};
+		this.optimizationBailout = [];
 	}
 
 	disconnect() {
@@ -55,7 +57,9 @@ class Module extends DependenciesBlock {
 		this.used = null;
 		this.usedExports = null;
 		this.providedExports = null;
-		this.chunks.length = 0;
+		this._chunks.clear();
+		this._chunksDebugIdent = undefined;
+		this._chunksIsSorted = this._chunksIsSortedByDebugId = false;
 		super.disconnect();
 	}
 
@@ -65,24 +69,91 @@ class Module extends DependenciesBlock {
 		this.index = null;
 		this.index2 = null;
 		this.depth = null;
-		this.chunks.length = 0;
+		this._chunks.clear();
+		this._chunksDebugIdent = undefined;
+		this._chunksIsSorted = this._chunksIsSortedByDebugId = false;
 		super.unseal();
 	}
 
 	addChunk(chunk) {
-		let idx = this.chunks.indexOf(chunk);
-		if(idx < 0)
-			this.chunks.push(chunk);
+		this._chunks.add(chunk);
+		this._chunksDebugIdent = undefined;
+		this._chunksIsSorted = this._chunksIsSortedByDebugId = false;
 	}
 
 	removeChunk(chunk) {
-		let idx = this.chunks.indexOf(chunk);
-		if(idx >= 0) {
-			this.chunks.splice(idx, 1);
+		if(this._chunks.delete(chunk)) {
+			this._chunksDebugIdent = undefined;
 			chunk.removeModule(this);
 			return true;
 		}
 		return false;
+	}
+
+	isInChunk(chunk) {
+		return this._chunks.has(chunk);
+	}
+
+	getChunkIdsIdent() {
+		if(this._chunksDebugIdent !== undefined) return this._chunksDebugIdent;
+		this._ensureChunksSortedByDebugId();
+		const chunks = this._chunks;
+		const list = [];
+		for(const chunk of chunks) {
+			const debugId = chunk.debugId;
+
+			if(typeof debugId !== "number") {
+				return this._chunksDebugIdent = null;
+			}
+
+			list.push(debugId);
+		}
+
+		return this._chunksDebugIdent = list.join(",");
+	}
+
+	forEachChunk(fn) {
+		this._chunks.forEach(fn);
+	}
+
+	mapChunks(fn) {
+		return Array.from(this._chunks, fn);
+	}
+
+	getChunks() {
+		return Array.from(this._chunks);
+	}
+
+	getNumberOfChunks() {
+		return this._chunks.size;
+	}
+
+	hasEqualsChunks(otherModule) {
+		if(this._chunks.size !== otherModule._chunks.size) return false;
+		this._ensureChunksSortedByDebugId();
+		otherModule._ensureChunksSortedByDebugId();
+		const a = this._chunks[Symbol.iterator]();
+		const b = otherModule._chunks[Symbol.iterator]();
+		while(true) { // eslint-disable-line
+			const aItem = a.next();
+			const bItem = b.next();
+			if(aItem.done) return true;
+			if(aItem.value !== bItem.value) return false;
+		}
+	}
+
+	_ensureChunksSorted() {
+		if(this._chunksIsSorted) return;
+		this._chunks = new Set(Array.from(this._chunks).sort(byId));
+		this._chunksIsSortedByDebugId = false;
+		this._chunksIsSorted = true;
+	}
+
+	_ensureChunksSortedByDebugId() {
+		if(this._chunksIsSortedByDebugId) return;
+		this._chunks = new Set(Array.from(this._chunks).sort(byDebugId));
+		this._chunksIsSorted = false;
+		this._chunksIsSortedByDebugId = true;
 	}
 
 	addReason(module, dependency) {
@@ -101,28 +172,17 @@ class Module extends DependenciesBlock {
 	}
 
 	hasReasonForChunk(chunk) {
-		for(let r of this.reasons) {
-			if(r.chunks) {
-				if(r.chunks.indexOf(chunk) >= 0)
-					return true;
-			} else if(r.module.chunks.indexOf(chunk) >= 0)
+		for(let i = 0; i < this.reasons.length; i++) {
+			if(this.reasons[i].hasChunk(chunk))
 				return true;
 		}
 		return false;
 	}
 
 	rewriteChunkInReasons(oldChunk, newChunks) {
-		this.reasons.forEach(r => {
-			if(!r.chunks) {
-				if(r.module.chunks.indexOf(oldChunk) < 0)
-					return;
-				r.chunks = r.module.chunks;
-			}
-			r.chunks = r.chunks.reduce((arr, c) => {
-				addToSet(arr, c !== oldChunk ? [c] : newChunks);
-				return arr;
-			}, []);
-		});
+		for(let i = 0; i < this.reasons.length; i++) {
+			this.reasons[i].rewriteChunks(oldChunk, newChunks);
+		}
 	}
 
 	isUsed(exportName) {
@@ -158,10 +218,14 @@ class Module extends DependenciesBlock {
 		super.updateHash(hash);
 	}
 
-	sortItems() {
+	sortItems(sortChunks) {
 		super.sortItems();
-		this.chunks.sort(byId);
+		if(sortChunks)
+			this._ensureChunksSorted();
 		this.reasons.sort((a, b) => byId(a.module, b.module));
+		if(Array.isArray(this.usedExports)) {
+			this.usedExports.sort();
+		}
 	}
 
 	unbuild() {
@@ -178,6 +242,17 @@ Object.defineProperty(Module.prototype, "entry", {
 		throw new Error("Module.entry was removed. Use Chunk.entryModule");
 	}
 });
+
+Object.defineProperty(Module.prototype, "chunks", {
+	configurable: false,
+	get: util.deprecate(function() {
+		return Array.from(this._chunks);
+	}, "Module.chunks: Use Module.forEachChunk/mapChunks/getNumberOfChunks/isInChunk/addChunk/removeChunk instead"),
+	set() {
+		throw new Error("Readonly. Use Module.addChunk/removeChunk to modify chunks.");
+	}
+});
+
 Module.prototype.identifier = null;
 Module.prototype.readableIdentifier = null;
 Module.prototype.build = null;

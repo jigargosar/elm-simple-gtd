@@ -1,6 +1,6 @@
+var _isArrayLike = require('./_isArrayLike');
 var _xwrap = require('./_xwrap');
 var bind = require('../bind');
-var isArrayLike = require('../isArrayLike');
 
 
 module.exports = (function() {
@@ -31,8 +31,8 @@ module.exports = (function() {
     return xf['@@transducer/result'](acc);
   }
 
-  function _methodReduce(xf, acc, obj) {
-    return xf['@@transducer/result'](obj.reduce(bind(xf['@@transducer/step'], xf), acc));
+  function _methodReduce(xf, acc, obj, methodName) {
+    return xf['@@transducer/result'](obj[methodName](bind(xf['@@transducer/step'], xf), acc));
   }
 
   var symIterator = (typeof Symbol !== 'undefined') ? Symbol.iterator : '@@iterator';
@@ -40,11 +40,11 @@ module.exports = (function() {
     if (typeof fn === 'function') {
       fn = _xwrap(fn);
     }
-    if (isArrayLike(list)) {
+    if (_isArrayLike(list)) {
       return _arrayReduce(fn, acc, list);
     }
-    if (typeof list.reduce === 'function') {
-      return _methodReduce(fn, acc, list);
+    if (typeof list['fantasy-land/reduce'] === 'function') {
+      return _methodReduce(fn, acc, list, 'fantasy-land/reduce');
     }
     if (list[symIterator] != null) {
       return _iterableReduce(fn, acc, list[symIterator]());
@@ -52,6 +52,10 @@ module.exports = (function() {
     if (typeof list.next === 'function') {
       return _iterableReduce(fn, acc, list);
     }
+    if (typeof list.reduce === 'function') {
+      return _methodReduce(fn, acc, list, 'reduce');
+    }
+
     throw new TypeError('reduce: list must be array or iterable');
   };
 }());

@@ -1,19 +1,19 @@
 {
   "name": "find-cache-dir",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "My well-made module",
   "license": "MIT",
-  "repository": "jamestalmage/find-cache-dir",
+  "repository": "avajs/find-cache-dir",
   "author": {
     "name": "James Talmage",
     "email": "james@talmage.io",
     "url": "github.com/jamestalmage"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "xo && nyc --reporter=lcov --reporter=text ava"
+    "test": "xo && nyc ava"
   },
   "files": [
     "index.js"
@@ -21,18 +21,27 @@
   "keywords": [
     "cache",
     "directory",
-    "dir"
+    "dir",
+    "caching",
+    "find",
+    "search"
   ],
   "dependencies": {
     "commondir": "^1.0.1",
-    "mkdirp": "^0.5.1",
-    "pkg-dir": "^1.0.0"
+    "make-dir": "^1.0.0",
+    "pkg-dir": "^2.0.0"
   },
   "devDependencies": {
-    "ava": "^0.8.0",
+    "ava": "^0.19.1",
     "coveralls": "^2.11.6",
-    "nyc": "^5.0.1",
-    "rimraf": "^2.5.0",
-    "xo": "^0.12.1"
+    "del": "^2.2.2",
+    "nyc": "^10.3.2",
+    "xo": "^0.18.2"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }

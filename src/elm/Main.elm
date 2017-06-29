@@ -155,12 +155,6 @@ updateInner msg =
                 _ ->
                     identity
 
-        ToggleDrawer ->
-            Return.map (Model.toggleLayoutForceNarrow)
-
-        OnLayoutNarrowChanged bool ->
-            Return.map (Model.setLayoutNarrow bool)
-
         RemotePouchSync form ->
             andThenUpdate OnSaveCurrentForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)

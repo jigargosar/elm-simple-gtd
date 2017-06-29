@@ -61,8 +61,6 @@ type Msg
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
-    | ToggleDrawer
-    | OnLayoutNarrowChanged Bool
     | ToggleTodoDone Todo.Id
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model

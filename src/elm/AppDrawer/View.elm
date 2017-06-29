@@ -35,14 +35,7 @@ sidebarHeader appVM m =
                 , "background-color" => AppColors.encode appVM.header.backgroundColor
                 ]
             ]
-            [ {- Material.iconButton "menu"
-                     [ class "menu-btn"
-                     , tabindex -1
-                     , onClick Model.ToggleDrawer
-                     ]
-                 ,
-              -}
-              div [ class "detail" ]
+            [ div [ class "detail" ]
                 [ h5 [ href AppUrl.landing ] [ text t1 ]
                 , div [ class "small layout horizontal " ]
                     [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]

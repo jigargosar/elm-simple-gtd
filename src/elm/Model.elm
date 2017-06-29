@@ -933,6 +933,7 @@ setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (setTodoStore # model)
 
 
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> Model -> Maybe ( Entity.Entity, Model )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->

@@ -13,16 +13,13 @@ import X.Keyboard as Keyboard exposing (Key)
 import X.Record as Record exposing (set)
 import X.Return as Return
 import Firebase
-import Http
 import Keyboard.Combo
 import LaunchBar
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
-import Model as Model
-import Notification exposing (Response)
+import Model
+import Notification
 import Todo.Notification.Model
-import Routes
-import Store
 import Todo
 import Todo.Form
 import Todo.GroupForm
@@ -74,12 +71,7 @@ updateInner msg =
             onSubMsg subMsg
 
         OnEntityUpsert entity ->
-            case entity of
-                Entity.Todo model ->
-                    Todo.Msg.Upsert model |> andThenTodoMsg
-
-                _ ->
-                    identity
+            identity
 
         OnSwitchToNewUserSetupModeIfNeeded ->
             Return.map (Model.switchToNewUserSetupModeIfNeeded)
@@ -305,11 +297,20 @@ onSubMsg subMsg =
             onGlobalKeyUp key
 
         OnPouchDBChange dbName encodedDoc ->
-            Return.andThenMaybe
-                (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                    >>? Tuple.mapFirst OnEntityUpsert
-                    >>? uncurry update
-                )
+            let
+                onEntityUpsert entity =
+                    case entity of
+                        Entity.Todo model ->
+                            Todo.Msg.Upsert model |> andThenTodoMsg
+
+                        _ ->
+                            identity
+            in
+                Return.andThenMaybe
+                    (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
+                        >>? Tuple.mapFirst OnEntityUpsert
+                        >>? uncurry update
+                    )
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)

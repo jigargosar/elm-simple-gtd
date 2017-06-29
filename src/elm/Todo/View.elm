@@ -292,18 +292,6 @@ moreIconButton vm =
         ]
 
 
-editContextButton vm =
-    Paper.button
-        [ id ("edit-context-button-" ++ vm.key)
-        , style [ "height" => "24px" ]
-        , class "small padding-0 margin-0 shrink"
-        , vm.tabindexAV
-        , onClick vm.showContextDropDownMsg
-        ]
-        [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
-        ]
-
-
 editScheduleButton vm =
     div
         [ id ("edit-schedule-button-" ++ vm.key)

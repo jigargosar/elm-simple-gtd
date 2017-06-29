@@ -37,41 +37,14 @@
 
             }
 
-            paper-icon-button.account, iron-icon.account{
-                @apply(--32-size);
-                padding: 0;
-                margin: 0;
-                --iron-icon-fill-color:white;
-            }
 
             paper-listbox.dropdown-content {
                 width: 15rem;
             }
 
-            paper-icon-button + [main-title] {
-                margin-left: 24px;
-            }
-
             .icon-text {
                 @apply(--layout-vertical);
                 @apply(--layout-center);
-            }
-
-            .secondary-color {
-                color: var(--secondary-text-color)
-            }
-
-            .accent-color {
-                color: var(--accent-color)
-            }
-
-            .light-accent-color {
-                color: var(--light-accent-color)
-            }
-
-            .horizontal-justified {
-                @apply(--layout-horizontal);
-                @apply(--layout-justified);
             }
 
             .full-view {
@@ -92,9 +65,6 @@
                 line-height: 20px;
             }
 
-            .font-title {
-                @apply(--paper-font-title);
-            }
 
             .font-headline {
                 @apply(--paper-font-headline);
@@ -107,26 +77,6 @@
             .font-subhead {
                 @apply(--paper-font-subhead);
             }
-
-            .font-body2 {
-                @apply(--paper-font-body2);
-            }
-
-            .font-body1 {
-                @apply(--paper-font-body1);
-            }
-
-            .font-code1 {
-                @apply(--paper-font-code1);
-            }
-
-            .font-code2 {
-                @apply(--paper-font-code2);
-            }
-
-            /*.font-headline.big-item.iron-selected{*/
-            /*font-weight: var(--paper-item-selected-weight);*/
-            /*}*/
 
             .font-headline {
                 @apply(--paper-font-headline)
@@ -143,10 +93,6 @@
 
             .elevation-24dp {
                 @apply(--shadow-elevation-24dp);
-            }
-
-            iron-icon.big {
-                @apply(--64-size);
             }
 
             .flex-auto-children > * {
@@ -167,44 +113,6 @@
                     opacity: 0.05;
                 };
             }
-
-            .primary-color {
-                color: var(--primary-color);
-            }
-
-            .primary-text-color {
-                color: var(--primary-text-color);
-            }
-
-            paper-button {
-                color: var(--primary-color);
-            }
-
-            paper-icon-button {
-                color: var(--paper-grey-500);
-                --paper-icon-button-hover: {
-                    color: var(--paper-grey-900);
-                }
-            }
-
-            paper-icon-button:hover {
-                color: var(--paper-grey-900);
-            }
-
-            paper-icon-button.deleted-True {
-                color: #000;
-            }
-
-            paper-icon-button.done-False {
-                --paper-icon-button-hover: {
-                    color: var(--paper-green-500);
-                }
-            }
-
-            paper-icon-button.done-True {
-                color: var(--paper-green-500);
-            }
-
 
         </style>
     </template>

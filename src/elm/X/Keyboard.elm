@@ -8,7 +8,6 @@ import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Keyboard.Extra as KX exposing (Key)
-
 import Keyboard
 
 
@@ -75,14 +74,15 @@ succeedIfDecodedKeyEquals key msg =
     KX.targetKey
         |> D.andThen
             (\actualKey ->
-                let
-                    _ =
-                        X.Debug.log "actualKey, expectedKey" ( actualKey, key )
-                in
-                    if key == actualKey then
-                        D.succeed msg
-                    else
-                        D.fail "Not intrested"
+                {- let
+                       _ =
+                           X.Debug.log "actualKey, expectedKey" ( actualKey, key )
+                   in
+                -}
+                if key == actualKey then
+                    D.succeed msg
+                else
+                    D.fail "Not intrested"
             )
 
 

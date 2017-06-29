@@ -45,3 +45,12 @@ fab name attributes =
 
 divider =
     div [ class "divider" ] []
+
+
+button textV attributes =
+    div attributes [ Html.button [ class "btn" ] [ text textV ] ]
+
+
+buttonFlat textV attributes =
+    div attributes
+        [ Html.button [ class "btn btn-flat" ] [ text textV ] ]

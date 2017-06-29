@@ -3,6 +3,7 @@ module View.Shared exposing (..)
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
+import Material
 import Model
 import Model
 import Polymer.Paper as Paper exposing (badge)
@@ -45,23 +46,22 @@ okCancelButtonsWith okMsg cancelMsg list =
 
 
 okButton msg =
-    Paper.button [ onClick msg ] [ text "Ok" ]
+    Material.buttonFlat "Ok" [ onClick msg ]
 
 
 cancelButton msg =
-    Paper.button [ onClick msg ] [ text "Cancel" ]
+    Material.buttonFlat "Cancel" [ onClick msg ]
 
 
 deleteButton msg =
-    Paper.button [ onClick msg ] [ text "Delete" ]
+    Material.buttonFlat "Delete" [ onClick msg ]
 
 
 archiveButton isArchived msg =
-    Paper.button [ onClick msg ]
-        [ text
-            (if isArchived then
-                "Unarchive"
-             else
-                "Archive"
-            )
-        ]
+    Material.buttonFlat
+        (if isArchived then
+            "Unarchive"
+         else
+            "Archive"
+        )
+        [ onClick msg ]

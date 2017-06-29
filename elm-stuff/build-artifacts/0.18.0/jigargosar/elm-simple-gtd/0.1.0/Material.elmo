@@ -1,3 +1,47 @@
+var _jigargosar$elm_simple_gtd$Material$buttonFlat = F2(
+	function (textV, attributes) {
+		return A2(
+			_elm_lang$html$Html$div,
+			attributes,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(textV),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _jigargosar$elm_simple_gtd$Material$button = F2(
+	function (textV, attributes) {
+		return A2(
+			_elm_lang$html$Html$div,
+			attributes,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('btn'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(textV),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _jigargosar$elm_simple_gtd$Material$divider = A2(
 	_elm_lang$html$Html$div,
 	{

@@ -59,3 +59,10 @@ $background: #fff;
 @import "landing";
 @import "app";
 
+
+.btn.btn-flat{
+  color:color("indigo", "accent-3")
+}
+.btn.btn-flat:hover{
+  color:color("indigo", "darken-1")
+}

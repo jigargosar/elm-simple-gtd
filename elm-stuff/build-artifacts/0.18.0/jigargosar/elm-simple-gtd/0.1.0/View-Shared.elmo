@@ -1,58 +1,41 @@
 var _jigargosar$elm_simple_gtd$View_Shared$archiveButton = F2(
 	function (isArchived, msg) {
 		return A2(
-			_edvail$elm_polymer$Polymer_Paper$button,
+			_jigargosar$elm_simple_gtd$Material$buttonFlat,
+			isArchived ? 'Unarchive' : 'Archive',
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(msg),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(
-					isArchived ? 'Unarchive' : 'Archive'),
 				_1: {ctor: '[]'}
 			});
 	});
 var _jigargosar$elm_simple_gtd$View_Shared$deleteButton = function (msg) {
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$button,
+		_jigargosar$elm_simple_gtd$Material$buttonFlat,
+		'Delete',
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Events$onClick(msg),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('Delete'),
 			_1: {ctor: '[]'}
 		});
 };
 var _jigargosar$elm_simple_gtd$View_Shared$cancelButton = function (msg) {
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$button,
+		_jigargosar$elm_simple_gtd$Material$buttonFlat,
+		'Cancel',
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Events$onClick(msg),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('Cancel'),
 			_1: {ctor: '[]'}
 		});
 };
 var _jigargosar$elm_simple_gtd$View_Shared$okButton = function (msg) {
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$button,
+		_jigargosar$elm_simple_gtd$Material$buttonFlat,
+		'Ok',
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Events$onClick(msg),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text('Ok'),
 			_1: {ctor: '[]'}
 		});
 };

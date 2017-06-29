@@ -11,10 +11,6 @@ import String.Extra
 import X.Html exposing (onClickStopPropagation)
 
 
-ironIcon =
-    Html.node "iron-icon"
-
-
 iconA =
     attribute "icon"
 

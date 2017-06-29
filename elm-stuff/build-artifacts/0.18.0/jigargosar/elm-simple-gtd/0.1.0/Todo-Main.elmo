@@ -323,38 +323,35 @@ var _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked = _elm
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
 var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
-			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Todo_Main$notificationClicked(
-				function (_p19) {
-					return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
-						_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderNotificationClicked(_p19));
-				}),
-			_1: {
+	return A2(
+		_elm_lang$core$Platform_Sub$map,
+		_jigargosar$elm_simple_gtd$Model$OnTodoMsg,
+		_elm_lang$core$Platform_Sub$batch(
+			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked(
-					function (_p20) {
-						return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
-							_jigargosar$elm_simple_gtd$Todo_Msg$RunningNotificationResponse(_p20));
-					}),
+				_0: _jigargosar$elm_simple_gtd$Todo_Main$notificationClicked(_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderNotificationClicked),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_elm_lang$core$Time$every,
-						_elm_lang$core$Time$second * 1,
-						_jigargosar$elm_simple_gtd$Model$OnTodoMsgWithTime(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker)),
+					_0: _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked(_jigargosar$elm_simple_gtd$Todo_Msg$RunningNotificationResponse),
 					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$core$Time$every,
-							_elm_lang$core$Time$second * 30,
-							function (_p21) {
-								return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick);
+							_elm_lang$core$Time$second * 1,
+							function (_p19) {
+								return _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker;
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$core$Time$every,
+								_elm_lang$core$Time$second * 30,
+								function (_p20) {
+									return _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick;
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
-			}
-		});
+			}));
 };

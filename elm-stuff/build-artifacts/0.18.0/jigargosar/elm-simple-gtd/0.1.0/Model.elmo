@@ -1464,6 +1464,23 @@ var _jigargosar$elm_simple_gtd$Model$Flags = function (a) {
 		};
 	};
 };
+var _jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange = F2(
+	function (a, b) {
+		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Model$OnPouchDBChange = F2(
+	function (a, b) {
+		return {ctor: 'OnPouchDBChange', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Model$OnGlobalKeyUp = function (a) {
+	return {ctor: 'OnGlobalKeyUp', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Model$OnKeyboardMsg = function (a) {
+	return {ctor: 'OnKeyboardMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Model$OnNowChanged = function (a) {
+	return {ctor: 'OnNowChanged', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Model$OnPersistLocalPref = {ctor: 'OnPersistLocalPref'};
 var _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg = function (a) {
 	return {ctor: 'OnAppDrawerMsg', _0: a};
@@ -1474,10 +1491,6 @@ var _jigargosar$elm_simple_gtd$Model$OnCloseNotification = function (a) {
 var _jigargosar$elm_simple_gtd$Model$OnKeyCombo = function (a) {
 	return {ctor: 'OnKeyCombo', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnFirebaseMsgWithTime = F2(
-	function (a, b) {
-		return {ctor: 'OnFirebaseMsgWithTime', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Model$OnFirebaseMsg = function (a) {
 	return {ctor: 'OnFirebaseMsg', _0: a};
 };
@@ -1528,19 +1541,10 @@ var _jigargosar$elm_simple_gtd$Model$OnLaunchBarMsgWithNow = F2(
 var _jigargosar$elm_simple_gtd$Model$OnLaunchBarMsg = function (a) {
 	return {ctor: 'OnLaunchBarMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnEntityAction = F2(
+var _jigargosar$elm_simple_gtd$Model$OnEntityMsg = F2(
 	function (a, b) {
-		return {ctor: 'OnEntityAction', _0: a, _1: b};
+		return {ctor: 'OnEntityMsg', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Model$OnGlobalKeyUp = function (a) {
-	return {ctor: 'OnGlobalKeyUp', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnKeyboardMsg = function (a) {
-	return {ctor: 'OnKeyboardMsg', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnNowChanged = function (a) {
-	return {ctor: 'OnNowChanged', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Model$OnSetEntityListView = function (a) {
 	return {ctor: 'OnSetEntityListView', _0: a};
 };
@@ -1605,17 +1609,12 @@ var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange = F2(
-	function (a, b) {
-		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Model$OnEntityUpsert = function (a) {
 	return {ctor: 'OnEntityUpsert', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnPouchDBChange = F2(
-	function (a, b) {
-		return {ctor: 'OnPouchDBChange', _0: a, _1: b};
-	});
+var _jigargosar$elm_simple_gtd$Model$OnSubMsg = function (a) {
+	return {ctor: 'OnSubMsg', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Model$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};
 };

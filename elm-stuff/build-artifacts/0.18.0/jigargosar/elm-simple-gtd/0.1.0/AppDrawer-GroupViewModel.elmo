@@ -7,7 +7,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
 			config.toEntity(entity));
 		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing);
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);

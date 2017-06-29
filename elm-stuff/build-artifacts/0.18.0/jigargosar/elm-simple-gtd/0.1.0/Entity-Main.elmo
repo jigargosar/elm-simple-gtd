@@ -1,0 +1,48 @@
+var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
+	function (andThenUpdate, entity, msg) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'StartEditing':
+				return function (_p1) {
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Model$startEditingEntity(entity),
+							_p1));
+				};
+			case 'NameChanged':
+				return _Fresheyeball$elm_return$Return$map(
+					A2(_jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged, _p0._0, entity));
+			case 'Save':
+				return andThenUpdate(_jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm);
+			case 'ToggleDeleted':
+				return function (_p2) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						A2(
+							_Fresheyeball$elm_return$Return$andThen,
+							_jigargosar$elm_simple_gtd$Model$toggleDeleteEntity(entity),
+							_p2));
+				};
+			case 'ToggleArchived':
+				return function (_p3) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						A2(
+							_Fresheyeball$elm_return$Return$andThen,
+							_jigargosar$elm_simple_gtd$Model$toggleArchiveEntity(entity),
+							_p3));
+				};
+			case 'OnFocusIn':
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Model$setFocusInEntity(entity));
+			case 'ToggleSelected':
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Model$toggleEntitySelection(entity));
+			default:
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity(entity));
+		}
+	});

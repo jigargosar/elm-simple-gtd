@@ -8,7 +8,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var onEntityAction = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
+		var onEntityAction = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
 			config.toEntity(groupDoc));
 		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);

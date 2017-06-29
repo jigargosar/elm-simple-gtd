@@ -168,7 +168,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$projectMenu = _jigargosar$elm_simple_gt
 var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
 var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
-		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Model$OnEntityAction, form.entity, _jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Model$OnEntityMsg, form.entity, _jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var fireTextChanged = function (_p4) {
 			return A2(
 				_jigargosar$elm_simple_gtd$Model$UpdateTodoForm,
@@ -833,7 +833,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 	function (appVM, canBeFocused, todo) {
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTodoMsg;
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityAction(
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
 			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$noop;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);

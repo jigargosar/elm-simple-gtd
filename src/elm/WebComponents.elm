@@ -23,14 +23,6 @@ iconButton iconName attributes =
     paperIconButton (attributes ++ [ iconA iconName ]) []
 
 
-doneAllIconP =
-    iconA "done-all"
-
-
-secondaryA =
-    attribute "secondary" "true"
-
-
 dynamicAlign =
     boolProperty "dynamicAlign" True
 
@@ -41,14 +33,6 @@ slotDropdownTrigger =
 
 slotDropdownContent =
     attribute "slot" "dropdown-content"
-
-
-labelA =
-    attribute "label"
-
-
-selectedA =
-    attribute "selected"
 
 
 noLabelFloatP =

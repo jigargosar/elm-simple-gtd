@@ -286,6 +286,9 @@ keyComboModel =
 init : Flags -> Return.Return Msg Model
 init flags =
     let
+        _ =
+            1
+
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
             flags
 

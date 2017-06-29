@@ -364,6 +364,8 @@ var _jigargosar$elm_simple_gtd$Model$startEditingEntity = F2(
 			_jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm(entity),
 			model);
 	});
+var _jigargosar$elm_simple_gtd$Model$showMainMenu = _jigargosar$elm_simple_gtd$Model$setEditMode(
+	_jigargosar$elm_simple_gtd$ExclusiveMode$MainMenu(_jigargosar$elm_simple_gtd$Menu$initState));
 var _jigargosar$elm_simple_gtd$Model$startEditingTodoContext = function (todo) {
 	return _jigargosar$elm_simple_gtd$Model$setEditMode(
 		_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoContext(
@@ -1282,6 +1284,8 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 					{pouchDBRemoteSyncURI: _p47._0.uri}));
 		case 'LaunchBar':
 			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'MainMenu':
+			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'ActionList':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'None':
@@ -1580,6 +1584,8 @@ var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged = {ctor: 'OnMainMenuStateChanged'};
+var _jigargosar$elm_simple_gtd$Model$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
 var _jigargosar$elm_simple_gtd$Model$OnSubMsg = function (a) {
 	return {ctor: 'OnSubMsg', _0: a};
 };

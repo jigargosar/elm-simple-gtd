@@ -5,6 +5,7 @@ import GroupDoc.EditForm
 import Entity
 import LaunchBar.Form
 import GroupDoc.EditForm
+import Menu
 import Todo.Menu
 import Todo.NewForm
 import Todo.GroupForm
@@ -37,6 +38,7 @@ type ExclusiveMode
     | EditTodoProject Todo.GroupForm.Model
     | LaunchBar LaunchBar.Form.Model
     | ActionList ActionList.Model
+    | MainMenu Menu.State
       -- different page !!
     | EditSyncSettings SyncForm
     | SignInOverlay

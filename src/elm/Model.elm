@@ -61,6 +61,8 @@ type SubMsg
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnSubMsg SubMsg
+    | OnShowMainMenu
+    | OnMainMenuStateChanged
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
@@ -685,6 +687,10 @@ startEditingTodoContext todo =
     setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.EditTodoContext)
 
 
+showMainMenu =
+    setEditMode (Menu.initState |> ExclusiveMode.MainMenu)
+
+
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (ExclusiveMode.createEntityEditForm entity) model
@@ -749,6 +755,9 @@ saveCurrentForm model =
                 |> Return.singleton
 
         ExclusiveMode.LaunchBar form ->
+            model |> Return.singleton
+
+        ExclusiveMode.MainMenu _ ->
             model |> Return.singleton
 
         ExclusiveMode.ActionList _ ->

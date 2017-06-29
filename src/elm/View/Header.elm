@@ -87,7 +87,7 @@ menu m =
                         ]
                         []
     in
-        div [] [ menuIcon ]
+        div [ onClick Mode.OnShowMainMenu ] [ menuIcon ]
 
 
 

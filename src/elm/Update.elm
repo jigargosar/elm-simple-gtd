@@ -71,6 +71,9 @@ updateInner msg =
         OnSubMsg subMsg ->
             onSubMsg subMsg
 
+        OnShowMainMenu ->
+            map Model.startEditingTodoContext
+
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->
@@ -124,6 +127,14 @@ updateInner msg =
             Return.map
                 (Todo.GroupForm.setMenuState menuState form
                     |> ExclusiveMode.EditTodoProject
+                    >> Model.setEditMode
+                )
+                >> autoFocusInputCmd
+
+        OnMainMenuStateChanged menuState ->
+            Return.map
+                (menuState
+                    |> ExclusiveMode.MainMenu
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd

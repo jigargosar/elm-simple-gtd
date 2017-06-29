@@ -6,6 +6,7 @@ import AppDrawer.View
 import CustomSync
 import Entity.View
 import Material
+import Menu
 import Ui.Layout
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
@@ -26,6 +27,7 @@ import LaunchBar.View
 import GroupDoc.EditView
 import Todo.MoreMenu
 import View.GetStarted
+import View.MainMenu
 
 
 init m =
@@ -86,6 +88,9 @@ overlayViews appModel =
 
                 ExclusiveMode.NewTodo form ->
                     Todo.View.new form
+
+                ExclusiveMode.MainMenu menuState ->
+                    View.MainMenu.init menuState appModel
 
                 _ ->
                     span [] []

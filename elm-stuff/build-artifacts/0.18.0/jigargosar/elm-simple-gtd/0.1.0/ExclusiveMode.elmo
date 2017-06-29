@@ -11,6 +11,9 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay = _jigargosar$elm_sim
 var _jigargosar$elm_simple_gtd$ExclusiveMode$EditSyncSettings = function (a) {
 	return {ctor: 'EditSyncSettings', _0: a};
 };
+var _jigargosar$elm_simple_gtd$ExclusiveMode$MainMenu = function (a) {
+	return {ctor: 'MainMenu', _0: a};
+};
 var _jigargosar$elm_simple_gtd$ExclusiveMode$ActionList = function (a) {
 	return {ctor: 'ActionList', _0: a};
 };

@@ -68,7 +68,7 @@ create config todoList groupDoc =
             Document.getId groupDoc
 
         onEntityAction =
-            Model.OnEntityAction (config.toEntity groupDoc)
+            Model.OnEntityMsg (config.toEntity groupDoc)
 
         isNull =
             config.isNull groupDoc

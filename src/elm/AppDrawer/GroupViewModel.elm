@@ -98,7 +98,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Model.OnEntityAction (config.toEntity entity)
+            Model.OnEntityMsg (config.toEntity entity)
 
         count =
             getTodoListByEntityId id |> List.length

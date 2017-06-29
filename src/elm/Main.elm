@@ -4,6 +4,7 @@ import AppDrawer.Main
 import CommonMsg
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
+import Entity.Main
 import ExclusiveMode
 import Entity
 import Firebase.Main
@@ -229,34 +230,8 @@ updateInner msg =
             Return.map Model.createAndEditNewContext
                 >> autoFocusInputCmd
 
-        OnEntityAction entity action ->
-            case (action) of
-                Entity.StartEditing ->
-                    Return.map (Model.startEditingEntity entity)
-                        >> autoFocusInputCmd
-
-                Entity.NameChanged newName ->
-                    Return.map (Model.updateEditModeNameChanged newName entity)
-
-                Entity.Save ->
-                    andThenUpdate OnSaveCurrentForm
-
-                Entity.ToggleDeleted ->
-                    Return.andThen (Model.toggleDeleteEntity entity)
-                        >> andThenUpdate OnDeactivateEditingMode
-
-                Entity.ToggleArchived ->
-                    Return.andThen (Model.toggleArchiveEntity entity)
-                        >> andThenUpdate OnDeactivateEditingMode
-
-                Entity.OnFocusIn ->
-                    Return.map (Model.setFocusInEntity entity)
-
-                Entity.ToggleSelected ->
-                    Return.map (Model.toggleEntitySelection entity)
-
-                Entity.Goto ->
-                    Return.map (Model.switchToEntityListViewFromEntity entity)
+        OnEntityMsg entity entityMsg ->
+            Entity.Main.update entity entityMsg
 
         OnLaunchBarMsgWithNow msg now ->
             case msg of

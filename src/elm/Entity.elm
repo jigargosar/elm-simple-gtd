@@ -52,7 +52,7 @@ type ListViewType
     | RecentView
 
 
-type Action
+type Msg
     = StartEditing
     | ToggleDeleted
     | ToggleArchived

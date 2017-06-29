@@ -86,7 +86,7 @@ type Msg
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | OnSetViewType ViewType
     | OnSetEntityListView EntityListViewType
-    | OnEntityAction Entity Entity.Action
+    | OnEntityMsg Entity Entity.Msg
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
     | OnTodoMsg Todo.Msg.Msg

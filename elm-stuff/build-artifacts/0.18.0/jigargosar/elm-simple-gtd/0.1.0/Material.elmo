@@ -153,7 +153,7 @@ var _jigargosar$elm_simple_gtd$Material$bigIconTextButton = F3(
 					_elm_lang$html$Html$i,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('material-icons medium'),
+						_0: _elm_lang$html$Html_Attributes$class('material-icons'),
 						_1: {ctor: '[]'}
 					},
 					{

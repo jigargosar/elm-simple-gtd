@@ -86,8 +86,17 @@ $background: #fff;
   padding: 0.5rem;
   text-transform: uppercase;
   color:darken($primary-color, 10%);
+  &:hover{
+    background-color: color("grey","lighten-4");
+  }
+
+  i{
+    font-size: 5rem;
+  }
 }
 
-.big-button:hover{
-  background-color: color("grey","lighten-4");
+@media #{$small-and-down} {
+  .big-button i{
+    font-size: 3rem;
+  }
 }

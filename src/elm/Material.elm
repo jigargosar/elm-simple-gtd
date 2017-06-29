@@ -23,7 +23,7 @@ iconButton name attributes =
 
 bigIconTextButton iconName textV clickHandler =
     a [ class "big-button layout vertical center upper-case", onClickStopPropagation clickHandler ]
-        [ i [ class "material-icons medium" ] [ text iconName ]
+        [ i [ class "material-icons" ] [ text iconName ]
         , div [] [ text textV ]
         ]
 

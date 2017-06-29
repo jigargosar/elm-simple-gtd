@@ -9,6 +9,8 @@ import Return
 import Time
 import X.Record
 import X.Return exposing (..)
+import X.Function.Infix exposing (..)
+import Toolkit.Operators exposing (..)
 
 
 port signIn : () -> Cmd msg

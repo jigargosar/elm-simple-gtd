@@ -123,6 +123,15 @@ var _jigargosar$elm_simple_gtd$Firebase$Client = F3(
 	function (a, b, c) {
 		return {id: a, connected: b, token: c};
 	});
+var _jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged = function (a) {
+	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase$OnFCMTokenChanged = function (a) {
+	return {ctor: 'OnFCMTokenChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase$OnUserChanged = function (a) {
+	return {ctor: 'OnUserChanged', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Firebase$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _jigargosar$elm_simple_gtd$Firebase$AfterUserChanged = {ctor: 'AfterUserChanged'};
 var _jigargosar$elm_simple_gtd$Firebase$OnSignOut = {ctor: 'OnSignOut'};

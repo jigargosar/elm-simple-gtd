@@ -43,4 +43,4 @@ init m =
             []
          ]
         )
-        |> Model.OnFirebaseMsg
+        |> Html.map Model.OnFirebaseMsg

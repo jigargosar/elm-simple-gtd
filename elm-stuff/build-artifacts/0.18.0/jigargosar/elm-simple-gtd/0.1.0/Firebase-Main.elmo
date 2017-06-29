@@ -1,3 +1,19 @@
+var _jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase = function (user) {
+	return _jigargosar$elm_simple_gtd$X_Return$maybeEffect(
+		A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'], _jigargosar$elm_simple_gtd$Model$getMaybeUserId, _jigargosar$elm_simple_gtd$Firebase$startSyncCmd));
+};
+var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		_jigargosar$elm_simple_gtd$Model$getMaybeUserId(model),
+		_jigargosar$elm_simple_gtd$Firebase$setupOnDisconnectCmd(model.firebaseClient));
+};
+var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		_jigargosar$elm_simple_gtd$Model$getMaybeUserId(model),
+		_jigargosar$elm_simple_gtd$Firebase$updateClientCmd(model.firebaseClient));
+};
 var _jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$signInModel);
 var _jigargosar$elm_simple_gtd$Firebase_Main$signIn = _elm_lang$core$Native_Platform.outgoingPort(
 	'signIn',
@@ -49,7 +65,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
 										{ctor: '_Tuple0'}),
 									_p2))));
 				};
-			default:
+			case 'AfterUserChanged':
 				return _Fresheyeball$elm_return$Return$andThen(
 					function (model) {
 						return function () {
@@ -73,5 +89,45 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F3(
 						}()(
 							_Fresheyeball$elm_return$Return$singleton(model));
 					});
+			case 'OnUserChanged':
+				var _p6 = _p0._0;
+				return function (_p5) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase,
+						_p6,
+						A2(
+							_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+							_jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd,
+							A2(
+								_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+								_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+								A2(
+									andThenUpdate,
+									_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
+									A2(
+										_Fresheyeball$elm_return$Return$map,
+										_jigargosar$elm_simple_gtd$Model$setUser(_p6),
+										_p5)))));
+				};
+			case 'OnFCMTokenChanged':
+				return function (_p7) {
+					return A2(
+						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Model$setFCMToken(_p0._0),
+							_p7));
+				};
+			default:
+				return function (_p8) {
+					return A2(
+						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Model$updateFirebaseConnection(_p0._0),
+							_p8));
+				};
 		}
 	});

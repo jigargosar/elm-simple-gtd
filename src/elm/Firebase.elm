@@ -15,8 +15,8 @@ type Msg
     | OnSignOut
     | AfterUserChanged
     | OnSkipSignIn
-    | OnUserChanged
-    | OnFCMTokenChanged
+    | OnUserChanged User
+    | OnFCMTokenChanged FCMToken
     | OnFirebaseConnectionChanged Bool
 
 

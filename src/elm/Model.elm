@@ -54,7 +54,7 @@ type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
-    | OnFirebaseChange String D.Value
+    | OnFirebaseDatabaseChange String D.Value
     | OnUserChanged Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool

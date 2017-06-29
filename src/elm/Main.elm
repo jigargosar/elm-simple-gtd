@@ -73,7 +73,7 @@ subscriptions m =
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.ups OnGlobalKeyUp
         , Store.onChange OnPouchDBChange
-        , Firebase.onChange OnFirebaseChange
+        , Firebase.onChange OnFirebaseDatabaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
         , Todo.Main.subscriptions m
         ]
@@ -118,7 +118,7 @@ updateInner msg =
                 _ ->
                     identity
 
-        OnFirebaseChange dbName encodedDoc ->
+        OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
         OnUserChanged user ->

@@ -9,7 +9,6 @@ import Firebase
 import Model
 import Model exposing (Model)
 import Model exposing (Msg)
-import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -67,12 +66,6 @@ menu m =
         maybeUserProfile =
             Model.getMaybeUserProfile m
 
-        userSignInLink =
-            maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Firebase.OnSignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Firebase.OnSignIn ] [ text "SignIn" ]
-                |> Html.map Model.OnFirebaseMsg
-
         menuIcon =
             case maybeUserProfile of
                 Nothing ->
@@ -88,40 +81,3 @@ menu m =
                         []
     in
         div [ id "main-menu-button", onClick Model.OnShowMainMenu ] [ menuIcon ]
-
-
-
-{- Paper.menuButton
-   [ dynamicAlign
-   , boolProperty "noOverlap" True
-   , boolProperty "closeOnActivate" True
-   ]
-   [ {- Html.node "iron-icon"
-        [ userAccountAttribute
-        , class "account"
-        , slotDropDownTrigger
-        ]
-        []
-     -}
-     menuIcon
-   , Paper.listbox [ class "", slotDropdownContent ]
-       [ userSignInLink
-       , itemLink AppUrl.forumsURL "Forums/Discuss"
-       , itemLink AppUrl.changeLogURL
-           ("Changelog v" ++ m.appVersion)
-       , itemLink AppUrl.github "Github"
-       ]
-   ]
--}
-
-
-itemLink url content =
-    Paper.item []
-        [ Paper.itemBody []
-            [ a
-                [ target "_blank"
-                , href url
-                ]
-                [ text content ]
-            ]
-        ]

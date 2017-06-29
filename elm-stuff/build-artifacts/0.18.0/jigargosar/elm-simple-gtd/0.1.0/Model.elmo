@@ -1584,7 +1584,9 @@ var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged = {ctor: 'OnMainMenuStateChanged'};
+var _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged = function (a) {
+	return {ctor: 'OnMainMenuStateChanged', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Model$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
 var _jigargosar$elm_simple_gtd$Model$OnSubMsg = function (a) {
 	return {ctor: 'OnSubMsg', _0: a};

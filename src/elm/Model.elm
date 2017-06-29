@@ -62,7 +62,7 @@ type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnSubMsg SubMsg
     | OnShowMainMenu
-    | OnMainMenuStateChanged
+    | OnMainMenuStateChanged Menu.State
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity

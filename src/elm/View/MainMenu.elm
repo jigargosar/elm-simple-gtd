@@ -14,7 +14,7 @@ import Model
 menuConfig : Menu.State -> Model.Model -> Menu.Config String Model.Msg
 menuConfig menuState model =
     { onSelect =
-        Model.noop
+        (\_ -> Model.noop)
     , isSelected = (\_ -> False)
     , itemKey = identity
     , itemSearchText = identity

@@ -1,0 +1,33 @@
+var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
+	function (menuState, model) {
+		return {
+			onSelect: function (_p0) {
+				return _jigargosar$elm_simple_gtd$Model$noop;
+			},
+			isSelected: function (_p1) {
+				return false;
+			},
+			itemKey: _elm_lang$core$Basics$identity,
+			itemSearchText: _elm_lang$core$Basics$identity,
+			itemView: _elm_lang$html$Html$text,
+			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged,
+			noOp: _jigargosar$elm_simple_gtd$Model$noop,
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
+		};
+	});
+var _jigargosar$elm_simple_gtd$View_MainMenu$init = F2(
+	function (menuState, appModel) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Menu$view,
+			{
+				ctor: '::',
+				_0: 'a',
+				_1: {
+					ctor: '::',
+					_0: 'b',
+					_1: {ctor: '[]'}
+				}
+			},
+			menuState,
+			A2(_jigargosar$elm_simple_gtd$View_MainMenu$menuConfig, menuState, appModel));
+	});

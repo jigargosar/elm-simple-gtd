@@ -19,10 +19,6 @@ iconA =
     attribute "icon"
 
 
-icon iconName attributes =
-    ironIcon (attributes ++ [ iconA iconName ]) []
-
-
 paperIconButton =
     Html.node "paper-icon-button"
 
@@ -33,13 +29,6 @@ iconButton iconName attributes =
 
 doneAllIconP =
     iconA "done-all"
-
-
-iconTextButton iconName text_ clickHandler =
-    Polymer.Paper.button [ class "icon-text font-caption", onClickStopPropagation clickHandler ]
-        [ icon iconName [ class "big" ]
-        , text text_
-        ]
 
 
 secondaryA =

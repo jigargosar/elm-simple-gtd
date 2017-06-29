@@ -9,7 +9,7 @@
     "*.ico",
     "*.js.map",
     "manifest.json",
-    "app/**",
+    "app.html",
     "*.bundle.js",
     "firebase-messaging-sw.js",
     "CNAME"

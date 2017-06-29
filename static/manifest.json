@@ -8,7 +8,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/app",
+  "start_url": "/app.html",
   "display": "standalone",
   "orientation": "portrait",
   "gcm_sender_id": "103953800507"

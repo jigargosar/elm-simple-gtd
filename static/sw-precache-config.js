@@ -4,7 +4,7 @@ module.exports = {
         "*.png",
         "*.ico",
         "manifest.json",
-        "app/**",
+        "app.html",
         "*.bundle.js",
         "bower_components/pouchdb/dist/pouchdb.js"
     ],

@@ -1,13 +1,6 @@
 module AppUrl exposing (..)
 
 
-
-
-
-
-
-
-
 changeLogURL =
     "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
 
@@ -33,7 +26,7 @@ contact =
 
 
 getStarted =
-    "/app/index.html#!/lists/contexts"
+    "/app.html#!/lists/contexts"
 
 
 landing =

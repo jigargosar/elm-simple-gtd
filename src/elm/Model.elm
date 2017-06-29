@@ -87,8 +87,8 @@ type Msg
     | OnSetViewType ViewType
     | OnSetEntityListView EntityListViewType
     | OnEntityMsg Entity Entity.Msg
-    | OnLaunchBarMsg LaunchBar.Action
-    | OnLaunchBarMsgWithNow LaunchBar.Action Time
+    | OnLaunchBarMsg LaunchBar.Msg
+    | OnLaunchBarMsgWithNow LaunchBar.Msg Time
     | OnTodoMsg Todo.Msg.Msg
     | OnTodoMsgWithTime Todo.Msg.Msg Time
     | OnFirebaseMsg Firebase.Msg

@@ -3,12 +3,7 @@ module LaunchBar exposing (..)
 import Context
 import Fuzzy
 import LaunchBar.Form
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import Project
 import String.Extra
 
@@ -20,7 +15,7 @@ type Entity
     | Contexts
 
 
-type Action
+type Msg
     = OnEnter Entity
     | OnInputChanged LaunchBar.Form.Model String
     | Open

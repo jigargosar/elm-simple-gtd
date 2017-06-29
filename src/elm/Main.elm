@@ -36,6 +36,7 @@ import Model exposing (..)
 import Todo.Main
 import View
 import Json.Decode as D exposing (Decoder)
+import LaunchBar.Main
 
 
 port syncWithRemotePouch : String -> Cmd msg
@@ -234,27 +235,7 @@ updateInner msg =
             Entity.Main.update andThenUpdate entity entityMsg
 
         OnLaunchBarMsgWithNow msg now ->
-            case msg of
-                LaunchBar.OnEnter entity ->
-                    andThenUpdate OnDeactivateEditingMode
-                        >> case entity of
-                            LaunchBar.Project project ->
-                                map (Model.switchToProjectView project)
-
-                            LaunchBar.Projects ->
-                                map (Model.setEntityListViewType Entity.ProjectsView)
-
-                            LaunchBar.Context context ->
-                                map (Model.switchToContextView context)
-
-                            LaunchBar.Contexts ->
-                                map (Model.setEntityListViewType Entity.ContextsView)
-
-                LaunchBar.OnInputChanged form text ->
-                    map (Model.updateLaunchBarInput now text form)
-
-                LaunchBar.Open ->
-                    map (Model.activateLaunchBar now) >> autoFocusInputCmd
+            LaunchBar.Main.update andThenUpdate now msg
 
         OnLaunchBarMsg msg ->
             withNow (OnLaunchBarMsgWithNow msg)

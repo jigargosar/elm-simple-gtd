@@ -71,13 +71,13 @@ subscriptions : Model -> Sub Model.Msg
 subscriptions m =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1) OnNowChanged
+            [ Time.every (Time.second * 1) OnNowChanged |> Sub.map OnSubMsg
             , Keyboard.subscription OnKeyboardMsg
             , Keyboard.ups OnGlobalKeyUp
             , Store.onChange OnPouchDBChange
             , Firebase.onChange OnFirebaseDatabaseChange
-            , Keyboard.Combo.subscriptions m.keyComboModel
             ]
+        , Keyboard.Combo.subscriptions m.keyComboModel
         , Todo.Main.subscriptions m
         ]
 
@@ -98,13 +98,17 @@ update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> updateInner msg
-        >> Return.map (logMsg msg)
 
 
 updateInner msg =
     case msg of
         OnCommonMsg msg ->
             CommonMsg.update msg
+
+        OnSubMsg subMsg ->
+            case subMsg of
+                OnNowChanged now ->
+                    Return.map (Model.setNow now)
 
         OnPouchDBChange dbName encodedDoc ->
             Return.andThenMaybe
@@ -215,9 +219,6 @@ updateInner msg =
 
         OnSetEntityListView viewType ->
             Return.map (Model.setEntityListViewType viewType)
-
-        OnNowChanged now ->
-            onUpdateNow now
 
         OnKeyboardMsg msg ->
             Return.map (Model.updateKeyboardState (Keyboard.update msg))
@@ -331,30 +332,6 @@ withNow toMsg =
     command (Task.perform toMsg Time.now)
 
 
-logMsg msg model =
-    let
-        _ =
-            case msg of
-                OnNowChanged _ ->
-                    Nothing
-
-                OnTodoMsg Todo.Msg.UpdateTimeTracker ->
-                    Nothing
-
-                OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
-                    Nothing
-
-                _ ->
-                    let
-                        _ =
-                            --                            X.Debug.log "Msg" (msg)
-                            1
-                    in
-                        Nothing
-    in
-        model
-
-
 map =
     Return.map
 
@@ -369,10 +346,6 @@ andThenUpdate =
 
 andThenTodoMsg =
     OnTodoMsg >> andThenUpdate
-
-
-onUpdateNow now =
-    Return.map (Model.setNow now)
 
 
 maybeMapToCmd fn =

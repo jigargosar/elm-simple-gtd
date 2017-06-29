@@ -1,33 +1,85 @@
+var _jigargosar$elm_simple_gtd$View_MainMenu$onSelect = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = _p1._1;
+	if (_p2.ctor === 'URL') {
+		return _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
+	} else {
+		return _p2._0;
+	}
+};
 var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
-	function (menuState, model) {
+	function (menuState, appModel) {
 		return {
-			onSelect: function (_p0) {
-				return _jigargosar$elm_simple_gtd$Model$noop;
-			},
-			isSelected: function (_p1) {
+			onSelect: _jigargosar$elm_simple_gtd$View_MainMenu$onSelect,
+			isSelected: function (_p3) {
 				return false;
 			},
-			itemKey: _elm_lang$core$Basics$identity,
-			itemSearchText: _elm_lang$core$Basics$identity,
-			itemView: _elm_lang$html$Html$text,
+			itemKey: _elm_lang$core$Tuple$first,
+			itemSearchText: _elm_lang$core$Tuple$first,
+			itemView: function (_p4) {
+				return _elm_lang$html$Html$text(
+					_elm_lang$core$Tuple$first(_p4));
+			},
 			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged,
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
 		};
 	});
+var _jigargosar$elm_simple_gtd$View_MainMenu$Msg = function (a) {
+	return {ctor: 'Msg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$View_MainMenu$URL = function (a) {
+	return {ctor: 'URL', _0: a};
+};
+var _jigargosar$elm_simple_gtd$View_MainMenu$getItems = function (appModel) {
+	var linkMenuItems = {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: 'Forums',
+			_1: _jigargosar$elm_simple_gtd$View_MainMenu$URL(_jigargosar$elm_simple_gtd$AppUrl$forumsURL)
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', appModel.appVersion),
+				_1: _jigargosar$elm_simple_gtd$View_MainMenu$URL(_jigargosar$elm_simple_gtd$AppUrl$changeLogURL)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'Github',
+					_1: _jigargosar$elm_simple_gtd$View_MainMenu$URL(_jigargosar$elm_simple_gtd$AppUrl$github)
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(appModel);
+	var signInMenuItem = A2(
+		_Fresheyeball$elm_tuple_extra$Tuple2$map,
+		function (_p5) {
+			return _jigargosar$elm_simple_gtd$View_MainMenu$Msg(
+				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_p5));
+		},
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeUserProfile,
+				function (_p6) {
+					return {ctor: '_Tuple2', _0: 'SignOut', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignOut};
+				}),
+			{ctor: '_Tuple2', _0: 'SignIn', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignIn}));
+	return {ctor: '::', _0: signInMenuItem, _1: linkMenuItems};
+};
 var _jigargosar$elm_simple_gtd$View_MainMenu$init = F2(
 	function (menuState, appModel) {
 		return A3(
 			_jigargosar$elm_simple_gtd$Menu$view,
-			{
-				ctor: '::',
-				_0: 'a',
-				_1: {
-					ctor: '::',
-					_0: 'b',
-					_1: {ctor: '[]'}
-				}
-			},
+			_jigargosar$elm_simple_gtd$View_MainMenu$getItems(appModel),
 			menuState,
 			A2(_jigargosar$elm_simple_gtd$View_MainMenu$menuConfig, menuState, appModel));
 	});

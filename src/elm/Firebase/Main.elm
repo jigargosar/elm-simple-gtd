@@ -1,13 +1,14 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
-import Firebase
+import Firebase exposing (Msg(..), User(..))
 import Firebase.SignIn
 import Model
 import Navigation
 import Return
 import Time
 import X.Record
+import X.Return exposing (..)
 
 
 port signIn : () -> Cmd msg
@@ -27,34 +28,63 @@ update :
     -> Model.ReturnF
 update andThenUpdate now msg =
     case msg of
-        Firebase.NOOP ->
+        NOOP ->
             identity
 
-        Firebase.OnSignIn ->
+        OnSignIn ->
             Return.command (signIn ())
 
-        Firebase.OnSkipSignIn ->
+        OnSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
                 >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
 
-        Firebase.OnSignOut ->
+        OnSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
                 >> andThenUpdate Model.OnPersistLocalPref
                 >> Return.command (Navigation.load AppUrl.landing)
 
-        Firebase.AfterUserChanged ->
+        AfterUserChanged ->
             Return.andThen
                 (\model ->
                     Return.singleton model
                         |> case model.user of
-                            Firebase.SignedOut ->
+                            SignedOut ->
                                 identity
 
-                            Firebase.SignedIn user ->
+                            SignedIn user ->
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
                                     >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
                 )
+
+        OnUserChanged user ->
+            Return.map (Model.setUser user)
+                >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
+                >> maybeEffect firebaseUpdateClientCmd
+                >> maybeEffect firebaseSetupOnDisconnectCmd
+                >> startSyncWithFirebase user
+
+        OnFCMTokenChanged token ->
+            Return.map (Model.setFCMToken token)
+                >> maybeEffect firebaseUpdateClientCmd
+
+        OnFirebaseConnectionChanged connected ->
+            Return.map (Model.updateFirebaseConnection connected)
+                >> maybeEffect firebaseUpdateClientCmd
+
+
+firebaseUpdateClientCmd model =
+    Model.getMaybeUserId model
+        ?|> Firebase.updateClientCmd model.firebaseClient
+
+
+firebaseSetupOnDisconnectCmd model =
+    Model.getMaybeUserId model
+        ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
+
+
+startSyncWithFirebase user =
+    maybeEffect (Model.getMaybeUserId >>? Firebase.startSyncCmd)

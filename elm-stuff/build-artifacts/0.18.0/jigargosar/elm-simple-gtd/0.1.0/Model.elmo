@@ -1605,18 +1605,9 @@ var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnFirebaseConnectionChanged = function (a) {
-	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnFCMTokenChanged = function (a) {
-	return {ctor: 'OnFCMTokenChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnUserChanged = function (a) {
-	return {ctor: 'OnUserChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnFirebaseChange = F2(
+var _jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange = F2(
 	function (a, b) {
-		return {ctor: 'OnFirebaseChange', _0: a, _1: b};
+		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Model$OnEntityUpsert = function (a) {
 	return {ctor: 'OnEntityUpsert', _0: a};

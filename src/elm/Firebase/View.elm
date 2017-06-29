@@ -27,19 +27,20 @@ init m =
     div [ id "firebase-container" ]
         ([ Html.node "firebase-auth"
             [ id "firebase-auth"
-            , onUserChanged Model.OnUserChanged
+            , onUserChanged Firebase.OnUserChanged
             ]
             []
          , Html.node "firebase-messaging"
             [ id "fb-messaging"
-            , onFCMTokenChanged Model.OnFCMTokenChanged
+            , onFCMTokenChanged Firebase.OnFCMTokenChanged
             , customSw
             ]
             []
          , Html.node "firebase-document"
             [ attribute "path" ".info/connected"
-            , onConnectionChange Model.OnFirebaseConnectionChanged
+            , onConnectionChange Firebase.OnFirebaseConnectionChanged
             ]
             []
          ]
         )
+        |> Model.OnFirebaseMsg

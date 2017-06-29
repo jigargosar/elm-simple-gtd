@@ -15,6 +15,9 @@ type Msg
     | OnSignOut
     | AfterUserChanged
     | OnSkipSignIn
+    | OnUserChanged
+    | OnFCMTokenChanged
+    | OnFirebaseConnectionChanged Bool
 
 
 type alias UID =

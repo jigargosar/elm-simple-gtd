@@ -121,23 +121,8 @@ updateInner msg =
         OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
-        OnUserChanged user ->
-            Return.map (Model.setUser user)
-                >> andThenUpdate (OnFirebaseMsg Firebase.AfterUserChanged)
-                >> Return.maybeEffect firebaseUpdateClientCmd
-                >> Return.maybeEffect firebaseSetupOnDisconnectCmd
-                >> startSyncWithFirebase user
-
         OnSwitchToNewUserSetupModeIfNeeded ->
             Return.map (Model.switchToNewUserSetupModeIfNeeded)
-
-        OnFCMTokenChanged token ->
-            Return.map (Model.setFCMToken token)
-                >> Return.maybeEffect firebaseUpdateClientCmd
-
-        OnFirebaseConnectionChanged connected ->
-            Return.map (Model.updateFirebaseConnection connected)
-                >> Return.maybeEffect firebaseUpdateClientCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
@@ -464,16 +449,6 @@ onGlobalKeyUp key =
         )
 
 
-firebaseUpdateClientCmd model =
-    Model.getMaybeUserId model
-        ?|> Firebase.updateClientCmd model.firebaseClient
-
-
-firebaseSetupOnDisconnectCmd model =
-    Model.getMaybeUserId model
-        ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
-
-
 positionContextMenuCmd todo =
     DomPorts.positionPopupMenu ("#edit-context-button-" ++ Document.getId todo)
 
@@ -484,7 +459,3 @@ positionProjectMenuCmd todo =
 
 positionScheduleMenuCmd todo =
     DomPorts.positionPopupMenu ("#edit-schedule-button-" ++ Document.getId todo)
-
-
-startSyncWithFirebase user =
-    Return.maybeEffect (Model.getMaybeUserId >>? Firebase.startSyncCmd)

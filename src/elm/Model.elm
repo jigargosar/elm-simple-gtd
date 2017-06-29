@@ -55,9 +55,6 @@ type Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
     | OnFirebaseDatabaseChange String D.Value
-    | OnUserChanged Firebase.User
-    | OnFCMTokenChanged Firebase.FCMToken
-    | OnFirebaseConnectionChanged Bool
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity

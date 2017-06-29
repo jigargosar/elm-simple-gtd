@@ -19,7 +19,14 @@ iconA name attr =
 
 iconButton name attributes =
     div attributes
-        [ a [ class "btn-flat btn-floating" ]
+        [ a [ class "btn-flat btn-floating", style [ "z-index" => "0" ] ]
+            [ i [ class "default-color material-icons" ] [ text name ] ]
+        ]
+
+
+smallIconButton name attributes =
+    div attributes
+        [ a [ class "btn-flat btn-floating x24", style [ "z-index" => "0" ] ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
 
@@ -28,13 +35,6 @@ fab name attributes =
     div attributes
         [ a [ class "btn-floating" ]
             [ i [ class "material-icons", style [ "color" => "white" ] ] [ text name ] ]
-        ]
-
-
-smallIconButton name attributes =
-    div attributes
-        [ a [ class "btn-flat btn-floating x24 " ]
-            [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
 
 

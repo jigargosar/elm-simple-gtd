@@ -5,9 +5,15 @@ var _jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState = F2(
 			{menuState: menuState});
 	});
 var _jigargosar$elm_simple_gtd$Todo_GroupForm$init = function (todo) {
-	return {todo: todo, menuState: _jigargosar$elm_simple_gtd$Menu$initState};
+	return {
+		todo: todo,
+		todoId: _jigargosar$elm_simple_gtd$Document$getId(todo),
+		contextId: _jigargosar$elm_simple_gtd$Todo$getContextId(todo),
+		projectId: _jigargosar$elm_simple_gtd$Todo$getProjectId(todo),
+		menuState: _jigargosar$elm_simple_gtd$Menu$initState
+	};
 };
-var _jigargosar$elm_simple_gtd$Todo_GroupForm$Model = F2(
-	function (a, b) {
-		return {todo: a, menuState: b};
+var _jigargosar$elm_simple_gtd$Todo_GroupForm$Model = F5(
+	function (a, b, c, d, e) {
+		return {todo: a, todoId: b, contextId: c, projectId: d, menuState: e};
 	});

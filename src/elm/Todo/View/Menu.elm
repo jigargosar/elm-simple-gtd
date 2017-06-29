@@ -9,11 +9,16 @@ import Todo
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Todo.GroupForm
+import Todo.Msg
 
 
 createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
-    { onSelect = Model.SetTodoProject # todoId
+    { onSelect =
+        Document.getId
+            >> Todo.SetProjectId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelected todoId
+            >> Model.OnTodoMsg
     , isSelected = Document.hasId projectId
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
@@ -26,7 +31,11 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
 
 createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
 createContextMenuConfig ({ todoId, contextId } as form) model =
-    { onSelect = Model.SetTodoContext # todoId
+    { onSelect =
+        Document.getId
+            >> Todo.SetContextId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelected todoId
+            >> Model.OnTodoMsg
     , isSelected = Document.hasId contextId
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName

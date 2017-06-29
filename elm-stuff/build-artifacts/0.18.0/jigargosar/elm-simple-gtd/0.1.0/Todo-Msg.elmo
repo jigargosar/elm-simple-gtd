@@ -1,3 +1,7 @@
+var _jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelected = F2(
+	function (a, b) {
+		return {ctor: 'OnUpdateTodoAndMaybeSelected', _0: a, _1: b};
+	});
 var _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick = {ctor: 'OnProcessPendingNotificationCronTick'};
 var _jigargosar$elm_simple_gtd$Todo_Msg$OnShowMoreMenu = function (a) {
 	return {ctor: 'OnShowMoreMenu', _0: a};

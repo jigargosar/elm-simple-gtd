@@ -12,16 +12,21 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey = function (prefix) {
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 	function (_p1, model) {
 		var _p2 = _p1;
-		var _p4 = _p2.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model$SetTodoContext, _p4),
-			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(
-				_jigargosar$elm_simple_gtd$Todo$getContextId(_p4)),
+			onSelect: function (_p3) {
+				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+					A2(
+						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateAction,
+						_p2.todoId,
+						_jigargosar$elm_simple_gtd$Todo$SetContextId(
+							_jigargosar$elm_simple_gtd$Document$getId(_p3))));
+			},
+			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p2.contextId),
 			itemKey: _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey('context'),
 			itemSearchText: _jigargosar$elm_simple_gtd$Context$getName,
-			itemView: function (_p3) {
+			itemView: function (_p4) {
 				return _elm_lang$html$Html$text(
-					_jigargosar$elm_simple_gtd$Context$getName(_p3));
+					_jigargosar$elm_simple_gtd$Context$getName(_p4));
 			},
 			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnEditTodoContextMenuStateChanged(_p2),
 			noOp: _jigargosar$elm_simple_gtd$Model$commonMsg.noOp,
@@ -39,16 +44,21 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 	function (_p5, model) {
 		var _p6 = _p5;
-		var _p8 = _p6.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model$SetTodoProject, _p8),
-			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(
-				_jigargosar$elm_simple_gtd$Todo$getProjectId(_p8)),
+			onSelect: function (_p7) {
+				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+					A2(
+						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateAction,
+						_p6.todoId,
+						_jigargosar$elm_simple_gtd$Todo$SetProjectId(
+							_jigargosar$elm_simple_gtd$Document$getId(_p7))));
+			},
+			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p6.projectId),
 			itemKey: _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey('project'),
 			itemSearchText: _jigargosar$elm_simple_gtd$Project$getName,
-			itemView: function (_p7) {
+			itemView: function (_p8) {
 				return _elm_lang$html$Html$text(
-					_jigargosar$elm_simple_gtd$Project$getName(_p7));
+					_jigargosar$elm_simple_gtd$Project$getName(_p8));
 			},
 			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnEditTodoProjectMenuStateChanged(_p6),
 			noOp: _jigargosar$elm_simple_gtd$Model$commonMsg.noOp,

@@ -38,8 +38,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 			case 'OnSkipSignIn':
 				return function (_p1) {
 					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded,
+						_Fresheyeball$elm_return$Return$map,
+						_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded,
 						A2(
 							andThenUpdate,
 							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
@@ -75,8 +75,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 							} else {
 								return function (_p4) {
 									return A2(
-										andThenUpdate,
-										_jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded,
+										_Fresheyeball$elm_return$Return$map,
+										_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded,
 										A2(
 											andThenUpdate,
 											_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,

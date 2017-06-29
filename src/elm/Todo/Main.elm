@@ -173,8 +173,8 @@ update andThenUpdate now todoMsg =
             X.Return.andThenMaybe
                 (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
-        OnUpdateTodo action todoId ->
-            andThen (Model.updateTodo action todoId)
+        OnUpdateTodoAndMaybeSelected todoId action ->
+            Model.updateTodoAndMaybeAlsoSelected action todoId |> andThen
 
 
 showReminderNotificationCmd ( todo, model ) =

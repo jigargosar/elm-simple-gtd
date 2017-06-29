@@ -84,12 +84,9 @@ var _jigargosar$elm_simple_gtd$Update$maybeMapToCmd = function (fn) {
 		_elm_lang$core$Platform_Cmd$none);
 };
 var _jigargosar$elm_simple_gtd$Update$updateTodoAndMaybeAlsoSelected = F2(
-	function (action, todo) {
+	function (action, todoId) {
 		return _Fresheyeball$elm_return$Return$andThen(
-			A2(
-				_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected,
-				action,
-				_jigargosar$elm_simple_gtd$Document$getId(todo)));
+			A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, action, todoId));
 	});
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update$withNow = function (toMsg) {
@@ -115,10 +112,6 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return _jigargosar$elm_simple_gtd$CommonMsg$update(_p8._0);
 		case 'OnSubMsg':
 			return _jigargosar$elm_simple_gtd$Update$onSubMsg(_p8._0);
-		case 'OnEntityUpsert':
-			return _elm_lang$core$Basics$identity;
-		case 'OnSwitchToNewUserSetupModeIfNeeded':
-			return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded);
 		case 'OnEntityListKeyDown':
 			var _p12 = _p8._0;
 			var _p9 = _p8._1.key;
@@ -206,8 +199,8 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 					_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
 					A3(
 						_jigargosar$elm_simple_gtd$Update$updateTodoAndMaybeAlsoSelected,
-						_jigargosar$elm_simple_gtd$Todo$SetContext(_p8._0),
-						_p8._1,
+						_jigargosar$elm_simple_gtd$Todo$SetContext(_p8._1),
+						_p8._0,
 						_p20));
 			};
 		case 'SetTodoProject':
@@ -217,8 +210,8 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 					_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
 					A3(
 						_jigargosar$elm_simple_gtd$Update$updateTodoAndMaybeAlsoSelected,
-						_jigargosar$elm_simple_gtd$Todo$SetProject(_p8._0),
-						_p8._1,
+						_jigargosar$elm_simple_gtd$Todo$SetProject(_p8._1),
+						_p8._0,
 						_p21));
 			};
 		case 'NewTodoTextChanged':
@@ -370,31 +363,29 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = function (subMsg) {
 		case 'OnGlobalKeyUp':
 			return _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp(_p38._0);
 		case 'OnPouchDBChange':
-			var onEntityUpsert = function (entity) {
+			var afterEntityUpsertOnPouchDBChange = function (entity) {
 				var _p40 = entity;
 				if (_p40.ctor === 'Todo') {
-					return _jigargosar$elm_simple_gtd$Update$andThenTodoMsg(
+					return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 						_jigargosar$elm_simple_gtd$Todo_Msg$Upsert(_p40._0));
 				} else {
-					return _elm_lang$core$Basics$identity;
+					return _jigargosar$elm_simple_gtd$Model$noop;
 				}
 			};
 			return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
 				A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-					A2(
-						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-						A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnPouchDBChange, _p38._0, _p38._1),
-						_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Model$OnEntityUpsert)),
-					_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Update$update)));
+					A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnPouchDBChange, _p38._0, _p38._1),
+					function (_p41) {
+						return A2(
+							_elm_lang$core$Basics$uncurry,
+							_jigargosar$elm_simple_gtd$Update$update,
+							A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapFirst, afterEntityUpsertOnPouchDBChange, _p41));
+					}));
 		default:
 			return _Fresheyeball$elm_return$Return$effect_(
 				A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnFirebaseChange, _p38._0, _p38._1));
 	}
-};
-var _jigargosar$elm_simple_gtd$Update$andThenTodoMsg = function (_p41) {
-	return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
-		_jigargosar$elm_simple_gtd$Model$OnTodoMsg(_p41));
 };
 var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 	return A2(
@@ -433,4 +424,8 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 			} while(false);
 			return _elm_lang$core$Basics$identity;
 		});
+};
+var _jigargosar$elm_simple_gtd$Update$andThenTodoMsg = function (_p44) {
+	return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
+		_jigargosar$elm_simple_gtd$Model$OnTodoMsg(_p44));
 };

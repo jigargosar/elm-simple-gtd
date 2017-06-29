@@ -1581,7 +1581,6 @@ var _jigargosar$elm_simple_gtd$Model$StartEditingContext = function (a) {
 var _jigargosar$elm_simple_gtd$Model$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
 var _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoTextChanged = F2(
 	function (a, b) {
@@ -1608,9 +1607,6 @@ var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Model$OnEntityUpsert = function (a) {
-	return {ctor: 'OnEntityUpsert', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Model$OnSubMsg = function (a) {
 	return {ctor: 'OnSubMsg', _0: a};

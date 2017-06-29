@@ -73,6 +73,7 @@ updateInner msg =
 
         OnShowMainMenu ->
             map Model.showMainMenu
+                >> Return.command positionMainMenuCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
@@ -344,6 +345,10 @@ onGlobalKeyUp key =
 
 positionContextMenuCmd todo =
     DomPorts.positionPopupMenu ("#edit-context-button-" ++ Document.getId todo)
+
+
+positionMainMenuCmd =
+    DomPorts.positionPopupMenu "#main-menu-button"
 
 
 positionProjectMenuCmd todo =

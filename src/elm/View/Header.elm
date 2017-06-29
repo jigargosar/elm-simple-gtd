@@ -87,7 +87,7 @@ menu m =
                         ]
                         []
     in
-        div [ onClick Model.OnShowMainMenu ] [ menuIcon ]
+        div [ id "main-menu-button", onClick Model.OnShowMainMenu ] [ menuIcon ]
 
 
 

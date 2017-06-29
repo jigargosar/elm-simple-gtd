@@ -71,9 +71,6 @@ updateInner msg =
         OnSubMsg subMsg ->
             onSubMsg subMsg
 
-        OnEntityUpsert entity ->
-            identity
-
         OnSwitchToNewUserSetupModeIfNeeded ->
             Return.map (Model.switchToNewUserSetupModeIfNeeded)
 

@@ -61,7 +61,6 @@ type SubMsg
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnSubMsg SubMsg
-    | OnEntityUpsert Entity
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity

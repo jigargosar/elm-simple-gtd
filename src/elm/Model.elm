@@ -73,7 +73,6 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
-    | OnSwitchToNewUserSetupModeIfNeeded
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model

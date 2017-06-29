@@ -71,9 +71,6 @@ updateInner msg =
         OnSubMsg subMsg ->
             onSubMsg subMsg
 
-        OnSwitchToNewUserSetupModeIfNeeded ->
-            Return.map (Model.switchToNewUserSetupModeIfNeeded)
-
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->

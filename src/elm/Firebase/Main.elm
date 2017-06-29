@@ -38,7 +38,7 @@ update andThenUpdate msg =
         OnSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
-                >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
+                >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
 
         OnSignOut ->
             Return.command (signOut ())
@@ -58,7 +58,7 @@ update andThenUpdate msg =
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
-                                    >> andThenUpdate Model.OnSwitchToNewUserSetupModeIfNeeded
+                                    >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
                 )
 
         OnUserChanged user ->

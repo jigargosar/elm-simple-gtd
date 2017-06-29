@@ -74,8 +74,9 @@ menu m =
 
         userSignInLink =
             maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Model.OnSignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Model.OnSignIn ] [ text "SignIn" ]
+                ?|> (\_ -> Paper.item [ onClick Firebase.OnSignOut ] [ text "SignOut" ])
+                ?= Paper.item [ onClick Firebase.OnSignIn ] [ text "SignIn" ]
+                |> Html.map Model.OnFirebaseMsg
 
         menuIcon =
             case maybeUserProfile of

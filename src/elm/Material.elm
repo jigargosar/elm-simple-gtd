@@ -5,10 +5,6 @@ import Html.Attributes exposing (..)
 import X.Function.Infix exposing (..)
 
 
---smallIcon name =
---    i [ class "material-icons small" ] [ text name ]
-
-
 icon name =
     i [ class "default-color material-icons" ] [ text name ]
 

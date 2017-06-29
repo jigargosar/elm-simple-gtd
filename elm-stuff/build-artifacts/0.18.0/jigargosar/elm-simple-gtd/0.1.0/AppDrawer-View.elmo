@@ -129,7 +129,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityListItem = function (vm) {
 					},
 					{
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$View_Shared$defaultBadge(vm),
+						_0: A2(_jigargosar$elm_simple_gtd$View_Shared$badge, vm.name, vm.count),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}

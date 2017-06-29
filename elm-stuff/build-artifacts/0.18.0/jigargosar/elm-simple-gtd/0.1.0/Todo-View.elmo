@@ -447,53 +447,6 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 			}
 		});
 };
-var _jigargosar$elm_simple_gtd$Todo_View$projectProjectButton = function (vm) {
-	return A2(
-		_edvail$elm_polymer$Polymer_Paper$button,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id(
-				A2(_elm_lang$core$Basics_ops['++'], 'edit-project-button-', vm.key)),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$style(
-					{
-						ctor: '::',
-						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'height', '24px'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
-					_1: {
-						ctor: '::',
-						_0: vm.tabindexAV,
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropDownMsg),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(vm.projectDisplayName),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
 var _jigargosar$elm_simple_gtd$Todo_View$editContextButton = function (vm) {
 	return A2(
 		_edvail$elm_polymer$Polymer_Paper$button,
@@ -595,10 +548,12 @@ var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
 			}
 		});
 };
-var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (displayText) {
+var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
+	var _p9 = _p8;
+	var _p11 = _p9.displayText;
 	var nonLinkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, displayText),
+		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p11),
 		_elm_lang$html$Html$text);
 	var createLink = function (url) {
 		return A2(
@@ -612,7 +567,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (displayTex
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _p9.tabindexAV,
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			},
@@ -629,12 +588,12 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (displayTex
 	};
 	var linkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, displayText),
-		function (_p8) {
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p11),
+		function (_p10) {
 			return createLink(
 				function (_) {
 					return _.match;
-				}(_p8));
+				}(_p10));
 		});
 	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
 };
@@ -711,7 +670,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 								_0: _elm_lang$html$Html_Attributes$class('display-text'),
 								_1: {ctor: '[]'}
 							},
-							_jigargosar$elm_simple_gtd$Todo_View$parseDisplayText(vm.displayText)),
+							_jigargosar$elm_simple_gtd$Todo_View$parseDisplayText(vm)),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -770,11 +729,48 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 											_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
 											_1: {ctor: '[]'}
 										}),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+										_1: {ctor: '[]'}
+									}
 								},
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$Todo_View$editContextButton(vm),
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id(
+												A2(_elm_lang$core$Basics_ops['++'], 'edit-context-button-', vm.key)),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'color', 'black'),
+														_1: {
+															ctor: '::',
+															_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'min-width', '3rem'),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropDownMsg),
+													_1: {
+														ctor: '::',
+														_0: vm.tabindexAV,
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(vm.contextDisplayName),
+											_1: {ctor: '[]'}
+										}),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -789,11 +785,48 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 												_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
 												_1: {ctor: '[]'}
 											}),
-										_1: {ctor: '[]'}
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+											_1: {ctor: '[]'}
+										}
 									},
 									{
 										ctor: '::',
-										_0: _jigargosar$elm_simple_gtd$Todo_View$projectProjectButton(vm),
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$id(
+													A2(_elm_lang$core$Basics_ops['++'], 'edit-project-button-', vm.key)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$style(
+														{
+															ctor: '::',
+															_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'color', 'black'),
+															_1: {
+																ctor: '::',
+																_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'min-width', '3rem'),
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropDownMsg),
+														_1: {
+															ctor: '::',
+															_0: vm.tabindexAV,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(vm.projectDisplayName),
+												_1: {ctor: '[]'}
+											}),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -814,9 +847,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$keyedItem = function (vm) {
 var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
-		function (_p9) {
+		function (_p12) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p9));
+				_elm_lang$core$String$trim(_p12));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -866,11 +899,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
 		var now = appVM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
-		var onKeyDownMsg = function (_p10) {
-			var _p11 = _p10;
-			if (_jigargosar$elm_simple_gtd$X_Keyboard$isNoSoftKeyDown(_p11)) {
-				var _p12 = _p11.key;
-				switch (_p12.ctor) {
+		var onKeyDownMsg = function (_p13) {
+			var _p14 = _p13;
+			if (_jigargosar$elm_simple_gtd$X_Keyboard$isNoSoftKeyDown(_p14)) {
+				var _p15 = _p14.key;
+				switch (_p15.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleSelected);
 					case 'CharE':

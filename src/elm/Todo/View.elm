@@ -219,20 +219,36 @@ item vm =
                 [ class "display-text"
                 ]
               <|
-                parseDisplayText vm.displayText
+                parseDisplayText vm
             , div [ class "self-start" ] [ moreIconButton vm ]
             ]
         , div
             [ class "layout horizontal end-justified"
             ]
             [ div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
-            , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
-            , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
+            , div [ style [ "padding" => "0 8px" ], class "layout horizontal center-center" ]
+                [ a
+                    [ id ("edit-context-button-" ++ vm.key)
+                    , style [ "color" => "black", "min-width" => "3rem" ]
+                    , onClick vm.showContextDropDownMsg
+                    , vm.tabindexAV
+                    ]
+                    [ text vm.contextDisplayName ]
+                ]
+            , div [ style [ "padding" => "0 8px" ], class "layout horizontal center-center" ]
+                [ a
+                    [ id ("edit-project-button-" ++ vm.key)
+                    , style [ "color" => "black", "min-width" => "3rem" ]
+                    , onClick vm.showProjectDropDownMsg
+                    , vm.tabindexAV
+                    ]
+                    [ text vm.projectDisplayName ]
+                ]
             ]
         ]
 
 
-parseDisplayText displayText =
+parseDisplayText { displayText, tabindexAV } =
     --Markdown.toHtml Nothing displayText
     let
         createLink url =
@@ -240,6 +256,7 @@ parseDisplayText displayText =
                 [ href url
                 , target "_blank"
                 , onMouseDownStopPropagation Model.noop
+                , tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
 
@@ -284,18 +301,6 @@ editContextButton vm =
         , onClick vm.showContextDropDownMsg
         ]
         [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
-        ]
-
-
-projectProjectButton vm =
-    Paper.button
-        [ id ("edit-project-button-" ++ vm.key)
-        , style [ "height" => "24px" ]
-        , class "small padding-0 margin-0 shrink"
-        , vm.tabindexAV
-        , onClick vm.showProjectDropDownMsg
-        ]
-        [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
         ]
 
 

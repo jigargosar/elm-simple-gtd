@@ -177,7 +177,7 @@ entityListItem vm =
         [ onClick (vm.onActiveStateChanged True)
         ]
         [ Material.iconA vm.icon.name [ style [ "color" => AppColors.encode vm.icon.color ] ]
-        , div [ class "font-nowrap" ] [ View.Shared.defaultBadge vm ]
+        , div [ class "font-nowrap" ] [ View.Shared.badge vm.name vm.count ]
         ]
 
 

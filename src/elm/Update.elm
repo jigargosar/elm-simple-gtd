@@ -34,6 +34,7 @@ import Todo.Main
 import View
 import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
+import Tuple2
 
 
 type alias Return =
@@ -298,18 +299,19 @@ onSubMsg subMsg =
 
         OnPouchDBChange dbName encodedDoc ->
             let
-                onEntityUpsert entity =
+                afterEntityUpsertOnPouchDBChange entity =
                     case entity of
                         Entity.Todo model ->
-                            Todo.Msg.Upsert model |> andThenTodoMsg
+                            Todo.Msg.Upsert model |> OnTodoMsg
 
                         _ ->
-                            identity
+                            Model.noop
             in
                 Return.andThenMaybe
                     (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                        >>? Tuple.mapFirst OnEntityUpsert
-                        >>? uncurry update
+                        >>? (Tuple2.mapFirst afterEntityUpsertOnPouchDBChange
+                                >> uncurry update
+                            )
                     )
 
         OnFirebaseDatabaseChange dbName encodedDoc ->

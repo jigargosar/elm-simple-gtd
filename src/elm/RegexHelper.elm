@@ -3,12 +3,6 @@ module RegexHelper exposing (..)
 import Regex exposing (HowMany(All))
 
 
-
-
-
-
-
-
 url =
     urlPrefixRegexString ++ "\\S+" |> Regex.regex
 

@@ -1,9 +1,0 @@
-var _ggb$numeral_elm$Languages_Russian$russianOrdinal = function (number) {
-	return '.';
-};
-var _ggb$numeral_elm$Languages_Russian$lang = {
-	delimiters: {thousands: ' ', decimal: ','},
-	abbreviations: {thousand: 'тыс.', million: 'млн', billion: 'b', trillion: 'трлн'},
-	ordinal: _ggb$numeral_elm$Languages_Russian$russianOrdinal,
-	currency: {symbol: 'руб.'}
-};

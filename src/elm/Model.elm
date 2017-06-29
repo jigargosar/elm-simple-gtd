@@ -14,7 +14,6 @@ import X.Predicate as Pred
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
 import GroupDoc
-import Http
 import Keyboard.Combo exposing (combo1, combo2, combo3)
 import Keyboard.Combo as Combo
 import LaunchBar.Form

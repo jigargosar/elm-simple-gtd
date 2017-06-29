@@ -34,7 +34,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem = function (vm) {
 			_0: vm.tabindexAV,
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(vm.onKeyDownMsg),

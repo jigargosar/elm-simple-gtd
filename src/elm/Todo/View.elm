@@ -17,7 +17,6 @@ import Regex
 import RegexHelper
 import Set
 import String.Extra as String
-import Svg.Events exposing (onFocusIn, onFocusOut)
 import Time exposing (Time)
 import Todo
 import Todo.Form
@@ -204,7 +203,7 @@ item vm =
             , "selected" => vm.isSelected
             , "can-be-focused" => vm.canBeFocused
             ]
-        , onFocusIn vm.onFocusIn
+        , X.Html.onFocusIn vm.onFocusIn
         , vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
         , attribute "data-key" vm.key

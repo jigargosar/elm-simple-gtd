@@ -2,7 +2,6 @@ module Todo exposing (..)
 
 import Context
 import Date
-import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
 import X.Record exposing (over, set)
 import Json.Decode as D exposing (Decoder)
@@ -343,24 +342,6 @@ toAllPassPredicate predicateList =
 
 toAnyPassPredicate predicateList =
     (applyList predicateList >> List.any identity)
-
-
-createdAtInWords : Time -> Model -> String
-createdAtInWords now =
-    getCreatedAt
-        >> Date.fromTime
-        >> Date.Distance.inWordsWithConfig
-            ({ defaultConfig | includeSeconds = True })
-            (Date.fromTime now)
-
-
-modifiedAtInWords : Time -> Model -> String
-modifiedAtInWords now =
-    getModifiedAt
-        >> Date.fromTime
-        >> Date.Distance.inWordsWithConfig
-            ({ defaultConfig | includeSeconds = True })
-            (Date.fromTime now)
 
 
 type alias Store =

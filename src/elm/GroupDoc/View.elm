@@ -8,7 +8,6 @@ import Html.Attributes exposing (..)
 import Html.Keyed
 import Material
 import Model
-import Svg.Events exposing (onFocusIn)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import View.Shared exposing (defaultOkCancelDeleteButtons)
@@ -53,7 +52,7 @@ headerItem vm =
     in
         div
             [ vm.tabindexAV
-            , onFocusIn vm.onFocusIn
+            , X.Html.onFocusIn vm.onFocusIn
             , onKeyDown vm.onKeyDownMsg
             , classList [ "entity-item focusable-list-item collection-item" => True ]
             ]

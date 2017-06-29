@@ -1,9 +1,0 @@
-var _ggb$numeral_elm$Languages_German$germanOrdinal = function (number) {
-	return '.';
-};
-var _ggb$numeral_elm$Languages_German$lang = {
-	delimiters: {thousands: ' ', decimal: ','},
-	abbreviations: {thousand: 'k', million: 'm', billion: 'b', trillion: 't'},
-	ordinal: _ggb$numeral_elm$Languages_German$germanOrdinal,
-	currency: {symbol: '€'}
-};

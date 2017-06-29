@@ -1,9 +1,0 @@
-var _ggb$numeral_elm$Languages_Japanese$japaneseOrdinal = function (number) {
-	return '.';
-};
-var _ggb$numeral_elm$Languages_Japanese$lang = {
-	delimiters: {thousands: ',', decimal: '.'},
-	abbreviations: {thousand: '千', million: '百万', billion: '十億', trillion: '兆'},
-	ordinal: _ggb$numeral_elm$Languages_Japanese$japaneseOrdinal,
-	currency: {symbol: '¥'}
-};

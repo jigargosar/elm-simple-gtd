@@ -19,10 +19,6 @@ paperIconButton =
     Html.node "paper-icon-button"
 
 
-iconButton iconName attributes =
-    paperIconButton (attributes ++ [ iconA iconName ]) []
-
-
 dynamicAlign =
     boolProperty "dynamicAlign" True
 

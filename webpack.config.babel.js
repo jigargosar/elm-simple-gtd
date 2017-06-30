@@ -80,6 +80,9 @@ export default {
                 'static/**',
             ],
             stripPrefix:"static/",
+            mergeStaticsConfig: true,
+            minify: !isDevEnv,
+            maximumFileSizeToCacheInBytes:5242880, // 5mb
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",

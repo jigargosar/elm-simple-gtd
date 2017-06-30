@@ -48,7 +48,7 @@ export const setup = (app, dbList, localDeviceId) => {
     })
 
     app.ports["firebaseRefSet"].subscribe(([path, value]) => {
-        console.log(`ref(path).set(value)`, {path, value})
+        // console.log(`ref(path).set(value)`, {path, value})
         ref(path).set(value).catch(console.error)
     })
 

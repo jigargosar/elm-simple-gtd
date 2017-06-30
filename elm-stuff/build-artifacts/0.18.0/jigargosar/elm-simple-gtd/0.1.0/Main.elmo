@@ -16,7 +16,7 @@ var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub = function (tagg
 	return _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChange(
 		_elm_lang$core$Basics$uncurry(tagger));
 };
-var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
+var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
@@ -47,11 +47,15 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
 					})),
 			_1: {
 				ctor: '::',
-				_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
+				_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(model.keyComboModel),
 				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Todo_Main$subscriptions(m),
-					_1: {ctor: '[]'}
+					_0: _jigargosar$elm_simple_gtd$Todo_Main$subscriptions(model),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions(model),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});

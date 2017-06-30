@@ -26,6 +26,64 @@ const firebaseConfig = (() => {
     }
 })()
 
+export const setup = (app, dbList, localDeviceId) => {
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+    function ref(path) {
+        return firebaseApp.database().ref(path)
+    }
+
+    setupAuth(app, firebaseApp.auth())
+    app.ports["signIn"].subscribe(() => {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account',
+            // prompt: 'consent'
+        })
+
+        document.getElementById('firebase-auth')
+                .signInWithPopup(provider)
+                .catch(console.error)
+    })
+
+
+    setupSync(app, localDeviceId, ref, dbList)
+
+    app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
+        // console.log("[FJS]:firebaseSetupOnDisconnect: called")
+        const connectedRef = firebaseApp.database().ref(`/users/${uid}/clients/${deviceId}/connected`)
+        connectedRef.onDisconnect().set(false)
+    })
+
+    app.ports["firebaseRefSet"].subscribe(([path, value]) => {
+        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
+        const ref = firebaseApp.database().ref(path);
+        ref.set(value)
+           .catch(console.error)
+    })
+
+    app.ports["firebaseRefPush"].subscribe(([path, value]) => {
+        // console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
+        firebaseApp.database().ref(path).push(value)
+    })
+
+    app.ports["signOut"].subscribe(() => {
+        let googleAuth = document.getElementById('firebase-auth');
+        googleAuth
+            .signOut()
+            .catch(console.error)
+    })
+    return {
+        ref(...args){
+            return firebaseApp.database().ref(...args)
+        }
+    }
+}
+
+export default {
+    setup
+}
+
 function setupSync(app, localDeviceId, ref, dbList) {
     let changesEmitters = []
 
@@ -152,59 +210,9 @@ function setupSync(app, localDeviceId, ref, dbList) {
     })
 }
 
-export const setup = (app, dbList, localDeviceId) => {
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-    function ref(path) {
-        return firebaseApp.database().ref(path)
-    }
-
-    app.ports["signIn"].subscribe(() => {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({
-            prompt: 'select_account',
-            // prompt: 'consent'
-        })
-
-        document.getElementById('firebase-auth')
-                .signInWithPopup(provider)
-                .catch(console.error)
+function setupAuth(app, auth) {
+    auth.onIdTokenChanged(user=>{
+        // console.log("fire.onIdTokenChanged - user:",user)
+        app.ports["onFirebaseUserChanged"].send(user)
     })
-
-
-    setupSync(app, localDeviceId, ref, dbList)
-
-    app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
-        // console.log("[FJS]:firebaseSetupOnDisconnect: called")
-        const connectedRef = firebaseApp.database().ref(`/users/${uid}/clients/${deviceId}/connected`)
-        connectedRef.onDisconnect().set(false)
-    })
-
-    app.ports["firebaseRefSet"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
-        const ref = firebaseApp.database().ref(path);
-        ref.set(value)
-           .catch(console.error)
-    })
-
-    app.ports["firebaseRefPush"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
-        firebaseApp.database().ref(path).push(value)
-    })
-
-    app.ports["signOut"].subscribe(() => {
-        let googleAuth = document.getElementById('firebase-auth');
-        googleAuth
-            .signOut()
-            .catch(console.error)
-    })
-    return {
-        ref(...args){
-            return firebaseApp.database().ref(...args)
-        }
-    }
-}
-
-export default {
-    setup
 }

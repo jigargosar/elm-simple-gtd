@@ -38,7 +38,7 @@ main =
 
 
 subscriptions : Model.Model -> Sub Model.Msg
-subscriptions m =
+subscriptions model =
     Sub.batch
         [ Sub.batch
             [ Time.every (Time.second * 1) Model.OnNowChanged
@@ -48,6 +48,7 @@ subscriptions m =
             , onFirebaseDatabaseChangeSub Model.OnFirebaseDatabaseChange
             ]
             |> Sub.map Model.OnSubMsg
-        , Keyboard.Combo.subscriptions m.keyComboModel
-        , Todo.Main.subscriptions m
+        , Keyboard.Combo.subscriptions model.keyComboModel
+        , Todo.Main.subscriptions model
+        , Firebase.Main.subscriptions model
         ]

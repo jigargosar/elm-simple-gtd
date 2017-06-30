@@ -1,5 +1,5 @@
 "use strict"
-
+// const PouchDB = require("pouchdb-browser")
 // self.importScripts("./common.js")
 
 // self.addEventListener('fetch', function (event) {

@@ -1,6 +1,6 @@
 {
   "name": "del",
-  "version": "3.0.0",
+  "version": "2.2.2",
   "description": "Delete files and folders",
   "license": "MIT",
   "repository": "sindresorhus/del",
@@ -10,7 +10,7 @@
     "url": "sindresorhus.com"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=0.10.0"
   },
   "scripts": {
     "test": "xo && ava"
@@ -20,9 +20,6 @@
   ],
   "keywords": [
     "delete",
-    "files",
-    "folders",
-    "directories",
     "del",
     "remove",
     "destroy",
@@ -38,24 +35,27 @@
     "glob",
     "gulpfriendly",
     "file",
+    "files",
     "folder",
-    "directory",
     "dir",
+    "directory",
     "fs",
     "filesystem"
   ],
   "dependencies": {
-    "globby": "^6.1.0",
+    "globby": "^5.0.0",
     "is-path-cwd": "^1.0.0",
     "is-path-in-cwd": "^1.0.0",
-    "p-map": "^1.1.1",
-    "pify": "^3.0.0",
+    "object-assign": "^4.0.1",
+    "pify": "^2.0.0",
+    "pinkie-promise": "^2.0.0",
     "rimraf": "^2.2.8"
   },
   "devDependencies": {
     "ava": "*",
-    "make-dir": "^1.0.0",
-    "tempy": "^0.1.0",
+    "fs-extra": "^0.30.0",
+    "path-exists": "^2.0.0",
+    "tempfile": "^1.1.1",
     "xo": "*"
   }
 }

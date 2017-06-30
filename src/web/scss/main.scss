@@ -22,7 +22,13 @@ $roboto-font-path: $font-path;
 @import "material/components/icons-material-design";
 @import "material/components/grid";
 @import "material/components/navbar";
-@import "material/components/roboto";
+
+// --
+@import "fonts";
+//@import "material/components/roboto";
+// --
+
+
 @import "material/components/typography";
 @import "material/components/transitions";
 @import "material/components/cards";
@@ -49,9 +55,6 @@ $roboto-font-path: $font-path;
 @import "material/components/date_picker/default.time";
 
 
-// --
-@import "fonts";
-// --
 
 $text-color: $off-black;
 $background: #fff;

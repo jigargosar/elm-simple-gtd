@@ -4,6 +4,8 @@ import ServiceWorkerWebpackPlugin from "serviceworker-webpack-plugin"
 import _ from "ramda"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+import SWPrecacheWebpackPlugin from "sw-precache-webpack-plugin"
+
 
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER === "true"
@@ -70,10 +72,15 @@ export default {
                 return Promise.resolve(serviceWorkerTemplate)
             }
         }),
+        new SWPrecacheWebpackPlugin({
+            cacheId: 'simple-gtd',
+            filename: 'service-worker.js',
+            importScripts:["notification-sw.js"],
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",
             minChunks: 2
-        })
+        }),
     ],
 
     module: {
@@ -89,7 +96,7 @@ export default {
                             verbose: true,
                             warn: false,
                             debug: false,
-                            cwd:path.resolve(__dirname),
+                            cwd: path.resolve(__dirname),
                         },
                     }
                 ],
@@ -147,17 +154,18 @@ export default {
 
     devServer: {
         // stats: {colors: false, "errors-only":true},
-        stats: "errors-only",
+        // stats: "errors-only",
+        // stats: "minimal",
         port: 8020,
         overlay: true,
         watchContentBase: true,
         // open:true,
         inline: true,
-        contentBase:  [path.join(__dirname, "static")],
+        contentBase: [path.join(__dirname, "static")],
         host: "localhost",
         /*watchOptions: {
-            aggregateTimeout: 700,
-        },*/
+         aggregateTimeout: 700,
+         },*/
     },
 };
 

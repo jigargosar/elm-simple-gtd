@@ -156,8 +156,8 @@ export const build = {
         run("rimraf dev")
         run("cp -R static/ dev")
         run(`${travisRunPrefix} webpack --progress`, dev().buildRunOptions)
-        run("polymer --version", {cwd: "dev"})
-        run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
+        // run("polymer --version", {cwd: "dev"})
+        // run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },
     // skip copying files to docs.
     prod: function () {

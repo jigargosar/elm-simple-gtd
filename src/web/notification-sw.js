@@ -2,39 +2,35 @@
 
 //noinspection JSUnresolvedVariable
 const isDevEnv = serviceWorkerOption.isDevEnv
-// const isDevEnv2 = serviceWorkerOption.isDevEnv
 
-
-self.addEventListener('install', function (event) {
-    if (isDevEnv) {
+if (isDevEnv) {
+    self.addEventListener('install', function (event) {
         console.log("calling skipWaiting")
         return self.skipWaiting()
-    }
-})
-self.addEventListener('activate', function (event) {
-    if (isDevEnv) {
+    })
+    self.addEventListener('activate', function (event) {
         console.log("calling claim")
         return self.clients.claim()
-    }
-})
+    })
+}
 
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
     // event.notification.close();
-    const skipFocusActionList = (event.notification.data && event.notification.data.skipFocusActionList)? event.notification.data.skipFocusActionList : []
-    const skipFocus = skipFocusActionList.findIndex(action => action === event.action) >=0
+    const skipFocusActionList = (event.notification.data && event.notification.data.skipFocusActionList) ? event.notification.data.skipFocusActionList : []
+    const skipFocus = skipFocusActionList.findIndex(action => action === event.action) >= 0
 
     event.waitUntil(
         clients
             .matchAll({type: "window"})
             .then(function (clientList) {
                 const client = clientList[0]
-                if(client){
+                if (client) {
                     postMessage(client, event)
                     if (!skipFocus && client.focus) {
                         return client.focus();
                     }
-                }else{
+                } else {
                     if (clients.openWindow) {
                         return clients
                         // .openWindow(url)

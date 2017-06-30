@@ -34,17 +34,6 @@ export const setup = (app, dbList, localDeviceId) => {
     }
 
     setupAuth(app, firebaseApp.auth())
-    app.ports["signIn"].subscribe(() => {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({
-            prompt: 'select_account',
-            // prompt: 'consent'
-        })
-
-        document.getElementById('firebase-auth')
-                .signInWithPopup(provider)
-                .catch(console.error)
-    })
 
 
     setupSync(app, localDeviceId, ref, dbList)
@@ -67,12 +56,7 @@ export const setup = (app, dbList, localDeviceId) => {
         firebaseApp.database().ref(path).push(value)
     })
 
-    app.ports["signOut"].subscribe(() => {
-        let googleAuth = document.getElementById('firebase-auth');
-        googleAuth
-            .signOut()
-            .catch(console.error)
-    })
+
     return {
         ref(...args){
             return firebaseApp.database().ref(...args)
@@ -211,8 +195,24 @@ function setupSync(app, localDeviceId, ref, dbList) {
 }
 
 function setupAuth(app, auth) {
-    auth.onIdTokenChanged(user=>{
+    auth.onIdTokenChanged(user => {
         // console.log("fire.onIdTokenChanged - user:",user)
         app.ports["onFirebaseUserChanged"].send(user)
     })
+
+    app.ports["signIn"].subscribe(() => {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account',
+            // prompt: 'consent'
+        })
+
+        auth.signInWithPopup(provider)
+            .catch(console.error)
+    })
+    app.ports["signOut"].subscribe(() => {
+        auth.signOut()
+            .catch(console.error)
+    })
+
 }

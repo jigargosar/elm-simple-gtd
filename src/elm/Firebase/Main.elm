@@ -52,7 +52,7 @@ updateClientCmd client uid =
 subscriptions : Model.Subscriptions
 subscriptions model =
     Sub.batch
-        [ onFirebaseUserChanged OnUserChangedEncoded
+        [ onFirebaseUserChanged OnUserChanged
         ]
         |> Sub.map Model.OnFirebaseMsg
 
@@ -99,18 +99,17 @@ update andThenUpdate msg =
                                     >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
                 )
 
-        OnUserChangedEncoded encodedUser ->
+        OnUserChanged encodedUser ->
             D.decodeValue Firebase.userDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
-                !|> (OnUserChanged >> Model.OnFirebaseMsg >> andThenUpdate)
+                !|> (\user ->
+                        Return.map (Model.setUser user)
+                            >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
+                            >> maybeEffect firebaseUpdateClientCmd
+                            >> maybeEffect firebaseSetupOnDisconnectCmd
+                            >> startSyncWithFirebase user
+                    )
                 != identity
-
-        OnUserChanged user ->
-            Return.map (Model.setUser user)
-                >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
-                >> maybeEffect firebaseUpdateClientCmd
-                >> maybeEffect firebaseSetupOnDisconnectCmd
-                >> startSyncWithFirebase user
 
         OnFCMTokenChanged token ->
             Return.map (Model.setFCMToken token)

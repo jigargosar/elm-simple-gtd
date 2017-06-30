@@ -10,7 +10,6 @@ import Menu
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
-import Firebase.View
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -30,11 +29,7 @@ import View.MainMenu
 
 
 init m =
-    div [ id "root" ]
-        ([ Firebase.View.init m
-         , appView m
-         ]
-        )
+    div [ id "root" ] [ appView m ]
 
 
 appView model =

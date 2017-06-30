@@ -196,11 +196,7 @@ var _jigargosar$elm_simple_gtd$View$init = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Firebase_View$init(m),
-			_1: {
-				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$View$appView(m),
-				_1: {ctor: '[]'}
-			}
+			_0: _jigargosar$elm_simple_gtd$View$appView(m),
+			_1: {ctor: '[]'}
 		});
 };

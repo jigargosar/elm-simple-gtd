@@ -39,7 +39,7 @@ async function setupNotifications(fire, app) {
     const intervalId = setInterval(() => {
         let messaging = document.getElementById("fb-messaging");
         if (!messaging) {
-            console.warn(`document.getElementById("fb-messaging")`, messaging)
+            // console.warn(`document.getElementById("fb-messaging")`, messaging)
             return
         }
         console.debug("messaging.activate(reg)")

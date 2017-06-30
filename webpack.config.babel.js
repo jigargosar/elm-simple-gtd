@@ -69,7 +69,7 @@ export default {
             entry: './notification-sw.js',
             filename: "notification-sw.js",
             transformOptions(options){
-                return {isDevEnv}
+                return {isDevEnv:isWebPackDevServer}
             }
         }),
         new SWPrecacheWebpackPlugin({
@@ -81,7 +81,7 @@ export default {
             ],
             stripPrefix:"static/",
             mergeStaticsConfig: true,
-            minify: !isDevEnv,
+            minify: !isWebPackDevServer,
             maximumFileSizeToCacheInBytes:5242880, // 5mb
         }),
         new webpack.optimize.CommonsChunkPlugin({
@@ -140,9 +140,8 @@ export default {
                     {
                         loader: 'url-loader',
                         options: {
-                            name: "[name].[ext]",
-                            outputPath: "/assets/fonts/",
-                            useRelativePath: false,
+                            name: "[path][name].[ext]",
+                            // useRelativePath: isWebPackDevServer,
                             limit: 10000,
                             mimetype: "application/font-woff",
                         }

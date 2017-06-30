@@ -107,7 +107,8 @@ export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.l
 })
 
 export const hotmon = () => {
-    run(`nodemon --watch runfile.js --watch src/elm/Native/** --watch webpack.config.babel.js --watch package.json \
+    run(`nodemon --watch runfile.js --watch src/elm/Native/** \
+        --watch webpack.config.babel.js --watch package.json \
             --watch elm-package.json --exec "run hot"`)
 }
 
@@ -155,7 +156,7 @@ export const build = {
         console.info("build:dev")
         run("rimraf dev")
         run("cp -R static/ dev")
-        run(`${travisRunPrefix} webpack --progress`, dev().buildRunOptions)
+        run(`${travisRunPrefix} webpack --progress --optimize-minimize`, dev().buildRunOptions)
         // run("polymer --version", {cwd: "dev"})
         // run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },

@@ -1,6 +1,6 @@
 'use strict';
 
-const reg = IS_DEVELOPMENT_ENV ?
+const reg = process.env.WEBPACK_DEV_SERVER === "true" ?
     require('serviceworker-webpack-plugin/lib/runtime').register()
     : register()
 

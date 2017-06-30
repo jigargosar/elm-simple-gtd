@@ -1,5 +1,7 @@
 ## Upcoming
 * completely remove polymer web components
+* remove poly-fire
+* remove bower
 
 ## v0.18.65 - 2017-06-26
 * fix /app/ page not being served by sw, by directly referring  to /app/index.html

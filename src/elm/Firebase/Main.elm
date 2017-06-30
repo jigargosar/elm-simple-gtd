@@ -37,6 +37,9 @@ port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.DeviceId ) -> Cmd msg
 port onFirebaseUserChanged : (E.Value -> msg) -> Sub msg
 
 
+port onFCMTokenChanged : (E.Value -> msg) -> Sub msg
+
+
 setupOnDisconnectCmd client uid =
     firebaseSetupOnDisconnect ( uid, client.id )
 

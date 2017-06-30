@@ -27,39 +27,35 @@ const firebaseConfig = (() => {
 })()
 
 export const setup = (app, dbList, localDeviceId) => {
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 
-    setupAuth(app, firebaseApp.auth())
+    setupAuth(app, firebase.auth())
 
     function ref(path) {
-        return firebaseApp.database().ref(path)
+        return firebase.database().ref(path)
     }
 
     setupSync(app, localDeviceId, ref, dbList)
 
     app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
         // console.log("[FJS]:firebaseSetupOnDisconnect: called")
-        const connectedRef = firebaseApp.database().ref(`/users/${uid}/clients/${deviceId}/connected`)
+        const connectedRef = ref(`/users/${uid}/clients/${deviceId}/connected`)
         connectedRef.onDisconnect().set(false)
     })
 
     app.ports["firebaseRefSet"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
-        const ref = firebaseApp.database().ref(path);
-        ref.set(value)
-           .catch(console.error)
+        // console.log(`ref(path).set(value)`, {path, value})
+        ref(path).set(value).catch(console.error)
     })
 
     app.ports["firebaseRefPush"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
-        firebaseApp.database().ref(path).push(value)
+        // console.log(`ref(path).push(value)`, {path, value})
+        ref(path).push(value).catch(console.error)
     })
 
 
     return {
-        ref(...args){
-            return firebaseApp.database().ref(...args)
-        }
+        ref
     }
 }
 

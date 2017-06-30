@@ -68,9 +68,6 @@ export default {
         new ServiceWorkerWebpackPlugin({
             entry: './notification-sw.js',
             filename: "notification-sw.js",
-            template: function () {
-                return Promise.resolve(serviceWorkerTemplate)
-            },
             transformOptions(options){
                 return {isDevEnv}
             }
@@ -171,10 +168,3 @@ export default {
          },*/
     },
 };
-
-
-const serviceWorkerTemplate =
-    `
-        const isDevEnv = ${isDevEnv};
-    
-    `

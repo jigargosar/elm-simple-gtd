@@ -111,8 +111,8 @@ export const setup = (app, dbList, localDeviceId) => {
             )
         }
 
-        const onFirebaseChange = doc => {
-            app.ports["onFirebaseChange"].send([dbName, doc])
+        const onFirebaseDatabaseChange = doc => {
+            app.ports["onFirebaseDatabaseChange"].send([dbName, doc])
             updateLastPersistedAt(doc)
         }
 
@@ -141,13 +141,13 @@ export const setup = (app, dbList, localDeviceId) => {
                           updateLastPersistedAt(doc)
                           return "[FireToELm] ignoring local change: note we receive this message twice when online, since we are setting firebaseServerPersistedAt field."
                       } else {
-                          onFirebaseChange(doc)
+                          onFirebaseDatabaseChange(doc)
                           return "[FireToELm] sending non-local change"
                       }
                   })
                   .catch(e => {
                       if (e.status === 404) {
-                          onFirebaseChange(doc)
+                          onFirebaseDatabaseChange(doc)
                           return "[FireToELm] docs not found locally, sending to elm"
                       }
                       throw e;

@@ -18,11 +18,11 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
+port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
 
 
 onFirebaseDatabaseChangeSub tagger =
-    onFirebaseChange (uncurry tagger)
+    onFirebaseDatabaseChange (uncurry tagger)
 
 
 main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Model.Msg

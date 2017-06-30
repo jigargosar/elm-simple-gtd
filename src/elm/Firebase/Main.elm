@@ -100,12 +100,10 @@ update andThenUpdate msg =
                 )
 
         OnUserChangedEncoded encodedUser ->
-            let
-                _ =
-                    D.decodeValue Firebase.userDecoder encodedUser
-                        |> Result.mapError (Debug.log "Error decoding User")
-            in
-                identity
+            D.decodeValue Firebase.userDecoder encodedUser
+                |> Result.mapError (Debug.log "Error decoding User")
+                !|> (OnUserChanged >> Model.OnFirebaseMsg >> andThenUpdate)
+                != identity
 
         OnUserChanged user ->
             Return.map (Model.setUser user)

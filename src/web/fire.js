@@ -195,6 +195,7 @@ function setupSync(app, localDeviceId, ref, dbList) {
 }
 
 function setupAuth(app, auth) {
+
     auth.onIdTokenChanged(user => {
         // console.log("fire.onIdTokenChanged - user:",user)
         app.ports["onFirebaseUserChanged"].send(user)

@@ -59,7 +59,7 @@ export default {
         new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
-            "window.jQuery": "jquery"
+            "window.jQuery": "jquery",
         }),
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
@@ -76,6 +76,10 @@ export default {
             cacheId: 'simple-gtd',
             filename: 'service-worker.js',
             importScripts:["notification-sw.js"],
+            staticFileGlobs: [
+                'static/**',
+            ],
+            stripPrefix:"static/",
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",

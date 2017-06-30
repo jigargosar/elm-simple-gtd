@@ -131,11 +131,20 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 							_Fresheyeball$elm_return$Return$singleton(model));
 					});
 			case 'OnUserChangedEncoded':
-				var _p5 = A2(
-					_elm_lang$core$Result$mapError,
-					_elm_lang$core$Debug$log('Error decoding User'),
-					A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$userDecoder, _p0._0));
-				return _elm_lang$core$Basics$identity;
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['!|>'],
+						A2(
+							_elm_lang$core$Result$mapError,
+							_elm_lang$core$Debug$log('Error decoding User'),
+							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$userDecoder, _p0._0)),
+						function (_p5) {
+							return andThenUpdate(
+								_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(
+									_jigargosar$elm_simple_gtd$Firebase$OnUserChanged(_p5)));
+						}),
+					_elm_lang$core$Basics$identity);
 			case 'OnUserChanged':
 				var _p7 = _p0._0;
 				return function (_p6) {

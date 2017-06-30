@@ -1,12 +1,6 @@
 module CommonMsg exposing (..)
 
 import DomPorts exposing (DomSelector)
-
-
-
-
-
-
 import Return
 import X.Debug
 
@@ -36,7 +30,7 @@ update msg =
 type alias Helper msg =
     { noOp : msg
     , focus : DomSelector -> msg
-    , logString : DomSelector -> msg
+    , logString : String -> msg
     }
 
 

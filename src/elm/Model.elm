@@ -131,6 +131,10 @@ noop =
     commonMsg.noOp
 
 
+logString =
+    commonMsg.logString
+
+
 type alias EntityListViewType =
     Entity.ListViewType
 

@@ -16,6 +16,7 @@ type Msg
     | AfterUserChanged
     | OnSkipSignIn
     | OnUserChanged User
+    | OnUserChangedEncoded E.Value
     | OnFCMTokenChanged FCMToken
     | OnFirebaseConnectionChanged Bool
 

@@ -1596,6 +1596,7 @@ var _jigargosar$elm_simple_gtd$Model$OnCommonMsg = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Model$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Model$OnCommonMsg);
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+var _jigargosar$elm_simple_gtd$Model$logString = _jigargosar$elm_simple_gtd$Model$commonMsg.logString;
 var _jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
 var _jigargosar$elm_simple_gtd$Model$SyncView = {ctor: 'SyncView'};
 var _jigargosar$elm_simple_gtd$Model$EntityListView = function (a) {

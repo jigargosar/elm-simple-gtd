@@ -130,12 +130,18 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						}()(
 							_Fresheyeball$elm_return$Return$singleton(model));
 					});
+			case 'OnUserChangedEncoded':
+				var _p5 = A2(
+					_elm_lang$core$Result$mapError,
+					_elm_lang$core$Debug$log('Error decoding User'),
+					A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$userDecoder, _p0._0));
+				return _elm_lang$core$Basics$identity;
 			case 'OnUserChanged':
-				var _p6 = _p0._0;
-				return function (_p5) {
+				var _p7 = _p0._0;
+				return function (_p6) {
 					return A2(
 						_jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase,
-						_p6,
+						_p7,
 						A2(
 							_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
 							_jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd,
@@ -147,28 +153,40 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 									_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
 									A2(
 										_Fresheyeball$elm_return$Return$map,
-										_jigargosar$elm_simple_gtd$Model$setUser(_p6),
-										_p5)))));
+										_jigargosar$elm_simple_gtd$Model$setUser(_p7),
+										_p6)))));
 				};
 			case 'OnFCMTokenChanged':
-				return function (_p7) {
-					return A2(
-						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
-						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
-						A2(
-							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model$setFCMToken(_p0._0),
-							_p7));
-				};
-			default:
 				return function (_p8) {
 					return A2(
 						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
 						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
 						A2(
 							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model$updateFirebaseConnection(_p0._0),
+							_jigargosar$elm_simple_gtd$Model$setFCMToken(_p0._0),
 							_p8));
+				};
+			default:
+				return function (_p9) {
+					return A2(
+						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Model$updateFirebaseConnection(_p0._0),
+							_p9));
 				};
 		}
 	});
+var _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged = _elm_lang$core$Native_Platform.incomingPort('onFirebaseUserChanged', _elm_lang$core$Json_Decode$value);
+var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
+	return A2(
+		_elm_lang$core$Platform_Sub$map,
+		_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg,
+		_elm_lang$core$Platform_Sub$batch(
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase$OnUserChangedEncoded),
+				_1: {ctor: '[]'}
+			}));
+};

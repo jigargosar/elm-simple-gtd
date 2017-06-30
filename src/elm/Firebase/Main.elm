@@ -34,6 +34,9 @@ port fireStartSync : String -> Cmd msg
 port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.DeviceId ) -> Cmd msg
 
 
+port onFirebaseUserChanged : (E.Value -> msg) -> Sub msg
+
+
 setupOnDisconnectCmd client uid =
     firebaseSetupOnDisconnect ( uid, client.id )
 
@@ -48,7 +51,10 @@ updateClientCmd client uid =
 
 subscriptions : Model.Subscriptions
 subscriptions model =
-    Sub.batch []
+    Sub.batch
+        [ onFirebaseUserChanged OnUserChangedEncoded
+        ]
+        |> Sub.map Model.OnFirebaseMsg
 
 
 overSignInModel =
@@ -92,6 +98,14 @@ update andThenUpdate msg =
                                     >> andThenUpdate Model.OnPersistLocalPref
                                     >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
                 )
+
+        OnUserChangedEncoded encodedUser ->
+            let
+                _ =
+                    D.decodeValue Firebase.userDecoder encodedUser
+                        |> Result.mapError (Debug.log "Error decoding User")
+            in
+                identity
 
         OnUserChanged user ->
             Return.map (Model.setUser user)

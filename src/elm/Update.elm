@@ -3,7 +3,7 @@ port module Update exposing (..)
 import AppDrawer.Main
 import CommonMsg
 import Document
-import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
+import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
 import ExclusiveMode
 import Entity

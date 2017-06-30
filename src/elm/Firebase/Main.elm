@@ -114,9 +114,14 @@ update andThenUpdate msg =
                     )
                 != identity
 
-        OnFCMTokenChanged token ->
-            Return.map (Model.setFCMToken token)
-                >> maybeEffect firebaseUpdateClientCmd
+        OnFCMTokenChanged encodedToken ->
+            D.decodeValue Firebase.fcmTokenDecoder encodedToken
+                |> Result.mapError (Debug.log "Error decoding User")
+                !|> (\token ->
+                        Return.map (Model.setFCMToken token)
+                            >> maybeEffect firebaseUpdateClientCmd
+                    )
+                != identity
 
         OnFirebaseConnectionChanged connected ->
             Return.map (Model.updateFirebaseConnection connected)

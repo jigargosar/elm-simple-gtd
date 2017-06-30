@@ -48,7 +48,7 @@ self.addEventListener('notificationclick', function (event) {
 }, false);
 
 function postMessage(client, event) {
-    console.log("posting notification-clicked from event", event)
+    // console.log("posting notification-clicked from event", event)
     client.postMessage({
         type: "notification-clicked",
         action: event.action,

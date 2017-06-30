@@ -1,7 +1,7 @@
 "use strict";
 import _ from "ramda"
-import $ from "jquery"
 import sound from "./sound"
+import swRegister from "./sw-register"
 
 export default {setup: setupNotifications}
 
@@ -11,9 +11,6 @@ async function setupNotifications(fire, app) {
         console.warn("serviceWorker not found in navigator")
         return
     }
-
-    const swScriptPath = IS_DEVELOPMENT_ENV ? "/notification-sw.js" : '/service-worker.js'
-    // const swScriptPath = "/notification-sw.js"
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
@@ -34,7 +31,7 @@ async function setupNotifications(fire, app) {
     });
 
     // console.info("navigator.serviceWorker.register: ", swScriptPath)
-    const reg = await navigator.serviceWorker.register(swScriptPath)
+    const reg = await swRegister
 
     const intervalId = setInterval(() => {
         let messaging = document.getElementById("fb-messaging");

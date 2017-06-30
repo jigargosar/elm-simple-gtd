@@ -70,6 +70,9 @@ export default {
             filename: "notification-sw.js",
             template: function () {
                 return Promise.resolve(serviceWorkerTemplate)
+            },
+            transformOptions(options){
+                return {isDevEnv}
             }
         }),
         new SWPrecacheWebpackPlugin({

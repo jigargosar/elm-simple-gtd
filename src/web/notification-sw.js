@@ -1,15 +1,20 @@
 "use strict"
-// const PouchDB = require("pouchdb-browser")
-// self.importScripts("./common.js")
 
-// self.addEventListener('fetch', function (event) {
-//     // console.log("sw:fetch listener event",event, event.request.url)
-// })
+//noinspection JSUnresolvedVariable
+const isDevEnv = serviceWorkerOption.isDevEnv
+// const isDevEnv2 = serviceWorkerOption.isDevEnv
+
 
 self.addEventListener('install', function (event) {
-    //noinspection JSUnresolvedVariable
     if (isDevEnv) {
-        event.waitUntil(self.skipWaiting())
+        console.log("calling skipWaiting")
+        return self.skipWaiting()
+    }
+})
+self.addEventListener('activate', function (event) {
+    if (isDevEnv) {
+        console.log("calling claim")
+        return self.clients.claim()
     }
 })
 

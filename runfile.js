@@ -30,8 +30,8 @@ const TRAVIS_COMMIT = process.env["TRAVIS_COMMIT"]
 const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
 const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 
-const firebaseDeployDev = `firebase deploy --except functions --project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
-const firebaseDeployProd = `firebase deploy --except functions --project prod --public app/build/unbundled/ --token ${FIREBASE_TOKEN}`
+const firebaseDeployDev = `firebase deploy --except functions --project dev --public dev/ --token ${FIREBASE_TOKEN}`
+const firebaseDeployProd = `firebase deploy --except functions --project prod --public app/ --token ${FIREBASE_TOKEN}`
 
 const doesTravisTagMatchReleaseSemVer =
     _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
@@ -167,8 +167,8 @@ export const build = {
         // run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         run(`${travisRunPrefix} webpack -p --progress`, prod().buildRunOptions)
-        run("polymer --version", {cwd: "app"})
-        run(`${travisRunPrefix} polymer build`, {cwd: "app"})
+        // run("polymer --version", {cwd: "app"})
+        // run(`${travisRunPrefix} polymer build`, {cwd: "app"})
         // run("cp -R app/build/unbundled/ docs")
     }
 }

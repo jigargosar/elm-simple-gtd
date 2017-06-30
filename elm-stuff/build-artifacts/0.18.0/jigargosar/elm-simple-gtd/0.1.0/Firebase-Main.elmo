@@ -194,6 +194,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 		}
 	});
 var _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged = _elm_lang$core$Native_Platform.incomingPort('onFirebaseUserChanged', _elm_lang$core$Json_Decode$value);
+var _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged = _elm_lang$core$Native_Platform.incomingPort('onFCMTokenChanged', _elm_lang$core$Json_Decode$value);
+var _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseConnectionChanged = _elm_lang$core$Native_Platform.incomingPort('onFirebaseConnectionChanged', _elm_lang$core$Json_Decode$bool);
 var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 	return A2(
 		_elm_lang$core$Platform_Sub$map,
@@ -202,7 +204,14 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 			{
 				ctor: '::',
 				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase$OnUserChanged),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged(_jigargosar$elm_simple_gtd$Firebase$OnFCMTokenChanged),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseConnectionChanged(_jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged),
+						_1: {ctor: '[]'}
+					}
+				}
 			}));
 };
-var _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged = _elm_lang$core$Native_Platform.incomingPort('onFCMTokenChanged', _elm_lang$core$Json_Decode$value);

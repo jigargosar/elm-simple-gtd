@@ -40,6 +40,9 @@ port onFirebaseUserChanged : (E.Value -> msg) -> Sub msg
 port onFCMTokenChanged : (E.Value -> msg) -> Sub msg
 
 
+port onFirebaseConnectionChanged : (Bool -> msg) -> Sub msg
+
+
 setupOnDisconnectCmd client uid =
     firebaseSetupOnDisconnect ( uid, client.id )
 
@@ -56,6 +59,8 @@ subscriptions : Model.Subscriptions
 subscriptions model =
     Sub.batch
         [ onFirebaseUserChanged OnUserChanged
+        , onFCMTokenChanged OnFCMTokenChanged
+        , onFirebaseConnectionChanged OnFirebaseConnectionChanged
         ]
         |> Sub.map Model.OnFirebaseMsg
 

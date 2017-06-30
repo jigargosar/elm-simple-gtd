@@ -37,6 +37,10 @@ export const setup = (app, dbList, localDeviceId) => {
 
     setupSync(app, localDeviceId, ref, dbList)
 
+    ref("/.info/connected").on("value",snapshot=>{
+        app.ports["onFirebaseConnectionChanged"].send(snapshot.val())
+    })
+
     app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
         // console.log("[FJS]:firebaseSetupOnDisconnect: called")
         const connectedRef = ref(`/users/${uid}/clients/${deviceId}/connected`)
@@ -44,7 +48,7 @@ export const setup = (app, dbList, localDeviceId) => {
     })
 
     app.ports["firebaseRefSet"].subscribe(([path, value]) => {
-        // console.log(`ref(path).set(value)`, {path, value})
+        console.log(`ref(path).set(value)`, {path, value})
         ref(path).set(value).catch(console.error)
     })
 

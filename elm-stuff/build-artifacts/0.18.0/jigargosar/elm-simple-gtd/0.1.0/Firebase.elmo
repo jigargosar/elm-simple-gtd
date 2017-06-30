@@ -60,65 +60,6 @@ var _jigargosar$elm_simple_gtd$Firebase$fcmTokenDecoder = _elm_lang$core$Json_De
 var _jigargosar$elm_simple_gtd$Firebase$initClient = function (deviceId) {
 	return {id: deviceId, connected: false, token: _elm_lang$core$Maybe$Nothing};
 };
-var _jigargosar$elm_simple_gtd$Firebase$firebaseRefSet = _elm_lang$core$Native_Platform.outgoingPort(
-	'firebaseRefSet',
-	function (v) {
-		return [v._0, v._1];
-	});
-var _jigargosar$elm_simple_gtd$Firebase$updateClientCmd = F2(
-	function (client, uid) {
-		return _jigargosar$elm_simple_gtd$Firebase$firebaseRefSet(
-			{
-				ctor: '_Tuple2',
-				_0: A2(
-					_elm_lang$core$Basics_ops['++'],
-					'/users/',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						uid,
-						A2(_elm_lang$core$Basics_ops['++'], '/clients/', client.id))),
-				_1: _jigargosar$elm_simple_gtd$Firebase$encodeClient(client)
-			});
-	});
-var _jigargosar$elm_simple_gtd$Firebase$firebaseRefPush = _elm_lang$core$Native_Platform.outgoingPort(
-	'firebaseRefPush',
-	function (v) {
-		return [v._0, v._1];
-	});
-var _jigargosar$elm_simple_gtd$Firebase$fireStartSync = _elm_lang$core$Native_Platform.outgoingPort(
-	'fireStartSync',
-	function (v) {
-		return v;
-	});
-var _jigargosar$elm_simple_gtd$Firebase$startSyncCmd = _jigargosar$elm_simple_gtd$Firebase$fireStartSync;
-var _jigargosar$elm_simple_gtd$Firebase$firebaseSetupOnDisconnect = _elm_lang$core$Native_Platform.outgoingPort(
-	'firebaseSetupOnDisconnect',
-	function (v) {
-		return [v._0, v._1];
-	});
-var _jigargosar$elm_simple_gtd$Firebase$setupOnDisconnectCmd = F2(
-	function (client, uid) {
-		return _jigargosar$elm_simple_gtd$Firebase$firebaseSetupOnDisconnect(
-			{ctor: '_Tuple2', _0: uid, _1: client.id});
-	});
-var _jigargosar$elm_simple_gtd$Firebase$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
-	'onFirebaseChange',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (x0) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (x1) {
-					return _elm_lang$core$Json_Decode$succeed(
-						{ctor: '_Tuple2', _0: x0, _1: x1});
-				},
-				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
-		},
-		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _jigargosar$elm_simple_gtd$Firebase$onChange = function (tagger) {
-	return _jigargosar$elm_simple_gtd$Firebase$onFirebaseChange(
-		_elm_lang$core$Basics$uncurry(tagger));
-};
 var _jigargosar$elm_simple_gtd$Firebase$Client = F3(
 	function (a, b, c) {
 		return {id: a, connected: b, token: c};

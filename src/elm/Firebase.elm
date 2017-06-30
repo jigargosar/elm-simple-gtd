@@ -28,33 +28,6 @@ type alias DeviceId =
     String
 
 
-port firebaseRefSet : ( String, E.Value ) -> Cmd msg
-
-
-port firebaseRefPush : ( String, E.Value ) -> Cmd msg
-
-
-port fireStartSync : String -> Cmd msg
-
-
-port firebaseSetupOnDisconnect : ( UID, DeviceId ) -> Cmd msg
-
-
-port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
-
-
-onChange tagger =
-    onFirebaseChange (uncurry tagger)
-
-
-setupOnDisconnectCmd client uid =
-    firebaseSetupOnDisconnect ( uid, client.id )
-
-
-startSyncCmd =
-    fireStartSync
-
-
 type alias Client =
     { id : DeviceId
     , connected : Bool
@@ -136,7 +109,3 @@ customSw =
 
 type alias AppAttributes =
     List ( String, String )
-
-
-updateClientCmd client uid =
-    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )

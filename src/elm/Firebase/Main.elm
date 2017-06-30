@@ -11,12 +11,39 @@ import X.Record
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 port signIn : () -> Cmd msg
 
 
 port signOut : () -> Cmd msg
+
+
+port firebaseRefSet : ( String, E.Value ) -> Cmd msg
+
+
+port firebaseRefPush : ( String, E.Value ) -> Cmd msg
+
+
+port fireStartSync : String -> Cmd msg
+
+
+port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.DeviceId ) -> Cmd msg
+
+
+setupOnDisconnectCmd client uid =
+    firebaseSetupOnDisconnect ( uid, client.id )
+
+
+startSyncCmd =
+    fireStartSync
+
+
+updateClientCmd client uid =
+    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.encodeClient client )
 
 
 overSignInModel =
@@ -79,13 +106,13 @@ update andThenUpdate msg =
 
 firebaseUpdateClientCmd model =
     Model.getMaybeUserId model
-        ?|> Firebase.updateClientCmd model.firebaseClient
+        ?|> updateClientCmd model.firebaseClient
 
 
 firebaseSetupOnDisconnectCmd model =
     Model.getMaybeUserId model
-        ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
+        ?|> setupOnDisconnectCmd model.firebaseClient
 
 
 startSyncWithFirebase user =
-    maybeEffect (Model.getMaybeUserId >>? Firebase.startSyncCmd)
+    maybeEffect (Model.getMaybeUserId >>? startSyncCmd)

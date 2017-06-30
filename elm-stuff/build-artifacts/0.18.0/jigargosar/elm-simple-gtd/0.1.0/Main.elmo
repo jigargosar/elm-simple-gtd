@@ -1,3 +1,21 @@
+var _jigargosar$elm_simple_gtd$Main$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
+	'onFirebaseChange',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (x0) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (x1) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{ctor: '_Tuple2', _0: x0, _1: x1});
+				},
+				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
+		},
+		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
+var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub = function (tagger) {
+	return _jigargosar$elm_simple_gtd$Main$onFirebaseChange(
+		_elm_lang$core$Basics$uncurry(tagger));
+};
 var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -20,7 +38,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
 									_0: _jigargosar$elm_simple_gtd$Store$onChange(_jigargosar$elm_simple_gtd$Model$OnPouchDBChange),
 									_1: {
 										ctor: '::',
-										_0: _jigargosar$elm_simple_gtd$Firebase$onChange(_jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange),
+										_0: _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub(_jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange),
 										_1: {ctor: '[]'}
 									}
 								}

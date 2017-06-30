@@ -1,6 +1,7 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Firebase
+import Firebase.Main
 import Keyboard.Combo
 import Model
 import Return
@@ -12,6 +13,16 @@ import Todo.Main
 import Update
 import View
 import X.Keyboard
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
+
+
+port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
+
+
+onFirebaseDatabaseChangeSub tagger =
+    onFirebaseChange (uncurry tagger)
 
 
 main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Model.Msg
@@ -34,7 +45,7 @@ subscriptions m =
             , X.Keyboard.subscription Model.OnKeyboardMsg
             , X.Keyboard.ups Model.OnGlobalKeyUp
             , Store.onChange Model.OnPouchDBChange
-            , Firebase.onChange Model.OnFirebaseDatabaseChange
+            , onFirebaseDatabaseChangeSub Model.OnFirebaseDatabaseChange
             ]
             |> Sub.map Model.OnSubMsg
         , Keyboard.Combo.subscriptions m.keyComboModel

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.66 - 2017-06-30
 * completely remove polymer web components
 * remove poly-fire
 * remove bower

@@ -29,12 +29,11 @@ const firebaseConfig = (() => {
 export const setup = (app, dbList, localDeviceId) => {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+    setupAuth(app, firebaseApp.auth())
+
     function ref(path) {
         return firebaseApp.database().ref(path)
     }
-
-    setupAuth(app, firebaseApp.auth())
-
 
     setupSync(app, localDeviceId, ref, dbList)
 

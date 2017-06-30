@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.68 - 2017-06-30
 * fix: notification click should now open app.html 
 
 ## v0.18.66 - 2017-06-30

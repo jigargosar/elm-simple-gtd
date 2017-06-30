@@ -130,7 +130,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						}()(
 							_Fresheyeball$elm_return$Return$singleton(model));
 					});
-			case 'OnUserChangedEncoded':
+			case 'OnUserChanged':
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
 					A2(
@@ -139,51 +139,46 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 							_elm_lang$core$Result$mapError,
 							_elm_lang$core$Debug$log('Error decoding User'),
 							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$userDecoder, _p0._0)),
-						function (_p5) {
-							return andThenUpdate(
-								_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(
-									_jigargosar$elm_simple_gtd$Firebase$OnUserChanged(_p5)));
+						function (user) {
+							return function (_p5) {
+								return A2(
+									_jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase,
+									user,
+									A2(
+										_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+										_jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd,
+										A2(
+											_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+											_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+											A2(
+												andThenUpdate,
+												_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
+												A2(
+													_Fresheyeball$elm_return$Return$map,
+													_jigargosar$elm_simple_gtd$Model$setUser(user),
+													_p5)))));
+							};
 						}),
 					_elm_lang$core$Basics$identity);
-			case 'OnUserChanged':
-				var _p7 = _p0._0;
-				return function (_p6) {
-					return A2(
-						_jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase,
-						_p7,
-						A2(
-							_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
-							_jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd,
-							A2(
-								_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
-								_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
-								A2(
-									andThenUpdate,
-									_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
-									A2(
-										_Fresheyeball$elm_return$Return$map,
-										_jigargosar$elm_simple_gtd$Model$setUser(_p7),
-										_p6)))));
-				};
 			case 'OnFCMTokenChanged':
-				return function (_p8) {
+				return function (_p6) {
 					return A2(
 						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
 						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							_jigargosar$elm_simple_gtd$Model$setFCMToken(_p0._0),
-							_p8));
+							_p6));
 				};
 			default:
-				return function (_p9) {
+				return function (_p7) {
 					return A2(
 						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
 						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							_jigargosar$elm_simple_gtd$Model$updateFirebaseConnection(_p0._0),
-							_p9));
+							_p7));
 				};
 		}
 	});
@@ -195,7 +190,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 		_elm_lang$core$Platform_Sub$batch(
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase$OnUserChangedEncoded),
+				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase$OnUserChanged),
 				_1: {ctor: '[]'}
 			}));
 };

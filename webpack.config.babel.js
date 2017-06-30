@@ -37,7 +37,6 @@ export default {
     entry: {
         "common": [
             "babel-polyfill",
-            "bower_components/webcomponentsjs/webcomponents-loader",
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",

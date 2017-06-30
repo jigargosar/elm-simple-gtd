@@ -1,6 +1,5 @@
 {
   "entrypoint": "index.html",
-  "shell": "imports.html",
   "fragments": [
   ],
   "sources": [

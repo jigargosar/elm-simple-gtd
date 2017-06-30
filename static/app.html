@@ -5,7 +5,6 @@
     <link rel="manifest" href="/manifest.json">
 
     <title>SimpleGTD - alpha </title>
-    <link rel="import" href="/imports.html">
 
 </head>
 <body unresolved>
@@ -15,9 +14,7 @@
 <script src="/common.bundle.js"></script>
 <script src="/app.bundle.js"></script>
 <script>
-    document.addEventListener('WebComponentsReady', () => {
-        window.appBoot().catch(console.error)
-    });
+    window.appBoot().catch(console.error)
 </script>
 <script async src="/landing.bundle.js"></script>
 </body>

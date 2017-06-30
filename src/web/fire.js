@@ -1,6 +1,6 @@
-"use strict";
-const _ = require("ramda")
-const Kefir = require("kefir")
+import _ from "ramda"
+import Kefir from "kefir"
+import firebase from "firebase"
 
 
 const firebaseConfig = (() => {

@@ -70,9 +70,6 @@ var _jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged = function (
 var _jigargosar$elm_simple_gtd$Firebase$OnFCMTokenChanged = function (a) {
 	return {ctor: 'OnFCMTokenChanged', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Firebase$OnUserChangedEncoded = function (a) {
-	return {ctor: 'OnUserChangedEncoded', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Firebase$OnUserChanged = function (a) {
 	return {ctor: 'OnUserChanged', _0: a};
 };

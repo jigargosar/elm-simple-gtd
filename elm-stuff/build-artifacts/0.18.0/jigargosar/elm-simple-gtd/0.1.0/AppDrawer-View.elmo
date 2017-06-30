@@ -532,14 +532,21 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarHeader = F2(
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(t1),
+								_0: A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(t1),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {

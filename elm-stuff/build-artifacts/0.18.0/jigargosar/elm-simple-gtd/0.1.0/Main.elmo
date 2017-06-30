@@ -1,5 +1,5 @@
-var _jigargosar$elm_simple_gtd$Main$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
-	'onFirebaseChange',
+var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChange = _elm_lang$core$Native_Platform.incomingPort(
+	'onFirebaseDatabaseChange',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (x0) {
@@ -13,7 +13,7 @@ var _jigargosar$elm_simple_gtd$Main$onFirebaseChange = _elm_lang$core$Native_Pla
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
 var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub = function (tagger) {
-	return _jigargosar$elm_simple_gtd$Main$onFirebaseChange(
+	return _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChange(
 		_elm_lang$core$Basics$uncurry(tagger));
 };
 var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {

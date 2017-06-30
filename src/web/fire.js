@@ -26,22 +26,8 @@ const firebaseConfig = (() => {
     }
 })()
 
-export const setup = (app, dbList, localDeviceId) => {
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
+function setupSync(app, localDeviceId, ref, dbList) {
     let changesEmitters = []
-
-    app.ports["signIn"].subscribe(() => {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({
-            prompt: 'select_account',
-            // prompt: 'consent'
-        })
-
-        document.getElementById('firebase-auth')
-                .signInWithPopup(provider)
-                .catch(console.error)
-    })
-
 
     function isDocChangeLocal(doc) {
         const docDeviceId = doc.deviceId
@@ -77,8 +63,7 @@ export const setup = (app, dbList, localDeviceId) => {
                     )({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
 
 
-                return firebaseApp
-                    .database().ref(`/users/${uid}/${db.name}/${change.id}`)
+                return ref(`/users/${uid}/${db.name}/${change.id}`)
                     .set(fireDoc)
                     .then(updateLastSeq)
             }
@@ -119,9 +104,7 @@ export const setup = (app, dbList, localDeviceId) => {
         const lastPersistedAtString = localStorage.getItem(lastPersistedAtKey)
         const lastPersistedAt = parseInt(lastPersistedAtString, 10) || 0
 
-        const todoDbRef = firebaseApp
-            .database()
-            .ref(`/users/${uid}/${dbName}`)
+        const todoDbRef = ref(`/users/${uid}/${dbName}`)
             .orderByChild("firebaseServerPersistedAt")
             .startAt(lastPersistedAt + 1)
 
@@ -160,7 +143,6 @@ export const setup = (app, dbList, localDeviceId) => {
             })
     }
 
-
     app.ports["fireStartSync"].subscribe(async (uid) => {
         _.map(changes => changes.cancel())(changesEmitters)
         changesEmitters = _.map((db) => {
@@ -168,6 +150,29 @@ export const setup = (app, dbList, localDeviceId) => {
             return startReplicationToFirebase(uid, db)
         })(dbList)
     })
+}
+
+export const setup = (app, dbList, localDeviceId) => {
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+    function ref(path) {
+        return firebaseApp.database().ref(path)
+    }
+
+    app.ports["signIn"].subscribe(() => {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account',
+            // prompt: 'consent'
+        })
+
+        document.getElementById('firebase-auth')
+                .signInWithPopup(provider)
+                .catch(console.error)
+    })
+
+
+    setupSync(app, localDeviceId, ref, dbList)
 
     app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
         // console.log("[FJS]:firebaseSetupOnDisconnect: called")

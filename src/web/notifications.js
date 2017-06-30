@@ -40,13 +40,16 @@ async function setupNotifications(fire, app) {
 
     async function getAndSendFCMToken() {
         const fcmToken = await messaging.getToken()
-        console.log("await messaging.getToken()",fcmToken)
+        // console.warn("await messaging.getToken()",fcmToken)
         app.ports["onFCMTokenChanged"].send(fcmToken)
     }
 
     await getAndSendFCMToken()
 
-    messaging.onTokenRefresh(getAndSendFCMToken)
+    messaging.onTokenRefresh((...args) =>{
+        console.warn("onTokenRefresh args:", args)
+        return getAndSendFCMToken()
+    })
 
     // app.ports["showTodoReminderNotification"].subscribe(showTodoReminderNotification(reg))
 

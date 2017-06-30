@@ -161,15 +161,26 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						}),
 					_elm_lang$core$Basics$identity);
 			case 'OnFCMTokenChanged':
-				return function (_p6) {
-					return A2(
-						_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
-						_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['!|>'],
 						A2(
-							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model$setFCMToken(_p0._0),
-							_p6));
-				};
+							_elm_lang$core$Result$mapError,
+							_elm_lang$core$Debug$log('Error decoding User'),
+							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$fcmTokenDecoder, _p0._0)),
+						function (token) {
+							return function (_p6) {
+								return A2(
+									_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
+									_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
+									A2(
+										_Fresheyeball$elm_return$Return$map,
+										_jigargosar$elm_simple_gtd$Model$setFCMToken(token),
+										_p6));
+							};
+						}),
+					_elm_lang$core$Basics$identity);
 			default:
 				return function (_p7) {
 					return A2(
@@ -194,3 +205,4 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 				_1: {ctor: '[]'}
 			}));
 };
+var _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged = _elm_lang$core$Native_Platform.incomingPort('onFCMTokenChanged', _elm_lang$core$Json_Decode$value);

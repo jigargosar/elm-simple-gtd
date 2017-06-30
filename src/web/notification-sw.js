@@ -36,7 +36,7 @@ self.addEventListener('notificationclick', function (event) {
                     if (clients.openWindow) {
                         return clients
                         // .openWindow(url)
-                            .openWindow("/")
+                            .openWindow("/app.html")
                             .then(function (client) {
                                 setTimeout(function () {
                                     postMessage(client, event)

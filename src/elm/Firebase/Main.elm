@@ -46,6 +46,11 @@ updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.encodeClient client )
 
 
+subscriptions : Model.Subscriptions
+subscriptions model =
+    Sub.batch []
+
+
 overSignInModel =
     X.Record.over Model.signInModel
 

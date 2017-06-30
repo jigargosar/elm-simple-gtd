@@ -178,6 +178,10 @@ type alias ModelF =
     Model -> Model
 
 
+type alias Subscriptions =
+    Model -> Sub Msg
+
+
 type alias Config =
     { isFirstVisit : Bool
     }

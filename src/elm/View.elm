@@ -106,13 +106,13 @@ appDrawerLayoutView m =
                 ]
             ]
             [ div
-                [ id "app-sidebar", X.Html.onClickStopPropagation Model.noop ]
+                [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
                 [ AppDrawer.View.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m
                 ]
-            , div [ id "app-main", onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay) ]
+            , div [ id "layout-center", onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay) ]
                 [ View.Header.appMainHeader appVM m
-                , div [ id "app-main-content" ] [ appMainContent appVM m ]
+                , div [ id "layout-center-content" ] [ appMainContent appVM m ]
                 ]
             ]
 

@@ -27,7 +27,7 @@ appMainHeader viewModel m =
                 ?= titleHeaderContent viewModel m
     in
         div
-            [ id "app-main-header"
+            [ id "layout-center-header"
             , style
                 [ "color" => "white"
                 , "background-color" => AppColors.encode viewModel.header.backgroundColor

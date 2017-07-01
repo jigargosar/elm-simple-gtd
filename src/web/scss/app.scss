@@ -25,29 +25,29 @@ $sidebar-width: 18rem;
   width: 100vw;
 }
 
-#app-sidebar, #app-main {
+#layout-sidebar, #layout-center {
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-#app-sidebar{
+#layout-sidebar{
   width: $sidebar-width;
 }
 
-#app-main{
+#layout-center{
   width: calc(100vw - #{$sidebar-width});
   @media #{$small-and-down} {
     width: 100%;
   }
 }
 
-#sidebar-content, #app-main-content {
+#sidebar-content, #layout-center-content {
   height: calc(100vh - #{$header-height});
   overflow: scroll;
 }
 
-#sidebar-header, #app-main-header {
+#sidebar-header, #layout-center-header {
   height: $header-height;
   padding: 0 1rem;
   display: flex;
@@ -75,7 +75,7 @@ $sidebar-width: 18rem;
   }
 }
 
-#app-main-header {
+#layout-center-header {
 
   .menu-btn {
     @extend .hide-on-med-and-up;
@@ -84,10 +84,10 @@ $sidebar-width: 18rem;
 }
 
 @media #{$small-and-down}{
-  #app-layout:not(.sidebar-overlay) #app-sidebar {
+  #app-layout:not(.sidebar-overlay) #layout-sidebar {
     display: none;
   }
-  #app-layout.sidebar-overlay #app-main::before {
+  #app-layout.sidebar-overlay #layout-center::before {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -99,7 +99,7 @@ $sidebar-width: 18rem;
     opacity: 0.5;
   }
 
-  #app-layout.sidebar-overlay #app-sidebar {
+  #app-layout.sidebar-overlay #layout-sidebar {
     margin-top: 0;
     height: 100%;
     min-width: $sidebar-width;

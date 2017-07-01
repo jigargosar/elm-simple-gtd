@@ -114,11 +114,17 @@ export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.l
     }
 })
 
+// export const hotmon = () => {
+//     run(`nodemon --watch runfile.js --watch src/elm/Native/** \
+//         --watch webpack.config.babel.js --watch package.json \
+//             --watch elm-package.json --exec "run hot"`)
+// }
+
 export const hotmon = () => {
-    run(`nodemon --watch runfile.js --watch src/elm/Native/** \
-        --watch webpack.config.babel.js --watch package.json \
-            --watch elm-package.json --exec "run hot"`)
+    run(`nodemon`)
 }
+
+
 
 export const bump = function () {
     run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")

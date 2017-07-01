@@ -1,0 +1,13 @@
+{
+  "ext": "json,js,elm",
+  "verbose": false,
+  "watch": [
+    "runfile*.js",
+    "src/elm/Native",
+    "package*.json",
+    "elm-package*.json",
+    "webpack.config.babel*.js"
+  ],
+  "ignore":["*.log", "elm-stuff", "build", "src", "./elm*.*"],
+  "exec": "run hot"
+}

@@ -161,7 +161,7 @@ export default {
     devServer: {
         // stats: {colors: false, "errors-only":true},
         // stats: "errors-only",
-        // stats: "minimal",
+        stats: "minimal",
         port: 8020,
         overlay: true,
         watchContentBase: true,

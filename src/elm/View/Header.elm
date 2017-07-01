@@ -32,7 +32,6 @@ appMainHeader viewModel m =
                 [ "color" => "white"
                 , "background-color" => AppColors.encode viewModel.header.backgroundColor
                 ]
-            , X.Html.onClickStopPropagation Model.noop
             ]
             (headerWithContent content m)
 

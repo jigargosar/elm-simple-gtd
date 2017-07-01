@@ -110,9 +110,14 @@ appLayoutView m =
                 [ AppDrawer.View.sidebarHeader appVM m
                 , AppDrawer.View.sidebarContent appVM m
                 ]
-            , div [ id "layout-main", onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay) ]
-                [ View.Header.appMainHeader appVM m
-                , div [ id "layout-main-content", X.Html.onClickStopPropagation Model.noop ] [ appMainContent appVM m ]
+            , div
+                [ id "layout-main"
+                , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                ]
+                [ div [ X.Html.onClickStopPropagation Model.noop ]
+                    [ View.Header.appMainHeader appVM m
+                    , div [ id "layout-main-content" ] [ appMainContent appVM m ]
+                    ]
                 ]
             ]
 

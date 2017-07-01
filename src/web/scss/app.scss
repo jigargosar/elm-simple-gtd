@@ -22,99 +22,80 @@ $sidebar-width: 18rem;
   display: flex;
   height: 100vh;
   width: 100vw;
+}
 
-  #app-sidebar, #app-main {
-    margin-top: $header-height;
-    height: calc(100% - #{$header-height});
-    overflow: scroll;
+#app-sidebar, #app-main {
+  margin-top: $header-height;
+  height: calc(100% - #{$header-height});
+  overflow: scroll;
+}
 
-    #sidebar-header, #app-main-header {
-      position: fixed;
-      top: 0;
-      height: $header-height;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      i {
-        color: white;
-      }
-    }
-
-    #sidebar-content, #app-main-content {
-
-    }
-  }
-
-  #app-sidebar, #sidebar-header {
-    width: $sidebar-width;
-  }
-
-  #app-main, #app-main-header {
-    width: calc(100vw - #{$sidebar-width});
-    @media #{$small-and-down} {
-      width: 100%;
-    }
-  }
-
-
-
-  #app-sidebar {
-
-    #sidebar-header {
-      h5 {
-        margin: 0;
-      }
-
-      .detail {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        a {
-          color: white;
-          margin-right: 1rem;
-        }
-      }
-    }
-
-    #sidebar-content {
-
-    }
-
-  }
-
-  #app-main {
-
-    #app-main-header {
-
-      .menu-btn {
-        @extend .hide-on-med-and-up;
-      }
-
-    }
-
-    #app-main-content {
-
-    }
+#sidebar-header, #app-main-header {
+  position: fixed;
+  top: 0;
+  height: $header-height;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  i {
+    color: white;
   }
 }
 
+#app-sidebar, #sidebar-header {
+  width: $sidebar-width;
+}
+
+#app-main, #app-main-header {
+  width: calc(100vw - #{$sidebar-width});
+  @media #{$small-and-down} {
+    width: 100%;
+  }
+}
+
+// chrome bug: mac Version 59.0.3071.115 (Official Build) (64-bit)
+// nested id tags are buggy
+// also when using id, we don't need to nest one id tag in another :)
+#sidebar-header {
+  h5 {
+    margin: 0;
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  a {
+    color: white;
+    margin-right: 1rem;
+  }
+}
+
+#app-main-header {
+
+  .menu-btn {
+    @extend .hide-on-med-and-up;
+  }
+
+}
 
 @media #{$small-and-down}{
   #app-layout:not(.sidebar-overlay) #app-sidebar {
     display: none;
   }
-  #app-layout.sidebar-overlay #app-main::before{
+  #app-layout.sidebar-overlay #app-main::before {
     z-index: 10;
-    position:absolute;
-    top:0;
-    left:0;
+    position: absolute;
+    top: 0;
+    left: 0;
     content: " ";
     width: 100vw;
     height: 100vh;
     background-color: black;
     opacity: 0.5;
   }
-
 
   #app-layout.sidebar-overlay #app-sidebar {
     margin-top: 0;
@@ -126,10 +107,9 @@ $sidebar-width: 18rem;
     z-index: 100;
     background-color: white;
 
-    #sidebar-header{
+    #sidebar-header {
       position: static;
     }
-
 
   }
 }

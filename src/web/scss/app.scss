@@ -31,12 +31,12 @@ $sidebar-width: 18rem;
 
 }
 
-#layout-sidebar{
+#layout-sidebar, #layout-sidebar-header{
   background-color: #F2F2F2;
   width: $sidebar-width;
 }
 
-#layout-main{
+#layout-main , #layout-main-header{
   width: calc(100vw - #{$sidebar-width});
   @media #{$small-and-down} {
     width: 100%;
@@ -54,14 +54,10 @@ $sidebar-width: 18rem;
   padding: 0 1rem;
   display: flex;
   align-items: center;
-  //box-shadow: 0px 1px 10px rgba(0,0,0,1);
 
   i {
     color: white;
   }
-}
-#layout-main-header {
-  z-index: 200;
 }
 
 #layout-sidebar-header {
@@ -123,6 +119,17 @@ $sidebar-width: 18rem;
   }
 }
 
+
+// note: fixed position for box shadow.
+
+#layout-sidebar-content, #layout-main-content {
+  margin-top: $header-height;
+}
+
+#layout-sidebar-header, #layout-main-header {
+  position: fixed;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
 
 #main-view-container {
   margin: 0 0 5rem 0;

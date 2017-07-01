@@ -28,7 +28,6 @@ $sidebar-width: 18rem;
   height: 100vh;
   display: flex;
   flex-direction: column;
-
 }
 
 #layout-sidebar, #layout-sidebar-header {
@@ -87,11 +86,11 @@ $sidebar-width: 18rem;
 
 @media #{$small-and-down}{
   #app-layout:not(.sidebar-overlay) {
-    #layout-sidebar , #layout-sidebar-header{
+    #layout-sidebar, #layout-sidebar-header {
       display: none;
     }
   }
-  
+
   #app-layout.sidebar-overlay #layout-main::before {
     z-index: 10;
     position: absolute;
@@ -107,9 +106,6 @@ $sidebar-width: 18rem;
   #app-layout.sidebar-overlay #layout-sidebar {
     margin-top: 0;
     height: 100%;
-    //min-width: $sidebar-width;
-    //max-width: calc(100vw - 1rem);
-    //width: auto;
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
     position: fixed;
     z-index: 100;
@@ -122,16 +118,11 @@ $sidebar-width: 18rem;
   }
 }
 
-// note: fixed position for box shadow.
-@media #{$medium-and-up} {
 
+//region layout changes for box-shadow.
+#layout-sidebar-content, #layout-main-content {
+  margin-top: $header-height;
 }
-
-//#app-layout:not(.sidebar-overlay) {
-  #layout-sidebar-content, #layout-main-content {
-    margin-top: $header-height;
-  }
-//}
 
 .bottom-shadow {
   z-index: 1;
@@ -141,6 +132,7 @@ $sidebar-width: 18rem;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
   display: flex;
 }
+//endregion
 
 #main-view-container {
   margin: 0 0 5rem 0;

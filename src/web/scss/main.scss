@@ -103,3 +103,19 @@ $background: #fff;
     font-size: 3rem;
   }
 }
+
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  z-index: 999;
+  top: -100px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 200%;
+  width: 100%;
+  //background: #000;
+
+  will-change: opacity;
+}

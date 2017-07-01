@@ -1,3 +1,6 @@
+## Upcoming
+* fix overlays covered by header 
+
 ## v0.18.74 - 2017-07-01
 * add box-shadow, layout changes. 
 

@@ -56,6 +56,8 @@ $sidebar-width: 18rem;
 // chrome bug: mac Version 59.0.3071.115 (Official Build) (64-bit)
 // nested id tags are buggy
 // also when using id, we don't need to nest one id tag in another :)
+// still not fixed :(
+
 #sidebar-header {
   h5 {
     margin: 0;

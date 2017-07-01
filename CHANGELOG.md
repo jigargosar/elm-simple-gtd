@@ -1,3 +1,7 @@
+## Upcoming
+* fix overflow of long text.
+* fix overlay toggle bug
+
 ## v0.18.71 - 2017-07-01
 * fix chrome css bug: by removing fixed positioning and using flex layout.
 

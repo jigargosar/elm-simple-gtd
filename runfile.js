@@ -173,7 +173,7 @@ export const build = {
         run(`rimraf ${PROD_DIR}`)
         run(`mkdir -p ${PROD_DIR}`)
         run(`cp -R static/ ${PROD_DIR}`)
-        run(`${travisRunPrefix} webpack -p --progress`, prod().buildRunOptions)
+        run(`${travisRunPrefix} webpack --progress --optimize-minimize`, prod().buildRunOptions)
 
         // run("rimraf app && rimraf docs && rimraf build")
         // run(`cp -R ${PROD_DIR} docs`)

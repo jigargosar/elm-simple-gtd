@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.74 - 2017-07-01
 * add box-shadow, layout changes. 
 
 ## v0.18.73 - 2017-07-01

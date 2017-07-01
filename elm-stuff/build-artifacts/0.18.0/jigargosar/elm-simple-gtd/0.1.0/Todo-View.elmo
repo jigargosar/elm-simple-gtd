@@ -435,12 +435,13 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_jigargosar$elm_simple_gtd$Material$smallIconButton,
+				_0: A3(
+					_jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV,
 					'schedule',
+					vm.tabindexAV,
 					{
 						ctor: '::',
-						_0: vm.tabindexAV,
+						_0: _elm_lang$html$Html_Events$onClick(vm.reminder.startEditingMsg),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -448,28 +449,26 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
-	return A2(
-		_jigargosar$elm_simple_gtd$Material$smallIconButton,
+	return A3(
+		_jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV,
 		'more_vert',
+		vm.tabindexAV,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id(
 				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
-				_1: {
-					ctor: '::',
-					_0: vm.tabindexAV,
-					_1: {ctor: '[]'}
-				}
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(vm.onMoreMenuClicked),
+				_1: {ctor: '[]'}
 			}
 		});
 };
 var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
-	return A2(
-		_jigargosar$elm_simple_gtd$Material$iconButton,
+	return A3(
+		_jigargosar$elm_simple_gtd$Material$iconButtonTIAV,
 		'done',
+		vm.tabindexAV,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$classList(
@@ -484,12 +483,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
-				_1: {
-					ctor: '::',
-					_0: vm.tabindexAV,
-					_1: {ctor: '[]'}
-				}
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(vm.toggleDoneMsg),
+				_1: {ctor: '[]'}
 			}
 		});
 };

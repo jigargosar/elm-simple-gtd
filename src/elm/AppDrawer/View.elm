@@ -36,7 +36,7 @@ sidebarHeader appVM m =
                 ]
             ]
             [ div [ class "detail" ]
-                [ h5 [] [ a [ href AppUrl.landing ] [ text t1 ] ]
+                [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text t1 ] ]
                 , div [ class "small layout horizontal " ]
                     [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
                         [ "v" ++ m.appVersion |> text ]

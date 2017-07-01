@@ -48,21 +48,18 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
-		var menuButton = A2(
-			_jigargosar$elm_simple_gtd$Material$iconButton,
+		var menuButton = A3(
+			_jigargosar$elm_simple_gtd$Material$iconButtonTIAV,
 			'menu',
+			_elm_lang$html$Html_Attributes$tabindex(-1),
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('menu-btn'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(
-							_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
-						_1: {ctor: '[]'}
-					}
+					_0: _elm_lang$html$Html_Events$onClick(
+						_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+					_1: {ctor: '[]'}
 				}
 			});
 		return {

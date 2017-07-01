@@ -48,9 +48,9 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Material.iconButton "menu"
+            Material.iconButtonTIAV "menu"
+                (tabindex -1)
                 [ class "menu-btn"
-                , tabindex -1
                 , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                 ]
     in
@@ -68,9 +68,7 @@ menu m =
         menuIcon =
             case maybeUserProfile of
                 Nothing ->
-                    Material.iconButton "account_circle"
-                        [ class "account"
-                        ]
+                    Material.iconButton "account_circle" [ class "account" ]
 
                 Just profile ->
                     img

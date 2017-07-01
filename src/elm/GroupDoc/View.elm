@@ -37,12 +37,16 @@ headerItem vm =
     let
         editButton =
             if vm.isEditable then
-                Material.iconButton "create" [ onClickStopPropagation vm.startEditingMsg, vm.tabindexAV ]
+                Material.iconButtonTIAV "create"
+                    vm.tabindexAV
+                    [ onClickStopPropagation vm.startEditingMsg ]
             else
                 span [] []
 
         archiveButton =
-            Material.iconButton vm.archive.iconName [ onClickStopPropagation vm.archive.onClick, vm.tabindexAV ]
+            Material.iconButtonTIAV vm.archive.iconName
+                vm.tabindexAV
+                [ onClickStopPropagation vm.archive.onClick ]
 
         editOrArchiveButton =
             if vm.archive.isArchived then

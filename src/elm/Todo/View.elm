@@ -272,19 +272,19 @@ parseDisplayText { displayText, tabindexAV } =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Material.iconButton "done"
+    Material.iconButtonTIAV "done"
+        vm.tabindexAV
         [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
-        , onClick (vm.toggleDoneMsg)
-        , vm.tabindexAV
+        , onClickStopPropagation (vm.toggleDoneMsg)
         ]
 
 
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
-    Material.smallIconButton "more_vert"
+    Material.smallIconButtonTIAV "more_vert"
+        vm.tabindexAV
         [ "todo-more-menu-button-" ++ vm.key |> id
-        , onClick (vm.onMoreMenuClicked)
-        , vm.tabindexAV
+        , onClickStopPropagation vm.onMoreMenuClicked
         ]
 
 
@@ -301,7 +301,9 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Material.smallIconButton "schedule" [ vm.tabindexAV ]
+        , Material.smallIconButtonTIAV "schedule"
+            vm.tabindexAV
+            [ onClick vm.reminder.startEditingMsg ]
         ]
 
 

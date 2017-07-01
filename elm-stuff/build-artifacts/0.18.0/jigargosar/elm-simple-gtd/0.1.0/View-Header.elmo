@@ -74,7 +74,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+						_0: _elm_lang$html$Html_Attributes$class('flex-auto font-nowrap'),
 						_1: {ctor: '[]'}
 					},
 					content),

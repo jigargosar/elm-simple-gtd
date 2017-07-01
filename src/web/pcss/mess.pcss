@@ -52,7 +52,7 @@ html, body{
 */
 
 .app-drawer-list-container {
-  @nest & ul {
+  & ul {
     @apply --layout-vertical;
     width: 100%;
     & li {
@@ -229,7 +229,7 @@ img.account{
 
 }
 
-.ellipsis {
+.ellipsis , .font-nowrap{
   @apply --font-nowrap;
 }
 

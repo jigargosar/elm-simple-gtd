@@ -43,7 +43,7 @@ $sidebar-width: 18rem;
 
 #layout-sidebar-content, #layout-main-content {
   height: calc(100vh - #{$header-height});
-  overflow: scroll;
+  //overflow-y: scroll;
 }
 
 #layout-sidebar-header, #layout-main-header {

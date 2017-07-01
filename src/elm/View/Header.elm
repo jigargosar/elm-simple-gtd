@@ -55,7 +55,7 @@ headerWithContent content m =
                 ]
     in
         [ menuButton
-        , div [ class "flex-auto" ] content
+        , div [ class "flex-auto font-nowrap" ] content
         , menu m
         ]
 

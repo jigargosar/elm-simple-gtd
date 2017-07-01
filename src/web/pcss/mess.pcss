@@ -17,10 +17,9 @@
     text-overflow: ellipsis;
   };
 
-
 }
 
-html, body{
+html, body {
   background-color: #fff;
 }
 
@@ -149,7 +148,6 @@ i {
   line-height: 64px;
 }
 
-
 /*mat css END*/
 
 .overlay {
@@ -158,11 +156,11 @@ i {
   left: 0;
   width: 100vw;
   height: 100vh;
-  
+
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.notification.overlay{
+.notification.overlay {
   background-color: transparent;
   & .flex-auto-children > * {
     flex: 1 1 auto;
@@ -192,9 +190,9 @@ i {
   overflow: hidden;
 }
 
-img.account{
+img.account {
   cursor: pointer;
-  width:32px;
+  width: 32px;
   height: 32px;
 }
 
@@ -229,7 +227,7 @@ img.account{
 
 }
 
-.ellipsis , .font-nowrap{
+.ellipsis, .font-nowrap {
   @apply --font-nowrap;
 }
 
@@ -312,7 +310,11 @@ paper-item, .has-hover-elements {
 
 #popup-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh; min-width: 20vw; max-width: 80vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100vh;
+  min-width: 20vw;
+  max-width: 80vw;
 }
 
 .entity-list > .collection {
@@ -337,12 +339,12 @@ paper-item, .has-hover-elements {
   & .display-text-container {
     cursor: default;
     & .display-text a {
-      text-decoration: underline ;
-      color: rgba(0,0,0,0.60);
+      text-decoration: underline;
+      color: rgba(0, 0, 0, 0.60);
     }
     & .display-text a:hover {
-      color: rgba(0,0,0,0.77);
-      text-decoration: underline ;
+      color: rgba(0, 0, 0, 0.77);
+      text-decoration: underline;
     }
   }
   &.can-be-focused .display-text-container {
@@ -352,8 +354,8 @@ paper-item, .has-hover-elements {
 
 .focusable-list .todo-item.collection-item {
   border-left: 2px solid transparent;
-  padding-left:1rem;
-  padding-right:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   &:not(.selected):before {
     background-color: transparent;
@@ -412,7 +414,6 @@ paper-item, .has-hover-elements {
 .margin-0 {
   margin: 0;
 }
-
 
 textarea.materialize-textarea {
 //min-height: 2em; //padding-bottom: 0.5rem;

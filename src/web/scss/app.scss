@@ -25,7 +25,7 @@ $sidebar-width: 18rem;
   width: 100vw;
 }
 
-#layout-sidebar, #layout-center {
+#layout-sidebar, #layout-main {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,19 +35,19 @@ $sidebar-width: 18rem;
   width: $sidebar-width;
 }
 
-#layout-center{
+#layout-main{
   width: calc(100vw - #{$sidebar-width});
   @media #{$small-and-down} {
     width: 100%;
   }
 }
 
-#sidebar-content, #layout-center-content {
+#layout-sidebar-content, #layout-main-content {
   height: calc(100vh - #{$header-height});
   overflow: scroll;
 }
 
-#sidebar-header, #layout-center-header {
+#layout-sidebar-header, #layout-main-header {
   height: $header-height;
   padding: 0 1rem;
   display: flex;
@@ -58,7 +58,7 @@ $sidebar-width: 18rem;
 }
 
 
-#sidebar-header {
+#layout-sidebar-header {
   h5 {
     margin: 0;
   }
@@ -75,7 +75,7 @@ $sidebar-width: 18rem;
   }
 }
 
-#layout-center-header {
+#layout-main-header {
 
   .menu-btn {
     @extend .hide-on-med-and-up;
@@ -87,7 +87,7 @@ $sidebar-width: 18rem;
   #app-layout:not(.sidebar-overlay) #layout-sidebar {
     display: none;
   }
-  #app-layout.sidebar-overlay #layout-center::before {
+  #app-layout.sidebar-overlay #layout-main::before {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -109,7 +109,7 @@ $sidebar-width: 18rem;
     z-index: 100;
     background-color: white;
 
-    #sidebar-header {
+    #layout-sidebar-header {
       position: static;
     }
 

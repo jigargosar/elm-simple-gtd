@@ -71,7 +71,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('app-sidebar'),
+					_0: _elm_lang$html$Html_Attributes$id('layout-sidebar'),
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
@@ -93,7 +93,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id('app-main'),
+						_0: _elm_lang$html$Html_Attributes$id('layout-main'),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Events$onClick(
@@ -110,7 +110,7 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('app-main-content'),
+									_0: _elm_lang$html$Html_Attributes$id('layout-main-content'),
 									_1: {ctor: '[]'}
 								},
 								{

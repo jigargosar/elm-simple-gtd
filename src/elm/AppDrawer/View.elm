@@ -29,7 +29,7 @@ sidebarHeader appVM m =
                 ( "SimpleGTD.com", "v" ++ m.appVersion )
     in
         div
-            [ id "sidebar-header"
+            [ id "layout-sidebar-header"
             , style
                 [ "color" => "white"
                 , "background-color" => AppColors.encode appVM.header.backgroundColor
@@ -54,7 +54,7 @@ sidebarContent appVM model =
         { contexts, projects } =
             appVM
     in
-        div [ id "sidebar-content", class "app-drawer-list-container" ]
+        div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
             [ ul []
                 ([]
                     ++ entityGroupView contexts model.mainViewType

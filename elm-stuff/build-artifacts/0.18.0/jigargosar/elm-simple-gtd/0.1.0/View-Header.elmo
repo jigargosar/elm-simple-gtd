@@ -123,7 +123,7 @@ var _jigargosar$elm_simple_gtd$View_Header$appMainHeader = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('app-main-header'),
+				_0: _elm_lang$html$Html_Attributes$id('layout-main-header'),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$style(

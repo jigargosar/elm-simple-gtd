@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import AppDrawer.Main
 import Firebase
 import Firebase.Main
 import Keyboard.Combo
@@ -51,4 +52,5 @@ subscriptions model =
         , Keyboard.Combo.subscriptions model.keyComboModel
         , Todo.Main.subscriptions model
         , Firebase.Main.subscriptions model
+        , AppDrawer.Main.subscriptions model
         ]

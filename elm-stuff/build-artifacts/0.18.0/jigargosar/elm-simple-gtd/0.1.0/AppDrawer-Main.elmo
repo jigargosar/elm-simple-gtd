@@ -1,32 +1,48 @@
-var _jigargosar$elm_simple_gtd$AppDrawer_Main$map = function (_p0) {
+var _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions = function (model) {
+	return A2(
+		_elm_lang$core$Platform_Sub$map,
+		_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg,
+		_elm_lang$core$Platform_Sub$batch(
+			{
+				ctor: '::',
+				_0: _elm_lang$window$Window$resizes(
+					function (_p0) {
+						return _jigargosar$elm_simple_gtd$AppDrawer_Model$OnWindowResizeTurnOverlayOff;
+					}),
+				_1: {ctor: '[]'}
+			}));
+};
+var _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver = function (_p1) {
 	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p0));
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p1));
 };
 var _jigargosar$elm_simple_gtd$AppDrawer_Main$update = F2(
 	function (andThenUpdate, msg) {
-		return function (_p1) {
+		return function (_p2) {
 			return A2(
 				andThenUpdate,
 				_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
 				function () {
-					var _p2 = msg;
-					switch (_p2.ctor) {
+					var _p3 = msg;
+					switch (_p3.ctor) {
 						case 'OnToggleContextsExpanded':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(
 								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$contexts));
 						case 'OnToggleProjectsExpanded':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(
 								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$projects));
 						case 'OnToggleArchivedContexts':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(
 								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupArchivedListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$contexts));
 						case 'OnToggleArchivedProjects':
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(
 								_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleGroupArchivedListExpanded(_jigargosar$elm_simple_gtd$AppDrawer_Model$projects));
+						case 'OnToggleOverlay':
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
 						default:
-							var _p3 = A2(_elm_lang$core$Debug$log, '\"called\"', 'called');
-							return _jigargosar$elm_simple_gtd$AppDrawer_Main$map(_jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay);
+							return _jigargosar$elm_simple_gtd$AppDrawer_Main$mapOver(
+								A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen, false));
 					}
-				}()(_p1));
+				}()(_p2));
 		};
 	});

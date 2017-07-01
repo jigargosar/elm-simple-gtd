@@ -176,6 +176,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$decoder = A4(
 			'contexts',
 			_jigargosar$elm_simple_gtd$AppDrawer_Model$groupModelDecoder,
 			_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$AppDrawer_Model$Model))));
+var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnWindowResizeTurnOverlayOff = {ctor: 'OnWindowResizeTurnOverlayOff'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay = {ctor: 'OnToggleOverlay'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedProjects = {ctor: 'OnToggleArchivedProjects'};
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedContexts = {ctor: 'OnToggleArchivedContexts'};

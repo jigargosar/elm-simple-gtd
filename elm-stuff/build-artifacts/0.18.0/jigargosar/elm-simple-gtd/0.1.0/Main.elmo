@@ -54,7 +54,11 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions(model),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions(model),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}

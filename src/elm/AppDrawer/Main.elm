@@ -3,11 +3,18 @@ module AppDrawer.Main exposing (..)
 import AppDrawer.Model exposing (..)
 import Model
 import Return
-import X.Record exposing (over, toggle)
+import Window
+import X.Record exposing (over, set, toggle)
 
 
-map =
+mapOver =
     over Model.appDrawerModel >> Return.map
+
+
+subscriptions model =
+    Sub.batch
+        [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
+        |> Sub.map Model.OnAppDrawerMsg
 
 
 update :
@@ -17,22 +24,21 @@ update :
 update andThenUpdate msg =
     (case msg of
         OnToggleContextsExpanded ->
-            map (toggleGroupListExpanded contexts)
+            mapOver (toggleGroupListExpanded contexts)
 
         OnToggleProjectsExpanded ->
-            map (toggleGroupListExpanded projects)
+            mapOver (toggleGroupListExpanded projects)
 
         OnToggleArchivedContexts ->
-            map (toggleGroupArchivedListExpanded contexts)
+            mapOver (toggleGroupArchivedListExpanded contexts)
 
         OnToggleArchivedProjects ->
-            map (toggleGroupArchivedListExpanded projects)
+            mapOver (toggleGroupArchivedListExpanded projects)
 
         OnToggleOverlay ->
-            let
-                _ =
-                    Debug.log "\"called\"" ("called")
-            in
-                map toggleOverlay
+            mapOver toggleOverlay
+
+        OnWindowResizeTurnOverlayOff ->
+            mapOver (set isOverlayOpen False)
     )
         >> andThenUpdate Model.OnPersistLocalPref

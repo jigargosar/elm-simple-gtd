@@ -14,6 +14,7 @@ type Msg
     | OnToggleArchivedContexts
     | OnToggleArchivedProjects
     | OnToggleOverlay
+    | OnWindowResizeTurnOverlayOff
 
 
 type alias GroupModel =

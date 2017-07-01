@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.71 - 2017-07-01
 * fix chrome css bug: by removing fixed positioning and using flex layout.
 
 ## v0.18.69 - 2017-07-01

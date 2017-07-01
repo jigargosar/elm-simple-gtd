@@ -112,13 +112,13 @@ appDrawerLayoutView m =
                 ]
             , div [ id "app-main", onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay) ]
                 [ View.Header.appMainHeader appVM m
-                , appMainContent appVM m
+                , div [ id "app-main-content" ] [ appMainContent appVM m ]
                 ]
             ]
 
 
 appMainContent viewModel model =
-    div [ id "app-main-content", X.Html.onClickStopPropagation Model.noop ]
+    div [ id "main-view-container", X.Html.onClickStopPropagation Model.noop ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
                 Entity.View.list viewType model viewModel

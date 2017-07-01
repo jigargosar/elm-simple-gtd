@@ -435,8 +435,12 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('sidebar-content app-drawer-list-container'),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$id('sidebar-content'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('app-drawer-list-container'),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',

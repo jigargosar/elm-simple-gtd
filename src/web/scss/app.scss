@@ -31,28 +31,22 @@ $sidebar-width: 18rem;
   flex-direction: column;
 }
 
+#app-sidebar{
+  width: $sidebar-width;
+}
+
+#app-main{
+  width: calc(100vw - #{$sidebar-width});
+  @media #{$small-and-down} {
+    width: 100%;
+  }
+}
+
 #sidebar-content, #app-main-content {
   height: calc(100vh - #{$header-height});
-  //height: 300px;
   overflow: scroll;
 }
 
-#main-view-container {
-  margin: 0 0 5rem 0;
-  max-width: 600px;
-  position: relative;
-  min-height: 70vh;
-}
-
-
-/*
-#app-sidebar, #app-main {
-  margin-top: $header-height;
-  height: calc(100vh - #{$header-height});
-  overflow: scroll;
-}
-
-*/
 #sidebar-header, #app-main-header {
   height: $header-height;
   padding: 0 1rem;
@@ -63,21 +57,6 @@ $sidebar-width: 18rem;
   }
 }
 
-#app-sidebar/*, #sidebar-header*/ {
-  width: $sidebar-width;
-}
-
-#app-main/*, #app-main-header*/ {
-  width: calc(100vw - #{$sidebar-width});
-  @media #{$small-and-down} {
-    width: 100%;
-  }
-}
-
-// chrome bug: mac Version 59.0.3071.115 (Official Build) (64-bit)
-// nested id tags are buggy
-// also when using id, we don't need to nest one id tag in another :)
-// still not fixed :(
 
 #sidebar-header {
   h5 {
@@ -136,3 +115,13 @@ $sidebar-width: 18rem;
 
   }
 }
+
+
+#main-view-container {
+  margin: 0 0 5rem 0;
+  max-width: 600px;
+  position: relative;
+  min-height: 70vh;
+}
+
+

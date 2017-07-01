@@ -95,10 +95,8 @@ appLayoutView m =
     let
         appVM =
             ViewModel.create m
-
-        forceNarrow =
-            Model.getLayoutForceNarrow m
     in
+        -- todo : remove duplication
         if AppDrawer.Model.getIsOverlayOpen m.appDrawerModel then
             div
                 [ id "app-layout"

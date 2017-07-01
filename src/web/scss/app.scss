@@ -31,12 +31,12 @@ $sidebar-width: 18rem;
 
 }
 
-#layout-sidebar, #layout-sidebar-header{
+#layout-sidebar, #layout-sidebar-header {
   background-color: #F2F2F2;
   width: $sidebar-width;
 }
 
-#layout-main , #layout-main-header{
+#layout-main, #layout-main-header {
   width: calc(100vw - #{$sidebar-width});
   @media #{$small-and-down} {
     width: 100%;
@@ -49,7 +49,7 @@ $sidebar-width: 18rem;
 }
 
 #layout-sidebar-header, #layout-main-header {
-  
+
   height: $header-height;
   padding: 0 1rem;
   display: flex;
@@ -86,9 +86,12 @@ $sidebar-width: 18rem;
 }
 
 @media #{$small-and-down}{
-  #app-layout:not(.sidebar-overlay) #layout-sidebar {
-    display: none;
+  #app-layout:not(.sidebar-overlay) {
+    #layout-sidebar , #layout-sidebar-header{
+      display: none;
+    }
   }
+  
   #app-layout.sidebar-overlay #layout-main::before {
     z-index: 10;
     position: absolute;
@@ -106,7 +109,7 @@ $sidebar-width: 18rem;
     height: 100%;
     //min-width: $sidebar-width;
     //max-width: calc(100vw - 1rem);
-    width: auto;
+    //width: auto;
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
     position: fixed;
     z-index: 100;
@@ -119,16 +122,24 @@ $sidebar-width: 18rem;
   }
 }
 
-
 // note: fixed position for box shadow.
+@media #{$medium-and-up} {
 
-#layout-sidebar-content, #layout-main-content {
-  margin-top: $header-height;
 }
 
-#layout-sidebar-header, #layout-main-header {
+//#app-layout:not(.sidebar-overlay) {
+  #layout-sidebar-content, #layout-main-content {
+    margin-top: $header-height;
+  }
+//}
+
+.bottom-shadow {
+  z-index: 1;
   position: fixed;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+  width: 100vw;
+  height: $header-height;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
 }
 
 #main-view-container {
@@ -137,5 +148,6 @@ $sidebar-width: 18rem;
   position: relative;
   min-height: 70vh;
 }
+
 
 

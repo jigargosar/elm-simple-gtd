@@ -1,3 +1,6 @@
+## Upcoming
+* fix overflow scroll  
+
 ## v0.18.72 - 2017-07-01
 * fix overflow of long text.
 * fix overlay toggle bug

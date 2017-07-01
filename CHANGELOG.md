@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.69 - 2017-07-01
 * fix chrome css bug 
 
 ## v0.18.68 - 2017-06-30

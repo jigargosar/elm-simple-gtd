@@ -31,7 +31,7 @@ import View.MainMenu
 init model =
     let
         children =
-            [ appDrawerLayoutView model
+            [ appLayoutView model
             , newTodoFab model
             ]
                 ++ overlayViews model
@@ -91,7 +91,7 @@ overlayViews appModel =
             |> List.filterMap identity
 
 
-appDrawerLayoutView m =
+appLayoutView m =
     let
         appVM =
             ViewModel.create m

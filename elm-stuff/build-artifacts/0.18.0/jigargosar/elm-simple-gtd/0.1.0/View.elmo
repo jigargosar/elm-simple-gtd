@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$View$addTodoFab = function (m) {
+var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 	return A2(
 		_jigargosar$elm_simple_gtd$Material$fab,
 		'add',
@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
+var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
 	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
 	return A2(
@@ -180,20 +180,16 @@ var _jigargosar$elm_simple_gtd$View$init = function (model) {
 		_elm_lang$core$Basics_ops['++'],
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$View$appDrawerLayoutView(model),
+			_0: _jigargosar$elm_simple_gtd$View$appLayoutView(model),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$View$addTodoFab(model),
+				_0: _jigargosar$elm_simple_gtd$View$newTodoFab(model),
 				_1: {ctor: '[]'}
 			}
 		},
 		_jigargosar$elm_simple_gtd$View$overlayViews(model));
 	return A2(
 		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('app-view'),
-			_1: {ctor: '[]'}
-		},
+		{ctor: '[]'},
 		children);
 };

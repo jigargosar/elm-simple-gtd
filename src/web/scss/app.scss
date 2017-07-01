@@ -117,6 +117,8 @@ $sidebar-width: 18rem;
 
 
 #main-view-container {
+  display: flex; // so as to contain child margins. and thereby be able to handle events. case in point overlay toggle issue.
+
   margin: 0 0 5rem 0;
   max-width: 600px;
   position: relative;

@@ -28,11 +28,7 @@ import View.GetStarted
 import View.MainMenu
 
 
-init m =
-    div [ id "root" ] [ appView m ]
-
-
-appView model =
+init model =
     let
         children =
             [ appDrawerLayoutView model

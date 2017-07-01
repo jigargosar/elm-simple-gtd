@@ -164,7 +164,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			}
 		});
 };
-var _jigargosar$elm_simple_gtd$View$appView = function (model) {
+var _jigargosar$elm_simple_gtd$View$init = function (model) {
 	var children = A2(
 		_elm_lang$core$Basics_ops['++'],
 		{
@@ -185,18 +185,4 @@ var _jigargosar$elm_simple_gtd$View$appView = function (model) {
 			_1: {ctor: '[]'}
 		},
 		children);
-};
-var _jigargosar$elm_simple_gtd$View$init = function (m) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('root'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$View$appView(m),
-			_1: {ctor: '[]'}
-		});
 };

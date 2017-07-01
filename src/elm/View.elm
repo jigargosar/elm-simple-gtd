@@ -32,11 +32,11 @@ init model =
     let
         children =
             [ appDrawerLayoutView model
-            , addTodoFab model
+            , newTodoFab model
             ]
                 ++ overlayViews model
     in
-        div [ id "app-view" ] children
+        div [] children
 
 
 overlayViews appModel =
@@ -128,7 +128,7 @@ appMainContent viewModel model =
         ]
 
 
-addTodoFab m =
+newTodoFab m =
     Material.fab "add"
         [ id "add-fab"
         , onClick Model.NewTodo

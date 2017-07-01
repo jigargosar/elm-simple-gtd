@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.75 - 2017-07-01
 * fix overlays covered by header 
 
 ## v0.18.74 - 2017-07-01

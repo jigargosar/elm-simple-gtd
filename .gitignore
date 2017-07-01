@@ -1,6 +1,5 @@
 .idea/workspace.xml
-/app/
-/dev/
+/build
 /*.log
 /out/
 /*.patch

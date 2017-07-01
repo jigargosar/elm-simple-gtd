@@ -23,9 +23,9 @@ console.log("webpack: isDevEnv: ", isDevEnv)
 console.log("webpack: isWebPackDevServer: ", isWebPackDevServer)
 
 
-const envOutputDir = isDevEnv ? "dev" : "app"
+const envOutputDir = isDevEnv ? "dev" : "prod"
 
-const outputPath = path.resolve(__dirname, envOutputDir)
+const outputPath = path.resolve(__dirname, "build", envOutputDir)
 const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
 export default {

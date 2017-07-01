@@ -2,6 +2,7 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
 import * as elm from "./tasks/elm"
+import path from "path"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)
 
@@ -30,8 +31,15 @@ const TRAVIS_COMMIT = process.env["TRAVIS_COMMIT"]
 const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
 const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 
-const firebaseDeployDev = `firebase deploy --except functions --project dev --public dev/ --token ${FIREBASE_TOKEN}`
-const firebaseDeployProd = `firebase deploy --except functions --project prod --public app/ --token ${FIREBASE_TOKEN}`
+const PROD_DIR = path.resolve(__dirname, "build", "prod")
+const DEV_DIR = path.resolve(__dirname, "build", "dev")
+
+const firebaseDeployDev = `firebase deploy --except functions --project dev \
+ --public ${path.relative(__dirname, DEV_DIR)} --token ${FIREBASE_TOKEN}`
+
+const firebaseDeployProd =
+    `firebase deploy --except functions --project prod \ 
+ --public ${path.relative(__dirname, PROD_DIR)} --token ${FIREBASE_TOKEN}`
 
 const doesTravisTagMatchReleaseSemVer =
     _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
@@ -102,7 +110,7 @@ export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.l
     env: {
         NODE_ENV: "development",
         npm_package_version: fetchPackageJson().version,
-        WEBPACK_DEV_SERVER:true
+        WEBPACK_DEV_SERVER: true
     }
 })
 
@@ -154,22 +162,21 @@ export const pbd = () => {
 export const build = {
     dev: function () {
         console.info("build:dev")
-        run("rimraf dev")
-        run("cp -R static/ dev")
+        run(`rimraf ${DEV_DIR}`)
+        run(`mkdir -p ${DEV_DIR}`)
+        run(`cp -R static/ ${DEV_DIR}`)
         run(`${travisRunPrefix} webpack --progress --optimize-minimize`, dev().buildRunOptions)
-        // run("polymer --version", {cwd: "dev"})
-        // run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },
     // skip copying files to docs.
     prod: function () {
         console.info("build:prod")
-        run("rimraf app")
-        // run("rimraf app && rimraf docs && rimraf build")
-        run("cp -R static/ app")
+        run(`rimraf ${PROD_DIR}`)
+        run(`mkdir -p ${PROD_DIR}`)
+        run(`cp -R static/ ${PROD_DIR}`)
         run(`${travisRunPrefix} webpack -p --progress`, prod().buildRunOptions)
-        // run("polymer --version", {cwd: "app"})
-        // run(`${travisRunPrefix} polymer build`, {cwd: "app"})
-        // run("cp -R app/build/unbundled/ docs")
+
+        // run("rimraf app && rimraf docs && rimraf build")
+        // run(`cp -R ${PROD_DIR} docs`)
     }
 }
 

@@ -274,7 +274,6 @@ doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Material.iconButton "done"
         [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
-        , onMouseDownStopPropagation (Model.noop)
         , onClick (vm.toggleDoneMsg)
         , vm.tabindexAV
         ]
@@ -284,7 +283,6 @@ moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
     Material.smallIconButton "more_vert"
         [ "todo-more-menu-button-" ++ vm.key |> id
-        , onMouseDownStopPropagation (Model.noop)
         , onClick (vm.onMoreMenuClicked)
         , vm.tabindexAV
         ]

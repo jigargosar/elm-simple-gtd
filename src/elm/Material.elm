@@ -30,7 +30,7 @@ bigIconTextButton iconName textV clickHandler =
 
 smallIconButton name attributes =
     div attributes
-        [ a [ class "btn-flat btn-floating x24", style [ "z-index" => "0" ] ]
+        [ Html.button [ class "btn-flat btn-floating x24", style [ "z-index" => "0" ] ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
 

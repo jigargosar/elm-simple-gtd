@@ -22,7 +22,7 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('app-main-content'),
+				_0: _elm_lang$html$Html_Attributes$id('main-view-container'),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
@@ -106,7 +106,18 @@ var _jigargosar$elm_simple_gtd$View$appDrawerLayoutView = function (m) {
 						_0: A2(_jigargosar$elm_simple_gtd$View_Header$appMainHeader, appVM, m),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$id('app-main-content'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
+									_1: {ctor: '[]'}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}),

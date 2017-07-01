@@ -23,11 +23,7 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$id('main-view-container'),
-				_1: {
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
@@ -111,7 +107,11 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Attributes$id('layout-main-content'),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+										_1: {ctor: '[]'}
+									}
 								},
 								{
 									ctor: '::',

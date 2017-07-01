@@ -38,7 +38,7 @@ const firebaseDeployDev = `firebase deploy --except functions --project dev \
  --public ${path.relative(__dirname, DEV_DIR)} --token ${FIREBASE_TOKEN}`
 
 const firebaseDeployProd =
-    `firebase deploy --except functions --project prod \ 
+    `firebase deploy --except functions --project prod \
  --public ${path.relative(__dirname, PROD_DIR)} --token ${FIREBASE_TOKEN}`
 
 const doesTravisTagMatchReleaseSemVer =

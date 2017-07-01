@@ -1,3 +1,6 @@
+## Upcoming
+* add box-shadow, layout changes. 
+
 ## v0.18.73 - 2017-07-01
 * fix overflow scroll  
 

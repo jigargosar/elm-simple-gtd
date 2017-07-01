@@ -39,7 +39,6 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
 			});
 	});
 var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
-	var forceNarrow = _jigargosar$elm_simple_gtd$Model$getLayoutForceNarrow(m);
 	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
 	return _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel) ? A2(
 		_elm_lang$html$Html$div,

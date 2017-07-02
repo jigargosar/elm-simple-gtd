@@ -28,6 +28,8 @@ const envOutputDir = isDevEnv ? "dev" : "prod"
 const outputPath = path.resolve(__dirname, "build", envOutputDir)
 const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
+const additionalCommonEntries = process.env.NODE_ENV === "production" ? ["./analytics.js"] : []
+
 export default {
     resolve: {
         alias: {
@@ -37,14 +39,13 @@ export default {
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
-        "common": [
+        "common": _.concat([
             "babel-polyfill",
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",
             "./font-loader",
-            "./analytics.js",
-        ],
+        ] , additionalCommonEntries),
         "app": ["./app.js"],
         "landing": ["./landing.js"],
     },

@@ -48,10 +48,6 @@ itemView ( textV, itemType ) =
             text textV
 
 
-
---    Tuple.first >> Html.text
-
-
 onSelect ( _, itemType ) =
     case itemType of
         URL url ->

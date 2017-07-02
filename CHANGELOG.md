@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.82 - 2017-07-02
 * fix google sign in button 
 
 ## v0.18.81 - 2017-07-02

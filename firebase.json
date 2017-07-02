@@ -3,6 +3,17 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "___xxx___"
+    "public": "___xxx___",
+    "headers": [
+      {
+        "source": "/service-worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=30"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.77 - 2017-07-02
 * fix todo text area not auto resizing.
 * fix deactivating edit mode, when todo is updated via any direct command.
 

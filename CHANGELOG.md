@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.79 - 2017-07-02
 * try force reloading of sw
 * fix main menu links
 

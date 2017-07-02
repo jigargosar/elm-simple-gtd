@@ -22,7 +22,7 @@ signInOverlay =
                     [ text "One click sign in" ]
                 , div [ class "section layout horizontal center-center" ]
                     [ div []
-                        [ a [ class "google-sign-up btn", onClick Firebase.OnSignIn ]
+                        [ a [ class "google-sign-in btn", onClick Firebase.OnSignIn ]
                             [ div [ class "left" ] [ img [ class "google-logo", src AppUrl.googleIconSvg ] [] ]
                             , text "Sign in with Google Account"
                             ]

@@ -210,7 +210,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 													_elm_lang$html$Html$a,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('google-sign-up btn'),
+														_0: _elm_lang$html$Html_Attributes$class('google-sign-in btn'),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase$OnSignIn),

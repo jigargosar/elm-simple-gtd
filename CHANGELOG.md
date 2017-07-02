@@ -1,5 +1,6 @@
 ## Upcoming
-* add gtm. ga move to single property and then use filtered views 
+* add gtm. ga move to single property and then use filtered views
+* remove old analytics.js
 
 ## v0.18.79 - 2017-07-02
 * try force reloading of sw

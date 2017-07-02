@@ -1,3 +1,6 @@
+## Upcoming
+* fix todo text area not auto resizing. 
+
 ## v0.18.76 - 2017-07-02
 * remove analytics from dev env. 
 

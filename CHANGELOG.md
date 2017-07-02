@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.78 - 2017-07-02
 * fix overly popup menu alignment bug. 
 
 ## v0.18.77 - 2017-07-02

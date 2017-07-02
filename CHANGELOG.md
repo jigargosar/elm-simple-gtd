@@ -1,3 +1,6 @@
+## Upcoming
+* fix google sign in button 
+
 ## v0.18.81 - 2017-07-02
 * add gtm. ga move to single property and then use filtered views
 * remove old analytics.js

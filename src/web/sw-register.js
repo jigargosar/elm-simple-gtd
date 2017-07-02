@@ -15,8 +15,9 @@ function register() {
 
 
 reg.then(function (reg) {
-    // reg.update()
-    //   .then(res => console.warn("sw-update result: ", res));
+    reg.update()
+      .then(res => console.warn("sw-update result: ", res))
+      .catch(console.error)
 
     // updatefound is fired if service-worker.js changes.
     reg.onupdatefound = function () {

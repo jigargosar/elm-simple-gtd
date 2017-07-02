@@ -28,7 +28,8 @@ const envOutputDir = isDevEnv ? "dev" : "prod"
 const outputPath = path.resolve(__dirname, "build", envOutputDir)
 const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
-const additionalCommonEntries = process.env.NODE_ENV === "production" ? ["./analytics.js"] : []
+// const additionalCommonEntries = process.env.NODE_ENV === "production" ? ["./analytics.js"] : []
+const additionalCommonEntries = []
 
 export default {
     resolve: {

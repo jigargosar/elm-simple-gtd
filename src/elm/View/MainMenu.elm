@@ -2,7 +2,10 @@ module View.MainMenu exposing (..)
 
 import AppUrl
 import Firebase
-import Html
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import X.Html exposing (..)
 import Menu
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -29,11 +32,24 @@ menuConfig menuState appModel =
     , isSelected = (\_ -> False)
     , itemKey = Tuple.first
     , itemSearchText = Tuple.first
-    , itemView = Tuple.first >> Html.text
+    , itemView = itemView
     , onStateChanged = Model.OnMainMenuStateChanged
     , noOp = Model.noop
     , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }
+
+
+itemView ( textV, itemType ) =
+    case itemType of
+        URL url ->
+            a [ href url, target "_blank" ] [ text textV ]
+
+        Msg _ ->
+            text textV
+
+
+
+--    Tuple.first >> Html.text
 
 
 onSelect ( _, itemType ) =

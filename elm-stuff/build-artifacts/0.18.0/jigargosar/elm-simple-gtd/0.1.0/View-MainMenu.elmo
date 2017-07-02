@@ -7,19 +7,41 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$onSelect = function (_p0) {
 		return _p2._0;
 	}
 };
+var _jigargosar$elm_simple_gtd$View_MainMenu$itemView = function (_p3) {
+	var _p4 = _p3;
+	var _p6 = _p4._0;
+	var _p5 = _p4._1;
+	if (_p5.ctor === 'URL') {
+		return A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$href(_p5._0),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(_p6),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return _elm_lang$html$Html$text(_p6);
+	}
+};
 var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
 	function (menuState, appModel) {
 		return {
 			onSelect: _jigargosar$elm_simple_gtd$View_MainMenu$onSelect,
-			isSelected: function (_p3) {
+			isSelected: function (_p7) {
 				return false;
 			},
 			itemKey: _elm_lang$core$Tuple$first,
 			itemSearchText: _elm_lang$core$Tuple$first,
-			itemView: function (_p4) {
-				return _elm_lang$html$Html$text(
-					_elm_lang$core$Tuple$first(_p4));
-			},
+			itemView: _jigargosar$elm_simple_gtd$View_MainMenu$itemView,
 			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged,
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
@@ -60,16 +82,16 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$getItems = function (appModel) {
 	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(appModel);
 	var signInMenuItem = A2(
 		_Fresheyeball$elm_tuple_extra$Tuple2$map,
-		function (_p5) {
+		function (_p8) {
 			return _jigargosar$elm_simple_gtd$View_MainMenu$Msg(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_p5));
+				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_p8));
 		},
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				maybeUserProfile,
-				function (_p6) {
+				function (_p9) {
 					return {ctor: '_Tuple2', _0: 'SignOut', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignOut};
 				}),
 			{ctor: '_Tuple2', _0: 'SignIn', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignIn}));

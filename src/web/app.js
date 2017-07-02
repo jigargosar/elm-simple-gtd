@@ -17,6 +17,7 @@ const isDevelopmentMode = process.env["NODE_ENV"] === "development"
 const env = process.env
 const npmPackageVersion = env["npm_package_version"]
 
+//test
 
 
 window.appBoot = async function appBoot() {

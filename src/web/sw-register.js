@@ -15,6 +15,9 @@ function register() {
 
 
 reg.then(function (reg) {
+    // reg.update()
+    //   .then(res => console.warn("sw-update result: ", res));
+
     // updatefound is fired if service-worker.js changes.
     reg.onupdatefound = function () {
         // The updatefound event implies that reg.installing is set; see

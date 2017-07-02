@@ -1,3 +1,7 @@
+## Upcoming
+* try force reloading of sw
+* fix main menu links
+
 ## v0.18.78 - 2017-07-02
 * fix overly popup menu alignment bug. 
 

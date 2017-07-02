@@ -187,22 +187,26 @@ var _jigargosar$elm_simple_gtd$Material$iconButtonTIAV = F3(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickPreventDefault(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'z-index', '0'),
-									_1: {ctor: '[]'}
-								}),
+							_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
 							_1: {
 								ctor: '::',
-								_0: tabIndexAV,
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'z-index', '0'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: tabIndexAV,
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					},
@@ -233,19 +237,23 @@ var _jigargosar$elm_simple_gtd$Material$iconButton = F2(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickPreventDefault(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'z-index', '0'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
+							_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'z-index', '0'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					},
 					{

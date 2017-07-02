@@ -35,19 +35,25 @@ var _jigargosar$elm_simple_gtd$X_Html$preventDefault = {stopPropagation: false, 
 var _jigargosar$elm_simple_gtd$X_Html$onPreventDefault = function (eventName) {
 	return A2(_elm_lang$html$Html_Events$onWithOptions, eventName, _jigargosar$elm_simple_gtd$X_Html$preventDefault);
 };
+var _jigargosar$elm_simple_gtd$X_Html$onClickPreventDefault = function (_p2) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Html$onPreventDefault,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(_p2));
+};
 var _jigargosar$elm_simple_gtd$X_Html$stopPropagation = {stopPropagation: true, preventDefault: false};
 var _jigargosar$elm_simple_gtd$X_Html$onStopPropagation = function (eventName) {
 	return A2(_elm_lang$html$Html_Events$onWithOptions, eventName, _jigargosar$elm_simple_gtd$X_Html$stopPropagation);
 };
-var _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation = function (_p2) {
+var _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation = function (_p3) {
 	return A2(
 		_jigargosar$elm_simple_gtd$X_Html$onStopPropagation,
 		'click',
-		_elm_lang$core$Json_Decode$succeed(_p2));
+		_elm_lang$core$Json_Decode$succeed(_p3));
 };
-var _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation = function (_p3) {
+var _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation = function (_p4) {
 	return A2(
 		_jigargosar$elm_simple_gtd$X_Html$onStopPropagation,
 		'mousedown',
-		_elm_lang$core$Json_Decode$succeed(_p3));
+		_elm_lang$core$Json_Decode$succeed(_p4));
 };

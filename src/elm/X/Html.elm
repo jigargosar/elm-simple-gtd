@@ -45,6 +45,10 @@ onClickStopPropagation =
     D.succeed >> onStopPropagation "click"
 
 
+onClickPreventDefault =
+    D.succeed >> onPreventDefault "click"
+
+
 onClickStopAll =
     D.succeed >> onStopAll "click"
 

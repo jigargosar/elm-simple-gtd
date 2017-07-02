@@ -163,7 +163,7 @@ window.appBoot = async function appBoot() {
     })
 
     app.ports["focusInput"].subscribe((selector) => {
-        console.log("focusInput: selector", selector)
+        // console.log("focusInput: selector", selector)
         requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
                 autosize(this); // for some reason, this is not needed when using keyboard shortcut. ?!! but only when mouse click.

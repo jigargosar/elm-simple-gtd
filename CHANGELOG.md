@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.76 - 2017-07-02
 * remove analytics from dev env. 
 
 ## v0.18.75 - 2017-07-01

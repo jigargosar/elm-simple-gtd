@@ -17,7 +17,7 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
             >> Todo.SetProjectId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelected todoId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
             >> Model.OnTodoMsg
     , isSelected = Document.hasId projectId
     , itemKey = getMenuKey "project"
@@ -34,7 +34,7 @@ createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId
             >> Todo.SetContextId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelected todoId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
             >> Model.OnTodoMsg
     , isSelected = Document.hasId contextId
     , itemKey = getMenuKey "context"

@@ -16,7 +16,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 			onSelect: function (_p3) {
 				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 					A2(
-						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelected,
+						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
 						_p2.todoId,
 						_jigargosar$elm_simple_gtd$Todo$SetContextId(
 							_jigargosar$elm_simple_gtd$Document$getId(_p3))));
@@ -48,7 +48,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 			onSelect: function (_p7) {
 				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
 					A2(
-						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelected,
+						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
 						_p6.todoId,
 						_jigargosar$elm_simple_gtd$Todo$SetProjectId(
 							_jigargosar$elm_simple_gtd$Document$getId(_p7))));

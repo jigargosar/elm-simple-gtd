@@ -56,7 +56,7 @@ update andThenUpdate entity msg =
                                     |> Return.andThen
 
                             Entity.Todo todo ->
-                                Todo.Msg.OnUpdateTodoAndMaybeSelected entityId Todo.ToggleDone
+                                Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId Todo.ToggleDone
                                     |> Model.OnTodoMsg
                                     |> andThenUpdate
             in

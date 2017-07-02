@@ -22,4 +22,4 @@ type Msg
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnShowMoreMenu Todo.Id
     | OnProcessPendingNotificationCronTick
-    | OnUpdateTodoAndMaybeSelected Todo.Id Todo.UpdateAction
+    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Todo.Id Todo.UpdateAction

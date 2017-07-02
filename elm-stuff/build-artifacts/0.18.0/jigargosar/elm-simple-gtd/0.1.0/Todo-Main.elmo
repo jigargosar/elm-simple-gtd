@@ -298,8 +298,13 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Model$findAndSnoozeOverDueTodo,
 						_Fresheyeball$elm_return$Return$andThen(_jigargosar$elm_simple_gtd$Todo_Main$showReminderNotificationCmd)));
 			default:
-				return _jigargosar$elm_simple_gtd$Todo_Main$andThen(
-					A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0));
+				return function (_p19) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
+							A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0))(_p19));
+				};
 		}
 	});
 var _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
@@ -341,7 +346,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 						_0: A2(
 							_elm_lang$core$Time$every,
 							_elm_lang$core$Time$second * 1,
-							function (_p19) {
+							function (_p20) {
 								return _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker;
 							}),
 						_1: {
@@ -349,7 +354,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 							_0: A2(
 								_elm_lang$core$Time$every,
 								_elm_lang$core$Time$second * 30,
-								function (_p20) {
+								function (_p21) {
 									return _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick;
 								}),
 							_1: {ctor: '[]'}

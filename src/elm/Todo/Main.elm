@@ -173,8 +173,12 @@ update andThenUpdate now todoMsg =
             X.Return.andThenMaybe
                 (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
-        OnUpdateTodoAndMaybeSelected todoId action ->
-            Model.updateTodoAndMaybeAlsoSelected action todoId |> andThen
+        OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId action ->
+            (Model.updateTodoAndMaybeAlsoSelected action todoId |> andThen)
+                -- todo: if we had use save editing form, we would't missed calling on deactivate.
+                -- todo: also it seems an appropriate place for any exclusive mode form saves.
+                -- such direct calls are messy. :(
+                >> andThenUpdate Model.OnDeactivateEditingMode
 
 
 showReminderNotificationCmd ( todo, model ) =

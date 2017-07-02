@@ -1,5 +1,17 @@
 //@import "material/components/color";
 
+.google-sign-up.btn {
+  background-color: $google-primary-color;
+  text-transform: none;
+  padding-left: 0;
+
+  img.google-logo {
+    width: 36px;
+    height: 36px;
+    margin-right: 1rem;
+  }
+}
+
 $header-height: 4rem;
 $sidebar-width: 18rem;
 
@@ -8,21 +20,9 @@ $sidebar-width: 18rem;
   flex-direction: row;
   height: 100vh;
   width: 100vw;
-
   background-color: #EEEEEE;
-
-  .google-sign-up.btn {
-    background-color: $google-primary-color;
-    text-transform: none;
-    padding-left: 0;
-
-    img.google-logo {
-      width: 36px;
-      height: 36px;
-      margin-right: 1rem;
-    }
-  }
 }
+
 
 #layout-sidebar, #layout-main {
   height: 100vh;
@@ -118,7 +118,6 @@ $sidebar-width: 18rem;
   }
 }
 
-
 //region layout changes for box-shadow.
 #layout-sidebar-content, #layout-main-content {
   margin-top: $header-height;
@@ -132,6 +131,7 @@ $sidebar-width: 18rem;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
   display: flex;
 }
+
 //endregion
 
 #main-view-container {

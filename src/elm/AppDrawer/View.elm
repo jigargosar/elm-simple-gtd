@@ -119,7 +119,7 @@ entityGroupView vm mainViewType =
             ++ [ li [ onClick fireSmart ]
                     [ Material.iconM vm.icon
                     , Html.h5 [] [ text vm.title ]
-                    , Material.iconButton expandIconName [ onClickStopPropagation onToggleExpanded ]
+                    , Material.iconBtn expandIconName [ onClickStopPropagation onToggleExpanded ]
                     ]
                , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
                     [ ul []

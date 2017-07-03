@@ -27,7 +27,7 @@ iconM icon =
     iconA icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
-iconButton name attributes =
+iconBtn name attributes =
     div attributes
         [ Html.button
             [ class "btn-flat btn-floating"

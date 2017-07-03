@@ -1,7 +1,8 @@
 var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
-	return A2(
+	return A3(
 		_jigargosar$elm_simple_gtd$Material$fab,
 		'add',
+		'add-todo-fab',
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id('add-fab'),
@@ -11,11 +12,7 @@ var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-					_1: {
-						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', 'add-todo-fab'),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		});

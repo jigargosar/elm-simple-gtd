@@ -27,7 +27,7 @@ var _jigargosar$elm_simple_gtd$CustomSync$view = function (model) {
 						},
 						{
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$Material$icon('settings'),
+							_0: _jigargosar$elm_simple_gtd$Material$iconD('settings'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html$text('Advance Settings'),

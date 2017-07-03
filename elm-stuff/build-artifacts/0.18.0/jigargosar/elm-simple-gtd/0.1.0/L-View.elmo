@@ -222,7 +222,7 @@ var _jigargosar$elm_simple_gtd$L_View$primaryFeatures = function () {
 					},
 					{
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Material$icon(_p3._0),
+						_0: _jigargosar$elm_simple_gtd$Material$iconD(_p3._0),
 						_1: {
 							ctor: '::',
 							_0: A2(

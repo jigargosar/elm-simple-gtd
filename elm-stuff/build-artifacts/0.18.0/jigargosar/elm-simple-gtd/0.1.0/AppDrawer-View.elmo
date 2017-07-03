@@ -14,7 +14,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Material$icon(iconName),
+				_0: _jigargosar$elm_simple_gtd$Material$iconD(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -45,7 +45,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItemSmall = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Material$icon(iconName),
+				_0: _jigargosar$elm_simple_gtd$Material$iconD(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -76,7 +76,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItem = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Material$icon(iconName),
+				_0: _jigargosar$elm_simple_gtd$Material$iconD(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -102,22 +102,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityListItem = function (vm) {
 		},
 		{
 			ctor: '::',
-			_0: A2(
-				_jigargosar$elm_simple_gtd$Material$iconA,
-				vm.icon.name,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: A2(
-								_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-								'color',
-								_jigargosar$elm_simple_gtd$AppColors$encode(vm.icon.color)),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
+			_0: _jigargosar$elm_simple_gtd$Material$iconM(vm.icon),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -167,7 +152,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$archivedItems = function (vm) {
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Material$icon(iconName),
+				_0: _jigargosar$elm_simple_gtd$Material$iconD(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -244,22 +229,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityGroupView = F2(
 					},
 					{
 						ctor: '::',
-						_0: A2(
-							_jigargosar$elm_simple_gtd$Material$iconA,
-							vm.icon.name,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$style(
-									{
-										ctor: '::',
-										_0: A2(
-											_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-											'color',
-											_jigargosar$elm_simple_gtd$AppColors$encode(vm.icon.color)),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
+						_0: _jigargosar$elm_simple_gtd$Material$iconM(vm.icon),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -330,7 +300,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityGroupView = F2(
 													},
 													{
 														ctor: '::',
-														_0: _jigargosar$elm_simple_gtd$Material$icon('add'),
+														_0: _jigargosar$elm_simple_gtd$Material$iconD('add'),
 														_1: {
 															ctor: '::',
 															_0: A2(

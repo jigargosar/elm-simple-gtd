@@ -27,20 +27,25 @@ iconM icon =
     iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
-iconBtn name attributes =
-    div attributes
-        [ Html.button
-            [ class "btn-flat btn-floating"
-            ]
-            [ i [ class "default-color material-icons" ] [ text name ] ]
+iconBtnC name className =
+    Html.button
+        [ class ("btn-flat btn-floating" ++ className)
         ]
+        [ i [ class "default-color material-icons" ] [ text name ] ]
+
+
+iconBtn name clickHandler =
+    Html.button
+        [ class "btn-flat btn-floating"
+        , onClickStopPropagation clickHandler
+        ]
+        [ i [ class "default-color material-icons" ] [ text name ] ]
 
 
 iconButtonTIAV name tabIndexAV attributes =
     div attributes
         [ Html.button
             [ class "btn-flat btn-floating"
-            , style [ "z-index" => "0" ]
             , tabIndexAV
             ]
             [ i [ class "default-color material-icons" ] [ text name ] ]

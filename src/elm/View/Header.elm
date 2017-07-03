@@ -68,7 +68,7 @@ menu m =
         menuIcon =
             case maybeUserProfile of
                 Nothing ->
-                    Material.iconBtn "account_circle" [ class "account" ]
+                    Material.iconBtnC "account_circle" "account"
 
                 Just profile ->
                     img

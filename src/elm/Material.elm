@@ -57,10 +57,12 @@ bigIconTextButton iconName textV clickHandler =
 
 
 fab name attributes =
-    div attributes
-        [ a [ class "btn-floating" ]
+    let
+        allAttr =
+            [ class "btn-floating" ] ++ attributes
+    in
+        Html.button allAttr
             [ i [ class "material-icons", style [ "color" => "white" ] ] [ text name ] ]
-        ]
 
 
 divider =

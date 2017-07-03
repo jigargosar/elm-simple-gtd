@@ -28,8 +28,6 @@ const envOutputDir = isDevEnv ? "dev" : "prod"
 const outputPath = path.resolve(__dirname, "build", envOutputDir)
 const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
-// const additionalCommonEntries = process.env.NODE_ENV === "production" ? ["./analytics.js"] : []
-const additionalCommonEntries = []
 
 export default {
     resolve: {
@@ -40,13 +38,14 @@ export default {
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
-        "common": _.concat([
+        "common": [
             "babel-polyfill",
             "materialize-css/dist/js/materialize.min",
             "./scss/main.scss",
             "./pcss/main.pcss",
             "./font-loader",
-        ] , additionalCommonEntries),
+            "./analytics.js",
+        ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],
     },

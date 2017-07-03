@@ -3,12 +3,24 @@
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
+        <option name="AUTODETECT_INDENTS" value="false" />
+        <option name="OTHER_INDENT_OPTIONS">
+          <value>
+            <option name="INDENT_SIZE" value="8" />
+            <option name="CONTINUATION_INDENT_SIZE" value="8" />
+            <option name="TAB_SIZE" value="4" />
+            <option name="USE_TAB_CHARACTER" value="false" />
+            <option name="SMART_TABS" value="true" />
+            <option name="LABEL_INDENT_SIZE" value="0" />
+            <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+            <option name="USE_RELATIVE_INDENTS" value="false" />
+          </value>
+        </option>
         <option name="RIGHT_MARGIN" value="160" />
         <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
         <option name="FORMATTER_TAGS_ENABLED" value="true" />
         <JSCodeStyleSettings>
           <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
-          <option name="ALIGN_MULTIPLE_ASSIGNMENTS" value="true" />
           <option name="ENFORCE_TRAILING_COMMA" value="WhenMultiline" />
           <option name="VAR_DECLARATION_WRAP" value="5" />
           <option name="USE_CHAINED_CALLS_GROUP_INDENTS" value="true" />
@@ -20,21 +32,18 @@
           <option name="ARRAY_WRAPPING" value="5" />
         </JSON>
         <codeStyleSettings language="JSON">
-          <option name="KEEP_LINE_BREAKS" value="false" />
           <option name="WRAP_LONG_LINES" value="true" />
+          <indentOptions>
+            <option name="INDENT_SIZE" value="4" />
+          </indentOptions>
         </codeStyleSettings>
         <codeStyleSettings language="JavaScript">
-          <option name="RIGHT_MARGIN" value="120" />
-          <option name="KEEP_LINE_BREAKS" value="false" />
           <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
-          <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
           <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_TERNARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
           <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
           <option name="CALL_PARAMETERS_WRAP" value="5" />
-          <option name="PREFER_PARAMETERS_WRAP" value="true" />
-          <option name="CALL_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
           <option name="CALL_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
           <option name="METHOD_PARAMETERS_WRAP" value="5" />
           <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
@@ -52,8 +61,7 @@
           <option name="WRAP_COMMENTS" value="true" />
           <option name="IF_BRACE_FORCE" value="1" />
           <indentOptions>
-            <option name="INDENT_SIZE" value="2" />
-            <option name="TAB_SIZE" value="2" />
+            <option name="CONTINUATION_INDENT_SIZE" value="8" />
           </indentOptions>
         </codeStyleSettings>
       </value>

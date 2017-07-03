@@ -26,18 +26,15 @@ const firebaseConfig = (() => {
 )()
 
 firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth()
 
 export default {
 
   onAuthStateChanged(){
-
     const stream = Kefir.stream(emitter => {
-      firebase.auth().onAuthStateChanged(user => {
-        emitter.emit(user)
-      })
+      auth.onAuthStateChanged(emitter.emit, emitter.error, emitter.end)
     })
     stream.observe({error(error){console.error(error)}})
     return stream
-
   },
 }

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.85 - 2017-07-03
 * move jq code from gtm
 * fix js error in prev rel
 

@@ -55,7 +55,7 @@ view vm =
                 , style [ "margin-right" => "1rem" ]
                 ]
                 [ text vm.displayTime ]
-            , Material.iconBtn vm.playPauseIconName vm.onTogglePause
-            , Material.iconBtn "stop" vm.onStop
+            , Material.iconBtnD vm.playPauseIconName vm.onTogglePause
+            , Material.iconBtnD "stop" vm.onStop
             ]
         ]

@@ -34,7 +34,7 @@ iconBtnC name className =
         [ i [ class "default-color material-icons" ] [ text name ] ]
 
 
-iconBtn name clickHandler =
+iconBtnD name clickHandler =
     Html.button
         [ class "btn-flat btn-floating"
         , onClickStopPropagation clickHandler

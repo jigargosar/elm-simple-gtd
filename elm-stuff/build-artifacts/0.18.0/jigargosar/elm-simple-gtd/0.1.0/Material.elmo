@@ -65,13 +65,13 @@ var _jigargosar$elm_simple_gtd$Material$btnAttr = F3(
 			},
 			otherAttr);
 	});
-var _jigargosar$elm_simple_gtd$Material$bigIconTextButton = F3(
+var _jigargosar$elm_simple_gtd$Material$bigIconTextBtn = F3(
 	function (iconName, textV, clickHandler) {
 		return A2(
-			_elm_lang$html$Html$a,
+			_elm_lang$html$Html$button,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('big-button layout vertical center upper-case'),
+				_0: _elm_lang$html$Html_Attributes$class('big-icon-text-btn'),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
@@ -210,16 +210,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtn = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'z-index', '0'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
@@ -240,7 +231,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtn = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconA = F2(
+var _jigargosar$elm_simple_gtd$Material$iconA__ = F2(
 	function (name, attrs) {
 		var allAttr = {
 			ctor: '::',
@@ -258,7 +249,7 @@ var _jigargosar$elm_simple_gtd$Material$iconA = F2(
 	});
 var _jigargosar$elm_simple_gtd$Material$iconM = function (icon) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Material$iconA,
+		_jigargosar$elm_simple_gtd$Material$iconA__,
 		icon.name,
 		{
 			ctor: '::',

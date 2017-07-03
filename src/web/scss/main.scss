@@ -127,3 +127,8 @@ $background: #fff;
 button.x-fab.btn-floating > i.material-icons{
   color: white;
 }
+
+
+button.btn-flat.btn-floating{
+  z-index: 0;
+}

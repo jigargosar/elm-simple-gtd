@@ -4,7 +4,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 		var _p0 = maybeUserProfile;
 		if (_p0.ctor === 'Nothing') {
 			return A2(
-				_jigargosar$elm_simple_gtd$Material$iconButton,
+				_jigargosar$elm_simple_gtd$Material$iconBtn,
 				'account_circle',
 				{
 					ctor: '::',

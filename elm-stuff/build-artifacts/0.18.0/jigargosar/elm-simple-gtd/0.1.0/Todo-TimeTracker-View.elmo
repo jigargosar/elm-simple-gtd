@@ -81,7 +81,7 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$view = function (vm) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_jigargosar$elm_simple_gtd$Material$iconButton,
+								_jigargosar$elm_simple_gtd$Material$iconBtn,
 								vm.playPauseIconName,
 								{
 									ctor: '::',
@@ -91,7 +91,7 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$view = function (vm) {
 							_1: {
 								ctor: '::',
 								_0: A2(
-									_jigargosar$elm_simple_gtd$Material$iconButton,
+									_jigargosar$elm_simple_gtd$Material$iconBtn,
 									'stop',
 									{
 										ctor: '::',

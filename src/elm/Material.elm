@@ -15,7 +15,7 @@ icon name =
     i [ class "material-icons" ] [ text name ]
 
 
-iconA name attrs =
+iconA__ name attrs =
     let
         allAttr =
             class "material-icons" :: attrs
@@ -24,14 +24,13 @@ iconA name attrs =
 
 
 iconM icon =
-    iconA icon.name [ style [ "color" => AppColors.encode icon.color ] ]
+    iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
 iconBtn name attributes =
     div attributes
         [ Html.button
             [ class "btn-flat btn-floating"
-            , style [ "z-index" => "0" ]
             ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
         ]

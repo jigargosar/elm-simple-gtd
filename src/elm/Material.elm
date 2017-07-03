@@ -63,9 +63,13 @@ bigIconTextButton iconName textV clickHandler =
 fab iconName btnName otherAttr =
     let
         allAttr =
-            [ class "btn-floating x-fab", attribute "data-btn-name" btnName ] ++ otherAttr
+            btnAttr "btn-floating x-fab" btnName otherAttr
     in
         Html.button allAttr [ icon iconName ]
+
+
+btnAttr btnClass btnName otherAttr =
+    [ class btnClass, attribute "data-btn-name" btnName ] ++ otherAttr
 
 
 divider =

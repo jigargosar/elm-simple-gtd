@@ -85,10 +85,14 @@ $background: #fff;
 }
 
 
-.big-button{
+.big-icon-text-btn{
   padding: 0.5rem;
   text-transform: uppercase;
   color:darken($primary-color, 10%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   &:hover{
     background-color: color("grey","lighten-4");
   }
@@ -99,7 +103,7 @@ $background: #fff;
 }
 
 @media #{$small-and-down} {
-  .big-button i{
+  .big-icon-text-btn i{
     font-size: 3rem;
   }
 }

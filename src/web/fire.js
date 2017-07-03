@@ -1,6 +1,7 @@
 import _ from "ramda"
 import Kefir from "kefir"
 import firebase from "firebase"
+import "./firebase/init.js"
 
 
 const firebaseConfig = (() => {

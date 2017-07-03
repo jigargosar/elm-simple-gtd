@@ -1,5 +1,6 @@
 ## Upcoming
-* ga track userid 
+* ga track userid
+* ga track btn click via data attribute
 
 ## v0.18.82 - 2017-07-02
 * fix google sign in button 

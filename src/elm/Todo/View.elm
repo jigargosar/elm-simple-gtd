@@ -279,10 +279,10 @@ classListAsClass list =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Material.iconBtnDT "done"
+    Material.iconBtnDTC "done"
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
-        (onClickStopPropagation vm.toggleDoneMsg)
+        vm.toggleDoneMsg
 
 
 moreIconButton : TodoViewModel -> Html Msg

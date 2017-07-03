@@ -29,7 +29,7 @@ iconM icon =
 
 iconBtnC name className =
     Html.button
-        [ class ("btn-flat btn-floating" ++ className)
+        [ class ("btn-flat btn-floating " ++ className)
         ]
         [ i [ class "default-color material-icons" ] [ text name ] ]
 
@@ -42,7 +42,25 @@ iconBtn name clickHandler =
         [ i [ class "default-color material-icons" ] [ text name ] ]
 
 
-iconButtonTIAV name tabIndexAV attributes =
+iconBtnDT name tabIndexAV clickHandler =
+    Html.button
+        [ class "btn-flat btn-floating"
+        , tabIndexAV
+        , onClickStopPropagation clickHandler
+        ]
+        [ i [ class "default-color material-icons" ] [ text name ] ]
+
+
+iconBtnDTC name tabIndexAV className clickHandler =
+    Html.button
+        [ class ("btn-flat btn-floating " ++ className)
+        , tabIndexAV
+        , onClickStopPropagation clickHandler
+        ]
+        [ i [ class "default-color material-icons" ] [ text name ] ]
+
+
+iconButtonA name tabIndexAV attributes =
     div attributes
         [ Html.button
             [ class "btn-flat btn-floating"

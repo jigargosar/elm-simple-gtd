@@ -48,11 +48,10 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Material.iconButtonTIAV "menu"
+            Material.iconBtnDTC "menu"
                 (tabindex -1)
-                [ class "menu-btn"
-                , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
-                ]
+                "menu-btn"
+                (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
     in
         [ menuButton
         , div [ class "flex-auto font-nowrap" ] content

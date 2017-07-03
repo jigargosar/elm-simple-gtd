@@ -270,13 +270,19 @@ parseDisplayText { displayText, tabindexAV } =
         List.interweave nonLinkStrings linkStrings
 
 
+classListAsClass list =
+    list
+        |> List.filter Tuple.second
+        |> List.map Tuple.first
+        |> String.join " "
+
+
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Material.iconButtonTIAV "done"
+    Material.iconBtnDT "done"
         vm.tabindexAV
-        [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
-        , onClickStopPropagation (vm.toggleDoneMsg)
-        ]
+        (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
+        (onClickStopPropagation vm.toggleDoneMsg)
 
 
 moreIconButton : TodoViewModel -> Html Msg

@@ -1,5 +1,6 @@
 module Material exposing (..)
 
+import AppColors
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import X.Function.Infix exposing (..)
@@ -14,8 +15,16 @@ icon name =
     i [ class "material-icons" ] [ text name ]
 
 
-iconA name attr =
-    div attr [ i [ class "material-icons" ] [ text name ] ]
+iconA name attrs =
+    let
+        allAttr =
+            class "material-icons" :: attrs
+    in
+        i allAttr [ text name ]
+
+
+iconM icon =
+    iconA icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
 iconButton name attributes =

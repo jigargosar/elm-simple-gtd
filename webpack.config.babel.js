@@ -40,7 +40,7 @@ export default {
     entry: {
         "common": [
             "babel-polyfill",
-            "materialize-css/dist/js/materialize.min",
+            "materialize-css/dist/js/materialize",
             "./scss/main.scss",
             "./pcss/main.pcss",
             "./font-loader",
@@ -58,8 +58,8 @@ export default {
     plugins: [
         // new ExtractTextPlugin(styleFileName),
         new webpack["ProvidePlugin"]({
-            $: "jquery",
             jQuery: "jquery",
+            "window.jQuery": "jquery",
         }),
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,

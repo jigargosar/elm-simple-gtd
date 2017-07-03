@@ -1,5 +1,6 @@
 import F from "./firebase/init.js"
 import Cookies from "browser-cookies"
+import $ from "jquery"
 
 F.onAuthStateChanged()
  .observe({
@@ -15,4 +16,6 @@ F.onAuthStateChanged()
    },
  })
 
-
+global.getClosestAttribute = (element, attrName) =>{
+  return $(element).closest(`[${attrName}]`).attr(attrName)
+}

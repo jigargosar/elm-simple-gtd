@@ -1,4 +1,8 @@
-## v0.18.84 - 2017-07-03
+## Upcoming
+* move jq code from gtm
+* fix js error in prev rel
+
+## v0.18.84 - 2017-07-03 NUKED
 * ga track userid
 * ga track btn click via data attribute
 

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.84 - 2017-07-03
 * ga track userid
 * ga track btn click via data attribute
 

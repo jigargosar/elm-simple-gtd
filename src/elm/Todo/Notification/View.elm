@@ -30,9 +30,9 @@ reminderOverlayActiveView activeView todoDetails =
                     }
             in
                 activeViewShell todoDetails
-                    [ Material.bigIconTextButton "not_interested" "dismiss" vm.onDismissClicked
-                    , Material.bigIconTextButton "snooze" "snooze" vm.onSnoozeClicked
-                    , Material.bigIconTextButton "done" "done!" vm.onDoneClicked
+                    [ Material.bigIconTextBtn "not_interested" "dismiss" vm.onDismissClicked
+                    , Material.bigIconTextBtn "snooze" "snooze" vm.onSnoozeClicked
+                    , Material.bigIconTextBtn "done" "done!" vm.onDoneClicked
                     ]
 
         Todo.Notification.Model.SnoozeView ->
@@ -48,10 +48,10 @@ reminderOverlayActiveView activeView todoDetails =
                     }
             in
                 activeViewShell todoDetails
-                    [ Material.bigIconTextButton "snooze" "15 min" vm.snoozeFor15Min
-                    , Material.bigIconTextButton "snooze" "1 hour" vm.snoozeFor1Hour
-                    , Material.bigIconTextButton "snooze" "3 hour" vm.snoozeFor3Hours
-                    , Material.bigIconTextButton "snooze" "tomorrow" vm.snoozeTillTomorrow
+                    [ Material.bigIconTextBtn "snooze" "15 min" vm.snoozeFor15Min
+                    , Material.bigIconTextBtn "snooze" "1 hour" vm.snoozeFor1Hour
+                    , Material.bigIconTextBtn "snooze" "3 hour" vm.snoozeFor3Hours
+                    , Material.bigIconTextBtn "snooze" "tomorrow" vm.snoozeTillTomorrow
                     ]
 
 

@@ -78,7 +78,7 @@ primaryFeatures =
         feature ( iconName, heading, desc ) =
             div [ class "feature col s12 m4 center-align" ]
                 [ div [ class "section" ]
-                    [ Material.icon iconName
+                    [ Material.iconD iconName
                     , h5 [] [ text heading ]
                     , div [] (desc .|> descriptionLine)
                     ]

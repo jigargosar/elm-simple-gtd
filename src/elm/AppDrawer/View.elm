@@ -129,7 +129,7 @@ entityGroupView vm mainViewType =
                                     [ class ""
                                     , X.Html.onClickStopAll onAddClicked
                                     ]
-                                    [ Material.icon "add"
+                                    [ Material.iconD "add"
                                     , div [] [ text "Add New" ]
                                     ]
                                ]
@@ -161,7 +161,7 @@ archivedItems vm =
             [ class ""
             , onClick vm.onToggleShowArchived
             ]
-            [ Material.icon iconName
+            [ Material.iconD iconName
             , div [ class "font-nowrap" ]
                 [ View.Shared.badge buttonText badgeCount
                 ]
@@ -186,7 +186,7 @@ switchViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Material.icon iconName
+        [ Material.iconD iconName
         , h5 [] [ text title ]
         ]
 
@@ -196,7 +196,7 @@ switchViewItemSmall iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Material.icon iconName
+        [ Material.iconD iconName
         , div [] [ text title ]
         ]
 
@@ -206,6 +206,6 @@ onSetEntityListViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetEntityListView viewType)
         ]
-        [ Material.icon iconName
+        [ Material.iconD iconName
         , h5 [] [ text title ]
         ]

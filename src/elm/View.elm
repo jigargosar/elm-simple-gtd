@@ -158,8 +158,8 @@ appMainContent viewModel model =
 
 newTodoFab m =
     Material.fab "add"
+        "add-todo-fab"
         [ id "add-fab"
         , onClick Model.NewTodo
         , tabindex -1
-        , attribute "data-btn-name" "add-todo-fab"
         ]

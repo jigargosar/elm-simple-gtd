@@ -6,8 +6,12 @@ import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
 
-icon name =
+iconD name =
     i [ class "default-color material-icons" ] [ text name ]
+
+
+icon name =
+    i [ class "material-icons" ] [ text name ]
 
 
 iconA name attr =
@@ -56,13 +60,12 @@ bigIconTextButton iconName textV clickHandler =
         ]
 
 
-fab iconName otherAttr =
+fab iconName btnName otherAttr =
     let
         allAttr =
-            [ class "btn-floating" ] ++ otherAttr
+            [ class "btn-floating x-fab", attribute "data-btn-name" btnName ] ++ otherAttr
     in
-        Html.button allAttr
-            [ i [ class "material-icons", style [ "color" => "white" ] ] [ text iconName ] ]
+        Html.button allAttr [ icon iconName ]
 
 
 divider =

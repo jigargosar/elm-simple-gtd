@@ -6,9 +6,8 @@
 $primary-color: color("blue", "base");
 $secondary-color: color("red", "lighten-1");
 $google-primary-color: color("blue", "darken-2");
-$font-path : "../assets/fonts/";
+$font-path: "../assets/fonts/";
 $roboto-font-path: $font-path;
-
 
 // Variables;
 @import "material/components/variables";
@@ -27,7 +26,6 @@ $roboto-font-path: $font-path;
 @import "fonts";
 //@import "material/components/roboto";
 // --
-
 
 @import "material/components/typography";
 @import "material/components/transitions";
@@ -54,60 +52,58 @@ $roboto-font-path: $font-path;
 @import "material/components/date_picker/default.date";
 @import "material/components/date_picker/default.time";
 
-
-
 $text-color: $off-black;
 $background: #fff;
 
 @import "landing";
 @import "app";
 
-
-.btn.btn-flat{
-  color:color("indigo", "accent-3")
-}
-.btn.btn-flat:hover{
-  color:color("indigo", "darken-1")
+.btn.btn-flat {
+  color: color("indigo", "accent-3")
 }
 
+.btn.btn-flat:hover {
+  color: color("indigo", "darken-1")
+}
 
-.static{
+.static {
   background-color: white;
   padding: 1rem;
 }
 
-.top-shadow{
-  box-shadow: 0 -0.1rem 1rem color("grey","base");
+.top-shadow {
+  box-shadow: 0 -0.1rem 1rem color("grey", "base");
 }
 
-.upper-case{
+.upper-case {
   text-transform: uppercase;
 }
 
-
-.big-icon-text-btn{
-  padding: 0.5rem;
-  text-transform: uppercase;
-  color:darken($primary-color, 10%);
+.big-icon-text-btn {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 
-  &:hover{
-    background-color: color("grey","lighten-4");
+  border: none;
+  background: transparent;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  color: darken($primary-color, 10%);
+
+  &:hover {
+    background-color: color("grey", "lighten-4");
   }
 
-  i{
+  i {
     font-size: 5rem;
   }
 }
 
 @media #{$small-and-down} {
-  .big-icon-text-btn i{
+  .big-icon-text-btn i {
     font-size: 3rem;
   }
 }
-
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.3);
@@ -124,11 +120,10 @@ $background: #fff;
   will-change: opacity;
 }
 
-button.x-fab.btn-floating > i.material-icons{
+button.x-fab.btn-floating > i.material-icons {
   color: white;
 }
 
-
-button.btn-flat.btn-floating{
+button.btn-flat.btn-floating {
   z-index: 0;
 }

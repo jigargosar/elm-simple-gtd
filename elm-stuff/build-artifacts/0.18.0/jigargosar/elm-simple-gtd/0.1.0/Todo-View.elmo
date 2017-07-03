@@ -464,29 +464,31 @@ var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
 			}
 		});
 };
+var _jigargosar$elm_simple_gtd$Todo_View$classListAsClass = function (list) {
+	return A2(
+		_elm_lang$core$String$join,
+		' ',
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Tuple$first,
+			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
+};
 var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
-	return A3(
-		_jigargosar$elm_simple_gtd$Material$iconButtonTIAV,
+	return A4(
+		_jigargosar$elm_simple_gtd$Material$iconBtnDTC,
 		'done',
 		vm.tabindexAV,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$classList(
-				{
-					ctor: '::',
-					_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'done-icon', true),
-					_1: {
-						ctor: '::',
-						_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'is-done', vm.isDone),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
+		_jigargosar$elm_simple_gtd$Todo_View$classListAsClass(
+			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(vm.toggleDoneMsg),
-				_1: {ctor: '[]'}
-			}
-		});
+				_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'done-icon', true),
+				_1: {
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'], 'is-done', vm.isDone),
+					_1: {ctor: '[]'}
+				}
+			}),
+		vm.toggleDoneMsg);
 };
 var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
 	var _p9 = _p8;

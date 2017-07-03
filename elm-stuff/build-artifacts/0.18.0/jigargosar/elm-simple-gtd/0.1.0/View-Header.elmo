@@ -3,14 +3,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 	var menuIcon = function () {
 		var _p0 = maybeUserProfile;
 		if (_p0.ctor === 'Nothing') {
-			return A2(
-				_jigargosar$elm_simple_gtd$Material$iconBtn,
-				'account_circle',
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('account'),
-					_1: {ctor: '[]'}
-				});
+			return A2(_jigargosar$elm_simple_gtd$Material$iconBtnC, 'account_circle', 'account');
 		} else {
 			return A2(
 				_elm_lang$html$Html$img,
@@ -48,20 +41,12 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
-		var menuButton = A3(
-			_jigargosar$elm_simple_gtd$Material$iconButtonTIAV,
+		var menuButton = A4(
+			_jigargosar$elm_simple_gtd$Material$iconBtnDTC,
 			'menu',
 			_elm_lang$html$Html_Attributes$tabindex(-1),
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('menu-btn'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(
-						_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
-					_1: {ctor: '[]'}
-				}
-			});
+			'menu-btn',
+			_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay));
 		return {
 			ctor: '::',
 			_0: menuButton,

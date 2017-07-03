@@ -11,6 +11,8 @@ import cryptoRandomString from "crypto-random-string"
 import autosize from "autosize"
 import localforage from "localforage"
 
+global.jQuery=$
+// global.$=$
 
 //noinspection JSUnresolvedVariable
 const isDevelopmentMode = process.env["NODE_ENV"] === "development"

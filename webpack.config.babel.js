@@ -60,7 +60,6 @@ export default {
         new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
-            "window.jQuery": "jquery",
         }),
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,

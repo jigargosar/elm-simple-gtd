@@ -161,4 +161,5 @@ newTodoFab m =
         [ id "add-fab"
         , onClick Model.NewTodo
         , tabindex -1
+        , attribute "data-btn-name" "add-todo-fab"
         ]

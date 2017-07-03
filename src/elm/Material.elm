@@ -60,7 +60,7 @@ smallIconButtonTIAV name tabIndexAV attributes =
 
 
 bigIconTextButton iconName textV clickHandler =
-    a
+    Html.button
         [ class "big-button layout vertical center upper-case"
         , onClickStopPropagation clickHandler
         ]

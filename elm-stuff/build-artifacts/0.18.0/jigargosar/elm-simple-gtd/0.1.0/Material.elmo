@@ -325,7 +325,11 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig = function (config) {
 			_1: {
 				ctor: '::',
 				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.onClick),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$tabindex(config.tabIndex),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
@@ -363,7 +367,8 @@ var _jigargosar$elm_simple_gtd$Material$defaultBtnConfig = {
 	classList: {ctor: '[]'},
 	iconName: '',
 	iconColor: A2(_mdgriffith$elm_color_mixing$Color_Mixing$lighten, 0.5, _elm_lang$core$Color$black),
-	onClick: _jigargosar$elm_simple_gtd$Model$noop
+	onClick: _jigargosar$elm_simple_gtd$Model$noop,
+	tabIndex: 0
 };
 var _jigargosar$elm_simple_gtd$Material$iconBtn = function (configFn) {
 	return _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig(
@@ -443,7 +448,7 @@ var _jigargosar$elm_simple_gtd$Material$iconD = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Material$BtnConfig = F5(
-	function (a, b, c, d, e) {
-		return {$class: a, classList: b, iconName: c, iconColor: d, onClick: e};
+var _jigargosar$elm_simple_gtd$Material$BtnConfig = F6(
+	function (a, b, c, d, e, f) {
+		return {$class: a, classList: b, iconName: c, iconColor: d, onClick: e, tabIndex: f};
 	});

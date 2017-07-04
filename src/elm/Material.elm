@@ -36,6 +36,7 @@ type alias BtnConfig =
     , iconName : String
     , iconColor : Color.Color
     , onClick : Model.Msg
+    , tabIndex : Int
     }
 
 
@@ -45,6 +46,7 @@ defaultBtnConfig =
     , iconName = ""
     , iconColor = Color.Mixing.lighten 0.5 Color.black
     , onClick = Model.noop
+    , tabIndex = 0
     }
 
 
@@ -56,6 +58,7 @@ iconBtnWithConfig config =
     Html.button
         [ class ("btn-flat btn-floating " ++ config.class)
         , onClickStopPropagation config.onClick
+        , tabindex config.tabIndex
         ]
         [ i
             [ class "material-icons"

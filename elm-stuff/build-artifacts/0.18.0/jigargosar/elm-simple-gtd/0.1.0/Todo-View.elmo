@@ -435,24 +435,28 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$smallIconBtn(
+				_0: A3(
+					_jigargosar$elm_simple_gtd$Mat$smallIconBtn,
+					'schedule',
+					vm.reminder.startEditingMsg,
 					function (c) {
 						return _elm_lang$core$Native_Utils.update(
 							c,
-							{iconName: 'schedule', tabIndex: vm.tabindexAV, msg: vm.reminder.startEditingMsg});
+							{tabIndex: vm.tabindexAV});
 					}),
 				_1: {ctor: '[]'}
 			}
 		});
 };
 var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
-	return _jigargosar$elm_simple_gtd$Mat$smallIconBtn(
+	return A3(
+		_jigargosar$elm_simple_gtd$Mat$smallIconBtn,
+		'more_vert',
+		vm.onMoreMenuClicked,
 		function (c) {
 			return _elm_lang$core$Native_Utils.update(
 				c,
 				{
-					iconName: 'more_vert',
-					msg: vm.onMoreMenuClicked,
 					id: A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)
 				});
 		});

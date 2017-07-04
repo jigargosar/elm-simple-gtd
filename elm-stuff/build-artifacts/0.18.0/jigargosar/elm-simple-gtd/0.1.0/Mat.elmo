@@ -286,36 +286,16 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn = function (configFn) {
 	return _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig(
 		configFn(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig));
 };
-var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = function (configFn) {
-	return _jigargosar$elm_simple_gtd$Mat$iconBtn(
-		function (_p4) {
-			return function (c) {
-				return _elm_lang$core$Native_Utils.update(
-					c,
-					{
-						classList: A2(
-							_elm_lang$core$Basics_ops['++'],
-							c.classList,
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'x24', _1: true},
-								_1: {ctor: '[]'}
-							})
-					});
-			}(
-				configFn(_p4));
-		});
-};
 var _jigargosar$elm_simple_gtd$Mat$ib = F3(
 	function (iconName, msg, configFn) {
-		return function (_p5) {
+		return function (_p4) {
 			return _jigargosar$elm_simple_gtd$Mat$ibc(
 				function (c) {
 					return _elm_lang$core$Native_Utils.update(
 						c,
 						{iconName: iconName, msg: msg});
 				}(
-					configFn(_p5)));
+					configFn(_p4)));
 		}(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig);
 	});
 var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
@@ -324,13 +304,13 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
 			_jigargosar$elm_simple_gtd$Mat$ib,
 			iconName,
 			msg,
-			function (_p6) {
+			function (_p5) {
 				return function (c) {
 					return _elm_lang$core$Native_Utils.update(
 						c,
 						{primaryFAB: true});
 				}(
-					configFn(_p6));
+					configFn(_p5));
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
@@ -359,6 +339,30 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
 				return _elm_lang$core$Native_Utils.update(
 					c,
 					{tabIndex: tabIndexV, $class: className});
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
+	function (name, clickHandler, configFn) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$ib,
+			name,
+			clickHandler,
+			function (_p6) {
+				return function (c) {
+					return _elm_lang$core$Native_Utils.update(
+						c,
+						{
+							classList: A2(
+								_elm_lang$core$Basics_ops['++'],
+								c.classList,
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'x24', _1: true},
+									_1: {ctor: '[]'}
+								})
+						});
+				}(
+					configFn(_p6));
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(

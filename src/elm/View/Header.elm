@@ -49,7 +49,7 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Mat.iconBtnDTC "menu"
+            Mat.iconBtn4 "menu"
                 -1
                 "menu-btn"
                 (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)

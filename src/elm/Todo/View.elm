@@ -279,7 +279,7 @@ classListAsClass list =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Mat.iconBtnDTC "done"
+    Mat.iconBtn4 "done"
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
         vm.toggleDoneMsg

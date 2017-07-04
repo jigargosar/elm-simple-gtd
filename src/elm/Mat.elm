@@ -67,15 +67,15 @@ iconBtn configFn =
     iconBtnWithConfig (configFn defaultBtnConfig)
 
 
-iconBtnD name clickHandler =
+iconBtn2 name clickHandler =
     iconBtn (\c -> { c | iconName = name, msg = clickHandler })
 
 
-iconBtnDT name tabIndexV clickHandler =
+iconBtn3 name tabIndexV clickHandler =
     iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
 
 
-iconBtnDTC name tabIndexV className clickHandler =
+iconBtn4 name tabIndexV className clickHandler =
     iconBtn
         (\c ->
             { c
@@ -85,16 +85,6 @@ iconBtnDTC name tabIndexV className clickHandler =
                 , class = className
             }
         )
-
-
-
-{- Html.button
-   [ class ("btn-flat btn-floating " ++ className)
-   , tabindex tabIndexV
-   , onClickStopPropagation clickHandler
-   ]
-   [ i [ class "default-color material-icons" ] [ text name ] ]
--}
 
 
 iconButtonA name tabIndexAV attributes =

@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem = function (vm) {
-	var archiveButton = A3(_jigargosar$elm_simple_gtd$Mat$iconBtnDT, vm.archive.iconName, vm.tabindexAV, vm.archive.onClick);
-	var editButton = vm.isEditable ? A3(_jigargosar$elm_simple_gtd$Mat$iconBtnDT, 'create', vm.tabindexAV, vm.startEditingMsg) : A2(
+	var archiveButton = A3(_jigargosar$elm_simple_gtd$Mat$iconBtn3, vm.archive.iconName, vm.tabindexAV, vm.archive.onClick);
+	var editButton = vm.isEditable ? A3(_jigargosar$elm_simple_gtd$Mat$iconBtn3, 'create', vm.tabindexAV, vm.startEditingMsg) : A2(
 		_elm_lang$html$Html$span,
 		{ctor: '[]'},
 		{ctor: '[]'});

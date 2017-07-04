@@ -32,7 +32,8 @@ iconM icon =
 
 
 type alias BtnConfig =
-    { class : String
+    { id : String
+    , class : String
     , classList : List ( String, Bool )
     , iconName : String
     , onClick : Model.Msg
@@ -41,7 +42,8 @@ type alias BtnConfig =
 
 
 defaultBtnConfig =
-    { class = ""
+    { id = ""
+    , class = ""
     , classList = []
     , iconName = ""
     , msg = Model.noop
@@ -51,7 +53,8 @@ defaultBtnConfig =
 
 iconBtnWithConfig config =
     a
-        [ class ("icon-button btn-flat btn-floating " ++ config.class)
+        [ id config.id
+        , class ("icon-button btn-flat btn-floating " ++ config.class)
         , onClickStopPropagation config.msg
         , tabindex config.tabIndex
         , X.Keyboard.onEnter config.msg
@@ -85,6 +88,10 @@ iconBtn4 name tabIndexV className clickHandler =
                 , class = className
             }
         )
+
+
+smallIconBtn configFn =
+    iconBtn (configFn >> (\c -> { c | class = c.class ++ " x24" }))
 
 
 smallIconButtonTIAV name tabIndexAV attributes =

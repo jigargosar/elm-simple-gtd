@@ -46,7 +46,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
 		var menuButton = A4(
-			_jigargosar$elm_simple_gtd$Mat$iconBtnDTC,
+			_jigargosar$elm_simple_gtd$Mat$iconBtn4,
 			'menu',
 			-1,
 			'menu-btn',

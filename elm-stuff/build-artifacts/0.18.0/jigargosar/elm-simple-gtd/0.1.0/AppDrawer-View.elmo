@@ -242,7 +242,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityGroupView = F2(
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtnD, expandIconName, onToggleExpanded),
+								_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtn2, expandIconName, onToggleExpanded),
 								_1: {ctor: '[]'}
 							}
 						}

@@ -70,13 +70,6 @@ iconBtnWithConfig config =
         ]
 
 
-iconBtnC name className =
-    Html.button
-        [ class ("btn-flat btn-floating " ++ className)
-        ]
-        [ i [ class "default-color material-icons" ] [ text name ] ]
-
-
 iconBtnD name clickHandler =
     Html.button
         [ class "btn-flat btn-floating"

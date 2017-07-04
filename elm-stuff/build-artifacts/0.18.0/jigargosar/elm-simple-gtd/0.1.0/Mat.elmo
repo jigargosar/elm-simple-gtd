@@ -275,15 +275,6 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn = function (configFn) {
 	return _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig(
 		configFn(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig));
 };
-var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
-	function (name, tabIndexV, clickHandler) {
-		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
-			function (c) {
-				return _elm_lang$core$Native_Utils.update(
-					c,
-					{iconName: name, msg: clickHandler, tabIndex: tabIndexV});
-			});
-	});
 var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
 	function (name, tabIndexV, className, clickHandler) {
 		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
@@ -293,13 +284,13 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
 					{iconName: name, msg: clickHandler, tabIndex: tabIndexV, $class: className});
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
-	function (name, clickHandler) {
+var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
+	function (name, tabIndexV, clickHandler) {
 		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
 			function (c) {
 				return _elm_lang$core$Native_Utils.update(
 					c,
-					{iconName: name, msg: clickHandler});
+					{iconName: name, msg: clickHandler, tabIndex: tabIndexV});
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = function (configFn) {
@@ -348,6 +339,10 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
 				}(
 					configFn(_p6));
 			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
+	function (name, clickHandler) {
+		return A3(_jigargosar$elm_simple_gtd$Mat$ib, name, clickHandler, _elm_lang$core$Basics$identity);
 	});
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 	function (name, attrs) {

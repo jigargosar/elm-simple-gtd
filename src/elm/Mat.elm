@@ -110,10 +110,6 @@ iconBtn2 name clickHandler =
     ib name clickHandler identity
 
 
-
---    ib name clickHandler identity
-
-
 iconBtn3 name tabIndexV clickHandler =
     iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
 

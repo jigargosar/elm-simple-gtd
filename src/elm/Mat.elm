@@ -41,6 +41,7 @@ type alias BtnConfig =
     , onClick : Model.Msg
     , tabIndex : Int
     , trackingId : String
+    , fab : Bool
     }
 
 
@@ -52,6 +53,7 @@ defaultBtnConfig =
     , msg = Model.noop
     , tabIndex = -1
     , trackingId = ""
+    , fab = False
     }
 
 
@@ -60,10 +62,18 @@ iconBtnWithConfig config =
         trackingId =
             config.trackingId
                 |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
+
+        btnClass =
+            classList
+                [ ( "icon-button btn-floating", True )
+                , ( "btn-flat", not config.fab )
+                , ( "x-fab", config.fab )
+                , ( config.class, config.class |> X.String.isBlank >> not )
+                ]
     in
         a
             [ id config.id
-            , class ("icon-button btn-flat btn-floating " ++ config.class)
+            , btnClass
             , onClickStopPropagation config.msg
             , tabindex config.tabIndex
             , X.Keyboard.onEnter config.msg
@@ -100,8 +110,25 @@ iconBtn4 name tabIndexV className clickHandler =
         )
 
 
+fab iconName msg configFn =
+    configFn >> (\c -> { c | iconName = iconName, fab = True, msg = msg }) |> iconBtn
+
+
 smallIconBtn configFn =
-    iconBtn (configFn >> (\c -> { c | class = c.class ++ " x24" }))
+    configFn
+        >> (\c ->
+                { c
+                    | class = classListAsClass [ ( c.class, True ), ( "x24", True ) ]
+                }
+           )
+        |> iconBtn
+
+
+classListAsClass list =
+    list
+        |> List.filter Tuple.second
+        |> List.map Tuple.first
+        |> String.join " "
 
 
 bigIconTextBtn iconName textV clickHandler =
@@ -112,18 +139,6 @@ bigIconTextBtn iconName textV clickHandler =
         [ i [ class "material-icons" ] [ text iconName ]
         , div [] [ text textV ]
         ]
-
-
-fab iconName btnName otherAttr =
-    let
-        allAttr =
-            btnAttr "btn-floating x-fab" btnName otherAttr
-    in
-        Html.button allAttr [ icon iconName ]
-
-
-btnAttr btnClass btnName otherAttr =
-    [ class btnClass, attribute "data-btn-name" btnName ] ++ otherAttr
 
 
 divider =

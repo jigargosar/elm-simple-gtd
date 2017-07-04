@@ -2,19 +2,11 @@ var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 	return A3(
 		_jigargosar$elm_simple_gtd$Mat$fab,
 		'add',
-		'add-todo-fab',
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('add-fab'),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$NewTodo),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-					_1: {ctor: '[]'}
-				}
-			}
+		_jigargosar$elm_simple_gtd$Model$NewTodo,
+		function (c) {
+			return _elm_lang$core$Native_Utils.update(
+				c,
+				{trackingId: 'add-todo-fab', id: 'add-fab'});
 		});
 };
 var _jigargosar$elm_simple_gtd$View$appMainContent = F2(

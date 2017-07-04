@@ -158,8 +158,5 @@ appMainContent viewModel model =
 
 newTodoFab m =
     Mat.fab "add"
-        "add-todo-fab"
-        [ id "add-fab"
-        , onClick Model.NewTodo
-        , tabindex -1
-        ]
+        Model.NewTodo
+        (\c -> { c | trackingId = "add-todo-fab", id = "add-fab" })

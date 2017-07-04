@@ -60,3 +60,22 @@ $size: 2.9rem;
   //line-height: 40px;
 }
 
+
+//todo fix
+.done-icon {
+  &.is-done .IB__I, &:not(.is-done) .IB__I:hover {
+    color: rgb(76, 175, 80);
+  }
+
+  &.is-done .IB__I:hover {
+    color: unset;
+  }
+
+}
+
+.done-icon .IB__I, .done-icon {
+  line-height: 2rem;
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+}

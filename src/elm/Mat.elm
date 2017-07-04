@@ -90,18 +90,6 @@ iconBtn configFn =
     iconBtnWithConfig (configFn defaultBtnConfig)
 
 
-iconBtn4 name tabIndexV className clickHandler =
-    iconBtn
-        (\c ->
-            { c
-                | iconName = name
-                , msg = clickHandler
-                , tabIndex = tabIndexV
-                , class = className
-            }
-        )
-
-
 primaryFAB iconName msg configFn =
     ib iconName msg <| configFn >> (\c -> { c | primaryFAB = True })
 
@@ -114,8 +102,8 @@ iconBtn3 name tabIndexV clickHandler =
     ib name clickHandler (\c -> { c | tabIndex = tabIndexV })
 
 
-
---    iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
+iconBtn4 name tabIndexV className clickHandler =
+    ib name clickHandler (\c -> { c | tabIndex = tabIndexV, class = className })
 
 
 ib iconName msg configFn =

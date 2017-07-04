@@ -6,7 +6,7 @@ import Color.Mixing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model
-import X.Function exposing (when)
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
@@ -51,7 +51,7 @@ defaultBtnConfig =
     , classList = []
     , iconName = ""
     , msg = Model.noop
-    , tabIndex = -1
+    , tabIndex = -2
     , trackingId = ""
     , primaryFAB = False
     }
@@ -134,15 +134,20 @@ ibc config =
             , ( config.class, config.class |> X.String.isBlank >> not )
             ]
                 ++ config.classList
+
+        optionalAttr =
+            [ ifElse (equals -2) (\_ -> Nothing) (tabindex >> Just) config.tabIndex ]
+                |> List.filterMap identity
     in
         a
-            [ id config.id
-            , classList classListV
-            , onClickStopPropagation config.msg
-            , tabindex config.tabIndex
-            , X.Keyboard.onEnter config.msg
-            , attribute "data-btn-name" trackingId
-            ]
+            ([ id config.id
+             , classList classListV
+             , onClickStopPropagation config.msg
+             , X.Keyboard.onEnter config.msg
+             , attribute "data-btn-name" trackingId
+             ]
+                ++ optionalAttr
+            )
             [ i
                 [ classList
                     [ ( "IB__I", True )

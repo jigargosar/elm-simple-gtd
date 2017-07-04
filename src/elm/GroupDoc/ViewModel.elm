@@ -38,9 +38,9 @@ type alias ViewModel =
     , icon : IconVM
     , onFocusIn : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
-    , tabindexAV : Html.Attribute Msg
+    , tabindexAV : Int
     , todoList : List Todo.Model
-    , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
+    , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 
 
@@ -58,7 +58,7 @@ type alias Config =
     , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
-    , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
+    , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 
 
@@ -148,7 +148,7 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (Entity.Entity -> Html.Attribute Msg) -> List Todo.Model -> Context.Model -> ViewModel
+contextGroup : (Entity.Entity -> Int) -> List Todo.Model -> Context.Model -> ViewModel
 contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
@@ -168,7 +168,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-projectGroup : (Entity.Entity -> Html.Attribute Msg) -> List Todo.Model -> Project.Model -> ViewModel
+projectGroup : (Entity.Entity -> Int) -> List Todo.Model -> Project.Model -> ViewModel
 projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config

@@ -511,7 +511,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
 						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {
 							ctor: '::',
-							_0: _p9.tabindexAV,
+							_0: _elm_lang$html$Html_Attributes$tabindex(_p9.tabindexAV),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -563,7 +563,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 				_0: _jigargosar$elm_simple_gtd$X_Html$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
-					_0: vm.tabindexAV,
+					_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabindexAV),
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(vm.onKeyDownMsg),
@@ -702,7 +702,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 													_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropDownMsg),
 													_1: {
 														ctor: '::',
-														_0: vm.tabindexAV,
+														_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabindexAV),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -758,7 +758,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$item = function (vm) {
 														_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropDownMsg),
 														_1: {
 															ctor: '::',
-															_0: vm.tabindexAV,
+															_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabindexAV),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -874,7 +874,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 		};
 		var tabindexAV = function () {
 			var tabindexValue = canBeFocused ? 0 : -1;
-			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+			return tabindexValue;
 		}();
 		return {
 			isDone: _jigargosar$elm_simple_gtd$Todo$isDone(todo),

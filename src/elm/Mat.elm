@@ -72,9 +72,10 @@ iconBtnD name clickHandler =
 
 
 iconBtnDT name tabIndexAV clickHandler =
+    --    iconBtn (\c -> { c | iconName = name, msg = clickHandler })
     Html.button
         [ class "btn-flat btn-floating"
-        , tabIndexAV
+        , tabindex tabIndexAV
         , onClickStopPropagation clickHandler
         ]
         [ i [ class "default-color material-icons" ] [ text name ] ]
@@ -83,7 +84,7 @@ iconBtnDT name tabIndexAV clickHandler =
 iconBtnDTC name tabIndexAV className clickHandler =
     Html.button
         [ class ("btn-flat btn-floating " ++ className)
-        , tabIndexAV
+        , tabindex tabIndexAV
         , onClickStopPropagation clickHandler
         ]
         [ i [ class "default-color material-icons" ] [ text name ] ]
@@ -93,7 +94,7 @@ iconButtonA name tabIndexAV attributes =
     div attributes
         [ Html.button
             [ class "btn-flat btn-floating"
-            , tabIndexAV
+            , tabindex tabIndexAV
             ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
@@ -104,7 +105,7 @@ smallIconButtonTIAV name tabIndexAV attributes =
         [ Html.button
             [ class "btn-flat btn-floating x24"
             , style [ "z-index" => "0" ]
-            , tabIndexAV
+            , tabindex tabIndexAV
             ]
             [ i [ class "default-color material-icons" ] [ text name ] ]
         ]

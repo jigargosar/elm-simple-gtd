@@ -64,17 +64,16 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 					_jigargosar$elm_simple_gtd$Entity$equalById(entity)),
 				false);
 		};
-		var getTabIndexAVForEntity = function (entity) {
-			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
-			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		var getTabIndexForEntity = function (entity) {
+			return hasFocusIn(entity) ? 0 : -1;
 		};
 		var createContextVM = function (_p0) {
 			var _p1 = _p0;
-			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.context);
+			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup, getTabIndexForEntity, _p1.todoList, _p1.context);
 		};
 		var createProjectVM = function (_p2) {
 			var _p3 = _p2;
-			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
+			return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup, getTabIndexForEntity, _p3.todoList, _p3.project);
 		};
 		var todoView = function (todo) {
 			var canBeFocused = hasFocusIn(

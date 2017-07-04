@@ -50,7 +50,7 @@ type alias TodoViewModel =
     , showProjectDropDownMsg : Msg
     , reminder : ScheduleViewModel
     , onFocusIn : Msg
-    , tabindexAV : Attribute Msg
+    , tabindexAV : Int
     , isSelected : Bool
     , onMoreMenuClicked : Msg
     }
@@ -83,7 +83,7 @@ createTodoViewModel appVM canBeFocused todo =
                     else
                         -1
             in
-                tabindex tabindexValue
+                tabindexValue
 
         now =
             appVM.now
@@ -204,7 +204,7 @@ item vm =
             , "can-be-focused" => vm.canBeFocused
             ]
         , X.Html.onFocusIn vm.onFocusIn
-        , vm.tabindexAV
+        , tabindex vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
         , attribute "data-key" vm.key
         ]
@@ -229,7 +229,7 @@ item vm =
                     [ id ("edit-context-button-" ++ vm.key)
                     , style [ "color" => "black", "min-width" => "3rem" ]
                     , onClick vm.showContextDropDownMsg
-                    , vm.tabindexAV
+                    , tabindex vm.tabindexAV
                     ]
                     [ text vm.contextDisplayName ]
                 ]
@@ -238,7 +238,7 @@ item vm =
                     [ id ("edit-project-button-" ++ vm.key)
                     , style [ "color" => "black", "min-width" => "3rem" ]
                     , onClick vm.showProjectDropDownMsg
-                    , vm.tabindexAV
+                    , tabindex vm.tabindexAV
                     ]
                     [ text vm.projectDisplayName ]
                 ]
@@ -254,7 +254,7 @@ parseDisplayText { displayText, tabindexAV } =
                 [ href url
                 , target "_blank"
                 , onMouseDownStopPropagation Model.noop
-                , tabindexAV
+                , tabindex tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
 

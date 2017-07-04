@@ -42,19 +42,15 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
         hasFocusIn entity =
             maybeFocusInEntity ?|> Entity.equalById entity ?= False
 
-        getTabIndexAVForEntity entity =
-            let
-                tabindexValue =
-                    if hasFocusIn entity then
-                        0
-                    else
-                        -1
-            in
-                tabindex tabindexValue
+        getTabIndexForEntity entity =
+            if hasFocusIn entity then
+                0
+            else
+                -1
 
         createContextVM { context, todoList } =
             GroupDoc.ViewModel.contextGroup
-                getTabIndexAVForEntity
+                getTabIndexForEntity
                 todoList
                 context
 
@@ -63,7 +59,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
 
         createProjectVM { project, todoList } =
             GroupDoc.ViewModel.projectGroup
-                getTabIndexAVForEntity
+                getTabIndexForEntity
                 todoList
                 project
 

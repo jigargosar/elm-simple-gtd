@@ -50,7 +50,7 @@ headerWithContent content m =
     let
         menuButton =
             Mat.iconBtnDTC "menu"
-                (tabindex -1)
+                -1
                 "menu-btn"
                 (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
     in

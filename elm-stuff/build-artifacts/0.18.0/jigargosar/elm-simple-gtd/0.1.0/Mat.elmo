@@ -128,7 +128,7 @@ var _jigargosar$elm_simple_gtd$Mat$smallIconButtonTIAV = F3(
 								}),
 							_1: {
 								ctor: '::',
-								_0: tabIndexAV,
+								_0: _elm_lang$html$Html_Attributes$tabindex(tabIndexAV),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -166,7 +166,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconButtonA = F3(
 						_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
 						_1: {
 							ctor: '::',
-							_0: tabIndexAV,
+							_0: _elm_lang$html$Html_Attributes$tabindex(tabIndexAV),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -199,7 +199,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnDTC = F4(
 					A2(_elm_lang$core$Basics_ops['++'], 'btn-flat btn-floating ', className)),
 				_1: {
 					ctor: '::',
-					_0: tabIndexAV,
+					_0: _elm_lang$html$Html_Attributes$tabindex(tabIndexAV),
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
@@ -233,7 +233,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnDT = F3(
 				_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
 				_1: {
 					ctor: '::',
-					_0: tabIndexAV,
+					_0: _elm_lang$html$Html_Attributes$tabindex(tabIndexAV),
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),

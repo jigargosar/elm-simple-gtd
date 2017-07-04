@@ -9,7 +9,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_View$headerItem = function (vm) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: vm.tabindexAV,
+			_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabindexAV),
 			_1: {
 				ctor: '::',
 				_0: _jigargosar$elm_simple_gtd$X_Html$onFocusIn(vm.onFocusIn),

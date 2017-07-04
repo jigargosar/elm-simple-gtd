@@ -55,7 +55,7 @@ headerItem vm =
                 editButton
     in
         div
-            [ vm.tabindexAV
+            [ tabindex vm.tabindexAV
             , X.Html.onFocusIn vm.onFocusIn
             , onKeyDown vm.onKeyDownMsg
             , classList [ "entity-item focusable-list-item collection-item" => True ]

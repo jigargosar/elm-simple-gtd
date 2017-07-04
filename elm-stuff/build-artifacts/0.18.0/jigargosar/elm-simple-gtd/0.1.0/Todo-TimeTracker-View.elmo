@@ -80,10 +80,10 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$view = function (vm) {
 							}),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$Material$iconBtnD, vm.playPauseIconName, vm.onTogglePause),
+							_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtnD, vm.playPauseIconName, vm.onTogglePause),
 							_1: {
 								ctor: '::',
-								_0: A2(_jigargosar$elm_simple_gtd$Material$iconBtnD, 'stop', vm.onStop),
+								_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtnD, 'stop', vm.onStop),
 								_1: {ctor: '[]'}
 							}
 						}

@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Material$buttonFlat = F2(
+var _jigargosar$elm_simple_gtd$Mat$buttonFlat = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -6,7 +6,7 @@ var _jigargosar$elm_simple_gtd$Material$buttonFlat = F2(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$button,
+					_elm_lang$html$Html$a,
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
@@ -20,7 +20,7 @@ var _jigargosar$elm_simple_gtd$Material$buttonFlat = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$button = F2(
+var _jigargosar$elm_simple_gtd$Mat$button = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$Material$button = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$divider = A2(
+var _jigargosar$elm_simple_gtd$Mat$divider = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -50,7 +50,7 @@ var _jigargosar$elm_simple_gtd$Material$divider = A2(
 		_1: {ctor: '[]'}
 	},
 	{ctor: '[]'});
-var _jigargosar$elm_simple_gtd$Material$btnAttr = F3(
+var _jigargosar$elm_simple_gtd$Mat$btnAttr = F3(
 	function (btnClass, btnName, otherAttr) {
 		return A2(
 			_elm_lang$core$Basics_ops['++'],
@@ -65,7 +65,7 @@ var _jigargosar$elm_simple_gtd$Material$btnAttr = F3(
 			},
 			otherAttr);
 	});
-var _jigargosar$elm_simple_gtd$Material$bigIconTextBtn = F3(
+var _jigargosar$elm_simple_gtd$Mat$bigIconTextBtn = F3(
 	function (iconName, textV, clickHandler) {
 		return A2(
 			_elm_lang$html$Html$button,
@@ -106,7 +106,7 @@ var _jigargosar$elm_simple_gtd$Material$bigIconTextBtn = F3(
 				}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV = F3(
+var _jigargosar$elm_simple_gtd$Mat$smallIconButtonTIAV = F3(
 	function (name, tabIndexAV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -152,7 +152,7 @@ var _jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconButtonA = F3(
+var _jigargosar$elm_simple_gtd$Mat$iconButtonA = F3(
 	function (name, tabIndexAV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -189,10 +189,10 @@ var _jigargosar$elm_simple_gtd$Material$iconButtonA = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtnDTC = F4(
+var _jigargosar$elm_simple_gtd$Mat$iconBtnDTC = F4(
 	function (name, tabIndexAV, className, clickHandler) {
 		return A2(
-			_elm_lang$html$Html$a,
+			_elm_lang$html$Html$button,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class(
@@ -203,11 +203,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnDTC = F4(
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$X_Keyboard$onEnter(clickHandler),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				}
 			},
@@ -228,7 +224,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnDTC = F4(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtnDT = F3(
+var _jigargosar$elm_simple_gtd$Mat$iconBtnDT = F3(
 	function (name, tabIndexAV, clickHandler) {
 		return A2(
 			_elm_lang$html$Html$button,
@@ -262,7 +258,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnDT = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtnD = F2(
+var _jigargosar$elm_simple_gtd$Mat$iconBtnD = F2(
 	function (name, clickHandler) {
 		return A2(
 			_elm_lang$html$Html$button,
@@ -292,7 +288,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnD = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtnC = F2(
+var _jigargosar$elm_simple_gtd$Mat$iconBtnC = F2(
 	function (name, className) {
 		return A2(
 			_elm_lang$html$Html$button,
@@ -319,20 +315,24 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnC = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig = function (config) {
+var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 	return A2(
-		_elm_lang$html$Html$button,
+		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$class(
-				A2(_elm_lang$core$Basics_ops['++'], 'btn-flat btn-floating ', config.$class)),
+				A2(_elm_lang$core$Basics_ops['++'], 'icon-button btn-flat btn-floating ', config.$class)),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.onClick),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.msg),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$tabindex(config.tabIndex),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onEnter(config.msg),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		},
@@ -366,19 +366,19 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig = function (config) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Material$defaultBtnConfig = {
+var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	$class: '',
 	classList: {ctor: '[]'},
 	iconName: '',
 	iconColor: A2(_mdgriffith$elm_color_mixing$Color_Mixing$lighten, 0.5, _elm_lang$core$Color$black),
-	onClick: _jigargosar$elm_simple_gtd$Model$noop,
+	msg: _jigargosar$elm_simple_gtd$Model$noop,
 	tabIndex: 0
 };
-var _jigargosar$elm_simple_gtd$Material$iconBtn = function (configFn) {
-	return _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig(
-		configFn(_jigargosar$elm_simple_gtd$Material$defaultBtnConfig));
+var _jigargosar$elm_simple_gtd$Mat$iconBtn = function (configFn) {
+	return _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig(
+		configFn(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig));
 };
-var _jigargosar$elm_simple_gtd$Material$iconA__ = F2(
+var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 	function (name, attrs) {
 		var allAttr = {
 			ctor: '::',
@@ -394,9 +394,9 @@ var _jigargosar$elm_simple_gtd$Material$iconA__ = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconM = function (icon) {
+var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Material$iconA__,
+		_jigargosar$elm_simple_gtd$Mat$iconA__,
 		icon.name,
 		{
 			ctor: '::',
@@ -412,7 +412,7 @@ var _jigargosar$elm_simple_gtd$Material$iconM = function (icon) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Material$icon = function (name) {
+var _jigargosar$elm_simple_gtd$Mat$icon = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,
 		{
@@ -426,19 +426,19 @@ var _jigargosar$elm_simple_gtd$Material$icon = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Material$fab = F3(
+var _jigargosar$elm_simple_gtd$Mat$fab = F3(
 	function (iconName, btnName, otherAttr) {
-		var allAttr = A3(_jigargosar$elm_simple_gtd$Material$btnAttr, 'btn-floating x-fab', btnName, otherAttr);
+		var allAttr = A3(_jigargosar$elm_simple_gtd$Mat$btnAttr, 'btn-floating x-fab', btnName, otherAttr);
 		return A2(
 			_elm_lang$html$Html$button,
 			allAttr,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Material$icon(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$icon(iconName),
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconD = function (name) {
+var _jigargosar$elm_simple_gtd$Mat$iconD = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,
 		{
@@ -452,7 +452,7 @@ var _jigargosar$elm_simple_gtd$Material$iconD = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Material$BtnConfig = F6(
+var _jigargosar$elm_simple_gtd$Mat$BtnConfig = F6(
 	function (a, b, c, d, e, f) {
 		return {$class: a, classList: b, iconName: c, iconColor: d, onClick: e, tabIndex: f};
 	});

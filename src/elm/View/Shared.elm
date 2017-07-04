@@ -3,7 +3,7 @@ module View.Shared exposing (..)
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
-import Material
+import Mat
 import Model
 import Model
 import X.Function.Infix exposing (..)
@@ -45,19 +45,19 @@ okCancelButtonsWith okMsg cancelMsg list =
 
 
 okButton msg =
-    Material.buttonFlat "Ok" [ onClick msg ]
+    Mat.buttonFlat "Ok" [ onClick msg ]
 
 
 cancelButton msg =
-    Material.buttonFlat "Cancel" [ onClick msg ]
+    Mat.buttonFlat "Cancel" [ onClick msg ]
 
 
 deleteButton msg =
-    Material.buttonFlat "Delete" [ onClick msg ]
+    Mat.buttonFlat "Delete" [ onClick msg ]
 
 
 archiveButton isArchived msg =
-    Material.buttonFlat
+    Mat.buttonFlat
         (if isArchived then
             "Unarchive"
          else

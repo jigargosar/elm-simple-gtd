@@ -4,7 +4,7 @@ import AppColors
 import AppDrawer.Model
 import AppUrl
 import Color
-import Material
+import Mat
 import X.Html exposing (boolProperty)
 import Firebase
 import Model
@@ -49,7 +49,7 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Material.iconBtnDTC "menu"
+            Mat.iconBtnDTC "menu"
                 (tabindex -1)
                 "menu-btn"
                 (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
@@ -67,13 +67,12 @@ menu m =
 menuIcon m =
     case Model.getMaybeUserProfile m of
         Nothing ->
-            Material.iconBtn
+            Mat.iconBtn
                 (\c ->
                     { c
                         | iconName = "account_circle"
-                        , class = "account"
                         , iconColor = Color.white
-                        , onClick = Model.OnShowMainMenu
+                        , msg = Model.OnShowMainMenu
                     }
                 )
 

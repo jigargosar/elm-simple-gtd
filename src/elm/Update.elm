@@ -322,6 +322,7 @@ onGlobalKeyUp key =
                     case key of
                         Key.Escape ->
                             Return.map (Model.clearSelection)
+                                >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                         Key.CharQ ->
                             andThenUpdate NewTodo

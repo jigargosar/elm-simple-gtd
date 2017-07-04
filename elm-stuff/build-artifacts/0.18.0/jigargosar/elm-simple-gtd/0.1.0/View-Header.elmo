@@ -1,11 +1,11 @@
 var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
-		return _jigargosar$elm_simple_gtd$Material$iconBtn(
+		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
 			function (c) {
 				return _elm_lang$core$Native_Utils.update(
 					c,
-					{iconName: 'account_circle', $class: 'account', iconColor: _elm_lang$core$Color$white, onClick: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
+					{iconName: 'account_circle', iconColor: _elm_lang$core$Color$white, msg: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
 			});
 	} else {
 		return A2(
@@ -46,7 +46,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
 		var menuButton = A4(
-			_jigargosar$elm_simple_gtd$Material$iconBtnDTC,
+			_jigargosar$elm_simple_gtd$Mat$iconBtnDTC,
 			'menu',
 			_elm_lang$html$Html_Attributes$tabindex(-1),
 			'menu-btn',

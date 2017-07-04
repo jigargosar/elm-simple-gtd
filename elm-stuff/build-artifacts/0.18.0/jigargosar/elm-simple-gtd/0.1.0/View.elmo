@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 	return A3(
-		_jigargosar$elm_simple_gtd$Material$fab,
+		_jigargosar$elm_simple_gtd$Mat$fab,
 		'add',
 		'add-todo-fab',
 		{

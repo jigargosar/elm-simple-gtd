@@ -3,7 +3,7 @@ module AppDrawer.View exposing (..)
 import AppColors
 import AppUrl
 import X.Html exposing (boolProperty, onClickStopPropagation)
-import Material
+import Mat
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Entity
@@ -59,11 +59,11 @@ sidebarContent appVM model =
                 ([]
                     ++ entityGroupView contexts model.mainViewType
                     ++ entityGroupView projects model.mainViewType
-                    ++ [ Material.divider ]
+                    ++ [ Mat.divider ]
                     ++ [ onSetEntityListViewItem "sort" Entity.RecentView "Recent"
                        , onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
-                       , Material.divider
+                       , Mat.divider
                        , switchViewItemSmall "settings" SyncView "Advance Settings"
                        ]
                  --                    ++ [ toggleDeletedItem model ]
@@ -117,9 +117,9 @@ entityGroupView vm mainViewType =
     in
         nullViewAsList
             ++ [ li [ onClick fireSmart ]
-                    [ Material.iconM vm.icon
+                    [ Mat.iconM vm.icon
                     , Html.h5 [] [ text vm.title ]
-                    , Material.iconBtnD expandIconName onToggleExpanded
+                    , Mat.iconBtnD expandIconName onToggleExpanded
                     ]
                , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
                     [ ul []
@@ -129,12 +129,12 @@ entityGroupView vm mainViewType =
                                     [ class ""
                                     , X.Html.onClickStopAll onAddClicked
                                     ]
-                                    [ Material.iconD "add"
+                                    [ Mat.iconD "add"
                                     , div [] [ text "Add New" ]
                                     ]
                                ]
                             ++ archivedItems vm
-                         --                            ++ [ Material.divider ]
+                         --                            ++ [ Mat.divider ]
                         )
                     ]
                ]
@@ -161,7 +161,7 @@ archivedItems vm =
             [ class ""
             , onClick vm.onToggleShowArchived
             ]
-            [ Material.iconD iconName
+            [ Mat.iconD iconName
             , div [ class "font-nowrap" ]
                 [ View.Shared.badge buttonText badgeCount
                 ]
@@ -176,7 +176,7 @@ entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)
         ]
-        [ Material.iconM vm.icon
+        [ Mat.iconM vm.icon
         , div [ class "font-nowrap" ] [ View.Shared.badge vm.name vm.count ]
         ]
 
@@ -186,7 +186,7 @@ switchViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Material.iconD iconName
+        [ Mat.iconD iconName
         , h5 [] [ text title ]
         ]
 
@@ -196,7 +196,7 @@ switchViewItemSmall iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Material.iconD iconName
+        [ Mat.iconD iconName
         , div [] [ text title ]
         ]
 
@@ -206,6 +206,6 @@ onSetEntityListViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetEntityListView viewType)
         ]
-        [ Material.iconD iconName
+        [ Mat.iconD iconName
         , h5 [] [ text title ]
         ]

@@ -394,7 +394,12 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 						var _p44 = _p43._0;
 						switch (_p44.ctor) {
 							case 'Escape':
-								return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model$clearSelection);
+								return function (_p45) {
+									return A2(
+										_jigargosar$elm_simple_gtd$Update$andThenUpdate,
+										_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
+										A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$clearSelection, _p45));
+								};
 							case 'CharQ':
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Model$NewTodo);
 							case 'CharI':
@@ -419,7 +424,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 			return _elm_lang$core$Basics$identity;
 		});
 };
-var _jigargosar$elm_simple_gtd$Update$andThenTodoMsg = function (_p45) {
+var _jigargosar$elm_simple_gtd$Update$andThenTodoMsg = function (_p46) {
 	return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
-		_jigargosar$elm_simple_gtd$Model$OnTodoMsg(_p45));
+		_jigargosar$elm_simple_gtd$Model$OnTodoMsg(_p46));
 };

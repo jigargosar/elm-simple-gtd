@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode
-import Material
+import Mat
 import String.Extra
 import X.Html exposing (onClickStopPropagation)
 

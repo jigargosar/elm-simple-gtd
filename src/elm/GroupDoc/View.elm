@@ -6,7 +6,7 @@ import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Keyed
-import Material
+import Mat
 import Model
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -37,14 +37,14 @@ headerItem vm =
     let
         editButton =
             if vm.isEditable then
-                Material.iconBtnDT "create"
+                Mat.iconBtnDT "create"
                     vm.tabindexAV
                     vm.startEditingMsg
             else
                 span [] []
 
         archiveButton =
-            Material.iconBtnDT vm.archive.iconName
+            Mat.iconBtnDT vm.archive.iconName
                 vm.tabindexAV
                 vm.archive.onClick
 

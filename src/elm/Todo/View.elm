@@ -9,7 +9,7 @@ import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
-import Material
+import Mat
 import Model
 import Model exposing (Msg, commonMsg)
 import Project
@@ -279,7 +279,7 @@ classListAsClass list =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Material.iconBtnDTC "done"
+    Mat.iconBtnDTC "done"
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
         vm.toggleDoneMsg
@@ -287,7 +287,7 @@ doneIconButton vm =
 
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
-    Material.smallIconButtonTIAV "more_vert"
+    Mat.smallIconButtonTIAV "more_vert"
         vm.tabindexAV
         [ "todo-more-menu-button-" ++ vm.key |> id
         , onClickStopPropagation vm.onMoreMenuClicked
@@ -307,7 +307,7 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Material.smallIconButtonTIAV "schedule"
+        , Mat.smallIconButtonTIAV "schedule"
             vm.tabindexAV
             [ onClick vm.reminder.startEditingMsg ]
         ]

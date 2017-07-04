@@ -1,7 +1,7 @@
 module L.View exposing (..)
 
 import AppUrl
-import Material
+import Mat
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -78,7 +78,7 @@ primaryFeatures =
         feature ( iconName, heading, desc ) =
             div [ class "feature col s12 m4 center-align" ]
                 [ div [ class "section" ]
-                    [ Material.iconD iconName
+                    [ Mat.iconD iconName
                     , h5 [] [ text heading ]
                     , div [] (desc .|> descriptionLine)
                     ]

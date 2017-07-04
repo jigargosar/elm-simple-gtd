@@ -1,7 +1,7 @@
 module CustomSync exposing (..)
 
 import X.Keyboard exposing (onKeyDownStopPropagation)
-import Material
+import Mat
 import Model
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -15,7 +15,7 @@ view model =
     in
         div [ id "custom-sync-container" ]
             [ div [ class "z-depth-2 static layout vertical " ]
-                [ h5 [ class "layout horizontal center" ] [ Material.iconD "settings", text "Advance Settings" ]
+                [ h5 [ class "layout horizontal center" ] [ Mat.iconD "settings", text "Advance Settings" ]
                 , p [] [ text "Sync your data with any CouchDB compatible server" ]
                 , div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.noop) ]
                     [ input
@@ -27,7 +27,7 @@ view model =
                     , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
                     ]
                 , div []
-                    [ Material.button "Sync Now" [ form |> Model.RemotePouchSync >> onClick ]
+                    [ Mat.button "Sync Now" [ form |> Model.RemotePouchSync >> onClick ]
                     ]
                 ]
             ]

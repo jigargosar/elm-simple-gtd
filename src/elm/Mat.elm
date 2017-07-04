@@ -1,4 +1,4 @@
-module Material exposing (..)
+module Mat exposing (..)
 
 import AppColors
 import Color
@@ -8,6 +8,7 @@ import Html.Attributes exposing (..)
 import Model
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
+import X.Keyboard
 
 
 iconD name =
@@ -45,7 +46,7 @@ defaultBtnConfig =
     , classList = []
     , iconName = ""
     , iconColor = Color.Mixing.lighten 0.5 Color.black
-    , onClick = Model.noop
+    , msg = Model.noop
     , tabIndex = 0
     }
 
@@ -55,10 +56,11 @@ iconBtn configFn =
 
 
 iconBtnWithConfig config =
-    Html.button
-        [ class ("btn-flat btn-floating " ++ config.class)
-        , onClickStopPropagation config.onClick
+    a
+        [ class ("icon-button btn-flat btn-floating " ++ config.class)
+        , onClickStopPropagation config.msg
         , tabindex config.tabIndex
+        , X.Keyboard.onEnter config.msg
         ]
         [ i
             [ class "material-icons"
@@ -154,4 +156,4 @@ button textV attributes =
 
 buttonFlat textV attributes =
     div attributes
-        [ Html.button [ class "btn btn-flat" ] [ text textV ] ]
+        [ Html.a [ class "btn btn-flat" ] [ text textV ] ]

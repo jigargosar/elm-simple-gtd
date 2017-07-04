@@ -1,7 +1,7 @@
 module Todo.TimeTracker.View exposing (..)
 
 import X.Time
-import Material
+import Mat
 import Model
 import Todo.TimeTracker exposing (State(..))
 import Toolkit.Operators exposing (..)
@@ -55,7 +55,7 @@ view vm =
                 , style [ "margin-right" => "1rem" ]
                 ]
                 [ text vm.displayTime ]
-            , Material.iconBtnD vm.playPauseIconName vm.onTogglePause
-            , Material.iconBtnD "stop" vm.onStop
+            , Mat.iconBtnD vm.playPauseIconName vm.onTogglePause
+            , Mat.iconBtnD "stop" vm.onStop
             ]
         ]

@@ -436,7 +436,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: A3(
-					_jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV,
+					_jigargosar$elm_simple_gtd$Mat$smallIconButtonTIAV,
 					'schedule',
 					vm.tabindexAV,
 					{
@@ -450,7 +450,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
 	return A3(
-		_jigargosar$elm_simple_gtd$Material$smallIconButtonTIAV,
+		_jigargosar$elm_simple_gtd$Mat$smallIconButtonTIAV,
 		'more_vert',
 		vm.tabindexAV,
 		{
@@ -475,7 +475,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$classListAsClass = function (list) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
 	return A4(
-		_jigargosar$elm_simple_gtd$Material$iconBtnDTC,
+		_jigargosar$elm_simple_gtd$Mat$iconBtnDTC,
 		'done',
 		vm.tabindexAV,
 		_jigargosar$elm_simple_gtd$Todo_View$classListAsClass(

@@ -157,6 +157,6 @@ appMainContent viewModel model =
 
 
 newTodoFab m =
-    Mat.fab "add"
+    Mat.primaryFAB "add"
         Model.NewTodo
         (\c -> { c | trackingId = "add-todo-fab", id = "add-fab" })

@@ -1,17 +1,46 @@
 .IB {
   width: 2rem;
   height: 2rem;
-}
-
-.IB_FAB{
-
-}
-
-.IB .IB__I {
   color: rgba(0, 0, 0, 0.6);
 }
 
-.IB .IB__I_FAB  {
-  color: white;
+.IB_PrimaryFAB{
+  display: inline-block;
+  color: #fff;
+
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+
+  @extend .z-depth-1;
+  overflow: hidden;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
   background-color: $secondary-color;
+  border-radius: 50%;
+  transition: .3s;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover{
+    @extend .z-depth-1-half
+  }
+}
+
+
+
+.IB .IB__I {
+
+}
+
+.IB .IB__I_PrimaryFAB  {
+  width: inherit;
+  display: inline-block;
+  text-align: center;
+  color: inherit;
+  font-size: 1.6rem;
+  line-height: 40px;
 }

@@ -41,7 +41,7 @@ type alias BtnConfig =
     , onClick : Model.Msg
     , tabIndex : Int
     , trackingId : String
-    , fab : Bool
+    , primaryFAB : Bool
     }
 
 
@@ -53,7 +53,7 @@ defaultBtnConfig =
     , msg = Model.noop
     , tabIndex = -1
     , trackingId = ""
-    , fab = False
+    , primaryFAB = False
     }
 
 
@@ -64,9 +64,9 @@ iconBtnWithConfig config =
                 |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
 
         classListV =
-            [ ( "IB icon-button btn-floating", True )
-            , ( "btn-flat", not config.fab )
-            , ( "x-fab", config.fab )
+            [ ( "icon-button btn-floating", True )
+            , ( "btn-flat", not config.primaryFAB )
+            , ( "x-primaryFAB", config.primaryFAB )
             , ( config.class, config.class |> X.String.isBlank >> not )
             ]
                 ++ config.classList
@@ -80,7 +80,7 @@ iconBtnWithConfig config =
             , attribute "data-btn-name" trackingId
             ]
             [ i
-                [ class "IB__I material-icons"
+                [ class "material-icons"
                 ]
                 [ text config.iconName ]
             ]
@@ -110,8 +110,44 @@ iconBtn4 name tabIndexV className clickHandler =
         )
 
 
-fab iconName msg configFn =
-    configFn >> (\c -> { c | iconName = iconName, fab = True, msg = msg }) |> iconBtn
+primaryFAB iconName msg configFn =
+    --    configFn >> (\c -> { c | iconName = iconName, primaryFAB = True, msg = msg }) |> iconBtn
+    ib iconName msg <| configFn >> (\c -> { c | primaryFAB = True })
+
+
+ib iconName msg configFn =
+    defaultBtnConfig |> configFn >> (\c -> { c | iconName = iconName, msg = msg }) >> ibc
+
+
+ibc config =
+    let
+        trackingId =
+            config.trackingId
+                |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
+
+        classListV =
+            [ ( "IB", True )
+            , ( "IB_PrimaryFAB", config.primaryFAB )
+            , ( config.class, config.class |> X.String.isBlank >> not )
+            ]
+                ++ config.classList
+    in
+        a
+            [ id config.id
+            , classList classListV
+            , onClickStopPropagation config.msg
+            , tabindex config.tabIndex
+            , X.Keyboard.onEnter config.msg
+            , attribute "data-btn-name" trackingId
+            ]
+            [ i
+                [ classList
+                    [ ( "IB IB__I material-icons", True )
+                    , ( "IB__I_PrimaryFAB", config.primaryFAB )
+                    ]
+                ]
+                [ text config.iconName ]
+            ]
 
 
 smallIconBtn configFn =

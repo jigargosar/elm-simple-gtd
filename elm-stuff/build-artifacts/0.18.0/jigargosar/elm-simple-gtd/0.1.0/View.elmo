@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 	return A3(
-		_jigargosar$elm_simple_gtd$Mat$fab,
+		_jigargosar$elm_simple_gtd$Mat$primaryFAB,
 		'add',
 		_jigargosar$elm_simple_gtd$Model$NewTodo,
 		function (c) {

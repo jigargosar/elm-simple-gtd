@@ -75,13 +75,26 @@ iconBtnDT name tabIndexV clickHandler =
     iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
 
 
-iconBtnDTC name tabIndexAV className clickHandler =
-    Html.button
-        [ class ("btn-flat btn-floating " ++ className)
-        , tabindex tabIndexAV
-        , onClickStopPropagation clickHandler
-        ]
-        [ i [ class "default-color material-icons" ] [ text name ] ]
+iconBtnDTC name tabIndexV className clickHandler =
+    iconBtn
+        (\c ->
+            { c
+                | iconName = name
+                , msg = clickHandler
+                , tabIndex = tabIndexV
+                , class = className
+            }
+        )
+
+
+
+{- Html.button
+   [ class ("btn-flat btn-floating " ++ className)
+   , tabindex tabIndexV
+   , onClickStopPropagation clickHandler
+   ]
+   [ i [ class "default-color material-icons" ] [ text name ] ]
+-}
 
 
 iconButtonA name tabIndexAV attributes =

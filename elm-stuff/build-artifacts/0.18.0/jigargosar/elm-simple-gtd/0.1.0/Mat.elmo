@@ -189,41 +189,6 @@ var _jigargosar$elm_simple_gtd$Mat$iconButtonA = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtnDTC = F4(
-	function (name, tabIndexAV, className, clickHandler) {
-		return A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(
-					A2(_elm_lang$core$Basics_ops['++'], 'btn-flat btn-floating ', className)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(tabIndexAV),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$i,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('default-color material-icons'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(name),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
 var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -289,6 +254,15 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnDT = F3(
 				return _elm_lang$core$Native_Utils.update(
 					c,
 					{iconName: name, msg: clickHandler, tabIndex: tabIndexV});
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtnDTC = F4(
+	function (name, tabIndexV, className, clickHandler) {
+		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
+			function (c) {
+				return _elm_lang$core$Native_Utils.update(
+					c,
+					{iconName: name, msg: clickHandler, tabIndex: tabIndexV, $class: className});
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(

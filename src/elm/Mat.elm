@@ -49,10 +49,6 @@ defaultBtnConfig =
     }
 
 
-iconBtn configFn =
-    iconBtnWithConfig (configFn defaultBtnConfig)
-
-
 iconBtnWithConfig config =
     a
         [ class ("icon-button btn-flat btn-floating " ++ config.class)
@@ -67,13 +63,11 @@ iconBtnWithConfig config =
         ]
 
 
+iconBtn configFn =
+    iconBtnWithConfig (configFn defaultBtnConfig)
+
+
 iconBtnD name clickHandler =
-    {- Html.button
-       [ class "btn-flat btn-floating"
-       , onClickStopPropagation clickHandler
-       ]
-       [ i [ class "default-color material-icons" ] [ text name ] ]
-    -}
     iconBtn (\c -> { c | iconName = name, msg = clickHandler })
 
 

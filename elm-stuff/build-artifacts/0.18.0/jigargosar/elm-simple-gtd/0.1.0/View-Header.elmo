@@ -1,27 +1,31 @@
-var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
-	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
-	var menuIcon = function () {
-		var _p0 = maybeUserProfile;
-		if (_p0.ctor === 'Nothing') {
-			return A2(_jigargosar$elm_simple_gtd$Material$iconBtnC, 'account_circle', 'account');
-		} else {
-			return A2(
-				_elm_lang$html$Html$img,
-				{
+var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
+	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
+	if (_p0.ctor === 'Nothing') {
+		return _jigargosar$elm_simple_gtd$Material$iconBtn(
+			function (c) {
+				return _elm_lang$core$Native_Utils.update(
+					c,
+					{iconName: 'account_circle', $class: 'account', iconColor: _elm_lang$core$Color$white, onClick: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$img,
+			{
+				ctor: '::',
+				_0: function (_p1) {
+					return _elm_lang$html$Html_Attributes$src(
+						_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p1));
+				}(_p0._0),
+				_1: {
 					ctor: '::',
-					_0: function (_p1) {
-						return _elm_lang$html$Html_Attributes$src(
-							_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p1));
-					}(_p0._0),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('account'),
-						_1: {ctor: '[]'}
-					}
-				},
-				{ctor: '[]'});
-		}
-	}();
+					_0: _elm_lang$html$Html_Attributes$class('account'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'});
+	}
+};
+var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -35,7 +39,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: menuIcon,
+			_0: _jigargosar$elm_simple_gtd$View_Header$menuIcon(m),
 			_1: {ctor: '[]'}
 		});
 };

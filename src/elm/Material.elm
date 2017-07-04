@@ -1,8 +1,11 @@
 module Material exposing (..)
 
 import AppColors
+import Color
+import Color.Mixing
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Model
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
@@ -25,6 +28,41 @@ iconA__ name attrs =
 
 iconM icon =
     iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
+
+
+type alias BtnConfig =
+    { class : String
+    , classList : List ( String, Bool )
+    , iconName : String
+    , iconColor : Color.Color
+    , onClick : Model.Msg
+    }
+
+
+defaultBtnConfig =
+    { class = ""
+    , classList = []
+    , iconName = ""
+    , iconColor = Color.Mixing.lighten 0.5 Color.black
+    , onClick = Model.noop
+    }
+
+
+iconBtn configFn =
+    iconBtnWithConfig (configFn defaultBtnConfig)
+
+
+iconBtnWithConfig config =
+    Html.button
+        [ class ("btn-flat btn-floating " ++ config.class)
+        , onClickStopPropagation config.onClick
+        ]
+        [ i
+            [ class "material-icons"
+            , style [ ( "color", AppColors.encode config.iconColor ) ]
+            ]
+            [ text config.iconName ]
+        ]
 
 
 iconBtnC name className =

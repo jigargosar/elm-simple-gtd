@@ -258,7 +258,7 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnDT = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Material$iconBtn = F2(
+var _jigargosar$elm_simple_gtd$Material$iconBtnD = F2(
 	function (name, clickHandler) {
 		return A2(
 			_elm_lang$html$Html$button,
@@ -315,6 +315,60 @@ var _jigargosar$elm_simple_gtd$Material$iconBtnC = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig = function (config) {
+	return A2(
+		_elm_lang$html$Html$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(_elm_lang$core$Basics_ops['++'], 'btn-flat btn-floating ', config.$class)),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.onClick),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'color',
+									_1: _jigargosar$elm_simple_gtd$AppColors$encode(config.iconColor)
+								},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(config.iconName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Material$defaultBtnConfig = {
+	$class: '',
+	classList: {ctor: '[]'},
+	iconName: '',
+	iconColor: A2(_mdgriffith$elm_color_mixing$Color_Mixing$lighten, 0.5, _elm_lang$core$Color$black),
+	onClick: _jigargosar$elm_simple_gtd$Model$noop
+};
+var _jigargosar$elm_simple_gtd$Material$iconBtn = function (configFn) {
+	return _jigargosar$elm_simple_gtd$Material$iconBtnWithConfig(
+		configFn(_jigargosar$elm_simple_gtd$Material$defaultBtnConfig));
+};
 var _jigargosar$elm_simple_gtd$Material$iconA__ = F2(
 	function (name, attrs) {
 		var allAttr = {
@@ -389,3 +443,7 @@ var _jigargosar$elm_simple_gtd$Material$iconD = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
+var _jigargosar$elm_simple_gtd$Material$BtnConfig = F5(
+	function (a, b, c, d, e) {
+		return {$class: a, classList: b, iconName: c, iconColor: d, onClick: e};
+	});

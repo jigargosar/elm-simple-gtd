@@ -3,6 +3,7 @@ module View.Header exposing (..)
 import AppColors
 import AppDrawer.Model
 import AppUrl
+import Color
 import Material
 import X.Html exposing (boolProperty)
 import Firebase
@@ -60,20 +61,25 @@ headerWithContent content m =
 
 
 menu m =
-    let
-        maybeUserProfile =
-            Model.getMaybeUserProfile m
+    div [ id "main-menu-button", onClick Model.OnShowMainMenu ] [ menuIcon m ]
 
-        menuIcon =
-            case maybeUserProfile of
-                Nothing ->
-                    Material.iconBtnC "account_circle" "account"
 
-                Just profile ->
-                    img
-                        [ profile |> Firebase.getPhotoURL >> src
-                        , class "account"
-                        ]
-                        []
-    in
-        div [ id "main-menu-button", onClick Model.OnShowMainMenu ] [ menuIcon ]
+menuIcon m =
+    case Model.getMaybeUserProfile m of
+        Nothing ->
+            Material.iconBtn
+                (\c ->
+                    { c
+                        | iconName = "account_circle"
+                        , class = "account"
+                        , iconColor = Color.white
+                        , onClick = Model.OnShowMainMenu
+                    }
+                )
+
+        Just profile ->
+            img
+                [ profile |> Firebase.getPhotoURL >> src
+                , class "account"
+                ]
+                []

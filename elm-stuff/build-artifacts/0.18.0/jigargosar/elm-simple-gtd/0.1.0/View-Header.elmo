@@ -1,12 +1,7 @@
 var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
-		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
-			function (c) {
-				return _elm_lang$core$Native_Utils.update(
-					c,
-					{iconName: 'account_circle', msg: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
-			});
+		return A2(_jigargosar$elm_simple_gtd$Mat$iconBtn2, 'account_circle', _jigargosar$elm_simple_gtd$Model$OnShowMainMenu);
 	} else {
 		return A2(
 			_elm_lang$html$Html$img,

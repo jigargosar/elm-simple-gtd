@@ -67,13 +67,7 @@ menu m =
 menuIcon m =
     case Model.getMaybeUserProfile m of
         Nothing ->
-            Mat.iconBtn
-                (\c ->
-                    { c
-                        | iconName = "account_circle"
-                        , msg = Model.OnShowMainMenu
-                    }
-                )
+            Mat.iconBtn2 "account_circle" Model.OnShowMainMenu
 
         Just profile ->
             img

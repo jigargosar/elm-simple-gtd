@@ -48,7 +48,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 		var menuButton = A4(
 			_jigargosar$elm_simple_gtd$Mat$iconBtnDTC,
 			'menu',
-			_elm_lang$html$Html_Attributes$tabindex(-1),
+			-1,
 			'menu-btn',
 			_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay));
 		return {

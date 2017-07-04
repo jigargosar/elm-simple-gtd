@@ -106,6 +106,16 @@ iconBtn4 name tabIndexV className clickHandler =
     ib name clickHandler (\c -> { c | tabIndex = tabIndexV, class = className })
 
 
+smallIconBtn name clickHandler configFn =
+    configFn
+        >> (\c ->
+                { c
+                    | classList = c.classList ++ [ ( "x24", True ) ]
+                }
+           )
+        |> ib name clickHandler
+
+
 ib iconName msg configFn =
     defaultBtnConfig |> configFn >> (\c -> { c | iconName = iconName, msg = msg }) >> ibc
 
@@ -145,16 +155,6 @@ ibc config =
                 ]
                 [ text config.iconName ]
             ]
-
-
-smallIconBtn configFn =
-    configFn
-        >> (\c ->
-                { c
-                    | classList = c.classList ++ [ ( "x24", True ) ]
-                }
-           )
-        |> iconBtn
 
 
 classListAsClass list =

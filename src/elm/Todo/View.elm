@@ -287,7 +287,7 @@ doneIconButton vm =
 
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
-    Mat.smallIconBtn (\c -> { c | iconName = "more_vert", msg = vm.onMoreMenuClicked, id = "todo-more-menu-button-" ++ vm.key })
+    Mat.smallIconBtn "more_vert" vm.onMoreMenuClicked (\c -> { c | id = "todo-more-menu-button-" ++ vm.key })
 
 
 editScheduleButton vm =
@@ -303,10 +303,9 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Mat.smallIconBtn
-            (\c ->
-                { c | iconName = "schedule", tabIndex = vm.tabindexAV, msg = vm.reminder.startEditingMsg }
-            )
+        , Mat.smallIconBtn "schedule"
+            vm.reminder.startEditingMsg
+            (\c -> { c | tabIndex = vm.tabindexAV })
         ]
 
 

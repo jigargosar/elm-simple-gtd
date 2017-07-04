@@ -94,17 +94,6 @@ smallIconBtn configFn =
     iconBtn (configFn >> (\c -> { c | class = c.class ++ " x24" }))
 
 
-smallIconButtonTIAV name tabIndexAV attributes =
-    div attributes
-        [ Html.button
-            [ class "btn-flat btn-floating x24"
-            , style [ "z-index" => "0" ]
-            , tabindex tabIndexAV
-            ]
-            [ i [ class "default-color material-icons" ] [ text name ] ]
-        ]
-
-
 bigIconTextBtn iconName textV clickHandler =
     Html.button
         [ class "big-icon-text-btn"

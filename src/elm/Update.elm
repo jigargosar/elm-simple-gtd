@@ -346,9 +346,6 @@ onGlobalKeyUp key =
                 ( Key.Escape, _ ) ->
                     andThenUpdate OnDeactivateEditingMode
 
-                ( Key.CharX, _ ) ->
-                    andThenUpdate OnDeactivateEditingMode
-
                 _ ->
                     identity
         )

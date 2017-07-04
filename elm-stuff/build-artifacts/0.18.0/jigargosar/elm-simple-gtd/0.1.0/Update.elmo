@@ -391,15 +391,18 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 			do {
 				if (_p43.ctor === '_Tuple2') {
 					if (_p43._1.ctor === 'None') {
-						var _p44 = _p43._0;
-						switch (_p44.ctor) {
+						var clear = function (_p44) {
+							return A2(
+								_jigargosar$elm_simple_gtd$Update$andThenUpdate,
+								_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+								A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$clearSelection, _p44));
+						};
+						var _p45 = _p43._0;
+						switch (_p45.ctor) {
 							case 'Escape':
-								return function (_p45) {
-									return A2(
-										_jigargosar$elm_simple_gtd$Update$andThenUpdate,
-										_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
-										A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model$clearSelection, _p45));
-								};
+								return clear;
+							case 'CharX':
+								return clear;
 							case 'CharQ':
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Model$NewTodo);
 							case 'CharI':

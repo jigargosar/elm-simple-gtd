@@ -1,7 +1,7 @@
 var _jigargosar$elm_simple_gtd$View_Shared$archiveButton = F2(
 	function (isArchived, msg) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Mat$buttonFlat,
+			_jigargosar$elm_simple_gtd$Mat$btnFlat,
 			isArchived ? 'Unarchive' : 'Archive',
 			{
 				ctor: '::',
@@ -11,7 +11,7 @@ var _jigargosar$elm_simple_gtd$View_Shared$archiveButton = F2(
 	});
 var _jigargosar$elm_simple_gtd$View_Shared$deleteButton = function (msg) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Mat$buttonFlat,
+		_jigargosar$elm_simple_gtd$Mat$btnFlat,
 		'Delete',
 		{
 			ctor: '::',
@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$View_Shared$deleteButton = function (msg) {
 };
 var _jigargosar$elm_simple_gtd$View_Shared$cancelButton = function (msg) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Mat$buttonFlat,
+		_jigargosar$elm_simple_gtd$Mat$btnFlat,
 		'Cancel',
 		{
 			ctor: '::',
@@ -31,7 +31,7 @@ var _jigargosar$elm_simple_gtd$View_Shared$cancelButton = function (msg) {
 };
 var _jigargosar$elm_simple_gtd$View_Shared$okButton = function (msg) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Mat$buttonFlat,
+		_jigargosar$elm_simple_gtd$Mat$btnFlat,
 		'Ok',
 		{
 			ctor: '::',

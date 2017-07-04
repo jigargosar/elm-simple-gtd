@@ -141,14 +141,14 @@ bigIconTextBtn iconName textV clickHandler =
         ]
 
 
-divider =
-    div [ class "divider" ] []
-
-
-button textV attributes =
+btn textV attributes =
     div attributes [ Html.button [ class "btn" ] [ text textV ] ]
 
 
-buttonFlat textV attributes =
+btnFlat textV attributes =
     div attributes
         [ Html.a [ class "btn btn-flat" ] [ text textV ] ]
+
+
+divider =
+    div [ class "divider" ] []

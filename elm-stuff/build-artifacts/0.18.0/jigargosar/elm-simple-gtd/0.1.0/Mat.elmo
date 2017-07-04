@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Mat$buttonFlat = F2(
+var _jigargosar$elm_simple_gtd$Mat$btnFlat = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -20,7 +20,7 @@ var _jigargosar$elm_simple_gtd$Mat$buttonFlat = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$button = F2(
+var _jigargosar$elm_simple_gtd$Mat$btn = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -101,7 +101,8 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
 var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
-	var btnClass = _elm_lang$html$Html_Attributes$classList(
+	var classListV = A2(
+		_elm_lang$core$Basics_ops['++'],
 		{
 			ctor: '::',
 			_0: {ctor: '_Tuple2', _0: 'icon-button btn-floating', _1: true},
@@ -124,7 +125,8 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 					}
 				}
 			}
-		});
+		},
+		config.classList);
 	var trackingId = A3(
 		_jigargosar$elm_simple_gtd$X_Function$when,
 		_jigargosar$elm_simple_gtd$X_String$isBlank,
@@ -139,7 +141,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 			_0: _elm_lang$html$Html_Attributes$id(config.id),
 			_1: {
 				ctor: '::',
-				_0: btnClass,
+				_0: _elm_lang$html$Html_Attributes$classList(classListV),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.msg),
@@ -236,15 +238,13 @@ var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = function (configFn) {
 				return _elm_lang$core$Native_Utils.update(
 					c,
 					{
-						$class: _jigargosar$elm_simple_gtd$Mat$classListAsClass(
+						classList: A2(
+							_elm_lang$core$Basics_ops['++'],
+							c.classList,
 							{
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: c.$class, _1: true},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'x24', _1: true},
-									_1: {ctor: '[]'}
-								}
+								_0: {ctor: '_Tuple2', _0: 'x24', _1: true},
+								_1: {ctor: '[]'}
 							})
 					});
 			}(

@@ -45,19 +45,19 @@ okCancelButtonsWith okMsg cancelMsg list =
 
 
 okButton msg =
-    Mat.buttonFlat "Ok" [ onClick msg ]
+    Mat.btnFlat "Ok" [ onClick msg ]
 
 
 cancelButton msg =
-    Mat.buttonFlat "Cancel" [ onClick msg ]
+    Mat.btnFlat "Cancel" [ onClick msg ]
 
 
 deleteButton msg =
-    Mat.buttonFlat "Delete" [ onClick msg ]
+    Mat.btnFlat "Delete" [ onClick msg ]
 
 
 archiveButton isArchived msg =
-    Mat.buttonFlat
+    Mat.btnFlat
         (if isArchived then
             "Unarchive"
          else

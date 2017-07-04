@@ -111,7 +111,11 @@ iconBtn2 name clickHandler =
 
 
 iconBtn3 name tabIndexV clickHandler =
-    iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
+    ib name clickHandler (\c -> { c | tabIndex = tabIndexV })
+
+
+
+--    iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
 
 
 ib iconName msg configFn =

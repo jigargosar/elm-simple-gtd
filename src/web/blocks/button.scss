@@ -1,7 +1,8 @@
+$size: 2.9rem;
 .IB {
   display: inline-block;
-  width: 3rem;
-  height: 3rem;
+  width: $size;
+  height: $size;
   color: rgba(0, 0, 0, 0.6);
 
   outline: none;
@@ -11,23 +12,6 @@
   border-radius: 50%;
   vertical-align: middle;
   padding: 0;
-
-
-
-  //&:focus,
-  //&:active {
-  //  background-color: transparent;
-  //}
-  //
-  //&:focus,
-  //&:hover {
-  //  background-color: rgba(0, 0, 0, .1);
-  //  box-shadow: none;
-  //}
-  //
-  //&:active {
-  //  background-color: rgba(0, 0, 0, .2);
-  //}
 
   &:hover, &:focus{
     background-color: rgba(0, 0, 0, .1);
@@ -66,7 +50,7 @@
   display: block;
   text-align: center;
   font-size: 1.6rem;
-  line-height: 3rem;
+  line-height: $size;
 }
 
 .IB__I_PrimaryFAB {

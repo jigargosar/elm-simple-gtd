@@ -1,3 +1,11 @@
+var _jigargosar$elm_simple_gtd$Mat$divider = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('divider'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
 var _jigargosar$elm_simple_gtd$Mat$btnFlat = F2(
 	function (textV, attributes) {
 		return A2(
@@ -42,14 +50,6 @@ var _jigargosar$elm_simple_gtd$Mat$btn = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$divider = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('divider'),
-		_1: {ctor: '[]'}
-	},
-	{ctor: '[]'});
 var _jigargosar$elm_simple_gtd$Mat$bigIconTextBtn = F3(
 	function (iconName, textV, clickHandler) {
 		return A2(

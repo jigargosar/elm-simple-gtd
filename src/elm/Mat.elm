@@ -87,16 +87,6 @@ iconBtn4 name tabIndexV className clickHandler =
         )
 
 
-iconButtonA name tabIndexAV attributes =
-    div attributes
-        [ Html.button
-            [ class "btn-flat btn-floating"
-            , tabindex tabIndexAV
-            ]
-            [ i [ class "default-color material-icons" ] [ text name ] ]
-        ]
-
-
 smallIconButtonTIAV name tabIndexAV attributes =
     div attributes
         [ Html.button

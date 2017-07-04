@@ -90,10 +90,6 @@ iconBtn configFn =
     iconBtnWithConfig (configFn defaultBtnConfig)
 
 
-iconBtn2 name clickHandler =
-    iconBtn (\c -> { c | iconName = name, msg = clickHandler })
-
-
 iconBtn3 name tabIndexV clickHandler =
     iconBtn (\c -> { c | iconName = name, msg = clickHandler, tabIndex = tabIndexV })
 
@@ -111,8 +107,15 @@ iconBtn4 name tabIndexV className clickHandler =
 
 
 primaryFAB iconName msg configFn =
-    --    configFn >> (\c -> { c | iconName = iconName, primaryFAB = True, msg = msg }) |> iconBtn
     ib iconName msg <| configFn >> (\c -> { c | primaryFAB = True })
+
+
+iconBtn2 name clickHandler =
+    iconBtn (\c -> { c | iconName = name, msg = clickHandler })
+
+
+
+--    ib name clickHandler identity
 
 
 ib iconName msg configFn =
@@ -142,7 +145,7 @@ ibc config =
             ]
             [ i
                 [ classList
-                    [ ( "IB IB__I material-icons", True )
+                    [ ( "IB__I material-icons", True )
                     , ( "IB__I_PrimaryFAB", config.primaryFAB )
                     ]
                 ]

@@ -2,9 +2,14 @@
   width: 2rem;
   height: 2rem;
   color: rgba(0, 0, 0, 0.6);
+
+  box-shadow: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color .2s;
 }
 
-.IB_PrimaryFAB{
+.IB.IB_PrimaryFAB{
   display: inline-block;
   color: #fff;
 
@@ -25,18 +30,13 @@
   cursor: pointer;
   vertical-align: middle;
 
-  &:hover{
+  &:hover, &:focus{
     @extend .z-depth-1-half
   }
 }
 
 
-
-.IB .IB__I {
-
-}
-
-.IB .IB__I_PrimaryFAB  {
+.IB .IB__I.IB__I_PrimaryFAB  {
   width: inherit;
   display: inline-block;
   text-align: center;

@@ -6,9 +6,11 @@ import Color.Mixing
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Model
+import X.Function exposing (when)
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
+import X.String
 
 
 iconD name =
@@ -38,6 +40,7 @@ type alias BtnConfig =
     , iconName : String
     , onClick : Model.Msg
     , tabIndex : Int
+    , trackingId : String
     }
 
 
@@ -48,22 +51,29 @@ defaultBtnConfig =
     , iconName = ""
     , msg = Model.noop
     , tabIndex = -1
+    , trackingId = ""
     }
 
 
 iconBtnWithConfig config =
-    a
-        [ id config.id
-        , class ("icon-button btn-flat btn-floating " ++ config.class)
-        , onClickStopPropagation config.msg
-        , tabindex config.tabIndex
-        , X.Keyboard.onEnter config.msg
-        ]
-        [ i
-            [ class "material-icons"
+    let
+        trackingId =
+            config.trackingId
+                |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
+    in
+        a
+            [ id config.id
+            , class ("icon-button btn-flat btn-floating " ++ config.class)
+            , onClickStopPropagation config.msg
+            , tabindex config.tabIndex
+            , X.Keyboard.onEnter config.msg
+            , attribute "data-btn-name" trackingId
             ]
-            [ text config.iconName ]
-        ]
+            [ i
+                [ class "material-icons"
+                ]
+                [ text config.iconName ]
+            ]
 
 
 iconBtn configFn =

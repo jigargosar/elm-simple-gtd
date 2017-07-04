@@ -63,17 +63,17 @@ iconBtnWithConfig config =
             config.trackingId
                 |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
 
-        btnClass =
-            classList
-                [ ( "icon-button btn-floating", True )
-                , ( "btn-flat", not config.fab )
-                , ( "x-fab", config.fab )
-                , ( config.class, config.class |> X.String.isBlank >> not )
-                ]
+        classListV =
+            [ ( "icon-button btn-floating", True )
+            , ( "btn-flat", not config.fab )
+            , ( "x-fab", config.fab )
+            , ( config.class, config.class |> X.String.isBlank >> not )
+            ]
+                ++ config.classList
     in
         a
             [ id config.id
-            , btnClass
+            , classList classListV
             , onClickStopPropagation config.msg
             , tabindex config.tabIndex
             , X.Keyboard.onEnter config.msg
@@ -118,7 +118,7 @@ smallIconBtn configFn =
     configFn
         >> (\c ->
                 { c
-                    | class = classListAsClass [ ( c.class, True ), ( "x24", True ) ]
+                    | classList = c.classList ++ [ ( "x24", True ) ]
                 }
            )
         |> iconBtn

@@ -71,7 +71,6 @@ menuIcon m =
                 (\c ->
                     { c
                         | iconName = "account_circle"
-                        , iconColor = Color.white
                         , msg = Model.OnShowMainMenu
                     }
                 )

@@ -35,7 +35,6 @@ type alias BtnConfig =
     { class : String
     , classList : List ( String, Bool )
     , iconName : String
-    , iconColor : Color.Color
     , onClick : Model.Msg
     , tabIndex : Int
     }
@@ -45,9 +44,8 @@ defaultBtnConfig =
     { class = ""
     , classList = []
     , iconName = ""
-    , iconColor = Color.Mixing.lighten 0.5 Color.black
     , msg = Model.noop
-    , tabIndex = 0
+    , tabIndex = -1
     }
 
 
@@ -64,7 +62,6 @@ iconBtnWithConfig config =
         ]
         [ i
             [ class "material-icons"
-            , style [ ( "color", AppColors.encode config.iconColor ) ]
             ]
             [ text config.iconName ]
         ]

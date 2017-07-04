@@ -68,6 +68,12 @@ $background: #fff;
 .btn.btn-flat:hover {
   color: color("indigo", "darken-1")
 }
+
+.icon-button .material-icons {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+
 //</editor-fold>
 
 img.account {

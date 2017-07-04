@@ -286,20 +286,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('material-icons'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: {
-									ctor: '_Tuple2',
-									_0: 'color',
-									_1: _jigargosar$elm_simple_gtd$AppColors$encode(config.iconColor)
-								},
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
@@ -313,9 +300,8 @@ var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	$class: '',
 	classList: {ctor: '[]'},
 	iconName: '',
-	iconColor: A2(_mdgriffith$elm_color_mixing$Color_Mixing$lighten, 0.5, _elm_lang$core$Color$black),
 	msg: _jigargosar$elm_simple_gtd$Model$noop,
-	tabIndex: 0
+	tabIndex: -1
 };
 var _jigargosar$elm_simple_gtd$Mat$iconBtn = function (configFn) {
 	return _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig(
@@ -404,7 +390,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconD = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Mat$BtnConfig = F6(
-	function (a, b, c, d, e, f) {
-		return {$class: a, classList: b, iconName: c, iconColor: d, onClick: e, tabIndex: f};
+var _jigargosar$elm_simple_gtd$Mat$BtnConfig = F5(
+	function (a, b, c, d, e) {
+		return {$class: a, classList: b, iconName: c, onClick: d, tabIndex: e};
 	});

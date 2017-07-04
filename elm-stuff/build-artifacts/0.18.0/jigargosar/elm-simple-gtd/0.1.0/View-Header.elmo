@@ -5,7 +5,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 			function (c) {
 				return _elm_lang$core$Native_Utils.update(
 					c,
-					{iconName: 'account_circle', iconColor: _elm_lang$core$Color$white, msg: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
+					{iconName: 'account_circle', msg: _jigargosar$elm_simple_gtd$Model$OnShowMainMenu});
 			});
 	} else {
 		return A2(

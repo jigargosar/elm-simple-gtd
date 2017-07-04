@@ -319,24 +319,34 @@ onGlobalKeyUp key =
         (\editMode ->
             case ( key, editMode ) of
                 ( key, ExclusiveMode.None ) ->
-                    case key of
-                        Key.Escape ->
+                    let
+                        clear =
                             Return.map (Model.clearSelection)
-                                >> andThenUpdate setDomFocusToFocusInEntityCmd
+                                >> andThenUpdate OnDeactivateEditingMode
+                    in
+                        case key of
+                            Key.Escape ->
+                                clear
 
-                        Key.CharQ ->
-                            andThenUpdate NewTodo
+                            Key.CharX ->
+                                clear
 
-                        Key.CharI ->
-                            andThenUpdate NewTodoForInbox
+                            Key.CharQ ->
+                                andThenUpdate NewTodo
 
-                        Key.Slash ->
-                            LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+                            Key.CharI ->
+                                andThenUpdate NewTodoForInbox
 
-                        _ ->
-                            identity
+                            Key.Slash ->
+                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+
+                            _ ->
+                                identity
 
                 ( Key.Escape, _ ) ->
+                    andThenUpdate OnDeactivateEditingMode
+
+                ( Key.CharX, _ ) ->
                     andThenUpdate OnDeactivateEditingMode
 
                 _ ->

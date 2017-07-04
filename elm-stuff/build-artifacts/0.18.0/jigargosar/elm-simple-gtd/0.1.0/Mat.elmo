@@ -258,63 +258,6 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnDT = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtnD = F2(
-	function (name, clickHandler) {
-		return A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
-				_1: {
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(clickHandler),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$i,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('default-color material-icons'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(name),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtnC = F2(
-	function (name, className) {
-		return A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(
-					A2(_elm_lang$core$Basics_ops['++'], 'btn-flat btn-floating ', className)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$i,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('default-color material-icons'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(name),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
 var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -378,6 +321,15 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn = function (configFn) {
 	return _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig(
 		configFn(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig));
 };
+var _jigargosar$elm_simple_gtd$Mat$iconBtnD = F2(
+	function (name, clickHandler) {
+		return _jigargosar$elm_simple_gtd$Mat$iconBtn(
+			function (c) {
+				return _elm_lang$core$Native_Utils.update(
+					c,
+					{iconName: name, msg: clickHandler});
+			});
+	});
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 	function (name, attrs) {
 		var allAttr = {

@@ -71,11 +71,13 @@ iconBtnWithConfig config =
 
 
 iconBtnD name clickHandler =
-    Html.button
-        [ class "btn-flat btn-floating"
-        , onClickStopPropagation clickHandler
-        ]
-        [ i [ class "default-color material-icons" ] [ text name ] ]
+    {- Html.button
+       [ class "btn-flat btn-floating"
+       , onClickStopPropagation clickHandler
+       ]
+       [ i [ class "default-color material-icons" ] [ text name ] ]
+    -}
+    iconBtn (\c -> { c | iconName = name, msg = clickHandler })
 
 
 iconBtnDT name tabIndexAV clickHandler =

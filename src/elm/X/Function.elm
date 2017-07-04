@@ -1,6 +1,5 @@
 module X.Function exposing (..)
 
-
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
@@ -124,3 +123,7 @@ andThenSubtract =
 
 add =
     (+)
+
+
+nothingWhen pred onTrue =
+    ifElse pred (\_ -> Nothing) (onTrue >> Just)

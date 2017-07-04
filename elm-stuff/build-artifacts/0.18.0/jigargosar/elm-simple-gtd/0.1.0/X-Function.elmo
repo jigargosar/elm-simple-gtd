@@ -74,6 +74,19 @@ var _jigargosar$elm_simple_gtd$X_Function$unless = function (pred) {
 			return !pred(_p1);
 		});
 };
+var _jigargosar$elm_simple_gtd$X_Function$nothingWhen = F2(
+	function (pred, onTrue) {
+		return A3(
+			_jigargosar$elm_simple_gtd$X_Function$ifElse,
+			pred,
+			function (_p2) {
+				return _elm_lang$core$Maybe$Nothing;
+			},
+			function (_p3) {
+				return _elm_lang$core$Maybe$Just(
+					onTrue(_p3));
+			});
+	});
 var _jigargosar$elm_simple_gtd$X_Function$apply3Uncurry = F3(
 	function (f1, f2, model) {
 		return A2(
@@ -99,11 +112,11 @@ var _jigargosar$elm_simple_gtd$X_Function$applyMaybeWith = F3(
 			model);
 	});
 var _jigargosar$elm_simple_gtd$X_Function$apply2With = F3(
-	function (_p2, f, model) {
-		var _p3 = _p2;
+	function (_p4, f, model) {
+		var _p5 = _p4;
 		return A3(
 			_jigargosar$elm_simple_gtd$X_Function$apply3Uncurry,
-			{ctor: '_Tuple3', _0: _p3._0, _1: _p3._1, _2: _elm_lang$core$Basics$identity},
+			{ctor: '_Tuple3', _0: _p5._0, _1: _p5._1, _2: _elm_lang$core$Basics$identity},
 			f,
 			model);
 	});

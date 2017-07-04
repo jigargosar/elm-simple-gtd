@@ -136,12 +136,13 @@ ibc config =
                 ++ config.classList
 
         optionalAttr =
-            [ ifElse (equals -2) (\_ -> Nothing) (tabindex >> Just) config.tabIndex ]
+            [ nothingWhen (equals -2) tabindex config.tabIndex
+            , nothingWhen X.String.isBlank id config.id
+            ]
                 |> List.filterMap identity
     in
         a
-            ([ id config.id
-             , classList classListV
+            ([ classList classListV
              , onClickStopPropagation config.msg
              , X.Keyboard.onEnter config.msg
              , attribute "data-btn-name" trackingId

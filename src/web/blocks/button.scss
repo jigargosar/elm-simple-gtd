@@ -3,6 +3,15 @@
   height: 2rem;
 }
 
+.IB_FAB{
+
+}
+
 .IB .IB__I {
   color: rgba(0, 0, 0, 0.6);
+}
+
+.IB .IB__I_FAB  {
+  color: white;
+  background-color: $secondary-color;
 }

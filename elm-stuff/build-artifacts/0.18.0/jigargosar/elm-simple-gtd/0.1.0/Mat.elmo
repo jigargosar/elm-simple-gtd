@@ -105,7 +105,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 		_elm_lang$core$Basics_ops['++'],
 		{
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'icon-button btn-floating', _1: true},
+			_0: {ctor: '_Tuple2', _0: 'IB icon-button btn-floating', _1: true},
 			_1: {
 				ctor: '::',
 				_0: {ctor: '_Tuple2', _0: 'btn-flat', _1: !config.fab},
@@ -167,7 +167,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtnWithConfig = function (config) {
 				_elm_lang$html$Html$i,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+					_0: _elm_lang$html$Html_Attributes$class('IB__I material-icons'),
 					_1: {ctor: '[]'}
 				},
 				{

@@ -57,39 +57,6 @@ defaultBtnConfig =
     }
 
 
-iconBtnWithConfig config =
-    let
-        trackingId =
-            config.trackingId
-                |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
-
-        classListV =
-            [ ( "icon-button btn-floating", True )
-            , ( "btn-flat", not config.primaryFAB )
-            , ( "x-primaryFAB", config.primaryFAB )
-            , ( config.class, config.class |> X.String.isBlank >> not )
-            ]
-                ++ config.classList
-    in
-        a
-            [ id config.id
-            , classList classListV
-            , onClickStopPropagation config.msg
-            , tabindex config.tabIndex
-            , X.Keyboard.onEnter config.msg
-            , attribute "data-btn-name" trackingId
-            ]
-            [ i
-                [ class "material-icons"
-                ]
-                [ text config.iconName ]
-            ]
-
-
-iconBtn configFn =
-    iconBtnWithConfig (configFn defaultBtnConfig)
-
-
 primaryFAB iconName msg configFn =
     ib iconName msg <| configFn >> (\c -> { c | primaryFAB = True })
 

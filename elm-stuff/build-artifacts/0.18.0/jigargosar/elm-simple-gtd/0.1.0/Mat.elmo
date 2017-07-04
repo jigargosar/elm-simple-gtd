@@ -166,7 +166,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = function (config) {
 					_0: _elm_lang$html$Html_Attributes$classList(
 						{
 							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'IB__I material-icons', _1: true},
+							_0: {ctor: '_Tuple2', _0: 'IB__I', _1: true},
 							_1: {
 								ctor: '::',
 								_0: {ctor: '_Tuple2', _0: 'IB__I_PrimaryFAB', _1: config.primaryFAB},

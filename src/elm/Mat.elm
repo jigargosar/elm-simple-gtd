@@ -145,7 +145,7 @@ ibc config =
             ]
             [ i
                 [ classList
-                    [ ( "IB__I material-icons", True )
+                    [ ( "IB__I", True )
                     , ( "IB__I_PrimaryFAB", config.primaryFAB )
                     ]
                 ]

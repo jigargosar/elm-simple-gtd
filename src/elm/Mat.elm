@@ -64,7 +64,7 @@ iconBtnWithConfig config =
                 |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
 
         classListV =
-            [ ( "icon-button btn-floating", True )
+            [ ( "IB icon-button btn-floating", True )
             , ( "btn-flat", not config.fab )
             , ( "x-fab", config.fab )
             , ( config.class, config.class |> X.String.isBlank >> not )
@@ -80,7 +80,7 @@ iconBtnWithConfig config =
             , attribute "data-btn-name" trackingId
             ]
             [ i
-                [ class "material-icons"
+                [ class "IB__I material-icons"
                 ]
                 [ text config.iconName ]
             ]

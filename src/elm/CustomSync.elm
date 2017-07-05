@@ -27,7 +27,7 @@ view model =
                     , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
                     ]
                 , div []
-                    [ Mat.btn "Sync Now" [ form |> Model.RemotePouchSync >> onClick ]
+                    [ Mat.btn_ "Sync Now" [ form |> Model.RemotePouchSync >> onClick ]
                     ]
                 ]
             ]

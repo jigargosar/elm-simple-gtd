@@ -27,13 +27,14 @@ import GroupDoc.EditView
 import Todo.MoreMenu
 import View.GetStarted
 import View.MainMenu
+import View.Mat
 
 
 init model =
     let
         children =
             [ appLayoutView model
-            , newTodoFab model
+            , View.Mat.newTodoFab model
             ]
                 ++ overlayViews model
     in
@@ -155,13 +156,3 @@ appMainContent viewModel model =
             SyncView ->
                 CustomSync.view model
         ]
-
-
-newTodoFab m =
-    Mat.b m.mdl
-        [ Mat.id "add-fab"
-        , Mat.pf
-        , Mat.resourceId "add-todo-fab"
-        , Mat.onClickStopPropagation Model.NewTodo
-        ]
-        [ Mat.i "add" ]

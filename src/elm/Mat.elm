@@ -115,7 +115,7 @@ i =
     Material.Icon.i
 
 
-pf =
+primaryFAB =
     Material.Options.many
         [ Material.Button.fab
         , Material.Button.colored
@@ -123,15 +123,8 @@ pf =
         ]
 
 
-b =
+btn =
     Material.Button.render Model.Mdl [ 0 ]
-
-
-primaryFAB mdl iconName opt =
-    b
-        mdl
-        [ pf, many opt ]
-        [ i iconName ]
 
 
 iconBtn2 name clickHandler =
@@ -237,7 +230,7 @@ bigIconTextBtn iconName textV clickHandler =
         ]
 
 
-btn textV attributes =
+btn_ textV attributes =
     div attributes [ Html.button [ class "btn" ] [ text textV ] ]
 
 

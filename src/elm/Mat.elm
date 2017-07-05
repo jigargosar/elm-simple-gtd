@@ -67,26 +67,24 @@ iconM icon =
     iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
-type alias BtnConfig =
-    { id : String
-    , class : String
-    , classList : List ( String, Bool )
-    , iconName : String
-    , onClick : Model.Msg
-    , tabIndex : Int
-    , trackingId : String
-    , primaryFAB : Bool
-    , mdl : Material.Model
-    , iconProps : List (Material.Icon.Property Model.Msg)
-    }
+
+--type alias BtnConfig =
+--    { id : String
+--    , class : String
+--    , classList : List ( String, Bool )
+--    , onClick : Model.Msg
+--    , tabIndex : Int
+--    , trackingId : String
+--    , primaryFAB : Bool
+--    , mdl : Material.Model
+--    , iconProps : List (Material.Icon.Property Model.Msg)
+--    }
 
 
 defaultBtnConfig =
     { id = ""
     , class = ""
     , classList = []
-    , iconName = ""
-    , msg = Model.noop
     , tabIndex = -2
     , trackingId = ""
     , primaryFAB = False
@@ -122,14 +120,14 @@ smallIconBtn name clickHandler configFn =
 
 
 ib iconName msg configFn =
-    defaultBtnConfig |> configFn >> (\c -> { c | iconName = iconName, msg = msg }) >> ibc
+    defaultBtnConfig |> configFn >> ibc iconName msg
 
 
-ibc config =
+ibc iconName msg config =
     let
         trackingId =
             config.trackingId
-                |> when X.String.isBlank (\_ -> "ma2-" ++ config.iconName)
+                |> when X.String.isBlank (\_ -> "ma2-" ++ iconName)
 
         cs =
             [ ( config.class, config.class |> X.String.isBlank >> not )
@@ -143,7 +141,7 @@ ibc config =
             ]
                 |> List.filterMap identity
                 .|> Material.Options.attribute
-                |++ [ onStopPropagation2 "click" config.msg
+                |++ [ onStopPropagation2 "click" msg
                     , Material.Options.attribute <| attribute "data-btn-name" trackingId
                     ]
                 |> Material.Options.many
@@ -160,7 +158,7 @@ ibc config =
             , Material.Options.cs cs
             , btnAttr
             ]
-            [ Material.Icon.view config.iconName config.iconProps ]
+            [ Material.Icon.view iconName config.iconProps ]
 
 
 classListAsClass list =

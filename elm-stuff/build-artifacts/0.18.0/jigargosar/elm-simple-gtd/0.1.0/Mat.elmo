@@ -100,35 +100,38 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			_elm_lang$core$Tuple$first,
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
+var _jigargosar$elm_simple_gtd$Mat$b = A2(
+	_debois$elm_mdl$Material_Button$render,
+	_jigargosar$elm_simple_gtd$Model$Mdl,
+	{
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	});
+var _jigargosar$elm_simple_gtd$Mat$pf = _debois$elm_mdl$Material_Options$many(
+	{
+		ctor: '::',
+		_0: _debois$elm_mdl$Material_Button$fab,
+		_1: {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Button$colored,
+			_1: {
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _jigargosar$elm_simple_gtd$Mat$i = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
 var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
 	function (mdl, iconName, opt) {
-		var pf = _debois$elm_mdl$Material_Options$many(
-			{
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Button$fab,
-				_1: {
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Button$colored,
-					_1: {
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
-						_1: {ctor: '[]'}
-					}
-				}
-			});
-		return A5(
-			_debois$elm_mdl$Material_Button$render,
-			_jigargosar$elm_simple_gtd$Model$Mdl,
-			{
-				ctor: '::',
-				_0: 0,
-				_1: {ctor: '[]'}
-			},
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$b,
 			mdl,
 			{
 				ctor: '::',
-				_0: pf,
+				_0: _jigargosar$elm_simple_gtd$Mat$pf,
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Mat$many(opt),
@@ -137,7 +140,7 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
 			},
 			{
 				ctor: '::',
-				_0: _debois$elm_mdl$Material_Icon$i(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
 				_1: {ctor: '[]'}
 			});
 	});

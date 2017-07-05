@@ -115,20 +115,23 @@ i =
     Material.Icon.i
 
 
+pf =
+    Material.Options.many
+        [ Material.Button.fab
+        , Material.Button.colored
+        , Material.Options.cs "mdl-button--page-fab"
+        ]
+
+
+b =
+    Material.Button.render Model.Mdl [ 0 ]
+
+
 primaryFAB mdl iconName opt =
-    let
-        pf =
-            Material.Options.many
-                [ Material.Button.fab
-                , Material.Button.colored
-                , Material.Options.cs "mdl-button--page-fab"
-                ]
-    in
-        Material.Button.render Model.Mdl
-            [ 0 ]
-            mdl
-            [ pf, many opt ]
-            [ i iconName ]
+    b
+        mdl
+        [ pf, many opt ]
+        [ i iconName ]
 
 
 iconBtn2 name clickHandler =

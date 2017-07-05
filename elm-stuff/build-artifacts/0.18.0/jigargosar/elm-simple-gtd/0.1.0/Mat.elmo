@@ -120,7 +120,7 @@ var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 		_0: 0,
 		_1: {ctor: '[]'}
 	});
-var _jigargosar$elm_simple_gtd$Mat$btnIcon = _debois$elm_mdl$Material_Button$icon;
+var _jigargosar$elm_simple_gtd$Mat$btnIconCS = _debois$elm_mdl$Material_Button$icon;
 var _jigargosar$elm_simple_gtd$Mat$iconView = _debois$elm_mdl$Material_Icon$view;
 var _jigargosar$elm_simple_gtd$Mat$icon = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$cs = _debois$elm_mdl$Material_Options$cs;
@@ -156,7 +156,7 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _jigargosar$elm_simple_gtd$Mat$m
 var _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon = _jigargosar$elm_simple_gtd$Mat$many(
 	{
 		ctor: '::',
-		_0: _jigargosar$elm_simple_gtd$Mat$btnIcon,
+		_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
 		_1: {
 			ctor: '::',
 			_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--header'),

@@ -132,16 +132,6 @@ iconBtn4 name tabIndexV className clickHandler =
     ib name clickHandler (\c -> { c | tabIndex = tabIndexV, class = className })
 
 
-smallIconBtn name clickHandler configFn =
-    configFn
-        >> (\c ->
-                { c
-                    | iconProps = c.iconProps ++ [ Material.Icon.size18 ]
-                }
-           )
-        |> ib name clickHandler
-
-
 defaultBtnConfig =
     { id = ""
     , class = ""

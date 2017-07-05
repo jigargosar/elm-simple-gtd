@@ -6,6 +6,7 @@ import AppDrawer.View
 import CustomSync
 import Entity.View
 import Mat
+import Material.Options
 import Menu
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
@@ -157,6 +158,4 @@ appMainContent viewModel model =
 
 
 newTodoFab m =
-    Mat.primaryFAB "add"
-        Model.NewTodo
-        (\c -> { c | trackingId = "add-todo-fab", id = "add-fab" })
+    Mat.primaryFAB "add" Model.NewTodo [ Mat.id "add-fab", Mat.resourceId "add-todo-fab" ]

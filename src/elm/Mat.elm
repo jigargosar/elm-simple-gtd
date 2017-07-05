@@ -13,12 +13,24 @@ import Model
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
-import X.Html exposing (onClickStopPropagation)
+import X.Html
 import X.Keyboard
 import X.String
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+
+
+id =
+    Material.Options.id
+
+
+resourceId =
+    attribute "data-btn-name" >> Material.Options.attribute
+
+
+pf =
+    Material.Options.many [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
 
 
 stopPropagation =
@@ -90,11 +102,13 @@ defaultBtnConfig =
     , primaryFAB = False
     , mdl = Material.model
     , iconProps = []
+    , iconName = ""
+    , msg = Model.noop
     }
 
 
-primaryFAB iconName msg configFn =
-    ib iconName msg <| configFn >> (\c -> { c | primaryFAB = True })
+primaryFAB iconName msg opt =
+    ibc_ iconName msg [ Material.Options.many opt, pf ]
 
 
 iconBtn2 name clickHandler =
@@ -123,6 +137,28 @@ ib iconName msg configFn =
     defaultBtnConfig |> configFn >> ibc iconName msg
 
 
+ibc_ iconName msg opts =
+    let
+        --        trackingId =
+        --            config.trackingId
+        --                |> when X.String.isBlank (\_ -> "ma2-" ++ iconName)
+        btnAttr =
+            [ onStopPropagation2 "click" msg
+
+            --                    , Material.Options.attribute <| attribute "data-btn-name" trackingId
+            ]
+                |> Material.Options.many
+
+        --        Material.Button.icon
+    in
+        Material.Button.render Model.Mdl
+            [ 0 ]
+            Material.model
+            [ btnAttr
+            ]
+            [ Material.Icon.view iconName [] ]
+
+
 ibc iconName msg config =
     let
         trackingId =
@@ -137,7 +173,7 @@ ibc iconName msg config =
 
         btnAttr =
             [ nothingWhen (equals -2) tabindex config.tabIndex
-            , nothingWhen X.String.isBlank id config.id
+            , nothingWhen X.String.isBlank Html.Attributes.id config.id
             ]
                 |> List.filterMap identity
                 .|> Material.Options.attribute
@@ -171,7 +207,7 @@ classListAsClass list =
 bigIconTextBtn iconName textV clickHandler =
     Html.button
         [ class "big-icon-text-btn"
-        , onClickStopPropagation clickHandler
+        , X.Html.onClickStopPropagation clickHandler
         ]
         [ i [ class "material-icons" ] [ text iconName ]
         , div [] [ text textV ]

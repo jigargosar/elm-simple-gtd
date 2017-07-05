@@ -112,8 +112,8 @@ btnIconCS =
     Material.Button.icon
 
 
-btnHeaderIcon =
-    many [ btnIconCS, cs "mdl-button--header" ]
+headerIconButton mdl opts =
+    btn mdl [ many [ btnIconCS, cs "mdl-button--header-icon" ], many opts ]
 
 
 btn =

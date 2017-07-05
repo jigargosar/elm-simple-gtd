@@ -6,7 +6,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 			m.mdl,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon,
+				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIconCS,
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('account-menu-not-signed-in'),
@@ -65,7 +65,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 			m.mdl,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon,
+				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIconCS,
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('center-header-menu'),

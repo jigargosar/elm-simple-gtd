@@ -153,15 +153,29 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _jigargosar$elm_simple_gtd$Mat$m
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon = _jigargosar$elm_simple_gtd$Mat$many(
-	{
-		ctor: '::',
-		_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
-		_1: {
-			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--header'),
-			_1: {ctor: '[]'}
-		}
+var _jigargosar$elm_simple_gtd$Mat$headerIconButton = F2(
+	function (mdl, opts) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Mat$btn,
+			mdl,
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$many(
+					{
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--header-icon'),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$many(opts),
+					_1: {ctor: '[]'}
+				}
+			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr = _debois$elm_mdl$Material_Options$attribute;
 var _jigargosar$elm_simple_gtd$Mat$tabIndex = function (_p0) {
@@ -355,29 +369,5 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
 				return _elm_lang$core$Native_Utils.update(
 					c,
 					{tabIndex: tabIndexV, $class: className});
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
-	function (name, clickHandler, configFn) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ib,
-			name,
-			clickHandler,
-			function (_p5) {
-				return function (c) {
-					return _elm_lang$core$Native_Utils.update(
-						c,
-						{
-							iconProps: A2(
-								_elm_lang$core$Basics_ops['++'],
-								c.iconProps,
-								{
-									ctor: '::',
-									_0: _debois$elm_mdl$Material_Icon$size18,
-									_1: {ctor: '[]'}
-								})
-						});
-				}(
-					configFn(_p5));
 			});
 	});

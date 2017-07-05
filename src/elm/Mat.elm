@@ -131,13 +131,6 @@ ibc config =
             config.trackingId
                 |> when X.String.isBlank (\_ -> "ma2-" ++ config.iconName)
 
-        classListV =
-            [ ( "IB", True )
-            , ( "IB_PrimaryFAB", config.primaryFAB )
-            , ( config.class, config.class |> X.String.isBlank >> not )
-            ]
-                ++ config.classList
-
         cs =
             [ ( config.class, config.class |> X.String.isBlank >> not )
             ]
@@ -154,24 +147,6 @@ ibc config =
                     , Material.Options.attribute <| attribute "data-btn-name" trackingId
                     ]
                 |> Material.Options.many
-
-        _ =
-            a
-                ([ classList classListV
-                 , onClickStopPropagation config.msg
-                 , X.Keyboard.onEnter config.msg
-                 , attribute "data-btn-name" trackingId
-                 ]
-                 --                            ++ optionalAttr
-                )
-                [ i
-                    [ classList
-                        [ ( "IB__I", True )
-                        , ( "IB__I_PrimaryFAB", config.primaryFAB )
-                        ]
-                    ]
-                    [ text config.iconName ]
-                ]
     in
         Material.Button.render Model.Mdl
             [ 0 ]
@@ -186,43 +161,6 @@ ibc config =
             , btnAttr
             ]
             [ Material.Icon.view config.iconName config.iconProps ]
-
-
-ibc_ config =
-    let
-        trackingId =
-            config.trackingId
-                |> when X.String.isBlank (\_ -> "ma-" ++ config.iconName)
-
-        classListV =
-            [ ( "IB", True )
-            , ( "IB_PrimaryFAB", config.primaryFAB )
-            , ( config.class, config.class |> X.String.isBlank >> not )
-            ]
-                ++ config.classList
-
-        optionalAttr =
-            [ nothingWhen (equals -2) tabindex config.tabIndex
-            , nothingWhen X.String.isBlank id config.id
-            ]
-                |> List.filterMap identity
-    in
-        a
-            ([ classList classListV
-             , onClickStopPropagation config.msg
-             , X.Keyboard.onEnter config.msg
-             , attribute "data-btn-name" trackingId
-             ]
-                ++ optionalAttr
-            )
-            [ i
-                [ classList
-                    [ ( "IB__I", True )
-                    , ( "IB__I_PrimaryFAB", config.primaryFAB )
-                    ]
-                ]
-                [ text config.iconName ]
-            ]
 
 
 classListAsClass list =

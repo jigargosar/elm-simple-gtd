@@ -117,7 +117,7 @@ entityGroupView vm mainViewType =
     in
         nullViewAsList
             ++ [ li [ onClick fireSmart ]
-                    [ Mat.iconM vm.icon
+                    [ Mat.iM vm.icon
                     , Html.h5 [] [ text vm.title ]
                     , Mat.iconBtn2 expandIconName onToggleExpanded
                     ]
@@ -176,7 +176,7 @@ entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)
         ]
-        [ Mat.iconM vm.icon
+        [ Mat.iM vm.icon
         , div [ class "font-nowrap" ] [ View.Shared.badge vm.name vm.count ]
         ]
 

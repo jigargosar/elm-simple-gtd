@@ -104,7 +104,7 @@ var _jigargosar$elm_simple_gtd$CustomSync$view = function (model) {
 									{
 										ctor: '::',
 										_0: A2(
-											_jigargosar$elm_simple_gtd$Mat$btn,
+											_jigargosar$elm_simple_gtd$Mat$btn_,
 											'Sync Now',
 											{
 												ctor: '::',

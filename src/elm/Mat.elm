@@ -75,8 +75,20 @@ iconA__ name attrs =
         Html.i allAttr [ text name ]
 
 
-iconM icon =
-    iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
+css =
+    Material.Options.css
+
+
+i =
+    Material.Icon.i
+
+
+iV =
+    Material.Icon.view
+
+
+iM icon =
+    iV icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
 defaultBtnConfig =
@@ -95,10 +107,6 @@ defaultBtnConfig =
 
 many =
     Material.Options.many
-
-
-i =
-    Material.Icon.i
 
 
 primaryFAB =

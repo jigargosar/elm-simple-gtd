@@ -1,0 +1,27 @@
+var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = function (m) {
+	return A3(
+		_jigargosar$elm_simple_gtd$Mat$btn,
+		m.mdl,
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Mat$id('add-fab'),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$primaryFAB,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('add-todo-fab'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NewTodo),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Mat$i('add'),
+			_1: {ctor: '[]'}
+		});
+};

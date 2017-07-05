@@ -28,7 +28,7 @@ var _jigargosar$elm_simple_gtd$Mat$btnFlat = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$btn = F2(
+var _jigargosar$elm_simple_gtd$Mat$btn_ = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -100,7 +100,7 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			_elm_lang$core$Tuple$first,
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
-var _jigargosar$elm_simple_gtd$Mat$b = A2(
+var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 	_debois$elm_mdl$Material_Button$render,
 	_jigargosar$elm_simple_gtd$Model$Mdl,
 	{
@@ -108,7 +108,7 @@ var _jigargosar$elm_simple_gtd$Mat$b = A2(
 		_0: 0,
 		_1: {ctor: '[]'}
 	});
-var _jigargosar$elm_simple_gtd$Mat$pf = _debois$elm_mdl$Material_Options$many(
+var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _debois$elm_mdl$Material_Options$many(
 	{
 		ctor: '::',
 		_0: _debois$elm_mdl$Material_Button$fab,
@@ -122,28 +122,7 @@ var _jigargosar$elm_simple_gtd$Mat$pf = _debois$elm_mdl$Material_Options$many(
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$i = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
-var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
-	function (mdl, iconName, opt) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$b,
-			mdl,
-			{
-				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$pf,
-				_1: {
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Mat$many(opt),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
-				_1: {ctor: '[]'}
-			});
-	});
 var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	id: '',
 	$class: '',
@@ -155,6 +134,22 @@ var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	iconProps: {ctor: '[]'},
 	iconName: '',
 	msg: _jigargosar$elm_simple_gtd$Model$noop
+};
+var _jigargosar$elm_simple_gtd$Mat$iV = _debois$elm_mdl$Material_Icon$view;
+var _jigargosar$elm_simple_gtd$Mat$i = _debois$elm_mdl$Material_Icon$i;
+var _jigargosar$elm_simple_gtd$Mat$css = _debois$elm_mdl$Material_Options$css;
+var _jigargosar$elm_simple_gtd$Mat$iM = function (icon) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Mat$iV,
+		icon.name,
+		{
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$Mat$css,
+				'color',
+				_jigargosar$elm_simple_gtd$AppColors$encode(icon.color)),
+			_1: {ctor: '[]'}
+		});
 };
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 	function (name, attrs) {
@@ -172,24 +167,6 @@ var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
-	return A2(
-		_jigargosar$elm_simple_gtd$Mat$iconA__,
-		icon.name,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$style(
-				{
-					ctor: '::',
-					_0: A2(
-						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-						'color',
-						_jigargosar$elm_simple_gtd$AppColors$encode(icon.color)),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
 var _jigargosar$elm_simple_gtd$Mat$icon = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,

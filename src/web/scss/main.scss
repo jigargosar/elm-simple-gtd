@@ -145,9 +145,12 @@ button.x-fab.btn-floating > i.material-icons {
   color: white;
 }
 
-
 button.btn-flat.btn-floating {
   z-index: 0;
 }
 
 @import "../blocks/button";
+
+html > body {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif !important;
+}

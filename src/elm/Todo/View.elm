@@ -8,6 +8,7 @@ import Entity
 import Material
 import Material.Button
 import Material.Icon
+import Material.Options
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -314,8 +315,8 @@ editScheduleButton vm =
         , Material.Button.render Model.Mdl
             [ 0 ]
             vm.mdl
-            [ Material.Button.icon ]
-            [ Material.Icon.i "schedule" ]
+            [ Material.Button.icon, Material.Options.attribute (tabindex vm.tabindexAV) ]
+            [ Material.Icon.view "schedule" [ Material.Icon.size18 ] ]
         ]
 
 

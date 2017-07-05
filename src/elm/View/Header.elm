@@ -67,7 +67,11 @@ menu m =
 menuIcon m =
     case Model.getMaybeUserProfile m of
         Nothing ->
-            Mat.btn m.mdl [ Mat.btnIcon ] [ Mat.icon "account_circle" ]
+            Mat.btn m.mdl
+                [ Mat.btnIcon
+                , Mat.resourceId "account-menu-not-signed-in"
+                ]
+                [ Mat.icon "account_circle" ]
 
         Just profile ->
             img

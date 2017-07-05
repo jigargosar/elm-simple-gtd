@@ -60,11 +60,11 @@ onClickStopPropagation =
 
 
 iconD name =
-    i [ class "default-color material-icons" ] [ text name ]
+    Html.i [ class "default-color material-icons" ] [ text name ]
 
 
 icon name =
-    i [ class "material-icons" ] [ text name ]
+    Html.i [ class "material-icons" ] [ text name ]
 
 
 iconA__ name attrs =
@@ -107,16 +107,28 @@ defaultBtnConfig =
     }
 
 
+many =
+    Material.Options.many
+
+
+i =
+    Material.Icon.i
+
+
 primaryFAB mdl iconName opt =
     let
         pf =
-            Material.Options.many [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
+            Material.Options.many
+                [ Material.Button.fab
+                , Material.Button.colored
+                , Material.Options.cs "mdl-button--page-fab"
+                ]
     in
         Material.Button.render Model.Mdl
             [ 0 ]
             mdl
-            [ pf, Material.Options.many opt ]
-            [ Material.Icon.i iconName ]
+            [ pf, many opt ]
+            [ i iconName ]
 
 
 iconBtn2 name clickHandler =
@@ -217,7 +229,7 @@ bigIconTextBtn iconName textV clickHandler =
         [ class "big-icon-text-btn"
         , X.Html.onClickStopPropagation clickHandler
         ]
-        [ i [ class "material-icons" ] [ text iconName ]
+        [ Html.i [ class "material-icons" ] [ text iconName ]
         , div [] [ text textV ]
         ]
 

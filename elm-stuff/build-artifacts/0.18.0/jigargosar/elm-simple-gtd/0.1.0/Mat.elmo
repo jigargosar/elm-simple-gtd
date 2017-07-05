@@ -100,6 +100,47 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			_elm_lang$core$Tuple$first,
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
+var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
+var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
+	function (mdl, iconName, opt) {
+		var pf = _debois$elm_mdl$Material_Options$many(
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Button$fab,
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Button$colored,
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+		return A5(
+			_debois$elm_mdl$Material_Button$render,
+			_jigargosar$elm_simple_gtd$Model$Mdl,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			},
+			mdl,
+			{
+				ctor: '::',
+				_0: pf,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$many(opt),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Icon$i(iconName),
+				_1: {ctor: '[]'}
+			});
+	});
 var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	id: '',
 	$class: '',
@@ -188,6 +229,7 @@ var _jigargosar$elm_simple_gtd$Mat$onStopPropagation2 = function (eventName) {
 			_elm_lang$core$Json_Decode$succeed(_p0));
 	};
 };
+var _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation = _jigargosar$elm_simple_gtd$Mat$onStopPropagation2('click');
 var _jigargosar$elm_simple_gtd$Mat$ibc_ = F3(
 	function (iconName, msg, opts) {
 		var btnAttr = _debois$elm_mdl$Material_Options$many(
@@ -380,36 +422,6 @@ var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
 						});
 				}(
 					configFn(_p4));
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$pf = _debois$elm_mdl$Material_Options$many(
-	{
-		ctor: '::',
-		_0: _debois$elm_mdl$Material_Button$fab,
-		_1: {
-			ctor: '::',
-			_0: _debois$elm_mdl$Material_Button$colored,
-			_1: {
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
-				_1: {ctor: '[]'}
-			}
-		}
-	});
-var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
-	function (iconName, msg, opt) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ibc_,
-			iconName,
-			msg,
-			{
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Options$many(opt),
-				_1: {
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Mat$pf,
-					_1: {ctor: '[]'}
-				}
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$resourceId = function (_p5) {

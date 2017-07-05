@@ -1,12 +1,20 @@
 var _jigargosar$elm_simple_gtd$View$newTodoFab = function (m) {
 	return A3(
 		_jigargosar$elm_simple_gtd$Mat$primaryFAB,
+		m.mdl,
 		'add',
-		_jigargosar$elm_simple_gtd$Model$NewTodo,
-		function (c) {
-			return _elm_lang$core$Native_Utils.update(
-				c,
-				{trackingId: 'add-todo-fab', id: 'add-fab'});
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Mat$id('add-fab'),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$resourceId('add-todo-fab'),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NewTodo),
+					_1: {ctor: '[]'}
+				}
+			}
 		});
 };
 var _jigargosar$elm_simple_gtd$View$appMainContent = F2(

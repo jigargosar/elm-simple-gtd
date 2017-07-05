@@ -67,14 +67,6 @@ icon name =
     Html.i [ class "material-icons" ] [ text name ]
 
 
-iconA__ name attrs =
-    let
-        allAttr =
-            class "material-icons" :: attrs
-    in
-        Html.i allAttr [ text name ]
-
-
 css =
     Material.Options.css
 

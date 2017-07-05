@@ -74,7 +74,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$Mat$id('menu-btn'),
+							_0: _jigargosar$elm_simple_gtd$Mat$cs('menu-btn'),
 							_1: {
 								ctor: '::',
 								_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(

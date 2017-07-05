@@ -53,7 +53,7 @@ headerWithContent content m =
                 [ Mat.btnHeaderIcon
                 , Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
-                , Mat.id "menu-btn"
+                , Mat.cs "menu-btn"
                 , Mat.onClickStopPropagation (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                 ]
                 [ Mat.icon "menu" ]

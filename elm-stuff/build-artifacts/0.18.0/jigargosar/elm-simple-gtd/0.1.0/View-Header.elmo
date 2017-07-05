@@ -2,19 +2,15 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
 		return A3(
-			_jigargosar$elm_simple_gtd$Mat$btn,
+			_jigargosar$elm_simple_gtd$Mat$headerIconButton,
 			m.mdl,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIconCS,
+				_0: _jigargosar$elm_simple_gtd$Mat$resourceId('account-menu-not-signed-in'),
 				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('account-menu-not-signed-in'),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
-						_1: {ctor: '[]'}
-					}
+					_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
+					_1: {ctor: '[]'}
 				}
 			},
 			{
@@ -61,26 +57,22 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
 		var menuButton = A3(
-			_jigargosar$elm_simple_gtd$Mat$btn,
+			_jigargosar$elm_simple_gtd$Mat$headerIconButton,
 			m.mdl,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIconCS,
+				_0: _jigargosar$elm_simple_gtd$Mat$resourceId('center-header-menu'),
 				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('center-header-menu'),
+					_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
+						_0: _jigargosar$elm_simple_gtd$Mat$cs('menu-btn'),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$Mat$cs('menu-btn'),
-							_1: {
-								ctor: '::',
-								_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
-									_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
-								_1: {ctor: '[]'}
-							}
+							_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
+								_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+							_1: {ctor: '[]'}
 						}
 					}
 				}

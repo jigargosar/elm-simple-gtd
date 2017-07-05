@@ -49,7 +49,7 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Mat.headerIconButton m.mdl
+            Mat.headerIconBtn m.mdl
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
@@ -70,7 +70,7 @@ menu m =
 menuIcon m =
     case Model.getMaybeUserProfile m of
         Nothing ->
-            Mat.headerIconButton m.mdl
+            Mat.headerIconBtn m.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"
                 , Mat.tabIndex -1
                 ]

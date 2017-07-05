@@ -92,12 +92,12 @@ icon =
     Material.Icon.i
 
 
-iconView =
-    Material.Icon.view
+icon18 iconName =
+    Material.Icon.view iconName [ Material.Icon.size18 ]
 
 
 iconM icon =
-    iconView icon.name [ css "color" (AppColors.encode icon.color) ]
+    Material.Icon.view icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
 primaryFAB =

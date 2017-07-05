@@ -88,3 +88,13 @@ $size: 2.9rem;
   font-size: 18px;
   line-height: 24px;
 }
+
+.mdl-button--page-fab{
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  z-index: 900;
+}

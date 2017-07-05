@@ -5,12 +5,46 @@ import Color
 import Color.Mixing
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Material
+import Material.Button
+import Material.Icon
+import Material.Options
 import Model
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
+import Toolkit.Operators exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
 import X.String
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
+
+
+stopPropagation =
+    { stopPropagation = True
+    , preventDefault = False
+    }
+
+
+preventDefault =
+    { stopPropagation = False
+    , preventDefault = True
+    }
+
+
+stopAll =
+    { stopPropagation = True
+    , preventDefault = True
+    }
+
+
+onStopPropagation eventName =
+    Material.Options.onWithOptions eventName stopPropagation
+
+
+onStopPropagation2 eventName =
+    D.succeed >> onStopPropagation eventName
 
 
 iconD name =
@@ -42,6 +76,8 @@ type alias BtnConfig =
     , tabIndex : Int
     , trackingId : String
     , primaryFAB : Bool
+    , mdl : Material.Model
+    , iconProps : List (Material.Icon.Property Model.Msg)
     }
 
 
@@ -54,6 +90,8 @@ defaultBtnConfig =
     , tabIndex = -2
     , trackingId = ""
     , primaryFAB = False
+    , mdl = Material.model
+    , iconProps = []
     }
 
 
@@ -77,7 +115,7 @@ smallIconBtn name clickHandler configFn =
     configFn
         >> (\c ->
                 { c
-                    | classList = c.classList ++ [ ( "x24", True ) ]
+                    | iconProps = c.iconProps ++ [ Material.Icon.size18 ]
                 }
            )
         |> ib name clickHandler
@@ -88,6 +126,69 @@ ib iconName msg configFn =
 
 
 ibc config =
+    let
+        trackingId =
+            config.trackingId
+                |> when X.String.isBlank (\_ -> "ma2-" ++ config.iconName)
+
+        classListV =
+            [ ( "IB", True )
+            , ( "IB_PrimaryFAB", config.primaryFAB )
+            , ( config.class, config.class |> X.String.isBlank >> not )
+            ]
+                ++ config.classList
+
+        cs =
+            [ ( config.class, config.class |> X.String.isBlank >> not )
+            ]
+                ++ config.classList
+                |> classListAsClass
+
+        btnAttr =
+            [ nothingWhen (equals -2) tabindex config.tabIndex
+            , nothingWhen X.String.isBlank id config.id
+            ]
+                |> List.filterMap identity
+                .|> Material.Options.attribute
+                |++ [ onStopPropagation2 "click" config.msg
+                    , Material.Options.attribute <| attribute "data-btn-name" trackingId
+                    ]
+                |> Material.Options.many
+
+        _ =
+            a
+                ([ classList classListV
+                 , onClickStopPropagation config.msg
+                 , X.Keyboard.onEnter config.msg
+                 , attribute "data-btn-name" trackingId
+                 ]
+                 --                            ++ optionalAttr
+                )
+                [ i
+                    [ classList
+                        [ ( "IB__I", True )
+                        , ( "IB__I_PrimaryFAB", config.primaryFAB )
+                        ]
+                    ]
+                    [ text config.iconName ]
+                ]
+    in
+        Material.Button.render Model.Mdl
+            [ 0 ]
+            config.mdl
+            [ Material.Options.many
+                (if config.primaryFAB then
+                    [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
+                 else
+                    [ Material.Button.icon ]
+                )
+            , Material.Options.cs cs
+            , btnAttr
+            ]
+            [ Material.Icon.view config.iconName config.iconProps ]
+
+
+ibc_ config =
     let
         trackingId =
             config.trackingId

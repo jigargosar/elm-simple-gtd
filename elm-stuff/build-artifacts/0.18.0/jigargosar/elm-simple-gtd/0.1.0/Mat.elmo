@@ -100,7 +100,7 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			_elm_lang$core$Tuple$first,
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
-var _jigargosar$elm_simple_gtd$Mat$ibc = function (config) {
+var _jigargosar$elm_simple_gtd$Mat$ibc_ = function (config) {
 	var optionalAttr = A2(
 		_elm_lang$core$List$filterMap,
 		_elm_lang$core$Basics$identity,
@@ -202,87 +202,10 @@ var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	msg: _jigargosar$elm_simple_gtd$Model$noop,
 	tabIndex: -2,
 	trackingId: '',
-	primaryFAB: false
+	primaryFAB: false,
+	mdl: _debois$elm_mdl$Material$model,
+	iconProps: {ctor: '[]'}
 };
-var _jigargosar$elm_simple_gtd$Mat$ib = F3(
-	function (iconName, msg, configFn) {
-		return function (_p2) {
-			return _jigargosar$elm_simple_gtd$Mat$ibc(
-				function (c) {
-					return _elm_lang$core$Native_Utils.update(
-						c,
-						{iconName: iconName, msg: msg});
-				}(
-					configFn(_p2)));
-		}(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig);
-	});
-var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
-	function (iconName, msg, configFn) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ib,
-			iconName,
-			msg,
-			function (_p3) {
-				return function (c) {
-					return _elm_lang$core$Native_Utils.update(
-						c,
-						{primaryFAB: true});
-				}(
-					configFn(_p3));
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
-	function (name, clickHandler) {
-		return A3(_jigargosar$elm_simple_gtd$Mat$ib, name, clickHandler, _elm_lang$core$Basics$identity);
-	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
-	function (name, tabIndexV, clickHandler) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ib,
-			name,
-			clickHandler,
-			function (c) {
-				return _elm_lang$core$Native_Utils.update(
-					c,
-					{tabIndex: tabIndexV});
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
-	function (name, tabIndexV, className, clickHandler) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ib,
-			name,
-			clickHandler,
-			function (c) {
-				return _elm_lang$core$Native_Utils.update(
-					c,
-					{tabIndex: tabIndexV, $class: className});
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
-	function (name, clickHandler, configFn) {
-		return A3(
-			_jigargosar$elm_simple_gtd$Mat$ib,
-			name,
-			clickHandler,
-			function (_p4) {
-				return function (c) {
-					return _elm_lang$core$Native_Utils.update(
-						c,
-						{
-							classList: A2(
-								_elm_lang$core$Basics_ops['++'],
-								c.classList,
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'x24', _1: true},
-									_1: {ctor: '[]'}
-								})
-						});
-				}(
-					configFn(_p4));
-			});
-	});
 var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
 	function (name, attrs) {
 		var allAttr = {
@@ -345,7 +268,283 @@ var _jigargosar$elm_simple_gtd$Mat$iconD = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Mat$BtnConfig = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {id: a, $class: b, classList: c, iconName: d, onClick: e, tabIndex: f, trackingId: g, primaryFAB: h};
+var _jigargosar$elm_simple_gtd$Mat$stopAll = {stopPropagation: true, preventDefault: true};
+var _jigargosar$elm_simple_gtd$Mat$preventDefault = {stopPropagation: false, preventDefault: true};
+var _jigargosar$elm_simple_gtd$Mat$stopPropagation = {stopPropagation: true, preventDefault: false};
+var _jigargosar$elm_simple_gtd$Mat$onStopPropagation = function (eventName) {
+	return A2(_debois$elm_mdl$Material_Options$onWithOptions, eventName, _jigargosar$elm_simple_gtd$Mat$stopPropagation);
+};
+var _jigargosar$elm_simple_gtd$Mat$onStopPropagation2 = function (eventName) {
+	return function (_p2) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Mat$onStopPropagation,
+			eventName,
+			_elm_lang$core$Json_Decode$succeed(_p2));
+	};
+};
+var _jigargosar$elm_simple_gtd$Mat$ibc = function (config) {
+	var cs = _jigargosar$elm_simple_gtd$Mat$classListAsClass(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: config.$class,
+					_1: function (_p3) {
+						return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p3);
+					}(config.$class)
+				},
+				_1: {ctor: '[]'}
+			},
+			config.classList));
+	var classListV = A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'IB', _1: true},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'IB_PrimaryFAB', _1: config.primaryFAB},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: config.$class,
+						_1: function (_p4) {
+							return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p4);
+						}(config.$class)
+					},
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		config.classList);
+	var trackingId = A3(
+		_jigargosar$elm_simple_gtd$X_Function$when,
+		_jigargosar$elm_simple_gtd$X_String$isBlank,
+		function (_p5) {
+			return A2(_elm_lang$core$Basics_ops['++'], 'ma2-', config.iconName);
+		},
+		config.trackingId);
+	var btnAttr = _debois$elm_mdl$Material_Options$many(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['|++'],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				A2(
+					_elm_lang$core$List$filterMap,
+					_elm_lang$core$Basics$identity,
+					{
+						ctor: '::',
+						_0: A3(
+							_jigargosar$elm_simple_gtd$X_Function$nothingWhen,
+							_jigargosar$elm_simple_gtd$X_Function$equals(-2),
+							_elm_lang$html$Html_Attributes$tabindex,
+							config.tabIndex),
+						_1: {
+							ctor: '::',
+							_0: A3(_jigargosar$elm_simple_gtd$X_Function$nothingWhen, _jigargosar$elm_simple_gtd$X_String$isBlank, _elm_lang$html$Html_Attributes$id, config.id),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_debois$elm_mdl$Material_Options$attribute),
+			{
+				ctor: '::',
+				_0: A2(_jigargosar$elm_simple_gtd$Mat$onStopPropagation2, 'click', config.msg),
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$attribute(
+						A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', trackingId)),
+					_1: {ctor: '[]'}
+				}
+			}));
+	var _p6 = A2(
+		_elm_lang$html$Html$a,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(classListV),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(config.msg),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onEnter(config.msg),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', trackingId),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'IB__I', _1: true},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'IB__I_PrimaryFAB', _1: config.primaryFAB},
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(config.iconName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+	return A5(
+		_debois$elm_mdl$Material_Button$render,
+		_jigargosar$elm_simple_gtd$Model$Mdl,
+		{
+			ctor: '::',
+			_0: 0,
+			_1: {ctor: '[]'}
+		},
+		config.mdl,
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Options$many(
+				config.primaryFAB ? {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Button$fab,
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Button$colored,
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
+							_1: {ctor: '[]'}
+						}
+					}
+				} : {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Button$icon,
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs(cs),
+				_1: {
+					ctor: '::',
+					_0: btnAttr,
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(_debois$elm_mdl$Material_Icon$view, config.iconName, config.iconProps),
+			_1: {ctor: '[]'}
+		});
+};
+var _jigargosar$elm_simple_gtd$Mat$ib = F3(
+	function (iconName, msg, configFn) {
+		return function (_p7) {
+			return _jigargosar$elm_simple_gtd$Mat$ibc(
+				function (c) {
+					return _elm_lang$core$Native_Utils.update(
+						c,
+						{iconName: iconName, msg: msg});
+				}(
+					configFn(_p7)));
+		}(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig);
 	});
+var _jigargosar$elm_simple_gtd$Mat$primaryFAB = F3(
+	function (iconName, msg, configFn) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$ib,
+			iconName,
+			msg,
+			function (_p8) {
+				return function (c) {
+					return _elm_lang$core$Native_Utils.update(
+						c,
+						{primaryFAB: true});
+				}(
+					configFn(_p8));
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
+	function (name, clickHandler) {
+		return A3(_jigargosar$elm_simple_gtd$Mat$ib, name, clickHandler, _elm_lang$core$Basics$identity);
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
+	function (name, tabIndexV, clickHandler) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$ib,
+			name,
+			clickHandler,
+			function (c) {
+				return _elm_lang$core$Native_Utils.update(
+					c,
+					{tabIndex: tabIndexV});
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
+	function (name, tabIndexV, className, clickHandler) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$ib,
+			name,
+			clickHandler,
+			function (c) {
+				return _elm_lang$core$Native_Utils.update(
+					c,
+					{tabIndex: tabIndexV, $class: className});
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
+	function (name, clickHandler, configFn) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Mat$ib,
+			name,
+			clickHandler,
+			function (_p9) {
+				return function (c) {
+					return _elm_lang$core$Native_Utils.update(
+						c,
+						{
+							iconProps: A2(
+								_elm_lang$core$Basics_ops['++'],
+								c.iconProps,
+								{
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Icon$size18,
+									_1: {ctor: '[]'}
+								})
+						});
+				}(
+					configFn(_p9));
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$BtnConfig = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {id: a, $class: b, classList: c, iconName: d, onClick: e, tabIndex: f, trackingId: g, primaryFAB: h, mdl: i, iconProps: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

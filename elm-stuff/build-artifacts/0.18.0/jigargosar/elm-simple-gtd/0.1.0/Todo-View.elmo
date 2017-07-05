@@ -446,29 +446,22 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: A5(
-						_debois$elm_mdl$Material_Button$render,
-						_jigargosar$elm_simple_gtd$Model$Mdl,
-						{
-							ctor: '::',
-							_0: 0,
-							_1: {ctor: '[]'}
-						},
+					_0: A3(
+						_jigargosar$elm_simple_gtd$Mat$btn,
 						vm.mdl,
 						{
 							ctor: '::',
-							_0: _debois$elm_mdl$Material_Button$icon,
+							_0: _jigargosar$elm_simple_gtd$Mat$btnIcon,
 							_1: {
 								ctor: '::',
-								_0: _debois$elm_mdl$Material_Options$attribute(
-									_elm_lang$html$Html_Attributes$tabindex(vm.tabindexAV)),
+								_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(vm.tabindexAV),
 								_1: {ctor: '[]'}
 							}
 						},
 						{
 							ctor: '::',
 							_0: A2(
-								_debois$elm_mdl$Material_Icon$view,
+								_jigargosar$elm_simple_gtd$Mat$iconView,
 								'schedule',
 								{
 									ctor: '::',

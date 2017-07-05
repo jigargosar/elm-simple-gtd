@@ -84,11 +84,15 @@ iconM icon =
 
 
 primaryFAB =
-    Material.Options.many
+    many
         [ Material.Button.fab
         , Material.Button.colored
         , Material.Options.cs "mdl-button--page-fab"
         ]
+
+
+btnIcon =
+    Material.Button.icon
 
 
 btn =

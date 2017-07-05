@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Mat$i('add'),
+			_0: _jigargosar$elm_simple_gtd$Mat$icon('add'),
 			_1: {ctor: '[]'}
 		});
 };

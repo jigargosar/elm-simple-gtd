@@ -158,4 +158,9 @@ appMainContent viewModel model =
 
 
 newTodoFab m =
-    Mat.primaryFAB "add" Model.NewTodo [ Mat.id "add-fab", Mat.resourceId "add-todo-fab" ]
+    Mat.primaryFAB m.mdl
+        "add"
+        [ Mat.id "add-fab"
+        , Mat.resourceId "add-todo-fab"
+        , Mat.onClickStopPropagation Model.NewTodo
+        ]

@@ -29,10 +29,6 @@ resourceId =
     attribute "data-btn-name" >> Material.Options.attribute
 
 
-pf =
-    Material.Options.many [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
-
-
 stopPropagation =
     { stopPropagation = True
     , preventDefault = False
@@ -57,6 +53,10 @@ onStopPropagation eventName =
 
 onStopPropagation2 eventName =
     D.succeed >> onStopPropagation eventName
+
+
+onClickStopPropagation =
+    onStopPropagation2 "click"
 
 
 iconD name =
@@ -107,8 +107,16 @@ defaultBtnConfig =
     }
 
 
-primaryFAB iconName msg opt =
-    ibc_ iconName msg [ Material.Options.many opt, pf ]
+primaryFAB mdl iconName opt =
+    let
+        pf =
+            Material.Options.many [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
+    in
+        Material.Button.render Model.Mdl
+            [ 0 ]
+            mdl
+            [ pf, Material.Options.many opt ]
+            [ Material.Icon.i iconName ]
 
 
 iconBtn2 name clickHandler =

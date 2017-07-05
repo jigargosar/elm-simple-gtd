@@ -5,6 +5,9 @@ import Date
 import Dict
 import Document
 import Entity
+import Material
+import Material.Button
+import Material.Icon
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -53,6 +56,7 @@ type alias TodoViewModel =
     , tabindexAV : Int
     , isSelected : Bool
     , onMoreMenuClicked : Msg
+    , mdl : Material.Model
     }
 
 
@@ -187,6 +191,7 @@ createTodoViewModel appVM canBeFocused todo =
         , tabindexAV = tabindexAV
         , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
         , onMoreMenuClicked = Todo.Msg.OnShowMoreMenu todoId |> onTodoMsg
+        , mdl = appVM.mdl
         }
 
 
@@ -306,6 +311,11 @@ editScheduleButton vm =
         , Mat.smallIconBtn "schedule"
             vm.reminder.startEditingMsg
             (\c -> { c | tabIndex = vm.tabindexAV })
+        , Material.Button.render Model.Mdl
+            [ 0 ]
+            vm.mdl
+            [ Material.Button.icon ]
+            [ Material.Icon.i "schedule" ]
         ]
 
 

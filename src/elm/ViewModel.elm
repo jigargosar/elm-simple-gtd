@@ -7,6 +7,7 @@ import Dict exposing (Dict)
 import Document exposing (Id)
 import Entity
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
+import Material
 import Model exposing (Msg)
 import Project
 import Set exposing (Set)
@@ -27,6 +28,7 @@ type alias Model =
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , selectedEntityIdSet : Set Document.Id
+    , mdl : Material.Model
     }
 
 
@@ -59,6 +61,7 @@ create model =
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model
+        , mdl = model.mdl
         }
 
 

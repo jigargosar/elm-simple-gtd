@@ -79,10 +79,11 @@ var _jigargosar$elm_simple_gtd$ViewModel$create = function (model) {
 		now: now,
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _jigargosar$elm_simple_gtd$Model$getProjectsAsIdDict(model),
-		contextByIdDict: _jigargosar$elm_simple_gtd$Model$getContextsAsIdDict(model)
+		contextByIdDict: _jigargosar$elm_simple_gtd$Model$getContextsAsIdDict(model),
+		mdl: model.mdl
 	};
 };
-var _jigargosar$elm_simple_gtd$ViewModel$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {contexts: a, projects: b, viewName: c, header: d, now: e, projectByIdDict: f, contextByIdDict: g, selectedEntityIdSet: h};
+var _jigargosar$elm_simple_gtd$ViewModel$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {contexts: a, projects: b, viewName: c, header: d, now: e, projectByIdDict: f, contextByIdDict: g, selectedEntityIdSet: h, mdl: i};
 	});

@@ -33,8 +33,8 @@ export default {
     resolve: {
         alias: {
             elm: path.resolve(__dirname, 'src/elm/'),
-            bower_components: path.resolve(__dirname, 'bower_components/')
-        }
+            bower_components: path.resolve(__dirname, 'bower_components/'),
+        },
     },
     context: path.resolve(__dirname, "src/web/"),
     entry: {
@@ -63,30 +63,30 @@ export default {
         }),
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
-            "process.env": JSON.stringify(process.env)
+            "process.env": JSON.stringify(process.env),
         }),
         new ServiceWorkerWebpackPlugin({
             entry: './notification-sw.js',
             filename: "notification-sw.js",
             transformOptions(options){
-                return {isDevEnv:isWebPackDevServer}
-            }
+                return {isDevEnv: isWebPackDevServer}
+            },
         }),
         new SWPrecacheWebpackPlugin({
             cacheId: 'simple-gtd',
             filename: 'service-worker.js',
-            importScripts:["notification-sw.js"],
+            importScripts: ["notification-sw.js"],
             staticFileGlobs: [
                 'static/**',
             ],
-            stripPrefix:"static/",
+            stripPrefix: "static/",
             mergeStaticsConfig: true,
             minify: !isWebPackDevServer,
-            maximumFileSizeToCacheInBytes:5242880, // 5mb
+            maximumFileSizeToCacheInBytes: 5242880, // 5mb
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",
-            minChunks: 2
+            minChunks: 2,
         }),
     ],
 
@@ -105,7 +105,7 @@ export default {
                             debug: false,
                             cwd: path.resolve(__dirname),
                         },
-                    }
+                    },
                 ],
                 // loader: 'elm-hot-loader!elm-webpack-loader?verbose=true&warn=false',
             },
@@ -123,16 +123,16 @@ export default {
                 use: [
                     'style-loader',
                     {loader: 'css-loader', options: {importLoaders: 1}},
-                    'postcss-loader'
-                ]
+                    'postcss-loader',
+                ],
             },
             {
                 test: /\.scss$/,
                 use: [
                     {loader: "style-loader"},
                     {loader: "css-loader"},
-                    {loader: "sass-loader"}
-                ]
+                    {loader: "sass-loader"},
+                ],
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -144,9 +144,9 @@ export default {
                             // useRelativePath: isWebPackDevServer,
                             limit: 10000,
                             mimetype: "application/font-woff",
-                        }
-                    }
-                ]
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -120,22 +120,10 @@ var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 		_0: 0,
 		_1: {ctor: '[]'}
 	});
-var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _debois$elm_mdl$Material_Options$many(
-	{
-		ctor: '::',
-		_0: _debois$elm_mdl$Material_Button$fab,
-		_1: {
-			ctor: '::',
-			_0: _debois$elm_mdl$Material_Button$colored,
-			_1: {
-				ctor: '::',
-				_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
-				_1: {ctor: '[]'}
-			}
-		}
-	});
+var _jigargosar$elm_simple_gtd$Mat$btnIcon = _debois$elm_mdl$Material_Button$icon;
 var _jigargosar$elm_simple_gtd$Mat$iconView = _debois$elm_mdl$Material_Icon$view;
 var _jigargosar$elm_simple_gtd$Mat$icon = _debois$elm_mdl$Material_Icon$i;
+var _jigargosar$elm_simple_gtd$Mat$cs = _debois$elm_mdl$Material_Options$cs;
 var _jigargosar$elm_simple_gtd$Mat$css = _debois$elm_mdl$Material_Options$css;
 var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 	return A2(
@@ -151,10 +139,37 @@ var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
-var _jigargosar$elm_simple_gtd$Mat$resourceId = function (_p0) {
-	return _debois$elm_mdl$Material_Options$attribute(
-		A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', _p0));
+var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _jigargosar$elm_simple_gtd$Mat$many(
+	{
+		ctor: '::',
+		_0: _debois$elm_mdl$Material_Button$fab,
+		_1: {
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Button$colored,
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--page-fab'),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon = _jigargosar$elm_simple_gtd$Mat$many(
+	{
+		ctor: '::',
+		_0: _jigargosar$elm_simple_gtd$Mat$btnIcon,
+		_1: {
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--header'),
+			_1: {ctor: '[]'}
+		}
+	});
+var _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr = _debois$elm_mdl$Material_Options$attribute;
+var _jigargosar$elm_simple_gtd$Mat$tabIndex = function (_p0) {
+	return _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr(
+		_elm_lang$html$Html_Attributes$tabindex(_p0));
 };
+var _jigargosar$elm_simple_gtd$Mat$attr = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _elm_lang$html$Html_Attributes$attribute, _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr);
+var _jigargosar$elm_simple_gtd$Mat$resourceId = _jigargosar$elm_simple_gtd$Mat$attr('data-btn-name');
 var _jigargosar$elm_simple_gtd$Mat$id = _debois$elm_mdl$Material_Options$id;
 var _jigargosar$elm_simple_gtd$Mat$onWithOptions = _debois$elm_mdl$Material_Options$onWithOptions;
 var _jigargosar$elm_simple_gtd$Mat$stopAll = {stopPropagation: true, preventDefault: true};

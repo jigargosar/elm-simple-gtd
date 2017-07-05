@@ -49,10 +49,20 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Mat.iconBtn4 "menu"
-                -1
-                "menu-btn"
-                (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+            Mat.btn m.mdl
+                [ Mat.btnHeaderIcon
+                , Mat.resourceId "center-header-menu"
+                , Mat.tabIndex -1
+                , Mat.id "menu-btn"
+                , Mat.onClickStopPropagation (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                ]
+                [ Mat.icon "menu" ]
+
+        --                Mat.iconBtn4
+        --                "menu"
+        --                -1
+        --                "menu-btn"
+        --                (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
     in
         [ menuButton
         , div [ class "flex-auto font-nowrap" ] content
@@ -68,8 +78,9 @@ menuIcon m =
     case Model.getMaybeUserProfile m of
         Nothing ->
             Mat.btn m.mdl
-                [ Mat.btnIcon
+                [ Mat.btnHeaderIcon
                 , Mat.resourceId "account-menu-not-signed-in"
+                , Mat.tabIndex -1
                 ]
                 [ Mat.icon "account_circle" ]
 

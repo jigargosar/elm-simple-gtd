@@ -4,7 +4,8 @@ import AppColors
 import Color
 import Color.Mixing
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes
+import Html.Attributes as HA
 import Material
 import Material.Button
 import Material.Icon
@@ -59,8 +60,20 @@ id =
     Material.Options.id
 
 
+attr =
+    Html.Attributes.attribute >>> fromHtmlAttr
+
+
+fromHtmlAttr =
+    Material.Options.attribute
+
+
 resourceId =
-    attribute "data-btn-name" >> Material.Options.attribute
+    attr "data-btn-name"
+
+
+tabIndex =
+    Html.Attributes.tabindex >> fromHtmlAttr
 
 
 many =
@@ -69,6 +82,10 @@ many =
 
 css =
     Material.Options.css
+
+
+cs =
+    Material.Options.cs
 
 
 icon =
@@ -87,12 +104,16 @@ primaryFAB =
     many
         [ Material.Button.fab
         , Material.Button.colored
-        , Material.Options.cs "mdl-button--page-fab"
+        , cs "mdl-button--page-fab"
         ]
 
 
 btnIcon =
     Material.Button.icon
+
+
+btnHeaderIcon =
+    many [ btnIcon, cs "mdl-button--header" ]
 
 
 btn =
@@ -174,13 +195,13 @@ ibc iconName msg config =
                 |> classListAsClass
 
         btnAttr =
-            [ nothingWhen (equals -2) tabindex config.tabIndex
+            [ nothingWhen (equals -2) HA.tabindex config.tabIndex
             , nothingWhen X.String.isBlank Html.Attributes.id config.id
             ]
                 |> List.filterMap identity
                 .|> Material.Options.attribute
                 |++ [ onStopPropagation2 "click" msg
-                    , Material.Options.attribute <| attribute "data-btn-name" trackingId
+                    , Material.Options.attribute <| Html.Attributes.attribute "data-btn-name" trackingId
                     ]
                 |> Material.Options.many
     in
@@ -208,22 +229,22 @@ classListAsClass list =
 
 bigIconTextBtn iconName textV clickHandler =
     Html.button
-        [ class "big-icon-text-btn"
+        [ HA.class "big-icon-text-btn"
         , X.Html.onClickStopPropagation clickHandler
         ]
-        [ Html.i [ class "material-icons" ] [ text iconName ]
+        [ Html.i [ HA.class "material-icons" ] [ text iconName ]
         , div [] [ text textV ]
         ]
 
 
 btn_ textV attributes =
-    div attributes [ Html.button [ class "btn" ] [ text textV ] ]
+    div attributes [ Html.button [ HA.class "btn" ] [ text textV ] ]
 
 
 btnFlat textV attributes =
     div attributes
-        [ Html.a [ class "btn btn-flat" ] [ text textV ] ]
+        [ Html.a [ HA.class "btn btn-flat" ] [ text textV ] ]
 
 
 divider =
-    div [ class "divider" ] []
+    div [ HA.class "divider" ] []

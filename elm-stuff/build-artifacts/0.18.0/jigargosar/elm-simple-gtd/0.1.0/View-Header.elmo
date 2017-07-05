@@ -6,8 +6,16 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 			m.mdl,
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$iconBtn,
-				_1: {ctor: '[]'}
+				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('account-menu-not-signed-in'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
+						_1: {ctor: '[]'}
+					}
+				}
 			},
 			{
 				ctor: '::',
@@ -52,12 +60,36 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
-		var menuButton = A4(
-			_jigargosar$elm_simple_gtd$Mat$iconBtn4,
-			'menu',
-			-1,
-			'menu-btn',
-			_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay));
+		var menuButton = A3(
+			_jigargosar$elm_simple_gtd$Mat$btn,
+			m.mdl,
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$btnHeaderIcon,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('center-header-menu'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(-1),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$Mat$id('menu-btn'),
+							_1: {
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
+									_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Mat$icon('menu'),
+				_1: {ctor: '[]'}
+			});
 		return {
 			ctor: '::',
 			_0: menuButton,

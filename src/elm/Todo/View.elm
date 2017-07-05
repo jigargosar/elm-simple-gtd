@@ -298,7 +298,7 @@ moreIconButton vm =
         , Mat.onClickStopPropagation vm.onMoreMenuClicked
         , Mat.tabIndex vm.tabindexAV
         ]
-        [ Mat.icon18 "more_vert" ]
+        [ Mat.iconSmall "more_vert" ]
 
 
 editScheduleButton vm =
@@ -317,7 +317,7 @@ editScheduleButton vm =
         , Mat.iconBtn vm.mdl
             [ Mat.tabIndex vm.tabindexAV
             ]
-            [ Mat.icon18 "schedule" ]
+            [ Mat.iconSmall "schedule" ]
         ]
 
 

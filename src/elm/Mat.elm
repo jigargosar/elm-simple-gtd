@@ -92,7 +92,7 @@ icon =
     Material.Icon.i
 
 
-icon18 iconName =
+iconSmall iconName =
     Material.Icon.view iconName [ Material.Icon.size18 ]
 
 

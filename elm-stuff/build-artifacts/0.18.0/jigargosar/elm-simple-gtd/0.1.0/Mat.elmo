@@ -100,6 +100,18 @@ var _jigargosar$elm_simple_gtd$Mat$classListAsClass = function (list) {
 			_elm_lang$core$Tuple$first,
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
+var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
+	id: '',
+	$class: '',
+	classList: {ctor: '[]'},
+	tabIndex: -2,
+	trackingId: '',
+	primaryFAB: false,
+	mdl: _debois$elm_mdl$Material$model,
+	iconProps: {ctor: '[]'},
+	iconName: '',
+	msg: _jigargosar$elm_simple_gtd$Model$noop
+};
 var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 	_debois$elm_mdl$Material_Button$render,
 	_jigargosar$elm_simple_gtd$Model$Mdl,
@@ -122,24 +134,12 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _debois$elm_mdl$Material_Options
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
-	id: '',
-	$class: '',
-	classList: {ctor: '[]'},
-	tabIndex: -2,
-	trackingId: '',
-	primaryFAB: false,
-	mdl: _debois$elm_mdl$Material$model,
-	iconProps: {ctor: '[]'},
-	iconName: '',
-	msg: _jigargosar$elm_simple_gtd$Model$noop
-};
-var _jigargosar$elm_simple_gtd$Mat$iV = _debois$elm_mdl$Material_Icon$view;
-var _jigargosar$elm_simple_gtd$Mat$i = _debois$elm_mdl$Material_Icon$i;
+var _jigargosar$elm_simple_gtd$Mat$iconView = _debois$elm_mdl$Material_Icon$view;
+var _jigargosar$elm_simple_gtd$Mat$icon = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$css = _debois$elm_mdl$Material_Options$css;
-var _jigargosar$elm_simple_gtd$Mat$iM = function (icon) {
+var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Mat$iV,
+		_jigargosar$elm_simple_gtd$Mat$iconView,
 		icon.name,
 		{
 			ctor: '::',

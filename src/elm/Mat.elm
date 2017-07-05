@@ -83,20 +83,6 @@ iconM icon =
     iconView icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
-defaultBtnConfig =
-    { id = ""
-    , class = ""
-    , classList = []
-    , tabIndex = -2
-    , trackingId = ""
-    , primaryFAB = False
-    , mdl = Material.model
-    , iconProps = []
-    , iconName = ""
-    , msg = Model.noop
-    }
-
-
 primaryFAB =
     Material.Options.many
         [ Material.Button.fab
@@ -129,6 +115,20 @@ smallIconBtn name clickHandler configFn =
                 }
            )
         |> ib name clickHandler
+
+
+defaultBtnConfig =
+    { id = ""
+    , class = ""
+    , classList = []
+    , tabIndex = -2
+    , trackingId = ""
+    , primaryFAB = False
+    , mdl = Material.model
+    , iconProps = []
+    , iconName = ""
+    , msg = Model.noop
+    }
 
 
 ib iconName msg configFn =

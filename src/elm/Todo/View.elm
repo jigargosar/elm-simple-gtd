@@ -293,9 +293,8 @@ doneIconButton vm =
 
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
-    Mat.btn vm.mdl
-        [ Mat.btnIconCS
-        , Mat.id ("todo-more-menu-button-" ++ vm.key)
+    Mat.iconBtn vm.mdl
+        [ Mat.id ("todo-more-menu-button-" ++ vm.key)
         , Mat.onClickStopPropagation vm.onMoreMenuClicked
         , Mat.tabIndex vm.tabindexAV
         ]
@@ -315,9 +314,8 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Mat.btn vm.mdl
-            [ Mat.btnIconCS
-            , Mat.tabIndex vm.tabindexAV
+        , Mat.iconBtn vm.mdl
+            [ Mat.tabIndex vm.tabindexAV
             ]
             [ Mat.iconView "schedule" [ Material.Icon.size18 ] ]
         ]

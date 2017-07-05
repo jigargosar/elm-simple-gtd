@@ -108,12 +108,12 @@ primaryFAB =
         ]
 
 
-btnIconCS =
-    Material.Button.icon
-
-
 headerIconBtn mdl opts =
-    btn mdl [ many [ btnIconCS, cs "mdl-button--header-icon" ], many opts ]
+    btn mdl [ many [ Material.Button.icon, cs "mdl-button--header-icon" ], many opts ]
+
+
+iconBtn mdl opts =
+    btn mdl [ Material.Button.icon, many opts ]
 
 
 btn =

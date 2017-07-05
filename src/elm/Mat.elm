@@ -79,20 +79,6 @@ iconM icon =
     iconA__ icon.name [ style [ "color" => AppColors.encode icon.color ] ]
 
 
-
---type alias BtnConfig =
---    { id : String
---    , class : String
---    , classList : List ( String, Bool )
---    , onClick : Model.Msg
---    , tabIndex : Int
---    , trackingId : String
---    , primaryFAB : Bool
---    , mdl : Material.Model
---    , iconProps : List (Material.Icon.Property Model.Msg)
---    }
-
-
 defaultBtnConfig =
     { id = ""
     , class = ""

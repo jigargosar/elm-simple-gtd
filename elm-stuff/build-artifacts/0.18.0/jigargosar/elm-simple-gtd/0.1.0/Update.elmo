@@ -317,12 +317,15 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return A2(_jigargosar$elm_simple_gtd$Firebase_Main$update, _jigargosar$elm_simple_gtd$Update$andThenUpdate, _p8._0);
 		case 'OnAppDrawerMsg':
 			return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, _jigargosar$elm_simple_gtd$Update$andThenUpdate, _p8._0);
-		default:
+		case 'OnPersistLocalPref':
 			return _Fresheyeball$elm_return$Return$effect_(
 				function (_p36) {
 					return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
 						_jigargosar$elm_simple_gtd$Model$encodeLocalPref(_p36));
 				});
+		default:
+			return _Fresheyeball$elm_return$Return$andThen(
+				A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Model$Mdl, _p8._0));
 	}
 };
 var _jigargosar$elm_simple_gtd$Update$andThenUpdate = function (_p37) {

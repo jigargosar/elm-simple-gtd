@@ -1,0 +1,28 @@
+var _debois$elm_mdl$Material_Icon$view = F2(
+	function (name, options) {
+		return A3(
+			_debois$elm_mdl$Material_Options$styled,
+			_elm_lang$html$Html$i,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('material-icons'),
+				_1: options
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(name),
+				_1: {ctor: '[]'}
+			});
+	});
+var _debois$elm_mdl$Material_Icon$i = function (name) {
+	return A2(
+		_debois$elm_mdl$Material_Icon$view,
+		name,
+		{ctor: '[]'});
+};
+var _debois$elm_mdl$Material_Icon$size48 = A2(_debois$elm_mdl$Material_Options$css, 'font-size', '48px');
+var _debois$elm_mdl$Material_Icon$size36 = A2(_debois$elm_mdl$Material_Options$css, 'font-size', '36px');
+var _debois$elm_mdl$Material_Icon$size24 = A2(_debois$elm_mdl$Material_Options$css, 'font-size', '24px');
+var _debois$elm_mdl$Material_Icon$size18 = A2(_debois$elm_mdl$Material_Options$css, 'font-size', '18px');
+var _debois$elm_mdl$Material_Icon$defaultConfig = {};
+var _debois$elm_mdl$Material_Icon$Config = {};

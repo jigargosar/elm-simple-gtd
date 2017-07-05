@@ -1,0 +1,84 @@
+var _debois$elm_mdl$Material$init = function (lift) {
+	return _debois$elm_mdl$Material_Layout$sub0(lift);
+};
+var _debois$elm_mdl$Material$subscriptions = F2(
+	function (lift, model) {
+		return _elm_lang$core$Platform_Sub$batch(
+			{
+				ctor: '::',
+				_0: A2(_debois$elm_mdl$Material_Layout$subs, lift, model.mdl),
+				_1: {
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Menu$subs, lift, model.mdl),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _debois$elm_mdl$Material$update_ = F3(
+	function (lift, msg, store) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'ButtonMsg':
+				return A4(_debois$elm_mdl$Material_Button$react, lift, _p0._1, _p0._0, store);
+			case 'TextfieldMsg':
+				return A4(_debois$elm_mdl$Material_Textfield$react, lift, _p0._1, _p0._0, store);
+			case 'MenuMsg':
+				var _p2 = _p0._0;
+				return A4(
+					_debois$elm_mdl$Material_Menu$react,
+					function (_p1) {
+						return lift(
+							A2(_debois$elm_mdl$Material_Component$MenuMsg, _p2, _p1));
+					},
+					_p0._1,
+					_p2,
+					store);
+			case 'LayoutMsg':
+				return A3(
+					_debois$elm_mdl$Material_Layout$react,
+					function (_p3) {
+						return lift(
+							_debois$elm_mdl$Material_Component$LayoutMsg(_p3));
+					},
+					_p0._0,
+					store);
+			case 'TogglesMsg':
+				return A4(_debois$elm_mdl$Material_Toggles$react, lift, _p0._1, _p0._0, store);
+			case 'TooltipMsg':
+				return A4(_debois$elm_mdl$Material_Tooltip$react, lift, _p0._1, _p0._0, store);
+			case 'TabsMsg':
+				return A4(_debois$elm_mdl$Material_Tabs$react, lift, _p0._1, _p0._0, store);
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Maybe$Nothing,
+					_1: _debois$elm_mdl$Material_Dispatch$forward(_p0._0)
+				};
+		}
+	});
+var _debois$elm_mdl$Material$update = F3(
+	function (lift, msg, container) {
+		return A2(
+			_debois$elm_mdl$Material_Helpers$map1st,
+			_elm_lang$core$Maybe$withDefault(container),
+			A2(
+				_debois$elm_mdl$Material_Helpers$map1st,
+				_elm_lang$core$Maybe$map(
+					function (mdl) {
+						return _elm_lang$core$Native_Utils.update(
+							container,
+							{mdl: mdl});
+					}),
+				A3(
+					_debois$elm_mdl$Material$update_,
+					lift,
+					msg,
+					function (_) {
+						return _.mdl;
+					}(container))));
+	});
+var _debois$elm_mdl$Material$model = {button: _elm_lang$core$Dict$empty, textfield: _elm_lang$core$Dict$empty, menu: _elm_lang$core$Dict$empty, snackbar: _elm_lang$core$Maybe$Nothing, layout: _debois$elm_mdl$Material_Layout$defaultModel, toggles: _elm_lang$core$Dict$empty, tooltip: _elm_lang$core$Dict$empty, tabs: _elm_lang$core$Dict$empty};
+var _debois$elm_mdl$Material$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {button: a, textfield: b, menu: c, snackbar: d, layout: e, toggles: f, tooltip: g, tabs: h};
+	});

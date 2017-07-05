@@ -1,0 +1,149 @@
+var _debois$elm_mdl$Material_Card$stopClick = _debois$elm_mdl$Material_Options_Internal$attribute(
+	A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'var event = arguments[0] || window.event; event.stopPropagation();'));
+var _debois$elm_mdl$Material_Card$block = function (block) {
+	var _p0 = block;
+	switch (_p0.ctor) {
+		case 'Title':
+			return A2(
+				_debois$elm_mdl$Material_Options$div,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card__title'),
+					_1: _p0._0
+				},
+				_p0._1);
+		case 'Media':
+			return A2(
+				_debois$elm_mdl$Material_Options$div,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card__media'),
+					_1: _p0._0
+				},
+				_p0._1);
+		case 'SupportingText':
+			return A2(
+				_debois$elm_mdl$Material_Options$div,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card__supporting-text'),
+					_1: _p0._0
+				},
+				_p0._1);
+		case 'Actions':
+			return A2(
+				_debois$elm_mdl$Material_Options$div,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card__actions'),
+					_1: {ctor: '::', _0: _debois$elm_mdl$Material_Card$stopClick, _1: _p0._0}
+				},
+				_p0._1);
+		default:
+			return A2(
+				_debois$elm_mdl$Material_Options$div,
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card__menu'),
+					_1: {ctor: '::', _0: _debois$elm_mdl$Material_Card$stopClick, _1: _p0._0}
+				},
+				_p0._1);
+	}
+};
+var _debois$elm_mdl$Material_Card$view = F2(
+	function (styling, views) {
+		return A2(
+			_debois$elm_mdl$Material_Options$div,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$many(styling),
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options$cs('mdl-card'),
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'min-height', '0px'),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			A2(_elm_lang$core$List$map, _debois$elm_mdl$Material_Card$block, views));
+	});
+var _debois$elm_mdl$Material_Card$subhead = function (styling) {
+	return _debois$elm_mdl$Material_Options$span(
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Options$cs('mdl-card__subtitle-text'),
+			_1: {
+				ctor: '::',
+				_0: A2(_debois$elm_mdl$Material_Options$css, 'padding-top', '8px'),
+				_1: styling
+			}
+		});
+};
+var _debois$elm_mdl$Material_Card$head = function (styling) {
+	return A2(
+		_debois$elm_mdl$Material_Options$styled,
+		_elm_lang$html$Html$h1,
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Options$cs('mdl-card__title-text'),
+			_1: {
+				ctor: '::',
+				_0: A2(_debois$elm_mdl$Material_Options$css, 'align-self', 'flex-start'),
+				_1: styling
+			}
+		});
+};
+var _debois$elm_mdl$Material_Card$expand = _debois$elm_mdl$Material_Options$cs('mdl-card--expand');
+var _debois$elm_mdl$Material_Card$border = _debois$elm_mdl$Material_Options$cs('mdl-card--border');
+var _debois$elm_mdl$Material_Card$Actions = F2(
+	function (a, b) {
+		return {ctor: 'Actions', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Card$actions = _debois$elm_mdl$Material_Card$Actions;
+var _debois$elm_mdl$Material_Card$SupportingText = F2(
+	function (a, b) {
+		return {ctor: 'SupportingText', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Card$text = _debois$elm_mdl$Material_Card$SupportingText;
+var _debois$elm_mdl$Material_Card$Media = F2(
+	function (a, b) {
+		return {ctor: 'Media', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Card$media = _debois$elm_mdl$Material_Card$Media;
+var _debois$elm_mdl$Material_Card$Menu = F2(
+	function (a, b) {
+		return {ctor: 'Menu', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Card$menu = F2(
+	function (styling, block) {
+		return A2(_debois$elm_mdl$Material_Card$Menu, styling, block);
+	});
+var _debois$elm_mdl$Material_Card$Title = F2(
+	function (a, b) {
+		return {ctor: 'Title', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Card$title = F2(
+	function (styling, block) {
+		return A2(
+			_debois$elm_mdl$Material_Card$Title,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$many(styling),
+				_1: {
+					ctor: '::',
+					_0: A2(_debois$elm_mdl$Material_Options$css, 'justify-content', 'flex-end'),
+					_1: {
+						ctor: '::',
+						_0: A2(_debois$elm_mdl$Material_Options$css, 'flex-direction', 'column'),
+						_1: {
+							ctor: '::',
+							_0: A2(_debois$elm_mdl$Material_Options$css, 'align-items', 'flex-start'),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			block);
+	});

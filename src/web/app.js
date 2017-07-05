@@ -18,13 +18,13 @@ const npmPackageVersion = env["npm_package_version"]
 
 //test
 
-global.xhot = module.hot
+/*global.xhot = module.hot
 
 if(module.hot){
   module.hot.addStatusHandler(status => {
     console.warn("hot status", status);
   })
-}
+}*/
 
 window.appBoot = async function appBoot() {
     const deviceId = getOrCreateDeviceId()

@@ -1,0 +1,1074 @@
+var _debois$elm_mdl$Material_Layout$_p0 = {
+	ctor: '_Tuple2',
+	_0: function (_) {
+		return _.layout;
+	},
+	_1: F2(
+		function (x, s) {
+			return _elm_lang$core$Native_Utils.update(
+				s,
+				{layout: x});
+		})
+};
+var _debois$elm_mdl$Material_Layout$get = _debois$elm_mdl$Material_Layout$_p0._0;
+var _debois$elm_mdl$Material_Layout$set = _debois$elm_mdl$Material_Layout$_p0._1;
+var _debois$elm_mdl$Material_Layout$drawerView = F3(
+	function (lift, isVisible, elems) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'mdl-layout__drawer', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'is-visible', _1: isVisible},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html_Attributes$attribute,
+						'aria-hidden',
+						isVisible ? 'false' : 'true'),
+					_1: {ctor: '[]'}
+				}
+			},
+			elems);
+	});
+var _debois$elm_mdl$Material_Layout$onKeypressFilterSpaceAndEnter = A2(_elm_lang$html$Html_Attributes$attribute, 'onkeypress', '\n  (function (evt) {\n     if (evt && evt.type === \"keydown\" && (evt.keyCode === 32 || evt.keyCode === 13)) {\n       evt.preventDefault();\n     }\n   })(window.event);\n  ');
+var _debois$elm_mdl$Material_Layout$toList = function (x) {
+	var _p1 = x;
+	if (_p1.ctor === 'Nothing') {
+		return {ctor: '[]'};
+	} else {
+		return {
+			ctor: '::',
+			_0: _p1._0,
+			_1: {ctor: '[]'}
+		};
+	}
+};
+var _debois$elm_mdl$Material_Layout$isWaterfall = function (mode) {
+	var _p2 = mode;
+	if (_p2.ctor === 'Waterfall') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _debois$elm_mdl$Material_Layout$row = function (styles) {
+	return _debois$elm_mdl$Material_Options$div(
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__header-row'),
+			_1: styles
+		});
+};
+var _debois$elm_mdl$Material_Layout$link = F2(
+	function (styles, contents) {
+		return A3(
+			_debois$elm_mdl$Material_Options$styled,
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('mdl-navigation__link'),
+				_1: {
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Options_Internal$attribute(
+						A2(_elm_lang$html$Html_Attributes$attribute, 'tabindex', '1')),
+					_1: styles
+				}
+			},
+			contents);
+	});
+var _debois$elm_mdl$Material_Layout$href = function (url) {
+	return _debois$elm_mdl$Material_Options$attribute(
+		_elm_lang$html$Html_Attributes$href(url));
+};
+var _debois$elm_mdl$Material_Layout$navigation = F2(
+	function (styles, contents) {
+		return A3(
+			_debois$elm_mdl$Material_Options$styled,
+			_elm_lang$html$Html$nav,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('mdl-navigation'),
+				_1: styles
+			},
+			contents);
+	});
+var _debois$elm_mdl$Material_Layout$title = function (styles) {
+	return _debois$elm_mdl$Material_Options$span(
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__title'),
+			_1: styles
+		});
+};
+var _debois$elm_mdl$Material_Layout$spacer = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('mdl-layout-spacer'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
+var _debois$elm_mdl$Material_Layout$onSelectTab = function (_p3) {
+	return _debois$elm_mdl$Material_Options_Internal$option(
+		F2(
+			function (f, config) {
+				return _elm_lang$core$Native_Utils.update(
+					config,
+					{
+						onSelectTab: _elm_lang$core$Maybe$Just(
+							function (_p4) {
+								return _elm_lang$html$Html_Events$onClick(
+									f(_p4));
+							})
+					});
+			})(_p3));
+};
+var _debois$elm_mdl$Material_Layout$moreTabs = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{moreTabs: true});
+	});
+var _debois$elm_mdl$Material_Layout$selectedTab = function (_p5) {
+	return _debois$elm_mdl$Material_Options_Internal$option(
+		F2(
+			function (k, config) {
+				return _elm_lang$core$Native_Utils.update(
+					config,
+					{selectedTab: k});
+			})(_p5));
+};
+var _debois$elm_mdl$Material_Layout$transparentHeader = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{transparentHeader: true});
+	});
+var _debois$elm_mdl$Material_Layout$rippleTabs = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{rippleTabs: true});
+	});
+var _debois$elm_mdl$Material_Layout$fixedTabs = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{fixedTabs: true});
+	});
+var _debois$elm_mdl$Material_Layout$fixedDrawer = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{fixedDrawer: true});
+	});
+var _debois$elm_mdl$Material_Layout$fixedHeader = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{fixedHeader: true});
+	});
+var _debois$elm_mdl$Material_Layout$mainId = 'elm-mdl-layout-main';
+var _debois$elm_mdl$Material_Layout$setTabsWidth_ = F2(
+	function (width, model) {
+		var x = model.tabScrollState;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				tabScrollState: _elm_lang$core$Native_Utils.update(
+					x,
+					{
+						width: _elm_lang$core$Maybe$Just(width)
+					})
+			});
+	});
+var _debois$elm_mdl$Material_Layout$setTabsWidth = F2(
+	function (w, container) {
+		return _elm_lang$core$Native_Utils.update(
+			container,
+			{
+				layout: A2(_debois$elm_mdl$Material_Layout$setTabsWidth_, w, container.layout)
+			});
+	});
+var _debois$elm_mdl$Material_Layout$defaultTabScrollState = {canScrollRight: true, canScrollLeft: false, width: _elm_lang$core$Maybe$Nothing};
+var _debois$elm_mdl$Material_Layout$defaultModel = {ripples: _elm_lang$core$Dict$empty, isSmallScreen: false, isCompact: false, isAnimating: false, isScrolled: false, isDrawerOpen: false, tabScrollState: _debois$elm_mdl$Material_Layout$defaultTabScrollState};
+var _debois$elm_mdl$Material_Layout$TabScrollState = F3(
+	function (a, b, c) {
+		return {canScrollLeft: a, canScrollRight: b, width: c};
+	});
+var _debois$elm_mdl$Material_Layout$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {ripples: a, isSmallScreen: b, isCompact: c, isAnimating: d, isScrolled: e, isDrawerOpen: f, tabScrollState: g};
+	});
+var _debois$elm_mdl$Material_Layout$Config = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {fixedHeader: a, fixedDrawer: b, fixedTabs: c, rippleTabs: d, mode: e, selectedTab: f, onSelectTab: g, transparentHeader: h, moreTabs: i};
+	});
+var _debois$elm_mdl$Material_Layout$Contents = F4(
+	function (a, b, c, d) {
+		return {header: a, drawer: b, tabs: c, main: d};
+	});
+var _debois$elm_mdl$Material_Layout$Ripple = F2(
+	function (a, b) {
+		return {ctor: 'Ripple', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Layout$NOP = {ctor: 'NOP'};
+var _debois$elm_mdl$Material_Layout$TransitionEnd = {ctor: 'TransitionEnd'};
+var _debois$elm_mdl$Material_Layout$TransitionHeader = function (a) {
+	return {ctor: 'TransitionHeader', _0: a};
+};
+var _debois$elm_mdl$Material_Layout$update_ = F3(
+	function (f, action, model) {
+		update_:
+		while (true) {
+			var _p6 = action;
+			switch (_p6.ctor) {
+				case 'NOP':
+					return _elm_lang$core$Maybe$Nothing;
+				case 'Resize':
+					var _p7 = _p6._0;
+					var tabScrollState = A2(
+						_elm_lang$core$Maybe$withDefault,
+						model.tabScrollState,
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (tabsWidth) {
+								var tabScrollState = model.tabScrollState;
+								return _elm_lang$core$Native_Utils.update(
+									tabScrollState,
+									{
+										canScrollRight: _elm_lang$core$Native_Utils.cmp(tabsWidth + (2 * 56), _p7) > 0
+									});
+							},
+							model.tabScrollState.width));
+					var isSmall = _elm_lang$core$Native_Utils.cmp(1024, _p7) > -1;
+					return (_elm_lang$core$Native_Utils.eq(isSmall, model.isSmallScreen) && _elm_lang$core$Native_Utils.eq(tabScrollState.canScrollRight, model.tabScrollState.canScrollRight)) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+						_debois$elm_mdl$Material_Helpers$pure(
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{isSmallScreen: isSmall, isDrawerOpen: (!isSmall) && model.isDrawerOpen, tabScrollState: tabScrollState})));
+				case 'ToggleDrawer':
+					return _elm_lang$core$Maybe$Just(
+						_debois$elm_mdl$Material_Helpers$pure(
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{isDrawerOpen: !model.isDrawerOpen})));
+				case 'Ripple':
+					var _p9 = _p6._0;
+					return _elm_lang$core$Maybe$Just(
+						A2(
+							_debois$elm_mdl$Material_Helpers$map2nd,
+							_elm_lang$core$Platform_Cmd$map(
+								function (_p8) {
+									return f(
+										A2(_debois$elm_mdl$Material_Layout$Ripple, _p9, _p8));
+								}),
+							A2(
+								_debois$elm_mdl$Material_Helpers$map1st,
+								function (ripple_) {
+									return _elm_lang$core$Native_Utils.update(
+										model,
+										{
+											ripples: A3(_elm_lang$core$Dict$insert, _p9, ripple_, model.ripples)
+										});
+								},
+								A2(
+									_debois$elm_mdl$Material_Ripple$update,
+									_p6._1,
+									A2(
+										_elm_lang$core$Maybe$withDefault,
+										_debois$elm_mdl$Material_Ripple$model,
+										A2(_elm_lang$core$Dict$get, _p9, model.ripples))))));
+				case 'ScrollTab':
+					var _p10 = _p6._0;
+					return (!_elm_lang$core$Native_Utils.eq(model.tabScrollState, _p10)) ? _elm_lang$core$Maybe$Just(
+						_debois$elm_mdl$Material_Helpers$pure(
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{tabScrollState: _p10}))) : _elm_lang$core$Maybe$Nothing;
+				case 'ScrollPane':
+					var isScrolled = _elm_lang$core$Native_Utils.cmp(0.0, _p6._1) < 0;
+					if (!_elm_lang$core$Native_Utils.eq(isScrolled, model.isScrolled)) {
+						var _v3 = f,
+							_v4 = _debois$elm_mdl$Material_Layout$TransitionHeader(
+							{toCompact: isScrolled, fixedHeader: _p6._0}),
+							_v5 = _elm_lang$core$Native_Utils.update(
+							model,
+							{isScrolled: isScrolled});
+						f = _v3;
+						action = _v4;
+						model = _v5;
+						continue update_;
+					} else {
+						return _elm_lang$core$Maybe$Nothing;
+					}
+				case 'TransitionHeader':
+					return (!model.isAnimating) ? _elm_lang$core$Maybe$Just(
+						{
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{isCompact: _p6._0.toCompact, isAnimating: (!model.isSmallScreen) || _p6._0.fixedHeader}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						}) : _elm_lang$core$Maybe$Nothing;
+				default:
+					return _elm_lang$core$Maybe$Just(
+						_debois$elm_mdl$Material_Helpers$pure(
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{isAnimating: false})));
+			}
+		}
+	});
+var _debois$elm_mdl$Material_Layout$update = F2(
+	function (msg, model) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none},
+			A3(_debois$elm_mdl$Material_Layout$update_, _elm_lang$core$Basics$identity, msg, model));
+	});
+var _debois$elm_mdl$Material_Layout$react = F3(
+	function (lift, msg, store) {
+		var _p11 = A3(
+			_debois$elm_mdl$Material_Layout$update_,
+			lift,
+			msg,
+			_debois$elm_mdl$Material_Layout$get(store));
+		if ((_p11.ctor === 'Just') && (_p11._0.ctor === '_Tuple2')) {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Maybe$Just(
+					A2(_debois$elm_mdl$Material_Layout$set, _p11._0._0, store)),
+				_1: _p11._0._1
+			};
+		} else {
+			return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _debois$elm_mdl$Material_Layout$ScrollPane = F2(
+	function (a, b) {
+		return {ctor: 'ScrollPane', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Layout$ScrollTab = function (a) {
+	return {ctor: 'ScrollTab', _0: a};
+};
+var _debois$elm_mdl$Material_Layout$Resize = function (a) {
+	return {ctor: 'Resize', _0: a};
+};
+var _debois$elm_mdl$Material_Layout$init = function () {
+	var measureScreenSize = A2(_elm_lang$core$Task$perform, _debois$elm_mdl$Material_Layout$Resize, _elm_lang$window$Window$width);
+	return {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Layout$defaultModel, _1: measureScreenSize};
+}();
+var _debois$elm_mdl$Material_Layout$sub0 = function (lift) {
+	return A2(
+		_elm_lang$core$Platform_Cmd$map,
+		function (_p12) {
+			return lift(
+				_debois$elm_mdl$Material_Component$LayoutMsg(_p12));
+		},
+		_elm_lang$core$Tuple$second(_debois$elm_mdl$Material_Layout$init));
+};
+var _debois$elm_mdl$Material_Layout$subscriptions = function (model) {
+	return _elm_lang$window$Window$resizes(
+		function (_p13) {
+			return _debois$elm_mdl$Material_Layout$Resize(
+				function (_) {
+					return _.width;
+				}(_p13));
+		});
+};
+var _debois$elm_mdl$Material_Layout$subs = function (lift) {
+	return function (_p14) {
+		return A2(
+			_elm_lang$core$Platform_Sub$map,
+			function (_p15) {
+				return lift(
+					_debois$elm_mdl$Material_Component$LayoutMsg(_p15));
+			},
+			_debois$elm_mdl$Material_Layout$subscriptions(
+				_debois$elm_mdl$Material_Layout$get(_p14)));
+	};
+};
+var _debois$elm_mdl$Material_Layout$ToggleDrawer = {ctor: 'ToggleDrawer'};
+var _debois$elm_mdl$Material_Layout$drawerButton = F2(
+	function (lift, isVisible) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'mdl-layout__drawer-button', _1: true},
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html_Attributes$attribute,
+								'aria-expanded',
+								isVisible ? 'true' : 'false'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$tabindex(1),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										lift(_debois$elm_mdl$Material_Layout$ToggleDrawer)),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_elm_lang$html$Html_Events$onWithOptions,
+											'keydown',
+											{stopPropagation: false, preventDefault: false},
+											A2(
+												_elm_lang$core$Json_Decode$map,
+												function (_p16) {
+													return lift(
+														function (key) {
+															var _p17 = key;
+															switch (_p17) {
+																case 32:
+																	return _debois$elm_mdl$Material_Layout$ToggleDrawer;
+																case 13:
+																	return _debois$elm_mdl$Material_Layout$ToggleDrawer;
+																default:
+																	return _debois$elm_mdl$Material_Layout$NOP;
+															}
+														}(_p16));
+												},
+												_elm_lang$html$Html_Events$keyCode)),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Icon$i('menu'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _debois$elm_mdl$Material_Layout$obfuscator = F2(
+	function (lift, isVisible) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'mdl-layout__obfuscator', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'is-visible', _1: isVisible},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						lift(_debois$elm_mdl$Material_Layout$ToggleDrawer)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _debois$elm_mdl$Material_Layout$toggleDrawer = function (lift) {
+	return function (_p18) {
+		return lift(
+			_debois$elm_mdl$Material_Component$LayoutMsg(_p18));
+	}(_debois$elm_mdl$Material_Layout$ToggleDrawer);
+};
+var _debois$elm_mdl$Material_Layout$Waterfall = function (a) {
+	return {ctor: 'Waterfall', _0: a};
+};
+var _debois$elm_mdl$Material_Layout$waterfall = function (_p19) {
+	return _debois$elm_mdl$Material_Options_Internal$option(
+		F2(
+			function (b, config) {
+				return _elm_lang$core$Native_Utils.update(
+					config,
+					{
+						mode: _debois$elm_mdl$Material_Layout$Waterfall(b)
+					});
+			})(_p19));
+};
+var _debois$elm_mdl$Material_Layout$Scrolling = {ctor: 'Scrolling'};
+var _debois$elm_mdl$Material_Layout$scrolling = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{mode: _debois$elm_mdl$Material_Layout$Scrolling});
+	});
+var _debois$elm_mdl$Material_Layout$Seamed = {ctor: 'Seamed'};
+var _debois$elm_mdl$Material_Layout$seamed = _debois$elm_mdl$Material_Options_Internal$option(
+	function (config) {
+		return _elm_lang$core$Native_Utils.update(
+			config,
+			{mode: _debois$elm_mdl$Material_Layout$Seamed});
+	});
+var _debois$elm_mdl$Material_Layout$Standard = {ctor: 'Standard'};
+var _debois$elm_mdl$Material_Layout$defaultConfig = {fixedHeader: false, fixedDrawer: false, fixedTabs: false, rippleTabs: true, mode: _debois$elm_mdl$Material_Layout$Standard, onSelectTab: _elm_lang$core$Maybe$Nothing, selectedTab: -1, moreTabs: false, transparentHeader: false};
+var _debois$elm_mdl$Material_Layout$headerView = F4(
+	function (lift, config, model, _p20) {
+		var _p21 = _p20;
+		var mode = function () {
+			var _p22 = config.mode;
+			switch (_p22.ctor) {
+				case 'Standard':
+					return _debois$elm_mdl$Material_Options$nop;
+				case 'Scrolling':
+					return _debois$elm_mdl$Material_Options$cs('mdl-layout__header--scroll');
+				case 'Seamed':
+					return _debois$elm_mdl$Material_Options$cs('mdl-layout__header--seamed');
+				default:
+					if (_p22._0 === true) {
+						return _debois$elm_mdl$Material_Options$cs('mdl-layout__header--waterfall mdl-layout__header--waterfall-hide-top');
+					} else {
+						return _debois$elm_mdl$Material_Options$cs('mdl-layout__header--waterfall');
+					}
+			}
+		}();
+		return A3(
+			_debois$elm_mdl$Material_Options$styled,
+			_elm_lang$html$Html$header,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__header'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Options$when,
+						_elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Standard) || (_debois$elm_mdl$Material_Layout$isWaterfall(config.mode) && model.isCompact),
+						_debois$elm_mdl$Material_Options$cs('is-casting-shadow')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Options$when,
+							model.isAnimating,
+							_debois$elm_mdl$Material_Options$cs('is-animating')),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_debois$elm_mdl$Material_Options$when,
+								model.isCompact,
+								_debois$elm_mdl$Material_Options$cs('is-compact')),
+							_1: {
+								ctor: '::',
+								_0: mode,
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_Options$when,
+										config.transparentHeader,
+										_debois$elm_mdl$Material_Options$cs('mdl-layout__header--transparent')),
+									_1: {
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Options$onClick(
+											lift(
+												_debois$elm_mdl$Material_Layout$TransitionHeader(
+													{toCompact: false, fixedHeader: config.fixedHeader}))),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_debois$elm_mdl$Material_Options$on,
+												'transitionend',
+												_elm_lang$core$Json_Decode$succeed(
+													lift(_debois$elm_mdl$Material_Layout$TransitionEnd))),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			A2(
+				_elm_lang$core$List$concatMap,
+				function (x) {
+					return x;
+				},
+				{
+					ctor: '::',
+					_0: _debois$elm_mdl$Material_Layout$toList(_p21._0),
+					_1: {
+						ctor: '::',
+						_0: _p21._1,
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Layout$toList(_p21._2),
+							_1: {ctor: '[]'}
+						}
+					}
+				}));
+	});
+var _debois$elm_mdl$Material_Layout$Right = {ctor: 'Right'};
+var _debois$elm_mdl$Material_Layout$Left = {ctor: 'Left'};
+var _debois$elm_mdl$Material_Layout$tabsView = F4(
+	function (lift, config, model, _p23) {
+		var _p24 = _p23;
+		var _p27 = _p24._1;
+		var chevron = F2(
+			function (direction, offset) {
+				var dir = function () {
+					var _p25 = direction;
+					if (_p25.ctor === 'Left') {
+						return 'left';
+					} else {
+						return 'right';
+					}
+				}();
+				return A3(
+					_debois$elm_mdl$Material_Options$styled,
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__tab-bar-button'),
+						_1: {
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Options$cs(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'mdl-layout__tab-bar-',
+									A2(_elm_lang$core$Basics_ops['++'], dir, '-button'))),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_Options$when,
+									(_elm_lang$core$Native_Utils.eq(direction, _debois$elm_mdl$Material_Layout$Left) && model.tabScrollState.canScrollLeft) || (_elm_lang$core$Native_Utils.eq(direction, _debois$elm_mdl$Material_Layout$Right) && model.tabScrollState.canScrollRight),
+									_debois$elm_mdl$Material_Options$cs('is-active')),
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options$many(_p27),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_debois$elm_mdl$Material_Icon$view,
+							A2(_elm_lang$core$Basics_ops['++'], 'chevron_', dir),
+							{
+								ctor: '::',
+								_0: _debois$elm_mdl$Material_Icon$size24,
+								_1: {
+									ctor: '::',
+									_0: _debois$elm_mdl$Material_Options_Internal$attribute(
+										A2(
+											_elm_lang$html$Html_Attributes$attribute,
+											'onclick',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'document.getElementsByClassName(\'mdl-layout__tab-bar\')[0].scrollLeft += ',
+												_elm_lang$core$Basics$toString(offset)))),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					});
+			});
+		return A2(
+			_debois$elm_mdl$Material_Options$div,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__tab-bar-container'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(chevron, _debois$elm_mdl$Material_Layout$Left, -100),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_debois$elm_mdl$Material_Options$div,
+						{
+							ctor: '::',
+							_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__tab-bar'),
+							_1: {
+								ctor: '::',
+								_0: A2(_debois$elm_mdl$Material_Options$css, 'position', 'relative'),
+								_1: {
+									ctor: '::',
+									_0: A2(_debois$elm_mdl$Material_Options$css, 'scroll-behavior', 'smooth'),
+									_1: {
+										ctor: '::',
+										_0: config.rippleTabs ? _debois$elm_mdl$Material_Options$many(
+											{
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Options$cs('mdl-js-ripple-effect'),
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Options$cs('mds-js-ripple-effect--ignore-events'),
+													_1: {ctor: '[]'}
+												}
+											}) : _debois$elm_mdl$Material_Options$nop,
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Standard) ? _debois$elm_mdl$Material_Options$cs('is-casting-shadow') : _debois$elm_mdl$Material_Options$nop,
+											_1: {
+												ctor: '::',
+												_0: _debois$elm_mdl$Material_Options$many(_p27),
+												_1: {
+													ctor: '::',
+													_0: _debois$elm_mdl$Material_Options_Internal$attribute(
+														A2(
+															_elm_lang$html$Html_Events$on,
+															'scroll',
+															_debois$elm_dom$DOM$target(
+																A4(
+																	_elm_lang$core$Json_Decode$map3,
+																	F3(
+																		function (scrollWidth, clientWidth, scrollLeft) {
+																			return lift(
+																				_debois$elm_mdl$Material_Layout$ScrollTab(
+																					{
+																						canScrollLeft: _elm_lang$core$Native_Utils.cmp(scrollLeft, 0) > 0,
+																						canScrollRight: _elm_lang$core$Native_Utils.cmp(scrollWidth - clientWidth, scrollLeft + 1) > 0,
+																						width: _elm_lang$core$Maybe$Just(scrollWidth)
+																					}));
+																		}),
+																	A2(_elm_lang$core$Json_Decode$field, 'scrollWidth', _elm_lang$core$Json_Decode$float),
+																	A2(_elm_lang$core$Json_Decode$field, 'clientWidth', _elm_lang$core$Json_Decode$float),
+																	A2(_elm_lang$core$Json_Decode$field, 'scrollLeft', _elm_lang$core$Json_Decode$float))))),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						A2(
+							_elm_lang$core$List$indexedMap,
+							F2(
+								function (tabIndex, tab) {
+									return A3(
+										_debois$elm_mdl$Material_Helpers$filter,
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$classList(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'mdl-layout__tab', _1: true},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 'is-active',
+															_1: _elm_lang$core$Native_Utils.eq(tabIndex, config.selectedTab)
+														},
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$core$Maybe$withDefault,
+													_debois$elm_mdl$Material_Helpers$noAttr,
+													A2(
+														_elm_lang$core$Maybe$map,
+														F2(
+															function (x, y) {
+																return y(x);
+															})(tabIndex),
+														config.onSelectTab)),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$core$Maybe$Just(tab),
+											_1: {
+												ctor: '::',
+												_0: config.rippleTabs ? _elm_lang$core$Maybe$Just(
+													A2(
+														_elm_lang$html$Html$map,
+														function (_p26) {
+															return lift(
+																A2(_debois$elm_mdl$Material_Layout$Ripple, tabIndex, _p26));
+														},
+														A2(
+															_debois$elm_mdl$Material_Ripple$view,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('mdl-layout__tab-ripple-container'),
+																_1: {ctor: '[]'}
+															},
+															A2(
+																_elm_lang$core$Maybe$withDefault,
+																_debois$elm_mdl$Material_Ripple$model,
+																A2(_elm_lang$core$Dict$get, tabIndex, model.ripples))))) : _elm_lang$core$Maybe$Nothing,
+												_1: {ctor: '[]'}
+											}
+										});
+								}),
+							_p24._0)),
+					_1: {
+						ctor: '::',
+						_0: A2(chevron, _debois$elm_mdl$Material_Layout$Right, 100),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _debois$elm_mdl$Material_Layout$view = F4(
+	function (lift, model, options, _p28) {
+		var _p29 = _p28;
+		var _p37 = _p29.tabs;
+		var _p36 = _p29.header;
+		var _p35 = _p29.drawer;
+		var hasDrawer = !_elm_lang$core$Native_Utils.eq(
+			_p35,
+			{ctor: '[]'});
+		var hasTabs = !_elm_lang$core$List$isEmpty(
+			_elm_lang$core$Tuple$first(_p37));
+		var hasHeader = hasTabs || (!_elm_lang$core$List$isEmpty(_p36));
+		var summary = A2(_debois$elm_mdl$Material_Options_Internal$collect, _debois$elm_mdl$Material_Layout$defaultConfig, options);
+		var config = summary.config;
+		var drawerIsFixed = config.fixedDrawer && (!model.isSmallScreen);
+		var drawerIsVisible = model.isDrawerOpen && (!drawerIsFixed);
+		var _p30 = function () {
+			var _p31 = {ctor: '_Tuple3', _0: _p35, _1: _p36, _2: config.fixedHeader};
+			if ((_p31.ctor === '_Tuple3') && (_p31._0.ctor === '::')) {
+				if ((_p31._1.ctor === '::') && (_p31._2 === true)) {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Nothing,
+						_1: _elm_lang$core$Maybe$Just(
+							A2(_debois$elm_mdl$Material_Layout$drawerButton, lift, drawerIsVisible))
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Maybe$Just(
+							A2(_debois$elm_mdl$Material_Layout$drawerButton, lift, drawerIsVisible)),
+						_1: _elm_lang$core$Maybe$Nothing
+					};
+				}
+			} else {
+				return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _elm_lang$core$Maybe$Nothing};
+			}
+		}();
+		var contentDrawerButton = _p30._0;
+		var headerDrawerButton = _p30._1;
+		var tabsElems = (!hasTabs) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+			A4(_debois$elm_mdl$Material_Layout$tabsView, lift, config, model, _p37));
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'mdl-layout__container', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'has-scrolling-header',
+								_1: _elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Scrolling)
+							},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(
+					_debois$elm_mdl$Material_Helpers$filter,
+					_elm_lang$html$Html_Keyed$node('div'),
+					A2(
+						_elm_lang$core$List$filterMap,
+						_elm_lang$core$Basics$identity,
+						{
+							ctor: '::',
+							_0: _elm_lang$core$Maybe$Just(
+								_elm_lang$html$Html_Attributes$classList(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'mdl-layout ', _1: true},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'is-upgraded', _1: true},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'is-small-screen', _1: model.isSmallScreen},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'has-drawer', _1: hasDrawer},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'has-tabs', _1: hasTabs},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: 'mdl-js-layout', _1: true},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: 'mdl-layout--fixed-drawer', _1: config.fixedDrawer && hasDrawer},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: 'mdl-layout--fixed-header', _1: config.fixedHeader && hasHeader},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'mdl-layout--fixed-tabs', _1: config.fixedTabs && hasTabs},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									})),
+							_1: {
+								ctor: '::',
+								_0: drawerIsVisible ? _elm_lang$core$Maybe$Just(
+									A2(
+										_elm_lang$html$Html_Events$on,
+										'keydown',
+										A2(
+											_elm_lang$core$Json_Decode$map,
+											function (_p32) {
+												return lift(
+													function (key) {
+														return _elm_lang$core$Native_Utils.eq(key, 27) ? _debois$elm_mdl$Material_Layout$ToggleDrawer : _debois$elm_mdl$Material_Layout$NOP;
+													}(_p32));
+											},
+											_elm_lang$html$Html_Events$keyCode))) : _elm_lang$core$Maybe$Nothing,
+								_1: {ctor: '[]'}
+							}
+						}),
+					{
+						ctor: '::',
+						_0: hasHeader ? _elm_lang$core$Maybe$Just(
+							A2(
+								F2(
+									function (v0, v1) {
+										return {ctor: '_Tuple2', _0: v0, _1: v1};
+									}),
+								'elm-mdl-header',
+								A4(
+									_debois$elm_mdl$Material_Layout$headerView,
+									lift,
+									config,
+									model,
+									{ctor: '_Tuple3', _0: headerDrawerButton, _1: _p36, _2: tabsElems}))) : _elm_lang$core$Maybe$Nothing,
+						_1: {
+							ctor: '::',
+							_0: (!hasDrawer) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+								{
+									ctor: '_Tuple2',
+									_0: 'elm-mdl-drawer',
+									_1: A3(_debois$elm_mdl$Material_Layout$drawerView, lift, drawerIsVisible, _p35)
+								}),
+							_1: {
+								ctor: '::',
+								_0: (!hasDrawer) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+									{
+										ctor: '_Tuple2',
+										_0: 'elm-mdl-obfuscator',
+										_1: A2(_debois$elm_mdl$Material_Layout$obfuscator, lift, drawerIsVisible)
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$core$Maybe$map,
+										F2(
+											function (v0, v1) {
+												return {ctor: '_Tuple2', _0: v0, _1: v1};
+											})('elm-drawer-button'),
+										contentDrawerButton),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$core$Maybe$Just(
+											A2(
+												F2(
+													function (v0, v1) {
+														return {ctor: '_Tuple2', _0: v0, _1: v1};
+													}),
+												_elm_lang$core$Basics$toString(config.selectedTab),
+												A3(
+													_debois$elm_mdl$Material_Options$styled,
+													_elm_lang$html$Html$main_,
+													{
+														ctor: '::',
+														_0: _debois$elm_mdl$Material_Options$id(_debois$elm_mdl$Material_Layout$mainId),
+														_1: {
+															ctor: '::',
+															_0: _debois$elm_mdl$Material_Options$cs('mdl-layout__content'),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_debois$elm_mdl$Material_Options$when,
+																	_elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Scrolling) && config.fixedHeader,
+																	A2(_debois$elm_mdl$Material_Options$css, 'overflow-y', 'visible')),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_debois$elm_mdl$Material_Options$when,
+																		_elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Scrolling) && config.fixedHeader,
+																		A2(_debois$elm_mdl$Material_Options$css, 'overflow-x', 'visible')),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_debois$elm_mdl$Material_Options$when,
+																			_elm_lang$core$Native_Utils.eq(config.mode, _debois$elm_mdl$Material_Layout$Scrolling) && config.fixedHeader,
+																			A2(_debois$elm_mdl$Material_Options$css, 'overflow', 'visible')),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_debois$elm_mdl$Material_Options$when,
+																				_debois$elm_mdl$Material_Layout$isWaterfall(config.mode),
+																				function (_p33) {
+																					return _debois$elm_mdl$Material_Options_Internal$attribute(
+																						A2(_elm_lang$html$Html_Events$on, 'scroll', _p33));
+																				}(
+																					A2(
+																						_elm_lang$core$Json_Decode$map,
+																						function (_p34) {
+																							return lift(
+																								A2(_debois$elm_mdl$Material_Layout$ScrollPane, config.fixedHeader, _p34));
+																						},
+																						_debois$elm_dom$DOM$target(_debois$elm_dom$DOM$scrollTop)))),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													},
+													_p29.main))),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _debois$elm_mdl$Material_Layout$render = A3(_debois$elm_mdl$Material_Component$render1, _debois$elm_mdl$Material_Layout$get, _debois$elm_mdl$Material_Layout$view, _debois$elm_mdl$Material_Component$LayoutMsg);

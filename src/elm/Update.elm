@@ -8,6 +8,7 @@ import Entity.Main
 import ExclusiveMode
 import Entity
 import Firebase.Main
+import Material
 import X.Debug
 import X.Keyboard as Keyboard exposing (Key)
 import X.Record as Record exposing (set)
@@ -210,6 +211,9 @@ updateInner msg =
 
         OnPersistLocalPref ->
             Return.effect_ (Model.encodeLocalPref >> persistLocalPref)
+
+        Mdl msg_ ->
+            Return.andThen (Material.update Mdl msg_)
 
 
 withNow : (Time -> Msg) -> ReturnF

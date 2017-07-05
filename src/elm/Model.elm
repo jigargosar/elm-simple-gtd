@@ -8,6 +8,7 @@ import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Firebase.SignIn
+import Material
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
 import X.Predicate as Pred
@@ -92,6 +93,7 @@ type Msg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Model.Msg
     | OnPersistLocalPref
+    | Mdl (Material.Msg Msg)
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
@@ -169,6 +171,7 @@ type alias Model =
     , config : Config
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model
+    , mdl : Material.Model
     }
 
 
@@ -355,6 +358,7 @@ init flags =
             , config = flags.config
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
+            , mdl = Material.model
             }
     in
         model |> Return.singleton

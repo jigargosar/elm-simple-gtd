@@ -1,0 +1,330 @@
+var _debois$elm_mdl$Material_Snackbar$enqueue = F2(
+	function (contents, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				queue: A2(
+					_elm_lang$core$List$append,
+					model.queue,
+					{
+						ctor: '::',
+						_0: contents,
+						_1: {ctor: '[]'}
+					})
+			});
+	});
+var _debois$elm_mdl$Material_Snackbar$snackbar = F3(
+	function (payload, message, label) {
+		return {
+			message: message,
+			action: _elm_lang$core$Maybe$Just(label),
+			payload: payload,
+			timeout: 2750,
+			fade: 250
+		};
+	});
+var _debois$elm_mdl$Material_Snackbar$toast = F2(
+	function (payload, message) {
+		return {message: message, action: _elm_lang$core$Maybe$Nothing, payload: payload, timeout: 2750, fade: 250};
+	});
+var _debois$elm_mdl$Material_Snackbar$Contents = F5(
+	function (a, b, c, d, e) {
+		return {message: a, action: b, payload: c, timeout: d, fade: e};
+	});
+var _debois$elm_mdl$Material_Snackbar$Model = F3(
+	function (a, b, c) {
+		return {queue: a, state: b, seq: c};
+	});
+var _debois$elm_mdl$Material_Snackbar$Fading = function (a) {
+	return {ctor: 'Fading', _0: a};
+};
+var _debois$elm_mdl$Material_Snackbar$Active = function (a) {
+	return {ctor: 'Active', _0: a};
+};
+var _debois$elm_mdl$Material_Snackbar$Inert = {ctor: 'Inert'};
+var _debois$elm_mdl$Material_Snackbar$model = {
+	queue: {ctor: '[]'},
+	state: _debois$elm_mdl$Material_Snackbar$Inert,
+	seq: -1
+};
+var _debois$elm_mdl$Material_Snackbar$Clicked = {ctor: 'Clicked'};
+var _debois$elm_mdl$Material_Snackbar$Timeout = {ctor: 'Timeout'};
+var _debois$elm_mdl$Material_Snackbar$Move = F2(
+	function (a, b) {
+		return {ctor: 'Move', _0: a, _1: b};
+	});
+var _debois$elm_mdl$Material_Snackbar$next = function (model) {
+	return _elm_lang$core$Platform_Cmd$map(
+		_debois$elm_mdl$Material_Snackbar$Move(model.seq));
+};
+var _debois$elm_mdl$Material_Snackbar$view = function (model) {
+	var isActive = function () {
+		var _p0 = model.state;
+		switch (_p0.ctor) {
+			case 'Inert':
+				return false;
+			case 'Active':
+				return true;
+			default:
+				return false;
+		}
+	}();
+	var contents = function () {
+		var _p1 = model.state;
+		switch (_p1.ctor) {
+			case 'Inert':
+				return _elm_lang$core$Maybe$Nothing;
+			case 'Active':
+				return _elm_lang$core$Maybe$Just(_p1._0);
+			default:
+				return _elm_lang$core$Maybe$Just(_p1._0);
+		}
+	}();
+	var action = A2(
+		_elm_lang$core$Maybe$andThen,
+		function (_) {
+			return _.action;
+		},
+		contents);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'mdl-js-snackbar', _1: true},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'mdl-snackbar', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'mdl-snackbar--active', _1: isActive},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(_debois$elm_mdl$Material_Helpers$aria, 'hidden', !isActive),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('mdl-snackbar__text'),
+					_1: {ctor: '[]'}
+				},
+				A2(
+					_elm_lang$core$Maybe$withDefault,
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$Maybe$map,
+						function (c) {
+							return {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(c.message),
+								_1: {ctor: '[]'}
+							};
+						},
+						contents))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('mdl-snackbar__action'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('button'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_debois$elm_mdl$Material_Helpers$aria,
+									'hidden',
+									A2(
+										_elm_lang$core$Maybe$withDefault,
+										true,
+										A2(
+											_elm_lang$core$Maybe$map,
+											_elm_lang$core$Basics$always(!isActive),
+											action))),
+								_1: A2(
+									_elm_lang$core$Maybe$withDefault,
+									{ctor: '[]'},
+									A2(
+										_elm_lang$core$Maybe$map,
+										_elm_lang$core$Basics$always(
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													A2(_debois$elm_mdl$Material_Snackbar$Move, model.seq, _debois$elm_mdl$Material_Snackbar$Clicked)),
+												_1: {ctor: '[]'}
+											}),
+										action))
+							}
+						}
+					},
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (action) {
+								return {
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(action),
+									_1: {ctor: '[]'}
+								};
+							},
+							action))),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _debois$elm_mdl$Material_Snackbar$Click = function (a) {
+	return {ctor: 'Click', _0: a};
+};
+var _debois$elm_mdl$Material_Snackbar$End = function (a) {
+	return {ctor: 'End', _0: a};
+};
+var _debois$elm_mdl$Material_Snackbar$Begin = function (a) {
+	return {ctor: 'Begin', _0: a};
+};
+var _debois$elm_mdl$Material_Snackbar$tryDequeue = function (model) {
+	var _p2 = {ctor: '_Tuple2', _0: model.state, _1: model.queue};
+	if (((_p2.ctor === '_Tuple2') && (_p2._0.ctor === 'Inert')) && (_p2._1.ctor === '::')) {
+		var _p3 = _p2._1._0;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					state: _debois$elm_mdl$Material_Snackbar$Active(_p3),
+					queue: _p2._1._1,
+					seq: model.seq + 1
+				}),
+			_1: _elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Platform_Cmd$map,
+						_debois$elm_mdl$Material_Snackbar$Move(model.seq + 1),
+						A2(_debois$elm_mdl$Material_Helpers$delay, _p3.timeout, _debois$elm_mdl$Material_Snackbar$Timeout)),
+					_1: {
+						ctor: '::',
+						_0: _debois$elm_mdl$Material_Helpers$cmd(
+							_debois$elm_mdl$Material_Snackbar$Begin(_p3.payload)),
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	} else {
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	}
+};
+var _debois$elm_mdl$Material_Snackbar$move = F2(
+	function (transition, model) {
+		var _p4 = {ctor: '_Tuple2', _0: model.state, _1: transition};
+		_v3_4:
+		do {
+			if (_p4.ctor === '_Tuple2') {
+				if (_p4._1.ctor === 'Clicked') {
+					if (_p4._0.ctor === 'Active') {
+						var _p5 = _p4._0._0;
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									state: _debois$elm_mdl$Material_Snackbar$Fading(_p5)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$batch(
+								{
+									ctor: '::',
+									_0: A2(
+										_debois$elm_mdl$Material_Snackbar$next,
+										model,
+										A2(_debois$elm_mdl$Material_Helpers$delay, _p5.fade, _debois$elm_mdl$Material_Snackbar$Timeout)),
+									_1: {
+										ctor: '::',
+										_0: _debois$elm_mdl$Material_Helpers$cmd(
+											_debois$elm_mdl$Material_Snackbar$Click(_p5.payload)),
+										_1: {ctor: '[]'}
+									}
+								})
+						};
+					} else {
+						break _v3_4;
+					}
+				} else {
+					switch (_p4._0.ctor) {
+						case 'Inert':
+							return _debois$elm_mdl$Material_Snackbar$tryDequeue(model);
+						case 'Active':
+							var _p6 = _p4._0._0;
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										state: _debois$elm_mdl$Material_Snackbar$Fading(_p6)
+									}),
+								_1: _elm_lang$core$Platform_Cmd$batch(
+									{
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_Snackbar$next,
+											model,
+											A2(_debois$elm_mdl$Material_Helpers$delay, _p6.fade, _debois$elm_mdl$Material_Snackbar$Timeout)),
+										_1: {ctor: '[]'}
+									})
+							};
+						default:
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{state: _debois$elm_mdl$Material_Snackbar$Inert}),
+								_1: _elm_lang$core$Platform_Cmd$batch(
+									{
+										ctor: '::',
+										_0: A2(
+											_debois$elm_mdl$Material_Snackbar$next,
+											model,
+											_debois$elm_mdl$Material_Helpers$cmd(_debois$elm_mdl$Material_Snackbar$Timeout)),
+										_1: {
+											ctor: '::',
+											_0: _debois$elm_mdl$Material_Helpers$cmd(
+												_debois$elm_mdl$Material_Snackbar$End(_p4._0._0.payload)),
+											_1: {ctor: '[]'}
+										}
+									})
+							};
+					}
+				}
+			} else {
+				break _v3_4;
+			}
+		} while(false);
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _debois$elm_mdl$Material_Snackbar$update = F2(
+	function (action, model) {
+		var _p7 = action;
+		if (_p7.ctor === 'Move') {
+			return _elm_lang$core$Native_Utils.eq(_p7._0, model.seq) ? A2(_debois$elm_mdl$Material_Snackbar$move, _p7._1, model) : {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _debois$elm_mdl$Material_Snackbar$add = F2(
+	function (contents, model) {
+		return _debois$elm_mdl$Material_Snackbar$tryDequeue(
+			A2(_debois$elm_mdl$Material_Snackbar$enqueue, contents, model));
+	});

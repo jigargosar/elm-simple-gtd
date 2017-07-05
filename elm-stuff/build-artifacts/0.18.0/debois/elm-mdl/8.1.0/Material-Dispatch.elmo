@@ -1,0 +1,318 @@
+var _debois$elm_mdl$Material_Dispatch$split = F4(
+	function (k0, same, differ, xs) {
+		split:
+		while (true) {
+			var _p0 = xs;
+			if (_p0.ctor === '[]') {
+				return {ctor: '_Tuple2', _0: same, _1: differ};
+			} else {
+				var _p1 = _p0._1;
+				if (_elm_lang$core$Native_Utils.eq(_p0._0._0, k0)) {
+					var _v1 = k0,
+						_v2 = {ctor: '::', _0: _p0._0._1, _1: same},
+						_v3 = differ,
+						_v4 = _p1;
+					k0 = _v1;
+					same = _v2;
+					differ = _v3;
+					xs = _v4;
+					continue split;
+				} else {
+					var _v5 = k0,
+						_v6 = same,
+						_v7 = {ctor: '::', _0: _p0._0, _1: differ},
+						_v8 = _p1;
+					k0 = _v5;
+					same = _v6;
+					differ = _v7;
+					xs = _v8;
+					continue split;
+				}
+			}
+		}
+	});
+var _debois$elm_mdl$Material_Dispatch$group_ = F2(
+	function (acc, items) {
+		group_:
+		while (true) {
+			var _p2 = items;
+			if (_p2.ctor === '[]') {
+				return acc;
+			} else {
+				if (_p2._1.ctor === '[]') {
+					return {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _p2._0._0,
+							_1: {
+								ctor: '::',
+								_0: _p2._0._1,
+								_1: {ctor: '[]'}
+							}
+						},
+						_1: acc
+					};
+				} else {
+					if ((_p2._1._0.ctor === '_Tuple2') && (_p2._1._1.ctor === '[]')) {
+						var _p6 = _p2._1._0._1;
+						var _p5 = _p2._0._1;
+						var _p4 = _p2._1._0._0;
+						var _p3 = _p2._0._0;
+						return _elm_lang$core$Native_Utils.eq(_p3, _p4) ? {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _p3,
+								_1: {
+									ctor: '::',
+									_0: _p6,
+									_1: {
+										ctor: '::',
+										_0: _p5,
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							_1: acc
+						} : {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _p4,
+								_1: {
+									ctor: '::',
+									_0: _p6,
+									_1: {ctor: '[]'}
+								}
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: _p3,
+									_1: {
+										ctor: '::',
+										_0: _p5,
+										_1: {ctor: '[]'}
+									}
+								},
+								_1: acc
+							}
+						};
+					} else {
+						var _p8 = _p2._0._0;
+						var _p7 = A4(
+							_debois$elm_mdl$Material_Dispatch$split,
+							_p8,
+							{
+								ctor: '::',
+								_0: _p2._0._1,
+								_1: {ctor: '[]'}
+							},
+							{ctor: '[]'},
+							_p2._1);
+						var same = _p7._0;
+						var different = _p7._1;
+						var _v10 = {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _p8, _1: same},
+							_1: acc
+						},
+							_v11 = different;
+						acc = _v10;
+						items = _v11;
+						continue group_;
+					}
+				}
+			}
+		}
+	});
+var _debois$elm_mdl$Material_Dispatch$group = _debois$elm_mdl$Material_Dispatch$group_(
+	{ctor: '[]'});
+var _debois$elm_mdl$Material_Dispatch$onSingle = function (_p9) {
+	var _p10 = _p9;
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		_p10._0,
+		A2(_elm_lang$core$Maybe$withDefault, _elm_lang$html$Html_Events$defaultOptions, _p10._1._1),
+		_p10._1._0);
+};
+var _debois$elm_mdl$Material_Dispatch$pickOptions = function (decoders) {
+	pickOptions:
+	while (true) {
+		var _p11 = decoders;
+		if (_p11.ctor === '::') {
+			if ((_p11._0.ctor === '_Tuple2') && (_p11._0._1.ctor === 'Just')) {
+				return _p11._0._1._0;
+			} else {
+				var _v14 = _p11._1;
+				decoders = _v14;
+				continue pickOptions;
+			}
+		} else {
+			return _elm_lang$html$Html_Events$defaultOptions;
+		}
+	}
+};
+var _debois$elm_mdl$Material_Dispatch$flatten = function (decoders) {
+	return A2(
+		_elm_lang$core$Json_Decode$map,
+		function (value) {
+			return A2(
+				_elm_lang$core$List$filterMap,
+				function (decoder) {
+					return _elm_lang$core$Result$toMaybe(
+						A2(_elm_lang$core$Json_Decode$decodeValue, decoder, value));
+				},
+				decoders);
+		},
+		_elm_lang$core$Json_Decode$value);
+};
+var _debois$elm_mdl$Material_Dispatch$onWithOptions = F4(
+	function (event, lift, options, decoders) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			event,
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				lift,
+				_debois$elm_mdl$Material_Dispatch$flatten(decoders)));
+	});
+var _debois$elm_mdl$Material_Dispatch$on = F2(
+	function (event, lift) {
+		return A3(_debois$elm_mdl$Material_Dispatch$onWithOptions, event, lift, _elm_lang$html$Html_Events$defaultOptions);
+	});
+var _debois$elm_mdl$Material_Dispatch$onMany = F2(
+	function (lift, decoders) {
+		var _p12 = decoders;
+		if ((_p12._1.ctor === '::') && (_p12._1._1.ctor === '[]')) {
+			return _debois$elm_mdl$Material_Dispatch$onSingle(
+				{ctor: '_Tuple2', _0: _p12._0, _1: _p12._1._0});
+		} else {
+			var _p13 = _p12._1;
+			return A3(
+				_elm_lang$html$Html_Events$onWithOptions,
+				_p12._0,
+				_debois$elm_mdl$Material_Dispatch$pickOptions(_p13),
+				lift(
+					_debois$elm_mdl$Material_Dispatch$flatten(
+						A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, _p13))));
+		}
+	});
+var _debois$elm_mdl$Material_Dispatch$map2nd = F2(
+	function (f, _p14) {
+		var _p15 = _p14;
+		return {
+			ctor: '_Tuple2',
+			_0: _p15._0,
+			_1: f(_p15._1)
+		};
+	});
+var _debois$elm_mdl$Material_Dispatch$update1 = F3(
+	function (update, cmd, _p16) {
+		var _p17 = _p16;
+		return A2(
+			_debois$elm_mdl$Material_Dispatch$map2nd,
+			A2(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				_p17._1),
+			A2(update, cmd, _p17._0));
+	});
+var _debois$elm_mdl$Material_Dispatch$update = F3(
+	function (update, msg, model) {
+		return A2(
+			_debois$elm_mdl$Material_Dispatch$map2nd,
+			_elm_lang$core$Platform_Cmd$batch,
+			A3(
+				_elm_lang$core$List$foldl,
+				_debois$elm_mdl$Material_Dispatch$update1(update),
+				{
+					ctor: '_Tuple2',
+					_0: model,
+					_1: {ctor: '[]'}
+				},
+				msg));
+	});
+var _debois$elm_mdl$Material_Dispatch$cmd = function (msg) {
+	return A2(
+		_elm_lang$core$Task$perform,
+		_elm_lang$core$Basics$always(msg),
+		_elm_lang$core$Task$succeed(msg));
+};
+var _debois$elm_mdl$Material_Dispatch$forward = function (messages) {
+	return _elm_lang$core$Platform_Cmd$batch(
+		A2(_elm_lang$core$List$map, _debois$elm_mdl$Material_Dispatch$cmd, messages));
+};
+var _debois$elm_mdl$Material_Dispatch$toAttributes = function (_p18) {
+	var _p19 = _p18;
+	var _p21 = _p19._0;
+	var _p20 = _p21.lift;
+	if (_p20.ctor === 'Just') {
+		return A2(
+			_elm_lang$core$List$map,
+			_debois$elm_mdl$Material_Dispatch$onMany(_p20._0),
+			_debois$elm_mdl$Material_Dispatch$group(_p21.decoders));
+	} else {
+		return A2(_elm_lang$core$List$map, _debois$elm_mdl$Material_Dispatch$onSingle, _p21.decoders);
+	}
+};
+var _debois$elm_mdl$Material_Dispatch$getDecoder = function (_p22) {
+	var _p23 = _p22;
+	return _p23._0.lift;
+};
+var _debois$elm_mdl$Material_Dispatch$Config = function (a) {
+	return {ctor: 'Config', _0: a};
+};
+var _debois$elm_mdl$Material_Dispatch$defaultConfig = _debois$elm_mdl$Material_Dispatch$Config(
+	{
+		decoders: {ctor: '[]'},
+		lift: _elm_lang$core$Maybe$Nothing
+	});
+var _debois$elm_mdl$Material_Dispatch$setDecoder = F2(
+	function (f, _p24) {
+		var _p25 = _p24;
+		return _debois$elm_mdl$Material_Dispatch$Config(
+			_elm_lang$core$Native_Utils.update(
+				_p25._0,
+				{
+					lift: _elm_lang$core$Maybe$Just(f)
+				}));
+	});
+var _debois$elm_mdl$Material_Dispatch$setMsg = function (_p26) {
+	return _debois$elm_mdl$Material_Dispatch$setDecoder(
+		_elm_lang$core$Json_Decode$map(_p26));
+};
+var _debois$elm_mdl$Material_Dispatch$add = F4(
+	function (event, options, decoder, _p27) {
+		var _p28 = _p27;
+		var _p29 = _p28._0;
+		return _debois$elm_mdl$Material_Dispatch$Config(
+			_elm_lang$core$Native_Utils.update(
+				_p29,
+				{
+					decoders: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: event,
+							_1: {ctor: '_Tuple2', _0: decoder, _1: options}
+						},
+						_1: _p29.decoders
+					}
+				}));
+	});
+var _debois$elm_mdl$Material_Dispatch$clear = function (_p30) {
+	var _p31 = _p30;
+	return _debois$elm_mdl$Material_Dispatch$Config(
+		_elm_lang$core$Native_Utils.update(
+			_p31._0,
+			{
+				decoders: {ctor: '[]'}
+			}));
+};

@@ -1383,7 +1383,9 @@ var _jigargosar$elm_simple_gtd$Model$Model = function (a) {
 																					return function (v) {
 																						return function (w) {
 																							return function (x) {
-																								return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v, appDrawerModel: w, signInModel: x};
+																								return function (y) {
+																									return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v, appDrawerModel: w, signInModel: x, mdl: y};
+																								};
 																							};
 																						};
 																					};
@@ -1467,6 +1469,9 @@ var _jigargosar$elm_simple_gtd$Model$OnKeyboardMsg = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Model$OnNowChanged = function (a) {
 	return {ctor: 'OnNowChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Model$Mdl = function (a) {
+	return {ctor: 'Mdl', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Model$OnPersistLocalPref = {ctor: 'OnPersistLocalPref'};
 var _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg = function (a) {
@@ -1661,7 +1666,8 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 			{toMsg: _jigargosar$elm_simple_gtd$Model$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Model$keyboardCombos}),
 		config: flags.config,
 		appDrawerModel: localPref.appDrawer,
-		signInModel: localPref.signIn
+		signInModel: localPref.signIn,
+		mdl: _debois$elm_mdl$Material$model
 	};
 	var _p59 = 1;
 	return _Fresheyeball$elm_return$Return$singleton(model);

@@ -1,0 +1,64 @@
+var _debois$elm_mdl$Material_Elevation$transition = function (duration) {
+	return A2(
+		_debois$elm_mdl$Material_Options$css,
+		'transition',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'box-shadow ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(duration),
+				'ms ease-in-out 0s')));
+};
+var _debois$elm_mdl$Material_Elevation$e0 = _debois$elm_mdl$Material_Options$nop;
+var _debois$elm_mdl$Material_Elevation$shadow = function (z) {
+	return _debois$elm_mdl$Material_Options$cs(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'mdl-shadow--',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(z),
+				'dp')));
+};
+var _debois$elm_mdl$Material_Elevation$e2 = _debois$elm_mdl$Material_Elevation$shadow(2);
+var _debois$elm_mdl$Material_Elevation$e3 = _debois$elm_mdl$Material_Elevation$shadow(3);
+var _debois$elm_mdl$Material_Elevation$e4 = _debois$elm_mdl$Material_Elevation$shadow(4);
+var _debois$elm_mdl$Material_Elevation$e6 = _debois$elm_mdl$Material_Elevation$shadow(6);
+var _debois$elm_mdl$Material_Elevation$e8 = _debois$elm_mdl$Material_Elevation$shadow(8);
+var _debois$elm_mdl$Material_Elevation$e16 = _debois$elm_mdl$Material_Elevation$shadow(16);
+var _debois$elm_mdl$Material_Elevation$e24 = _debois$elm_mdl$Material_Elevation$shadow(24);
+var _debois$elm_mdl$Material_Elevation$elevations = _elm_lang$core$Array$fromList(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e0, _1: 0},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e2, _1: 2},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e3, _1: 3},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e4, _1: 4},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e6, _1: 6},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e8, _1: 8},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e16, _1: 16},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: _debois$elm_mdl$Material_Elevation$e24, _1: 24},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});

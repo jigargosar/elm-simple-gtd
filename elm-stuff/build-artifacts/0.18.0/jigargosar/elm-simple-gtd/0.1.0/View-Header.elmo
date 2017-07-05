@@ -2,7 +2,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
 		return A3(
-			_jigargosar$elm_simple_gtd$Mat$headerIconButton,
+			_jigargosar$elm_simple_gtd$Mat$headerIconBtn,
 			m.mdl,
 			{
 				ctor: '::',
@@ -57,7 +57,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
 		var menuButton = A3(
-			_jigargosar$elm_simple_gtd$Mat$headerIconButton,
+			_jigargosar$elm_simple_gtd$Mat$headerIconBtn,
 			m.mdl,
 			{
 				ctor: '::',

@@ -93,7 +93,7 @@ icon =
 
 
 iconSmall iconName =
-    Material.Icon.view iconName [ Material.Icon.size18 ]
+    Material.Icon.view iconName [ Material.Icon.size24 ]
 
 
 iconM icon =

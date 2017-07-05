@@ -436,27 +436,16 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: A3(
-					_jigargosar$elm_simple_gtd$Mat$btn,
+					_jigargosar$elm_simple_gtd$Mat$iconBtn,
 					vm.mdl,
 					{
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(vm.tabindexAV),
-							_1: {ctor: '[]'}
-						}
+						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(vm.tabindexAV),
+						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
-						_0: A2(
-							_jigargosar$elm_simple_gtd$Mat$iconView,
-							'schedule',
-							{
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Icon$size18,
-								_1: {ctor: '[]'}
-							}),
+						_0: _jigargosar$elm_simple_gtd$Mat$iconSmall('schedule'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -465,36 +454,25 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
 	return A3(
-		_jigargosar$elm_simple_gtd$Mat$btn,
+		_jigargosar$elm_simple_gtd$Mat$iconBtn,
 		vm.mdl,
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
+			_0: _jigargosar$elm_simple_gtd$Mat$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$id(
-					A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
+				_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(vm.onMoreMenuClicked),
 				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(vm.onMoreMenuClicked),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(vm.tabindexAV),
-						_1: {ctor: '[]'}
-					}
+					_0: _jigargosar$elm_simple_gtd$Mat$tabIndex(vm.tabindexAV),
+					_1: {ctor: '[]'}
 				}
 			}
 		},
 		{
 			ctor: '::',
-			_0: A2(
-				_jigargosar$elm_simple_gtd$Mat$iconView,
-				'more_vert',
-				{
-					ctor: '::',
-					_0: _debois$elm_mdl$Material_Icon$size18,
-					_1: {ctor: '[]'}
-				}),
+			_0: _jigargosar$elm_simple_gtd$Mat$iconSmall('more_vert'),
 			_1: {ctor: '[]'}
 		});
 };

@@ -120,14 +120,22 @@ var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 		_0: 0,
 		_1: {ctor: '[]'}
 	});
-var _jigargosar$elm_simple_gtd$Mat$btnIconCS = _debois$elm_mdl$Material_Button$icon;
-var _jigargosar$elm_simple_gtd$Mat$iconView = _debois$elm_mdl$Material_Icon$view;
+var _jigargosar$elm_simple_gtd$Mat$iconSmall = function (iconName) {
+	return A2(
+		_debois$elm_mdl$Material_Icon$view,
+		iconName,
+		{
+			ctor: '::',
+			_0: _debois$elm_mdl$Material_Icon$size24,
+			_1: {ctor: '[]'}
+		});
+};
 var _jigargosar$elm_simple_gtd$Mat$icon = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$cs = _debois$elm_mdl$Material_Options$cs;
 var _jigargosar$elm_simple_gtd$Mat$css = _debois$elm_mdl$Material_Options$css;
 var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 	return A2(
-		_jigargosar$elm_simple_gtd$Mat$iconView,
+		_debois$elm_mdl$Material_Icon$view,
 		icon.name,
 		{
 			ctor: '::',
@@ -153,7 +161,7 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _jigargosar$elm_simple_gtd$Mat$m
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$headerIconButton = F2(
+var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F2(
 	function (mdl, opts) {
 		return A2(
 			_jigargosar$elm_simple_gtd$Mat$btn,
@@ -163,13 +171,28 @@ var _jigargosar$elm_simple_gtd$Mat$headerIconButton = F2(
 				_0: _jigargosar$elm_simple_gtd$Mat$many(
 					{
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$btnIconCS,
+						_0: _debois$elm_mdl$Material_Button$icon,
 						_1: {
 							ctor: '::',
 							_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--header-icon'),
 							_1: {ctor: '[]'}
 						}
 					}),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$many(opts),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$iconBtn = F2(
+	function (mdl, opts) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Mat$btn,
+			mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Button$icon,
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Mat$many(opts),

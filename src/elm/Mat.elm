@@ -72,7 +72,7 @@ iconA__ name attrs =
         allAttr =
             class "material-icons" :: attrs
     in
-        i allAttr [ text name ]
+        Html.i allAttr [ text name ]
 
 
 iconM icon =

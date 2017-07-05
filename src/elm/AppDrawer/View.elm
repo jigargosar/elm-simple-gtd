@@ -117,7 +117,7 @@ entityGroupView vm mainViewType =
     in
         nullViewAsList
             ++ [ li [ onClick fireSmart ]
-                    [ Mat.iM vm.icon
+                    [ Mat.iconM vm.icon
                     , Html.h5 [] [ text vm.title ]
                     , Mat.iconBtn2 expandIconName onToggleExpanded
                     ]
@@ -129,7 +129,7 @@ entityGroupView vm mainViewType =
                                     [ class ""
                                     , X.Html.onClickStopAll onAddClicked
                                     ]
-                                    [ Mat.iconD "add"
+                                    [ Mat.icon "add"
                                     , div [] [ text "Add New" ]
                                     ]
                                ]
@@ -161,7 +161,7 @@ archivedItems vm =
             [ class ""
             , onClick vm.onToggleShowArchived
             ]
-            [ Mat.iconD iconName
+            [ Mat.icon iconName
             , div [ class "font-nowrap" ]
                 [ View.Shared.badge buttonText badgeCount
                 ]
@@ -176,7 +176,7 @@ entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)
         ]
-        [ Mat.iM vm.icon
+        [ Mat.iconM vm.icon
         , div [ class "font-nowrap" ] [ View.Shared.badge vm.name vm.count ]
         ]
 
@@ -186,7 +186,7 @@ switchViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Mat.iconD iconName
+        [ Mat.icon iconName
         , h5 [] [ text title ]
         ]
 
@@ -196,7 +196,7 @@ switchViewItemSmall iconName viewType title =
         [ class ""
         , onClick (OnSetViewType viewType)
         ]
-        [ Mat.iconD iconName
+        [ Mat.icon iconName
         , div [] [ text title ]
         ]
 
@@ -206,6 +206,6 @@ onSetEntityListViewItem iconName viewType title =
         [ class ""
         , onClick (OnSetEntityListView viewType)
         ]
-        [ Mat.iconD iconName
+        [ Mat.icon iconName
         , h5 [] [ text title ]
         ]

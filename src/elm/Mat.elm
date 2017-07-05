@@ -21,14 +21,6 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-id =
-    Material.Options.id
-
-
-resourceId =
-    attribute "data-btn-name" >> Material.Options.attribute
-
-
 stopPropagation =
     { stopPropagation = True
     , preventDefault = False
@@ -47,8 +39,12 @@ stopAll =
     }
 
 
+onWithOptions =
+    Material.Options.onWithOptions
+
+
 onStopPropagation eventName =
-    Material.Options.onWithOptions eventName stopPropagation
+    onWithOptions eventName stopPropagation
 
 
 onStopPropagation2 eventName =
@@ -59,28 +55,32 @@ onClickStopPropagation =
     onStopPropagation2 "click"
 
 
-iconD name =
-    Html.i [ class "default-color material-icons" ] [ text name ]
+id =
+    Material.Options.id
 
 
-icon name =
-    Html.i [ class "material-icons" ] [ text name ]
+resourceId =
+    attribute "data-btn-name" >> Material.Options.attribute
+
+
+many =
+    Material.Options.many
 
 
 css =
     Material.Options.css
 
 
-i =
+icon =
     Material.Icon.i
 
 
-iV =
+iconView =
     Material.Icon.view
 
 
-iM icon =
-    iV icon.name [ css "color" (AppColors.encode icon.color) ]
+iconM icon =
+    iconView icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
 defaultBtnConfig =
@@ -95,10 +95,6 @@ defaultBtnConfig =
     , iconName = ""
     , msg = Model.noop
     }
-
-
-many =
-    Material.Options.many
 
 
 primaryFAB =

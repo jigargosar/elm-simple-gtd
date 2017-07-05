@@ -17,4 +17,4 @@ newTodoFab m =
         , resourceId "add-todo-fab"
         , onClickStopPropagation Model.NewTodo
         ]
-        [ i "add" ]
+        [ icon "add" ]

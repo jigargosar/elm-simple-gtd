@@ -122,7 +122,6 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _debois$elm_mdl$Material_Options
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
 var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	id: '',
 	$class: '',
@@ -151,62 +150,25 @@ var _jigargosar$elm_simple_gtd$Mat$iM = function (icon) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Mat$iconA__ = F2(
-	function (name, attrs) {
-		var allAttr = {
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('material-icons'),
-			_1: attrs
-		};
-		return A2(
-			_elm_lang$html$Html$i,
-			allAttr,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(name),
-				_1: {ctor: '[]'}
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$icon = function (name) {
-	return A2(
-		_elm_lang$html$Html$i,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('material-icons'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(name),
-			_1: {ctor: '[]'}
-		});
+var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
+var _jigargosar$elm_simple_gtd$Mat$resourceId = function (_p0) {
+	return _debois$elm_mdl$Material_Options$attribute(
+		A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', _p0));
 };
-var _jigargosar$elm_simple_gtd$Mat$iconD = function (name) {
-	return A2(
-		_elm_lang$html$Html$i,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('default-color material-icons'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(name),
-			_1: {ctor: '[]'}
-		});
-};
+var _jigargosar$elm_simple_gtd$Mat$id = _debois$elm_mdl$Material_Options$id;
+var _jigargosar$elm_simple_gtd$Mat$onWithOptions = _debois$elm_mdl$Material_Options$onWithOptions;
 var _jigargosar$elm_simple_gtd$Mat$stopAll = {stopPropagation: true, preventDefault: true};
 var _jigargosar$elm_simple_gtd$Mat$preventDefault = {stopPropagation: false, preventDefault: true};
 var _jigargosar$elm_simple_gtd$Mat$stopPropagation = {stopPropagation: true, preventDefault: false};
 var _jigargosar$elm_simple_gtd$Mat$onStopPropagation = function (eventName) {
-	return A2(_debois$elm_mdl$Material_Options$onWithOptions, eventName, _jigargosar$elm_simple_gtd$Mat$stopPropagation);
+	return A2(_jigargosar$elm_simple_gtd$Mat$onWithOptions, eventName, _jigargosar$elm_simple_gtd$Mat$stopPropagation);
 };
 var _jigargosar$elm_simple_gtd$Mat$onStopPropagation2 = function (eventName) {
-	return function (_p0) {
+	return function (_p1) {
 		return A2(
 			_jigargosar$elm_simple_gtd$Mat$onStopPropagation,
 			eventName,
-			_elm_lang$core$Json_Decode$succeed(_p0));
+			_elm_lang$core$Json_Decode$succeed(_p1));
 	};
 };
 var _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation = _jigargosar$elm_simple_gtd$Mat$onStopPropagation2('click');
@@ -251,8 +213,8 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 					_0: {
 						ctor: '_Tuple2',
 						_0: config.$class,
-						_1: function (_p1) {
-							return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p1);
+						_1: function (_p2) {
+							return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p2);
 						}(config.$class)
 					},
 					_1: {ctor: '[]'}
@@ -261,7 +223,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 		var trackingId = A3(
 			_jigargosar$elm_simple_gtd$X_Function$when,
 			_jigargosar$elm_simple_gtd$X_String$isBlank,
-			function (_p2) {
+			function (_p3) {
 				return A2(_elm_lang$core$Basics_ops['++'], 'ma2-', iconName);
 			},
 			config.trackingId);
@@ -344,12 +306,12 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 	});
 var _jigargosar$elm_simple_gtd$Mat$ib = F3(
 	function (iconName, msg, configFn) {
-		return function (_p3) {
+		return function (_p4) {
 			return A3(
 				_jigargosar$elm_simple_gtd$Mat$ibc,
 				iconName,
 				msg,
-				configFn(_p3));
+				configFn(_p4));
 		}(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig);
 	});
 var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
@@ -386,7 +348,7 @@ var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
 			_jigargosar$elm_simple_gtd$Mat$ib,
 			name,
 			clickHandler,
-			function (_p4) {
+			function (_p5) {
 				return function (c) {
 					return _elm_lang$core$Native_Utils.update(
 						c,
@@ -401,11 +363,6 @@ var _jigargosar$elm_simple_gtd$Mat$smallIconBtn = F3(
 								})
 						});
 				}(
-					configFn(_p4));
+					configFn(_p5));
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$resourceId = function (_p5) {
-	return _debois$elm_mdl$Material_Options$attribute(
-		A2(_elm_lang$html$Html_Attributes$attribute, 'data-btn-name', _p5));
-};
-var _jigargosar$elm_simple_gtd$Mat$id = _debois$elm_mdl$Material_Options$id;

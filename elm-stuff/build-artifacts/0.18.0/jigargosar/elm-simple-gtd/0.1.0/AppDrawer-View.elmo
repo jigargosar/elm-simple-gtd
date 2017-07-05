@@ -14,7 +14,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$iconD(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -45,7 +45,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItemSmall = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$iconD(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -76,7 +76,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItem = F3(
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$iconD(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -152,7 +152,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$archivedItems = function (vm) {
 			},
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$iconD(iconName),
+				_0: _jigargosar$elm_simple_gtd$Mat$i(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -293,7 +293,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityGroupView = F2(
 													},
 													{
 														ctor: '::',
-														_0: _jigargosar$elm_simple_gtd$Mat$iconD('add'),
+														_0: _jigargosar$elm_simple_gtd$Mat$i('add'),
 														_1: {
 															ctor: '::',
 															_0: A2(

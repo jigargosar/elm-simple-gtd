@@ -309,13 +309,12 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Mat.smallIconBtn "schedule"
-            vm.reminder.startEditingMsg
-            (\c -> { c | tabIndex = vm.tabindexAV })
         , Material.Button.render Model.Mdl
             [ 0 ]
             vm.mdl
-            [ Material.Button.icon, Material.Options.attribute (tabindex vm.tabindexAV) ]
+            [ Material.Button.icon
+            , Material.Options.attribute (tabindex vm.tabindexAV)
+            ]
             [ Material.Icon.view "schedule" [ Material.Icon.size18 ] ]
         ]
 

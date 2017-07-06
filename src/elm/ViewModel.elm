@@ -44,10 +44,10 @@ create model =
             getViewInfo mainViewType projectsVM contextsVM model
 
         editMode =
-            Model.getEditMode model
+            model.editMode
 
         now =
-            Model.getNow model
+            model.now
     in
         { contexts = contextsVM
         , projects = projectsVM

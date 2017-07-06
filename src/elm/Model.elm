@@ -870,10 +870,10 @@ upsertEncodedDocOnFirebaseChange dbName encodedEntity =
             .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         "project-db" ->
-            getProjectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .projectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         "context-db" ->
-            getContextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .contextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         _ ->
             (\_ -> Cmd.none)
@@ -958,24 +958,9 @@ setSelectedEntityIdSet selectedEntityIdSet model =
     { model | selectedEntityIdSet = selectedEntityIdSet }
 
 
-updateSelectedEntityIdSetM : (Model -> Set Document.Id) -> ModelF
-updateSelectedEntityIdSetM updater model =
-    setSelectedEntityIdSet (updater model) model
-
-
 updateSelectedEntityIdSet : (Set Document.Id -> Set Document.Id) -> ModelF
 updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
-
-
-setTodoStore : Todo.Store -> ModelF
-setTodoStore todoStore model =
-    { model | todoStore = todoStore }
-
-
-getProjectStore : Model -> Project.Store
-getProjectStore =
-    (.projectStore)
 
 
 setProjectStore : Project.Store -> ModelF
@@ -985,11 +970,6 @@ setProjectStore projectStore model =
 
 setProjectStoreIn =
     flip setProjectStore
-
-
-getContextStore : Model -> Context.Store
-getContextStore =
-    (.contextStore)
 
 
 setContextStore : Context.Store -> ModelF
@@ -1011,11 +991,6 @@ setNow now model =
     { model | now = now }
 
 
-updateNowM : (Model -> Time) -> ModelF
-updateNowM updater model =
-    { model | now = updater model }
-
-
 getKeyboardState : Model -> Keyboard.State
 getKeyboardState =
     (.keyboardState)
@@ -1024,11 +999,6 @@ getKeyboardState =
 setKeyboardState : Keyboard.State -> ModelF
 setKeyboardState keyboardState model =
     { model | keyboardState = keyboardState }
-
-
-updateKeyboardStateM : (Model -> Keyboard.State) -> ModelF
-updateKeyboardStateM updater model =
-    setKeyboardState (updater model) model
 
 
 updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF

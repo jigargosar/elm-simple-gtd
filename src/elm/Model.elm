@@ -372,8 +372,8 @@ type alias Return =
     Return.Return Msg Model
 
 
-type alias ModelReturnF msg =
-    Model -> Return.Return msg Model
+type alias ModelReturnF =
+    Model -> Return
 
 
 type alias ReturnF =
@@ -602,7 +602,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             >> Tuple.mapFirst removeReminderOverlay
 
 
-findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd msg )
+findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd Msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
@@ -822,7 +822,7 @@ setFocusInEntityFromTodoId todoId model =
         ?= model
 
 
-toggleDeleteEntity : Entity -> ModelReturnF msg
+toggleDeleteEntity : Entity -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
@@ -1329,12 +1329,12 @@ findAndUpdateAllTodos findFn action model =
             |> Return.map (updateEntityListCursor model)
 
 
-updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
+updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF
 updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 
 
-updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF msg
+updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF
 updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
@@ -1343,7 +1343,7 @@ updateAllTodos action idSet model =
 -- combo
 
 
-updateCombo : Keyboard.Combo.Msg -> ModelReturnF Msg
+updateCombo : Keyboard.Combo.Msg -> ModelReturnF
 updateCombo comboMsg =
     overReturn
         keyComboModel

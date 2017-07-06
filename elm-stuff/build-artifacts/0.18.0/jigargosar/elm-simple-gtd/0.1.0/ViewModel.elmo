@@ -76,14 +76,10 @@ var _jigargosar$elm_simple_gtd$ViewModel$create = function (model) {
 		projects: projectsVM,
 		viewName: viewName,
 		header: {backgroundColor: headerBackgroundColor},
-		now: now,
-		selectedEntityIdSet: model.selectedEntityIdSet,
-		projectByIdDict: _jigargosar$elm_simple_gtd$Model$getProjectsAsIdDict(model),
-		contextByIdDict: _jigargosar$elm_simple_gtd$Model$getContextsAsIdDict(model),
 		mdl: model.mdl
 	};
 };
-var _jigargosar$elm_simple_gtd$ViewModel$Model = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {contexts: a, projects: b, viewName: c, header: d, now: e, projectByIdDict: f, contextByIdDict: g, selectedEntityIdSet: h, mdl: i};
+var _jigargosar$elm_simple_gtd$ViewModel$Model = F5(
+	function (a, b, c, d, e) {
+		return {contexts: a, projects: b, viewName: c, header: d, mdl: e};
 	});

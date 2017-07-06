@@ -1,25 +1,24 @@
-var _jigargosar$elm_simple_gtd$View$appMainContent = F2(
-	function (viewModel, model) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('main-view-container'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: function () {
-					var _p0 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
-					if (_p0.ctor === 'EntityListView') {
-						return A3(_jigargosar$elm_simple_gtd$Entity_View$list, _p0._0, model, viewModel);
-					} else {
-						return _jigargosar$elm_simple_gtd$CustomSync$view(model);
-					}
-				}(),
-				_1: {ctor: '[]'}
-			});
-	});
+var _jigargosar$elm_simple_gtd$View$appMainContent = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('main-view-container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: function () {
+				var _p0 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
+				if (_p0.ctor === 'EntityListView') {
+					return A2(_jigargosar$elm_simple_gtd$Entity_View$list, _p0._0, model);
+				} else {
+					return _jigargosar$elm_simple_gtd$CustomSync$view(model);
+				}
+			}(),
+			_1: {ctor: '[]'}
+		});
+};
 var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
 	return _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel) ? A2(
@@ -123,7 +122,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 										},
 										{
 											ctor: '::',
-											_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
+											_0: _jigargosar$elm_simple_gtd$View$appMainContent(m),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -223,7 +222,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 										},
 										{
 											ctor: '::',
-											_0: A2(_jigargosar$elm_simple_gtd$View$appMainContent, appVM, m),
+											_0: _jigargosar$elm_simple_gtd$View$appMainContent(m),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}

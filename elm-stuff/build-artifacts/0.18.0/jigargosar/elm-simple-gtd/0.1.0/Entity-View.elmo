@@ -54,7 +54,7 @@ var _jigargosar$elm_simple_gtd$Entity_View$groupView = F2(
 		return A2(_jigargosar$elm_simple_gtd$GroupDoc_View$initKeyed, todoView, vm);
 	});
 var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
-	function (grouping, maybeFocusInEntity, appViewModel) {
+	function (grouping, maybeFocusInEntity, model) {
 		var hasFocusIn = function (entity) {
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -79,7 +79,7 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 			var canBeFocused = hasFocusIn(
 				_jigargosar$elm_simple_gtd$Entity$Todo(todo));
 			return _jigargosar$elm_simple_gtd$Todo_View$keyedItem(
-				A3(_jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel, appViewModel, canBeFocused, todo));
+				A3(_jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel, model, canBeFocused, todo));
 		};
 		var multiContextView = function (list) {
 			return A2(
@@ -133,8 +133,8 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 					todoListView(_p6._1));
 		}
 	});
-var _jigargosar$elm_simple_gtd$Entity_View$list = F3(
-	function (viewType, model, appViewModel) {
+var _jigargosar$elm_simple_gtd$Entity_View$list = F2(
+	function (viewType, model) {
 		var grouping = A2(_jigargosar$elm_simple_gtd$Model$createGrouping, viewType, model);
 		var entityList = _jigargosar$elm_simple_gtd$Entity_Tree$flatten(grouping);
 		var maybeFocusInEntity = A2(_jigargosar$elm_simple_gtd$Model$getMaybeFocusInEntity, entityList, model);
@@ -151,5 +151,5 @@ var _jigargosar$elm_simple_gtd$Entity_View$list = F3(
 					_1: {ctor: '[]'}
 				}
 			},
-			A3(_jigargosar$elm_simple_gtd$Entity_View$keyedViewList, grouping, maybeFocusInEntity, appViewModel));
+			A3(_jigargosar$elm_simple_gtd$Entity_View$keyedViewList, grouping, maybeFocusInEntity, model));
 	});

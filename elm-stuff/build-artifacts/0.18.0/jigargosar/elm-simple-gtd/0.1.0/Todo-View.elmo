@@ -818,7 +818,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 			_jigargosar$elm_simple_gtd$Todo$getText(todo)));
 };
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
-	function (appVM, canBeFocused, todo) {
+	function (appM, canBeFocused, todo) {
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
 			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
@@ -836,7 +836,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.projectByIdDict),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Store$findById, appM.projectStore),
 						_jigargosar$elm_simple_gtd$Project$getName)(projectId),
 					'')));
 		var contextDisplayName = truncateName(
@@ -847,11 +847,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.contextByIdDict),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Store$findById, appM.contextStore),
 						_jigargosar$elm_simple_gtd$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
-		var now = appVM.now;
+		var now = appM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p13) {
 			var _p14 = _p13;
@@ -904,10 +904,10 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			reminder: reminder,
 			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
-			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet),
+			isSelected: A2(_elm_lang$core$Set$member, todoId, appM.selectedEntityIdSet),
 			onMoreMenuClicked: onTodoMsg(
 				_jigargosar$elm_simple_gtd$Todo_Msg$OnShowMoreMenu(todoId)),
-			mdl: appVM.mdl
+			mdl: appM.mdl
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View$TodoViewModel = function (a) {

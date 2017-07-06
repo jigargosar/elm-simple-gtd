@@ -50,6 +50,10 @@ type alias ReturnF =
     Return -> Return
 
 
+map =
+    Return.map
+
+
 over =
     Record.over >>> map
 
@@ -79,11 +83,11 @@ updateInner msg =
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->
-                    Return.map (Model.moveFocusBy -1 entityList)
+                    map (Model.moveFocusBy -1 entityList)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
-                    Return.map (Model.moveFocusBy 1 entityList)
+                    map (Model.moveFocusBy 1 entityList)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 _ ->
@@ -94,39 +98,39 @@ updateInner msg =
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         ToggleShowDeletedEntity ->
-            Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
+            map ((\m -> { m | showDeleted = not m.showDeleted }))
 
         ReminderOverlayAction action ->
             reminderOverlayAction action
 
         OnDeactivateEditingMode ->
-            Return.map (Model.deactivateEditingMode)
+            map (Model.deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         StartEditingContext todo ->
-            Return.map (Model.startEditingTodoContext todo)
+            map (Model.startEditingTodoContext todo)
                 >> Return.command (positionContextMenuCmd todo)
 
         StartEditingProject todo ->
-            Return.map (Model.startEditingTodoProject todo)
+            map (Model.startEditingTodoProject todo)
                 >> Return.command (positionProjectMenuCmd todo)
 
         NewTodoTextChanged form text ->
-            Return.map (Model.updateNewTodoText form text)
+            map (Model.updateNewTodoText form text)
 
         StartEditingReminder todo ->
-            Return.map (Model.startEditingReminder todo)
+            map (Model.startEditingReminder todo)
                 >> Return.command (positionScheduleMenuCmd todo)
 
         UpdateTodoForm form action ->
-            Return.map
+            map
                 (Todo.Form.set action form
                     |> ExclusiveMode.EditTodo
                     >> Model.setEditMode
                 )
 
         OnEditTodoProjectMenuStateChanged form menuState ->
-            Return.map
+            map
                 (Todo.GroupForm.setMenuState menuState form
                     |> ExclusiveMode.EditTodoProject
                     >> Model.setEditMode
@@ -134,7 +138,7 @@ updateInner msg =
                 >> autoFocusInputCmd
 
         OnMainMenuStateChanged menuState ->
-            Return.map
+            map
                 (menuState
                     |> ExclusiveMode.MainMenu
                     >> Model.setEditMode
@@ -142,7 +146,7 @@ updateInner msg =
                 >> autoFocusInputCmd
 
         OnEditTodoContextMenuStateChanged form menuState ->
-            Return.map
+            map
                 (Todo.GroupForm.setMenuState menuState form
                     |> ExclusiveMode.EditTodoContext
                     >> Model.setEditMode
@@ -150,36 +154,36 @@ updateInner msg =
                 >> autoFocusInputCmd
 
         UpdateRemoteSyncFormUri form uri ->
-            Return.map
+            map
                 ({ form | uri = uri }
                     |> ExclusiveMode.EditSyncSettings
                     >> Model.setEditMode
                 )
 
         OnSetViewType viewType ->
-            Return.map (Model.switchToView viewType)
+            map (Model.switchToView viewType)
 
         OnSetEntityListView viewType ->
-            Return.map (Model.setEntityListViewType viewType)
+            map (Model.setEntityListViewType viewType)
 
         OnSaveCurrentForm ->
             Return.andThen Model.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
         NewTodo ->
-            Return.map (Model.activateNewTodoModeWithFocusInEntityAsReference)
+            map (Model.activateNewTodoModeWithFocusInEntityAsReference)
                 >> autoFocusInputCmd
 
         NewTodoForInbox ->
-            Return.map (Model.activateNewTodoModeWithInboxAsReference)
+            map (Model.activateNewTodoModeWithInboxAsReference)
                 >> autoFocusInputCmd
 
         NewProject ->
-            Return.map Model.createAndEditNewProject
+            map Model.createAndEditNewProject
                 >> autoFocusInputCmd
 
         NewContext ->
-            Return.map Model.createAndEditNewContext
+            map Model.createAndEditNewContext
                 >> autoFocusInputCmd
 
         OnEntityMsg entity entityMsg ->
@@ -219,10 +223,6 @@ updateInner msg =
 withNow : (Time -> Msg) -> ReturnF
 withNow toMsg =
     command (Task.perform toMsg Time.now)
-
-
-map =
-    Return.map
 
 
 updateTodoAndMaybeAlsoSelected action todoId =
@@ -287,10 +287,10 @@ command =
 onSubMsg subMsg =
     case subMsg of
         OnNowChanged now ->
-            Return.map (Model.setNow now)
+            map (Model.setNow now)
 
         OnKeyboardMsg msg ->
-            Return.map (Model.updateKeyboardState (Keyboard.update msg))
+            map (Model.updateKeyboardState (Keyboard.update msg))
                 >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
@@ -325,7 +325,7 @@ onGlobalKeyUp key =
                 ( key, ExclusiveMode.None ) ->
                     let
                         clear =
-                            Return.map (Model.clearSelection)
+                            map (Model.clearSelection)
                                 >> andThenUpdate OnDeactivateEditingMode
                     in
                         case key of

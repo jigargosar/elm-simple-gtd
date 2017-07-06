@@ -156,17 +156,17 @@ updateFirebaseConnection connected =
     over firebaseClient (Firebase.updateConnection connected)
 
 
-firebaseClient =
-    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
-
-
 getMaybeUserId =
     .user >> Firebase.getMaybeUserId
 
 
-user =
-    X.Record.field .user (\s b -> { b | user = s })
-
-
 setUser =
     set user
+
+
+firebaseClient =
+    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
+
+
+user =
+    X.Record.field .user (\s b -> { b | user = s })

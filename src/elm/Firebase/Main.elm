@@ -7,7 +7,7 @@ import Model
 import Navigation
 import Return
 import Time
-import X.Record exposing (over)
+import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
@@ -111,7 +111,7 @@ update andThenUpdate msg =
             D.decodeValue Firebase.userDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
-                        Return.map (Model.setUser user)
+                        Return.map (setUser user)
                             >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
@@ -162,3 +162,11 @@ firebaseClient =
 
 getMaybeUserId =
     .user >> Firebase.getMaybeUserId
+
+
+user =
+    X.Record.field .user (\s b -> { b | user = s })
+
+
+setUser =
+    set user

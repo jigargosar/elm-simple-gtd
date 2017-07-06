@@ -269,10 +269,6 @@ editMode =
     X.Record.field .editMode (\s b -> { b | editMode = s })
 
 
-user =
-    X.Record.field .user (\s b -> { b | user = s })
-
-
 focusInEntity =
     X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
 
@@ -371,10 +367,6 @@ inboxEntity =
 
 getMaybeUserProfile =
     .user >> Firebase.getMaybeUserProfile
-
-
-setUser =
-    set user
 
 
 filterTodosAndSortBy pred sortBy model =

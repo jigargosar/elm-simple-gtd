@@ -61,6 +61,7 @@ type SubMsg
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnSubMsg SubMsg
+    | OnStartExclusiveMode ExclusiveMode
     | OnShowMainMenu
     | OnMainMenuStateChanged Menu.State
     | RemotePouchSync ExclusiveMode.SyncForm
@@ -587,6 +588,10 @@ activateLaunchBar now =
 
 updateLaunchBarInput now text form =
     set editMode (LaunchBar.Form.updateInput now text form |> ExclusiveMode.LaunchBar)
+
+
+foo model =
+    Todo.NewForm.create (model.focusInEntity) "" |> ExclusiveMode.NewTodo |> OnStartExclusiveMode
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

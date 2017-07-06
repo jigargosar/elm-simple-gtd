@@ -111,6 +111,8 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return _jigargosar$elm_simple_gtd$CommonMsg$update(_p8._0);
 		case 'OnSubMsg':
 			return _jigargosar$elm_simple_gtd$Update$onSubMsg(_p8._0);
+		case 'OnStartExclusiveMode':
+			return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p8._0);
 		case 'OnShowMainMenu':
 			return function (_p9) {
 				return A2(
@@ -256,9 +258,6 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 		case 'OnSetViewType':
 			return _jigargosar$elm_simple_gtd$Update$map(
 				_jigargosar$elm_simple_gtd$Model$switchToView(_p8._0));
-		case 'OnSetEntityListView':
-			return _jigargosar$elm_simple_gtd$Update$map(
-				_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_p8._0));
 		case 'OnSaveCurrentForm':
 			return function (_p31) {
 				return A2(

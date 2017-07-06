@@ -47,7 +47,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 	var activeFilter = _jigargosar$elm_simple_gtd$Model$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
 	var config = {
 		groupByFn: _jigargosar$elm_simple_gtd$Todo$getContextId,
-		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveProjects(model),
+		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveProject(model),
 		namePrefix: '@',
 		filter: activeFilter,
 		toEntity: _jigargosar$elm_simple_gtd$Entity$fromContext,
@@ -84,7 +84,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 	var activeFilter = _jigargosar$elm_simple_gtd$Model$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
 	var config = {
 		groupByFn: _jigargosar$elm_simple_gtd$Todo$getProjectId,
-		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveContexts(model),
+		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveContext(model),
 		namePrefix: '#',
 		filter: activeFilter,
 		toEntity: _jigargosar$elm_simple_gtd$Entity$fromProject,

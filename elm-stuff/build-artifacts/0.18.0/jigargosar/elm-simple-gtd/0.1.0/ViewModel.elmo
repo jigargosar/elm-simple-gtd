@@ -63,8 +63,8 @@ var _jigargosar$elm_simple_gtd$ViewModel$getViewInfo = F4(
 		}
 	});
 var _jigargosar$elm_simple_gtd$ViewModel$create = function (model) {
-	var now = _jigargosar$elm_simple_gtd$Model$getNow(model);
-	var editMode = _jigargosar$elm_simple_gtd$Model$getEditMode(model);
+	var now = model.now;
+	var editMode = model.editMode;
 	var mainViewType = model.mainViewType;
 	var projectsVM = _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects(model);
 	var contextsVM = _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts(model);

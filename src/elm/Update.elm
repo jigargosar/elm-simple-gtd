@@ -7,6 +7,7 @@ import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
 import ExclusiveMode
 import Entity
+import ExclusiveMode.Main
 import Firebase.Main
 import Material
 import X.Debug
@@ -54,6 +55,9 @@ updateInner msg =
 
         OnSubMsg subMsg ->
             onSubMsg subMsg
+
+        OnStartExclusiveMode exclusiveMode ->
+            ExclusiveMode.Main.start exclusiveMode
 
         OnShowMainMenu ->
             map Model.showMainMenu

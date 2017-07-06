@@ -8,7 +8,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem = F3(
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_jigargosar$elm_simple_gtd$Model$OnSetEntityListView(viewType)),
+						_jigargosar$elm_simple_gtd$Model$onSetEntityListView(viewType)),
 					_1: {ctor: '[]'}
 				}
 			},

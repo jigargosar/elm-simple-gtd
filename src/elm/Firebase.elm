@@ -41,20 +41,12 @@ type alias DeviceId =
     Model.DeviceId
 
 
-initClient deviceId =
-    { id = deviceId, connected = False, token = Nothing }
-
-
-initUser =
-    Model.initUser
+init =
+    Model.init
 
 
 getMaybeUserProfile =
     .user >> Model.getMaybeUserProfile
-
-
-getPhotoURL =
-    .photoURL
 
 
 updateConnection connected client =

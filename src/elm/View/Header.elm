@@ -76,9 +76,9 @@ menuIcon m =
                 ]
                 [ Mat.icon "account_circle" ]
 
-        Just profile ->
+        Just { photoURL } ->
             img
-                [ profile |> Firebase.getPhotoURL >> src
+                [ src photoURL
                 , class "account"
                 ]
                 []

@@ -20,6 +20,13 @@ type alias Model =
     }
 
 
+init deviceId =
+    { user = initUser
+    , fcmToken = Nothing
+    , firebaseClient = initClient deviceId
+    }
+
+
 type alias FCMToken =
     Maybe String
 
@@ -42,6 +49,10 @@ type alias Client =
     , connected : Bool
     , token : Maybe String
     }
+
+
+initClient deviceId =
+    { id = deviceId, connected = False, token = Nothing }
 
 
 encodeClient client =

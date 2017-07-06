@@ -11,19 +11,13 @@ var _jigargosar$elm_simple_gtd$Firebase$updateConnection = F2(
 			client,
 			{connected: connected});
 	});
-var _jigargosar$elm_simple_gtd$Firebase$getPhotoURL = function (_) {
-	return _.photoURL;
-};
 var _jigargosar$elm_simple_gtd$Firebase$getMaybeUserProfile = function (_p0) {
 	return _jigargosar$elm_simple_gtd$Firebase_Model$getMaybeUserProfile(
 		function (_) {
 			return _.user;
 		}(_p0));
 };
-var _jigargosar$elm_simple_gtd$Firebase$initUser = _jigargosar$elm_simple_gtd$Firebase_Model$initUser;
-var _jigargosar$elm_simple_gtd$Firebase$initClient = function (deviceId) {
-	return {id: deviceId, connected: false, token: _elm_lang$core$Maybe$Nothing};
-};
+var _jigargosar$elm_simple_gtd$Firebase$init = _jigargosar$elm_simple_gtd$Firebase_Model$init;
 var _jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged = function (a) {
 	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
 };

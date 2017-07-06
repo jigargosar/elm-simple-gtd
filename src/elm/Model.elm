@@ -295,8 +295,8 @@ init flags =
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)
 
-        firebaseClient =
-            Firebase.initClient flags.deviceId
+        firebaseModel =
+            Firebase.init flags.deviceId
 
         localPref =
             D.decodeValue localPrefDecoder flags.localPref
@@ -322,9 +322,9 @@ init flags =
             , keyboardState = Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-            , user = Firebase.initUser
-            , fcmToken = Nothing
-            , firebaseClient = firebaseClient
+            , user = firebaseModel.user
+            , fcmToken = firebaseModel.fcmToken
+            , firebaseClient = firebaseModel.firebaseClient
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion

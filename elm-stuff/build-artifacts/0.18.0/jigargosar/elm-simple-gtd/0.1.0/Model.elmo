@@ -1439,7 +1439,7 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 			_jigargosar$elm_simple_gtd$X_Debug$log('Unable to decode localPref'),
 			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Model$localPrefDecoder, flags.localPref)),
 		_jigargosar$elm_simple_gtd$Model$defaultLocalPref);
-	var firebaseClient = _jigargosar$elm_simple_gtd$Firebase$initClient(flags.deviceId);
+	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
 	var _p52 = flags;
 	var now = _p52.now;
 	var encodedTodoList = _p52.encodedTodoList;
@@ -1474,9 +1474,9 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
 		reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none,
 		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
-		user: _jigargosar$elm_simple_gtd$Firebase$initUser,
-		fcmToken: _elm_lang$core$Maybe$Nothing,
-		firebaseClient: firebaseClient,
+		user: firebaseModel.user,
+		fcmToken: firebaseModel.fcmToken,
+		firebaseClient: firebaseModel.firebaseClient,
 		developmentMode: flags.developmentMode,
 		selectedEntityIdSet: _elm_lang$core$Set$empty,
 		appVersion: flags.appVersion,

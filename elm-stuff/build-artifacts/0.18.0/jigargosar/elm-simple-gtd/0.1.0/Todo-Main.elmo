@@ -221,21 +221,11 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
 					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
 					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$toggleStartStop, _p8._0, now));
-			case 'InitRunning':
-				return A2(
-					_jigargosar$elm_simple_gtd$Todo_Main$mapSet,
-					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
-					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$initRunning, _p8._0, now));
 			case 'SwitchOrStartRunning':
 				return A2(
 					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
 					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
 					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$switchOrStartRunning, _p8._0, now));
-			case 'TogglePaused':
-				return A2(
-					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
-					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
-					_jigargosar$elm_simple_gtd$Todo_TimeTracker$togglePause(now));
 			case 'StopRunning':
 				return A2(_jigargosar$elm_simple_gtd$Todo_Main$mapSet, _jigargosar$elm_simple_gtd$Todo_Main$timeTracker, _jigargosar$elm_simple_gtd$Todo_TimeTracker$none);
 			case 'GotoRunning':

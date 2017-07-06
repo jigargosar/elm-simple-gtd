@@ -9,11 +9,7 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker$isTrackingTodo = function (todo)
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker$getElapsedTime = F2(
 	function (now, rec) {
 		var _p0 = rec.state;
-		if (_p0.ctor === 'Running') {
-			return rec.totalTime + (now - _p0._0);
-		} else {
-			return rec.totalTime;
-		}
+		return now - _p0._0;
 	});
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker$alarmDelay = 10 * _elm_lang$core$Time$minute;
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker$map = _elm_lang$core$Maybe$map;
@@ -57,11 +53,10 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker$Info = F2(
 	function (a, b) {
 		return {todoId: a, elapsedTime: b};
 	});
-var _jigargosar$elm_simple_gtd$Todo_TimeTracker$ModelRec = F4(
-	function (a, b, c, d) {
-		return {todoId: a, totalTime: b, state: c, nextAlarmAt: d};
+var _jigargosar$elm_simple_gtd$Todo_TimeTracker$ModelRec = F3(
+	function (a, b, c) {
+		return {todoId: a, state: b, nextAlarmAt: c};
 	});
-var _jigargosar$elm_simple_gtd$Todo_TimeTracker$Paused = {ctor: 'Paused'};
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker$Running = function (a) {
 	return {ctor: 'Running', _0: a};
 };
@@ -70,7 +65,6 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker$initRunning = F2(
 		return _jigargosar$elm_simple_gtd$Todo_TimeTracker$wrap(
 			{
 				todoId: todoId,
-				totalTime: 0,
 				state: _jigargosar$elm_simple_gtd$Todo_TimeTracker$Running(now),
 				nextAlarmAt: now + _jigargosar$elm_simple_gtd$Todo_TimeTracker$alarmDelay
 			});
@@ -99,20 +93,3 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker$switchOrStartRunning = F2(
 						{todoId: todoId}));
 			});
 	});
-var _jigargosar$elm_simple_gtd$Todo_TimeTracker$togglePause = function (now) {
-	return _jigargosar$elm_simple_gtd$Todo_TimeTracker$map(
-		function (rec) {
-			var _p6 = rec.state;
-			if (_p6.ctor === 'Running') {
-				return _elm_lang$core$Native_Utils.update(
-					rec,
-					{totalTime: rec.totalTime + (now - _p6._0), state: _jigargosar$elm_simple_gtd$Todo_TimeTracker$Paused});
-			} else {
-				return _elm_lang$core$Native_Utils.update(
-					rec,
-					{
-						state: _jigargosar$elm_simple_gtd$Todo_TimeTracker$Running(now)
-					});
-			}
-		});
-};

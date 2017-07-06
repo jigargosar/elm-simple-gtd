@@ -98,12 +98,8 @@ update andThenUpdate now todoMsg =
                     >> Model.setEditMode
                 )
 
-        --                >> DomPorts.autoFocusInputCmd
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)
-
-        InitRunning todoId ->
-            mapSet timeTracker (Tracker.initRunning todoId now)
 
         SwitchOrStartRunning todoId ->
             mapOver timeTracker (Tracker.switchOrStartRunning todoId now)

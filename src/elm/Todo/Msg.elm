@@ -8,7 +8,6 @@ import Todo.ReminderForm
 
 type Msg
     = ToggleRunning Todo.Id
-    | InitRunning Todo.Id
     | SwitchOrStartRunning Todo.Id
     | StopRunning
     | RunningNotificationResponse Response

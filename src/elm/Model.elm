@@ -391,11 +391,11 @@ isTodoProjectActive model =
         >>?= True
 
 
-getActiveTodoListHavingActiveContexts model =
+getActiveTodoListHavingActiveContext model =
     model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoContextActive model ])
 
 
-getActiveTodoListHavingActiveProjects model =
+getActiveTodoListHavingActiveProject model =
     model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoProjectActive model ])
 
 

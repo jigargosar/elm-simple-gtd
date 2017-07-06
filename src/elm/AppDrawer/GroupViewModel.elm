@@ -145,7 +145,7 @@ contexts model =
         config : Config
         config =
             { groupByFn = Todo.getContextId
-            , todoList = Model.getActiveTodoListHavingActiveProjects model
+            , todoList = Model.getAllActiveTodoHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
             , toEntity = Entity.fromContext
@@ -193,7 +193,7 @@ projects model =
         config : Config
         config =
             { groupByFn = Todo.getProjectId
-            , todoList = Model.getActiveTodoListHavingActiveContexts model
+            , todoList = Model.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
             , toEntity = Entity.fromProject

@@ -28,13 +28,9 @@ var _jigargosar$elm_simple_gtd$Todo_Msg$OnReminderNotificationClicked = function
 var _jigargosar$elm_simple_gtd$Todo_Msg$RunningNotificationResponse = function (a) {
 	return {ctor: 'RunningNotificationResponse', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_Msg$TogglePaused = {ctor: 'TogglePaused'};
 var _jigargosar$elm_simple_gtd$Todo_Msg$StopRunning = {ctor: 'StopRunning'};
 var _jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning = function (a) {
 	return {ctor: 'SwitchOrStartRunning', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo_Msg$InitRunning = function (a) {
-	return {ctor: 'InitRunning', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Todo_Msg$ToggleRunning = function (a) {
 	return {ctor: 'ToggleRunning', _0: a};

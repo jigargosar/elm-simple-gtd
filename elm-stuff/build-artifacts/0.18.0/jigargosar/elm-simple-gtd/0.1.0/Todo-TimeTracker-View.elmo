@@ -80,12 +80,8 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$view = function (vm) {
 							}),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtn2, vm.playPauseIconName, vm.onTogglePause),
-							_1: {
-								ctor: '::',
-								_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtn2, 'stop', vm.onStop),
-								_1: {ctor: '[]'}
-							}
+							_0: A2(_jigargosar$elm_simple_gtd$Mat$iconBtn2, 'stop', vm.onStop),
+							_1: {ctor: '[]'}
 						}
 					}),
 				_1: {ctor: '[]'}
@@ -101,34 +97,19 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$createViewModel = F2(
 				A2(_jigargosar$elm_simple_gtd$Model$findTodoById, tracker.todoId, appModel),
 				_jigargosar$elm_simple_gtd$Todo$getText),
 			tracker.todoId);
-		var _p0 = function () {
-			var _p1 = tracker.state;
-			if (_p1.ctor === 'Running') {
-				return {ctor: '_Tuple2', _0: tracker.totalTime + (appModel.now - _p1._0), _1: 'pause'};
-			} else {
-				return {ctor: '_Tuple2', _0: tracker.totalTime, _1: 'play_arrow'};
-			}
-		}();
-		var elapsedTime = _p0._0;
-		var playPauseIconName = _p0._1;
+		var elapsedTime = A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$getElapsedTime, appModel.now, tracker);
 		return {
 			displayText: todoText,
 			displayTime: _jigargosar$elm_simple_gtd$X_Time$toHHMMSS(elapsedTime),
-			playPauseIconName: playPauseIconName,
-			onStop: _jigargosar$elm_simple_gtd$Model$onTodoStopRunning,
-			onTogglePause: _jigargosar$elm_simple_gtd$Model$onTodoTogglePaused
+			onStop: _jigargosar$elm_simple_gtd$Model$onTodoStopRunning
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$maybe = function (appModel) {
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 		appModel.timeTracker,
-		function (_p2) {
+		function (_p0) {
 			return _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$view(
-				A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker_View$createViewModel, appModel, _p2));
+				A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker_View$createViewModel, appModel, _p0));
 		});
 };
-var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$ViewModel = F2(
-	function (a, b) {
-		return {displayText: a, displayTime: b};
-	});

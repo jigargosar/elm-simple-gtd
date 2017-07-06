@@ -18,8 +18,8 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-list : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
-list viewType model appViewModel =
+list : Entity.ListViewType -> Model.Model -> Html.Html Msg
+list viewType model =
     let
         grouping =
             Model.createGrouping viewType model
@@ -34,10 +34,10 @@ list viewType model appViewModel =
             [ class "entity-list focusable-list"
             , Model.OnEntityListKeyDown entityList |> onKeyDown
             ]
-            (keyedViewList grouping maybeFocusInEntity appViewModel)
+            (keyedViewList grouping maybeFocusInEntity model)
 
 
-keyedViewList grouping maybeFocusInEntity appViewModel =
+keyedViewList grouping maybeFocusInEntity model =
     let
         hasFocusIn entity =
             maybeFocusInEntity ?|> Entity.equalById entity ?= False
@@ -72,7 +72,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                     Entity.Todo todo |> hasFocusIn
             in
                 todo
-                    |> Todo.View.createTodoViewModel appViewModel canBeFocused
+                    |> Todo.View.createTodoViewModel model canBeFocused
                     |> Todo.View.keyedItem
 
         todoListView =

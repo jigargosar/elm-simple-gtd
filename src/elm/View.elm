@@ -117,7 +117,7 @@ appLayoutView m =
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
                         [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
-                        , div [ id "layout-main-content" ] [ appMainContent appVM m ]
+                        , div [ id "layout-main-content" ] [ appMainContent m ]
                         ]
                     ]
                 ]
@@ -141,17 +141,17 @@ appLayoutView m =
                     , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
-                        [ div [ id "layout-main-content" ] [ appMainContent appVM m ]
+                        [ div [ id "layout-main-content" ] [ appMainContent m ]
                         ]
                     ]
                 ]
 
 
-appMainContent viewModel model =
+appMainContent model =
     div [ id "main-view-container" ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
-                Entity.View.list viewType model viewModel
+                Entity.View.list viewType model
 
             SyncView ->
                 CustomSync.view model

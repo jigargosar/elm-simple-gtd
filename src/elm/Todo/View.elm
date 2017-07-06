@@ -9,6 +9,7 @@ import Material
 import Material.Button
 import Material.Icon
 import Material.Options
+import Store
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -77,8 +78,8 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : ViewModel.Model -> Bool -> Todo.Model -> TodoViewModel
-createTodoViewModel appVM canBeFocused todo =
+createTodoViewModel : Model.Model -> Bool -> Todo.Model -> TodoViewModel
+createTodoViewModel appM canBeFocused todo =
     let
         tabindexAV =
             let
@@ -91,7 +92,7 @@ createTodoViewModel appVM canBeFocused todo =
                 tabindexValue
 
         now =
-            appVM.now
+            appM.now
 
         todoId =
             Document.getId todo
@@ -104,7 +105,7 @@ createTodoViewModel appVM canBeFocused todo =
 
         projectDisplayName =
             projectId
-                |> (Dict.get # appVM.projectByIdDict >>? Project.getName)
+                |> (Store.findById # appM.projectStore >>? Project.getName)
                 ?= ""
                 |> truncateName
                 |> String.append "#"
@@ -114,7 +115,7 @@ createTodoViewModel appVM canBeFocused todo =
 
         contextDisplayName =
             contextId
-                |> (Dict.get # appVM.contextByIdDict >>? Context.getName)
+                |> (Store.findById # appM.contextStore >>? Context.getName)
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
@@ -190,9 +191,9 @@ createTodoViewModel appVM canBeFocused todo =
         , reminder = reminder
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
-        , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
+        , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , onMoreMenuClicked = Todo.Msg.OnShowMoreMenu todoId |> onTodoMsg
-        , mdl = appVM.mdl
+        , mdl = appM.mdl
         }
 
 

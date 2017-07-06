@@ -23,10 +23,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 			_elm_lang$html$Html$img,
 			{
 				ctor: '::',
-				_0: function (_p1) {
-					return _elm_lang$html$Html_Attributes$src(
-						_jigargosar$elm_simple_gtd$Firebase$getPhotoURL(_p1));
-				}(_p0._0),
+				_0: _elm_lang$html$Html_Attributes$src(_p0._0.photoURL),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('account'),

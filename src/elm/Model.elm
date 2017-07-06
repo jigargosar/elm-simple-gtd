@@ -98,25 +98,12 @@ type Msg
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
     [ combo2 ( Combo.shift, Combo.s ) (onTodoStopRunning)
-    , combo2 ( Combo.shift, Combo.p ) (onTodoTogglePaused)
     , combo2 ( Combo.shift, Combo.r ) (onGotoRunningTodo)
     ]
 
 
-onTodoToggleRunning =
-    Todo.Msg.ToggleRunning >> OnTodoMsg
-
-
-onTodoInitRunning =
-    Todo.Msg.InitRunning >> OnTodoMsg
-
-
 onTodoStopRunning =
     Todo.Msg.StopRunning |> OnTodoMsg
-
-
-onTodoTogglePaused =
-    Todo.Msg.TogglePaused |> OnTodoMsg
 
 
 onGotoRunningTodo =

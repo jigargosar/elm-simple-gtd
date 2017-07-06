@@ -9,7 +9,6 @@ import X.Debug
 
 type State
     = Running Time
-    | Paused
 
 
 type alias Info =
@@ -20,7 +19,6 @@ type alias Info =
 
 type alias ModelRec =
     { todoId : Todo.Id
-    , totalTime : Time
     , state : State
     , nextAlarmAt : Time
     }
@@ -61,7 +59,6 @@ initRunning : Todo.Id -> Time -> Model
 initRunning todoId now =
     wrap
         { todoId = todoId
-        , totalTime = 0
         , state = Running now
         , nextAlarmAt = now + alarmDelay
         }
@@ -74,19 +71,6 @@ switchOrStartRunning todoId now =
             X.Debug.log "switchOrStartRunning" "foo"
     in
         Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
-
-
-togglePause : Time -> Model -> Model
-togglePause now =
-    map
-        (\rec ->
-            case rec.state of
-                Running startedAt ->
-                    { rec | totalTime = rec.totalTime + (now - startedAt), state = Paused }
-
-                Paused ->
-                    { rec | state = Running now }
-        )
 
 
 getMaybeTodoId =
@@ -120,10 +104,7 @@ updateNextAlarmAt now model =
 getElapsedTime now rec =
     case rec.state of
         Running startedAt ->
-            rec.totalTime + (now - startedAt)
-
-        Paused ->
-            rec.totalTime
+            now - startedAt
 
 
 isTrackingTodo todo =

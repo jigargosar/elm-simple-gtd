@@ -15,30 +15,17 @@ import Html.Events exposing (..)
 -- View
 
 
-type alias ViewModel =
-    { displayText : String
-    , displayTime : String
-    }
-
-
 createViewModel appModel tracker =
     let
-        ( elapsedTime, playPauseIconName ) =
-            case tracker.state of
-                Running startedAt ->
-                    ( tracker.totalTime + (appModel.now - startedAt), "pause" )
-
-                Paused ->
-                    ( tracker.totalTime, "play_arrow" )
+        elapsedTime =
+            Todo.TimeTracker.getElapsedTime appModel.now tracker
 
         todoText =
             Model.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
     in
         { displayText = todoText
         , displayTime = X.Time.toHHMMSS elapsedTime
-        , playPauseIconName = playPauseIconName
         , onStop = Model.onTodoStopRunning
-        , onTogglePause = Model.onTodoTogglePaused
         }
 
 
@@ -55,7 +42,6 @@ view vm =
                 , style [ "margin-right" => "1rem" ]
                 ]
                 [ text vm.displayTime ]
-            , Mat.iconBtn2 vm.playPauseIconName vm.onTogglePause
             , Mat.iconBtn2 "stop" vm.onStop
             ]
         ]

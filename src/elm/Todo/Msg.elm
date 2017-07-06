@@ -11,7 +11,6 @@ type Msg
     | InitRunning Todo.Id
     | SwitchOrStartRunning Todo.Id
     | StopRunning
-    | TogglePaused
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
     | ShowReminderOverlayForTodoId Todo.Id

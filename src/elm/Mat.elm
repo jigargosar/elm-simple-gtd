@@ -101,7 +101,7 @@ iconM icon =
 
 
 fab mdl opts =
-    btn mdl [ Material.Button.icon, many opts ]
+    btn mdl [ Material.Button.fab, many opts ]
 
 
 primaryFABCS =

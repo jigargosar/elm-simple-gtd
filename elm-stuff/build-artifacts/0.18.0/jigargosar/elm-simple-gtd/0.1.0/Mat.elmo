@@ -154,7 +154,7 @@ var _jigargosar$elm_simple_gtd$Mat$fab = F2(
 			mdl,
 			{
 				ctor: '::',
-				_0: _debois$elm_mdl$Material_Button$icon,
+				_0: _debois$elm_mdl$Material_Button$fab,
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Mat$many(opts),
@@ -165,15 +165,11 @@ var _jigargosar$elm_simple_gtd$Mat$fab = F2(
 var _jigargosar$elm_simple_gtd$Mat$primaryFABCS = _jigargosar$elm_simple_gtd$Mat$many(
 	{
 		ctor: '::',
-		_0: _debois$elm_mdl$Material_Button$minifab,
+		_0: _debois$elm_mdl$Material_Button$colored,
 		_1: {
 			ctor: '::',
-			_0: _debois$elm_mdl$Material_Button$colored,
-			_1: {
-				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--page-fab'),
-				_1: {ctor: '[]'}
-			}
+			_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--page-fab'),
+			_1: {ctor: '[]'}
 		}
 	});
 var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F2(

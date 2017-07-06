@@ -894,7 +894,7 @@ clearSelection =
 
 findTodoById : Document.Id -> Model -> Maybe Todo.Model
 findTodoById id =
-    getTodoStore >> Store.findById id
+    .todoStore >> Store.findById id
 
 
 findProjectById : Document.Id -> Model -> Maybe Project.Model
@@ -935,10 +935,6 @@ insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-setTodoStoreFromTuple tuple model =
-    tuple |> Tuple.mapSecond (setTodoStore # model)
-
-
 upsertEncodedDocOnPouchDBChange : String -> E.Value -> Model -> Maybe ( Entity.Entity, Model )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
@@ -962,7 +958,7 @@ upsertEncodedDocOnFirebaseChange : String -> E.Value -> Model -> Cmd msg
 upsertEncodedDocOnFirebaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            getTodoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         "project-db" ->
             getProjectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
@@ -1083,19 +1079,9 @@ updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
 
 
-getTodoStore : Model -> Todo.Store
-getTodoStore =
-    (.todoStore)
-
-
 setTodoStore : Todo.Store -> ModelF
 setTodoStore todoStore model =
     { model | todoStore = todoStore }
-
-
-updateTodoStore : (Todo.Store -> Todo.Store) -> ModelF
-updateTodoStore updater model =
-    { model | todoStore = getTodoStore model |> updater }
 
 
 getProjectStore : Model -> Project.Store
@@ -1112,16 +1098,6 @@ setProjectStoreIn =
     flip setProjectStore
 
 
-updateProjectStore : (Project.Store -> Project.Store) -> ModelF
-updateProjectStore updater model =
-    setProjectStore (updater (getProjectStore model)) model
-
-
-updateProjectStoreM : (Model -> Project.Store) -> ModelF
-updateProjectStoreM updater model =
-    setProjectStore (updater model) model
-
-
 getContextStore : Model -> Context.Store
 getContextStore =
     (.contextStore)
@@ -1134,11 +1110,6 @@ setContextStore contextStore model =
 
 setContextStoreIn =
     flip setContextStore
-
-
-updateContextStoreM : (Model -> Context.Store) -> ModelF
-updateContextStoreM updater model =
-    setContextStore (updater model) model
 
 
 getNow : Model -> Time

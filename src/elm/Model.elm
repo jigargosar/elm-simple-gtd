@@ -1089,14 +1089,6 @@ getActiveContexts =
     filterContexts GroupDoc.isActive
 
 
-getContextsAsIdDict =
-    (.contextStore) >> Store.asIdDict
-
-
-getProjectsAsIdDict =
-    (.projectStore) >> Store.asIdDict
-
-
 
 -- Document Update Helpers
 

@@ -24,10 +24,6 @@ type alias Model =
     , projects : AppDrawer.GroupViewModel.ViewModel
     , viewName : String
     , header : { backgroundColor : Color.Color }
-    , now : Time
-    , projectByIdDict : Dict Id Project.Model
-    , contextByIdDict : Dict Id Context.Model
-    , selectedEntityIdSet : Set Document.Id
     , mdl : Material.Model
     }
 
@@ -57,10 +53,6 @@ create model =
         , projects = projectsVM
         , viewName = viewName
         , header = { backgroundColor = headerBackgroundColor }
-        , now = now
-        , selectedEntityIdSet = model.selectedEntityIdSet
-        , projectByIdDict = Model.getProjectsAsIdDict model
-        , contextByIdDict = Model.getContextsAsIdDict model
         , mdl = model.mdl
         }
 

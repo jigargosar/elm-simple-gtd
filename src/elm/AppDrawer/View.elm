@@ -66,27 +66,8 @@ sidebarContent appVM model =
                        , Mat.divider
                        , switchViewItemSmall "settings" SyncView "Advance Settings"
                        ]
-                 --                    ++ [ toggleDeletedItem model ]
                 )
             ]
-
-
-toggleDeletedItem model =
-    li [ onClick Model.ToggleShowDeletedEntity ]
-        [ div [ class "switch" ]
-            [ label []
-                [ input
-                    [ type_ "checkbox"
-                    , checked model.showDeleted
-                    , tabindex -1
-                    , onClick Model.ToggleShowDeletedEntity
-                    ]
-                    []
-                , span [ class "lever" ] []
-                ]
-            ]
-        , div [] [ text "Show/Hide Deleted Contexts/Projects" ]
-        ]
 
 
 entityGroupView vm mainViewType =

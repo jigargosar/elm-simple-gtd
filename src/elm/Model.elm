@@ -65,7 +65,6 @@ type Msg
     | OnMainMenuStateChanged Menu.State
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
-    | ToggleShowDeletedEntity
     | NewTodo
     | NewTodoForInbox
     | NewProject
@@ -154,14 +153,12 @@ type alias Model =
     , editMode : ExclusiveMode
     , mainViewType : ViewType
     , keyboardState : Keyboard.State
-    , showDeleted : Bool
     , reminderOverlay : Todo.Notification.Model.Model
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
     , developmentMode : Bool
     , selectedEntityIdSet : Set Document.Id
-    , layout : Layout
     , appVersion : String
     , deviceId : String
     , firebaseClient : Firebase.Client
@@ -172,12 +169,6 @@ type alias Model =
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model
     , mdl : Material.Model
-    }
-
-
-type alias Layout =
-    { narrow : Bool
-    , forceNarrow : Bool
     }
 
 
@@ -337,14 +328,12 @@ init flags =
             , editMode = editMode
             , mainViewType = defaultView
             , keyboardState = Keyboard.init
-            , showDeleted = False
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = Firebase.SignedOut
             , fcmToken = Nothing
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
-            , layout = { narrow = False, forceNarrow = False }
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , focusInEntity = inboxEntity
@@ -405,25 +394,6 @@ updateFirebaseConnection connected =
     over firebaseClient (Firebase.updateConnection connected)
 
 
-toggleLayoutForceNarrow =
-    updateLayout (\layout -> { layout | forceNarrow = not layout.forceNarrow })
-
-
-setLayoutNarrow narrow =
-    updateLayout (\layout -> { layout | narrow = narrow })
-
-
-getLayoutForceNarrow =
-    .layout >> .forceNarrow
-
-
-isLayoutAutoNarrow : Model -> Bool
-isLayoutAutoNarrow =
-    getLayout
-        >> apply2 ( .forceNarrow >> not, .narrow )
-        >> uncurry and
-
-
 filterTodosAndSortBy pred sortBy model =
     Store.filterDocs pred model.todoStore
         |> List.sortBy sortBy
@@ -447,21 +417,6 @@ filterProjects pred model =
     Store.filterDocs pred model.projectStore
         |> List.append (Project.filterNull pred)
         |> Project.sort
-
-
-currentDocPredicate model =
-    if model.showDeleted then
-        Document.isDeleted
-    else
-        Document.isNotDeleted
-
-
-filterCurrentContexts model =
-    filterContexts (currentDocPredicate model) model
-
-
-filterCurrentProjects model =
-    filterProjects (currentDocPredicate model) model
 
 
 isTodoContextActive model =
@@ -1026,26 +981,6 @@ maybeGetCurrentEntityListViewType model =
 
         _ ->
             Nothing
-
-
-getLayout : Model -> Layout
-getLayout =
-    (.layout)
-
-
-setLayout : Layout -> ModelF
-setLayout layout model =
-    { model | layout = layout }
-
-
-updateLayoutM : (Model -> Layout) -> ModelF
-updateLayoutM updater model =
-    setLayout (updater model) model
-
-
-updateLayout : (Layout -> Layout) -> ModelF
-updateLayout updater model =
-    setLayout (updater (getLayout model)) model
 
 
 toggleEntitySelection entity =

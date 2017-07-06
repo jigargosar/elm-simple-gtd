@@ -31,7 +31,6 @@ type alias ViewModel =
     , viewType : EntityListViewType
     , title : String
     , className : String
-    , showDeleted : Bool
     , showArchived : Bool
     , onAddClicked : Msg
     , onToggleExpanded : Msg
@@ -51,10 +50,6 @@ type alias DocumentWithNameViewModel =
     , onActiveStateChanged : Bool -> Msg
     , icon : IconVM
     }
-
-
-type alias Record =
-    { name : String, archived : Bool }
 
 
 type alias GroupDoc =
@@ -177,7 +172,6 @@ contexts model =
         , viewType = Entity.ContextsView
         , title = "Contexts"
         , className = "contexts"
-        , showDeleted = model.showDeleted
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = AppColors.contextsColor }
@@ -226,7 +220,6 @@ projects model =
         , viewType = Entity.ProjectsView
         , title = "Projects"
         , className = "projects"
-        , showDeleted = model.showDeleted
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
         , onAddClicked = Model.NewProject
         , icon = { name = "group_work", color = AppColors.projectsColor }

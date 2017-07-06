@@ -76,9 +76,6 @@ updateInner msg =
             andThenUpdate OnSaveCurrentForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
-        ToggleShowDeletedEntity ->
-            map ((\m -> { m | showDeleted = not m.showDeleted }))
-
         ReminderOverlayAction action ->
             reminderOverlayAction action
 

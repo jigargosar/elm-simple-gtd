@@ -368,6 +368,14 @@ defaultView =
     EntityListView Entity.defaultListView
 
 
+type alias Return =
+    Return.Return Msg Model
+
+
+type alias ModelReturnF msg =
+    Model -> Return.Return msg Model
+
+
 type alias ReturnF =
     Return.Return Msg Model -> Return.Return Msg Model
 
@@ -1214,14 +1222,6 @@ getProjectsAsIdDict =
 
 
 -- Document Update Helpers
-
-
-type alias Return msg =
-    Return.Return msg Model
-
-
-type alias ModelReturnF msg =
-    Model -> Return msg
 
 
 updateContext id updateFn =

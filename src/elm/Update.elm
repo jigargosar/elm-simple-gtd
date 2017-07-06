@@ -18,7 +18,6 @@ import Keyboard.Combo
 import LaunchBar
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
-import Model
 import Notification
 import Todo.Notification.Model
 import Todo
@@ -36,18 +35,6 @@ import View
 import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
-
-
-type alias Return =
-    Return.Return Msg Model
-
-
-type alias ReturnTuple a =
-    Return.Return Msg ( a, Model )
-
-
-type alias ReturnF =
-    Return -> Return
 
 
 map =

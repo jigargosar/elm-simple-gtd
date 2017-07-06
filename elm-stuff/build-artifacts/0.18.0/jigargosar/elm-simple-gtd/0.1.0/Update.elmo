@@ -94,8 +94,6 @@ var _jigargosar$elm_simple_gtd$Update$withNow = function (toMsg) {
 		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
 };
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
-var _jigargosar$elm_simple_gtd$Update$over = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Update$map);
-var _jigargosar$elm_simple_gtd$Update$set = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Update$map);
 var _jigargosar$elm_simple_gtd$Update$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
 	'syncWithRemotePouch',
 	function (v) {

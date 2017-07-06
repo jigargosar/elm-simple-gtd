@@ -139,9 +139,6 @@ updateInner msg =
         OnSetViewType viewType ->
             map (Model.switchToView viewType)
 
-        OnSetEntityListView viewType ->
-            andThenUpdate (EntityListView viewType |> OnSetViewType)
-
         OnSaveCurrentForm ->
             Return.andThen Model.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode

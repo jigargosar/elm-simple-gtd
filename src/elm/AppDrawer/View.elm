@@ -15,7 +15,7 @@ import Model exposing (Msg(OnSetViewType), commonMsg)
 import Toolkit.Operators exposing (..)
 import Model exposing (..)
 import X.Function.Infix exposing (..)
-import Model exposing (..)
+import Model
 import View.Shared exposing (..)
 import ViewModel
 
@@ -185,7 +185,7 @@ switchViewItemSmall iconName viewType title =
 onSetEntityListViewItem iconName viewType title =
     li
         [ class ""
-        , onClick (OnSetEntityListView viewType)
+        , onClick (onSetEntityListView viewType)
         ]
         [ Mat.icon iconName
         , h5 [] [ text title ]

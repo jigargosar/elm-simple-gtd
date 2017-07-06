@@ -81,7 +81,6 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | OnSetViewType ViewType
-    | OnSetEntityListView EntityListViewType
     | OnEntityMsg Entity Entity.Msg
     | OnLaunchBarMsg LaunchBar.Msg
     | OnLaunchBarMsgWithNow LaunchBar.Msg Time
@@ -93,6 +92,10 @@ type Msg
     | OnAppDrawerMsg AppDrawer.Model.Msg
     | OnPersistLocalPref
     | Mdl (Material.Msg Msg)
+
+
+onSetEntityListView =
+    EntityListView >> OnSetViewType
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)

@@ -100,10 +100,13 @@ iconM icon =
     Material.Icon.view icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
-primaryFAB =
+fab mdl opts =
+    btn mdl [ Material.Button.icon, many opts ]
+
+
+primaryFABCS =
     many
-        [ Material.Button.fab
-        , Material.Button.colored
+        [ Material.Button.colored
         , cs "mdl-button--page-fab"
         ]
 

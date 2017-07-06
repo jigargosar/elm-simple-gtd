@@ -11,9 +11,9 @@ import Model
 
 
 newTodoFab m =
-    btn m.mdl
+    Mat.fab m.mdl
         [ id "add-fab"
-        , primaryFAB
+        , primaryFABCS
         , resourceId "add-todo-fab"
         , onClickStopPropagation (Model.onNewTodoModeWithFocusInEntityAsReference m)
         ]

@@ -147,10 +147,25 @@ var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
-var _jigargosar$elm_simple_gtd$Mat$primaryFAB = _jigargosar$elm_simple_gtd$Mat$many(
+var _jigargosar$elm_simple_gtd$Mat$fab = F2(
+	function (mdl, opts) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Mat$btn,
+			mdl,
+			{
+				ctor: '::',
+				_0: _debois$elm_mdl$Material_Button$icon,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Mat$many(opts),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _jigargosar$elm_simple_gtd$Mat$primaryFABCS = _jigargosar$elm_simple_gtd$Mat$many(
 	{
 		ctor: '::',
-		_0: _debois$elm_mdl$Material_Button$fab,
+		_0: _debois$elm_mdl$Material_Button$minifab,
 		_1: {
 			ctor: '::',
 			_0: _debois$elm_mdl$Material_Button$colored,

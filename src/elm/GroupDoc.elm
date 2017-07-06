@@ -5,12 +5,7 @@ import X.Predicate
 import X.Record
 import Firebase exposing (DeviceId)
 import Time exposing (Time)
-
-
-
 import X.Function.Infix exposing (..)
-
-
 import Store
 import Tuple2
 import Json.Decode as D exposing (Decoder)

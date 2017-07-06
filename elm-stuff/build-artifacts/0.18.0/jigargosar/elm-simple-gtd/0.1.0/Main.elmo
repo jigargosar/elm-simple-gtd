@@ -48,27 +48,12 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 			_1: {
 				ctor: '::',
 				_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(model.keyComboModel),
-				_1: {
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Todo_Main$subscriptions(model),
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions(model),
-						_1: {
-							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions(model),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 };
-var _jigargosar$elm_simple_gtd$Main$main = function () {
-	var _p0 = 1;
-	return _rgrempel$elm_route_url$RouteUrl$programWithFlags(
-		{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions});
-}()(
+var _jigargosar$elm_simple_gtd$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
+	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (appVersion) {

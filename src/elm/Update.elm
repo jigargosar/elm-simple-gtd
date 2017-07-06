@@ -54,14 +54,6 @@ map =
     Return.map
 
 
-over =
-    Record.over >>> map
-
-
-set =
-    Record.set >>> map
-
-
 update : Msg -> Model -> Return
 update msg =
     Return.singleton

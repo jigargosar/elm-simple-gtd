@@ -788,8 +788,8 @@ getEditMode =
 
 
 setEditMode : ExclusiveMode -> ModelF
-setEditMode editMode =
-    (\model -> { model | editMode = editMode })
+setEditMode =
+    set editMode
 
 
 updateEditModeM : (Model -> ExclusiveMode) -> ModelF

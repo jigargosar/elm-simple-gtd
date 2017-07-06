@@ -385,11 +385,6 @@ setUser =
     set user
 
 
-setFCMToken fcmToken model =
-    { model | fcmToken = fcmToken }
-        |> over firebaseClient (Firebase.updateToken fcmToken)
-
-
 updateFirebaseConnection connected =
     over firebaseClient (Firebase.updateConnection connected)
 

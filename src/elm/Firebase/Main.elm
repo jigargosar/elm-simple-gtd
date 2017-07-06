@@ -123,7 +123,7 @@ update andThenUpdate msg =
             D.decodeValue Firebase.fcmTokenDecoder encodedToken
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\token ->
-                        Return.map (Model.setFCMToken token)
+                        Return.map (setFCMToken token)
                             >> maybeEffect firebaseUpdateClientCmd
                     )
                 != identity
@@ -145,3 +145,8 @@ firebaseSetupOnDisconnectCmd model =
 
 startSyncWithFirebase user =
     maybeEffect (Model.getMaybeUserId >>? startSyncCmd)
+
+
+setFCMToken fcmToken model =
+    { model | fcmToken = fcmToken }
+        |> X.Record.over Model.firebaseClient (Firebase.updateToken fcmToken)

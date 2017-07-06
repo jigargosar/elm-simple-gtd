@@ -7,7 +7,7 @@ import Model
 import Navigation
 import Return
 import Time
-import X.Record
+import X.Record exposing (over)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
@@ -129,24 +129,36 @@ update andThenUpdate msg =
                 != identity
 
         OnFirebaseConnectionChanged connected ->
-            Return.map (Model.updateFirebaseConnection connected)
+            Return.map (updateFirebaseConnection connected)
                 >> maybeEffect firebaseUpdateClientCmd
 
 
 firebaseUpdateClientCmd model =
-    Model.getMaybeUserId model
+    getMaybeUserId model
         ?|> updateClientCmd model.firebaseClient
 
 
 firebaseSetupOnDisconnectCmd model =
-    Model.getMaybeUserId model
+    getMaybeUserId model
         ?|> setupOnDisconnectCmd model.firebaseClient
 
 
 startSyncWithFirebase user =
-    maybeEffect (Model.getMaybeUserId >>? startSyncCmd)
+    maybeEffect (getMaybeUserId >>? startSyncCmd)
 
 
 setFCMToken fcmToken model =
     { model | fcmToken = fcmToken }
-        |> X.Record.over Model.firebaseClient (Firebase.updateToken fcmToken)
+        |> over firebaseClient (Firebase.updateToken fcmToken)
+
+
+updateFirebaseConnection connected =
+    over firebaseClient (Firebase.updateConnection connected)
+
+
+firebaseClient =
+    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
+
+
+getMaybeUserId =
+    .user >> Firebase.getMaybeUserId

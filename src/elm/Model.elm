@@ -265,10 +265,6 @@ now =
     X.Record.field .now (\s b -> { b | now = s })
 
 
-firebaseClient =
-    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
-
-
 editMode =
     X.Record.field .editMode (\s b -> { b | editMode = s })
 
@@ -377,16 +373,8 @@ getMaybeUserProfile =
     .user >> Firebase.getMaybeUserProfile
 
 
-getMaybeUserId =
-    .user >> Firebase.getMaybeUserId
-
-
 setUser =
     set user
-
-
-updateFirebaseConnection connected =
-    over firebaseClient (Firebase.updateConnection connected)
 
 
 filterTodosAndSortBy pred sortBy model =

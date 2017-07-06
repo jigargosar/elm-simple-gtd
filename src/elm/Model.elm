@@ -566,10 +566,6 @@ createAndEditNewContext model =
            )
 
 
-isShowDetailsKeyPressed =
-    .keyboardState >> Keyboard.isAltDown >> not
-
-
 switchToNewUserSetupModeIfNeeded model =
     if Store.isEmpty model.todoStore then
         setEditMode createSetupExclusiveMode model

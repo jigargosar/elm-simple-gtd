@@ -145,7 +145,7 @@ contexts model =
         config : Config
         config =
             { groupByFn = Todo.getContextId
-            , todoList = Model.getAllActiveTodoHavingActiveProject model
+            , todoList = Model.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
             , toEntity = Entity.fromContext

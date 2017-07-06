@@ -157,13 +157,6 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 					},
 					A2(_jigargosar$elm_simple_gtd$Update$andThenUpdate, _jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm, _p14));
 			};
-		case 'ToggleShowDeletedEntity':
-			return _jigargosar$elm_simple_gtd$Update$map(
-				function (m) {
-					return _elm_lang$core$Native_Utils.update(
-						m,
-						{showDeleted: !m.showDeleted});
-				});
 		case 'ReminderOverlayAction':
 			return _jigargosar$elm_simple_gtd$Update$reminderOverlayAction(_p8._0);
 		case 'OnDeactivateEditingMode':

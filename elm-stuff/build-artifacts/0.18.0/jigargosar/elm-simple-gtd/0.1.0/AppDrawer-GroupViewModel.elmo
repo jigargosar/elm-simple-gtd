@@ -72,7 +72,6 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		viewType: _jigargosar$elm_simple_gtd$Entity$ContextsView,
 		title: 'Contexts',
 		className: 'contexts',
-		showDeleted: model.showDeleted,
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewContext,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$contextsColor},
@@ -110,7 +109,6 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		viewType: _jigargosar$elm_simple_gtd$Entity$ProjectsView,
 		title: 'Projects',
 		className: 'projects',
-		showDeleted: model.showDeleted,
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewProject,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$projectsColor},
@@ -135,9 +133,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$ViewModel = function (a)
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return function (m) {
-													return {nullVMAsList: a, entityList: b, archivedEntityList: c, viewType: d, title: e, className: f, showDeleted: g, showArchived: h, onAddClicked: i, onToggleExpanded: j, onToggleShowArchived: k, isExpanded: l, icon: m};
-												};
+												return {nullVMAsList: a, entityList: b, archivedEntityList: c, viewType: d, title: e, className: f, showArchived: g, onAddClicked: h, onToggleExpanded: i, onToggleShowArchived: j, isExpanded: k, icon: l};
 											};
 										};
 									};
@@ -153,10 +149,6 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$ViewModel = function (a)
 var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$DocumentWithNameViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {id: a, name: b, appHeader: c, isDeleted: d, isEmpty: e, count: f, onActiveStateChanged: g, icon: h};
-	});
-var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$Record = F2(
-	function (a, b) {
-		return {name: a, archived: b};
 	});
 var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$Config = function (a) {
 	return function (b) {

@@ -2,6 +2,7 @@ module ExclusiveMode.Main exposing (..)
 
 import DomPorts exposing (autoFocusInputCmd)
 import ExclusiveMode
+import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -14,7 +15,7 @@ import Return
 start exclusiveMode =
     case exclusiveMode of
         ExclusiveMode.NewTodo form ->
-            identity
+            Return.map (Model.setEditMode exclusiveMode)
                 >> autoFocusInputCmd
 
         _ ->

@@ -66,7 +66,6 @@ type Msg
     | OnMainMenuStateChanged Menu.State
     | RemotePouchSync ExclusiveMode.SyncForm
     | ReminderOverlayAction Todo.Notification.Model.Action
-    | NewTodo
     | NewTodoForInbox
     | NewProject
     | NewContext
@@ -590,7 +589,7 @@ updateLaunchBarInput now text form =
     set editMode (LaunchBar.Form.updateInput now text form |> ExclusiveMode.LaunchBar)
 
 
-foo model =
+onNewTodoModeWithFocusInEntityAsReference model =
     Todo.NewForm.create (model.focusInEntity) "" |> ExclusiveMode.NewTodo |> OnStartExclusiveMode
 
 

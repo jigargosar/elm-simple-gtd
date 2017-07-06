@@ -13,7 +13,8 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = function (m) {
 					_0: _jigargosar$elm_simple_gtd$Mat$resourceId('add-todo-fab'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$NewTodo),
+						_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
+							_jigargosar$elm_simple_gtd$Model$onNewTodoModeWithFocusInEntityAsReference(m)),
 						_1: {ctor: '[]'}
 					}
 				}

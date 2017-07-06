@@ -10,6 +10,7 @@ import Entity
 import ExclusiveMode.Main
 import Firebase.Main
 import Material
+import Toolkit.Helpers exposing (apply2)
 import X.Debug
 import X.Keyboard as Keyboard exposing (Key)
 import X.Record as Record exposing (set)
@@ -146,10 +147,6 @@ updateInner msg =
         OnSaveCurrentForm ->
             Return.andThen Model.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
-
-        NewTodo ->
-            map (Model.activateNewTodoModeWithFocusInEntityAsReference)
-                >> autoFocusInputCmd
 
         NewTodoForInbox ->
             map (Model.activateNewTodoModeWithInboxAsReference)
@@ -313,7 +310,13 @@ onGlobalKeyUp key =
                                 clear
 
                             Key.CharQ ->
-                                andThenUpdate NewTodo
+                                Return.andThen
+                                    (apply2
+                                        ( Model.onNewTodoModeWithFocusInEntityAsReference
+                                        , identity
+                                        )
+                                        >> uncurry update
+                                    )
 
                             Key.CharI ->
                                 andThenUpdate NewTodoForInbox

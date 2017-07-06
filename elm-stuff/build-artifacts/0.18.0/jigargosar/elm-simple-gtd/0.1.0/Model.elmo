@@ -1333,7 +1333,6 @@ var _jigargosar$elm_simple_gtd$Model$NewTodoTextChanged = F2(
 var _jigargosar$elm_simple_gtd$Model$NewContext = {ctor: 'NewContext'};
 var _jigargosar$elm_simple_gtd$Model$NewProject = {ctor: 'NewProject'};
 var _jigargosar$elm_simple_gtd$Model$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
-var _jigargosar$elm_simple_gtd$Model$NewTodo = {ctor: 'NewTodo'};
 var _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction = function (a) {
 	return {ctor: 'ReminderOverlayAction', _0: a};
 };
@@ -1347,7 +1346,7 @@ var _jigargosar$elm_simple_gtd$Model$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
 var _jigargosar$elm_simple_gtd$Model$OnStartExclusiveMode = function (a) {
 	return {ctor: 'OnStartExclusiveMode', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Model$foo = function (model) {
+var _jigargosar$elm_simple_gtd$Model$onNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return _jigargosar$elm_simple_gtd$Model$OnStartExclusiveMode(
 		_jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo(
 			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')));

@@ -15,6 +15,6 @@ newTodoFab m =
         [ id "add-fab"
         , primaryFAB
         , resourceId "add-todo-fab"
-        , onClickStopPropagation (Model.foo m)
+        , onClickStopPropagation (Model.onNewTodoModeWithFocusInEntityAsReference m)
         ]
         [ icon "add" ]

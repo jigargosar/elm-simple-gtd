@@ -14,7 +14,7 @@ var _jigargosar$elm_simple_gtd$Mat$btnFlat = F2(
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$a,
+					_elm_lang$html$Html$button,
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),

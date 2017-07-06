@@ -233,7 +233,7 @@ btn_ textV attributes =
 
 btnFlat textV attributes =
     div attributes
-        [ Html.a [ HA.class "btn btn-flat" ] [ text textV ] ]
+        [ Html.button [ HA.class "btn btn-flat" ] [ text textV ] ]
 
 
 divider =

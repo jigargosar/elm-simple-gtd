@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
-	var _p0 = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(m);
+	var _p0 = _jigargosar$elm_simple_gtd$Firebase$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
 		return A3(
 			_jigargosar$elm_simple_gtd$Mat$headerIconBtn,

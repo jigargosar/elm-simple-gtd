@@ -1,12 +1,8 @@
 module Firebase.SignIn exposing (..)
 
 import Firebase
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -97,16 +93,3 @@ setStateToTriedSignOut =
 
 setStateToSignInSuccess =
     X.Record.set state SignInSuccess
-
-
-updateAfterUserChanged user =
-    X.Record.over state (updateStateAfterUserChanged user)
-
-
-updateStateAfterUserChanged user state =
-    case user of
-        Firebase.SignedIn _ ->
-            SignInSuccess
-
-        _ ->
-            state

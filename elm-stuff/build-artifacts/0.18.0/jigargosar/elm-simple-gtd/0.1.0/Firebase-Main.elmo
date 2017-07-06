@@ -1,9 +1,14 @@
-var _jigargosar$elm_simple_gtd$Firebase_Main$getMaybeUserId = function (_p0) {
-	return _jigargosar$elm_simple_gtd$Firebase$getMaybeUserId(
-		function (_) {
-			return _.user;
-		}(_p0));
-};
+var _jigargosar$elm_simple_gtd$Firebase_Main$user = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.user;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{user: s});
+		}));
 var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseClient = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -15,6 +20,13 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseClient = A2(
 				b,
 				{firebaseClient: s});
 		}));
+var _jigargosar$elm_simple_gtd$Firebase_Main$setUser = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Firebase_Main$user);
+var _jigargosar$elm_simple_gtd$Firebase_Main$getMaybeUserId = function (_p0) {
+	return _jigargosar$elm_simple_gtd$Firebase_Model$getMaybeUserId(
+		function (_) {
+			return _.user;
+		}(_p0));
+};
 var _jigargosar$elm_simple_gtd$Firebase_Main$updateFirebaseConnection = function (connected) {
 	return A2(
 		_jigargosar$elm_simple_gtd$X_Record$over,
@@ -59,7 +71,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$updateClientCmd = F2(
 						_elm_lang$core$Basics_ops['++'],
 						uid,
 						A2(_elm_lang$core$Basics_ops['++'], '/clients/', client.id))),
-				_1: _jigargosar$elm_simple_gtd$Firebase$encodeClient(client)
+				_1: _jigargosar$elm_simple_gtd$Firebase_Model$encodeClient(client)
 			});
 	});
 var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd = function (model) {
@@ -79,10 +91,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$fireStartSync = _elm_lang$core$Nati
 		return v;
 	});
 var _jigargosar$elm_simple_gtd$Firebase_Main$startSyncCmd = _jigargosar$elm_simple_gtd$Firebase_Main$fireStartSync;
-var _jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase = function (user) {
-	return _jigargosar$elm_simple_gtd$X_Return$maybeEffect(
-		A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'], _jigargosar$elm_simple_gtd$Firebase_Main$getMaybeUserId, _jigargosar$elm_simple_gtd$Firebase_Main$startSyncCmd));
-};
+var _jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase = _jigargosar$elm_simple_gtd$X_Return$maybeEffect(
+	A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'], _jigargosar$elm_simple_gtd$Firebase_Main$getMaybeUserId, _jigargosar$elm_simple_gtd$Firebase_Main$startSyncCmd));
 var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnect = _elm_lang$core$Native_Platform.outgoingPort(
 	'firebaseSetupOnDisconnect',
 	function (v) {
@@ -171,12 +181,10 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						A2(
 							_elm_lang$core$Result$mapError,
 							_elm_lang$core$Debug$log('Error decoding User'),
-							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$userDecoder, _p1._0)),
+							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase_Model$userDecoder, _p1._0)),
 						function (user) {
 							return function (_p6) {
-								return A2(
-									_jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase,
-									user,
+								return _jigargosar$elm_simple_gtd$Firebase_Main$startSyncWithFirebase(
 									A2(
 										_jigargosar$elm_simple_gtd$X_Return$maybeEffect,
 										_jigargosar$elm_simple_gtd$Firebase_Main$firebaseSetupOnDisconnectCmd,
@@ -188,7 +196,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 												_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
 												A2(
 													_Fresheyeball$elm_return$Return$map,
-													_jigargosar$elm_simple_gtd$Model$setUser(user),
+													_jigargosar$elm_simple_gtd$Firebase_Main$setUser(user),
 													_p6)))));
 							};
 						}),
@@ -201,7 +209,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						A2(
 							_elm_lang$core$Result$mapError,
 							_elm_lang$core$Debug$log('Error decoding User'),
-							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase$fcmTokenDecoder, _p1._0)),
+							A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Firebase_Model$fcmTokenDecoder, _p1._0)),
 						function (token) {
 							return function (_p7) {
 								return A2(

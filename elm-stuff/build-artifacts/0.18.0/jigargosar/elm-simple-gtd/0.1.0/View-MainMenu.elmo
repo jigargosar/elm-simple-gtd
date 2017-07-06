@@ -79,7 +79,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$getItems = function (appModel) {
 			}
 		}
 	};
-	var maybeUserProfile = _jigargosar$elm_simple_gtd$Model$getMaybeUserProfile(appModel);
+	var maybeUserProfile = _jigargosar$elm_simple_gtd$Firebase$getMaybeUserProfile(appModel);
 	var signInMenuItem = A2(
 		_Fresheyeball$elm_tuple_extra$Tuple2$map,
 		function (_p8) {

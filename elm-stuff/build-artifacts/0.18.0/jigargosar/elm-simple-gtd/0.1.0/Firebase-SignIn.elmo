@@ -39,27 +39,12 @@ var _jigargosar$elm_simple_gtd$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignO
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToTriedSignOut = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$TriedSignOut);
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToSignInSuccess = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess);
-var _jigargosar$elm_simple_gtd$Firebase_SignIn$updateStateAfterUserChanged = F2(
-	function (user, state) {
-		var _p1 = user;
-		if (_p1.ctor === 'SignedIn') {
-			return _jigargosar$elm_simple_gtd$Firebase_SignIn$SignInSuccess;
-		} else {
-			return state;
-		}
-	});
-var _jigargosar$elm_simple_gtd$Firebase_SignIn$updateAfterUserChanged = function (user) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Record$over,
-		_jigargosar$elm_simple_gtd$Firebase_SignIn$state,
-		_jigargosar$elm_simple_gtd$Firebase_SignIn$updateStateAfterUserChanged(user));
-};
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn = {ctor: 'SkipSignIn'};
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$setSkipSignIn = A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Firebase_SignIn$state, _jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn);
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$FirstVisitNotSignedIn = {ctor: 'FirstVisitNotSignedIn'};
 var _jigargosar$elm_simple_gtd$Firebase_SignIn$stringToMaybeState = function (string) {
-	var _p2 = string;
-	switch (_p2) {
+	var _p1 = string;
+	switch (_p1) {
 		case 'SkipSignIn':
 			return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Firebase_SignIn$SkipSignIn);
 		case 'TriedSignOut':

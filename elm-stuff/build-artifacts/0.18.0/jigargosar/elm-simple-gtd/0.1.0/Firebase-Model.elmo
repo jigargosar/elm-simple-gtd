@@ -1,0 +1,66 @@
+var _jigargosar$elm_simple_gtd$Firebase_Model$getMaybeUserId = function (user) {
+	var _p0 = user;
+	if (_p0.ctor === 'SignedOut') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Just(_p0._0.id);
+	}
+};
+var _jigargosar$elm_simple_gtd$Firebase_Model$getMaybeUserProfile = function (user) {
+	var _p1 = user;
+	if (_p1.ctor === 'SignedOut') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$List$head(_p1._0.providerData);
+	}
+};
+var _jigargosar$elm_simple_gtd$Firebase_Model$encodeClient = function (client) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+				'id',
+				_elm_lang$core$Json_Encode$string(client.id)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+					'token',
+					A2(_elm_community$json_extra$Json_Encode_Extra$maybe, _elm_lang$core$Json_Encode$string, client.token)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+						'connected',
+						_elm_lang$core$Json_Encode$bool(client.connected)),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$Firebase_Model$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string);
+var _jigargosar$elm_simple_gtd$Firebase_Model$encodeFCMToken = _elm_community$json_extra$Json_Encode_Extra$maybe(_elm_lang$core$Json_Encode$string);
+var _jigargosar$elm_simple_gtd$Firebase_Model$Model = F3(
+	function (a, b, c) {
+		return {user: a, fcmToken: b, firebaseClient: c};
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Model$Client = F3(
+	function (a, b, c) {
+		return {id: a, connected: b, token: c};
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Model$SignedIn = function (a) {
+	return {ctor: 'SignedIn', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_Model$SignedOut = {ctor: 'SignedOut'};
+var _jigargosar$elm_simple_gtd$Firebase_Model$initUser = _jigargosar$elm_simple_gtd$Firebase_Model$SignedOut;
+var _jigargosar$elm_simple_gtd$Firebase_Model$userDecoder = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$core$Json_Decode$map, _jigargosar$elm_simple_gtd$Firebase_Model$SignedIn, _jigargosar$elm_simple_gtd$Firebase_User$decoder),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_Model$SignedOut),
+			_1: {ctor: '[]'}
+		}
+	});

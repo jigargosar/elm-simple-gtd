@@ -68,7 +68,7 @@ menu m =
 
 
 menuIcon m =
-    case Model.getMaybeUserProfile m of
+    case Firebase.getMaybeUserProfile m of
         Nothing ->
             Mat.headerIconBtn m.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"

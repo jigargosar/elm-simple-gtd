@@ -61,7 +61,7 @@ getItems : Model.Model -> List Item
 getItems appModel =
     let
         maybeUserProfile =
-            Model.getMaybeUserProfile appModel
+            Firebase.getMaybeUserProfile appModel
 
         signInMenuItem =
             maybeUserProfile

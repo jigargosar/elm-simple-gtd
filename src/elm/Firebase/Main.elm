@@ -1,7 +1,8 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
-import Firebase exposing (Msg(..), User(..))
+import Firebase exposing (Msg(..))
+import Firebase.Model exposing (User(..))
 import Firebase.SignIn
 import Model
 import Navigation
@@ -52,7 +53,7 @@ startSyncCmd =
 
 
 updateClientCmd client uid =
-    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.encodeClient client )
+    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
 
 
 subscriptions : Model.Subscriptions
@@ -108,19 +109,19 @@ update andThenUpdate msg =
                 )
 
         OnUserChanged encodedUser ->
-            D.decodeValue Firebase.userDecoder encodedUser
+            D.decodeValue Firebase.Model.userDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
                         Return.map (setUser user)
                             >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
-                            >> startSyncWithFirebase user
+                            >> startSyncWithFirebase
                     )
                 != identity
 
         OnFCMTokenChanged encodedToken ->
-            D.decodeValue Firebase.fcmTokenDecoder encodedToken
+            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\token ->
                         Return.map (setFCMToken token)
@@ -143,7 +144,7 @@ firebaseSetupOnDisconnectCmd model =
         ?|> setupOnDisconnectCmd model.firebaseClient
 
 
-startSyncWithFirebase user =
+startSyncWithFirebase =
     maybeEffect (getMaybeUserId >>? startSyncCmd)
 
 
@@ -157,7 +158,7 @@ updateFirebaseConnection connected =
 
 
 getMaybeUserId =
-    .user >> Firebase.getMaybeUserId
+    .user >> Firebase.Model.getMaybeUserId
 
 
 setUser =

@@ -157,11 +157,11 @@ type alias Model =
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
+    , firebaseClient : Firebase.Client
     , developmentMode : Bool
     , selectedEntityIdSet : Set Document.Id
     , appVersion : String
     , deviceId : String
-    , firebaseClient : Firebase.Client
     , focusInEntity : Entity.Entity
     , timeTracker : Todo.TimeTracker.Model
     , keyComboModel : Keyboard.Combo.Model Msg
@@ -322,15 +322,15 @@ init flags =
             , keyboardState = Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-            , user = Firebase.SignedOut
+            , user = Firebase.initUser
             , fcmToken = Nothing
+            , firebaseClient = firebaseClient
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , focusInEntity = inboxEntity
             , timeTracker = Todo.TimeTracker.none
-            , firebaseClient = firebaseClient
             , keyComboModel =
                 Keyboard.Combo.init
                     { toMsg = OnKeyCombo
@@ -363,10 +363,6 @@ type alias ReturnF =
 
 inboxEntity =
     Entity.fromContext Context.null
-
-
-getMaybeUserProfile =
-    .user >> Firebase.getMaybeUserProfile
 
 
 filterTodosAndSortBy pred sortBy model =

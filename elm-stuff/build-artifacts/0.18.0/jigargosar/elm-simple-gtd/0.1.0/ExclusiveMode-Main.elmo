@@ -1,0 +1,14 @@
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start = function (exclusiveMode) {
+	var _p0 = exclusiveMode;
+	if (_p0.ctor === 'NewTodo') {
+		return function (_p1) {
+			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+				A2(
+					_Fresheyeball$elm_return$Return$map,
+					_jigargosar$elm_simple_gtd$Model$setEditMode(exclusiveMode),
+					_p1));
+		};
+	} else {
+		return _elm_lang$core$Basics$identity;
+	}
+};

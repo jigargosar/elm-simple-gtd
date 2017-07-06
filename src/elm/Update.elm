@@ -310,13 +310,9 @@ onGlobalKeyUp key =
                                 clear
 
                             Key.CharQ ->
-                                Return.andThen
-                                    (apply2
-                                        ( Model.onNewTodoModeWithFocusInEntityAsReference
-                                        , identity
-                                        )
-                                        >> uncurry update
-                                    )
+                                Return.andThenApplyWith
+                                    Model.onNewTodoModeWithFocusInEntityAsReference
+                                    update
 
                             Key.CharI ->
                                 andThenUpdate NewTodoForInbox

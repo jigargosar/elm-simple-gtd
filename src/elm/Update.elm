@@ -140,7 +140,7 @@ updateInner msg =
             map (Model.switchToView viewType)
 
         OnSetEntityListView viewType ->
-            map (Model.setEntityListViewType viewType)
+            andThenUpdate (EntityListView viewType |> OnSetViewType)
 
         OnSaveCurrentForm ->
             Return.andThen Model.saveCurrentForm

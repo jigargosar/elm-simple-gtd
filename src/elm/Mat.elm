@@ -89,7 +89,11 @@ cs =
 
 
 icon =
-    Material.Icon.i
+    let
+        _ =
+            5
+    in
+        Material.Icon.i
 
 
 iconSmall iconName =

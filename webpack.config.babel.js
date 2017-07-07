@@ -100,6 +100,7 @@ export default {
                     {
                         loader: "elm-webpack-loader",
                         options: {
+                            // pathToMake:"./elm-make.sh",
                             verbose: true,
                             warn: false,
                             debug: false,

@@ -1,7 +1,6 @@
 module X.Decode exposing (..)
 
 import Json.Decode exposing (..)
-
 import X.Debug
 
 

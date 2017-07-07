@@ -1,0 +1,22 @@
+$header-height: 4rem;
+$sidebar-width: 18rem;
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  background-color: #EEEEEE;
+}
+
+.layout--sidebar{
+  width: $sidebar-width;
+  background-color: color("blue", "lighten-1");
+
+}
+
+.layout--main{
+  background-color: #fff;
+  flex: 1 1 auto;
+}
+

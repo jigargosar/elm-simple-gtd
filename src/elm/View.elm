@@ -10,15 +10,12 @@ import Material.Options
 import Menu
 import Msg exposing (ViewType(..))
 import X.Html exposing (boolProperty, onClickStopPropagation)
-import GroupDoc.EditView
 import ExclusiveMode
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model
-import Model exposing (commonMsg)
 import View.Header
-import Model exposing (..)
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel

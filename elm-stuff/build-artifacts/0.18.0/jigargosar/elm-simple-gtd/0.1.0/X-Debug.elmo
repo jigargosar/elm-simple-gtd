@@ -1,45 +1,16 @@
-var _jigargosar$elm_simple_gtd$X_Debug$toColor = function (logLevel) {
-	var _p0 = logLevel;
-	switch (_p0.ctor) {
-		case 'Error':
-			return 'red';
-		case 'Warning':
-			return 'orange';
-		case 'Info':
-			return 'green';
-		case 'Debug':
-			return 'purple';
-		default:
-			return 'LightBlue';
-	}
-};
-var _jigargosar$elm_simple_gtd$X_Debug$nativeLog = F3(
-	function (level, message, value) {
-		return A4(
-			_jigargosar$elm_simple_gtd$Native_Logger.log,
-			_iosphere$elm_logger$Logger$levelString(level),
-			_jigargosar$elm_simple_gtd$X_Debug$toColor(level),
-			message,
-			value);
-	});
-var _jigargosar$elm_simple_gtd$X_Debug$loggerConfig = A2(_iosphere$elm_logger$Logger$customConfig, _iosphere$elm_logger$Logger$Debug, _jigargosar$elm_simple_gtd$X_Debug$nativeLog);
-var _jigargosar$elm_simple_gtd$X_Debug$log = A2(_iosphere$elm_logger$Logger$log, _jigargosar$elm_simple_gtd$X_Debug$loggerConfig, _iosphere$elm_logger$Logger$Debug);
-var _jigargosar$elm_simple_gtd$X_Debug$logVerbose = A2(_iosphere$elm_logger$Logger$log, _jigargosar$elm_simple_gtd$X_Debug$loggerConfig, _iosphere$elm_logger$Logger$Verbose);
-var _jigargosar$elm_simple_gtd$X_Debug$logInfo = A2(_iosphere$elm_logger$Logger$log, _jigargosar$elm_simple_gtd$X_Debug$loggerConfig, _iosphere$elm_logger$Logger$Info);
-var _jigargosar$elm_simple_gtd$X_Debug$logWarning = A2(_iosphere$elm_logger$Logger$log, _jigargosar$elm_simple_gtd$X_Debug$loggerConfig, _iosphere$elm_logger$Logger$Warning);
-var _jigargosar$elm_simple_gtd$X_Debug$logError = A2(_iosphere$elm_logger$Logger$log, _jigargosar$elm_simple_gtd$X_Debug$loggerConfig, _iosphere$elm_logger$Logger$Error);
+var _jigargosar$elm_simple_gtd$X_Debug$log = _elm_lang$core$Debug$log;
 var _jigargosar$elm_simple_gtd$X_Debug$tap = F2(
 	function (tapperFunction, value) {
-		var _p1 = tapperFunction(value);
+		var _p0 = tapperFunction(value);
 		return value;
 	});
 var _jigargosar$elm_simple_gtd$X_Debug$tapLog = F2(
 	function (transformerFunction, logString) {
 		return _jigargosar$elm_simple_gtd$X_Debug$tap(
-			function (_p2) {
+			function (_p1) {
 				return A2(
-					_jigargosar$elm_simple_gtd$X_Debug$log,
+					_elm_lang$core$Debug$log,
 					logString,
-					transformerFunction(_p2));
+					transformerFunction(_p1));
 			});
 	});

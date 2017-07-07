@@ -19,7 +19,6 @@ import X.String
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Msg
 
 
 stopPropagation =
@@ -89,11 +88,7 @@ cs =
 
 
 icon =
-    let
-        _ =
-            5
-    in
-        Material.Icon.i
+    Material.Icon.i
 
 
 iconSmall iconName =
@@ -104,8 +99,8 @@ iconM icon =
     Material.Icon.view icon.name [ css "color" (AppColors.encode icon.color) ]
 
 
-fab mdl opts =
-    btn mdl [ Material.Button.fab, many opts ]
+fab msg mdl opts =
+    btn msg [ 0 ] mdl [ Material.Button.fab, many opts ]
 
 
 primaryFABCS =
@@ -115,28 +110,28 @@ primaryFABCS =
         ]
 
 
-headerIconBtn mdl opts =
-    btn mdl [ many [ Material.Button.icon, cs "mdl-button--header-icon" ], many opts ]
+headerIconBtn msg mdl opts =
+    btn msg [ 0 ] mdl [ many [ Material.Button.icon, cs "mdl-button--header-icon" ], many opts ]
 
 
-iconBtn mdl opts =
-    btn mdl [ Material.Button.icon, many opts ]
+iconBtn msg mdl opts =
+    btn msg [ 0 ] mdl [ Material.Button.icon, many opts ]
 
 
 btn =
-    Material.Button.render Msg.OnMdl [ 0 ]
+    Material.Button.render
 
 
-iconBtn2 name clickHandler =
-    ib name clickHandler identity
+iconBtn2 msg name clickHandler =
+    ib msg name clickHandler identity
 
 
-iconBtn3 name tabIndexV clickHandler =
-    ib name clickHandler (\c -> { c | tabIndex = tabIndexV })
+iconBtn3 msg name tabIndexV clickHandler =
+    ib msg name clickHandler (\c -> { c | tabIndex = tabIndexV })
 
 
-iconBtn4 name tabIndexV className clickHandler =
-    ib name clickHandler (\c -> { c | tabIndex = tabIndexV, class = className })
+iconBtn4 msg name tabIndexV className clickHandler =
+    ib msg name clickHandler (\c -> { c | tabIndex = tabIndexV, class = className })
 
 
 defaultBtnConfig =
@@ -149,37 +144,14 @@ defaultBtnConfig =
     , mdl = Material.model
     , iconProps = []
     , iconName = ""
-    , msg = Msg.noop
     }
 
 
-ib iconName msg configFn =
-    defaultBtnConfig |> configFn >> ibc iconName msg
+ib msg iconName clickHandler configFn =
+    defaultBtnConfig |> configFn >> ibc msg iconName clickHandler
 
 
-ibc_ iconName msg opts =
-    let
-        --        trackingId =
-        --            config.trackingId
-        --                |> when X.String.isBlank (\_ -> "ma2-" ++ iconName)
-        btnAttr =
-            [ onStopPropagation2 "click" msg
-
-            --                    , Material.Options.attribute <| attribute "data-btn-name" trackingId
-            ]
-                |> Material.Options.many
-
-        --        Material.Button.icon
-    in
-        Material.Button.render Msg.OnMdl
-            [ 0 ]
-            Material.model
-            [ btnAttr
-            ]
-            [ Material.Icon.view iconName [] ]
-
-
-ibc iconName msg config =
+ibc msg iconName clickHandler config =
     let
         trackingId =
             config.trackingId
@@ -197,12 +169,12 @@ ibc iconName msg config =
             ]
                 |> List.filterMap identity
                 .|> Material.Options.attribute
-                |++ [ onStopPropagation2 "click" msg
+                |++ [ onStopPropagation2 "click" clickHandler
                     , Material.Options.attribute <| Html.Attributes.attribute "data-btn-name" trackingId
                     ]
                 |> Material.Options.many
     in
-        Material.Button.render Msg.OnMdl
+        Material.Button.render msg
             [ 0 ]
             config.mdl
             [ Material.Options.many
@@ -234,7 +206,7 @@ bigIconTextBtn iconName textV clickHandler =
         ]
 
 
-btn_ textV attributes =
+submit textV attributes =
     div attributes [ Html.button [ HA.class "btn" ] [ text textV ] ]
 
 

@@ -38,14 +38,16 @@ headerItem vm =
     let
         editButton =
             if vm.isEditable then
-                Mat.iconBtn3 "create"
+                Mat.iconBtn3 Msg.OnMdl
+                    "create"
                     vm.tabindexAV
                     vm.startEditingMsg
             else
                 span [] []
 
         archiveButton =
-            Mat.iconBtn3 vm.archive.iconName
+            Mat.iconBtn3 Msg.OnMdl
+                vm.archive.iconName
                 vm.tabindexAV
                 vm.archive.onClick
 

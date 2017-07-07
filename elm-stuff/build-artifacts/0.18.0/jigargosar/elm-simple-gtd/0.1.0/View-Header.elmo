@@ -1,8 +1,9 @@
 var _jigargosar$elm_simple_gtd$View_Header$menuIcon = function (m) {
 	var _p0 = _jigargosar$elm_simple_gtd$Firebase$getMaybeUserProfile(m);
 	if (_p0.ctor === 'Nothing') {
-		return A3(
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$headerIconBtn,
+			_jigargosar$elm_simple_gtd$Msg$OnMdl,
 			m.mdl,
 			{
 				ctor: '::',
@@ -53,8 +54,9 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 };
 var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 	function (content, m) {
-		var menuButton = A3(
+		var menuButton = A4(
 			_jigargosar$elm_simple_gtd$Mat$headerIconBtn,
+			_jigargosar$elm_simple_gtd$Msg$OnMdl,
 			m.mdl,
 			{
 				ctor: '::',

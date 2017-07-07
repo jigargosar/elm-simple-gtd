@@ -28,7 +28,7 @@ var _jigargosar$elm_simple_gtd$Mat$btnFlat = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$btn_ = F2(
+var _jigargosar$elm_simple_gtd$Mat$submit = F2(
 	function (textV, attributes) {
 		return A2(
 			_elm_lang$html$Html$div,
@@ -109,17 +109,9 @@ var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 	primaryFAB: false,
 	mdl: _debois$elm_mdl$Material$model,
 	iconProps: {ctor: '[]'},
-	iconName: '',
-	msg: _jigargosar$elm_simple_gtd$Msg$noop
+	iconName: ''
 };
-var _jigargosar$elm_simple_gtd$Mat$btn = A2(
-	_debois$elm_mdl$Material_Button$render,
-	_jigargosar$elm_simple_gtd$Msg$OnMdl,
-	{
-		ctor: '::',
-		_0: 0,
-		_1: {ctor: '[]'}
-	});
+var _jigargosar$elm_simple_gtd$Mat$btn = _debois$elm_mdl$Material_Button$render;
 var _jigargosar$elm_simple_gtd$Mat$iconSmall = function (iconName) {
 	return A2(
 		_debois$elm_mdl$Material_Icon$view,
@@ -130,10 +122,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconSmall = function (iconName) {
 			_1: {ctor: '[]'}
 		});
 };
-var _jigargosar$elm_simple_gtd$Mat$icon = function () {
-	var _p0 = 5;
-	return _debois$elm_mdl$Material_Icon$i;
-}();
+var _jigargosar$elm_simple_gtd$Mat$icon = _debois$elm_mdl$Material_Icon$i;
 var _jigargosar$elm_simple_gtd$Mat$cs = _debois$elm_mdl$Material_Options$cs;
 var _jigargosar$elm_simple_gtd$Mat$css = _debois$elm_mdl$Material_Options$css;
 var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
@@ -150,10 +139,16 @@ var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Mat$many = _debois$elm_mdl$Material_Options$many;
-var _jigargosar$elm_simple_gtd$Mat$fab = F2(
-	function (mdl, opts) {
-		return A2(
+var _jigargosar$elm_simple_gtd$Mat$fab = F3(
+	function (msg, mdl, opts) {
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$btn,
+			msg,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			},
 			mdl,
 			{
 				ctor: '::',
@@ -175,10 +170,16 @@ var _jigargosar$elm_simple_gtd$Mat$primaryFABCS = _jigargosar$elm_simple_gtd$Mat
 			_1: {ctor: '[]'}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F2(
-	function (mdl, opts) {
-		return A2(
+var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F3(
+	function (msg, mdl, opts) {
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$btn,
+			msg,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			},
 			mdl,
 			{
 				ctor: '::',
@@ -199,10 +200,16 @@ var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F2(
 				}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn = F2(
-	function (mdl, opts) {
-		return A2(
+var _jigargosar$elm_simple_gtd$Mat$iconBtn = F3(
+	function (msg, mdl, opts) {
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$btn,
+			msg,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			},
 			mdl,
 			{
 				ctor: '::',
@@ -215,9 +222,9 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn = F2(
 			});
 	});
 var _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr = _debois$elm_mdl$Material_Options$attribute;
-var _jigargosar$elm_simple_gtd$Mat$tabIndex = function (_p1) {
+var _jigargosar$elm_simple_gtd$Mat$tabIndex = function (_p0) {
 	return _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr(
-		_elm_lang$html$Html_Attributes$tabindex(_p1));
+		_elm_lang$html$Html_Attributes$tabindex(_p0));
 };
 var _jigargosar$elm_simple_gtd$Mat$attr = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _elm_lang$html$Html_Attributes$attribute, _jigargosar$elm_simple_gtd$Mat$fromHtmlAttr);
 var _jigargosar$elm_simple_gtd$Mat$resourceId = _jigargosar$elm_simple_gtd$Mat$attr('data-btn-name');
@@ -230,47 +237,16 @@ var _jigargosar$elm_simple_gtd$Mat$onStopPropagation = function (eventName) {
 	return A2(_jigargosar$elm_simple_gtd$Mat$onWithOptions, eventName, _jigargosar$elm_simple_gtd$Mat$stopPropagation);
 };
 var _jigargosar$elm_simple_gtd$Mat$onStopPropagation2 = function (eventName) {
-	return function (_p2) {
+	return function (_p1) {
 		return A2(
 			_jigargosar$elm_simple_gtd$Mat$onStopPropagation,
 			eventName,
-			_elm_lang$core$Json_Decode$succeed(_p2));
+			_elm_lang$core$Json_Decode$succeed(_p1));
 	};
 };
 var _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation = _jigargosar$elm_simple_gtd$Mat$onStopPropagation2('click');
-var _jigargosar$elm_simple_gtd$Mat$ibc_ = F3(
-	function (iconName, msg, opts) {
-		var btnAttr = _debois$elm_mdl$Material_Options$many(
-			{
-				ctor: '::',
-				_0: A2(_jigargosar$elm_simple_gtd$Mat$onStopPropagation2, 'click', msg),
-				_1: {ctor: '[]'}
-			});
-		return A5(
-			_debois$elm_mdl$Material_Button$render,
-			_jigargosar$elm_simple_gtd$Msg$OnMdl,
-			{
-				ctor: '::',
-				_0: 0,
-				_1: {ctor: '[]'}
-			},
-			_debois$elm_mdl$Material$model,
-			{
-				ctor: '::',
-				_0: btnAttr,
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_debois$elm_mdl$Material_Icon$view,
-					iconName,
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
-	function (iconName, msg, config) {
+var _jigargosar$elm_simple_gtd$Mat$ibc = F4(
+	function (msg, iconName, clickHandler, config) {
 		var cs = _jigargosar$elm_simple_gtd$Mat$classListAsClass(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
@@ -279,8 +255,8 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 					_0: {
 						ctor: '_Tuple2',
 						_0: config.$class,
-						_1: function (_p3) {
-							return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p3);
+						_1: function (_p2) {
+							return !_jigargosar$elm_simple_gtd$X_String$isBlank(_p2);
 						}(config.$class)
 					},
 					_1: {ctor: '[]'}
@@ -289,7 +265,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 		var trackingId = A3(
 			_jigargosar$elm_simple_gtd$X_Function$when,
 			_jigargosar$elm_simple_gtd$X_String$isBlank,
-			function (_p4) {
+			function (_p3) {
 				return A2(_elm_lang$core$Basics_ops['++'], 'ma2-', iconName);
 			},
 			config.trackingId);
@@ -317,7 +293,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 					_debois$elm_mdl$Material_Options$attribute),
 				{
 					ctor: '::',
-					_0: A2(_jigargosar$elm_simple_gtd$Mat$onStopPropagation2, 'click', msg),
+					_0: A2(_jigargosar$elm_simple_gtd$Mat$onStopPropagation2, 'click', clickHandler),
 					_1: {
 						ctor: '::',
 						_0: _debois$elm_mdl$Material_Options$attribute(
@@ -327,7 +303,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 				}));
 		return A5(
 			_debois$elm_mdl$Material_Button$render,
-			_jigargosar$elm_simple_gtd$Msg$OnMdl,
+			msg,
 			{
 				ctor: '::',
 				_0: 0,
@@ -370,24 +346,26 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 				_1: {ctor: '[]'}
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$ib = F3(
-	function (iconName, msg, configFn) {
-		return function (_p5) {
-			return A3(
+var _jigargosar$elm_simple_gtd$Mat$ib = F4(
+	function (msg, iconName, clickHandler, configFn) {
+		return function (_p4) {
+			return A4(
 				_jigargosar$elm_simple_gtd$Mat$ibc,
-				iconName,
 				msg,
-				configFn(_p5));
+				iconName,
+				clickHandler,
+				configFn(_p4));
 		}(_jigargosar$elm_simple_gtd$Mat$defaultBtnConfig);
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F2(
-	function (name, clickHandler) {
-		return A3(_jigargosar$elm_simple_gtd$Mat$ib, name, clickHandler, _elm_lang$core$Basics$identity);
+var _jigargosar$elm_simple_gtd$Mat$iconBtn2 = F3(
+	function (msg, name, clickHandler) {
+		return A4(_jigargosar$elm_simple_gtd$Mat$ib, msg, name, clickHandler, _elm_lang$core$Basics$identity);
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
-	function (name, tabIndexV, clickHandler) {
-		return A3(
+var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F4(
+	function (msg, name, tabIndexV, clickHandler) {
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$ib,
+			msg,
 			name,
 			clickHandler,
 			function (c) {
@@ -396,10 +374,11 @@ var _jigargosar$elm_simple_gtd$Mat$iconBtn3 = F3(
 					{tabIndex: tabIndexV});
 			});
 	});
-var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F4(
-	function (name, tabIndexV, className, clickHandler) {
-		return A3(
+var _jigargosar$elm_simple_gtd$Mat$iconBtn4 = F5(
+	function (msg, name, tabIndexV, className, clickHandler) {
+		return A4(
 			_jigargosar$elm_simple_gtd$Mat$ib,
+			msg,
 			name,
 			clickHandler,
 			function (c) {

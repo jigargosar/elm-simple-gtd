@@ -287,7 +287,8 @@ classListAsClass list =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Mat.iconBtn4 "done"
+    Mat.iconBtn4 Msg.OnMdl
+        "done"
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
         vm.toggleDoneMsg
@@ -295,7 +296,8 @@ doneIconButton vm =
 
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
-    Mat.iconBtn vm.mdl
+    Mat.iconBtn Msg.OnMdl
+        vm.mdl
         [ Mat.id ("todo-more-menu-button-" ++ vm.key)
         , Mat.onClickStopPropagation vm.onMoreMenuClicked
         , Mat.tabIndex vm.tabindexAV
@@ -316,7 +318,8 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Mat.iconBtn vm.mdl
+        , Mat.iconBtn Msg.OnMdl
+            vm.mdl
             [ Mat.tabIndex vm.tabindexAV
             ]
             [ Mat.iconSmall "schedule" ]

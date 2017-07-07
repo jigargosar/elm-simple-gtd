@@ -435,8 +435,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: A3(
+				_0: A4(
 					_jigargosar$elm_simple_gtd$Mat$iconBtn,
+					_jigargosar$elm_simple_gtd$Msg$OnMdl,
 					vm.mdl,
 					{
 						ctor: '::',
@@ -453,8 +454,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Todo_View$moreIconButton = function (vm) {
-	return A3(
+	return A4(
 		_jigargosar$elm_simple_gtd$Mat$iconBtn,
+		_jigargosar$elm_simple_gtd$Msg$OnMdl,
 		vm.mdl,
 		{
 			ctor: '::',
@@ -486,8 +488,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$classListAsClass = function (list) {
 			A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list)));
 };
 var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
-	return A4(
+	return A5(
 		_jigargosar$elm_simple_gtd$Mat$iconBtn4,
+		_jigargosar$elm_simple_gtd$Msg$OnMdl,
 		'done',
 		vm.tabindexAV,
 		_jigargosar$elm_simple_gtd$Todo_View$classListAsClass(

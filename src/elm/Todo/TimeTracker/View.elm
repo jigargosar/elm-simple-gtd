@@ -1,5 +1,6 @@
 module Todo.TimeTracker.View exposing (..)
 
+import Msg
 import X.Time
 import Mat
 import Model
@@ -42,6 +43,6 @@ view vm =
                 , style [ "margin-right" => "1rem" ]
                 ]
                 [ text vm.displayTime ]
-            , Mat.iconBtn2 "stop" vm.onStop
+            , Mat.iconBtn2 Msg.OnMdl "stop" vm.onStop
             ]
         ]

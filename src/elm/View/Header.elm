@@ -49,7 +49,8 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Mat.headerIconBtn m.mdl
+            Mat.headerIconBtn Msg.OnMdl
+                m.mdl
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
@@ -70,7 +71,8 @@ menu m =
 menuIcon m =
     case Firebase.getMaybeUserProfile m of
         Nothing ->
-            Mat.headerIconBtn m.mdl
+            Mat.headerIconBtn Msg.OnMdl
+                m.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"
                 , Mat.tabIndex -1
                 ]

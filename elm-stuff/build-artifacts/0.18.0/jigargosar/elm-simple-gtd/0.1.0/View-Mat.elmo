@@ -1,6 +1,7 @@
 var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = function (m) {
-	return A3(
+	return A4(
 		_jigargosar$elm_simple_gtd$Mat$fab,
+		_jigargosar$elm_simple_gtd$Msg$OnMdl,
 		m.mdl,
 		{
 			ctor: '::',

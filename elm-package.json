@@ -26,7 +26,6 @@
         "elm-lang/keyboard": "1.0.1 <= v < 2.0.0",
         "elm-lang/navigation": "2.1.0 <= v < 3.0.0",
         "debois/elm-mdl": "8.1.0 <= v < 9.0.0",
-        "evancz/url-parser": "2.0.1 <= v < 3.0.0",
         "iosphere/elm-logger": "1.0.1 <= v < 2.0.0",
         "justinmimbs/elm-date-extra": "2.0.3 <= v < 3.0.0",
         "mdgriffith/elm-color-mixing": "1.1.1 <= v < 2.0.0",
@@ -35,7 +34,12 @@
         "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0",
         "rgrempel/elm-route-url": "3.0.0 <= v < 4.0.0",
         "scottcorgan/keyboard-combo": "4.0.0 <= v < 5.0.0",
-        "tripokey/elm-fuzzy": "5.1.0 <= v < 6.0.0"
+        "tripokey/elm-fuzzy": "5.1.0 <= v < 6.0.0",
+        "eeue56/elm-ffi": "1.0.0 < v <= 2.0.0"
+
+    },
+    "dependency-sources": {
+        "eeue56/elm-ffi": "git@github.com:eeue56/elm-ffi.git"
     },
     "elm-version": "0.18.0 <= v < 0.19.0"
 }

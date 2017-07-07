@@ -1,0 +1,68 @@
+var _jigargosar$elm_simple_gtd$MainOld$onFirebaseDatabaseChange = _elm_lang$core$Native_Platform.incomingPort(
+	'onFirebaseDatabaseChange',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (x0) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (x1) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{ctor: '_Tuple2', _0: x0, _1: x1});
+				},
+				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
+		},
+		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
+var _jigargosar$elm_simple_gtd$MainOld$onFirebaseDatabaseChangeSub = function (tagger) {
+	return _jigargosar$elm_simple_gtd$MainOld$onFirebaseDatabaseChange(
+		_elm_lang$core$Basics$uncurry(tagger));
+};
+var _jigargosar$elm_simple_gtd$MainOld$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Platform_Sub$map,
+				_jigargosar$elm_simple_gtd$Model$OnSubMsg,
+				_elm_lang$core$Platform_Sub$batch(
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _jigargosar$elm_simple_gtd$Model$OnNowChanged),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$X_Keyboard$subscription(_jigargosar$elm_simple_gtd$Model$OnKeyboardMsg),
+							_1: {
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$X_Keyboard$ups(_jigargosar$elm_simple_gtd$Model$OnGlobalKeyUp),
+								_1: {
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$Store$onChange(_jigargosar$elm_simple_gtd$Model$OnPouchDBChange),
+									_1: {
+										ctor: '::',
+										_0: _jigargosar$elm_simple_gtd$MainOld$onFirebaseDatabaseChangeSub(_jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					})),
+			_1: {
+				ctor: '::',
+				_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(model.keyComboModel),
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Todo_Main$subscriptions(model),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions(model),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions(model),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _jigargosar$elm_simple_gtd$MainOld$main2 = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
+	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$MainOld$subscriptions});

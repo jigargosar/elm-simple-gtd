@@ -1,0 +1,39 @@
+var _eeue56$elm_ffi$FFI$toString = function (a) {
+	return _eeue56$elm_ffi$Native_FFI.trueToString(a);
+};
+var _eeue56$elm_ffi$FFI$safeAsync = F2(
+	function (text, args) {
+		return A3(
+			_eeue56$elm_ffi$Native_FFI.makeSafe,
+			text,
+			_elm_lang$core$Json_Encode$list(args),
+			true);
+	});
+var _eeue56$elm_ffi$FFI$async = F2(
+	function (text, args) {
+		return A2(
+			_eeue56$elm_ffi$Native_FFI.async,
+			text,
+			_elm_lang$core$Json_Encode$list(args));
+	});
+var _eeue56$elm_ffi$FFI$intoElm = function (thing) {
+	return _eeue56$elm_ffi$Native_FFI.intoElm(thing);
+};
+var _eeue56$elm_ffi$FFI$asIs = function (thing) {
+	return _eeue56$elm_ffi$Native_FFI.asIs(thing);
+};
+var _eeue56$elm_ffi$FFI$safeSync = F2(
+	function (text, args) {
+		return A3(
+			_eeue56$elm_ffi$Native_FFI.makeSafe,
+			text,
+			_elm_lang$core$Json_Encode$list(args),
+			false);
+	});
+var _eeue56$elm_ffi$FFI$sync = F2(
+	function (text, args) {
+		return A2(
+			_eeue56$elm_ffi$Native_FFI.sync,
+			text,
+			_elm_lang$core$Json_Encode$list(args));
+	});

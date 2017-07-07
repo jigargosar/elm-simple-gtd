@@ -26,12 +26,13 @@
   "rgrempel/elm-route-url": "3.0.0",
   "scottcorgan/keyboard-combo": "4.0.0",
   "tripokey/elm-fuzzy": "5.1.0",
+  "eeue56/elm-ffi": "1.3.0",
   "toastal/either": "3.1.1",
-  "ccapndave/elm-update-extra": "2.3.1",
-  "elm-lang/http": "1.0.0",
-  "sporto/erl": "10.0.2",
   "elm-lang/virtual-dom": "2.0.4",
   "elm-lang/dom": "1.1.1",
+  "elm-lang/http": "1.0.0",
+  "ccapndave/elm-update-extra": "2.3.1",
+  "sporto/erl": "10.0.2",
   "debois/elm-dom": "1.2.3",
   "elm-lang/mouse": "1.0.1"
 }

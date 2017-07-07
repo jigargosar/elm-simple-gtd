@@ -37,7 +37,33 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 					_0: _elm_lang$html$Html_Attributes$class('x-sidebar'),
 					_1: {ctor: '[]'}
 				},
-				{ctor: '[]'}),
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('x-sidebar-header'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('x-sidebar-header__inner'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('foo'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
 			_1: {
 				ctor: '::',
 				_0: A2(
@@ -72,7 +98,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 											{ctor: '[]'},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('dadadaklsdalkdjaldjalijdlakjdklajdiljwiajlskdjalijdaljdlsjdailwjdlaijsdlkjailwdjalidjsjdakjdlkajdlaksjdliwj'),
+												_0: _elm_lang$html$Html$text('a'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

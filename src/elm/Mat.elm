@@ -10,7 +10,6 @@ import Material
 import Material.Button
 import Material.Icon
 import Material.Options
-import Model
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
@@ -146,7 +145,7 @@ defaultBtnConfig =
     , mdl = Material.model
     , iconProps = []
     , iconName = ""
-    , msg = Model.noop
+    , msg = Msg.noop
     }
 
 

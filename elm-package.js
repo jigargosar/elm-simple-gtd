@@ -1,4 +1,4 @@
-{
+const backup = {
     "version": "0.1.0",
     "summary": "helpful summary of your project, less than 80 characters",
     "repository": "https://github.com/jigargosar/elm-simple-gtd.git",
@@ -33,8 +33,12 @@
         "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0",
         "rgrempel/elm-route-url": "3.0.0 <= v < 4.0.0",
         "scottcorgan/keyboard-combo": "4.0.0 <= v < 5.0.0",
-        "tripokey/elm-fuzzy": "5.1.0 <= v < 6.0.0"
+        "tripokey/elm-fuzzy": "5.1.0 <= v < 6.0.0",
+        "eeue56/elm-ffi": "1.0.0 < v <= 2.0.0"
 
+    },
+    "dependency-sources": {
+        "eeue56/elm-ffi": "git@github.com:eeue56/elm-ffi.git"
     },
     "elm-version": "0.18.0 <= v < 0.19.0"
 }

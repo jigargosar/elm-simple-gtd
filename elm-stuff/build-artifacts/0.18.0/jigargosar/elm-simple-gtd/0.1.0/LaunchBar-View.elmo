@@ -17,10 +17,10 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 			var _p1 = _p0;
 			var _p2 = _p1.key;
 			if (_p2.ctor === 'Enter') {
-				return _jigargosar$elm_simple_gtd$Model$OnLaunchBarMsg(
+				return _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(
 					_jigargosar$elm_simple_gtd$LaunchBar$OnEnter(matchingEntity));
 			} else {
-				return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+				return _jigargosar$elm_simple_gtd$Model$noop;
 			}
 		};
 		return A2(
@@ -33,7 +33,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(keyHandler),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode),
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -55,7 +55,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onInput(
 										function (_p3) {
-											return _jigargosar$elm_simple_gtd$Model$OnLaunchBarMsg(
+											return _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(
 												A2(_jigargosar$elm_simple_gtd$LaunchBar$OnInputChanged, form, _p3));
 										}),
 									_1: {ctor: '[]'}

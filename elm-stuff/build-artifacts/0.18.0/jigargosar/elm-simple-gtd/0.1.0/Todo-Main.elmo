@@ -256,7 +256,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							_p14));
 				} : function (_p15) {
 					return andThenUpdate(
-						_jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+						_jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 							_jigargosar$elm_simple_gtd$Todo_Msg$ShowReminderOverlayForTodoId(_p15)));
 				}(todoId);
 			case 'ShowReminderOverlayForTodoId':
@@ -268,7 +268,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return function (_p16) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnCloseNotification(todoId),
+						_jigargosar$elm_simple_gtd$Msg$OnCloseNotification(todoId),
 						function () {
 							var _p17 = _p18.action;
 							switch (_p17) {
@@ -291,7 +291,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return function (_p19) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
 							A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0))(_p19));
 				};
@@ -323,7 +323,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked = _elm
 var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 	return A2(
 		_elm_lang$core$Platform_Sub$map,
-		_jigargosar$elm_simple_gtd$Model$OnTodoMsg,
+		_jigargosar$elm_simple_gtd$Msg$OnTodoMsg,
 		_elm_lang$core$Platform_Sub$batch(
 			{
 				ctor: '::',

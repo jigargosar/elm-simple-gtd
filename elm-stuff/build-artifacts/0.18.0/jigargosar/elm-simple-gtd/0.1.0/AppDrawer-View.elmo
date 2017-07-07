@@ -39,7 +39,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItemSmall = F3(
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_jigargosar$elm_simple_gtd$Model$OnSetViewType(viewType)),
+						_jigargosar$elm_simple_gtd$Msg$OnSetViewType(viewType)),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -70,7 +70,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItem = F3(
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_jigargosar$elm_simple_gtd$Model$OnSetViewType(viewType)),
+						_jigargosar$elm_simple_gtd$Msg$OnSetViewType(viewType)),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -209,10 +209,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$entityGroupView = F2(
 		var onToggleExpanded = _p1.onToggleExpanded;
 		var isExpanded = _p1.isExpanded;
 		var isCurrentView = _elm_lang$core$Native_Utils.eq(
-			_jigargosar$elm_simple_gtd$Model$EntityListView(viewType),
+			_jigargosar$elm_simple_gtd$Msg$EntityListView(viewType),
 			mainViewType);
-		var fireSwitchView = _jigargosar$elm_simple_gtd$Model$OnSetViewType(
-			_jigargosar$elm_simple_gtd$Model$EntityListView(viewType));
+		var fireSwitchView = _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
+			_jigargosar$elm_simple_gtd$Msg$EntityListView(viewType));
 		var fireSmart = isCurrentView ? onToggleExpanded : fireSwitchView;
 		var expandIconName = isExpanded ? 'expand_less' : 'expand_more';
 		return A2(
@@ -367,7 +367,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent = F2(
 													_0: _jigargosar$elm_simple_gtd$Mat$divider,
 													_1: {
 														ctor: '::',
-														_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItemSmall, 'settings', _jigargosar$elm_simple_gtd$Model$SyncView, 'Advance Settings'),
+														_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$switchViewItemSmall, 'settings', _jigargosar$elm_simple_gtd$Msg$SyncView, 'Advance Settings'),
 														_1: {ctor: '[]'}
 													}
 												}

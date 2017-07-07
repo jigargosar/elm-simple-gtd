@@ -4,6 +4,7 @@ import DomPorts
 import Entity
 import GroupDoc
 import Model
+import Msg
 import Return
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -17,7 +18,7 @@ import Todo.Msg
 
 
 update :
-    (Model.Msg -> Model.ReturnF)
+    (Msg.Msg -> Model.ReturnF)
     -> Entity.Entity
     -> Entity.Msg
     -> Model.ReturnF
@@ -31,11 +32,11 @@ update andThenUpdate entity msg =
             Return.map (Model.updateEditModeNameChanged newName entity)
 
         Entity.Save ->
-            andThenUpdate Model.OnSaveCurrentForm
+            andThenUpdate Msg.OnSaveCurrentForm
 
         Entity.ToggleDeleted ->
             Return.andThen (Model.toggleDeleteEntity entity)
-                >> andThenUpdate Model.OnDeactivateEditingMode
+                >> andThenUpdate Msg.OnDeactivateEditingMode
 
         Entity.ToggleArchived ->
             let
@@ -57,11 +58,11 @@ update andThenUpdate entity msg =
 
                             Entity.Todo todo ->
                                 Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId Todo.ToggleDone
-                                    |> Model.OnTodoMsg
+                                    |> Msg.OnTodoMsg
                                     |> andThenUpdate
             in
                 toggleArchivedEntity entity
-                    >> andThenUpdate Model.OnDeactivateEditingMode
+                    >> andThenUpdate Msg.OnDeactivateEditingMode
 
         Entity.OnFocusIn ->
             Return.map (Model.setFocusInEntity entity)

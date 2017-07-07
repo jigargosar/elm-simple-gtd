@@ -1,0 +1,118 @@
+var _jigargosar$elm_simple_gtd$Msg$SyncView = {ctor: 'SyncView'};
+var _jigargosar$elm_simple_gtd$Msg$EntityListView = function (a) {
+	return {ctor: 'EntityListView', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnFirebaseDatabaseChange = F2(
+	function (a, b) {
+		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnPouchDBChange = F2(
+	function (a, b) {
+		return {ctor: 'OnPouchDBChange', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnGlobalKeyUp = function (a) {
+	return {ctor: 'OnGlobalKeyUp', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnKeyboardMsg = function (a) {
+	return {ctor: 'OnKeyboardMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnNowChanged = function (a) {
+	return {ctor: 'OnNowChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnMdl = function (a) {
+	return {ctor: 'OnMdl', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref = {ctor: 'OnPersistLocalPref'};
+var _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg = function (a) {
+	return {ctor: 'OnAppDrawerMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnCloseNotification = function (a) {
+	return {ctor: 'OnCloseNotification', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnKeyCombo = function (a) {
+	return {ctor: 'OnKeyCombo', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg = function (a) {
+	return {ctor: 'OnFirebaseMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime = F2(
+	function (a, b) {
+		return {ctor: 'OnTodoMsgWithTime', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnTodoMsg = function (a) {
+	return {ctor: 'OnTodoMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
+	function (a, b) {
+		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg = function (a) {
+	return {ctor: 'OnLaunchBarMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = F2(
+	function (a, b) {
+		return {ctor: 'OnEntityMsg', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
+	return {ctor: 'OnSetViewType', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
+	function (a, b) {
+		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm = F2(
+	function (a, b) {
+		return {ctor: 'OnUpdateTodoForm', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnEditTodoContextMenuStateChanged = F2(
+	function (a, b) {
+		return {ctor: 'OnEditTodoContextMenuStateChanged', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnEditTodoProjectMenuStateChanged = F2(
+	function (a, b) {
+		return {ctor: 'OnEditTodoProjectMenuStateChanged', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
+	function (a, b) {
+		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm = {ctor: 'OnSaveCurrentForm'};
+var _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject = function (a) {
+	return {ctor: 'OnStartEditingProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext = function (a) {
+	return {ctor: 'OnStartEditingContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnStartEditingReminder = function (a) {
+	return {ctor: 'OnStartEditingReminder', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
+var _jigargosar$elm_simple_gtd$Msg$OnNewTodoTextChanged = F2(
+	function (a, b) {
+		return {ctor: 'OnNewTodoTextChanged', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnNewContext = {ctor: 'OnNewContext'};
+var _jigargosar$elm_simple_gtd$Msg$OnNewProject = {ctor: 'OnNewProject'};
+var _jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox = {ctor: 'OnNewTodoForInbox'};
+var _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction = function (a) {
+	return {ctor: 'OnReminderOverlayAction', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnRemotePouchSync = function (a) {
+	return {ctor: 'OnRemotePouchSync', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged = function (a) {
+	return {ctor: 'OnMainMenuStateChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
+var _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode = function (a) {
+	return {ctor: 'OnStartExclusiveMode', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnSubMsg = function (a) {
+	return {ctor: 'OnSubMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnCommonMsg = function (a) {
+	return {ctor: 'OnCommonMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
+var _jigargosar$elm_simple_gtd$Msg$noop = _jigargosar$elm_simple_gtd$Msg$commonMsg.noOp;
+var _jigargosar$elm_simple_gtd$Msg$logString = _jigargosar$elm_simple_gtd$Msg$commonMsg.logString;

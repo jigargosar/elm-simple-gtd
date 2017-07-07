@@ -62,7 +62,7 @@ var _jigargosar$elm_simple_gtd$View_Shared$okCancelButtonsWith = F3(
 				list));
 	});
 var _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelButtonsWith = function (list) {
-	return A3(_jigargosar$elm_simple_gtd$View_Shared$okCancelButtonsWith, _jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm, _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode, list);
+	return A3(_jigargosar$elm_simple_gtd$View_Shared$okCancelButtonsWith, _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, list);
 };
 var _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg) {
 	return _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelButtonsWith(

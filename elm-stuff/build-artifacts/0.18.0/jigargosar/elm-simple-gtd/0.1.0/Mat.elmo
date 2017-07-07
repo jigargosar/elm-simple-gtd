@@ -114,7 +114,7 @@ var _jigargosar$elm_simple_gtd$Mat$defaultBtnConfig = {
 };
 var _jigargosar$elm_simple_gtd$Mat$btn = A2(
 	_debois$elm_mdl$Material_Button$render,
-	_jigargosar$elm_simple_gtd$Model$Mdl,
+	_jigargosar$elm_simple_gtd$Msg$OnMdl,
 	{
 		ctor: '::',
 		_0: 0,
@@ -245,7 +245,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc_ = F3(
 			});
 		return A5(
 			_debois$elm_mdl$Material_Button$render,
-			_jigargosar$elm_simple_gtd$Model$Mdl,
+			_jigargosar$elm_simple_gtd$Msg$OnMdl,
 			{
 				ctor: '::',
 				_0: 0,
@@ -324,7 +324,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F3(
 				}));
 		return A5(
 			_debois$elm_mdl$Material_Button$render,
-			_jigargosar$elm_simple_gtd$Model$Mdl,
+			_jigargosar$elm_simple_gtd$Msg$OnMdl,
 			{
 				ctor: '::',
 				_0: 0,

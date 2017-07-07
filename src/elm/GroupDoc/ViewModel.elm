@@ -8,12 +8,12 @@ import Entity exposing (Entity)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Html
-import Model exposing (EntityListViewType, ViewType(..))
-import Model exposing (Msg, commonMsg)
+import Model exposing (commonMsg)
 import Todo
 import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
+import Msg exposing (..)
 
 
 type alias IconVM =
@@ -68,7 +68,7 @@ create config todoList groupDoc =
             Document.getId groupDoc
 
         onEntityAction =
-            Model.OnEntityMsg (config.toEntity groupDoc)
+            Msg.OnEntityMsg (config.toEntity groupDoc)
 
         isNull =
             config.isNull groupDoc
@@ -109,7 +109,7 @@ create config todoList groupDoc =
                     onEntityAction Entity.Goto
 
                 _ ->
-                    commonMsg.noOp
+                    Model.noop
 
         archive =
             let
@@ -138,7 +138,7 @@ create config todoList groupDoc =
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = onEntityAction Entity.Save
         , onNameChanged = Entity.NameChanged >> onEntityAction
-        , onCancelClicked = Model.OnDeactivateEditingMode
+        , onCancelClicked = Msg.OnDeactivateEditingMode
         , icon = icon
         , onFocusIn = onEntityAction Entity.OnFocusIn
         , onKeyDownMsg = onKeyDownMsg

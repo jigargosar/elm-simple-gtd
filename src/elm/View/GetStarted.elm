@@ -3,6 +3,7 @@ module View.GetStarted exposing (..)
 import AppUrl
 import Firebase
 import Model
+import Msg
 import Todo.Msg
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -35,16 +36,16 @@ signInOverlay =
                 ]
             ]
         ]
-        |> Html.map Model.OnFirebaseMsg
+        |> Html.map Msg.OnFirebaseMsg
 
 
 setup form =
     let
         addTodoMsg =
-            Model.OnSaveCurrentForm
+            Msg.OnSaveCurrentForm
 
         updateSetupFormTodoText =
-            Todo.Msg.UpdateSetupFormTodoText form >> Model.OnTodoMsg
+            Todo.Msg.UpdateSetupFormTodoText form >> Msg.OnTodoMsg
     in
         div
             [ class "overlay"

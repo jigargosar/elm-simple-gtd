@@ -15,6 +15,7 @@ import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Msg
 
 
 port signIn : () -> Cmd msg
@@ -63,7 +64,7 @@ subscriptions model =
         , onFCMTokenChanged OnFCMTokenChanged
         , onFirebaseConnectionChanged OnFirebaseConnectionChanged
         ]
-        |> Sub.map Model.OnFirebaseMsg
+        |> Sub.map Msg.OnFirebaseMsg
 
 
 overSignInModel =
@@ -71,7 +72,7 @@ overSignInModel =
 
 
 update :
-    (Model.Msg -> Model.ReturnF)
+    (Msg.Msg -> Model.ReturnF)
     -> Firebase.Msg
     -> Model.ReturnF
 update andThenUpdate msg =
@@ -84,13 +85,13 @@ update andThenUpdate msg =
 
         OnSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
-                >> andThenUpdate Model.OnPersistLocalPref
+                >> andThenUpdate Msg.OnPersistLocalPref
                 >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
 
         OnSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
-                >> andThenUpdate Model.OnPersistLocalPref
+                >> andThenUpdate Msg.OnPersistLocalPref
                 >> Return.command (Navigation.load AppUrl.landing)
 
         AfterUserChanged ->
@@ -104,7 +105,7 @@ update andThenUpdate msg =
                             SignedIn user ->
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
-                                    >> andThenUpdate Model.OnPersistLocalPref
+                                    >> andThenUpdate Msg.OnPersistLocalPref
                                     >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
                 )
 
@@ -113,7 +114,7 @@ update andThenUpdate msg =
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
                         Return.map (setUser user)
-                            >> andThenUpdate (Model.OnFirebaseMsg AfterUserChanged)
+                            >> andThenUpdate (Msg.OnFirebaseMsg AfterUserChanged)
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
                             >> startSyncWithFirebase

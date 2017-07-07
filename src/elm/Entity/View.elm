@@ -10,7 +10,7 @@ import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Model
-import Model exposing (Msg)
+import Msg exposing (..)
 import Todo.View exposing (TodoViewModel)
 import ViewModel
 import Html exposing (..)
@@ -32,7 +32,7 @@ list viewType model =
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"
-            , Model.OnEntityListKeyDown entityList |> onKeyDown
+            , Msg.OnEntityListKeyDown entityList |> onKeyDown
             ]
             (keyedViewList grouping maybeFocusInEntity model)
 

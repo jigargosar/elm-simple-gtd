@@ -9,7 +9,7 @@ import X.Html exposing (boolProperty)
 import Firebase
 import Model
 import Model exposing (Model)
-import Model exposing (Msg)
+import Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -53,7 +53,7 @@ headerWithContent content m =
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                , Mat.onClickStopPropagation (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                 ]
                 [ Mat.icon "menu" ]
     in
@@ -64,7 +64,7 @@ headerWithContent content m =
 
 
 menu m =
-    div [ id "main-menu-button", onClick Model.OnShowMainMenu ] [ menuIcon m ]
+    div [ id "main-menu-button", onClick Msg.OnShowMainMenu ] [ menuIcon m ]
 
 
 menuIcon m =

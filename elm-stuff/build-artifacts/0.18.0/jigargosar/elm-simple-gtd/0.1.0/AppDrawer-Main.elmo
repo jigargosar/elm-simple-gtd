@@ -1,7 +1,7 @@
 var _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions = function (model) {
 	return A2(
 		_elm_lang$core$Platform_Sub$map,
-		_jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg,
+		_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg,
 		_elm_lang$core$Platform_Sub$batch(
 			{
 				ctor: '::',
@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Main$update = F2(
 		return function (_p2) {
 			return A2(
 				andThenUpdate,
-				_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+				_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,
 				function () {
 					var _p3 = msg;
 					switch (_p3.ctor) {

@@ -14,7 +14,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 		var _p2 = _p1;
 		return {
 			onSelect: function (_p3) {
-				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+				return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 					A2(
 						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
 						_p2.todoId,
@@ -28,9 +28,9 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 				return _elm_lang$html$Html$text(
 					_jigargosar$elm_simple_gtd$Context$getName(_p4));
 			},
-			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnEditTodoContextMenuStateChanged(_p2),
-			noOp: _jigargosar$elm_simple_gtd$Model$commonMsg.noOp,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
+			onStateChanged: _jigargosar$elm_simple_gtd$Msg$OnEditTodoContextMenuStateChanged(_p2),
+			noOp: _jigargosar$elm_simple_gtd$Model$noop,
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
@@ -46,7 +46,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 		var _p6 = _p5;
 		return {
 			onSelect: function (_p7) {
-				return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+				return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 					A2(
 						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
 						_p6.todoId,
@@ -60,9 +60,9 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 				return _elm_lang$html$Html$text(
 					_jigargosar$elm_simple_gtd$Project$getName(_p8));
 			},
-			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnEditTodoProjectMenuStateChanged(_p6),
-			noOp: _jigargosar$elm_simple_gtd$Model$commonMsg.noOp,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
+			onStateChanged: _jigargosar$elm_simple_gtd$Msg$OnEditTodoProjectMenuStateChanged(_p6),
+			noOp: _jigargosar$elm_simple_gtd$Model$noop,
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$project = F2(

@@ -2,6 +2,7 @@ module GroupDoc.View exposing (..)
 
 import Entity
 import GroupDoc.ViewModel exposing (ViewModel)
+import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -32,7 +33,7 @@ initHeaderKeyed vm =
     ( vm.id, headerItem vm )
 
 
-headerItem : ViewModel -> Html Model.Msg
+headerItem : ViewModel -> Html Msg.Msg
 headerItem vm =
     let
         editButton =

@@ -126,7 +126,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded,
 						A2(
 							andThenUpdate,
-							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+							_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,
 							A2(
 								_Fresheyeball$elm_return$Return$map,
 								_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setSkipSignIn),
@@ -139,7 +139,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						_elm_lang$navigation$Navigation$load(_jigargosar$elm_simple_gtd$AppUrl$landing),
 						A2(
 							andThenUpdate,
-							_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+							_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,
 							A2(
 								_Fresheyeball$elm_return$Return$map,
 								_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToTriedSignOut),
@@ -163,7 +163,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 										_jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded,
 										A2(
 											andThenUpdate,
-											_jigargosar$elm_simple_gtd$Model$OnPersistLocalPref,
+											_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,
 											A2(
 												_Fresheyeball$elm_return$Return$map,
 												_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setStateToSignInSuccess),
@@ -193,7 +193,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 											_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
 											A2(
 												andThenUpdate,
-												_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
+												_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
 												A2(
 													_Fresheyeball$elm_return$Return$map,
 													_jigargosar$elm_simple_gtd$Firebase_Main$setUser(user),
@@ -240,7 +240,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseConnectionChanged = _elm_
 var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 	return A2(
 		_elm_lang$core$Platform_Sub$map,
-		_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg,
+		_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg,
 		_elm_lang$core$Platform_Sub$batch(
 			{
 				ctor: '::',

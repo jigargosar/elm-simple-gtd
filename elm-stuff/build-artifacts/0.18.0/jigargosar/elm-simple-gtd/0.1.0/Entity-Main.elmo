@@ -14,12 +14,12 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$map(
 					A2(_jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged, _p0._0, entity));
 			case 'Save':
-				return andThenUpdate(_jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm);
+				return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm);
 			case 'ToggleDeleted':
 				return function (_p2) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						A2(
 							_Fresheyeball$elm_return$Return$andThen,
 							_jigargosar$elm_simple_gtd$Model$toggleDeleteEntity(entity),
@@ -41,14 +41,14 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 							}());
 					} else {
 						return andThenUpdate(
-							_jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+							_jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 								A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode, entityId, _jigargosar$elm_simple_gtd$Todo$ToggleDone)));
 					}
 				};
 				return function (_p5) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						A2(toggleArchivedEntity, entity, _p5));
 				};
 			case 'OnFocusIn':

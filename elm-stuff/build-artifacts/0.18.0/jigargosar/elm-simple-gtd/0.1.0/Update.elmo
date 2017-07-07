@@ -147,7 +147,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 				default:
 					return _elm_lang$core$Basics$identity;
 			}
-		case 'RemotePouchSync':
+		case 'OnRemotePouchSync':
 			return function (_p14) {
 				return A2(
 					_Fresheyeball$elm_return$Return$effect_,
@@ -157,9 +157,9 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 								return _.pouchDBRemoteSyncURI;
 							}(_p15));
 					},
-					A2(_jigargosar$elm_simple_gtd$Update$andThenUpdate, _jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm, _p14));
+					A2(_jigargosar$elm_simple_gtd$Update$andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm, _p14));
 			};
-		case 'ReminderOverlayAction':
+		case 'OnReminderOverlayAction':
 			return _jigargosar$elm_simple_gtd$Update$reminderOverlayAction(_p8._0);
 		case 'OnDeactivateEditingMode':
 			return function (_p16) {
@@ -168,7 +168,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 					_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 					A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$deactivateEditingMode, _p16));
 			};
-		case 'StartEditingContext':
+		case 'OnStartEditingContext':
 			var _p18 = _p8._0;
 			return function (_p17) {
 				return A2(
@@ -179,7 +179,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Model$startEditingTodoContext(_p18),
 						_p17));
 			};
-		case 'StartEditingProject':
+		case 'OnStartEditingProject':
 			var _p20 = _p8._0;
 			return function (_p19) {
 				return A2(
@@ -190,10 +190,10 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Model$startEditingTodoProject(_p20),
 						_p19));
 			};
-		case 'NewTodoTextChanged':
+		case 'OnNewTodoTextChanged':
 			return _jigargosar$elm_simple_gtd$Update$map(
 				A2(_jigargosar$elm_simple_gtd$Model$updateNewTodoText, _p8._0, _p8._1));
-		case 'StartEditingReminder':
+		case 'OnStartEditingReminder':
 			var _p22 = _p8._0;
 			return function (_p21) {
 				return A2(
@@ -204,7 +204,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Model$startEditingReminder(_p22),
 						_p21));
 			};
-		case 'UpdateTodoForm':
+		case 'OnUpdateTodoForm':
 			return _jigargosar$elm_simple_gtd$Update$map(
 				function (_p23) {
 					return _jigargosar$elm_simple_gtd$Model$setEditMode(
@@ -246,7 +246,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 							A2(_jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState, _p8._1, _p8._0)),
 						_p28));
 			};
-		case 'UpdateRemoteSyncFormUri':
+		case 'OnUpdateRemoteSyncFormUri':
 			return _jigargosar$elm_simple_gtd$Update$map(
 				function (_p30) {
 					return _jigargosar$elm_simple_gtd$Model$setEditMode(
@@ -262,20 +262,20 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return function (_p31) {
 				return A2(
 					_jigargosar$elm_simple_gtd$Update$andThenUpdate,
-					_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+					_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 					A2(_Fresheyeball$elm_return$Return$andThen, _jigargosar$elm_simple_gtd$Model$saveCurrentForm, _p31));
 			};
-		case 'NewTodoForInbox':
+		case 'OnNewTodoForInbox':
 			return function (_p32) {
 				return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 					A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$activateNewTodoModeWithInboxAsReference, _p32));
 			};
-		case 'NewProject':
+		case 'OnNewProject':
 			return function (_p33) {
 				return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 					A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$createAndEditNewProject, _p33));
 			};
-		case 'NewContext':
+		case 'OnNewContext':
 			return function (_p34) {
 				return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 					A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$createAndEditNewContext, _p34));
@@ -286,7 +286,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return A3(_jigargosar$elm_simple_gtd$LaunchBar_Main$update, _jigargosar$elm_simple_gtd$Update$andThenUpdate, _p8._1, _p8._0);
 		case 'OnLaunchBarMsg':
 			return _jigargosar$elm_simple_gtd$Update$withNow(
-				_jigargosar$elm_simple_gtd$Model$OnLaunchBarMsgWithNow(_p8._0));
+				_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow(_p8._0));
 		case 'OnCloseNotification':
 			return _jigargosar$elm_simple_gtd$Update$command(
 				_jigargosar$elm_simple_gtd$Notification$closeNotification(_p8._0));
@@ -295,7 +295,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 				_jigargosar$elm_simple_gtd$Model$updateCombo(_p8._0));
 		case 'OnTodoMsg':
 			return _jigargosar$elm_simple_gtd$Update$withNow(
-				_jigargosar$elm_simple_gtd$Model$OnTodoMsgWithTime(_p8._0));
+				_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime(_p8._0));
 		case 'OnTodoMsgWithTime':
 			return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, _jigargosar$elm_simple_gtd$Update$andThenUpdate, _p8._1, _p8._0);
 		case 'OnFirebaseMsg':
@@ -310,7 +310,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 				});
 		default:
 			return _Fresheyeball$elm_return$Return$andThen(
-				A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Model$Mdl, _p8._0));
+				A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Msg$OnMdl, _p8._0));
 	}
 };
 var _jigargosar$elm_simple_gtd$Update$andThenUpdate = function (_p36) {
@@ -348,7 +348,7 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = function (subMsg) {
 			var afterEntityUpsertOnPouchDBChange = function (entity) {
 				var _p40 = entity;
 				if (_p40.ctor === 'Todo') {
-					return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+					return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 						_jigargosar$elm_simple_gtd$Todo_Msg$Upsert(_p40._0));
 				} else {
 					return _jigargosar$elm_simple_gtd$Model$noop;
@@ -382,7 +382,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 						var clear = function (_p43) {
 							return A2(
 								_jigargosar$elm_simple_gtd$Update$andThenUpdate,
-								_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+								_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 								A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$clearSelection, _p43));
 						};
 						var _p44 = _p42._0;
@@ -394,16 +394,16 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 							case 'CharQ':
 								return A2(_jigargosar$elm_simple_gtd$X_Return$andThenApplyWith, _jigargosar$elm_simple_gtd$Model$onNewTodoModeWithFocusInEntityAsReference, _jigargosar$elm_simple_gtd$Update$update);
 							case 'CharI':
-								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Model$NewTodoForInbox);
+								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox);
 							case 'Slash':
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
-									_jigargosar$elm_simple_gtd$Model$OnLaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar$Open));
+									_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar$Open));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
 						if (_p42._0.ctor === 'Escape') {
-							return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode);
+							return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode);
 						} else {
 							break _v6_2;
 						}
@@ -417,5 +417,5 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 };
 var _jigargosar$elm_simple_gtd$Update$andThenTodoMsg = function (_p45) {
 	return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
-		_jigargosar$elm_simple_gtd$Model$OnTodoMsg(_p45));
+		_jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_p45));
 };

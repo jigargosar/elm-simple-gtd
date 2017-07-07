@@ -1,5 +1,6 @@
 module CustomSync exposing (..)
 
+import Msg
 import X.Keyboard exposing (onKeyDownStopPropagation)
 import Mat
 import Model
@@ -21,13 +22,13 @@ view model =
                     [ input
                         [ defaultValue form.uri
                         , autofocus True
-                        , onInput (Model.UpdateRemoteSyncFormUri form)
+                        , onInput (Msg.OnUpdateRemoteSyncFormUri form)
                         ]
                         []
                     , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
                     ]
                 , div []
-                    [ Mat.btn_ "Sync Now" [ form |> Model.RemotePouchSync >> onClick ]
+                    [ Mat.btn_ "Sync Now" [ form |> Msg.OnRemotePouchSync >> onClick ]
                     ]
                 ]
             ]

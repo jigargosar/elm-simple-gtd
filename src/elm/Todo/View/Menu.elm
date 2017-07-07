@@ -3,7 +3,8 @@ module Todo.View.Menu exposing (..)
 import Context
 import Document exposing (Document)
 import Menu
-import Model exposing (commonMsg)
+import Model
+import Msg
 import Project
 import Todo
 import Toolkit.Operators exposing (..)
@@ -12,37 +13,37 @@ import Todo.GroupForm
 import Todo.Msg
 
 
-createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
+createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Project.Model Msg.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
             >> Todo.SetProjectId
             >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
-            >> Model.OnTodoMsg
+            >> Msg.OnTodoMsg
     , isSelected = Document.hasId projectId
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
     , itemView = Project.getName >> text
-    , onStateChanged = Model.OnEditTodoProjectMenuStateChanged form
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.OnDeactivateEditingMode
+    , onStateChanged = Msg.OnEditTodoProjectMenuStateChanged form
+    , noOp = Model.noop
+    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
 
 
-createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
+createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Msg.Msg
 createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId
             >> Todo.SetContextId
             >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
-            >> Model.OnTodoMsg
+            >> Msg.OnTodoMsg
     , isSelected = Document.hasId contextId
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName
     , itemView = Context.getName >> text
-    , onStateChanged = Model.OnEditTodoContextMenuStateChanged form
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.OnDeactivateEditingMode
+    , onStateChanged = Msg.OnEditTodoContextMenuStateChanged form
+    , noOp = Model.noop
+    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
 
 

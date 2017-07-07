@@ -4,6 +4,7 @@ import DomPorts exposing (autoFocusInputCmd)
 import Entity
 import LaunchBar
 import Model
+import Msg
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -19,14 +20,14 @@ map =
 
 
 update :
-    (Model.Msg -> Model.ReturnF)
+    (Msg.Msg -> Model.ReturnF)
     -> Time.Time
     -> LaunchBar.Msg
     -> Model.ReturnF
 update andThenUpdate now msg =
     case msg of
         LaunchBar.OnEnter entity ->
-            andThenUpdate Model.OnDeactivateEditingMode
+            andThenUpdate Msg.OnDeactivateEditingMode
                 >> case entity of
                     LaunchBar.Project project ->
                         map (Model.switchToProjectView project)

@@ -9,6 +9,7 @@ import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Firebase.SignIn
 import Material
+import Msg exposing (..)
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
 import X.Predicate as Pred
@@ -50,50 +51,6 @@ import Todo.TimeTracker
 import X.Debug
 
 
-type SubMsg
-    = OnNowChanged Time
-    | OnKeyboardMsg Keyboard.Msg
-    | OnGlobalKeyUp Keyboard.Key
-    | OnPouchDBChange String D.Value
-    | OnFirebaseDatabaseChange String D.Value
-
-
-type Msg
-    = OnCommonMsg CommonMsg.Msg
-    | OnSubMsg SubMsg
-    | OnStartExclusiveMode ExclusiveMode
-    | OnShowMainMenu
-    | OnMainMenuStateChanged Menu.State
-    | RemotePouchSync ExclusiveMode.SyncForm
-    | ReminderOverlayAction Todo.Notification.Model.Action
-    | NewTodoForInbox
-    | NewProject
-    | NewContext
-    | NewTodoTextChanged Todo.NewForm.Model Todo.Text
-    | OnDeactivateEditingMode
-    | StartEditingReminder Todo.Model
-    | StartEditingContext Todo.Model
-    | StartEditingProject Todo.Model
-    | OnSaveCurrentForm
-    | UpdateRemoteSyncFormUri ExclusiveMode.SyncForm String
-    | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
-    | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
-    | UpdateTodoForm Todo.Form.Model Todo.Form.Action
-    | OnEntityListKeyDown (List Entity) KeyboardEvent
-    | OnSetViewType ViewType
-    | OnEntityMsg Entity Entity.Msg
-    | OnLaunchBarMsg LaunchBar.Msg
-    | OnLaunchBarMsgWithNow LaunchBar.Msg Time
-    | OnTodoMsg Todo.Msg.Msg
-    | OnTodoMsgWithTime Todo.Msg.Msg Time
-    | OnFirebaseMsg Firebase.Msg
-    | OnKeyCombo Combo.Msg
-    | OnCloseNotification String
-    | OnAppDrawerMsg AppDrawer.Model.Msg
-    | OnPersistLocalPref
-    | Mdl (Material.Msg Msg)
-
-
 onSetEntityListView =
     EntityListView >> OnSetViewType
 
@@ -124,15 +81,6 @@ noop =
 
 logString =
     commonMsg.logString
-
-
-type alias EntityListViewType =
-    Entity.ListViewType
-
-
-type ViewType
-    = EntityListView EntityListViewType
-    | SyncView
 
 
 type alias Model =

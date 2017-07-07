@@ -9,6 +9,7 @@ import Material
 import Material.Button
 import Material.Icon
 import Material.Options
+import Msg exposing (Msg)
 import Store
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
@@ -16,7 +17,7 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Mat
 import Model
-import Model exposing (Msg, commonMsg)
+import Model exposing (commonMsg)
 import Project
 import Regex
 import RegexHelper
@@ -121,10 +122,10 @@ createTodoViewModel appM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Model.OnEntityMsg (Entity.Todo todo)
+            Msg.OnEntityMsg (Entity.Todo todo)
 
         onTodoMsg =
-            Model.OnTodoMsg
+            Msg.OnTodoMsg
 
         reminder =
             createScheduleViewModel now todo
@@ -145,10 +146,10 @@ createTodoViewModel appM canBeFocused todo =
                         toggleDeleteMsg
 
                     Key.CharP ->
-                        Model.StartEditingProject todo
+                        Msg.OnStartEditingProject todo
 
                     Key.CharC ->
-                        Model.StartEditingContext todo
+                        Msg.OnStartEditingContext todo
 
                     Key.CharR ->
                         reminder.startEditingMsg
@@ -160,9 +161,9 @@ createTodoViewModel appM canBeFocused todo =
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
 
                     _ ->
-                        commonMsg.noOp
+                        Model.noop
             else
-                commonMsg.noOp
+                Model.noop
 
         startEditingMsg =
             if canBeFocused then
@@ -183,8 +184,8 @@ createTodoViewModel appM canBeFocused todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = Model.StartEditingContext todo
-        , showProjectDropDownMsg = Model.StartEditingProject todo
+        , showContextDropDownMsg = Msg.OnStartEditingContext todo
+        , showProjectDropDownMsg = Msg.OnStartEditingProject todo
         , startEditingMsg = startEditingMsg
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
@@ -353,12 +354,12 @@ createScheduleViewModel now todo =
     in
         { displayText = displayText
         , isOverDue = displayText == overDueText
-        , startEditingMsg = Model.StartEditingReminder todo
+        , startEditingMsg = Msg.OnStartEditingReminder todo
         }
 
 
 fireCancel =
-    Model.OnDeactivateEditingMode
+    Msg.OnDeactivateEditingMode
 
 
 edit : Todo.Form.Model -> Model.Model -> Html Msg
@@ -368,10 +369,10 @@ edit form appModel =
             form.todoText
 
         fireTextChanged =
-            Todo.Form.SetText >> Model.UpdateTodoForm form
+            Todo.Form.SetText >> Msg.OnUpdateTodoForm form
 
         fireToggleDelete =
-            Model.OnEntityMsg form.entity Entity.ToggleDeleted
+            Msg.OnEntityMsg form.entity Entity.ToggleDeleted
     in
         div
             [ class "overlay"
@@ -406,7 +407,7 @@ new form =
                 [ div [ class "input-field" ]
                     [ textarea
                         [ class "materialize-textarea auto-focus"
-                        , onInput (Model.NewTodoTextChanged form)
+                        , onInput (Msg.OnNewTodoTextChanged form)
                         , form |> Todo.NewForm.getText |> defaultValue
                         ]
                         []
@@ -429,17 +430,17 @@ contextMenu =
 reminderPopup form =
     let
         updateReminderForm =
-            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
+            Todo.Msg.UpdateReminderForm form >> Msg.OnTodoMsg
     in
         div
             [ class "overlay"
-            , onClickStopPropagation Model.OnDeactivateEditingMode
+            , onClickStopPropagation Msg.OnDeactivateEditingMode
             , onKeyDownStopPropagation (\_ -> Model.noop)
             ]
             [ div
                 [ id "popup-menu"
                 , class "z-depth-4 static"
-                , onClickStopPropagation commonMsg.noOp
+                , onClickStopPropagation Model.noop
                 ]
                 [ div [ class "font-subhead" ] [ text "Select date and time" ]
                 , div [ class "input-field" ]

@@ -4,6 +4,7 @@ import Document
 import DomPorts
 import ExclusiveMode
 import Entity
+import Msg
 import Todo.NewForm
 import X.Record as Record exposing (set)
 import X.Return
@@ -70,11 +71,11 @@ subscriptions m =
         , Time.every (Time.second * 1) (\_ -> UpdateTimeTracker)
         , Time.every (Time.second * 30) (\_ -> OnProcessPendingNotificationCronTick)
         ]
-        |> Sub.map Model.OnTodoMsg
+        |> Sub.map Msg.OnTodoMsg
 
 
 update :
-    (Model.Msg -> Model.ReturnF)
+    (Msg.Msg -> Model.ReturnF)
     -> Time.Time
     -> Msg
     -> Model.ReturnF
@@ -139,7 +140,7 @@ update andThenUpdate now todoMsg =
                 else
                     todoId
                         |> ShowReminderOverlayForTodoId
-                        >> Model.OnTodoMsg
+                        >> Msg.OnTodoMsg
                         >> andThenUpdate
 
         ShowReminderOverlayForTodoId todoId ->
@@ -160,7 +161,7 @@ update andThenUpdate now todoMsg =
                     _ ->
                         andThenUpdate Model.onGotoRunningTodo
                 )
-                    >> andThenUpdate (Model.OnCloseNotification todoId)
+                    >> andThenUpdate (Msg.OnCloseNotification todoId)
 
         OnProcessPendingNotificationCronTick ->
             X.Return.andThenMaybe
@@ -171,7 +172,7 @@ update andThenUpdate now todoMsg =
                 -- todo: if we had use save editing form, we would't missed calling on deactivate.
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(
-                >> andThenUpdate Model.OnDeactivateEditingMode
+                >> andThenUpdate Msg.OnDeactivateEditingMode
 
 
 showReminderNotificationCmd ( todo, model ) =

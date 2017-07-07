@@ -1,9 +1,9 @@
 var _jigargosar$elm_simple_gtd$View_GetStarted$setup = function (form) {
 	var updateSetupFormTodoText = function (_p0) {
-		return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+		return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateSetupFormTodoText, form, _p0));
 	};
-	var addTodoMsg = _jigargosar$elm_simple_gtd$Model$OnSaveCurrentForm;
+	var addTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -146,7 +146,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$setup = function (form) {
 };
 var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 	_elm_lang$html$Html$map,
-	_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg,
+	_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg,
 	A2(
 		_elm_lang$html$Html$div,
 		{

@@ -9,8 +9,9 @@ import Dict.Extra
 import Document
 import Entity exposing (Entity)
 import GroupDoc
-import Model exposing (EntityListViewType, ViewType(..))
-import Model exposing (Msg, commonMsg)
+import Msg
+import Model
+import Msg exposing (..)
 import Todo
 import Toolkit.Operators exposing (..)
 import Model
@@ -93,7 +94,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Model.OnEntityMsg (config.toEntity entity)
+            Msg.OnEntityMsg (config.toEntity entity)
 
         count =
             getTodoListByEntityId id |> List.length
@@ -124,9 +125,9 @@ create getTodoListByEntityId config entity =
         , onActiveStateChanged =
             (\bool ->
                 if bool then
-                    Model.OnSetViewType (config.getViewType id |> EntityListView)
+                    Msg.OnSetViewType (config.getViewType id |> EntityListView)
                 else
-                    commonMsg.noOp
+                    Model.noop
             )
         , icon = icon
         , appHeader = appHeader
@@ -173,10 +174,10 @@ contexts model =
         , title = "Contexts"
         , className = "contexts"
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
-        , onAddClicked = Model.NewContext
+        , onAddClicked = Msg.OnNewContext
         , icon = { name = "group_work", color = AppColors.contextsColor }
-        , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleContextsExpanded
-        , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedContexts
+        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleContextsExpanded
+        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedContexts
         , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
         }
 
@@ -221,9 +222,9 @@ projects model =
         , title = "Projects"
         , className = "projects"
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
-        , onAddClicked = Model.NewProject
+        , onAddClicked = Msg.OnNewProject
         , icon = { name = "group_work", color = AppColors.projectsColor }
-        , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleProjectsExpanded
-        , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedProjects
+        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleProjectsExpanded
+        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedProjects
         , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
         }

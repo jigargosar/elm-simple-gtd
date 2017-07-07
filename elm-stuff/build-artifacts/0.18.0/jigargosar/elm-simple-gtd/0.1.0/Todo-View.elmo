@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 	var updateReminderForm = function (_p0) {
-		return _jigargosar$elm_simple_gtd$Model$OnTodoMsg(
+		return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm, form, _p0));
 	};
 	return A2(
@@ -10,7 +10,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
@@ -33,7 +33,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 						_0: _elm_lang$html$Html_Attributes$class('z-depth-4 static'),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$commonMsg.noOp),
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -165,13 +165,13 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$contextMenu = _jigargosar$elm_simple_gtd$Todo_View_Menu$context;
 var _jigargosar$elm_simple_gtd$Todo_View$projectMenu = _jigargosar$elm_simple_gtd$Todo_View_Menu$project;
-var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
+var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
-		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Model$OnEntityMsg, form.entity, _jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
+		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$OnEntityMsg, form.entity, _jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var fireTextChanged = function (_p4) {
 			return A2(
-				_jigargosar$elm_simple_gtd$Model$UpdateTodoForm,
+				_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 				form,
 				_jigargosar$elm_simple_gtd$Todo_Form$SetText(_p4));
 		};
@@ -334,7 +334,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onInput(
-													_jigargosar$elm_simple_gtd$Model$NewTodoTextChanged(form)),
+													_jigargosar$elm_simple_gtd$Msg$OnNewTodoTextChanged(form)),
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$defaultValue(
@@ -390,7 +390,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel = F2(
 		return {
 			displayText: displayText,
 			isOverDue: _elm_lang$core$Native_Utils.eq(displayText, overDueText),
-			startEditingMsg: _jigargosar$elm_simple_gtd$Model$StartEditingReminder(todo)
+			startEditingMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingReminder(todo)
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
@@ -819,8 +819,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 	function (appM, canBeFocused, todo) {
-		var onTodoMsg = _jigargosar$elm_simple_gtd$Model$OnTodoMsg;
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
+		var onTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg;
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
 			_jigargosar$elm_simple_gtd$Entity$Todo(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing) : _jigargosar$elm_simple_gtd$Model$noop;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
@@ -867,9 +867,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'Delete':
 						return toggleDeleteMsg;
 					case 'CharP':
-						return _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo);
+						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject(todo);
 					case 'CharC':
-						return _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo);
+						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext(todo);
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
@@ -878,10 +878,10 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 						return onTodoMsg(
 							_jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning(todoId));
 					default:
-						return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+						return _jigargosar$elm_simple_gtd$Model$noop;
 				}
 			} else {
-				return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+				return _jigargosar$elm_simple_gtd$Model$noop;
 			}
 		};
 		var tabindexAV = function () {
@@ -896,8 +896,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			displayText: _jigargosar$elm_simple_gtd$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingContext(todo),
-			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Model$StartEditingProject(todo),
+			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext(todo),
+			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,

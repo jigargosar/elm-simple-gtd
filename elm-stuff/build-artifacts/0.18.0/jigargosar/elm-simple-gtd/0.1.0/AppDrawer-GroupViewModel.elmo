@@ -7,7 +7,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
 			config.toEntity(entity));
 		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing);
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);
@@ -20,9 +20,9 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			isEmpty: _elm_lang$core$Native_Utils.eq(count, 0),
 			count: count,
 			onActiveStateChanged: function (bool) {
-				return bool ? _jigargosar$elm_simple_gtd$Model$OnSetViewType(
-					_jigargosar$elm_simple_gtd$Model$EntityListView(
-						config.getViewType(id))) : _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+				return bool ? _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
+					_jigargosar$elm_simple_gtd$Msg$EntityListView(
+						config.getViewType(id))) : _jigargosar$elm_simple_gtd$Model$noop;
 			},
 			icon: icon,
 			appHeader: appHeader
@@ -73,10 +73,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		title: 'Contexts',
 		className: 'contexts',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
-		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewContext,
+		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewContext,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$contextsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleContextsExpanded),
-		onToggleShowArchived: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedContexts),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleContextsExpanded),
+		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedContexts),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getContextExpanded(model.appDrawerModel)
 	};
 };
@@ -110,10 +110,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		title: 'Projects',
 		className: 'projects',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),
-		onAddClicked: _jigargosar$elm_simple_gtd$Model$NewProject,
+		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewProject,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$projectsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleProjectsExpanded),
-		onToggleShowArchived: _jigargosar$elm_simple_gtd$Model$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedProjects),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleProjectsExpanded),
+		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedProjects),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getProjectsExpanded(model.appDrawerModel)
 	};
 };

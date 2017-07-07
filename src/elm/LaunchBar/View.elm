@@ -1,25 +1,16 @@
 module LaunchBar.View exposing (..)
 
-
-
+import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
-
 import Keyboard.Extra as Key exposing (Key(..))
 import LaunchBar
 import Model
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
-import Model exposing (commonMsg)
-
-
+import Model
 
 
 init form m =
@@ -39,22 +30,22 @@ init form m =
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    matchingEntity |> LaunchBar.OnEnter |> Model.OnLaunchBarMsg
+                    matchingEntity |> LaunchBar.OnEnter |> Msg.OnLaunchBarMsg
 
                 _ ->
-                    commonMsg.noOp
+                    Model.noop
     in
         div
             [ class "overlay"
             , onKeyDownStopPropagation (keyHandler)
-            , onClickStopPropagation Model.OnDeactivateEditingMode
+            , onClickStopPropagation Msg.OnDeactivateEditingMode
             ]
             [ div
                 [ id "launch-bar-container"
                 , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (LaunchBar.OnInputChanged form >> Model.OnLaunchBarMsg)
+                , onInput (LaunchBar.OnInputChanged form >> Msg.OnLaunchBarMsg)
                 ]
                 [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
                 , div [ class "no-wrap input typing" ] [ text form.input ]

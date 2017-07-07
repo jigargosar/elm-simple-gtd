@@ -3,6 +3,7 @@ module Todo.Notification.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Mat
+import Msg
 import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model
@@ -24,9 +25,9 @@ reminderOverlayActiveView activeView todoDetails =
         Todo.Notification.Model.InitialView ->
             let
                 vm =
-                    { onDismissClicked = Model.ReminderOverlayAction Todo.Notification.Model.Dismiss
-                    , onDoneClicked = Model.ReminderOverlayAction Todo.Notification.Model.MarkDone
-                    , onSnoozeClicked = Model.ReminderOverlayAction Todo.Notification.Model.ShowSnoozeOptions
+                    { onDismissClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.Dismiss
+                    , onDoneClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.MarkDone
+                    , onSnoozeClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.ShowSnoozeOptions
                     }
             in
                 activeViewShell todoDetails
@@ -38,7 +39,7 @@ reminderOverlayActiveView activeView todoDetails =
         Todo.Notification.Model.SnoozeView ->
             let
                 msg =
-                    Todo.Notification.Model.SnoozeTill >> Model.ReminderOverlayAction
+                    Todo.Notification.Model.SnoozeTill >> Msg.OnReminderOverlayAction
 
                 vm =
                     { snoozeFor15Min = msg (Todo.Notification.Model.SnoozeForMilli (Time.minute * 15))
@@ -58,7 +59,7 @@ reminderOverlayActiveView activeView todoDetails =
 activeViewShell todoDetails children =
     let
         onOutsideMouseDown =
-            Model.ReminderOverlayAction Todo.Notification.Model.Close
+            Msg.OnReminderOverlayAction Todo.Notification.Model.Close
     in
         div [ class "notification overlay", onClickStopPropagation onOutsideMouseDown ]
             [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation Model.noop ]

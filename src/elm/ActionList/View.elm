@@ -3,6 +3,7 @@ module ActionList.View exposing (..)
 import ActionList
 import X.Keyboard exposing (onKeyDownStopPropagation)
 import Model
+import Msg
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -10,7 +11,7 @@ import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
 
-init : Model.Model -> ActionList.Model -> Html Model.Msg
+init : Model.Model -> ActionList.Model -> Html Msg.Msg
 init appModel model =
     let
         searchText =
@@ -24,7 +25,7 @@ init appModel model =
     in
         div
             [ class "overlay"
-            , onClick Model.OnDeactivateEditingMode
+            , onClick Msg.OnDeactivateEditingMode
             ]
             [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.noop, onKeyDownStopPropagation (\_ -> Model.noop) ]
                 [ div [ class "modal-content" ]

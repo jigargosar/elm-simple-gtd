@@ -17,6 +17,7 @@ import X.Keyboard
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Msg
 
 
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
@@ -26,7 +27,7 @@ onFirebaseDatabaseChangeSub tagger =
     onFirebaseDatabaseChange (uncurry tagger)
 
 
-main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Model.Msg
+main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Msg.Msg
 main =
     let
         _ =
@@ -42,17 +43,17 @@ main =
             }
 
 
-subscriptions : Model.Model -> Sub Model.Msg
+subscriptions : Model.Model -> Sub Msg.Msg
 subscriptions model =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1) Model.OnNowChanged
-            , X.Keyboard.subscription Model.OnKeyboardMsg
-            , X.Keyboard.ups Model.OnGlobalKeyUp
-            , Store.onChange Model.OnPouchDBChange
-            , onFirebaseDatabaseChangeSub Model.OnFirebaseDatabaseChange
+            [ Time.every (Time.second * 1) Msg.OnNowChanged
+            , X.Keyboard.subscription Msg.OnKeyboardMsg
+            , X.Keyboard.ups Msg.OnGlobalKeyUp
+            , Store.onChange Msg.OnPouchDBChange
+            , onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
             ]
-            |> Sub.map Model.OnSubMsg
+            |> Sub.map Msg.OnSubMsg
         , Keyboard.Combo.subscriptions model.keyComboModel
         , Todo.Main.subscriptions model
         , Firebase.Main.subscriptions model

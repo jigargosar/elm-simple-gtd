@@ -2,7 +2,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$onSelect = function (_p0) {
 	var _p1 = _p0;
 	var _p2 = _p1._1;
 	if (_p2.ctor === 'URL') {
-		return _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode;
+		return _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 	} else {
 		return _p2._0;
 	}
@@ -42,9 +42,9 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
 			itemKey: _elm_lang$core$Tuple$first,
 			itemSearchText: _elm_lang$core$Tuple$first,
 			itemView: _jigargosar$elm_simple_gtd$View_MainMenu$itemView,
-			onStateChanged: _jigargosar$elm_simple_gtd$Model$OnMainMenuStateChanged,
+			onStateChanged: _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged,
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};
 	});
 var _jigargosar$elm_simple_gtd$View_MainMenu$Msg = function (a) {
@@ -84,7 +84,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$getItems = function (appModel) {
 		_Fresheyeball$elm_tuple_extra$Tuple2$map,
 		function (_p8) {
 			return _jigargosar$elm_simple_gtd$View_MainMenu$Msg(
-				_jigargosar$elm_simple_gtd$Model$OnFirebaseMsg(_p8));
+				_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg(_p8));
 		},
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],

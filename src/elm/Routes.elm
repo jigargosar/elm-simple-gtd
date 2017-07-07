@@ -3,7 +3,7 @@ module Routes exposing (..)
 import Entity
 import Maybe.Extra
 import Model as Model
-import Model exposing (Msg)
+import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
@@ -40,11 +40,11 @@ builder2messages builder =
             (\_ ->
                 case path builder of
                     "custom-sync" :: [] ->
-                        [ Model.OnSetViewType SyncView ]
+                        [ Msg.OnSetViewType SyncView ]
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ Model.OnSetViewType Model.defaultView ]
+                        [ Msg.OnSetViewType Model.defaultView ]
             )
             (Model.onSetEntityListView >> X.List.singleton)
 

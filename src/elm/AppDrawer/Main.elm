@@ -2,6 +2,7 @@ module AppDrawer.Main exposing (..)
 
 import AppDrawer.Model exposing (..)
 import Model
+import Msg
 import Return
 import Window
 import X.Record exposing (over, set, toggle)
@@ -14,11 +15,11 @@ mapOver =
 subscriptions model =
     Sub.batch
         [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
-        |> Sub.map Model.OnAppDrawerMsg
+        |> Sub.map Msg.OnAppDrawerMsg
 
 
 update :
-    (Model.Msg -> Model.ReturnF)
+    (Msg.Msg -> Model.ReturnF)
     -> Msg
     -> Model.ReturnF
 update andThenUpdate msg =
@@ -41,4 +42,4 @@ update andThenUpdate msg =
         OnWindowResizeTurnOverlayOff ->
             mapOver (set isOverlayOpen False)
     )
-        >> andThenUpdate Model.OnPersistLocalPref
+        >> andThenUpdate Msg.OnPersistLocalPref

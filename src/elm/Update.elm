@@ -10,6 +10,7 @@ import Entity
 import ExclusiveMode.Main
 import Firebase.Main
 import Material
+import Msg exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import X.Debug
 import X.Keyboard as Keyboard exposing (Key)
@@ -77,33 +78,33 @@ updateInner msg =
                 _ ->
                     identity
 
-        RemotePouchSync form ->
+        OnRemotePouchSync form ->
             andThenUpdate OnSaveCurrentForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
-        ReminderOverlayAction action ->
+        OnReminderOverlayAction action ->
             reminderOverlayAction action
 
         OnDeactivateEditingMode ->
             map (Model.deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        StartEditingContext todo ->
+        OnStartEditingContext todo ->
             map (Model.startEditingTodoContext todo)
                 >> Return.command (positionContextMenuCmd todo)
 
-        StartEditingProject todo ->
+        OnStartEditingProject todo ->
             map (Model.startEditingTodoProject todo)
                 >> Return.command (positionProjectMenuCmd todo)
 
-        NewTodoTextChanged form text ->
+        OnNewTodoTextChanged form text ->
             map (Model.updateNewTodoText form text)
 
-        StartEditingReminder todo ->
+        OnStartEditingReminder todo ->
             map (Model.startEditingReminder todo)
                 >> Return.command (positionScheduleMenuCmd todo)
 
-        UpdateTodoForm form action ->
+        OnUpdateTodoForm form action ->
             map
                 (Todo.Form.set action form
                     |> ExclusiveMode.EditTodo
@@ -134,7 +135,7 @@ updateInner msg =
                 )
                 >> autoFocusInputCmd
 
-        UpdateRemoteSyncFormUri form uri ->
+        OnUpdateRemoteSyncFormUri form uri ->
             map
                 ({ form | uri = uri }
                     |> ExclusiveMode.EditSyncSettings
@@ -148,15 +149,15 @@ updateInner msg =
             Return.andThen Model.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
-        NewTodoForInbox ->
+        OnNewTodoForInbox ->
             map (Model.activateNewTodoModeWithInboxAsReference)
                 >> autoFocusInputCmd
 
-        NewProject ->
+        OnNewProject ->
             map Model.createAndEditNewProject
                 >> autoFocusInputCmd
 
-        NewContext ->
+        OnNewContext ->
             map Model.createAndEditNewContext
                 >> autoFocusInputCmd
 
@@ -190,8 +191,8 @@ updateInner msg =
         OnPersistLocalPref ->
             Return.effect_ (Model.encodeLocalPref >> persistLocalPref)
 
-        Mdl msg_ ->
-            Return.andThen (Material.update Mdl msg_)
+        OnMdl msg_ ->
+            Return.andThen (Material.update OnMdl msg_)
 
 
 withNow : (Time -> Msg) -> ReturnF
@@ -315,7 +316,7 @@ onGlobalKeyUp key =
                                     update
 
                             Key.CharI ->
-                                andThenUpdate NewTodoForInbox
+                                andThenUpdate OnNewTodoForInbox
 
                             Key.Slash ->
                                 LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate

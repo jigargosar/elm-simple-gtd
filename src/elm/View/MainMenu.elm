@@ -5,6 +5,7 @@ import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Msg
 import X.Html exposing (..)
 import Menu
 import Toolkit.Helpers exposing (..)
@@ -19,23 +20,23 @@ import Tuple2
 
 type ItemType
     = URL String
-    | Msg Model.Msg
+    | Msg Msg.Msg
 
 
 type alias Item =
     ( String, ItemType )
 
 
-menuConfig : Menu.State -> Model.Model -> Menu.Config Item Model.Msg
+menuConfig : Menu.State -> Model.Model -> Menu.Config Item Msg.Msg
 menuConfig menuState appModel =
     { onSelect = onSelect
     , isSelected = (\_ -> False)
     , itemKey = Tuple.first
     , itemSearchText = Tuple.first
     , itemView = itemView
-    , onStateChanged = Model.OnMainMenuStateChanged
+    , onStateChanged = Msg.OnMainMenuStateChanged
     , noOp = Model.noop
-    , onOutsideMouseDown = Model.OnDeactivateEditingMode
+    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
 
 
@@ -51,7 +52,7 @@ itemView ( textV, itemType ) =
 onSelect ( _, itemType ) =
     case itemType of
         URL url ->
-            Model.OnDeactivateEditingMode
+            Msg.OnDeactivateEditingMode
 
         Msg msg ->
             msg
@@ -67,7 +68,7 @@ getItems appModel =
             maybeUserProfile
                 ?|> (\_ -> ( "SignOut", Firebase.OnSignOut ))
                 ?= ( "SignIn", Firebase.OnSignIn )
-                |> Tuple2.map (Model.OnFirebaseMsg >> Msg)
+                |> Tuple2.map (Msg.OnFirebaseMsg >> Msg)
 
         linkMenuItems =
             [ ( "Forums", URL AppUrl.forumsURL )

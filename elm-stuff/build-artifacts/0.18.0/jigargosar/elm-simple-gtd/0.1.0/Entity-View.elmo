@@ -147,7 +147,7 @@ var _jigargosar$elm_simple_gtd$Entity_View$list = F2(
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDown(
-						_jigargosar$elm_simple_gtd$Model$OnEntityListKeyDown(entityList)),
+						_jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown(entityList)),
 					_1: {ctor: '[]'}
 				}
 			},

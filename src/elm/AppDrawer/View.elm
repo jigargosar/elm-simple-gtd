@@ -2,6 +2,7 @@ module AppDrawer.View exposing (..)
 
 import AppColors
 import AppUrl
+import Msg exposing (..)
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Mat
 import Toolkit.Operators exposing (..)
@@ -11,7 +12,6 @@ import AppDrawer.GroupViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model exposing (Msg(OnSetViewType), commonMsg)
 import Toolkit.Operators exposing (..)
 import Model exposing (..)
 import X.Function.Infix exposing (..)

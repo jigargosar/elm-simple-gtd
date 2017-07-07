@@ -13,7 +13,7 @@ var _jigargosar$elm_simple_gtd$Todo_MoreMenu$moreMenuConfig = function (model) {
 			return _jigargosar$elm_simple_gtd$Model$noop;
 		},
 		noOp: _jigargosar$elm_simple_gtd$Model$noop,
-		onOutsideMouseDown: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode
+		onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo_MoreMenu$view = function (model) {

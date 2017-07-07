@@ -1,6 +1,7 @@
 module GroupDoc.EditView exposing (..)
 
 import Entity
+import Msg
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import GroupDoc.EditForm
 import Model
@@ -11,20 +12,20 @@ import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (defaultOkCancelArchiveButtons)
 
 
-init : GroupDoc.EditForm.Model -> Html Model.Msg
+init : GroupDoc.EditForm.Model -> Html Msg.Msg
 init form =
     let
         toMsg =
-            Model.OnEntityMsg form.entity
+            Msg.OnEntityMsg form.entity
 
         fireNameChanged =
             Entity.NameChanged >> toMsg
 
         fireSaveForm =
-            Model.OnSaveCurrentForm
+            Msg.OnSaveCurrentForm
 
         fireCancel =
-            Model.OnDeactivateEditingMode
+            Msg.OnDeactivateEditingMode
 
         fireToggleArchive =
             toMsg Entity.ToggleArchived

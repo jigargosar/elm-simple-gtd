@@ -22,23 +22,23 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$core$Platform_Sub$map,
-				_jigargosar$elm_simple_gtd$Model$OnSubMsg,
+				_jigargosar$elm_simple_gtd$Msg$OnSubMsg,
 				_elm_lang$core$Platform_Sub$batch(
 					{
 						ctor: '::',
-						_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _jigargosar$elm_simple_gtd$Model$OnNowChanged),
+						_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _jigargosar$elm_simple_gtd$Msg$OnNowChanged),
 						_1: {
 							ctor: '::',
-							_0: _jigargosar$elm_simple_gtd$X_Keyboard$subscription(_jigargosar$elm_simple_gtd$Model$OnKeyboardMsg),
+							_0: _jigargosar$elm_simple_gtd$X_Keyboard$subscription(_jigargosar$elm_simple_gtd$Msg$OnKeyboardMsg),
 							_1: {
 								ctor: '::',
-								_0: _jigargosar$elm_simple_gtd$X_Keyboard$ups(_jigargosar$elm_simple_gtd$Model$OnGlobalKeyUp),
+								_0: _jigargosar$elm_simple_gtd$X_Keyboard$ups(_jigargosar$elm_simple_gtd$Msg$OnGlobalKeyUp),
 								_1: {
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$Store$onChange(_jigargosar$elm_simple_gtd$Model$OnPouchDBChange),
+									_0: _jigargosar$elm_simple_gtd$Store$onChange(_jigargosar$elm_simple_gtd$Msg$OnPouchDBChange),
 									_1: {
 										ctor: '::',
-										_0: _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub(_jigargosar$elm_simple_gtd$Model$OnFirebaseDatabaseChange),
+										_0: _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChangeSub(_jigargosar$elm_simple_gtd$Msg$OnFirebaseDatabaseChange),
 										_1: {ctor: '[]'}
 									}
 								}

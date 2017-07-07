@@ -4,6 +4,7 @@ import Html
 import Menu
 import Todo.Menu
 import Model
+import Msg
 
 
 type alias MenuItem =
@@ -17,7 +18,7 @@ type ItemType
     | Bar
 
 
-moreMenuConfig : Todo.Menu.Model -> Menu.Config String Model.Msg
+moreMenuConfig : Todo.Menu.Model -> Menu.Config String Msg.Msg
 moreMenuConfig model =
     { onSelect = (\_ -> Model.noop)
     , isSelected = (\_ -> False)
@@ -26,7 +27,7 @@ moreMenuConfig model =
     , itemView = Html.text
     , onStateChanged = (\_ -> Model.noop)
     , noOp = Model.noop
-    , onOutsideMouseDown = Model.OnDeactivateEditingMode
+    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
 
 

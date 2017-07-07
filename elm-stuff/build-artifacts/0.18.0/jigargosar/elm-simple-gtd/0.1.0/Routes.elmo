@@ -6,13 +6,13 @@ var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
 			if (((_p1.ctor === '::') && (_p1._0 === 'custom-sync')) && (_p1._1.ctor === '[]')) {
 				return {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Model$OnSetViewType(_jigargosar$elm_simple_gtd$Model$SyncView),
+					_0: _jigargosar$elm_simple_gtd$Msg$OnSetViewType(_jigargosar$elm_simple_gtd$Msg$SyncView),
 					_1: {ctor: '[]'}
 				};
 			} else {
 				return {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Model$OnSetViewType(_jigargosar$elm_simple_gtd$Model$defaultView),
+					_0: _jigargosar$elm_simple_gtd$Msg$OnSetViewType(_jigargosar$elm_simple_gtd$Model$defaultView),
 					_1: {ctor: '[]'}
 				};
 			}

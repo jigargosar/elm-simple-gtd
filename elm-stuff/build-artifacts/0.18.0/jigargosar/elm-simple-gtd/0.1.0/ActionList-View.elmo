@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$ActionList_View$init = F2(
 				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode),
+					_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode),
 					_1: {ctor: '[]'}
 				}
 			},

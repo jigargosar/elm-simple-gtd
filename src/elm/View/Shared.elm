@@ -8,6 +8,7 @@ import Model
 import Model
 import X.Function.Infix exposing (..)
 import Model exposing (Model)
+import Msg
 
 
 badge : String -> Int -> Html msg
@@ -24,7 +25,7 @@ defaultOkCancelButtons =
 
 
 defaultOkCancelButtonsWith list =
-    okCancelButtonsWith Model.OnSaveCurrentForm Model.OnDeactivateEditingMode list
+    okCancelButtonsWith Msg.OnSaveCurrentForm Msg.OnDeactivateEditingMode list
 
 
 defaultOkCancelDeleteButtons deleteMsg =

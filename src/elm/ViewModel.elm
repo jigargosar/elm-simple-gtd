@@ -8,7 +8,7 @@ import Document exposing (Id)
 import Entity
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Material
-import Model exposing (Msg)
+import Msg exposing (..)
 import Project
 import Set exposing (Set)
 import Time exposing (Time)
@@ -16,7 +16,8 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model exposing (ViewType(..))
+import Model
+import Msg exposing (..)
 
 
 type alias Model =

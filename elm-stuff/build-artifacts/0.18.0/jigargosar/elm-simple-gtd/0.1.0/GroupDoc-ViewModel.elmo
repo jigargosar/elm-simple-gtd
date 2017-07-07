@@ -8,7 +8,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var onEntityAction = _jigargosar$elm_simple_gtd$Model$OnEntityMsg(
+		var onEntityAction = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
 			config.toEntity(groupDoc));
 		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
 		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);
@@ -23,7 +23,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				case 'CharG':
 					return onEntityAction(_jigargosar$elm_simple_gtd$Entity$Goto);
 				default:
-					return _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
+					return _jigargosar$elm_simple_gtd$Model$noop;
 			}
 		};
 		var archive = function () {
@@ -51,7 +51,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				return onEntityAction(
 					_jigargosar$elm_simple_gtd$Entity$NameChanged(_p3));
 			},
-			onCancelClicked: _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode,
+			onCancelClicked: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 			icon: icon,
 			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity$OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,

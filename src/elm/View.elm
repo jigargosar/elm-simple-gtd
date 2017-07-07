@@ -8,6 +8,7 @@ import Entity.View
 import Mat
 import Material.Options
 import Menu
+import Msg exposing (ViewType(..))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
@@ -15,7 +16,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model
-import Model exposing (Msg, commonMsg)
+import Model exposing (commonMsg)
 import View.Header
 import Model exposing (..)
 import Todo.Notification.View exposing (maybeOverlay)
@@ -113,7 +114,7 @@ appLayoutView m =
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
                         [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
@@ -138,7 +139,7 @@ appLayoutView m =
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Model.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
                         [ div [ id "layout-main-content" ] [ appMainContent m ]

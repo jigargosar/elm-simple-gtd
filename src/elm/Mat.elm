@@ -20,6 +20,7 @@ import X.String
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Msg
 
 
 stopPropagation =
@@ -120,7 +121,7 @@ iconBtn mdl opts =
 
 
 btn =
-    Material.Button.render Model.Mdl [ 0 ]
+    Material.Button.render Msg.OnMdl [ 0 ]
 
 
 iconBtn2 name clickHandler =
@@ -167,7 +168,7 @@ ibc_ iconName msg opts =
 
         --        Material.Button.icon
     in
-        Material.Button.render Model.Mdl
+        Material.Button.render Msg.OnMdl
             [ 0 ]
             Material.model
             [ btnAttr
@@ -198,7 +199,7 @@ ibc iconName msg config =
                     ]
                 |> Material.Options.many
     in
-        Material.Button.render Model.Mdl
+        Material.Button.render Msg.OnMdl
             [ 0 ]
             config.mdl
             [ Material.Options.many

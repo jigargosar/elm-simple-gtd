@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$Todo_Notification_View$activeViewShell = F2(
 	function (todoDetails, children) {
-		var onOutsideMouseDown = _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$Close);
+		var onOutsideMouseDown = _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$Close);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -56,9 +56,9 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$reminderOverlayActiveView 
 		var _p0 = activeView;
 		if (_p0.ctor === 'InitialView') {
 			var vm = {
-				onDismissClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$Dismiss),
-				onDoneClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$MarkDone),
-				onSnoozeClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$ShowSnoozeOptions)
+				onDismissClicked: _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$Dismiss),
+				onDoneClicked: _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$MarkDone),
+				onSnoozeClicked: _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction(_jigargosar$elm_simple_gtd$Todo_Notification_Model$ShowSnoozeOptions)
 			};
 			return A2(
 				_jigargosar$elm_simple_gtd$Todo_Notification_View$activeViewShell,
@@ -78,7 +78,7 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_View$reminderOverlayActiveView 
 				});
 		} else {
 			var msg = function (_p1) {
-				return _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(
+				return _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction(
 					_jigargosar$elm_simple_gtd$Todo_Notification_Model$SnoozeTill(_p1));
 			};
 			var vm = {

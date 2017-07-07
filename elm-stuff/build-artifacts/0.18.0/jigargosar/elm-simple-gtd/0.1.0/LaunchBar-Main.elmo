@@ -22,7 +22,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity$ContextsView));
 						}
 					}()(
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Model$OnDeactivateEditingMode, _p1));
+						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p1));
 				};
 			case 'OnInputChanged':
 				return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(

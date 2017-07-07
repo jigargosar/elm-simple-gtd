@@ -25,7 +25,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('layout'),
+			_0: _elm_lang$html$Html_Attributes$class('x-layout'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -34,7 +34,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout--sidebar'),
+					_0: _elm_lang$html$Html_Attributes$class('x-sidebar'),
 					_1: {ctor: '[]'}
 				},
 				{ctor: '[]'}),
@@ -44,10 +44,43 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('layout--main'),
+						_0: _elm_lang$html$Html_Attributes$class('x-main'),
 						_1: {ctor: '[]'}
 					},
-					{ctor: '[]'}),
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('x-main-header'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('x-main-header__inner'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('dadadaklsdalkdjaldjalijdlakjdklajdiljwiajlskdjalijdaljdlsjdailwjdlaijsdlkjailwdjalidjsjdakjdlkajdlaksjdliwj'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			}
 		});

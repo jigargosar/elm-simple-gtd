@@ -96,9 +96,15 @@ appLayoutView m =
         appVM =
             ViewModel.create m
     in
-        div [ class "layout" ]
-            [ div [ class "layout--sidebar" ] []
-            , div [ class "layout--main" ] []
+        div [ class "x-layout" ]
+            [ div [ class "x-sidebar" ] []
+            , div [ class "x-main" ]
+                [ div [ class "x-main-header" ]
+                    [ div [ class "x-main-header__inner" ]
+                        [ div [] [ text "dadadaklsdalkdjaldjalijdlakjdklajdiljwiajlskdjalijdaljdlsjdailwjdlaijsdlkjailwdjalidjsjdakjdlkajdlaksjdliwj" ]
+                        ]
+                    ]
+                ]
             ]
 
 

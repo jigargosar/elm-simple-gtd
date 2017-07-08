@@ -11,18 +11,20 @@
     "url": "https://github.com/jigargosar/elm-simple-gtd"
   },
   "scripts": {
-    "postinstall": "yarn global add elm-github-install@1.0.1 elm@0.18.0 elm-format@0.6.1-alpha firebase-tools@3.9.1",
+    "_postinstall": "yarn global add elm-github-install@1.0.1 elm@0.18.0 elm-format@0.6.1-alpha firebase-tools@3.9.1",
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "hotmon": "run hotmon",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
     "babel-core": "6.25.0",
     "babel-loader": "7.1.1",
     "babel-preset-env": "1.5.2",
     "cross-env": "5.0.1",
     "css-loader": "0.28.4",
+    "electron": "1.6.11",
     "electronify-server": "0.6.2",
     "elm-hot-loader": "0.5.4",
     "elm-webpack-loader": "4.3.1",

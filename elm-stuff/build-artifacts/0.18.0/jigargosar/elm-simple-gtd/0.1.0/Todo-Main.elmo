@@ -195,7 +195,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 			case 'UpdateSetupFormTodoText':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model$setEditMode(
-						_jigargosar$elm_simple_gtd$ExclusiveMode$Setup(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p8._1, _p8._0))));
 			case 'OnShowMoreMenu':
 				var _p10 = _p8._0;
@@ -213,7 +213,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$map(
 					function (_p11) {
 						return _jigargosar$elm_simple_gtd$Model$setEditMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoReminder(_p11));
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(_p11));
 					}(
 						A2(_jigargosar$elm_simple_gtd$Todo_ReminderForm$update, _p8._1, _p8._0)));
 			case 'ToggleRunning':

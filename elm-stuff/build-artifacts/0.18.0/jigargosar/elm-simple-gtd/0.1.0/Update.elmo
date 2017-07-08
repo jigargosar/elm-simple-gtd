@@ -208,7 +208,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return _jigargosar$elm_simple_gtd$Update$map(
 				function (_p23) {
 					return _jigargosar$elm_simple_gtd$Model$setEditMode(
-						_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodo(_p23));
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(_p23));
 				}(
 					A2(_jigargosar$elm_simple_gtd$Todo_Form$set, _p8._1, _p8._0)));
 		case 'OnEditTodoProjectMenuStateChanged':
@@ -218,7 +218,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Update$map,
 						function (_p25) {
 							return _jigargosar$elm_simple_gtd$Model$setEditMode(
-								_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoProject(_p25));
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject(_p25));
 						}(
 							A2(_jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState, _p8._1, _p8._0)),
 						_p24));
@@ -230,7 +230,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Update$map,
 						function (_p27) {
 							return _jigargosar$elm_simple_gtd$Model$setEditMode(
-								_jigargosar$elm_simple_gtd$ExclusiveMode$MainMenu(_p27));
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p27));
 						}(_p8._0),
 						_p26));
 			};
@@ -241,7 +241,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						_jigargosar$elm_simple_gtd$Update$map,
 						function (_p29) {
 							return _jigargosar$elm_simple_gtd$Model$setEditMode(
-								_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoContext(_p29));
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext(_p29));
 						}(
 							A2(_jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState, _p8._1, _p8._0)),
 						_p28));
@@ -250,7 +250,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return _jigargosar$elm_simple_gtd$Update$map(
 				function (_p30) {
 					return _jigargosar$elm_simple_gtd$Model$setEditMode(
-						_jigargosar$elm_simple_gtd$ExclusiveMode$EditSyncSettings(_p30));
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p30));
 				}(
 					_elm_lang$core$Native_Utils.update(
 						_p8._0,
@@ -378,7 +378,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 			_v6_2:
 			do {
 				if (_p42.ctor === '_Tuple2') {
-					if (_p42._1.ctor === 'None') {
+					if (_p42._1.ctor === 'XMNone') {
 						var clear = function (_p43) {
 							return A2(
 								_jigargosar$elm_simple_gtd$Update$andThenUpdate,

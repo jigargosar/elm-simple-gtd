@@ -2,6 +2,7 @@ module GroupDoc.EditView exposing (..)
 
 import Entity
 import Entity.Types
+import GroupDoc.FormTypes exposing (GroupDocEditModel)
 import Msg
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import GroupDoc.EditForm
@@ -13,7 +14,7 @@ import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (defaultOkCancelArchiveButtons)
 
 
-init : GroupDoc.EditForm.Model -> Html Msg.Msg
+init : GroupDocEditModel -> Html Msg.Msg
 init form =
     let
         toMsg =

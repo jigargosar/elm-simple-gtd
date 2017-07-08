@@ -6,8 +6,9 @@ import Context
 import Document exposing (Document)
 import Entity.Tree
 import Entity.Types
-import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
+import ExclusiveMode
+import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
@@ -528,53 +529,53 @@ switchToNewUserSetupModeIfNeeded model =
 
 
 createSetupExclusiveMode =
-    ExclusiveMode.XMSetup (Todo.NewForm.create inboxEntity "")
+    XMSetup (Todo.NewForm.create inboxEntity "")
 
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    set editMode (LaunchBar.Form.create now |> ExclusiveMode.XMLaunchBar)
+    set editMode (LaunchBar.Form.create now |> XMLaunchBar)
 
 
 updateLaunchBarInput now text form =
-    set editMode (LaunchBar.Form.updateInput now text form |> ExclusiveMode.XMLaunchBar)
+    set editMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
 
 
 onNewTodoModeWithFocusInEntityAsReference model =
-    Todo.NewForm.create (model.focusInEntity) "" |> ExclusiveMode.XMNewTodo |> OnStartExclusiveMode
+    Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo |> OnStartExclusiveMode
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> ExclusiveMode.XMNewTodo) model
+    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
 
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    set editMode (Todo.NewForm.create inboxEntity "" |> ExclusiveMode.XMNewTodo)
+    set editMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
 
 
 updateNewTodoText form text =
-    set editMode (Todo.NewForm.setText text form |> ExclusiveMode.XMNewTodo)
+    set editMode (Todo.NewForm.setText text form |> XMNewTodo)
 
 
 startEditingReminder : TodoDoc -> ModelF
 startEditingReminder todo =
-    updateEditModeM (.now >> Todo.ReminderForm.create todo >> ExclusiveMode.XMEditTodoReminder)
+    updateEditModeM (.now >> Todo.ReminderForm.create todo >> XMEditTodoReminder)
 
 
 startEditingTodoProject : TodoDoc -> ModelF
 startEditingTodoProject todo =
-    setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.XMEditTodoProject)
+    setEditMode (Todo.GroupForm.init todo |> XMEditTodoProject)
 
 
 startEditingTodoContext : TodoDoc -> ModelF
 startEditingTodoContext todo =
-    setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.XMEditTodoContext)
+    setEditMode (Todo.GroupForm.init todo |> XMEditTodoContext)
 
 
 showMainMenu =
-    setEditMode (Menu.initState |> ExclusiveMode.XMMainMenu)
+    setEditMode (Menu.initState |> XMMainMenu)
 
 
 startEditingEntity : Entity -> ModelF
@@ -594,10 +595,10 @@ switchToEntityListViewFromEntity entity model =
 
 updateEditModeNameChanged newName entity model =
     case model.editMode of
-        ExclusiveMode.XMEditContext ecm ->
+        XMEditContext ecm ->
             setEditMode (ExclusiveMode.editContextSetName newName ecm) model
 
-        ExclusiveMode.XMEditProject epm ->
+        XMEditProject epm ->
             setEditMode (ExclusiveMode.editProjectSetName newName epm) model
 
         _ ->
@@ -606,53 +607,53 @@ updateEditModeNameChanged newName entity model =
 
 saveCurrentForm model =
     case model.editMode of
-        ExclusiveMode.XMEditContext form ->
+        XMEditContext form ->
             model
                 |> updateContext form.id
                     (Context.setName form.name)
 
-        ExclusiveMode.XMEditProject form ->
+        XMEditProject form ->
             model
                 |> updateProject form.id
                     (Project.setName form.name)
 
-        ExclusiveMode.XMEditTodo form ->
+        XMEditTodo form ->
             model
                 |> updateTodo (Todo.SetText form.todoText) form.id
 
-        ExclusiveMode.XMEditTodoReminder form ->
+        XMEditTodoReminder form ->
             model
                 |> updateTodo (Todo.SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
-        ExclusiveMode.XMEditTodoContext form ->
+        XMEditTodoContext form ->
             model |> Return.singleton
 
-        ExclusiveMode.XMEditTodoProject form ->
+        XMEditTodoProject form ->
             model |> Return.singleton
 
-        ExclusiveMode.XMTodoMoreMenu _ ->
+        XMTodoMoreMenu _ ->
             model |> Return.singleton
 
-        ExclusiveMode.XMNewTodo form ->
+        XMNewTodo form ->
             saveNewTodoForm form model
 
-        ExclusiveMode.XMEditSyncSettings form ->
+        XMEditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
                 |> Return.singleton
 
-        ExclusiveMode.XMLaunchBar form ->
+        XMLaunchBar form ->
             model |> Return.singleton
 
-        ExclusiveMode.XMMainMenu _ ->
+        XMMainMenu _ ->
             model |> Return.singleton
 
-        ExclusiveMode.XMNone ->
+        XMNone ->
             model |> Return.singleton
 
-        ExclusiveMode.XMSignInOverlay ->
+        XMSignInOverlay ->
             model |> Return.singleton
 
-        ExclusiveMode.XMSetup form ->
+        XMSetup form ->
             saveNewTodoForm form model
 
 
@@ -708,7 +709,7 @@ toggleDeleteEntity entity model =
 
 getMaybeEditTodoReminderForm model =
     case model.editMode of
-        ExclusiveMode.XMEditTodoReminder form ->
+        XMEditTodoReminder form ->
             Just form
 
         _ ->
@@ -719,7 +720,7 @@ getRemoteSyncForm model =
     let
         maybeForm =
             case model.editMode of
-                ExclusiveMode.XMEditSyncSettings form ->
+                XMEditSyncSettings form ->
                     Just form
 
                 _ ->
@@ -728,7 +729,7 @@ getRemoteSyncForm model =
         maybeForm ?= createRemoteSyncForm model
 
 
-createRemoteSyncForm : Model -> ExclusiveMode.SyncForm
+createRemoteSyncForm : Model -> SyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 

@@ -7,7 +7,7 @@ import Entity.Types
 
 --safe
 
-import ExclusiveMode
+import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase
 import Keyboard.Combo
 import Keyboard.Extra
@@ -50,10 +50,10 @@ type SubMsg
 type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
-    | OnStartExclusiveMode ExclusiveMode.ExclusiveMode
+    | OnStartExclusiveMode ExclusiveMode
     | OnShowMainMenu
     | OnMainMenuStateChanged Menu.State
-    | OnRemotePouchSync ExclusiveMode.SyncForm
+    | OnRemotePouchSync SyncForm
     | OnReminderOverlayAction Todo.Notification.Model.Action
     | OnNewTodoForInbox
     | OnNewProject
@@ -64,7 +64,7 @@ type Msg
     | OnStartEditingContext TodoDoc
     | OnStartEditingProject TodoDoc
     | OnSaveCurrentForm
-    | OnUpdateRemoteSyncFormUri ExclusiveMode.SyncForm String
+    | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnUpdateTodoForm Todo.Form.Model Todo.Form.Action

@@ -5,6 +5,7 @@ import DomPorts
 import Entity.Types
 import ExclusiveMode
 import Entity
+import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
 import Msg
 import Todo.NewForm
 import X.Record as Record exposing (set)
@@ -85,7 +86,7 @@ update andThenUpdate now todoMsg =
         UpdateSetupFormTodoText form todoText ->
             Return.map
                 (Todo.NewForm.setText todoText form
-                    |> ExclusiveMode.XMSetup
+                    |> XMSetup
                     |> Model.setEditMode
                 )
 
@@ -96,7 +97,7 @@ update andThenUpdate now todoMsg =
         UpdateReminderForm form action ->
             Return.map
                 (Todo.ReminderForm.update action form
-                    |> ExclusiveMode.XMEditTodoReminder
+                    |> XMEditTodoReminder
                     >> Model.setEditMode
                 )
 

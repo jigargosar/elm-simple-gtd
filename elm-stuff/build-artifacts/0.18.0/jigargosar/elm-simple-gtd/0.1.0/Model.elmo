@@ -227,7 +227,7 @@ var _jigargosar$elm_simple_gtd$Model$createRemoteSyncForm = function (model) {
 var _jigargosar$elm_simple_gtd$Model$getRemoteSyncForm = function (model) {
 	var maybeForm = function () {
 		var _p16 = model.editMode;
-		if (_p16.ctor === 'EditSyncSettings') {
+		if (_p16.ctor === 'XMEditSyncSettings') {
 			return _elm_lang$core$Maybe$Just(_p16._0);
 		} else {
 			return _elm_lang$core$Maybe$Nothing;
@@ -240,7 +240,7 @@ var _jigargosar$elm_simple_gtd$Model$getRemoteSyncForm = function (model) {
 };
 var _jigargosar$elm_simple_gtd$Model$getMaybeEditTodoReminderForm = function (model) {
 	var _p17 = model.editMode;
-	if (_p17.ctor === 'EditTodoReminder') {
+	if (_p17.ctor === 'XMEditTodoReminder') {
 		return _elm_lang$core$Maybe$Just(_p17._0);
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
@@ -254,7 +254,7 @@ var _jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity = F2(
 	});
 var _jigargosar$elm_simple_gtd$Model$onNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')));
 };
 var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToSnoozeView = F2(
@@ -512,7 +512,7 @@ var _jigargosar$elm_simple_gtd$Model$getCurrentViewEntityList = function (model)
 	}
 };
 var _jigargosar$elm_simple_gtd$Model$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode$Setup(
+var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, ''));
 var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$Msg$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
@@ -695,7 +695,7 @@ var _jigargosar$elm_simple_gtd$Model$activateLaunchBar = function (now) {
 	return A2(
 		_jigargosar$elm_simple_gtd$X_Record$set,
 		_jigargosar$elm_simple_gtd$Model$editMode,
-		_jigargosar$elm_simple_gtd$ExclusiveMode$LaunchBar(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
 			_jigargosar$elm_simple_gtd$LaunchBar_Form$create(now)));
 };
 var _jigargosar$elm_simple_gtd$Model$updateLaunchBarInput = F3(
@@ -703,43 +703,43 @@ var _jigargosar$elm_simple_gtd$Model$updateLaunchBarInput = F3(
 		return A2(
 			_jigargosar$elm_simple_gtd$X_Record$set,
 			_jigargosar$elm_simple_gtd$Model$editMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode$LaunchBar(
+			_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
 				A3(_jigargosar$elm_simple_gtd$LaunchBar_Form$updateInput, now, text, form)));
 	});
 var _jigargosar$elm_simple_gtd$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return A3(
 		_jigargosar$elm_simple_gtd$X_Record$set,
 		_jigargosar$elm_simple_gtd$Model$editMode,
-		_jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')),
 		model);
 };
 var _jigargosar$elm_simple_gtd$Model$activateNewTodoModeWithInboxAsReference = A2(
 	_jigargosar$elm_simple_gtd$X_Record$set,
 	_jigargosar$elm_simple_gtd$Model$editMode,
-	_jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo(
+	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 		A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, '')));
 var _jigargosar$elm_simple_gtd$Model$updateNewTodoText = F2(
 	function (form, text) {
 		return A2(
 			_jigargosar$elm_simple_gtd$X_Record$set,
 			_jigargosar$elm_simple_gtd$Model$editMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode$NewTodo(
+			_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 				A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, text, form)));
 	});
 var _jigargosar$elm_simple_gtd$Model$setEditMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model$editMode);
 var _jigargosar$elm_simple_gtd$Model$startEditingTodoProject = function (todo) {
 	return _jigargosar$elm_simple_gtd$Model$setEditMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoProject(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject(
 			_jigargosar$elm_simple_gtd$Todo_GroupForm$init(todo)));
 };
 var _jigargosar$elm_simple_gtd$Model$startEditingTodoContext = function (todo) {
 	return _jigargosar$elm_simple_gtd$Model$setEditMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoContext(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext(
 			_jigargosar$elm_simple_gtd$Todo_GroupForm$init(todo)));
 };
 var _jigargosar$elm_simple_gtd$Model$showMainMenu = _jigargosar$elm_simple_gtd$Model$setEditMode(
-	_jigargosar$elm_simple_gtd$ExclusiveMode$MainMenu(_jigargosar$elm_simple_gtd$Menu$initState));
+	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState));
 var _jigargosar$elm_simple_gtd$Model$startEditingEntity = F2(
 	function (entity, model) {
 		return A2(
@@ -785,12 +785,12 @@ var _jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged = F3(
 	function (newName, entity, model) {
 		var _p37 = model.editMode;
 		switch (_p37.ctor) {
-			case 'EditContext':
+			case 'XMEditContext':
 				return A2(
 					_jigargosar$elm_simple_gtd$Model$setEditMode,
 					A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName, newName, _p37._0),
 					model);
-			case 'EditProject':
+			case 'XMEditProject':
 				return A2(
 					_jigargosar$elm_simple_gtd$Model$setEditMode,
 					A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName, newName, _p37._0),
@@ -813,7 +813,7 @@ var _jigargosar$elm_simple_gtd$Model$updateEditModeM = F2(
 var _jigargosar$elm_simple_gtd$Model$startEditingReminder = function (todo) {
 	return _jigargosar$elm_simple_gtd$Model$updateEditModeM(
 		function (_p38) {
-			return _jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoReminder(
+			return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(
 				A2(
 					_jigargosar$elm_simple_gtd$Todo_ReminderForm$create,
 					todo,
@@ -1089,28 +1089,28 @@ var _jigargosar$elm_simple_gtd$Model$updateContext = F2(
 var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 	var _p50 = model.editMode;
 	switch (_p50.ctor) {
-		case 'EditContext':
+		case 'XMEditContext':
 			var _p51 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateContext,
 				_p51.id,
 				_jigargosar$elm_simple_gtd$Context$setName(_p51.name),
 				model);
-		case 'EditProject':
+		case 'XMEditProject':
 			var _p52 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateProject,
 				_p52.id,
 				_jigargosar$elm_simple_gtd$Project$setName(_p52.name),
 				model);
-		case 'EditTodo':
+		case 'XMEditTodo':
 			var _p53 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
 				_jigargosar$elm_simple_gtd$Todo$SetText(_p53.todoText),
 				_p53.id,
 				model);
-		case 'EditTodoReminder':
+		case 'XMEditTodoReminder':
 			var _p54 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
@@ -1118,26 +1118,26 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p54)),
 				_p54.id,
 				model);
-		case 'EditTodoContext':
+		case 'XMEditTodoContext':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'EditTodoProject':
+		case 'XMEditTodoProject':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'TodoMoreMenu':
+		case 'XMTodoMoreMenu':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'NewTodo':
+		case 'XMNewTodo':
 			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p50._0, model);
-		case 'EditSyncSettings':
+		case 'XMEditSyncSettings':
 			return _Fresheyeball$elm_return$Return$singleton(
 				_elm_lang$core$Native_Utils.update(
 					model,
 					{pouchDBRemoteSyncURI: _p50._0.uri}));
-		case 'LaunchBar':
+		case 'XMLaunchBar':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'MainMenu':
+		case 'XMMainMenu':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'None':
+		case 'XMNone':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'SignInOverlay':
+		case 'XMSignInOverlay':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		default:
 			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p50._0, model);

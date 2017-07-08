@@ -5,6 +5,7 @@ import AppDrawer.Types
 import AppDrawer.View
 import CustomSync
 import Entity.View
+import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Mat
 import Material.Options
 import Menu
@@ -43,40 +44,40 @@ overlayViews appModel =
     let
         editModeOverlayView =
             case Model.getEditMode appModel of
-                ExclusiveMode.XMLaunchBar form ->
+                XMLaunchBar form ->
                     LaunchBar.View.init form appModel
 
-                ExclusiveMode.XMTodoMoreMenu model ->
+                XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                ExclusiveMode.XMEditTodoContext form ->
+                XMEditTodoContext form ->
                     Todo.View.contextMenu form appModel
 
-                ExclusiveMode.XMEditTodoProject form ->
+                XMEditTodoProject form ->
                     Todo.View.projectMenu form appModel
 
-                ExclusiveMode.XMEditTodoReminder form ->
+                XMEditTodoReminder form ->
                     Todo.View.reminderPopup form
 
-                ExclusiveMode.XMSignInOverlay ->
+                XMSignInOverlay ->
                     View.GetStarted.signInOverlay
 
-                ExclusiveMode.XMSetup form ->
+                XMSetup form ->
                     View.GetStarted.setup form
 
-                ExclusiveMode.XMEditProject form ->
+                XMEditProject form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.XMEditContext form ->
+                XMEditContext form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.XMEditTodo form ->
+                XMEditTodo form ->
                     Todo.View.edit form appModel
 
-                ExclusiveMode.XMNewTodo form ->
+                XMNewTodo form ->
                     Todo.View.new form
 
-                ExclusiveMode.XMMainMenu menuState ->
+                XMMainMenu menuState ->
                     View.MainMenu.init menuState appModel
 
                 _ ->

@@ -1,24 +1,12 @@
 module GroupDoc.EditForm exposing (..)
 
-import Document.Types exposing (DocId, getDocId)
+import Document.Types exposing (getDocId)
 import Entity.Types exposing (EntityType, createContextEntity, createProjectEntity)
-import GroupDoc.Types exposing (GroupDoc, GroupDocName, getGroupDocName, isGroupDocArchived)
+import GroupDoc.FormTypes exposing (GroupDocEditModel, NameInputLabel)
+import GroupDoc.Types exposing (GroupDoc, getGroupDocName, isGroupDocArchived)
 
 
-type alias NameInputLabel =
-    String
-
-
-type alias Model =
-    { id : DocId
-    , name : GroupDocName
-    , entity : EntityType
-    , isArchived : Bool
-    , nameLabel : NameInputLabel
-    }
-
-
-init : (GroupDoc -> EntityType) -> NameInputLabel -> GroupDoc -> Model
+init : (GroupDoc -> EntityType) -> NameInputLabel -> GroupDoc -> GroupDocEditModel
 init toEntity nameLabel groupDoc =
     { id = getDocId groupDoc
     , name = getGroupDocName groupDoc

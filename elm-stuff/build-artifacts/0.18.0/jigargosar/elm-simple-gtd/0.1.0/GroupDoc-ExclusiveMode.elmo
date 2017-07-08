@@ -1,0 +1,4 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_ExclusiveMode$GroupDocEditModel = F5(
+	function (a, b, c, d, e) {
+		return {id: a, name: b, entity: c, isArchived: d, nameLabel: e};
+	});

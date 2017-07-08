@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start = function (exclusiveMode) {
 	var _p0 = exclusiveMode;
-	if (_p0.ctor === 'NewTodo') {
+	if (_p0.ctor === 'XMNewTodo') {
 		return function (_p1) {
 			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 				A2(

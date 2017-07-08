@@ -9,6 +9,7 @@ import Entity.Types
 import ExclusiveMode
 import Entity
 import ExclusiveMode.Main
+import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
 import Material
 import Msg exposing (..)
@@ -108,14 +109,14 @@ updateInner msg =
         OnUpdateTodoForm form action ->
             map
                 (Todo.Form.set action form
-                    |> ExclusiveMode.XMEditTodo
+                    |> XMEditTodo
                     >> Model.setEditMode
                 )
 
         OnEditTodoProjectMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
-                    |> ExclusiveMode.XMEditTodoProject
+                    |> XMEditTodoProject
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -123,7 +124,7 @@ updateInner msg =
         OnMainMenuStateChanged menuState ->
             map
                 (menuState
-                    |> ExclusiveMode.XMMainMenu
+                    |> XMMainMenu
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -131,7 +132,7 @@ updateInner msg =
         OnEditTodoContextMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
-                    |> ExclusiveMode.XMEditTodoContext
+                    |> XMEditTodoContext
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -139,7 +140,7 @@ updateInner msg =
         OnUpdateRemoteSyncFormUri form uri ->
             map
                 ({ form | uri = uri }
-                    |> ExclusiveMode.XMEditSyncSettings
+                    |> XMEditSyncSettings
                     >> Model.setEditMode
                 )
 
@@ -298,7 +299,7 @@ onGlobalKeyUp key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
-                ( key, ExclusiveMode.XMNone ) ->
+                ( key, XMNone ) ->
                     let
                         clear =
                             map (Model.clearSelection)

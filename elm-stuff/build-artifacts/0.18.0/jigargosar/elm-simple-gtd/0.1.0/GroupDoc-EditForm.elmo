@@ -16,7 +16,3 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init = F3(
 	});
 var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity, 'Context Name');
 var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity, 'Project Name');
-var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$Model = F5(
-	function (a, b, c, d, e) {
-		return {id: a, name: b, entity: c, isArchived: d, nameLabel: e};
-	});

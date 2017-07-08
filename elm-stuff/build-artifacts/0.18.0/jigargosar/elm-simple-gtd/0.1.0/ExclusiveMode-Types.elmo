@@ -1,0 +1,41 @@
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$SyncForm = function (a) {
+	return {uri: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone = {ctor: 'XMNone'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup = function (a) {
+	return {ctor: 'XMSetup', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay = {ctor: 'XMSignInOverlay'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings = function (a) {
+	return {ctor: 'XMEditSyncSettings', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
+	return {ctor: 'XMMainMenu', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = function (a) {
+	return {ctor: 'XMLaunchBar', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject = function (a) {
+	return {ctor: 'XMEditTodoProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext = function (a) {
+	return {ctor: 'XMEditTodoContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder = function (a) {
+	return {ctor: 'XMEditTodoReminder', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
+	return {ctor: 'XMTodoMoreMenu', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) {
+	return {ctor: 'XMEditProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
+	return {ctor: 'XMEditContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = function (a) {
+	return {ctor: 'XMEditTodo', _0: a};
+};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo = function (a) {
+	return {ctor: 'XMNewTodo', _0: a};
+};

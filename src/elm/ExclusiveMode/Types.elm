@@ -1,6 +1,7 @@
 module ExclusiveMode.Types exposing (..)
 
 import GroupDoc.EditForm
+import GroupDoc.FormTypes exposing (GroupDocEditModel)
 import LaunchBar.Form
 import Menu
 import Todo.Form
@@ -11,11 +12,11 @@ import Todo.ReminderForm
 
 
 type alias EditContextForm =
-    GroupDoc.EditForm.Model
+    GroupDocEditModel
 
 
 type alias EditProjectForm =
-    GroupDoc.EditForm.Model
+    GroupDocEditModel
 
 
 type alias SyncForm =

@@ -238,29 +238,29 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 	var editModeOverlayView = function () {
 		var _p1 = _jigargosar$elm_simple_gtd$Model$getEditMode(appModel);
 		switch (_p1.ctor) {
-			case 'LaunchBar':
+			case 'XMLaunchBar':
 				return A2(_jigargosar$elm_simple_gtd$LaunchBar_View$init, _p1._0, appModel);
-			case 'TodoMoreMenu':
+			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
-			case 'EditTodoContext':
+			case 'XMEditTodoContext':
 				return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p1._0, appModel);
-			case 'EditTodoProject':
+			case 'XMEditTodoProject':
 				return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p1._0, appModel);
-			case 'EditTodoReminder':
+			case 'XMEditTodoReminder':
 				return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p1._0);
-			case 'SignInOverlay':
+			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
-			case 'Setup':
+			case 'XMSetup':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p1._0);
-			case 'EditProject':
+			case 'XMEditProject':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
-			case 'EditContext':
+			case 'XMEditContext':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
-			case 'EditTodo':
+			case 'XMEditTodo':
 				return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p1._0, appModel);
-			case 'NewTodo':
+			case 'XMNewTodo':
 				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
-			case 'MainMenu':
+			case 'XMMainMenu':
 				return A2(_jigargosar$elm_simple_gtd$View_MainMenu$init, _p1._0, appModel);
 			default:
 				return A2(

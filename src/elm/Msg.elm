@@ -11,21 +11,18 @@ import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase
 import Keyboard.Combo
 import Keyboard.Extra
+import X.Keyboard
 import LaunchBar
 import Material
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
-import Todo.GroupForm
 import Todo.Msg
-import Todo.NewForm
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import X.Keyboard
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E

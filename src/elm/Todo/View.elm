@@ -5,6 +5,7 @@ import Date
 import Dict
 import Document
 import Entity
+import Entity.Types
 import Material
 import Material.Button
 import Material.Icon
@@ -122,7 +123,7 @@ createTodoViewModel appM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Msg.OnEntityMsg (Entity.Todo todo)
+            Msg.OnEntityMsg (Entity.Types.Todo todo)
 
         onTodoMsg =
             Msg.OnTodoMsg
@@ -134,7 +135,7 @@ createTodoViewModel appM canBeFocused todo =
             if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
-                        createEntityActionMsg Entity.ToggleSelected
+                        createEntityActionMsg Entity.Types.OnToggleSelected
 
                     Key.CharE ->
                         startEditingMsg
@@ -155,7 +156,7 @@ createTodoViewModel appM canBeFocused todo =
                         reminder.startEditingMsg
 
                     Key.CharG ->
-                        createEntityActionMsg Entity.Goto
+                        createEntityActionMsg Entity.Types.OnGoto
 
                     Key.CharS ->
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
@@ -167,15 +168,15 @@ createTodoViewModel appM canBeFocused todo =
 
         startEditingMsg =
             if canBeFocused then
-                createEntityActionMsg Entity.StartEditing
+                createEntityActionMsg Entity.Types.OnStartEditing
             else
                 Model.noop
 
         toggleDeleteMsg =
-            createEntityActionMsg Entity.ToggleDeleted
+            createEntityActionMsg Entity.Types.OnToggleDeleted
 
         toggleDoneMsg =
-            createEntityActionMsg Entity.ToggleArchived
+            createEntityActionMsg Entity.Types.OnToggleArchived
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -190,7 +191,7 @@ createTodoViewModel appM canBeFocused todo =
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
-        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
+        , onFocusIn = createEntityActionMsg Entity.Types.OnOnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , onMoreMenuClicked = Todo.Msg.OnShowMoreMenu todoId |> onTodoMsg
@@ -375,7 +376,7 @@ edit form appModel =
             Todo.Form.SetText >> Msg.OnUpdateTodoForm form
 
         fireToggleDelete =
-            Msg.OnEntityMsg form.entity Entity.ToggleDeleted
+            Msg.OnEntityMsg form.entity Entity.Types.OnToggleDeleted
     in
         div
             [ class "overlay"

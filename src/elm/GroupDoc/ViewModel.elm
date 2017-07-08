@@ -5,6 +5,7 @@ import Color
 import Context
 import Document
 import Entity exposing (Entity)
+import Entity.Types
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Html
@@ -57,7 +58,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Document.Id -> EntityListViewType
+    , getViewType : Document.Id -> Entity.Types.ListViewType
     , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 
@@ -77,13 +78,13 @@ create config todoList groupDoc =
             if isNull then
                 Model.noop
             else
-                onEntityAction Entity.ToggleDeleted
+                onEntityAction Entity.Types.OnToggleDeleted
 
         startEditingMsg =
             if isNull then
                 Model.noop
             else
-                onEntityAction Entity.StartEditing
+                onEntityAction Entity.Types.OnStartEditing
 
         icon =
             if isNull then
@@ -106,7 +107,7 @@ create config todoList groupDoc =
                     toggleDeleteMsg
 
                 Key.CharG ->
-                    onEntityAction Entity.Goto
+                    onEntityAction Entity.Types.OnGoto
 
                 _ ->
                     Model.noop
@@ -123,7 +124,7 @@ create config todoList groupDoc =
                         "archive"
             in
                 { iconName = iconName
-                , onClick = onEntityAction Entity.ToggleArchived
+                , onClick = onEntityAction Entity.Types.OnToggleArchived
                 , isArchived = isArchived
                 }
     in
@@ -136,11 +137,11 @@ create config todoList groupDoc =
         , archive = archive
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = onEntityAction Entity.Save
-        , onNameChanged = Entity.NameChanged >> onEntityAction
+        , onSaveClicked = onEntityAction Entity.Types.OnSave
+        , onNameChanged = Entity.Types.OnNameChanged >> onEntityAction
         , onCancelClicked = Msg.OnDeactivateEditingMode
         , icon = icon
-        , onFocusIn = onEntityAction Entity.OnFocusIn
+        , onFocusIn = onEntityAction Entity.Types.OnOnFocusIn
         , onKeyDownMsg = onKeyDownMsg
         , tabindexAV = config.getTabIndexAVForEntity (config.toEntity groupDoc)
         , todoList = todoList
@@ -161,7 +162,7 @@ contextGroup getTabIndexAVForEntity todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getViewType = Entity.ContextView
+            , getViewType = Entity.Types.ContextView
             , getTabIndexAVForEntity = getTabIndexAVForEntity
             }
     in
@@ -181,7 +182,7 @@ projectGroup getTabIndexAVForEntity todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getViewType = Entity.ProjectView
+            , getViewType = Entity.Types.ProjectView
             , getTabIndexAVForEntity = getTabIndexAVForEntity
             }
     in

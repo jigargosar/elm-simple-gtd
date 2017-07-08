@@ -9,7 +9,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 		};
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
 			config.toEntity(entity));
-		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity$StartEditing);
+		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing);
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);
 		var count = _elm_lang$core$List$length(
 			getTodoListByEntityId(id));
@@ -56,7 +56,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$AppColors$nullContextColor},
 		defaultIconName: 'fiber_manual_record',
 		defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultContextColor,
-		getViewType: _jigargosar$elm_simple_gtd$Entity$ContextView
+		getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ContextView
 	};
 	var entityList = A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, config, model);
 	var nullVMAsList = _jigargosar$elm_simple_gtd$X_Maybe$toList(
@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		entityList: A2(_elm_lang$core$List$drop, 1, entityList),
 		nullVMAsList: nullVMAsList,
 		archivedEntityList: A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, archivedConfig, model),
-		viewType: _jigargosar$elm_simple_gtd$Entity$ContextsView,
+		viewType: _jigargosar$elm_simple_gtd$Entity_Types$ContextsView,
 		title: 'Contexts',
 		className: 'contexts',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
@@ -93,7 +93,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		nullIcon: {name: 'apps', color: _jigargosar$elm_simple_gtd$AppColors$nullProjectColor},
 		defaultIconName: 'apps',
 		defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
-		getViewType: _jigargosar$elm_simple_gtd$Entity$ProjectView
+		getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ProjectView
 	};
 	var entityList = A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, config, model);
 	var nullVMAsList = _jigargosar$elm_simple_gtd$X_Maybe$toList(
@@ -106,7 +106,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		entityList: A2(_elm_lang$core$List$drop, 1, entityList),
 		nullVMAsList: {ctor: '[]'},
 		archivedEntityList: A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, archivedConfig, model),
-		viewType: _jigargosar$elm_simple_gtd$Entity$ProjectsView,
+		viewType: _jigargosar$elm_simple_gtd$Entity_Types$ProjectsView,
 		title: 'Projects',
 		className: 'projects',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),

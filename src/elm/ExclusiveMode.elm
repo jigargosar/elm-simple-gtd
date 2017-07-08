@@ -1,6 +1,7 @@
 module ExclusiveMode exposing (..)
 
 import ActionList
+import Entity.Types
 import GroupDoc.EditForm
 import Entity
 import LaunchBar.Form
@@ -85,13 +86,13 @@ editTodo =
 createEntityEditForm : Entity.Entity -> ExclusiveMode
 createEntityEditForm entity =
     case entity of
-        Entity.Group g ->
+        Entity.Types.Group g ->
             case g of
-                Entity.Context model ->
+                Entity.Types.Context model ->
                     editContext model
 
-                Entity.Project model ->
+                Entity.Types.Project model ->
                     editProject model
 
-        Entity.Todo model ->
+        Entity.Types.Todo model ->
             editTodo model

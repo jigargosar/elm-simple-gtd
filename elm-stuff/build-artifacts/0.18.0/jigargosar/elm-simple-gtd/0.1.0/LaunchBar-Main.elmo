@@ -13,13 +13,13 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 									_jigargosar$elm_simple_gtd$Model$switchToProjectView(_p2._0));
 							case 'Projects':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity$ProjectsView));
+									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
 							case 'Context':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
 									_jigargosar$elm_simple_gtd$Model$switchToContextView(_p2._0));
 							default:
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity$ContextsView));
+									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
 						}
 					}()(
 						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p1));

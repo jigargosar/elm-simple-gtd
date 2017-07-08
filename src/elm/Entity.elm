@@ -2,6 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
+import Entity.Types exposing (Entity(..), GroupEntity(..), ListViewType(..))
 import X.List as List
 import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
@@ -12,14 +13,12 @@ import Project
 import Todo
 
 
-type GroupEntity
-    = Project Project.Model
-    | Context Context.Model
+type alias GroupEntity =
+    Entity.Types.GroupEntity
 
 
-type Entity
-    = Group GroupEntity
-    | Todo Todo.Model
+type alias Entity =
+    Entity.Types.Entity
 
 
 fromContext =
@@ -42,25 +41,8 @@ initContextGroup =
     Context
 
 
-type ListViewType
-    = ContextsView
-    | ContextView Document.Id
-    | ProjectsView
-    | ProjectView Document.Id
-    | BinView
-    | DoneView
-    | RecentView
-
-
-type Msg
-    = StartEditing
-    | ToggleDeleted
-    | ToggleArchived
-    | Save
-    | NameChanged String
-    | OnFocusIn
-    | ToggleSelected
-    | Goto
+type alias Msg =
+    Entity.Types.Msg
 
 
 getId entity =

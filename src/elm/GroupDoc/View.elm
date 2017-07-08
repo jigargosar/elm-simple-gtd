@@ -1,6 +1,7 @@
 module GroupDoc.View exposing (..)
 
 import Entity
+import Entity.Types
 import GroupDoc.ViewModel exposing (ViewModel)
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
@@ -22,7 +23,7 @@ initKeyed todoView vm =
 item todoView vm =
     let
         getTabIndexAVForTodo =
-            Entity.Todo >> vm.getTabIndexAVForEntity
+            Entity.Types.Todo >> vm.getTabIndexAVForEntity
     in
         Html.Keyed.node "div"
             [ class "collection" ]

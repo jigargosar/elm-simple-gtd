@@ -2,6 +2,7 @@ port module Todo.Main exposing (..)
 
 import Document
 import DomPorts
+import Entity.Types
 import ExclusiveMode
 import Entity
 import Msg
@@ -245,7 +246,7 @@ gotoTodoWithId todoId model =
                 |> List.find
                     (\entity ->
                         case entity of
-                            Entity.Todo doc ->
+                            Entity.Types.Todo doc ->
                                 Document.hasId todoId doc
 
                             _ ->

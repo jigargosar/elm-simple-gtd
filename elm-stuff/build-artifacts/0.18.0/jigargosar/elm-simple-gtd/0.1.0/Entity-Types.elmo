@@ -1,0 +1,33 @@
+var _jigargosar$elm_simple_gtd$Entity_Types$Context = function (a) {
+	return {ctor: 'Context', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$Project = function (a) {
+	return {ctor: 'Project', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$Todo = function (a) {
+	return {ctor: 'Todo', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$Group = function (a) {
+	return {ctor: 'Group', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$RecentView = {ctor: 'RecentView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$DoneView = {ctor: 'DoneView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$BinView = {ctor: 'BinView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$ProjectView = function (a) {
+	return {ctor: 'ProjectView', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$ProjectsView = {ctor: 'ProjectsView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$ContextView = function (a) {
+	return {ctor: 'ContextView', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$ContextsView = {ctor: 'ContextsView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnGoto = {ctor: 'OnGoto'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelected = {ctor: 'OnToggleSelected'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn = {ctor: 'OnOnFocusIn'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnNameChanged = function (a) {
+	return {ctor: 'OnNameChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnSave = {ctor: 'OnSave'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived = {ctor: 'OnToggleArchived'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted = {ctor: 'OnToggleDeleted'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing = {ctor: 'OnStartEditing'};

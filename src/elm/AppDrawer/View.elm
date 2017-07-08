@@ -2,6 +2,7 @@ module AppDrawer.View exposing (..)
 
 import AppColors
 import AppUrl
+import Entity.Types
 import Msg exposing (..)
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Mat
@@ -60,9 +61,9 @@ sidebarContent appVM model =
                     ++ entityGroupView contexts model.mainViewType
                     ++ entityGroupView projects model.mainViewType
                     ++ [ Mat.divider ]
-                    ++ [ onSetEntityListViewItem "sort" Entity.RecentView "Recent"
-                       , onSetEntityListViewItem "delete" Entity.BinView "Bin"
-                       , onSetEntityListViewItem "done" Entity.DoneView "Done"
+                    ++ [ onSetEntityListViewItem "sort" Entity.Types.RecentView "Recent"
+                       , onSetEntityListViewItem "delete" Entity.Types.BinView "Bin"
+                       , onSetEntityListViewItem "done" Entity.Types.DoneView "Done"
                        , Mat.divider
                        , switchViewItemSmall "settings" SyncView "Advance Settings"
                        ]

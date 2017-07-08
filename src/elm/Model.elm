@@ -5,6 +5,7 @@ import CommonMsg
 import Context
 import Document exposing (Document)
 import Entity.Tree
+import Entity.Types
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Firebase.SignIn
@@ -372,7 +373,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createGrouping : Entity.ListViewType -> Model -> Entity.Tree.Tree
+createGrouping : Entity.Types.ListViewType -> Model -> Entity.Tree.Tree
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =
@@ -388,36 +389,36 @@ createGrouping viewType model =
             findContextById # model
     in
         case viewType of
-            Entity.ContextsView ->
+            Entity.Types.ContextsView ->
                 getActiveContexts model
                     |> Entity.Tree.initContextForest
                         getActiveTodoListForContextHelp
 
-            Entity.ProjectsView ->
+            Entity.Types.ProjectsView ->
                 getActiveProjects model
                     |> Entity.Tree.initProjectForest
                         getActiveTodoListForProjectHelp
 
-            Entity.ContextView id ->
+            Entity.Types.ContextView id ->
                 findContextById id model
                     ?= Context.null
                     |> Entity.Tree.initContextRoot
                         getActiveTodoListForContextHelp
                         findProjectByIdHelp
 
-            Entity.ProjectView id ->
+            Entity.Types.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
                     |> Entity.Tree.initProjectRoot
                         getActiveTodoListForProjectHelp
                         findContextByIdHelp
 
-            Entity.BinView ->
+            Entity.Types.BinView ->
                 Entity.Tree.initTodoForest
                     "Bin"
                     (filterTodosAndSortByLatestModified Document.isDeleted model)
 
-            Entity.DoneView ->
+            Entity.Types.DoneView ->
                 Entity.Tree.initTodoForest
                     "Done"
                     (filterTodosAndSortByLatestModified
@@ -425,7 +426,7 @@ createGrouping viewType model =
                         model
                     )
 
-            Entity.RecentView ->
+            Entity.Types.RecentView ->
                 Entity.Tree.initTodoForest
                     "Recent"
                     (filterTodosAndSortByLatestModified Pred.always model)
@@ -663,15 +664,15 @@ saveNewTodoForm form model =
             (\todoId ->
                 updateTodo
                     (case form.referenceEntity of
-                        Entity.Todo fromTodo ->
+                        Entity.Types.Todo fromTodo ->
                             (Todo.CopyProjectAndContextId fromTodo)
 
-                        Entity.Group g ->
+                        Entity.Types.Group g ->
                             case g of
-                                Entity.Context context ->
+                                Entity.Types.Context context ->
                                     (Todo.SetContext context)
 
-                                Entity.Project project ->
+                                Entity.Types.Project project ->
                                     (Todo.SetProject project)
                     )
                     todoId
@@ -681,7 +682,7 @@ saveNewTodoForm form model =
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF
 setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.Todo, Just model )
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.Todo, Just model )
         ?|> uncurry setFocusInEntity
         ?= model
 
@@ -694,15 +695,15 @@ toggleDeleteEntity entity model =
     in
         model
             |> case entity of
-                Entity.Group g ->
+                Entity.Types.Group g ->
                     case g of
-                        Entity.Context context ->
+                        Entity.Types.Context context ->
                             updateContext entityId Document.toggleDeleted
 
-                        Entity.Project project ->
+                        Entity.Types.Project project ->
                             updateProject entityId Document.toggleDeleted
 
-                Entity.Todo todo ->
+                Entity.Types.Todo todo ->
                     updateTodo (Todo.ToggleDeleted) entityId
 
 
@@ -846,11 +847,11 @@ switchToView mainViewType model =
 
 
 projectView =
-    Document.getId >> Entity.ProjectView >> EntityListView
+    Document.getId >> Entity.Types.ProjectView >> EntityListView
 
 
 contextView =
-    Document.getId >> Entity.ContextView >> EntityListView
+    Document.getId >> Entity.Types.ContextView >> EntityListView
 
 
 switchToProjectView =
@@ -862,7 +863,7 @@ switchToContextView =
 
 
 switchToContextsView =
-    EntityListView Entity.ContextsView |> switchToView
+    EntityListView Entity.Types.ContextsView |> switchToView
 
 
 setEntityListViewType =

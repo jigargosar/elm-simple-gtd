@@ -91,81 +91,81 @@ overlayViews appModel =
             |> List.filterMap identity
 
 
-appLayoutView m =
-    let
-        appVM =
-            ViewModel.create m
-    in
-        div [ class "x-layout" ]
-            [ div [ class "x-sidebar" ]
-                [ div [ class "x-sidebar-header" ]
-                    [ div [ class "x-sidebar-header__inner" ]
-                        [ text "foo" ]
-                    ]
-                ]
-            , div [ class "x-main" ]
-                [ div [ class "x-main-header" ]
-                    [ div [ class "x-main-header__inner" ]
-                        [ div [] [ text "a" ]
-                        ]
-                    ]
-                ]
-            ]
-
-
 
 --appLayoutView m =
 --    let
 --        appVM =
 --            ViewModel.create m
 --    in
---        -- todo : remove duplication
---        if AppDrawer.Model.getIsOverlayOpen m.appDrawerModel then
---            div
---                [ id "app-layout"
---                , classList
---                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+--        div [ class "x-layout" ]
+--            [ div [ class "x-sidebar" ]
+--                [ div [ class "x-sidebar-header" ]
+--                    [ div [ class "x-sidebar-header__inner" ]
+--                        [ text "foo" ]
 --                    ]
 --                ]
---                [ div
---                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
---                    [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM m ]
---                    , AppDrawer.View.sidebarContent appVM m
---                    ]
---                , div
---                    [ id "layout-main"
---                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
---                    ]
---                    [ div [ X.Html.onClickStopPropagation Model.noop ]
---                        [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
---                        , div [ id "layout-main-content" ] [ appMainContent m ]
+--            , div [ class "x-main" ]
+--                [ div [ class "x-main-header" ]
+--                    [ div [ class "x-main-header__inner" ]
+--                        [ div [] [ text "a" ]
 --                        ]
 --                    ]
 --                ]
---        else
---            div
---                [ id "app-layout"
---                , classList
---                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
---                    ]
---                ]
---                [ div [ class "bottom-shadow" ]
---                    [ AppDrawer.View.sidebarHeader appVM m
---                    , View.Header.appMainHeader appVM m
---                    ]
---                , div
---                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
---                    [ AppDrawer.View.sidebarContent appVM m
---                    ]
---                , div
---                    [ id "layout-main"
---                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
---                    ]
---                    [ div [ X.Html.onClickStopPropagation Model.noop ]
---                        [ div [ id "layout-main-content" ] [ appMainContent m ]
---                        ]
---                    ]
---                ]
+--            ]
+
+
+appLayoutView m =
+    let
+        appVM =
+            ViewModel.create m
+    in
+        -- todo : remove duplication
+        if AppDrawer.Model.getIsOverlayOpen m.appDrawerModel then
+            div
+                [ id "app-layout"
+                , classList
+                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+                    ]
+                ]
+                [ div
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
+                    [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM m ]
+                    , AppDrawer.View.sidebarContent appVM m
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    ]
+                    [ div [ X.Html.onClickStopPropagation Model.noop ]
+                        [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
+                        , div [ id "layout-main-content" ] [ appMainContent m ]
+                        ]
+                    ]
+                ]
+        else
+            div
+                [ id "app-layout"
+                , classList
+                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+                    ]
+                ]
+                [ div [ class "bottom-shadow" ]
+                    [ AppDrawer.View.sidebarHeader appVM m
+                    , View.Header.appMainHeader appVM m
+                    ]
+                , div
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
+                    [ AppDrawer.View.sidebarContent appVM m
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    ]
+                    [ div [ X.Html.onClickStopPropagation Model.noop ]
+                        [ div [ id "layout-main-content" ] [ appMainContent m ]
+                        ]
+                    ]
+                ]
 
 
 appMainContent model =

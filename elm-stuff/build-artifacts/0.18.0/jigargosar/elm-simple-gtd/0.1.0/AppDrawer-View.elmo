@@ -355,13 +355,13 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent = F2(
 									},
 									{
 										ctor: '::',
-										_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'sort', _jigargosar$elm_simple_gtd$Entity$RecentView, 'Recent'),
+										_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'sort', _jigargosar$elm_simple_gtd$Entity_Types$RecentView, 'Recent'),
 										_1: {
 											ctor: '::',
-											_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'delete', _jigargosar$elm_simple_gtd$Entity$BinView, 'Bin'),
+											_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'delete', _jigargosar$elm_simple_gtd$Entity_Types$BinView, 'Bin'),
 											_1: {
 												ctor: '::',
-												_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'done', _jigargosar$elm_simple_gtd$Entity$DoneView, 'Done'),
+												_0: A3(_jigargosar$elm_simple_gtd$AppDrawer_View$onSetEntityListViewItem, 'done', _jigargosar$elm_simple_gtd$Entity_Types$DoneView, 'Done'),
 												_1: {
 													ctor: '::',
 													_0: _jigargosar$elm_simple_gtd$Mat$divider,

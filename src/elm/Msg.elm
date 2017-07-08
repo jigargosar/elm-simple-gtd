@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Model
 import CommonMsg
-import Entity
+import Entity.Types
 import ExclusiveMode
 import Firebase
 import Keyboard.Combo
@@ -29,12 +29,8 @@ import Menu
 import Todo.Notification.Model
 
 
-type alias EntityListViewType =
-    Entity.ListViewType
-
-
 type ViewType
-    = EntityListView EntityListViewType
+    = EntityListView Entity.Types.ListViewType
     | SyncView
 
 
@@ -67,9 +63,9 @@ type Msg
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnUpdateTodoForm Todo.Form.Model Todo.Form.Action
-    | OnEntityListKeyDown (List Entity.Entity) X.Keyboard.KeyboardEvent
+    | OnEntityListKeyDown (List Entity.Types.Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
-    | OnEntityMsg Entity.Entity Entity.Msg
+    | OnEntityMsg Entity.Types.Entity Entity.Types.Msg
     | OnLaunchBarMsg LaunchBar.Msg
     | OnLaunchBarMsgWithNow LaunchBar.Msg Time
     | OnTodoMsg Todo.Msg.Msg

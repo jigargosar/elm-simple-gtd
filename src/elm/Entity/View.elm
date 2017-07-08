@@ -2,6 +2,7 @@ module Entity.View exposing (..)
 
 import Entity exposing (Entity)
 import Entity.Tree
+import Entity.Types
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
@@ -18,7 +19,7 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-list : Entity.ListViewType -> Model.Model -> Html.Html Msg
+list : Entity.Types.ListViewType -> Model.Model -> Html.Html Msg
 list viewType model =
     let
         grouping =
@@ -69,7 +70,7 @@ keyedViewList grouping maybeFocusInEntity model =
         todoView todo =
             let
                 canBeFocused =
-                    Entity.Todo todo |> hasFocusIn
+                    Entity.Types.Todo todo |> hasFocusIn
             in
                 todo
                     |> Todo.View.createTodoViewModel model canBeFocused

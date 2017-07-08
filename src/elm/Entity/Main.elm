@@ -2,6 +2,7 @@ module Entity.Main exposing (..)
 
 import DomPorts
 import Entity
+import Entity.Types
 import GroupDoc
 import Model
 import Msg
@@ -20,25 +21,25 @@ import Todo.Msg
 update :
     (Msg.Msg -> Model.ReturnF)
     -> Entity.Entity
-    -> Entity.Msg
+    -> Entity.Types.Msg
     -> Model.ReturnF
 update andThenUpdate entity msg =
     case msg of
-        Entity.StartEditing ->
+        Entity.Types.OnStartEditing ->
             Return.map (Model.startEditingEntity entity)
                 >> DomPorts.autoFocusInputCmd
 
-        Entity.NameChanged newName ->
+        Entity.Types.OnNameChanged newName ->
             Return.map (Model.updateEditModeNameChanged newName entity)
 
-        Entity.Save ->
+        Entity.Types.OnSave ->
             andThenUpdate Msg.OnSaveCurrentForm
 
-        Entity.ToggleDeleted ->
+        Entity.Types.OnToggleDeleted ->
             Return.andThen (Model.toggleDeleteEntity entity)
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.ToggleArchived ->
+        Entity.Types.OnToggleArchived ->
             let
                 toggleArchivedEntity entity =
                     let
@@ -46,17 +47,17 @@ update andThenUpdate entity msg =
                             Entity.getId entity
                     in
                         case entity of
-                            Entity.Group g ->
+                            Entity.Types.Group g ->
                                 (case g of
-                                    Entity.Context context ->
+                                    Entity.Types.Context context ->
                                         Model.updateContext entityId GroupDoc.toggleArchived
 
-                                    Entity.Project project ->
+                                    Entity.Types.Project project ->
                                         Model.updateProject entityId GroupDoc.toggleArchived
                                 )
                                     |> Return.andThen
 
-                            Entity.Todo todo ->
+                            Entity.Types.Todo todo ->
                                 Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId Todo.ToggleDone
                                     |> Msg.OnTodoMsg
                                     |> andThenUpdate
@@ -64,11 +65,11 @@ update andThenUpdate entity msg =
                 toggleArchivedEntity entity
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.OnFocusIn ->
+        Entity.Types.OnOnFocusIn ->
             Return.map (Model.setFocusInEntity entity)
 
-        Entity.ToggleSelected ->
+        Entity.Types.OnToggleSelected ->
             Return.map (Model.toggleEntitySelection entity)
 
-        Entity.Goto ->
+        Entity.Types.OnGoto ->
             Return.map (Model.switchToEntityListViewFromEntity entity)

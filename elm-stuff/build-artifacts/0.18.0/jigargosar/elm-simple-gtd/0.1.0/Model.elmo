@@ -92,12 +92,12 @@ var _jigargosar$elm_simple_gtd$Model$toggleEntitySelection = function (entity) {
 };
 var _jigargosar$elm_simple_gtd$Model$contextView = function (_p1) {
 	return _jigargosar$elm_simple_gtd$Msg$EntityListView(
-		_jigargosar$elm_simple_gtd$Entity$ContextView(
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextView(
 			_jigargosar$elm_simple_gtd$Document$getId(_p1)));
 };
 var _jigargosar$elm_simple_gtd$Model$projectView = function (_p2) {
 	return _jigargosar$elm_simple_gtd$Msg$EntityListView(
-		_jigargosar$elm_simple_gtd$Entity$ProjectView(
+		_jigargosar$elm_simple_gtd$Entity_Types$ProjectView(
 			_jigargosar$elm_simple_gtd$Document$getId(_p2)));
 };
 var _jigargosar$elm_simple_gtd$Model$getMainViewType = function (_) {
@@ -213,7 +213,7 @@ var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p14) {
 		_jigargosar$elm_simple_gtd$Model$contextView(_p14));
 };
 var _jigargosar$elm_simple_gtd$Model$switchToContextsView = _jigargosar$elm_simple_gtd$Model$switchToView(
-	_jigargosar$elm_simple_gtd$Msg$EntityListView(_jigargosar$elm_simple_gtd$Entity$ContextsView));
+	_jigargosar$elm_simple_gtd$Msg$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
 var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p15) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
 		_jigargosar$elm_simple_gtd$Msg$EntityListView(_p15));
@@ -558,7 +558,7 @@ var _jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId = F2(
 						_0: A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 							A2(_jigargosar$elm_simple_gtd$Model$findTodoById, todoId, model),
-							_jigargosar$elm_simple_gtd$Entity$Todo),
+							_jigargosar$elm_simple_gtd$Entity_Types$Todo),
 						_1: _elm_lang$core$Maybe$Just(model)
 					}),
 				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Model$setFocusInEntity)),

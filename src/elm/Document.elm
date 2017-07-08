@@ -1,13 +1,10 @@
 module Document exposing (..)
 
+import Document.Types
 import Firebase exposing (DeviceId)
 import Time exposing (Time)
-
-
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-
-
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -27,7 +24,7 @@ equalById doc1 doc2 =
 
 
 type alias Id =
-    String
+    Document.Types.Id
 
 
 type alias Revision =

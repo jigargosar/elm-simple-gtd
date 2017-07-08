@@ -5,6 +5,7 @@ import CommonMsg
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
+import Entity.Types
 import ExclusiveMode
 import Entity
 import ExclusiveMode.Main
@@ -275,7 +276,7 @@ onSubMsg subMsg =
             let
                 afterEntityUpsertOnPouchDBChange entity =
                     case entity of
-                        Entity.Todo model ->
+                        Entity.Types.Todo model ->
                             Todo.Msg.Upsert model |> OnTodoMsg
 
                         _ ->

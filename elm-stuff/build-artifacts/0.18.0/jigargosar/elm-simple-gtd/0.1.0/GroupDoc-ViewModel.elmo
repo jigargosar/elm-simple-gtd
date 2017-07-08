@@ -10,8 +10,8 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 		};
 		var onEntityAction = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
 			config.toEntity(groupDoc));
-		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleDeleted);
-		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity$StartEditing);
+		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
+		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;
@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				case 'CharG':
-					return onEntityAction(_jigargosar$elm_simple_gtd$Entity$Goto);
+					return onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnGoto);
 				default:
 					return _jigargosar$elm_simple_gtd$Model$noop;
 			}
@@ -31,7 +31,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			var iconName = isArchived ? 'unarchive' : 'archive';
 			return {
 				iconName: iconName,
-				onClick: onEntityAction(_jigargosar$elm_simple_gtd$Entity$ToggleArchived),
+				onClick: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived),
 				isArchived: isArchived
 			};
 		}();
@@ -46,14 +46,14 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			archive: archive,
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity$Save),
+			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnSave),
 			onNameChanged: function (_p3) {
 				return onEntityAction(
-					_jigargosar$elm_simple_gtd$Entity$NameChanged(_p3));
+					_jigargosar$elm_simple_gtd$Entity_Types$OnNameChanged(_p3));
 			},
 			onCancelClicked: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 			icon: icon,
-			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity$OnFocusIn),
+			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: config.getTabIndexAVForEntity(
 				config.toEntity(groupDoc)),
@@ -72,7 +72,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup = F3(
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
 			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
-			getViewType: _jigargosar$elm_simple_gtd$Entity$ContextView,
+			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ContextView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity
 		};
 		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, context);
@@ -88,7 +88,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup = F3(
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
 			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
-			getViewType: _jigargosar$elm_simple_gtd$Entity$ProjectView,
+			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ProjectView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity
 		};
 		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, project);

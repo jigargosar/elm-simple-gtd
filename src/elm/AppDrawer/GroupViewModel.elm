@@ -8,6 +8,7 @@ import Dict
 import Dict.Extra
 import Document
 import Entity exposing (Entity)
+import Entity.Types
 import GroupDoc
 import Msg
 import Model
@@ -29,7 +30,7 @@ type alias ViewModel =
     { nullVMAsList : List DocumentWithNameViewModel
     , entityList : List DocumentWithNameViewModel
     , archivedEntityList : List DocumentWithNameViewModel
-    , viewType : EntityListViewType
+    , viewType : Entity.Types.ListViewType
     , title : String
     , className : String
     , showArchived : Bool
@@ -68,7 +69,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Document.Id -> EntityListViewType
+    , getViewType : Document.Id -> Entity.Types.ListViewType
     }
 
 
@@ -115,7 +116,7 @@ create getTodoListByEntityId config entity =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
 
         startEditingMsg =
-            createEntityActionMsg Entity.StartEditing
+            createEntityActionMsg Entity.Types.OnStartEditing
     in
         { id = id
         , name = name
@@ -155,7 +156,7 @@ contexts model =
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
-            , getViewType = Entity.ContextView
+            , getViewType = Entity.Types.ContextView
             }
 
         archivedConfig =
@@ -170,7 +171,7 @@ contexts model =
         { entityList = entityList |> List.drop 1
         , nullVMAsList = nullVMAsList
         , archivedEntityList = createList archivedConfig model
-        , viewType = Entity.ContextsView
+        , viewType = Entity.Types.ContextsView
         , title = "Contexts"
         , className = "contexts"
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
@@ -203,7 +204,7 @@ projects model =
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor
-            , getViewType = Entity.ProjectView
+            , getViewType = Entity.Types.ProjectView
             }
 
         archivedConfig =
@@ -218,7 +219,7 @@ projects model =
         { entityList = entityList |> List.drop 1
         , nullVMAsList = []
         , archivedEntityList = createList archivedConfig model
-        , viewType = Entity.ProjectsView
+        , viewType = Entity.Types.ProjectsView
         , title = "Projects"
         , className = "projects"
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel

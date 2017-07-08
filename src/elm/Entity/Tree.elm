@@ -2,6 +2,7 @@ module Entity.Tree exposing (..)
 
 import Context
 import Entity
+import Entity.Types
 import Todo
 import Toolkit.Operators exposing (..)
 import List.Extra as List
@@ -137,15 +138,15 @@ flatten tree =
         ContextForest nodeList ->
             nodeList
                 |> List.concatMap
-                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Todo))
+                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Types.Todo))
 
         ProjectForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
                         Entity.fromProject g.project
-                            :: (g.todoList .|> Entity.Todo)
+                            :: (g.todoList .|> Entity.Types.Todo)
                     )
 
         TodoForest title todoList ->
-            todoList .|> Entity.Todo
+            todoList .|> Entity.Types.Todo

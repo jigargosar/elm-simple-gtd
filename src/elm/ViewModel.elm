@@ -7,6 +7,7 @@ import Dict exposing (Dict)
 import Document exposing (Id)
 import Entity
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
+import Entity.Types
 import Material
 import Msg exposing (..)
 import Project
@@ -74,25 +75,25 @@ getViewInfo mainViewType projectsVM contextsVM model =
         case mainViewType of
             EntityListView viewType ->
                 case viewType of
-                    Entity.ContextsView ->
+                    Entity.Types.ContextsView ->
                         ( contextsVM.title, contextsVM.icon.color )
 
-                    Entity.ContextView id ->
+                    Entity.Types.ContextView id ->
                         appHeaderInfoById id contextsVM
 
-                    Entity.ProjectsView ->
+                    Entity.Types.ProjectsView ->
                         ( projectsVM.title, projectsVM.icon.color )
 
-                    Entity.ProjectView id ->
+                    Entity.Types.ProjectView id ->
                         appHeaderInfoById id projectsVM
 
-                    Entity.BinView ->
+                    Entity.Types.BinView ->
                         ( "Bin", sgtdBlue )
 
-                    Entity.DoneView ->
+                    Entity.Types.DoneView ->
                         ( "Done", sgtdBlue )
 
-                    Entity.RecentView ->
+                    Entity.Types.RecentView ->
                         ( "Recent", sgtdBlue )
 
             SyncView ->

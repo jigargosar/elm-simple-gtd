@@ -21,12 +21,25 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = function (model) {
 };
 var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 	var appVM = _jigargosar$elm_simple_gtd$ViewModel$create(m);
-	return A2(
+	return _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel) ? A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('x-layout'),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$id('app-layout'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'sidebar-overlay',
+							_1: _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel)
+						},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
@@ -34,8 +47,12 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('x-sidebar'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$id('layout-sidebar'),
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',
@@ -43,26 +60,19 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('x-sidebar-header'),
+							_0: _elm_lang$html$Html_Attributes$class('bottom-shadow'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('x-sidebar-header__inner'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('foo'),
-									_1: {ctor: '[]'}
-								}),
+							_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarHeader, appVM, m),
 							_1: {ctor: '[]'}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent, appVM, m),
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {
 				ctor: '::',
@@ -70,8 +80,13 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('x-main'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$id('layout-main'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
@@ -79,7 +94,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('x-main-header'),
+								_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 								_1: {ctor: '[]'}
 							},
 							{
@@ -88,26 +103,134 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('x-main-header__inner'),
+										_0: _elm_lang$html$Html_Attributes$class('bottom-shadow'),
 										_1: {ctor: '[]'}
 									},
 									{
 										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$div,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('a'),
-												_1: {ctor: '[]'}
-											}),
+										_0: A2(_jigargosar$elm_simple_gtd$View_Header$appMainHeader, appVM, m),
 										_1: {ctor: '[]'}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id('layout-main-content'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _jigargosar$elm_simple_gtd$View$appMainContent(m),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
+			}
+		}) : A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('app-layout'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'sidebar-overlay',
+							_1: _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen(m.appDrawerModel)
+						},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('bottom-shadow'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarHeader, appVM, m),
+					_1: {
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$View_Header$appMainHeader, appVM, m),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('layout-sidebar'),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$sidebarContent, appVM, m),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('layout-main'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id('layout-main-content'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _jigargosar$elm_simple_gtd$View$appMainContent(m),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

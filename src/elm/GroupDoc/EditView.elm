@@ -1,6 +1,7 @@
 module GroupDoc.EditView exposing (..)
 
 import Entity
+import Entity.Types
 import Msg
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import GroupDoc.EditForm
@@ -19,7 +20,7 @@ init form =
             Msg.OnEntityMsg form.entity
 
         fireNameChanged =
-            Entity.NameChanged >> toMsg
+            Entity.Types.OnNameChanged >> toMsg
 
         fireSaveForm =
             Msg.OnSaveCurrentForm
@@ -28,7 +29,7 @@ init form =
             Msg.OnDeactivateEditingMode
 
         fireToggleArchive =
-            toMsg Entity.ToggleArchived
+            toMsg Entity.Types.OnToggleArchived
     in
         div
             [ class "overlay"

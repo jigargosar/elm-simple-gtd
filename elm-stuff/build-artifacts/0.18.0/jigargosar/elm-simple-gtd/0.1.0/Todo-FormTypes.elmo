@@ -18,3 +18,6 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditReminderForm = F4(
 	function (a, b, c, d) {
 		return {id: a, date: b, time: c, menuState: d};
 	});
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetText = function (a) {
+	return {ctor: 'SetText', _0: a};
+};

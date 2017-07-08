@@ -17,7 +17,7 @@ import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Todo
 import Todo.Form
-import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, TodoGroupFrom)
+import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
 import Todo.GroupForm
 import Todo.Msg
 import Todo.NewForm
@@ -68,7 +68,7 @@ type Msg
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEditTodoProjectMenuStateChanged TodoGroupFrom MenuState
     | OnEditTodoContextMenuStateChanged TodoGroupFrom MenuState
-    | OnUpdateTodoForm TodoEditForm Todo.Form.Action
+    | OnUpdateTodoForm TodoEditForm TodoAction
     | OnEntityListKeyDown (List EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityType Entity.Types.Msg

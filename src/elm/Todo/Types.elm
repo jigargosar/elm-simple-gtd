@@ -25,3 +25,7 @@ type Schedule
     = NoReminder Time
     | WithReminder Time Time
     | Unscheduled
+
+
+getTodoText =
+    .text

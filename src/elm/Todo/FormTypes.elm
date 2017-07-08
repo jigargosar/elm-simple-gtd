@@ -40,3 +40,7 @@ type alias TodoEditReminderForm =
     , time : String
     , menuState : MenuState
     }
+
+
+type TodoAction
+    = SetText String

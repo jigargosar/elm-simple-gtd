@@ -1,3 +1,6 @@
+var _jigargosar$elm_simple_gtd$Todo_Types$getTodoText = function (_) {
+	return _.text;
+};
 var _jigargosar$elm_simple_gtd$Todo_Types$Record = F5(
 	function (a, b, c, d, e) {
 		return {done: a, text: b, schedule: c, projectId: d, contextId: e};

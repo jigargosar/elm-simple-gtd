@@ -12,7 +12,7 @@ import Material.Icon
 import Material.Options
 import Msg exposing (Msg)
 import Store
-import Todo.FormTypes exposing (TodoAction(SetText), TodoEditForm)
+import Todo.FormTypes exposing (EditTodoFormAction(SetText), EditTodoReminderFormAction(SetDate, SetTime), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
@@ -454,7 +454,7 @@ reminderPopup form =
                         [ type_ "date"
                         , class "auto-focus"
                         , value form.date
-                        , Todo.ReminderForm.SetDate >> updateReminderForm |> onChange
+                        , SetDate >> updateReminderForm |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Date" |> text ]
@@ -463,7 +463,7 @@ reminderPopup form =
                     [ Html.input
                         [ type_ "time"
                         , value form.time
-                        , Todo.ReminderForm.SetTime >> updateReminderForm |> onChange
+                        , SetTime >> updateReminderForm |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Time" |> text ]

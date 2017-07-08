@@ -46,12 +46,3 @@ var _jigargosar$elm_simple_gtd$Todo_ReminderForm$create = F2(
 			menuState: _jigargosar$elm_simple_gtd$Menu$initState
 		};
 	});
-var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetMenuState = function (a) {
-	return {ctor: 'SetMenuState', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetTime = function (a) {
-	return {ctor: 'SetTime', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo_ReminderForm$SetDate = function (a) {
-	return {ctor: 'SetDate', _0: a};
-};

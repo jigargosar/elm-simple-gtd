@@ -79,7 +79,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 													_0: _jigargosar$elm_simple_gtd$WebComponents$onChange(
 														function (_p2) {
 															return updateReminderForm(
-																_jigargosar$elm_simple_gtd$Todo_ReminderForm$SetDate(_p2));
+																_jigargosar$elm_simple_gtd$Todo_FormTypes$SetDate(_p2));
 														}),
 													_1: {ctor: '[]'}
 												}
@@ -128,7 +128,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 													_0: _jigargosar$elm_simple_gtd$WebComponents$onChange(
 														function (_p3) {
 															return updateReminderForm(
-																_jigargosar$elm_simple_gtd$Todo_ReminderForm$SetTime(_p3));
+																_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTime(_p3));
 														}),
 													_1: {ctor: '[]'}
 												}

@@ -8,26 +8,15 @@ import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Types exposing (LBMsg)
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
-import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
+import Todo.FormTypes exposing (AddTodoForm, EditTodoFormAction, TodoEditForm, TodoGroupFrom)
+import Todo.Types exposing (TodoDoc, TodoText)
+import Json.Encode as E
 
 
 --safe
 
-import Todo.Msg
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
-import Json.Encode as E
+import Todo.Msg exposing (TodoMsg)
 import Todo.Notification.Model
-import Todo.Types exposing (TodoDoc, TodoText)
-
-
--- later
-
 import Material
 import X.Keyboard
 import Keyboard.Combo
@@ -42,8 +31,8 @@ type SubMsg
     = OnNowChanged Time
     | OnKeyboardMsg X.Keyboard.Msg
     | OnGlobalKeyUp X.Keyboard.Key
-    | OnPouchDBChange String D.Value
-    | OnFirebaseDatabaseChange String D.Value
+    | OnPouchDBChange String E.Value
+    | OnFirebaseDatabaseChange String E.Value
 
 
 type Msg
@@ -66,14 +55,14 @@ type Msg
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEditTodoProjectMenuStateChanged TodoGroupFrom MenuState
     | OnEditTodoContextMenuStateChanged TodoGroupFrom MenuState
-    | OnUpdateTodoForm TodoEditForm TodoAction
+    | OnUpdateTodoForm TodoEditForm EditTodoFormAction
     | OnEntityListKeyDown (List EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityType Entity.Types.Msg
     | OnLaunchBarMsg LBMsg
     | OnLaunchBarMsgWithNow LBMsg Time
-    | OnTodoMsg Todo.Msg.Msg
-    | OnTodoMsgWithTime Todo.Msg.Msg Time
+    | OnTodoMsg TodoMsg
+    | OnTodoMsgWithTime TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
     | OnKeyCombo Keyboard.Combo.Msg
     | OnCloseNotification String

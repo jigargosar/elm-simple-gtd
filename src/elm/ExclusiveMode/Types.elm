@@ -8,7 +8,7 @@ import LaunchBar.Form
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Types exposing (LaunchBarForm)
 import Menu.Types exposing (MenuState)
-import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, TodoEditReminderForm, TodoGroupFrom, TodoMoreMenuForm)
+import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoGroupFrom, TodoMoreMenuForm)
 
 
 type alias SyncForm =
@@ -21,7 +21,7 @@ type ExclusiveMode
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu TodoMoreMenuForm
-    | XMEditTodoReminder TodoEditReminderForm
+    | XMEditTodoReminder EditTodoReminderForm
     | XMEditTodoContext TodoGroupFrom
     | XMEditTodoProject TodoGroupFrom
     | XMLaunchBar LaunchBarForm

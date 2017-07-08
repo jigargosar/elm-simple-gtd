@@ -14,10 +14,19 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm = F2(
 	function (a, b) {
 		return {text: a, referenceEntity: b};
 	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditReminderForm = F4(
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoReminderForm = F4(
 	function (a, b, c, d) {
 		return {id: a, date: b, time: c, menuState: d};
 	});
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetMenuState = function (a) {
+	return {ctor: 'SetMenuState', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTime = function (a) {
+	return {ctor: 'SetTime', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetDate = function (a) {
+	return {ctor: 'SetDate', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetText = function (a) {
 	return {ctor: 'SetText', _0: a};
 };

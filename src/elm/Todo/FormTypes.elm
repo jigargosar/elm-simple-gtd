@@ -34,7 +34,7 @@ type alias AddTodoForm =
     }
 
 
-type alias TodoEditReminderForm =
+type alias EditTodoReminderForm =
     { id : DocId
     , date : String
     , time : String
@@ -42,5 +42,11 @@ type alias TodoEditReminderForm =
     }
 
 
-type TodoAction
+type EditTodoReminderFormAction
+    = SetDate String
+    | SetTime String
+    | SetMenuState MenuState
+
+
+type EditTodoFormAction
     = SetText String

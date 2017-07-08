@@ -16,7 +16,7 @@ import Notification
 import Return
 import Time
 import Todo
-import Todo.Msg exposing (Msg(..))
+import Todo.Msg exposing (TodoMsg(..))
 import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -80,7 +80,7 @@ subscriptions m =
 update :
     (Msg.Msg -> Model.ReturnF)
     -> Time.Time
-    -> Msg
+    -> TodoMsg
     -> Model.ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of

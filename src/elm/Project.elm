@@ -12,7 +12,7 @@ import Time exposing (Time)
 
 
 type alias Model =
-    GroupDoc.Types.Model
+    GroupDoc.Types.GroupDoc
 
 
 type alias Store =
@@ -28,12 +28,12 @@ storeGenerator =
     GroupDoc.storeGenerator "project-db"
 
 
-getName : Model -> Name
+getName : Model -> GroupDocName
 getName =
     (.name)
 
 
-setName : Name -> ModelF
+setName : GroupDocName -> ModelF
 setName name model =
     { model | name = name }
 
@@ -42,7 +42,7 @@ constructor =
     GroupDoc.constructor
 
 
-init : Name -> Time -> DeviceId -> DocId -> Model
+init : GroupDocName -> Time -> DeviceId -> DocId -> Model
 init name now deviceId id =
     constructor id "" now now False deviceId name False
 

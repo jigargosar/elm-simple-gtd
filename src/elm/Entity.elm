@@ -2,7 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
-import Entity.Types exposing (Entity(..), GroupEntity(..), ListViewType(..))
+import Entity.Types exposing (EntityType(..), GroupEntityType(..), ListViewType(..))
 import X.List as List
 import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
@@ -14,31 +14,31 @@ import Todo
 
 
 type alias GroupEntity =
-    Entity.Types.GroupEntity
+    Entity.Types.GroupEntityType
 
 
 type alias Entity =
-    Entity.Types.Entity
+    Entity.Types.EntityType
 
 
 fromContext =
-    Context >> Group
+    ContextEntity >> GroupEntity
 
 
 fromProject =
-    Project >> Group
+    ProjectEntity >> GroupEntity
 
 
 fromTodo =
-    Todo
+    TodoEntity
 
 
 initProjectGroup =
-    Project
+    ProjectEntity
 
 
 initContextGroup =
-    Context
+    ContextEntity
 
 
 type alias Msg =
@@ -47,15 +47,15 @@ type alias Msg =
 
 getId entity =
     case entity of
-        Todo model ->
+        TodoEntity model ->
             Document.getId model
 
-        Group group ->
+        GroupEntity group ->
             case group of
-                Project model ->
+                ProjectEntity model ->
                     Document.getId model
 
-                Context model ->
+                ContextEntity model ->
                     Document.getId model
 
 
@@ -65,18 +65,18 @@ equalById e1 e2 =
             Document.equalById
     in
         case ( e1, e2 ) of
-            ( Group g1, Group g2 ) ->
+            ( GroupEntity g1, GroupEntity g2 ) ->
                 case ( g1, g2 ) of
-                    ( Project m1, Project m2 ) ->
+                    ( ProjectEntity m1, ProjectEntity m2 ) ->
                         eq m1 m2
 
-                    ( Context m1, Context m2 ) ->
+                    ( ContextEntity m1, ContextEntity m2 ) ->
                         eq m1 m2
 
                     _ ->
                         False
 
-            ( Todo m1, Todo m2 ) ->
+            ( TodoEntity m1, TodoEntity m2 ) ->
                 eq m1 m2
 
             _ ->
@@ -185,15 +185,15 @@ getTodoGotoGroupView todo prevView =
 toViewType : Maybe ListViewType -> Entity -> ListViewType
 toViewType maybePrevView entity =
     case entity of
-        Group group ->
+        GroupEntity group ->
             case group of
-                Context model ->
+                ContextEntity model ->
                     Document.getId model |> ContextView
 
-                Project model ->
+                ProjectEntity model ->
                     Document.getId model |> ProjectView
 
-        Todo model ->
+        TodoEntity model ->
             maybePrevView
                 ?|> getTodoGotoGroupView model
                 ?= (Todo.getContextId model |> ContextView)

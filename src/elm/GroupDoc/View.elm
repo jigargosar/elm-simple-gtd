@@ -23,7 +23,7 @@ initKeyed todoView vm =
 item todoView vm =
     let
         getTabIndexAVForTodo =
-            Entity.Types.Todo >> vm.getTabIndexAVForEntity
+            Entity.Types.TodoEntity >> vm.getTabIndexAVForEntity
     in
         Html.Keyed.node "div"
             [ class "collection" ]

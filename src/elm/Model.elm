@@ -645,9 +645,6 @@ saveCurrentForm model =
         ExclusiveMode.MainMenu _ ->
             model |> Return.singleton
 
-        ExclusiveMode.ActionList _ ->
-            model |> Return.singleton
-
         ExclusiveMode.None ->
             model |> Return.singleton
 
@@ -665,15 +662,15 @@ saveNewTodoForm form model =
             (\todoId ->
                 updateTodo
                     (case form.referenceEntity of
-                        Entity.Types.Todo fromTodo ->
+                        Entity.Types.TodoEntity fromTodo ->
                             (Todo.CopyProjectAndContextId fromTodo)
 
-                        Entity.Types.Group g ->
+                        Entity.Types.GroupEntity g ->
                             case g of
-                                Entity.Types.Context context ->
+                                Entity.Types.ContextEntity context ->
                                     (Todo.SetContext context)
 
-                                Entity.Types.Project project ->
+                                Entity.Types.ProjectEntity project ->
                                     (Todo.SetProject project)
                     )
                     todoId
@@ -683,7 +680,7 @@ saveNewTodoForm form model =
 
 setFocusInEntityFromTodoId : Types.DocId__ -> ModelF
 setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.Todo, Just model )
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.TodoEntity, Just model )
         ?|> uncurry setFocusInEntity
         ?= model
 
@@ -696,15 +693,15 @@ toggleDeleteEntity entity model =
     in
         model
             |> case entity of
-                Entity.Types.Group g ->
+                Entity.Types.GroupEntity g ->
                     case g of
-                        Entity.Types.Context context ->
+                        Entity.Types.ContextEntity context ->
                             updateContext entityId Document.toggleDeleted
 
-                        Entity.Types.Project project ->
+                        Entity.Types.ProjectEntity project ->
                             updateProject entityId Document.toggleDeleted
 
-                Entity.Types.Todo todo ->
+                Entity.Types.TodoEntity todo ->
                     updateTodo (Todo.ToggleDeleted) entityId
 
 

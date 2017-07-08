@@ -276,7 +276,7 @@ onSubMsg subMsg =
             let
                 afterEntityUpsertOnPouchDBChange entity =
                     case entity of
-                        Entity.Types.Todo model ->
+                        Entity.Types.TodoEntity model ->
                             Todo.Msg.Upsert model |> OnTodoMsg
 
                         _ ->

@@ -47,17 +47,17 @@ update andThenUpdate entity msg =
                             Entity.getId entity
                     in
                         case entity of
-                            Entity.Types.Group g ->
+                            Entity.Types.GroupEntity g ->
                                 (case g of
-                                    Entity.Types.Context context ->
+                                    Entity.Types.ContextEntity context ->
                                         Model.updateContext entityId GroupDoc.toggleArchived
 
-                                    Entity.Types.Project project ->
+                                    Entity.Types.ProjectEntity project ->
                                         Model.updateProject entityId GroupDoc.toggleArchived
                                 )
                                     |> Return.andThen
 
-                            Entity.Types.Todo todo ->
+                            Entity.Types.TodoEntity todo ->
                                 Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId Todo.ToggleDone
                                     |> Msg.OnTodoMsg
                                     |> andThenUpdate

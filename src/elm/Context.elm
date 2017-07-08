@@ -11,7 +11,7 @@ import Time exposing (Time)
 
 
 type alias Model =
-    GroupDoc.Types.Model
+    GroupDoc.Types.GroupDoc
 
 
 type alias Store =
@@ -22,7 +22,7 @@ constructor =
     GroupDoc.constructor
 
 
-init : Name -> Time -> DeviceId -> DocId -> Model
+init : GroupDocName -> Time -> DeviceId -> DocId -> Model
 init name now deviceId id =
     constructor id "" now now False deviceId name False
 

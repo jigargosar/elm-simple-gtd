@@ -3,7 +3,7 @@ module GroupDoc.Types exposing (..)
 import Document.Types
 
 
-type alias Name =
+type alias GroupDocName =
     String
 
 
@@ -12,18 +12,26 @@ type alias Archived =
 
 
 type alias Record =
-    { name : Name
+    { name : GroupDocName
     , archived : Bool
     }
 
 
-type alias Model =
+type alias GroupDoc =
     Document.Types.Document Record
 
 
 type alias Context =
-    Model
+    GroupDoc
 
 
 type alias Project =
-    Model
+    GroupDoc
+
+
+getGroupDocName =
+    .name
+
+
+isGroupDocArchived =
+    .archived

@@ -1,11 +1,8 @@
 module ExclusiveMode exposing (..)
 
-import ActionList
 import Entity.Types
 import GroupDoc.EditForm
-import Entity
 import LaunchBar.Form
-import GroupDoc.EditForm
 import Menu
 import Todo.Menu
 import Todo.NewForm
@@ -38,7 +35,6 @@ type ExclusiveMode
     | EditTodoContext Todo.GroupForm.Model
     | EditTodoProject Todo.GroupForm.Model
     | LaunchBar LaunchBar.Form.Model
-    | ActionList ActionList.Model
     | MainMenu Menu.State
       -- different page !!
     | EditSyncSettings SyncForm
@@ -53,10 +49,6 @@ none =
 
 signInOverlay =
     SignInOverlay
-
-
-initActionList =
-    ActionList ActionList.init
 
 
 todoMoreMenu =
@@ -83,16 +75,16 @@ editTodo =
     Todo.Form.create >> EditTodo
 
 
-createEntityEditForm : Entity.Entity -> ExclusiveMode
+createEntityEditForm : Entity.Types.EntityType -> ExclusiveMode
 createEntityEditForm entity =
     case entity of
-        Entity.Types.Group g ->
+        Entity.Types.GroupEntity g ->
             case g of
-                Entity.Types.Context model ->
+                Entity.Types.ContextEntity model ->
                     editContext model
 
-                Entity.Types.Project model ->
+                Entity.Types.ProjectEntity model ->
                     editProject model
 
-        Entity.Types.Todo model ->
+        Entity.Types.TodoEntity model ->
             editTodo model

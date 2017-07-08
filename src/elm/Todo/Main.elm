@@ -246,7 +246,7 @@ gotoTodoWithId todoId model =
                 |> List.find
                     (\entity ->
                         case entity of
-                            Entity.Types.Todo doc ->
+                            Entity.Types.TodoEntity doc ->
                                 Document.hasId todoId doc
 
                             _ ->

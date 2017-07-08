@@ -27,9 +27,9 @@ constructor :
     -> Time
     -> Document.Deleted
     -> DeviceId
-    -> Name
+    -> GroupDocName
     -> Archived
-    -> Model
+    -> GroupDoc
 constructor id rev createdAt modifiedAt deleted deviceId name archived =
     { id = id
     , rev = rev
@@ -46,7 +46,7 @@ constructor id rev createdAt modifiedAt deleted deviceId name archived =
     }
 
 
-decoder : Decoder Model
+decoder : Decoder GroupDoc
 decoder =
     D.decode constructor
         |> Document.documentFieldsDecoder
@@ -54,7 +54,7 @@ decoder =
         |> D.optional "archived" D.bool False
 
 
-encodeRecordFields : Model -> List ( String, E.Value )
+encodeRecordFields : GroupDoc -> List ( String, E.Value )
 encodeRecordFields model =
     [ "name" => E.string model.name
     , "archived" => E.bool model.archived

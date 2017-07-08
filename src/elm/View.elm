@@ -1,6 +1,5 @@
 module View exposing (init)
 
-import ActionList.View
 import AppDrawer.Model
 import AppDrawer.Types
 import AppDrawer.View
@@ -64,9 +63,6 @@ overlayViews appModel =
 
                 ExclusiveMode.Setup form ->
                     View.GetStarted.setup form
-
-                ExclusiveMode.ActionList model ->
-                    ActionList.View.init appModel model
 
                 ExclusiveMode.EditProject form ->
                     GroupDoc.EditView.init form

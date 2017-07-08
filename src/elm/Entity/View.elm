@@ -70,7 +70,7 @@ keyedViewList grouping maybeFocusInEntity model =
         todoView todo =
             let
                 canBeFocused =
-                    Entity.Types.Todo todo |> hasFocusIn
+                    Entity.Types.TodoEntity todo |> hasFocusIn
             in
                 todo
                     |> Todo.View.createTodoViewModel model canBeFocused

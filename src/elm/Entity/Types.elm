@@ -5,14 +5,14 @@ import GroupDoc.Types
 import Todo.Types
 
 
-type GroupEntity
-    = Project GroupDoc.Types.Model
-    | Context GroupDoc.Types.Model
+type GroupEntityType
+    = ProjectEntity GroupDoc.Types.GroupDoc
+    | ContextEntity GroupDoc.Types.GroupDoc
 
 
-type Entity
-    = Group GroupEntity
-    | Todo Todo.Types.Model
+type EntityType
+    = GroupEntity GroupEntityType
+    | TodoEntity Todo.Types.Model
 
 
 type ListViewType
@@ -34,3 +34,11 @@ type Msg
     | OnOnFocusIn
     | OnToggleSelected
     | OnGoto
+
+
+createContextEntity =
+    ContextEntity >> GroupEntity
+
+
+createProjectEntity =
+    ProjectEntity >> GroupEntity

@@ -67,9 +67,9 @@ type Msg
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnUpdateTodoForm Todo.Form.Model Todo.Form.Action
-    | OnEntityListKeyDown (List Entity.Types.Entity) X.Keyboard.KeyboardEvent
+    | OnEntityListKeyDown (List Entity.Types.EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
-    | OnEntityMsg Entity.Types.Entity Entity.Types.Msg
+    | OnEntityMsg Entity.Types.EntityType Entity.Types.Msg
     | OnLaunchBarMsg LaunchBar.Msg
     | OnLaunchBarMsgWithNow LaunchBar.Msg Time
     | OnTodoMsg Todo.Msg.Msg

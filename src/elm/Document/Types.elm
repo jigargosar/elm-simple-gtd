@@ -24,3 +24,7 @@ type alias Document record =
         , modifiedAt : Time
         , deviceId : DeviceId
     }
+
+
+getDocId =
+    .id

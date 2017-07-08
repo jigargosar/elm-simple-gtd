@@ -22,7 +22,7 @@ create : Todo.Model -> Model
 create todo =
     { id = Document.getId todo
     , todoText = Todo.getText todo
-    , entity = Entity.Types.Todo todo
+    , entity = Entity.Types.TodoEntity todo
     }
 
 

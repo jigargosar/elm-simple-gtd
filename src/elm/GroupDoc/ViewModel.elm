@@ -48,7 +48,7 @@ type alias ViewModel =
 
 
 type alias GroupDoc =
-    GroupDoc.Types.Model
+    GroupDoc.Types.GroupDoc
 
 
 type alias Config =

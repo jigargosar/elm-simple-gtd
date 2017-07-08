@@ -31,7 +31,6 @@ import X.Keyboard
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Menu
 import Todo.Notification.Model
 import Todo.Types exposing (TodoDoc)
 

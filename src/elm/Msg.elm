@@ -4,12 +4,11 @@ import AppDrawer.Types
 import CommonMsg.Types
 import Entity.Types exposing (EntityListViewType, EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
+import Firebase.Types exposing (FirebaseMsg)
 
 
 --safe
 
-import Firebase
-import Firebase.Types exposing (FirebaseMsg)
 import Keyboard.Combo
 import Keyboard.Extra
 import X.Keyboard

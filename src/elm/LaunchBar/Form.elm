@@ -1,14 +1,6 @@
 module LaunchBar.Form exposing (..)
 
-
-
 import Regex
-
-
-
-
-
-
 import Time exposing (Time)
 
 

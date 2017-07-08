@@ -6,14 +6,13 @@ import Entity.Types exposing (EntityListViewType, EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Types exposing (LBMsg)
+import Menu.Types exposing (MenuState)
+import Time exposing (Time)
+import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
 
 
 --safe
 
-import Material
-import Menu.Types exposing (MenuState)
-import Time exposing (Time)
-import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
 import Todo.Msg
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -29,6 +28,7 @@ import Todo.Types exposing (TodoDoc, TodoText)
 
 -- later
 
+import Material
 import X.Keyboard
 import Keyboard.Combo
 

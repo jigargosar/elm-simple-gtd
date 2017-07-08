@@ -14,6 +14,7 @@ import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Msg exposing (..)
+import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
 import Toolkit.Helpers exposing (apply2)
 import X.Debug
 import X.Keyboard as Keyboard exposing (Key)
@@ -231,7 +232,7 @@ reminderOverlayAction action =
                         in
                             case action of
                                 Todo.Notification.Model.Dismiss ->
-                                    Model.updateTodo (Todo.TurnReminderOff) todoId
+                                    Model.updateTodo (TA_TurnReminderOff) todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
@@ -249,7 +250,7 @@ reminderOverlayAction action =
                                         >> Return.singleton
 
                                 Todo.Notification.Model.MarkDone ->
-                                    Model.updateTodo Todo.MarkDone todoId
+                                    Model.updateTodo TA_MarkDone todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 

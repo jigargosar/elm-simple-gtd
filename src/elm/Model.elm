@@ -13,7 +13,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
-import Todo.Types exposing (TodoDoc)
+import Todo.Types exposing (TodoAction(..), TodoDoc)
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
 import X.Predicate as Pred
@@ -466,7 +466,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> updateTodo (time |> Todo.SnoozeTill) todoId
+            |> updateTodo (time |> TA_SnoozeTill) todoId
             >> Tuple.mapFirst removeReminderOverlay
 
 
@@ -474,7 +474,7 @@ findAndSnoozeOverDueTodo : Model -> Maybe ( ( TodoDoc, Model ), Cmd Msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
-            updateTodo (Todo.AutoSnooze model.now) todoId model
+            updateTodo (TA_AutoSnooze model.now) todoId model
                 |> (\( model, cmd ) ->
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
@@ -619,11 +619,11 @@ saveCurrentForm model =
 
         XMEditTodo form ->
             model
-                |> updateTodo (Todo.SetText form.todoText) form.id
+                |> updateTodo (TA_SetText form.todoText) form.id
 
         XMEditTodoReminder form ->
             model
-                |> updateTodo (Todo.SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
+                |> updateTodo (TA_SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         XMEditTodoContext form ->
             model |> Return.singleton
@@ -665,15 +665,15 @@ saveNewTodoForm form model =
                 updateTodo
                     (case form.referenceEntity of
                         Entity.Types.TodoEntity fromTodo ->
-                            (Todo.CopyProjectAndContextId fromTodo)
+                            (TA_CopyProjectAndContextId fromTodo)
 
                         Entity.Types.GroupEntity g ->
                             case g of
                                 Entity.Types.ContextEntity context ->
-                                    (Todo.SetContext context)
+                                    (TA_SetContext context)
 
                                 Entity.Types.ProjectEntity project ->
-                                    (Todo.SetProject project)
+                                    (TA_SetProject project)
                     )
                     todoId
                     >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
@@ -704,7 +704,7 @@ toggleDeleteEntity entity model =
                             updateProject entityId Document.toggleDeleted
 
                 Entity.Types.TodoEntity todo ->
-                    updateTodo (Todo.ToggleDeleted) entityId
+                    updateTodo (TA_ToggleDeleted) entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -1107,12 +1107,12 @@ findAndUpdateAllTodos findFn action model =
             |> Return.map (updateEntityListCursor model)
 
 
-updateTodo : Todo.UpdateAction -> DocId -> ModelReturnF
+updateTodo : TodoAction -> DocId -> ModelReturnF
 updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 
 
-updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF
+updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
 updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 

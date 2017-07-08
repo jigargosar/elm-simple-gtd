@@ -6,7 +6,7 @@ import Todo
 import Todo.FormTypes exposing (AddTodoForm, TodoEditReminderForm)
 import Todo.NewForm
 import Todo.ReminderForm
-import Todo.Types exposing (TodoDoc)
+import Todo.Types exposing (TodoAction, TodoDoc)
 
 
 type Msg
@@ -23,4 +23,4 @@ type Msg
     | UpdateReminderForm TodoEditReminderForm Todo.ReminderForm.Action
     | OnShowMoreMenu DocId
     | OnProcessPendingNotificationCronTick
-    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId Todo.UpdateAction
+    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId TodoAction

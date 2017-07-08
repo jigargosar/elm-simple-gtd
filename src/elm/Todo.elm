@@ -18,6 +18,7 @@ import Time exposing (Time)
 import Project
 import Store
 import Todo.Schedule
+import Todo.Types exposing (TodoAction(..))
 
 
 type alias Text =
@@ -43,23 +44,6 @@ type alias ViewModel =
 
 type alias Encoded =
     E.Value
-
-
-type UpdateAction
-    = MarkDone
-    | SetText Text
-    | SetContextId DocId
-    | SetScheduleFromMaybeTime (Maybe Time)
-    | SetContext Context.Model
-    | SetProjectId DocId
-    | CopyProjectAndContextId Model
-    | SetProject Project.Model
-    | ToggleDone
-    | ToggleDeleted
-    | TurnReminderOff
-    | SetSchedule Todo.Schedule.Model
-    | SnoozeTill Time
-    | AutoSnooze Time
 
 
 type alias ModelF =
@@ -138,50 +122,50 @@ updateSchedule fn model =
     over schedule fn model
 
 
-update : UpdateAction -> ModelF
+update : TodoAction -> ModelF
 update action =
     case action of
-        SetText val ->
+        TA_SetText val ->
             set text val
 
-        SetContextId val ->
+        TA_SetContextId val ->
             set contextId val
 
-        SetProjectId val ->
+        TA_SetProjectId val ->
             set projectId val
 
-        SetSchedule val ->
+        TA_SetSchedule val ->
             set schedule val
 
-        CopyProjectAndContextId fromTodo ->
-            update (SetContextId fromTodo.contextId)
-                >> update (SetProjectId fromTodo.projectId)
+        TA_CopyProjectAndContextId fromTodo ->
+            update (TA_SetContextId fromTodo.contextId)
+                >> update (TA_SetProjectId fromTodo.projectId)
 
-        SetProject project ->
+        TA_SetProject project ->
             Document.getId project |> set projectId
 
-        SetContext context ->
+        TA_SetContext context ->
             Document.getId context |> set contextId
 
-        ToggleDone ->
+        TA_ToggleDone ->
             over done not
 
-        MarkDone ->
+        TA_MarkDone ->
             set done True
 
-        ToggleDeleted ->
+        TA_ToggleDeleted ->
             over deleted not
 
-        SetScheduleFromMaybeTime maybeTime ->
+        TA_SetScheduleFromMaybeTime maybeTime ->
             set schedule (Todo.Schedule.fromMaybeTime maybeTime)
 
-        TurnReminderOff ->
+        TA_TurnReminderOff ->
             updateSchedule Todo.Schedule.turnReminderOff
 
-        SnoozeTill time ->
+        TA_SnoozeTill time ->
             updateSchedule (Todo.Schedule.snoozeTill time)
 
-        AutoSnooze now ->
+        TA_AutoSnooze now ->
             updateSchedule (Todo.Schedule.autoSnooze now)
 
 

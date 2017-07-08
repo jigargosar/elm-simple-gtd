@@ -24,6 +24,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
+import Todo.Types exposing (TodoAction(TA_MarkDone))
 
 
 port showTodoReminderNotification : Notification.TodoNotification -> Cmd msg
@@ -137,7 +138,7 @@ update andThenUpdate now todoMsg =
                     data.id
             in
                 if action == "mark-done" then
-                    Return.andThen (Model.updateTodo Todo.MarkDone todoId)
+                    Return.andThen (Model.updateTodo TA_MarkDone todoId)
                         >> command (Notification.closeNotification todoId)
                 else
                     todoId

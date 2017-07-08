@@ -16,6 +16,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Time
 import Todo.Msg
+import Todo.Types exposing (TodoAction(..))
 
 
 update :
@@ -58,7 +59,7 @@ update andThenUpdate entity msg =
                                     |> Return.andThen
 
                             Entity.Types.TodoEntity todo ->
-                                Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId Todo.ToggleDone
+                                Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId TA_ToggleDone
                                     |> Msg.OnTodoMsg
                                     |> andThenUpdate
             in

@@ -12,13 +12,14 @@ import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Todo.GroupForm
 import Todo.Msg
+import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
 
 
 createProjectMenuConfig : TodoGroupFrom -> Model.Model -> Menu.Config Project.Model Msg.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
-            >> Todo.SetProjectId
+            >> TA_SetProjectId
             >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
             >> Msg.OnTodoMsg
     , isSelected = Document.hasId projectId
@@ -35,7 +36,7 @@ createContextMenuConfig : TodoGroupFrom -> Model.Model -> Menu.Config Context.Mo
 createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId
-            >> Todo.SetContextId
+            >> TA_SetContextId
             >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
             >> Msg.OnTodoMsg
     , isSelected = Document.hasId contextId

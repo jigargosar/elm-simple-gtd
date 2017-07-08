@@ -898,7 +898,7 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
 				A3(
 					_jigargosar$elm_simple_gtd$Model$updateTodo,
-					_jigargosar$elm_simple_gtd$Todo$SnoozeTill(time),
+					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
 					todoId,
 					_p39));
 		}(model);
@@ -921,7 +921,7 @@ var _jigargosar$elm_simple_gtd$Model$findAndSnoozeOverDueTodo = function (model)
 		}(
 			A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo$AutoSnooze(model.now),
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_AutoSnooze(model.now),
 				todoId,
 				model));
 	};
@@ -950,13 +950,13 @@ var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
 							function () {
 								var _p45 = form.referenceEntity;
 								if (_p45.ctor === 'TodoEntity') {
-									return _jigargosar$elm_simple_gtd$Todo$CopyProjectAndContextId(_p45._0);
+									return _jigargosar$elm_simple_gtd$Todo_Types$TA_CopyProjectAndContextId(_p45._0);
 								} else {
 									var _p46 = _p45._0;
 									if (_p46.ctor === 'ContextEntity') {
-										return _jigargosar$elm_simple_gtd$Todo$SetContext(_p46._0);
+										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetContext(_p46._0);
 									} else {
-										return _jigargosar$elm_simple_gtd$Todo$SetProject(_p46._0);
+										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetProject(_p46._0);
 									}
 								}
 							}(),
@@ -1107,14 +1107,14 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 			var _p53 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo$SetText(_p53.todoText),
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p53.todoText),
 				_p53.id,
 				model);
 		case 'XMEditTodoReminder':
 			var _p54 = _p50._0;
 			return A3(
 				_jigargosar$elm_simple_gtd$Model$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo$SetScheduleFromMaybeTime(
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
 					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p54)),
 				_p54.id,
 				model);
@@ -1156,7 +1156,7 @@ var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 					return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
 				}
 			} else {
-				return A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$ToggleDeleted, entityId);
+				return A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_ToggleDeleted, entityId);
 			}
 		}()(model);
 	});

@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 					} else {
 						return andThenUpdate(
 							_jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-								A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode, entityId, _jigargosar$elm_simple_gtd$Todo$ToggleDone)));
+								A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode, entityId, _jigargosar$elm_simple_gtd$Todo_Types$TA_ToggleDone)));
 					}
 				};
 				return function (_p5) {

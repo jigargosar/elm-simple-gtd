@@ -5,11 +5,11 @@ import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
-import Todo.Types exposing (Schedule(..))
+import Todo.Types exposing (TodoSchedule(..))
 
 
 type alias Model =
-    Schedule
+    TodoSchedule
 
 
 decode : Decoder Model

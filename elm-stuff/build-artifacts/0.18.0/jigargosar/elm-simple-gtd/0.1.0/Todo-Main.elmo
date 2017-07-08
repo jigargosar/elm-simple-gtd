@@ -252,7 +252,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Notification$closeNotification(todoId),
 						A2(
 							_Fresheyeball$elm_return$Return$andThen,
-							A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$MarkDone, todoId),
+							A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_MarkDone, todoId),
 							_p14));
 				} : function (_p15) {
 					return andThenUpdate(

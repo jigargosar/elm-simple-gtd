@@ -222,6 +222,59 @@ var _jigargosar$elm_simple_gtd$Todo$done = A2(
 				b,
 				{done: s});
 		}));
+var _jigargosar$elm_simple_gtd$Todo$update = function (action) {
+	var _p7 = action;
+	switch (_p7.ctor) {
+		case 'TA_SetText':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$text, _p7._0);
+		case 'TA_SetContextId':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$contextId, _p7._0);
+		case 'TA_SetProjectId':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$projectId, _p7._0);
+		case 'TA_SetSchedule':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$schedule, _p7._0);
+		case 'TA_CopyProjectAndContextId':
+			var _p9 = _p7._0;
+			return function (_p8) {
+				return A2(
+					_jigargosar$elm_simple_gtd$Todo$update,
+					_jigargosar$elm_simple_gtd$Todo_Types$TA_SetProjectId(_p9.projectId),
+					A2(
+						_jigargosar$elm_simple_gtd$Todo$update,
+						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetContextId(_p9.contextId),
+						_p8));
+			};
+		case 'TA_SetProject':
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Record$set,
+				_jigargosar$elm_simple_gtd$Todo$projectId,
+				_jigargosar$elm_simple_gtd$Document$getId(_p7._0));
+		case 'TA_SetContext':
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Record$set,
+				_jigargosar$elm_simple_gtd$Todo$contextId,
+				_jigargosar$elm_simple_gtd$Document$getId(_p7._0));
+		case 'TA_ToggleDone':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Todo$done, _elm_lang$core$Basics$not);
+		case 'TA_MarkDone':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$done, true);
+		case 'TA_ToggleDeleted':
+			return A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Todo$deleted, _elm_lang$core$Basics$not);
+		case 'TA_SetScheduleFromMaybeTime':
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Record$set,
+				_jigargosar$elm_simple_gtd$Todo$schedule,
+				_jigargosar$elm_simple_gtd$Todo_Schedule$fromMaybeTime(_p7._0));
+		case 'TA_TurnReminderOff':
+			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(_jigargosar$elm_simple_gtd$Todo_Schedule$turnReminderOff);
+		case 'TA_SnoozeTill':
+			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(
+				_jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill(_p7._0));
+		default:
+			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(
+				_jigargosar$elm_simple_gtd$Todo_Schedule$autoSnooze(_p7._0));
+	}
+};
 var _jigargosar$elm_simple_gtd$Todo$getModifiedAt = function (_) {
 	return _.modifiedAt;
 };
@@ -232,19 +285,19 @@ var _jigargosar$elm_simple_gtd$Todo$getProjectId = function (_) {
 	return _.projectId;
 };
 var _jigargosar$elm_simple_gtd$Todo$hasProject = function (project) {
-	return function (_p7) {
+	return function (_p10) {
 		return A2(
 			_jigargosar$elm_simple_gtd$X_Function$equals,
 			_jigargosar$elm_simple_gtd$Document$getId(project),
-			_jigargosar$elm_simple_gtd$Todo$getProjectId(_p7));
+			_jigargosar$elm_simple_gtd$Todo$getProjectId(_p10));
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo$hasProjectId = function (projectId) {
-	return function (_p8) {
+	return function (_p11) {
 		return A2(
 			_jigargosar$elm_simple_gtd$X_Function$equals,
 			projectId,
-			_jigargosar$elm_simple_gtd$Todo$getProjectId(_p8));
+			_jigargosar$elm_simple_gtd$Todo$getProjectId(_p11));
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo$getDeleted = function (_) {
@@ -261,11 +314,11 @@ var _jigargosar$elm_simple_gtd$Todo$isInActive = _jigargosar$elm_simple_gtd$X_Fu
 			_1: {ctor: '[]'}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Todo$isActive = function (_p9) {
-	return !_jigargosar$elm_simple_gtd$Todo$isInActive(_p9);
+var _jigargosar$elm_simple_gtd$Todo$isActive = function (_p12) {
+	return !_jigargosar$elm_simple_gtd$Todo$isInActive(_p12);
 };
-var _jigargosar$elm_simple_gtd$Todo$isNotDeleted = function (_p10) {
-	return !_jigargosar$elm_simple_gtd$Todo$getDeleted(_p10);
+var _jigargosar$elm_simple_gtd$Todo$isNotDeleted = function (_p13) {
+	return !_jigargosar$elm_simple_gtd$Todo$getDeleted(_p13);
 };
 var _jigargosar$elm_simple_gtd$Todo$doneFilter = _jigargosar$elm_simple_gtd$Todo$toAllPassPredicate(
 	{
@@ -287,8 +340,8 @@ var _jigargosar$elm_simple_gtd$Todo$projectIdFilter = function (projectId) {
 				_0: _jigargosar$elm_simple_gtd$Todo$isNotDeleted,
 				_1: {
 					ctor: '::',
-					_0: function (_p11) {
-						return !_jigargosar$elm_simple_gtd$Todo$isDone(_p11);
+					_0: function (_p14) {
+						return !_jigargosar$elm_simple_gtd$Todo$isDone(_p14);
 					},
 					_1: {ctor: '[]'}
 				}
@@ -301,30 +354,30 @@ var _jigargosar$elm_simple_gtd$Todo$binFilter = _jigargosar$elm_simple_gtd$Todo$
 		_0: _jigargosar$elm_simple_gtd$Todo$getDeleted,
 		_1: {ctor: '[]'}
 	});
-var _jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime = function (_p12) {
+var _jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime = function (_p15) {
 	return _jigargosar$elm_simple_gtd$Todo_Schedule$getMaybeReminderTime(
 		function (_) {
 			return _.schedule;
-		}(_p12));
+		}(_p15));
 };
 var _jigargosar$elm_simple_gtd$Todo$isReminderOverdue = F2(
 	function (now, model) {
-		var isOverDue = function (_p13) {
+		var isOverDue = function (_p16) {
 			return A3(
 				_elm_community$maybe_extra$Maybe_Extra$unwrap,
 				false,
 				function (time) {
 					return _elm_lang$core$Native_Utils.cmp(time, now) < 1;
 				},
-				_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(_p13));
+				_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(_p16));
 		};
 		return _jigargosar$elm_simple_gtd$Todo$isActive(model) ? isOverDue(model) : false;
 	});
-var _jigargosar$elm_simple_gtd$Todo$getMaybeDueAt = function (_p14) {
+var _jigargosar$elm_simple_gtd$Todo$getMaybeDueAt = function (_p17) {
 	return _jigargosar$elm_simple_gtd$Todo_Schedule$getMaybeDueAt(
 		function (_) {
 			return _.schedule;
-		}(_p14));
+		}(_p17));
 };
 var _jigargosar$elm_simple_gtd$Todo$getMaybeTime = function (model) {
 	return A2(
@@ -350,90 +403,3 @@ var _jigargosar$elm_simple_gtd$Todo$Record = F5(
 	function (a, b, c, d, e) {
 		return {done: a, text: b, schedule: c, projectId: d, contextId: e};
 	});
-var _jigargosar$elm_simple_gtd$Todo$AutoSnooze = function (a) {
-	return {ctor: 'AutoSnooze', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SnoozeTill = function (a) {
-	return {ctor: 'SnoozeTill', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SetSchedule = function (a) {
-	return {ctor: 'SetSchedule', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$TurnReminderOff = {ctor: 'TurnReminderOff'};
-var _jigargosar$elm_simple_gtd$Todo$ToggleDeleted = {ctor: 'ToggleDeleted'};
-var _jigargosar$elm_simple_gtd$Todo$ToggleDone = {ctor: 'ToggleDone'};
-var _jigargosar$elm_simple_gtd$Todo$SetProject = function (a) {
-	return {ctor: 'SetProject', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$CopyProjectAndContextId = function (a) {
-	return {ctor: 'CopyProjectAndContextId', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SetProjectId = function (a) {
-	return {ctor: 'SetProjectId', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SetContext = function (a) {
-	return {ctor: 'SetContext', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SetScheduleFromMaybeTime = function (a) {
-	return {ctor: 'SetScheduleFromMaybeTime', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$SetContextId = function (a) {
-	return {ctor: 'SetContextId', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$update = function (action) {
-	var _p15 = action;
-	switch (_p15.ctor) {
-		case 'SetText':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$text, _p15._0);
-		case 'SetContextId':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$contextId, _p15._0);
-		case 'SetProjectId':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$projectId, _p15._0);
-		case 'SetSchedule':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$schedule, _p15._0);
-		case 'CopyProjectAndContextId':
-			var _p17 = _p15._0;
-			return function (_p16) {
-				return A2(
-					_jigargosar$elm_simple_gtd$Todo$update,
-					_jigargosar$elm_simple_gtd$Todo$SetProjectId(_p17.projectId),
-					A2(
-						_jigargosar$elm_simple_gtd$Todo$update,
-						_jigargosar$elm_simple_gtd$Todo$SetContextId(_p17.contextId),
-						_p16));
-			};
-		case 'SetProject':
-			return A2(
-				_jigargosar$elm_simple_gtd$X_Record$set,
-				_jigargosar$elm_simple_gtd$Todo$projectId,
-				_jigargosar$elm_simple_gtd$Document$getId(_p15._0));
-		case 'SetContext':
-			return A2(
-				_jigargosar$elm_simple_gtd$X_Record$set,
-				_jigargosar$elm_simple_gtd$Todo$contextId,
-				_jigargosar$elm_simple_gtd$Document$getId(_p15._0));
-		case 'ToggleDone':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Todo$done, _elm_lang$core$Basics$not);
-		case 'MarkDone':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo$done, true);
-		case 'ToggleDeleted':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Todo$deleted, _elm_lang$core$Basics$not);
-		case 'SetScheduleFromMaybeTime':
-			return A2(
-				_jigargosar$elm_simple_gtd$X_Record$set,
-				_jigargosar$elm_simple_gtd$Todo$schedule,
-				_jigargosar$elm_simple_gtd$Todo_Schedule$fromMaybeTime(_p15._0));
-		case 'TurnReminderOff':
-			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(_jigargosar$elm_simple_gtd$Todo_Schedule$turnReminderOff);
-		case 'SnoozeTill':
-			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(
-				_jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill(_p15._0));
-		default:
-			return _jigargosar$elm_simple_gtd$Todo$updateSchedule(
-				_jigargosar$elm_simple_gtd$Todo_Schedule$autoSnooze(_p15._0));
-	}
-};
-var _jigargosar$elm_simple_gtd$Todo$SetText = function (a) {
-	return {ctor: 'SetText', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo$MarkDone = {ctor: 'MarkDone'};

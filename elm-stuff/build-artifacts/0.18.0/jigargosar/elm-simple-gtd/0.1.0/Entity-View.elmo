@@ -77,7 +77,7 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 		};
 		var todoView = function (todo) {
 			var canBeFocused = hasFocusIn(
-				_jigargosar$elm_simple_gtd$Entity$Todo(todo));
+				_jigargosar$elm_simple_gtd$Entity_Types$Todo(todo));
 			return _jigargosar$elm_simple_gtd$Todo_View$keyedItem(
 				A3(_jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel, model, canBeFocused, todo));
 		};

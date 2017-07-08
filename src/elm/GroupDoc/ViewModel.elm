@@ -15,6 +15,7 @@ import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)
+import Types
 
 
 type alias IconVM =
@@ -50,7 +51,7 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Document.Id
+    { groupByFn : Todo.Model -> Types.DocId
     , namePrefix : String
     , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
@@ -58,7 +59,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Document.Id -> Entity.Types.ListViewType
+    , getViewType : Types.DocId -> Entity.Types.ListViewType
     , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 

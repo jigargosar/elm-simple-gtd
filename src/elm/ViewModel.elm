@@ -4,7 +4,6 @@ import AppColors
 import Color
 import Context
 import Dict exposing (Dict)
-import Document exposing (Id)
 import Entity
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Entity.Types

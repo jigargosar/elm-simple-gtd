@@ -12,6 +12,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
+import Types
 
 
 type alias Name =
@@ -37,7 +38,7 @@ type alias Model =
 
 
 constructor :
-    Document.Id
+    Types.DocId
     -> Document.Revision
     -> Time
     -> Time

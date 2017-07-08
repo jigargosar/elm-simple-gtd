@@ -7,10 +7,11 @@ import Time exposing (Time)
 import Time.Format
 import Toolkit.Operators exposing (..)
 import Todo
+import Types
 
 
 type alias Model =
-    { id : Document.Id
+    { id : Types.DocId
     , date : String
     , time : String
     , menuState : Menu.State

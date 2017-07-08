@@ -2,10 +2,11 @@ module Todo.Menu exposing (..)
 
 import Menu
 import Todo
+import Types
 
 
 type alias Model =
-    { todoId : Todo.Id
+    { todoId : Types.DocId
     , menuState : Menu.State
     }
 

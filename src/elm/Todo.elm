@@ -17,22 +17,19 @@ import Time exposing (Time)
 import Project
 import Store
 import Todo.Schedule
+import Types
 
 
 type alias Text =
     String
 
 
-type alias Id =
-    Document.Id
-
-
 type alias Record =
     { done : Bool
     , text : Text
     , schedule : Todo.Schedule.Model
-    , projectId : Document.Id
-    , contextId : Document.Id
+    , projectId : Types.DocId
+    , contextId : Types.DocId
     }
 
 
@@ -51,10 +48,10 @@ type alias Encoded =
 type UpdateAction
     = MarkDone
     | SetText Text
-    | SetContextId Id
+    | SetContextId Types.DocId
     | SetScheduleFromMaybeTime (Maybe Time)
     | SetContext Context.Model
-    | SetProjectId Id
+    | SetProjectId Types.DocId
     | CopyProjectAndContextId Model
     | SetProject Project.Model
     | ToggleDone
@@ -327,7 +324,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : Document.Id -> Model -> Bool
+hasProjectId : Types.DocId -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

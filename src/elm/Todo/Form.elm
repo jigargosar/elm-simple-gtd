@@ -4,10 +4,11 @@ import Document
 import Entity
 import Entity.Types
 import Todo
+import Types
 
 
 type alias Model =
-    { id : Document.Id
+    { id : Types.DocId
     , todoText : Todo.Text
     , entity : Entity.Entity
     }

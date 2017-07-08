@@ -5,6 +5,7 @@ import Date.Extra as Date
 import Document
 import Todo
 import Time exposing (Time)
+import Types
 
 
 type ActiveView
@@ -13,7 +14,7 @@ type ActiveView
 
 
 type alias TodoDetails =
-    { id : Todo.Id, text : Todo.Text }
+    { id : Types.DocId, text : Todo.Text }
 
 
 type Model

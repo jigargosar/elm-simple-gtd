@@ -3,13 +3,14 @@ module Todo.GroupForm exposing (..)
 import Document
 import Menu
 import Todo
+import Types
 
 
 type alias Model =
     { todo : Todo.Model
-    , todoId : Document.Id
-    , contextId : Document.Id
-    , projectId : Document.Id
+    , todoId : Types.DocId
+    , contextId : Types.DocId
+    , projectId : Types.DocId
     , menuState : Menu.State
     }
 

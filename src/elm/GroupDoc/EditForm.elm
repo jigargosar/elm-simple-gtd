@@ -2,14 +2,8 @@ module GroupDoc.EditForm exposing (..)
 
 import Document
 import Entity
-
-
-
-
-
-
-
 import GroupDoc
+import Types
 
 
 type alias NameLabel =
@@ -17,7 +11,7 @@ type alias NameLabel =
 
 
 type alias Model =
-    { id : Document.Id
+    { id : Types.DocId
     , name : GroupDoc.Name
     , entity : Entity.Entity
     , isArchived : Bool

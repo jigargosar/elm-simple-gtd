@@ -117,7 +117,7 @@ var _jigargosar$elm_simple_gtd$Entity_Tree$flatten = function (tree) {
 					return {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$Entity$fromContext(node.context),
-						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], node.todoList, _jigargosar$elm_simple_gtd$Entity$Todo)
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], node.todoList, _jigargosar$elm_simple_gtd$Entity_Types$Todo)
 					};
 				},
 				_p0._0);
@@ -128,12 +128,12 @@ var _jigargosar$elm_simple_gtd$Entity_Tree$flatten = function (tree) {
 					return {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$Entity$fromProject(g.project),
-						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _jigargosar$elm_simple_gtd$Entity$Todo)
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _jigargosar$elm_simple_gtd$Entity_Types$Todo)
 					};
 				},
 				_p0._0);
 		default:
-			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p0._1, _jigargosar$elm_simple_gtd$Entity$Todo);
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p0._1, _jigargosar$elm_simple_gtd$Entity_Types$Todo);
 	}
 };
 var _jigargosar$elm_simple_gtd$Entity_Tree$ProjectRoot = F2(

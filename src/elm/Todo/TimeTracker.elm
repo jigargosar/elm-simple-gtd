@@ -4,6 +4,7 @@ import Document
 import Time exposing (Time)
 import Todo
 import Maybe.Extra as Maybe
+import Types
 import X.Debug
 
 
@@ -12,13 +13,13 @@ type State
 
 
 type alias Info =
-    { todoId : Todo.Id
+    { todoId : Types.DocId
     , elapsedTime : Time
     }
 
 
 type alias ModelRec =
-    { todoId : Todo.Id
+    { todoId : Types.DocId
     , state : State
     , nextAlarmAt : Time
     }
@@ -41,7 +42,7 @@ map =
     Maybe.map
 
 
-toggleStartStop : Todo.Id -> Time -> Model -> Model
+toggleStartStop : Types.DocId -> Time -> Model -> Model
 toggleStartStop todoId now model =
     case model of
         Nothing ->
@@ -55,7 +56,7 @@ alarmDelay =
     10 * Time.minute
 
 
-initRunning : Todo.Id -> Time -> Model
+initRunning : Types.DocId -> Time -> Model
 initRunning todoId now =
     wrap
         { todoId = todoId
@@ -64,7 +65,7 @@ initRunning todoId now =
         }
 
 
-switchOrStartRunning : Todo.Id -> Time -> Model -> Model
+switchOrStartRunning : Types.DocId -> Time -> Model -> Model
 switchOrStartRunning todoId now =
     let
         _ =

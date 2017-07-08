@@ -2,7 +2,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 	function (andThenUpdate, entity, msg) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
-			case 'StartEditing':
+			case 'OnStartEditing':
 				return function (_p1) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
@@ -10,12 +10,12 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 							_jigargosar$elm_simple_gtd$Model$startEditingEntity(entity),
 							_p1));
 				};
-			case 'NameChanged':
+			case 'OnNameChanged':
 				return _Fresheyeball$elm_return$Return$map(
 					A2(_jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged, _p0._0, entity));
-			case 'Save':
+			case 'OnSave':
 				return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm);
-			case 'ToggleDeleted':
+			case 'OnToggleDeleted':
 				return function (_p2) {
 					return A2(
 						andThenUpdate,
@@ -25,7 +25,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 							_jigargosar$elm_simple_gtd$Model$toggleDeleteEntity(entity),
 							_p2));
 				};
-			case 'ToggleArchived':
+			case 'OnToggleArchived':
 				var toggleArchivedEntity = function (entity) {
 					var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
 					var _p3 = entity;
@@ -51,10 +51,10 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						A2(toggleArchivedEntity, entity, _p5));
 				};
-			case 'OnFocusIn':
+			case 'OnOnFocusIn':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model$setFocusInEntity(entity));
-			case 'ToggleSelected':
+			case 'OnToggleSelected':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model$toggleEntitySelection(entity));
 			default:

@@ -17,6 +17,7 @@ import Todo
 import Toolkit.Operators exposing (..)
 import Model
 import Project
+import Types
 import X.Maybe
 
 
@@ -59,7 +60,7 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Document.Id
+    { groupByFn : Todo.Model -> Types.DocId
     , todoList : List Todo.Model
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
@@ -69,7 +70,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Document.Id -> Entity.Types.ListViewType
+    , getViewType : Types.DocId -> Entity.Types.ListViewType
     }
 
 

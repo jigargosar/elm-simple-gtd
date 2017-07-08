@@ -1,22 +1,13 @@
 module Project exposing (..)
 
-
-import Document exposing (Document, Id, Revision)
+import Document exposing (Document, Revision)
 import Firebase exposing (DeviceId)
 import GroupDoc
-
-
-
-
 import X.Function exposing (..)
-
 import Random.Pcg as Random exposing (..)
-
-
-
 import Json.Encode as E
-
 import Time exposing (Time)
+import Types
 
 
 type alias Name =
@@ -54,7 +45,7 @@ constructor =
     GroupDoc.constructor
 
 
-init : GroupDoc.Name -> Time -> DeviceId -> Id -> Model
+init : GroupDoc.Name -> Time -> DeviceId -> Types.DocId -> Model
 init name now deviceId id =
     constructor id "" now now False deviceId name False
 

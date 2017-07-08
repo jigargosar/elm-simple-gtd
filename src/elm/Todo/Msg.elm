@@ -4,20 +4,21 @@ import Notification exposing (Response)
 import Todo
 import Todo.NewForm
 import Todo.ReminderForm
+import Types
 
 
 type Msg
-    = ToggleRunning Todo.Id
-    | SwitchOrStartRunning Todo.Id
+    = ToggleRunning Types.DocId
+    | SwitchOrStartRunning Types.DocId
     | StopRunning
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | ShowReminderOverlayForTodoId Todo.Id
+    | ShowReminderOverlayForTodoId Types.DocId
     | GotoRunning
     | UpdateTimeTracker
     | UpdateSetupFormTodoText Todo.NewForm.Model String
     | Upsert Todo.Model
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
-    | OnShowMoreMenu Todo.Id
+    | OnShowMoreMenu Types.DocId
     | OnProcessPendingNotificationCronTick
-    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Todo.Id Todo.UpdateAction
+    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Types.DocId Todo.UpdateAction

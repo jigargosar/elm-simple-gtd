@@ -4,6 +4,7 @@ import Context
 import Document.Types
 import Project
 import Todo
+import Types
 
 
 type GroupEntity
@@ -18,9 +19,9 @@ type Entity
 
 type ListViewType
     = ContextsView
-    | ContextView Document.Types.Id
+    | ContextView Types.DocId
     | ProjectsView
-    | ProjectView Document.Types.Id
+    | ProjectView Types.DocId
     | BinView
     | DoneView
     | RecentView

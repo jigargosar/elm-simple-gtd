@@ -11,6 +11,7 @@ import Entity exposing (Entity)
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
+import Types
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
 import X.Predicate as Pred
@@ -98,7 +99,7 @@ type alias Model =
     , fcmToken : Firebase.FCMToken
     , firebaseClient : Firebase.Client
     , developmentMode : Bool
-    , selectedEntityIdSet : Set Document.Id
+    , selectedEntityIdSet : Set Types.DocId
     , appVersion : String
     , deviceId : String
     , focusInEntity : Entity.Entity
@@ -680,7 +681,7 @@ saveNewTodoForm form model =
             )
 
 
-setFocusInEntityFromTodoId : Todo.Id -> ModelF
+setFocusInEntityFromTodoId : Types.DocId -> ModelF
 setFocusInEntityFromTodoId todoId model =
     maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.Todo, Just model )
         ?|> uncurry setFocusInEntity
@@ -757,12 +758,12 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-findTodoById : Document.Id -> Model -> Maybe Todo.Model
+findTodoById : Types.DocId -> Model -> Maybe Todo.Model
 findTodoById id =
     .todoStore >> Store.findById id
 
 
-findProjectById : Document.Id -> Model -> Maybe Project.Model
+findProjectById : Types.DocId -> Model -> Maybe Project.Model
 findProjectById id =
     .projectStore
         >> Store.findById id
@@ -773,7 +774,7 @@ findProjectByIdIn =
     flip findProjectById
 
 
-findContextById : Document.Id -> Model -> Maybe Context.Model
+findContextById : Types.DocId -> Model -> Maybe Context.Model
 findContextById id =
     .contextStore
         >> Store.findById id
@@ -795,7 +796,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
         model |> updateAllTodos action idSet
 
 
-insertTodo : (DeviceId -> Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodo : (DeviceId -> Types.DocId -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
@@ -904,17 +905,17 @@ toggleSetMember item set =
         Set.insert item set
 
 
-getSelectedEntityIdSet : Model -> Set Document.Id
+getSelectedEntityIdSet : Model -> Set Types.DocId
 getSelectedEntityIdSet =
     (.selectedEntityIdSet)
 
 
-setSelectedEntityIdSet : Set Document.Id -> ModelF
+setSelectedEntityIdSet : Set Types.DocId -> ModelF
 setSelectedEntityIdSet selectedEntityIdSet model =
     { model | selectedEntityIdSet = selectedEntityIdSet }
 
 
-updateSelectedEntityIdSet : (Set Document.Id -> Set Document.Id) -> ModelF
+updateSelectedEntityIdSet : (Set Types.DocId -> Set Types.DocId) -> ModelF
 updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
 
@@ -1107,7 +1108,7 @@ findAndUpdateAllTodos findFn action model =
             |> Return.map (updateEntityListCursor model)
 
 
-updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF
+updateTodo : Todo.UpdateAction -> Types.DocId -> ModelReturnF
 updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 

@@ -19,7 +19,7 @@ port module Store
         )
 
 import Dict exposing (Dict)
-import Document exposing (Document, Id)
+import Document exposing (Document)
 import X.Debug
 import X.Random as Random
 import X.Record as Record exposing (get, over, overT2)
@@ -35,6 +35,7 @@ import Random.Pcg as Random exposing (Seed)
 import Set exposing (Set)
 import Time exposing (Time)
 import Tuple2
+import Types
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
@@ -67,7 +68,7 @@ decodeList decoder =
 
 type alias Store x =
     { seed : Seed
-    , dict : Dict Document.Id (Document x)
+    , dict : Dict Types.DocId (Document x)
     , otherFieldsEncoder : Document x -> List ( String, E.Value )
     , decoder : Decoder (Document x)
     , name : String
@@ -144,7 +145,7 @@ type alias UpdateAllReturnF x =
 
 
 updateAll :
-    Set Document.Id
+    Set Types.DocId
     -> Time
     -> (Document x -> Document x)
     -> Store x
@@ -233,7 +234,7 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-insert : (DeviceId -> Id -> Document x) -> Store x -> ( Document x, Store x )
+insert : (DeviceId -> Types.DocId -> Document x) -> Store x -> ( Document x, Store x )
 insert constructor store =
     Random.mapWithIdGenerator (constructor store.deviceId)
         |> (generate # store)
@@ -264,7 +265,7 @@ findBy predicate =
     get dict >> Dict.values >> List.find predicate
 
 
-findById : Document.Id -> Store x -> Maybe (Document x)
+findById : Types.DocId -> Store x -> Maybe (Document x)
 findById id =
     get dict >> Dict.get id
 

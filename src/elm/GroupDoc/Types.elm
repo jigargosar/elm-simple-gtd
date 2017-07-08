@@ -21,11 +21,11 @@ type alias GroupDoc =
     Document.Types.Document Record
 
 
-type alias Context =
+type alias ContextDoc =
     GroupDoc
 
 
-type alias Project =
+type alias ProjectDoc =
     GroupDoc
 
 

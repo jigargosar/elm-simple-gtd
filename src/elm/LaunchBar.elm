@@ -9,31 +9,31 @@ import Project
 import String.Extra
 
 
-type Entity
-    = Context Context.Model
-    | Project Project.Model
-    | Projects
-    | Contexts
+type LBEntity
+    = LBContext Context.Model
+    | LBProject Project.Model
+    | LBProjects
+    | LBContexts
 
 
 type Msg
-    = OnEnter Entity
-    | OnInputChanged LaunchBarForm String
-    | Open
+    = OnLBEnter LBEntity
+    | OnLBInputChanged LaunchBarForm String
+    | OnLBOpen
 
 
 getName entity =
     case entity of
-        Project project ->
+        LBProject project ->
             Project.getName project
 
-        Context context ->
+        LBContext context ->
             Context.getName context
 
-        Projects ->
+        LBProjects ->
             "Projects"
 
-        Contexts ->
+        LBContexts ->
             "Contexts"
 
 
@@ -53,10 +53,10 @@ fuzzyMatch needle entity =
             Fuzzy.match [] [] n
     in
         case ( String.toList needle, entity ) of
-            ( '#' :: [], Projects ) ->
+            ( '#' :: [], LBProjects ) ->
                 ( entity, match boiledNeedle "#" )
 
-            ( '@' :: [], Contexts ) ->
+            ( '@' :: [], LBContexts ) ->
                 ( entity, match boiledNeedle "@" )
 
             _ ->
@@ -66,21 +66,21 @@ fuzzyMatch needle entity =
 getFuzzyResults needle activeContexts activeProjects =
     let
         contexts =
-            activeContexts .|> Context
+            activeContexts .|> LBContext
 
         projects =
-            activeProjects .|> Project
+            activeProjects .|> LBProject
 
         all =
-            projects ++ contexts ++ [ Projects, Contexts ]
+            projects ++ contexts ++ [ LBProjects, LBContexts ]
 
         entityList =
             case String.toList needle of
                 '#' :: xs ->
-                    [ Projects ] ++ projects
+                    [ LBProjects ] ++ projects
 
                 '@' :: xs ->
-                    [ Contexts ] ++ contexts
+                    [ LBContexts ] ++ contexts
 
                 _ ->
                     all
@@ -91,4 +91,4 @@ getFuzzyResults needle activeContexts activeProjects =
 
 
 defaultEntity =
-    Context Context.null
+    LBContext Context.null

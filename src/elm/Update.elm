@@ -321,7 +321,7 @@ onGlobalKeyUp key =
                                 andThenUpdate OnNewTodoForInbox
 
                             Key.Slash ->
-                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+                                LaunchBar.OnLBOpen |> OnLaunchBarMsg |> andThenUpdate
 
                             _ ->
                                 identity

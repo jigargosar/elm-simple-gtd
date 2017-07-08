@@ -27,23 +27,23 @@ update :
     -> Model.ReturnF
 update andThenUpdate now msg =
     case msg of
-        LaunchBar.OnEnter entity ->
+        LaunchBar.OnLBEnter entity ->
             andThenUpdate Msg.OnDeactivateEditingMode
                 >> case entity of
-                    LaunchBar.Project project ->
+                    LaunchBar.LBProject project ->
                         map (Model.switchToProjectView project)
 
-                    LaunchBar.Projects ->
+                    LaunchBar.LBProjects ->
                         map (Model.setEntityListViewType Entity.Types.ProjectsView)
 
-                    LaunchBar.Context context ->
+                    LaunchBar.LBContext context ->
                         map (Model.switchToContextView context)
 
-                    LaunchBar.Contexts ->
+                    LaunchBar.LBContexts ->
                         map (Model.setEntityListViewType Entity.Types.ContextsView)
 
-        LaunchBar.OnInputChanged form text ->
+        LaunchBar.OnLBInputChanged form text ->
             map (Model.updateLaunchBarInput now text form)
 
-        LaunchBar.Open ->
+        LaunchBar.OnLBOpen ->
             map (Model.activateLaunchBar now) >> DomPorts.autoFocusInputCmd

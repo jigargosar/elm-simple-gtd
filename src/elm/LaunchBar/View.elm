@@ -30,7 +30,7 @@ init form m =
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    matchingEntity |> LaunchBar.OnEnter |> Msg.OnLaunchBarMsg
+                    matchingEntity |> LaunchBar.OnLBEnter |> Msg.OnLaunchBarMsg
 
                 _ ->
                     Model.noop
@@ -45,7 +45,7 @@ init form m =
                 , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (LaunchBar.OnInputChanged form >> Msg.OnLaunchBarMsg)
+                , onInput (LaunchBar.OnLBInputChanged form >> Msg.OnLaunchBarMsg)
                 ]
                 [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
                 , div [ class "no-wrap input typing" ] [ text form.input ]

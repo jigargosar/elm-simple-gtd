@@ -9,9 +9,6 @@ import Firebase.Types exposing (FirebaseMsg)
 
 --safe
 
-import Keyboard.Combo
-import Keyboard.Extra
-import X.Keyboard
 import LaunchBar
 import Material
 import Menu.Types exposing (MenuState)
@@ -30,6 +27,12 @@ import Todo.Notification.Model
 import Todo.Types exposing (TodoDoc, TodoText)
 
 
+-- later
+
+import X.Keyboard
+import Keyboard.Combo
+
+
 type ViewType
     = EntityListView EntityListViewType
     | SyncView
@@ -38,7 +41,7 @@ type ViewType
 type SubMsg
     = OnNowChanged Time
     | OnKeyboardMsg X.Keyboard.Msg
-    | OnGlobalKeyUp Keyboard.Extra.Key
+    | OnGlobalKeyUp X.Keyboard.Key
     | OnPouchDBChange String D.Value
     | OnFirebaseDatabaseChange String D.Value
 

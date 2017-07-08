@@ -9,7 +9,7 @@ type alias NameInputLabel =
     String
 
 
-type alias GroupDocEditModel =
+type alias GroupDocEditForm =
     { id : DocId
     , name : GroupDocName
     , entity : EntityType

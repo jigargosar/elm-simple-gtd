@@ -1,9 +1,9 @@
 module ExclusiveMode exposing (..)
 
-import Entity.Types
+import Entity.Types exposing (EntityType(..), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc.EditForm
-import GroupDoc.FormTypes exposing (GroupDocEditModel)
+import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Form
 import Menu
 import Todo.Menu
@@ -46,16 +46,16 @@ editTodo =
     Todo.Form.create >> XMEditTodo
 
 
-createEntityEditForm : Entity.Types.EntityType -> ExclusiveMode
+createEntityEditForm : EntityType -> ExclusiveMode
 createEntityEditForm entity =
     case entity of
-        Entity.Types.GroupEntity g ->
+        GroupEntity g ->
             case g of
-                Entity.Types.ContextEntity model ->
+                ContextEntity model ->
                     editContext model
 
-                Entity.Types.ProjectEntity model ->
+                ProjectEntity model ->
                     editProject model
 
-        Entity.Types.TodoEntity model ->
+        TodoEntity model ->
             editTodo model

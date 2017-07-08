@@ -1,7 +1,6 @@
 module ExclusiveMode.Types exposing (..)
 
-import GroupDoc.EditForm
-import GroupDoc.FormTypes exposing (GroupDocEditModel)
+import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Form
 import Menu
 import Todo.Form
@@ -11,14 +10,6 @@ import Todo.NewForm
 import Todo.ReminderForm
 
 
-type alias EditContextForm =
-    GroupDocEditModel
-
-
-type alias EditProjectForm =
-    GroupDocEditModel
-
-
 type alias SyncForm =
     { uri : String }
 
@@ -26,8 +17,8 @@ type alias SyncForm =
 type ExclusiveMode
     = XMNewTodo Todo.NewForm.Model
     | XMEditTodo Todo.Form.Model
-    | XMEditContext EditContextForm
-    | XMEditProject EditProjectForm
+    | XMEditContext GroupDocEditForm
+    | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu Todo.Menu.Model
     | XMEditTodoReminder Todo.ReminderForm.Model
     | XMEditTodoContext Todo.GroupForm.Model

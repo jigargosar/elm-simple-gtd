@@ -3,6 +3,7 @@ module Context exposing (..)
 import Document exposing (Document, Revision)
 import Firebase exposing (DeviceId)
 import GroupDoc
+import GroupDoc.Types
 import X.Function exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random
@@ -15,7 +16,7 @@ type alias Name =
 
 
 type alias Model =
-    GroupDoc.Model
+    GroupDoc.Types.Context
 
 
 type alias Store =

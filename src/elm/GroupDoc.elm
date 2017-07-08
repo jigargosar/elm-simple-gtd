@@ -1,6 +1,7 @@
 module GroupDoc exposing (..)
 
 import Document
+import Document.Types exposing (Id)
 import X.Predicate
 import X.Record
 import Firebase exposing (DeviceId)
@@ -12,7 +13,6 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
-import Types
 
 
 type alias Name =
@@ -38,7 +38,7 @@ type alias Model =
 
 
 constructor :
-    Types.DocId
+    Id
     -> Document.Revision
     -> Time
     -> Time

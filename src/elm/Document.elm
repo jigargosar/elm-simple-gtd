@@ -1,7 +1,6 @@
 module Document exposing (..)
 
-import Document.Types
-import Firebase exposing (DeviceId)
+import Document.Types exposing (DeviceId)
 import Time exposing (Time)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

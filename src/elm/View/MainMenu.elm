@@ -5,6 +5,7 @@ import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Menu.Types exposing (MenuState)
 import Msg
 import X.Html exposing (..)
 import Menu
@@ -27,7 +28,7 @@ type alias Item =
     ( String, ItemType )
 
 
-menuConfig : Menu.State -> Model.Model -> Menu.Config Item Msg.Msg
+menuConfig : MenuState -> Model.Model -> Menu.Config Item Msg.Msg
 menuConfig menuState appModel =
     { onSelect = onSelect
     , isSelected = (\_ -> False)

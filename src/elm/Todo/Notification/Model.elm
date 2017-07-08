@@ -3,10 +3,10 @@ module Todo.Notification.Model exposing (..)
 import Date
 import Date.Extra as Date
 import Document
+import Document.Types exposing (DocId)
 import Todo
 import Time exposing (Time)
 import Todo.Types exposing (TodoDoc)
-import Types
 
 
 type ActiveView
@@ -15,7 +15,7 @@ type ActiveView
 
 
 type alias TodoDetails =
-    { id : Types.DocId__, text : Todo.Text }
+    { id : DocId, text : Todo.Text }
 
 
 type Model

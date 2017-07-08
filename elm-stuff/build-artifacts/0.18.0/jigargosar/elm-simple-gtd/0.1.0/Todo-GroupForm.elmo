@@ -7,7 +7,7 @@ var _jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState = F2(
 var _jigargosar$elm_simple_gtd$Todo_GroupForm$init = function (todo) {
 	return {
 		todo: todo,
-		todoId: _jigargosar$elm_simple_gtd$Document$getId(todo),
+		todoId: _jigargosar$elm_simple_gtd$Document_Types$getDocId(todo),
 		contextId: _jigargosar$elm_simple_gtd$Todo$getContextId(todo),
 		projectId: _jigargosar$elm_simple_gtd$Todo$getProjectId(todo),
 		menuState: _jigargosar$elm_simple_gtd$Menu$initState

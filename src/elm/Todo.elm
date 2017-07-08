@@ -3,6 +3,7 @@ module Todo exposing (..)
 import Context
 import Date
 import Document exposing (Revision)
+import Document.Types exposing (DocId)
 import X.Record exposing (over, set)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -17,7 +18,6 @@ import Time exposing (Time)
 import Project
 import Store
 import Todo.Schedule
-import Types
 
 
 type alias Text =
@@ -28,8 +28,8 @@ type alias Record =
     { done : Bool
     , text : Text
     , schedule : Todo.Schedule.Model
-    , projectId : Types.DocId__
-    , contextId : Types.DocId__
+    , projectId : DocId
+    , contextId : DocId
     }
 
 
@@ -48,10 +48,10 @@ type alias Encoded =
 type UpdateAction
     = MarkDone
     | SetText Text
-    | SetContextId Types.DocId__
+    | SetContextId DocId
     | SetScheduleFromMaybeTime (Maybe Time)
     | SetContext Context.Model
-    | SetProjectId Types.DocId__
+    | SetProjectId DocId
     | CopyProjectAndContextId Model
     | SetProject Project.Model
     | ToggleDone
@@ -324,7 +324,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : Types.DocId__ -> Model -> Bool
+hasProjectId : DocId -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

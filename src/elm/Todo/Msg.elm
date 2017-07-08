@@ -6,7 +6,6 @@ import Todo
 import Todo.NewForm
 import Todo.ReminderForm
 import Todo.Types exposing (TodoDoc)
-import Types
 
 
 type Msg

@@ -1,5 +1,6 @@
 module Menu exposing (..)
 
+import Menu.Types exposing (MenuState)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import X.List as List
@@ -17,8 +18,7 @@ import Tuple2
 
 
 type alias State =
-    { maybeFocusKey : Maybe String
-    }
+    MenuState
 
 
 initState : State

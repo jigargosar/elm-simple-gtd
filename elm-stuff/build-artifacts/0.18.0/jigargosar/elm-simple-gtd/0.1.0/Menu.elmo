@@ -243,9 +243,6 @@ var _jigargosar$elm_simple_gtd$Menu$view = F3(
 			});
 	});
 var _jigargosar$elm_simple_gtd$Menu$initState = {maybeFocusKey: _elm_lang$core$Maybe$Nothing};
-var _jigargosar$elm_simple_gtd$Menu$State = function (a) {
-	return {maybeFocusKey: a};
-};
 var _jigargosar$elm_simple_gtd$Menu$Config = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {onSelect: a, itemKey: b, itemSearchText: c, itemView: d, isSelected: e, onStateChanged: f, noOp: g, onOutsideMouseDown: h};

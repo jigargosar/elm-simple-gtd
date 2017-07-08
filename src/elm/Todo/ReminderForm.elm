@@ -2,27 +2,28 @@ module Todo.ReminderForm exposing (..)
 
 import Date
 import Document
+import Document.Types exposing (DocId)
 import Menu
+import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Time.Format
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Todo
-import Types
 
 
 type alias Model =
-    { id : Types.DocId__
+    { id : DocId
     , date : String
     , time : String
-    , menuState : Menu.State
+    , menuState : MenuState
     }
 
 
 type Action
     = SetDate String
     | SetTime String
-    | SetMenuState Menu.State
+    | SetMenuState MenuState
 
 
 create : TodoDoc -> Time.Time -> Model

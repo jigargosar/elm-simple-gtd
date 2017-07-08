@@ -1,10 +1,10 @@
 module Todo.TimeTracker exposing (..)
 
 import Document
+import Document.Types exposing (DocId)
 import Time exposing (Time)
 import Todo
 import Maybe.Extra as Maybe
-import Types
 import X.Debug
 
 
@@ -13,13 +13,13 @@ type State
 
 
 type alias Info =
-    { todoId : Types.DocId__
+    { todoId : DocId
     , elapsedTime : Time
     }
 
 
 type alias ModelRec =
-    { todoId : Types.DocId__
+    { todoId : DocId
     , state : State
     , nextAlarmAt : Time
     }
@@ -42,7 +42,7 @@ map =
     Maybe.map
 
 
-toggleStartStop : Types.DocId__ -> Time -> Model -> Model
+toggleStartStop : DocId -> Time -> Model -> Model
 toggleStartStop todoId now model =
     case model of
         Nothing ->
@@ -56,7 +56,7 @@ alarmDelay =
     10 * Time.minute
 
 
-initRunning : Types.DocId__ -> Time -> Model
+initRunning : DocId -> Time -> Model
 initRunning todoId now =
     wrap
         { todoId = todoId
@@ -65,7 +65,7 @@ initRunning todoId now =
         }
 
 
-switchOrStartRunning : Types.DocId__ -> Time -> Model -> Model
+switchOrStartRunning : DocId -> Time -> Model -> Model
 switchOrStartRunning todoId now =
     let
         _ =

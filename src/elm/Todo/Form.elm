@@ -1,15 +1,15 @@
 module Todo.Form exposing (..)
 
 import Document
+import Document.Types exposing (DocId)
 import Entity
 import Entity.Types
 import Todo
 import Todo.Types exposing (TodoDoc)
-import Types
 
 
 type alias Model =
-    { id : Types.DocId__
+    { id : DocId
     , todoText : Todo.Text
     , entity : Entity.Entity
     }

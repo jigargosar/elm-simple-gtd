@@ -13,6 +13,7 @@ import Keyboard.Combo
 import Keyboard.Extra
 import LaunchBar
 import Material
+import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Todo
 import Todo.Form
@@ -52,7 +53,7 @@ type Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode
     | OnShowMainMenu
-    | OnMainMenuStateChanged Menu.State
+    | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
     | OnReminderOverlayAction Todo.Notification.Model.Action
     | OnNewTodoForInbox
@@ -65,8 +66,8 @@ type Msg
     | OnStartEditingProject TodoDoc
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
-    | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
+    | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model MenuState
+    | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model MenuState
     | OnUpdateTodoForm Todo.Form.Model Todo.Form.Action
     | OnEntityListKeyDown (List Entity.Types.EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType

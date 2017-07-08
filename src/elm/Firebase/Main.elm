@@ -1,9 +1,10 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
-import Firebase exposing (Msg(..))
+import Firebase
 import Firebase.Model exposing (User(..))
 import Firebase.SignIn
+import Firebase.Types exposing (..)
 import Model
 import Navigation
 import Return
@@ -60,9 +61,9 @@ updateClientCmd client uid =
 subscriptions : Model.Subscriptions
 subscriptions model =
     Sub.batch
-        [ onFirebaseUserChanged OnUserChanged
-        , onFCMTokenChanged OnFCMTokenChanged
-        , onFirebaseConnectionChanged OnFirebaseConnectionChanged
+        [ onFirebaseUserChanged OnFBUserChanged
+        , onFCMTokenChanged OnFBFCMTokenChanged
+        , onFirebaseConnectionChanged OnFBConnectionChanged
         ]
         |> Sub.map Msg.OnFirebaseMsg
 
@@ -73,28 +74,28 @@ overSignInModel =
 
 update :
     (Msg.Msg -> Model.ReturnF)
-    -> Firebase.Msg
+    -> FirebaseMsg
     -> Model.ReturnF
 update andThenUpdate msg =
     case msg of
-        NOOP ->
+        OnFBNOOP ->
             identity
 
-        OnSignIn ->
+        OnFBSignIn ->
             Return.command (signIn ())
 
-        OnSkipSignIn ->
+        OnFBSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Msg.OnPersistLocalPref
                 >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
 
-        OnSignOut ->
+        OnFBSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
                 >> andThenUpdate Msg.OnPersistLocalPref
                 >> Return.command (Navigation.load AppUrl.landing)
 
-        AfterUserChanged ->
+        OnFBAfterUserChanged ->
             Return.andThen
                 (\model ->
                     Return.singleton model
@@ -109,19 +110,19 @@ update andThenUpdate msg =
                                     >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
                 )
 
-        OnUserChanged encodedUser ->
+        OnFBUserChanged encodedUser ->
             D.decodeValue Firebase.Model.userDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
                         Return.map (setUser user)
-                            >> andThenUpdate (Msg.OnFirebaseMsg AfterUserChanged)
+                            >> andThenUpdate (Msg.OnFirebaseMsg OnFBAfterUserChanged)
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
                             >> startSyncWithFirebase
                     )
                 != identity
 
-        OnFCMTokenChanged encodedToken ->
+        OnFBFCMTokenChanged encodedToken ->
             D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\token ->
@@ -130,7 +131,7 @@ update andThenUpdate msg =
                     )
                 != identity
 
-        OnFirebaseConnectionChanged connected ->
+        OnFBConnectionChanged connected ->
             Return.map (updateFirebaseConnection connected)
                 >> maybeEffect firebaseUpdateClientCmd
 

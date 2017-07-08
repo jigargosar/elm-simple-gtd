@@ -113,13 +113,13 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p1 = msg;
 		switch (_p1.ctor) {
-			case 'NOOP':
+			case 'OnFBNOOP':
 				return _elm_lang$core$Basics$identity;
-			case 'OnSignIn':
+			case 'OnFBSignIn':
 				return _Fresheyeball$elm_return$Return$command(
 					_jigargosar$elm_simple_gtd$Firebase_Main$signIn(
 						{ctor: '_Tuple0'}));
-			case 'OnSkipSignIn':
+			case 'OnFBSkipSignIn':
 				return function (_p2) {
 					return A2(
 						_Fresheyeball$elm_return$Return$map,
@@ -132,7 +132,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 								_jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel(_jigargosar$elm_simple_gtd$Firebase_SignIn$setSkipSignIn),
 								_p2)));
 				};
-			case 'OnSignOut':
+			case 'OnFBSignOut':
 				return function (_p3) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
@@ -149,7 +149,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 										{ctor: '_Tuple0'}),
 									_p3))));
 				};
-			case 'AfterUserChanged':
+			case 'OnFBAfterUserChanged':
 				return _Fresheyeball$elm_return$Return$andThen(
 					function (model) {
 						return function () {
@@ -173,7 +173,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 						}()(
 							_Fresheyeball$elm_return$Return$singleton(model));
 					});
-			case 'OnUserChanged':
+			case 'OnFBUserChanged':
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
 					A2(
@@ -193,7 +193,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 											_jigargosar$elm_simple_gtd$Firebase_Main$firebaseUpdateClientCmd,
 											A2(
 												andThenUpdate,
-												_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase$AfterUserChanged),
+												_jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBAfterUserChanged),
 												A2(
 													_Fresheyeball$elm_return$Return$map,
 													_jigargosar$elm_simple_gtd$Firebase_Main$setUser(user),
@@ -201,7 +201,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 							};
 						}),
 					_elm_lang$core$Basics$identity);
-			case 'OnFCMTokenChanged':
+			case 'OnFBFCMTokenChanged':
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
 					A2(
@@ -244,13 +244,13 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$subscriptions = function (model) {
 		_elm_lang$core$Platform_Sub$batch(
 			{
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase$OnUserChanged),
+				_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseUserChanged(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBUserChanged),
 				_1: {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged(_jigargosar$elm_simple_gtd$Firebase$OnFCMTokenChanged),
+					_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFCMTokenChanged(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBFCMTokenChanged),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseConnectionChanged(_jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged),
+						_0: _jigargosar$elm_simple_gtd$Firebase_Main$onFirebaseConnectionChanged(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBConnectionChanged),
 						_1: {ctor: '[]'}
 					}
 				}

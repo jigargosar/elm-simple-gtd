@@ -29,18 +29,14 @@ onFirebaseDatabaseChangeSub tagger =
 
 main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Msg.Msg
 main =
-    let
-        _ =
-            1
-    in
-        RouteUrl.programWithFlags
-            { delta2url = Routes.delta2hash
-            , location2messages = Routes.hash2messages
-            , init = Model.init
-            , update = Update.update
-            , view = View.init
-            , subscriptions = subscriptions
-            }
+    RouteUrl.programWithFlags
+        { delta2url = Routes.delta2hash
+        , location2messages = Routes.hash2messages
+        , init = Model.init
+        , update = Update.update
+        , view = View.init
+        , subscriptions = subscriptions
+        }
 
 
 subscriptions : Model.Model -> Sub Msg.Msg

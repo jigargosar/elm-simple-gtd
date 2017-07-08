@@ -2,6 +2,7 @@ module View.MainMenu exposing (..)
 
 import AppUrl
 import Firebase
+import Firebase.Types exposing (FirebaseMsg(OnFBSignIn, OnFBSignOut))
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -67,8 +68,8 @@ getItems appModel =
 
         signInMenuItem =
             maybeUserProfile
-                ?|> (\_ -> ( "SignOut", Firebase.OnSignOut ))
-                ?= ( "SignIn", Firebase.OnSignIn )
+                ?|> (\_ -> ( "SignOut", OnFBSignOut ))
+                ?= ( "SignIn", OnFBSignIn )
                 |> Tuple2.map (Msg.OnFirebaseMsg >> Msg)
 
         linkMenuItems =

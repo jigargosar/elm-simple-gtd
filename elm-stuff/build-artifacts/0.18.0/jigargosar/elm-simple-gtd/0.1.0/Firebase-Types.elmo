@@ -1,0 +1,14 @@
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBConnectionChanged = function (a) {
+	return {ctor: 'OnFBConnectionChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBFCMTokenChanged = function (a) {
+	return {ctor: 'OnFBFCMTokenChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBUserChanged = function (a) {
+	return {ctor: 'OnFBUserChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSkipSignIn = {ctor: 'OnFBSkipSignIn'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBAfterUserChanged = {ctor: 'OnFBAfterUserChanged'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignOut = {ctor: 'OnFBSignOut'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignIn = {ctor: 'OnFBSignIn'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBNOOP = {ctor: 'OnFBNOOP'};

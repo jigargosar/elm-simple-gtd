@@ -2,6 +2,7 @@ module View.GetStarted exposing (..)
 
 import AppUrl
 import Firebase
+import Firebase.Types exposing (FirebaseMsg(OnFBNOOP, OnFBSignIn, OnFBSkipSignIn))
 import Model
 import Msg
 import Todo.Msg
@@ -15,7 +16,7 @@ import X.Keyboard
 signInOverlay =
     div
         [ class "overlay"
-        , onClickStopPropagation Firebase.NOOP
+        , onClickStopPropagation OnFBNOOP
         ]
         [ div [ class "modal fixed-center" ]
             [ div [ class "modal-content" ]
@@ -23,7 +24,7 @@ signInOverlay =
                     [ text "One click sign in" ]
                 , div [ class "section layout horizontal center-center" ]
                     [ div []
-                        [ a [ class "google-sign-in btn", onClick Firebase.OnSignIn ]
+                        [ a [ class "google-sign-in btn", onClick OnFBSignIn ]
                             [ div [ class "left" ] [ img [ class "google-logo", src AppUrl.googleIconSvg ] [] ]
                             , text "Sign in with Google Account"
                             ]
@@ -31,7 +32,7 @@ signInOverlay =
                     ]
                 ]
             , div [ class "right-align" ]
-                [ a [ class "btn btn-flat", onClick Firebase.OnSkipSignIn ]
+                [ a [ class "btn btn-flat", onClick OnFBSkipSignIn ]
                     [ text "Skip" ]
                 ]
             ]

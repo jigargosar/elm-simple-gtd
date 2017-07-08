@@ -92,9 +92,9 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$getItems = function (appModel) {
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				maybeUserProfile,
 				function (_p9) {
-					return {ctor: '_Tuple2', _0: 'SignOut', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignOut};
+					return {ctor: '_Tuple2', _0: 'SignOut', _1: _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignOut};
 				}),
-			{ctor: '_Tuple2', _0: 'SignIn', _1: _jigargosar$elm_simple_gtd$Firebase$OnSignIn}));
+			{ctor: '_Tuple2', _0: 'SignIn', _1: _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignIn}));
 	return {ctor: '::', _0: signInMenuItem, _1: linkMenuItems};
 };
 var _jigargosar$elm_simple_gtd$View_MainMenu$init = F2(

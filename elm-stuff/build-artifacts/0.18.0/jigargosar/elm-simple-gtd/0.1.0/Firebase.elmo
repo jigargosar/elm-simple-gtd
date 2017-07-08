@@ -18,17 +18,3 @@ var _jigargosar$elm_simple_gtd$Firebase$getMaybeUserProfile = function (_p0) {
 		}(_p0));
 };
 var _jigargosar$elm_simple_gtd$Firebase$init = _jigargosar$elm_simple_gtd$Firebase_Model$init;
-var _jigargosar$elm_simple_gtd$Firebase$OnFirebaseConnectionChanged = function (a) {
-	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Firebase$OnFCMTokenChanged = function (a) {
-	return {ctor: 'OnFCMTokenChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Firebase$OnUserChanged = function (a) {
-	return {ctor: 'OnUserChanged', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Firebase$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
-var _jigargosar$elm_simple_gtd$Firebase$AfterUserChanged = {ctor: 'AfterUserChanged'};
-var _jigargosar$elm_simple_gtd$Firebase$OnSignOut = {ctor: 'OnSignOut'};
-var _jigargosar$elm_simple_gtd$Firebase$OnSignIn = {ctor: 'OnSignIn'};
-var _jigargosar$elm_simple_gtd$Firebase$NOOP = {ctor: 'NOOP'};

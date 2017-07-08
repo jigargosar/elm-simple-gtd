@@ -9,6 +9,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 --safe
 
 import Firebase
+import Firebase.Types exposing (FirebaseMsg)
 import Keyboard.Combo
 import Keyboard.Extra
 import X.Keyboard
@@ -71,7 +72,7 @@ type Msg
     | OnLaunchBarMsgWithNow LaunchBar.Msg Time
     | OnTodoMsg Todo.Msg.Msg
     | OnTodoMsgWithTime Todo.Msg.Msg Time
-    | OnFirebaseMsg Firebase.Msg
+    | OnFirebaseMsg FirebaseMsg
     | OnKeyCombo Keyboard.Combo.Msg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Types.Msg

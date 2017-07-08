@@ -10,17 +10,6 @@ import Json.Encode.Extra as E
 import X.Html
 
 
-type Msg
-    = NOOP
-    | OnSignIn
-    | OnSignOut
-    | AfterUserChanged
-    | OnSkipSignIn
-    | OnUserChanged E.Value
-    | OnFCMTokenChanged E.Value
-    | OnFirebaseConnectionChanged Bool
-
-
 type alias UID =
     String
 

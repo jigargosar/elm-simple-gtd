@@ -154,7 +154,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Firebase$NOOP),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBNOOP),
 				_1: {ctor: '[]'}
 			}
 		},
@@ -213,7 +213,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 														_0: _elm_lang$html$Html_Attributes$class('google-sign-in btn'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase$OnSignIn),
+															_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignIn),
 															_1: {ctor: '[]'}
 														}
 													},
@@ -273,7 +273,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 										_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase$OnSkipSignIn),
+											_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBSkipSignIn),
 											_1: {ctor: '[]'}
 										}
 									},

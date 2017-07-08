@@ -1,12 +1,12 @@
 module Types exposing (..)
 
 import Document.Types
-import GroupDoc
+import GroupDoc.Types
 
 
 type alias DocId =
-    Document.Types.Id
+    Document.Types.DocId
 
 
 type alias ContextDoc =
-    GroupDoc.Model
+    GroupDoc.Types.Context

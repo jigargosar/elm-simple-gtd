@@ -1,15 +1,14 @@
 module Entity.Types exposing (..)
 
-import Context
 import Document.Types
-import Project
+import GroupDoc.Types
 import Todo
 import Types
 
 
 type GroupEntity
-    = Project Project.Model
-    | Context Context.Model
+    = Project GroupDoc.Types.Model
+    | Context GroupDoc.Types.Model
 
 
 type Entity

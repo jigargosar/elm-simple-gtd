@@ -1,15 +1,9 @@
 module Document.Types exposing (..)
 
 import Time exposing (Time)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 
 
-type alias Id =
+type alias DocId =
     String
 
 
@@ -23,7 +17,7 @@ type alias DeviceId =
 
 type alias Document record =
     { record
-        | id : Id
+        | id : DocId
         , rev : Revision
         , deleted : Bool
         , createdAt : Time

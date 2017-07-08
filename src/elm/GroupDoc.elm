@@ -1,7 +1,8 @@
 module GroupDoc exposing (..)
 
 import Document
-import Document.Types exposing (Id)
+import Document.Types exposing (DocId)
+import GroupDoc.Types exposing (..)
 import X.Predicate
 import X.Record
 import Firebase exposing (DeviceId)
@@ -15,30 +16,12 @@ import Json.Encode as E
 import Random.Pcg
 
 
-type alias Name =
-    String
-
-
-type alias Archived =
-    Bool
-
-
-type alias Record =
-    { name : Name
-    , archived : Bool
-    }
-
-
 archived =
     X.Record.bool .archived (\s b -> { b | archived = s })
 
 
-type alias Model =
-    Document.Document Record
-
-
 constructor :
-    Id
+    DocId
     -> Document.Revision
     -> Time
     -> Time

@@ -1,21 +1,18 @@
 module Project exposing (..)
 
 import Document exposing (Document, Revision)
+import Document.Types exposing (DocId)
 import Firebase exposing (DeviceId)
 import GroupDoc
+import GroupDoc.Types exposing (..)
 import X.Function exposing (..)
 import Random.Pcg as Random exposing (..)
 import Json.Encode as E
 import Time exposing (Time)
-import Types
-
-
-type alias Name =
-    GroupDoc.Name
 
 
 type alias Model =
-    GroupDoc.Model
+    GroupDoc.Types.Model
 
 
 type alias Store =
@@ -31,12 +28,12 @@ storeGenerator =
     GroupDoc.storeGenerator "project-db"
 
 
-getName : Model -> GroupDoc.Name
+getName : Model -> Name
 getName =
     (.name)
 
 
-setName : GroupDoc.Name -> ModelF
+setName : Name -> ModelF
 setName name model =
     { model | name = name }
 
@@ -45,7 +42,7 @@ constructor =
     GroupDoc.constructor
 
 
-init : GroupDoc.Name -> Time -> DeviceId -> Types.DocId -> Model
+init : Name -> Time -> DeviceId -> DocId -> Model
 init name now deviceId id =
     constructor id "" now now False deviceId name False
 

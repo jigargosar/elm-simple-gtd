@@ -10,6 +10,7 @@ import Document
 import Entity exposing (Entity)
 import Entity.Types
 import GroupDoc
+import GroupDoc.Types
 import Msg
 import Model
 import Msg exposing (..)
@@ -56,7 +57,7 @@ type alias DocumentWithNameViewModel =
 
 
 type alias GroupDoc =
-    GroupDoc.Model
+    GroupDoc.Types.Model
 
 
 type alias Config =

@@ -20,7 +20,7 @@ port module Store
 
 import Dict exposing (Dict)
 import Document exposing (Document)
-import Document.Types exposing (Id)
+import Document.Types exposing (DocId)
 import X.Debug
 import X.Random as Random
 import X.Record as Record exposing (get, over, overT2)
@@ -68,7 +68,7 @@ decodeList decoder =
 
 type alias Store x =
     { seed : Seed
-    , dict : Dict Id (Document x)
+    , dict : Dict DocId (Document x)
     , otherFieldsEncoder : Document x -> List ( String, E.Value )
     , decoder : Decoder (Document x)
     , name : String
@@ -145,7 +145,7 @@ type alias UpdateAllReturnF x =
 
 
 updateAll :
-    Set Id
+    Set DocId
     -> Time
     -> (Document x -> Document x)
     -> Store x
@@ -234,7 +234,7 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-insert : (DeviceId -> Id -> Document x) -> Store x -> ( Document x, Store x )
+insert : (DeviceId -> DocId -> Document x) -> Store x -> ( Document x, Store x )
 insert constructor store =
     Random.mapWithIdGenerator (constructor store.deviceId)
         |> (generate # store)
@@ -265,7 +265,7 @@ findBy predicate =
     get dict >> Dict.values >> List.find predicate
 
 
-findById : Id -> Store x -> Maybe (Document x)
+findById : DocId -> Store x -> Maybe (Document x)
 findById id =
     get dict >> Dict.get id
 

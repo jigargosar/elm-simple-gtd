@@ -6,6 +6,7 @@ import Context
 import Document
 import Entity exposing (Entity)
 import Entity.Types
+import GroupDoc.Types
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Html
@@ -47,7 +48,7 @@ type alias ViewModel =
 
 
 type alias GroupDoc =
-    GroupDoc.Model
+    GroupDoc.Types.Model
 
 
 type alias Config =

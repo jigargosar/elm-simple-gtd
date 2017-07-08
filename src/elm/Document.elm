@@ -23,7 +23,7 @@ equalById doc1 doc2 =
 
 
 type alias Id =
-    Document.Types.Id
+    Document.Types.DocId
 
 
 type alias Revision =

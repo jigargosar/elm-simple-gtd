@@ -3,23 +3,10 @@ module LaunchBar exposing (..)
 import Context
 import Fuzzy
 import LaunchBar.Form
-import LaunchBar.Types exposing (LaunchBarForm)
+import LaunchBar.Types exposing (LBEntity(..), LaunchBarForm)
 import Toolkit.Operators exposing (..)
 import Project
 import String.Extra
-
-
-type LBEntity
-    = LBContext Context.Model
-    | LBProject Project.Model
-    | LBProjects
-    | LBContexts
-
-
-type Msg
-    = OnLBEnter LBEntity
-    | OnLBInputChanged LaunchBarForm String
-    | OnLBOpen
 
 
 getName entity =

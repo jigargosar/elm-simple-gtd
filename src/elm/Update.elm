@@ -11,6 +11,7 @@ import Entity
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
+import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Msg exposing (..)
 import Toolkit.Helpers exposing (apply2)
@@ -321,7 +322,7 @@ onGlobalKeyUp key =
                                 andThenUpdate OnNewTodoForInbox
 
                             Key.Slash ->
-                                LaunchBar.OnLBOpen |> OnLaunchBarMsg |> andThenUpdate
+                                OnLBOpen |> OnLaunchBarMsg |> andThenUpdate
 
                             _ ->
                                 identity

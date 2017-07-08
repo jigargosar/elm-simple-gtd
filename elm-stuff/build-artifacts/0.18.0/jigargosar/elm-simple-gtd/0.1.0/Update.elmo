@@ -397,7 +397,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox);
 							case 'Slash':
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(
-									_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar$Open));
+									_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBOpen));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}

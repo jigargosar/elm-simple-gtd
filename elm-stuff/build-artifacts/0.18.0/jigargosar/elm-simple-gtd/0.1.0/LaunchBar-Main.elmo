@@ -3,18 +3,18 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 	function (andThenUpdate, now, msg) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
-			case 'OnEnter':
+			case 'OnLBEnter':
 				return function (_p1) {
 					return function () {
 						var _p2 = _p0._0;
 						switch (_p2.ctor) {
-							case 'Project':
+							case 'LBProject':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
 									_jigargosar$elm_simple_gtd$Model$switchToProjectView(_p2._0));
-							case 'Projects':
+							case 'LBProjects':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
 									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
-							case 'Context':
+							case 'LBContext':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
 									_jigargosar$elm_simple_gtd$Model$switchToContextView(_p2._0));
 							default:
@@ -24,7 +24,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 					}()(
 						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p1));
 				};
-			case 'OnInputChanged':
+			case 'OnLBInputChanged':
 				return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
 					A3(_jigargosar$elm_simple_gtd$Model$updateLaunchBarInput, now, _p0._1, _p0._0));
 			default:

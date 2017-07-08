@@ -2,3 +2,19 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Types$LaunchBarForm = F2(
 	function (a, b) {
 		return {input: a, updatedAt: b};
 	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContexts = {ctor: 'LBContexts'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProjects = {ctor: 'LBProjects'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProject = function (a) {
+	return {ctor: 'LBProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContext = function (a) {
+	return {ctor: 'LBContext', _0: a};
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBOpen = {ctor: 'OnLBOpen'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBInputChanged = F2(
+	function (a, b) {
+		return {ctor: 'OnLBInputChanged', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBEnter = function (a) {
+	return {ctor: 'OnLBEnter', _0: a};
+};

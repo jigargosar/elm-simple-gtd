@@ -18,7 +18,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 			var _p2 = _p1.key;
 			if (_p2.ctor === 'Enter') {
 				return _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(
-					_jigargosar$elm_simple_gtd$LaunchBar$OnEnter(matchingEntity));
+					_jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBEnter(matchingEntity));
 			} else {
 				return _jigargosar$elm_simple_gtd$Model$noop;
 			}
@@ -56,7 +56,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 									_0: _elm_lang$html$Html_Events$onInput(
 										function (_p3) {
 											return _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(
-												A2(_jigargosar$elm_simple_gtd$LaunchBar$OnInputChanged, form, _p3));
+												A2(_jigargosar$elm_simple_gtd$LaunchBar_Types$OnLBInputChanged, form, _p3));
 										}),
 									_1: {ctor: '[]'}
 								}

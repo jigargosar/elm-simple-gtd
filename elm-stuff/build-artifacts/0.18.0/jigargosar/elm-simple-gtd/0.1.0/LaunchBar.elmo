@@ -1,11 +1,12 @@
+var _jigargosar$elm_simple_gtd$LaunchBar$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$LaunchBar$getName = function (entity) {
 	var _p0 = entity;
 	switch (_p0.ctor) {
-		case 'Project':
+		case 'LBProject':
 			return _jigargosar$elm_simple_gtd$Project$getName(_p0._0);
-		case 'Context':
+		case 'LBContext':
 			return _jigargosar$elm_simple_gtd$Context$getName(_p0._0);
-		case 'Projects':
+		case 'LBProjects':
 			return 'Projects';
 		default:
 			return 'Contexts';
@@ -36,7 +37,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$fuzzyMatch = F2(
 			if (((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._1.ctor === '[]')) {
 				switch (_p2._0._0.valueOf()) {
 					case '#':
-						if (_p2._1.ctor === 'Projects') {
+						if (_p2._1.ctor === 'LBProjects') {
 							return {
 								ctor: '_Tuple2',
 								_0: entity,
@@ -46,7 +47,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$fuzzyMatch = F2(
 							break _v1_2;
 						}
 					case '@':
-						if (_p2._1.ctor === 'Contexts') {
+						if (_p2._1.ctor === 'LBContexts') {
 							return {
 								ctor: '_Tuple2',
 								_0: entity,
@@ -68,18 +69,10 @@ var _jigargosar$elm_simple_gtd$LaunchBar$fuzzyMatch = F2(
 			_1: A2(match, boiledNeedle, boiledHay)
 		};
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar$Contexts = {ctor: 'Contexts'};
-var _jigargosar$elm_simple_gtd$LaunchBar$Projects = {ctor: 'Projects'};
-var _jigargosar$elm_simple_gtd$LaunchBar$Project = function (a) {
-	return {ctor: 'Project', _0: a};
-};
-var _jigargosar$elm_simple_gtd$LaunchBar$Context = function (a) {
-	return {ctor: 'Context', _0: a};
-};
 var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 	function (needle, activeContexts, activeProjects) {
-		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar$Project);
-		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar$Context);
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProject);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContext);
 		var all = A2(
 			_elm_lang$core$Basics_ops['++'],
 			projects,
@@ -88,10 +81,10 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 				contexts,
 				{
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$LaunchBar$Projects,
+					_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProjects,
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$LaunchBar$Contexts,
+						_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContexts,
 						_1: {ctor: '[]'}
 					}
 				}));
@@ -106,7 +99,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 								_elm_lang$core$Basics_ops['++'],
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar$Projects,
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProjects,
 									_1: {ctor: '[]'}
 								},
 								projects);
@@ -115,7 +108,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 								_elm_lang$core$Basics_ops['++'],
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar$Contexts,
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContexts,
 									_1: {ctor: '[]'}
 								},
 								contexts);
@@ -141,12 +134,3 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 				entityList,
 				_jigargosar$elm_simple_gtd$LaunchBar$fuzzyMatch(needle)));
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar$Context(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$LaunchBar$Open = {ctor: 'Open'};
-var _jigargosar$elm_simple_gtd$LaunchBar$OnInputChanged = F2(
-	function (a, b) {
-		return {ctor: 'OnInputChanged', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$LaunchBar$OnEnter = function (a) {
-	return {ctor: 'OnEnter', _0: a};
-};

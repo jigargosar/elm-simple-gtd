@@ -4,6 +4,7 @@ import DomPorts exposing (autoFocusInputCmd)
 import Entity
 import Entity.Types
 import LaunchBar
+import LaunchBar.Types exposing (LBEntity(..), LBMsg(..))
 import Model
 import Msg
 import Return
@@ -23,27 +24,27 @@ map =
 update :
     (Msg.Msg -> Model.ReturnF)
     -> Time.Time
-    -> LaunchBar.Msg
+    -> LBMsg
     -> Model.ReturnF
 update andThenUpdate now msg =
     case msg of
-        LaunchBar.OnLBEnter entity ->
+        OnLBEnter entity ->
             andThenUpdate Msg.OnDeactivateEditingMode
                 >> case entity of
-                    LaunchBar.LBProject project ->
+                    LBProject project ->
                         map (Model.switchToProjectView project)
 
-                    LaunchBar.LBProjects ->
+                    LBProjects ->
                         map (Model.setEntityListViewType Entity.Types.ProjectsView)
 
-                    LaunchBar.LBContext context ->
+                    LBContext context ->
                         map (Model.switchToContextView context)
 
-                    LaunchBar.LBContexts ->
+                    LBContexts ->
                         map (Model.setEntityListViewType Entity.Types.ContextsView)
 
-        LaunchBar.OnLBInputChanged form text ->
+        OnLBInputChanged form text ->
             map (Model.updateLaunchBarInput now text form)
 
-        LaunchBar.OnLBOpen ->
+        OnLBOpen ->
             map (Model.activateLaunchBar now) >> DomPorts.autoFocusInputCmd

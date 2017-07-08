@@ -5,11 +5,11 @@ import CommonMsg.Types
 import Entity.Types exposing (EntityListViewType, EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase.Types exposing (FirebaseMsg)
+import LaunchBar.Types exposing (LBMsg)
 
 
 --safe
 
-import LaunchBar
 import Material
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
@@ -70,8 +70,8 @@ type Msg
     | OnEntityListKeyDown (List EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityType Entity.Types.Msg
-    | OnLaunchBarMsg LaunchBar.Msg
-    | OnLaunchBarMsgWithNow LaunchBar.Msg Time
+    | OnLaunchBarMsg LBMsg
+    | OnLaunchBarMsgWithNow LBMsg Time
     | OnTodoMsg Todo.Msg.Msg
     | OnTodoMsgWithTime Todo.Msg.Msg Time
     | OnFirebaseMsg FirebaseMsg

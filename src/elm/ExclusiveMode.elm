@@ -29,14 +29,12 @@ type ExclusiveMode
     | EditTodo Todo.Form.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
-      -- overlay
     | TodoMoreMenu Todo.Menu.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.GroupForm.Model
     | EditTodoProject Todo.GroupForm.Model
     | LaunchBar LaunchBar.Form.Model
     | MainMenu Menu.State
-      -- different page !!
     | EditSyncSettings SyncForm
     | SignInOverlay
     | Setup Todo.NewForm.Model

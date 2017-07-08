@@ -7,8 +7,7 @@ import LaunchBar.Form
 
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import Menu.Types exposing (MenuState)
-import Todo.Form
-import Todo.FormTypes exposing (TodoEditForm)
+import Todo.FormTypes exposing (TodoEditForm, TodoGroupFrom)
 import Todo.GroupForm
 import Todo.Menu
 import Todo.NewForm
@@ -26,8 +25,8 @@ type ExclusiveMode
     | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu Todo.Menu.Model
     | XMEditTodoReminder Todo.ReminderForm.Model
-    | XMEditTodoContext Todo.GroupForm.Model
-    | XMEditTodoProject Todo.GroupForm.Model
+    | XMEditTodoContext TodoGroupFrom
+    | XMEditTodoProject TodoGroupFrom
     | XMLaunchBar LaunchBar.Form.Model
     | XMMainMenu MenuState
     | XMEditSyncSettings SyncForm

@@ -8,15 +8,6 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 
 
-type alias Model =
-    { todo : TodoDoc
-    , todoId : DocId
-    , contextId : DocId
-    , projectId : DocId
-    , menuState : MenuState
-    }
-
-
 init todo =
     { todo = todo
     , todoId = getDocId todo

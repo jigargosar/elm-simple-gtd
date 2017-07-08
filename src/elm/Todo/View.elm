@@ -12,7 +12,7 @@ import Material.Icon
 import Material.Options
 import Msg exposing (Msg)
 import Store
-import Todo.FormTypes exposing (TodoEditForm)
+import Todo.FormTypes exposing (TodoAction(SetText), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
@@ -375,7 +375,7 @@ edit form appModel =
             form.todoText
 
         fireTextChanged =
-            Todo.Form.SetText >> Msg.OnUpdateTodoForm form
+            SetText >> Msg.OnUpdateTodoForm form
 
         fireToggleDelete =
             Msg.OnEntityMsg form.entity Entity.Types.OnToggleDeleted

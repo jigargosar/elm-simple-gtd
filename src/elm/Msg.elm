@@ -15,8 +15,6 @@ import LaunchBar
 import Material
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
-import Todo
-import Todo.Form
 import Todo.FormTypes exposing (AddTodoForm, TodoAction, TodoEditForm, TodoGroupFrom)
 import Todo.GroupForm
 import Todo.Msg

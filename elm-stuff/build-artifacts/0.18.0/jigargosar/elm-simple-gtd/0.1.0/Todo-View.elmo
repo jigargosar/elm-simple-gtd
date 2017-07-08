@@ -173,7 +173,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 			return A2(
 				_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 				form,
-				_jigargosar$elm_simple_gtd$Todo_Form$SetText(_p4));
+				_jigargosar$elm_simple_gtd$Todo_FormTypes$SetText(_p4));
 		};
 		var todoText = form.todoText;
 		return A2(

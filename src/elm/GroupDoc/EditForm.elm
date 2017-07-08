@@ -12,7 +12,7 @@ type alias NameLabel =
 
 
 type alias Model =
-    { id : Types.DocId
+    { id : Types.DocId__
     , name : GroupDoc.Types.Name
     , entity : Entity.Entity
     , isArchived : Bool

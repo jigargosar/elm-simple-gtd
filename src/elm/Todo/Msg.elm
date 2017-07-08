@@ -8,17 +8,17 @@ import Types
 
 
 type Msg
-    = ToggleRunning Types.DocId
-    | SwitchOrStartRunning Types.DocId
+    = ToggleRunning Types.DocId__
+    | SwitchOrStartRunning Types.DocId__
     | StopRunning
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | ShowReminderOverlayForTodoId Types.DocId
+    | ShowReminderOverlayForTodoId Types.DocId__
     | GotoRunning
     | UpdateTimeTracker
     | UpdateSetupFormTodoText Todo.NewForm.Model String
     | Upsert Todo.Model
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
-    | OnShowMoreMenu Types.DocId
+    | OnShowMoreMenu Types.DocId__
     | OnProcessPendingNotificationCronTick
-    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Types.DocId Todo.UpdateAction
+    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Types.DocId__ Todo.UpdateAction

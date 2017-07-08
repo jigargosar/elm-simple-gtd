@@ -1,0 +1,7 @@
+var _jigargosar$elm_simple_gtd$CommonMsg_Types$LogString = function (a) {
+	return {ctor: 'LogString', _0: a};
+};
+var _jigargosar$elm_simple_gtd$CommonMsg_Types$Focus = function (a) {
+	return {ctor: 'Focus', _0: a};
+};
+var _jigargosar$elm_simple_gtd$CommonMsg_Types$NoOp = {ctor: 'NoOp'};

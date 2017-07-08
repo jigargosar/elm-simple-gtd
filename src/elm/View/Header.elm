@@ -2,6 +2,7 @@ module View.Header exposing (..)
 
 import AppColors
 import AppDrawer.Model
+import AppDrawer.Types
 import AppUrl
 import Color
 import Mat
@@ -54,7 +55,7 @@ headerWithContent content m =
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                , Mat.onClickStopPropagation (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                 ]
                 [ Mat.icon "menu" ]
     in

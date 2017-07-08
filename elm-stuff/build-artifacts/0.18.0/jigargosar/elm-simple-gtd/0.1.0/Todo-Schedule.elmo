@@ -1,10 +1,36 @@
+var _jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill = F2(
+	function (snoozedTillTime, model) {
+		var _p0 = model;
+		switch (_p0.ctor) {
+			case 'NoReminder':
+				return A2(_jigargosar$elm_simple_gtd$Todo_Types$WithReminder, _p0._0, snoozedTillTime);
+			case 'WithReminder':
+				return A2(_jigargosar$elm_simple_gtd$Todo_Types$WithReminder, _p0._0, snoozedTillTime);
+			default:
+				return model;
+		}
+	});
+var _jigargosar$elm_simple_gtd$Todo_Schedule$autoSnooze = function (now) {
+	return _jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill(now + (_elm_lang$core$Time$minute * 15));
+};
+var _jigargosar$elm_simple_gtd$Todo_Schedule$turnReminderOff = function (model) {
+	var _p1 = model;
+	switch (_p1.ctor) {
+		case 'WithReminder':
+			return _jigargosar$elm_simple_gtd$Todo_Types$NoReminder(_p1._0);
+		case 'NoReminder':
+			return model;
+		default:
+			return model;
+	}
+};
 var _jigargosar$elm_simple_gtd$Todo_Schedule$getMaybeReminderTime = function (model) {
-	var _p0 = model;
-	switch (_p0.ctor) {
+	var _p2 = model;
+	switch (_p2.ctor) {
 		case 'NoReminder':
 			return _elm_lang$core$Maybe$Nothing;
 		case 'WithReminder':
-			return _elm_lang$core$Maybe$Just(_p0._1);
+			return _elm_lang$core$Maybe$Just(_p2._1);
 		default:
 			return _elm_lang$core$Maybe$Nothing;
 	}
@@ -16,59 +42,26 @@ var _jigargosar$elm_simple_gtd$Todo_Schedule$hasReminderChanged = F2(
 			_jigargosar$elm_simple_gtd$Todo_Schedule$getMaybeReminderTime($new));
 	});
 var _jigargosar$elm_simple_gtd$Todo_Schedule$getMaybeDueAt = function (model) {
-	var _p1 = model;
-	switch (_p1.ctor) {
+	var _p3 = model;
+	switch (_p3.ctor) {
 		case 'NoReminder':
-			return _elm_lang$core$Maybe$Just(_p1._0);
+			return _elm_lang$core$Maybe$Just(_p3._0);
 		case 'WithReminder':
-			return _elm_lang$core$Maybe$Just(_p1._0);
+			return _elm_lang$core$Maybe$Just(_p3._0);
 		default:
 			return _elm_lang$core$Maybe$Nothing;
 	}
 };
-var _jigargosar$elm_simple_gtd$Todo_Schedule$encode = function (model) {
-	var encodeDueAt = function (dueAt) {
-		return A2(
-			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-			'dueAt',
-			_elm_lang$core$Json_Encode$float(dueAt));
-	};
-	var fields = function () {
-		var _p2 = model;
-		switch (_p2.ctor) {
-			case 'NoReminder':
-				return {
-					ctor: '::',
-					_0: encodeDueAt(_p2._0),
-					_1: {ctor: '[]'}
-				};
-			case 'WithReminder':
-				return {
-					ctor: '::',
-					_0: encodeDueAt(_p2._0),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-							'reminderAt',
-							_elm_lang$core$Json_Encode$float(_p2._1)),
-						_1: {ctor: '[]'}
-					}
-				};
-			default:
-				return {ctor: '[]'};
-		}
-	}();
-	return _elm_lang$core$Json_Encode$object(fields);
+var _jigargosar$elm_simple_gtd$Todo_Schedule$unscheduled = _jigargosar$elm_simple_gtd$Todo_Types$Unscheduled;
+var _jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAt = function (dueAt) {
+	return _jigargosar$elm_simple_gtd$Todo_Types$NoReminder(dueAt);
 };
-var _jigargosar$elm_simple_gtd$Todo_Schedule$Unscheduled = {ctor: 'Unscheduled'};
-var _jigargosar$elm_simple_gtd$Todo_Schedule$unscheduled = _jigargosar$elm_simple_gtd$Todo_Schedule$Unscheduled;
-var _jigargosar$elm_simple_gtd$Todo_Schedule$WithReminder = F2(
-	function (a, b) {
-		return {ctor: 'WithReminder', _0: a, _1: b};
+var _jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAtAndReminder = F2(
+	function (dueAt, reminder) {
+		return A2(_jigargosar$elm_simple_gtd$Todo_Types$WithReminder, dueAt, reminder);
 	});
 var _jigargosar$elm_simple_gtd$Todo_Schedule$initWithReminder = function (time) {
-	return A2(_jigargosar$elm_simple_gtd$Todo_Schedule$WithReminder, time, time);
+	return A2(_jigargosar$elm_simple_gtd$Todo_Types$WithReminder, time, time);
 };
 var _jigargosar$elm_simple_gtd$Todo_Schedule$fromMaybeTime = function (maybeTime) {
 	return A2(
@@ -76,31 +69,42 @@ var _jigargosar$elm_simple_gtd$Todo_Schedule$fromMaybeTime = function (maybeTime
 		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeTime, _jigargosar$elm_simple_gtd$Todo_Schedule$initWithReminder),
 		_jigargosar$elm_simple_gtd$Todo_Schedule$unscheduled);
 };
-var _jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAtAndReminder = F2(
-	function (dueAt, reminder) {
-		return A2(_jigargosar$elm_simple_gtd$Todo_Schedule$WithReminder, dueAt, reminder);
-	});
-var _jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill = F2(
-	function (snoozedTillTime, model) {
-		var _p3 = model;
-		switch (_p3.ctor) {
-			case 'NoReminder':
-				return A2(_jigargosar$elm_simple_gtd$Todo_Schedule$WithReminder, _p3._0, snoozedTillTime);
-			case 'WithReminder':
-				return A2(_jigargosar$elm_simple_gtd$Todo_Schedule$WithReminder, _p3._0, snoozedTillTime);
-			default:
-				return model;
-		}
-	});
-var _jigargosar$elm_simple_gtd$Todo_Schedule$autoSnooze = function (now) {
-	return _jigargosar$elm_simple_gtd$Todo_Schedule$snoozeTill(now + (_elm_lang$core$Time$minute * 15));
-};
-var _jigargosar$elm_simple_gtd$Todo_Schedule$NoReminder = function (a) {
-	return {ctor: 'NoReminder', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAt = function (dueAt) {
-	return _jigargosar$elm_simple_gtd$Todo_Schedule$NoReminder(dueAt);
-};
+var _jigargosar$elm_simple_gtd$Todo_Schedule$decodeV1 = function () {
+	var decodeWithDueAt = function (dueAt) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (reminder) {
+						return _elm_lang$core$Json_Decode$succeed(
+							A2(_jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAtAndReminder, dueAt, reminder));
+					},
+					A2(
+						_elm_lang$core$Json_Decode$at,
+						{
+							ctor: '::',
+							_0: 'reminder',
+							_1: {
+								ctor: '::',
+								_0: 'at',
+								_1: {ctor: '[]'}
+							}
+						},
+						_elm_lang$core$Json_Decode$float)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Json_Decode$succeed(
+						_jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAt(dueAt)),
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		decodeWithDueAt,
+		A2(_elm_lang$core$Json_Decode$field, 'dueAt', _elm_lang$core$Json_Decode$float));
+}();
 var _jigargosar$elm_simple_gtd$Todo_Schedule$decodeV2 = function () {
 	var decodeWithDueAt = function (dueAt) {
 		return _elm_lang$core$Json_Decode$oneOf(
@@ -148,42 +152,41 @@ var _jigargosar$elm_simple_gtd$Todo_Schedule$decodeV2 = function () {
 			},
 			_elm_lang$core$Json_Decode$float));
 }();
-var _jigargosar$elm_simple_gtd$Todo_Schedule$decodeV1 = function () {
-	var decodeWithDueAt = function (dueAt) {
-		return _elm_lang$core$Json_Decode$oneOf(
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$core$Json_Decode$andThen,
-					function (reminder) {
-						return _elm_lang$core$Json_Decode$succeed(
-							A2(_jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAtAndReminder, dueAt, reminder));
-					},
-					A2(
-						_elm_lang$core$Json_Decode$at,
-						{
-							ctor: '::',
-							_0: 'reminder',
-							_1: {
-								ctor: '::',
-								_0: 'at',
-								_1: {ctor: '[]'}
-							}
-						},
-						_elm_lang$core$Json_Decode$float)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$core$Json_Decode$succeed(
-						_jigargosar$elm_simple_gtd$Todo_Schedule$initWithDueAt(dueAt)),
-					_1: {ctor: '[]'}
-				}
-			});
+var _jigargosar$elm_simple_gtd$Todo_Schedule$encode = function (model) {
+	var encodeDueAt = function (dueAt) {
+		return A2(
+			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+			'dueAt',
+			_elm_lang$core$Json_Encode$float(dueAt));
 	};
-	return A2(
-		_elm_lang$core$Json_Decode$andThen,
-		decodeWithDueAt,
-		A2(_elm_lang$core$Json_Decode$field, 'dueAt', _elm_lang$core$Json_Decode$float));
-}();
+	var fields = function () {
+		var _p4 = model;
+		switch (_p4.ctor) {
+			case 'NoReminder':
+				return {
+					ctor: '::',
+					_0: encodeDueAt(_p4._0),
+					_1: {ctor: '[]'}
+				};
+			case 'WithReminder':
+				return {
+					ctor: '::',
+					_0: encodeDueAt(_p4._0),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
+							'reminderAt',
+							_elm_lang$core$Json_Encode$float(_p4._1)),
+						_1: {ctor: '[]'}
+					}
+				};
+			default:
+				return {ctor: '[]'};
+		}
+	}();
+	return _elm_lang$core$Json_Encode$object(fields);
+};
 var _jigargosar$elm_simple_gtd$Todo_Schedule$decode = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
@@ -198,14 +201,3 @@ var _jigargosar$elm_simple_gtd$Todo_Schedule$decode = _elm_lang$core$Json_Decode
 			}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Todo_Schedule$turnReminderOff = function (model) {
-	var _p4 = model;
-	switch (_p4.ctor) {
-		case 'WithReminder':
-			return _jigargosar$elm_simple_gtd$Todo_Schedule$NoReminder(_p4._0);
-		case 'NoReminder':
-			return model;
-		default:
-			return model;
-	}
-};

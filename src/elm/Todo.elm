@@ -28,8 +28,8 @@ type alias Record =
     { done : Bool
     , text : Text
     , schedule : Todo.Schedule.Model
-    , projectId : Types.DocId
-    , contextId : Types.DocId
+    , projectId : Types.DocId__
+    , contextId : Types.DocId__
     }
 
 
@@ -48,10 +48,10 @@ type alias Encoded =
 type UpdateAction
     = MarkDone
     | SetText Text
-    | SetContextId Types.DocId
+    | SetContextId Types.DocId__
     | SetScheduleFromMaybeTime (Maybe Time)
     | SetContext Context.Model
-    | SetProjectId Types.DocId
+    | SetProjectId Types.DocId__
     | CopyProjectAndContextId Model
     | SetProject Project.Model
     | ToggleDone
@@ -324,7 +324,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : Types.DocId -> Model -> Bool
+hasProjectId : Types.DocId__ -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

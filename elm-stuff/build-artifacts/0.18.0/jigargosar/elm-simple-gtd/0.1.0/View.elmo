@@ -84,7 +84,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Events$onClick(
-								_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+								_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleOverlay)),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -198,7 +198,7 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onClick(
-									_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+									_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleOverlay)),
 								_1: {ctor: '[]'}
 							}
 						},

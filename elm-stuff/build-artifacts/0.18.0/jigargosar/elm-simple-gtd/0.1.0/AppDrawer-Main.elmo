@@ -7,7 +7,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Main$subscriptions = function (model) {
 				ctor: '::',
 				_0: _elm_lang$window$Window$resizes(
 					function (_p0) {
-						return _jigargosar$elm_simple_gtd$AppDrawer_Model$OnWindowResizeTurnOverlayOff;
+						return _jigargosar$elm_simple_gtd$AppDrawer_Types$OnWindowResizeTurnOverlayOff;
 					}),
 				_1: {ctor: '[]'}
 			}));

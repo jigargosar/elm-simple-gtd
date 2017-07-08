@@ -70,7 +70,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerWithContent = F2(
 						_1: {
 							ctor: '::',
 							_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
-								_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleOverlay)),
+								_jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleOverlay)),
 							_1: {ctor: '[]'}
 						}
 					}

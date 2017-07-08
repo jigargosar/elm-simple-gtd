@@ -145,7 +145,3 @@ var _jigargosar$elm_simple_gtd$GroupDoc$archived = A2(
 				{archived: s});
 		}));
 var _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$GroupDoc$archived);
-var _jigargosar$elm_simple_gtd$GroupDoc$Record = F2(
-	function (a, b) {
-		return {name: a, archived: b};
-	});

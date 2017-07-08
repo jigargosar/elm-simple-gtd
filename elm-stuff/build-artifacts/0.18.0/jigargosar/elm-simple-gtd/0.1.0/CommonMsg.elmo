@@ -1,42 +1,35 @@
-var _jigargosar$elm_simple_gtd$CommonMsg$Helper = F3(
-	function (a, b, c) {
-		return {noOp: a, focus: b, logString: c};
-	});
-var _jigargosar$elm_simple_gtd$CommonMsg$LogString = function (a) {
-	return {ctor: 'LogString', _0: a};
+var _jigargosar$elm_simple_gtd$CommonMsg$createHelper = function (tagger) {
+	return {
+		noOp: tagger(_jigargosar$elm_simple_gtd$CommonMsg_Types$NoOp),
+		focus: function (_p0) {
+			return tagger(
+				_jigargosar$elm_simple_gtd$CommonMsg_Types$Focus(_p0));
+		},
+		logString: function (_p1) {
+			return tagger(
+				_jigargosar$elm_simple_gtd$CommonMsg_Types$LogString(_p1));
+		}
+	};
 };
-var _jigargosar$elm_simple_gtd$CommonMsg$Focus = function (a) {
-	return {ctor: 'Focus', _0: a};
-};
-var _jigargosar$elm_simple_gtd$CommonMsg$NoOp = {ctor: 'NoOp'};
 var _jigargosar$elm_simple_gtd$CommonMsg$update = function (msg) {
 	update:
 	while (true) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
 			case 'NoOp':
 				return _Fresheyeball$elm_return$Return$command(_elm_lang$core$Platform_Cmd$none);
 			case 'Focus':
 				return _Fresheyeball$elm_return$Return$command(
-					_jigargosar$elm_simple_gtd$DomPorts$focusSelector(_p0._0));
+					_jigargosar$elm_simple_gtd$DomPorts$focusSelector(_p2._0));
 			default:
-				var _p1 = A2(_jigargosar$elm_simple_gtd$X_Debug$log, 'CM:LogString', _p0._0);
-				var _v1 = _jigargosar$elm_simple_gtd$CommonMsg$NoOp;
+				var _p3 = A2(_jigargosar$elm_simple_gtd$X_Debug$log, 'CM:LogString', _p2._0);
+				var _v1 = _jigargosar$elm_simple_gtd$CommonMsg_Types$NoOp;
 				msg = _v1;
 				continue update;
 		}
 	}
 };
-var _jigargosar$elm_simple_gtd$CommonMsg$createHelper = function (tagger) {
-	return {
-		noOp: tagger(_jigargosar$elm_simple_gtd$CommonMsg$NoOp),
-		focus: function (_p2) {
-			return tagger(
-				_jigargosar$elm_simple_gtd$CommonMsg$Focus(_p2));
-		},
-		logString: function (_p3) {
-			return tagger(
-				_jigargosar$elm_simple_gtd$CommonMsg$LogString(_p3));
-		}
-	};
-};
+var _jigargosar$elm_simple_gtd$CommonMsg$Helper = F3(
+	function (a, b, c) {
+		return {noOp: a, focus: b, logString: c};
+	});

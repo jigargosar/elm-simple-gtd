@@ -8,9 +8,9 @@ import Types
 
 type alias Model =
     { todo : Todo.Model
-    , todoId : Types.DocId
-    , contextId : Types.DocId
-    , projectId : Types.DocId
+    , todoId : Types.DocId__
+    , contextId : Types.DocId__
+    , projectId : Types.DocId__
     , menuState : Menu.State
     }
 

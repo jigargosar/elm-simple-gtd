@@ -1,12 +1,27 @@
 module Todo.Types exposing (..)
 
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+import Document.Types exposing (DocId)
+import Time exposing (Time)
 
 
-_ =
-    1
+type alias Text =
+    String
+
+
+type alias Record =
+    { done : Bool
+    , text : Text
+    , schedule : Schedule
+    , projectId : DocId
+    , contextId : DocId
+    }
+
+
+type alias Model =
+    Document.Types.Document Record
+
+
+type Schedule
+    = NoReminder Time
+    | WithReminder Time Time
+    | Unscheduled

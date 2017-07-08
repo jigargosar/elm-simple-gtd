@@ -2,6 +2,7 @@ module AppDrawer.GroupViewModel exposing (..)
 
 import AppColors
 import AppDrawer.Model
+import AppDrawer.Types
 import Color
 import Context
 import Dict
@@ -61,7 +62,7 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Types.DocId
+    { groupByFn : Todo.Model -> Types.DocId__
     , todoList : List Todo.Model
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
@@ -71,7 +72,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Types.DocId -> Entity.Types.ListViewType
+    , getViewType : Types.DocId__ -> Entity.Types.ListViewType
     }
 
 
@@ -179,8 +180,8 @@ contexts model =
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
         , onAddClicked = Msg.OnNewContext
         , icon = { name = "group_work", color = AppColors.contextsColor }
-        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleContextsExpanded
-        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedContexts
+        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
+        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
         , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
         }
 
@@ -227,7 +228,7 @@ projects model =
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
         , onAddClicked = Msg.OnNewProject
         , icon = { name = "group_work", color = AppColors.projectsColor }
-        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleProjectsExpanded
-        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleArchivedProjects
+        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
+        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
         , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
         }

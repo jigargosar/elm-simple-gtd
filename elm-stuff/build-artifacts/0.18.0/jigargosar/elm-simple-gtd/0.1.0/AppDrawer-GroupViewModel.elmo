@@ -75,8 +75,8 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewContext,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$contextsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleContextsExpanded),
-		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedContexts),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleContextsExpanded),
+		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedContexts),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getContextExpanded(model.appDrawerModel)
 	};
 };
@@ -112,8 +112,8 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),
 		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewProject,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$projectsColor},
-		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleProjectsExpanded),
-		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Model$OnToggleArchivedProjects),
+		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleProjectsExpanded),
+		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedProjects),
 		isExpanded: _jigargosar$elm_simple_gtd$AppDrawer_Model$getProjectsExpanded(model.appDrawerModel)
 	};
 };

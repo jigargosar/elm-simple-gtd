@@ -1,8 +1,12 @@
 module Msg exposing (..)
 
-import AppDrawer.Model
-import CommonMsg
+import AppDrawer.Types
+import CommonMsg.Types
 import Entity.Types
+
+
+--safe
+
 import ExclusiveMode
 import Firebase
 import Keyboard.Combo
@@ -43,7 +47,7 @@ type SubMsg
 
 
 type Msg
-    = OnCommonMsg CommonMsg.Msg
+    = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode.ExclusiveMode
     | OnShowMainMenu
@@ -73,19 +77,6 @@ type Msg
     | OnFirebaseMsg Firebase.Msg
     | OnKeyCombo Keyboard.Combo.Msg
     | OnCloseNotification String
-    | OnAppDrawerMsg AppDrawer.Model.Msg
+    | OnAppDrawerMsg AppDrawer.Types.Msg
     | OnPersistLocalPref
     | OnMdl (Material.Msg Msg)
-
-
-commonMsg : CommonMsg.Helper Msg
-commonMsg =
-    CommonMsg.createHelper OnCommonMsg
-
-
-noop =
-    commonMsg.noOp
-
-
-logString =
-    commonMsg.logString

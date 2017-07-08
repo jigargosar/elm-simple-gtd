@@ -14,7 +14,7 @@ type ActiveView
 
 
 type alias TodoDetails =
-    { id : Types.DocId, text : Todo.Text }
+    { id : Types.DocId__, text : Todo.Text }
 
 
 type Model

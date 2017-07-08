@@ -1,25 +1,15 @@
 module Todo.Schedule exposing (..)
 
 import Time exposing (Time)
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
 import Json.Decode as D exposing (Decoder)
-
 import Json.Encode as E
+import Todo.Types exposing (Schedule(..))
 
 
 type alias Model =
     Schedule
-
-
-type Schedule
-    = NoReminder Time
-    | WithReminder Time Time
-    | Unscheduled
 
 
 decode : Decoder Model

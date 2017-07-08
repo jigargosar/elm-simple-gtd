@@ -11,7 +11,7 @@ import Types
 
 
 type alias Model =
-    { id : Types.DocId
+    { id : Types.DocId__
     , date : String
     , time : String
     , menuState : Menu.State

@@ -1,6 +1,7 @@
 module AppDrawer.Main exposing (..)
 
 import AppDrawer.Model exposing (..)
+import AppDrawer.Types exposing (Msg(..))
 import Model
 import Msg
 import Return
@@ -20,7 +21,7 @@ subscriptions model =
 
 update :
     (Msg.Msg -> Model.ReturnF)
-    -> Msg
+    -> AppDrawer.Types.Msg
     -> Model.ReturnF
 update andThenUpdate msg =
     (case msg of

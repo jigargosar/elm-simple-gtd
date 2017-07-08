@@ -1,9 +1,8 @@
 module Entity.Types exposing (..)
 
-import Document.Types
+import Document.Types exposing (DocId)
 import GroupDoc.Types
-import Todo
-import Types
+import Todo.Types
 
 
 type GroupEntity
@@ -13,14 +12,14 @@ type GroupEntity
 
 type Entity
     = Group GroupEntity
-    | Todo Todo.Model
+    | Todo Todo.Types.Model
 
 
 type ListViewType
     = ContextsView
-    | ContextView Types.DocId
+    | ContextView DocId
     | ProjectsView
-    | ProjectView Types.DocId
+    | ProjectView DocId
     | BinView
     | DoneView
     | RecentView

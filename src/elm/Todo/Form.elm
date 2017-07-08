@@ -8,7 +8,7 @@ import Types
 
 
 type alias Model =
-    { id : Types.DocId
+    { id : Types.DocId__
     , todoText : Todo.Text
     , entity : Entity.Entity
     }

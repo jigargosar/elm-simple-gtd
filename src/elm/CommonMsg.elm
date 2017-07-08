@@ -1,14 +1,13 @@
 module CommonMsg exposing (..)
 
+import CommonMsg.Types exposing (Msg(..))
 import DomPorts exposing (DomSelector)
 import Return
 import X.Debug
 
 
-type Msg
-    = NoOp
-    | Focus DomSelector
-    | LogString String
+type alias Msg =
+    CommonMsg.Types.Msg
 
 
 update msg =

@@ -2,6 +2,7 @@ module View exposing (init)
 
 import ActionList.View
 import AppDrawer.Model
+import AppDrawer.Types
 import AppDrawer.View
 import CustomSync
 import Entity.View
@@ -134,7 +135,7 @@ appLayoutView m =
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
                         [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
@@ -159,7 +160,7 @@ appLayoutView m =
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Model.OnToggleOverlay)
+                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Model.noop ]
                         [ div [ id "layout-main-content" ] [ appMainContent m ]

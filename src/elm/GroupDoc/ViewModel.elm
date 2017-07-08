@@ -52,7 +52,7 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Types.DocId
+    { groupByFn : Todo.Model -> Types.DocId__
     , namePrefix : String
     , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
@@ -60,7 +60,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Types.DocId -> Entity.Types.ListViewType
+    , getViewType : Types.DocId__ -> Entity.Types.ListViewType
     , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 

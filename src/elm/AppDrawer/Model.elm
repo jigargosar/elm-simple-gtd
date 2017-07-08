@@ -1,20 +1,12 @@
 module AppDrawer.Model exposing (..)
 
+import AppDrawer.Types
 import X.Record exposing (get, over, set, toggle)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-
-
-type Msg
-    = OnToggleProjectsExpanded
-    | OnToggleContextsExpanded
-    | OnToggleArchivedContexts
-    | OnToggleArchivedProjects
-    | OnToggleOverlay
-    | OnWindowResizeTurnOverlayOff
 
 
 type alias GroupModel =

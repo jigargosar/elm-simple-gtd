@@ -1,0 +1,12 @@
+var _jigargosar$elm_simple_gtd$Todo_Types$Record = F5(
+	function (a, b, c, d, e) {
+		return {done: a, text: b, schedule: c, projectId: d, contextId: e};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Types$Unscheduled = {ctor: 'Unscheduled'};
+var _jigargosar$elm_simple_gtd$Todo_Types$WithReminder = F2(
+	function (a, b) {
+		return {ctor: 'WithReminder', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Types$NoReminder = function (a) {
+	return {ctor: 'NoReminder', _0: a};
+};

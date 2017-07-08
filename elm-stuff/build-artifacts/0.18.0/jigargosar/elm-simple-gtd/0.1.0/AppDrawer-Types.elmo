@@ -1,0 +1,6 @@
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnWindowResizeTurnOverlayOff = {ctor: 'OnWindowResizeTurnOverlayOff'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleOverlay = {ctor: 'OnToggleOverlay'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedProjects = {ctor: 'OnToggleArchivedProjects'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedContexts = {ctor: 'OnToggleArchivedContexts'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleContextsExpanded = {ctor: 'OnToggleContextsExpanded'};
+var _jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleProjectsExpanded = {ctor: 'OnToggleProjectsExpanded'};

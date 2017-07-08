@@ -20,3 +20,23 @@ type alias TodoGroupFrom =
     , projectId : DocId
     , menuState : MenuState
     }
+
+
+type alias TodoMoreMenuForm =
+    { todoId : DocId
+    , menuState : MenuState
+    }
+
+
+type alias AddTodoForm =
+    { text : TodoText
+    , referenceEntity : EntityType
+    }
+
+
+type alias TodoEditReminderForm =
+    { id : DocId
+    , date : String
+    , time : String
+    , menuState : MenuState
+    }

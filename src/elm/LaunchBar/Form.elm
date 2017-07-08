@@ -1,17 +1,12 @@
 module LaunchBar.Form exposing (..)
 
+import LaunchBar.Types exposing (LaunchBarForm)
 import Regex
 import Time exposing (Time)
 
 
-type alias Model =
-    { input : String
-    , updatedAt : Time
-    }
-
-
 type alias ModelF =
-    Model -> Model
+    LaunchBarForm -> LaunchBarForm
 
 
 create now =

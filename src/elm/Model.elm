@@ -6,7 +6,7 @@ import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Entity.Tree
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (EntityListViewType, EntityType)
 import Entity exposing (Entity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
@@ -376,7 +376,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createGrouping : Entity.Types.ListViewType -> Model -> Entity.Tree.Tree
+createGrouping : EntityListViewType -> Model -> Entity.Tree.Tree
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =

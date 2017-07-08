@@ -11,9 +11,5 @@ var _jigargosar$elm_simple_gtd$Todo_NewForm$create = F2(
 	function (referenceEntity, text) {
 		return {text: text, referenceEntity: referenceEntity};
 	});
-var _jigargosar$elm_simple_gtd$Todo_NewForm$Model = F2(
-	function (a, b) {
-		return {text: a, referenceEntity: b};
-	});
 var _jigargosar$elm_simple_gtd$Todo_NewForm$ReferenceTodoId = {ctor: 'ReferenceTodoId'};
 var _jigargosar$elm_simple_gtd$Todo_NewForm$Text = {ctor: 'Text'};

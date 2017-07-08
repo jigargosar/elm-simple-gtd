@@ -5,6 +5,7 @@ import Menu
 import Todo.Menu
 import Model
 import Msg
+import Todo.FormTypes exposing (TodoMoreMenuForm)
 
 
 type alias MenuItem =
@@ -18,7 +19,7 @@ type ItemType
     | Bar
 
 
-moreMenuConfig : Todo.Menu.Model -> Menu.Config String Msg.Msg
+moreMenuConfig : TodoMoreMenuForm -> Menu.Config String Msg.Msg
 moreMenuConfig model =
     { onSelect = (\_ -> Model.noop)
     , isSelected = (\_ -> False)

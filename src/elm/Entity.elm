@@ -2,7 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
-import Entity.Types exposing (EntityType(..), GroupEntityType(..), ListViewType(..))
+import Entity.Types exposing (EntityType(..), GroupEntityType(..), EntityListViewType(..))
 import X.List as List
 import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
@@ -87,7 +87,7 @@ defaultListView =
     ContextsView
 
 
-routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe ListViewType
+routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
 routeUrlBuilderToMaybeListViewType builder =
     case RouteUrl.Builder.path builder of
         "lists" :: "contexts" :: [] ->
@@ -182,7 +182,7 @@ getTodoGotoGroupView todo prevView =
                 ContextsView
 
 
-toViewType : Maybe ListViewType -> Entity -> ListViewType
+toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
 toViewType maybePrevView entity =
     case entity of
         GroupEntity group ->

@@ -10,14 +10,7 @@ import Time.Format
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Todo
-
-
-type alias Model =
-    { id : DocId
-    , date : String
-    , time : String
-    , menuState : MenuState
-    }
+import Todo.FormTypes exposing (TodoEditReminderForm)
 
 
 type Action
@@ -26,7 +19,7 @@ type Action
     | SetMenuState MenuState
 
 
-create : TodoDoc -> Time.Time -> Model
+create : TodoDoc -> Time.Time -> TodoEditReminderForm
 create todo now =
     let
         timeInMilli =
@@ -39,7 +32,7 @@ create todo now =
         }
 
 
-update : Action -> Model -> Model
+update : Action -> TodoEditReminderForm -> TodoEditReminderForm
 update action model =
     case action of
         SetDate value ->
@@ -52,7 +45,7 @@ update action model =
             { model | menuState = value }
 
 
-getMaybeTime : Model -> Maybe Time
+getMaybeTime : TodoEditReminderForm -> Maybe Time
 getMaybeTime { id, date, time } =
     let
         dateTimeString =

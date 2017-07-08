@@ -2,12 +2,12 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types
+import Entity.Types exposing (EntityListViewType)
+import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 
 
 --safe
 
-import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase
 import Keyboard.Combo
 import Keyboard.Extra
@@ -17,7 +17,7 @@ import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Todo
 import Todo.Form
-import Todo.FormTypes exposing (TodoEditForm, TodoGroupFrom)
+import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, TodoGroupFrom)
 import Todo.GroupForm
 import Todo.Msg
 import Todo.NewForm
@@ -37,7 +37,7 @@ import Todo.Types exposing (TodoDoc)
 
 
 type ViewType
-    = EntityListView Entity.Types.ListViewType
+    = EntityListView EntityListViewType
     | SyncView
 
 
@@ -60,7 +60,7 @@ type Msg
     | OnNewTodoForInbox
     | OnNewProject
     | OnNewContext
-    | OnNewTodoTextChanged Todo.NewForm.Model Todo.Text
+    | OnNewTodoTextChanged AddTodoForm Todo.Text
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
     | OnStartEditingContext TodoDoc

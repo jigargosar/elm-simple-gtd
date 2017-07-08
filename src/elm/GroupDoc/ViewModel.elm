@@ -6,7 +6,7 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity exposing (Entity)
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (EntityListViewType, EntityType)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
@@ -61,7 +61,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> Entity.Types.ListViewType
+    , getViewType : DocId -> EntityListViewType
     , getTabIndexAVForEntity : EntityType -> Int
     }
 

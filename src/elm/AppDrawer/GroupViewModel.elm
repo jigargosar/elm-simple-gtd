@@ -10,7 +10,7 @@ import Dict.Extra
 import Document
 import Document.Types exposing (DocId)
 import Entity exposing (Entity)
-import Entity.Types
+import Entity.Types exposing (EntityListViewType)
 import GroupDoc
 import GroupDoc.Types
 import Msg
@@ -34,7 +34,7 @@ type alias ViewModel =
     { nullVMAsList : List DocumentWithNameViewModel
     , entityList : List DocumentWithNameViewModel
     , archivedEntityList : List DocumentWithNameViewModel
-    , viewType : Entity.Types.ListViewType
+    , viewType : EntityListViewType
     , title : String
     , className : String
     , showArchived : Bool
@@ -73,7 +73,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> Entity.Types.ListViewType
+    , getViewType : DocId -> EntityListViewType
     }
 
 

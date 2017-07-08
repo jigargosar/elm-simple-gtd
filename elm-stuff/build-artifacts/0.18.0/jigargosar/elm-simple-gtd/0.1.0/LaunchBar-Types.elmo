@@ -1,0 +1,4 @@
+var _jigargosar$elm_simple_gtd$LaunchBar_Types$LaunchBarForm = F2(
+	function (a, b) {
+		return {input: a, updatedAt: b};
+	});

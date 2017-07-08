@@ -2,7 +2,7 @@ module Entity.View exposing (..)
 
 import Entity exposing (Entity)
 import Entity.Tree
-import Entity.Types
+import Entity.Types exposing (EntityListViewType)
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
@@ -19,7 +19,7 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-list : Entity.Types.ListViewType -> Model.Model -> Html.Html Msg
+list : EntityListViewType -> Model.Model -> Html.Html Msg
 list viewType model =
     let
         grouping =

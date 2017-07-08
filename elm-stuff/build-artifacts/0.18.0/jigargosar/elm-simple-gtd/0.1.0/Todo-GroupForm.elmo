@@ -13,7 +13,3 @@ var _jigargosar$elm_simple_gtd$Todo_GroupForm$init = function (todo) {
 		menuState: _jigargosar$elm_simple_gtd$Menu$initState
 	};
 };
-var _jigargosar$elm_simple_gtd$Todo_GroupForm$Model = F5(
-	function (a, b, c, d, e) {
-		return {todo: a, todoId: b, contextId: c, projectId: d, menuState: e};
-	});

@@ -85,7 +85,7 @@ update andThenUpdate now todoMsg =
         UpdateSetupFormTodoText form todoText ->
             Return.map
                 (Todo.NewForm.setText todoText form
-                    |> ExclusiveMode.Setup
+                    |> ExclusiveMode.XMSetup
                     |> Model.setEditMode
                 )
 
@@ -96,7 +96,7 @@ update andThenUpdate now todoMsg =
         UpdateReminderForm form action ->
             Return.map
                 (Todo.ReminderForm.update action form
-                    |> ExclusiveMode.EditTodoReminder
+                    |> ExclusiveMode.XMEditTodoReminder
                     >> Model.setEditMode
                 )
 

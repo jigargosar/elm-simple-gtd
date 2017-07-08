@@ -43,40 +43,40 @@ overlayViews appModel =
     let
         editModeOverlayView =
             case Model.getEditMode appModel of
-                ExclusiveMode.LaunchBar form ->
+                ExclusiveMode.XMLaunchBar form ->
                     LaunchBar.View.init form appModel
 
-                ExclusiveMode.TodoMoreMenu model ->
+                ExclusiveMode.XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                ExclusiveMode.EditTodoContext form ->
+                ExclusiveMode.XMEditTodoContext form ->
                     Todo.View.contextMenu form appModel
 
-                ExclusiveMode.EditTodoProject form ->
+                ExclusiveMode.XMEditTodoProject form ->
                     Todo.View.projectMenu form appModel
 
-                ExclusiveMode.EditTodoReminder form ->
+                ExclusiveMode.XMEditTodoReminder form ->
                     Todo.View.reminderPopup form
 
-                ExclusiveMode.SignInOverlay ->
+                ExclusiveMode.XMSignInOverlay ->
                     View.GetStarted.signInOverlay
 
-                ExclusiveMode.Setup form ->
+                ExclusiveMode.XMSetup form ->
                     View.GetStarted.setup form
 
-                ExclusiveMode.EditProject form ->
+                ExclusiveMode.XMEditProject form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.EditContext form ->
+                ExclusiveMode.XMEditContext form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.EditTodo form ->
+                ExclusiveMode.XMEditTodo form ->
                     Todo.View.edit form appModel
 
-                ExclusiveMode.NewTodo form ->
+                ExclusiveMode.XMNewTodo form ->
                     Todo.View.new form
 
-                ExclusiveMode.MainMenu menuState ->
+                ExclusiveMode.XMMainMenu menuState ->
                     View.MainMenu.init menuState appModel
 
                 _ ->

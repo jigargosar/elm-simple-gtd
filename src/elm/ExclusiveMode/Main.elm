@@ -14,7 +14,7 @@ import Return
 
 start exclusiveMode =
     case exclusiveMode of
-        ExclusiveMode.NewTodo form ->
+        ExclusiveMode.XMNewTodo form ->
             Return.map (Model.setEditMode exclusiveMode)
                 >> autoFocusInputCmd
 

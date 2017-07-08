@@ -25,52 +25,52 @@ type alias SyncForm =
 
 
 type ExclusiveMode
-    = NewTodo Todo.NewForm.Model
-    | EditTodo Todo.Form.Model
-    | EditContext EditContextForm
-    | EditProject EditProjectForm
-    | TodoMoreMenu Todo.Menu.Model
-    | EditTodoReminder Todo.ReminderForm.Model
-    | EditTodoContext Todo.GroupForm.Model
-    | EditTodoProject Todo.GroupForm.Model
-    | LaunchBar LaunchBar.Form.Model
-    | MainMenu Menu.State
-    | EditSyncSettings SyncForm
-    | SignInOverlay
-    | Setup Todo.NewForm.Model
-    | None
+    = XMNewTodo Todo.NewForm.Model
+    | XMEditTodo Todo.Form.Model
+    | XMEditContext EditContextForm
+    | XMEditProject EditProjectForm
+    | XMTodoMoreMenu Todo.Menu.Model
+    | XMEditTodoReminder Todo.ReminderForm.Model
+    | XMEditTodoContext Todo.GroupForm.Model
+    | XMEditTodoProject Todo.GroupForm.Model
+    | XMLaunchBar LaunchBar.Form.Model
+    | XMMainMenu Menu.State
+    | XMEditSyncSettings SyncForm
+    | XMSignInOverlay
+    | XMSetup Todo.NewForm.Model
+    | XMNone
 
 
 none =
-    None
+    XMNone
 
 
 signInOverlay =
-    SignInOverlay
+    XMSignInOverlay
 
 
 todoMoreMenu =
-    Todo.Menu.init >> TodoMoreMenu
+    Todo.Menu.init >> XMTodoMoreMenu
 
 
 editProject =
-    GroupDoc.EditForm.forProject >> EditProject
+    GroupDoc.EditForm.forProject >> XMEditProject
 
 
 editProjectSetName =
-    GroupDoc.EditForm.setName >>> EditProject
+    GroupDoc.EditForm.setName >>> XMEditProject
 
 
 editContext =
-    GroupDoc.EditForm.forContext >> EditContext
+    GroupDoc.EditForm.forContext >> XMEditContext
 
 
 editContextSetName =
-    GroupDoc.EditForm.setName >>> EditContext
+    GroupDoc.EditForm.setName >>> XMEditContext
 
 
 editTodo =
-    Todo.Form.create >> EditTodo
+    Todo.Form.create >> XMEditTodo
 
 
 createEntityEditForm : Entity.Types.EntityType -> ExclusiveMode

@@ -108,14 +108,14 @@ updateInner msg =
         OnUpdateTodoForm form action ->
             map
                 (Todo.Form.set action form
-                    |> ExclusiveMode.EditTodo
+                    |> ExclusiveMode.XMEditTodo
                     >> Model.setEditMode
                 )
 
         OnEditTodoProjectMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
-                    |> ExclusiveMode.EditTodoProject
+                    |> ExclusiveMode.XMEditTodoProject
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -123,7 +123,7 @@ updateInner msg =
         OnMainMenuStateChanged menuState ->
             map
                 (menuState
-                    |> ExclusiveMode.MainMenu
+                    |> ExclusiveMode.XMMainMenu
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -131,7 +131,7 @@ updateInner msg =
         OnEditTodoContextMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
-                    |> ExclusiveMode.EditTodoContext
+                    |> ExclusiveMode.XMEditTodoContext
                     >> Model.setEditMode
                 )
                 >> autoFocusInputCmd
@@ -139,7 +139,7 @@ updateInner msg =
         OnUpdateRemoteSyncFormUri form uri ->
             map
                 ({ form | uri = uri }
-                    |> ExclusiveMode.EditSyncSettings
+                    |> ExclusiveMode.XMEditSyncSettings
                     >> Model.setEditMode
                 )
 
@@ -298,7 +298,7 @@ onGlobalKeyUp key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
-                ( key, ExclusiveMode.None ) ->
+                ( key, ExclusiveMode.XMNone ) ->
                     let
                         clear =
                             map (Model.clearSelection)

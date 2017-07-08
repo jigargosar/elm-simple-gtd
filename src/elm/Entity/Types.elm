@@ -12,7 +12,7 @@ type GroupEntityType
 
 type EntityType
     = GroupEntity GroupEntityType
-    | TodoEntity Todo.Types.Model
+    | TodoEntity Todo.Types.TodoDoc
 
 
 type ListViewType

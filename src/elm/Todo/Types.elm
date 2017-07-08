@@ -17,7 +17,7 @@ type alias Record =
     }
 
 
-type alias Model =
+type alias TodoDoc =
     Document.Types.Document Record
 
 

@@ -4,13 +4,13 @@ import Document.Types exposing (DocId)
 import Time exposing (Time)
 
 
-type alias Text =
+type alias TodoText =
     String
 
 
 type alias Record =
     { done : Bool
-    , text : Text
+    , text : TodoText
     , schedule : Schedule
     , projectId : DocId
     , contextId : DocId

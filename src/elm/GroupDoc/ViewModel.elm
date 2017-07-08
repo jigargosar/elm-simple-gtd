@@ -6,7 +6,7 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity exposing (Entity)
-import Entity.Types
+import Entity.Types exposing (EntityType)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
@@ -44,7 +44,7 @@ type alias ViewModel =
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Int
     , todoList : List TodoDoc
-    , getTabIndexAVForEntity : Entity.Entity -> Int
+    , getTabIndexAVForEntity : EntityType -> Int
     }
 
 
@@ -62,7 +62,7 @@ type alias Config =
     , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : DocId -> Entity.Types.ListViewType
-    , getTabIndexAVForEntity : Entity.Entity -> Int
+    , getTabIndexAVForEntity : EntityType -> Int
     }
 
 
@@ -152,7 +152,7 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (Entity.Entity -> Int) -> List TodoDoc -> Context.Model -> ViewModel
+contextGroup : (EntityType -> Int) -> List TodoDoc -> Context.Model -> ViewModel
 contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
@@ -172,7 +172,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-projectGroup : (Entity.Entity -> Int) -> List TodoDoc -> Project.Model -> ViewModel
+projectGroup : (EntityType -> Int) -> List TodoDoc -> Project.Model -> ViewModel
 projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config

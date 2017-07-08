@@ -6,7 +6,7 @@ import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Entity.Tree
-import Entity.Types
+import Entity.Types exposing (EntityType)
 import Entity exposing (Entity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
@@ -104,7 +104,7 @@ type alias Model =
     , selectedEntityIdSet : Set DocId
     , appVersion : String
     , deviceId : String
-    , focusInEntity : Entity.Entity
+    , focusInEntity : EntityType
     , timeTracker : Todo.TimeTracker.Model
     , keyComboModel : Keyboard.Combo.Model Msg
     , config : Config
@@ -800,7 +800,7 @@ insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> Model -> Maybe ( Entity.Entity, Model )
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> Model -> Maybe ( EntityType, Model )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->

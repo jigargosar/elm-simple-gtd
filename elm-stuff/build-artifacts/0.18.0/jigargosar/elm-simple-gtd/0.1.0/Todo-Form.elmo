@@ -12,10 +12,6 @@ var _jigargosar$elm_simple_gtd$Todo_Form$create = function (todo) {
 		entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo)
 	};
 };
-var _jigargosar$elm_simple_gtd$Todo_Form$Model = F3(
-	function (a, b, c) {
-		return {id: a, todoText: b, entity: c};
-	});
 var _jigargosar$elm_simple_gtd$Todo_Form$SetText = function (a) {
 	return {ctor: 'SetText', _0: a};
 };

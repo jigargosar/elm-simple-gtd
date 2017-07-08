@@ -2,7 +2,7 @@ module Entity.Tree exposing (..)
 
 import Context
 import Entity
-import Entity.Types
+import Entity.Types exposing (EntityType)
 import Todo
 import Toolkit.Operators exposing (..)
 import List.Extra as List
@@ -125,7 +125,7 @@ initTodoForest =
     TodoForest
 
 
-flatten : Tree -> List Entity.Entity
+flatten : Tree -> List EntityType
 flatten tree =
     case tree of
         ContextRoot node nodeList ->

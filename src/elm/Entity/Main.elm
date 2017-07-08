@@ -2,7 +2,7 @@ module Entity.Main exposing (..)
 
 import DomPorts
 import Entity
-import Entity.Types
+import Entity.Types exposing (EntityType)
 import GroupDoc
 import Model
 import Msg
@@ -20,7 +20,7 @@ import Todo.Msg
 
 update :
     (Msg.Msg -> Model.ReturnF)
-    -> Entity.Entity
+    -> EntityType
     -> Entity.Types.Msg
     -> Model.ReturnF
 update andThenUpdate entity msg =

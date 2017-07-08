@@ -1,0 +1,4 @@
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F3(
+	function (a, b, c) {
+		return {id: a, todoText: b, entity: c};
+	});

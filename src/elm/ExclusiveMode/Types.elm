@@ -1,10 +1,14 @@
 module ExclusiveMode.Types exposing (..)
 
-import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Form
-import Menu
+
+
+-- small so safe
+
+import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import Menu.Types exposing (MenuState)
 import Todo.Form
+import Todo.FormTypes exposing (TodoEditForm)
 import Todo.GroupForm
 import Todo.Menu
 import Todo.NewForm
@@ -17,7 +21,7 @@ type alias SyncForm =
 
 type ExclusiveMode
     = XMNewTodo Todo.NewForm.Model
-    | XMEditTodo Todo.Form.Model
+    | XMEditTodo TodoEditForm
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu Todo.Menu.Model

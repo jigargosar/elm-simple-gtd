@@ -12,6 +12,7 @@ import Material.Icon
 import Material.Options
 import Msg exposing (Msg)
 import Store
+import Todo.FormTypes exposing (TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
@@ -367,7 +368,7 @@ fireCancel =
     Msg.OnDeactivateEditingMode
 
 
-edit : Todo.Form.Model -> Model.Model -> Html Msg
+edit : TodoEditForm -> Model.Model -> Html Msg
 edit form appModel =
     let
         todoText =

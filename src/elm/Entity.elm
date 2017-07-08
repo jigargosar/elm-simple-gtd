@@ -17,10 +17,6 @@ type alias GroupEntity =
     Entity.Types.GroupEntityType
 
 
-type alias Entity =
-    Entity.Types.EntityType
-
-
 fromContext =
     ContextEntity >> GroupEntity
 
@@ -182,7 +178,7 @@ getTodoGotoGroupView todo prevView =
                 ContextsView
 
 
-toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
+toViewType : Maybe EntityListViewType -> EntityType -> EntityListViewType
 toViewType maybePrevView entity =
     case entity of
         GroupEntity group ->

@@ -5,7 +5,7 @@ import Color
 import Context
 import Document
 import Document.Types exposing (DocId)
-import Entity exposing (Entity)
+import Entity
 import Entity.Types exposing (EntityListViewType, EntityType)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
@@ -55,7 +55,7 @@ type alias GroupDoc =
 type alias Config =
     { groupByFn : TodoDoc -> DocId
     , namePrefix : String
-    , toEntity : GroupDoc -> Entity
+    , toEntity : GroupDoc -> EntityType
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM

@@ -1,6 +1,6 @@
 module Entity.View exposing (..)
 
-import Entity exposing (Entity)
+import Entity
 import Entity.Tree
 import Entity.Types exposing (EntityListViewType)
 import GroupDoc.View

@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (EntityListViewType)
+import Entity.Types exposing (EntityListViewType, EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 
 
@@ -32,7 +32,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Todo.Notification.Model
-import Todo.Types exposing (TodoDoc)
+import Todo.Types exposing (TodoDoc, TodoText)
 
 
 type ViewType
@@ -59,7 +59,7 @@ type Msg
     | OnNewTodoForInbox
     | OnNewProject
     | OnNewContext
-    | OnNewTodoTextChanged AddTodoForm Todo.Text
+    | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
     | OnStartEditingContext TodoDoc
@@ -69,9 +69,9 @@ type Msg
     | OnEditTodoProjectMenuStateChanged TodoGroupFrom MenuState
     | OnEditTodoContextMenuStateChanged TodoGroupFrom MenuState
     | OnUpdateTodoForm TodoEditForm Todo.Form.Action
-    | OnEntityListKeyDown (List Entity.Types.EntityType) X.Keyboard.KeyboardEvent
+    | OnEntityListKeyDown (List EntityType) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
-    | OnEntityMsg Entity.Types.EntityType Entity.Types.Msg
+    | OnEntityMsg EntityType Entity.Types.Msg
     | OnLaunchBarMsg LaunchBar.Msg
     | OnLaunchBarMsgWithNow LaunchBar.Msg Time
     | OnTodoMsg Todo.Msg.Msg

@@ -9,8 +9,8 @@ import Dict
 import Dict.Extra
 import Document
 import Document.Types exposing (DocId)
-import Entity exposing (Entity)
-import Entity.Types exposing (EntityListViewType)
+import Entity
+import Entity.Types exposing (EntityListViewType, EntityType)
 import GroupDoc
 import GroupDoc.Types
 import Msg
@@ -67,7 +67,7 @@ type alias Config =
     , todoList : List TodoDoc
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
-    , toEntity : GroupDoc -> Entity
+    , toEntity : GroupDoc -> EntityType
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM

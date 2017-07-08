@@ -7,7 +7,7 @@ import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Entity.Tree
 import Entity.Types exposing (EntityListViewType, EntityType)
-import Entity exposing (Entity)
+import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase.SignIn
@@ -578,7 +578,7 @@ showMainMenu =
     setEditMode (Menu.initState |> XMMainMenu)
 
 
-startEditingEntity : Entity -> ModelF
+startEditingEntity : EntityType -> ModelF
 startEditingEntity entity model =
     setEditMode (ExclusiveMode.createEntityEditForm entity) model
 
@@ -687,7 +687,7 @@ setFocusInEntityFromTodoId todoId model =
         ?= model
 
 
-toggleDeleteEntity : Entity -> ModelReturnF
+toggleDeleteEntity : EntityType -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
@@ -981,7 +981,7 @@ getMaybeFocusInEntity entityList model =
         |> Maybe.orElse (List.head entityList)
 
 
-moveFocusBy : Int -> List Entity -> ModelF
+moveFocusBy : Int -> List EntityType -> ModelF
 moveFocusBy =
     Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 

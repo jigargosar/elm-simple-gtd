@@ -8,7 +8,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId = F2(
 			_elm_community$list_extra$List_Extra$find,
 			function (entity) {
 				var _p0 = entity;
-				if (_p0.ctor === 'Todo') {
+				if (_p0.ctor === 'TodoEntity') {
 					return A2(_jigargosar$elm_simple_gtd$Document$hasId, todoId, _p0._0);
 				} else {
 					return false;

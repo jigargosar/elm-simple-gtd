@@ -1,16 +1,17 @@
 module Todo.GroupForm exposing (..)
 
 import Document
+import Document.Types exposing (DocId)
 import Menu
 import Todo
-import Types
+import Todo.Types exposing (TodoDoc)
 
 
 type alias Model =
-    { todo : Todo.Model
-    , todoId : Types.DocId__
-    , contextId : Types.DocId__
-    , projectId : Types.DocId__
+    { todo : TodoDoc
+    , todoId : DocId
+    , contextId : DocId
+    , projectId : DocId
     , menuState : Menu.State
     }
 

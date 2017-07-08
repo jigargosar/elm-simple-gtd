@@ -558,7 +558,7 @@ var _jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId = F2(
 						_0: A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 							A2(_jigargosar$elm_simple_gtd$Model$findTodoById, todoId, model),
-							_jigargosar$elm_simple_gtd$Entity_Types$Todo),
+							_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity),
 						_1: _elm_lang$core$Maybe$Just(model)
 					}),
 				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Model$setFocusInEntity)),
@@ -949,11 +949,11 @@ var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
 							_jigargosar$elm_simple_gtd$Model$updateTodo,
 							function () {
 								var _p45 = form.referenceEntity;
-								if (_p45.ctor === 'Todo') {
+								if (_p45.ctor === 'TodoEntity') {
 									return _jigargosar$elm_simple_gtd$Todo$CopyProjectAndContextId(_p45._0);
 								} else {
 									var _p46 = _p45._0;
-									if (_p46.ctor === 'Context') {
+									if (_p46.ctor === 'ContextEntity') {
 										return _jigargosar$elm_simple_gtd$Todo$SetContext(_p46._0);
 									} else {
 										return _jigargosar$elm_simple_gtd$Todo$SetProject(_p46._0);
@@ -1135,8 +1135,6 @@ var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'MainMenu':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'ActionList':
-			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'None':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'SignInOverlay':
@@ -1150,9 +1148,9 @@ var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 		var entityId = _jigargosar$elm_simple_gtd$Model$getEntityId(entity);
 		return function () {
 			var _p55 = entity;
-			if (_p55.ctor === 'Group') {
+			if (_p55.ctor === 'GroupEntity') {
 				var _p56 = _p55._0;
-				if (_p56.ctor === 'Context') {
+				if (_p56.ctor === 'ContextEntity') {
 					return A2(_jigargosar$elm_simple_gtd$Model$updateContext, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
 				} else {
 					return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);

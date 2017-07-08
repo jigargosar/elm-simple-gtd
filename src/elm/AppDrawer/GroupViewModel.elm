@@ -8,6 +8,7 @@ import Context
 import Dict
 import Dict.Extra
 import Document
+import Document.Types exposing (DocId)
 import Entity exposing (Entity)
 import Entity.Types
 import GroupDoc
@@ -16,6 +17,7 @@ import Msg
 import Model
 import Msg exposing (..)
 import Todo
+import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Model
 import Project
@@ -62,8 +64,8 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Types.DocId__
-    , todoList : List Todo.Model
+    { groupByFn : TodoDoc -> DocId
+    , todoList : List TodoDoc
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
     , toEntity : GroupDoc -> Entity
@@ -72,7 +74,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : Types.DocId__ -> Entity.Types.ListViewType
+    , getViewType : DocId -> Entity.Types.ListViewType
     }
 
 

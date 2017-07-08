@@ -7,14 +7,15 @@ import Todo
 import Toolkit.Operators exposing (..)
 import List.Extra as List
 import Project
+import Todo.Types exposing (TodoDoc)
 
 
 type alias TodoNode =
-    Todo.Model
+    TodoDoc
 
 
 type alias TodoNodeList =
-    List Todo.Model
+    List TodoDoc
 
 
 type alias ContextNode =

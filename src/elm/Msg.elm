@@ -31,6 +31,7 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Menu
 import Todo.Notification.Model
+import Todo.Types exposing (TodoDoc)
 
 
 type ViewType
@@ -59,9 +60,9 @@ type Msg
     | OnNewContext
     | OnNewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
-    | OnStartEditingReminder Todo.Model
-    | OnStartEditingContext Todo.Model
-    | OnStartEditingProject Todo.Model
+    | OnStartEditingReminder TodoDoc
+    | OnStartEditingContext TodoDoc
+    | OnStartEditingProject TodoDoc
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri ExclusiveMode.SyncForm String
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State

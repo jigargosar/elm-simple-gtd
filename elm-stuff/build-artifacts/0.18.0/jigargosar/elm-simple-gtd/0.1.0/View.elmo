@@ -252,8 +252,6 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
 			case 'Setup':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p1._0);
-			case 'ActionList':
-				return A2(_jigargosar$elm_simple_gtd$ActionList_View$init, appModel, _p1._0);
 			case 'EditProject':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
 			case 'EditContext':

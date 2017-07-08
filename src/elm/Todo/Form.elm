@@ -4,6 +4,7 @@ import Document
 import Entity
 import Entity.Types
 import Todo
+import Todo.Types exposing (TodoDoc)
 import Types
 
 
@@ -18,7 +19,7 @@ type Action
     = SetText String
 
 
-create : Todo.Model -> Model
+create : TodoDoc -> Model
 create todo =
     { id = Document.getId todo
     , todoText = Todo.getText todo

@@ -12,6 +12,7 @@ import Material.Icon
 import Material.Options
 import Msg exposing (Msg)
 import Store
+import Todo.Types exposing (TodoDoc)
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -80,7 +81,7 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : Model.Model -> Bool -> Todo.Model -> TodoViewModel
+createTodoViewModel : Model.Model -> Bool -> TodoDoc -> TodoViewModel
 createTodoViewModel appM canBeFocused todo =
     let
         tabindexAV =
@@ -334,7 +335,7 @@ type alias ScheduleViewModel =
     }
 
 
-createScheduleViewModel : Time -> Todo.Model -> ScheduleViewModel
+createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel
 createScheduleViewModel now todo =
     let
         overDueText =

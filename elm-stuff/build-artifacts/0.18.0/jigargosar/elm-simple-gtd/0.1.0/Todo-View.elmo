@@ -824,7 +824,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 	function (appM, canBeFocused, todo) {
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
-			_jigargosar$elm_simple_gtd$Entity_Types$Todo(todo));
+			_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing) : _jigargosar$elm_simple_gtd$Model$noop;
 		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
 		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived);

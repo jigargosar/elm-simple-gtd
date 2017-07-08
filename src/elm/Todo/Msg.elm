@@ -1,24 +1,26 @@
 module Todo.Msg exposing (..)
 
+import Document.Types exposing (DocId)
 import Notification exposing (Response)
 import Todo
 import Todo.NewForm
 import Todo.ReminderForm
+import Todo.Types exposing (TodoDoc)
 import Types
 
 
 type Msg
-    = ToggleRunning Types.DocId__
-    | SwitchOrStartRunning Types.DocId__
+    = ToggleRunning DocId
+    | SwitchOrStartRunning DocId
     | StopRunning
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | ShowReminderOverlayForTodoId Types.DocId__
+    | ShowReminderOverlayForTodoId DocId
     | GotoRunning
     | UpdateTimeTracker
     | UpdateSetupFormTodoText Todo.NewForm.Model String
-    | Upsert Todo.Model
+    | Upsert TodoDoc
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
-    | OnShowMoreMenu Types.DocId__
+    | OnShowMoreMenu DocId
     | OnProcessPendingNotificationCronTick
-    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode Types.DocId__ Todo.UpdateAction
+    | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId Todo.UpdateAction

@@ -25,9 +25,9 @@ var _jigargosar$elm_simple_gtd$Entity$getTodoGotoGroupView = F2(
 var _jigargosar$elm_simple_gtd$Entity$toViewType = F2(
 	function (maybePrevView, entity) {
 		var _p1 = entity;
-		if (_p1.ctor === 'Group') {
+		if (_p1.ctor === 'GroupEntity') {
 			var _p2 = _p1._0;
-			if (_p2.ctor === 'Context') {
+			if (_p2.ctor === 'ContextEntity') {
 				return _jigargosar$elm_simple_gtd$Entity_Types$ContextView(
 					_jigargosar$elm_simple_gtd$Document$getId(_p2._0));
 			} else {
@@ -186,20 +186,20 @@ var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
 		_v5_2:
 		do {
 			if (_p8.ctor === '_Tuple2') {
-				if (_p8._0.ctor === 'Group') {
-					if (_p8._1.ctor === 'Group') {
+				if (_p8._0.ctor === 'GroupEntity') {
+					if (_p8._1.ctor === 'GroupEntity') {
 						var _p9 = {ctor: '_Tuple2', _0: _p8._0._0, _1: _p8._1._0};
 						_v6_2:
 						do {
 							if (_p9.ctor === '_Tuple2') {
-								if (_p9._0.ctor === 'Project') {
-									if (_p9._1.ctor === 'Project') {
+								if (_p9._0.ctor === 'ProjectEntity') {
+									if (_p9._1.ctor === 'ProjectEntity') {
 										return A2(eq, _p9._0._0, _p9._1._0);
 									} else {
 										break _v6_2;
 									}
 								} else {
-									if (_p9._1.ctor === 'Context') {
+									if (_p9._1.ctor === 'ContextEntity') {
 										return A2(eq, _p9._0._0, _p9._1._0);
 									} else {
 										break _v6_2;
@@ -214,7 +214,7 @@ var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
 						break _v5_2;
 					}
 				} else {
-					if (_p8._1.ctor === 'Todo') {
+					if (_p8._1.ctor === 'TodoEntity') {
 						return A2(eq, _p8._0._0, _p8._1._0);
 					} else {
 						break _v5_2;
@@ -250,25 +250,25 @@ var _jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn = F3(
 	});
 var _jigargosar$elm_simple_gtd$Entity$getId = function (entity) {
 	var _p10 = entity;
-	if (_p10.ctor === 'Todo') {
+	if (_p10.ctor === 'TodoEntity') {
 		return _jigargosar$elm_simple_gtd$Document$getId(_p10._0);
 	} else {
 		var _p11 = _p10._0;
-		if (_p11.ctor === 'Project') {
+		if (_p11.ctor === 'ProjectEntity') {
 			return _jigargosar$elm_simple_gtd$Document$getId(_p11._0);
 		} else {
 			return _jigargosar$elm_simple_gtd$Document$getId(_p11._0);
 		}
 	}
 };
-var _jigargosar$elm_simple_gtd$Entity$initContextGroup = _jigargosar$elm_simple_gtd$Entity_Types$Context;
-var _jigargosar$elm_simple_gtd$Entity$initProjectGroup = _jigargosar$elm_simple_gtd$Entity_Types$Project;
-var _jigargosar$elm_simple_gtd$Entity$fromTodo = _jigargosar$elm_simple_gtd$Entity_Types$Todo;
+var _jigargosar$elm_simple_gtd$Entity$initContextGroup = _jigargosar$elm_simple_gtd$Entity_Types$ContextEntity;
+var _jigargosar$elm_simple_gtd$Entity$initProjectGroup = _jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity;
+var _jigargosar$elm_simple_gtd$Entity$fromTodo = _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity;
 var _jigargosar$elm_simple_gtd$Entity$fromProject = function (_p12) {
-	return _jigargosar$elm_simple_gtd$Entity_Types$Group(
-		_jigargosar$elm_simple_gtd$Entity_Types$Project(_p12));
+	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
+		_jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity(_p12));
 };
 var _jigargosar$elm_simple_gtd$Entity$fromContext = function (_p13) {
-	return _jigargosar$elm_simple_gtd$Entity_Types$Group(
-		_jigargosar$elm_simple_gtd$Entity_Types$Context(_p13));
+	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p13));
 };

@@ -29,11 +29,11 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 				var toggleArchivedEntity = function (entity) {
 					var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
 					var _p3 = entity;
-					if (_p3.ctor === 'Group') {
+					if (_p3.ctor === 'GroupEntity') {
 						return _Fresheyeball$elm_return$Return$andThen(
 							function () {
 								var _p4 = _p3._0;
-								if (_p4.ctor === 'Context') {
+								if (_p4.ctor === 'ContextEntity') {
 									return A2(_jigargosar$elm_simple_gtd$Model$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
 								} else {
 									return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);

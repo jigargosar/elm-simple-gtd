@@ -5,6 +5,7 @@ import Document
 import Menu
 import Time exposing (Time)
 import Time.Format
+import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Todo
 import Types
@@ -24,7 +25,7 @@ type Action
     | SetMenuState Menu.State
 
 
-create : Todo.Model -> Time.Time -> Model
+create : TodoDoc -> Time.Time -> Model
 create todo now =
     let
         timeInMilli =

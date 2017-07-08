@@ -7,6 +7,7 @@ import Document
 import Entity exposing (Entity)
 import Entity.Types
 import GroupDoc.Types
+import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Html
@@ -42,7 +43,7 @@ type alias ViewModel =
     , onFocusIn : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Int
-    , todoList : List Todo.Model
+    , todoList : List TodoDoc
     , getTabIndexAVForEntity : Entity.Entity -> Int
     }
 
@@ -52,7 +53,7 @@ type alias GroupDoc =
 
 
 type alias Config =
-    { groupByFn : Todo.Model -> Types.DocId__
+    { groupByFn : TodoDoc -> Types.DocId__
     , namePrefix : String
     , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
@@ -151,7 +152,7 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (Entity.Entity -> Int) -> List Todo.Model -> Context.Model -> ViewModel
+contextGroup : (Entity.Entity -> Int) -> List TodoDoc -> Context.Model -> ViewModel
 contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
@@ -171,7 +172,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-projectGroup : (Entity.Entity -> Int) -> List Todo.Model -> Project.Model -> ViewModel
+projectGroup : (Entity.Entity -> Int) -> List TodoDoc -> Project.Model -> ViewModel
 projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config

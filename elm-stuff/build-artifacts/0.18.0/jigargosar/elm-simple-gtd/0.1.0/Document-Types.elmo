@@ -1,0 +1,3 @@
+var _jigargosar$elm_simple_gtd$Document_Types$getDocId = function (_) {
+	return _.id;
+};

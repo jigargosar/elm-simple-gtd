@@ -5,6 +5,7 @@ import Date.Extra as Date
 import Document
 import Todo
 import Time exposing (Time)
+import Todo.Types exposing (TodoDoc)
 import Types
 
 
@@ -44,7 +45,7 @@ addSnoozeOffset time offset =
             Date.fromTime time |> Date.ceiling Date.Day |> Date.add Date.Hour 10 |> Date.toTime
 
 
-initialView : Todo.Model -> Model
+initialView : TodoDoc -> Model
 initialView =
     createTodoDetails >> Active InitialView
 

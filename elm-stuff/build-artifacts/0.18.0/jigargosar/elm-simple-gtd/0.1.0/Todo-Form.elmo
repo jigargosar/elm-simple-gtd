@@ -9,7 +9,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$create = function (todo) {
 	return {
 		id: _jigargosar$elm_simple_gtd$Document$getId(todo),
 		todoText: _jigargosar$elm_simple_gtd$Todo$getText(todo),
-		entity: _jigargosar$elm_simple_gtd$Entity_Types$Todo(todo)
+		entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo)
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo_Form$Model = F3(

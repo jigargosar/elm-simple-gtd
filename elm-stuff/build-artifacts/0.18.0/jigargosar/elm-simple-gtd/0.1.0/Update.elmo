@@ -347,7 +347,7 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = function (subMsg) {
 		case 'OnPouchDBChange':
 			var afterEntityUpsertOnPouchDBChange = function (entity) {
 				var _p40 = entity;
-				if (_p40.ctor === 'Todo') {
+				if (_p40.ctor === 'TodoEntity') {
 					return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 						_jigargosar$elm_simple_gtd$Todo_Msg$Upsert(_p40._0));
 				} else {

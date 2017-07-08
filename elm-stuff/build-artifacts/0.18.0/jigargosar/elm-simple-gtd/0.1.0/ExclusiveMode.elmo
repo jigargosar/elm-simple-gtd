@@ -14,10 +14,6 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$EditSyncSettings = function (a) {
 var _jigargosar$elm_simple_gtd$ExclusiveMode$MainMenu = function (a) {
 	return {ctor: 'MainMenu', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode$ActionList = function (a) {
-	return {ctor: 'ActionList', _0: a};
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode$initActionList = _jigargosar$elm_simple_gtd$ExclusiveMode$ActionList(_jigargosar$elm_simple_gtd$ActionList$init);
 var _jigargosar$elm_simple_gtd$ExclusiveMode$LaunchBar = function (a) {
 	return {ctor: 'LaunchBar', _0: a};
 };
@@ -62,9 +58,9 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo = function (_p3) {
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (entity) {
 	var _p4 = entity;
-	if (_p4.ctor === 'Group') {
+	if (_p4.ctor === 'GroupEntity') {
 		var _p5 = _p4._0;
-		if (_p5.ctor === 'Context') {
+		if (_p5.ctor === 'ContextEntity') {
 			return _jigargosar$elm_simple_gtd$ExclusiveMode$editContext(_p5._0);
 		} else {
 			return _jigargosar$elm_simple_gtd$ExclusiveMode$editProject(_p5._0);

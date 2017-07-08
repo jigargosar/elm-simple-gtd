@@ -11,6 +11,7 @@ import Entity exposing (Entity)
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
+import Todo.Types exposing (TodoDoc)
 import Types
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
@@ -468,7 +469,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             >> Tuple.mapFirst removeReminderOverlay
 
 
-findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd Msg )
+findAndSnoozeOverDueTodo : Model -> Maybe ( ( TodoDoc, Model ), Cmd Msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
@@ -557,17 +558,17 @@ updateNewTodoText form text =
     set editMode (Todo.NewForm.setText text form |> ExclusiveMode.NewTodo)
 
 
-startEditingReminder : Todo.Model -> ModelF
+startEditingReminder : TodoDoc -> ModelF
 startEditingReminder todo =
     updateEditModeM (.now >> Todo.ReminderForm.create todo >> ExclusiveMode.EditTodoReminder)
 
 
-startEditingTodoProject : Todo.Model -> ModelF
+startEditingTodoProject : TodoDoc -> ModelF
 startEditingTodoProject todo =
     setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.EditTodoProject)
 
 
-startEditingTodoContext : Todo.Model -> ModelF
+startEditingTodoContext : TodoDoc -> ModelF
 startEditingTodoContext todo =
     setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.EditTodoContext)
 
@@ -755,7 +756,7 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-findTodoById : Types.DocId__ -> Model -> Maybe Todo.Model
+findTodoById : Types.DocId__ -> Model -> Maybe TodoDoc
 findTodoById id =
     .todoStore >> Store.findById id
 
@@ -793,7 +794,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
         model |> updateAllTodos action idSet
 
 
-insertTodo : (DeviceId -> Types.DocId__ -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodo : (DeviceId -> Types.DocId__ -> TodoDoc) -> Model -> ( TodoDoc, Model )
 insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 

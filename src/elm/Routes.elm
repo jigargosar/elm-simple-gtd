@@ -7,6 +7,8 @@ import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
+import Types exposing (AppModel)
+import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import Model exposing (..)
 import X.List

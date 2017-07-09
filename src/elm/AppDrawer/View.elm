@@ -17,6 +17,7 @@ import Model exposing (..)
 import X.Function.Infix exposing (..)
 import Model
 import View.Shared exposing (..)
+import ViewType exposing (ViewType(EntityListView, SyncView))
 
 
 sidebarHeader appVM m =

@@ -22,6 +22,7 @@ import Todo.MoreMenu
 import View.GetStarted
 import View.MainMenu
 import View.Mat
+import ViewType exposing (ViewType(EntityListView, SyncView))
 
 
 init model =

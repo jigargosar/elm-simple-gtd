@@ -16,6 +16,7 @@ import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Msg exposing (..)
+import Stores exposing (findTodoById, insertTodo, setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
 import Types exposing (AppConfig, AppModel)
@@ -159,18 +160,6 @@ mapOverAppDrawerModel =
     over appDrawerModel >> Return.map
 
 
-contextStore =
-    X.Record.field .contextStore (\s b -> { b | contextStore = s })
-
-
-projectStore =
-    X.Record.field .projectStore (\s b -> { b | projectStore = s })
-
-
-todoStore =
-    X.Record.field .todoStore (\s b -> { b | todoStore = s })
-
-
 keyboardState =
     X.Record.field .keyboardState (\s b -> { b | keyboardState = s })
 
@@ -276,142 +265,6 @@ inboxEntity =
     Entity.fromContext Context.null
 
 
-filterTodosAndSortBy pred sortBy model =
-    Store.filterDocs pred model.todoStore
-        |> List.sortBy sortBy
-
-
-filterTodosAndSortByLatestCreated pred =
-    filterTodosAndSortBy pred (Todo.getCreatedAt >> negate)
-
-
-filterTodosAndSortByLatestModified pred =
-    filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
-
-
-filterContexts pred model =
-    Store.filterDocs pred model.contextStore
-        |> List.append (Context.filterNull pred)
-        |> Context.sort
-
-
-filterProjects pred model =
-    Store.filterDocs pred model.projectStore
-        |> List.append (Project.filterNull pred)
-        |> Project.sort
-
-
-isTodoContextActive model =
-    Todo.getContextId
-        >> findContextByIdIn model
-        >>? GroupDoc.isActive
-        >>?= True
-
-
-isTodoProjectActive model =
-    Todo.getProjectId
-        >> findProjectByIdIn model
-        >>? GroupDoc.isActive
-        >>?= True
-
-
-getActiveTodoListHavingActiveContext model =
-    model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoContextActive model ])
-
-
-getActiveTodoListHavingActiveProject model =
-    model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoProjectActive model ])
-
-
-getActiveTodoListForContext context model =
-    filterTodosAndSortByLatestCreated
-        (Pred.all
-            [ Todo.isActive
-            , Todo.contextFilter context
-            , isTodoProjectActive model
-            ]
-        )
-        model
-
-
-getActiveTodoListForProject project model =
-    filterTodosAndSortByLatestCreated
-        (Pred.all
-            [ Todo.isActive
-            , Todo.hasProject project
-            , isTodoContextActive model
-            ]
-        )
-        model
-
-
-createGrouping : EntityListViewType -> AppModel -> Entity.Tree.Tree
-createGrouping viewType model =
-    let
-        getActiveTodoListForContextHelp =
-            getActiveTodoListForContext # model
-
-        getActiveTodoListForProjectHelp =
-            getActiveTodoListForProject # model
-
-        findProjectByIdHelp =
-            findProjectById # model
-
-        findContextByIdHelp =
-            findContextById # model
-    in
-        case viewType of
-            Entity.Types.ContextsView ->
-                getActiveContexts model
-                    |> Entity.Tree.initContextForest
-                        getActiveTodoListForContextHelp
-
-            Entity.Types.ProjectsView ->
-                getActiveProjects model
-                    |> Entity.Tree.initProjectForest
-                        getActiveTodoListForProjectHelp
-
-            Entity.Types.ContextView id ->
-                findContextById id model
-                    ?= Context.null
-                    |> Entity.Tree.initContextRoot
-                        getActiveTodoListForContextHelp
-                        findProjectByIdHelp
-
-            Entity.Types.ProjectView id ->
-                findProjectById id model
-                    ?= Project.null
-                    |> Entity.Tree.initProjectRoot
-                        getActiveTodoListForProjectHelp
-                        findContextByIdHelp
-
-            Entity.Types.BinView ->
-                Entity.Tree.initTodoForest
-                    "Bin"
-                    (filterTodosAndSortByLatestModified Document.isDeleted model)
-
-            Entity.Types.DoneView ->
-                Entity.Tree.initTodoForest
-                    "Done"
-                    (filterTodosAndSortByLatestModified
-                        (Pred.all [ Document.isNotDeleted, Todo.isDone ])
-                        model
-                    )
-
-            Entity.Types.RecentView ->
-                Entity.Tree.initTodoForest
-                    "Recent"
-                    (filterTodosAndSortByLatestModified Pred.always model)
-
-
-getActiveTodoListWithReminderTime model =
-    model.todoStore |> Store.filterDocs (Todo.isReminderOverdue model.now)
-
-
-findTodoWithOverDueReminder model =
-    model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
-
-
 setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
@@ -437,37 +290,6 @@ snoozeTodoWithOffset snoozeOffset todoId model =
         model
             |> updateTodo (time |> TA_SnoozeTill) todoId
             >> Tuple.mapFirst removeReminderOverlay
-
-
-findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd Msg )
-findAndSnoozeOverDueTodo model =
-    let
-        snooze todoId =
-            updateTodo (TA_AutoSnooze model.now) todoId model
-                |> (\( model, cmd ) ->
-                        findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
-                   )
-    in
-        Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
-            ?+> (Document.getId >> snooze)
-
-
-createContext text model =
-    model
-        |> overT2 contextStore (Store.insert (Context.init text model.now))
-        |> Tuple.second
-
-
-createProject text model =
-    model
-        |> overT2 projectStore (Store.insert (Project.init text model.now))
-        |> Tuple.second
-
-
-createTodo text model =
-    model
-        |> insertTodo (Todo.init model.now text)
-        |> Tuple.second
 
 
 createAndEditNewProject model =
@@ -726,84 +548,6 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-findTodoById : DocId -> AppModel -> Maybe TodoDoc
-findTodoById id =
-    .todoStore >> Store.findById id
-
-
-findProjectById : DocId -> AppModel -> Maybe Project.Model
-findProjectById id =
-    .projectStore
-        >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> ([ Project.null ] |> List.find (Document.hasId id)))
-
-
-findProjectByIdIn =
-    flip findProjectById
-
-
-findContextById : DocId -> AppModel -> Maybe Context.Model
-findContextById id =
-    .contextStore
-        >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
-
-
-findContextByIdIn =
-    flip findContextById
-
-
-updateTodoAndMaybeAlsoSelected action todoId model =
-    let
-        idSet =
-            if model.selectedEntityIdSet |> Set.member todoId then
-                model.selectedEntityIdSet
-            else
-                Set.singleton todoId
-    in
-        model |> updateAllTodos action idSet
-
-
-insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
-insertTodo constructWithId =
-    X.Record.overT2 todoStore (Store.insert (constructWithId))
-
-
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( EntityType, AppModel )
-upsertEncodedDocOnPouchDBChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromTodo
-
-        "project-db" ->
-            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromProject
-
-        "context-db" ->
-            maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromContext
-
-        _ ->
-            (\_ -> Nothing)
-
-
-upsertEncodedDocOnFirebaseChange : String -> E.Value -> AppModel -> Cmd msg
-upsertEncodedDocOnFirebaseChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        "project-db" ->
-            .projectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        "context-db" ->
-            .contextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        _ ->
-            (\_ -> Cmd.none)
-
-
 getMainViewType : AppModel -> ViewType
 getMainViewType =
     (.mainViewType)
@@ -843,16 +587,6 @@ getEntityId =
     Entity.getId
 
 
-getCurrentViewEntityList model =
-    --todo: can use maybeGetCurrentEntityListViewType
-    case model.mainViewType of
-        EntityListView viewType ->
-            createGrouping viewType model |> Entity.Tree.flatten
-
-        _ ->
-            []
-
-
 maybeGetCurrentEntityListViewType model =
     case model.mainViewType of
         EntityListView viewType ->
@@ -888,24 +622,6 @@ updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
 
 
-setProjectStore : ProjectStore -> ModelF
-setProjectStore projectStore model =
-    { model | projectStore = projectStore }
-
-
-setProjectStoreIn =
-    flip setProjectStore
-
-
-setContextStore : ContextStore -> ModelF
-setContextStore contextStore model =
-    { model | contextStore = contextStore }
-
-
-setContextStoreIn =
-    flip setContextStore
-
-
 getNow : AppModel -> Time
 getNow =
     (.now)
@@ -939,11 +655,6 @@ setFocusInEntity entity =
     set focusInEntity entity
 
 
-getMaybeFocusInEntityIndex entityList model =
-    entityList
-        |> List.findIndex (Entity.equalById model.focusInEntity)
-
-
 getMaybeFocusInEntity entityList model =
     entityList
         |> List.find (Entity.equalById model.focusInEntity)
@@ -955,150 +666,11 @@ moveFocusBy =
     Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
-
--- Document Query Helpers
-
-
-getActiveProjects =
-    filterProjects GroupDoc.isActive
-
-
-getActiveContexts =
-    filterContexts GroupDoc.isActive
-
-
-
--- Document Update Helpers
-
-
-updateContext id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
-
-
-updateProject id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
-
-
-updateAllNamedDocsDocs idSet updateFn store model =
-    X.Record.overT2 store
-        (Store.updateAndPersist
-            (Document.getId >> Set.member # idSet)
-            model.now
-            updateFn
-        )
-        model
-        |> Tuple2.swap
-        |> Return.map (updateEntityListCursorOnGroupDocChange model)
-
-
-updateEntityListCursorOnGroupDocChange oldModel newModel =
-    let
-        updateEntityListCursorFromEntityIndexTuple model indexTuple =
-            let
-                setFocusInEntityByIndex index entityList model =
-                    List.clampIndex index entityList
-                        |> (List.getAt # entityList)
-                        |> Maybe.orElse (List.head entityList)
-                        |> maybeSetIn model focusInEntity
-
-                setFocusInIndex index =
-                    setFocusInEntityByIndex
-                        index
-                        (getCurrentViewEntityList model)
-            in
-                model
-                    |> case indexTuple of
-                        -- not we want focus to remain on group entity, when edited, since its sort order may change. But if removed from view, we want to focus on next entity.
-                        {- ( Just oldIndex, Just newIndex ) ->
-                           if oldIndex < newIndex then
-                               setFocusInIndex (oldIndex)
-                           else if oldIndex > newIndex then
-                               setFocusInIndex (oldIndex + 1)
-                           else
-                               identity
-                        -}
-                        ( Just oldIndex, Nothing ) ->
-                            setFocusInIndex oldIndex
-
-                        _ ->
-                            identity
-    in
-        ( oldModel, newModel )
-            |> Tuple2.mapBoth
-                (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
-            |> updateEntityListCursorFromEntityIndexTuple newModel
-
-
-updateEntityListCursor oldModel newModel =
-    ( oldModel, newModel )
-        |> Tuple2.mapBoth
-            (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
-        |> updateEntityListCursorFromEntityIndexTuple newModel
-
-
-updateEntityListCursorFromEntityIndexTuple model indexTuple =
-    let
-        setFocusInEntityByIndex index entityList model =
-            List.clampIndex index entityList
-                |> (List.getAt # entityList)
-                |> Maybe.orElse (List.head entityList)
-                |> maybeSetIn model focusInEntity
-
-        setFocusInIndex index =
-            setFocusInEntityByIndex
-                index
-                (getCurrentViewEntityList model)
-    in
-        model
-            |> case indexTuple of
-                ( Just oldIndex, Just newIndex ) ->
-                    if oldIndex < newIndex then
-                        setFocusInIndex (oldIndex)
-                    else if oldIndex > newIndex then
-                        setFocusInIndex (oldIndex + 1)
-                    else
-                        identity
-
-                ( Just oldIndex, Nothing ) ->
-                    setFocusInIndex oldIndex
-
-                _ ->
-                    identity
-
-
-findAndUpdateAllTodos findFn action model =
-    let
-        updateFn =
-            Todo.update action
-    in
-        X.Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
-            |> Tuple2.swap
-            |> Return.map (updateEntityListCursor model)
-
-
-updateTodo : TodoAction -> DocId -> ModelReturnF
-updateTodo action todoId =
-    findAndUpdateAllTodos (Document.hasId todoId) action
-
-
-updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
-updateAllTodos action idSet model =
-    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
-
-
-
--- combo
-
-
 updateCombo : Keyboard.Combo.Msg -> ModelReturnF
 updateCombo comboMsg =
     overReturn
         keyComboModel
         (Keyboard.Combo.update comboMsg)
-
-
-
--- common cmds
 
 
 setDomFocusToFocusInEntityCmd =

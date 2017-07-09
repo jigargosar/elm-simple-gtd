@@ -1,0 +1,651 @@
+var _jigargosar$elm_simple_gtd$Stores$setContextStore = F2(
+	function (contextStore, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{contextStore: contextStore});
+	});
+var _jigargosar$elm_simple_gtd$Stores$setProjectStore = F2(
+	function (projectStore, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{projectStore: projectStore});
+	});
+var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange = F2(
+	function (dbName, encodedEntity) {
+		var _p0 = dbName;
+		switch (_p0) {
+			case 'todo-db':
+				return function (_p1) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Store$upsertInPouchDbOnFirebaseChange,
+						encodedEntity,
+						function (_) {
+							return _.todoStore;
+						}(_p1));
+				};
+			case 'project-db':
+				return function (_p2) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Store$upsertInPouchDbOnFirebaseChange,
+						encodedEntity,
+						function (_) {
+							return _.projectStore;
+						}(_p2));
+				};
+			case 'context-db':
+				return function (_p3) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Store$upsertInPouchDbOnFirebaseChange,
+						encodedEntity,
+						function (_) {
+							return _.contextStore;
+						}(_p3));
+				};
+			default:
+				return function (_p4) {
+					return _elm_lang$core$Platform_Cmd$none;
+				};
+		}
+	});
+var _jigargosar$elm_simple_gtd$Stores$findTodoWithOverDueReminder = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Store$findBy,
+		_jigargosar$elm_simple_gtd$Todo$isReminderOverdue(model.now),
+		model.todoStore);
+};
+var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListWithReminderTime = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Store$filterDocs,
+		_jigargosar$elm_simple_gtd$Todo$isReminderOverdue(model.now),
+		model.todoStore);
+};
+var _jigargosar$elm_simple_gtd$Stores$findContextById = function (id) {
+	return function (_p5) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElseLazy,
+			function (_p6) {
+				return A2(
+					_elm_community$list_extra$List_Extra$find,
+					_jigargosar$elm_simple_gtd$Document$hasId(id),
+					{
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Context$null,
+						_1: {ctor: '[]'}
+					});
+			},
+			A2(
+				_jigargosar$elm_simple_gtd$Store$findById,
+				id,
+				function (_) {
+					return _.contextStore;
+				}(_p5)));
+	};
+};
+var _jigargosar$elm_simple_gtd$Stores$findContextByIdIn = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$Stores$findContextById);
+var _jigargosar$elm_simple_gtd$Stores$isTodoContextActive = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
+		A2(
+			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+			function (_p7) {
+				return A2(
+					_jigargosar$elm_simple_gtd$Stores$findContextByIdIn,
+					model,
+					_jigargosar$elm_simple_gtd$Todo$getContextId(_p7));
+			},
+			_jigargosar$elm_simple_gtd$GroupDoc$isActive),
+		true);
+};
+var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveContext = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Store$filterDocs,
+		_jigargosar$elm_simple_gtd$X_Function$allPass(
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Todo$isActive,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Stores$isTodoContextActive(model),
+					_1: {ctor: '[]'}
+				}
+			}),
+		model.todoStore);
+};
+var _jigargosar$elm_simple_gtd$Stores$findProjectById = function (id) {
+	return function (_p8) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElseLazy,
+			function (_p9) {
+				return A2(
+					_elm_community$list_extra$List_Extra$find,
+					_jigargosar$elm_simple_gtd$Document$hasId(id),
+					{
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Project$null,
+						_1: {ctor: '[]'}
+					});
+			},
+			A2(
+				_jigargosar$elm_simple_gtd$Store$findById,
+				id,
+				function (_) {
+					return _.projectStore;
+				}(_p8)));
+	};
+};
+var _jigargosar$elm_simple_gtd$Stores$findProjectByIdIn = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$Stores$findProjectById);
+var _jigargosar$elm_simple_gtd$Stores$isTodoProjectActive = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
+		A2(
+			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+			function (_p10) {
+				return A2(
+					_jigargosar$elm_simple_gtd$Stores$findProjectByIdIn,
+					model,
+					_jigargosar$elm_simple_gtd$Todo$getProjectId(_p10));
+			},
+			_jigargosar$elm_simple_gtd$GroupDoc$isActive),
+		true);
+};
+var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveProject = function (model) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Store$filterDocs,
+		_jigargosar$elm_simple_gtd$X_Function$allPass(
+			{
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Todo$isActive,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Stores$isTodoProjectActive(model),
+					_1: {ctor: '[]'}
+				}
+			}),
+		model.todoStore);
+};
+var _jigargosar$elm_simple_gtd$Stores$findTodoById = function (id) {
+	return function (_p11) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Store$findById,
+			id,
+			function (_) {
+				return _.todoStore;
+			}(_p11));
+	};
+};
+var _jigargosar$elm_simple_gtd$Stores$filterProjects = F2(
+	function (pred, model) {
+		return _jigargosar$elm_simple_gtd$Project$sort(
+			A2(
+				_elm_lang$core$List$append,
+				_jigargosar$elm_simple_gtd$Project$filterNull(pred),
+				A2(_jigargosar$elm_simple_gtd$Store$filterDocs, pred, model.projectStore)));
+	});
+var _jigargosar$elm_simple_gtd$Stores$getActiveProjects = _jigargosar$elm_simple_gtd$Stores$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
+var _jigargosar$elm_simple_gtd$Stores$filterContexts = F2(
+	function (pred, model) {
+		return _jigargosar$elm_simple_gtd$Context$sort(
+			A2(
+				_elm_lang$core$List$append,
+				_jigargosar$elm_simple_gtd$Context$filterNull(pred),
+				A2(_jigargosar$elm_simple_gtd$Store$filterDocs, pred, model.contextStore)));
+	});
+var _jigargosar$elm_simple_gtd$Stores$getActiveContexts = _jigargosar$elm_simple_gtd$Stores$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
+var _jigargosar$elm_simple_gtd$Stores$filterTodosAndSortBy = F3(
+	function (pred, sortBy, model) {
+		return A2(
+			_elm_lang$core$List$sortBy,
+			sortBy,
+			A2(_jigargosar$elm_simple_gtd$Store$filterDocs, pred, model.todoStore));
+	});
+var _jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestCreated = function (pred) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortBy,
+		pred,
+		function (_p12) {
+			return _elm_lang$core$Basics$negate(
+				_jigargosar$elm_simple_gtd$Todo$getCreatedAt(_p12));
+		});
+};
+var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForContext = F2(
+	function (context, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestCreated,
+			_jigargosar$elm_simple_gtd$X_Predicate$all(
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Todo$isActive,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Todo$contextFilter(context),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$Stores$isTodoProjectActive(model),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForProject = F2(
+	function (project, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestCreated,
+			_jigargosar$elm_simple_gtd$X_Predicate$all(
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$Todo$isActive,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Todo$hasProject(project),
+						_1: {
+							ctor: '::',
+							_0: _jigargosar$elm_simple_gtd$Stores$isTodoContextActive(model),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestModified = function (pred) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortBy,
+		pred,
+		function (_p13) {
+			return _elm_lang$core$Basics$negate(
+				_jigargosar$elm_simple_gtd$Todo$getModifiedAt(_p13));
+		});
+};
+var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
+	function (viewType, model) {
+		var findContextByIdHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$findContextById, model);
+		var findProjectByIdHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$findProjectById, model);
+		var getActiveTodoListForProjectHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForProject, model);
+		var getActiveTodoListForContextHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForContext, model);
+		var _p14 = viewType;
+		switch (_p14.ctor) {
+			case 'ContextsView':
+				return A2(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initContextForest,
+					getActiveTodoListForContextHelp,
+					_jigargosar$elm_simple_gtd$Stores$getActiveContexts(model));
+			case 'ProjectsView':
+				return A2(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initProjectForest,
+					getActiveTodoListForProjectHelp,
+					_jigargosar$elm_simple_gtd$Stores$getActiveProjects(model));
+			case 'ContextView':
+				return A3(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initContextRoot,
+					getActiveTodoListForContextHelp,
+					findProjectByIdHelp,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(_jigargosar$elm_simple_gtd$Stores$findContextById, _p14._0, model),
+						_jigargosar$elm_simple_gtd$Context$null));
+			case 'ProjectView':
+				return A3(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initProjectRoot,
+					getActiveTodoListForProjectHelp,
+					findContextByIdHelp,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(_jigargosar$elm_simple_gtd$Stores$findProjectById, _p14._0, model),
+						_jigargosar$elm_simple_gtd$Project$null));
+			case 'BinView':
+				return A2(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initTodoForest,
+					'Bin',
+					A2(_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestModified, _jigargosar$elm_simple_gtd$Document$isDeleted, model));
+			case 'DoneView':
+				return A2(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initTodoForest,
+					'Done',
+					A2(
+						_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestModified,
+						_jigargosar$elm_simple_gtd$X_Predicate$all(
+							{
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$Document$isNotDeleted,
+								_1: {
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$Todo$isDone,
+									_1: {ctor: '[]'}
+								}
+							}),
+						model));
+			default:
+				return A2(
+					_jigargosar$elm_simple_gtd$Entity_Tree$initTodoForest,
+					'Recent',
+					A2(_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestModified, _jigargosar$elm_simple_gtd$X_Predicate$always, model));
+		}
+	});
+var _jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList = function (model) {
+	var _p15 = model.mainViewType;
+	if (_p15.ctor === 'EntityListView') {
+		return _jigargosar$elm_simple_gtd$Entity_Tree$flatten(
+			A2(_jigargosar$elm_simple_gtd$Stores$createGrouping, _p15._0, model));
+	} else {
+		return {ctor: '[]'};
+	}
+};
+var _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex = F2(
+	function (entityList, model) {
+		return A2(
+			_elm_community$list_extra$List_Extra$findIndex,
+			_jigargosar$elm_simple_gtd$Entity$equalById(model.focusInEntity),
+			entityList);
+	});
+var _jigargosar$elm_simple_gtd$Stores$focusInEntity = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.focusInEntity;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{focusInEntity: s});
+		}));
+var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursorOnGroupDocChange = F2(
+	function (oldModel, newModel) {
+		var updateEntityListCursorFromEntityIndexTuple = F2(
+			function (model, indexTuple) {
+				var setFocusInEntityByIndex = F3(
+					function (index, entityList, model) {
+						return A3(
+							_jigargosar$elm_simple_gtd$X_Record$maybeSetIn,
+							model,
+							_jigargosar$elm_simple_gtd$Stores$focusInEntity,
+							A2(
+								_elm_community$maybe_extra$Maybe_Extra$orElse,
+								_elm_lang$core$List$head(entityList),
+								A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
+									A2(_jigargosar$elm_simple_gtd$X_List$clampIndex, index, entityList))));
+					});
+				var setFocusInIndex = function (index) {
+					return A2(
+						setFocusInEntityByIndex,
+						index,
+						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(model));
+				};
+				return function () {
+					var _p16 = indexTuple;
+					if (((_p16.ctor === '_Tuple2') && (_p16._0.ctor === 'Just')) && (_p16._1.ctor === 'Nothing')) {
+						return setFocusInIndex(_p16._0._0);
+					} else {
+						return _elm_lang$core$Basics$identity;
+					}
+				}()(model);
+			});
+		return A2(
+			updateEntityListCursorFromEntityIndexTuple,
+			newModel,
+			A2(
+				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
+				function (_p17) {
+					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex, oldModel)(
+						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p17));
+				},
+				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateAllNamedDocsDocs = F4(
+	function (idSet, updateFn, store, model) {
+		return A2(
+			_Fresheyeball$elm_return$Return$map,
+			_jigargosar$elm_simple_gtd$Stores$updateEntityListCursorOnGroupDocChange(model),
+			_Fresheyeball$elm_tuple_extra$Tuple2$swap(
+				A3(
+					_jigargosar$elm_simple_gtd$X_Record$overT2,
+					store,
+					A3(
+						_jigargosar$elm_simple_gtd$Store$updateAndPersist,
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+							function (_p18) {
+								return _elm_lang$core$Set$member(
+									_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p18));
+							},
+							idSet),
+						model.now,
+						updateFn),
+					model)));
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursorFromEntityIndexTuple = F2(
+	function (model, indexTuple) {
+		var setFocusInEntityByIndex = F3(
+			function (index, entityList, model) {
+				return A3(
+					_jigargosar$elm_simple_gtd$X_Record$maybeSetIn,
+					model,
+					_jigargosar$elm_simple_gtd$Stores$focusInEntity,
+					A2(
+						_elm_community$maybe_extra$Maybe_Extra$orElse,
+						_elm_lang$core$List$head(entityList),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
+							A2(_jigargosar$elm_simple_gtd$X_List$clampIndex, index, entityList))));
+			});
+		var setFocusInIndex = function (index) {
+			return A2(
+				setFocusInEntityByIndex,
+				index,
+				_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(model));
+		};
+		return function () {
+			var _p19 = indexTuple;
+			if ((_p19.ctor === '_Tuple2') && (_p19._0.ctor === 'Just')) {
+				if (_p19._1.ctor === 'Just') {
+					var _p21 = _p19._0._0;
+					var _p20 = _p19._1._0;
+					return (_elm_lang$core$Native_Utils.cmp(_p21, _p20) < 0) ? setFocusInIndex(_p21) : ((_elm_lang$core$Native_Utils.cmp(_p21, _p20) > 0) ? setFocusInIndex(_p21 + 1) : _elm_lang$core$Basics$identity);
+				} else {
+					return setFocusInIndex(_p19._0._0);
+				}
+			} else {
+				return _elm_lang$core$Basics$identity;
+			}
+		}()(model);
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursor = F2(
+	function (oldModel, newModel) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Stores$updateEntityListCursorFromEntityIndexTuple,
+			newModel,
+			A2(
+				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
+				function (_p22) {
+					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex, oldModel)(
+						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p22));
+				},
+				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
+	});
+var _jigargosar$elm_simple_gtd$Stores$todoStore = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.todoStore;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{todoStore: s});
+		}));
+var _jigargosar$elm_simple_gtd$Stores$insertTodo = function (constructWithId) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$overT2,
+		_jigargosar$elm_simple_gtd$Stores$todoStore,
+		_jigargosar$elm_simple_gtd$Store$insert(constructWithId));
+};
+var _jigargosar$elm_simple_gtd$Stores$createTodo = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A2(
+				_jigargosar$elm_simple_gtd$Stores$insertTodo,
+				A2(_jigargosar$elm_simple_gtd$Todo$init, model.now, text),
+				model));
+	});
+var _jigargosar$elm_simple_gtd$Stores$findAndUpdateAllTodos = F3(
+	function (findFn, action, model) {
+		var updateFn = _jigargosar$elm_simple_gtd$Todo$update(action);
+		return A2(
+			_Fresheyeball$elm_return$Return$map,
+			_jigargosar$elm_simple_gtd$Stores$updateEntityListCursor(model),
+			_Fresheyeball$elm_tuple_extra$Tuple2$swap(
+				A3(
+					_jigargosar$elm_simple_gtd$X_Record$overT2,
+					_jigargosar$elm_simple_gtd$Stores$todoStore,
+					A3(_jigargosar$elm_simple_gtd$Store$updateAndPersist, findFn, model.now, updateFn),
+					model)));
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateTodo = F2(
+	function (action, todoId) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Stores$findAndUpdateAllTodos,
+			_jigargosar$elm_simple_gtd$Document$hasId(todoId),
+			action);
+	});
+var _jigargosar$elm_simple_gtd$Stores$findAndSnoozeOverDueTodo = function (model) {
+	var snooze = function (todoId) {
+		return function (_p23) {
+			var _p24 = _p23;
+			var _p25 = _p24._0;
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, _p25),
+				function (todo) {
+					return {
+						ctor: '_Tuple2',
+						_0: {ctor: '_Tuple2', _0: todo, _1: _p25},
+						_1: _p24._1
+					};
+				});
+		}(
+			A3(
+				_jigargosar$elm_simple_gtd$Stores$updateTodo,
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_AutoSnooze(model.now),
+				todoId,
+				model));
+	};
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
+		A2(
+			_jigargosar$elm_simple_gtd$Store$findBy,
+			_jigargosar$elm_simple_gtd$Todo$isReminderOverdue(model.now),
+			model.todoStore),
+		function (_p26) {
+			return snooze(
+				_jigargosar$elm_simple_gtd$Document$getId(_p26));
+		});
+};
+var _jigargosar$elm_simple_gtd$Stores$updateAllTodos = F3(
+	function (action, idSet, model) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Stores$findAndUpdateAllTodos,
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+				function (_p27) {
+					return _elm_lang$core$Set$member(
+						_jigargosar$elm_simple_gtd$Document$getId(_p27));
+				},
+				idSet),
+			action,
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected = F3(
+	function (action, todoId, model) {
+		var idSet = A2(_elm_lang$core$Set$member, todoId, model.selectedEntityIdSet) ? model.selectedEntityIdSet : _elm_lang$core$Set$singleton(todoId);
+		return A3(_jigargosar$elm_simple_gtd$Stores$updateAllTodos, action, idSet, model);
+	});
+var _jigargosar$elm_simple_gtd$Stores$projectStore = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.projectStore;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{projectStore: s});
+		}));
+var _jigargosar$elm_simple_gtd$Stores$createProject = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_jigargosar$elm_simple_gtd$X_Record$overT2,
+				_jigargosar$elm_simple_gtd$Stores$projectStore,
+				_jigargosar$elm_simple_gtd$Store$insert(
+					A2(_jigargosar$elm_simple_gtd$Project$init, text, model.now)),
+				model));
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateProject = F2(
+	function (id, updateFn) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Stores$updateAllNamedDocsDocs,
+			_elm_lang$core$Set$singleton(id),
+			updateFn,
+			_jigargosar$elm_simple_gtd$Stores$projectStore);
+	});
+var _jigargosar$elm_simple_gtd$Stores$contextStore = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.contextStore;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{contextStore: s});
+		}));
+var _jigargosar$elm_simple_gtd$Stores$createContext = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_jigargosar$elm_simple_gtd$X_Record$overT2,
+				_jigargosar$elm_simple_gtd$Stores$contextStore,
+				_jigargosar$elm_simple_gtd$Store$insert(
+					A2(_jigargosar$elm_simple_gtd$Context$init, text, model.now)),
+				model));
+	});
+var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
+	function (dbName, encodedEntity) {
+		var _p28 = dbName;
+		switch (_p28) {
+			case 'todo-db':
+				return A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+					A2(
+						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
+						_jigargosar$elm_simple_gtd$Stores$todoStore,
+						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromTodo));
+			case 'project-db':
+				return A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+					A2(
+						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
+						_jigargosar$elm_simple_gtd$Stores$projectStore,
+						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromProject));
+			case 'context-db':
+				return A2(
+					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+					A2(
+						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
+						_jigargosar$elm_simple_gtd$Stores$contextStore,
+						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromContext));
+			default:
+				return function (_p29) {
+					return _elm_lang$core$Maybe$Nothing;
+				};
+		}
+	});
+var _jigargosar$elm_simple_gtd$Stores$updateContext = F2(
+	function (id, updateFn) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Stores$updateAllNamedDocsDocs,
+			_elm_lang$core$Set$singleton(id),
+			updateFn,
+			_jigargosar$elm_simple_gtd$Stores$contextStore);
+	});

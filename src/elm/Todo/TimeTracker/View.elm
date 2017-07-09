@@ -10,6 +10,7 @@ import X.Function.Infix exposing (..)
 import Todo
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Stores
 
 
 -- View
@@ -21,7 +22,7 @@ createViewModel appModel tracker =
             Todo.TimeTracker.getElapsedTime appModel.now tracker
 
         todoText =
-            Model.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
+            Stores.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
     in
         { displayText = todoText
         , displayTime = X.Time.toHHMMSS elapsedTime

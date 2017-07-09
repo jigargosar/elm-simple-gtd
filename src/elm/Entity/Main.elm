@@ -7,6 +7,7 @@ import GroupDoc
 import Model
 import Msg
 import Return
+import Stores
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 
@@ -43,10 +44,10 @@ update andThenUpdate entity msg =
                             Entity.Types.GroupEntity g ->
                                 (case g of
                                     Entity.Types.ContextEntity context ->
-                                        Model.updateContext entityId GroupDoc.toggleArchived
+                                        Stores.updateContext entityId GroupDoc.toggleArchived
 
                                     Entity.Types.ProjectEntity project ->
-                                        Model.updateProject entityId GroupDoc.toggleArchived
+                                        Stores.updateProject entityId GroupDoc.toggleArchived
                                 )
                                     |> Return.andThen
 

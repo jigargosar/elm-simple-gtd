@@ -16,6 +16,7 @@ import GroupDoc.Types
 import Msg
 import Model
 import Msg exposing (..)
+import Stores
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
@@ -145,15 +146,15 @@ contexts : AppModel -> ViewModel
 contexts model =
     let
         archivedFilter =
-            Model.filterContexts GroupDoc.archivedButNotDeletedPred
+            Stores.filterContexts GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.filterContexts GroupDoc.isActive
+            Stores.filterContexts GroupDoc.isActive
 
         config : Config
         config =
             { groupByFn = Todo.getContextId
-            , todoList = Model.getActiveTodoListHavingActiveProject model
+            , todoList = Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
             , toEntity = Entity.fromContext
@@ -193,15 +194,15 @@ projects : AppModel -> ViewModel
 projects model =
     let
         archivedFilter =
-            Model.filterProjects GroupDoc.archivedButNotDeletedPred
+            Stores.filterProjects GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.filterProjects GroupDoc.isActive
+            Stores.filterProjects GroupDoc.isActive
 
         config : Config
         config =
             { groupByFn = Todo.getProjectId
-            , todoList = Model.getActiveTodoListHavingActiveContext model
+            , todoList = Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
             , toEntity = Entity.fromProject

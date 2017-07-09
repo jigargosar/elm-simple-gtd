@@ -14,7 +14,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId = F2(
 					return false;
 				}
 			},
-			_jigargosar$elm_simple_gtd$Model$getCurrentViewEntityList(model));
+			_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(model));
 		return A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
 			function (_p1) {
@@ -171,7 +171,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$showRunningNotificationCmd = function (
 			function (info) {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					A2(_jigargosar$elm_simple_gtd$Model$findTodoById, info.todoId, _p6._1),
+					A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, info.todoId, _p6._1),
 					createRequest(info));
 			}));
 };
@@ -252,7 +252,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Notification$closeNotification(todoId),
 						A2(
 							_Fresheyeball$elm_return$Return$andThen,
-							A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_MarkDone, todoId),
+							A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_MarkDone, todoId),
 							_p14));
 				} : function (_p15) {
 					return andThenUpdate(
@@ -285,7 +285,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
 					A2(
 						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-						_jigargosar$elm_simple_gtd$Model$findAndSnoozeOverDueTodo,
+						_jigargosar$elm_simple_gtd$Stores$findAndSnoozeOverDueTodo,
 						_Fresheyeball$elm_return$Return$andThen(_jigargosar$elm_simple_gtd$Todo_Main$showReminderNotificationCmd)));
 			default:
 				return function (_p19) {
@@ -293,7 +293,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
-							A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0))(_p19));
+							A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0))(_p19));
 				};
 		}
 	});

@@ -34,9 +34,9 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 							function () {
 								var _p4 = _p3._0;
 								if (_p4.ctor === 'ContextEntity') {
-									return A2(_jigargosar$elm_simple_gtd$Model$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
+									return A2(_jigargosar$elm_simple_gtd$Stores$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
 								} else {
-									return A2(_jigargosar$elm_simple_gtd$Model$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
+									return A2(_jigargosar$elm_simple_gtd$Stores$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
 								}
 							}());
 					} else {

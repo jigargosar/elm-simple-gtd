@@ -37,7 +37,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
 	function (form, model) {
 		return A3(
 			_jigargosar$elm_simple_gtd$Menu$view,
-			_jigargosar$elm_simple_gtd$Model$getActiveContexts(model),
+			_jigargosar$elm_simple_gtd$Stores$getActiveContexts(model),
 			form.menuState,
 			A2(_jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$project = F2(
 	function (form, model) {
 		return A3(
 			_jigargosar$elm_simple_gtd$Menu$view,
-			_jigargosar$elm_simple_gtd$Model$getActiveProjects(model),
+			_jigargosar$elm_simple_gtd$Stores$getActiveProjects(model),
 			form.menuState,
 			A2(_jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig, form, model));
 	});

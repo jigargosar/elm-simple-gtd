@@ -6,6 +6,7 @@ import Entity.Types exposing (EntityListViewType)
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
+import Stores
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
 import X.Keyboard exposing (onKeyDown)
@@ -23,7 +24,7 @@ list : EntityListViewType -> AppModel -> Html.Html Msg
 list viewType model =
     let
         grouping =
-            Model.createGrouping viewType model
+            Stores.createGrouping viewType model
 
         entityList =
             grouping |> Entity.Tree.flatten

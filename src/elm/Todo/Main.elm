@@ -6,6 +6,7 @@ import Entity.Types
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
 import Msg
+import Stores
 import Todo.NewForm
 import X.Record as Record exposing (set)
 import X.Return
@@ -137,7 +138,7 @@ update andThenUpdate now todoMsg =
                     data.id
             in
                 if action == "mark-done" then
-                    Return.andThen (Model.updateTodo TA_MarkDone todoId)
+                    Return.andThen (Stores.updateTodo TA_MarkDone todoId)
                         >> command (Notification.closeNotification todoId)
                 else
                     todoId
@@ -167,10 +168,10 @@ update andThenUpdate now todoMsg =
 
         OnProcessPendingNotificationCronTick ->
             X.Return.andThenMaybe
-                (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
+                (Stores.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
         OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId action ->
-            (Model.updateTodoAndMaybeAlsoSelected action todoId |> andThen)
+            (Stores.updateTodoAndMaybeAlsoSelected action todoId |> andThen)
                 -- todo: if we had use save editing form, we would't missed calling on deactivate.
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(
@@ -220,7 +221,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                 }
     in
         maybeTrackerInfo
-            ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
+            ?+> (\info -> Stores.findTodoById info.todoId model ?|> createRequest info)
             |> maybeMapToCmd showRunningTodoNotification
 
 
@@ -243,7 +244,7 @@ gotoTodoWithIdIn =
 gotoTodoWithId todoId model =
     let
         maybeTodoEntity =
-            Model.getCurrentViewEntityList model
+            Stores.getCurrentViewEntityList model
                 |> List.find
                     (\entity ->
                         case entity of

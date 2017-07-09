@@ -12,12 +12,13 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import Model
+import Stores
 
 
 init form m =
     let
         fuzzyResults =
-            LaunchBar.getFuzzyResults form.input (Model.getActiveContexts m) (Model.getActiveProjects m)
+            LaunchBar.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
 
         matchingEntity =
             fuzzyResults

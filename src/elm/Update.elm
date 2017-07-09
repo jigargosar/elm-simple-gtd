@@ -12,6 +12,7 @@ import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Msg exposing (..)
+import Stores
 import Todo.Notification.Types
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
 import X.Keyboard as Keyboard exposing (Key)
@@ -195,7 +196,7 @@ withNow toMsg =
 
 
 updateTodoAndMaybeAlsoSelected action todoId =
-    Return.andThen (Model.updateTodoAndMaybeAlsoSelected action todoId)
+    Return.andThen (Stores.updateTodoAndMaybeAlsoSelected action todoId)
 
 
 andThenUpdate =
@@ -222,7 +223,7 @@ reminderOverlayAction action =
                         in
                             case action of
                                 Todo.Notification.Model.Dismiss ->
-                                    Model.updateTodo (TA_TurnReminderOff) todoId
+                                    Stores.updateTodo (TA_TurnReminderOff) todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
@@ -240,7 +241,7 @@ reminderOverlayAction action =
                                         >> Return.singleton
 
                                 Todo.Notification.Model.MarkDone ->
-                                    Model.updateTodo TA_MarkDone todoId
+                                    Stores.updateTodo TA_MarkDone todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
@@ -276,14 +277,14 @@ onSubMsg subMsg =
                             Model.noop
             in
                 Return.andThenMaybe
-                    (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
+                    (Stores.upsertEncodedDocOnPouchDBChange dbName encodedDoc
                         >>? (Tuple2.mapFirst afterEntityUpsertOnPouchDBChange
                                 >> uncurry update
                             )
                     )
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
+            Return.effect_ (Stores.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
 
 onGlobalKeyUp : Key -> ReturnF

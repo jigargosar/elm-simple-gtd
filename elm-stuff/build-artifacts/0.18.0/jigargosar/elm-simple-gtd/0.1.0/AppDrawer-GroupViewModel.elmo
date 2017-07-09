@@ -44,10 +44,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList = F2(
 			A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create, getTodoListWithGroupId, config));
 	});
 var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (model) {
-	var activeFilter = _jigargosar$elm_simple_gtd$Model$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
+	var activeFilter = _jigargosar$elm_simple_gtd$Stores$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
 	var config = {
 		groupByFn: _jigargosar$elm_simple_gtd$Todo$getContextId,
-		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveProject(model),
+		todoList: _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveProject(model),
 		namePrefix: '@',
 		filter: activeFilter,
 		toEntity: _jigargosar$elm_simple_gtd$Entity$fromContext,
@@ -61,7 +61,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 	var entityList = A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, config, model);
 	var nullVMAsList = _jigargosar$elm_simple_gtd$X_Maybe$toList(
 		_elm_lang$core$List$head(entityList));
-	var archivedFilter = _jigargosar$elm_simple_gtd$Model$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$archivedButNotDeletedPred);
+	var archivedFilter = _jigargosar$elm_simple_gtd$Stores$filterContexts(_jigargosar$elm_simple_gtd$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});
@@ -81,10 +81,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 	};
 };
 var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (model) {
-	var activeFilter = _jigargosar$elm_simple_gtd$Model$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
+	var activeFilter = _jigargosar$elm_simple_gtd$Stores$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$isActive);
 	var config = {
 		groupByFn: _jigargosar$elm_simple_gtd$Todo$getProjectId,
-		todoList: _jigargosar$elm_simple_gtd$Model$getActiveTodoListHavingActiveContext(model),
+		todoList: _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveContext(model),
 		namePrefix: '#',
 		filter: activeFilter,
 		toEntity: _jigargosar$elm_simple_gtd$Entity$fromProject,
@@ -98,7 +98,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 	var entityList = A2(_jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$createList, config, model);
 	var nullVMAsList = _jigargosar$elm_simple_gtd$X_Maybe$toList(
 		_elm_lang$core$List$head(entityList));
-	var archivedFilter = _jigargosar$elm_simple_gtd$Model$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$archivedButNotDeletedPred);
+	var archivedFilter = _jigargosar$elm_simple_gtd$Stores$filterProjects(_jigargosar$elm_simple_gtd$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});

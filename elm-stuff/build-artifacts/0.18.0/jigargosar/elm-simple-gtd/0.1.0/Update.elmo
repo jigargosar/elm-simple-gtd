@@ -39,7 +39,7 @@ var _jigargosar$elm_simple_gtd$Update$reminderOverlayAction = function (action) 
 									A2(
 										_elm_lang$core$Tuple$mapFirst,
 										_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
-										A3(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_TurnReminderOff, todoId, _p2)));
+										A3(_jigargosar$elm_simple_gtd$Stores$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_TurnReminderOff, todoId, _p2)));
 							};
 						case 'ShowSnoozeOptions':
 							return function (_p3) {
@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Update$reminderOverlayAction = function (action) 
 									A2(
 										_elm_lang$core$Tuple$mapFirst,
 										_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
-										A3(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_MarkDone, todoId, _p6)));
+										A3(_jigargosar$elm_simple_gtd$Stores$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_MarkDone, todoId, _p6)));
 							};
 					}
 				} else {
@@ -87,7 +87,7 @@ var _jigargosar$elm_simple_gtd$Update$maybeMapToCmd = function (fn) {
 var _jigargosar$elm_simple_gtd$Update$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todoId) {
 		return _Fresheyeball$elm_return$Return$andThen(
-			A2(_jigargosar$elm_simple_gtd$Model$updateTodoAndMaybeAlsoSelected, action, todoId));
+			A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, action, todoId));
 	});
 var _jigargosar$elm_simple_gtd$Update$withNow = function (toMsg) {
 	return _jigargosar$elm_simple_gtd$Update$command(
@@ -357,7 +357,7 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = function (subMsg) {
 			return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
 				A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-					A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnPouchDBChange, _p38._0, _p38._1),
+					A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange, _p38._0, _p38._1),
 					function (_p41) {
 						return A2(
 							_elm_lang$core$Basics$uncurry,
@@ -366,7 +366,7 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = function (subMsg) {
 					}));
 		default:
 			return _Fresheyeball$elm_return$Return$effect_(
-				A2(_jigargosar$elm_simple_gtd$Model$upsertEncodedDocOnFirebaseChange, _p38._0, _p38._1));
+				A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange, _p38._0, _p38._1));
 	}
 };
 var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {

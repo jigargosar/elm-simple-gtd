@@ -6,6 +6,7 @@ import Menu
 import Model
 import Msg
 import Project
+import Stores
 import Todo.FormTypes exposing (TodoGroupFrom)
 import Html exposing (..)
 import Todo.Msg
@@ -48,13 +49,13 @@ createContextMenuConfig ({ todoId, contextId } as form) model =
 
 
 project form model =
-    Menu.view (Model.getActiveProjects model)
+    Menu.view (Stores.getActiveProjects model)
         form.menuState
         (createProjectMenuConfig form model)
 
 
 context form model =
-    Menu.view (Model.getActiveContexts model)
+    Menu.view (Stores.getActiveContexts model)
         form.menuState
         (createContextMenuConfig form model)
 

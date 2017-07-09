@@ -94,7 +94,7 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$createViewModel = F2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_jigargosar$elm_simple_gtd$Model$findTodoById, tracker.todoId, appModel),
+				A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, tracker.todoId, appModel),
 				_jigargosar$elm_simple_gtd$Todo$getText),
 			tracker.todoId);
 		var elapsedTime = A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$getElapsedTime, appModel.now, tracker);

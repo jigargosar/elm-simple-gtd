@@ -32,7 +32,7 @@ import Todo.Main
 import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
-import Types exposing (AppModel)
+import Types exposing (AppModel, Return, ReturnF)
 
 
 map =

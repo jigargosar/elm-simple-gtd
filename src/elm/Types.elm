@@ -10,6 +10,7 @@ import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Keyboard.Combo
 import Material
 import Msg exposing (Msg)
+import Return
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
@@ -49,3 +50,19 @@ type alias AppModel =
     , mdl : Material.Model
     , keyboardState : KeyboardState
     }
+
+
+type alias Return =
+    Return.Return Msg AppModel
+
+
+type alias ModelReturnF =
+    AppModel -> Return
+
+
+type alias ReturnF =
+    Return.Return Msg AppModel -> Return.Return Msg AppModel
+
+
+type alias ModelF =
+    AppModel -> AppModel

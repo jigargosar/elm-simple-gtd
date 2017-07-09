@@ -5,6 +5,7 @@ import AppDrawer.Types exposing (Msg(..))
 import Model
 import Msg
 import Return
+import Types exposing (ReturnF)
 import Window
 import X.Record exposing (over, set, toggle)
 
@@ -20,9 +21,9 @@ subscriptions model =
 
 
 update :
-    (Msg.Msg -> Model.ReturnF)
+    (Msg.Msg -> ReturnF)
     -> AppDrawer.Types.Msg
-    -> Model.ReturnF
+    -> ReturnF
 update andThenUpdate msg =
     (case msg of
         OnToggleContextsExpanded ->

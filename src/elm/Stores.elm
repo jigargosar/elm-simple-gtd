@@ -16,6 +16,7 @@ import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
+import Types exposing (AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -27,29 +28,6 @@ import Set
 import Tuple2
 import X.List
 import X.Predicate
-
-
-type alias AppModel a =
-    { a
-        | contextStore : ContextStore
-        , focusInEntity : EntityType
-        , mainViewType : ViewType
-        , now : Time
-        , projectStore : ProjectStore
-        , todoStore : TodoStore
-    }
-
-
-type alias Return a =
-    Return.Return Msg (AppModel a)
-
-
-type alias ModelReturnF a =
-    AppModel a -> Return a
-
-
-type alias ModelF a =
-    AppModel a -> AppModel a
 
 
 contextStore =
@@ -80,12 +58,12 @@ createProject text model =
         |> Tuple.second
 
 
-insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel a -> ( TodoDoc, AppModel a )
+insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
 insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel a -> Maybe ( EntityType, AppModel a )
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( EntityType, AppModel )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -241,12 +219,12 @@ filterProjects pred model =
         |> Project.sort
 
 
-findTodoById : DocId -> AppModel a -> Maybe TodoDoc
+findTodoById : DocId -> AppModel -> Maybe TodoDoc
 findTodoById id =
     .todoStore >> Store.findById id
 
 
-findProjectById : DocId -> AppModel a -> Maybe Project.Model
+findProjectById : DocId -> AppModel -> Maybe Project.Model
 findProjectById id =
     .projectStore
         >> Store.findById id
@@ -257,7 +235,7 @@ findProjectByIdIn =
     flip findProjectById
 
 
-findContextById : DocId -> AppModel a -> Maybe Context.Model
+findContextById : DocId -> AppModel -> Maybe Context.Model
 findContextById id =
     .contextStore
         >> Store.findById id
@@ -320,7 +298,7 @@ getActiveContexts =
     filterContexts GroupDoc.isActive
 
 
-createGrouping : EntityListViewType -> AppModel a -> Entity.Tree.Tree
+createGrouping : EntityListViewType -> AppModel -> Entity.Tree.Tree
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =
@@ -387,12 +365,12 @@ updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
-updateTodo : TodoAction -> DocId -> ModelReturnF a
+updateTodo : TodoAction -> DocId -> ModelReturnF
 updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 
 
-updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF a
+updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
 updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
@@ -422,7 +400,7 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
-findAndSnoozeOverDueTodo : AppModel a -> Maybe ( ( TodoDoc, AppModel a ), Cmd Msg )
+findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd Msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
@@ -435,7 +413,7 @@ findAndSnoozeOverDueTodo model =
             ?+> (Document.getId >> snooze)
 
 
-upsertEncodedDocOnFirebaseChange : String -> E.Value -> AppModel a -> Cmd msg
+upsertEncodedDocOnFirebaseChange : String -> E.Value -> AppModel -> Cmd msg
 upsertEncodedDocOnFirebaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -451,11 +429,11 @@ upsertEncodedDocOnFirebaseChange dbName encodedEntity =
             (\_ -> Cmd.none)
 
 
-setProjectStore : ProjectStore -> ModelF a
+setProjectStore : ProjectStore -> ModelF
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-setContextStore : ContextStore -> ModelF a
+setContextStore : ContextStore -> ModelF
 setContextStore contextStore model =
     { model | contextStore = contextStore }

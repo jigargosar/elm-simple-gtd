@@ -15,7 +15,7 @@ import Material
 import Msg exposing (..)
 import Stores exposing (findTodoById, insertTodo, setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
-import Types exposing (AppConfig, AppModel)
+import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
@@ -82,10 +82,6 @@ noop =
 
 logString =
     commonMsg.logString
-
-
-type alias ModelF =
-    AppModel -> AppModel
 
 
 type alias Subscriptions =
@@ -239,18 +235,6 @@ init flags =
 
 defaultView =
     EntityListView Entity.defaultListView
-
-
-type alias Return =
-    Return.Return Msg AppModel
-
-
-type alias ModelReturnF =
-    AppModel -> Return
-
-
-type alias ReturnF =
-    Return.Return Msg AppModel -> Return.Return Msg AppModel
 
 
 inboxEntity =

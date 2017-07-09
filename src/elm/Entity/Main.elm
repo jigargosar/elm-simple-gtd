@@ -10,13 +10,14 @@ import Return
 import Stores
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
+import Types exposing (ReturnF)
 
 
 update :
-    (Msg.Msg -> Model.ReturnF)
+    (Msg.Msg -> ReturnF)
     -> EntityType
     -> Entity.Types.Msg
-    -> Model.ReturnF
+    -> ReturnF
 update andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->

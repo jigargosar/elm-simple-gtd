@@ -25,6 +25,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone))
+import Types exposing (ReturnF)
 
 
 port showTodoReminderNotification : Notification.TodoNotification -> Cmd msg
@@ -78,10 +79,10 @@ subscriptions m =
 
 
 update :
-    (Msg.Msg -> Model.ReturnF)
+    (Msg.Msg -> ReturnF)
     -> Time.Time
     -> TodoMsg
-    -> Model.ReturnF
+    -> ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
         UpdateSetupFormTodoText form todoText ->

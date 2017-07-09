@@ -7,6 +7,7 @@ import Model
 import Msg
 import Return
 import Time
+import Types exposing (ReturnF)
 
 
 map =
@@ -14,10 +15,10 @@ map =
 
 
 update :
-    (Msg.Msg -> Model.ReturnF)
+    (Msg.Msg -> ReturnF)
     -> Time.Time
     -> LBMsg
-    -> Model.ReturnF
+    -> ReturnF
 update andThenUpdate now msg =
     case msg of
         OnLBEnter entity ->

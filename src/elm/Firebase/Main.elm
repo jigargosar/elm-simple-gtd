@@ -15,6 +15,7 @@ import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg
+import Types exposing (ReturnF)
 
 
 port signIn : () -> Cmd msg
@@ -71,9 +72,9 @@ overSignInModel =
 
 
 update :
-    (Msg.Msg -> Model.ReturnF)
+    (Msg.Msg -> ReturnF)
     -> FirebaseMsg
-    -> Model.ReturnF
+    -> ReturnF
 update andThenUpdate msg =
     case msg of
         OnFBNOOP ->

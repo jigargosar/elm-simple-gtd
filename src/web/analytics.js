@@ -6,7 +6,7 @@ F.onAuthStateChanged()
  .observe({
    value: user => {
 
-     console.log("onAuthStateChanged", !!user)
+     // console.log("onAuthStateChanged", !!user)
 
      if (user) {
        Cookies.set("firebase_uid", user.uid, {expires: 30})

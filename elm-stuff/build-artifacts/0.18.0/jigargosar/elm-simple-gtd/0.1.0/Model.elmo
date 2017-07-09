@@ -1355,7 +1355,6 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		signInModel: localPref.signIn,
 		mdl: _debois$elm_mdl$Material$model
 	};
-	var _p61 = 1;
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };
 var _jigargosar$elm_simple_gtd$Model$Flags = function (a) {

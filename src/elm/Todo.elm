@@ -1,7 +1,5 @@
 module Todo exposing (..)
 
-import Context
-import Date
 import Document exposing (Revision)
 import Document.Types exposing (DocId)
 import X.Record exposing (over, set)
@@ -15,7 +13,6 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List
 import Time exposing (Time)
-import Project
 import Store
 import Todo.Schedule
 import Todo.Types exposing (TodoAction(..))

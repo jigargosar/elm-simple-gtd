@@ -1,6 +1,5 @@
 module AppDrawer.Model exposing (..)
 
-import AppDrawer.Types
 import X.Record exposing (get, over, set, toggle)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

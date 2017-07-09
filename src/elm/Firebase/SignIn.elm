@@ -1,6 +1,5 @@
 module Firebase.SignIn exposing (..)
 
-import Firebase
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)

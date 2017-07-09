@@ -1,8 +1,6 @@
 module Mat exposing (..)
 
 import AppColors
-import Color
-import Color.Mixing
 import Html exposing (..)
 import Html.Attributes
 import Html.Attributes as HA
@@ -14,11 +12,8 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Html
-import X.Keyboard
 import X.String
 import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
-import Json.Encode as E
 
 
 stopPropagation =

@@ -4,10 +4,7 @@ import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
 import Mat
-import Model
-import Model
 import X.Function.Infix exposing (..)
-import Model exposing (Model)
 import Msg
 
 

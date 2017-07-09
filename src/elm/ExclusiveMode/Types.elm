@@ -1,8 +1,5 @@
 module ExclusiveMode.Types exposing (..)
 
-import LaunchBar.Form
-
-
 -- small so safe
 
 import GroupDoc.FormTypes exposing (GroupDocEditForm)

@@ -1,6 +1,5 @@
 module Context exposing (..)
 
-import Document exposing (Document, Revision)
 import Document.Types exposing (DeviceId, DocId)
 import GroupDoc
 import GroupDoc.Types exposing (..)

@@ -2,7 +2,6 @@ module Todo.MoreMenu exposing (..)
 
 import Html
 import Menu
-import Todo.Menu
 import Model
 import Msg
 import Todo.FormTypes exposing (TodoMoreMenuForm)

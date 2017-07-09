@@ -11,7 +11,6 @@ import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
-import Html
 import Model exposing (commonMsg)
 import Todo
 import Model

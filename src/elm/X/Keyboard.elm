@@ -1,6 +1,5 @@
 module X.Keyboard exposing (..)
 
-import X.Debug
 import X.Decode exposing (traceDecoder)
 import X.Html
 import Html exposing (Attribute)

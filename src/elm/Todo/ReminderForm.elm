@@ -2,9 +2,7 @@ module Todo.ReminderForm exposing (..)
 
 import Date
 import Document
-import Document.Types exposing (DocId)
 import Menu
-import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Time.Format
 import Todo.Types exposing (TodoDoc)

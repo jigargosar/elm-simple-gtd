@@ -2,14 +2,9 @@ module Todo.View exposing (..)
 
 import Context
 import Date
-import Dict
 import Document
-import Entity
 import Entity.Types
 import Material
-import Material.Button
-import Material.Icon
-import Material.Options
 import Msg exposing (Msg)
 import Store
 import Todo.FormTypes exposing (EditTodoFormAction(SetText), EditTodoReminderFormAction(SetDate, SetTime), TodoEditForm)
@@ -28,10 +23,8 @@ import Set
 import String.Extra as String
 import Time exposing (Time)
 import Todo
-import Todo.Form
 import Todo.Msg
 import Todo.NewForm
-import Todo.ReminderForm
 import Todo.View.Menu
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -40,7 +33,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
-import ViewModel
 import WebComponents exposing (..)
 
 

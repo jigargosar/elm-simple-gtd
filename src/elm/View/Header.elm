@@ -1,15 +1,9 @@
 module View.Header exposing (..)
 
 import AppColors
-import AppDrawer.Model
 import AppDrawer.Types
-import AppUrl
-import Color
 import Mat
-import X.Html exposing (boolProperty)
 import Firebase
-import Model
-import Model exposing (Model)
 import Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -17,7 +11,6 @@ import Html.Events exposing (..)
 import Todo.TimeTracker.View
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import WebComponents exposing (..)
 import X.List
 
 

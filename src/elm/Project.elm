@@ -1,6 +1,5 @@
 module Project exposing (..)
 
-import Document exposing (Document, Revision)
 import Document.Types exposing (DocId)
 import Firebase exposing (DeviceId)
 import GroupDoc

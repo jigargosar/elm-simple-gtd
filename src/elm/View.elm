@@ -6,12 +6,8 @@ import AppDrawer.View
 import CustomSync
 import Entity.View
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
-import Mat
-import Material.Options
-import Menu
 import Msg exposing (ViewType(..))
 import X.Html exposing (boolProperty, onClickStopPropagation)
-import ExclusiveMode
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -20,7 +16,6 @@ import View.Header
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel
-import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
 import GroupDoc.EditView
 import Todo.MoreMenu

@@ -38,7 +38,6 @@ import Set exposing (Set)
 import Store
 import Time exposing (Time)
 import Todo
-import Todo.Form
 import Todo.Msg
 import Todo.NewForm
 import Todo.ReminderForm
@@ -49,7 +48,6 @@ import Tuple2
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import LaunchBar
 import Todo.GroupForm
 import Todo.TimeTracker
 import X.Debug

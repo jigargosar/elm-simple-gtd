@@ -1,8 +1,6 @@
 module Todo.Menu exposing (..)
 
-import Document.Types exposing (DocId)
 import Menu
-import Menu.Types exposing (MenuState)
 
 
 init todoId =

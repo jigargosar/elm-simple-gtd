@@ -1,6 +1,5 @@
 module Todo.NewForm exposing (..)
 
-import Entity
 import Entity.Types exposing (EntityType)
 import Todo
 import Todo.FormTypes exposing (AddTodoForm)

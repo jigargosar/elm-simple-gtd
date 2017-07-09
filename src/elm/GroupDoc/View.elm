@@ -1,6 +1,5 @@
 module GroupDoc.View exposing (..)
 
-import Entity
 import Entity.Types
 import GroupDoc.ViewModel exposing (ViewModel)
 import Msg
@@ -9,7 +8,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Keyed
 import Mat
-import Model
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import View.Shared exposing (defaultOkCancelDeleteButtons)

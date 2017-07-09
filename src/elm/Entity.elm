@@ -1,6 +1,5 @@
 module Entity exposing (..)
 
-import Context
 import Document
 import Entity.Types exposing (EntityType(..), GroupEntityType(..), EntityListViewType(..))
 import X.List as List
@@ -9,7 +8,6 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Project
 import Todo
 
 

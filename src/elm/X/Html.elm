@@ -3,10 +3,6 @@ module X.Html exposing (..)
 import Html exposing (Attribute)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onWithOptions)
-import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 

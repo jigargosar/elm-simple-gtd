@@ -1,7 +1,6 @@
 module View.GetStarted exposing (..)
 
 import AppUrl
-import Firebase
 import Firebase.Types exposing (FirebaseMsg(OnFBNOOP, OnFBSignIn, OnFBSkipSignIn))
 import Model
 import Msg

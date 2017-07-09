@@ -1,12 +1,9 @@
 module WebComponents exposing (..)
 
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode
-import Mat
 import String.Extra
-import X.Html exposing (onClickStopPropagation)
 
 
 onBoolPropertyChanged propertyName tagger =

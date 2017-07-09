@@ -1,12 +1,6 @@
 port module Firebase exposing (..)
 
 import Firebase.Model as Model
-import Firebase.User
-import Json.Decode
-import X.Function.Infix exposing (..)
-import Json.Decode as D exposing (Decoder)
-import Json.Encode as E
-import Json.Encode.Extra as E
 import X.Html
 
 

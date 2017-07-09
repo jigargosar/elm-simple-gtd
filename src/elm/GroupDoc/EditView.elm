@@ -1,11 +1,9 @@
 module GroupDoc.EditView exposing (..)
 
-import Entity
 import Entity.Types
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import Msg
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
-import GroupDoc.EditForm
 import Model
 import Html exposing (..)
 import Html.Attributes exposing (..)

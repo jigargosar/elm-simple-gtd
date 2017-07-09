@@ -8,7 +8,6 @@ import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model
 import Time
-import WebComponents exposing (..)
 
 
 maybeOverlay m =

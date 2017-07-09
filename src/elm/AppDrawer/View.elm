@@ -8,7 +8,6 @@ import X.Html exposing (boolProperty, onClickStopPropagation)
 import Mat
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import Entity
 import AppDrawer.GroupViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -18,7 +17,6 @@ import Model exposing (..)
 import X.Function.Infix exposing (..)
 import Model
 import View.Shared exposing (..)
-import ViewModel
 
 
 sidebarHeader appVM m =

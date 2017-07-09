@@ -1,8 +1,6 @@
 module Todo.Form exposing (..)
 
 import Document
-import Document.Types exposing (DocId)
-import Entity
 import Entity.Types exposing (EntityType(TodoEntity))
 import Todo.FormTypes exposing (EditTodoFormAction(SetText), TodoEditForm)
 import Todo.Types exposing (TodoDoc, getTodoText)

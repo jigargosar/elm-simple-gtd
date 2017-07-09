@@ -13,7 +13,6 @@ import Html.Keyed
 import Model
 import Msg exposing (..)
 import Todo.View exposing (TodoViewModel)
-import ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import View.Shared exposing (badge)

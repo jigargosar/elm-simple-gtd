@@ -6,11 +6,8 @@ import Menu
 import Model
 import Msg
 import Project
-import Todo
 import Todo.FormTypes exposing (TodoGroupFrom)
-import Toolkit.Operators exposing (..)
 import Html exposing (..)
-import Todo.GroupForm
 import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
 

@@ -1,11 +1,9 @@
 port module Main exposing (..)
 
 import AppDrawer.Main
-import Firebase
 import Firebase.Main
 import Keyboard.Combo
 import Model
-import Return
 import RouteUrl
 import Routes
 import Store
@@ -14,8 +12,6 @@ import Todo.Main
 import Update
 import View
 import X.Keyboard
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Msg
 

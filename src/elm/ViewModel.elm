@@ -2,16 +2,10 @@ module ViewModel exposing (..)
 
 import AppColors
 import Color
-import Context
-import Dict exposing (Dict)
-import Entity
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Entity.Types
 import Material
 import Msg exposing (..)
-import Project
-import Set exposing (Set)
-import Time exposing (Time)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List

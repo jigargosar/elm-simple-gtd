@@ -4,7 +4,6 @@ import Document
 import DomPorts
 import Entity.Types
 import ExclusiveMode
-import Entity
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
 import Msg
 import Todo.NewForm

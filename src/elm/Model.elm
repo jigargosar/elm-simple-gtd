@@ -94,7 +94,6 @@ type alias Model =
     , contextStore : ContextStore
     , editMode : ExclusiveMode
     , mainViewType : ViewType
-    , keyboardState : KeyboardState
     , reminderOverlay : Todo.Notification.Model.Model
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
@@ -111,6 +110,7 @@ type alias Model =
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model
     , mdl : Material.Model
+    , keyboardState : KeyboardState
     }
 
 

@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			count: count,
 			onActiveStateChanged: function (bool) {
 				return bool ? _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
-					_jigargosar$elm_simple_gtd$Msg$EntityListView(
+					_jigargosar$elm_simple_gtd$Types$EntityListView(
 						config.getViewType(id))) : _jigargosar$elm_simple_gtd$Model$noop;
 			},
 			icon: icon,

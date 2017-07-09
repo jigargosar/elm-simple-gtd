@@ -6,8 +6,9 @@ import Entity.Types
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
 import Msg
-import Stores
+import Stores exposing (findTodoById)
 import Todo.NewForm
+import Todo.Notification.Model
 import X.Record as Record exposing (set)
 import X.Return
 import X.Time
@@ -26,6 +27,7 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone))
 import Types exposing (ReturnF)
+import X.Function exposing (applyMaybeWith)
 
 
 port showTodoReminderNotification : Notification.TodoNotification -> Cmd msg
@@ -148,7 +150,7 @@ update andThenUpdate now todoMsg =
                         >> andThenUpdate
 
         ShowReminderOverlayForTodoId todoId ->
-            Return.map (Model.showReminderOverlayForTodoId todoId)
+            Return.map (showReminderOverlayForTodoId todoId)
 
         RunningNotificationResponse res ->
             let
@@ -268,3 +270,12 @@ gotoTodoWithId todoId model =
 
 positionMoreMenuCmd todoId =
     DomPorts.positionPopupMenu ("#todo-more-menu-button-" ++ todoId)
+
+
+showReminderOverlayForTodoId todoId =
+    applyMaybeWith (findTodoById todoId)
+        (setReminderOverlayToInitialView)
+
+
+setReminderOverlayToInitialView todo model =
+    { model | reminderOverlay = Todo.Notification.Model.initialView todo }

@@ -241,15 +241,6 @@ inboxEntity =
     Entity.fromContext Context.null
 
 
-setReminderOverlayToInitialView todo model =
-    { model | reminderOverlay = Todo.Notification.Model.initialView todo }
-
-
-showReminderOverlayForTodoId todoId =
-    applyMaybeWith (findTodoById todoId)
-        (setReminderOverlayToInitialView)
-
-
 removeReminderOverlay model =
     { model | reminderOverlay = Todo.Notification.Model.none }
 

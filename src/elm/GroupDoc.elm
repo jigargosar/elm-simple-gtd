@@ -14,7 +14,6 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
-import Store.Types exposing (Store)
 
 
 archived =

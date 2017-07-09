@@ -2,7 +2,6 @@ module Todo exposing (..)
 
 import Document exposing (Revision)
 import Document.Types exposing (DocId)
-import Store.Types exposing (Store)
 import X.Record exposing (over, set)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -14,7 +13,6 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List
 import Time exposing (Time)
-import Store
 import Todo.Schedule
 import Todo.Types exposing (TodoAction(..))
 

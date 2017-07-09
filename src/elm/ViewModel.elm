@@ -5,13 +5,10 @@ import Color
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Entity.Types
 import Material
-import Msg exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model
-import Msg exposing (..)
 import Types exposing (AppModel)
 import ViewType exposing (ViewType(EntityListView, SyncView))
 

@@ -5,28 +5,20 @@ import CommonMsg
 import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId)
-import Entity.Tree
 import Entity.Types exposing (EntityListViewType, EntityType)
 import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase
 import Firebase.SignIn
-import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
-import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Msg exposing (..)
 import Stores exposing (findTodoById, insertTodo, setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
-import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
 import Types exposing (AppConfig, AppModel)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
-import X.List as List
-import X.Predicate as Pred
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
-import Firebase.Types exposing (DeviceId)
-import GroupDoc
 import Keyboard.Combo exposing (combo1, combo2, combo3)
 import Keyboard.Combo as Combo
 import LaunchBar.Form

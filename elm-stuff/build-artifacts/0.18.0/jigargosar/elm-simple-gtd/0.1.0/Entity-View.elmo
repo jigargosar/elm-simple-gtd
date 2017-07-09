@@ -135,7 +135,7 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 	});
 var _jigargosar$elm_simple_gtd$Entity_View$list = F2(
 	function (viewType, model) {
-		var grouping = A2(_jigargosar$elm_simple_gtd$Model$createGrouping, viewType, model);
+		var grouping = A2(_jigargosar$elm_simple_gtd$Stores$createGrouping, viewType, model);
 		var entityList = _jigargosar$elm_simple_gtd$Entity_Tree$flatten(grouping);
 		var maybeFocusInEntity = A2(_jigargosar$elm_simple_gtd$Model$getMaybeFocusInEntity, entityList, model);
 		return A3(

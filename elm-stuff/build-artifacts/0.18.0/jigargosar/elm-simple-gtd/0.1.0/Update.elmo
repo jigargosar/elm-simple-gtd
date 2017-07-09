@@ -257,7 +257,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 						{uri: _p8._1})));
 		case 'OnSetViewType':
 			return _jigargosar$elm_simple_gtd$Update$map(
-				_jigargosar$elm_simple_gtd$Model$switchToView(_p8._0));
+				_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p8._0));
 		case 'OnSaveCurrentForm':
 			return function (_p31) {
 				return A2(
@@ -383,7 +383,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 							return A2(
 								_jigargosar$elm_simple_gtd$Update$andThenUpdate,
 								_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-								A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model$clearSelection, _p43));
+								A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Selection$clearSelection, _p43));
 						};
 						var _p44 = _p42._0;
 						switch (_p44.ctor) {

@@ -37,7 +37,7 @@ map =
     Return.map
 
 
-update : Msg -> Model -> Return
+update : Msg -> AppModel -> Return
 update msg =
     Return.singleton
         >> updateInner msg

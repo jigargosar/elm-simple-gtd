@@ -7,6 +7,7 @@ import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
 import Toolkit.Operators exposing (..)
+import Types exposing (AppModel)
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
@@ -18,7 +19,7 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-list : EntityListViewType -> Model.Model -> Html.Html Msg
+list : EntityListViewType -> AppModel -> Html.Html Msg
 list viewType model =
     let
         grouping =

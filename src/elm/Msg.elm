@@ -20,7 +20,7 @@ import Todo.Notification.Model
 import Material
 import X.Keyboard
 import Keyboard.Combo
-import Types exposing (ViewType)
+import ViewType exposing (ViewType)
 
 
 type SubMsg

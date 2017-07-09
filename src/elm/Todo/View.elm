@@ -9,6 +9,7 @@ import Msg exposing (Msg)
 import Store
 import Todo.FormTypes exposing (EditTodoFormAction(SetText), EditTodoReminderFormAction(SetDate, SetTime), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
+import Types exposing (AppModel)
 import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -74,7 +75,7 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : Model.Model -> Bool -> TodoDoc -> TodoViewModel
+createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel
 createTodoViewModel appM canBeFocused todo =
     let
         tabindexAV =
@@ -360,7 +361,7 @@ fireCancel =
     Msg.OnDeactivateEditingMode
 
 
-edit : TodoEditForm -> Model.Model -> Html Msg
+edit : TodoEditForm -> AppModel -> Html Msg
 edit form appModel =
     let
         todoText =

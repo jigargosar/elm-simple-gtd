@@ -21,7 +21,8 @@ import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Model
 import Project
-import Types exposing (ViewType(EntityListView))
+import Types exposing (AppModel)
+import ViewType exposing (ViewType(EntityListView))
 import X.Maybe
 
 
@@ -67,7 +68,7 @@ type alias Config =
     { groupByFn : TodoDoc -> DocId
     , todoList : List TodoDoc
     , namePrefix : String
-    , filter : Model.Model -> List GroupDoc
+    , filter : AppModel -> List GroupDoc
     , toEntity : GroupDoc -> EntityType
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
@@ -78,7 +79,7 @@ type alias Config =
     }
 
 
-createList : Config -> Model.Model -> List DocumentWithNameViewModel
+createList : Config -> AppModel -> List DocumentWithNameViewModel
 createList config model =
     let
         todoListDict =
@@ -140,7 +141,7 @@ create getTodoListByEntityId config entity =
         }
 
 
-contexts : Model.Model -> ViewModel
+contexts : AppModel -> ViewModel
 contexts model =
     let
         archivedFilter =
@@ -188,7 +189,7 @@ contexts model =
         }
 
 
-projects : Model.Model -> ViewModel
+projects : AppModel -> ViewModel
 projects model =
     let
         archivedFilter =

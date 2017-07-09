@@ -1,0 +1,4 @@
+var _jigargosar$elm_simple_gtd$ViewType$SyncView = {ctor: 'SyncView'};
+var _jigargosar$elm_simple_gtd$ViewType$EntityListView = function (a) {
+	return {ctor: 'EntityListView', _0: a};
+};

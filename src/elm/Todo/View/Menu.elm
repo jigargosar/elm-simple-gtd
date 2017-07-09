@@ -10,9 +10,10 @@ import Todo.FormTypes exposing (TodoGroupFrom)
 import Html exposing (..)
 import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
+import Types exposing (AppModel)
 
 
-createProjectMenuConfig : TodoGroupFrom -> Model.Model -> Menu.Config Project.Model Msg.Msg
+createProjectMenuConfig : TodoGroupFrom -> AppModel -> Menu.Config Project.Model Msg.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
@@ -29,7 +30,7 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
     }
 
 
-createContextMenuConfig : TodoGroupFrom -> Model.Model -> Menu.Config Context.Model Msg.Msg
+createContextMenuConfig : TodoGroupFrom -> AppModel -> Menu.Config Context.Model Msg.Msg
 createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId

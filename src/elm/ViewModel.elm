@@ -12,7 +12,8 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Msg exposing (..)
-import Types exposing (ViewType(EntityListView, SyncView))
+import Types exposing (AppModel)
+import ViewType exposing (ViewType(EntityListView, SyncView))
 
 
 type alias Model =
@@ -24,7 +25,7 @@ type alias Model =
     }
 
 
-create : Model.Model -> Model
+create : AppModel -> Model
 create model =
     let
         contextsVM =

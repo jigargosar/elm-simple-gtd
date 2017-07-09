@@ -18,7 +18,8 @@ import Material
 import Msg exposing (..)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
-import Types exposing (ViewType(EntityListView))
+import Types exposing (AppConfig, AppModel)
+import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
 import X.List as List
 import X.Predicate as Pred
@@ -90,44 +91,12 @@ logString =
     commonMsg.logString
 
 
-type alias Model =
-    { now : Time
-    , todoStore : TodoStore
-    , projectStore : ProjectStore
-    , contextStore : ContextStore
-    , editMode : ExclusiveMode
-    , mainViewType : ViewType
-    , reminderOverlay : TodoReminderOverlayModel
-    , pouchDBRemoteSyncURI : String
-    , user : FirebaseUser
-    , fcmToken : FCMToken
-    , firebaseClient : FirebaseClient
-    , developmentMode : Bool
-    , selectedEntityIdSet : Set DocId
-    , appVersion : String
-    , deviceId : String
-    , focusInEntity : EntityType
-    , timeTracker : Todo.TimeTracker.Model
-    , keyComboModel : Keyboard.Combo.Model Msg
-    , config : Config
-    , appDrawerModel : AppDrawer.Model.Model
-    , signInModel : Firebase.SignIn.Model
-    , mdl : Material.Model
-    , keyboardState : KeyboardState
-    }
-
-
 type alias ModelF =
-    Model -> Model
+    AppModel -> AppModel
 
 
 type alias Subscriptions =
-    Model -> Sub Msg
-
-
-type alias Config =
-    { isFirstVisit : Bool
-    }
+    AppModel -> Sub Msg
 
 
 type alias LocalPref =
@@ -165,7 +134,7 @@ type alias Flags =
     , developmentMode : Bool
     , appVersion : String
     , deviceId : String
-    , config : Config
+    , config : AppConfig
     , localPref : D.Value
     }
 
@@ -222,7 +191,7 @@ keyComboModel =
     X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
-init : Flags -> Return.Return Msg Model
+init : Flags -> Return.Return Msg AppModel
 init flags =
     let
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
@@ -292,15 +261,15 @@ defaultView =
 
 
 type alias Return =
-    Return.Return Msg Model
+    Return.Return Msg AppModel
 
 
 type alias ModelReturnF =
-    Model -> Return
+    AppModel -> Return
 
 
 type alias ReturnF =
-    Return.Return Msg Model -> Return.Return Msg Model
+    Return.Return Msg AppModel -> Return.Return Msg AppModel
 
 
 inboxEntity =
@@ -376,7 +345,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createGrouping : EntityListViewType -> Model -> Entity.Tree.Tree
+createGrouping : EntityListViewType -> AppModel -> Entity.Tree.Tree
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =
@@ -470,7 +439,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             >> Tuple.mapFirst removeReminderOverlay
 
 
-findAndSnoozeOverDueTodo : Model -> Maybe ( ( TodoDoc, Model ), Cmd Msg )
+findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd Msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
@@ -729,7 +698,7 @@ getRemoteSyncForm model =
         maybeForm ?= createRemoteSyncForm model
 
 
-createRemoteSyncForm : Model -> SyncForm
+createRemoteSyncForm : AppModel -> SyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
@@ -738,7 +707,7 @@ deactivateEditingMode =
     setEditMode ExclusiveMode.none
 
 
-getEditMode : Model -> ExclusiveMode
+getEditMode : AppModel -> ExclusiveMode
 getEditMode =
     (.editMode)
 
@@ -748,7 +717,7 @@ setEditMode =
     set editMode
 
 
-updateEditModeM : (Model -> ExclusiveMode) -> ModelF
+updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
 
@@ -757,12 +726,12 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-findTodoById : DocId -> Model -> Maybe TodoDoc
+findTodoById : DocId -> AppModel -> Maybe TodoDoc
 findTodoById id =
     .todoStore >> Store.findById id
 
 
-findProjectById : DocId -> Model -> Maybe Project.Model
+findProjectById : DocId -> AppModel -> Maybe Project.Model
 findProjectById id =
     .projectStore
         >> Store.findById id
@@ -773,7 +742,7 @@ findProjectByIdIn =
     flip findProjectById
 
 
-findContextById : DocId -> Model -> Maybe Context.Model
+findContextById : DocId -> AppModel -> Maybe Context.Model
 findContextById id =
     .contextStore
         >> Store.findById id
@@ -795,12 +764,12 @@ updateTodoAndMaybeAlsoSelected action todoId model =
         model |> updateAllTodos action idSet
 
 
-insertTodo : (DeviceId -> DocId -> TodoDoc) -> Model -> ( TodoDoc, Model )
+insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
 insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> Model -> Maybe ( EntityType, Model )
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( EntityType, AppModel )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -819,7 +788,7 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
             (\_ -> Nothing)
 
 
-upsertEncodedDocOnFirebaseChange : String -> E.Value -> Model -> Cmd msg
+upsertEncodedDocOnFirebaseChange : String -> E.Value -> AppModel -> Cmd msg
 upsertEncodedDocOnFirebaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -835,7 +804,7 @@ upsertEncodedDocOnFirebaseChange dbName encodedEntity =
             (\_ -> Cmd.none)
 
 
-getMainViewType : Model -> ViewType
+getMainViewType : AppModel -> ViewType
 getMainViewType =
     (.mainViewType)
 
@@ -904,7 +873,7 @@ toggleSetMember item set =
         Set.insert item set
 
 
-getSelectedEntityIdSet : Model -> Set DocId
+getSelectedEntityIdSet : AppModel -> Set DocId
 getSelectedEntityIdSet =
     (.selectedEntityIdSet)
 
@@ -937,7 +906,7 @@ setContextStoreIn =
     flip setContextStore
 
 
-getNow : Model -> Time
+getNow : AppModel -> Time
 getNow =
     (.now)
 
@@ -947,7 +916,7 @@ setNow now model =
     { model | now = now }
 
 
-getKeyboardState : Model -> KeyboardState
+getKeyboardState : AppModel -> KeyboardState
 getKeyboardState =
     (.keyboardState)
 

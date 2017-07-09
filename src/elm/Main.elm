@@ -14,6 +14,7 @@ import View
 import X.Keyboard
 import Json.Encode as E
 import Msg
+import Types exposing (AppModel)
 
 
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
@@ -23,7 +24,7 @@ onFirebaseDatabaseChangeSub tagger =
     onFirebaseDatabaseChange (uncurry tagger)
 
 
-main : RouteUrl.RouteUrlProgram Model.Flags Model.Model Msg.Msg
+main : RouteUrl.RouteUrlProgram Model.Flags AppModel Msg.Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
@@ -35,7 +36,7 @@ main =
         }
 
 
-subscriptions : Model.Model -> Sub Msg.Msg
+subscriptions : AppModel -> Sub Msg.Msg
 subscriptions model =
     Sub.batch
         [ Sub.batch

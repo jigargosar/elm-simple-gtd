@@ -4,7 +4,6 @@ import AppColors
 import AppUrl
 import Entity.Types
 import Msg exposing (..)
-import Types exposing (ViewType(EntityListView, SyncView))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Mat
 import Toolkit.Operators exposing (..)

@@ -11,6 +11,7 @@ import Menu
 import Toolkit.Operators exposing (..)
 import Model
 import Tuple2
+import Types exposing (AppModel)
 
 
 type ItemType
@@ -22,7 +23,7 @@ type alias Item =
     ( String, ItemType )
 
 
-menuConfig : MenuState -> Model.Model -> Menu.Config Item Msg.Msg
+menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.Msg
 menuConfig menuState appModel =
     { onSelect = onSelect
     , isSelected = (\_ -> False)
@@ -53,7 +54,7 @@ onSelect ( _, itemType ) =
             msg
 
 
-getItems : Model.Model -> List Item
+getItems : AppModel -> List Item
 getItems appModel =
     let
         maybeUserProfile =

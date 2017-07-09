@@ -7,7 +7,6 @@ import CustomSync
 import Entity.View
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Msg
-import Types exposing (ViewType(EntityListView, SyncView))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)

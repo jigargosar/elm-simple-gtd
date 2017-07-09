@@ -7,13 +7,12 @@ import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Types exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import Model exposing (..)
 import X.List
 
 
-delta2builder : Model -> Model -> Maybe Builder
+delta2builder : AppModel -> AppModel -> Maybe Builder
 delta2builder previous current =
     builder
         |> replacePath (getPathFromModel current)
@@ -29,7 +28,7 @@ getPathFromModel model =
             [ "custom-sync" ]
 
 
-delta2hash : Model -> Model -> Maybe UrlChange
+delta2hash : AppModel -> AppModel -> Maybe UrlChange
 delta2hash =
     delta2builder >>> Maybe.map toHashChange
 

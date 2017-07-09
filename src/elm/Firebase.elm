@@ -8,14 +8,6 @@ type alias UID =
     String
 
 
-type alias Client =
-    Model.Client
-
-
-type alias DeviceId =
-    Model.DeviceId
-
-
 init =
     Model.init
 

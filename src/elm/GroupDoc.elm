@@ -5,7 +5,7 @@ import Document.Types exposing (DocId)
 import GroupDoc.Types exposing (..)
 import X.Predicate
 import X.Record
-import Firebase exposing (DeviceId)
+import Firebase.Types exposing (DeviceId)
 import Time exposing (Time)
 import X.Function.Infix exposing (..)
 import Store

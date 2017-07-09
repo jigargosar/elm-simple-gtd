@@ -1,7 +1,7 @@
 module Project exposing (..)
 
 import Document.Types exposing (DocId)
-import Firebase exposing (DeviceId)
+import Firebase.Types exposing (DeviceId)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import X.Function exposing (..)

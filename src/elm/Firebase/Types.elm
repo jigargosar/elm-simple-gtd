@@ -36,3 +36,14 @@ type alias Provider =
 
 type alias FCMToken =
     Maybe String
+
+
+type alias FirebaseClient =
+    { id : DeviceId
+    , connected : Bool
+    , token : Maybe String
+    }
+
+
+type alias DeviceId =
+    String

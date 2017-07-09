@@ -32,7 +32,7 @@ port firebaseRefPush : ( String, E.Value ) -> Cmd msg
 port fireStartSync : String -> Cmd msg
 
 
-port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.DeviceId ) -> Cmd msg
+port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.Types.DeviceId ) -> Cmd msg
 
 
 port onFirebaseUserChanged : (E.Value -> msg) -> Sub msg

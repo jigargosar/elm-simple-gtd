@@ -1,3 +1,15 @@
+var _jigargosar$elm_simple_gtd$Firebase_Types$UserInfo = F2(
+	function (a, b) {
+		return {id: a, providerData: b};
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Types$Provider = F5(
+	function (a, b, c, d, e) {
+		return {displayName: a, email: b, photoURL: c, providerId: d, uid: e};
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Types$FirebaseClient = F3(
+	function (a, b, c) {
+		return {id: a, connected: b, token: c};
+	});
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBConnectionChanged = function (a) {
 	return {ctor: 'OnFBConnectionChanged', _0: a};
 };
@@ -12,3 +24,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBAfterUserChanged = {ctor: 'OnF
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignOut = {ctor: 'OnFBSignOut'};
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignIn = {ctor: 'OnFBSignIn'};
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBNOOP = {ctor: 'OnFBNOOP'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$SignedIn = function (a) {
+	return {ctor: 'SignedIn', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Firebase_Types$SignedOut = {ctor: 'SignedOut'};

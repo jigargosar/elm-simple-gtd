@@ -25,7 +25,7 @@ import Store.Types
 import X.Debug
 import X.Random as Random
 import X.Record as Record exposing (get, over, overT2)
-import Firebase exposing (DeviceId)
+import Firebase.Types exposing (DeviceId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import List.Extra as List

@@ -14,6 +14,17 @@ var _jigargosar$elm_simple_gtd$Firebase_Model$getMaybeUserProfile = function (us
 		return _elm_lang$core$List$head(_p1._0.providerData);
 	}
 };
+var _jigargosar$elm_simple_gtd$Firebase_Model$userDecoder = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(_elm_lang$core$Json_Decode$map, _jigargosar$elm_simple_gtd$Firebase_Types$SignedIn, _jigargosar$elm_simple_gtd$Firebase_User$decoder),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_Types$SignedOut),
+			_1: {ctor: '[]'}
+		}
+	});
+var _jigargosar$elm_simple_gtd$Firebase_Model$initUser = _jigargosar$elm_simple_gtd$Firebase_Types$SignedOut;
 var _jigargosar$elm_simple_gtd$Firebase_Model$encodeClient = function (client) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -44,19 +55,6 @@ var _jigargosar$elm_simple_gtd$Firebase_Model$initClient = function (deviceId) {
 };
 var _jigargosar$elm_simple_gtd$Firebase_Model$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string);
 var _jigargosar$elm_simple_gtd$Firebase_Model$encodeFCMToken = _elm_community$json_extra$Json_Encode_Extra$maybe(_elm_lang$core$Json_Encode$string);
-var _jigargosar$elm_simple_gtd$Firebase_Model$Model = F3(
-	function (a, b, c) {
-		return {user: a, fcmToken: b, firebaseClient: c};
-	});
-var _jigargosar$elm_simple_gtd$Firebase_Model$Client = F3(
-	function (a, b, c) {
-		return {id: a, connected: b, token: c};
-	});
-var _jigargosar$elm_simple_gtd$Firebase_Model$SignedIn = function (a) {
-	return {ctor: 'SignedIn', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Firebase_Model$SignedOut = {ctor: 'SignedOut'};
-var _jigargosar$elm_simple_gtd$Firebase_Model$initUser = _jigargosar$elm_simple_gtd$Firebase_Model$SignedOut;
 var _jigargosar$elm_simple_gtd$Firebase_Model$init = function (deviceId) {
 	return {
 		user: _jigargosar$elm_simple_gtd$Firebase_Model$initUser,
@@ -64,13 +62,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Model$init = function (deviceId) {
 		firebaseClient: _jigargosar$elm_simple_gtd$Firebase_Model$initClient(deviceId)
 	};
 };
-var _jigargosar$elm_simple_gtd$Firebase_Model$userDecoder = _elm_lang$core$Json_Decode$oneOf(
-	{
-		ctor: '::',
-		_0: A2(_elm_lang$core$Json_Decode$map, _jigargosar$elm_simple_gtd$Firebase_Model$SignedIn, _jigargosar$elm_simple_gtd$Firebase_User$decoder),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_Model$SignedOut),
-			_1: {ctor: '[]'}
-		}
+var _jigargosar$elm_simple_gtd$Firebase_Model$Model = F3(
+	function (a, b, c) {
+		return {user: a, fcmToken: b, firebaseClient: c};
 	});

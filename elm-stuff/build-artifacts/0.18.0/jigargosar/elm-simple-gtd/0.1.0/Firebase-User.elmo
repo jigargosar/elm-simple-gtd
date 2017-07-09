@@ -1,11 +1,3 @@
-var _jigargosar$elm_simple_gtd$Firebase_User$Model = F2(
-	function (a, b) {
-		return {id: a, providerData: b};
-	});
-var _jigargosar$elm_simple_gtd$Firebase_User$Provider = F5(
-	function (a, b, c, d, e) {
-		return {displayName: a, email: b, photoURL: c, providerId: d, uid: e};
-	});
 var _jigargosar$elm_simple_gtd$Firebase_User$providerDataDecoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 	'uid',
@@ -26,7 +18,7 @@ var _jigargosar$elm_simple_gtd$Firebase_User$providerDataDecoder = A3(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 					'displayName',
 					_elm_lang$core$Json_Decode$string,
-					_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_User$Provider))))));
+					_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_Types$Provider))))));
 var _jigargosar$elm_simple_gtd$Firebase_User$decoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 	'providerData',
@@ -35,4 +27,4 @@ var _jigargosar$elm_simple_gtd$Firebase_User$decoder = A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 		'uid',
 		_elm_lang$core$Json_Decode$string,
-		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_User$Model)));
+		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Firebase_Types$UserInfo)));

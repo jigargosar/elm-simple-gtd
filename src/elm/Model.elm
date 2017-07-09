@@ -10,8 +10,9 @@ import Entity.Types exposing (EntityListViewType, EntityType)
 import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
+import Firebase
 import Firebase.SignIn
-import Firebase.Types exposing (FCMToken, FirebaseUser)
+import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Msg exposing (..)
@@ -22,7 +23,7 @@ import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
 import X.List as List
 import X.Predicate as Pred
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
-import Firebase exposing (DeviceId)
+import Firebase.Types exposing (DeviceId)
 import GroupDoc
 import Keyboard.Combo exposing (combo1, combo2, combo3)
 import Keyboard.Combo as Combo
@@ -100,7 +101,7 @@ type alias Model =
     , pouchDBRemoteSyncURI : String
     , user : FirebaseUser
     , fcmToken : FCMToken
-    , firebaseClient : Firebase.Client
+    , firebaseClient : FirebaseClient
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
     , appVersion : String

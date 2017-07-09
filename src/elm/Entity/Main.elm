@@ -61,7 +61,7 @@ update andThenUpdate entity msg =
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
         Entity.Types.OnOnFocusIn ->
-            Return.map (Model.setFocusInEntity entity)
+            Return.map (Stores.setFocusInEntity entity)
 
         Entity.Types.OnToggleSelected ->
             Return.map (Model.toggleEntitySelection entity)

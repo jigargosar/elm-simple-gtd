@@ -13,7 +13,7 @@ import Firebase
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
-import Stores exposing (findTodoById, insertTodo, setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
+import Stores exposing (insertTodo, setContextStore, setFocusInEntityFromTodoId, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
 import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
@@ -438,13 +438,6 @@ saveNewTodoForm form model =
             )
 
 
-setFocusInEntityFromTodoId : DocId -> ModelF
-setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.TodoEntity, Just model )
-        ?|> uncurry setFocusInEntity
-        ?= model
-
-
 toggleDeleteEntity : EntityType -> ModelReturnF
 toggleDeleteEntity entity model =
     let
@@ -616,10 +609,6 @@ updateKeyboardState updater model =
 
 
 -- Focus Functions
-
-
-setFocusInEntity entity =
-    set focusInEntity entity
 
 
 getMaybeFocusInEntity entityList model =

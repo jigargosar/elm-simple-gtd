@@ -460,6 +460,27 @@ var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursor = F2(
 				},
 				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
 	});
+var _jigargosar$elm_simple_gtd$Stores$setFocusInEntity = function (entity) {
+	return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Stores$focusInEntity, entity);
+};
+var _jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId = F2(
+	function (todoId, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
+					{
+						ctor: '_Tuple2',
+						_0: A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, model),
+							_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity),
+						_1: _elm_lang$core$Maybe$Just(model)
+					}),
+				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Stores$setFocusInEntity)),
+			model);
+	});
 var _jigargosar$elm_simple_gtd$Stores$todoStore = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {

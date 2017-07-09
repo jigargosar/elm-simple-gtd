@@ -53,7 +53,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 				};
 			case 'OnOnFocusIn':
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model$setFocusInEntity(entity));
+					_jigargosar$elm_simple_gtd$Stores$setFocusInEntity(entity));
 			case 'OnToggleSelected':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model$toggleEntitySelection(entity));

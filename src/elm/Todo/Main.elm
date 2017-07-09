@@ -262,10 +262,10 @@ gotoTodoWithId todoId model =
             |> Maybe.unpack
                 (\_ ->
                     model
-                        |> Model.setFocusInEntityFromTodoId todoId
+                        |> Stores.setFocusInEntityFromTodoId todoId
                         |> Model.switchToContextsView
                 )
-                (Model.setFocusInEntity # model)
+                (Stores.setFocusInEntity # model)
 
 
 positionMoreMenuCmd todoId =

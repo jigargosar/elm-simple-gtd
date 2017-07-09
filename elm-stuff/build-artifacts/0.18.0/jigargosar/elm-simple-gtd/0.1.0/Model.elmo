@@ -149,6 +149,102 @@ var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
+var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
+	function (form, model) {
+		return A2(
+			_elm_lang$core$Basics$uncurry,
+			function (todoId) {
+				return function (_p10) {
+					return A2(
+						_elm_lang$core$Tuple$mapFirst,
+						_jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId(todoId),
+						A3(
+							_jigargosar$elm_simple_gtd$Stores$updateTodo,
+							function () {
+								var _p11 = form.referenceEntity;
+								if (_p11.ctor === 'TodoEntity') {
+									return _jigargosar$elm_simple_gtd$Todo_Types$TA_CopyProjectAndContextId(_p11._0);
+								} else {
+									var _p12 = _p11._0;
+									if (_p12.ctor === 'ContextEntity') {
+										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetContext(_p12._0);
+									} else {
+										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetProject(_p12._0);
+									}
+								}
+							}(),
+							todoId,
+							_p10));
+				};
+			},
+			A2(
+				_elm_lang$core$Tuple$mapFirst,
+				_jigargosar$elm_simple_gtd$Document$getId,
+				A2(
+					_jigargosar$elm_simple_gtd$Stores$insertTodo,
+					A2(
+						_jigargosar$elm_simple_gtd$Todo$init,
+						model.now,
+						_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
+					model)));
+	});
+var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
+	var _p13 = model.editMode;
+	switch (_p13.ctor) {
+		case 'XMEditContext':
+			var _p14 = _p13._0;
+			return A3(
+				_jigargosar$elm_simple_gtd$Stores$updateContext,
+				_p14.id,
+				_jigargosar$elm_simple_gtd$Context$setName(_p14.name),
+				model);
+		case 'XMEditProject':
+			var _p15 = _p13._0;
+			return A3(
+				_jigargosar$elm_simple_gtd$Stores$updateProject,
+				_p15.id,
+				_jigargosar$elm_simple_gtd$Project$setName(_p15.name),
+				model);
+		case 'XMEditTodo':
+			var _p16 = _p13._0;
+			return A3(
+				_jigargosar$elm_simple_gtd$Stores$updateTodo,
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p16.todoText),
+				_p16.id,
+				model);
+		case 'XMEditTodoReminder':
+			var _p17 = _p13._0;
+			return A3(
+				_jigargosar$elm_simple_gtd$Stores$updateTodo,
+				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
+					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p17)),
+				_p17.id,
+				model);
+		case 'XMEditTodoContext':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMEditTodoProject':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMTodoMoreMenu':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMNewTodo':
+			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p13._0, model);
+		case 'XMEditSyncSettings':
+			return _Fresheyeball$elm_return$Return$singleton(
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{pouchDBRemoteSyncURI: _p13._0.uri}));
+		case 'XMLaunchBar':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMMainMenu':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMNone':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'XMSignInOverlay':
+			return _Fresheyeball$elm_return$Return$singleton(model);
+		default:
+			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p13._0, model);
+	}
+};
 var _jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {
 		var maybeEntityListViewType = _jigargosar$elm_simple_gtd$Model$maybeGetCurrentEntityListViewType(model);
@@ -176,7 +272,7 @@ var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
 var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p10) {
+		return function (_p18) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
@@ -184,23 +280,9 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 					_jigargosar$elm_simple_gtd$Stores$updateTodo,
 					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
 					todoId,
-					_p10));
+					_p18));
 		}(model);
 	});
-var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToInitialView = F2(
-	function (todo, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$initialView(todo)
-			});
-	});
-var _jigargosar$elm_simple_gtd$Model$showReminderOverlayForTodoId = function (todoId) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Function$applyMaybeWith,
-		_jigargosar$elm_simple_gtd$Stores$findTodoById(todoId),
-		_jigargosar$elm_simple_gtd$Model$setReminderOverlayToInitialView);
-};
 var _jigargosar$elm_simple_gtd$Model$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, ''));
@@ -233,123 +315,6 @@ var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
 				b,
 				{focusInEntity: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$setFocusInEntity = function (entity) {
-	return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Model$focusInEntity, entity);
-};
-var _jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId = F2(
-	function (todoId, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
-					{
-						ctor: '_Tuple2',
-						_0: A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, model),
-							_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity),
-						_1: _elm_lang$core$Maybe$Just(model)
-					}),
-				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Model$setFocusInEntity)),
-			model);
-	});
-var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
-	function (form, model) {
-		return A2(
-			_elm_lang$core$Basics$uncurry,
-			function (todoId) {
-				return function (_p11) {
-					return A2(
-						_elm_lang$core$Tuple$mapFirst,
-						_jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId(todoId),
-						A3(
-							_jigargosar$elm_simple_gtd$Stores$updateTodo,
-							function () {
-								var _p12 = form.referenceEntity;
-								if (_p12.ctor === 'TodoEntity') {
-									return _jigargosar$elm_simple_gtd$Todo_Types$TA_CopyProjectAndContextId(_p12._0);
-								} else {
-									var _p13 = _p12._0;
-									if (_p13.ctor === 'ContextEntity') {
-										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetContext(_p13._0);
-									} else {
-										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetProject(_p13._0);
-									}
-								}
-							}(),
-							todoId,
-							_p11));
-				};
-			},
-			A2(
-				_elm_lang$core$Tuple$mapFirst,
-				_jigargosar$elm_simple_gtd$Document$getId,
-				A2(
-					_jigargosar$elm_simple_gtd$Stores$insertTodo,
-					A2(
-						_jigargosar$elm_simple_gtd$Todo$init,
-						model.now,
-						_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
-					model)));
-	});
-var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
-	var _p14 = model.editMode;
-	switch (_p14.ctor) {
-		case 'XMEditContext':
-			var _p15 = _p14._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateContext,
-				_p15.id,
-				_jigargosar$elm_simple_gtd$Context$setName(_p15.name),
-				model);
-		case 'XMEditProject':
-			var _p16 = _p14._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateProject,
-				_p16.id,
-				_jigargosar$elm_simple_gtd$Project$setName(_p16.name),
-				model);
-		case 'XMEditTodo':
-			var _p17 = _p14._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p17.todoText),
-				_p17.id,
-				model);
-		case 'XMEditTodoReminder':
-			var _p18 = _p14._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p18)),
-				_p18.id,
-				model);
-		case 'XMEditTodoContext':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMEditTodoProject':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMTodoMoreMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMNewTodo':
-			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p14._0, model);
-		case 'XMEditSyncSettings':
-			return _Fresheyeball$elm_return$Return$singleton(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{pouchDBRemoteSyncURI: _p14._0.uri}));
-		case 'XMLaunchBar':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMMainMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMNone':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMSignInOverlay':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		default:
-			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p14._0, model);
-	}
-};
 var _jigargosar$elm_simple_gtd$Model$moveFocusBy = A2(
 	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
 	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,

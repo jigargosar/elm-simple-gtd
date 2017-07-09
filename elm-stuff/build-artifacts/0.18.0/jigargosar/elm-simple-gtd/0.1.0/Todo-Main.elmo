@@ -1,3 +1,17 @@
+var _jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView = F2(
+	function (todo, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$initialView(todo)
+			});
+	});
+var _jigargosar$elm_simple_gtd$Todo_Main$showReminderOverlayForTodoId = function (todoId) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Function$applyMaybeWith,
+		_jigargosar$elm_simple_gtd$Stores$findTodoById(todoId),
+		_jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView);
+};
 var _jigargosar$elm_simple_gtd$Todo_Main$positionMoreMenuCmd = function (todoId) {
 	return _jigargosar$elm_simple_gtd$DomPorts$positionPopupMenu(
 		A2(_elm_lang$core$Basics_ops['++'], '#todo-more-menu-button-', todoId));
@@ -19,9 +33,9 @@ var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId = F2(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
 			function (_p1) {
 				return _jigargosar$elm_simple_gtd$Model$switchToContextsView(
-					A2(_jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId, todoId, model));
+					A2(_jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId, todoId, model));
 			},
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model$setFocusInEntity, model),
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setFocusInEntity, model),
 			maybeTodoEntity);
 	});
 var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId);
@@ -261,7 +275,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				}(todoId);
 			case 'ShowReminderOverlayForTodoId':
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model$showReminderOverlayForTodoId(_p8._0));
+					_jigargosar$elm_simple_gtd$Todo_Main$showReminderOverlayForTodoId(_p8._0));
 			case 'RunningNotificationResponse':
 				var _p18 = _p8._0;
 				var todoId = _p18.data.id;

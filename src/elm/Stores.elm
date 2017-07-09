@@ -15,6 +15,7 @@ import Store
 import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
+import Toolkit.Helpers exposing (maybe2Tuple)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
@@ -22,7 +23,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import X.Record exposing (maybeOverT2, maybeSetIn, overT2)
+import X.Record exposing (maybeOverT2, maybeSetIn, overT2, set)
 import Json.Encode as E
 import Set
 import Tuple2
@@ -437,3 +438,14 @@ setProjectStore projectStore model =
 setContextStore : ContextStore -> ModelF
 setContextStore contextStore model =
     { model | contextStore = contextStore }
+
+
+setFocusInEntityFromTodoId : DocId -> ModelF
+setFocusInEntityFromTodoId todoId model =
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.TodoEntity, Just model )
+        ?|> uncurry setFocusInEntity
+        ?= model
+
+
+setFocusInEntity entity =
+    set focusInEntity entity

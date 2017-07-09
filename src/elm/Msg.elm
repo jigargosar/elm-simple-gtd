@@ -20,7 +20,7 @@ import Todo.Notification.Model
 import Material
 import X.Keyboard
 import Keyboard.Combo
-import ViewType exposing (ViewType)
+import ViewType exposing (ViewType(EntityListView))
 
 
 type SubMsg
@@ -65,3 +65,7 @@ type Msg
     | OnAppDrawerMsg AppDrawer.Types.Msg
     | OnPersistLocalPref
     | OnMdl (Material.Msg Msg)
+
+
+onSetEntityListView =
+    EntityListView >> OnSetViewType

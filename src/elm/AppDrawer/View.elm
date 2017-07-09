@@ -185,7 +185,7 @@ switchViewItemSmall iconName viewType title =
 onSetEntityListViewItem iconName viewType title =
     li
         [ class ""
-        , onClick (onSetEntityListView viewType)
+        , onClick (Msg.onSetEntityListView viewType)
         ]
         [ Mat.icon iconName
         , h5 [] [ text title ]

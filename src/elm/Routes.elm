@@ -48,7 +48,7 @@ builder2messages builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ Msg.OnSetViewType Model.defaultView ]
             )
-            (Model.onSetEntityListView >> X.List.singleton)
+            (Msg.onSetEntityListView >> X.List.singleton)
 
 
 hash2messages : Location -> List Msg

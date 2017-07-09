@@ -52,10 +52,6 @@ import Todo.TimeTracker
 import X.Debug
 
 
-onSetEntityListView =
-    EntityListView >> OnSetViewType
-
-
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
     [ combo2 ( Combo.shift, Combo.s ) (onTodoStopRunning)

@@ -1,13 +1,16 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
+import ExclusiveMode
 import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
 import Model
+import Model.ExMode
 import Navigation
 import Return
+import Store
 import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
@@ -86,7 +89,7 @@ update andThenUpdate msg =
         OnFBSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Msg.OnPersistLocalPref
-                >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
+                >> Return.map (switchToNewUserSetupModeIfNeeded)
 
         OnFBSignOut ->
             Return.command (signOut ())
@@ -106,7 +109,7 @@ update andThenUpdate msg =
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Msg.OnPersistLocalPref
-                                    >> Return.map (Model.switchToNewUserSetupModeIfNeeded)
+                                    >> Return.map (switchToNewUserSetupModeIfNeeded)
                 )
 
         OnFBUserChanged encodedUser ->
@@ -172,3 +175,10 @@ firebaseClient =
 
 user =
     X.Record.field .user (\s b -> { b | user = s })
+
+
+switchToNewUserSetupModeIfNeeded model =
+    if Store.isEmpty model.todoStore then
+        Model.ExMode.setEditMode ExclusiveMode.createSetupExclusiveMode model
+    else
+        Model.ExMode.deactivateEditingMode model

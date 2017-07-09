@@ -1,11 +1,13 @@
 module ExclusiveMode exposing (..)
 
+import Entity
 import Entity.Types exposing (EntityType(..), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc.EditForm
 import Todo.Menu
 import X.Function.Infix exposing (..)
 import Todo.Form
+import Todo.NewForm
 
 
 none =
@@ -53,3 +55,7 @@ createEntityEditForm entity =
 
         TodoEntity model ->
             editTodo model
+
+
+createSetupExclusiveMode =
+    XMSetup (Todo.NewForm.create Entity.inboxEntity "")

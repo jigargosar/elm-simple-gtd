@@ -62,33 +62,13 @@ var _jigargosar$elm_simple_gtd$Model$getMaybeEditTodoReminderForm = function (mo
 		return _elm_lang$core$Maybe$Nothing;
 	}
 };
-var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
-	function (entity, model) {
-		var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
-		return function () {
-			var _p2 = entity;
-			if (_p2.ctor === 'GroupEntity') {
-				var _p3 = _p2._0;
-				if (_p3.ctor === 'ContextEntity') {
-					return A2(_jigargosar$elm_simple_gtd$Stores$updateContext, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
-				} else {
-					return A2(_jigargosar$elm_simple_gtd$Stores$updateProject, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
-				}
-			} else {
-				return A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, _jigargosar$elm_simple_gtd$Todo_Types$TA_ToggleDeleted, entityId);
-			}
-		}()(model);
-	});
-var _jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded = function (model) {
-	return _jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? A2(_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode, _jigargosar$elm_simple_gtd$Model_ExMode$createSetupExclusiveMode, model) : _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode(model);
-};
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
-	return function (_p4) {
-		var _p5 = _p4;
+	return function (_p2) {
+		var _p3 = _p2;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromContext(_p5._0),
-			_p5._1);
+			_jigargosar$elm_simple_gtd$Entity$fromContext(_p3._0),
+			_p3._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -99,12 +79,12 @@ var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) 
 				model.contextStore)));
 };
 var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
-	return function (_p6) {
-		var _p7 = _p6;
+	return function (_p4) {
+		var _p5 = _p4;
 		return A2(
 			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromProject(_p7._0),
-			_p7._1);
+			_jigargosar$elm_simple_gtd$Entity$fromProject(_p5._0),
+			_p5._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -130,7 +110,7 @@ var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
 var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p8) {
+		return function (_p6) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
@@ -138,7 +118,7 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 					_jigargosar$elm_simple_gtd$Stores$updateTodo,
 					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
 					todoId,
-					_p8));
+					_p6));
 		}(model);
 	});
 var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
@@ -219,9 +199,9 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				{appDrawerModel: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$overAppDrawerModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$appDrawerModel);
-var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p9) {
+var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p7) {
 	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p9));
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p7));
 };
 var _jigargosar$elm_simple_gtd$Model$defaultLocalPref = {appDrawer: _jigargosar$elm_simple_gtd$AppDrawer_Model$default, signIn: _jigargosar$elm_simple_gtd$Firebase_SignIn$default};
 var _jigargosar$elm_simple_gtd$Model$encodeLocalPref = function (model) {
@@ -287,12 +267,12 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Model$localPrefDecoder, flags.localPref)),
 		_jigargosar$elm_simple_gtd$Model$defaultLocalPref);
 	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
-	var _p10 = flags;
-	var now = _p10.now;
-	var encodedTodoList = _p10.encodedTodoList;
-	var encodedProjectList = _p10.encodedProjectList;
-	var encodedContextList = _p10.encodedContextList;
-	var pouchDBRemoteSyncURI = _p10.pouchDBRemoteSyncURI;
+	var _p8 = flags;
+	var now = _p8.now;
+	var encodedTodoList = _p8.encodedTodoList;
+	var encodedProjectList = _p8.encodedProjectList;
+	var encodedContextList = _p8.encodedContextList;
+	var pouchDBRemoteSyncURI = _p8.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -302,15 +282,15 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p11 = A2(
+	var _p9 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
-	var todoStore = _p11._0._0;
-	var projectStore = _p11._0._1;
-	var contextStore = _p11._0._2;
-	var seed = _p11._1;
-	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$Model_ExMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
+	var todoStore = _p9._0._0;
+	var projectStore = _p9._0._1;
+	var contextStore = _p9._0._2;
+	var seed = _p9._1;
+	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
 	var model = {
 		now: now,
 		todoStore: todoStore,

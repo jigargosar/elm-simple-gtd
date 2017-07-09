@@ -12,7 +12,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase
 import Firebase.SignIn
 import Material
-import Model.ExMode exposing (createSetupExclusiveMode, deactivateEditingMode, setEditMode, startEditingEntity)
+import Model.ExMode exposing (deactivateEditingMode, setEditMode, startEditingEntity)
 import Msg exposing (..)
 import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
@@ -180,7 +180,7 @@ init flags =
         editMode =
             if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
                 if Store.isEmpty todoStore then
-                    createSetupExclusiveMode
+                    ExclusiveMode.createSetupExclusiveMode
                 else
                     ExclusiveMode.none
             else
@@ -257,33 +257,6 @@ createAndEditNewContext model =
                 model
                     |> startEditingEntity (Entity.fromContext context)
            )
-
-
-switchToNewUserSetupModeIfNeeded model =
-    if Store.isEmpty model.todoStore then
-        setEditMode createSetupExclusiveMode model
-    else
-        deactivateEditingMode model
-
-
-toggleDeleteEntity : EntityType -> ModelReturnF
-toggleDeleteEntity entity model =
-    let
-        entityId =
-            Entity.getId entity
-    in
-        model
-            |> case entity of
-                Entity.Types.GroupEntity g ->
-                    case g of
-                        Entity.Types.ContextEntity context ->
-                            updateContext entityId Document.toggleDeleted
-
-                        Entity.Types.ProjectEntity project ->
-                            updateProject entityId Document.toggleDeleted
-
-                Entity.Types.TodoEntity todo ->
-                    updateTodo (TA_ToggleDeleted) entityId
 
 
 getMaybeEditTodoReminderForm model =

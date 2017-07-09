@@ -1,5 +1,6 @@
 module Entity.Main exposing (..)
 
+import Document
 import DomPorts
 import Entity
 import Entity.Types exposing (EntityType)
@@ -14,7 +15,7 @@ import Set
 import Stores
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
-import Types exposing (ReturnF)
+import Types exposing (ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
 
 
@@ -36,7 +37,7 @@ update andThenUpdate entity msg =
             andThenUpdate Msg.OnSaveCurrentForm
 
         Entity.Types.OnToggleDeleted ->
-            Return.andThen (Model.toggleDeleteEntity entity)
+            Return.andThen (toggleDeleteEntity entity)
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
         Entity.Types.OnToggleArchived ->
@@ -94,3 +95,23 @@ switchToEntityListViewFromEntity entity model =
         entity
             |> Entity.toViewType maybeEntityListViewType
             |> (Model.ViewType.setEntityListViewType # model)
+
+
+toggleDeleteEntity : EntityType -> ModelReturnF
+toggleDeleteEntity entity model =
+    let
+        entityId =
+            Entity.getId entity
+    in
+        model
+            |> case entity of
+                Entity.Types.GroupEntity g ->
+                    case g of
+                        Entity.Types.ContextEntity context ->
+                            Stores.updateContext entityId Document.toggleDeleted
+
+                        Entity.Types.ProjectEntity project ->
+                            Stores.updateProject entityId Document.toggleDeleted
+
+                Entity.Types.TodoEntity todo ->
+                    Stores.updateTodo (TA_ToggleDeleted) entityId

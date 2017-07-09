@@ -111,10 +111,6 @@ startEditingEntity entity model =
     setEditMode (ExclusiveMode.createEntityEditForm entity) model
 
 
-createSetupExclusiveMode =
-    XMSetup (Todo.NewForm.create Entity.inboxEntity "")
-
-
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
     setEditMode (LaunchBar.Form.create now |> XMLaunchBar)

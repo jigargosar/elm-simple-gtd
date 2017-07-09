@@ -115,7 +115,7 @@ type alias Key =
     KX.Key
 
 
-type alias State =
+type alias KeyboardState =
     KX.State
 
 

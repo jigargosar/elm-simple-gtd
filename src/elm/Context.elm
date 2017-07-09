@@ -13,10 +13,6 @@ type alias Model =
     GroupDoc.Types.GroupDoc
 
 
-type alias Store =
-    GroupDoc.Store
-
-
 constructor =
     GroupDoc.constructor
 
@@ -59,6 +55,6 @@ setName name model =
     { model | name = name }
 
 
-storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
+storeGenerator : DeviceId -> List E.Value -> Random.Generator ContextStore
 storeGenerator =
     GroupDoc.storeGenerator "context-db"

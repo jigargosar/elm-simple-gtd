@@ -1,6 +1,7 @@
 module GroupDoc.Types exposing (..)
 
 import Document.Types
+import Store.Types exposing (Store)
 
 
 type alias GroupDocName =
@@ -35,3 +36,15 @@ getGroupDocName =
 
 isGroupDocArchived =
     .archived
+
+
+type alias GroupDocStore =
+    Store Record
+
+
+type alias ProjectStore =
+    GroupDocStore
+
+
+type alias ContextStore =
+    GroupDocStore

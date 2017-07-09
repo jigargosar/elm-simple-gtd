@@ -14,15 +14,11 @@ type alias Model =
     GroupDoc.Types.GroupDoc
 
 
-type alias Store =
-    GroupDoc.Store
-
-
 type alias ModelF =
     Model -> Model
 
 
-storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
+storeGenerator : DeviceId -> List E.Value -> Random.Generator ProjectStore
 storeGenerator =
     GroupDoc.storeGenerator "project-db"
 

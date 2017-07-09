@@ -14,6 +14,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
+import Store.Types exposing (Store)
 
 
 archived =
@@ -61,7 +62,7 @@ encodeRecordFields model =
     ]
 
 
-storeGenerator : String -> DeviceId -> List E.Value -> Random.Pcg.Generator Store
+storeGenerator : String -> DeviceId -> List E.Value -> Random.Pcg.Generator GroupDocStore
 storeGenerator dbName =
     Store.generator dbName encodeRecordFields decoder
 
@@ -80,10 +81,6 @@ isArchived =
 
 isNotArchived =
     isArchived >> not
-
-
-type alias Store =
-    Store.Store Record
 
 
 sort isNull =

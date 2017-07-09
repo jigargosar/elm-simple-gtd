@@ -12,6 +12,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Msg exposing (..)
+import Types exposing (ViewType(EntityListView, SyncView))
 
 
 type alias Model =

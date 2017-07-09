@@ -21,6 +21,7 @@ import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Model
 import Project
+import Types exposing (ViewType(EntityListView))
 import X.Maybe
 
 

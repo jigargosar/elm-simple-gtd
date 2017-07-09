@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Types exposing (LBMsg)
@@ -20,11 +20,7 @@ import Todo.Notification.Model
 import Material
 import X.Keyboard
 import Keyboard.Combo
-
-
-type ViewType
-    = EntityListView EntityListViewType
-    | SyncView
+import Types exposing (ViewType)
 
 
 type SubMsg

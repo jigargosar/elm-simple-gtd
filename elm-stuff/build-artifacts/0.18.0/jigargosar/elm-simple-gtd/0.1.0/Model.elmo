@@ -91,12 +91,12 @@ var _jigargosar$elm_simple_gtd$Model$toggleEntitySelection = function (entity) {
 			_jigargosar$elm_simple_gtd$Model$getEntityId(entity)));
 };
 var _jigargosar$elm_simple_gtd$Model$contextView = function (_p1) {
-	return _jigargosar$elm_simple_gtd$Msg$EntityListView(
+	return _jigargosar$elm_simple_gtd$Types$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity_Types$ContextView(
 			_jigargosar$elm_simple_gtd$Document$getId(_p1)));
 };
 var _jigargosar$elm_simple_gtd$Model$projectView = function (_p2) {
-	return _jigargosar$elm_simple_gtd$Msg$EntityListView(
+	return _jigargosar$elm_simple_gtd$Types$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity_Types$ProjectView(
 			_jigargosar$elm_simple_gtd$Document$getId(_p2)));
 };
@@ -213,10 +213,10 @@ var _jigargosar$elm_simple_gtd$Model$switchToContextView = function (_p14) {
 		_jigargosar$elm_simple_gtd$Model$contextView(_p14));
 };
 var _jigargosar$elm_simple_gtd$Model$switchToContextsView = _jigargosar$elm_simple_gtd$Model$switchToView(
-	_jigargosar$elm_simple_gtd$Msg$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
+	_jigargosar$elm_simple_gtd$Types$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
 var _jigargosar$elm_simple_gtd$Model$setEntityListViewType = function (_p15) {
 	return _jigargosar$elm_simple_gtd$Model$switchToView(
-		_jigargosar$elm_simple_gtd$Msg$EntityListView(_p15));
+		_jigargosar$elm_simple_gtd$Types$EntityListView(_p15));
 };
 var _jigargosar$elm_simple_gtd$Model$getEditMode = function (_) {
 	return _.editMode;
@@ -514,7 +514,7 @@ var _jigargosar$elm_simple_gtd$Model$getCurrentViewEntityList = function (model)
 var _jigargosar$elm_simple_gtd$Model$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, ''));
-var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$Msg$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
+var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$Types$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -1229,7 +1229,7 @@ var _jigargosar$elm_simple_gtd$Model$keyboardCombos = {
 };
 var _jigargosar$elm_simple_gtd$Model$onSetEntityListView = function (_p58) {
 	return _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
-		_jigargosar$elm_simple_gtd$Msg$EntityListView(_p58));
+		_jigargosar$elm_simple_gtd$Types$EntityListView(_p58));
 };
 var _jigargosar$elm_simple_gtd$Model$Model = function (a) {
 	return function (b) {

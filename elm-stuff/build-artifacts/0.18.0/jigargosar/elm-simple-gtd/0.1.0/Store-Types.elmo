@@ -1,0 +1,4 @@
+var _jigargosar$elm_simple_gtd$Store_Types$Store = F6(
+	function (a, b, c, d, e, f) {
+		return {seed: a, dict: b, otherFieldsEncoder: c, decoder: d, name: e, deviceId: f};
+	});

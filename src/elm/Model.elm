@@ -11,10 +11,12 @@ import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase.SignIn
+import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Msg exposing (..)
-import Todo.Types exposing (TodoAction(..), TodoDoc)
-import X.Keyboard as Keyboard exposing (KeyboardEvent)
+import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
+import Types exposing (ViewType(EntityListView))
+import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
 import X.List as List
 import X.Predicate as Pred
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
@@ -87,12 +89,12 @@ logString =
 
 type alias Model =
     { now : Time
-    , todoStore : Todo.Store
-    , projectStore : Project.Store
-    , contextStore : Context.Store
+    , todoStore : TodoStore
+    , projectStore : ProjectStore
+    , contextStore : ContextStore
     , editMode : ExclusiveMode
     , mainViewType : ViewType
-    , keyboardState : Keyboard.State
+    , keyboardState : KeyboardState
     , reminderOverlay : Todo.Notification.Model.Model
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
@@ -914,7 +916,7 @@ updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
 
 
-setProjectStore : Project.Store -> ModelF
+setProjectStore : ProjectStore -> ModelF
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
@@ -923,7 +925,7 @@ setProjectStoreIn =
     flip setProjectStore
 
 
-setContextStore : Context.Store -> ModelF
+setContextStore : ContextStore -> ModelF
 setContextStore contextStore model =
     { model | contextStore = contextStore }
 
@@ -942,17 +944,17 @@ setNow now model =
     { model | now = now }
 
 
-getKeyboardState : Model -> Keyboard.State
+getKeyboardState : Model -> KeyboardState
 getKeyboardState =
     (.keyboardState)
 
 
-setKeyboardState : Keyboard.State -> ModelF
+setKeyboardState : KeyboardState -> ModelF
 setKeyboardState keyboardState model =
     { model | keyboardState = keyboardState }
 
 
-updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF
+updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
 updateKeyboardState updater model =
     setKeyboardState (updater (getKeyboardState model)) model
 

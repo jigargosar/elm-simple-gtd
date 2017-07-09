@@ -1,7 +1,3 @@
-var _jigargosar$elm_simple_gtd$Msg$SyncView = {ctor: 'SyncView'};
-var _jigargosar$elm_simple_gtd$Msg$EntityListView = function (a) {
-	return {ctor: 'EntityListView', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Msg$OnFirebaseDatabaseChange = F2(
 	function (a, b) {
 		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};

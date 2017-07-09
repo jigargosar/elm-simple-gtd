@@ -2,6 +2,7 @@ module Todo.Types exposing (..)
 
 import Document.Types exposing (DocId)
 import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
+import Store.Types exposing (Store)
 import Time exposing (Time)
 
 
@@ -47,3 +48,7 @@ type TodoAction
     | TA_SetSchedule TodoSchedule
     | TA_SnoozeTill Time
     | TA_AutoSnooze Time
+
+
+type alias TodoStore =
+    Store Record

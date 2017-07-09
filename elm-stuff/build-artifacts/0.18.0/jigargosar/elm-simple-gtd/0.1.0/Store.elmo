@@ -327,7 +327,3 @@ var _jigargosar$elm_simple_gtd$Store$onChange = function (_p18) {
 	return _jigargosar$elm_simple_gtd$Store$pouchDBChanges(
 		_elm_lang$core$Basics$uncurry(_p18));
 };
-var _jigargosar$elm_simple_gtd$Store$Store = F6(
-	function (a, b, c, d, e, f) {
-		return {seed: a, dict: b, otherFieldsEncoder: c, decoder: d, name: e, deviceId: f};
-	});

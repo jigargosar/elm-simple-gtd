@@ -2,6 +2,7 @@ module Todo exposing (..)
 
 import Document exposing (Revision)
 import Document.Types exposing (DocId)
+import Store.Types exposing (Store)
 import X.Record exposing (over, set)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -320,7 +321,3 @@ toAllPassPredicate predicateList =
 
 toAnyPassPredicate predicateList =
     (applyList predicateList >> List.any identity)
-
-
-type alias Store =
-    Store.Store Record

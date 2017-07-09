@@ -13,6 +13,8 @@ import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Model.ExMode
 import Model.Msg
+import Model.Selection
+import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.Notification.Types
@@ -140,7 +142,7 @@ updateInner msg =
                 )
 
         OnSetViewType viewType ->
-            map (Model.switchToView viewType)
+            map (Model.ViewType.switchToView viewType)
 
         OnSaveCurrentForm ->
             Return.andThen Model.ExMode.saveCurrentForm
@@ -297,7 +299,7 @@ onGlobalKeyUp key =
                 ( key, XMNone ) ->
                     let
                         clear =
-                            map (Model.clearSelection)
+                            map (Model.Selection.clearSelection)
                                 >> andThenUpdate OnDeactivateEditingMode
                     in
                         case key of

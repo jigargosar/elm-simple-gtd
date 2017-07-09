@@ -13,7 +13,7 @@ import Firebase
 import Firebase.SignIn
 import Material
 import Msg exposing (..)
-import Stores exposing (insertTodo, setContextStore, setFocusInEntityFromTodoId, setProjectStore, updateContext, updateProject, updateTodo)
+import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
 import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
@@ -279,6 +279,16 @@ createAndEditNewContext model =
            )
 
 
+startEditingEntity : EntityType -> ModelF
+startEditingEntity entity model =
+    setEditMode (ExclusiveMode.createEntityEditForm entity) model
+
+
+setEditMode : ExclusiveMode -> ModelF
+setEditMode =
+    set editMode
+
+
 switchToNewUserSetupModeIfNeeded model =
     if Store.isEmpty model.todoStore then
         setEditMode createSetupExclusiveMode model
@@ -292,11 +302,11 @@ createSetupExclusiveMode =
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    set editMode (LaunchBar.Form.create now |> XMLaunchBar)
+    setEditMode (LaunchBar.Form.create now |> XMLaunchBar)
 
 
 updateLaunchBarInput now text form =
-    set editMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
+    setEditMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
 
 
 onNewTodoModeWithFocusInEntityAsReference model =
@@ -305,16 +315,16 @@ onNewTodoModeWithFocusInEntityAsReference model =
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
+    setEditMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
 
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    set editMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
+    setEditMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
 
 
 updateNewTodoText form text =
-    set editMode (Todo.NewForm.setText text form |> XMNewTodo)
+    setEditMode (Todo.NewForm.setText text form |> XMNewTodo)
 
 
 startEditingReminder : TodoDoc -> ModelF
@@ -334,11 +344,6 @@ startEditingTodoContext todo =
 
 showMainMenu =
     setEditMode (Menu.initState |> XMMainMenu)
-
-
-startEditingEntity : EntityType -> ModelF
-startEditingEntity entity model =
-    setEditMode (ExclusiveMode.createEntityEditForm entity) model
 
 
 switchToEntityListViewFromEntity entity model =
@@ -363,86 +368,11 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-saveCurrentForm model =
-    case model.editMode of
-        XMEditContext form ->
-            model
-                |> updateContext form.id
-                    (Context.setName form.name)
-
-        XMEditProject form ->
-            model
-                |> updateProject form.id
-                    (Project.setName form.name)
-
-        XMEditTodo form ->
-            model
-                |> updateTodo (TA_SetText form.todoText) form.id
-
-        XMEditTodoReminder form ->
-            model
-                |> updateTodo (TA_SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
-
-        XMEditTodoContext form ->
-            model |> Return.singleton
-
-        XMEditTodoProject form ->
-            model |> Return.singleton
-
-        XMTodoMoreMenu _ ->
-            model |> Return.singleton
-
-        XMNewTodo form ->
-            saveNewTodoForm form model
-
-        XMEditSyncSettings form ->
-            { model | pouchDBRemoteSyncURI = form.uri }
-                |> Return.singleton
-
-        XMLaunchBar form ->
-            model |> Return.singleton
-
-        XMMainMenu _ ->
-            model |> Return.singleton
-
-        XMNone ->
-            model |> Return.singleton
-
-        XMSignInOverlay ->
-            model |> Return.singleton
-
-        XMSetup form ->
-            saveNewTodoForm form model
-
-
-saveNewTodoForm form model =
-    insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
-        |> Tuple.mapFirst Document.getId
-        |> uncurry
-            (\todoId ->
-                updateTodo
-                    (case form.referenceEntity of
-                        Entity.Types.TodoEntity fromTodo ->
-                            (TA_CopyProjectAndContextId fromTodo)
-
-                        Entity.Types.GroupEntity g ->
-                            case g of
-                                Entity.Types.ContextEntity context ->
-                                    (TA_SetContext context)
-
-                                Entity.Types.ProjectEntity project ->
-                                    (TA_SetProject project)
-                    )
-                    todoId
-                    >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
-            )
-
-
 toggleDeleteEntity : EntityType -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
-            getEntityId entity
+            Entity.getId entity
     in
         model
             |> case entity of
@@ -494,11 +424,6 @@ getEditMode =
     (.editMode)
 
 
-setEditMode : ExclusiveMode -> ModelF
-setEditMode =
-    set editMode
-
-
 updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
@@ -543,10 +468,6 @@ setEntityListViewType =
     EntityListView >> switchToView
 
 
-getEntityId =
-    Entity.getId
-
-
 maybeGetCurrentEntityListViewType model =
     case model.mainViewType of
         EntityListView viewType ->
@@ -557,7 +478,7 @@ maybeGetCurrentEntityListViewType model =
 
 
 toggleEntitySelection entity =
-    updateSelectedEntityIdSet (toggleSetMember (getEntityId entity))
+    updateSelectedEntityIdSet (toggleSetMember (Entity.getId entity))
 
 
 toggleSetMember item set =

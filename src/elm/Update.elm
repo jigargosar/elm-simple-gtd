@@ -11,6 +11,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
+import Model.ExMode
 import Msg exposing (..)
 import Stores
 import Todo.Notification.Types
@@ -141,7 +142,7 @@ updateInner msg =
             map (Model.switchToView viewType)
 
         OnSaveCurrentForm ->
-            Return.andThen Model.saveCurrentForm
+            Return.andThen Model.ExMode.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
         OnNewTodoForInbox ->

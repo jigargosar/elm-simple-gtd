@@ -13,9 +13,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Toolkit.Operators exposing (..)
-import Model exposing (..)
 import X.Function.Infix exposing (..)
-import Model
 import View.Shared exposing (..)
 import ViewType exposing (ViewType(EntityListView, SyncView))
 

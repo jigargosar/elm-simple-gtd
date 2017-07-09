@@ -3,7 +3,7 @@ module Model.ExMode exposing (..)
 import Context
 import Document.Types exposing (getDocId)
 import Entity
-import Entity.Types exposing (EntityType(GroupEntity, TodoEntity), GroupEntityType(ContextEntity, ProjectEntity))
+import Entity.Types exposing (..)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import LaunchBar.Form
@@ -16,13 +16,7 @@ import Todo
 import Todo.GroupForm
 import Todo.NewForm
 import Todo.ReminderForm
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
 import Types exposing (AppModel, ModelF)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Stores
 import Todo.Types exposing (TodoAction(..), TodoDoc)
 import X.Record exposing (set)
@@ -128,10 +122,6 @@ activateLaunchBar now =
 
 updateLaunchBarInput now text form =
     setEditMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
-
-
-onNewTodoModeWithFocusInEntityAsReference model =
-    Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo |> Msg.OnStartExclusiveMode
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

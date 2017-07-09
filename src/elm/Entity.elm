@@ -41,7 +41,7 @@ initContextGroup =
 
 
 type alias Msg =
-    Entity.Types.Msg
+    Entity.Types.EntityMsg
 
 
 getId entity =

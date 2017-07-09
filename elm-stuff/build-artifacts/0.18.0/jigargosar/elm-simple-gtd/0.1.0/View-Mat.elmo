@@ -15,7 +15,7 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = function (m) {
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
-							_jigargosar$elm_simple_gtd$Model_ExMode$onNewTodoModeWithFocusInEntityAsReference(m)),
+							_jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference(m)),
 						_1: {ctor: '[]'}
 					}
 				}

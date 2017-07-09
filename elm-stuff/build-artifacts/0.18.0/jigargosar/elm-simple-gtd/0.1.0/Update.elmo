@@ -392,7 +392,7 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = function (key) {
 							case 'CharX':
 								return clear;
 							case 'CharQ':
-								return A2(_jigargosar$elm_simple_gtd$X_Return$andThenApplyWith, _jigargosar$elm_simple_gtd$Model_ExMode$onNewTodoModeWithFocusInEntityAsReference, _jigargosar$elm_simple_gtd$Update$update);
+								return A2(_jigargosar$elm_simple_gtd$X_Return$andThenApplyWith, _jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference, _jigargosar$elm_simple_gtd$Update$update);
 							case 'CharI':
 								return _jigargosar$elm_simple_gtd$Update$andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox);
 							case 'Slash':

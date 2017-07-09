@@ -25,7 +25,7 @@ type EntityListViewType
     | RecentView
 
 
-type Msg
+type EntityMsg
     = OnStartEditing
     | OnToggleDeleted
     | OnToggleArchived

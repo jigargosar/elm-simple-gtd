@@ -17,7 +17,7 @@ import Types exposing (ReturnF)
 update :
     (Msg.Msg -> ReturnF)
     -> EntityType
-    -> Entity.Types.Msg
+    -> Entity.Types.EntityMsg
     -> ReturnF
 update andThenUpdate entity msg =
     case msg of

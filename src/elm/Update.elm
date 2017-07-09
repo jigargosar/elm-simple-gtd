@@ -12,6 +12,7 @@ import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Model.ExMode
+import Model.Msg
 import Msg exposing (..)
 import Stores
 import Todo.Notification.Types
@@ -308,7 +309,7 @@ onGlobalKeyUp key =
 
                             Key.CharQ ->
                                 Return.andThenApplyWith
-                                    Model.ExMode.onNewTodoModeWithFocusInEntityAsReference
+                                    Model.Msg.onNewTodoModeWithFocusInEntityAsReference
                                     update
 
                             Key.CharI ->

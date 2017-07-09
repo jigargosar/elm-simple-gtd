@@ -12,7 +12,6 @@ import Msg exposing (Msg)
 import Project
 import Return
 import Store
-import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Helpers exposing (maybe2Tuple)

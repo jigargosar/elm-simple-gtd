@@ -1,0 +1,5 @@
+var _jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference = function (model) {
+	return _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
+			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')));
+};

@@ -1,8 +1,26 @@
+var _jigargosar$elm_simple_gtd$Todo_Notification_Model$dummy = A2(
+	_jigargosar$elm_simple_gtd$Todo_Notification_Types$Active,
+	_jigargosar$elm_simple_gtd$Todo_Notification_Types$InitialView,
+	A2(_jigargosar$elm_simple_gtd$Todo_Notification_Types$TodoDetails, 'dummy-todo-id', 'dummy todo'));
+var _jigargosar$elm_simple_gtd$Todo_Notification_Model$snoozeView = _jigargosar$elm_simple_gtd$Todo_Notification_Types$Active(_jigargosar$elm_simple_gtd$Todo_Notification_Types$SnoozeView);
+var _jigargosar$elm_simple_gtd$Todo_Notification_Model$none = _jigargosar$elm_simple_gtd$Todo_Notification_Types$None;
+var _jigargosar$elm_simple_gtd$Todo_Notification_Model$createTodoDetails = function (todo) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Todo_Notification_Types$TodoDetails,
+		_jigargosar$elm_simple_gtd$Document$getId(todo),
+		_jigargosar$elm_simple_gtd$Todo$getText(todo));
+};
+var _jigargosar$elm_simple_gtd$Todo_Notification_Model$initialView = function (_p0) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Todo_Notification_Types$Active,
+		_jigargosar$elm_simple_gtd$Todo_Notification_Types$InitialView,
+		_jigargosar$elm_simple_gtd$Todo_Notification_Model$createTodoDetails(_p0));
+};
 var _jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset = F2(
 	function (time, offset) {
-		var _p0 = offset;
-		if (_p0.ctor === 'SnoozeForMilli') {
-			return time + _p0._0;
+		var _p1 = offset;
+		if (_p1.ctor === 'SnoozeForMilli') {
+			return time + _p1._0;
 		} else {
 			return _elm_lang$core$Date$toTime(
 				A3(
@@ -15,35 +33,6 @@ var _jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset = F2(
 						_elm_lang$core$Date$fromTime(time))));
 		}
 	});
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$TodoDetails = F2(
-	function (a, b) {
-		return {id: a, text: b};
-	});
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$createTodoDetails = function (todo) {
-	return A2(
-		_jigargosar$elm_simple_gtd$Todo_Notification_Model$TodoDetails,
-		_jigargosar$elm_simple_gtd$Document$getId(todo),
-		_jigargosar$elm_simple_gtd$Todo$getText(todo));
-};
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$SnoozeView = {ctor: 'SnoozeView'};
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$InitialView = {ctor: 'InitialView'};
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$Active = F2(
-	function (a, b) {
-		return {ctor: 'Active', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$initialView = function (_p1) {
-	return A2(
-		_jigargosar$elm_simple_gtd$Todo_Notification_Model$Active,
-		_jigargosar$elm_simple_gtd$Todo_Notification_Model$InitialView,
-		_jigargosar$elm_simple_gtd$Todo_Notification_Model$createTodoDetails(_p1));
-};
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$snoozeView = _jigargosar$elm_simple_gtd$Todo_Notification_Model$Active(_jigargosar$elm_simple_gtd$Todo_Notification_Model$SnoozeView);
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$dummy = A2(
-	_jigargosar$elm_simple_gtd$Todo_Notification_Model$Active,
-	_jigargosar$elm_simple_gtd$Todo_Notification_Model$InitialView,
-	A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$TodoDetails, 'dummy-todo-id', 'dummy todo'));
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$None = {ctor: 'None'};
-var _jigargosar$elm_simple_gtd$Todo_Notification_Model$none = _jigargosar$elm_simple_gtd$Todo_Notification_Model$None;
 var _jigargosar$elm_simple_gtd$Todo_Notification_Model$Close = {ctor: 'Close'};
 var _jigargosar$elm_simple_gtd$Todo_Notification_Model$MarkDone = {ctor: 'MarkDone'};
 var _jigargosar$elm_simple_gtd$Todo_Notification_Model$Dismiss = {ctor: 'Dismiss'};

@@ -1,5 +1,6 @@
 module Firebase.Model exposing (..)
 
+import Firebase.Types exposing (FCMToken, FirebaseUser(SignedIn, SignedOut))
 import Firebase.User
 import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
@@ -8,7 +9,7 @@ import Json.Encode.Extra as E
 
 
 type alias Model =
-    { user : User
+    { user : FirebaseUser
     , fcmToken : FCMToken
     , firebaseClient : Client
     }
@@ -19,10 +20,6 @@ init deviceId =
     , fcmToken = Nothing
     , firebaseClient = initClient deviceId
     }
-
-
-type alias FCMToken =
-    Maybe String
 
 
 encodeFCMToken =
@@ -57,16 +54,11 @@ encodeClient client =
         ]
 
 
-type User
-    = SignedOut
-    | SignedIn Firebase.User.Model
-
-
 initUser =
     SignedOut
 
 
-userDecoder : Decoder User
+userDecoder : Decoder FirebaseUser
 userDecoder =
     D.oneOf
         [ Firebase.User.decoder |> D.map SignedIn

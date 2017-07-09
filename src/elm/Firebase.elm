@@ -8,16 +8,8 @@ type alias UID =
     String
 
 
-type alias FCMToken =
-    Model.FCMToken
-
-
 type alias Client =
     Model.Client
-
-
-type alias User =
-    Model.User
 
 
 type alias DeviceId =

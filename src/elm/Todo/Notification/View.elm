@@ -8,20 +8,21 @@ import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model
 import Time
+import Todo.Notification.Types
 
 
 maybeOverlay m =
     case m.reminderOverlay of
-        Todo.Notification.Model.Active activeView todoDetails ->
+        Todo.Notification.Types.Active activeView todoDetails ->
             reminderOverlayActiveView activeView todoDetails |> Just
 
-        Todo.Notification.Model.None ->
+        Todo.Notification.Types.None ->
             Nothing
 
 
 reminderOverlayActiveView activeView todoDetails =
     case activeView of
-        Todo.Notification.Model.InitialView ->
+        Todo.Notification.Types.InitialView ->
             let
                 vm =
                     { onDismissClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.Dismiss
@@ -35,7 +36,7 @@ reminderOverlayActiveView activeView todoDetails =
                     , Mat.bigIconTextBtn "done" "done!" vm.onDoneClicked
                     ]
 
-        Todo.Notification.Model.SnoozeView ->
+        Todo.Notification.Types.SnoozeView ->
             let
                 msg =
                     Todo.Notification.Model.SnoozeTill >> Msg.OnReminderOverlayAction

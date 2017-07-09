@@ -2,7 +2,7 @@ port module Firebase.Main exposing (..)
 
 import AppUrl
 import Firebase
-import Firebase.Model exposing (User(..))
+import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
 import Model

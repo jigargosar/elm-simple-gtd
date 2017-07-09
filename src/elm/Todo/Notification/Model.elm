@@ -6,21 +6,8 @@ import Document
 import Document.Types exposing (DocId)
 import Todo
 import Time exposing (Time)
+import Todo.Notification.Types exposing (..)
 import Todo.Types exposing (TodoDoc)
-
-
-type ActiveView
-    = InitialView
-    | SnoozeView
-
-
-type alias TodoDetails =
-    { id : DocId, text : Todo.Text }
-
-
-type Model
-    = None
-    | Active ActiveView TodoDetails
 
 
 type Action
@@ -45,7 +32,7 @@ addSnoozeOffset time offset =
             Date.fromTime time |> Date.ceiling Date.Day |> Date.add Date.Hour 10 |> Date.toTime
 
 
-initialView : TodoDoc -> Model
+initialView : TodoDoc -> TodoReminderOverlayModel
 initialView =
     createTodoDetails >> Active InitialView
 
@@ -58,7 +45,7 @@ none =
     None
 
 
-snoozeView : TodoDetails -> Model
+snoozeView : TodoDetails -> TodoReminderOverlayModel
 snoozeView =
     Active SnoozeView
 

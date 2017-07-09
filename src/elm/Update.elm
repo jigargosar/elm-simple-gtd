@@ -6,39 +6,28 @@ import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
 import Entity.Types
-
-
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import Material
 import Msg exposing (..)
+import Todo.Notification.Types
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
-
-
 import X.Keyboard as Keyboard exposing (Key)
-
 import X.Return as Return
-
-
-
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
 import Todo.Notification.Model
-
 import Todo.Form
 import Todo.GroupForm
 import Todo.Msg
 import Return
-
 import Task
 import Time exposing (Time)
-
 import Model exposing (..)
 import Todo.Main
-
 import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
@@ -225,7 +214,7 @@ reminderOverlayAction action =
         (\model ->
             model
                 |> case model.reminderOverlay of
-                    Todo.Notification.Model.Active activeView todoDetails ->
+                    Todo.Notification.Types.Active activeView todoDetails ->
                         let
                             todoId =
                                 todoDetails.id

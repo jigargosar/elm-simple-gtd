@@ -11,9 +11,11 @@ import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase.SignIn
+import Firebase.Types exposing (FCMToken, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Msg exposing (..)
+import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
 import Types exposing (ViewType(EntityListView))
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
@@ -94,10 +96,10 @@ type alias Model =
     , contextStore : ContextStore
     , editMode : ExclusiveMode
     , mainViewType : ViewType
-    , reminderOverlay : Todo.Notification.Model.Model
+    , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String
-    , user : Firebase.User
-    , fcmToken : Firebase.FCMToken
+    , user : FirebaseUser
+    , fcmToken : FCMToken
     , firebaseClient : Firebase.Client
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId

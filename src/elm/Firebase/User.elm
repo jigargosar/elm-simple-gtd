@@ -1,22 +1,8 @@
 module Firebase.User exposing (..)
 
+import Firebase.Types exposing (Provider, UserInfo)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
-
-
-type alias Model =
-    { id : String
-    , providerData : List Provider
-    }
-
-
-type alias Provider =
-    { displayName : String
-    , email : String
-    , photoURL : String
-    , providerId : String
-    , uid : String
-    }
 
 
 providerDataDecoder =
@@ -29,6 +15,6 @@ providerDataDecoder =
 
 
 decoder =
-    D.succeed Model
+    D.succeed UserInfo
         |> D.required "uid" D.string
         |> D.required "providerData" (D.list providerDataDecoder)

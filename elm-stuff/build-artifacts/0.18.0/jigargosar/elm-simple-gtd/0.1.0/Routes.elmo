@@ -28,7 +28,7 @@ var _jigargosar$elm_simple_gtd$Routes$hash2messages = function (location) {
 		_rgrempel$elm_route_url$RouteUrl_Builder$fromHash(location.href));
 };
 var _jigargosar$elm_simple_gtd$Routes$getPathFromModel = function (model) {
-	var _p3 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
+	var _p3 = _jigargosar$elm_simple_gtd$Model_ViewType$getMainViewType(model);
 	if (_p3.ctor === 'EntityListView') {
 		return _jigargosar$elm_simple_gtd$Entity$getPathFromViewType(_p3._0);
 	} else {

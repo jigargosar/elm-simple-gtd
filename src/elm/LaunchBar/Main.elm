@@ -5,6 +5,7 @@ import Entity.Types
 import LaunchBar.Types exposing (LBEntity(..), LBMsg(..))
 import Model
 import Model.ExMode
+import Model.ViewType
 import Msg
 import Return
 import Time
@@ -26,16 +27,16 @@ update andThenUpdate now msg =
             andThenUpdate Msg.OnDeactivateEditingMode
                 >> case entity of
                     LBProject project ->
-                        map (Model.switchToProjectView project)
+                        map (Model.ViewType.switchToProjectView project)
 
                     LBProjects ->
-                        map (Model.setEntityListViewType Entity.Types.ProjectsView)
+                        map (Model.ViewType.setEntityListViewType Entity.Types.ProjectsView)
 
                     LBContext context ->
-                        map (Model.switchToContextView context)
+                        map (Model.ViewType.switchToContextView context)
 
                     LBContexts ->
-                        map (Model.setEntityListViewType Entity.Types.ContextsView)
+                        map (Model.ViewType.setEntityListViewType Entity.Types.ContextsView)
 
         OnLBInputChanged form text ->
             map (Model.ExMode.updateLaunchBarInput now text form)

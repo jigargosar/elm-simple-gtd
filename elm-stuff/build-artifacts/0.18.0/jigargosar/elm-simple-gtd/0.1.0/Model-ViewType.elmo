@@ -1,0 +1,42 @@
+var _jigargosar$elm_simple_gtd$Model_ViewType$getMainViewType = function (_) {
+	return _.mainViewType;
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$maybeGetCurrentEntityListViewType = function (model) {
+	var _p0 = model.mainViewType;
+	if (_p0.ctor === 'EntityListView') {
+		return _elm_lang$core$Maybe$Just(_p0._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToView = F2(
+	function (mainViewType, model) {
+		return _jigargosar$elm_simple_gtd$Model_Selection$clearSelection(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{mainViewType: mainViewType}));
+	});
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView = _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
+	_jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
+var _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType = function (_p1) {
+	return _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
+		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p1));
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$contextView = function (_p2) {
+	return _jigargosar$elm_simple_gtd$ViewType$EntityListView(
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextView(
+			_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p2)));
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView = function (_p3) {
+	return _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
+		_jigargosar$elm_simple_gtd$Model_ViewType$contextView(_p3));
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$projectView = function (_p4) {
+	return _jigargosar$elm_simple_gtd$ViewType$EntityListView(
+		_jigargosar$elm_simple_gtd$Entity_Types$ProjectView(
+			_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p4)));
+};
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView = function (_p5) {
+	return _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
+		_jigargosar$elm_simple_gtd$Model_ViewType$projectView(_p5));
+};

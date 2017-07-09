@@ -6,6 +6,7 @@ import Entity.Types
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
 import Model.ExMode
+import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
 import Todo.NewForm
@@ -264,7 +265,7 @@ gotoTodoWithId todoId model =
                 (\_ ->
                     model
                         |> Stores.setFocusInEntityFromTodoId todoId
-                        |> Model.switchToContextsView
+                        |> Model.ViewType.switchToContextsView
                 )
                 (Stores.setFocusInEntity # model)
 

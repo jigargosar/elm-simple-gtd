@@ -9,7 +9,7 @@ var _jigargosar$elm_simple_gtd$View$appMainContent = function (model) {
 		{
 			ctor: '::',
 			_0: function () {
-				var _p0 = _jigargosar$elm_simple_gtd$Model$getMainViewType(model);
+				var _p0 = _jigargosar$elm_simple_gtd$Model_ViewType$getMainViewType(model);
 				if (_p0.ctor === 'EntityListView') {
 					return A2(_jigargosar$elm_simple_gtd$Entity_View$list, _p0._0, model);
 				} else {

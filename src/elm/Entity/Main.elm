@@ -6,12 +6,16 @@ import Entity.Types exposing (EntityType)
 import GroupDoc
 import Model
 import Model.ExMode
+import Model.Selection
+import Model.ViewType
 import Msg
 import Return
+import Set
 import Stores
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ReturnF)
+import Toolkit.Operators exposing (..)
 
 
 update :
@@ -65,7 +69,28 @@ update andThenUpdate entity msg =
             Return.map (Stores.setFocusInEntity entity)
 
         Entity.Types.OnToggleSelected ->
-            Return.map (Model.toggleEntitySelection entity)
+            Return.map (toggleEntitySelection entity)
 
         Entity.Types.OnGoto ->
-            Return.map (Model.switchToEntityListViewFromEntity entity)
+            Return.map (switchToEntityListViewFromEntity entity)
+
+
+toggleEntitySelection entity =
+    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getId entity))
+
+
+toggleSetMember item set =
+    if Set.member item set then
+        Set.remove item set
+    else
+        Set.insert item set
+
+
+switchToEntityListViewFromEntity entity model =
+    let
+        maybeEntityListViewType =
+            Model.ViewType.maybeGetCurrentEntityListViewType model
+    in
+        entity
+            |> Entity.toViewType maybeEntityListViewType
+            |> (Model.ViewType.setEntityListViewType # model)

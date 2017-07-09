@@ -1,0 +1,18 @@
+var _jigargosar$elm_simple_gtd$Model_Selection$setSelectedEntityIdSet = F2(
+	function (selectedEntityIdSet, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{selectedEntityIdSet: selectedEntityIdSet});
+	});
+var _jigargosar$elm_simple_gtd$Model_Selection$getSelectedEntityIdSet = function (_) {
+	return _.selectedEntityIdSet;
+};
+var _jigargosar$elm_simple_gtd$Model_Selection$updateSelectedEntityIdSet = F2(
+	function (updater, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_Selection$setSelectedEntityIdSet,
+			updater(
+				_jigargosar$elm_simple_gtd$Model_Selection$getSelectedEntityIdSet(model)),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Model_Selection$clearSelection = _jigargosar$elm_simple_gtd$Model_Selection$setSelectedEntityIdSet(_elm_lang$core$Set$empty);

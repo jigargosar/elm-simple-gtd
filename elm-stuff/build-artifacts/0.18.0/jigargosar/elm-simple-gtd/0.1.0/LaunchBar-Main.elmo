@@ -10,16 +10,16 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 						switch (_p2.ctor) {
 							case 'LBProject':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$switchToProjectView(_p2._0));
+									_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p2._0));
 							case 'LBProjects':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
+									_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
 							case 'LBContext':
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$switchToContextView(_p2._0));
+									_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p2._0));
 							default:
 								return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-									_jigargosar$elm_simple_gtd$Model$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
+									_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
 						}
 					}()(
 						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p1));

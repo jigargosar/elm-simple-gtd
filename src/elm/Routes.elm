@@ -3,6 +3,7 @@ module Routes exposing (..)
 import Entity
 import Maybe.Extra
 import Model as Model
+import Model.ViewType
 import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
@@ -22,7 +23,7 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case Model.getMainViewType model of
+    case Model.ViewType.getMainViewType model of
         EntityListView viewType ->
             Entity.getPathFromViewType viewType
 

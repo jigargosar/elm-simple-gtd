@@ -4,7 +4,7 @@ import AppDrawer.Model
 import CommonMsg
 import Context
 import Document exposing (Document)
-import Document.Types exposing (DocId)
+import Document.Types exposing (DocId, getDocId)
 import Entity.Types exposing (EntityListViewType, EntityType)
 import Entity exposing (inboxEntity)
 import ExclusiveMode
@@ -246,7 +246,6 @@ createAndEditNewProject model =
         |> Tuple2.mapSecond (setProjectStore # model)
         |> (\( project, model ) ->
                 model
-                    |> switchToProjectView project
                     |> startEditingEntity (Entity.fromProject project)
            )
 
@@ -256,7 +255,6 @@ createAndEditNewContext model =
         |> Tuple2.mapSecond (setContextStore # model)
         |> (\( context, model ) ->
                 model
-                    |> switchToContextView context
                     |> startEditingEntity (Entity.fromContext context)
            )
 
@@ -266,16 +264,6 @@ switchToNewUserSetupModeIfNeeded model =
         setEditMode createSetupExclusiveMode model
     else
         deactivateEditingMode model
-
-
-switchToEntityListViewFromEntity entity model =
-    let
-        maybeEntityListViewType =
-            maybeGetCurrentEntityListViewType model
-    in
-        entity
-            |> Entity.toViewType maybeEntityListViewType
-            |> (setEntityListViewType # model)
 
 
 toggleDeleteEntity : EntityType -> ModelReturnF
@@ -328,80 +316,6 @@ createRemoteSyncForm model =
 getEditMode : AppModel -> ExclusiveMode
 getEditMode =
     (.editMode)
-
-
-clearSelection =
-    setSelectedEntityIdSet Set.empty
-
-
-getMainViewType : AppModel -> ViewType
-getMainViewType =
-    (.mainViewType)
-
-
-switchToView : ViewType -> ModelF
-switchToView mainViewType model =
-    { model | mainViewType = mainViewType }
-        |> clearSelection
-
-
-projectView =
-    Document.getId >> Entity.Types.ProjectView >> EntityListView
-
-
-contextView =
-    Document.getId >> Entity.Types.ContextView >> EntityListView
-
-
-switchToProjectView =
-    projectView >> switchToView
-
-
-switchToContextView =
-    contextView >> switchToView
-
-
-switchToContextsView =
-    EntityListView Entity.Types.ContextsView |> switchToView
-
-
-setEntityListViewType =
-    EntityListView >> switchToView
-
-
-maybeGetCurrentEntityListViewType model =
-    case model.mainViewType of
-        EntityListView viewType ->
-            Just viewType
-
-        _ ->
-            Nothing
-
-
-toggleEntitySelection entity =
-    updateSelectedEntityIdSet (toggleSetMember (Entity.getId entity))
-
-
-toggleSetMember item set =
-    if Set.member item set then
-        Set.remove item set
-    else
-        Set.insert item set
-
-
-getSelectedEntityIdSet : AppModel -> Set DocId
-getSelectedEntityIdSet =
-    (.selectedEntityIdSet)
-
-
-setSelectedEntityIdSet : Set DocId -> ModelF
-setSelectedEntityIdSet selectedEntityIdSet model =
-    { model | selectedEntityIdSet = selectedEntityIdSet }
-
-
-updateSelectedEntityIdSet : (Set DocId -> Set DocId) -> ModelF
-updateSelectedEntityIdSet updater model =
-    setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
 
 
 getNow : AppModel -> Time

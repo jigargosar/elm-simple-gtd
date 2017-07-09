@@ -1,3 +1,18 @@
+var _jigargosar$elm_simple_gtd$Entity_Main$switchToEntityListViewFromEntity = F2(
+	function (entity, model) {
+		var maybeEntityListViewType = _jigargosar$elm_simple_gtd$Model_ViewType$maybeGetCurrentEntityListViewType(model);
+		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType, model)(
+			A2(_jigargosar$elm_simple_gtd$Entity$toViewType, maybeEntityListViewType, entity));
+	});
+var _jigargosar$elm_simple_gtd$Entity_Main$toggleSetMember = F2(
+	function (item, set) {
+		return A2(_elm_lang$core$Set$member, item, set) ? A2(_elm_lang$core$Set$remove, item, set) : A2(_elm_lang$core$Set$insert, item, set);
+	});
+var _jigargosar$elm_simple_gtd$Entity_Main$toggleEntitySelection = function (entity) {
+	return _jigargosar$elm_simple_gtd$Model_Selection$updateSelectedEntityIdSet(
+		_jigargosar$elm_simple_gtd$Entity_Main$toggleSetMember(
+			_jigargosar$elm_simple_gtd$Entity$getId(entity)));
+};
 var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 	function (andThenUpdate, entity, msg) {
 		var _p0 = msg;
@@ -56,9 +71,9 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 					_jigargosar$elm_simple_gtd$Stores$setFocusInEntity(entity));
 			case 'OnToggleSelected':
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model$toggleEntitySelection(entity));
+					_jigargosar$elm_simple_gtd$Entity_Main$toggleEntitySelection(entity));
 			default:
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity(entity));
+					_jigargosar$elm_simple_gtd$Entity_Main$switchToEntityListViewFromEntity(entity));
 		}
 	});

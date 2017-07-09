@@ -6,6 +6,7 @@ import AppDrawer.View
 import CustomSync
 import Entity.View
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
+import Model.ViewType
 import Msg
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
@@ -164,7 +165,7 @@ appLayoutView m =
 
 appMainContent model =
     div [ id "main-view-container" ]
-        [ case Model.getMainViewType model of
+        [ case Model.ViewType.getMainViewType model of
             EntityListView viewType ->
                 Entity.View.list viewType model
 

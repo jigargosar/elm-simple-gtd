@@ -26,13 +26,13 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Main$update = F3(
 				};
 			case 'OnLBInputChanged':
 				return _jigargosar$elm_simple_gtd$LaunchBar_Main$map(
-					A3(_jigargosar$elm_simple_gtd$Model$updateLaunchBarInput, now, _p0._1, _p0._0));
+					A3(_jigargosar$elm_simple_gtd$Model_ExMode$updateLaunchBarInput, now, _p0._1, _p0._0));
 			default:
 				return function (_p3) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
 							_jigargosar$elm_simple_gtd$LaunchBar_Main$map,
-							_jigargosar$elm_simple_gtd$Model$activateLaunchBar(now),
+							_jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar(now),
 							_p3));
 				};
 		}

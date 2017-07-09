@@ -4,6 +4,7 @@ import DomPorts exposing (autoFocusInputCmd)
 import Entity.Types
 import LaunchBar.Types exposing (LBEntity(..), LBMsg(..))
 import Model
+import Model.ExMode
 import Msg
 import Return
 import Time
@@ -37,7 +38,7 @@ update andThenUpdate now msg =
                         map (Model.setEntityListViewType Entity.Types.ContextsView)
 
         OnLBInputChanged form text ->
-            map (Model.updateLaunchBarInput now text form)
+            map (Model.ExMode.updateLaunchBarInput now text form)
 
         OnLBOpen ->
-            map (Model.activateLaunchBar now) >> DomPorts.autoFocusInputCmd
+            map (Model.ExMode.activateLaunchBar now) >> DomPorts.autoFocusInputCmd

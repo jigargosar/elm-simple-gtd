@@ -1,7 +1,7 @@
 module View.Mat exposing (..)
 
 import Mat exposing (..)
-import Model
+import Model.ExMode
 import Msg
 
 
@@ -11,6 +11,6 @@ newTodoFab m =
         [ id "add-fab"
         , primaryFABCS
         , resourceId "add-todo-fab"
-        , onClickStopPropagation (Model.onNewTodoModeWithFocusInEntityAsReference m)
+        , onClickStopPropagation (Model.ExMode.onNewTodoModeWithFocusInEntityAsReference m)
         ]
         [ icon "add" ]

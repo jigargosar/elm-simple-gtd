@@ -208,7 +208,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 		switch (_p8.ctor) {
 			case 'UpdateSetupFormTodoText':
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model$setEditMode(
+					_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p8._1, _p8._0))));
 			case 'OnShowMoreMenu':
@@ -219,14 +219,14 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Todo_Main$positionMoreMenuCmd(_p10),
 						A2(
 							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model$setEditMode(
+							_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 								_jigargosar$elm_simple_gtd$ExclusiveMode$todoMoreMenu(_p10)),
 							_p9));
 				};
 			case 'UpdateReminderForm':
 				return _Fresheyeball$elm_return$Return$map(
 					function (_p11) {
-						return _jigargosar$elm_simple_gtd$Model$setEditMode(
+						return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(_p11));
 					}(
 						A2(_jigargosar$elm_simple_gtd$Todo_ReminderForm$update, _p8._1, _p8._0)));

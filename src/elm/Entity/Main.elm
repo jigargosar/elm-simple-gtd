@@ -5,6 +5,7 @@ import Entity
 import Entity.Types exposing (EntityType)
 import GroupDoc
 import Model
+import Model.ExMode
 import Msg
 import Return
 import Stores
@@ -21,11 +22,11 @@ update :
 update andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->
-            Return.map (Model.startEditingEntity entity)
+            Return.map (Model.ExMode.startEditingEntity entity)
                 >> DomPorts.autoFocusInputCmd
 
         Entity.Types.OnNameChanged newName ->
-            Return.map (Model.updateEditModeNameChanged newName entity)
+            Return.map (Model.ExMode.updateEditModeNameChanged newName entity)
 
         Entity.Types.OnSave ->
             andThenUpdate Msg.OnSaveCurrentForm

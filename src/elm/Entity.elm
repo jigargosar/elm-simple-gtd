@@ -1,5 +1,6 @@
 module Entity exposing (..)
 
+import Context
 import Document
 import Entity.Types exposing (EntityType(..), GroupEntityType(..), EntityListViewType(..))
 import X.List as List
@@ -13,6 +14,10 @@ import Todo
 
 type alias GroupEntity =
     Entity.Types.GroupEntityType
+
+
+inboxEntity =
+    fromContext Context.null
 
 
 fromContext =

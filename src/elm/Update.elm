@@ -58,7 +58,7 @@ updateInner msg =
             ExclusiveMode.Main.start exclusiveMode
 
         OnShowMainMenu ->
-            map Model.showMainMenu
+            map Model.ExMode.showMainMenu
                 >> Return.command positionMainMenuCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
@@ -82,36 +82,36 @@ updateInner msg =
             reminderOverlayAction action
 
         OnDeactivateEditingMode ->
-            map (Model.deactivateEditingMode)
+            map (Model.ExMode.deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartEditingContext todo ->
-            map (Model.startEditingTodoContext todo)
+            map (Model.ExMode.startEditingTodoContext todo)
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingProject todo ->
-            map (Model.startEditingTodoProject todo)
+            map (Model.ExMode.startEditingTodoProject todo)
                 >> Return.command (positionProjectMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
-            map (Model.updateNewTodoText form text)
+            map (Model.ExMode.updateNewTodoText form text)
 
         OnStartEditingReminder todo ->
-            map (Model.startEditingReminder todo)
+            map (Model.ExMode.startEditingReminder todo)
                 >> Return.command (positionScheduleMenuCmd todo)
 
         OnUpdateTodoForm form action ->
             map
                 (Todo.Form.set action form
                     |> XMEditTodo
-                    >> Model.setEditMode
+                    >> Model.ExMode.setEditMode
                 )
 
         OnEditTodoProjectMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
                     |> XMEditTodoProject
-                    >> Model.setEditMode
+                    >> Model.ExMode.setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -119,7 +119,7 @@ updateInner msg =
             map
                 (menuState
                     |> XMMainMenu
-                    >> Model.setEditMode
+                    >> Model.ExMode.setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -127,7 +127,7 @@ updateInner msg =
             map
                 (Todo.GroupForm.setMenuState menuState form
                     |> XMEditTodoContext
-                    >> Model.setEditMode
+                    >> Model.ExMode.setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -135,7 +135,7 @@ updateInner msg =
             map
                 ({ form | uri = uri }
                     |> XMEditSyncSettings
-                    >> Model.setEditMode
+                    >> Model.ExMode.setEditMode
                 )
 
         OnSetViewType viewType ->
@@ -146,7 +146,7 @@ updateInner msg =
                 >> andThenUpdate OnDeactivateEditingMode
 
         OnNewTodoForInbox ->
-            map (Model.activateNewTodoModeWithInboxAsReference)
+            map (Model.ExMode.activateNewTodoModeWithInboxAsReference)
                 >> autoFocusInputCmd
 
         OnNewProject ->
@@ -308,7 +308,7 @@ onGlobalKeyUp key =
 
                             Key.CharQ ->
                                 Return.andThenApplyWith
-                                    Model.onNewTodoModeWithFocusInEntityAsReference
+                                    Model.ExMode.onNewTodoModeWithFocusInEntityAsReference
                                     update
 
                             Key.CharI ->

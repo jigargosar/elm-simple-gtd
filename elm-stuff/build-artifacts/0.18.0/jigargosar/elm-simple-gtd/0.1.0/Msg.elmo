@@ -52,6 +52,10 @@ var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$onSetEntityListView = function (_p0) {
+	return _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
+		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p0));
+};
 var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};

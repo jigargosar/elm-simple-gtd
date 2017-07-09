@@ -6,12 +6,13 @@ import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Entity.Types exposing (EntityListViewType, EntityType)
-import Entity
+import Entity exposing (inboxEntity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase
 import Firebase.SignIn
 import Material
+import Model.ExMode exposing (createSetupExclusiveMode, deactivateEditingMode, setEditMode, startEditingEntity)
 import Msg exposing (..)
 import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
@@ -152,10 +153,6 @@ now =
     X.Record.field .now (\s b -> { b | now = s })
 
 
-editMode =
-    X.Record.field .editMode (\s b -> { b | editMode = s })
-
-
 focusInEntity =
     X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
 
@@ -233,10 +230,6 @@ defaultView =
     EntityListView Entity.defaultListView
 
 
-inboxEntity =
-    Entity.fromContext Context.null
-
-
 removeReminderOverlay model =
     { model | reminderOverlay = Todo.Notification.Model.none }
 
@@ -275,71 +268,11 @@ createAndEditNewContext model =
            )
 
 
-startEditingEntity : EntityType -> ModelF
-startEditingEntity entity model =
-    setEditMode (ExclusiveMode.createEntityEditForm entity) model
-
-
-setEditMode : ExclusiveMode -> ModelF
-setEditMode =
-    set editMode
-
-
 switchToNewUserSetupModeIfNeeded model =
     if Store.isEmpty model.todoStore then
         setEditMode createSetupExclusiveMode model
     else
         deactivateEditingMode model
-
-
-createSetupExclusiveMode =
-    XMSetup (Todo.NewForm.create inboxEntity "")
-
-
-activateLaunchBar : Time -> ModelF
-activateLaunchBar now =
-    setEditMode (LaunchBar.Form.create now |> XMLaunchBar)
-
-
-updateLaunchBarInput now text form =
-    setEditMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
-
-
-onNewTodoModeWithFocusInEntityAsReference model =
-    Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo |> OnStartExclusiveMode
-
-
-activateNewTodoModeWithFocusInEntityAsReference : ModelF
-activateNewTodoModeWithFocusInEntityAsReference model =
-    setEditMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
-
-
-activateNewTodoModeWithInboxAsReference : ModelF
-activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
-
-
-updateNewTodoText form text =
-    setEditMode (Todo.NewForm.setText text form |> XMNewTodo)
-
-
-startEditingReminder : TodoDoc -> ModelF
-startEditingReminder todo =
-    updateEditModeM (.now >> Todo.ReminderForm.create todo >> XMEditTodoReminder)
-
-
-startEditingTodoProject : TodoDoc -> ModelF
-startEditingTodoProject todo =
-    setEditMode (Todo.GroupForm.init todo |> XMEditTodoProject)
-
-
-startEditingTodoContext : TodoDoc -> ModelF
-startEditingTodoContext todo =
-    setEditMode (Todo.GroupForm.init todo |> XMEditTodoContext)
-
-
-showMainMenu =
-    setEditMode (Menu.initState |> XMMainMenu)
 
 
 switchToEntityListViewFromEntity entity model =
@@ -350,18 +283,6 @@ switchToEntityListViewFromEntity entity model =
         entity
             |> Entity.toViewType maybeEntityListViewType
             |> (setEntityListViewType # model)
-
-
-updateEditModeNameChanged newName entity model =
-    case model.editMode of
-        XMEditContext ecm ->
-            setEditMode (ExclusiveMode.editContextSetName newName ecm) model
-
-        XMEditProject epm ->
-            setEditMode (ExclusiveMode.editProjectSetName newName epm) model
-
-        _ ->
-            model
 
 
 toggleDeleteEntity : EntityType -> ModelReturnF
@@ -411,18 +332,9 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-deactivateEditingMode =
-    setEditMode ExclusiveMode.none
-
-
 getEditMode : AppModel -> ExclusiveMode
 getEditMode =
     (.editMode)
-
-
-updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
-updateEditModeM updater model =
-    setEditMode (updater model) model
 
 
 clearSelection =

@@ -2,14 +2,14 @@ module ExclusiveMode.Main exposing (..)
 
 import DomPorts exposing (autoFocusInputCmd)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNewTodo))
-import Model
+import Model.ExMode
 import Return
 
 
 start exclusiveMode =
     case exclusiveMode of
         XMNewTodo form ->
-            Return.map (Model.setEditMode exclusiveMode)
+            Return.map (Model.ExMode.setEditMode exclusiveMode)
                 >> autoFocusInputCmd
 
         _ ->

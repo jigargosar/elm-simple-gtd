@@ -7,12 +7,12 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F3(
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
 							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model$startEditingEntity(entity),
+							_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity(entity),
 							_p1));
 				};
 			case 'OnNameChanged':
 				return _Fresheyeball$elm_return$Return$map(
-					A2(_jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged, _p0._0, entity));
+					A2(_jigargosar$elm_simple_gtd$Model_ExMode$updateEditModeNameChanged, _p0._0, entity));
 			case 'OnSave':
 				return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm);
 			case 'OnToggleDeleted':

@@ -55,6 +55,11 @@ var _jigargosar$elm_simple_gtd$Model$toggleSetMember = F2(
 	function (item, set) {
 		return A2(_elm_lang$core$Set$member, item, set) ? A2(_elm_lang$core$Set$remove, item, set) : A2(_elm_lang$core$Set$insert, item, set);
 	});
+var _jigargosar$elm_simple_gtd$Model$toggleEntitySelection = function (entity) {
+	return _jigargosar$elm_simple_gtd$Model$updateSelectedEntityIdSet(
+		_jigargosar$elm_simple_gtd$Model$toggleSetMember(
+			_jigargosar$elm_simple_gtd$Entity$getId(entity)));
+};
 var _jigargosar$elm_simple_gtd$Model$maybeGetCurrentEntityListViewType = function (model) {
 	var _p0 = model.mainViewType;
 	if (_p0.ctor === 'EntityListView') {
@@ -62,12 +67,6 @@ var _jigargosar$elm_simple_gtd$Model$maybeGetCurrentEntityListViewType = functio
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
 	}
-};
-var _jigargosar$elm_simple_gtd$Model$getEntityId = _jigargosar$elm_simple_gtd$Entity$getId;
-var _jigargosar$elm_simple_gtd$Model$toggleEntitySelection = function (entity) {
-	return _jigargosar$elm_simple_gtd$Model$updateSelectedEntityIdSet(
-		_jigargosar$elm_simple_gtd$Model$toggleSetMember(
-			_jigargosar$elm_simple_gtd$Model$getEntityId(entity)));
 };
 var _jigargosar$elm_simple_gtd$Model$contextView = function (_p1) {
 	return _jigargosar$elm_simple_gtd$ViewType$EntityListView(
@@ -134,7 +133,7 @@ var _jigargosar$elm_simple_gtd$Model$getMaybeEditTodoReminderForm = function (mo
 };
 var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 	function (entity, model) {
-		var entityId = _jigargosar$elm_simple_gtd$Model$getEntityId(entity);
+		var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
 		return function () {
 			var _p8 = entity;
 			if (_p8.ctor === 'GroupEntity') {
@@ -149,112 +148,48 @@ var _jigargosar$elm_simple_gtd$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
-var _jigargosar$elm_simple_gtd$Model$saveNewTodoForm = F2(
-	function (form, model) {
-		return A2(
-			_elm_lang$core$Basics$uncurry,
-			function (todoId) {
-				return function (_p10) {
-					return A2(
-						_elm_lang$core$Tuple$mapFirst,
-						_jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId(todoId),
-						A3(
-							_jigargosar$elm_simple_gtd$Stores$updateTodo,
-							function () {
-								var _p11 = form.referenceEntity;
-								if (_p11.ctor === 'TodoEntity') {
-									return _jigargosar$elm_simple_gtd$Todo_Types$TA_CopyProjectAndContextId(_p11._0);
-								} else {
-									var _p12 = _p11._0;
-									if (_p12.ctor === 'ContextEntity') {
-										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetContext(_p12._0);
-									} else {
-										return _jigargosar$elm_simple_gtd$Todo_Types$TA_SetProject(_p12._0);
-									}
-								}
-							}(),
-							todoId,
-							_p10));
-				};
-			},
-			A2(
-				_elm_lang$core$Tuple$mapFirst,
-				_jigargosar$elm_simple_gtd$Document$getId,
-				A2(
-					_jigargosar$elm_simple_gtd$Stores$insertTodo,
-					A2(
-						_jigargosar$elm_simple_gtd$Todo$init,
-						model.now,
-						_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
-					model)));
-	});
-var _jigargosar$elm_simple_gtd$Model$saveCurrentForm = function (model) {
-	var _p13 = model.editMode;
-	switch (_p13.ctor) {
-		case 'XMEditContext':
-			var _p14 = _p13._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateContext,
-				_p14.id,
-				_jigargosar$elm_simple_gtd$Context$setName(_p14.name),
-				model);
-		case 'XMEditProject':
-			var _p15 = _p13._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateProject,
-				_p15.id,
-				_jigargosar$elm_simple_gtd$Project$setName(_p15.name),
-				model);
-		case 'XMEditTodo':
-			var _p16 = _p13._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p16.todoText),
-				_p16.id,
-				model);
-		case 'XMEditTodoReminder':
-			var _p17 = _p13._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateTodo,
-				_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p17)),
-				_p17.id,
-				model);
-		case 'XMEditTodoContext':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMEditTodoProject':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMTodoMoreMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMNewTodo':
-			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p13._0, model);
-		case 'XMEditSyncSettings':
-			return _Fresheyeball$elm_return$Return$singleton(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{pouchDBRemoteSyncURI: _p13._0.uri}));
-		case 'XMLaunchBar':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMMainMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMNone':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMSignInOverlay':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		default:
-			return A2(_jigargosar$elm_simple_gtd$Model$saveNewTodoForm, _p13._0, model);
-	}
-};
 var _jigargosar$elm_simple_gtd$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {
 		var maybeEntityListViewType = _jigargosar$elm_simple_gtd$Model$maybeGetCurrentEntityListViewType(model);
 		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model$setEntityListViewType, model)(
 			A2(_jigargosar$elm_simple_gtd$Entity$toViewType, maybeEntityListViewType, entity));
 	});
-var _jigargosar$elm_simple_gtd$Model$onNewTodoModeWithFocusInEntityAsReference = function (model) {
-	return _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')));
+var _jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded = function (model) {
+	return _jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? A2(_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode, _jigargosar$elm_simple_gtd$Model_ExMode$createSetupExclusiveMode, model) : _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode(model);
+};
+var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
+	return function (_p10) {
+		var _p11 = _p10;
+		var _p12 = _p11._0;
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
+			_jigargosar$elm_simple_gtd$Entity$fromContext(_p12),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p12, _p11._1));
+	}(
+		A2(
+			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setContextStore, model),
+			A2(
+				_jigargosar$elm_simple_gtd$Store$insert,
+				A2(_jigargosar$elm_simple_gtd$Context$init, '<New Context>', model.now),
+				model.contextStore)));
+};
+var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
+	return function (_p13) {
+		var _p14 = _p13;
+		var _p15 = _p14._0;
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
+			_jigargosar$elm_simple_gtd$Entity$fromProject(_p15),
+			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p15, _p14._1));
+	}(
+		A2(
+			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setProjectStore, model),
+			A2(
+				_jigargosar$elm_simple_gtd$Store$insert,
+				A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
+				model.projectStore)));
 };
 var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToSnoozeView = F2(
 	function (details, model) {
@@ -272,7 +207,7 @@ var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
 var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p18) {
+		return function (_p16) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
@@ -280,12 +215,9 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 					_jigargosar$elm_simple_gtd$Stores$updateTodo,
 					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
 					todoId,
-					_p18));
+					_p16));
 		}(model);
 	});
-var _jigargosar$elm_simple_gtd$Model$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, ''));
 var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
@@ -319,148 +251,6 @@ var _jigargosar$elm_simple_gtd$Model$moveFocusBy = A2(
 	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
 	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
 	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
-var _jigargosar$elm_simple_gtd$Model$editMode = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
-	function (_) {
-		return _.editMode;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{editMode: s});
-		}));
-var _jigargosar$elm_simple_gtd$Model$activateLaunchBar = function (now) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Record$set,
-		_jigargosar$elm_simple_gtd$Model$editMode,
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-			_jigargosar$elm_simple_gtd$LaunchBar_Form$create(now)));
-};
-var _jigargosar$elm_simple_gtd$Model$updateLaunchBarInput = F3(
-	function (now, text, form) {
-		return A2(
-			_jigargosar$elm_simple_gtd$X_Record$set,
-			_jigargosar$elm_simple_gtd$Model$editMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-				A3(_jigargosar$elm_simple_gtd$LaunchBar_Form$updateInput, now, text, form)));
-	});
-var _jigargosar$elm_simple_gtd$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
-	return A3(
-		_jigargosar$elm_simple_gtd$X_Record$set,
-		_jigargosar$elm_simple_gtd$Model$editMode,
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')),
-		model);
-};
-var _jigargosar$elm_simple_gtd$Model$activateNewTodoModeWithInboxAsReference = A2(
-	_jigargosar$elm_simple_gtd$X_Record$set,
-	_jigargosar$elm_simple_gtd$Model$editMode,
-	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-		A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Model$inboxEntity, '')));
-var _jigargosar$elm_simple_gtd$Model$updateNewTodoText = F2(
-	function (form, text) {
-		return A2(
-			_jigargosar$elm_simple_gtd$X_Record$set,
-			_jigargosar$elm_simple_gtd$Model$editMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-				A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, text, form)));
-	});
-var _jigargosar$elm_simple_gtd$Model$setEditMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model$editMode);
-var _jigargosar$elm_simple_gtd$Model$startEditingTodoProject = function (todo) {
-	return _jigargosar$elm_simple_gtd$Model$setEditMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject(
-			_jigargosar$elm_simple_gtd$Todo_GroupForm$init(todo)));
-};
-var _jigargosar$elm_simple_gtd$Model$startEditingTodoContext = function (todo) {
-	return _jigargosar$elm_simple_gtd$Model$setEditMode(
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext(
-			_jigargosar$elm_simple_gtd$Todo_GroupForm$init(todo)));
-};
-var _jigargosar$elm_simple_gtd$Model$showMainMenu = _jigargosar$elm_simple_gtd$Model$setEditMode(
-	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState));
-var _jigargosar$elm_simple_gtd$Model$startEditingEntity = F2(
-	function (entity, model) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Model$setEditMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm(entity),
-			model);
-	});
-var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
-	return function (_p19) {
-		var _p20 = _p19;
-		var _p21 = _p20._0;
-		return A2(
-			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromProject(_p21),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToProjectView, _p21, _p20._1));
-	}(
-		A2(
-			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setProjectStore, model),
-			A2(
-				_jigargosar$elm_simple_gtd$Store$insert,
-				A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
-				model.projectStore)));
-};
-var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
-	return function (_p22) {
-		var _p23 = _p22;
-		var _p24 = _p23._0;
-		return A2(
-			_jigargosar$elm_simple_gtd$Model$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromContext(_p24),
-			A2(_jigargosar$elm_simple_gtd$Model$switchToContextView, _p24, _p23._1));
-	}(
-		A2(
-			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setContextStore, model),
-			A2(
-				_jigargosar$elm_simple_gtd$Store$insert,
-				A2(_jigargosar$elm_simple_gtd$Context$init, '<New Context>', model.now),
-				model.contextStore)));
-};
-var _jigargosar$elm_simple_gtd$Model$updateEditModeNameChanged = F3(
-	function (newName, entity, model) {
-		var _p25 = model.editMode;
-		switch (_p25.ctor) {
-			case 'XMEditContext':
-				return A2(
-					_jigargosar$elm_simple_gtd$Model$setEditMode,
-					A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName, newName, _p25._0),
-					model);
-			case 'XMEditProject':
-				return A2(
-					_jigargosar$elm_simple_gtd$Model$setEditMode,
-					A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName, newName, _p25._0),
-					model);
-			default:
-				return model;
-		}
-	});
-var _jigargosar$elm_simple_gtd$Model$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode$none);
-var _jigargosar$elm_simple_gtd$Model$switchToNewUserSetupModeIfNeeded = function (model) {
-	return _jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? A2(_jigargosar$elm_simple_gtd$Model$setEditMode, _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode, model) : _jigargosar$elm_simple_gtd$Model$deactivateEditingMode(model);
-};
-var _jigargosar$elm_simple_gtd$Model$updateEditModeM = F2(
-	function (updater, model) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Model$setEditMode,
-			updater(model),
-			model);
-	});
-var _jigargosar$elm_simple_gtd$Model$startEditingReminder = function (todo) {
-	return _jigargosar$elm_simple_gtd$Model$updateEditModeM(
-		function (_p26) {
-			return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(
-				A2(
-					_jigargosar$elm_simple_gtd$Todo_ReminderForm$create,
-					todo,
-					function (_) {
-						return _.now;
-					}(_p26)));
-		});
-};
 var _jigargosar$elm_simple_gtd$Model$now = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -506,9 +296,9 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				{appDrawerModel: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$overAppDrawerModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$appDrawerModel);
-var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p27) {
+var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p17) {
 	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p27));
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p17));
 };
 var _jigargosar$elm_simple_gtd$Model$defaultLocalPref = {appDrawer: _jigargosar$elm_simple_gtd$AppDrawer_Model$default, signIn: _jigargosar$elm_simple_gtd$Firebase_SignIn$default};
 var _jigargosar$elm_simple_gtd$Model$encodeLocalPref = function (model) {
@@ -550,10 +340,6 @@ var _jigargosar$elm_simple_gtd$Model$keyboardCombos = {
 		_1: {ctor: '[]'}
 	}
 };
-var _jigargosar$elm_simple_gtd$Model$onSetEntityListView = function (_p28) {
-	return _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
-		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p28));
-};
 var _jigargosar$elm_simple_gtd$Model$LocalPref = F2(
 	function (a, b) {
 		return {appDrawer: a, signIn: b};
@@ -578,12 +364,12 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Model$localPrefDecoder, flags.localPref)),
 		_jigargosar$elm_simple_gtd$Model$defaultLocalPref);
 	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
-	var _p29 = flags;
-	var now = _p29.now;
-	var encodedTodoList = _p29.encodedTodoList;
-	var encodedProjectList = _p29.encodedProjectList;
-	var encodedContextList = _p29.encodedContextList;
-	var pouchDBRemoteSyncURI = _p29.pouchDBRemoteSyncURI;
+	var _p18 = flags;
+	var now = _p18.now;
+	var encodedTodoList = _p18.encodedTodoList;
+	var encodedProjectList = _p18.encodedProjectList;
+	var encodedContextList = _p18.encodedContextList;
+	var pouchDBRemoteSyncURI = _p18.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -593,15 +379,15 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p30 = A2(
+	var _p19 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
-	var todoStore = _p30._0._0;
-	var projectStore = _p30._0._1;
-	var contextStore = _p30._0._2;
-	var seed = _p30._1;
-	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$Model$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
+	var todoStore = _p19._0._0;
+	var projectStore = _p19._0._1;
+	var contextStore = _p19._0._2;
+	var seed = _p19._1;
+	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$Model_ExMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
 	var model = {
 		now: now,
 		todoStore: todoStore,
@@ -619,7 +405,7 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		selectedEntityIdSet: _elm_lang$core$Set$empty,
 		appVersion: flags.appVersion,
 		deviceId: flags.deviceId,
-		focusInEntity: _jigargosar$elm_simple_gtd$Model$inboxEntity,
+		focusInEntity: _jigargosar$elm_simple_gtd$Entity$inboxEntity,
 		timeTracker: _jigargosar$elm_simple_gtd$Todo_TimeTracker$none,
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
 			{toMsg: _jigargosar$elm_simple_gtd$Msg$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Model$keyboardCombos}),

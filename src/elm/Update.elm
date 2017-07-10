@@ -4,6 +4,7 @@ import AppDrawer.Main
 import CommonMsg
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
+import Entity
 import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Main
@@ -35,8 +36,9 @@ import Todo.Main
 import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
-import Types exposing (AppModel, Return, ReturnF)
+import Types exposing (AppModel, ModelF, Return, ReturnF)
 import Toolkit.Helpers exposing (..)
+import X.Record exposing (maybeOver)
 
 
 map =
@@ -68,11 +70,11 @@ update andThenUpdate msg =
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->
-                    map (Model.moveFocusBy -1 entityList)
+                    map (moveFocusBy -1 entityList)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
-                    map (Model.moveFocusBy 1 entityList)
+                    map (moveFocusBy 1 entityList)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 _ ->
@@ -178,6 +180,11 @@ update andThenUpdate msg =
 
         OnMdl msg_ ->
             Return.andThen (Material.update OnMdl msg_)
+
+
+moveFocusBy : Int -> List Entity -> ModelF
+moveFocusBy =
+    Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
 withNow : (Time -> Msg) -> ReturnF

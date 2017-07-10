@@ -6,6 +6,8 @@ import Entity.Types exposing (EntityListViewType)
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
+import List.Extra
+import Maybe.Extra
 import Stores
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
@@ -30,13 +32,19 @@ list viewType model =
             grouping |> Entity.Tree.flatten
 
         maybeFocusInEntity =
-            Model.getMaybeFocusInEntity entityList model
+            getMaybeFocusInEntity entityList model
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"
             , Msg.OnEntityListKeyDown entityList |> onKeyDown
             ]
             (keyedViewList grouping maybeFocusInEntity model)
+
+
+getMaybeFocusInEntity entityList model =
+    entityList
+        |> List.Extra.find (Entity.equalById model.focusInEntity)
+        |> Maybe.Extra.orElse (List.head entityList)
 
 
 keyedViewList grouping maybeFocusInEntity model =

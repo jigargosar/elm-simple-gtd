@@ -2,7 +2,6 @@ module Model exposing (..)
 
 import CommonMsg
 import Entity.Types exposing (EntityListViewType, Entity)
-import Entity
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Msg exposing (..)
 import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
@@ -142,17 +141,6 @@ updateKeyboardState updater model =
 
 
 -- Focus Functions
-
-
-getMaybeFocusInEntity entityList model =
-    entityList
-        |> List.find (Entity.equalById model.focusInEntity)
-        |> Maybe.orElse (List.head entityList)
-
-
-moveFocusBy : Int -> List Entity -> ModelF
-moveFocusBy =
-    Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
 updateCombo : Keyboard.Combo.Msg -> ModelReturnF

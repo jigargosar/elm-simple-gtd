@@ -3,6 +3,7 @@ import * as _ from "ramda"
 import LineDriver from "line-driver"
 
 export const removeUnusedImports = function() {
+    run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
     run("elm-make --warn src/elm/Main.elm --output /dev/null 2> /tmp/main-warn.txt")
     LineDriver.read({
         in: '/tmp/main-warn.txt',

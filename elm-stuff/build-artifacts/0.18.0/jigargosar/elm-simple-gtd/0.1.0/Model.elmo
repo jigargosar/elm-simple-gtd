@@ -143,17 +143,6 @@ var _jigargosar$elm_simple_gtd$Model$keyboardState = A2(
 				b,
 				{keyboardState: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$signInModel = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
-	function (_) {
-		return _.signInModel;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{signInModel: s});
-		}));
 var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -165,13 +154,8 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				b,
 				{appDrawerModel: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$overAppDrawerModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$appDrawerModel);
-var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p3) {
-	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p3));
-};
 var _jigargosar$elm_simple_gtd$Model$commonMsg = function () {
-	var _p4 = 1;
+	var _p3 = 1;
 	return _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
 }();
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;

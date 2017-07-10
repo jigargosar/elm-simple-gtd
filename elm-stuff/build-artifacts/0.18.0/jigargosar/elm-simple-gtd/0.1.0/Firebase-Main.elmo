@@ -43,7 +43,18 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$setFCMToken = F2(
 				model,
 				{fcmToken: fcmToken}));
 	});
-var _jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$signInModel);
+var _jigargosar$elm_simple_gtd$Firebase_Main$signInModel = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.signInModel;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{signInModel: s});
+		}));
+var _jigargosar$elm_simple_gtd$Firebase_Main$overSignInModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Firebase_Main$signInModel);
 var _jigargosar$elm_simple_gtd$Firebase_Main$signIn = _elm_lang$core$Native_Platform.outgoingPort(
 	'signIn',
 	function (v) {

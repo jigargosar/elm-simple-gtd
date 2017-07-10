@@ -184,7 +184,7 @@ update andThenUpdate now todoMsg =
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
         OnNewTodoForInbox ->
-            map (Model.ExMode.activateNewTodoModeWithInboxAsReference)
+            map (activateNewTodoModeWithInboxAsReference)
                 >> DomPorts.autoFocusInputCmd
 
 
@@ -286,3 +286,8 @@ showReminderOverlayForTodoId todoId =
 
 setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
+
+
+activateNewTodoModeWithInboxAsReference : ModelF
+activateNewTodoModeWithInboxAsReference =
+    setEditMode (Todo.NewForm.create Entity.inboxEntity "" |> XMNewTodo)

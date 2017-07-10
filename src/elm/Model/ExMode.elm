@@ -120,11 +120,6 @@ activateNewTodoModeWithFocusInEntityAsReference model =
     setEditMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
 
 
-activateNewTodoModeWithInboxAsReference : ModelF
-activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.NewForm.create Entity.inboxEntity "" |> XMNewTodo)
-
-
 updateNewTodoText form text =
     setEditMode (Todo.NewForm.setText text form |> XMNewTodo)
 

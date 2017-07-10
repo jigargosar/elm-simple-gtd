@@ -10,6 +10,7 @@ import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
+import LocalPref
 import Material
 import Model.ExMode
 import Model.Msg
@@ -188,7 +189,7 @@ updateInner msg =
             AppDrawer.Main.update andThenUpdate msg
 
         OnPersistLocalPref ->
-            Return.effect_ (Model.encodeLocalPref >> persistLocalPref)
+            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
 
         OnMdl msg_ ->
             Return.andThen (Material.update OnMdl msg_)

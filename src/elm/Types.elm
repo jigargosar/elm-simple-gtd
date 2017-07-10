@@ -2,7 +2,7 @@ module Types exposing (..)
 
 import AppDrawer.Model
 import Document.Types exposing (DocId)
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityListViewType(ContextsView), EntityType)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
@@ -16,8 +16,29 @@ import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
-import ViewType exposing (ViewType)
+import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
+import Json.Encode as E
+
+
+type alias LocalPref =
+    { appDrawer : AppDrawer.Model.Model
+    , signIn : Firebase.SignIn.Model
+    }
+
+
+type alias Flags =
+    { now : Time
+    , encodedTodoList : List E.Value
+    , encodedProjectList : List E.Value
+    , encodedContextList : List E.Value
+    , pouchDBRemoteSyncURI : String
+    , developmentMode : Bool
+    , appVersion : String
+    , deviceId : String
+    , config : AppConfig
+    , localPref : E.Value
+    }
 
 
 type alias AppConfig =
@@ -66,3 +87,7 @@ type alias ReturnF =
 
 type alias ModelF =
     AppModel -> AppModel
+
+
+defaultView =
+    EntityListView ContextsView

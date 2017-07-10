@@ -121,7 +121,6 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 					_p6));
 		}(model);
 	});
-var _jigargosar$elm_simple_gtd$Model$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity$defaultListView);
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -203,140 +202,7 @@ var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p7) {
 	return _Fresheyeball$elm_return$Return$map(
 		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p7));
 };
-var _jigargosar$elm_simple_gtd$Model$defaultLocalPref = {appDrawer: _jigargosar$elm_simple_gtd$AppDrawer_Model$default, signIn: _jigargosar$elm_simple_gtd$Firebase_SignIn$default};
-var _jigargosar$elm_simple_gtd$Model$encodeLocalPref = function (model) {
-	return _elm_lang$core$Json_Encode$object(
-		{
-			ctor: '::',
-			_0: A2(
-				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-				'appDrawer',
-				_jigargosar$elm_simple_gtd$AppDrawer_Model$encoder(model.appDrawerModel)),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
-					'signIn',
-					_jigargosar$elm_simple_gtd$Firebase_SignIn$encode(model.signInModel)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _jigargosar$elm_simple_gtd$Model$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
 var _jigargosar$elm_simple_gtd$Model$logString = _jigargosar$elm_simple_gtd$Model$commonMsg.logString;
 var _jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
-var _jigargosar$elm_simple_gtd$Model$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
-var _jigargosar$elm_simple_gtd$Model$onTodoStopRunning = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
-var _jigargosar$elm_simple_gtd$Model$keyboardCombos = {
-	ctor: '::',
-	_0: A2(
-		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
-		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
-		_jigargosar$elm_simple_gtd$Model$onTodoStopRunning),
-	_1: {
-		ctor: '::',
-		_0: A2(
-			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
-			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$r},
-			_jigargosar$elm_simple_gtd$Model$onGotoRunningTodo),
-		_1: {ctor: '[]'}
-	}
-};
-var _jigargosar$elm_simple_gtd$Model$LocalPref = F2(
-	function (a, b) {
-		return {appDrawer: a, signIn: b};
-	});
-var _jigargosar$elm_simple_gtd$Model$localPrefDecoder = A4(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'signIn',
-	_jigargosar$elm_simple_gtd$Firebase_SignIn$decoder,
-	_jigargosar$elm_simple_gtd$Firebase_SignIn$default,
-	A4(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'appDrawer',
-		_jigargosar$elm_simple_gtd$AppDrawer_Model$decoder,
-		_jigargosar$elm_simple_gtd$AppDrawer_Model$default,
-		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Model$LocalPref)));
-var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
-	var localPref = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
-		A2(
-			_elm_lang$core$Result$mapError,
-			_jigargosar$elm_simple_gtd$X_Debug$log('Unable to decode localPref'),
-			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$Model$localPrefDecoder, flags.localPref)),
-		_jigargosar$elm_simple_gtd$Model$defaultLocalPref);
-	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
-	var _p8 = flags;
-	var now = _p8.now;
-	var encodedTodoList = _p8.encodedTodoList;
-	var encodedProjectList = _p8.encodedProjectList;
-	var encodedContextList = _p8.encodedContextList;
-	var pouchDBRemoteSyncURI = _p8.pouchDBRemoteSyncURI;
-	var storeGenerator = A4(
-		_mgold$elm_random_pcg$Random_Pcg$map3,
-		F3(
-			function (v0, v1, v2) {
-				return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
-			}),
-		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
-		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
-		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p9 = A2(
-		_mgold$elm_random_pcg$Random_Pcg$step,
-		storeGenerator,
-		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
-	var todoStore = _p9._0._0;
-	var projectStore = _p9._0._1;
-	var contextStore = _p9._0._2;
-	var seed = _p9._1;
-	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
-	var model = {
-		now: now,
-		todoStore: todoStore,
-		projectStore: projectStore,
-		contextStore: contextStore,
-		editMode: editMode,
-		mainViewType: _jigargosar$elm_simple_gtd$Model$defaultView,
-		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
-		reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none,
-		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
-		user: firebaseModel.user,
-		fcmToken: firebaseModel.fcmToken,
-		firebaseClient: firebaseModel.firebaseClient,
-		developmentMode: flags.developmentMode,
-		selectedEntityIdSet: _elm_lang$core$Set$empty,
-		appVersion: flags.appVersion,
-		deviceId: flags.deviceId,
-		focusInEntity: _jigargosar$elm_simple_gtd$Entity$inboxEntity,
-		timeTracker: _jigargosar$elm_simple_gtd$Todo_TimeTracker$none,
-		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
-			{toMsg: _jigargosar$elm_simple_gtd$Msg$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Model$keyboardCombos}),
-		config: flags.config,
-		appDrawerModel: localPref.appDrawer,
-		signInModel: localPref.signIn,
-		mdl: _debois$elm_mdl$Material$model
-	};
-	return _Fresheyeball$elm_return$Return$singleton(model);
-};
-var _jigargosar$elm_simple_gtd$Model$Flags = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h, config: i, localPref: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};

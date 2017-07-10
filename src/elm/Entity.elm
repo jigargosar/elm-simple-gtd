@@ -82,10 +82,6 @@ equalById e1 e2 =
                 False
 
 
-defaultListView =
-    ContextsView
-
-
 routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
 routeUrlBuilderToMaybeListViewType builder =
     case RouteUrl.Builder.path builder of

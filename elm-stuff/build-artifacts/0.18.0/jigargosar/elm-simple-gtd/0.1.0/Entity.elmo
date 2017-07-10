@@ -178,7 +178,6 @@ var _jigargosar$elm_simple_gtd$Entity$routeUrlBuilderToMaybeListViewType = funct
 	} while(false);
 	return _elm_lang$core$Maybe$Nothing;
 };
-var _jigargosar$elm_simple_gtd$Entity$defaultListView = _jigargosar$elm_simple_gtd$Entity_Types$ContextsView;
 var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
 	function (e1, e2) {
 		var eq = _jigargosar$elm_simple_gtd$Document$equalById;

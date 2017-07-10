@@ -46,21 +46,6 @@ import Todo.TimeTracker
 import X.Debug
 
 
-keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
-keyboardCombos =
-    [ combo2 ( Combo.shift, Combo.s ) (onTodoStopRunning)
-    , combo2 ( Combo.shift, Combo.r ) (onGotoRunningTodo)
-    ]
-
-
-onTodoStopRunning =
-    Todo.Msg.StopRunning |> OnTodoMsg
-
-
-onGotoRunningTodo =
-    Todo.Msg.GotoRunning |> OnTodoMsg
-
-
 commonMsg : CommonMsg.Helper Msg
 commonMsg =
     CommonMsg.createHelper OnCommonMsg
@@ -76,46 +61,6 @@ logString =
 
 type alias Subscriptions =
     AppModel -> Sub Msg
-
-
-type alias LocalPref =
-    { appDrawer : AppDrawer.Model.Model
-    , signIn : Firebase.SignIn.Model
-    }
-
-
-localPrefDecoder =
-    D.succeed LocalPref
-        |> D.optional "appDrawer" AppDrawer.Model.decoder AppDrawer.Model.default
-        |> D.optional "signIn" Firebase.SignIn.decoder Firebase.SignIn.default
-
-
-encodeLocalPref model =
-    E.object
-        [ "appDrawer" => AppDrawer.Model.encoder model.appDrawerModel
-        , "signIn" => Firebase.SignIn.encode model.signInModel
-        ]
-
-
-defaultLocalPref : LocalPref
-defaultLocalPref =
-    { appDrawer = AppDrawer.Model.default
-    , signIn = Firebase.SignIn.default
-    }
-
-
-type alias Flags =
-    { now : Time
-    , encodedTodoList : List Todo.Encoded
-    , encodedProjectList : List E.Value
-    , encodedContextList : List E.Value
-    , pouchDBRemoteSyncURI : String
-    , developmentMode : Bool
-    , appVersion : String
-    , deviceId : String
-    , config : AppConfig
-    , localPref : D.Value
-    }
 
 
 
@@ -152,75 +97,6 @@ focusInEntity =
 
 keyComboModel =
     X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
-
-
-init : Flags -> Return.Return Msg AppModel
-init flags =
-    let
-        { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
-            flags
-
-        storeGenerator =
-            Random.map3 (,,)
-                (Todo.Store.generator flags.deviceId encodedTodoList)
-                (Project.storeGenerator flags.deviceId encodedProjectList)
-                (Context.storeGenerator flags.deviceId encodedContextList)
-
-        ( ( todoStore, projectStore, contextStore ), seed ) =
-            Random.step storeGenerator (Random.seedFromTime now)
-
-        firebaseModel =
-            Firebase.init flags.deviceId
-
-        localPref =
-            D.decodeValue localPrefDecoder flags.localPref
-                |> Result.mapError (X.Debug.log "Unable to decode localPref")
-                != defaultLocalPref
-
-        editMode =
-            if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
-                if Store.isEmpty todoStore then
-                    ExclusiveMode.createSetupExclusiveMode
-                else
-                    ExclusiveMode.none
-            else
-                ExclusiveMode.signInOverlay
-
-        model =
-            { now = now
-            , todoStore = todoStore
-            , projectStore = projectStore
-            , contextStore = contextStore
-            , editMode = editMode
-            , mainViewType = defaultView
-            , keyboardState = Keyboard.init
-            , reminderOverlay = Todo.Notification.Model.none
-            , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-            , user = firebaseModel.user
-            , fcmToken = firebaseModel.fcmToken
-            , firebaseClient = firebaseModel.firebaseClient
-            , developmentMode = flags.developmentMode
-            , selectedEntityIdSet = Set.empty
-            , appVersion = flags.appVersion
-            , deviceId = flags.deviceId
-            , focusInEntity = inboxEntity
-            , timeTracker = Todo.TimeTracker.none
-            , keyComboModel =
-                Keyboard.Combo.init
-                    { toMsg = OnKeyCombo
-                    , combos = keyboardCombos
-                    }
-            , config = flags.config
-            , appDrawerModel = localPref.appDrawer
-            , signInModel = localPref.signIn
-            , mdl = Material.model
-            }
-    in
-        model |> Return.singleton
-
-
-defaultView =
-    EntityListView Entity.defaultListView
 
 
 removeReminderOverlay model =

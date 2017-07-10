@@ -306,7 +306,7 @@ var _jigargosar$elm_simple_gtd$Update$updateInner = function (msg) {
 			return _Fresheyeball$elm_return$Return$effect_(
 				function (_p35) {
 					return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
-						_jigargosar$elm_simple_gtd$Model$encodeLocalPref(_p35));
+						_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p35));
 				});
 		default:
 			return _Fresheyeball$elm_return$Return$andThen(

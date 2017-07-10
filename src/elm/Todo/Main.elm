@@ -161,13 +161,13 @@ update andThenUpdate now todoMsg =
             in
                 (case res.action of
                     "stop" ->
-                        andThenUpdate Model.onTodoStopRunning
+                        andThenUpdate Msg.onTodoStopRunning
 
                     "continue" ->
                         identity
 
                     _ ->
-                        andThenUpdate Model.onGotoRunningTodo
+                        andThenUpdate Msg.onGotoRunningTodo
                 )
                     >> andThenUpdate (Msg.OnCloseNotification todoId)
 

@@ -69,3 +69,11 @@ type Msg
 
 onSetEntityListView =
     EntityListView >> OnSetViewType
+
+
+onTodoStopRunning =
+    Todo.Msg.StopRunning |> OnTodoMsg
+
+
+onGotoRunningTodo =
+    Todo.Msg.GotoRunning |> OnTodoMsg

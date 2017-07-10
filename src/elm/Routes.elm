@@ -8,7 +8,7 @@ import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Types exposing (AppModel)
+import Types exposing (AppModel, defaultView)
 import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import Model exposing (..)
@@ -47,7 +47,7 @@ builder2messages builder =
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ Msg.OnSetViewType Model.defaultView ]
+                        [ Msg.OnSetViewType defaultView ]
             )
             (Msg.onSetEntityListView >> X.List.singleton)
 

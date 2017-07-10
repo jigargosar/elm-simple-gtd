@@ -1,3 +1,29 @@
+var _jigargosar$elm_simple_gtd$Types$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
+var _jigargosar$elm_simple_gtd$Types$LocalPref = F2(
+	function (a, b) {
+		return {appDrawer: a, signIn: b};
+	});
+var _jigargosar$elm_simple_gtd$Types$Flags = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h, config: i, localPref: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _jigargosar$elm_simple_gtd$Types$AppConfig = function (a) {
 	return {isFirstVisit: a};
 };

@@ -38,6 +38,8 @@ var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$onTodoStopRunning = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
+var _jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
 var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};

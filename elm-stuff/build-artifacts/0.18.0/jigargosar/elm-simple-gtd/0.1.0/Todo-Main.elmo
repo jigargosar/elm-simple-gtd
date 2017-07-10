@@ -287,11 +287,11 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							var _p17 = _p18.action;
 							switch (_p17) {
 								case 'stop':
-									return andThenUpdate(_jigargosar$elm_simple_gtd$Model$onTodoStopRunning);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onTodoStopRunning);
 								case 'continue':
 									return _elm_lang$core$Basics$identity;
 								default:
-									return andThenUpdate(_jigargosar$elm_simple_gtd$Model$onGotoRunningTodo);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo);
 							}
 						}()(_p16));
 				};

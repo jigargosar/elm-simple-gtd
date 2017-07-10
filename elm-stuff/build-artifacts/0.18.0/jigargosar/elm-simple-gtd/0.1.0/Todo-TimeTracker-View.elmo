@@ -101,7 +101,7 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$createViewModel = F2(
 		return {
 			displayText: todoText,
 			displayTime: _jigargosar$elm_simple_gtd$X_Time$toHHMMSS(elapsedTime),
-			onStop: _jigargosar$elm_simple_gtd$Model$onTodoStopRunning
+			onStop: _jigargosar$elm_simple_gtd$Msg$onTodoStopRunning
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker_View$maybe = function (appModel) {

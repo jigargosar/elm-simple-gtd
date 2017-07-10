@@ -21,11 +21,7 @@ import Toolkit.Operators exposing (..)
 
 commonMsg : CommonMsg.Helper Msg
 commonMsg =
-    let
-        _ =
-            1
-    in
-        CommonMsg.createHelper OnCommonMsg
+    CommonMsg.createHelper OnCommonMsg
 
 
 noop =
@@ -36,20 +32,12 @@ logString =
     commonMsg.logString
 
 
-type alias Subscriptions =
-    AppModel -> Sub Msg
-
-
 
 -- Model Lens
 
 
 appDrawerModel =
     X.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
-
-
-keyboardState =
-    X.Record.field .keyboardState (\s b -> { b | keyboardState = s })
 
 
 now =
@@ -109,11 +97,6 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-getEditMode : AppModel -> ExclusiveMode
-getEditMode =
-    (.editMode)
-
-
 getNow : AppModel -> Time
 getNow =
     (.now)
@@ -124,30 +107,8 @@ setNow now model =
     { model | now = now }
 
 
-getKeyboardState : AppModel -> KeyboardState
-getKeyboardState =
-    (.keyboardState)
-
-
-setKeyboardState : KeyboardState -> ModelF
-setKeyboardState keyboardState model =
-    { model | keyboardState = keyboardState }
-
-
-updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
-updateKeyboardState updater model =
-    setKeyboardState (updater (getKeyboardState model)) model
-
-
 
 -- Focus Functions
-
-
-updateCombo : Keyboard.Combo.Msg -> ModelReturnF
-updateCombo comboMsg =
-    overReturn
-        keyComboModel
-        (Keyboard.Combo.update comboMsg)
 
 
 setDomFocusToFocusInEntityCmd =

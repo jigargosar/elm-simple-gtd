@@ -15,6 +15,7 @@ import LocalPref
 import Main.Update
 import Material
 import Model.ExMode
+import Model.Keyboard
 import Model.Msg
 import Model.Selection
 import Model.ViewType
@@ -161,7 +162,7 @@ update andThenUpdate msg =
             command (Notification.closeNotification tag)
 
         OnKeyCombo comboMsg ->
-            Return.andThen (Model.updateCombo comboMsg)
+            Return.andThen (Model.Keyboard.updateCombo comboMsg)
 
         OnTodoMsg todoMsg ->
             withNow (OnTodoMsgWithTime todoMsg)
@@ -210,7 +211,7 @@ onSubMsg andThenUpdate subMsg =
             map (Model.setNow now)
 
         OnKeyboardMsg msg ->
-            map (Model.updateKeyboardState (Keyboard.update msg))
+            map (Model.Keyboard.updateKeyboardState (Keyboard.update msg))
                 >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
@@ -238,7 +239,7 @@ onSubMsg andThenUpdate subMsg =
 
 
 onGlobalKeyUp andThenUpdate key =
-    Return.with (Model.getEditMode)
+    Return.with (.editMode)
         (\editMode ->
             case ( key, editMode ) of
                 ( key, XMNone ) ->

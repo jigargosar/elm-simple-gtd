@@ -36,12 +36,18 @@ var _jigargosar$elm_simple_gtd$Update$withNow = function (toMsg) {
 	return _jigargosar$elm_simple_gtd$Update$command(
 		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
 };
+var _jigargosar$elm_simple_gtd$Update$moveFocusBy = A2(
+	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
+	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
+	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = F2(
 	function (andThenUpdate, key) {
 		return A2(
 			_jigargosar$elm_simple_gtd$X_Return$with,
-			_jigargosar$elm_simple_gtd$Model$getEditMode,
+			function (_) {
+				return _.editMode;
+			},
 			function (editMode) {
 				var _p0 = {ctor: '_Tuple2', _0: key, _1: editMode};
 				_v0_2:
@@ -107,7 +113,7 @@ var _jigargosar$elm_simple_gtd$Update$onSubMsg = F2(
 						'.entity-list .focusable-list-item[tabindex=0]',
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model$updateKeyboardState(
+							_jigargosar$elm_simple_gtd$Model_Keyboard$updateKeyboardState(
 								_jigargosar$elm_simple_gtd$X_Keyboard$update(_p4._0)),
 							_p5));
 				};
@@ -178,7 +184,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 								A2(
 									_jigargosar$elm_simple_gtd$Update$map,
-									A2(_jigargosar$elm_simple_gtd$Model$moveFocusBy, -1, _p13),
+									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, -1, _p13),
 									_p11));
 						};
 					case 'ArrowDown':
@@ -188,7 +194,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 								A2(
 									_jigargosar$elm_simple_gtd$Update$map,
-									A2(_jigargosar$elm_simple_gtd$Model$moveFocusBy, 1, _p13),
+									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, 1, _p13),
 									_p12));
 						};
 					default:
@@ -322,7 +328,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p8._0));
 			case 'OnKeyCombo':
 				return _Fresheyeball$elm_return$Return$andThen(
-					_jigargosar$elm_simple_gtd$Model$updateCombo(_p8._0));
+					_jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo(_p8._0));
 			case 'OnTodoMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
 					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime(_p8._0));

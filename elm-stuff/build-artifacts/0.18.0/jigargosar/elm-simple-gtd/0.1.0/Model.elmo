@@ -1,30 +1,3 @@
-var _jigargosar$elm_simple_gtd$Model$getMaybeFocusInEntity = F2(
-	function (entityList, model) {
-		return A2(
-			_elm_community$maybe_extra$Maybe_Extra$orElse,
-			_elm_lang$core$List$head(entityList),
-			A2(
-				_elm_community$list_extra$List_Extra$find,
-				_jigargosar$elm_simple_gtd$Entity$equalById(model.focusInEntity),
-				entityList));
-	});
-var _jigargosar$elm_simple_gtd$Model$setKeyboardState = F2(
-	function (keyboardState, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{keyboardState: keyboardState});
-	});
-var _jigargosar$elm_simple_gtd$Model$getKeyboardState = function (_) {
-	return _.keyboardState;
-};
-var _jigargosar$elm_simple_gtd$Model$updateKeyboardState = F2(
-	function (updater, model) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Model$setKeyboardState,
-			updater(
-				_jigargosar$elm_simple_gtd$Model$getKeyboardState(model)),
-			model);
-	});
 var _jigargosar$elm_simple_gtd$Model$setNow = F2(
 	function (now, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -33,9 +6,6 @@ var _jigargosar$elm_simple_gtd$Model$setNow = F2(
 	});
 var _jigargosar$elm_simple_gtd$Model$getNow = function (_) {
 	return _.now;
-};
-var _jigargosar$elm_simple_gtd$Model$getEditMode = function (_) {
-	return _.editMode;
 };
 var _jigargosar$elm_simple_gtd$Model$createRemoteSyncForm = function (model) {
 	return {uri: model.pouchDBRemoteSyncURI};
@@ -100,12 +70,6 @@ var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
 				b,
 				{keyComboModel: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$updateCombo = function (comboMsg) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Record$overReturn,
-		_jigargosar$elm_simple_gtd$Model$keyComboModel,
-		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
-};
 var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -117,10 +81,6 @@ var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
 				b,
 				{focusInEntity: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$moveFocusBy = A2(
-	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
-	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
-	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
 var _jigargosar$elm_simple_gtd$Model$now = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -131,17 +91,6 @@ var _jigargosar$elm_simple_gtd$Model$now = A2(
 			return _elm_lang$core$Native_Utils.update(
 				b,
 				{now: s});
-		}));
-var _jigargosar$elm_simple_gtd$Model$keyboardState = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
-	function (_) {
-		return _.keyboardState;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{keyboardState: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
@@ -154,10 +103,7 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				b,
 				{appDrawerModel: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model$commonMsg = function () {
-	var _p3 = 1;
-	return _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
-}();
+var _jigargosar$elm_simple_gtd$Model$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
 var _jigargosar$elm_simple_gtd$Model$logString = _jigargosar$elm_simple_gtd$Model$commonMsg.logString;
 var _jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');

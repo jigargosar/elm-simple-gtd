@@ -40,7 +40,7 @@ init model =
 overlayViews appModel =
     let
         editModeOverlayView =
-            case Model.getEditMode appModel of
+            case appModel.editMode of
                 XMLaunchBar form ->
                     LaunchBar.View.init form appModel
 

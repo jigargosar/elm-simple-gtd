@@ -133,11 +133,21 @@ var _jigargosar$elm_simple_gtd$Entity_View$keyedViewList = F3(
 					todoListView(_p6._1));
 		}
 	});
+var _jigargosar$elm_simple_gtd$Entity_View$getMaybeFocusInEntity = F2(
+	function (entityList, model) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElse,
+			_elm_lang$core$List$head(entityList),
+			A2(
+				_elm_community$list_extra$List_Extra$find,
+				_jigargosar$elm_simple_gtd$Entity$equalById(model.focusInEntity),
+				entityList));
+	});
 var _jigargosar$elm_simple_gtd$Entity_View$list = F2(
 	function (viewType, model) {
 		var grouping = A2(_jigargosar$elm_simple_gtd$Stores$createGrouping, viewType, model);
 		var entityList = _jigargosar$elm_simple_gtd$Entity_Tree$flatten(grouping);
-		var maybeFocusInEntity = A2(_jigargosar$elm_simple_gtd$Model$getMaybeFocusInEntity, entityList, model);
+		var maybeFocusInEntity = A2(_jigargosar$elm_simple_gtd$Entity_View$getMaybeFocusInEntity, entityList, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',

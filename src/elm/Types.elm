@@ -91,3 +91,7 @@ type alias ModelF =
 
 defaultView =
     EntityListView ContextsView
+
+
+type alias Subscriptions =
+    AppModel -> Sub Msg

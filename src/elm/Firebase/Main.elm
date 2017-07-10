@@ -5,7 +5,6 @@ import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
-import Model
 import Navigation
 import Return
 import X.Record exposing (over, set)
@@ -15,7 +14,7 @@ import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg
-import Types exposing (ReturnF)
+import Types exposing (ReturnF, Subscriptions)
 
 
 port signIn : () -> Cmd msg
@@ -57,7 +56,7 @@ updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
 
 
-subscriptions : Model.Subscriptions
+subscriptions : Subscriptions
 subscriptions model =
     Sub.batch
         [ onFirebaseUserChanged OnFBUserChanged

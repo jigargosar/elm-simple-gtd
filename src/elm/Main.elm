@@ -142,6 +142,6 @@ init flags =
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
-    [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (Msg.onTodoStopRunning)
+    [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (Msg.onStopRunningTodo)
     , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (Msg.onGotoRunningTodo)
     ]

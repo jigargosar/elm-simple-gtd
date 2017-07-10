@@ -70,7 +70,7 @@ onSetEntityListView =
     EntityListView >> OnSetViewType
 
 
-onTodoStopRunning =
+onStopRunningTodo =
     Todo.Msg.StopRunning |> OnTodoMsg
 
 

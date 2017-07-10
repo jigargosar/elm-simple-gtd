@@ -161,7 +161,7 @@ update andThenUpdate now todoMsg =
             in
                 (case res.action of
                     "stop" ->
-                        andThenUpdate Msg.onTodoStopRunning
+                        andThenUpdate Msg.onStopRunningTodo
 
                     "continue" ->
                         identity

@@ -1,10 +1,7 @@
 var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
 	function (andThenUpdate, msg) {
 		var _p0 = msg;
-		var inboxEntity = function (_p1) {
-			return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
-				_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p1));
-		}(_jigargosar$elm_simple_gtd$Context$null);
+		var inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 		var createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, inboxEntity, ''));
 		var onSwitchToNewUserSetupModeIfNeeded = function (model) {

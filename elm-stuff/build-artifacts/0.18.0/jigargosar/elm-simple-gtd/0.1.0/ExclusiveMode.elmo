@@ -25,9 +25,5 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (en
 		return _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo(_p3._0);
 	}
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode$todoMoreMenu = function (_p5) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu(
-		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p5));
-};
 var _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay;
 var _jigargosar$elm_simple_gtd$ExclusiveMode$none = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone;

@@ -44,7 +44,6 @@ type Msg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnReminderOverlayAction Todo.Notification.Model.Action
     | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
@@ -100,3 +99,7 @@ onEntityUpdateMsg =
 
 onSwitchToNewUserSetupModeIfNeeded =
     OnMainMsg OnSwitchToNewUserSetupModeIfNeeded
+
+
+onReminderOverlayAction =
+    Todo.Msg.OnReminderOverlayAction >> OnTodoMsg

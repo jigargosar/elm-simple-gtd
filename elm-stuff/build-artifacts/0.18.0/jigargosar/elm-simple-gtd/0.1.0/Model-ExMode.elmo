@@ -28,9 +28,6 @@ var _jigargosar$elm_simple_gtd$Model_ExMode$activateNewTodoModeWithFocusInEntity
 			A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, model.focusInEntity, '')),
 		model);
 };
-var _jigargosar$elm_simple_gtd$Model_ExMode$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
-	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-		A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Entity$inboxEntity, '')));
 var _jigargosar$elm_simple_gtd$Model_ExMode$updateNewTodoText = F2(
 	function (form, text) {
 		return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(

@@ -92,9 +92,6 @@ update andThenUpdate msg =
             andThenUpdate OnSaveCurrentForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
-        OnReminderOverlayAction action ->
-            reminderOverlayAction action
-
         OnDeactivateEditingMode ->
             map (Model.ExMode.deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
@@ -204,45 +201,6 @@ updateTodoAndMaybeAlsoSelected action todoId =
 
 maybeMapToCmd fn =
     Maybe.map fn >>?= Cmd.none
-
-
-reminderOverlayAction action =
-    Return.andThen
-        (\model ->
-            model
-                |> case model.reminderOverlay of
-                    Todo.Notification.Types.Active activeView todoDetails ->
-                        let
-                            todoId =
-                                todoDetails.id
-                        in
-                            case action of
-                                Todo.Notification.Model.Dismiss ->
-                                    Stores.updateTodo (TA_TurnReminderOff) todoId
-                                        >> Tuple.mapFirst Model.removeReminderOverlay
-                                        >> Return.command (Notification.closeNotification todoId)
-
-                                Todo.Notification.Model.ShowSnoozeOptions ->
-                                    Model.setReminderOverlayToSnoozeView todoDetails
-                                        >> Return.singleton
-
-                                Todo.Notification.Model.SnoozeTill snoozeOffset ->
-                                    Return.singleton
-                                        >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
-                                        >> Return.command (Notification.closeNotification todoId)
-
-                                Todo.Notification.Model.Close ->
-                                    Model.removeReminderOverlay
-                                        >> Return.singleton
-
-                                Todo.Notification.Model.MarkDone ->
-                                    Stores.updateTodo TA_MarkDone todoId
-                                        >> Tuple.mapFirst Model.removeReminderOverlay
-                                        >> Return.command (Notification.closeNotification todoId)
-
-                    _ ->
-                        Return.singleton
-        )
 
 
 command =

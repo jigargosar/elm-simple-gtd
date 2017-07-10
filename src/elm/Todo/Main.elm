@@ -12,6 +12,7 @@ import Stores exposing (findTodoById)
 import Todo.Menu
 import Todo.NewForm
 import Todo.Notification.Model
+import Todo.Notification.Types
 import X.Record as Record exposing (set)
 import X.Return
 import X.Time
@@ -28,7 +29,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(TA_MarkDone))
+import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
 import Types exposing (ModelF, ReturnF)
 import X.Function exposing (applyMaybeWith)
 
@@ -187,6 +188,9 @@ update andThenUpdate now todoMsg =
             map (activateNewTodoModeWithInboxAsReference)
                 >> DomPorts.autoFocusInputCmd
 
+        OnReminderOverlayAction action ->
+            reminderOverlayAction action
+
 
 showReminderNotificationCmd ( todo, model ) =
     let
@@ -299,3 +303,42 @@ activateNewTodoModeWithInboxAsReference =
 
 todoMoreMenu =
     Todo.Menu.init >> XMTodoMoreMenu
+
+
+reminderOverlayAction action =
+    Return.andThen
+        (\model ->
+            model
+                |> case model.reminderOverlay of
+                    Todo.Notification.Types.Active activeView todoDetails ->
+                        let
+                            todoId =
+                                todoDetails.id
+                        in
+                            case action of
+                                Todo.Notification.Model.Dismiss ->
+                                    Stores.updateTodo (TA_TurnReminderOff) todoId
+                                        >> Tuple.mapFirst Model.removeReminderOverlay
+                                        >> Return.command (Notification.closeNotification todoId)
+
+                                Todo.Notification.Model.ShowSnoozeOptions ->
+                                    Model.setReminderOverlayToSnoozeView todoDetails
+                                        >> Return.singleton
+
+                                Todo.Notification.Model.SnoozeTill snoozeOffset ->
+                                    Return.singleton
+                                        >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
+                                        >> Return.command (Notification.closeNotification todoId)
+
+                                Todo.Notification.Model.Close ->
+                                    Model.removeReminderOverlay
+                                        >> Return.singleton
+
+                                Todo.Notification.Model.MarkDone ->
+                                    Stores.updateTodo TA_MarkDone todoId
+                                        >> Tuple.mapFirst Model.removeReminderOverlay
+                                        >> Return.command (Notification.closeNotification todoId)
+
+                    _ ->
+                        Return.singleton
+        )

@@ -15,7 +15,7 @@ import Material
 import Model.ExMode exposing (deactivateEditingMode, setEditMode)
 import Msg exposing (..)
 import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
-import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
+import Todo.Types exposing (TodoAction(TA_SnoozeTill))
 import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)

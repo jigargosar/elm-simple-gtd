@@ -25,9 +25,9 @@ reminderOverlayActiveView activeView todoDetails =
         Todo.Notification.Types.InitialView ->
             let
                 vm =
-                    { onDismissClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.Dismiss
-                    , onDoneClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.MarkDone
-                    , onSnoozeClicked = Msg.OnReminderOverlayAction Todo.Notification.Model.ShowSnoozeOptions
+                    { onDismissClicked = Msg.onReminderOverlayAction Todo.Notification.Model.Dismiss
+                    , onDoneClicked = Msg.onReminderOverlayAction Todo.Notification.Model.MarkDone
+                    , onSnoozeClicked = Msg.onReminderOverlayAction Todo.Notification.Model.ShowSnoozeOptions
                     }
             in
                 activeViewShell todoDetails
@@ -39,7 +39,7 @@ reminderOverlayActiveView activeView todoDetails =
         Todo.Notification.Types.SnoozeView ->
             let
                 msg =
-                    Todo.Notification.Model.SnoozeTill >> Msg.OnReminderOverlayAction
+                    Todo.Notification.Model.SnoozeTill >> Msg.onReminderOverlayAction
 
                 vm =
                     { snoozeFor15Min = msg (Todo.Notification.Model.SnoozeForMilli (Time.minute * 15))
@@ -59,7 +59,7 @@ reminderOverlayActiveView activeView todoDetails =
 activeViewShell todoDetails children =
     let
         onOutsideMouseDown =
-            Msg.OnReminderOverlayAction Todo.Notification.Model.Close
+            Msg.onReminderOverlayAction Todo.Notification.Model.Close
     in
         div [ class "notification overlay", onClickStopPropagation onOutsideMouseDown ]
             [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation Model.noop ]

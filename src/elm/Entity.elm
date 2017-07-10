@@ -75,54 +75,6 @@ equalById e1 e2 =
         |> uncurry equals
 
 
-getTodoGotoGroupView todo prevView =
-    let
-        contextView =
-            Todo.getContextId todo |> ContextView
-
-        projectView =
-            Todo.getProjectId todo |> ProjectView
-    in
-        case prevView of
-            ProjectsView ->
-                contextView
-
-            ProjectView _ ->
-                contextView
-
-            ContextsView ->
-                projectView
-
-            ContextView _ ->
-                projectView
-
-            BinView ->
-                ContextsView
-
-            DoneView ->
-                ContextsView
-
-            RecentView ->
-                ContextsView
-
-
-toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
-toViewType maybePrevView entity =
-    case entity of
-        GroupEntity group ->
-            case group of
-                ContextEntity model ->
-                    Document.getId model |> ContextView
-
-                ProjectEntity model ->
-                    Document.getId model |> ProjectView
-
-        TodoEntity model ->
-            maybePrevView
-                ?|> getTodoGotoGroupView model
-                ?= (Todo.getContextId model |> ContextView)
-
-
 findEntityByOffsetIn offsetIndex entityList fromEntity =
     entityList
         |> List.findIndex (equalById fromEntity)

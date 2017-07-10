@@ -2,9 +2,10 @@ module Entity.Main exposing (..)
 
 import Context
 import Document
+import Document.Types exposing (getDocId)
 import DomPorts
 import Entity
-import Entity.Types exposing (Entity, createContextEntity, createProjectEntity)
+import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject))
 import GroupDoc
@@ -17,6 +18,7 @@ import Return
 import Set
 import Store
 import Stores
+import Todo
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelF, ModelReturnF, ReturnF)
@@ -120,7 +122,7 @@ switchToEntityListViewFromEntity entity model =
             Model.ViewType.maybeGetCurrentEntityListViewType model
     in
         entity
-            |> Entity.toViewType maybeEntityListViewType
+            |> toViewType maybeEntityListViewType
             |> (Model.ViewType.setEntityListViewType # model)
 
 
@@ -182,3 +184,51 @@ updateEditModeNameChanged newName entity model =
 
             _ ->
                 identity
+
+
+toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
+toViewType maybePrevView entity =
+    case entity of
+        GroupEntity group ->
+            case group of
+                ContextEntity model ->
+                    getDocId model |> ContextView
+
+                ProjectEntity model ->
+                    getDocId model |> ProjectView
+
+        TodoEntity model ->
+            maybePrevView
+                ?|> getTodoGotoGroupView model
+                ?= (Todo.getContextId model |> ContextView)
+
+
+getTodoGotoGroupView todo prevView =
+    let
+        contextView =
+            Todo.getContextId todo |> ContextView
+
+        projectView =
+            Todo.getProjectId todo |> ProjectView
+    in
+        case prevView of
+            ProjectsView ->
+                contextView
+
+            ProjectView _ ->
+                contextView
+
+            ContextsView ->
+                projectView
+
+            ContextView _ ->
+                projectView
+
+            BinView ->
+                ContextsView
+
+            DoneView ->
+                ContextsView
+
+            RecentView ->
+                ContextsView

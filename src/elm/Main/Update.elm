@@ -1,7 +1,7 @@
 module Main.Update exposing (..)
 
 import Context
-import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity))
+import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup))
 import Firebase.SignIn
@@ -38,7 +38,7 @@ update andThenUpdate msg =
                             Model.ExMode.setEditMode ExclusiveMode.signInOverlay
 
                 inboxEntity =
-                    Context.null |> ContextEntity >> GroupEntity
+                    createContextEntity Context.null
 
                 createSetupExclusiveMode =
                     XMSetup (Todo.NewForm.create inboxEntity "")

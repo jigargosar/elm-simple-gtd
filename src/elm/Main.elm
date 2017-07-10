@@ -3,7 +3,6 @@ port module Main exposing (..)
 import AppDrawer.Main
 import AppDrawer.Model
 import Context
-import Entity exposing (inboxEntity)
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode
 import Firebase

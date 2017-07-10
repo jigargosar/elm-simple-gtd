@@ -16,10 +16,6 @@ type alias GroupEntity =
     Entity.Types.GroupEntityType
 
 
-inboxEntity =
-    Context.null |> ContextEntity >> GroupEntity
-
-
 fromContext =
     ContextEntity >> GroupEntity
 

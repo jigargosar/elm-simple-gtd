@@ -1,15 +1,15 @@
 port module Todo.Main exposing (..)
 
+import Context
 import Document
 import DomPorts
-import Entity
 import Entity.Types
-import ExclusiveMode
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMNewTodo, XMSetup))
+import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMNewTodo, XMSetup, XMTodoMoreMenu))
 import Model.ExMode exposing (setEditMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
+import Todo.Menu
 import Todo.NewForm
 import Todo.Notification.Model
 import X.Record as Record exposing (set)
@@ -98,7 +98,7 @@ update andThenUpdate now todoMsg =
                 )
 
         OnShowMoreMenu todoId ->
-            Return.map (ExclusiveMode.todoMoreMenu todoId |> Model.ExMode.setEditMode)
+            Return.map (todoMoreMenu todoId |> Model.ExMode.setEditMode)
                 >> Return.command (positionMoreMenuCmd todoId)
 
         UpdateReminderForm form action ->
@@ -288,6 +288,14 @@ setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
 
+inboxEntity =
+    Entity.Types.createContextEntity Context.null
+
+
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.NewForm.create Entity.inboxEntity "" |> XMNewTodo)
+    setEditMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
+
+
+todoMoreMenu =
+    Todo.Menu.init >> XMTodoMoreMenu

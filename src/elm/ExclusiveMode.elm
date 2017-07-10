@@ -18,10 +18,6 @@ signInOverlay =
     XMSignInOverlay
 
 
-todoMoreMenu =
-    Todo.Menu.init >> XMTodoMoreMenu
-
-
 editProject =
     GroupDoc.EditForm.forProject >> XMEditProject
 

@@ -1,0 +1,8 @@
+var _elm_community$json_extra$Json_Encode_Extra$maybe = function (encoder) {
+	return function (_p0) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_elm_lang$core$Json_Encode$null,
+			A2(_elm_lang$core$Maybe$map, encoder, _p0));
+	};
+};

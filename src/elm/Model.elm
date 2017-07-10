@@ -51,23 +51,6 @@ keyComboModel =
     X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
-removeReminderOverlay model =
-    { model | reminderOverlay = Todo.Notification.Model.none }
-
-
-setReminderOverlayToSnoozeView details model =
-    { model | reminderOverlay = Todo.Notification.Model.snoozeView details }
-
-
-getMaybeEditTodoReminderForm model =
-    case model.editMode of
-        XMEditTodoReminder form ->
-            Just form
-
-        _ ->
-            Nothing
-
-
 getRemoteSyncForm model =
     let
         maybeForm =

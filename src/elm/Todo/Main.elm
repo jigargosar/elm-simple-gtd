@@ -318,11 +318,11 @@ reminderOverlayAction action =
                             case action of
                                 Todo.Notification.Model.Dismiss ->
                                     Stores.updateTodo (TA_TurnReminderOff) todoId
-                                        >> Tuple.mapFirst Model.removeReminderOverlay
+                                        >> Tuple.mapFirst removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
                                 Todo.Notification.Model.ShowSnoozeOptions ->
-                                    Model.setReminderOverlayToSnoozeView todoDetails
+                                    setReminderOverlayToSnoozeView todoDetails
                                         >> Return.singleton
 
                                 Todo.Notification.Model.SnoozeTill snoozeOffset ->
@@ -331,12 +331,12 @@ reminderOverlayAction action =
                                         >> Return.command (Notification.closeNotification todoId)
 
                                 Todo.Notification.Model.Close ->
-                                    Model.removeReminderOverlay
+                                    removeReminderOverlay
                                         >> Return.singleton
 
                                 Todo.Notification.Model.MarkDone ->
                                     Stores.updateTodo TA_MarkDone todoId
-                                        >> Tuple.mapFirst Model.removeReminderOverlay
+                                        >> Tuple.mapFirst removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
                     _ ->
@@ -351,4 +351,12 @@ snoozeTodoWithOffset snoozeOffset todoId model =
     in
         model
             |> Stores.updateTodo (time |> TA_SnoozeTill) todoId
-            >> Tuple.mapFirst Model.removeReminderOverlay
+            >> Tuple.mapFirst removeReminderOverlay
+
+
+removeReminderOverlay model =
+    { model | reminderOverlay = Todo.Notification.Model.none }
+
+
+setReminderOverlayToSnoozeView details model =
+    { model | reminderOverlay = Todo.Notification.Model.snoozeView details }

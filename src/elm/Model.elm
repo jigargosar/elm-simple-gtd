@@ -19,7 +19,11 @@ noop =
 
 
 logString =
-    commonMsg.logString
+    let
+        _ =
+            2
+    in
+        commonMsg.logString
 
 
 

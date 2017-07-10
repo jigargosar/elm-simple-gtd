@@ -48,3 +48,13 @@ createContextEntity =
 
 createProjectEntity =
     ProjectEntity >> GroupEntity
+
+
+createTodoEntity =
+    TodoEntity
+
+
+type EntityId
+    = ContextId DocId
+    | ProjectId DocId
+    | TodoId DocId

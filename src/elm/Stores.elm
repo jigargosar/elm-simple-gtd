@@ -5,7 +5,7 @@ import Document
 import Document.Types exposing (DeviceId, DocId, getDocId)
 import Entity
 import Entity.Tree
-import Entity.Types exposing (EntityListViewType, Entity)
+import Entity.Types exposing (Entity, EntityListViewType, createContextEntity, createProjectEntity, createTodoEntity)
 import GroupDoc
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Msg exposing (Msg)
@@ -68,15 +68,15 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
             maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromTodo
+                >>? Tuple.mapFirst createTodoEntity
 
         "project-db" ->
             maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromProject
+                >>? Tuple.mapFirst createProjectEntity
 
         "context-db" ->
             maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromContext
+                >>? Tuple.mapFirst createContextEntity
 
         _ ->
             (\_ -> Nothing)

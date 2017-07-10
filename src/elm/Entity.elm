@@ -1,7 +1,8 @@
 module Entity exposing (..)
 
 import Document
-import Entity.Types exposing (Entity(..), GroupEntityType(..), EntityListViewType(..))
+import Document.Types exposing (getDocId)
+import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
 import X.List as List
 import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
@@ -9,6 +10,7 @@ import X.Function exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo
+import Tuple2
 
 
 type alias GroupEntity =
@@ -53,28 +55,24 @@ getId entity =
                     Document.getId model
 
 
+toEntityId entity =
+    case entity of
+        TodoEntity m ->
+            TodoId (getDocId m)
+
+        GroupEntity ge ->
+            case ge of
+                ProjectEntity m ->
+                    ProjectId (getDocId m)
+
+                ContextEntity m ->
+                    ContextId (getDocId m)
+
+
 equalById e1 e2 =
-    let
-        eq =
-            Document.equalById
-    in
-        case ( e1, e2 ) of
-            ( GroupEntity g1, GroupEntity g2 ) ->
-                case ( g1, g2 ) of
-                    ( ProjectEntity m1, ProjectEntity m2 ) ->
-                        eq m1 m2
-
-                    ( ContextEntity m1, ContextEntity m2 ) ->
-                        eq m1 m2
-
-                    _ ->
-                        False
-
-            ( TodoEntity m1, TodoEntity m2 ) ->
-                eq m1 m2
-
-            _ ->
-                False
+    ( e1, e2 )
+        |> Tuple2.mapBoth toEntityId
+        |> uncurry equals
 
 
 routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType

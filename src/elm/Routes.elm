@@ -1,11 +1,12 @@
 module Routes exposing (..)
 
 import Entity
+import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType
 import Msg exposing (..)
 import Navigation exposing (Location)
-import RouteUrl.Builder as Builder exposing (..)
+import RouteUrl.Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import Types exposing (AppModel, defaultView)
 import ViewType exposing (ViewType(EntityListView, SyncView))
@@ -23,7 +24,7 @@ delta2builder previous current =
 getPathFromModel model =
     case Model.ViewType.getMainViewType model of
         EntityListView viewType ->
-            Entity.getPathFromViewType viewType
+            getPathFromViewType viewType
 
         SyncView ->
             [ "custom-sync" ]
@@ -36,7 +37,7 @@ delta2hash =
 
 builder2messages : Builder -> List Msg
 builder2messages builder =
-    Entity.routeUrlBuilderToMaybeListViewType builder
+    routeUrlBuilderToMaybeListViewType builder
         |> Maybe.Extra.unpack
             (\_ ->
                 case path builder of
@@ -53,3 +54,67 @@ builder2messages builder =
 hash2messages : Location -> List Msg
 hash2messages location =
     builder2messages (fromHash location.href)
+
+
+routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
+routeUrlBuilderToMaybeListViewType builder =
+    case RouteUrl.Builder.path builder of
+        "lists" :: "contexts" :: [] ->
+            ContextsView |> Just
+
+        "lists" :: "projects" :: [] ->
+            ProjectsView |> Just
+
+        "bin" :: [] ->
+            BinView |> Just
+
+        "done" :: [] ->
+            DoneView |> Just
+
+        "recent" :: [] ->
+            RecentView |> Just
+
+        "Inbox" :: [] ->
+            (ContextView "") |> Just
+
+        "context" :: id :: [] ->
+            (ContextView id) |> Just
+
+        "project" :: "NotAssigned" :: [] ->
+            (ProjectView "") |> Just
+
+        "project" :: id :: [] ->
+            (ProjectView id) |> Just
+
+        _ ->
+            Nothing
+
+
+getPathFromViewType viewType =
+    case viewType of
+        ContextsView ->
+            [ "lists", "contexts" ]
+
+        ProjectsView ->
+            [ "lists", "projects" ]
+
+        ProjectView id ->
+            if String.isEmpty id then
+                [ "project", "NotAssigned" ]
+            else
+                [ "project", id ]
+
+        ContextView id ->
+            if String.isEmpty id then
+                [ "Inbox" ]
+            else
+                [ "context", id ]
+
+        BinView ->
+            [ "bin" ]
+
+        DoneView ->
+            [ "done" ]
+
+        RecentView ->
+            [ "recent" ]

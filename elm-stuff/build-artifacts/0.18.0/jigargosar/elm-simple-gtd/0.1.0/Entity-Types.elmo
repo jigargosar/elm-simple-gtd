@@ -7,6 +7,7 @@ var _jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity = function (a) {
 var _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity = function (a) {
 	return {ctor: 'TodoEntity', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Entity_Types$createTodoEntity = _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity;
 var _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity = function (a) {
 	return {ctor: 'GroupEntity', _0: a};
 };
@@ -45,3 +46,12 @@ var _jigargosar$elm_simple_gtd$Entity_Types$OnSave = {ctor: 'OnSave'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived = {ctor: 'OnToggleArchived'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted = {ctor: 'OnToggleDeleted'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing = {ctor: 'OnStartEditing'};
+var _jigargosar$elm_simple_gtd$Entity_Types$TodoId = function (a) {
+	return {ctor: 'TodoId', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$ProjectId = function (a) {
+	return {ctor: 'ProjectId', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Entity_Types$ContextId = function (a) {
+	return {ctor: 'ContextId', _0: a};
+};

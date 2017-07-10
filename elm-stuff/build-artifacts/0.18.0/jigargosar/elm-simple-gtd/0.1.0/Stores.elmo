@@ -639,7 +639,7 @@ var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
 						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
 						_jigargosar$elm_simple_gtd$Stores$todoStore,
 						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromTodo));
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity_Types$createTodoEntity));
 			case 'project-db':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
@@ -647,7 +647,7 @@ var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
 						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
 						_jigargosar$elm_simple_gtd$Stores$projectStore,
 						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromProject));
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity));
 			case 'context-db':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
@@ -655,7 +655,7 @@ var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
 						_jigargosar$elm_simple_gtd$X_Record$maybeOverT2,
 						_jigargosar$elm_simple_gtd$Stores$contextStore,
 						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity$fromContext));
+					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity_Types$createContextEntity));
 			default:
 				return function (_p29) {
 					return _elm_lang$core$Maybe$Nothing;

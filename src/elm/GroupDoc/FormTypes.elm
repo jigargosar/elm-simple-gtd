@@ -1,7 +1,7 @@
 module GroupDoc.FormTypes exposing (..)
 
 import Document.Types exposing (DocId)
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (Entity)
 import GroupDoc.Types exposing (GroupDocName)
 
 
@@ -12,7 +12,7 @@ type alias NameInputLabel =
 type alias GroupDocEditForm =
     { id : DocId
     , name : GroupDocName
-    , entity : EntityType
+    , entity : Entity
     , isArchived : Bool
     , nameLabel : NameInputLabel
     }

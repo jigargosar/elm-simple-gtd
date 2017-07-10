@@ -2,7 +2,7 @@ module Types exposing (..)
 
 import AppDrawer.Model
 import Document.Types exposing (DocId)
-import Entity.Types exposing (EntityListViewType(ContextsView), EntityType)
+import Entity.Types exposing (EntityListViewType(ContextsView), Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
@@ -62,7 +62,7 @@ type alias AppModel =
     , selectedEntityIdSet : Set DocId
     , appVersion : String
     , deviceId : String
-    , focusInEntity : EntityType
+    , focusInEntity : Entity
     , timeTracker : Todo.TimeTracker.Model
     , keyComboModel : Keyboard.Combo.Model Msg
     , config : AppConfig

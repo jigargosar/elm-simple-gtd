@@ -5,7 +5,7 @@ import Document
 import Document.Types exposing (DeviceId, DocId, getDocId)
 import Entity
 import Entity.Tree
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityListViewType, Entity)
 import GroupDoc
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Msg exposing (Msg)
@@ -63,7 +63,7 @@ insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( EntityType, AppModel )
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->

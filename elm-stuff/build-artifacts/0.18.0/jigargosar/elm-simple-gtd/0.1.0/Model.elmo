@@ -62,38 +62,6 @@ var _jigargosar$elm_simple_gtd$Model$getMaybeEditTodoReminderForm = function (mo
 		return _elm_lang$core$Maybe$Nothing;
 	}
 };
-var _jigargosar$elm_simple_gtd$Model$createAndEditNewContext = function (model) {
-	return function (_p2) {
-		var _p3 = _p2;
-		return A2(
-			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromContext(_p3._0),
-			_p3._1);
-	}(
-		A2(
-			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setContextStore, model),
-			A2(
-				_jigargosar$elm_simple_gtd$Store$insert,
-				A2(_jigargosar$elm_simple_gtd$Context$init, '<New Context>', model.now),
-				model.contextStore)));
-};
-var _jigargosar$elm_simple_gtd$Model$createAndEditNewProject = function (model) {
-	return function (_p4) {
-		var _p5 = _p4;
-		return A2(
-			_jigargosar$elm_simple_gtd$Model_ExMode$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity$fromProject(_p5._0),
-			_p5._1);
-	}(
-		A2(
-			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setProjectStore, model),
-			A2(
-				_jigargosar$elm_simple_gtd$Store$insert,
-				A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
-				model.projectStore)));
-};
 var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToSnoozeView = F2(
 	function (details, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -110,7 +78,7 @@ var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
 var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p6) {
+		return function (_p2) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
@@ -118,7 +86,7 @@ var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 					_jigargosar$elm_simple_gtd$Stores$updateTodo,
 					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
 					todoId,
-					_p6));
+					_p2));
 		}(model);
 	});
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
@@ -198,11 +166,14 @@ var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
 				{appDrawerModel: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$overAppDrawerModel = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model$appDrawerModel);
-var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p7) {
+var _jigargosar$elm_simple_gtd$Model$mapOverAppDrawerModel = function (_p3) {
 	return _Fresheyeball$elm_return$Return$map(
-		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p7));
+		A2(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Model$appDrawerModel, _p3));
 };
-var _jigargosar$elm_simple_gtd$Model$commonMsg = _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
+var _jigargosar$elm_simple_gtd$Model$commonMsg = function () {
+	var _p4 = 1;
+	return _jigargosar$elm_simple_gtd$CommonMsg$createHelper(_jigargosar$elm_simple_gtd$Msg$OnCommonMsg);
+}();
 var _jigargosar$elm_simple_gtd$Model$noop = _jigargosar$elm_simple_gtd$Model$commonMsg.noOp;
 var _jigargosar$elm_simple_gtd$Model$logString = _jigargosar$elm_simple_gtd$Model$commonMsg.logString;
 var _jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');

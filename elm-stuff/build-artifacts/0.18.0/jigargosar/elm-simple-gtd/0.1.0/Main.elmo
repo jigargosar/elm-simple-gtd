@@ -1,3 +1,79 @@
+var _jigargosar$elm_simple_gtd$Main$keyboardCombos = {
+	ctor: '::',
+	_0: A2(
+		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
+		_jigargosar$elm_simple_gtd$Msg$onTodoStopRunning),
+	_1: {
+		ctor: '::',
+		_0: A2(
+			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$r},
+			_jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo),
+		_1: {ctor: '[]'}
+	}
+};
+var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
+	var localPref = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+		A2(
+			_elm_lang$core$Result$mapError,
+			_elm_lang$core$Debug$log('Unable to decode localPref'),
+			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder, flags.localPref)),
+		_jigargosar$elm_simple_gtd$LocalPref$defaultLocalPref);
+	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
+	var _p0 = flags;
+	var now = _p0.now;
+	var encodedTodoList = _p0.encodedTodoList;
+	var encodedProjectList = _p0.encodedProjectList;
+	var encodedContextList = _p0.encodedContextList;
+	var pouchDBRemoteSyncURI = _p0.pouchDBRemoteSyncURI;
+	var storeGenerator = A4(
+		_mgold$elm_random_pcg$Random_Pcg$map3,
+		F3(
+			function (v0, v1, v2) {
+				return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
+			}),
+		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
+		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
+		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
+	var _p1 = A2(
+		_mgold$elm_random_pcg$Random_Pcg$step,
+		storeGenerator,
+		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
+	var todoStore = _p1._0._0;
+	var projectStore = _p1._0._1;
+	var contextStore = _p1._0._2;
+	var seed = _p1._1;
+	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
+	var model = {
+		now: now,
+		todoStore: todoStore,
+		projectStore: projectStore,
+		contextStore: contextStore,
+		editMode: editMode,
+		mainViewType: _jigargosar$elm_simple_gtd$Types$defaultView,
+		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
+		reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none,
+		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
+		user: firebaseModel.user,
+		fcmToken: firebaseModel.fcmToken,
+		firebaseClient: firebaseModel.firebaseClient,
+		developmentMode: flags.developmentMode,
+		selectedEntityIdSet: _elm_lang$core$Set$empty,
+		appVersion: flags.appVersion,
+		deviceId: flags.deviceId,
+		focusInEntity: _jigargosar$elm_simple_gtd$Entity$inboxEntity,
+		timeTracker: _jigargosar$elm_simple_gtd$Todo_TimeTracker$none,
+		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
+			{toMsg: _jigargosar$elm_simple_gtd$Msg$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Main$keyboardCombos}),
+		config: flags.config,
+		appDrawerModel: localPref.appDrawer,
+		signInModel: localPref.signIn,
+		mdl: _debois$elm_mdl$Material$model
+	};
+	return _Fresheyeball$elm_return$Return$singleton(model);
+};
 var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChange = _elm_lang$core$Native_Platform.incomingPort(
 	'onFirebaseDatabaseChange',
 	A2(
@@ -65,7 +141,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
-	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Model$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
+	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Main$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (appVersion) {

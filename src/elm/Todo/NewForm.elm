@@ -1,6 +1,6 @@
 module Todo.NewForm exposing (..)
 
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (Entity)
 import Todo
 import Todo.FormTypes exposing (AddTodoForm)
 
@@ -10,7 +10,7 @@ type Field
     | ReferenceTodoId
 
 
-create : EntityType -> Todo.Text -> AddTodoForm
+create : Entity -> Todo.Text -> AddTodoForm
 create referenceEntity text =
     { text = text, referenceEntity = referenceEntity }
 

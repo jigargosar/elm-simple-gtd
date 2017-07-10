@@ -1,37 +1,65 @@
 module Entity.Main exposing (..)
 
+import Context
 import Document
 import DomPorts
 import Entity
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (Entity, createContextEntity, createProjectEntity)
+import ExclusiveMode
+import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject))
 import GroupDoc
 import Model
 import Model.ExMode
 import Model.Selection
 import Model.ViewType
-import Msg
+import Msg exposing (Msg)
+import Project
 import Return
 import Set
+import Store
 import Stores
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
-import Types exposing (ModelReturnF, ReturnF)
+import Types exposing (ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
+import Tuple2
+
+
+map =
+    Return.map
 
 
 update :
-    (Msg.Msg -> ReturnF)
-    -> EntityType
+    (Msg -> ReturnF)
     -> Entity.Types.EntityMsg
     -> ReturnF
-update andThenUpdate entity msg =
+update andThenUpdate msg =
+    case msg of
+        Entity.Types.OnNewProject ->
+            map createAndEditNewProject
+                >> DomPorts.autoFocusInputCmd
+
+        Entity.Types.OnNewContext ->
+            map createAndEditNewContext
+                >> DomPorts.autoFocusInputCmd
+
+        Entity.Types.OnUpdate entity entityUpdateMsg ->
+            onUpdate andThenUpdate entity entityUpdateMsg
+
+
+onUpdate :
+    (Msg -> ReturnF)
+    -> Entity
+    -> Entity.Types.EntityUpdateMsg
+    -> ReturnF
+onUpdate andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->
-            Return.map (Model.ExMode.startEditingEntity entity)
+            Return.map (startEditingEntity entity)
                 >> DomPorts.autoFocusInputCmd
 
         Entity.Types.OnNameChanged newName ->
-            Return.map (Model.ExMode.updateEditModeNameChanged newName entity)
+            Return.map (updateEditModeNameChanged newName entity)
 
         Entity.Types.OnSave ->
             andThenUpdate Msg.OnSaveCurrentForm
@@ -97,7 +125,7 @@ switchToEntityListViewFromEntity entity model =
             |> (Model.ViewType.setEntityListViewType # model)
 
 
-toggleDeleteEntity : EntityType -> ModelReturnF
+toggleDeleteEntity : Entity -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
@@ -115,3 +143,43 @@ toggleDeleteEntity entity model =
 
                 Entity.Types.TodoEntity todo ->
                     Stores.updateTodo (TA_ToggleDeleted) entityId
+
+
+createAndEditNewProject model =
+    Store.insert (Project.init "<New Project>" model.now) model.projectStore
+        |> Tuple2.mapSecond (Stores.setProjectStore # model)
+        |> (\( project, model ) ->
+                model
+                    |> startEditingEntity (createProjectEntity project)
+           )
+
+
+createAndEditNewContext model =
+    Store.insert (Context.init "<New Context>" model.now) model.contextStore
+        |> Tuple2.mapSecond (Stores.setContextStore # model)
+        |> (\( context, model ) ->
+                model
+                    |> startEditingEntity (createContextEntity context)
+           )
+
+
+setEditMode =
+    Model.ExMode.setEditMode
+
+
+startEditingEntity : Entity -> ModelF
+startEditingEntity entity model =
+    Model.ExMode.setEditMode (ExclusiveMode.createEntityEditForm entity) model
+
+
+updateEditModeNameChanged newName entity model =
+    model
+        |> case model.editMode of
+            XMEditContext ecm ->
+                setEditMode (ExclusiveMode.editContextSetName newName ecm)
+
+            XMEditProject epm ->
+                setEditMode (ExclusiveMode.editProjectSetName newName epm)
+
+            _ ->
+                identity

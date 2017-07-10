@@ -2,10 +2,11 @@ port module Update exposing (..)
 
 import AppDrawer.Main
 import CommonMsg
+import Context
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
-import Entity.Types
+import Entity.Types exposing (createContextEntity, createProjectEntity)
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
@@ -17,6 +18,8 @@ import Model.Msg
 import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
+import Project
+import Store
 import Stores
 import Todo.Notification.Types
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
@@ -38,6 +41,8 @@ import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
 import Types exposing (AppModel, Return, ReturnF)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 map =
@@ -153,16 +158,11 @@ updateInner msg =
             map (Model.ExMode.activateNewTodoModeWithInboxAsReference)
                 >> autoFocusInputCmd
 
-        OnNewProject ->
-            map Model.createAndEditNewProject
-                >> autoFocusInputCmd
+        OnEntityMsg entityMsg ->
+            Entity.Main.update andThenUpdate entityMsg
 
-        OnNewContext ->
-            map Model.createAndEditNewContext
-                >> autoFocusInputCmd
-
-        OnEntityMsg entity entityMsg ->
-            Entity.Main.update andThenUpdate entity entityMsg
+        OnEntityUpdateMsg entity entityUpdateMsg ->
+            Entity.Main.update andThenUpdate (Entity.Types.OnUpdate entity entityUpdateMsg)
 
         OnLaunchBarMsgWithNow msg now ->
             LaunchBar.Main.update andThenUpdate now msg

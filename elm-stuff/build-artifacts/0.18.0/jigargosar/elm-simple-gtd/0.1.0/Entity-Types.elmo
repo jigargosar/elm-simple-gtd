@@ -29,6 +29,12 @@ var _jigargosar$elm_simple_gtd$Entity_Types$ContextView = function (a) {
 	return {ctor: 'ContextView', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Entity_Types$ContextsView = {ctor: 'ContextsView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnUpdate = F2(
+	function (a, b) {
+		return {ctor: 'OnUpdate', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Entity_Types$OnNewContext = {ctor: 'OnNewContext'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnNewProject = {ctor: 'OnNewProject'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnGoto = {ctor: 'OnGoto'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelected = {ctor: 'OnToggleSelected'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn = {ctor: 'OnOnFocusIn'};

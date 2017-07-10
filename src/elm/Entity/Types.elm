@@ -10,7 +10,7 @@ type GroupEntityType
     | ContextEntity GroupDoc.Types.GroupDoc
 
 
-type EntityType
+type Entity
     = GroupEntity GroupEntityType
     | TodoEntity Todo.Types.TodoDoc
 
@@ -26,6 +26,12 @@ type EntityListViewType
 
 
 type EntityMsg
+    = OnNewProject
+    | OnNewContext
+    | OnUpdate Entity EntityUpdateMsg
+
+
+type EntityUpdateMsg
     = OnStartEditing
     | OnToggleDeleted
     | OnToggleArchived

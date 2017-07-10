@@ -106,11 +106,6 @@ setEditMode =
     set editMode
 
 
-startEditingEntity : EntityType -> ModelF
-startEditingEntity entity model =
-    setEditMode (ExclusiveMode.createEntityEditForm entity) model
-
-
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
     setEditMode (LaunchBar.Form.create now |> XMLaunchBar)
@@ -156,18 +151,6 @@ startEditingTodoContext todo =
 
 showMainMenu =
     setEditMode (Menu.initState |> XMMainMenu)
-
-
-updateEditModeNameChanged newName entity model =
-    case model.editMode of
-        XMEditContext ecm ->
-            setEditMode (ExclusiveMode.editContextSetName newName ecm) model
-
-        XMEditProject epm ->
-            setEditMode (ExclusiveMode.editProjectSetName newName epm) model
-
-        _ ->
-            model
 
 
 deactivateEditingMode =

@@ -6,7 +6,7 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityListViewType, Entity)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
@@ -43,7 +43,7 @@ type alias ViewModel =
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Int
     , todoList : List TodoDoc
-    , getTabIndexAVForEntity : EntityType -> Int
+    , getTabIndexAVForEntity : Entity -> Int
     }
 
 
@@ -54,14 +54,14 @@ type alias GroupDoc =
 type alias Config =
     { groupByFn : TodoDoc -> DocId
     , namePrefix : String
-    , toEntity : GroupDoc -> EntityType
+    , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : DocId -> EntityListViewType
-    , getTabIndexAVForEntity : EntityType -> Int
+    , getTabIndexAVForEntity : Entity -> Int
     }
 
 
@@ -71,7 +71,7 @@ create config todoList groupDoc =
             Document.getId groupDoc
 
         onEntityAction =
-            Msg.OnEntityMsg (config.toEntity groupDoc)
+            Msg.OnEntityUpdateMsg (config.toEntity groupDoc)
 
         isNull =
             config.isNull groupDoc
@@ -151,7 +151,7 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (EntityType -> Int) -> List TodoDoc -> Context.Model -> ViewModel
+contextGroup : (Entity -> Int) -> List TodoDoc -> Context.Model -> ViewModel
 contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
@@ -171,7 +171,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-projectGroup : (EntityType -> Int) -> List TodoDoc -> Project.Model -> ViewModel
+projectGroup : (Entity -> Int) -> List TodoDoc -> Project.Model -> ViewModel
 projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config

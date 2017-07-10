@@ -2,7 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
-import Entity.Types exposing (EntityType(..), GroupEntityType(..), EntityListViewType(..))
+import Entity.Types exposing (Entity(..), GroupEntityType(..), EntityListViewType(..))
 import X.List as List
 import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
@@ -41,7 +41,7 @@ initContextGroup =
 
 
 type alias Msg =
-    Entity.Types.EntityMsg
+    Entity.Types.EntityUpdateMsg
 
 
 getId entity =
@@ -177,7 +177,7 @@ getTodoGotoGroupView todo prevView =
                 ContextsView
 
 
-toViewType : Maybe EntityListViewType -> EntityType -> EntityListViewType
+toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
 toViewType maybePrevView entity =
     case entity of
         GroupEntity group ->

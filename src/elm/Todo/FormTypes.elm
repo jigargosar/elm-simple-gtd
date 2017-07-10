@@ -1,7 +1,7 @@
 module Todo.FormTypes exposing (..)
 
 import Document.Types exposing (DocId)
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (Entity)
 import Menu.Types exposing (MenuState)
 import Todo.Types exposing (TodoDoc, TodoText)
 
@@ -9,7 +9,7 @@ import Todo.Types exposing (TodoDoc, TodoText)
 type alias TodoEditForm =
     { id : DocId
     , todoText : TodoText
-    , entity : EntityType
+    , entity : Entity
     }
 
 
@@ -30,7 +30,7 @@ type alias TodoMoreMenuForm =
 
 type alias AddTodoForm =
     { text : TodoText
-    , referenceEntity : EntityType
+    , referenceEntity : Entity
     }
 
 

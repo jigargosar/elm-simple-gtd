@@ -5,14 +5,14 @@ import CommonMsg
 import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId, getDocId)
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityListViewType, Entity)
 import Entity exposing (inboxEntity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase
 import Firebase.SignIn
 import Material
-import Model.ExMode exposing (deactivateEditingMode, setEditMode, startEditingEntity)
+import Model.ExMode exposing (deactivateEditingMode, setEditMode)
 import Msg exposing (..)
 import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(..), TodoDoc, TodoStore)
@@ -48,7 +48,11 @@ import X.Debug
 
 commonMsg : CommonMsg.Helper Msg
 commonMsg =
-    CommonMsg.createHelper OnCommonMsg
+    let
+        _ =
+            1
+    in
+        CommonMsg.createHelper OnCommonMsg
 
 
 noop =
@@ -115,24 +119,6 @@ snoozeTodoWithOffset snoozeOffset todoId model =
         model
             |> updateTodo (time |> TA_SnoozeTill) todoId
             >> Tuple.mapFirst removeReminderOverlay
-
-
-createAndEditNewProject model =
-    Store.insert (Project.init "<New Project>" model.now) model.projectStore
-        |> Tuple2.mapSecond (setProjectStore # model)
-        |> (\( project, model ) ->
-                model
-                    |> startEditingEntity (Entity.fromProject project)
-           )
-
-
-createAndEditNewContext model =
-    Store.insert (Context.init "<New Context>" model.now) model.contextStore
-        |> Tuple2.mapSecond (setContextStore # model)
-        |> (\( context, model ) ->
-                model
-                    |> startEditingEntity (Entity.fromContext context)
-           )
 
 
 getMaybeEditTodoReminderForm model =
@@ -202,7 +188,7 @@ getMaybeFocusInEntity entityList model =
         |> Maybe.orElse (List.head entityList)
 
 
-moveFocusBy : Int -> List EntityType -> ModelF
+moveFocusBy : Int -> List Entity -> ModelF
 moveFocusBy =
     Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 

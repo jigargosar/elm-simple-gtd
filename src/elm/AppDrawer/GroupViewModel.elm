@@ -10,7 +10,7 @@ import Dict.Extra
 import Document
 import Document.Types exposing (DocId)
 import Entity
-import Entity.Types exposing (EntityListViewType, EntityType)
+import Entity.Types exposing (EntityListViewType, Entity)
 import GroupDoc
 import GroupDoc.Types
 import Msg
@@ -70,7 +70,7 @@ type alias Config =
     , todoList : List TodoDoc
     , namePrefix : String
     , filter : AppModel -> List GroupDoc
-    , toEntity : GroupDoc -> EntityType
+    , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
@@ -102,7 +102,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Msg.OnEntityMsg (config.toEntity entity)
+            Msg.OnEntityUpdateMsg (config.toEntity entity)
 
         count =
             getTodoListByEntityId id |> List.length
@@ -182,7 +182,7 @@ contexts model =
         , title = "Contexts"
         , className = "contexts"
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
-        , onAddClicked = Msg.OnNewContext
+        , onAddClicked = Msg.onNewContext
         , icon = { name = "group_work", color = AppColors.contextsColor }
         , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
         , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
@@ -230,7 +230,7 @@ projects model =
         , title = "Projects"
         , className = "projects"
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
-        , onAddClicked = Msg.OnNewProject
+        , onAddClicked = Msg.onNewProject
         , icon = { name = "group_work", color = AppColors.projectsColor }
         , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
         , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects

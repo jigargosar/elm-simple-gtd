@@ -16,7 +16,7 @@ init : GroupDocEditForm -> Html Msg.Msg
 init form =
     let
         toMsg =
-            Msg.OnEntityMsg form.entity
+            Msg.OnEntityUpdateMsg form.entity
 
         fireNameChanged =
             Entity.Types.OnNameChanged >> toMsg

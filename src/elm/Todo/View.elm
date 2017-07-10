@@ -118,7 +118,7 @@ createTodoViewModel appM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Msg.OnEntityMsg (Entity.Types.TodoEntity todo)
+            Msg.OnEntityUpdateMsg (Entity.Types.TodoEntity todo)
 
         onTodoMsg =
             Msg.OnTodoMsg
@@ -371,7 +371,7 @@ edit form appModel =
             SetText >> Msg.OnUpdateTodoForm form
 
         fireToggleDelete =
-            Msg.OnEntityMsg form.entity Entity.Types.OnToggleDeleted
+            Msg.OnEntityUpdateMsg form.entity Entity.Types.OnToggleDeleted
     in
         div
             [ class "overlay"

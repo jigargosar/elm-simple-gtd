@@ -47,10 +47,15 @@ var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg = function (a) {
 	return {ctor: 'OnLaunchBarMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = F2(
+var _jigargosar$elm_simple_gtd$Msg$OnEntityUpdateMsg = F2(
 	function (a, b) {
-		return {ctor: 'OnEntityMsg', _0: a, _1: b};
+		return {ctor: 'OnEntityUpdateMsg', _0: a, _1: b};
 	});
+var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
+	return {ctor: 'OnEntityMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewProject);
+var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewContext);
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
@@ -93,8 +98,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnNewTodoTextChanged = F2(
 	function (a, b) {
 		return {ctor: 'OnNewTodoTextChanged', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnNewContext = {ctor: 'OnNewContext'};
-var _jigargosar$elm_simple_gtd$Msg$OnNewProject = {ctor: 'OnNewProject'};
 var _jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox = {ctor: 'OnNewTodoForInbox'};
 var _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction = function (a) {
 	return {ctor: 'OnReminderOverlayAction', _0: a};

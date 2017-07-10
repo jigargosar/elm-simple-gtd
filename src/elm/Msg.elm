@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (EntityType)
+import Entity.Types exposing (Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Types exposing (LBMsg)
@@ -40,8 +40,6 @@ type Msg
     | OnRemotePouchSync SyncForm
     | OnReminderOverlayAction Todo.Notification.Model.Action
     | OnNewTodoForInbox
-    | OnNewProject
-    | OnNewContext
     | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
@@ -52,9 +50,10 @@ type Msg
     | OnEditTodoProjectMenuStateChanged TodoGroupFrom MenuState
     | OnEditTodoContextMenuStateChanged TodoGroupFrom MenuState
     | OnUpdateTodoForm TodoEditForm EditTodoFormAction
-    | OnEntityListKeyDown (List EntityType) X.Keyboard.KeyboardEvent
+    | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
-    | OnEntityMsg EntityType Entity.Types.EntityMsg
+    | OnEntityMsg Entity.Types.EntityMsg
+    | OnEntityUpdateMsg Entity Entity.Types.EntityUpdateMsg
     | OnLaunchBarMsg LBMsg
     | OnLaunchBarMsgWithNow LBMsg Time
     | OnTodoMsg TodoMsg
@@ -77,3 +76,11 @@ onTodoStopRunning =
 
 onGotoRunningTodo =
     Todo.Msg.GotoRunning |> OnTodoMsg
+
+
+onNewProject =
+    OnEntityMsg Entity.Types.OnNewProject
+
+
+onNewContext =
+    OnEntityMsg Entity.Types.OnNewContext

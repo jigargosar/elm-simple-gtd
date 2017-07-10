@@ -54,7 +54,6 @@ type Msg
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg Entity.Types.EntityMsg
-    | OnEntityUpdateMsg Entity Entity.Types.EntityUpdateMsg
     | OnLaunchBarMsg LBMsg
     | OnLaunchBarMsgWithNow LBMsg Time
     | OnTodoMsg TodoMsg

@@ -161,9 +161,6 @@ updateInner msg =
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg
 
-        OnEntityUpdateMsg entity entityUpdateMsg ->
-            Entity.Main.update andThenUpdate (Entity.Types.OnUpdate entity entityUpdateMsg)
-
         OnLaunchBarMsgWithNow msg now ->
             LaunchBar.Main.update andThenUpdate now msg
 

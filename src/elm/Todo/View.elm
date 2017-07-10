@@ -10,7 +10,7 @@ import Store
 import Todo.FormTypes exposing (EditTodoFormAction(SetText), EditTodoReminderFormAction(SetDate, SetTime), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import Types exposing (AppModel)
-import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
+import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
@@ -34,7 +34,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
-import WebComponents exposing (..)
 
 
 type alias TodoViewModel =

@@ -212,3 +212,7 @@ btnFlat textV attributes =
 
 divider =
     div [ HA.class "divider" ] []
+
+
+foo =
+    1 + 1

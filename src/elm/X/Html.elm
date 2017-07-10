@@ -2,7 +2,7 @@ module X.Html exposing (..)
 
 import Html exposing (Attribute)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onWithOptions)
+import Html.Events exposing (onWithOptions, targetValue)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 
@@ -77,3 +77,8 @@ boolProp =
 boolProperty : String -> Bool -> Attribute msg
 boolProperty name value =
     E.bool value |> property name
+
+
+onChange : (String -> msg) -> Attribute msg
+onChange tagger =
+    Html.Events.on "change" (D.map tagger targetValue)

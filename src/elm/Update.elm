@@ -1,4 +1,4 @@
-port module Update exposing (..)
+port module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg

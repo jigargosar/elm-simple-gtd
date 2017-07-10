@@ -2,9 +2,9 @@ module AppColors exposing (..)
 
 import Color
 import Color.Mixing
-import CssBasics
 
 
+--import CssBasics
 -- base colors
 
 
@@ -54,29 +54,24 @@ mixNullGroupColor =
 
 
 -- util
+--encode =
+--    CssBasics.Col >> CssBasics.encodeCssValue
 
 
 encode =
-    CssBasics.Col >> CssBasics.encodeCssValue
-
-
-
-{-
-   encode =
-       let
-           _ =
-               1
-       in
-           Color.toRgb
-               >> (\{ red, green, blue, alpha } ->
-                       "rgba("
-                           ++ toString red
-                           ++ ","
-                           ++ toString green
-                           ++ ","
-                           ++ toString blue
-                           ++ ","
-                           ++ toString alpha
-                           ++ ")"
-                  )
--}
+    let
+        _ =
+            1
+    in
+        Color.toRgb
+            >> (\{ red, green, blue, alpha } ->
+                    "rgba("
+                        ++ toString red
+                        ++ ","
+                        ++ toString green
+                        ++ ","
+                        ++ toString blue
+                        ++ ","
+                        ++ toString alpha
+                        ++ ")"
+               )

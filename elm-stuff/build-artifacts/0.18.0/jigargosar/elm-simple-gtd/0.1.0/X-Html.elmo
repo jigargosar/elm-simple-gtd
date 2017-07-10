@@ -1,3 +1,9 @@
+var _jigargosar$elm_simple_gtd$X_Html$onChange = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
 var _jigargosar$elm_simple_gtd$X_Html$boolProperty = F2(
 	function (name, value) {
 		return A2(

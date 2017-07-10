@@ -17,7 +17,7 @@ type alias GroupEntity =
 
 
 inboxEntity =
-    fromContext Context.null
+    Context.null |> ContextEntity >> GroupEntity
 
 
 fromContext =

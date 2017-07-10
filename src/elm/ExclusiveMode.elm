@@ -55,7 +55,3 @@ createEntityEditForm entity =
 
         TodoEntity model ->
             editTodo model
-
-
-createSetupExclusiveMode =
-    XMSetup (Todo.NewForm.create Entity.inboxEntity "")

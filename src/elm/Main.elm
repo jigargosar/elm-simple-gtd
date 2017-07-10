@@ -51,7 +51,7 @@ main =
         { delta2url = Routes.delta2hash
         , location2messages = Routes.hash2messages
         , init = init
-        , update = Update.update
+        , update = update
         , view = View.init
         , subscriptions = subscriptions
         }
@@ -98,21 +98,12 @@ init flags =
                 |> Result.mapError (Debug.log "Unable to decode localPref")
                 != LocalPref.defaultLocalPref
 
-        editMode =
-            if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
-                if Store.isEmpty todoStore then
-                    ExclusiveMode.createSetupExclusiveMode
-                else
-                    ExclusiveMode.none
-            else
-                ExclusiveMode.signInOverlay
-
         model =
             { now = now
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
-            , editMode = editMode
+            , editMode = ExclusiveMode.none
             , mainViewType = defaultView
             , keyboardState = X.Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none
@@ -137,7 +128,7 @@ init flags =
             , mdl = Material.model
             }
     in
-        model |> Return.singleton
+        update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
@@ -145,3 +136,13 @@ keyboardCombos =
     [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (Msg.onStopRunningTodo)
     , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (Msg.onGotoRunningTodo)
     ]
+
+
+update : Msg -> AppModel -> Return
+update msg =
+    let
+        andThenUpdate =
+            update >> Return.andThen
+    in
+        Return.singleton
+            >> Update.update andThenUpdate msg

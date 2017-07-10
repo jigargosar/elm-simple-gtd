@@ -1,3 +1,16 @@
+var _jigargosar$elm_simple_gtd$Main$update = function (msg) {
+	var andThenUpdate = function (_p0) {
+		return _Fresheyeball$elm_return$Return$andThen(
+			_jigargosar$elm_simple_gtd$Main$update(_p0));
+	};
+	return function (_p1) {
+		return A3(
+			_jigargosar$elm_simple_gtd$Update$update,
+			andThenUpdate,
+			msg,
+			_Fresheyeball$elm_return$Return$singleton(_p1));
+	};
+};
 var _jigargosar$elm_simple_gtd$Main$keyboardCombos = {
 	ctor: '::',
 	_0: A2(
@@ -22,12 +35,12 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder, flags.localPref)),
 		_jigargosar$elm_simple_gtd$LocalPref$defaultLocalPref);
 	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
-	var _p0 = flags;
-	var now = _p0.now;
-	var encodedTodoList = _p0.encodedTodoList;
-	var encodedProjectList = _p0.encodedProjectList;
-	var encodedContextList = _p0.encodedContextList;
-	var pouchDBRemoteSyncURI = _p0.pouchDBRemoteSyncURI;
+	var _p2 = flags;
+	var now = _p2.now;
+	var encodedTodoList = _p2.encodedTodoList;
+	var encodedProjectList = _p2.encodedProjectList;
+	var encodedContextList = _p2.encodedContextList;
+	var pouchDBRemoteSyncURI = _p2.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -37,21 +50,20 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		A2(_jigargosar$elm_simple_gtd$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_jigargosar$elm_simple_gtd$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_jigargosar$elm_simple_gtd$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p1 = A2(
+	var _p3 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_jigargosar$elm_simple_gtd$X_Random$seedFromTime(now));
-	var todoStore = _p1._0._0;
-	var projectStore = _p1._0._1;
-	var contextStore = _p1._0._2;
-	var seed = _p1._1;
-	var editMode = _jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(todoStore) ? _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode : _jigargosar$elm_simple_gtd$ExclusiveMode$none) : _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay;
+	var todoStore = _p3._0._0;
+	var projectStore = _p3._0._1;
+	var contextStore = _p3._0._2;
+	var seed = _p3._1;
 	var model = {
 		now: now,
 		todoStore: todoStore,
 		projectStore: projectStore,
 		contextStore: contextStore,
-		editMode: editMode,
+		editMode: _jigargosar$elm_simple_gtd$ExclusiveMode$none,
 		mainViewType: _jigargosar$elm_simple_gtd$Types$defaultView,
 		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
 		reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none,
@@ -72,7 +84,7 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		signInModel: localPref.signIn,
 		mdl: _debois$elm_mdl$Material$model
 	};
-	return _Fresheyeball$elm_return$Return$singleton(model);
+	return A2(_jigargosar$elm_simple_gtd$Main$update, _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded, model);
 };
 var _jigargosar$elm_simple_gtd$Main$onFirebaseDatabaseChange = _elm_lang$core$Native_Platform.incomingPort(
 	'onFirebaseDatabaseChange',
@@ -141,7 +153,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 		});
 };
 var _jigargosar$elm_simple_gtd$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
-	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Main$init, update: _jigargosar$elm_simple_gtd$Update$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
+	{delta2url: _jigargosar$elm_simple_gtd$Routes$delta2hash, location2messages: _jigargosar$elm_simple_gtd$Routes$hash2messages, init: _jigargosar$elm_simple_gtd$Main$init, update: _jigargosar$elm_simple_gtd$Main$update, view: _jigargosar$elm_simple_gtd$View$init, subscriptions: _jigargosar$elm_simple_gtd$Main$subscriptions})(
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
 		function (appVersion) {

@@ -89,7 +89,7 @@ update andThenUpdate msg =
         OnFBSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Msg.OnPersistLocalPref
-                >> Return.map (switchToNewUserSetupModeIfNeeded)
+                >> andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
@@ -109,7 +109,7 @@ update andThenUpdate msg =
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Msg.OnPersistLocalPref
-                                    >> Return.map (switchToNewUserSetupModeIfNeeded)
+                                    >> andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
                 )
 
         OnFBUserChanged encodedUser ->
@@ -175,10 +175,3 @@ firebaseClient =
 
 user =
     X.Record.field .user (\s b -> { b | user = s })
-
-
-switchToNewUserSetupModeIfNeeded model =
-    if Store.isEmpty model.todoStore then
-        Model.ExMode.setEditMode ExclusiveMode.createSetupExclusiveMode model
-    else
-        Model.ExMode.deactivateEditingMode model

@@ -1,6 +1,3 @@
-var _jigargosar$elm_simple_gtd$Firebase_Main$switchToNewUserSetupModeIfNeeded = function (model) {
-	return _jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? A2(_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode, model) : _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode(model);
-};
 var _jigargosar$elm_simple_gtd$Firebase_Main$user = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -125,8 +122,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 			case 'OnFBSkipSignIn':
 				return function (_p2) {
 					return A2(
-						_Fresheyeball$elm_return$Return$map,
-						_jigargosar$elm_simple_gtd$Firebase_Main$switchToNewUserSetupModeIfNeeded,
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded,
 						A2(
 							andThenUpdate,
 							_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,
@@ -162,8 +159,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 							} else {
 								return function (_p5) {
 									return A2(
-										_Fresheyeball$elm_return$Return$map,
-										_jigargosar$elm_simple_gtd$Firebase_Main$switchToNewUserSetupModeIfNeeded,
+										andThenUpdate,
+										_jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded,
 										A2(
 											andThenUpdate,
 											_jigargosar$elm_simple_gtd$Msg$OnPersistLocalPref,

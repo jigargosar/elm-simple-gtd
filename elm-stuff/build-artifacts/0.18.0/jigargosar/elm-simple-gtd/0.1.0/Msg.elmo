@@ -15,6 +15,7 @@ var _jigargosar$elm_simple_gtd$Msg$OnKeyboardMsg = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnNowChanged = function (a) {
 	return {ctor: 'OnNowChanged', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
 var _jigargosar$elm_simple_gtd$Msg$OnMdl = function (a) {
 	return {ctor: 'OnMdl', _0: a};
 };
@@ -106,6 +107,10 @@ var _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged = function (a) {
 	return {ctor: 'OnMainMenuStateChanged', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
+var _jigargosar$elm_simple_gtd$Msg$OnMainMsg = function (a) {
+	return {ctor: 'OnMainMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded = _jigargosar$elm_simple_gtd$Msg$OnMainMsg(_jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded);
 var _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode = function (a) {
 	return {ctor: 'OnStartExclusiveMode', _0: a};
 };

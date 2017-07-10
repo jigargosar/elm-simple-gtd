@@ -6,12 +6,15 @@ import Context
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
-import Entity.Types exposing (createContextEntity, createProjectEntity)
+import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity, createProjectEntity)
+import ExclusiveMode
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
+import Firebase.SignIn
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import LocalPref
+import Main.Update
 import Material
 import Model.ExMode
 import Model.Msg
@@ -21,6 +24,7 @@ import Msg exposing (..)
 import Project
 import Store
 import Stores
+import Todo.NewForm
 import Todo.Notification.Types
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
 import X.Keyboard as Keyboard exposing (Key)
@@ -49,22 +53,23 @@ map =
     Return.map
 
 
-update : Msg -> AppModel -> Return
-update msg =
-    Return.singleton
-        >> updateInner msg
-
-
-updateInner msg =
+update :
+    (Msg -> ReturnF)
+    -> Msg
+    -> ReturnF
+update andThenUpdate msg =
     case msg of
         OnCommonMsg msg ->
             CommonMsg.update msg
 
         OnSubMsg subMsg ->
-            onSubMsg subMsg
+            onSubMsg andThenUpdate subMsg
 
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
+
+        OnMainMsg mainMsg ->
+            Main.Update.update andThenUpdate mainMsg
 
         OnShowMainMenu ->
             map Model.ExMode.showMainMenu
@@ -197,14 +202,6 @@ updateTodoAndMaybeAlsoSelected action todoId =
     Return.andThen (Stores.updateTodoAndMaybeAlsoSelected action todoId)
 
 
-andThenUpdate =
-    update >> Return.andThen
-
-
-andThenTodoMsg =
-    OnTodoMsg >> andThenUpdate
-
-
 maybeMapToCmd fn =
     Maybe.map fn >>?= Cmd.none
 
@@ -252,7 +249,7 @@ command =
     Return.command
 
 
-onSubMsg subMsg =
+onSubMsg andThenUpdate subMsg =
     case subMsg of
         OnNowChanged now ->
             map (Model.setNow now)
@@ -262,7 +259,7 @@ onSubMsg subMsg =
                 >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
-            onGlobalKeyUp key
+            onGlobalKeyUp andThenUpdate key
 
         OnPouchDBChange dbName encodedDoc ->
             let
@@ -276,8 +273,8 @@ onSubMsg subMsg =
             in
                 Return.andThenMaybe
                     (Stores.upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                        >>? (Tuple2.mapFirst afterEntityUpsertOnPouchDBChange
-                                >> uncurry update
+                        >>? (Tuple2.mapEach afterEntityUpsertOnPouchDBChange Return.singleton
+                                >> uncurry andThenUpdate
                             )
                     )
 
@@ -285,8 +282,7 @@ onSubMsg subMsg =
             Return.effect_ (Stores.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
 
-onGlobalKeyUp : Key -> ReturnF
-onGlobalKeyUp key =
+onGlobalKeyUp andThenUpdate key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
@@ -304,10 +300,20 @@ onGlobalKeyUp key =
                                 clear
 
                             Key.CharQ ->
-                                Return.andThenApplyWith
-                                    Model.Msg.onNewTodoModeWithFocusInEntityAsReference
-                                    update
+                                Return.andThen
+                                    (apply2
+                                        ( Model.Msg.onNewTodoModeWithFocusInEntityAsReference
+                                        , Return.singleton
+                                        )
+                                        >> uncurry andThenUpdate
+                                    )
 
+                            {- (\model ->
+                                   model
+                                       |> Return.singleton
+                                       >> andThenUpdate (Model.Msg.onNewTodoModeWithFocusInEntityAsReference model)
+                               )
+                            -}
                             Key.CharI ->
                                 andThenUpdate Msg.onNewTodoForInbox
 

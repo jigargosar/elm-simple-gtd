@@ -271,4 +271,7 @@ var _jigargosar$elm_simple_gtd$Entity$fromContext = function (_p13) {
 	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
 		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p13));
 };
-var _jigargosar$elm_simple_gtd$Entity$inboxEntity = _jigargosar$elm_simple_gtd$Entity$fromContext(_jigargosar$elm_simple_gtd$Context$null);
+var _jigargosar$elm_simple_gtd$Entity$inboxEntity = function (_p14) {
+	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p14));
+}(_jigargosar$elm_simple_gtd$Context$null);

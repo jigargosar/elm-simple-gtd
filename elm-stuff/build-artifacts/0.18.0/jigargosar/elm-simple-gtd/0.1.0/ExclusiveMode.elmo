@@ -1,5 +1,3 @@
-var _jigargosar$elm_simple_gtd$ExclusiveMode$createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-	A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Entity$inboxEntity, ''));
 var _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo = function (_p0) {
 	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(
 		_jigargosar$elm_simple_gtd$Todo_Form$create(_p0));

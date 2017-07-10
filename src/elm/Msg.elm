@@ -32,10 +32,15 @@ type SubMsg
     | OnFirebaseDatabaseChange String E.Value
 
 
+type MainMsg
+    = OnSwitchToNewUserSetupModeIfNeeded
+
+
 type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode
+    | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
@@ -91,3 +96,7 @@ onNewContext =
 
 onEntityUpdateMsg =
     Entity.Types.OnUpdate >>> OnEntityMsg
+
+
+onSwitchToNewUserSetupModeIfNeeded =
+    OnMainMsg OnSwitchToNewUserSetupModeIfNeeded

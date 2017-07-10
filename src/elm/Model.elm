@@ -6,7 +6,7 @@ import Context
 import Document exposing (Document)
 import Document.Types exposing (DocId, getDocId)
 import Entity.Types exposing (EntityListViewType, Entity)
-import Entity exposing (inboxEntity)
+import Entity
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Firebase

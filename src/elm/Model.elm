@@ -4,7 +4,6 @@ import CommonMsg
 import Entity.Types exposing (EntityListViewType, Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Msg exposing (..)
-import Stores exposing (setContextStore, setProjectStore, updateContext, updateProject, updateTodo)
 import Todo.Types exposing (TodoAction(TA_SnoozeTill))
 import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
@@ -58,16 +57,6 @@ removeReminderOverlay model =
 
 setReminderOverlayToSnoozeView details model =
     { model | reminderOverlay = Todo.Notification.Model.snoozeView details }
-
-
-snoozeTodoWithOffset snoozeOffset todoId model =
-    let
-        time =
-            Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
-    in
-        model
-            |> updateTodo (time |> TA_SnoozeTill) todoId
-            >> Tuple.mapFirst removeReminderOverlay
 
 
 getMaybeEditTodoReminderForm model =

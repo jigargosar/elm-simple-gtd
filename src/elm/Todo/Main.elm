@@ -29,7 +29,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
+import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
 import Types exposing (ModelF, ReturnF)
 import X.Function exposing (applyMaybeWith)
 
@@ -327,7 +327,7 @@ reminderOverlayAction action =
 
                                 Todo.Notification.Model.SnoozeTill snoozeOffset ->
                                     Return.singleton
-                                        >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
+                                        >> Return.andThen (snoozeTodoWithOffset snoozeOffset todoId)
                                         >> Return.command (Notification.closeNotification todoId)
 
                                 Todo.Notification.Model.Close ->
@@ -342,3 +342,13 @@ reminderOverlayAction action =
                     _ ->
                         Return.singleton
         )
+
+
+snoozeTodoWithOffset snoozeOffset todoId model =
+    let
+        time =
+            Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
+    in
+        model
+            |> Stores.updateTodo (time |> TA_SnoozeTill) todoId
+            >> Tuple.mapFirst Model.removeReminderOverlay

@@ -31,8 +31,8 @@ function fixWarningsFrom(warnFilePath) {
     })
 }
 export const removeUnusedImports = function() {
-    run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
-    // run(`bash -c "shopt -s globstar && rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.*"`)
+    // run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
+    run(`fish -c "rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.* ; or echo no match"`)
 
     const warnFilePath = '/tmp/main-warn.txt'
 
@@ -43,7 +43,7 @@ export const removeUnusedImports = function() {
     run(`elm-make --warn src/elm/Main.elm --output /dev/null 2> ${warnFilePath}`)
     fixWarningsFrom(warnFilePath)
 
-    run("elm-format --yes src/elm/**.elm")
+    run(`fish -c "elm-format --yes src/elm/**.elm"`)
 }
 
 export const parseWPD = function() {

@@ -14,7 +14,6 @@ import Types exposing (AppModel)
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
-import Model
 import Msg exposing (..)
 import Todo.View exposing (TodoViewModel)
 import Html exposing (..)

@@ -24,41 +24,6 @@ var _jigargosar$elm_simple_gtd$Model$getRemoteSyncForm = function (model) {
 		maybeForm,
 		_jigargosar$elm_simple_gtd$Model$createRemoteSyncForm(model));
 };
-var _jigargosar$elm_simple_gtd$Model$getMaybeEditTodoReminderForm = function (model) {
-	var _p1 = model.editMode;
-	if (_p1.ctor === 'XMEditTodoReminder') {
-		return _elm_lang$core$Maybe$Just(_p1._0);
-	} else {
-		return _elm_lang$core$Maybe$Nothing;
-	}
-};
-var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToSnoozeView = F2(
-	function (details, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$snoozeView(details)
-			});
-	});
-var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
-	return _elm_lang$core$Native_Utils.update(
-		model,
-		{reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none});
-};
-var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
-	function (snoozeOffset, todoId, model) {
-		var time = A2(_jigargosar$elm_simple_gtd$Todo_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p2) {
-			return A2(
-				_elm_lang$core$Tuple$mapFirst,
-				_jigargosar$elm_simple_gtd$Model$removeReminderOverlay,
-				A3(
-					_jigargosar$elm_simple_gtd$Stores$updateTodo,
-					_jigargosar$elm_simple_gtd$Todo_Types$TA_SnoozeTill(time),
-					todoId,
-					_p2));
-		}(model);
-	});
 var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {

@@ -1,19 +1,10 @@
 module Model exposing (..)
 
 import CommonMsg
-import Entity.Types exposing (EntityListViewType, Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Msg exposing (..)
-import Todo.Types exposing (TodoAction(TA_SnoozeTill))
 import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
-import X.Keyboard as Keyboard exposing (KeyboardEvent, KeyboardState)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
-import Keyboard.Combo exposing (combo1, combo2, combo3)
-import Keyboard.Combo as Combo
-import Todo.Notification.Model
-import List.Extra as List
-import Maybe.Extra as Maybe
-import X.Function.Infix exposing (..)
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
 

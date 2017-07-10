@@ -75,18 +75,6 @@ appDrawerModel =
     X.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
 
 
-signInModel =
-    X.Record.field .signInModel (\s b -> { b | signInModel = s })
-
-
-overAppDrawerModel =
-    over appDrawerModel
-
-
-mapOverAppDrawerModel =
-    over appDrawerModel >> Return.map
-
-
 keyboardState =
     X.Record.field .keyboardState (\s b -> { b | keyboardState = s })
 

@@ -70,8 +70,12 @@ subscriptions model =
         |> Sub.map Msg.OnFirebaseMsg
 
 
+signInModel =
+    X.Record.field .signInModel (\s b -> { b | signInModel = s })
+
+
 overSignInModel =
-    X.Record.over Model.signInModel
+    X.Record.over signInModel
 
 
 update :

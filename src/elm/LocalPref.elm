@@ -27,3 +27,9 @@ defaultLocalPref =
     { appDrawer = AppDrawer.Model.default
     , signIn = Firebase.SignIn.default
     }
+
+
+decode encoded =
+    D.decodeValue localPrefDecoder encoded
+        |> Result.mapError (Debug.log "Unable to decode localPref")
+        != defaultLocalPref

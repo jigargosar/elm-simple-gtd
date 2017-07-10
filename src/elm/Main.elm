@@ -4,6 +4,7 @@ import AppDrawer.Main
 import AppDrawer.Model
 import Context
 import Entity exposing (inboxEntity)
+import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode
 import Firebase
 import Firebase.Main
@@ -94,10 +95,9 @@ init flags =
             Firebase.init flags.deviceId
 
         localPref =
-            D.decodeValue LocalPref.localPrefDecoder flags.localPref
-                |> Result.mapError (Debug.log "Unable to decode localPref")
-                != LocalPref.defaultLocalPref
+            LocalPref.decode flags.localPref
 
+        model : AppModel
         model =
             { now = now
             , todoStore = todoStore
@@ -115,7 +115,7 @@ init flags =
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
-            , focusInEntity = inboxEntity
+            , focusInEntity = createContextEntity Context.null
             , timeTracker = Todo.TimeTracker.none
             , keyComboModel =
                 Keyboard.Combo.init

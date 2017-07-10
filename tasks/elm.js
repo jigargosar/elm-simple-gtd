@@ -6,6 +6,7 @@ export const removeUnusedImports = function() {
     run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
     run("elm-make --warn src/elm/Main.elm --output /dev/null 2> /tmp/main-warn.txt")
     LineDriver.read({
+        sync:true,
         in: '/tmp/main-warn.txt',
         line: function (props, parser) {
             const line = parser.line
@@ -30,6 +31,8 @@ export const removeUnusedImports = function() {
             }
         }
     });
+    run("elm-format --yes src/elm/**.elm")
+
 }
 
 export const parseWPD = function() {

@@ -2,15 +2,7 @@ module X.Date exposing (..)
 
 import Date exposing (Date)
 import Date.Extra as Date
-
 import Date.Format as Date
-
-
-
-
-
-
-
 
 
 smartFormat : Date -> Date -> String

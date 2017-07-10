@@ -1,16 +1,13 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
-import ExclusiveMode
 import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
 import Model
-import Model.ExMode
 import Navigation
 import Return
-import Store
 import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)

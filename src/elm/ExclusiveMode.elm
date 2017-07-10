@@ -1,13 +1,10 @@
 module ExclusiveMode exposing (..)
 
-import Entity
 import Entity.Types exposing (Entity(..), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc.EditForm
-import Todo.Menu
 import X.Function.Infix exposing (..)
 import Todo.Form
-import Todo.NewForm
 
 
 none =

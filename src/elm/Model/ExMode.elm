@@ -2,13 +2,11 @@ module Model.ExMode exposing (..)
 
 import Context
 import Document.Types exposing (getDocId)
-import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import LaunchBar.Form
 import Menu
-import Msg
 import Project
 import Return
 import Time exposing (Time)

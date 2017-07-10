@@ -1,12 +1,7 @@
 module Form exposing (..)
 
 import Dict exposing (Dict)
-
-
-
 import X.Function.Infix exposing (..)
-
-
 
 
 type alias Model =

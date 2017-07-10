@@ -1,18 +1,12 @@
 module X.Time exposing (..)
 
 import Date
-
-
-
 import X.Date
 import List.Extra
 import Time exposing (Time)
-
-
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Time.Format
-
 
 
 toHHMMSS : Time -> String

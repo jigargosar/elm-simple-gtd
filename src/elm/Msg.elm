@@ -17,7 +17,6 @@ import X.Function.Infix exposing (..)
 --safe
 
 import Todo.Msg exposing (TodoMsg)
-import Todo.Notification.Model
 import Material
 import X.Keyboard
 import Keyboard.Combo

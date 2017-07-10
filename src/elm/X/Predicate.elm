@@ -3,11 +3,6 @@ module X.Predicate exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-
-
-
-
-
 type alias Predicate a =
     a -> Bool
 

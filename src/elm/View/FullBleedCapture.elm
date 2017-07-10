@@ -1,15 +1,8 @@
 module View.FullBleedCapture exposing (..)
 
-
-
-
-
-
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
 
 
 type alias ViewModel msg =

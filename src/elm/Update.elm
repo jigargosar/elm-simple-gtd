@@ -2,16 +2,13 @@ port module Update exposing (..)
 
 import AppDrawer.Main
 import CommonMsg
-import Context
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
 import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
-import ExclusiveMode
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
-import Firebase.SignIn
 import LaunchBar.Types exposing (LBMsg(OnLBOpen))
 import LocalPref
 import Main.Update
@@ -21,18 +18,12 @@ import Model.Msg
 import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
-import Project
-import Store
 import Stores
-import Todo.NewForm
-import Todo.Notification.Types
-import Todo.Types exposing (TodoAction(TA_MarkDone, TA_TurnReminderOff))
 import X.Keyboard as Keyboard exposing (Key)
 import X.Return as Return
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
-import Todo.Notification.Model
 import Todo.Form
 import Todo.GroupForm
 import Todo.Msg
@@ -45,7 +36,6 @@ import Json.Decode as D exposing (Decoder)
 import LaunchBar.Main
 import Tuple2
 import Types exposing (AppModel, Return, ReturnF)
-import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 

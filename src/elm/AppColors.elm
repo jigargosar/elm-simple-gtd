@@ -5,12 +5,6 @@ import Color.Mixing
 import CssBasics
 
 
-
-
-
-
-
-
 -- base colors
 
 

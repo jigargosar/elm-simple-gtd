@@ -8,7 +8,6 @@ import Entity.Types exposing (Entity, createContextEntity, createProjectEntity)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject))
 import GroupDoc
-import Model
 import Model.ExMode
 import Model.Selection
 import Model.ViewType

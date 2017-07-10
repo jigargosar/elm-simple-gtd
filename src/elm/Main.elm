@@ -1,17 +1,14 @@
 port module Main exposing (..)
 
 import AppDrawer.Main
-import AppDrawer.Model
 import Context
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode
 import Firebase
 import Firebase.Main
-import Firebase.SignIn
 import Keyboard.Combo exposing (combo2)
 import LocalPref
 import Material
-import Model
 import Project
 import Random.Pcg
 import Return
@@ -31,11 +28,7 @@ import Json.Encode as E
 import Msg exposing (Msg)
 import Types exposing (AppModel, Flags, LocalPref, Return, defaultView)
 import X.Random
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
-import ViewType exposing (ViewType(EntityListView))
-import Toolkit.Operators exposing (..)
 
 
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg

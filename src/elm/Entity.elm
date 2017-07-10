@@ -1,6 +1,5 @@
 module Entity exposing (..)
 
-import Context
 import Document
 import Entity.Types exposing (Entity(..), GroupEntityType(..), EntityListViewType(..))
 import X.List as List

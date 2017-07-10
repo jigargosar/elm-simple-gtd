@@ -2,7 +2,6 @@ module Routes exposing (..)
 
 import Entity
 import Maybe.Extra
-import Model as Model
 import Model.ViewType
 import Msg exposing (..)
 import Navigation exposing (Location)
@@ -11,7 +10,6 @@ import RouteUrl exposing (UrlChange)
 import Types exposing (AppModel, defaultView)
 import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
-import Model exposing (..)
 import X.List
 
 

@@ -3,7 +3,6 @@ module Todo.TimeTracker.View exposing (..)
 import Msg
 import X.Time
 import Mat
-import Model
 import Todo.TimeTracker exposing (State(..))
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)

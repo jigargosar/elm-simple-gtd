@@ -1,3 +1,4 @@
+var _jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox = {ctor: 'OnNewTodoForInbox'};
 var _jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode = F2(
 	function (a, b) {
 		return {ctor: 'OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode', _0: a, _1: b};

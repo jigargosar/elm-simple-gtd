@@ -3,7 +3,7 @@ var _jigargosar$elm_simple_gtd$Main$keyboardCombos = {
 	_0: A2(
 		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
 		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
-		_jigargosar$elm_simple_gtd$Msg$onTodoStopRunning),
+		_jigargosar$elm_simple_gtd$Msg$onStopRunningTodo),
 	_1: {
 		ctor: '::',
 		_0: A2(

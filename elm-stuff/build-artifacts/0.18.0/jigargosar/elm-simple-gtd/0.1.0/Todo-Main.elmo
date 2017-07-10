@@ -287,7 +287,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							var _p17 = _p18.action;
 							switch (_p17) {
 								case 'stop':
-									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onTodoStopRunning);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onStopRunningTodo);
 								case 'continue':
 									return _elm_lang$core$Basics$identity;
 								default:
@@ -301,13 +301,18 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
 						_jigargosar$elm_simple_gtd$Stores$findAndSnoozeOverDueTodo,
 						_Fresheyeball$elm_return$Return$andThen(_jigargosar$elm_simple_gtd$Todo_Main$showReminderNotificationCmd)));
-			default:
+			case 'OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode':
 				return function (_p19) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
 							A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, _p8._1, _p8._0))(_p19));
+				};
+			default:
+				return function (_p20) {
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+						A2(_jigargosar$elm_simple_gtd$Todo_Main$map, _jigargosar$elm_simple_gtd$Model_ExMode$activateNewTodoModeWithInboxAsReference, _p20));
 				};
 		}
 	});
@@ -350,7 +355,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 						_0: A2(
 							_elm_lang$core$Time$every,
 							_elm_lang$core$Time$second * 1,
-							function (_p20) {
+							function (_p21) {
 								return _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker;
 							}),
 						_1: {
@@ -358,7 +363,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 							_0: A2(
 								_elm_lang$core$Time$every,
 								_elm_lang$core$Time$second * 30,
-								function (_p21) {
+								function (_p22) {
 									return _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick;
 								}),
 							_1: {ctor: '[]'}

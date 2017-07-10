@@ -38,8 +38,9 @@ var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$onTodoStopRunning = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
+var _jigargosar$elm_simple_gtd$Msg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
 var _jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
+var _jigargosar$elm_simple_gtd$Msg$onNewTodoForInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox);
 var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
@@ -47,15 +48,12 @@ var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg = function (a) {
 	return {ctor: 'OnLaunchBarMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnEntityUpdateMsg = F2(
-	function (a, b) {
-		return {ctor: 'OnEntityUpdateMsg', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
 	return {ctor: 'OnEntityMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewProject);
 var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewContext);
+var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$OnUpdate, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
@@ -98,7 +96,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnNewTodoTextChanged = F2(
 	function (a, b) {
 		return {ctor: 'OnNewTodoTextChanged', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnNewTodoForInbox = {ctor: 'OnNewTodoForInbox'};
 var _jigargosar$elm_simple_gtd$Msg$OnReminderOverlayAction = function (a) {
 	return {ctor: 'OnReminderOverlayAction', _0: a};
 };

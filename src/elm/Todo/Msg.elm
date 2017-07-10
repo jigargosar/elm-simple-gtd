@@ -21,3 +21,4 @@ type TodoMsg
     | OnShowMoreMenu DocId
     | OnProcessPendingNotificationCronTick
     | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId TodoAction
+    | OnNewTodoForInbox

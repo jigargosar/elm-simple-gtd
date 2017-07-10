@@ -2,10 +2,11 @@ port module Todo.Main exposing (..)
 
 import Document
 import DomPorts
+import Entity
 import Entity.Types
 import ExclusiveMode
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMSetup))
-import Model.ExMode
+import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMNewTodo, XMSetup))
+import Model.ExMode exposing (setEditMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
@@ -28,7 +29,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone))
-import Types exposing (ReturnF)
+import Types exposing (ModelF, ReturnF)
 import X.Function exposing (applyMaybeWith)
 
 
@@ -181,6 +182,10 @@ update andThenUpdate now todoMsg =
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(
                 >> andThenUpdate Msg.OnDeactivateEditingMode
+
+        OnNewTodoForInbox ->
+            map (Model.ExMode.activateNewTodoModeWithInboxAsReference)
+                >> DomPorts.autoFocusInputCmd
 
 
 showReminderNotificationCmd ( todo, model ) =

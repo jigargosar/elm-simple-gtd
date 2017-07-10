@@ -154,10 +154,6 @@ updateInner msg =
             Return.andThen Model.ExMode.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
-        OnNewTodoForInbox ->
-            map (Model.ExMode.activateNewTodoModeWithInboxAsReference)
-                >> autoFocusInputCmd
-
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg
 
@@ -313,7 +309,7 @@ onGlobalKeyUp key =
                                     update
 
                             Key.CharI ->
-                                andThenUpdate OnNewTodoForInbox
+                                andThenUpdate Msg.onNewTodoForInbox
 
                             Key.Slash ->
                                 OnLBOpen |> OnLaunchBarMsg |> andThenUpdate

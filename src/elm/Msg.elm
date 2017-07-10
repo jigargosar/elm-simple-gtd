@@ -40,7 +40,6 @@ type Msg
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
     | OnReminderOverlayAction Todo.Notification.Model.Action
-    | OnNewTodoForInbox
     | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
@@ -76,6 +75,10 @@ onStopRunningTodo =
 
 onGotoRunningTodo =
     Todo.Msg.GotoRunning |> OnTodoMsg
+
+
+onNewTodoForInbox =
+    Todo.Msg.OnNewTodoForInbox |> OnTodoMsg
 
 
 onNewProject =

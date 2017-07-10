@@ -2,12 +2,10 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import LineDriver from "line-driver"
 
-export const removeUnusedImports = function() {
-    run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
-    run("elm-make --warn src/elm/Main.elm --output /dev/null 2> /tmp/main-warn.txt")
+function fixWarningsFrom(warnFilePath) {
     LineDriver.read({
-        sync:true,
-        in: '/tmp/main-warn.txt',
+        sync: true,
+        in: warnFilePath,
         line: function (props, parser) {
             const line = parser.line
             // console.log(parser.line);
@@ -30,9 +28,22 @@ export const removeUnusedImports = function() {
                 }
             }
         }
-    });
-    run("elm-format --yes src/elm/**.elm")
+    })
+}
+export const removeUnusedImports = function() {
+    run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
+    // run(`bash -c "shopt -s globstar && rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.*"`)
 
+    const warnFilePath = '/tmp/main-warn.txt'
+
+    run(`elm-make --warn src/elm/L/Main.elm --output /dev/null 2> ${warnFilePath}`)
+    fixWarningsFrom(warnFilePath)
+
+
+    run(`elm-make --warn src/elm/Main.elm --output /dev/null 2> ${warnFilePath}`)
+    fixWarningsFrom(warnFilePath)
+
+    run("elm-format --yes src/elm/**.elm")
 }
 
 export const parseWPD = function() {

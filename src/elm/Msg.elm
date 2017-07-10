@@ -11,6 +11,7 @@ import Time exposing (Time)
 import Todo.FormTypes exposing (AddTodoForm, EditTodoFormAction, TodoEditForm, TodoGroupFrom)
 import Todo.Types exposing (TodoDoc, TodoText)
 import Json.Encode as E
+import X.Function.Infix exposing (..)
 
 
 --safe
@@ -84,3 +85,7 @@ onNewProject =
 
 onNewContext =
     OnEntityMsg Entity.Types.OnNewContext
+
+
+onEntityUpdateMsg =
+    Entity.Types.OnUpdate >>> OnEntityMsg

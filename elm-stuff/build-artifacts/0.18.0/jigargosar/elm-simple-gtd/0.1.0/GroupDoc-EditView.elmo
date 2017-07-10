@@ -1,7 +1,7 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 	var fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
-	var toMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(form.entity);
+	var toMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(form.entity);
 	var fireNameChanged = function (_p0) {
 		return toMsg(
 			_jigargosar$elm_simple_gtd$Entity_Types$OnNameChanged(_p0));

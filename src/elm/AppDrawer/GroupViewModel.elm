@@ -102,7 +102,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Msg.OnEntityUpdateMsg (config.toEntity entity)
+            Msg.onEntityUpdateMsg (config.toEntity entity)
 
         count =
             getTodoListByEntityId id |> List.length

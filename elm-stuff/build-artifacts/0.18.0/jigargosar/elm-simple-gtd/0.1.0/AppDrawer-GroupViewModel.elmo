@@ -7,7 +7,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			config.toEntity(entity));
 		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing);
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);
@@ -73,7 +73,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		title: 'Contexts',
 		className: 'contexts',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedContextsExpanded(model.appDrawerModel),
-		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewContext,
+		onAddClicked: _jigargosar$elm_simple_gtd$Msg$onNewContext,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$contextsColor},
 		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleContextsExpanded),
 		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedContexts),
@@ -110,7 +110,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		title: 'Projects',
 		className: 'projects',
 		showArchived: _jigargosar$elm_simple_gtd$AppDrawer_Model$getArchivedProjectsExpanded(model.appDrawerModel),
-		onAddClicked: _jigargosar$elm_simple_gtd$Msg$OnNewProject,
+		onAddClicked: _jigargosar$elm_simple_gtd$Msg$onNewProject,
 		icon: {name: 'group_work', color: _jigargosar$elm_simple_gtd$AppColors$projectsColor},
 		onToggleExpanded: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleProjectsExpanded),
 		onToggleShowArchived: _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg(_jigargosar$elm_simple_gtd$AppDrawer_Types$OnToggleArchivedProjects),

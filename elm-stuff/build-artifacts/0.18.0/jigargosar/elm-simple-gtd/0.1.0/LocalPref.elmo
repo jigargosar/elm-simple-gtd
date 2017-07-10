@@ -28,3 +28,12 @@ var _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder = A4(
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$decoder,
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$default,
 		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Types$LocalPref)));
+var _jigargosar$elm_simple_gtd$LocalPref$decode = function (encoded) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+		A2(
+			_elm_lang$core$Result$mapError,
+			_elm_lang$core$Debug$log('Unable to decode localPref'),
+			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder, encoded)),
+		_jigargosar$elm_simple_gtd$LocalPref$defaultLocalPref);
+};

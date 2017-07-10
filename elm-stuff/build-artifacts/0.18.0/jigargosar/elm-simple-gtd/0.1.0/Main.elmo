@@ -27,13 +27,7 @@ var _jigargosar$elm_simple_gtd$Main$keyboardCombos = {
 	}
 };
 var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
-	var localPref = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
-		A2(
-			_elm_lang$core$Result$mapError,
-			_elm_lang$core$Debug$log('Unable to decode localPref'),
-			A2(_elm_lang$core$Json_Decode$decodeValue, _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder, flags.localPref)),
-		_jigargosar$elm_simple_gtd$LocalPref$defaultLocalPref);
+	var localPref = _jigargosar$elm_simple_gtd$LocalPref$decode(flags.localPref);
 	var firebaseModel = _jigargosar$elm_simple_gtd$Firebase$init(flags.deviceId);
 	var _p2 = flags;
 	var now = _p2.now;
@@ -75,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		selectedEntityIdSet: _elm_lang$core$Set$empty,
 		appVersion: flags.appVersion,
 		deviceId: flags.deviceId,
-		focusInEntity: _jigargosar$elm_simple_gtd$Entity$inboxEntity,
+		focusInEntity: _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null),
 		timeTracker: _jigargosar$elm_simple_gtd$Todo_TimeTracker$none,
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
 			{toMsg: _jigargosar$elm_simple_gtd$Msg$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Main$keyboardCombos}),

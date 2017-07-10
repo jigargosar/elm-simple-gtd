@@ -1,0 +1,553 @@
+var _jigargosar$elm_simple_gtd$L_View$learnMoreLinks = function () {
+	var linkV = function (_p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('white-text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(_p1._0),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$target('_blank'),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p1._1),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$ul,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center wrap'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: linkV(
+				{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$AppUrl$github, _1: 'Github'}),
+			_1: {
+				ctor: '::',
+				_0: linkV(
+					{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$AppUrl$forumsURL, _1: 'Forums'}),
+				_1: {
+					ctor: '::',
+					_0: linkV(
+						{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$AppUrl$newIssueURL, _1: 'Report Issue'}),
+					_1: {
+						ctor: '::',
+						_0: linkV(
+							{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$AppUrl$changeLogURL, _1: 'Change Log'}),
+						_1: {
+							ctor: '::',
+							_0: linkV(
+								{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$AppUrl$contact, _1: 'Contact us'}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+}();
+var _jigargosar$elm_simple_gtd$L_View$footerView = A2(
+	_elm_lang$html$Html$footer,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('page-footer'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container footer'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('col s12'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _jigargosar$elm_simple_gtd$L_View$learnMoreLinks,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('footer-copyright'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('container'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('© 2017 Copyright simplegtd.com'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _jigargosar$elm_simple_gtd$L_View$primaryFeatures = function () {
+	var list = {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple3',
+			_0: 'palette',
+			_1: 'Minimalistic Design',
+			_2: {
+				ctor: '::',
+				_0: 'Focus on doing with our simple & beautiful interface',
+				_1: {
+					ctor: '::',
+					_0: 'Less is more, that\'s our philosophy',
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple3',
+				_0: 'sync',
+				_1: 'Work seamlessly',
+				_2: {
+					ctor: '::',
+					_0: 'We will sync automatically when you get online',
+					_1: {
+						ctor: '::',
+						_0: 'Additionally you never have to worry about upgrading, it just happens automatically',
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple3',
+					_0: 'nature_people',
+					_1: 'Free and Open Source',
+					_2: {
+						ctor: '::',
+						_0: 'And we are proud of it',
+						_1: {
+							ctor: '::',
+							_0: 'You can contribute, tinker, learn, host yourself, sky is the limit',
+							_1: {
+								ctor: '::',
+								_0: 'No more worries about propriety software',
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var seamlessly = '';
+	var descriptionLine = function (desc) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(desc),
+				_1: {ctor: '[]'}
+			});
+	};
+	var feature = function (_p2) {
+		var _p3 = _p2;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('feature col s12 m4 center-align'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('section'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$Mat$icon(_p3._0),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(_p3._1),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p3._2, descriptionLine)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('row features primary'),
+			_1: {ctor: '[]'}
+		},
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], list, feature));
+}();
+var _jigargosar$elm_simple_gtd$L_View$overview = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('container overview center'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _jigargosar$elm_simple_gtd$L_View$primaryFeatures,
+		_1: {ctor: '[]'}
+	});
+var _jigargosar$elm_simple_gtd$L_View$bannerMock = A2(
+	_elm_lang$html$Html$img,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$src('https://d3ptyyxy2at9ui.cloudfront.net/bc51cd8ccfb3787ee54ad263924a1a0a.jpg'),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('responsive-img'),
+			_1: {ctor: '[]'}
+		}
+	},
+	{ctor: '[]'});
+var _jigargosar$elm_simple_gtd$L_View$banner = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('banner'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('col s12 m6'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h3,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Simply Get To Done'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h5,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Achieve more, with mind like water'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$a,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$getStarted),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Get Started - It\'s Free'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$p,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class(''),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('No sign up required!'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _jigargosar$elm_simple_gtd$L_View$navHeader = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('navbar-fixed'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$nav,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('nav-wrapper container'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('brand-logo'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$landing),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('logo-font-icon'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('logo-content'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('SG'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('app-name'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('S'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('imple'),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('GTD'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$ul,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('right hide-on-med-and-down'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$a,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href(_jigargosar$elm_simple_gtd$AppUrl$getStarted),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Get Started'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _jigargosar$elm_simple_gtd$L_View$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('landing'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$L_View$navHeader,
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$L_View$banner,
+				_1: {
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$L_View$overview,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$L_View$footerView,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};

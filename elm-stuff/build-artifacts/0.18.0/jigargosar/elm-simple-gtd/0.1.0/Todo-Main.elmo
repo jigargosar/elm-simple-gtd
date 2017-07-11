@@ -87,7 +87,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$todoMoreMenu = function (_p9) {
 		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p9));
 };
 var _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+var _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 		A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity, '')));
 var _jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView = F2(
@@ -300,7 +300,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 		switch (_p18.ctor) {
 			case 'UpdateSetupFormTodoText':
 				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p18._1, _p18._0))));
 			case 'OnShowMoreMenu':
@@ -311,14 +311,14 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Todo_Main$positionMoreMenuCmd(_p20),
 						A2(
 							_Fresheyeball$elm_return$Return$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+							_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 								_jigargosar$elm_simple_gtd$Todo_Main$todoMoreMenu(_p20)),
 							_p19));
 				};
 			case 'UpdateReminderForm':
 				return _Fresheyeball$elm_return$Return$map(
 					function (_p21) {
-						return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+						return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(_p21));
 					}(
 						A2(_jigargosar$elm_simple_gtd$Todo_ReminderForm$update, _p18._1, _p18._0)));

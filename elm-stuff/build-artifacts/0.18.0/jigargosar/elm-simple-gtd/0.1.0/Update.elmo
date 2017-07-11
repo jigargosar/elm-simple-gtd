@@ -83,7 +83,10 @@ var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = F2(
 									return function (_p4) {
 										return andThenUpdate(
 											_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$OnLBOpen))(
-											A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar2, _p4));
+											A2(
+												_jigargosar$elm_simple_gtd$Update$map,
+												_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
+												_p4));
 									};
 								default:
 									return _elm_lang$core$Basics$identity;
@@ -261,7 +264,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnUpdateTodoForm':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					function (_p24) {
-						return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+						return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(_p24));
 					}(
 						A2(_jigargosar$elm_simple_gtd$Todo_Form$set, _p9._1, _p9._0)));
@@ -271,7 +274,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p26) {
-								return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+								return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject(_p26));
 							}(
 								A2(_jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState, _p9._1, _p9._0)),
@@ -283,7 +286,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p28) {
-								return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+								return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p28));
 							}(_p9._0),
 							_p27));
@@ -294,7 +297,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p30) {
-								return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+								return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext(_p30));
 							}(
 								A2(_jigargosar$elm_simple_gtd$Todo_GroupForm$setMenuState, _p9._1, _p9._0)),
@@ -303,7 +306,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnUpdateRemoteSyncFormUri':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					function (_p31) {
-						return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
+						return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p31));
 					}(
 						_elm_lang$core$Native_Utils.update(

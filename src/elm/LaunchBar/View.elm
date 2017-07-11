@@ -1,7 +1,7 @@
 module LaunchBar.View exposing (..)
 
 import GroupDoc
-import LaunchBar.Messages exposing (LBMsg(..))
+import LaunchBar.Messages exposing (Msg(..))
 import LaunchBar.Models exposing (..)
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)

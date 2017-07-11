@@ -5,14 +5,14 @@ import DomPorts exposing (autoFocusInputCmd)
 import Entity.Types
 import Fuzzy
 import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
-import LaunchBar.Messages exposing (LBMsg(..))
+import LaunchBar.Messages exposing (Msg(..))
 import LaunchBar.Models exposing (..)
 import Model.ExMode
 import Model.ViewType
 import Msg
 import Project
 import Regex
-import Return
+import Return exposing (Return)
 import String.Extra
 import Time exposing (Time)
 import Types exposing (ReturnF)
@@ -33,9 +33,9 @@ map =
 
 update :
     Config
-    -> LBMsg
+    -> Msg
     -> LaunchBar
-    -> ( LaunchBar, Cmd LBMsg )
+    -> Return Msg LaunchBar
 update config msg =
     Return.singleton
         >> case msg of

@@ -5,7 +5,7 @@ import LaunchBar.Models exposing (SearchItem, LaunchBar)
 import Time exposing (Time)
 
 
-type LBMsg
+type Msg
     = NOOP
     | OnLBEnter SearchItem
     | OnLBInputChanged LaunchBar String

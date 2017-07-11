@@ -1,0 +1,120 @@
+var _jigargosar$elm_simple_gtd$Update_Subscription$keyboardState = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.keyboardState;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{keyboardState: s});
+		}));
+var _jigargosar$elm_simple_gtd$Update_Subscription$updateKeyboardState = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Update_Subscription$keyboardState);
+var _jigargosar$elm_simple_gtd$Update_Subscription$setNow = F2(
+	function (now, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{now: now});
+	});
+var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
+	function (andThenUpdate, key) {
+		return A2(
+			_jigargosar$elm_simple_gtd$X_Return$with,
+			function (_) {
+				return _.editMode;
+			},
+			function (editMode) {
+				var _p0 = {ctor: '_Tuple2', _0: key, _1: editMode};
+				_v0_2:
+				do {
+					if (_p0.ctor === '_Tuple2') {
+						if (_p0._1.ctor === 'XMNone') {
+							var clear = function (_p1) {
+								return A2(
+									andThenUpdate,
+									_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+									A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model_Selection$clearSelection, _p1));
+							};
+							var _p2 = _p0._0;
+							switch (_p2.ctor) {
+								case 'Escape':
+									return clear;
+								case 'CharX':
+									return clear;
+								case 'CharQ':
+									return _Fresheyeball$elm_return$Return$andThen(
+										function (_p3) {
+											return A2(
+												_elm_lang$core$Basics$uncurry,
+												andThenUpdate,
+												A2(
+													_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+													{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference, _1: _Fresheyeball$elm_return$Return$singleton},
+													_p3));
+										});
+								case 'CharI':
+									return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onNewTodoForInbox);
+								case 'Slash':
+									return _jigargosar$elm_simple_gtd$Update_LaunchBar$open(andThenUpdate);
+								default:
+									return _elm_lang$core$Basics$identity;
+							}
+						} else {
+							if (_p0._0.ctor === 'Escape') {
+								return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode);
+							} else {
+								break _v0_2;
+							}
+						}
+					} else {
+						break _v0_2;
+					}
+				} while(false);
+				return _elm_lang$core$Basics$identity;
+			});
+	});
+var _jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg = F2(
+	function (andThenUpdate, subMsg) {
+		var _p4 = subMsg;
+		switch (_p4.ctor) {
+			case 'OnNowChanged':
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Update_Subscription$setNow(_p4._0));
+			case 'OnKeyboardMsg':
+				return function (_p5) {
+					return A2(
+						_jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocusCmd,
+						'.entity-list .focusable-list-item[tabindex=0]',
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Update_Subscription$updateKeyboardState(
+								_jigargosar$elm_simple_gtd$X_Keyboard$update(_p4._0)),
+							_p5));
+				};
+			case 'OnGlobalKeyUp':
+				return A2(_jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp, andThenUpdate, _p4._0);
+			case 'OnPouchDBChange':
+				var afterEntityUpsertOnPouchDBChange = function (entity) {
+					var _p6 = entity;
+					if (_p6.ctor === 'TodoEntity') {
+						return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+							_jigargosar$elm_simple_gtd$Todo_Msg$Upsert(_p6._0));
+					} else {
+						return _jigargosar$elm_simple_gtd$Model$noop;
+					}
+				};
+				return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
+					A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+						A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange, _p4._0, _p4._1),
+						function (_p7) {
+							return A2(
+								_elm_lang$core$Basics$uncurry,
+								andThenUpdate,
+								A3(_Fresheyeball$elm_tuple_extra$Tuple2$mapEach, afterEntityUpsertOnPouchDBChange, _Fresheyeball$elm_return$Return$singleton, _p7));
+						}));
+			default:
+				return _Fresheyeball$elm_return$Return$effect_(
+					A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange, _p4._0, _p4._1));
+		}
+	});

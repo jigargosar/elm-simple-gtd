@@ -1,9 +1,3 @@
-var _jigargosar$elm_simple_gtd$Model$setNow = F2(
-	function (now, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{now: now});
-	});
 var _jigargosar$elm_simple_gtd$Model$getNow = function (_) {
 	return _.now;
 };
@@ -24,17 +18,6 @@ var _jigargosar$elm_simple_gtd$Model$getRemoteSyncForm = function (model) {
 		maybeForm,
 		_jigargosar$elm_simple_gtd$Model$createRemoteSyncForm(model));
 };
-var _jigargosar$elm_simple_gtd$Model$keyComboModel = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
-	function (_) {
-		return _.keyComboModel;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{keyComboModel: s});
-		}));
 var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {

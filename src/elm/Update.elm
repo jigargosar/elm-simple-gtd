@@ -15,8 +15,8 @@ import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
 import Material
-import Model.ExMode
-import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEditForm)
+import Menu
+import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEditForm, updateEditModeM)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -24,6 +24,7 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.NewForm
+import Todo.ReminderForm
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -71,7 +72,7 @@ update andThenUpdate msg =
             Main.Update.update andThenUpdate mainMsg
 
         OnShowMainMenu ->
-            map Model.ExMode.showMainMenu
+            map (setEditMode (Menu.initState |> XMMainMenu))
                 >> Return.command positionMainMenuCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
@@ -113,7 +114,7 @@ update andThenUpdate msg =
             map (setEditMode (Todo.NewForm.setText text form |> XMNewTodo))
 
         OnStartEditingReminder todo ->
-            map (Model.ExMode.startEditingReminder todo)
+            map (updateEditModeM (.now >> Todo.ReminderForm.create todo >> XMEditTodoReminder))
                 >> Return.command (positionScheduleMenuCmd todo)
 
         OnUpdateTodoForm form action ->

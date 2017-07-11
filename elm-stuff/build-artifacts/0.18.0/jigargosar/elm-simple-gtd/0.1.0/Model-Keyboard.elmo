@@ -1,18 +1,17 @@
-var _jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo = function (comboMsg) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Record$overReturn,
-		_jigargosar$elm_simple_gtd$Model$keyComboModel,
-		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
-};
-var _jigargosar$elm_simple_gtd$Model_Keyboard$keyboardState = A2(
+var _jigargosar$elm_simple_gtd$Model_Keyboard$keyComboModel = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
-		return _.keyboardState;
+		return _.keyComboModel;
 	},
 	F2(
 		function (s, b) {
 			return _elm_lang$core$Native_Utils.update(
 				b,
-				{keyboardState: s});
+				{keyComboModel: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model_Keyboard$updateKeyboardState = _jigargosar$elm_simple_gtd$X_Record$over(_jigargosar$elm_simple_gtd$Model_Keyboard$keyboardState);
+var _jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo = function (comboMsg) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$overReturn,
+		_jigargosar$elm_simple_gtd$Model_Keyboard$keyComboModel,
+		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
+};

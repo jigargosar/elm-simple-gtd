@@ -7,7 +7,6 @@ import Fuzzy
 import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
 import LaunchBar.Messages exposing (Msg(..))
 import LaunchBar.Models exposing (..)
-import Model.ExMode
 import Model.ViewType
 import Msg
 import Project

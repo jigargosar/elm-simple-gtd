@@ -1,3 +1,11 @@
+var _jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm = F2(
+	function (f, m) {
+		return _elm_lang$core$Native_Utils.update(
+			m,
+			{
+				maybeTodoEditForm: _elm_lang$core$Maybe$Just(f)
+			});
+	});
 var _jigargosar$elm_simple_gtd$Model_Internal$editMode = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -10,3 +18,11 @@ var _jigargosar$elm_simple_gtd$Model_Internal$editMode = A2(
 				{editMode: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model_Internal$setEditMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model_Internal$editMode);
+var _jigargosar$elm_simple_gtd$Model_Internal$updateEditModeM = F2(
+	function (updater, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_Internal$setEditMode,
+			updater(model),
+			model);
+	});
+var _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);

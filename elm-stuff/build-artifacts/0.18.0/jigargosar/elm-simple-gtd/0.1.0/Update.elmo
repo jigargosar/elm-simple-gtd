@@ -41,108 +41,6 @@ var _jigargosar$elm_simple_gtd$Update$moveFocusBy = A2(
 	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
 	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
-var _jigargosar$elm_simple_gtd$Update$onGlobalKeyUp = F2(
-	function (andThenUpdate, key) {
-		return A2(
-			_jigargosar$elm_simple_gtd$X_Return$with,
-			function (_) {
-				return _.editMode;
-			},
-			function (editMode) {
-				var _p0 = {ctor: '_Tuple2', _0: key, _1: editMode};
-				_v0_2:
-				do {
-					if (_p0.ctor === '_Tuple2') {
-						if (_p0._1.ctor === 'XMNone') {
-							var clear = function (_p1) {
-								return A2(
-									andThenUpdate,
-									_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-									A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Selection$clearSelection, _p1));
-							};
-							var _p2 = _p0._0;
-							switch (_p2.ctor) {
-								case 'Escape':
-									return clear;
-								case 'CharX':
-									return clear;
-								case 'CharQ':
-									return _Fresheyeball$elm_return$Return$andThen(
-										function (_p3) {
-											return A2(
-												_elm_lang$core$Basics$uncurry,
-												andThenUpdate,
-												A2(
-													_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
-													{ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference, _1: _Fresheyeball$elm_return$Return$singleton},
-													_p3));
-										});
-								case 'CharI':
-									return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onNewTodoForInbox);
-								case 'Slash':
-									return _jigargosar$elm_simple_gtd$Update_LaunchBar$open(andThenUpdate);
-								default:
-									return _elm_lang$core$Basics$identity;
-							}
-						} else {
-							if (_p0._0.ctor === 'Escape') {
-								return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode);
-							} else {
-								break _v0_2;
-							}
-						}
-					} else {
-						break _v0_2;
-					}
-				} while(false);
-				return _elm_lang$core$Basics$identity;
-			});
-	});
-var _jigargosar$elm_simple_gtd$Update$onSubMsg = F2(
-	function (andThenUpdate, subMsg) {
-		var _p4 = subMsg;
-		switch (_p4.ctor) {
-			case 'OnNowChanged':
-				return _jigargosar$elm_simple_gtd$Update$map(
-					_jigargosar$elm_simple_gtd$Model$setNow(_p4._0));
-			case 'OnKeyboardMsg':
-				return function (_p5) {
-					return A2(
-						_jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocusCmd,
-						'.entity-list .focusable-list-item[tabindex=0]',
-						A2(
-							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_Keyboard$updateKeyboardState(
-								_jigargosar$elm_simple_gtd$X_Keyboard$update(_p4._0)),
-							_p5));
-				};
-			case 'OnGlobalKeyUp':
-				return A2(_jigargosar$elm_simple_gtd$Update$onGlobalKeyUp, andThenUpdate, _p4._0);
-			case 'OnPouchDBChange':
-				var afterEntityUpsertOnPouchDBChange = function (entity) {
-					var _p6 = entity;
-					if (_p6.ctor === 'TodoEntity') {
-						return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-							_jigargosar$elm_simple_gtd$Todo_Msg$Upsert(_p6._0));
-					} else {
-						return _jigargosar$elm_simple_gtd$Model$noop;
-					}
-				};
-				return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
-					A2(
-						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
-						A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange, _p4._0, _p4._1),
-						function (_p7) {
-							return A2(
-								_elm_lang$core$Basics$uncurry,
-								andThenUpdate,
-								A3(_Fresheyeball$elm_tuple_extra$Tuple2$mapEach, afterEntityUpsertOnPouchDBChange, _Fresheyeball$elm_return$Return$singleton, _p7));
-						}));
-			default:
-				return _Fresheyeball$elm_return$Return$effect_(
-					A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange, _p4._0, _p4._1));
-		}
-	});
 var _jigargosar$elm_simple_gtd$Update$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
 	'syncWithRemotePouch',
 	function (v) {
@@ -155,174 +53,199 @@ var _jigargosar$elm_simple_gtd$Update$persistLocalPref = _elm_lang$core$Native_P
 	});
 var _jigargosar$elm_simple_gtd$Update$update = F2(
 	function (andThenUpdate, msg) {
-		var _p8 = msg;
-		switch (_p8.ctor) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
 			case 'OnCommonMsg':
-				return _jigargosar$elm_simple_gtd$CommonMsg$update(_p8._0);
+				return _jigargosar$elm_simple_gtd$CommonMsg$update(_p0._0);
 			case 'OnSubMsg':
-				return A2(_jigargosar$elm_simple_gtd$Update$onSubMsg, andThenUpdate, _p8._0);
+				return A2(_jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg, andThenUpdate, _p0._0);
 			case 'OnStartExclusiveMode':
-				return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p8._0);
+				return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p0._0);
 			case 'OnMainMsg':
-				return A2(_jigargosar$elm_simple_gtd$Main_Update$update, andThenUpdate, _p8._0);
+				return A2(_jigargosar$elm_simple_gtd$Main_Update$update, andThenUpdate, _p0._0);
 			case 'OnShowMainMenu':
-				return function (_p9) {
+				return function (_p1) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
 						_jigargosar$elm_simple_gtd$Update$positionMainMenuCmd,
-						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_ExMode$showMainMenu, _p9));
+						A2(
+							_jigargosar$elm_simple_gtd$Update$map,
+							_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState)),
+							_p1));
 				};
 			case 'OnEntityListKeyDown':
-				var _p13 = _p8._0;
-				var _p10 = _p8._1.key;
-				switch (_p10.ctor) {
+				var _p5 = _p0._0;
+				var _p2 = _p0._1.key;
+				switch (_p2.ctor) {
 					case 'ArrowUp':
-						return function (_p11) {
+						return function (_p3) {
 							return A2(
 								andThenUpdate,
 								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 								A2(
 									_jigargosar$elm_simple_gtd$Update$map,
-									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, -1, _p13),
-									_p11));
+									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, -1, _p5),
+									_p3));
 						};
 					case 'ArrowDown':
-						return function (_p12) {
+						return function (_p4) {
 							return A2(
 								andThenUpdate,
 								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 								A2(
 									_jigargosar$elm_simple_gtd$Update$map,
-									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, 1, _p13),
-									_p12));
+									A2(_jigargosar$elm_simple_gtd$Update$moveFocusBy, 1, _p5),
+									_p4));
 						};
 					default:
 						return _elm_lang$core$Basics$identity;
 				}
 			case 'OnRemotePouchSync':
-				return function (_p14) {
+				return function (_p6) {
 					return A2(
 						_Fresheyeball$elm_return$Return$effect_,
-						function (_p15) {
+						function (_p7) {
 							return _jigargosar$elm_simple_gtd$Update$syncWithRemotePouch(
 								function (_) {
 									return _.pouchDBRemoteSyncURI;
-								}(_p15));
+								}(_p7));
 						},
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm, _p14));
+						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm, _p6));
 				};
 			case 'OnDeactivateEditingMode':
-				return function (_p16) {
+				return function (_p8) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
-						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode, _p16));
+						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode, _p8));
 				};
 			case 'OnStartEditingContext':
-				var _p18 = _p8._0;
-				return function (_p17) {
+				var _p11 = _p0._0;
+				return function (_p9) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p18),
+						_jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p11),
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$startEditingTodoContext(_p18),
-							_p17));
+							function (_p10) {
+								return A2(
+									_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
+									_jigargosar$elm_simple_gtd$Todo_Form$create(_p11),
+									A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext, _p10));
+							},
+							_p9));
 				};
 			case 'OnStartEditingProject':
-				var _p20 = _p8._0;
-				return function (_p19) {
+				var _p14 = _p0._0;
+				return function (_p12) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p20),
+						_jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p14),
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$startEditingTodoProject(_p20),
-							_p19));
+							function (_p13) {
+								return A2(
+									_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
+									_jigargosar$elm_simple_gtd$Todo_Form$create(_p14),
+									A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject, _p13));
+							},
+							_p12));
 				};
 			case 'OnNewTodoTextChanged':
 				return _jigargosar$elm_simple_gtd$Update$map(
-					A2(_jigargosar$elm_simple_gtd$Model_ExMode$updateNewTodoText, _p8._0, _p8._1));
+					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
+							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p0._1, _p0._0))));
 			case 'OnStartEditingReminder':
-				var _p22 = _p8._0;
-				return function (_p21) {
+				var _p17 = _p0._0;
+				return function (_p15) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p22),
+						_jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p17),
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$startEditingReminder(_p22),
-							_p21));
+							_jigargosar$elm_simple_gtd$Model_Internal$updateEditModeM(
+								function (_p16) {
+									return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(
+										A2(
+											_jigargosar$elm_simple_gtd$Todo_ReminderForm$create,
+											_p17,
+											function (_) {
+												return _.now;
+											}(_p16)));
+								}),
+							_p15));
 				};
 			case 'OnUpdateTodoForm':
-				return function (_p23) {
+				return function (_p18) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$setTodoEditForm(
-								A2(_jigargosar$elm_simple_gtd$Todo_Form$set, _p8._1, _p8._0)),
-							_p23));
+							_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm(
+								A2(_jigargosar$elm_simple_gtd$Todo_Form$set, _p0._1, _p0._0)),
+							_p18));
 				};
 			case 'OnMainMenuStateChanged':
-				return function (_p24) {
+				return function (_p19) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							function (_p25) {
+							function (_p20) {
 								return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
-									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p25));
-							}(_p8._0),
-							_p24));
+									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p20));
+							}(_p0._0),
+							_p19));
 				};
 			case 'OnUpdateRemoteSyncFormUri':
 				return _jigargosar$elm_simple_gtd$Update$map(
-					function (_p26) {
+					function (_p21) {
 						return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p26));
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p21));
 					}(
 						_elm_lang$core$Native_Utils.update(
-							_p8._0,
-							{uri: _p8._1})));
+							_p0._0,
+							{uri: _p0._1})));
 			case 'OnSetViewType':
 				return _jigargosar$elm_simple_gtd$Update$map(
-					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p8._0));
+					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p0._0));
 			case 'OnSaveCurrentForm':
-				return function (_p27) {
+				return function (_p22) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-						A2(_Fresheyeball$elm_return$Return$andThen, _jigargosar$elm_simple_gtd$Model_ExMode$saveCurrentForm, _p27));
+						A2(_Fresheyeball$elm_return$Return$andThen, _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm, _p22));
 				};
 			case 'OnEntityMsg':
-				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p8._0);
+				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);
 			case 'LaunchBarMsgWithNow':
-				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p8._0, _p8._1);
+				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p0._0, _p0._1);
 			case 'LaunchBarMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
-					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow(_p8._0));
+					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow(_p0._0));
 			case 'OnCloseNotification':
 				return _jigargosar$elm_simple_gtd$Update$command(
-					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p8._0));
+					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p0._0));
 			case 'OnKeyCombo':
 				return _Fresheyeball$elm_return$Return$andThen(
-					_jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo(_p8._0));
+					_jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo(_p0._0));
 			case 'OnTodoMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
-					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime(_p8._0));
+					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime(_p0._0));
 			case 'OnTodoMsgWithTime':
-				return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, andThenUpdate, _p8._1, _p8._0);
+				return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, andThenUpdate, _p0._1, _p0._0);
 			case 'OnFirebaseMsg':
-				return A2(_jigargosar$elm_simple_gtd$Firebase_Main$update, andThenUpdate, _p8._0);
+				return A2(_jigargosar$elm_simple_gtd$Firebase_Main$update, andThenUpdate, _p0._0);
 			case 'OnAppDrawerMsg':
-				return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, andThenUpdate, _p8._0);
+				return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, andThenUpdate, _p0._0);
 			case 'OnPersistLocalPref':
 				return _Fresheyeball$elm_return$Return$effect_(
-					function (_p28) {
+					function (_p23) {
 						return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
-							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p28));
+							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p23));
 					});
 			default:
 				return _Fresheyeball$elm_return$Return$andThen(
-					A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Msg$OnMdl, _p8._0));
+					A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Msg$OnMdl, _p0._0));
 		}
 	});

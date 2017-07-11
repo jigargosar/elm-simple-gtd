@@ -4,7 +4,6 @@ import Context
 import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup, XMSignInOverlay))
 import Firebase.SignIn
-import Model.ExMode
 import Model.Internal exposing (deactivateEditingMode, setEditMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)

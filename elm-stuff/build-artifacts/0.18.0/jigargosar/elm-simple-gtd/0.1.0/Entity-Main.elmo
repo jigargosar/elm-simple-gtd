@@ -68,7 +68,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
 			} else {
 				return function (_p8) {
 					return A2(
-						_jigargosar$elm_simple_gtd$Model_ExMode$setTodoEditForm,
+						_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
 						_jigargosar$elm_simple_gtd$Todo_Form$create(_p4._0),
 						A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo, _p8));
 				};

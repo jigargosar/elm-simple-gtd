@@ -1,13 +1,13 @@
 module LaunchBar.Messages exposing (..)
 
 import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
-import LaunchBar.Models exposing (LBEntity, LaunchBar)
+import LaunchBar.Models exposing (SearchItem, LaunchBar)
 import Time exposing (Time)
 
 
 type LBMsg
     = NOOP
-    | OnLBEnter LBEntity
+    | OnLBEnter SearchItem
     | OnLBInputChanged LaunchBar String
     | OnLBOpen
     | OnCancel

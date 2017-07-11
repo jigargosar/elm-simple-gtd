@@ -16,22 +16,22 @@ import Project
 import String.Extra
 
 
-type LBEntity
-    = LBContext ContextDoc
-    | LBProject ProjectDoc
-    | LBProjects
-    | LBContexts
+type SearchItem
+    = SI_Context ContextDoc
+    | SI_Project ProjectDoc
+    | SI_Projects
+    | SI_Contexts
 
 
 type Result
     = Canceled
-    | Selected LBEntity
+    | Selected SearchItem
 
 
 type alias LaunchBar =
     { input : String
     , updatedAt : Time
-    , searchResults : List ( LBEntity, Fuzzy.Result )
+    , searchResults : List ( SearchItem, Fuzzy.Result )
     , maybeResult : Maybe Result
     }
 
@@ -46,4 +46,19 @@ initialModel now =
 
 
 defaultEntity =
-    LBContext Context.null
+    SI_Context Context.null
+
+
+getSearchItemName searchItem =
+    case searchItem of
+        SI_Project project ->
+            Project.getName project
+
+        SI_Context context ->
+            Context.getName context
+
+        SI_Projects ->
+            "Projects"
+
+        SI_Contexts ->
+            "Contexts"

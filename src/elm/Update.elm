@@ -11,7 +11,7 @@ import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
 import LaunchBar.Messages exposing (LBMsg(OnLBOpen))
-import LaunchBar.Models exposing (LBEntity(..))
+import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
 import Material

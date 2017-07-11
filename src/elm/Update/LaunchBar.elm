@@ -1,7 +1,7 @@
 module Update.LaunchBar exposing (..)
 
 import Entity.Types
-import LaunchBar.Models exposing (LBEntity(..))
+import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
 import Msg
 import Return
@@ -26,7 +26,7 @@ update andThenUpdate msg now =
         (\m ->
             let
                 config =
-                    LaunchBar.Models.Config
+                    LaunchBar.Update.Config
                         now
                         (Stores.getActiveProjects m)
                         (Stores.getActiveContexts m)
@@ -43,16 +43,16 @@ update andThenUpdate msg now =
                     >> case result of
                         LaunchBar.Models.Selected entity ->
                             case entity of
-                                LBProject project ->
+                                SI_Project project ->
                                     map (Model.ViewType.switchToProjectView project)
 
-                                LBProjects ->
+                                SI_Projects ->
                                     map Model.ViewType.switchToProjectsView
 
-                                LBContext context ->
+                                SI_Context context ->
                                     map (Model.ViewType.switchToContextView context)
 
-                                LBContexts ->
+                                SI_Contexts ->
                                     map Model.ViewType.switchToContextsView
 
                         LaunchBar.Models.Canceled ->

@@ -5,7 +5,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start = function (exclusiveMod
 			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 				A2(
 					_Fresheyeball$elm_return$Return$map,
-					_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(exclusiveMode),
+					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(exclusiveMode),
 					_p1));
 		};
 	} else {

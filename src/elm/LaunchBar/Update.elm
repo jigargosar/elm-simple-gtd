@@ -16,6 +16,8 @@ import Return
 import String.Extra
 import Time exposing (Time)
 import Types exposing (ReturnF)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 type alias Config =
@@ -84,21 +86,6 @@ updateInputHelp input model now =
         |> (\model -> { model | updatedAt = now })
 
 
-getName entity =
-    case entity of
-        LBProject project ->
-            Project.getName project
-
-        LBContext context ->
-            Context.getName context
-
-        LBProjects ->
-            "Projects"
-
-        LBContexts ->
-            "Contexts"
-
-
 fuzzyMatch needle entity =
     let
         --        boil = String.toLower
@@ -106,7 +93,7 @@ fuzzyMatch needle entity =
             String.Extra.underscored
 
         boiledHay =
-            entity |> getName >> boil
+            entity |> getSearchItemName >> boil
 
         boiledNeedle =
             boil needle
@@ -117,33 +104,16 @@ fuzzyMatch needle entity =
         ( entity, match boiledNeedle boiledHay )
 
 
-fuzzyMatch2 needle hay =
-    let
-        boil =
-            String.Extra.underscored
-
-        boiledHay =
-            hay.getSearchText hay.item |> boil
-
-        boiledNeedle =
-            boil needle
-
-        match n =
-            Fuzzy.match [] [] n
-    in
-        ( hay, match boiledNeedle boiledHay )
-
-
 getFuzzyResults needle { activeContexts, activeProjects } =
     let
         contexts =
-            activeContexts .|> LBContext
+            activeContexts .|> SI_Context
 
         projects =
-            activeProjects .|> LBProject
+            activeProjects .|> SI_Project
 
         all =
-            projects ++ contexts ++ [ LBProjects, LBContexts ]
+            projects ++ contexts ++ [ SI_Projects, SI_Contexts ]
     in
         all
             .|> fuzzyMatch needle

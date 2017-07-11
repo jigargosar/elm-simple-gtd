@@ -46,29 +46,28 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toViewType = F2(
 					_jigargosar$elm_simple_gtd$Todo$getContextId(_p3)));
 		}
 	});
-var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
-	function (entity, model) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Model_ExMode$setEditMode,
-			_jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm(entity),
-			model);
-	});
-var _jigargosar$elm_simple_gtd$Entity_Main$setEditMode = _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode;
 var _jigargosar$elm_simple_gtd$Entity_Main$updateEditModeNameChanged = F3(
 	function (newName, entity, model) {
 		return function () {
 			var _p4 = model.editMode;
 			switch (_p4.ctor) {
 				case 'XMEditContext':
-					return _jigargosar$elm_simple_gtd$Entity_Main$setEditMode(
+					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName, newName, _p4._0));
 				case 'XMEditProject':
-					return _jigargosar$elm_simple_gtd$Entity_Main$setEditMode(
+					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName, newName, _p4._0));
 				default:
 					return _elm_lang$core$Basics$identity;
 			}
 		}()(model);
+	});
+var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
+	function (entity, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_Internal$setEditMode,
+			_jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm(entity),
+			model);
 	});
 var _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext = function (model) {
 	return function (_p5) {

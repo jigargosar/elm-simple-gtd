@@ -1,3 +1,16 @@
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$getSearchItemName = function (searchItem) {
+	var _p0 = searchItem;
+	switch (_p0.ctor) {
+		case 'SI_Project':
+			return _jigargosar$elm_simple_gtd$Project$getName(_p0._0);
+		case 'SI_Context':
+			return _jigargosar$elm_simple_gtd$Context$getName(_p0._0);
+		case 'SI_Projects':
+			return 'Projects';
+		default:
+			return 'Contexts';
+	}
+};
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
 	return {
 		input: '',
@@ -10,15 +23,15 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F4(
 	function (a, b, c, d) {
 		return {input: a, updatedAt: b, searchResults: c, maybeResult: d};
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts = {ctor: 'LBContexts'};
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects = {ctor: 'LBProjects'};
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject = function (a) {
-	return {ctor: 'LBProject', _0: a};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Contexts = {ctor: 'SI_Contexts'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Projects = {ctor: 'SI_Projects'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Project = function (a) {
+	return {ctor: 'SI_Project', _0: a};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext = function (a) {
-	return {ctor: 'LBContext', _0: a};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Context = function (a) {
+	return {ctor: 'SI_Context', _0: a};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Context(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$Selected = function (a) {
 	return {ctor: 'Selected', _0: a};
 };

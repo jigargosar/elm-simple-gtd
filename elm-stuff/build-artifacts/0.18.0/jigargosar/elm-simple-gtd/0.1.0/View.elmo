@@ -238,7 +238,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 	var editModeOverlayView = function () {
 		var _p1 = appModel.editMode;
 		switch (_p1.ctor) {
-			case 'XMLaunchBar2':
+			case 'XMLaunchBar':
 				return A2(
 					_elm_lang$html$Html$map,
 					_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg,

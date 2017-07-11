@@ -6,7 +6,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = function (model) {
 			_elm_lang$core$List$head(model.searchResults),
 			_elm_lang$core$Tuple$first),
 		_jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity);
-	var matchingEntityName = _jigargosar$elm_simple_gtd$LaunchBar_Models$getName(matchingEntity);
+	var matchingEntityName = _jigargosar$elm_simple_gtd$LaunchBar_Models$getSearchItemName(matchingEntity);
 	var keyHandler = function (_p0) {
 		var _p1 = _p0;
 		var _p2 = _p1.key;

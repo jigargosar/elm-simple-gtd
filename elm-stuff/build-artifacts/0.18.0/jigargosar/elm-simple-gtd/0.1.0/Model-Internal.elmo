@@ -1,0 +1,12 @@
+var _jigargosar$elm_simple_gtd$Model_Internal$editMode = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.editMode;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{editMode: s});
+		}));
+var _jigargosar$elm_simple_gtd$Model_Internal$setEditMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model_Internal$editMode);

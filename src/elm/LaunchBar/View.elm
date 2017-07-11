@@ -2,7 +2,7 @@ module LaunchBar.View exposing (..)
 
 import GroupDoc
 import LaunchBar.Messages exposing (LBMsg(..))
-import LaunchBar.Models exposing (LBEntity(LBContext), LaunchBar, getName)
+import LaunchBar.Models exposing (..)
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))
@@ -25,7 +25,7 @@ init model =
                 ?= LaunchBar.Models.defaultEntity
 
         matchingEntityName =
-            matchingEntity |> LaunchBar.Models.getName
+            matchingEntity |> LaunchBar.Models.getSearchItemName
 
         keyHandler { key } =
             case key of

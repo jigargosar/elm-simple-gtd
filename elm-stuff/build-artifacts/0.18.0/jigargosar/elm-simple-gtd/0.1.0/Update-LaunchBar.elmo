@@ -19,12 +19,12 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 							if (_p3.ctor === 'Selected') {
 								var _p4 = _p3._0;
 								switch (_p4.ctor) {
-									case 'LBProject':
+									case 'SI_Project':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
 											_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p4._0));
-									case 'LBProjects':
+									case 'SI_Projects':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
-									case 'LBContext':
+									case 'SI_Context':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
 											_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p4._0));
 									default:
@@ -41,7 +41,7 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 					_Fresheyeball$elm_return$Return$andThen,
 					function (m) {
 						var config = A3(
-							_jigargosar$elm_simple_gtd$LaunchBar_Models$Config,
+							_jigargosar$elm_simple_gtd$LaunchBar_Update$Config,
 							now,
 							_jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
 							_jigargosar$elm_simple_gtd$Stores$getActiveContexts(m));

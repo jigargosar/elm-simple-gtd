@@ -48,7 +48,7 @@ update config msg =
             OnLBInputChanged form text ->
                 map (updateInput config text)
 
-            OnLBOpen ->
+            Open ->
                 map (\m -> { m | maybeResult = Nothing })
                     >> DomPorts.autoFocusInputCmd
 

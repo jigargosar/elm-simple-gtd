@@ -10,7 +10,7 @@ import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
-import LaunchBar.Messages exposing (Msg(OnLBOpen))
+import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
@@ -272,8 +272,7 @@ onGlobalKeyUp andThenUpdate key =
                                 andThenUpdate TodoMsg.onNewTodoForInbox
 
                             Key.Slash ->
-                                map (setEditMode XMLaunchBar)
-                                    >> (OnLBOpen |> LaunchBarMsg |> andThenUpdate)
+                                Update.LaunchBar.open andThenUpdate
 
                             _ ->
                                 identity

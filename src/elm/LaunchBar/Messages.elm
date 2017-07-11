@@ -9,5 +9,5 @@ type Msg
     = NOOP
     | OnLBEnter SearchItem
     | OnLBInputChanged LaunchBar String
-    | OnLBOpen
+    | Open
     | OnCancel

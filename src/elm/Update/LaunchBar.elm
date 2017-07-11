@@ -1,9 +1,12 @@
 module Update.LaunchBar exposing (..)
 
 import Entity.Types
+import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
+import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
-import Msg
+import Model.Internal exposing (setEditMode)
+import Msg exposing (Msg(LaunchBarMsg))
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -58,3 +61,8 @@ update andThenUpdate msg now =
                         LaunchBar.Models.Canceled ->
                             identity
             )
+
+
+open andThenUpdate =
+    map (setEditMode XMLaunchBar)
+        >> (LaunchBar.Messages.Open |> LaunchBarMsg |> andThenUpdate)

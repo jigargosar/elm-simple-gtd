@@ -21,6 +21,7 @@ import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
 import Stores
+import TodoMsg
 import X.Keyboard as Keyboard exposing (Key)
 import X.Return as Return
 import X.Function.Infix exposing (..)
@@ -271,7 +272,7 @@ onGlobalKeyUp andThenUpdate key =
                                )
                             -}
                             Key.CharI ->
-                                andThenUpdate Msg.onNewTodoForInbox
+                                andThenUpdate TodoMsg.onNewTodoForInbox
 
                             Key.Slash ->
                                 OnLBOpen |> OnLaunchBarMsg |> andThenUpdate

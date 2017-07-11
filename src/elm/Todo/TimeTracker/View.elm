@@ -10,6 +10,7 @@ import Todo
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Stores
+import TodoMsg
 
 
 -- View
@@ -25,7 +26,7 @@ createViewModel appModel tracker =
     in
         { displayText = todoText
         , displayTime = X.Time.toHHMMSS elapsedTime
-        , onStop = Msg.onStopRunningTodo
+        , onStop = TodoMsg.onStopRunningTodo
         }
 
 

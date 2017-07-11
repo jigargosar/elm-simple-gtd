@@ -13,6 +13,7 @@ import Todo.Menu
 import Todo.NewForm
 import Todo.Notification.Model
 import Todo.Notification.Types
+import TodoMsg
 import X.Record as Record exposing (set)
 import X.Return
 import X.Time
@@ -163,13 +164,13 @@ update andThenUpdate now todoMsg =
             in
                 (case res.action of
                     "stop" ->
-                        andThenUpdate Msg.onStopRunningTodo
+                        andThenUpdate TodoMsg.onStopRunningTodo
 
                     "continue" ->
                         identity
 
                     _ ->
-                        andThenUpdate Msg.onGotoRunningTodo
+                        andThenUpdate TodoMsg.onGotoRunningTodo
                 )
                     >> andThenUpdate (Msg.OnCloseNotification todoId)
 

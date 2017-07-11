@@ -29,6 +29,7 @@ import Msg exposing (Msg)
 import Types exposing (AppModel, Flags, LocalPref, Return, defaultView)
 import X.Random
 import Json.Encode as E
+import TodoMsg
 
 
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
@@ -125,8 +126,8 @@ init flags =
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
-    [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (Msg.onStopRunningTodo)
-    , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (Msg.onGotoRunningTodo)
+    [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (TodoMsg.onStopRunningTodo)
+    , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (TodoMsg.onGotoRunningTodo)
     ]
 
 

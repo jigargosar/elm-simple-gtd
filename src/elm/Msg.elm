@@ -72,22 +72,6 @@ onSetEntityListView =
     EntityListView >> OnSetViewType
 
 
-onStopRunningTodo =
-    Todo.Msg.StopRunning |> OnTodoMsg
-
-
-onGotoRunningTodo =
-    Todo.Msg.GotoRunning |> OnTodoMsg
-
-
-onReminderOverlayAction =
-    Todo.Msg.OnReminderOverlayAction >> OnTodoMsg
-
-
-onNewTodoForInbox =
-    Todo.Msg.OnNewTodoForInbox |> OnTodoMsg
-
-
 onNewProject =
     OnEntityMsg Entity.Types.OnNewProject
 

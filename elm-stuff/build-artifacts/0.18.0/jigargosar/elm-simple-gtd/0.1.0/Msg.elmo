@@ -39,13 +39,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime = F2(
 var _jigargosar$elm_simple_gtd$Msg$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
-var _jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
-var _jigargosar$elm_simple_gtd$Msg$onNewTodoForInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox);
-var _jigargosar$elm_simple_gtd$Msg$onReminderOverlayAction = function (_p0) {
-	return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-		_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderOverlayAction(_p0));
-};
 var _jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
@@ -62,9 +55,9 @@ var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$onSetEntityListView = function (_p1) {
+var _jigargosar$elm_simple_gtd$Msg$onSetEntityListView = function (_p0) {
 	return _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
-		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p1));
+		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p0));
 };
 var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
 	function (a, b) {

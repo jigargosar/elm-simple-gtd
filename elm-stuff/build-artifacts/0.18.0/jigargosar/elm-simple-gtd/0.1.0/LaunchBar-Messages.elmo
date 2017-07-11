@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$LaunchBar_Messages$OnCancel = {ctor: 'OnCancel'};
-var _jigargosar$elm_simple_gtd$LaunchBar_Messages$OnLBOpen = {ctor: 'OnLBOpen'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Messages$Open = {ctor: 'Open'};
 var _jigargosar$elm_simple_gtd$LaunchBar_Messages$OnLBInputChanged = F2(
 	function (a, b) {
 		return {ctor: 'OnLBInputChanged', _0: a, _1: b};

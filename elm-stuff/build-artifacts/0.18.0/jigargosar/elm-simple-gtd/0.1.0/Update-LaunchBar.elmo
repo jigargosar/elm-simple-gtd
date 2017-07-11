@@ -52,9 +52,19 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 									m,
 									{launchBar: l});
 							},
-							_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg),
+							_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg),
 							A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update, config, msg, m.launchBar));
 					},
 					_p0));
 		};
 	});
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$open = function (andThenUpdate) {
+	return function (_p5) {
+		return andThenUpdate(
+			_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open))(
+			A2(
+				_jigargosar$elm_simple_gtd$Update_LaunchBar$map,
+				_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
+				_p5));
+	};
+};

@@ -241,7 +241,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMLaunchBar':
 				return A2(
 					_elm_lang$html$Html$map,
-					_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg,
+					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg,
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);

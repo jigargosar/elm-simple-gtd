@@ -20,7 +20,6 @@ create todo now =
         { id = Document.getId todo
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
-        , menuState = Menu.initState
         }
 
 
@@ -32,9 +31,6 @@ update action model =
 
         SetTime value ->
             { model | time = value }
-
-        SetMenuState value ->
-            { model | menuState = value }
 
 
 getMaybeTime : EditTodoReminderForm -> Maybe Time

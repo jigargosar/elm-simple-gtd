@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$LaunchBar_Update$fuzzyMatch = F2(
-	function (needle, entity) {
+	function (needle, searchItem) {
 		var match = function (n) {
 			return A3(
 				_tripokey$elm_fuzzy$Fuzzy$match,
@@ -11,11 +11,11 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$fuzzyMatch = F2(
 		var boiledHay = function (_p0) {
 			return boil(
 				_jigargosar$elm_simple_gtd$LaunchBar_Models$getSearchItemName(_p0));
-		}(entity);
+		}(searchItem);
 		var boiledNeedle = boil(needle);
 		return {
 			ctor: '_Tuple2',
-			_0: entity,
+			_0: searchItem,
 			_1: A2(match, boiledNeedle, boiledHay)
 		};
 	});
@@ -108,7 +108,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F2(
 					case 'OnLBInputChanged':
 						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
 							A2(_jigargosar$elm_simple_gtd$LaunchBar_Update$updateInput, config, _p6._1));
-					case 'OnLBOpen':
+					case 'Open':
 						return function (_p7) {
 							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 								A2(

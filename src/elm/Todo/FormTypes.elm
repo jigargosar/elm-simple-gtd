@@ -38,14 +38,12 @@ type alias EditTodoReminderForm =
     { id : DocId
     , date : String
     , time : String
-    , menuState : MenuState
     }
 
 
 type EditTodoReminderFormAction
     = SetDate String
     | SetTime String
-    | SetMenuState MenuState
 
 
 type EditTodoFormAction

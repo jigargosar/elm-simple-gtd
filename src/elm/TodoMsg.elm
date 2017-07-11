@@ -1,4 +1,4 @@
-module TodoMsg exposing (..)
+module TodoMsg exposing (onStopRunningTodo, onGotoRunningTodo, onReminderOverlayAction, onNewTodoForInbox)
 
 import Msg exposing (Msg(OnTodoMsg))
 import Todo.Msg

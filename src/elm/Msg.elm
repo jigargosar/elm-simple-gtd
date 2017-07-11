@@ -80,6 +80,10 @@ onGotoRunningTodo =
     Todo.Msg.GotoRunning |> OnTodoMsg
 
 
+onReminderOverlayAction =
+    Todo.Msg.OnReminderOverlayAction >> OnTodoMsg
+
+
 onNewTodoForInbox =
     Todo.Msg.OnNewTodoForInbox |> OnTodoMsg
 
@@ -98,7 +102,3 @@ onEntityUpdateMsg =
 
 onSwitchToNewUserSetupModeIfNeeded =
     OnMainMsg OnSwitchToNewUserSetupModeIfNeeded
-
-
-onReminderOverlayAction =
-    Todo.Msg.OnReminderOverlayAction >> OnTodoMsg

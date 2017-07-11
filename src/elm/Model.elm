@@ -42,10 +42,6 @@ focusInEntity =
     X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
-keyComboModel =
-    X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
-
-
 getRemoteSyncForm model =
     let
         maybeForm =

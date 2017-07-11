@@ -3,9 +3,7 @@
 import PouchDB from "pouchdb-browser"
 
 //noinspection JSUnresolvedVariable
-const isDevEnv = serviceWorkerOption.isDevEnv
-
-if (isDevEnv) {
+if (WEBPACK_DEV_SERVER) {
     self.addEventListener('install', function (event) {
         console.log("calling skipWaiting")
         return self.skipWaiting()

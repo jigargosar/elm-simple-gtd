@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import SWPrecacheWebpackPlugin from "sw-precache-webpack-plugin"
 
-
+console.log(process.env)
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER === "true"
 
@@ -26,7 +26,6 @@ console.log("webpack: isWebPackDevServer: ", isWebPackDevServer)
 const envOutputDir = isDevEnv ? "dev" : "prod"
 
 const outputPath = path.resolve(__dirname, "build", envOutputDir)
-const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
 
 
 export default {
@@ -62,8 +61,9 @@ export default {
             "window.jQuery": "jquery",
         }),
         new webpack.DefinePlugin({
-            'IS_DEVELOPMENT_ENV': isDevEnv,
+            'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             "process.env": JSON.stringify(process.env),
+            "WEBPACK_DEV_SERVER":isWebPackDevServer
         }),
         new ServiceWorkerWebpackPlugin({
             entry: './notification-sw.js',

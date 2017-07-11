@@ -319,7 +319,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p8._0);
 			case 'OnLaunchBarMsgWithNow':
-				return A3(_jigargosar$elm_simple_gtd$LaunchBar_Main$update, andThenUpdate, _p8._1, _p8._0);
+				return A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update, andThenUpdate, _p8._1, _p8._0);
 			case 'OnLaunchBarMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
 					_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow(_p8._0));

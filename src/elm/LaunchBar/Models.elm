@@ -29,17 +29,17 @@ type alias LaunchBar =
     }
 
 
-type alias ModelF =
+type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-create now =
+initialModel now =
     { input = ""
     , updatedAt = now
     }
 
 
-updateInput : Time -> String -> ModelF
+updateInput : Time -> String -> LaunchBarF
 updateInput now input model =
     let
         newInput =

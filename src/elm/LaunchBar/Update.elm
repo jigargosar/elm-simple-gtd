@@ -1,4 +1,4 @@
-module LaunchBar.Main exposing (..)
+module LaunchBar.Update exposing (..)
 
 import DomPorts exposing (autoFocusInputCmd)
 import Entity.Types

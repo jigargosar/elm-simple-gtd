@@ -1,7 +1,7 @@
 var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 	function (form, m) {
 		var fuzzyResults = A3(
-			_jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults,
+			_jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults,
 			form.input,
 			_jigargosar$elm_simple_gtd$Stores$getActiveContexts(m),
 			_jigargosar$elm_simple_gtd$Stores$getActiveProjects(m));
@@ -11,8 +11,8 @@ var _jigargosar$elm_simple_gtd$LaunchBar_View$init = F2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				_elm_lang$core$List$head(fuzzyResults),
 				_elm_lang$core$Tuple$first),
-			_jigargosar$elm_simple_gtd$LaunchBar$defaultEntity);
-		var matchingEntityName = _jigargosar$elm_simple_gtd$LaunchBar$getName(matchingEntity);
+			_jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity);
+		var matchingEntityName = _jigargosar$elm_simple_gtd$LaunchBar_Models$getName(matchingEntity);
 		var keyHandler = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;

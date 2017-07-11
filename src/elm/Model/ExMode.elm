@@ -106,7 +106,7 @@ setEditMode =
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    setEditMode (LaunchBar.Models.create now |> XMLaunchBar)
+    setEditMode (LaunchBar.Models.initialModel now |> XMLaunchBar)
 
 
 updateLaunchBarInput now text form =

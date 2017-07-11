@@ -1,3 +1,73 @@
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$getName = function (entity) {
+	var _p0 = entity;
+	switch (_p0.ctor) {
+		case 'LBProject':
+			return _jigargosar$elm_simple_gtd$Project$getName(_p0._0);
+		case 'LBContext':
+			return _jigargosar$elm_simple_gtd$Context$getName(_p0._0);
+		case 'LBProjects':
+			return 'Projects';
+		default:
+			return 'Contexts';
+	}
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch = F2(
+	function (needle, entity) {
+		var match = function (n) {
+			return A3(
+				_tripokey$elm_fuzzy$Fuzzy$match,
+				{ctor: '[]'},
+				{ctor: '[]'},
+				n);
+		};
+		var boil = _elm_community$string_extra$String_Extra$underscored;
+		var boiledHay = function (_p1) {
+			return boil(
+				_jigargosar$elm_simple_gtd$LaunchBar_Models$getName(_p1));
+		}(entity);
+		var boiledNeedle = boil(needle);
+		var _p2 = {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$String$toList(needle),
+			_1: entity
+		};
+		_v1_2:
+		do {
+			if (((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._1.ctor === '[]')) {
+				switch (_p2._0._0.valueOf()) {
+					case '#':
+						if (_p2._1.ctor === 'LBProjects') {
+							return {
+								ctor: '_Tuple2',
+								_0: entity,
+								_1: A2(match, boiledNeedle, '#')
+							};
+						} else {
+							break _v1_2;
+						}
+					case '@':
+						if (_p2._1.ctor === 'LBContexts') {
+							return {
+								ctor: '_Tuple2',
+								_0: entity,
+								_1: A2(match, boiledNeedle, '@')
+							};
+						} else {
+							break _v1_2;
+						}
+					default:
+						break _v1_2;
+				}
+			} else {
+				break _v1_2;
+			}
+		} while(false);
+		return {
+			ctor: '_Tuple2',
+			_0: entity,
+			_1: A2(match, boiledNeedle, boiledHay)
+		};
+	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp = F3(
 	function (input, model, now) {
 		return function (model) {
@@ -19,12 +89,12 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput = F3(
 					_elm_lang$core$Basics_ops['++'],
 					'^',
 					_elm_lang$core$Regex$escape(model.input))),
-			function (_p0) {
+			function (_p3) {
 				return '';
 			}) : _elm_lang$core$Basics$identity)(input);
 		return A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp, newInput, model, now);
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$create = function (now) {
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
 	return {input: '', updatedAt: now};
 };
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F2(
@@ -39,3 +109,69 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject = function (a) {
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext = function (a) {
 	return {ctor: 'LBContext', _0: a};
 };
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults = F3(
+	function (needle, activeContexts, activeProjects) {
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext);
+		var all = A2(
+			_elm_lang$core$Basics_ops['++'],
+			projects,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				contexts,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
+						_1: {ctor: '[]'}
+					}
+				}));
+		var entityList = function () {
+			var _p4 = _elm_lang$core$String$toList(needle);
+			_v2_2:
+			do {
+				if (_p4.ctor === '::') {
+					switch (_p4._0.valueOf()) {
+						case '#':
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								{
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
+									_1: {ctor: '[]'}
+								},
+								projects);
+						case '@':
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								{
+									ctor: '::',
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
+									_1: {ctor: '[]'}
+								},
+								contexts);
+						default:
+							break _v2_2;
+					}
+				} else {
+					break _v2_2;
+				}
+			} while(false);
+			return all;
+		}();
+		return A2(
+			_elm_lang$core$List$sortBy,
+			function (_p5) {
+				return function (_) {
+					return _.score;
+				}(
+					_elm_lang$core$Tuple$second(_p5));
+			},
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				entityList,
+				_jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch(needle)));
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);

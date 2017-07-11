@@ -7,6 +7,7 @@ import ExclusiveMode
 import Firebase
 import Firebase.Main
 import Keyboard.Combo exposing (combo2)
+import LaunchBar.Models
 import LocalPref
 import Material
 import Project
@@ -119,6 +120,7 @@ init flags =
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
             , mdl = Material.model
+            , launchBar = LaunchBar.Models.initialModel now
             }
     in
         update Msg.onSwitchToNewUserSetupModeIfNeeded model

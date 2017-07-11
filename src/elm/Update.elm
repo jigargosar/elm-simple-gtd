@@ -36,7 +36,7 @@ import Time exposing (Time)
 import Model exposing (..)
 import Todo.Main
 import Json.Decode as D exposing (Decoder)
-import LaunchBar.Main
+import LaunchBar.Update
 import Tuple2
 import Types exposing (AppModel, ModelF, Return, ReturnF)
 import Toolkit.Helpers exposing (..)
@@ -154,7 +154,7 @@ update andThenUpdate msg =
             Entity.Main.update andThenUpdate entityMsg
 
         OnLaunchBarMsgWithNow msg now ->
-            LaunchBar.Main.update andThenUpdate now msg
+            LaunchBar.Update.update andThenUpdate now msg
 
         OnLaunchBarMsg msg ->
             withNow (OnLaunchBarMsgWithNow msg)

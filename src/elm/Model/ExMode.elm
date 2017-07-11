@@ -11,13 +11,15 @@ import Project
 import Return
 import Time exposing (Time)
 import Todo
-import Todo.GroupForm
+import Todo.Form
 import Todo.NewForm
 import Todo.ReminderForm
 import Types exposing (AppModel, ModelF)
 import Stores
 import Todo.Types exposing (TodoAction(..), TodoDoc)
 import X.Record exposing (set)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 saveCurrentForm model =
@@ -32,9 +34,13 @@ saveCurrentForm model =
                 |> Stores.updateProject form.id
                     (Project.setName form.name)
 
-        XMEditTodo form ->
-            model
-                |> Stores.updateTodo (TA_SetText form.todoText) form.id
+        XMEditTodo ->
+            model.maybeTodoEditForm
+                ?|> (\form ->
+                        model
+                            |> Stores.updateTodo (TA_SetText form.todoText) form.id
+                    )
+                ?= Return.singleton model
 
         XMEditTodoReminder form ->
             model
@@ -96,14 +102,16 @@ updateEditModeM updater model =
     setEditMode (updater model) model
 
 
-startEditingTodoProject : TodoDoc -> ModelF
-startEditingTodoProject todo =
-    setEditMode (Todo.GroupForm.init todo |> XMEditTodoProject)
-
-
 startEditingTodoContext : TodoDoc -> ModelF
 startEditingTodoContext todo =
-    setEditMode (Todo.GroupForm.init todo |> XMEditTodoContext)
+    setEditMode (XMEditTodoContext)
+        >> setTodoEditForm (Todo.Form.create todo)
+
+
+startEditingTodoProject : TodoDoc -> ModelF
+startEditingTodoProject todo =
+    setEditMode (XMEditTodoProject)
+        >> setTodoEditForm (Todo.Form.create todo)
 
 
 showMainMenu =
@@ -112,3 +120,7 @@ showMainMenu =
 
 deactivateEditingMode =
     setEditMode XMNone
+
+
+setTodoEditForm f m =
+    { m | maybeTodoEditForm = Just f }

@@ -5,7 +5,7 @@ module ExclusiveMode.Types exposing (..)
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Models exposing (LaunchBar)
 import Menu.Types exposing (MenuState)
-import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoGroupFrom, TodoMoreMenuForm)
+import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoEditForm, TodoMoreMenuForm)
 
 
 type alias SyncForm =
@@ -14,13 +14,13 @@ type alias SyncForm =
 
 type ExclusiveMode
     = XMNewTodo AddTodoForm
-    | XMEditTodo TodoEditForm
+    | XMEditTodo
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu TodoMoreMenuForm
     | XMEditTodoReminder EditTodoReminderForm
-    | XMEditTodoContext TodoGroupFrom
-    | XMEditTodoProject TodoGroupFrom
+    | XMEditTodoContext
+    | XMEditTodoProject
     | XMLaunchBar
     | XMMainMenu MenuState
     | XMEditSyncSettings SyncForm

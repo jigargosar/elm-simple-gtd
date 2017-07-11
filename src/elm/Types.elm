@@ -20,6 +20,7 @@ import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
 import Json.Encode as E
 import LaunchBar.Models exposing (LaunchBar)
+import Todo.FormTypes exposing (..)
 
 
 type alias LocalPref =
@@ -54,6 +55,7 @@ type alias AppModel =
     , contextStore : ContextStore
     , editMode : ExclusiveMode
     , launchBar : LaunchBar
+    , maybeTodoEditForm : Maybe TodoEditForm
     , mainViewType : ViewType
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String

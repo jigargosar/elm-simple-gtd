@@ -15,7 +15,7 @@ import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
 import Material
-import Model.ExMode
+import Model.ExMode exposing (setTodoEditForm)
 import Model.Internal exposing (setEditMode)
 import Model.Keyboard
 import Model.Msg
@@ -31,7 +31,6 @@ import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
 import Todo.Form
-import Todo.GroupForm
 import Todo.Msg
 import Return
 import Task
@@ -110,31 +109,13 @@ update andThenUpdate msg =
 
         OnUpdateTodoForm form action ->
             map
-                (Todo.Form.set action form
-                    |> XMEditTodo
-                    >> setEditMode
-                )
-
-        OnEditTodoProjectMenuStateChanged form menuState ->
-            map
-                (Todo.GroupForm.setMenuState menuState form
-                    |> XMEditTodoProject
-                    >> setEditMode
-                )
+                (setTodoEditForm (Todo.Form.set action form))
                 >> autoFocusInputCmd
 
         OnMainMenuStateChanged menuState ->
             map
                 (menuState
                     |> XMMainMenu
-                    >> setEditMode
-                )
-                >> autoFocusInputCmd
-
-        OnEditTodoContextMenuStateChanged form menuState ->
-            map
-                (Todo.GroupForm.setMenuState menuState form
-                    |> XMEditTodoContext
                     >> setEditMode
                 )
                 >> autoFocusInputCmd

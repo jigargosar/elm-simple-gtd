@@ -7,7 +7,7 @@ import Entity.Types
 import Material
 import Msg exposing (Msg)
 import Store
-import Todo.FormTypes exposing (EditTodoFormAction(SetText), EditTodoReminderFormAction(SetDate, SetTime), TodoEditForm)
+import Todo.FormTypes exposing (EditTodoFormAction(SetTodoText), EditTodoReminderFormAction(SetTodoReminderDate, SetTodoReminderTime), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import Types exposing (AppModel)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
@@ -367,7 +367,7 @@ edit form appModel =
             form.todoText
 
         fireTextChanged =
-            SetText >> Msg.OnUpdateTodoForm form
+            SetTodoText >> Msg.OnUpdateTodoForm form
 
         fireToggleDelete =
             Msg.onEntityUpdateMsg form.entity Entity.Types.OnToggleDeleted
@@ -446,7 +446,7 @@ reminderPopup form =
                         [ type_ "date"
                         , class "auto-focus"
                         , value form.date
-                        , SetDate >> updateReminderForm |> onChange
+                        , SetTodoReminderDate >> updateReminderForm |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Date" |> text ]
@@ -455,7 +455,7 @@ reminderPopup form =
                     [ Html.input
                         [ type_ "time"
                         , value form.time
-                        , SetTime >> updateReminderForm |> onChange
+                        , SetTodoReminderTime >> updateReminderForm |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Time" |> text ]

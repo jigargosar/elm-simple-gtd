@@ -9,7 +9,7 @@ import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewTyp
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject, XMEditTodo))
 import GroupDoc
 import GroupDoc.EditForm
-import Model.ExMode
+import Model.ExMode exposing (setTodoEditForm)
 import Model.Internal exposing (setEditMode)
 import Model.Selection
 import Model.ViewType
@@ -177,22 +177,19 @@ editContextSetName =
 
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
-    setEditMode (createEntityEditForm entity) model
+    model
+        |> case entity of
+            GroupEntity g ->
+                case g of
+                    ContextEntity context ->
+                        setEditMode (context |> GroupDoc.EditForm.forContext >> XMEditContext)
 
+                    ProjectEntity p ->
+                        setEditMode (p |> GroupDoc.EditForm.forProject >> XMEditProject)
 
-createEntityEditForm : Entity -> ExclusiveMode
-createEntityEditForm entity =
-    case entity of
-        GroupEntity g ->
-            case g of
-                ContextEntity model ->
-                    model |> GroupDoc.EditForm.forContext >> XMEditContext
-
-                ProjectEntity model ->
-                    model |> GroupDoc.EditForm.forProject >> XMEditProject
-
-        TodoEntity model ->
-            model |> Todo.Form.create >> XMEditTodo
+            TodoEntity todo ->
+                setEditMode XMEditTodo
+                    >> setTodoEditForm (Todo.Form.create todo)
 
 
 updateEditModeNameChanged newName entity model =

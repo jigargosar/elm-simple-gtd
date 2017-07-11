@@ -46,34 +46,34 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toViewType = F2(
 					_jigargosar$elm_simple_gtd$Todo$getContextId(_p3)));
 		}
 	});
-var _jigargosar$elm_simple_gtd$Entity_Main$createEntityEditForm = function (entity) {
-	var _p4 = entity;
-	if (_p4.ctor === 'GroupEntity') {
-		var _p5 = _p4._0;
-		if (_p5.ctor === 'ContextEntity') {
-			return function (_p6) {
-				return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
-					_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p6));
-			}(_p5._0);
-		} else {
-			return function (_p7) {
-				return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject(
-					_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject(_p7));
-			}(_p5._0);
-		}
-	} else {
-		return function (_p8) {
-			return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(
-				_jigargosar$elm_simple_gtd$Todo_Form$create(_p8));
-		}(_p4._0);
-	}
-};
 var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
 	function (entity, model) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Model_Internal$setEditMode,
-			_jigargosar$elm_simple_gtd$Entity_Main$createEntityEditForm(entity),
-			model);
+		return function () {
+			var _p4 = entity;
+			if (_p4.ctor === 'GroupEntity') {
+				var _p5 = _p4._0;
+				if (_p5.ctor === 'ContextEntity') {
+					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						function (_p6) {
+							return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
+								_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p6));
+						}(_p5._0));
+				} else {
+					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						function (_p7) {
+							return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject(
+								_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject(_p7));
+						}(_p5._0));
+				}
+			} else {
+				return function (_p8) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Model_ExMode$setTodoEditForm,
+						_jigargosar$elm_simple_gtd$Todo_Form$create(_p4._0),
+						A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo, _p8));
+				};
+			}
+		}()(model);
 	});
 var _jigargosar$elm_simple_gtd$Entity_Main$editContextSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext);
 var _jigargosar$elm_simple_gtd$Entity_Main$editProjectSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject);

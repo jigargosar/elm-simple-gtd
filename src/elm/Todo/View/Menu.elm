@@ -7,14 +7,14 @@ import Model
 import Msg
 import Project
 import Stores
-import Todo.FormTypes exposing (TodoGroupFrom)
 import Html exposing (..)
+import Todo.FormTypes exposing (..)
 import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
 import Types exposing (AppModel)
 
 
-createProjectMenuConfig : TodoGroupFrom -> AppModel -> Menu.Config Project.Model Msg.Msg
+createProjectMenuConfig : TodoEditForm -> AppModel -> Menu.Config Project.Model Msg.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
@@ -25,13 +25,13 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
     , itemView = Project.getName >> text
-    , onStateChanged = Msg.OnEditTodoProjectMenuStateChanged form
+    , onStateChanged = SetTodoMenuState >> Msg.OnUpdateTodoForm form
     , noOp = Model.noop
     , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
 
 
-createContextMenuConfig : TodoGroupFrom -> AppModel -> Menu.Config Context.Model Msg.Msg
+createContextMenuConfig : TodoEditForm -> AppModel -> Menu.Config Context.Model Msg.Msg
 createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId
@@ -42,7 +42,7 @@ createContextMenuConfig ({ todoId, contextId } as form) model =
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName
     , itemView = Context.getName >> text
-    , onStateChanged = Msg.OnEditTodoContextMenuStateChanged form
+    , onStateChanged = SetTodoMenuState >> Msg.OnUpdateTodoForm form
     , noOp = Model.noop
     , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }

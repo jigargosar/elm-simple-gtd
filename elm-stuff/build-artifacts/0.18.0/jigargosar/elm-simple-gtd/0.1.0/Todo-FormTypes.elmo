@@ -1,10 +1,6 @@
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F3(
-	function (a, b, c) {
-		return {id: a, todoText: b, entity: c};
-	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoGroupFrom = F4(
-	function (a, b, c, d) {
-		return {todoId: a, contextId: b, projectId: c, menuState: d};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, todoText: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g};
 	});
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
 	function (a, b) {
@@ -18,12 +14,15 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoReminderForm = F3(
 	function (a, b, c) {
 		return {id: a, date: b, time: c};
 	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTime = function (a) {
-	return {ctor: 'SetTime', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime = function (a) {
+	return {ctor: 'SetTodoReminderTime', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetDate = function (a) {
-	return {ctor: 'SetDate', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate = function (a) {
+	return {ctor: 'SetTodoReminderDate', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetText = function (a) {
-	return {ctor: 'SetText', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
+	return {ctor: 'SetTodoMenuState', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
+	return {ctor: 'SetTodoText', _0: a};
 };

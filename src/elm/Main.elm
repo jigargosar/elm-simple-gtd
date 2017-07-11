@@ -121,6 +121,7 @@ init flags =
             , signInModel = localPref.signIn
             , mdl = Material.model
             , launchBar = LaunchBar.Models.initialModel now
+            , maybeTodoEditForm = Nothing
             }
     in
         update Msg.onSwitchToNewUserSetupModeIfNeeded model

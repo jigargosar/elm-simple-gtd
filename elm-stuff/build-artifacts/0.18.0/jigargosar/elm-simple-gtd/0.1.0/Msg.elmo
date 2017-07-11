@@ -67,14 +67,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm = F2(
 	function (a, b) {
 		return {ctor: 'OnUpdateTodoForm', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnEditTodoContextMenuStateChanged = F2(
-	function (a, b) {
-		return {ctor: 'OnEditTodoContextMenuStateChanged', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Msg$OnEditTodoProjectMenuStateChanged = F2(
-	function (a, b) {
-		return {ctor: 'OnEditTodoProjectMenuStateChanged', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 	function (a, b) {
 		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};

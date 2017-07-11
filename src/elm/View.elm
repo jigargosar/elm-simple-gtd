@@ -24,6 +24,8 @@ import View.GetStarted
 import View.MainMenu
 import View.Mat
 import ViewType exposing (ViewType(EntityListView, SyncView))
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 init model =
@@ -39,6 +41,9 @@ init model =
 
 overlayViews appModel =
     let
+        def =
+            span [] []
+
         editModeOverlayView =
             case appModel.editMode of
                 --                XMLaunchBar form ->
@@ -50,11 +55,15 @@ overlayViews appModel =
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                XMEditTodoContext form ->
-                    Todo.View.contextMenu form appModel
+                XMEditTodoContext ->
+                    appModel.maybeTodoEditForm
+                        ?|> (\form -> Todo.View.contextMenu form appModel)
+                        ?= def
 
-                XMEditTodoProject form ->
-                    Todo.View.projectMenu form appModel
+                XMEditTodoProject ->
+                    appModel.maybeTodoEditForm
+                        ?|> (\form -> Todo.View.projectMenu form appModel)
+                        ?= def
 
                 XMEditTodoReminder form ->
                     Todo.View.reminderPopup form
@@ -71,8 +80,10 @@ overlayViews appModel =
                 XMEditContext form ->
                     GroupDoc.EditView.init form
 
-                XMEditTodo form ->
-                    Todo.View.edit form appModel
+                XMEditTodo ->
+                    appModel.maybeTodoEditForm
+                        ?|> (\form -> Todo.View.edit form appModel)
+                        ?= def
 
                 XMNewTodo form ->
                     Todo.View.new form
@@ -81,7 +92,7 @@ overlayViews appModel =
                     View.MainMenu.init menuState appModel
 
                 _ ->
-                    span [] []
+                    def
     in
         [ Just editModeOverlayView
         , Todo.Notification.View.maybeOverlay appModel

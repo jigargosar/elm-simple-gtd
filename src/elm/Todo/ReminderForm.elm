@@ -26,10 +26,10 @@ create todo now =
 update : EditTodoReminderFormAction -> EditTodoReminderForm -> EditTodoReminderForm
 update action model =
     case action of
-        SetDate value ->
+        SetTodoReminderDate value ->
             { model | date = value }
 
-        SetTime value ->
+        SetTodoReminderTime value ->
             { model | time = value }
 
 

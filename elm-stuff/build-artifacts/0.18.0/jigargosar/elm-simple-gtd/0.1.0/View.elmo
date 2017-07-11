@@ -235,6 +235,10 @@ var _jigargosar$elm_simple_gtd$View$appLayoutView = function (m) {
 		});
 };
 var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
+	var def = A2(
+		_elm_lang$html$Html$span,
+		{ctor: '[]'},
+		{ctor: '[]'});
 	var editModeOverlayView = function () {
 		var _p1 = appModel.editMode;
 		switch (_p1.ctor) {
@@ -246,9 +250,25 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
 			case 'XMEditTodoContext':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p1._0, appModel);
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						appModel.maybeTodoEditForm,
+						function (form) {
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, form, appModel);
+						}),
+					def);
 			case 'XMEditTodoProject':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p1._0, appModel);
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						appModel.maybeTodoEditForm,
+						function (form) {
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, form, appModel);
+						}),
+					def);
 			case 'XMEditTodoReminder':
 				return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p1._0);
 			case 'XMSignInOverlay':
@@ -260,16 +280,21 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMEditContext':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
 			case 'XMEditTodo':
-				return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p1._0, appModel);
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						appModel.maybeTodoEditForm,
+						function (form) {
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, form, appModel);
+						}),
+					def);
 			case 'XMNewTodo':
 				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
 			case 'XMMainMenu':
 				return A2(_jigargosar$elm_simple_gtd$View_MainMenu$init, _p1._0, appModel);
 			default:
-				return A2(
-					_elm_lang$html$Html$span,
-					{ctor: '[]'},
-					{ctor: '[]'});
+				return def;
 		}
 	}();
 	return A2(

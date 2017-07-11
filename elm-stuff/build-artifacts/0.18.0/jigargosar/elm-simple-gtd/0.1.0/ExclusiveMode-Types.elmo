@@ -13,12 +13,8 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 	return {ctor: 'XMMainMenu', _0: a};
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = {ctor: 'XMLaunchBar'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject = function (a) {
-	return {ctor: 'XMEditTodoProject', _0: a};
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext = function (a) {
-	return {ctor: 'XMEditTodoContext', _0: a};
-};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject = {ctor: 'XMEditTodoProject'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder = function (a) {
 	return {ctor: 'XMEditTodoReminder', _0: a};
 };
@@ -31,9 +27,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) 
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
 	return {ctor: 'XMEditContext', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = function (a) {
-	return {ctor: 'XMEditTodo', _0: a};
-};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = {ctor: 'XMEditTodo'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo = function (a) {
 	return {ctor: 'XMNewTodo', _0: a};
 };

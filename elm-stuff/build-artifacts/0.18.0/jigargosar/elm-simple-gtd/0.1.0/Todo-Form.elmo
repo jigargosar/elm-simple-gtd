@@ -1,14 +1,28 @@
+var _jigargosar$elm_simple_gtd$Todo_Form$setMenuState = F2(
+	function (menuState, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{menuState: menuState});
+	});
 var _jigargosar$elm_simple_gtd$Todo_Form$set = F2(
 	function (action, model) {
 		var _p0 = action;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{todoText: _p0._0});
+		if (_p0.ctor === 'SetTodoText') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{todoText: _p0._0});
+		} else {
+			return A2(_jigargosar$elm_simple_gtd$Todo_Form$setMenuState, _p0._0, model);
+		}
 	});
 var _jigargosar$elm_simple_gtd$Todo_Form$create = function (todo) {
 	return {
 		id: _jigargosar$elm_simple_gtd$Document$getId(todo),
 		todoText: _jigargosar$elm_simple_gtd$Todo_Types$getTodoText(todo),
-		entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo)
+		entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo),
+		todoId: _jigargosar$elm_simple_gtd$Document_Types$getDocId(todo),
+		contextId: _jigargosar$elm_simple_gtd$Todo$getContextId(todo),
+		projectId: _jigargosar$elm_simple_gtd$Todo$getProjectId(todo),
+		menuState: _jigargosar$elm_simple_gtd$Menu$initState
 	};
 };

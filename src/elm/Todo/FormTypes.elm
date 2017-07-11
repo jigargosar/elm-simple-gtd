@@ -2,6 +2,7 @@ module Todo.FormTypes exposing (..)
 
 import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity)
+import Menu
 import Menu.Types exposing (MenuState)
 import Todo.Types exposing (TodoDoc, TodoText)
 
@@ -10,11 +11,7 @@ type alias TodoEditForm =
     { id : DocId
     , todoText : TodoText
     , entity : Entity
-    }
-
-
-type alias TodoGroupFrom =
-    { todoId : DocId
+    , todoId : DocId
     , contextId : DocId
     , projectId : DocId
     , menuState : MenuState
@@ -41,9 +38,10 @@ type alias EditTodoReminderForm =
 
 
 type EditTodoReminderFormAction
-    = SetDate String
-    | SetTime String
+    = SetTodoReminderDate String
+    | SetTodoReminderTime String
 
 
 type EditTodoFormAction
-    = SetText String
+    = SetTodoText String
+    | SetTodoMenuState Menu.State

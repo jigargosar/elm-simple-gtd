@@ -8,7 +8,7 @@ import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
-import Todo.FormTypes exposing (AddTodoForm, EditTodoFormAction, TodoEditForm, TodoGroupFrom)
+import Todo.FormTypes exposing (AddTodoForm, EditTodoFormAction, TodoEditForm, TodoEditForm)
 import Todo.Types exposing (TodoDoc, TodoText)
 import Json.Encode as E
 import X.Function.Infix exposing (..)
@@ -50,8 +50,6 @@ type Msg
     | OnStartEditingProject TodoDoc
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnEditTodoProjectMenuStateChanged TodoGroupFrom MenuState
-    | OnEditTodoContextMenuStateChanged TodoGroupFrom MenuState
     | OnUpdateTodoForm TodoEditForm EditTodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType

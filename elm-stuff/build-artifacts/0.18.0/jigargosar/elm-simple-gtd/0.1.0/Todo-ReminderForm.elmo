@@ -18,7 +18,7 @@ var _jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime = function (_p0) {
 var _jigargosar$elm_simple_gtd$Todo_ReminderForm$update = F2(
 	function (action, model) {
 		var _p3 = action;
-		if (_p3.ctor === 'SetDate') {
+		if (_p3.ctor === 'SetTodoReminderDate') {
 			return _elm_lang$core$Native_Utils.update(
 				model,
 				{date: _p3._0});

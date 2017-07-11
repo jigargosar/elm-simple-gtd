@@ -156,11 +156,11 @@ update andThenUpdate msg =
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg
 
-        OnLaunchBarMsgWithNow msg now ->
+        LaunchBarMsgWithNow msg now ->
             Update.LaunchBar.update andThenUpdate msg now
 
-        OnLaunchBarMsg msg ->
-            withNow (OnLaunchBarMsgWithNow msg)
+        LaunchBarMsg msg ->
+            withNow (LaunchBarMsgWithNow msg)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
@@ -273,7 +273,7 @@ onGlobalKeyUp andThenUpdate key =
 
                             Key.Slash ->
                                 map (setEditMode XMLaunchBar)
-                                    >> (OnLBOpen |> OnLaunchBarMsg |> andThenUpdate)
+                                    >> (OnLBOpen |> LaunchBarMsg |> andThenUpdate)
 
                             _ ->
                                 identity

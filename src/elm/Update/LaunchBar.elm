@@ -35,7 +35,7 @@ update andThenUpdate msg now =
                     |> LaunchBar.Update.update config msg
                     |> Tuple2.mapEach
                         (\l -> { m | launchBar = l })
-                        (Cmd.map Msg.OnLaunchBarMsg)
+                        (Cmd.map Msg.LaunchBarMsg)
         )
         >> X.Return.withMaybe (.launchBar >> .maybeResult)
             (\result ->

@@ -86,14 +86,14 @@ updateInputHelp input model now =
         |> (\model -> { model | updatedAt = now })
 
 
-fuzzyMatch needle entity =
+fuzzyMatch needle searchItem =
     let
         --        boil = String.toLower
         boil =
             String.Extra.underscored
 
         boiledHay =
-            entity |> getSearchItemName >> boil
+            searchItem |> getSearchItemName >> boil
 
         boiledNeedle =
             boil needle
@@ -101,7 +101,7 @@ fuzzyMatch needle entity =
         match n =
             Fuzzy.match [] [] n
     in
-        ( entity, match boiledNeedle boiledHay )
+        ( searchItem, match boiledNeedle boiledHay )
 
 
 getFuzzyResults needle { activeContexts, activeProjects } =

@@ -45,7 +45,7 @@ overlayViews appModel =
                 --                    LaunchBar.View.init form appModel
                 XMLaunchBar ->
                     LaunchBar.View.init appModel.launchBar
-                        |> Html.map Msg.OnLaunchBarMsg
+                        |> Html.map Msg.LaunchBarMsg
 
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model

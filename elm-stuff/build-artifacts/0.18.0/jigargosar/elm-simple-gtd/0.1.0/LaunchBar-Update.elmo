@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$LaunchBar_Update$map = _Fresheyeball$elm_return$Return$map;
-var _jigargosar$elm_simple_gtd$LaunchBar_Update$update2 = F2(
+var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F2(
 	function (config, msg) {
 		return function (_p0) {
 			return function () {
@@ -11,13 +11,14 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update2 = F2(
 								return _elm_lang$core$Native_Utils.update(
 									model,
 									{
-										selectedEntity: _elm_lang$core$Maybe$Just(_p1._0)
+										maybeResult: _elm_lang$core$Maybe$Just(
+											_jigargosar$elm_simple_gtd$LaunchBar_Models$Selected(_p1._0))
 									});
 							});
 					case 'OnLBInputChanged':
 						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
 							A2(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput, config, _p1._1));
-					default:
+					case 'OnLBOpen':
 						return function (_p2) {
 							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 								A2(
@@ -25,10 +26,19 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update2 = F2(
 									function (m) {
 										return _elm_lang$core$Native_Utils.update(
 											m,
-											{selectedEntity: _elm_lang$core$Maybe$Nothing});
+											{maybeResult: _elm_lang$core$Maybe$Nothing});
 									},
 									_p2));
 						};
+					default:
+						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
+							function (m) {
+								return _elm_lang$core$Native_Utils.update(
+									m,
+									{
+										maybeResult: _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$LaunchBar_Models$Canceled)
+									});
+							});
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p0));

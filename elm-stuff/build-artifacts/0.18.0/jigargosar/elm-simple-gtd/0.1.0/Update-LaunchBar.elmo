@@ -1,0 +1,60 @@
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$map = _Fresheyeball$elm_return$Return$map;
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
+	function (andThenUpdate, msg, now) {
+		return function (_p0) {
+			return A3(
+				_jigargosar$elm_simple_gtd$X_Return$withMaybe,
+				function (_p1) {
+					return function (_) {
+						return _.maybeResult;
+					}(
+						function (_) {
+							return _.launchBar;
+						}(_p1));
+				},
+				function (result) {
+					return function (_p2) {
+						return function () {
+							var _p3 = result;
+							if (_p3.ctor === 'Selected') {
+								var _p4 = _p3._0;
+								switch (_p4.ctor) {
+									case 'LBProject':
+										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+											_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p4._0));
+									case 'LBProjects':
+										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
+									case 'LBContext':
+										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+											_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p4._0));
+									default:
+										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
+								}
+							} else {
+								return _elm_lang$core$Basics$identity;
+							}
+						}()(
+							A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p2));
+					};
+				},
+				A2(
+					_Fresheyeball$elm_return$Return$andThen,
+					function (m) {
+						var config = A3(
+							_jigargosar$elm_simple_gtd$LaunchBar_Models$Config,
+							now,
+							_jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
+							_jigargosar$elm_simple_gtd$Stores$getActiveContexts(m));
+						return A3(
+							_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
+							function (l) {
+								return _elm_lang$core$Native_Utils.update(
+									m,
+									{launchBar: l});
+							},
+							_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg),
+							A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update, config, msg, m.launchBar));
+					},
+					_p0));
+		};
+	});

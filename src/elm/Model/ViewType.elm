@@ -33,6 +33,10 @@ switchToContextsView =
     EntityListView Entity.Types.ContextsView |> switchToView
 
 
+switchToProjectsView =
+    EntityListView Entity.Types.ProjectsView |> switchToView
+
+
 setEntityListViewType =
     EntityListView >> switchToView
 

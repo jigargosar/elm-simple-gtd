@@ -67,7 +67,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
 		input: '',
 		updatedAt: now,
 		searchResults: {ctor: '[]'},
-		selectedEntity: _elm_lang$core$Maybe$Nothing
+		maybeResult: _elm_lang$core$Maybe$Nothing
 	};
 };
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$SearchItem = F2(
@@ -79,7 +79,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI = function (e) {
 };
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F4(
 	function (a, b, c, d) {
-		return {input: a, updatedAt: b, searchResults: c, selectedEntity: d};
+		return {input: a, updatedAt: b, searchResults: c, maybeResult: d};
 	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$Config = F3(
 	function (a, b, c) {
@@ -189,3 +189,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults2 = F3(
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity2 = _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI(
 	_jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null));
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$Selected = function (a) {
+	return {ctor: 'Selected', _0: a};
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$Canceled = {ctor: 'Canceled'};

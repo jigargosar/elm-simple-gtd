@@ -2,7 +2,7 @@ module LaunchBar.View exposing (..)
 
 import GroupDoc
 import LaunchBar.Messages exposing (LBMsg(..))
-import LaunchBar.Models exposing (LBEntity(LBContext), SearchItem, getName)
+import LaunchBar.Models exposing (LBEntity(LBContext), LaunchBar, SearchItem, getName)
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))
@@ -16,14 +16,10 @@ import Model
 import Stores
 
 
-init form m =
+init model =
     let
-        fuzzyResults =
-            --            LaunchBar.Models.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
-            form.searchResults
-
         matchingEntity =
-            fuzzyResults
+            model.searchResults
                 |> List.head
                 ?|> Tuple.first
                 ?= LaunchBar.Models.defaultEntity
@@ -49,15 +45,15 @@ init form m =
                 , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (OnLBInputChanged form >> Msg.OnLaunchBarMsg)
+                , onInput (OnLBInputChanged model >> Msg.OnLaunchBarMsg)
                 ]
                 [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
-                , div [ class "no-wrap input typing" ] [ text form.input ]
+                , div [ class "no-wrap input typing" ] [ text model.input ]
                 , input
                     [ id "hidden-input"
                     , class "auto-focus"
                     , autofocus True
-                    , value form.input
+                    , value model.input
                     ]
                     []
                 ]

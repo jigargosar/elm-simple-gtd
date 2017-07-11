@@ -23,6 +23,7 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import TodoMsg
+import Update.LaunchBar
 import X.Keyboard as Keyboard exposing (Key)
 import X.Return as Return
 import X.Function.Infix exposing (..)
@@ -155,44 +156,7 @@ update andThenUpdate msg =
             Entity.Main.update andThenUpdate entityMsg
 
         OnLaunchBarMsgWithNow msg now ->
-            Return.andThen
-                (\m ->
-                    let
-                        config =
-                            LaunchBar.Models.Config
-                                now
-                                (Stores.getActiveProjects m)
-                                (Stores.getActiveContexts m)
-                    in
-                        m.launchBar
-                            |> LaunchBar.Update.update2 config msg
-                            |> Tuple2.mapEach
-                                (\l -> { m | launchBar = l })
-                                (Cmd.map OnLaunchBarMsg)
-                )
-                >> Return.andThen
-                    (\m ->
-                        m
-                            |> Return.singleton
-                            >> case m.launchBar.selectedEntity of
-                                Just entity ->
-                                    andThenUpdate Msg.OnDeactivateEditingMode
-                                        >> case entity of
-                                            LBProject project ->
-                                                map (Model.ViewType.switchToProjectView project)
-
-                                            LBProjects ->
-                                                map (Model.ViewType.setEntityListViewType Entity.Types.ProjectsView)
-
-                                            LBContext context ->
-                                                map (Model.ViewType.switchToContextView context)
-
-                                            LBContexts ->
-                                                map (Model.ViewType.setEntityListViewType Entity.Types.ContextsView)
-
-                                Nothing ->
-                                    identity
-                    )
+            Update.LaunchBar.update andThenUpdate msg now
 
         OnLaunchBarMsg msg ->
             withNow (OnLaunchBarMsgWithNow msg)

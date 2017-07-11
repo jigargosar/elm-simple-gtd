@@ -322,61 +322,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p9._0);
 			case 'OnLaunchBarMsgWithNow':
-				return function (_p33) {
-					return A2(
-						_Fresheyeball$elm_return$Return$andThen,
-						function (m) {
-							return function (_p34) {
-								return function () {
-									var _p35 = m.launchBar.selectedEntity;
-									if (_p35.ctor === 'Just') {
-										return function (_p36) {
-											return function () {
-												var _p37 = _p35._0;
-												switch (_p37.ctor) {
-													case 'LBProject':
-														return _jigargosar$elm_simple_gtd$Update$map(
-															_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p37._0));
-													case 'LBProjects':
-														return _jigargosar$elm_simple_gtd$Update$map(
-															_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
-													case 'LBContext':
-														return _jigargosar$elm_simple_gtd$Update$map(
-															_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p37._0));
-													default:
-														return _jigargosar$elm_simple_gtd$Update$map(
-															_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
-												}
-											}()(
-												A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p36));
-										};
-									} else {
-										return _elm_lang$core$Basics$identity;
-									}
-								}()(
-									_Fresheyeball$elm_return$Return$singleton(_p34));
-							}(m);
-						},
-						A2(
-							_Fresheyeball$elm_return$Return$andThen,
-							function (m) {
-								var config = A3(
-									_jigargosar$elm_simple_gtd$LaunchBar_Models$Config,
-									_p9._1,
-									_jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
-									_jigargosar$elm_simple_gtd$Stores$getActiveContexts(m));
-								return A3(
-									_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
-									function (l) {
-										return _elm_lang$core$Native_Utils.update(
-											m,
-											{launchBar: l});
-									},
-									_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsg),
-									A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update2, config, _p9._0, m.launchBar));
-							},
-							_p33));
-				};
+				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p9._0, _p9._1);
 			case 'OnLaunchBarMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
 					_jigargosar$elm_simple_gtd$Msg$OnLaunchBarMsgWithNow(_p9._0));
@@ -397,9 +343,9 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, andThenUpdate, _p9._0);
 			case 'OnPersistLocalPref':
 				return _Fresheyeball$elm_return$Return$effect_(
-					function (_p38) {
+					function (_p33) {
 						return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
-							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p38));
+							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p33));
 					});
 			default:
 				return _Fresheyeball$elm_return$Return$andThen(

@@ -9,3 +9,4 @@ type LBMsg
     = OnLBEnter LBEntity
     | OnLBInputChanged LaunchBar String
     | OnLBOpen
+    | OnCancel

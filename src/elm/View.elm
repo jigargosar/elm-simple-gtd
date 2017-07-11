@@ -44,7 +44,7 @@ overlayViews appModel =
                 --                XMLaunchBar form ->
                 --                    LaunchBar.View.init form appModel
                 XMLaunchBar2 ->
-                    LaunchBar.View.init appModel.launchBar appModel
+                    LaunchBar.View.init appModel.launchBar
 
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model

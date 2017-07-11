@@ -29,11 +29,16 @@ type alias SearchItem a =
     }
 
 
+type Result
+    = Canceled
+    | Selected LBEntity
+
+
 type alias LaunchBar =
     { input : String
     , updatedAt : Time
     , searchResults : List ( LBEntity, Fuzzy.Result )
-    , selectedEntity : Maybe LBEntity
+    , maybeResult : Maybe Result
     }
 
 
@@ -46,7 +51,7 @@ initialModel now =
     { input = ""
     , updatedAt = now
     , searchResults = []
-    , selectedEntity = Nothing
+    , maybeResult = Nothing
     }
 
 

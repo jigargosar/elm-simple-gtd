@@ -13,13 +13,13 @@ var _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode = _jigargosar$elm_simple
 var _jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar = function (now) {
 	return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-			_jigargosar$elm_simple_gtd$LaunchBar_Form$create(now)));
+			_jigargosar$elm_simple_gtd$LaunchBar_Models$create(now)));
 };
 var _jigargosar$elm_simple_gtd$Model_ExMode$updateLaunchBarInput = F3(
 	function (now, text, form) {
 		return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 			_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-				A3(_jigargosar$elm_simple_gtd$LaunchBar_Form$updateInput, now, text, form)));
+				A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput, now, text, form)));
 	});
 var _jigargosar$elm_simple_gtd$Model_ExMode$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return A2(

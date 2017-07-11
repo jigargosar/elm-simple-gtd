@@ -1,10 +1,10 @@
 module LaunchBar.View exposing (..)
 
 import LaunchBar.Messages exposing (LBMsg(..))
+import LaunchBar.Models
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))
-import LaunchBar
 import Model
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -18,16 +18,16 @@ import Stores
 init form m =
     let
         fuzzyResults =
-            LaunchBar.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
+            LaunchBar.Models.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
 
         matchingEntity =
             fuzzyResults
                 |> List.head
                 ?|> Tuple.first
-                ?= LaunchBar.defaultEntity
+                ?= LaunchBar.Models.defaultEntity
 
         matchingEntityName =
-            matchingEntity |> LaunchBar.getName
+            matchingEntity |> LaunchBar.Models.getName
 
         keyHandler { key } =
             case key of

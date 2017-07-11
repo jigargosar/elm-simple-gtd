@@ -6,7 +6,8 @@ import Time exposing (Time)
 
 
 type LBMsg
-    = OnLBEnter LBEntity
+    = NOOP
+    | OnLBEnter LBEntity
     | OnLBInputChanged LaunchBar String
     | OnLBOpen
     | OnCancel

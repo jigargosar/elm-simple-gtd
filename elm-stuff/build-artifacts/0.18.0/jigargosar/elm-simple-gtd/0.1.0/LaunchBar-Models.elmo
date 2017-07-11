@@ -70,13 +70,6 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
 		maybeResult: _elm_lang$core$Maybe$Nothing
 	};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$SearchItem = F2(
-	function (a, b) {
-		return {getSearchText: a, item: b};
-	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI = function (e) {
-	return A2(_jigargosar$elm_simple_gtd$LaunchBar_Models$SearchItem, _jigargosar$elm_simple_gtd$LaunchBar_Models$getName, e);
-};
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F4(
 	function (a, b, c, d) {
 		return {input: a, updatedAt: b, searchResults: c, maybeResult: d};
@@ -149,46 +142,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput = F3(
 		}(
 			A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp, newInput, model, now));
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults2 = F3(
-	function (needle, activeContexts, activeProjects) {
-		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject);
-		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext);
-		var all = A2(
-			_elm_lang$core$Basics_ops['++'],
-			projects,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				contexts,
-				{
-					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
-					_1: {
-						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
-						_1: {ctor: '[]'}
-					}
-				}));
-		return A2(
-			_elm_lang$core$List$sortBy,
-			function (_p6) {
-				return function (_) {
-					return _.score;
-				}(
-					_elm_lang$core$Tuple$second(_p6));
-			},
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				all,
-				function (_p7) {
-					return A2(
-						_jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch2,
-						needle,
-						_jigargosar$elm_simple_gtd$LaunchBar_Models$toSI(_p7));
-				}));
-	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity2 = _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI(
-	_jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null));
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$Selected = function (a) {
 	return {ctor: 'Selected', _0: a};
 };

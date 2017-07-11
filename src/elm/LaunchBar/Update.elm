@@ -24,6 +24,9 @@ update :
 update config msg =
     Return.singleton
         >> case msg of
+            NOOP ->
+                identity
+
             OnLBEnter entity ->
                 map (\model -> { model | maybeResult = Selected entity |> Just })
 

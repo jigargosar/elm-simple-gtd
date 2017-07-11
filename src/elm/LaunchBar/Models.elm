@@ -23,12 +23,6 @@ type LBEntity
     | LBContexts
 
 
-type alias SearchItem a =
-    { getSearchText : a -> String
-    , item : a
-    }
-
-
 type Result
     = Canceled
     | Selected LBEntity
@@ -148,47 +142,11 @@ getFuzzyResults needle { activeContexts, activeProjects } =
 
         all =
             projects ++ contexts ++ [ LBProjects, LBContexts ]
-
-        {- entityList =
-           case String.toList needle of
-               '#' :: xs ->
-                   [ LBProjects ] ++ projects
-
-               '@' :: xs ->
-                   [ LBContexts ] ++ contexts
-
-               _ ->
-                   all
-        -}
     in
         all
             .|> fuzzyMatch needle
             |> List.sortBy (Tuple.second >> (.score))
 
 
-getFuzzyResults2 needle activeContexts activeProjects =
-    let
-        contexts =
-            activeContexts .|> LBContext
-
-        projects =
-            activeProjects .|> LBProject
-
-        all =
-            projects ++ contexts ++ [ LBProjects, LBContexts ]
-    in
-        all
-            .|> (toSI >> fuzzyMatch2 needle)
-            |> List.sortBy (Tuple.second >> (.score))
-
-
-toSI =
-    (\e -> SearchItem getName e)
-
-
 defaultEntity =
     LBContext Context.null
-
-
-defaultEntity2 =
-    LBContext Context.null |> toSI

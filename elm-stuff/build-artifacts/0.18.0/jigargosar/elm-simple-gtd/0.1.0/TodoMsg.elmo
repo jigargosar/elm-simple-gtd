@@ -1,0 +1,7 @@
+var _jigargosar$elm_simple_gtd$TodoMsg$onNewTodoForInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox);
+var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p0) {
+	return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+		_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderOverlayAction(_p0));
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);

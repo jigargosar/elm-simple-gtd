@@ -379,11 +379,11 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							var _p27 = _p28.action;
 							switch (_p27) {
 								case 'stop':
-									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onStopRunningTodo);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStopRunningTodo);
 								case 'continue':
 									return _elm_lang$core$Basics$identity;
 								default:
-									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$onGotoRunningTodo);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onGotoRunningTodo);
 							}
 						}()(_p26));
 				};

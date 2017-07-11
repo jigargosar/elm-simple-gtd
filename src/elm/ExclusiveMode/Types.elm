@@ -21,8 +21,7 @@ type ExclusiveMode
     | XMEditTodoReminder EditTodoReminderForm
     | XMEditTodoContext TodoGroupFrom
     | XMEditTodoProject TodoGroupFrom
-    | XMLaunchBar LaunchBar
-    | XMLaunchBar2
+    | XMLaunchBar
     | XMMainMenu MenuState
     | XMEditSyncSettings SyncForm
     | XMSignInOverlay

@@ -7,6 +7,7 @@ import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import LaunchBar.Models
 import Menu
+import Model.Internal exposing (setEditMode)
 import Project
 import Return
 import Time exposing (Time)
@@ -75,29 +76,6 @@ saveNewTodoForm form model =
                     todoId
                     >> Tuple.mapFirst (Stores.setFocusInEntityFromTodoId todoId)
             )
-
-
-editMode =
-    X.Record.field .editMode (\s b -> { b | editMode = s })
-
-
-setEditMode : ExclusiveMode -> ModelF
-setEditMode =
-    set editMode
-
-
-activateLaunchBar : Time -> ModelF
-activateLaunchBar now =
-    setEditMode (LaunchBar.Models.initialModel now |> XMLaunchBar)
-
-
-activateLaunchBar2 : ModelF
-activateLaunchBar2 =
-    setEditMode (XMLaunchBar2)
-
-
-updateLaunchBarInput now text form =
-    setEditMode (LaunchBar.Models.updateInput now text form |> XMLaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

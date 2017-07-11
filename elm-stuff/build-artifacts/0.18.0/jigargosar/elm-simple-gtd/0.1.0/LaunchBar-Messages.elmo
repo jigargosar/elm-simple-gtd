@@ -7,3 +7,4 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Messages$OnLBInputChanged = F2(
 var _jigargosar$elm_simple_gtd$LaunchBar_Messages$OnLBEnter = function (a) {
 	return {ctor: 'OnLBEnter', _0: a};
 };
+var _jigargosar$elm_simple_gtd$LaunchBar_Messages$NOOP = {ctor: 'NOOP'};

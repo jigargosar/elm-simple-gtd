@@ -10,6 +10,7 @@ import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject))
 import GroupDoc
 import Model.ExMode
+import Model.Internal exposing (setEditMode)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (Msg)
@@ -164,13 +165,9 @@ createAndEditNewContext model =
            )
 
 
-setEditMode =
-    Model.ExMode.setEditMode
-
-
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
-    Model.ExMode.setEditMode (ExclusiveMode.createEntityEditForm entity) model
+    setEditMode (ExclusiveMode.createEntityEditForm entity) model
 
 
 updateEditModeNameChanged newName entity model =

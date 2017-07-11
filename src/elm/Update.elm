@@ -16,6 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Model.ExMode
+import Model.Internal exposing (setEditMode)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -111,14 +112,14 @@ update andThenUpdate msg =
             map
                 (Todo.Form.set action form
                     |> XMEditTodo
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
 
         OnEditTodoProjectMenuStateChanged form menuState ->
             map
                 (Todo.GroupForm.setMenuState menuState form
                     |> XMEditTodoProject
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -126,7 +127,7 @@ update andThenUpdate msg =
             map
                 (menuState
                     |> XMMainMenu
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -134,7 +135,7 @@ update andThenUpdate msg =
             map
                 (Todo.GroupForm.setMenuState menuState form
                     |> XMEditTodoContext
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
                 >> autoFocusInputCmd
 
@@ -142,7 +143,7 @@ update andThenUpdate msg =
             map
                 ({ form | uri = uri }
                     |> XMEditSyncSettings
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
 
         OnSetViewType viewType ->
@@ -271,7 +272,7 @@ onGlobalKeyUp andThenUpdate key =
                                 andThenUpdate TodoMsg.onNewTodoForInbox
 
                             Key.Slash ->
-                                map (Model.ExMode.activateLaunchBar2)
+                                map (setEditMode XMLaunchBar)
                                     >> (OnLBOpen |> OnLaunchBarMsg |> andThenUpdate)
 
                             _ ->

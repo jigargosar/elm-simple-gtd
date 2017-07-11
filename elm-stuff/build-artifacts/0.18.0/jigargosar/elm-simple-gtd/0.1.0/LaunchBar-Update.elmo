@@ -5,6 +5,8 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F2(
 			return function () {
 				var _p1 = msg;
 				switch (_p1.ctor) {
+					case 'NOOP':
+						return _elm_lang$core$Basics$identity;
 					case 'OnLBEnter':
 						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
 							function (model) {

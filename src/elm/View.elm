@@ -43,7 +43,7 @@ overlayViews appModel =
             case appModel.editMode of
                 --                XMLaunchBar form ->
                 --                    LaunchBar.View.init form appModel
-                XMLaunchBar2 ->
+                XMLaunchBar ->
                     LaunchBar.View.init appModel.launchBar
                         |> Html.map Msg.OnLaunchBarMsg
 

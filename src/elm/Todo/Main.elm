@@ -6,6 +6,7 @@ import DomPorts
 import Entity.Types
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMNewTodo, XMSetup, XMTodoMoreMenu))
 import Model.ExMode exposing (setEditMode)
+import Model.Internal exposing (setEditMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
@@ -96,18 +97,18 @@ update andThenUpdate now todoMsg =
             Return.map
                 (Todo.NewForm.setText todoText form
                     |> XMSetup
-                    |> Model.ExMode.setEditMode
+                    |> setEditMode
                 )
 
         OnShowMoreMenu todoId ->
-            Return.map (todoMoreMenu todoId |> Model.ExMode.setEditMode)
+            Return.map (todoMoreMenu todoId |> setEditMode)
                 >> Return.command (positionMoreMenuCmd todoId)
 
         UpdateReminderForm form action ->
             Return.map
                 (Todo.ReminderForm.update action form
                     |> XMEditTodoReminder
-                    >> Model.ExMode.setEditMode
+                    >> setEditMode
                 )
 
         ToggleRunning todoId ->

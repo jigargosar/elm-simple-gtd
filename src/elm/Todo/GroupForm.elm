@@ -6,8 +6,7 @@ import Todo
 
 
 init todo =
-    { todo = todo
-    , todoId = getDocId todo
+    { todoId = getDocId todo
     , contextId = Todo.getContextId todo
     , projectId = Todo.getProjectId todo
     , menuState = Menu.initState

@@ -14,8 +14,7 @@ type alias TodoEditForm =
 
 
 type alias TodoGroupFrom =
-    { todo : TodoDoc
-    , todoId : DocId
+    { todoId : DocId
     , contextId : DocId
     , projectId : DocId
     , menuState : MenuState

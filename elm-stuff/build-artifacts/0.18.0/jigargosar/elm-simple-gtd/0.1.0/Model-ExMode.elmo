@@ -13,8 +13,9 @@ var _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode = _jigargosar$elm_simple
 var _jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar = function (now) {
 	return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
 		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-			_jigargosar$elm_simple_gtd$LaunchBar_Models$create(now)));
+			_jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(now)));
 };
+var _jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar2 = _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar2);
 var _jigargosar$elm_simple_gtd$Model_ExMode$updateLaunchBarInput = F3(
 	function (now, text, form) {
 		return _jigargosar$elm_simple_gtd$Model_ExMode$setEditMode(
@@ -137,12 +138,6 @@ var _jigargosar$elm_simple_gtd$Model_ExMode$saveCurrentForm = function (model) {
 					_jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime(_p8)),
 				_p8.id,
 				model);
-		case 'XMEditTodoContext':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMEditTodoProject':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMTodoMoreMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'XMNewTodo':
 			return A2(_jigargosar$elm_simple_gtd$Model_ExMode$saveNewTodoForm, _p4._0, model);
 		case 'XMEditSyncSettings':
@@ -150,15 +145,9 @@ var _jigargosar$elm_simple_gtd$Model_ExMode$saveCurrentForm = function (model) {
 				_elm_lang$core$Native_Utils.update(
 					model,
 					{pouchDBRemoteSyncURI: _p4._0.uri}));
-		case 'XMLaunchBar':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMMainMenu':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMNone':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'XMSignInOverlay':
-			return _Fresheyeball$elm_return$Return$singleton(model);
-		default:
+		case 'XMSetup':
 			return A2(_jigargosar$elm_simple_gtd$Model_ExMode$saveNewTodoForm, _p4._0, model);
+		default:
+			return _Fresheyeball$elm_return$Return$singleton(model);
 	}
 };

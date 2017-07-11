@@ -238,8 +238,8 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 	var editModeOverlayView = function () {
 		var _p1 = appModel.editMode;
 		switch (_p1.ctor) {
-			case 'XMLaunchBar':
-				return A2(_jigargosar$elm_simple_gtd$LaunchBar_View$init, _p1._0, appModel);
+			case 'XMLaunchBar2':
+				return A2(_jigargosar$elm_simple_gtd$LaunchBar_View$init, appModel.launchBar, appModel);
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
 			case 'XMEditTodoContext':

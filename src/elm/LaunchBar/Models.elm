@@ -1,6 +1,6 @@
 module LaunchBar.Models exposing (..)
 
-import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
+import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
 import Regex
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -23,9 +23,17 @@ type LBEntity
     | LBContexts
 
 
+type alias SearchItem a =
+    { getSearchText : a -> String
+    , item : a
+    }
+
+
 type alias LaunchBar =
     { input : String
     , updatedAt : Time
+    , searchResults : List ( LBEntity, Fuzzy.Result )
+    , selectedEntity : Maybe LBEntity
     }
 
 
@@ -33,15 +41,28 @@ type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
+initialModel : Time -> LaunchBar
 initialModel now =
     { input = ""
     , updatedAt = now
+    , searchResults = []
+    , selectedEntity = Nothing
     }
 
 
-updateInput : Time -> String -> LaunchBarF
-updateInput now input model =
+type alias Config =
+    { now : Time
+    , activeProjects : List GroupDoc
+    , activeContexts : List GroupDoc
+    }
+
+
+updateInput : Config -> String -> LaunchBarF
+updateInput config input model =
     let
+        now =
+            config.now
+
         newInput =
             input
                 |> if now - model.updatedAt > 1 * Time.second then
@@ -52,6 +73,9 @@ updateInput now input model =
                     identity
     in
         updateInputHelp newInput model now
+            |> (\model ->
+                    { model | searchResults = getFuzzyResults input config }
+               )
 
 
 updateInputHelp input model now =
@@ -89,18 +113,27 @@ fuzzyMatch needle entity =
         match n =
             Fuzzy.match [] [] n
     in
-        case ( String.toList needle, entity ) of
-            ( '#' :: [], LBProjects ) ->
-                ( entity, match boiledNeedle "#" )
-
-            ( '@' :: [], LBContexts ) ->
-                ( entity, match boiledNeedle "@" )
-
-            _ ->
-                ( entity, match boiledNeedle boiledHay )
+        ( entity, match boiledNeedle boiledHay )
 
 
-getFuzzyResults needle activeContexts activeProjects =
+fuzzyMatch2 needle hay =
+    let
+        boil =
+            String.Extra.underscored
+
+        boiledHay =
+            hay.getSearchText hay.item |> boil
+
+        boiledNeedle =
+            boil needle
+
+        match n =
+            Fuzzy.match [] [] n
+    in
+        ( hay, match boiledNeedle boiledHay )
+
+
+getFuzzyResults needle { activeContexts, activeProjects } =
     let
         contexts =
             activeContexts .|> LBContext
@@ -111,21 +144,46 @@ getFuzzyResults needle activeContexts activeProjects =
         all =
             projects ++ contexts ++ [ LBProjects, LBContexts ]
 
-        entityList =
-            case String.toList needle of
-                '#' :: xs ->
-                    [ LBProjects ] ++ projects
+        {- entityList =
+           case String.toList needle of
+               '#' :: xs ->
+                   [ LBProjects ] ++ projects
 
-                '@' :: xs ->
-                    [ LBContexts ] ++ contexts
+               '@' :: xs ->
+                   [ LBContexts ] ++ contexts
 
-                _ ->
-                    all
+               _ ->
+                   all
+        -}
     in
-        entityList
+        all
             .|> fuzzyMatch needle
             |> List.sortBy (Tuple.second >> (.score))
 
 
+getFuzzyResults2 needle activeContexts activeProjects =
+    let
+        contexts =
+            activeContexts .|> LBContext
+
+        projects =
+            activeProjects .|> LBProject
+
+        all =
+            projects ++ contexts ++ [ LBProjects, LBContexts ]
+    in
+        all
+            .|> (toSI >> fuzzyMatch2 needle)
+            |> List.sortBy (Tuple.second >> (.score))
+
+
+toSI =
+    (\e -> SearchItem getName e)
+
+
 defaultEntity =
     LBContext Context.null
+
+
+defaultEntity2 =
+    LBContext Context.null |> toSI

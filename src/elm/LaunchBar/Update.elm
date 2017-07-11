@@ -3,12 +3,12 @@ module LaunchBar.Update exposing (..)
 import DomPorts exposing (autoFocusInputCmd)
 import Entity.Types
 import LaunchBar.Messages exposing (LBMsg(..))
-import LaunchBar.Models exposing (LBEntity(..))
+import LaunchBar.Models exposing (Config, LBEntity(..), LaunchBar, updateInput)
 import Model.ExMode
 import Model.ViewType
 import Msg
 import Return
-import Time
+import Time exposing (Time)
 import Types exposing (ReturnF)
 
 
@@ -16,30 +16,20 @@ map =
     Return.map
 
 
-update :
-    (Msg.Msg -> ReturnF)
-    -> Time.Time
+update2 :
+    Config
     -> LBMsg
-    -> ReturnF
-update andThenUpdate now msg =
-    case msg of
-        OnLBEnter entity ->
-            andThenUpdate Msg.OnDeactivateEditingMode
-                >> case entity of
-                    LBProject project ->
-                        map (Model.ViewType.switchToProjectView project)
+    -> LaunchBar
+    -> ( LaunchBar, Cmd LBMsg )
+update2 config msg =
+    Return.singleton
+        >> case msg of
+            OnLBEnter entity ->
+                map (\model -> { model | selectedEntity = Just entity })
 
-                    LBProjects ->
-                        map (Model.ViewType.setEntityListViewType Entity.Types.ProjectsView)
+            OnLBInputChanged form text ->
+                map (updateInput config text)
 
-                    LBContext context ->
-                        map (Model.ViewType.switchToContextView context)
-
-                    LBContexts ->
-                        map (Model.ViewType.setEntityListViewType Entity.Types.ContextsView)
-
-        OnLBInputChanged form text ->
-            map (Model.ExMode.updateLaunchBarInput now text form)
-
-        OnLBOpen ->
-            map (Model.ExMode.activateLaunchBar now) >> DomPorts.autoFocusInputCmd
+            OnLBOpen ->
+                map (\m -> { m | selectedEntity = Nothing })
+                    >> DomPorts.autoFocusInputCmd

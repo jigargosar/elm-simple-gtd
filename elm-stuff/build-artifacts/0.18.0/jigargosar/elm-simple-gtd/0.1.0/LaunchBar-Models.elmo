@@ -1,3 +1,22 @@
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch2 = F2(
+	function (needle, hay) {
+		var match = function (n) {
+			return A3(
+				_tripokey$elm_fuzzy$Fuzzy$match,
+				{ctor: '[]'},
+				{ctor: '[]'},
+				n);
+		};
+		var boil = _elm_community$string_extra$String_Extra$underscored;
+		var boiledHay = boil(
+			hay.getSearchText(hay.item));
+		var boiledNeedle = boil(needle);
+		return {
+			ctor: '_Tuple2',
+			_0: hay,
+			_1: A2(match, boiledNeedle, boiledHay)
+		};
+	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$getName = function (entity) {
 	var _p0 = entity;
 	switch (_p0.ctor) {
@@ -26,42 +45,6 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch = F2(
 				_jigargosar$elm_simple_gtd$LaunchBar_Models$getName(_p1));
 		}(entity);
 		var boiledNeedle = boil(needle);
-		var _p2 = {
-			ctor: '_Tuple2',
-			_0: _elm_lang$core$String$toList(needle),
-			_1: entity
-		};
-		_v1_2:
-		do {
-			if (((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._1.ctor === '[]')) {
-				switch (_p2._0._0.valueOf()) {
-					case '#':
-						if (_p2._1.ctor === 'LBProjects') {
-							return {
-								ctor: '_Tuple2',
-								_0: entity,
-								_1: A2(match, boiledNeedle, '#')
-							};
-						} else {
-							break _v1_2;
-						}
-					case '@':
-						if (_p2._1.ctor === 'LBContexts') {
-							return {
-								ctor: '_Tuple2',
-								_0: entity,
-								_1: A2(match, boiledNeedle, '@')
-							};
-						} else {
-							break _v1_2;
-						}
-					default:
-						break _v1_2;
-				}
-			} else {
-				break _v1_2;
-			}
-		} while(false);
 		return {
 			ctor: '_Tuple2',
 			_0: entity,
@@ -79,27 +62,28 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp = F3(
 				model,
 				{input: input}));
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput = F3(
-	function (now, input, model) {
-		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - model.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
-			_elm_lang$core$Regex$replace,
-			_elm_lang$core$Regex$AtMost(1),
-			_elm_lang$core$Regex$regex(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'^',
-					_elm_lang$core$Regex$escape(model.input))),
-			function (_p3) {
-				return '';
-			}) : _elm_lang$core$Basics$identity)(input);
-		return A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp, newInput, model, now);
-	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
-	return {input: '', updatedAt: now};
+	return {
+		input: '',
+		updatedAt: now,
+		searchResults: {ctor: '[]'},
+		selectedEntity: _elm_lang$core$Maybe$Nothing
+	};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F2(
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$SearchItem = F2(
 	function (a, b) {
-		return {input: a, updatedAt: b};
+		return {getSearchText: a, item: b};
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI = function (e) {
+	return A2(_jigargosar$elm_simple_gtd$LaunchBar_Models$SearchItem, _jigargosar$elm_simple_gtd$LaunchBar_Models$getName, e);
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F4(
+	function (a, b, c, d) {
+		return {input: a, updatedAt: b, searchResults: c, selectedEntity: d};
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$Config = F3(
+	function (a, b, c) {
+		return {now: a, activeProjects: b, activeContexts: c};
 	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts = {ctor: 'LBContexts'};
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects = {ctor: 'LBProjects'};
@@ -109,7 +93,63 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject = function (a) {
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext = function (a) {
 	return {ctor: 'LBContext', _0: a};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults = F3(
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults = F2(
+	function (needle, _p2) {
+		var _p3 = _p2;
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p3.activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p3.activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext);
+		var all = A2(
+			_elm_lang$core$Basics_ops['++'],
+			projects,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				contexts,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
+						_1: {ctor: '[]'}
+					}
+				}));
+		return A2(
+			_elm_lang$core$List$sortBy,
+			function (_p4) {
+				return function (_) {
+					return _.score;
+				}(
+					_elm_lang$core$Tuple$second(_p4));
+			},
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				all,
+				_jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch(needle)));
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput = F3(
+	function (config, input, model) {
+		var now = config.now;
+		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - model.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$AtMost(1),
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'^',
+					_elm_lang$core$Regex$escape(model.input))),
+			function (_p5) {
+				return '';
+			}) : _elm_lang$core$Basics$identity)(input);
+		return function (model) {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					searchResults: A2(_jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults, input, config)
+				});
+		}(
+			A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp, newInput, model, now));
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults2 = F3(
 	function (needle, activeContexts, activeProjects) {
 		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject);
 		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext);
@@ -128,50 +168,24 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$getFuzzyResults = F3(
 						_1: {ctor: '[]'}
 					}
 				}));
-		var entityList = function () {
-			var _p4 = _elm_lang$core$String$toList(needle);
-			_v2_2:
-			do {
-				if (_p4.ctor === '::') {
-					switch (_p4._0.valueOf()) {
-						case '#':
-							return A2(
-								_elm_lang$core$Basics_ops['++'],
-								{
-									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
-									_1: {ctor: '[]'}
-								},
-								projects);
-						case '@':
-							return A2(
-								_elm_lang$core$Basics_ops['++'],
-								{
-									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
-									_1: {ctor: '[]'}
-								},
-								contexts);
-						default:
-							break _v2_2;
-					}
-				} else {
-					break _v2_2;
-				}
-			} while(false);
-			return all;
-		}();
 		return A2(
 			_elm_lang$core$List$sortBy,
-			function (_p5) {
+			function (_p6) {
 				return function (_) {
 					return _.score;
 				}(
-					_elm_lang$core$Tuple$second(_p5));
+					_elm_lang$core$Tuple$second(_p6));
 			},
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				entityList,
-				_jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch(needle)));
+				all,
+				function (_p7) {
+					return A2(
+						_jigargosar$elm_simple_gtd$LaunchBar_Models$fuzzyMatch2,
+						needle,
+						_jigargosar$elm_simple_gtd$LaunchBar_Models$toSI(_p7));
+				}));
 	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$defaultEntity2 = _jigargosar$elm_simple_gtd$LaunchBar_Models$toSI(
+	_jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null));

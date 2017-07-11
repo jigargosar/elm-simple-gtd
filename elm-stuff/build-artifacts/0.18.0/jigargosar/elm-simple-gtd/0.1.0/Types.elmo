@@ -50,7 +50,9 @@ var _jigargosar$elm_simple_gtd$Types$AppModel = function (a) {
 																				return function (u) {
 																					return function (v) {
 																						return function (w) {
-																							return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, reminderOverlay: g, pouchDBRemoteSyncURI: h, user: i, fcmToken: j, firebaseClient: k, developmentMode: l, selectedEntityIdSet: m, appVersion: n, deviceId: o, focusInEntity: p, timeTracker: q, keyComboModel: r, config: s, appDrawerModel: t, signInModel: u, mdl: v, keyboardState: w};
+																							return function (x) {
+																								return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, launchBar: f, mainViewType: g, reminderOverlay: h, pouchDBRemoteSyncURI: i, user: j, fcmToken: k, firebaseClient: l, developmentMode: m, selectedEntityIdSet: n, appVersion: o, deviceId: p, focusInEntity: q, timeTracker: r, keyComboModel: s, config: t, appDrawerModel: u, signInModel: v, mdl: w, keyboardState: x};
+																							};
 																						};
 																					};
 																				};

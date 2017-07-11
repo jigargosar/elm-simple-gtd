@@ -1,39 +1,36 @@
 var _jigargosar$elm_simple_gtd$LaunchBar_Update$map = _Fresheyeball$elm_return$Return$map;
-var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F3(
-	function (andThenUpdate, now, msg) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'OnLBEnter':
-				return function (_p1) {
-					return function () {
-						var _p2 = _p0._0;
-						switch (_p2.ctor) {
-							case 'LBProject':
-								return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-									_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p2._0));
-							case 'LBProjects':
-								return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-									_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
-							case 'LBContext':
-								return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-									_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p2._0));
-							default:
-								return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-									_jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
-						}
-					}()(
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p1));
-				};
-			case 'OnLBInputChanged':
-				return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-					A3(_jigargosar$elm_simple_gtd$Model_ExMode$updateLaunchBarInput, now, _p0._1, _p0._0));
-			default:
-				return function (_p3) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
-						A2(
-							_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
-							_jigargosar$elm_simple_gtd$Model_ExMode$activateLaunchBar(now),
-							_p3));
-				};
-		}
+var _jigargosar$elm_simple_gtd$LaunchBar_Update$update2 = F2(
+	function (config, msg) {
+		return function (_p0) {
+			return function () {
+				var _p1 = msg;
+				switch (_p1.ctor) {
+					case 'OnLBEnter':
+						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
+							function (model) {
+								return _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										selectedEntity: _elm_lang$core$Maybe$Just(_p1._0)
+									});
+							});
+					case 'OnLBInputChanged':
+						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
+							A2(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput, config, _p1._1));
+					default:
+						return function (_p2) {
+							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+								A2(
+									_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
+									function (m) {
+										return _elm_lang$core$Native_Utils.update(
+											m,
+											{selectedEntity: _elm_lang$core$Maybe$Nothing});
+									},
+									_p2));
+						};
+				}
+			}()(
+				_Fresheyeball$elm_return$Return$singleton(_p0));
+		};
 	});

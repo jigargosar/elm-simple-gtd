@@ -12,6 +12,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings = function
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 	return {ctor: 'XMMainMenu', _0: a};
 };
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar2 = {ctor: 'XMLaunchBar2'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = function (a) {
 	return {ctor: 'XMLaunchBar', _0: a};
 };

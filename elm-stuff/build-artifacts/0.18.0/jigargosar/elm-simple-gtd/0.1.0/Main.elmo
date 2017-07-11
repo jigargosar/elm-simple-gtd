@@ -76,7 +76,8 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		config: flags.config,
 		appDrawerModel: localPref.appDrawer,
 		signInModel: localPref.signIn,
-		mdl: _debois$elm_mdl$Material$model
+		mdl: _debois$elm_mdl$Material$model,
+		launchBar: _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(now)
 	};
 	return A2(_jigargosar$elm_simple_gtd$Main$update, _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded, model);
 };

@@ -1,7 +1,8 @@
 module LaunchBar.View exposing (..)
 
+import GroupDoc
 import LaunchBar.Messages exposing (LBMsg(..))
-import LaunchBar.Models
+import LaunchBar.Models exposing (LBEntity(LBContext), SearchItem, getName)
 import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))
@@ -18,7 +19,8 @@ import Stores
 init form m =
     let
         fuzzyResults =
-            LaunchBar.Models.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
+            --            LaunchBar.Models.getFuzzyResults form.input (Stores.getActiveContexts m) (Stores.getActiveProjects m)
+            form.searchResults
 
         matchingEntity =
             fuzzyResults

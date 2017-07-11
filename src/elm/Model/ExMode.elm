@@ -40,15 +40,6 @@ saveCurrentForm model =
             model
                 |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
-        XMEditTodoContext form ->
-            model |> Return.singleton
-
-        XMEditTodoProject form ->
-            model |> Return.singleton
-
-        XMTodoMoreMenu _ ->
-            model |> Return.singleton
-
         XMNewTodo form ->
             saveNewTodoForm form model
 
@@ -56,20 +47,11 @@ saveCurrentForm model =
             { model | pouchDBRemoteSyncURI = form.uri }
                 |> Return.singleton
 
-        XMLaunchBar form ->
-            model |> Return.singleton
-
-        XMMainMenu _ ->
-            model |> Return.singleton
-
-        XMNone ->
-            model |> Return.singleton
-
-        XMSignInOverlay ->
-            model |> Return.singleton
-
         XMSetup form ->
             saveNewTodoForm form model
+
+        _ ->
+            model |> Return.singleton
 
 
 saveNewTodoForm form model =
@@ -107,6 +89,11 @@ setEditMode =
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
     setEditMode (LaunchBar.Models.initialModel now |> XMLaunchBar)
+
+
+activateLaunchBar2 : ModelF
+activateLaunchBar2 =
+    setEditMode (XMLaunchBar2)
 
 
 updateLaunchBarInput now text form =

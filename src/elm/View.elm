@@ -41,8 +41,10 @@ overlayViews appModel =
     let
         editModeOverlayView =
             case appModel.editMode of
-                XMLaunchBar form ->
-                    LaunchBar.View.init form appModel
+                --                XMLaunchBar form ->
+                --                    LaunchBar.View.init form appModel
+                XMLaunchBar2 ->
+                    LaunchBar.View.init appModel.launchBar appModel
 
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model

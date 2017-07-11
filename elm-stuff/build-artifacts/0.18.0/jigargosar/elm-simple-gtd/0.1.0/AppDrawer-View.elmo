@@ -406,7 +406,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_View$sidebarHeader = F2(
 								_0: A2(
 									_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
 									'background-color',
-									_jigargosar$elm_simple_gtd$AppColors$encode(appVM.header.backgroundColor)),
+									_jigargosar$elm_x$AppColors$encode(appVM.header.backgroundColor)),
 								_1: {ctor: '[]'}
 							}
 						}),

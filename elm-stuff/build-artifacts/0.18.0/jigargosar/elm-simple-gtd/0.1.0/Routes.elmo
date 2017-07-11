@@ -1,9 +1,141 @@
+var _jigargosar$elm_simple_gtd$Routes$getPathFromViewType = function (viewType) {
+	var _p0 = viewType;
+	switch (_p0.ctor) {
+		case 'ContextsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'contexts',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'projects',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectView':
+			var _p1 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p1) ? {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: 'NotAssigned',
+					_1: {ctor: '[]'}
+				}
+			} : {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: _p1,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ContextView':
+			var _p2 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p2) ? {
+				ctor: '::',
+				_0: 'Inbox',
+				_1: {ctor: '[]'}
+			} : {
+				ctor: '::',
+				_0: 'context',
+				_1: {
+					ctor: '::',
+					_0: _p2,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'BinView':
+			return {
+				ctor: '::',
+				_0: 'bin',
+				_1: {ctor: '[]'}
+			};
+		case 'DoneView':
+			return {
+				ctor: '::',
+				_0: 'done',
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'recent',
+				_1: {ctor: '[]'}
+			};
+	}
+};
+var _jigargosar$elm_simple_gtd$Routes$routeUrlBuilderToMaybeListViewType = function (builder) {
+	var _p3 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+	_v1_9:
+	do {
+		if (_p3.ctor === '::') {
+			if (_p3._1.ctor === '[]') {
+				switch (_p3._0) {
+					case 'bin':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity_Types$BinView);
+					case 'done':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity_Types$DoneView);
+					case 'recent':
+						return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity_Types$RecentView);
+					case 'Inbox':
+						return _elm_lang$core$Maybe$Just(
+							_jigargosar$elm_simple_gtd$Entity_Types$ContextView(''));
+					default:
+						break _v1_9;
+				}
+			} else {
+				if (_p3._1._1.ctor === '[]') {
+					switch (_p3._0) {
+						case 'lists':
+							switch (_p3._1._0) {
+								case 'contexts':
+									return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
+								case 'projects':
+									return _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView);
+								default:
+									break _v1_9;
+							}
+						case 'context':
+							return _elm_lang$core$Maybe$Just(
+								_jigargosar$elm_simple_gtd$Entity_Types$ContextView(_p3._1._0));
+						case 'project':
+							if (_p3._1._0 === 'NotAssigned') {
+								return _elm_lang$core$Maybe$Just(
+									_jigargosar$elm_simple_gtd$Entity_Types$ProjectView(''));
+							} else {
+								return _elm_lang$core$Maybe$Just(
+									_jigargosar$elm_simple_gtd$Entity_Types$ProjectView(_p3._1._0));
+							}
+						default:
+							break _v1_9;
+					}
+				} else {
+					break _v1_9;
+				}
+			}
+		} else {
+			break _v1_9;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
 var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
 	return A3(
 		_elm_community$maybe_extra$Maybe_Extra$unpack,
-		function (_p0) {
-			var _p1 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-			if (((_p1.ctor === '::') && (_p1._0 === 'custom-sync')) && (_p1._1.ctor === '[]')) {
+		function (_p4) {
+			var _p5 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+			if (((_p5.ctor === '::') && (_p5._0 === 'custom-sync')) && (_p5._1.ctor === '[]')) {
 				return {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$Msg$OnSetViewType(_jigargosar$elm_simple_gtd$ViewType$SyncView),
@@ -17,20 +149,20 @@ var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
 				};
 			}
 		},
-		function (_p2) {
+		function (_p6) {
 			return _jigargosar$elm_simple_gtd$X_List$singleton(
-				_jigargosar$elm_simple_gtd$Msg$onSetEntityListView(_p2));
+				_jigargosar$elm_simple_gtd$Msg$onSetEntityListView(_p6));
 		},
-		_jigargosar$elm_simple_gtd$Entity$routeUrlBuilderToMaybeListViewType(builder));
+		_jigargosar$elm_simple_gtd$Routes$routeUrlBuilderToMaybeListViewType(builder));
 };
 var _jigargosar$elm_simple_gtd$Routes$hash2messages = function (location) {
 	return _jigargosar$elm_simple_gtd$Routes$builder2messages(
 		_rgrempel$elm_route_url$RouteUrl_Builder$fromHash(location.href));
 };
 var _jigargosar$elm_simple_gtd$Routes$getPathFromModel = function (model) {
-	var _p3 = _jigargosar$elm_simple_gtd$Model_ViewType$getMainViewType(model);
-	if (_p3.ctor === 'EntityListView') {
-		return _jigargosar$elm_simple_gtd$Entity$getPathFromViewType(_p3._0);
+	var _p7 = _jigargosar$elm_simple_gtd$Model_ViewType$getMainViewType(model);
+	if (_p7.ctor === 'EntityListView') {
+		return _jigargosar$elm_simple_gtd$Routes$getPathFromViewType(_p7._0);
 	} else {
 		return {
 			ctor: '::',

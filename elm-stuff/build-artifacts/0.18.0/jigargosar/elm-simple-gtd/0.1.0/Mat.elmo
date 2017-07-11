@@ -135,7 +135,7 @@ var _jigargosar$elm_simple_gtd$Mat$iconM = function (icon) {
 			_0: A2(
 				_jigargosar$elm_simple_gtd$Mat$css,
 				'color',
-				_jigargosar$elm_simple_gtd$AppColors$encode(icon.color)),
+				_jigargosar$elm_x$AppColors$encode(icon.color)),
 			_1: {ctor: '[]'}
 		});
 };

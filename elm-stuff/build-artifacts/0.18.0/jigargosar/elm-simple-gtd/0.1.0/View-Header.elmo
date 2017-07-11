@@ -151,7 +151,7 @@ var _jigargosar$elm_simple_gtd$View_Header$appMainHeader = F2(
 								_0: A2(
 									_jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'],
 									'background-color',
-									_jigargosar$elm_simple_gtd$AppColors$encode(viewModel.header.backgroundColor)),
+									_jigargosar$elm_x$AppColors$encode(viewModel.header.backgroundColor)),
 								_1: {ctor: '[]'}
 							}
 						}),

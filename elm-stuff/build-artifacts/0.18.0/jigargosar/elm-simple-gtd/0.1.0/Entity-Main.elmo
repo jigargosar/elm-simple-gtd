@@ -1,3 +1,51 @@
+var _jigargosar$elm_simple_gtd$Entity_Main$getTodoGotoGroupView = F2(
+	function (todo, prevView) {
+		var projectView = _jigargosar$elm_simple_gtd$Entity_Types$ProjectView(
+			_jigargosar$elm_simple_gtd$Todo$getProjectId(todo));
+		var contextView = _jigargosar$elm_simple_gtd$Entity_Types$ContextView(
+			_jigargosar$elm_simple_gtd$Todo$getContextId(todo));
+		var _p0 = prevView;
+		switch (_p0.ctor) {
+			case 'ProjectsView':
+				return contextView;
+			case 'ProjectView':
+				return contextView;
+			case 'ContextsView':
+				return projectView;
+			case 'ContextView':
+				return projectView;
+			case 'BinView':
+				return _jigargosar$elm_simple_gtd$Entity_Types$ContextsView;
+			case 'DoneView':
+				return _jigargosar$elm_simple_gtd$Entity_Types$ContextsView;
+			default:
+				return _jigargosar$elm_simple_gtd$Entity_Types$ContextsView;
+		}
+	});
+var _jigargosar$elm_simple_gtd$Entity_Main$toViewType = F2(
+	function (maybePrevView, entity) {
+		var _p1 = entity;
+		if (_p1.ctor === 'GroupEntity') {
+			var _p2 = _p1._0;
+			if (_p2.ctor === 'ContextEntity') {
+				return _jigargosar$elm_simple_gtd$Entity_Types$ContextView(
+					_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p2._0));
+			} else {
+				return _jigargosar$elm_simple_gtd$Entity_Types$ProjectView(
+					_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p2._0));
+			}
+		} else {
+			var _p3 = _p1._0;
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					maybePrevView,
+					_jigargosar$elm_simple_gtd$Entity_Main$getTodoGotoGroupView(_p3)),
+				_jigargosar$elm_simple_gtd$Entity_Types$ContextView(
+					_jigargosar$elm_simple_gtd$Todo$getContextId(_p3)));
+		}
+	});
 var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
 	function (entity, model) {
 		return A2(
@@ -9,26 +57,26 @@ var _jigargosar$elm_simple_gtd$Entity_Main$setEditMode = _jigargosar$elm_simple_
 var _jigargosar$elm_simple_gtd$Entity_Main$updateEditModeNameChanged = F3(
 	function (newName, entity, model) {
 		return function () {
-			var _p0 = model.editMode;
-			switch (_p0.ctor) {
+			var _p4 = model.editMode;
+			switch (_p4.ctor) {
 				case 'XMEditContext':
 					return _jigargosar$elm_simple_gtd$Entity_Main$setEditMode(
-						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName, newName, _p0._0));
+						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName, newName, _p4._0));
 				case 'XMEditProject':
 					return _jigargosar$elm_simple_gtd$Entity_Main$setEditMode(
-						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName, newName, _p0._0));
+						A2(_jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName, newName, _p4._0));
 				default:
 					return _elm_lang$core$Basics$identity;
 			}
 		}()(model);
 	});
 var _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext = function (model) {
-	return function (_p1) {
-		var _p2 = _p1;
+	return function (_p5) {
+		var _p6 = _p5;
 		return A2(
 			_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_p2._0),
-			_p2._1);
+			_jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_p6._0),
+			_p6._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -39,12 +87,12 @@ var _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext = function (m
 				model.contextStore)));
 };
 var _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewProject = function (model) {
-	return function (_p3) {
-		var _p4 = _p3;
+	return function (_p7) {
+		var _p8 = _p7;
 		return A2(
 			_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity,
-			_jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity(_p4._0),
-			_p4._1);
+			_jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity(_p8._0),
+			_p8._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -58,10 +106,10 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toggleDeleteEntity = F2(
 	function (entity, model) {
 		var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
 		return function () {
-			var _p5 = entity;
-			if (_p5.ctor === 'GroupEntity') {
-				var _p6 = _p5._0;
-				if (_p6.ctor === 'ContextEntity') {
+			var _p9 = entity;
+			if (_p9.ctor === 'GroupEntity') {
+				var _p10 = _p9._0;
+				if (_p10.ctor === 'ContextEntity') {
 					return A2(_jigargosar$elm_simple_gtd$Stores$updateContext, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
 				} else {
 					return A2(_jigargosar$elm_simple_gtd$Stores$updateProject, entityId, _jigargosar$elm_simple_gtd$Document$toggleDeleted);
@@ -75,7 +123,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$switchToEntityListViewFromEntity = F2
 	function (entity, model) {
 		var maybeEntityListViewType = _jigargosar$elm_simple_gtd$Model_ViewType$maybeGetCurrentEntityListViewType(model);
 		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType, model)(
-			A2(_jigargosar$elm_simple_gtd$Entity$toViewType, maybeEntityListViewType, entity));
+			A2(_jigargosar$elm_simple_gtd$Entity_Main$toViewType, maybeEntityListViewType, entity));
 	});
 var _jigargosar$elm_simple_gtd$Entity_Main$toggleSetMember = F2(
 	function (item, set) {
@@ -88,40 +136,40 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toggleEntitySelection = function (ent
 };
 var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 	function (andThenUpdate, entity, msg) {
-		var _p7 = msg;
-		switch (_p7.ctor) {
+		var _p11 = msg;
+		switch (_p11.ctor) {
 			case 'OnStartEditing':
-				return function (_p8) {
+				return function (_p12) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity(entity),
-							_p8));
+							_p12));
 				};
 			case 'OnNameChanged':
 				return _Fresheyeball$elm_return$Return$map(
-					A2(_jigargosar$elm_simple_gtd$Entity_Main$updateEditModeNameChanged, _p7._0, entity));
+					A2(_jigargosar$elm_simple_gtd$Entity_Main$updateEditModeNameChanged, _p11._0, entity));
 			case 'OnSave':
 				return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm);
 			case 'OnToggleDeleted':
-				return function (_p9) {
+				return function (_p13) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						A2(
 							_Fresheyeball$elm_return$Return$andThen,
 							_jigargosar$elm_simple_gtd$Entity_Main$toggleDeleteEntity(entity),
-							_p9));
+							_p13));
 				};
 			case 'OnToggleArchived':
 				var toggleArchivedEntity = function (entity) {
 					var entityId = _jigargosar$elm_simple_gtd$Entity$getId(entity);
-					var _p10 = entity;
-					if (_p10.ctor === 'GroupEntity') {
+					var _p14 = entity;
+					if (_p14.ctor === 'GroupEntity') {
 						return _Fresheyeball$elm_return$Return$andThen(
 							function () {
-								var _p11 = _p10._0;
-								if (_p11.ctor === 'ContextEntity') {
+								var _p15 = _p14._0;
+								if (_p15.ctor === 'ContextEntity') {
 									return A2(_jigargosar$elm_simple_gtd$Stores$updateContext, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
 								} else {
 									return A2(_jigargosar$elm_simple_gtd$Stores$updateProject, entityId, _jigargosar$elm_simple_gtd$GroupDoc$toggleArchived);
@@ -133,11 +181,11 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 								A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode, entityId, _jigargosar$elm_simple_gtd$Todo_Types$TA_ToggleDone)));
 					}
 				};
-				return function (_p12) {
+				return function (_p16) {
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-						A2(toggleArchivedEntity, entity, _p12));
+						A2(toggleArchivedEntity, entity, _p16));
 				};
 			case 'OnOnFocusIn':
 				return _Fresheyeball$elm_return$Return$map(
@@ -153,19 +201,19 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 var _jigargosar$elm_simple_gtd$Entity_Main$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 	function (andThenUpdate, msg) {
-		var _p13 = msg;
-		switch (_p13.ctor) {
+		var _p17 = msg;
+		switch (_p17.ctor) {
 			case 'OnNewProject':
-				return function (_p14) {
+				return function (_p18) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
-						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewProject, _p14));
+						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewProject, _p18));
 				};
 			case 'OnNewContext':
-				return function (_p15) {
+				return function (_p19) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
-						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext, _p15));
+						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext, _p19));
 				};
 			default:
-				return A3(_jigargosar$elm_simple_gtd$Entity_Main$onUpdate, andThenUpdate, _p13._0, _p13._1);
+				return A3(_jigargosar$elm_simple_gtd$Entity_Main$onUpdate, andThenUpdate, _p17._0, _p17._1);
 		}
 	});

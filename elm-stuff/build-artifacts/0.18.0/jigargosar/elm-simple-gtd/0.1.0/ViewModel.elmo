@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$ViewModel$sgtdBlue = _jigargosar$elm_simple_gtd$AppColors$sgtdBlue;
+var _jigargosar$elm_simple_gtd$ViewModel$sgtdBlue = _jigargosar$elm_x$AppColors$sgtdBlue;
 var _jigargosar$elm_simple_gtd$ViewModel$getViewInfo = F4(
 	function (mainViewType, projectsVM, contextsVM, model) {
 		var entityById = function (id) {

@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor = _jigargosar$elm_simple_gtd$AppColors$nullContextColor;
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor = _jigargosar$elm_x$AppColors$nullContextColor;
 var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 	function (config, todoList, groupDoc) {
 		var name = groupDoc.name;
@@ -70,7 +70,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup = F3(
 			nullEntity: _jigargosar$elm_simple_gtd$Context$null,
 			isNull: _jigargosar$elm_simple_gtd$Context$isNull,
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
-			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
+			defaultColor: _jigargosar$elm_x$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ContextView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity
@@ -86,7 +86,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup = F3(
 			nullEntity: _jigargosar$elm_simple_gtd$Project$null,
 			isNull: _jigargosar$elm_simple_gtd$Project$isNull,
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
-			defaultColor: _jigargosar$elm_simple_gtd$AppColors$defaultProjectColor,
+			defaultColor: _jigargosar$elm_x$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ProjectView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity

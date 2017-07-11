@@ -29,6 +29,46 @@ const envOutputDir = isDevEnv ? "dev" : "prod"
 const outputPath = path.resolve(__dirname, "build", envOutputDir)
 
 
+const commonPlugins = [
+    new DashboardPlugin(),
+    // new ExtractTextPlugin(styleFileName),
+    new webpack["ProvidePlugin"]({
+        jQuery: "jquery",
+        "window.jQuery": "jquery",
+    }),
+    new webpack.DefinePlugin({
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        "process.env": JSON.stringify(process.env),
+        "WEBPACK_DEV_SERVER": isWebPackDevServer,
+    }),
+    new ServiceWorkerWebpackPlugin({
+        entry: './notification-sw.js',
+        filename: "notification-sw.js",
+        transformOptions(options){
+            return {isDevEnv: isWebPackDevServer}
+        },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: "common",
+        minChunks: 2,
+    }),
+]
+const excludeInDevServerModePlugins = [
+    new SWPrecacheWebpackPlugin({
+        cacheId: 'simple-gtd',
+        filename: 'service-worker.js',
+        importScripts: ["notification-sw.js"],
+        staticFileGlobs: [
+            'static/**',
+        ],
+        stripPrefix: "static/",
+        mergeStaticsConfig: true,
+        minify: !isWebPackDevServer,
+        maximumFileSizeToCacheInBytes: 5242880, // 5mb
+    }),
+]
+const plugins = _.concat(commonPlugins, isWebPackDevServer? [] : excludeInDevServerModePlugins)
+
 export default {
     resolve: {
         alias: {
@@ -55,42 +95,7 @@ export default {
         filename: '[name].bundle.js',
     },
 
-    plugins: [
-        new DashboardPlugin(),
-        // new ExtractTextPlugin(styleFileName),
-        new webpack["ProvidePlugin"]({
-            jQuery: "jquery",
-            "window.jQuery": "jquery",
-        }),
-        new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-            "process.env": JSON.stringify(process.env),
-            "WEBPACK_DEV_SERVER": isWebPackDevServer,
-        }),
-        new ServiceWorkerWebpackPlugin({
-            entry: './notification-sw.js',
-            filename: "notification-sw.js",
-            transformOptions(options){
-                return {isDevEnv: isWebPackDevServer}
-            },
-        }),
-        new SWPrecacheWebpackPlugin({
-            cacheId: 'simple-gtd',
-            filename: 'service-worker.js',
-            importScripts: ["notification-sw.js"],
-            staticFileGlobs: [
-                'static/**',
-            ],
-            stripPrefix: "static/",
-            mergeStaticsConfig: true,
-            minify: !isWebPackDevServer,
-            maximumFileSizeToCacheInBytes: 5242880, // 5mb
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "common",
-            minChunks: 2,
-        }),
-    ],
+    plugins: plugins,
 
     module: {
         rules: [

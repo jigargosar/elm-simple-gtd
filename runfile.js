@@ -103,17 +103,17 @@ const prod = () => {
     }
 }
 
-const refCmd = `webpack-dev-server --hot --inline | tee -a \\
-        >( sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' >> wp-dev-server.log )`
+// const refCmd = `webpack-dev-server --hot --inline | tee -a \\
+//         >( sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' >> wp-dev-server.log )`
 
 // export const hot = runF(`sysconfcpus -n 1 webpack-dev-server --hot --inline | tee wp-dev-server.log`, {
-export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.log`, {
-    env: {
-        NODE_ENV: "development",
-        npm_package_version: fetchPackageJson().version,
-        WEBPACK_DEV_SERVER: true
-    }
-})
+// export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.log`, {
+//     env: {
+//         NODE_ENV: "development",
+//         npm_package_version: fetchPackageJson().version,
+//         WEBPACK_DEV_SERVER: true
+//     }
+// })
 
 // export const hotmon = () => {
 //     run(`nodemon --watch runfile.js --watch src/elm/Native/** \
@@ -121,11 +121,11 @@ export const hot = runF(`webpack-dev-server --hot --inline | tee wp-dev-server.l
 //             --watch elm-package.json --exec "run hot"`)
 // }
 
-export const hotmon = () => {
-    run(`nodemon`)
-}
-
-
+// export const hotmon = () => {
+//     run(`nodemon`)
+// }
+//
+//
 
 export const bump = function () {
     run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")

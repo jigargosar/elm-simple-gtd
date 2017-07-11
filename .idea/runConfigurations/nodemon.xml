@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="hotmon" type="js.build_tools.npm" factoryName="npm">
+  <configuration default="false" name="nodemon" type="js.build_tools.npm" factoryName="npm">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="hotmon" />
+      <script value="nodemon" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

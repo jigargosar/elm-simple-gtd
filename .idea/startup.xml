@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectStartupSharedConfiguration">
     <configurations>
-      <configuration id="npm.hotmon" name="hotmon" />
+      <configuration id="npm.nodemon" name="nodemon" />
     </configurations>
   </component>
 </project>

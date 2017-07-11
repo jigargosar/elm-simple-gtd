@@ -6,7 +6,6 @@ import HtmlWebpackPlugin from "html-webpack-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import SWPrecacheWebpackPlugin from "sw-precache-webpack-plugin"
 
-console.log(process.env)
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER === "true"
 
@@ -63,7 +62,7 @@ export default {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             "process.env": JSON.stringify(process.env),
-            "WEBPACK_DEV_SERVER":isWebPackDevServer
+            "WEBPACK_DEV_SERVER": isWebPackDevServer,
         }),
         new ServiceWorkerWebpackPlugin({
             entry: './notification-sw.js',

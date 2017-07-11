@@ -15,16 +15,19 @@ import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
 import Material
-import Model.ExMode exposing (setTodoEditForm)
-import Model.Internal exposing (setEditMode)
+import Model.ExMode
+import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEditForm)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
 import Stores
+import Todo.NewForm
 import TodoMsg
+import Update.ExMode
 import Update.LaunchBar
+import Update.Subscription
 import X.Keyboard as Keyboard exposing (Key)
 import X.Return as Return
 import X.Function.Infix exposing (..)
@@ -59,7 +62,7 @@ update andThenUpdate msg =
             CommonMsg.update msg
 
         OnSubMsg subMsg ->
-            onSubMsg andThenUpdate subMsg
+            Update.Subscription.onSubMsg andThenUpdate subMsg
 
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
@@ -89,19 +92,25 @@ update andThenUpdate msg =
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         OnDeactivateEditingMode ->
-            map (Model.ExMode.deactivateEditingMode)
+            map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartEditingContext todo ->
-            map (Model.ExMode.startEditingTodoContext todo)
+            map
+                (setEditMode (XMEditTodoContext)
+                    >> setTodoEditForm (Todo.Form.create todo)
+                )
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingProject todo ->
-            map (Model.ExMode.startEditingTodoProject todo)
+            map
+                (setEditMode (XMEditTodoProject)
+                    >> setTodoEditForm (Todo.Form.create todo)
+                )
                 >> Return.command (positionProjectMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
-            map (Model.ExMode.updateNewTodoText form text)
+            map (setEditMode (Todo.NewForm.setText text form |> XMNewTodo))
 
         OnStartEditingReminder todo ->
             map (Model.ExMode.startEditingReminder todo)
@@ -131,7 +140,7 @@ update andThenUpdate msg =
             map (Model.ViewType.switchToView viewType)
 
         OnSaveCurrentForm ->
-            Return.andThen Model.ExMode.saveCurrentForm
+            Return.andThen Update.ExMode.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
         OnEntityMsg entityMsg ->
@@ -188,82 +197,6 @@ maybeMapToCmd fn =
 
 command =
     Return.command
-
-
-onSubMsg andThenUpdate subMsg =
-    case subMsg of
-        OnNowChanged now ->
-            map (Model.setNow now)
-
-        OnKeyboardMsg msg ->
-            map (Model.Keyboard.updateKeyboardState (Keyboard.update msg))
-                >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
-
-        OnGlobalKeyUp key ->
-            onGlobalKeyUp andThenUpdate key
-
-        OnPouchDBChange dbName encodedDoc ->
-            let
-                afterEntityUpsertOnPouchDBChange entity =
-                    case entity of
-                        TodoEntity model ->
-                            Todo.Msg.Upsert model |> OnTodoMsg
-
-                        _ ->
-                            Model.noop
-            in
-                Return.andThenMaybe
-                    (Stores.upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                        >>? (Tuple2.mapEach afterEntityUpsertOnPouchDBChange Return.singleton
-                                >> uncurry andThenUpdate
-                            )
-                    )
-
-        OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (Stores.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
-
-
-onGlobalKeyUp andThenUpdate key =
-    Return.with (.editMode)
-        (\editMode ->
-            case ( key, editMode ) of
-                ( key, XMNone ) ->
-                    let
-                        clear =
-                            map (Model.Selection.clearSelection)
-                                >> andThenUpdate OnDeactivateEditingMode
-                    in
-                        case key of
-                            Key.Escape ->
-                                clear
-
-                            Key.CharX ->
-                                clear
-
-                            Key.CharQ ->
-                                Return.andThen
-                                    (apply2
-                                        ( Model.Msg.onNewTodoModeWithFocusInEntityAsReference
-                                        , Return.singleton
-                                        )
-                                        >> uncurry andThenUpdate
-                                    )
-
-                            Key.CharI ->
-                                andThenUpdate TodoMsg.onNewTodoForInbox
-
-                            Key.Slash ->
-                                Update.LaunchBar.open andThenUpdate
-
-                            _ ->
-                                identity
-
-                ( Key.Escape, _ ) ->
-                    andThenUpdate OnDeactivateEditingMode
-
-                _ ->
-                    identity
-        )
 
 
 positionContextMenuCmd todo =

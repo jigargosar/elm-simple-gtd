@@ -5,7 +5,7 @@ import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup, XMSignInOverlay))
 import Firebase.SignIn
 import Model.ExMode
-import Model.Internal exposing (setEditMode)
+import Model.Internal exposing (deactivateEditingMode, setEditMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)
 import Store
@@ -27,7 +27,7 @@ update andThenUpdate msg =
                             if Store.isEmpty model.todoStore then
                                 setEditMode createSetupExclusiveMode
                             else
-                                Model.ExMode.deactivateEditingMode
+                                deactivateEditingMode
                            else
                             setEditMode XMSignInOverlay
 

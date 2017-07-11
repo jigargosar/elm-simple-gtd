@@ -9,8 +9,7 @@ import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewTyp
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject, XMEditTodo))
 import GroupDoc
 import GroupDoc.EditForm
-import Model.ExMode exposing (setTodoEditForm)
-import Model.Internal exposing (setEditMode)
+import Model.Internal exposing (setEditMode, setTodoEditForm)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (Msg)

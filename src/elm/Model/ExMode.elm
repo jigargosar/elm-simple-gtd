@@ -6,7 +6,7 @@ import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import LaunchBar.Models
 import Menu
-import Model.Internal exposing (setEditMode)
+import Model.Internal exposing (setEditMode, updateEditModeM)
 import Project
 import Return
 import Time exposing (Time)
@@ -22,74 +22,9 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-saveCurrentForm model =
-    case model.editMode of
-        XMEditContext form ->
-            model
-                |> Stores.updateContext form.id
-                    (Context.setName form.name)
-
-        XMEditProject form ->
-            model
-                |> Stores.updateProject form.id
-                    (Project.setName form.name)
-
-        XMEditTodo ->
-            model.maybeTodoEditForm
-                ?|> (\form ->
-                        model
-                            |> Stores.updateTodo (TA_SetText form.todoText) form.id
-                    )
-                ?= Return.singleton model
-
-        XMEditTodoReminder form ->
-            model
-                |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
-
-        XMNewTodo form ->
-            saveNewTodoForm form model
-
-        XMEditSyncSettings form ->
-            { model | pouchDBRemoteSyncURI = form.uri }
-                |> Return.singleton
-
-        XMSetup form ->
-            saveNewTodoForm form model
-
-        _ ->
-            model |> Return.singleton
-
-
-saveNewTodoForm form model =
-    Stores.insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
-        |> Tuple.mapFirst getDocId
-        |> uncurry
-            (\todoId ->
-                Stores.updateTodo
-                    (case form.referenceEntity of
-                        TodoEntity fromTodo ->
-                            (TA_CopyProjectAndContextId fromTodo)
-
-                        GroupEntity g ->
-                            case g of
-                                ContextEntity context ->
-                                    (TA_SetContext context)
-
-                                ProjectEntity project ->
-                                    (TA_SetProject project)
-                    )
-                    todoId
-                    >> Tuple.mapFirst (Stores.setFocusInEntityFromTodoId todoId)
-            )
-
-
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
     setEditMode (Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo) model
-
-
-updateNewTodoText form text =
-    setEditMode (Todo.NewForm.setText text form |> XMNewTodo)
 
 
 startEditingReminder : TodoDoc -> ModelF
@@ -97,30 +32,5 @@ startEditingReminder todo =
     updateEditModeM (.now >> Todo.ReminderForm.create todo >> XMEditTodoReminder)
 
 
-updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
-updateEditModeM updater model =
-    setEditMode (updater model) model
-
-
-startEditingTodoContext : TodoDoc -> ModelF
-startEditingTodoContext todo =
-    setEditMode (XMEditTodoContext)
-        >> setTodoEditForm (Todo.Form.create todo)
-
-
-startEditingTodoProject : TodoDoc -> ModelF
-startEditingTodoProject todo =
-    setEditMode (XMEditTodoProject)
-        >> setTodoEditForm (Todo.Form.create todo)
-
-
 showMainMenu =
     setEditMode (Menu.initState |> XMMainMenu)
-
-
-deactivateEditingMode =
-    setEditMode XMNone
-
-
-setTodoEditForm f m =
-    { m | maybeTodoEditForm = Just f }

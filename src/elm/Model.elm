@@ -65,11 +65,6 @@ getNow =
     (.now)
 
 
-setNow : Time -> ModelF
-setNow now model =
-    { model | now = now }
-
-
 
 -- Focus Functions
 

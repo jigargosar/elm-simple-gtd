@@ -1,0 +1,41 @@
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp = F3(
+	function (input, model, now) {
+		return function (model) {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{updatedAt: now});
+		}(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{input: input}));
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$updateInput = F3(
+	function (now, input, model) {
+		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - model.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$AtMost(1),
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'^',
+					_elm_lang$core$Regex$escape(model.input))),
+			function (_p0) {
+				return '';
+			}) : _elm_lang$core$Basics$identity)(input);
+		return A3(_jigargosar$elm_simple_gtd$LaunchBar_Models$updateInputHelp, newInput, model, now);
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$create = function (now) {
+	return {input: '', updatedAt: now};
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F2(
+	function (a, b) {
+		return {input: a, updatedAt: b};
+	});
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts = {ctor: 'LBContexts'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects = {ctor: 'LBProjects'};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject = function (a) {
+	return {ctor: 'LBProject', _0: a};
+};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext = function (a) {
+	return {ctor: 'LBContext', _0: a};
+};

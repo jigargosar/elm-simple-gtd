@@ -2,7 +2,7 @@ module LaunchBar exposing (..)
 
 import Context
 import Fuzzy
-import LaunchBar.Types exposing (LBEntity(..), LaunchBarForm)
+import LaunchBar.Models exposing (LBEntity(..))
 import Toolkit.Operators exposing (..)
 import Project
 import String.Extra

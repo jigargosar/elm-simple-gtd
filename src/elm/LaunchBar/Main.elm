@@ -2,7 +2,8 @@ module LaunchBar.Main exposing (..)
 
 import DomPorts exposing (autoFocusInputCmd)
 import Entity.Types
-import LaunchBar.Types exposing (LBEntity(..), LBMsg(..))
+import LaunchBar.Messages exposing (LBMsg(..))
+import LaunchBar.Models exposing (LBEntity(..))
 import Model.ExMode
 import Model.ViewType
 import Msg

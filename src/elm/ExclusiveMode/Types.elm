@@ -3,7 +3,7 @@ module ExclusiveMode.Types exposing (..)
 -- small so safe
 
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
-import LaunchBar.Types exposing (LaunchBarForm)
+import LaunchBar.Models exposing (LaunchBar)
 import Menu.Types exposing (MenuState)
 import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoGroupFrom, TodoMoreMenuForm)
 
@@ -21,7 +21,7 @@ type ExclusiveMode
     | XMEditTodoReminder EditTodoReminderForm
     | XMEditTodoContext TodoGroupFrom
     | XMEditTodoProject TodoGroupFrom
-    | XMLaunchBar LaunchBarForm
+    | XMLaunchBar LaunchBar
     | XMMainMenu MenuState
     | XMEditSyncSettings SyncForm
     | XMSignInOverlay

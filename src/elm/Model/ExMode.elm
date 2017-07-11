@@ -5,7 +5,7 @@ import Document.Types exposing (getDocId)
 import Entity.Types exposing (..)
 import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
-import LaunchBar.Form
+import LaunchBar.Models
 import Menu
 import Project
 import Return
@@ -106,11 +106,11 @@ setEditMode =
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    setEditMode (LaunchBar.Form.create now |> XMLaunchBar)
+    setEditMode (LaunchBar.Models.create now |> XMLaunchBar)
 
 
 updateLaunchBarInput now text form =
-    setEditMode (LaunchBar.Form.updateInput now text form |> XMLaunchBar)
+    setEditMode (LaunchBar.Models.updateInput now text form |> XMLaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

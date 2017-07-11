@@ -10,7 +10,7 @@ import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.Main
-import LaunchBar.Types exposing (LBMsg(OnLBOpen))
+import LaunchBar.Messages exposing (LBMsg(OnLBOpen))
 import LocalPref
 import Main.Update
 import Material

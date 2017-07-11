@@ -5,7 +5,7 @@ import CommonMsg.Types
 import Entity.Types exposing (Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
 import Firebase.Types exposing (FirebaseMsg)
-import LaunchBar.Types exposing (LBMsg)
+import LaunchBar.Messages exposing (LBMsg)
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 import Todo.FormTypes exposing (AddTodoForm, EditTodoFormAction, TodoEditForm, TodoGroupFrom)

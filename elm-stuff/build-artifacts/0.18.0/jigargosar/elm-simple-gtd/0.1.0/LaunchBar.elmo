@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$LaunchBar$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContext(_jigargosar$elm_simple_gtd$Context$null);
+var _jigargosar$elm_simple_gtd$LaunchBar$defaultEntity = _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$LaunchBar$getName = function (entity) {
 	var _p0 = entity;
 	switch (_p0.ctor) {
@@ -71,8 +71,8 @@ var _jigargosar$elm_simple_gtd$LaunchBar$fuzzyMatch = F2(
 	});
 var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 	function (needle, activeContexts, activeProjects) {
-		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProject);
-		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContext);
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProject);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContext);
 		var all = A2(
 			_elm_lang$core$Basics_ops['++'],
 			projects,
@@ -81,10 +81,10 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 				contexts,
 				{
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProjects,
+					_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContexts,
+						_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
 						_1: {ctor: '[]'}
 					}
 				}));
@@ -99,7 +99,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 								_elm_lang$core$Basics_ops['++'],
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBProjects,
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBProjects,
 									_1: {ctor: '[]'}
 								},
 								projects);
@@ -108,7 +108,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar$getFuzzyResults = F3(
 								_elm_lang$core$Basics_ops['++'],
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$LaunchBar_Types$LBContexts,
+									_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$LBContexts,
 									_1: {ctor: '[]'}
 								},
 								contexts);

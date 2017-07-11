@@ -1,29 +1,2 @@
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo = function (_p0) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(
-		_jigargosar$elm_simple_gtd$Todo_Form$create(_p0));
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editContextSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext);
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editContext = function (_p1) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
-		_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p1));
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editProjectSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject);
-var _jigargosar$elm_simple_gtd$ExclusiveMode$editProject = function (_p2) {
-	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject(
-		_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject(_p2));
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode$createEntityEditForm = function (entity) {
-	var _p3 = entity;
-	if (_p3.ctor === 'GroupEntity') {
-		var _p4 = _p3._0;
-		if (_p4.ctor === 'ContextEntity') {
-			return _jigargosar$elm_simple_gtd$ExclusiveMode$editContext(_p4._0);
-		} else {
-			return _jigargosar$elm_simple_gtd$ExclusiveMode$editProject(_p4._0);
-		}
-	} else {
-		return _jigargosar$elm_simple_gtd$ExclusiveMode$editTodo(_p3._0);
-	}
-};
 var _jigargosar$elm_simple_gtd$ExclusiveMode$signInOverlay = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay;
 var _jigargosar$elm_simple_gtd$ExclusiveMode$none = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone;

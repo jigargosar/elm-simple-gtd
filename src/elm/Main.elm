@@ -3,7 +3,7 @@ port module Main exposing (main)
 import AppDrawer.Main
 import Context
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
-import ExclusiveMode
+import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import Firebase.Main
 import Keyboard.Combo exposing (combo2)
@@ -97,7 +97,7 @@ init flags =
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
-            , editMode = ExclusiveMode.none
+            , editMode = XMNone
             , mainViewType = defaultView
             , keyboardState = X.Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none

@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode$none);
+var _jigargosar$elm_simple_gtd$Model_ExMode$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);
 var _jigargosar$elm_simple_gtd$Model_ExMode$showMainMenu = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState));
 var _jigargosar$elm_simple_gtd$Model_ExMode$startEditingTodoContext = function (todo) {

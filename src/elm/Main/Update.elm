@@ -2,8 +2,7 @@ module Main.Update exposing (..)
 
 import Context
 import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
-import ExclusiveMode
-import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup))
+import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup, XMSignInOverlay))
 import Firebase.SignIn
 import Model.ExMode
 import Model.Internal exposing (setEditMode)
@@ -30,7 +29,7 @@ update andThenUpdate msg =
                             else
                                 Model.ExMode.deactivateEditingMode
                            else
-                            setEditMode ExclusiveMode.signInOverlay
+                            setEditMode XMSignInOverlay
 
                 inboxEntity =
                     createContextEntity Context.null

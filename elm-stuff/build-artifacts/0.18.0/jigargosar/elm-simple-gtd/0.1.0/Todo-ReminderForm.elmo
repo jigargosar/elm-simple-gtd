@@ -18,19 +18,14 @@ var _jigargosar$elm_simple_gtd$Todo_ReminderForm$getMaybeTime = function (_p0) {
 var _jigargosar$elm_simple_gtd$Todo_ReminderForm$update = F2(
 	function (action, model) {
 		var _p3 = action;
-		switch (_p3.ctor) {
-			case 'SetDate':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{date: _p3._0});
-			case 'SetTime':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{time: _p3._0});
-			default:
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{menuState: _p3._0});
+		if (_p3.ctor === 'SetDate') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{date: _p3._0});
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{time: _p3._0});
 		}
 	});
 var _jigargosar$elm_simple_gtd$Todo_ReminderForm$create = F2(
@@ -42,7 +37,6 @@ var _jigargosar$elm_simple_gtd$Todo_ReminderForm$create = F2(
 		return {
 			id: _jigargosar$elm_simple_gtd$Document$getId(todo),
 			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
-			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
-			menuState: _jigargosar$elm_simple_gtd$Menu$initState
+			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli)
 		};
 	});

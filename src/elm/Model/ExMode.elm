@@ -3,7 +3,6 @@ module Model.ExMode exposing (..)
 import Context
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (..)
-import ExclusiveMode
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import LaunchBar.Models
 import Menu
@@ -112,4 +111,4 @@ showMainMenu =
 
 
 deactivateEditingMode =
-    setEditMode ExclusiveMode.none
+    setEditMode XMNone

@@ -2,9 +2,9 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F3(
 	function (a, b, c) {
 		return {id: a, todoText: b, entity: c};
 	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoGroupFrom = F5(
-	function (a, b, c, d, e) {
-		return {todo: a, todoId: b, contextId: c, projectId: d, menuState: e};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoGroupFrom = F4(
+	function (a, b, c, d) {
+		return {todoId: a, contextId: b, projectId: c, menuState: d};
 	});
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
 	function (a, b) {

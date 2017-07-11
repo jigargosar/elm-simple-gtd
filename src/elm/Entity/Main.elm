@@ -6,9 +6,9 @@ import Document.Types exposing (getDocId)
 import DomPorts
 import Entity
 import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity)
-import ExclusiveMode
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject))
+import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject, XMEditTodo))
 import GroupDoc
+import GroupDoc.EditForm
 import Model.ExMode
 import Model.Internal exposing (setEditMode)
 import Model.Selection
@@ -20,11 +20,13 @@ import Set
 import Store
 import Stores
 import Todo
+import Todo.Form
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
 import Tuple2
+import X.Function.Infix exposing (..)
 
 
 map =
@@ -165,19 +167,42 @@ createAndEditNewContext model =
            )
 
 
+editProjectSetName =
+    GroupDoc.EditForm.setName >>> XMEditProject
+
+
+editContextSetName =
+    GroupDoc.EditForm.setName >>> XMEditContext
+
+
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
-    setEditMode (ExclusiveMode.createEntityEditForm entity) model
+    setEditMode (createEntityEditForm entity) model
+
+
+createEntityEditForm : Entity -> ExclusiveMode
+createEntityEditForm entity =
+    case entity of
+        GroupEntity g ->
+            case g of
+                ContextEntity model ->
+                    model |> GroupDoc.EditForm.forContext >> XMEditContext
+
+                ProjectEntity model ->
+                    model |> GroupDoc.EditForm.forProject >> XMEditProject
+
+        TodoEntity model ->
+            model |> Todo.Form.create >> XMEditTodo
 
 
 updateEditModeNameChanged newName entity model =
     model
         |> case model.editMode of
             XMEditContext ecm ->
-                setEditMode (ExclusiveMode.editContextSetName newName ecm)
+                setEditMode (editContextSetName newName ecm)
 
             XMEditProject epm ->
-                setEditMode (ExclusiveMode.editProjectSetName newName epm)
+                setEditMode (editProjectSetName newName epm)
 
             _ ->
                 identity

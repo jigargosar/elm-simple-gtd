@@ -123,7 +123,6 @@ update andThenUpdate msg =
                             Cmd.none
                     )
 
-        -- bug: causes reminder form focus to jump, but needed for menu updates.
         OnMainMenuStateChanged menuState ->
             map
                 (menuState

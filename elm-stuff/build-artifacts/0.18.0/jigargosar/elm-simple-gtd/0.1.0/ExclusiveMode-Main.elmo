@@ -1,14 +1,31 @@
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$createAndSetTodoEditForm = F2(
+	function (todo, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
+			A2(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, model.now, todo),
+			model);
+	});
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start = function (exclusiveMode) {
 	var _p0 = exclusiveMode;
-	if (_p0.ctor === 'XMNewTodo') {
-		return function (_p1) {
-			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-				A2(
-					_Fresheyeball$elm_return$Return$map,
-					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(exclusiveMode),
-					_p1));
-		};
-	} else {
-		return _elm_lang$core$Basics$identity;
+	switch (_p0.ctor) {
+		case 'XMNewTodo':
+			return function (_p1) {
+				return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
+					A2(
+						_Fresheyeball$elm_return$Return$map,
+						_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(exclusiveMode),
+						_p1));
+			};
+		case 'XMTodoEdit':
+			var _p3 = _p0._0;
+			return _Fresheyeball$elm_return$Return$map(
+				function (_p2) {
+					return A2(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Main$createAndSetTodoEditForm,
+						_p3,
+						A3(_jigargosar$elm_simple_gtd$Model_Internal$setTodoEXMode, _p3, _p0._1, _p2));
+				});
+		default:
+			return _elm_lang$core$Basics$identity;
 	}
 };

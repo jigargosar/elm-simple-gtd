@@ -58,7 +58,7 @@ overlayViews appModel =
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                XMTodoEdit t ->
+                XMEditTodo form t ->
                     case t of
                         XMEditTodoContext ->
                             appModel.maybeTodoEditForm

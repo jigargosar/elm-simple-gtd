@@ -20,9 +20,9 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) 
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
 	return {ctor: 'XMEditContext', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit = F2(
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = F2(
 	function (a, b) {
-		return {ctor: 'XMTodoEdit', _0: a, _1: b};
+		return {ctor: 'XMEditTodo', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
 	return {ctor: 'XMTodoMoreMenu', _0: a};

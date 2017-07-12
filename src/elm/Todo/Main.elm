@@ -5,7 +5,7 @@ import Document
 import DomPorts
 import Entity.Types
 import ExclusiveMode.Types exposing (..)
-import Model.Internal exposing (setEditMode)
+import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
@@ -95,11 +95,11 @@ update andThenUpdate now todoMsg =
             Return.map
                 (Todo.Form.setNewTodoFormText todoText form
                     |> XMSetup
-                    |> setEditMode
+                    |> setExclusiveMode
                 )
 
         OnShowMoreMenu todoId ->
-            Return.map (todoMoreMenu todoId |> setEditMode)
+            Return.map (todoMoreMenu todoId |> setExclusiveMode)
                 >> Return.command (positionMoreMenuCmd todoId)
 
         ToggleRunning todoId ->
@@ -291,7 +291,7 @@ inboxEntity =
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.Form.createNewTodoForm inboxEntity "" |> XMNewTodo)
+    setExclusiveMode (Todo.Form.createNewTodoForm inboxEntity "" |> XMNewTodo)
 
 
 todoMoreMenu =

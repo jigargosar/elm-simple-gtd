@@ -16,7 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEXMode, setTodoEditForm, updateEditModeM)
+import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEXMode, setTodoEditForm, updateEditModeM)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -68,21 +68,31 @@ update andThenUpdate msg =
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
 
-        OnStartEditTodo todo t ->
+        --        OnStartEditingTodo todo t ->
+        --            let
+        --                createAndSetTodoEditForm todo model =
+        --                    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
+        --            in
+        --                map
+        --                    (setTodoEXMode t
+        --                        >> createAndSetTodoEditForm todo
+        --                    )
+        --
+        OnStartEditingTodo todo t ->
             let
-                createAndSetTodoEditForm todo model =
-                    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
+                createForm now =
+                    Todo.Form.createEditTodoForm now todo
+
+                createXM model =
+                    XMEditTodo (createForm model.now) t
             in
-                map
-                    (setTodoEXMode t
-                        >> createAndSetTodoEditForm todo
-                    )
+                Return.mapModelWith createXM setExclusiveMode
 
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg
 
         OnShowMainMenu ->
-            map (setEditMode (Menu.initState |> XMMainMenu))
+            map (setExclusiveMode (Menu.initState |> XMMainMenu))
                 >> Return.command positionMainMenuCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
@@ -107,19 +117,19 @@ update andThenUpdate msg =
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartEditingTodoContext todo ->
-            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoContext)
+            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoContext)
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingTodoProject todo ->
-            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoProject)
+            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoProject)
                 >> Return.command (positionProjectMenuCmd todo)
 
         OnStartEditingReminder todo ->
-            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoReminder)
+            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoReminder)
                 >> Return.command (positionScheduleMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
-            map (setEditMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
+            map (setExclusiveMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
 
         OnUpdateTodoForm form action ->
             map
@@ -137,7 +147,7 @@ update andThenUpdate msg =
             map
                 (menuState
                     |> XMMainMenu
-                    >> setEditMode
+                    >> setExclusiveMode
                 )
                 >> autoFocusInputRCmd
 
@@ -145,7 +155,7 @@ update andThenUpdate msg =
             map
                 ({ form | uri = uri }
                     |> XMEditSyncSettings
-                    >> setEditMode
+                    >> setExclusiveMode
                 )
 
         OnSetViewType viewType ->

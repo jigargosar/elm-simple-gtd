@@ -5,7 +5,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
-import Model.Internal exposing (setEditMode)
+import Model.Internal exposing (setExclusiveMode)
 import Msg exposing (Msg(LaunchBarMsg))
 import Return
 import Toolkit.Helpers exposing (..)
@@ -64,5 +64,5 @@ update andThenUpdate msg now =
 
 
 open andThenUpdate =
-    map (setEditMode XMLaunchBar)
+    map (setExclusiveMode XMLaunchBar)
         >> (LaunchBar.Messages.Open |> LaunchBarMsg |> andThenUpdate)

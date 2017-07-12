@@ -4,7 +4,7 @@ import Context
 import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup, XMSignInOverlay))
 import Firebase.SignIn
-import Model.Internal exposing (deactivateEditingMode, setEditMode)
+import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)
 import Store
@@ -24,11 +24,11 @@ update andThenUpdate msg =
                     model
                         |> if Firebase.SignIn.shouldSkipSignIn model.signInModel then
                             if Store.isEmpty model.todoStore then
-                                setEditMode createSetupExclusiveMode
+                                setExclusiveMode createSetupExclusiveMode
                             else
                                 deactivateEditingMode
                            else
-                            setEditMode XMSignInOverlay
+                            setExclusiveMode XMSignInOverlay
 
                 inboxEntity =
                     createContextEntity Context.null

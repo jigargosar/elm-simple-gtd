@@ -64,7 +64,7 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$open = function (andThenUpdate) 
 			_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open))(
 			A2(
 				_jigargosar$elm_simple_gtd$Update_LaunchBar$map,
-				_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
+				_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
 				_p5));
 	};
 };

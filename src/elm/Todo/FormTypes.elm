@@ -7,7 +7,7 @@ import Menu.Types exposing (MenuState)
 import Todo.Types exposing (TodoDoc, TodoText)
 
 
-type alias TodoEditForm =
+type alias EditTodoForm =
     { id : DocId
     , name : TodoText
     , entity : Entity

@@ -54,10 +54,10 @@ var _jigargosar$elm_simple_gtd$Entity_Main$updateEditModeNameChanged = F3(
 			var _p4 = model.editMode;
 			switch (_p4.ctor) {
 				case 'XMEditContext':
-					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+					return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 						A2(_jigargosar$elm_simple_gtd$Entity_Main$editContextSetName, newName, _p4._0));
 				case 'XMEditProject':
-					return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+					return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 						A2(_jigargosar$elm_simple_gtd$Entity_Main$editProjectSetName, newName, _p4._0));
 				default:
 					return _elm_lang$core$Basics$identity;
@@ -105,14 +105,14 @@ var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F4(
 				var _p8 = _p7._0;
 				if (_p8.ctor === 'ContextEntity') {
 					return _jigargosar$elm_simple_gtd$Entity_Main$map(
-						_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 							function (_p9) {
 								return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
 									_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forContext(_p9));
 							}(_p8._0)));
 				} else {
 					return _jigargosar$elm_simple_gtd$Entity_Main$map(
-						_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 							function (_p10) {
 								return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject(
 									_jigargosar$elm_simple_gtd$GroupDoc_EditForm$forProject(_p10));
@@ -120,8 +120,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F4(
 				}
 			} else {
 				return andThenUpdate(
-					_jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-						A2(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit, _p7._0, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoText)));
+					A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p7._0, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoText));
 			}
 		}()(
 			_Fresheyeball$elm_return$Return$singleton(model));

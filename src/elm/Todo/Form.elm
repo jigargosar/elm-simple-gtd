@@ -15,7 +15,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-createEditTodoForm : Time -> TodoDoc -> TodoEditForm
+createEditTodoForm : Time -> TodoDoc -> EditTodoForm
 createEditTodoForm now todo =
     let
         timeInMilli =
@@ -58,7 +58,7 @@ time =
     field .time (\s b -> { b | time = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> TodoEditForm -> TodoEditForm
+updateEditTodoForm : EditTodoFormAction -> EditTodoForm -> EditTodoForm
 updateEditTodoForm action =
     case action of
         SetTodoText value ->
@@ -74,7 +74,7 @@ updateEditTodoForm action =
             set time value
 
 
-getMaybeTime : TodoEditForm -> Maybe Time
+getMaybeTime : EditTodoForm -> Maybe Time
 getMaybeTime { id, date, time } =
     let
         dateTimeString =

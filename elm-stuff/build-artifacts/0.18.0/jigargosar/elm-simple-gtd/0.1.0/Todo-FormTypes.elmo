@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F9(
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = F9(
 	function (a, b, c, d, e, f, g, h, i) {
 		return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i};
 	});

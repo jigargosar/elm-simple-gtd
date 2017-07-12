@@ -55,7 +55,7 @@ type alias AppModel =
     , contextStore : ContextStore
     , editMode : ExclusiveMode
     , launchBar : LaunchBar
-    , maybeTodoEditForm : Maybe TodoEditForm
+    , maybeTodoEditForm : Maybe EditTodoForm
     , mainViewType : ViewType
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String

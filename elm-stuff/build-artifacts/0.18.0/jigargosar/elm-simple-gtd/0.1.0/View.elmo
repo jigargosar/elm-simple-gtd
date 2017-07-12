@@ -249,7 +249,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
-			case 'XMTodoEdit':
+			case 'XMEditTodo':
 				var _p2 = _p1._1;
 				switch (_p2.ctor) {
 					case 'XMEditTodoContext':

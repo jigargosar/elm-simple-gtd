@@ -5,7 +5,7 @@ module ExclusiveMode.Types exposing (..)
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Models exposing (LaunchBar)
 import Menu.Types exposing (MenuState)
-import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoEditForm, TodoMoreMenuForm)
+import Todo.FormTypes exposing (AddTodoForm, EditTodoForm, EditTodoReminderForm, EditTodoForm, TodoMoreMenuForm)
 import Todo.Types exposing (TodoDoc)
 
 
@@ -24,7 +24,7 @@ type ExclusiveMode
     = XMNewTodo AddTodoForm
     | XMSetup AddTodoForm
     | XMTodoMoreMenu TodoMoreMenuForm
-    | XMTodoEdit XMEditTodoType
+    | XMEditTodo EditTodoForm XMEditTodoType
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMLaunchBar

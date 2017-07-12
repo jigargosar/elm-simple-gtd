@@ -5,7 +5,7 @@ var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
 		var createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
 			A2(_jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm, inboxEntity, ''));
 		var onSwitchToNewUserSetupModeIfNeeded = function (model) {
-			return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(createSetupExclusiveMode) : _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode) : _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay))(model);
+			return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(createSetupExclusiveMode) : _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode) : _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay))(model);
 		};
 		return _Fresheyeball$elm_return$Return$map(onSwitchToNewUserSetupModeIfNeeded);
 	});

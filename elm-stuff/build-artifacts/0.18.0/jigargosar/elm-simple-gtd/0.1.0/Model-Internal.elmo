@@ -17,16 +17,18 @@ var _jigargosar$elm_simple_gtd$Model_Internal$editMode = A2(
 				b,
 				{editMode: s});
 		}));
-var _jigargosar$elm_simple_gtd$Model_Internal$setEditMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model_Internal$editMode);
+var _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model_Internal$editMode);
 var _jigargosar$elm_simple_gtd$Model_Internal$updateEditModeM = F2(
 	function (updater, model) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Model_Internal$setEditMode,
+			_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode,
 			updater(model),
 			model);
 	});
-var _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);
-var _jigargosar$elm_simple_gtd$Model_Internal$setTodoEXMode = A2(
-	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
-	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit,
-	_jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Model_Internal$editMode));
+var _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);
+var _jigargosar$elm_simple_gtd$Model_Internal$setTodoEXMode = function (_p0) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$set,
+		_jigargosar$elm_simple_gtd$Model_Internal$editMode,
+		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(_p0));
+};

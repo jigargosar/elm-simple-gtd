@@ -15,13 +15,13 @@ editMode =
     X.Record.field .editMode (\s b -> { b | editMode = s })
 
 
-setEditMode : ExclusiveMode -> ModelF
-setEditMode =
+setExclusiveMode : ExclusiveMode -> ModelF
+setExclusiveMode =
     set editMode
 
 
 setTodoEXMode =
-    XMTodoEdit >> set editMode
+    XMEditTodo >> set editMode
 
 
 setTodoEditForm f m =
@@ -30,8 +30,8 @@ setTodoEditForm f m =
 
 updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
 updateEditModeM updater model =
-    setEditMode (updater model) model
+    setExclusiveMode (updater model) model
 
 
 deactivateEditingMode =
-    setEditMode XMNone
+    setExclusiveMode XMNone

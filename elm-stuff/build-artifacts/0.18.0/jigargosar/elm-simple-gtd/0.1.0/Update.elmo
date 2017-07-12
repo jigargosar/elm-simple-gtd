@@ -61,6 +61,17 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return A2(_jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg, andThenUpdate, _p0._0);
 			case 'OnStartExclusiveMode':
 				return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p0._0);
+			case 'OnStartEditingTodo':
+				var createForm = function (now) {
+					return A2(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, now, _p0._0);
+				};
+				var createXM = function (model) {
+					return A2(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo,
+						createForm(model.now),
+						_p0._1);
+				};
+				return A2(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode);
 			case 'OnMainMsg':
 				return A2(_jigargosar$elm_simple_gtd$Main_Update$update, andThenUpdate, _p0._0);
 			case 'OnShowMainMenu':
@@ -70,7 +81,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionMainMenuCmd,
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+							_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState)),
 							_p1));
 				};
@@ -128,8 +139,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p10),
 						A2(
 							andThenUpdate,
-							_jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-								A2(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit, _p10, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext)),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p10, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext),
 							_p9));
 				};
 			case 'OnStartEditingTodoProject':
@@ -140,8 +150,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p12),
 						A2(
 							andThenUpdate,
-							_jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-								A2(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit, _p12, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject)),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p12, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject),
 							_p11));
 				};
 			case 'OnStartEditingReminder':
@@ -152,13 +161,12 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p14),
 						A2(
 							andThenUpdate,
-							_jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode(
-								A2(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoEdit, _p14, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder)),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p14, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder),
 							_p13));
 				};
 			case 'OnNewTodoTextChanged':
 				return _jigargosar$elm_simple_gtd$Update$map(
-					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
 							A2(_jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText, _p0._1, _p0._0))));
 			case 'OnUpdateTodoForm':
@@ -186,7 +194,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p19) {
-								return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+								return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p19));
 							}(_p0._0),
 							_p18));
@@ -194,7 +202,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnUpdateRemoteSyncFormUri':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					function (_p20) {
-						return _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
+						return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p20));
 					}(
 						_elm_lang$core$Native_Utils.update(

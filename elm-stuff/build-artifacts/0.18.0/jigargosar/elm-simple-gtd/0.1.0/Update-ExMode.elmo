@@ -51,7 +51,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 				_p5.id,
 				_jigargosar$elm_simple_gtd$Project$setName(_p5.name),
 				model);
-		case 'XMTodoEdit':
+		case 'XMEditTodo':
 			var _p6 = _p3._1;
 			switch (_p6.ctor) {
 				case 'XMEditTodoText':

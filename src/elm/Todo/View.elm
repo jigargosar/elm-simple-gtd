@@ -9,6 +9,7 @@ import Msg exposing (Msg)
 import Store
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc)
+import TodoMsg
 import Types exposing (AppModel)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
@@ -162,7 +163,7 @@ createTodoViewModel appM canBeFocused todo =
 
         startEditingMsg =
             if canBeFocused then
-                Msg.OnStartEditingTodo todo XMEditTodoText
+                TodoMsg.onStartEditingTodoText todo
             else
                 Model.noop
 

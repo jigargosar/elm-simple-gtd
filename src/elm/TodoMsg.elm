@@ -1,6 +1,7 @@
-module TodoMsg exposing (onStopRunningTodo, onGotoRunningTodo, onReminderOverlayAction, onNewTodoForInbox)
+module TodoMsg exposing (..)
 
 import Msg exposing (Msg(OnTodoMsg))
+import Todo.FormTypes exposing (..)
 import Todo.Msg
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -29,3 +30,7 @@ onReminderOverlayAction =
 onNewTodoForInbox : Msg
 onNewTodoForInbox =
     Todo.Msg.OnNewTodoForInbox |> OnTodoMsg
+
+
+onStartEditingTodoText todo =
+    Msg.OnStartEditingTodo todo XMEditTodoText

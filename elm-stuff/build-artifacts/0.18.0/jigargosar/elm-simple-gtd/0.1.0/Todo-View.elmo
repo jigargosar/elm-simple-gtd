@@ -818,7 +818,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 };
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 	function (appM, canBeFocused, todo) {
-		var startEditingMsg = canBeFocused ? A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText) : _jigargosar$elm_simple_gtd$Model$noop;
+		var startEditingMsg = canBeFocused ? _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText(todo) : _jigargosar$elm_simple_gtd$Model$noop;
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo));

@@ -80,8 +80,21 @@ update andThenUpdate msg =
                     XMEditTodo (createForm model.now)
             in
                 Return.with (createXM >> OnStartTodoEXMode) andThenUpdate
+                    >> command
+                        (case t of
+                            XMEditTodoText ->
+                                autoFocusInputCmd
 
-        --                Return.mapModelWith createXM setExclusiveMode
+                            XMEditTodoContext ->
+                                positionContextMenuCmd todo
+
+                            XMEditTodoProject ->
+                                positionProjectMenuCmd todo
+
+                            XMEditTodoReminder ->
+                                positionScheduleMenuCmd todo
+                        )
+
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg
 
@@ -112,15 +125,12 @@ update andThenUpdate msg =
 
         OnStartEditingTodoContext todo ->
             andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoContext)
-                >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingTodoProject todo ->
             andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoProject)
-                >> Return.command (positionProjectMenuCmd todo)
 
         OnStartEditingReminder todo ->
             andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoReminder)
-                >> Return.command (positionScheduleMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
             map (setExclusiveMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))

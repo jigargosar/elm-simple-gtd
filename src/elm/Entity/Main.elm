@@ -6,10 +6,10 @@ import Document.Types exposing (getDocId)
 import DomPorts
 import Entity
 import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity)
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditContext, XMEditProject, XMEditTodo))
+import ExclusiveMode.Types exposing (..)
 import GroupDoc
 import GroupDoc.EditForm
-import Model.Internal exposing (setEditMode, setTodoEditForm)
+import Model.Internal exposing (setEditMode, setTodoEXMode, setTodoEditForm)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (Msg)
@@ -188,7 +188,7 @@ startEditingEntity now entity model =
                         setEditMode (p |> GroupDoc.EditForm.forProject >> XMEditProject)
 
             TodoEntity todo ->
-                setEditMode XMEditTodo
+                setTodoEXMode XMEditTodo
                     >> setTodoEditForm (Todo.Form.createEditTodoForm now todo)
 
 

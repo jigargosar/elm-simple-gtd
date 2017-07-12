@@ -1,6 +1,6 @@
 module Model.Internal exposing (..)
 
-import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
+import ExclusiveMode.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel, ModelF)
@@ -18,6 +18,11 @@ editMode =
 setEditMode : ExclusiveMode -> ModelF
 setEditMode =
     set editMode
+
+
+setTodoEXMode : XMTodoType -> ModelF
+setTodoEXMode =
+    XMTodo >> set editMode
 
 
 setTodoEditForm f m =

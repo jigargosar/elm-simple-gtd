@@ -4,7 +4,7 @@ import Context
 import Document
 import DomPorts
 import Entity.Types
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditTodoReminder, XMNewTodo, XMSetup, XMTodoMoreMenu))
+import ExclusiveMode.Types exposing (..)
 import Model.Internal exposing (setEditMode)
 import Model.ViewType
 import Msg

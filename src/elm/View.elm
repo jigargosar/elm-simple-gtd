@@ -5,7 +5,7 @@ import AppDrawer.Types
 import AppDrawer.View
 import CustomSync
 import Entity.View
-import ExclusiveMode.Types exposing (ExclusiveMode(..))
+import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
 import X.Html exposing (boolProperty, onClickStopPropagation)
@@ -58,20 +58,27 @@ overlayViews appModel =
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                XMEditTodoContext ->
-                    appModel.maybeTodoEditForm
-                        ?|> (\form -> Todo.View.contextMenu form appModel)
-                        ?= def
+                XMTodo t ->
+                    case t of
+                        XMEditTodoContext ->
+                            appModel.maybeTodoEditForm
+                                ?|> (\form -> Todo.View.contextMenu form appModel)
+                                ?= def
 
-                XMEditTodoProject ->
-                    appModel.maybeTodoEditForm
-                        ?|> (\form -> Todo.View.projectMenu form appModel)
-                        ?= def
+                        XMEditTodoProject ->
+                            appModel.maybeTodoEditForm
+                                ?|> (\form -> Todo.View.projectMenu form appModel)
+                                ?= def
 
-                XMEditTodoReminder ->
-                    appModel.maybeTodoEditForm
-                        ?|> (\form -> Todo.View.reminderPopup form)
-                        ?= def
+                        XMEditTodoReminder ->
+                            appModel.maybeTodoEditForm
+                                ?|> (\form -> Todo.View.reminderPopup form)
+                                ?= def
+
+                        XMEditTodo ->
+                            appModel.maybeTodoEditForm
+                                ?|> (\form -> Todo.View.edit form appModel)
+                                ?= def
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
@@ -84,11 +91,6 @@ overlayViews appModel =
 
                 XMEditContext form ->
                     GroupDoc.EditView.init form
-
-                XMEditTodo ->
-                    appModel.maybeTodoEditForm
-                        ?|> (\form -> Todo.View.edit form appModel)
-                        ?= def
 
                 XMNewTodo form ->
                     Todo.View.new form

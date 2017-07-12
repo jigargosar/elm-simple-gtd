@@ -3,7 +3,7 @@ module Update.ExMode exposing (..)
 import Context
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), GroupEntityType(..))
-import ExclusiveMode.Types exposing (ExclusiveMode(..))
+import ExclusiveMode.Types exposing (..)
 import Project
 import Return
 import Todo
@@ -31,21 +31,26 @@ saveCurrentForm model =
                 |> Stores.updateProject form.id
                     (Project.setName form.name)
 
-        XMEditTodo ->
-            model.maybeTodoEditForm
-                ?|> (\form ->
-                        model
-                            |> Stores.updateTodo (TA_SetText form.name) form.id
-                    )
-                ?= Return.singleton model
+        XMTodo t ->
+            case t of
+                XMEditTodo ->
+                    model.maybeTodoEditForm
+                        ?|> (\form ->
+                                model
+                                    |> Stores.updateTodo (TA_SetText form.name) form.id
+                            )
+                        ?= Return.singleton model
 
-        XMEditTodoReminder ->
-            model.maybeTodoEditForm
-                ?|> (\form ->
-                        model
-                            |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
-                    )
-                ?= Return.singleton model
+                XMEditTodoReminder ->
+                    model.maybeTodoEditForm
+                        ?|> (\form ->
+                                model
+                                    |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
+                            )
+                        ?= Return.singleton model
+
+                _ ->
+                    model |> Return.singleton
 
         XMNewTodo form ->
             saveNewTodoForm form model

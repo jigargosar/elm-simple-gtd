@@ -8,7 +8,7 @@ import Entity
 import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Main
-import ExclusiveMode.Types exposing (ExclusiveMode(..))
+import ExclusiveMode.Types exposing (..)
 import Firebase.Main
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
@@ -16,7 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEditForm, updateEditModeM)
+import Model.Internal exposing (deactivateEditingMode, setEditMode, setTodoEXMode, setTodoEditForm, updateEditModeM)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -98,14 +98,14 @@ update andThenUpdate msg =
 
         OnStartEditingTodoContext todo ->
             map
-                (setEditMode (XMEditTodoContext)
+                (setTodoEXMode (XMEditTodoContext)
                     >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingTodoProject todo ->
             map
-                (setEditMode (XMEditTodoProject)
+                (setTodoEXMode (XMEditTodoProject)
                     >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionProjectMenuCmd todo)
@@ -115,7 +115,7 @@ update andThenUpdate msg =
 
         OnStartEditingReminder todo ->
             map
-                (setEditMode (XMEditTodoReminder)
+                (setTodoEXMode XMEditTodoReminder
                     >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionScheduleMenuCmd todo)

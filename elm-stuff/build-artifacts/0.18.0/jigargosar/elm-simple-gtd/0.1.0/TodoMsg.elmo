@@ -1,3 +1,12 @@
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder = function (todo) {
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder);
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject = function (todo) {
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject);
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext = function (todo) {
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext);
+};
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText = function (todo) {
 	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText);
 };

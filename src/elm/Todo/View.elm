@@ -142,10 +142,10 @@ createTodoViewModel appM canBeFocused todo =
                         toggleDeleteMsg
 
                     Key.CharP ->
-                        Msg.OnStartEditingTodoProject todo
+                        TodoMsg.onStartEditingTodoProject todo
 
                     Key.CharC ->
-                        Msg.OnStartEditingTodoContext todo
+                        TodoMsg.onStartEditingTodoContext todo
 
                     Key.CharR ->
                         reminder.startEditingMsg
@@ -180,8 +180,8 @@ createTodoViewModel appM canBeFocused todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = Msg.OnStartEditingTodoContext todo
-        , showProjectDropDownMsg = Msg.OnStartEditingTodoProject todo
+        , showContextDropDownMsg = TodoMsg.onStartEditingTodoContext todo
+        , showProjectDropDownMsg = TodoMsg.onStartEditingTodoProject todo
         , startEditingMsg = startEditingMsg
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
@@ -353,7 +353,7 @@ createScheduleViewModel now todo =
     in
         { displayText = displayText
         , isOverDue = displayText == overDueText
-        , startEditingMsg = Msg.OnStartEditingReminder todo
+        , startEditingMsg = TodoMsg.onStartEditingReminder todo
         }
 
 

@@ -34,3 +34,15 @@ onNewTodoForInbox =
 
 onStartEditingTodoText todo =
     Msg.OnStartEditingTodo todo XMEditTodoText
+
+
+onStartEditingTodoContext todo =
+    Msg.OnStartEditingTodo todo XMEditTodoContext
+
+
+onStartEditingTodoProject todo =
+    Msg.OnStartEditingTodo todo XMEditTodoProject
+
+
+onStartEditingReminder todo =
+    Msg.OnStartEditingTodo todo XMEditTodoReminder

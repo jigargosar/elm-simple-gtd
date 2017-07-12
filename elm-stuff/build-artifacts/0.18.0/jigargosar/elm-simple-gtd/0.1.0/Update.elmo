@@ -159,15 +159,6 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode, _p13));
 				};
-			case 'OnStartEditingTodoContext':
-				return andThenUpdate(
-					A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p0._0, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext));
-			case 'OnStartEditingTodoProject':
-				return andThenUpdate(
-					A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p0._0, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject));
-			case 'OnStartEditingReminder':
-				return andThenUpdate(
-					A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p0._0, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder));
 			case 'OnNewTodoTextChanged':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(

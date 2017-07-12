@@ -386,7 +386,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel = F2(
 		return {
 			displayText: displayText,
 			isOverDue: _elm_lang$core$Native_Utils.eq(displayText, overDueText),
-			startEditingMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingReminder(todo)
+			startEditingMsg: _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder(todo)
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View$editScheduleButton = function (vm) {
@@ -866,9 +866,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'Delete':
 						return toggleDeleteMsg;
 					case 'CharP':
-						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoProject(todo);
+						return _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject(todo);
 					case 'CharC':
-						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoContext(todo);
+						return _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext(todo);
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
@@ -895,8 +895,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			displayText: _jigargosar$elm_simple_gtd$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoContext(todo),
-			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoProject(todo),
+			showContextDropDownMsg: _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext(todo),
+			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject(todo),
 			startEditingMsg: startEditingMsg,
 			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,

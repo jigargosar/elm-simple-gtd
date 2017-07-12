@@ -47,9 +47,6 @@ type Msg
     | OnRemotePouchSync SyncForm
     | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
-    | OnStartEditingReminder TodoDoc
-    | OnStartEditingTodoContext TodoDoc
-    | OnStartEditingTodoProject TodoDoc
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnUpdateTodoForm EditTodoForm EditTodoFormAction

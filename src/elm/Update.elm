@@ -123,15 +123,6 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnStartEditingTodoContext todo ->
-            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoContext)
-
-        OnStartEditingTodoProject todo ->
-            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoProject)
-
-        OnStartEditingReminder todo ->
-            andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoReminder)
-
         OnNewTodoTextChanged form text ->
             map (setExclusiveMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
 

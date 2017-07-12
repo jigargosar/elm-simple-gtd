@@ -25,12 +25,8 @@ newTodoFab alv m =
         , Material.Tooltip.render Msg.OnMdl
             [ 0 ]
             m.mdl
-            [ Material.Tooltip.left
-            , Material.Tooltip.element Html.div
-            ]
-            [ div
-                [ cs "mdl-typography--subhead" ]
-                [ text "Quick Add Task: shortcut q" ]
-            , div [ cs "mdl-typography--body-1" ] [ text "Add To Inbox: shortcut i" ]
+            [ Material.Tooltip.left ]
+            [ div [ cs "mdl-typography--body-2" ] [ text "Quick Add Task (q)" ]
+            , div [ cs "mdl-typography--body-1" ] [ text "Add To Inbox (i)" ]
             ]
         ]

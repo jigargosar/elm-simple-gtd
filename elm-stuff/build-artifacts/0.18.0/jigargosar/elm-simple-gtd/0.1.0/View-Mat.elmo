@@ -68,11 +68,7 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = F2(
 						{
 							ctor: '::',
 							_0: _debois$elm_mdl$Material_Tooltip$left,
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Tooltip$element(_elm_lang$html$Html$div),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
@@ -80,12 +76,12 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = F2(
 								_debois$elm_mdl$Material_Options$div,
 								{
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-typography--subhead'),
+									_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-typography--body-2'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Quick Add Task: shortcut q'),
+									_0: _elm_lang$html$Html$text('Quick Add Task (q)'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -99,7 +95,7 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = F2(
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Add To Inbox: shortcut i'),
+										_0: _elm_lang$html$Html$text('Add To Inbox (i)'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}

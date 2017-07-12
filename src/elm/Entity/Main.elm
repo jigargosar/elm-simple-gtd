@@ -189,7 +189,7 @@ startEditingEntity now entity model =
 
             TodoEntity todo ->
                 setEditMode XMEditTodo
-                    >> setTodoEditForm (Todo.Form.create now todo)
+                    >> setTodoEditForm (Todo.Form.createEditTodoForm now todo)
 
 
 updateEditModeNameChanged newName entity model =

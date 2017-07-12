@@ -15,8 +15,8 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-create : Time -> TodoDoc -> TodoEditForm
-create now todo =
+createEditTodoForm : Time -> TodoDoc -> TodoEditForm
+createEditTodoForm now todo =
     let
         timeInMilli =
             Todo.getMaybeReminderTime todo ?= now + Time.hour

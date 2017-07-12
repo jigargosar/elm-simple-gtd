@@ -181,7 +181,7 @@ update andThenUpdate msg =
 
 
 createAndSetTodoEditForm todo model =
-    Model.Internal.setTodoEditForm (Todo.Form.create model.now todo) model
+    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
 
 
 moveFocusBy : Int -> List Entity -> ModelF

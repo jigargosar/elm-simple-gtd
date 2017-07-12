@@ -30,9 +30,12 @@ import Toolkit.Helpers exposing (..)
 
 init model =
     let
+        alv =
+            appLayoutView model
+
         children =
-            [ appLayoutView model
-            , View.Mat.newTodoFab model
+            [ alv
+            , View.Mat.newTodoFab alv model
             ]
                 ++ overlayViews model
     in

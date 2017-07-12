@@ -95,14 +95,7 @@ iconM icon =
 
 
 fab msg mdl opts =
-    btn msg [ 0 ] mdl [ Material.Button.fab, many opts ]
-
-
-primaryFABCS =
-    many
-        [ Material.Button.colored
-        , cs "mdl-button--page-fab"
-        ]
+    btn msg [ 99 ] mdl [ Material.Button.fab, many opts ]
 
 
 headerIconBtn msg mdl opts =

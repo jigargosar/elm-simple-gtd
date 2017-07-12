@@ -147,7 +147,7 @@ var _jigargosar$elm_simple_gtd$Mat$fab = F3(
 			msg,
 			{
 				ctor: '::',
-				_0: 0,
+				_0: 99,
 				_1: {ctor: '[]'}
 			},
 			mdl,
@@ -160,16 +160,6 @@ var _jigargosar$elm_simple_gtd$Mat$fab = F3(
 					_1: {ctor: '[]'}
 				}
 			});
-	});
-var _jigargosar$elm_simple_gtd$Mat$primaryFABCS = _jigargosar$elm_simple_gtd$Mat$many(
-	{
-		ctor: '::',
-		_0: _debois$elm_mdl$Material_Button$colored,
-		_1: {
-			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$Mat$cs('mdl-button--page-fab'),
-			_1: {ctor: '[]'}
-		}
 	});
 var _jigargosar$elm_simple_gtd$Mat$headerIconBtn = F3(
 	function (msg, mdl, opts) {

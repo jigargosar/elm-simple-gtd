@@ -311,14 +311,15 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 		});
 };
 var _jigargosar$elm_simple_gtd$View$init = function (model) {
+	var alv = _jigargosar$elm_simple_gtd$View$appLayoutView(model);
 	var children = A2(
 		_elm_lang$core$Basics_ops['++'],
 		{
 			ctor: '::',
-			_0: _jigargosar$elm_simple_gtd$View$appLayoutView(model),
+			_0: alv,
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$View_Mat$newTodoFab(model),
+				_0: A2(_jigargosar$elm_simple_gtd$View_Mat$newTodoFab, alv, model),
 				_1: {ctor: '[]'}
 			}
 		},

@@ -95,7 +95,7 @@ iconM icon =
 
 
 fab msg mdl opts =
-    btn msg [ 99 ] mdl [ Material.Button.fab, many opts ]
+    btn msg [ 0 ] mdl [ Material.Button.fab, many opts ]
 
 
 headerIconBtn msg mdl opts =

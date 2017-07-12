@@ -12,7 +12,7 @@ import Msg
 
 newTodoFab alv m =
     div [ cs "primary-fab-container" ]
-        [ div [ Material.Tooltip.attach Msg.OnMdl [ 3 ] ]
+        [ div [ Material.Tooltip.attach Msg.OnMdl [ 0 ] ]
             [ Mat.fab Msg.OnMdl
                 m.mdl
                 [ id "add-fab"
@@ -23,7 +23,7 @@ newTodoFab alv m =
                 [ icon "add" ]
             ]
         , Material.Tooltip.render Msg.OnMdl
-            [ 3 ]
+            [ 0 ]
             m.mdl
             [ Material.Tooltip.left
             , Material.Tooltip.element Html.div

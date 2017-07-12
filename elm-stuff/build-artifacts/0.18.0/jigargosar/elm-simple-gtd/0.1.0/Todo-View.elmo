@@ -1,8 +1,5 @@
 var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
-	var updateReminderForm = function (_p0) {
-		return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm, form, _p0));
-	};
+	var updateReminderForm = _jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm(form);
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -14,7 +11,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-						function (_p1) {
+						function (_p0) {
 							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
@@ -77,9 +74,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 												_1: {
 													ctor: '::',
 													_0: _jigargosar$elm_simple_gtd$X_Html$onChange(
-														function (_p2) {
+														function (_p1) {
 															return updateReminderForm(
-																_jigargosar$elm_simple_gtd$Todo_Form$SetTodoReminderDate(_p2));
+																_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate(_p1));
 														}),
 													_1: {ctor: '[]'}
 												}
@@ -126,9 +123,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 												_1: {
 													ctor: '::',
 													_0: _jigargosar$elm_simple_gtd$X_Html$onChange(
-														function (_p3) {
+														function (_p2) {
 															return updateReminderForm(
-																_jigargosar$elm_simple_gtd$Todo_Form$SetTodoReminderTime(_p3));
+																_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime(_p2));
 														}),
 													_1: {ctor: '[]'}
 												}
@@ -169,11 +166,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd
 var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
 		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg, form.entity, _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
-		var fireTextChanged = function (_p4) {
+		var fireTextChanged = function (_p3) {
 			return A2(
 				_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 				form,
-				_jigargosar$elm_simple_gtd$Todo_Form$SetTodoText(_p4));
+				_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p3));
 		};
 		var todoText = form.name;
 		return A2(
@@ -187,7 +184,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 					_1: {
 						ctor: '::',
 						_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-							function (_p5) {
+							function (_p4) {
 								return _jigargosar$elm_simple_gtd$Model$noop;
 							}),
 						_1: {ctor: '[]'}
@@ -226,7 +223,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 										_1: {
 											ctor: '::',
 											_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-												function (_p6) {
+												function (_p5) {
 													return _jigargosar$elm_simple_gtd$Model$noop;
 												}),
 											_1: {ctor: '[]'}
@@ -286,7 +283,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-						function (_p7) {
+						function (_p6) {
 							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
@@ -505,12 +502,12 @@ var _jigargosar$elm_simple_gtd$Todo_View$doneIconButton = function (vm) {
 			}),
 		vm.toggleDoneMsg);
 };
-var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
-	var _p9 = _p8;
-	var _p11 = _p9.displayText;
+var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p7) {
+	var _p8 = _p7;
+	var _p10 = _p8.displayText;
 	var nonLinkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p11),
+		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p10),
 		_elm_lang$html$Html$text);
 	var createLink = function (url) {
 		return A2(
@@ -526,7 +523,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
 						_0: _jigargosar$elm_simple_gtd$X_Html$onMouseDownStopPropagation(_jigargosar$elm_simple_gtd$Model$noop),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$tabindex(_p9.tabindexAV),
+							_0: _elm_lang$html$Html_Attributes$tabindex(_p8.tabindexAV),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -545,12 +542,12 @@ var _jigargosar$elm_simple_gtd$Todo_View$parseDisplayText = function (_p8) {
 	};
 	var linkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p11),
-		function (_p10) {
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _jigargosar$elm_simple_gtd$RegexHelper$url, _p10),
+		function (_p9) {
 			return createLink(
 				function (_) {
 					return _.match;
-				}(_p10));
+				}(_p9));
 		});
 	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
 };
@@ -804,9 +801,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$keyedItem = function (vm) {
 var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
-		function (_p12) {
+		function (_p11) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p12));
+				_elm_lang$core$String$trim(_p11));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -856,11 +853,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
 		var now = appM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
-		var onKeyDownMsg = function (_p13) {
-			var _p14 = _p13;
-			if (_jigargosar$elm_simple_gtd$X_Keyboard$isNoSoftKeyDown(_p14)) {
-				var _p15 = _p14.key;
-				switch (_p15.ctor) {
+		var onKeyDownMsg = function (_p12) {
+			var _p13 = _p12;
+			if (_jigargosar$elm_simple_gtd$X_Keyboard$isNoSoftKeyDown(_p13)) {
+				var _p14 = _p13.key;
+				switch (_p14.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelected);
 					case 'CharE':

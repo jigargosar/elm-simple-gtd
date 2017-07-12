@@ -23,7 +23,6 @@ import Return
 import Time
 import Todo
 import Todo.Msg exposing (TodoMsg(..))
-import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -102,13 +101,6 @@ update andThenUpdate now todoMsg =
         OnShowMoreMenu todoId ->
             Return.map (todoMoreMenu todoId |> setEditMode)
                 >> Return.command (positionMoreMenuCmd todoId)
-
-        UpdateReminderForm form action ->
-            Return.map
-                (Todo.ReminderForm.update action form
-                    |> XMEditTodoReminder
-                    >> setEditMode
-                )
 
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)

@@ -2,7 +2,7 @@ module Todo.Msg exposing (..)
 
 import Document.Types exposing (DocId)
 import Notification exposing (Response)
-import Todo.FormTypes exposing (AddTodoForm, EditTodoReminderFormAction, EditTodoReminderForm)
+import Todo.FormTypes exposing (AddTodoForm)
 import Todo.Notification.Model
 import Todo.Types exposing (TodoAction, TodoDoc)
 
@@ -18,7 +18,6 @@ type TodoMsg
     | UpdateTimeTracker
     | UpdateSetupFormTodoText AddTodoForm String
     | Upsert TodoDoc
-    | UpdateReminderForm EditTodoReminderForm EditTodoReminderFormAction
     | OnShowMoreMenu DocId
     | OnProcessPendingNotificationCronTick
     | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId TodoAction

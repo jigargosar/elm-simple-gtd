@@ -40,6 +40,13 @@ var _jigargosar$elm_simple_gtd$Update$moveFocusBy = A2(
 	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
 	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
 	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
+var _jigargosar$elm_simple_gtd$Update$createAndSetTodoEditForm = F2(
+	function (todo, model) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
+			A2(_jigargosar$elm_simple_gtd$Todo_Form$create, model.now, todo),
+			model);
+	});
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
 	'syncWithRemotePouch',
@@ -130,8 +137,8 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p10) {
 								return A2(
-									_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
-									_jigargosar$elm_simple_gtd$Todo_Form$create(_p11),
+									_jigargosar$elm_simple_gtd$Update$createAndSetTodoEditForm,
+									_p11,
 									A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext, _p10));
 							},
 							_p9));
@@ -146,8 +153,8 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							function (_p13) {
 								return A2(
-									_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
-									_jigargosar$elm_simple_gtd$Todo_Form$create(_p14),
+									_jigargosar$elm_simple_gtd$Update$createAndSetTodoEditForm,
+									_p14,
 									A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject, _p13));
 							},
 							_p12));
@@ -165,16 +172,12 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p17),
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_Internal$updateEditModeM(
-								function (_p16) {
-									return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder(
-										A2(
-											_jigargosar$elm_simple_gtd$Todo_ReminderForm$create,
-											_p17,
-											function (_) {
-												return _.now;
-											}(_p16)));
-								}),
+							function (_p16) {
+								return A2(
+									_jigargosar$elm_simple_gtd$Update$createAndSetTodoEditForm,
+									_p17,
+									A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder, _p16));
+							},
 							_p15));
 				};
 			case 'OnUpdateTodoForm':

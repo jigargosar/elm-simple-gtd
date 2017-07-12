@@ -15,9 +15,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = {ctor: 'XMLaunchBar'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject = {ctor: 'XMEditTodoProject'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder = function (a) {
-	return {ctor: 'XMEditTodoReminder', _0: a};
-};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder = {ctor: 'XMEditTodoReminder'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
 	return {ctor: 'XMTodoMoreMenu', _0: a};
 };

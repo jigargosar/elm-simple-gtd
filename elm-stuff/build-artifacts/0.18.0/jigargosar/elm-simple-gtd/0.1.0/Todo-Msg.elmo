@@ -10,10 +10,6 @@ var _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick = {
 var _jigargosar$elm_simple_gtd$Todo_Msg$OnShowMoreMenu = function (a) {
 	return {ctor: 'OnShowMoreMenu', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_Msg$UpdateReminderForm = F2(
-	function (a, b) {
-		return {ctor: 'UpdateReminderForm', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Todo_Msg$Upsert = function (a) {
 	return {ctor: 'Upsert', _0: a};
 };

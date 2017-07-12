@@ -39,11 +39,8 @@ type alias EditTodoReminderForm =
     }
 
 
-type EditTodoReminderFormAction
-    = SetTodoReminderDate String
-    | SetTodoReminderTime String
-
-
 type EditTodoFormAction
     = SetTodoText String
     | SetTodoMenuState Menu.State
+    | SetTodoReminderDate String
+    | SetTodoReminderTime String

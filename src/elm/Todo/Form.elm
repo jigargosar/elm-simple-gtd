@@ -1,5 +1,6 @@
 module Todo.Form exposing (..)
 
+import Date
 import Document
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(TodoEntity))
@@ -40,6 +41,14 @@ menuState =
     field .menuState (\s b -> { b | menuState = s })
 
 
+date =
+    field .date (\s b -> { b | date = s })
+
+
+time =
+    field .time (\s b -> { b | time = s })
+
+
 update : EditTodoFormAction -> TodoEditForm -> TodoEditForm
 update action =
     case action of
@@ -48,3 +57,20 @@ update action =
 
         SetTodoMenuState value ->
             set menuState value
+
+        SetTodoReminderDate value ->
+            set date value
+
+        SetTodoReminderTime value ->
+            set time value
+
+
+getMaybeTime : TodoEditForm -> Maybe Time
+getMaybeTime { id, date, time } =
+    let
+        dateTimeString =
+            date ++ " " ++ time
+    in
+        Date.fromString (dateTimeString)
+            !|> (Date.toTime >> Just)
+            != Nothing

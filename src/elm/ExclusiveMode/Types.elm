@@ -18,7 +18,7 @@ type ExclusiveMode
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMTodoMoreMenu TodoMoreMenuForm
-    | XMEditTodoReminder EditTodoReminderForm
+    | XMEditTodoReminder
     | XMEditTodoContext
     | XMEditTodoProject
     | XMLaunchBar

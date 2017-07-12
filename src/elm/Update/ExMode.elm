@@ -7,8 +7,8 @@ import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Project
 import Return
 import Todo
+import Todo.Form
 import Todo.NewForm
-import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -39,9 +39,13 @@ saveCurrentForm model =
                     )
                 ?= Return.singleton model
 
-        XMEditTodoReminder form ->
-            model
-                |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
+        XMEditTodoReminder ->
+            model.maybeTodoEditForm
+                ?|> (\form ->
+                        model
+                            |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
+                    )
+                ?= Return.singleton model
 
         XMNewTodo form ->
             saveNewTodoForm form model

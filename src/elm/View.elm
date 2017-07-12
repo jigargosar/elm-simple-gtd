@@ -68,8 +68,10 @@ overlayViews appModel =
                         ?|> (\form -> Todo.View.projectMenu form appModel)
                         ?= def
 
-                XMEditTodoReminder form ->
-                    Todo.View.reminderPopup form
+                XMEditTodoReminder ->
+                    appModel.maybeTodoEditForm
+                        ?|> (\form -> Todo.View.reminderPopup form)
+                        ?= def
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

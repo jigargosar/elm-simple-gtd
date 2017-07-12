@@ -24,7 +24,6 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.NewForm
-import Todo.ReminderForm
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -114,7 +113,10 @@ update andThenUpdate msg =
             map (setEditMode (Todo.NewForm.setText text form |> XMNewTodo))
 
         OnStartEditingReminder todo ->
-            map (updateEditModeM (.now >> Todo.ReminderForm.create todo >> XMEditTodoReminder))
+            map
+                (setEditMode (XMEditTodoReminder)
+                    >> createAndSetTodoEditForm todo
+                )
                 >> Return.command (positionScheduleMenuCmd todo)
 
         OnUpdateTodoForm form action ->

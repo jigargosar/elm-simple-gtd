@@ -47,3 +47,8 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject = {ctor: 'XMEdit
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder = {ctor: 'XMEditTodoReminder'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText = {ctor: 'XMEditTodoText'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetupNewTodo = {ctor: 'SetupNewTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$NewTodo = {ctor: 'NewTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodo = function (a) {
+	return {ctor: 'XMEditTodo', _0: a};
+};

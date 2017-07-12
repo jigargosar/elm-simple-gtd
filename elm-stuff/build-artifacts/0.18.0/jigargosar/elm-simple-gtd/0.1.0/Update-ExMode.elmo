@@ -51,22 +51,23 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 				_p5.id,
 				_jigargosar$elm_simple_gtd$Project$setName(_p5.name),
 				model);
-		case 'XMEditTodo':
-			var _p7 = _p3._0;
-			var _p6 = _p7.xmType;
-			switch (_p6.ctor) {
+		case 'XMTodo':
+			var _p6 = _p3._0;
+			var _p8 = _p6._0;
+			var _p7 = _p8.xmType;
+			switch (_p7.ctor) {
 				case 'XMEditTodoText':
 					return A3(
 						_jigargosar$elm_simple_gtd$Stores$updateTodo,
-						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p7.name),
-						_p7.id,
+						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p8.name),
+						_p8.id,
 						model);
 				case 'XMEditTodoReminder':
 					return A3(
 						_jigargosar$elm_simple_gtd$Stores$updateTodo,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-							_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(_p7)),
-						_p7.id,
+							_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(_p8)),
+						_p8.id,
 						model);
 				default:
 					return _Fresheyeball$elm_return$Return$singleton(model);

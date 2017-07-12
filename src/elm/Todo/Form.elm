@@ -15,7 +15,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-createEditTodoForm : XMEditTodoType -> Time -> TodoDoc -> EditTodoForm
+createEditTodoForm : XMEditTodoFormMode -> Time -> TodoDoc -> EditTodoForm
 createEditTodoForm xmType now todo =
     let
         timeInMilli =

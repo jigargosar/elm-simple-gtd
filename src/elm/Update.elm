@@ -24,7 +24,7 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.Form
-import Todo.FormTypes exposing (XMEditTodoType(..))
+import Todo.FormTypes exposing (..)
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -68,6 +68,9 @@ update andThenUpdate msg =
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
 
+        OnStartTodoEXMode todoExMode ->
+            map (setExclusiveMode (XMTodo todoExMode))
+
         OnStartEditingTodo todo t ->
             let
                 createForm now =
@@ -76,8 +79,9 @@ update andThenUpdate msg =
                 createXM model =
                     XMEditTodo (createForm model.now)
             in
-                Return.mapModelWith createXM setExclusiveMode
+                Return.with (createXM >> OnStartTodoEXMode) andThenUpdate
 
+        --                Return.mapModelWith createXM setExclusiveMode
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg
 

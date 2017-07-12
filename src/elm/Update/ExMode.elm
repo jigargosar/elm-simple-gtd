@@ -9,7 +9,7 @@ import Return
 import Todo
 import Todo.Form
 import Todo.Form
-import Todo.FormTypes exposing (XMEditTodoType(..))
+import Todo.FormTypes exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -32,18 +32,20 @@ saveCurrentForm model =
                 |> Stores.updateProject form.id
                     (Project.setName form.name)
 
-        XMEditTodo form ->
-            case form.xmType of
-                XMEditTodoText ->
-                    model
-                        |> Stores.updateTodo (TA_SetText form.name) form.id
+        XMTodo t ->
+            case t of
+                XMEditTodo form ->
+                    case form.xmType of
+                        XMEditTodoText ->
+                            model
+                                |> Stores.updateTodo (TA_SetText form.name) form.id
 
-                XMEditTodoReminder ->
-                    model
-                        |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
+                        XMEditTodoReminder ->
+                            model
+                                |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
 
-                _ ->
-                    model |> Return.singleton
+                        _ ->
+                            model |> Return.singleton
 
         XMNewTodo form ->
             saveNewTodoForm form model

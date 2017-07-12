@@ -8,7 +8,7 @@ import Entity.View
 import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
-import Todo.FormTypes exposing (XMEditTodoType(..))
+import Todo.FormTypes exposing (XMEditTodoFormMode(..), XMTodoForm(XMEditTodo))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -59,19 +59,21 @@ overlayViews appModel =
                 XMTodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
-                XMEditTodo form ->
-                    case form.xmType of
-                        XMEditTodoContext ->
-                            Todo.View.contextMenu form appModel
+                XMTodo t ->
+                    case t of
+                        XMEditTodo form ->
+                            case form.xmType of
+                                XMEditTodoContext ->
+                                    Todo.View.contextMenu form appModel
 
-                        XMEditTodoProject ->
-                            Todo.View.projectMenu form appModel
+                                XMEditTodoProject ->
+                                    Todo.View.projectMenu form appModel
 
-                        XMEditTodoReminder ->
-                            Todo.View.reminderPopup form
+                                XMEditTodoReminder ->
+                                    Todo.View.reminderPopup form
 
-                        XMEditTodoText ->
-                            Todo.View.edit form appModel
+                                XMEditTodoText ->
+                                    Todo.View.edit form appModel
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

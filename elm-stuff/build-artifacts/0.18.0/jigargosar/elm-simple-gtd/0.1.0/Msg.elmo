@@ -101,6 +101,9 @@ var _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo = F2(
 	function (a, b) {
 		return {ctor: 'OnStartEditingTodo', _0: a, _1: b};
 	});
+var _jigargosar$elm_simple_gtd$Msg$OnStartTodoEXMode = function (a) {
+	return {ctor: 'OnStartTodoEXMode', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Msg$OnStartExclusiveMode = function (a) {
 	return {ctor: 'OnStartExclusiveMode', _0: a};
 };

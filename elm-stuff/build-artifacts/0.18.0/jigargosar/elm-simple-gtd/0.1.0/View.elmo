@@ -250,48 +250,17 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
 			case 'XMEditTodo':
-				var _p2 = _p1._1;
+				var _p3 = _p1._0;
+				var _p2 = _p3.xmType;
 				switch (_p2.ctor) {
 					case 'XMEditTodoContext':
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-							A2(
-								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-								appModel.maybeTodoEditForm,
-								function (form) {
-									return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, form, appModel);
-								}),
-							def);
+						return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p3, appModel);
 					case 'XMEditTodoProject':
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-							A2(
-								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-								appModel.maybeTodoEditForm,
-								function (form) {
-									return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, form, appModel);
-								}),
-							def);
+						return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p3, appModel);
 					case 'XMEditTodoReminder':
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-							A2(
-								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-								appModel.maybeTodoEditForm,
-								function (form) {
-									return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(form);
-								}),
-							def);
+						return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p3);
 					default:
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-							A2(
-								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-								appModel.maybeTodoEditForm,
-								function (form) {
-									return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, form, appModel);
-								}),
-							def);
+						return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p3, appModel);
 				}
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;

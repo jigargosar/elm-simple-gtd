@@ -16,7 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEXMode, setTodoEditForm, updateEditModeM)
+import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEditForm, updateEditModeM)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -24,7 +24,7 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.Form
-import Todo.FormTypes
+import Todo.FormTypes exposing (XMEditTodoType(..))
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -68,23 +68,13 @@ update andThenUpdate msg =
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
 
-        --        OnStartEditingTodo todo t ->
-        --            let
-        --                createAndSetTodoEditForm todo model =
-        --                    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
-        --            in
-        --                map
-        --                    (setTodoEXMode t
-        --                        >> createAndSetTodoEditForm todo
-        --                    )
-        --
         OnStartEditingTodo todo t ->
             let
                 createForm now =
-                    Todo.Form.createEditTodoForm now todo
+                    Todo.Form.createEditTodoForm t now todo
 
                 createXM model =
-                    XMEditTodo (createForm model.now) t
+                    XMEditTodo (createForm model.now)
             in
                 Return.mapModelWith createXM setExclusiveMode
 

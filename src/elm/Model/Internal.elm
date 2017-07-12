@@ -20,10 +20,6 @@ setExclusiveMode =
     set editMode
 
 
-setTodoEXMode =
-    XMEditTodo >> set editMode
-
-
 setTodoEditForm f m =
     { m | maybeTodoEditForm = Just f }
 

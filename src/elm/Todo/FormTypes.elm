@@ -17,6 +17,7 @@ type alias EditTodoForm =
     , menuState : MenuState
     , date : String
     , time : String
+    , xmType : XMEditTodoType
     }
 
 
@@ -44,3 +45,10 @@ type EditTodoFormAction
     | SetTodoMenuState Menu.State
     | SetTodoReminderDate String
     | SetTodoReminderTime String
+
+
+type XMEditTodoType
+    = XMEditTodoText
+    | XMEditTodoReminder
+    | XMEditTodoContext
+    | XMEditTodoProject

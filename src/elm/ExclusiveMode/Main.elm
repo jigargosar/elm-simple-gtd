@@ -2,7 +2,7 @@ module ExclusiveMode.Main exposing (..)
 
 import DomPorts exposing (autoFocusInputRCmd)
 import ExclusiveMode.Types exposing (..)
-import Model.Internal exposing (setExclusiveMode, setTodoEditForm)
+import Model.Internal exposing (setExclusiveMode)
 import Return exposing (map)
 import Todo.Form
 

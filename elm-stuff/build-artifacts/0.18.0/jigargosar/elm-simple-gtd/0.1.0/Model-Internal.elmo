@@ -26,9 +26,3 @@ var _jigargosar$elm_simple_gtd$Model_Internal$updateEditModeM = F2(
 			model);
 	});
 var _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode = _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);
-var _jigargosar$elm_simple_gtd$Model_Internal$setTodoEXMode = function (_p0) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Record$set,
-		_jigargosar$elm_simple_gtd$Model_Internal$editMode,
-		_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(_p0));
-};

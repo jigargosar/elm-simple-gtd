@@ -1,10 +1,6 @@
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$SyncForm = function (a) {
 	return {uri: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject = {ctor: 'XMEditTodoProject'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder = {ctor: 'XMEditTodoReminder'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoText = {ctor: 'XMEditTodoText'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone = {ctor: 'XMNone'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay = {ctor: 'XMSignInOverlay'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings = function (a) {
@@ -20,10 +16,9 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) 
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
 	return {ctor: 'XMEditContext', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = F2(
-	function (a, b) {
-		return {ctor: 'XMEditTodo', _0: a, _1: b};
-	});
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo = function (a) {
+	return {ctor: 'XMEditTodo', _0: a};
+};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
 	return {ctor: 'XMTodoMoreMenu', _0: a};
 };

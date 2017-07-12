@@ -13,18 +13,11 @@ type alias SyncForm =
     { uri : String }
 
 
-type XMEditTodoType
-    = XMEditTodoText
-    | XMEditTodoReminder
-    | XMEditTodoContext
-    | XMEditTodoProject
-
-
 type ExclusiveMode
     = XMNewTodo AddTodoForm
     | XMSetup AddTodoForm
     | XMTodoMoreMenu TodoMoreMenuForm
-    | XMEditTodo EditTodoForm XMEditTodoType
+    | XMEditTodo EditTodoForm
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMLaunchBar

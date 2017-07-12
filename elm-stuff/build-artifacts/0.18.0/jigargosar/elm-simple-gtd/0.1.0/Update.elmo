@@ -63,13 +63,11 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p0._0);
 			case 'OnStartEditingTodo':
 				var createForm = function (now) {
-					return A2(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, now, _p0._0);
+					return A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p0._1, now, _p0._0);
 				};
 				var createXM = function (model) {
-					return A2(
-						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo,
-						createForm(model.now),
-						_p0._1);
+					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo(
+						createForm(model.now));
 				};
 				return A2(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode);
 			case 'OnMainMsg':
@@ -139,7 +137,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p10),
 						A2(
 							andThenUpdate,
-							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p10, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoContext),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p10, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext),
 							_p9));
 				};
 			case 'OnStartEditingTodoProject':
@@ -150,7 +148,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p12),
 						A2(
 							andThenUpdate,
-							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p12, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoProject),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p12, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject),
 							_p11));
 				};
 			case 'OnStartEditingReminder':
@@ -161,7 +159,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p14),
 						A2(
 							andThenUpdate,
-							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p14, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoReminder),
+							A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p14, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder),
 							_p13));
 				};
 			case 'OnNewTodoTextChanged':

@@ -52,37 +52,22 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 				_jigargosar$elm_simple_gtd$Project$setName(_p5.name),
 				model);
 		case 'XMEditTodo':
-			var _p6 = _p3._1;
+			var _p7 = _p3._0;
+			var _p6 = _p7.xmType;
 			switch (_p6.ctor) {
 				case 'XMEditTodoText':
-					return A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							model.maybeTodoEditForm,
-							function (form) {
-								return A3(
-									_jigargosar$elm_simple_gtd$Stores$updateTodo,
-									_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(form.name),
-									form.id,
-									model);
-							}),
-						_Fresheyeball$elm_return$Return$singleton(model));
+					return A3(
+						_jigargosar$elm_simple_gtd$Stores$updateTodo,
+						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p7.name),
+						_p7.id,
+						model);
 				case 'XMEditTodoReminder':
-					return A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							model.maybeTodoEditForm,
-							function (form) {
-								return A3(
-									_jigargosar$elm_simple_gtd$Stores$updateTodo,
-									_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-										_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(form)),
-									form.id,
-									model);
-							}),
-						_Fresheyeball$elm_return$Return$singleton(model));
+					return A3(
+						_jigargosar$elm_simple_gtd$Stores$updateTodo,
+						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
+							_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(_p7)),
+						_p7.id,
+						model);
 				default:
 					return _Fresheyeball$elm_return$Return$singleton(model);
 			}

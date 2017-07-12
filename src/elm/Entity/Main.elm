@@ -9,7 +9,7 @@ import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewTyp
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
 import GroupDoc.EditForm
-import Model.Internal exposing (setExclusiveMode, setTodoEditForm)
+import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (Msg)
@@ -21,6 +21,7 @@ import Stores
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.FormTypes exposing (XMEditTodoType(..))
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelF, ModelReturnF, ReturnF)
@@ -187,7 +188,7 @@ startEditingEntity andThenUpdate now entity model =
                         map (setExclusiveMode (p |> GroupDoc.EditForm.forProject >> XMEditProject))
 
             TodoEntity todo ->
-                andThenUpdate (Msg.OnStartEditingTodo todo XMEditTodoText)
+                Debug.log "startEditingEntity : This method should not be called for todo. We should probably get rid of entity Main stuff, or bring all types of edits here. which doesn't seem fesable, since there are different types of edit modes for todo."
 
 
 updateEditModeNameChanged newName entity model =

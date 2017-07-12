@@ -162,7 +162,7 @@ createTodoViewModel appM canBeFocused todo =
 
         startEditingMsg =
             if canBeFocused then
-                createEntityActionMsg Entity.Types.OnStartEditing
+                Msg.OnStartEditingTodo todo XMEditTodoText
             else
                 Model.noop
 

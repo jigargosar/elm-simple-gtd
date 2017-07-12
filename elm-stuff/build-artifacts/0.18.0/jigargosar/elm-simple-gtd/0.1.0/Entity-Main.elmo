@@ -119,8 +119,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F4(
 							}(_p8._0)));
 				}
 			} else {
-				return andThenUpdate(
-					A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, _p7._0, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodoText));
+				return _elm_lang$core$Debug$log('startEditingEntity : This method should not be called for todo. We should probably get rid of entity Main stuff, or bring all types of edits here. which doesn\'t seem fesable, since there are different types of edit modes for todo.');
 			}
 		}()(
 			_Fresheyeball$elm_return$Return$singleton(model));

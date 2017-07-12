@@ -1,7 +1,24 @@
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i};
-	});
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i, xmType: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
 	function (a, b) {
 		return {todoId: a, menuState: b};
@@ -26,3 +43,7 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 	return {ctor: 'SetTodoText', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject = {ctor: 'XMEditTodoProject'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder = {ctor: 'XMEditTodoReminder'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText = {ctor: 'XMEditTodoText'};

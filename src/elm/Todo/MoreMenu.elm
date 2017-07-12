@@ -4,7 +4,7 @@ import Html
 import Menu
 import Model
 import Msg
-import Todo.Form exposing (TodoMoreMenuForm)
+import Todo.FormTypes exposing (TodoMoreMenuForm)
 
 
 type alias MenuItem =

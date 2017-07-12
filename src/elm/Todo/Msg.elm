@@ -2,7 +2,7 @@ module Todo.Msg exposing (..)
 
 import Document.Types exposing (DocId)
 import Notification exposing (Response)
-import Todo.Form exposing (AddTodoForm, EditTodoReminderFormAction, EditTodoReminderForm)
+import Todo.FormTypes exposing (AddTodoForm, EditTodoReminderFormAction, EditTodoReminderForm)
 import Todo.Notification.Model
 import Todo.Types exposing (TodoAction, TodoDoc)
 

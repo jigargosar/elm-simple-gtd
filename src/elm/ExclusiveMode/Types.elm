@@ -5,7 +5,7 @@ module ExclusiveMode.Types exposing (..)
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import LaunchBar.Models exposing (LaunchBar)
 import Menu.Types exposing (MenuState)
-import Todo.Form exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoEditForm, TodoMoreMenuForm)
+import Todo.FormTypes exposing (AddTodoForm, TodoEditForm, EditTodoReminderForm, TodoEditForm, TodoMoreMenuForm)
 
 
 type alias SyncForm =

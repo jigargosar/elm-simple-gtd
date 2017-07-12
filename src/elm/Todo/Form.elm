@@ -1,53 +1,13 @@
 module Todo.Form exposing (..)
 
 import Document
-import Document.Types exposing (DocId, getDocId)
+import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(TodoEntity))
 import Menu
-import Menu.Types exposing (MenuState)
 import Todo
-import Todo.Types exposing (TodoDoc, TodoText, getTodoText)
+import Todo.FormTypes exposing (EditTodoFormAction(..), TodoEditForm)
+import Todo.Types exposing (TodoDoc, getTodoText)
 import X.Record exposing (field, set)
-
-
-type alias TodoEditForm =
-    { id : DocId
-    , name : TodoText
-    , entity : Entity
-    , todoId : DocId
-    , contextId : DocId
-    , projectId : DocId
-    , menuState : MenuState
-    }
-
-
-type alias TodoMoreMenuForm =
-    { todoId : DocId
-    , menuState : MenuState
-    }
-
-
-type alias AddTodoForm =
-    { text : TodoText
-    , referenceEntity : Entity
-    }
-
-
-type alias EditTodoReminderForm =
-    { id : DocId
-    , date : String
-    , time : String
-    }
-
-
-type EditTodoReminderFormAction
-    = SetTodoReminderDate String
-    | SetTodoReminderTime String
-
-
-type EditTodoFormAction
-    = SetTodoText String
-    | SetTodoMenuState Menu.State
 
 
 create : TodoDoc -> TodoEditForm
@@ -78,7 +38,3 @@ update action =
 
         SetTodoMenuState value ->
             set menuState value
-
-
-f =
-    1

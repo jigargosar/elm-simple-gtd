@@ -2,7 +2,7 @@ module Todo.NewForm exposing (..)
 
 import Entity.Types exposing (Entity)
 import Todo
-import Todo.Form exposing (AddTodoForm)
+import Todo.FormTypes exposing (AddTodoForm)
 
 
 type Field

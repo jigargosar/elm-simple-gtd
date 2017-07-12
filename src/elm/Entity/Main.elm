@@ -59,7 +59,7 @@ onUpdate :
 onUpdate andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->
-            Return.map (startEditingEntity entity)
+            Return.map (\model -> startEditingEntity model.now entity model)
                 >> DomPorts.autoFocusInputCmd
 
         Entity.Types.OnNameChanged newName ->

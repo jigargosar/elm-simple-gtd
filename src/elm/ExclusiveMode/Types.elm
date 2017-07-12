@@ -13,7 +13,7 @@ type alias SyncForm =
 
 
 type XMTodoType
-    = XMEditTodo
+    = XMEditTodoText
     | XMEditTodoReminder
     | XMEditTodoContext
     | XMEditTodoProject

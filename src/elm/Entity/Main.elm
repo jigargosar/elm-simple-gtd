@@ -188,7 +188,7 @@ startEditingEntity now entity model =
                         setEditMode (p |> GroupDoc.EditForm.forProject >> XMEditProject)
 
             TodoEntity todo ->
-                setTodoEXMode XMEditTodo
+                setTodoEXMode XMEditTodoText
                     >> setTodoEditForm (Todo.Form.createEditTodoForm now todo)
 
 

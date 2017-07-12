@@ -33,7 +33,7 @@ saveCurrentForm model =
 
         XMTodo t ->
             case t of
-                XMEditTodo ->
+                XMEditTodoText ->
                     model.maybeTodoEditForm
                         ?|> (\form ->
                                 model

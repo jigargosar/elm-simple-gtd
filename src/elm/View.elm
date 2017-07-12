@@ -75,7 +75,7 @@ overlayViews appModel =
                                 ?|> (\form -> Todo.View.reminderPopup form)
                                 ?= def
 
-                        XMEditTodo ->
+                        XMEditTodoText ->
                             appModel.maybeTodoEditForm
                                 ?|> (\form -> Todo.View.edit form appModel)
                                 ?= def

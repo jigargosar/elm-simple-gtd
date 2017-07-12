@@ -23,7 +23,7 @@ import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
 import Stores
-import Todo.NewForm
+import Todo.Form
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -110,7 +110,7 @@ update andThenUpdate msg =
                 >> Return.command (positionProjectMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
-            map (setEditMode (Todo.NewForm.setText text form |> XMNewTodo))
+            map (setEditMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
 
         OnStartEditingReminder todo ->
             map

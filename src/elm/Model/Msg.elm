@@ -1,9 +1,9 @@
 module Model.Msg exposing (..)
 
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNewTodo))
-import Todo.NewForm
+import Todo.Form
 import Msg
 
 
 onNewTodoModeWithFocusInEntityAsReference model =
-    Todo.NewForm.create (model.focusInEntity) "" |> XMNewTodo |> Msg.OnStartExclusiveMode
+    Todo.Form.createNewTodoForm (model.focusInEntity) "" |> XMNewTodo |> Msg.OnStartExclusiveMode

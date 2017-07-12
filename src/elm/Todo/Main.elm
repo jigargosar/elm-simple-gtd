@@ -10,7 +10,7 @@ import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
 import Todo.Menu
-import Todo.NewForm
+import Todo.Form
 import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
@@ -93,7 +93,7 @@ update andThenUpdate now todoMsg =
     case todoMsg of
         UpdateSetupFormTodoText form todoText ->
             Return.map
-                (Todo.NewForm.setText todoText form
+                (Todo.Form.setNewTodoFormText todoText form
                     |> XMSetup
                     |> setEditMode
                 )
@@ -291,7 +291,7 @@ inboxEntity =
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.NewForm.create inboxEntity "" |> XMNewTodo)
+    setEditMode (Todo.Form.createNewTodoForm inboxEntity "" |> XMNewTodo)
 
 
 todoMoreMenu =

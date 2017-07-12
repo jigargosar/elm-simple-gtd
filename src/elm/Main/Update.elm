@@ -8,7 +8,7 @@ import Model.Internal exposing (deactivateEditingMode, setEditMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)
 import Store
-import Todo.NewForm
+import Todo.Form
 import Types exposing (ReturnF)
 
 
@@ -34,6 +34,6 @@ update andThenUpdate msg =
                     createContextEntity Context.null
 
                 createSetupExclusiveMode =
-                    XMSetup (Todo.NewForm.create inboxEntity "")
+                    XMSetup (Todo.Form.createNewTodoForm inboxEntity "")
             in
                 map onSwitchToNewUserSetupModeIfNeeded

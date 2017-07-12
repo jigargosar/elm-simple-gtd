@@ -270,7 +270,15 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 						}),
 					def);
 			case 'XMEditTodoReminder':
-				return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p1._0);
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						appModel.maybeTodoEditForm,
+						function (form) {
+							return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(form);
+						}),
+					def);
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
 			case 'XMSetup':

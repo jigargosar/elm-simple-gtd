@@ -25,7 +25,7 @@ import String.Extra as String
 import Time exposing (Time)
 import Todo
 import Todo.Msg
-import Todo.NewForm
+import Todo.Form
 import Todo.View.Menu
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -406,7 +406,7 @@ new form =
                     [ textarea
                         [ class "materialize-textarea auto-focus"
                         , onInput (Msg.OnNewTodoTextChanged form)
-                        , form |> Todo.NewForm.getText |> defaultValue
+                        , form.text |> defaultValue
                         ]
                         []
                     , label [ class "active" ] [ text "New Todo" ]

@@ -8,7 +8,7 @@ import Project
 import Return
 import Todo
 import Todo.Form
-import Todo.NewForm
+import Todo.Form
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -62,7 +62,7 @@ saveCurrentForm model =
 
 
 saveNewTodoForm form model =
-    Stores.insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
+    Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
         |> uncurry
             (\todoId ->

@@ -8,7 +8,7 @@ import Menu
 import Time exposing (Time)
 import Time.Format
 import Todo
-import Todo.FormTypes exposing (EditTodoFormAction(..), TodoEditForm)
+import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, getTodoText)
 import X.Record exposing (field, set)
 import Toolkit.Operators exposing (..)
@@ -31,6 +31,15 @@ create now todo =
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
         }
+
+
+createNewTodoForm : Entity -> Todo.Text -> AddTodoForm
+createNewTodoForm referenceEntity text =
+    { text = text, referenceEntity = referenceEntity }
+
+
+setNewTodoFormText text form =
+    { form | text = text }
 
 
 name =

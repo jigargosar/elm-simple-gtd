@@ -175,7 +175,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 				form,
 				_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p4));
 		};
-		var todoText = form.todoText;
+		var todoText = form.name;
 		return A2(
 			_elm_lang$html$Html$div,
 			{

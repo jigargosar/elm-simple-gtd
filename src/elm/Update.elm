@@ -119,7 +119,7 @@ update andThenUpdate msg =
 
         OnUpdateTodoForm form action ->
             map
-                (setTodoEditForm (Todo.Form.set action form))
+                (setTodoEditForm (Todo.Form.update action form))
                 >> autoFocusInputCmd
 
         OnMainMenuStateChanged menuState ->

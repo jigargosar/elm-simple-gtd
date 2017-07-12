@@ -35,7 +35,7 @@ saveCurrentForm model =
             model.maybeTodoEditForm
                 ?|> (\form ->
                         model
-                            |> Stores.updateTodo (TA_SetText form.todoText) form.id
+                            |> Stores.updateTodo (TA_SetText form.name) form.id
                     )
                 ?= Return.singleton model
 

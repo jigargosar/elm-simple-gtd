@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoEditForm = F7(
 	function (a, b, c, d, e, f, g) {
-		return {id: a, todoText: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g};
+		return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g};
 	});
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
 	function (a, b) {

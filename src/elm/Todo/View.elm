@@ -364,7 +364,7 @@ edit : TodoEditForm -> AppModel -> Html Msg
 edit form appModel =
     let
         todoText =
-            form.todoText
+            form.name
 
         fireTextChanged =
             SetTodoText >> Msg.OnUpdateTodoForm form

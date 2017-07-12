@@ -63,7 +63,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 					function (form) {
 						return A3(
 							_jigargosar$elm_simple_gtd$Stores$updateTodo,
-							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(form.todoText),
+							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(form.name),
 							form.id,
 							model);
 					}),

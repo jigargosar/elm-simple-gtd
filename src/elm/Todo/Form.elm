@@ -7,12 +7,13 @@ import Menu
 import Todo
 import Todo.FormTypes exposing (EditTodoFormAction(..), TodoEditForm)
 import Todo.Types exposing (TodoDoc, getTodoText)
+import X.Record exposing (field, set)
 
 
 create : TodoDoc -> TodoEditForm
 create todo =
     { id = Document.getId todo
-    , todoText = getTodoText todo
+    , name = getTodoText todo
     , entity = TodoEntity todo
     , todoId = getDocId todo
     , contextId = Todo.getContextId todo
@@ -21,15 +22,23 @@ create todo =
     }
 
 
+name =
+    field .name (\s b -> { b | name = s })
+
+
+menuState =
+    field .menuState (\s b -> { b | menuState = s })
+
+
 setMenuState menuState form =
     { form | menuState = menuState }
 
 
-set : EditTodoFormAction -> TodoEditForm -> TodoEditForm
-set action model =
+update : EditTodoFormAction -> TodoEditForm -> TodoEditForm
+update action =
     case action of
         SetTodoText value ->
-            { model | todoText = value }
+            set name value
 
-        SetTodoMenuState state ->
-            setMenuState state model
+        SetTodoMenuState value ->
+            set menuState value

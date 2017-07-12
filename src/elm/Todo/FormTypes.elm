@@ -9,7 +9,7 @@ import Todo.Types exposing (TodoDoc, TodoText)
 
 type alias TodoEditForm =
     { id : DocId
-    , todoText : TodoText
+    , name : TodoText
     , entity : Entity
     , todoId : DocId
     , contextId : DocId

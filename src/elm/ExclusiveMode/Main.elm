@@ -1,9 +1,10 @@
 module ExclusiveMode.Main exposing (..)
 
 import DomPorts exposing (autoFocusInputRCmd)
-import ExclusiveMode.Types exposing (ExclusiveMode(XMNewTodo))
-import Model.Internal exposing (setEditMode)
-import Return
+import ExclusiveMode.Types exposing (..)
+import Model.Internal exposing (setEditMode, setTodoEXMode, setTodoEditForm)
+import Return exposing (map)
+import Todo.Form
 
 
 start exclusiveMode =
@@ -12,5 +13,15 @@ start exclusiveMode =
             Return.map (setEditMode exclusiveMode)
                 >> autoFocusInputRCmd
 
+        XMTodoEdit todo t ->
+            map
+                (setTodoEXMode todo t
+                    >> createAndSetTodoEditForm todo
+                )
+
         _ ->
             identity
+
+
+createAndSetTodoEditForm todo model =
+    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model

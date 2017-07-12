@@ -51,35 +51,41 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 				_p5.id,
 				_jigargosar$elm_simple_gtd$Project$setName(_p5.name),
 				model);
-		case 'XMEditTodo':
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					model.maybeTodoEditForm,
-					function (form) {
-						return A3(
-							_jigargosar$elm_simple_gtd$Stores$updateTodo,
-							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(form.name),
-							form.id,
-							model);
-					}),
-				_Fresheyeball$elm_return$Return$singleton(model));
-		case 'XMEditTodoReminder':
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					model.maybeTodoEditForm,
-					function (form) {
-						return A3(
-							_jigargosar$elm_simple_gtd$Stores$updateTodo,
-							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-								_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(form)),
-							form.id,
-							model);
-					}),
-				_Fresheyeball$elm_return$Return$singleton(model));
+		case 'XMTodoEdit':
+			var _p6 = _p3._1;
+			switch (_p6.ctor) {
+				case 'XMEditTodoText':
+					return A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							model.maybeTodoEditForm,
+							function (form) {
+								return A3(
+									_jigargosar$elm_simple_gtd$Stores$updateTodo,
+									_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(form.name),
+									form.id,
+									model);
+							}),
+						_Fresheyeball$elm_return$Return$singleton(model));
+				case 'XMEditTodoReminder':
+					return A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							model.maybeTodoEditForm,
+							function (form) {
+								return A3(
+									_jigargosar$elm_simple_gtd$Stores$updateTodo,
+									_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
+										_jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime(form)),
+									form.id,
+									model);
+							}),
+						_Fresheyeball$elm_return$Return$singleton(model));
+				default:
+					return _Fresheyeball$elm_return$Return$singleton(model);
+			}
 		case 'XMNewTodo':
 			return A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm, _p3._0, model);
 		case 'XMEditSyncSettings':

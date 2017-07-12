@@ -97,28 +97,19 @@ update andThenUpdate msg =
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartEditingTodoContext todo ->
-            map
-                (setTodoEXMode (XMEditTodoContext)
-                    >> createAndSetTodoEditForm todo
-                )
+            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoContext))
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingTodoProject todo ->
-            map
-                (setTodoEXMode (XMEditTodoProject)
-                    >> createAndSetTodoEditForm todo
-                )
+            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoProject))
                 >> Return.command (positionProjectMenuCmd todo)
+
+        OnStartEditingReminder todo ->
+            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoReminder))
+                >> Return.command (positionScheduleMenuCmd todo)
 
         OnNewTodoTextChanged form text ->
             map (setEditMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
-
-        OnStartEditingReminder todo ->
-            map
-                (setTodoEXMode XMEditTodoReminder
-                    >> createAndSetTodoEditForm todo
-                )
-                >> Return.command (positionScheduleMenuCmd todo)
 
         OnUpdateTodoForm form action ->
             map
@@ -187,10 +178,6 @@ update andThenUpdate msg =
 
         OnMdl msg_ ->
             Return.andThen (Material.update OnMdl msg_)
-
-
-createAndSetTodoEditForm todo model =
-    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
 
 
 moveFocusBy : Int -> List Entity -> ModelF

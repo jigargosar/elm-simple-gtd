@@ -249,36 +249,50 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
 			case 'XMTodoMoreMenu':
 				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
-			case 'XMEditTodoContext':
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						appModel.maybeTodoEditForm,
-						function (form) {
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, form, appModel);
-						}),
-					def);
-			case 'XMEditTodoProject':
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						appModel.maybeTodoEditForm,
-						function (form) {
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, form, appModel);
-						}),
-					def);
-			case 'XMEditTodoReminder':
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						appModel.maybeTodoEditForm,
-						function (form) {
-							return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(form);
-						}),
-					def);
+			case 'XMTodoEdit':
+				var _p2 = _p1._1;
+				switch (_p2.ctor) {
+					case 'XMEditTodoContext':
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+								appModel.maybeTodoEditForm,
+								function (form) {
+									return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, form, appModel);
+								}),
+							def);
+					case 'XMEditTodoProject':
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+								appModel.maybeTodoEditForm,
+								function (form) {
+									return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, form, appModel);
+								}),
+							def);
+					case 'XMEditTodoReminder':
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+								appModel.maybeTodoEditForm,
+								function (form) {
+									return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(form);
+								}),
+							def);
+					default:
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+								appModel.maybeTodoEditForm,
+								function (form) {
+									return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, form, appModel);
+								}),
+							def);
+				}
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
 			case 'XMSetup':
@@ -287,16 +301,6 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
 			case 'XMEditContext':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
-			case 'XMEditTodo':
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						appModel.maybeTodoEditForm,
-						function (form) {
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, form, appModel);
-						}),
-					def);
 			case 'XMNewTodo':
 				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
 			case 'XMMainMenu':

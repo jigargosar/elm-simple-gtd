@@ -20,9 +20,8 @@ setEditMode =
     set editMode
 
 
-setTodoEXMode : XMTodoType -> ModelF
 setTodoEXMode =
-    XMTodo >> set editMode
+    XMTodoEdit >>> set editMode
 
 
 setTodoEditForm f m =

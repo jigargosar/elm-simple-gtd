@@ -14,7 +14,7 @@ import Model.Selection
 import Model.ViewType
 import Msg exposing (Msg)
 import Project
-import Return
+import Return exposing (andThen)
 import Set
 import Store
 import Stores
@@ -40,11 +40,11 @@ update :
 update andThenUpdate msg =
     case msg of
         Entity.Types.OnNewProject ->
-            map createAndEditNewProject
+            andThen (createAndEditNewProject andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNewContext ->
-            map createAndEditNewContext
+            andThen (createAndEditNewContext andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnUpdate entity entityUpdateMsg ->
@@ -59,7 +59,7 @@ onUpdate :
 onUpdate andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->
-            Return.map (\model -> startEditingEntity model.now entity model)
+            andThen (\model -> startEditingEntity andThenUpdate model.now entity model)
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNameChanged newName ->
@@ -149,21 +149,21 @@ toggleDeleteEntity entity model =
                     Stores.updateTodo (TA_ToggleDeleted) entityId
 
 
-createAndEditNewProject model =
+createAndEditNewProject andThenUpdate model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (Stores.setProjectStore # model)
         |> (\( project, model ) ->
                 model
-                    |> startEditingEntity model.now (createProjectEntity project)
+                    |> startEditingEntity andThenUpdate model.now (createProjectEntity project)
            )
 
 
-createAndEditNewContext model =
+createAndEditNewContext andThenUpdate model =
     Store.insert (Context.init "<New Context>" model.now) model.contextStore
         |> Tuple2.mapSecond (Stores.setContextStore # model)
         |> (\( context, model ) ->
                 model
-                    |> startEditingEntity model.now (createContextEntity context)
+                    |> startEditingEntity andThenUpdate model.now (createContextEntity context)
            )
 
 
@@ -175,21 +175,25 @@ editContextSetName =
     GroupDoc.EditForm.setName >>> XMEditContext
 
 
-startEditingEntity : Time -> Entity -> ModelF
-startEditingEntity now entity model =
-    model
+startEditingEntity andThenUpdate now entity model =
+    Return.singleton model
         |> case entity of
             GroupEntity g ->
                 case g of
                     ContextEntity context ->
-                        setEditMode (context |> GroupDoc.EditForm.forContext >> XMEditContext)
+                        map (setEditMode (context |> GroupDoc.EditForm.forContext >> XMEditContext))
 
                     ProjectEntity p ->
-                        setEditMode (p |> GroupDoc.EditForm.forProject >> XMEditProject)
+                        map (setEditMode (p |> GroupDoc.EditForm.forProject >> XMEditProject))
 
             TodoEntity todo ->
-                setTodoEXMode XMEditTodoText
-                    >> setTodoEditForm (Todo.Form.createEditTodoForm now todo)
+                andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoText))
+
+
+
+{- setTodoEXMode XMEditTodoText
+   >> setTodoEditForm (Todo.Form.createEditTodoForm now todo)
+-}
 
 
 updateEditModeNameChanged newName entity model =

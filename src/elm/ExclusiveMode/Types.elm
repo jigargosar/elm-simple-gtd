@@ -24,7 +24,7 @@ type ExclusiveMode
     = XMNewTodo AddTodoForm
     | XMSetup AddTodoForm
     | XMTodoMoreMenu TodoMoreMenuForm
-    | XMTodoEdit TodoDoc XMEditTodoType
+    | XMTodoEdit XMEditTodoType
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMLaunchBar

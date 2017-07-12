@@ -3,7 +3,7 @@ module Msg exposing (..)
 import AppDrawer.Types
 import CommonMsg.Types
 import Entity.Types exposing (Entity)
-import ExclusiveMode.Types exposing (ExclusiveMode, SyncForm)
+import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
 import Menu.Types exposing (MenuState)
@@ -39,6 +39,7 @@ type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode
+    | OnStartEditTodo TodoDoc XMEditTodoType
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState

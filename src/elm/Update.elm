@@ -68,6 +68,16 @@ update andThenUpdate msg =
         OnStartExclusiveMode exclusiveMode ->
             ExclusiveMode.Main.start exclusiveMode
 
+        OnStartEditTodo todo t ->
+            let
+                createAndSetTodoEditForm todo model =
+                    Model.Internal.setTodoEditForm (Todo.Form.createEditTodoForm model.now todo) model
+            in
+                map
+                    (setTodoEXMode t
+                        >> createAndSetTodoEditForm todo
+                    )
+
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg
 
@@ -97,15 +107,15 @@ update andThenUpdate msg =
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartEditingTodoContext todo ->
-            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoContext))
+            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoContext)
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingTodoProject todo ->
-            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoProject))
+            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoProject)
                 >> Return.command (positionProjectMenuCmd todo)
 
         OnStartEditingReminder todo ->
-            andThenUpdate (Msg.OnStartExclusiveMode (XMTodoEdit todo XMEditTodoReminder))
+            andThenUpdate (Msg.OnStartEditTodo todo XMEditTodoReminder)
                 >> Return.command (positionScheduleMenuCmd todo)
 
         OnNewTodoTextChanged form text ->

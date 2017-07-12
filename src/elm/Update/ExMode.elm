@@ -31,7 +31,7 @@ saveCurrentForm model =
                 |> Stores.updateProject form.id
                     (Project.setName form.name)
 
-        XMTodoEdit todo t ->
+        XMTodoEdit t ->
             case t of
                 XMEditTodoText ->
                     model.maybeTodoEditForm

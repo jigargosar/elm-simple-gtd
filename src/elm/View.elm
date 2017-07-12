@@ -39,7 +39,7 @@ init model =
             ]
                 ++ overlayViews model
     in
-        div [] children
+        div [ class "mdl-typography--body-1" ] children
 
 
 overlayViews appModel =

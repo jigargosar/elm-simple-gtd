@@ -326,6 +326,10 @@ var _jigargosar$elm_simple_gtd$View$init = function (model) {
 		_jigargosar$elm_simple_gtd$View$overlayViews(model));
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('mdl-typography--body-1'),
+			_1: {ctor: '[]'}
+		},
 		children);
 };

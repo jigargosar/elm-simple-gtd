@@ -304,19 +304,7 @@ var _jigargosar$elm_simple_gtd$Mat$ibc = F4(
 			{
 				ctor: '::',
 				_0: _debois$elm_mdl$Material_Options$many(
-					config.primaryFAB ? {
-						ctor: '::',
-						_0: _debois$elm_mdl$Material_Button$fab,
-						_1: {
-							ctor: '::',
-							_0: _debois$elm_mdl$Material_Button$colored,
-							_1: {
-								ctor: '::',
-								_0: _debois$elm_mdl$Material_Options$cs('mdl-button--page-fab'),
-								_1: {ctor: '[]'}
-							}
-						}
-					} : {
+					config.primaryFAB ? {ctor: '[]'} : {
 						ctor: '::',
 						_0: _debois$elm_mdl$Material_Button$icon,
 						_1: {ctor: '[]'}

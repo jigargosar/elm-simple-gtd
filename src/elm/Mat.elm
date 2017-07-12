@@ -167,7 +167,7 @@ ibc msg iconName clickHandler config =
             config.mdl
             [ Material.Options.many
                 (if config.primaryFAB then
-                    [ Material.Button.fab, Material.Button.colored, Material.Options.cs "mdl-button--page-fab" ]
+                    []
                  else
                     [ Material.Button.icon ]
                 )

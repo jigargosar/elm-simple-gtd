@@ -11,7 +11,7 @@ import Msg
 
 
 newTodoFab alv m =
-    div [ cs "mdl-button--page-fab" ]
+    div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach Msg.OnMdl [ 3 ] ]
             [ Mat.fab Msg.OnMdl
                 m.mdl

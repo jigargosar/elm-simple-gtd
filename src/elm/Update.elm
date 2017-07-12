@@ -99,14 +99,14 @@ update andThenUpdate msg =
         OnStartEditingContext todo ->
             map
                 (setEditMode (XMEditTodoContext)
-                    >> setTodoEditForm (Todo.Form.create todo)
+                    >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionContextMenuCmd todo)
 
         OnStartEditingProject todo ->
             map
                 (setEditMode (XMEditTodoProject)
-                    >> setTodoEditForm (Todo.Form.create todo)
+                    >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionProjectMenuCmd todo)
 
@@ -176,6 +176,10 @@ update andThenUpdate msg =
 
         OnMdl msg_ ->
             Return.andThen (Material.update OnMdl msg_)
+
+
+createAndSetTodoEditForm todo model =
+    Model.Internal.setTodoEditForm (Todo.Form.create model.now todo) model
 
 
 moveFocusBy : Int -> List Entity -> ModelF

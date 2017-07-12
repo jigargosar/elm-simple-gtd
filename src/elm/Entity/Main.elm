@@ -18,6 +18,7 @@ import Return
 import Set
 import Store
 import Stores
+import Time exposing (Time)
 import Todo
 import Todo.Form
 import Todo.Msg
@@ -153,7 +154,7 @@ createAndEditNewProject model =
         |> Tuple2.mapSecond (Stores.setProjectStore # model)
         |> (\( project, model ) ->
                 model
-                    |> startEditingEntity (createProjectEntity project)
+                    |> startEditingEntity model.now (createProjectEntity project)
            )
 
 
@@ -162,7 +163,7 @@ createAndEditNewContext model =
         |> Tuple2.mapSecond (Stores.setContextStore # model)
         |> (\( context, model ) ->
                 model
-                    |> startEditingEntity (createContextEntity context)
+                    |> startEditingEntity model.now (createContextEntity context)
            )
 
 
@@ -174,8 +175,8 @@ editContextSetName =
     GroupDoc.EditForm.setName >>> XMEditContext
 
 
-startEditingEntity : Entity -> ModelF
-startEditingEntity entity model =
+startEditingEntity : Time -> Entity -> ModelF
+startEditingEntity now entity model =
     model
         |> case entity of
             GroupEntity g ->
@@ -188,7 +189,7 @@ startEditingEntity entity model =
 
             TodoEntity todo ->
                 setEditMode XMEditTodo
-                    >> setTodoEditForm (Todo.Form.create todo)
+                    >> setTodoEditForm (Todo.Form.create now todo)
 
 
 updateEditModeNameChanged newName entity model =

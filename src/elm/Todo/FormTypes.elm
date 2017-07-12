@@ -15,6 +15,8 @@ type alias TodoEditForm =
     , contextId : DocId
     , projectId : DocId
     , menuState : MenuState
+    , date : String
+    , time : String
     }
 
 

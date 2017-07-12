@@ -32,7 +32,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 				return A2(
 					_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 					_p2,
-					_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p5));
+					_jigargosar$elm_simple_gtd$Todo_Form$SetTodoMenuState(_p5));
 			},
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 				return A2(
 					_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 					_p7,
-					_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p10));
+					_jigargosar$elm_simple_gtd$Todo_Form$SetTodoMenuState(_p10));
 			},
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode

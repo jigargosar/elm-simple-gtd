@@ -1,28 +1,70 @@
-var _jigargosar$elm_simple_gtd$Todo_Form$setMenuState = F2(
-	function (menuState, form) {
-		return _elm_lang$core$Native_Utils.update(
-			form,
-			{menuState: menuState});
-	});
-var _jigargosar$elm_simple_gtd$Todo_Form$set = F2(
-	function (action, model) {
-		var _p0 = action;
-		if (_p0.ctor === 'SetTodoText') {
+var _jigargosar$elm_simple_gtd$Todo_Form$f = 1;
+var _jigargosar$elm_simple_gtd$Todo_Form$menuState = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.menuState;
+	},
+	F2(
+		function (s, b) {
 			return _elm_lang$core$Native_Utils.update(
-				model,
-				{todoText: _p0._0});
-		} else {
-			return A2(_jigargosar$elm_simple_gtd$Todo_Form$setMenuState, _p0._0, model);
-		}
-	});
+				b,
+				{menuState: s});
+		}));
+var _jigargosar$elm_simple_gtd$Todo_Form$name = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.name;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{name: s});
+		}));
+var _jigargosar$elm_simple_gtd$Todo_Form$update = function (action) {
+	var _p0 = action;
+	if (_p0.ctor === 'SetTodoText') {
+		return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$name, _p0._0);
+	} else {
+		return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$menuState, _p0._0);
+	}
+};
 var _jigargosar$elm_simple_gtd$Todo_Form$create = function (todo) {
 	return {
 		id: _jigargosar$elm_simple_gtd$Document$getId(todo),
-		todoText: _jigargosar$elm_simple_gtd$Todo_Types$getTodoText(todo),
+		name: _jigargosar$elm_simple_gtd$Todo_Types$getTodoText(todo),
 		entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo),
 		todoId: _jigargosar$elm_simple_gtd$Document_Types$getDocId(todo),
 		contextId: _jigargosar$elm_simple_gtd$Todo$getContextId(todo),
 		projectId: _jigargosar$elm_simple_gtd$Todo$getProjectId(todo),
 		menuState: _jigargosar$elm_simple_gtd$Menu$initState
 	};
+};
+var _jigargosar$elm_simple_gtd$Todo_Form$TodoEditForm = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$TodoMoreMenuForm = F2(
+	function (a, b) {
+		return {todoId: a, menuState: b};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$AddTodoForm = F2(
+	function (a, b) {
+		return {text: a, referenceEntity: b};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$EditTodoReminderForm = F3(
+	function (a, b, c) {
+		return {id: a, date: b, time: c};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$SetTodoReminderTime = function (a) {
+	return {ctor: 'SetTodoReminderTime', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Form$SetTodoReminderDate = function (a) {
+	return {ctor: 'SetTodoReminderDate', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Form$SetTodoMenuState = function (a) {
+	return {ctor: 'SetTodoMenuState', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_Form$SetTodoText = function (a) {
+	return {ctor: 'SetTodoText', _0: a};
 };

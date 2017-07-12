@@ -183,7 +183,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						A2(
 							_jigargosar$elm_simple_gtd$Update$map,
 							_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm(
-								A2(_jigargosar$elm_simple_gtd$Todo_Form$set, _p0._1, _p0._0)),
+								A2(_jigargosar$elm_simple_gtd$Todo_Form$update, _p0._1, _p0._0)),
 							_p18));
 				};
 			case 'OnMainMenuStateChanged':

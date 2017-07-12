@@ -8,7 +8,7 @@ import Time.Format
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Todo
-import Todo.FormTypes exposing (EditTodoReminderFormAction(..), EditTodoReminderForm)
+import Todo.Form exposing (EditTodoReminderFormAction(..), EditTodoReminderForm)
 
 
 create : TodoDoc -> Time.Time -> EditTodoReminderForm

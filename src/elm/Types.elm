@@ -20,7 +20,7 @@ import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
 import Json.Encode as E
 import LaunchBar.Models exposing (LaunchBar)
-import Todo.FormTypes exposing (..)
+import Todo.Form exposing (..)
 
 
 type alias LocalPref =

@@ -8,7 +8,7 @@ import Msg
 import Project
 import Stores
 import Html exposing (..)
-import Todo.FormTypes exposing (..)
+import Todo.Form exposing (..)
 import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
 import Types exposing (AppModel)

@@ -7,7 +7,7 @@ import Entity.Types
 import Material
 import Msg exposing (Msg)
 import Store
-import Todo.FormTypes exposing (EditTodoFormAction(SetTodoText), EditTodoReminderFormAction(SetTodoReminderDate, SetTodoReminderTime), TodoEditForm)
+import Todo.Form exposing (EditTodoFormAction(SetTodoText), EditTodoReminderFormAction(SetTodoReminderDate, SetTodoReminderTime), TodoEditForm)
 import Todo.Types exposing (TodoDoc)
 import Types exposing (AppModel)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)

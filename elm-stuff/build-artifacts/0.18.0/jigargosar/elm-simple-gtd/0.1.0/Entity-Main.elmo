@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F3(
 				return function (_p8) {
 					return A2(
 						_jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm,
-						A2(_jigargosar$elm_simple_gtd$Todo_Form$create, now, _p4._0),
+						A2(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, now, _p4._0),
 						A2(_jigargosar$elm_simple_gtd$Model_Internal$setEditMode, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditTodo, _p8));
 				};
 			}
@@ -167,7 +167,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 		switch (_p18.ctor) {
 			case 'OnStartEditing':
 				return function (_p19) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							function (model) {
@@ -234,12 +234,12 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 		switch (_p24.ctor) {
 			case 'OnNewProject':
 				return function (_p25) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewProject, _p25));
 				};
 			case 'OnNewContext':
 				return function (_p26) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(_jigargosar$elm_simple_gtd$Entity_Main$map, _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext, _p26));
 				};
 			default:

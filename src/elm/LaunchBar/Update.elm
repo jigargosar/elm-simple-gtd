@@ -1,7 +1,7 @@
 module LaunchBar.Update exposing (..)
 
 import Context
-import DomPorts exposing (autoFocusInputCmd)
+import DomPorts exposing (autoFocusInputRCmd)
 import Entity.Types
 import Fuzzy
 import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
@@ -49,7 +49,7 @@ update config msg =
 
             Open ->
                 map (\m -> { m | maybeResult = Nothing })
-                    >> DomPorts.autoFocusInputCmd
+                    >> DomPorts.autoFocusInputRCmd
 
             OnCancel ->
                 map (\m -> { m | maybeResult = Just Canceled })

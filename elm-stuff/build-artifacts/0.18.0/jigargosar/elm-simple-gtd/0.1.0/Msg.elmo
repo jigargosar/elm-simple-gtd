@@ -72,11 +72,11 @@ var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm = {ctor: 'OnSaveCurrentForm'};
-var _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject = function (a) {
-	return {ctor: 'OnStartEditingProject', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoProject = function (a) {
+	return {ctor: 'OnStartEditingTodoProject', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext = function (a) {
-	return {ctor: 'OnStartEditingContext', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoContext = function (a) {
+	return {ctor: 'OnStartEditingTodoContext', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnStartEditingReminder = function (a) {
 	return {ctor: 'OnStartEditingReminder', _0: a};

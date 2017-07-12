@@ -141,10 +141,10 @@ createTodoViewModel appM canBeFocused todo =
                         toggleDeleteMsg
 
                     Key.CharP ->
-                        Msg.OnStartEditingProject todo
+                        Msg.OnStartEditingTodoProject todo
 
                     Key.CharC ->
-                        Msg.OnStartEditingContext todo
+                        Msg.OnStartEditingTodoContext todo
 
                     Key.CharR ->
                         reminder.startEditingMsg
@@ -179,8 +179,8 @@ createTodoViewModel appM canBeFocused todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = Msg.OnStartEditingContext todo
-        , showProjectDropDownMsg = Msg.OnStartEditingProject todo
+        , showContextDropDownMsg = Msg.OnStartEditingTodoContext todo
+        , showProjectDropDownMsg = Msg.OnStartEditingTodoProject todo
         , startEditingMsg = startEditingMsg
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg

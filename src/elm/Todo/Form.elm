@@ -58,8 +58,8 @@ time =
     field .time (\s b -> { b | time = s })
 
 
-update : EditTodoFormAction -> TodoEditForm -> TodoEditForm
-update action =
+updateEditTodoForm : EditTodoFormAction -> TodoEditForm -> TodoEditForm
+updateEditTodoForm action =
     case action of
         SetTodoText value ->
             set name value

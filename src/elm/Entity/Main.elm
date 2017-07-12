@@ -41,11 +41,11 @@ update andThenUpdate msg =
     case msg of
         Entity.Types.OnNewProject ->
             map createAndEditNewProject
-                >> DomPorts.autoFocusInputCmd
+                >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNewContext ->
             map createAndEditNewContext
-                >> DomPorts.autoFocusInputCmd
+                >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnUpdate entity entityUpdateMsg ->
             onUpdate andThenUpdate entity entityUpdateMsg
@@ -60,7 +60,7 @@ onUpdate andThenUpdate entity msg =
     case msg of
         Entity.Types.OnStartEditing ->
             Return.map (\model -> startEditingEntity model.now entity model)
-                >> DomPorts.autoFocusInputCmd
+                >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNameChanged newName ->
             Return.map (updateEditModeNameChanged newName entity)

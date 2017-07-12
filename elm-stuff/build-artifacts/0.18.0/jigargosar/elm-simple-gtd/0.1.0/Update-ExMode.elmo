@@ -31,10 +31,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm = F2(
 				_jigargosar$elm_simple_gtd$Document_Types$getDocId,
 				A2(
 					_jigargosar$elm_simple_gtd$Stores$insertTodo,
-					A2(
-						_jigargosar$elm_simple_gtd$Todo$init,
-						model.now,
-						_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
+					A2(_jigargosar$elm_simple_gtd$Todo$init, model.now, form.text),
 					model)));
 	});
 var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) {

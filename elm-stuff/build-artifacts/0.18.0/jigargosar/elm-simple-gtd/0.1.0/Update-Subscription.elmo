@@ -83,7 +83,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg = F2(
 			case 'OnKeyboardMsg':
 				return function (_p5) {
 					return A2(
-						_jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocusCmd,
+						_jigargosar$elm_simple_gtd$DomPorts$focusSelectorIfNoFocusRCmd,
 						'.entity-list .focusable-list-item[tabindex=0]',
 						A2(
 							_Fresheyeball$elm_return$Return$map,

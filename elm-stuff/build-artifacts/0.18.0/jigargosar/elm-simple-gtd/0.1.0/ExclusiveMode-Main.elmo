@@ -2,7 +2,7 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start = function (exclusiveMod
 	var _p0 = exclusiveMode;
 	if (_p0.ctor === 'XMNewTodo') {
 		return function (_p1) {
-			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+			return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 				A2(
 					_Fresheyeball$elm_return$Return$map,
 					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(exclusiveMode),

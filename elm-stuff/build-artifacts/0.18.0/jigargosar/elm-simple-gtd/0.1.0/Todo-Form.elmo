@@ -59,7 +59,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$name = A2(
 				b,
 				{name: s});
 		}));
-var _jigargosar$elm_simple_gtd$Todo_Form$update = function (action) {
+var _jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm = function (action) {
 	var _p3 = action;
 	switch (_p3.ctor) {
 		case 'SetTodoText':
@@ -72,7 +72,17 @@ var _jigargosar$elm_simple_gtd$Todo_Form$update = function (action) {
 			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$time, _p3._0);
 	}
 };
-var _jigargosar$elm_simple_gtd$Todo_Form$create = F2(
+var _jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText = F2(
+	function (text, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{text: text});
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm = F2(
+	function (referenceEntity, text) {
+		return {text: text, referenceEntity: referenceEntity};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F2(
 	function (now, todo) {
 		var timeInMilli = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],

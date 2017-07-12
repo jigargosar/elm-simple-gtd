@@ -3,7 +3,7 @@ port module Update exposing (update)
 import AppDrawer.Main
 import CommonMsg
 import Document
-import DomPorts exposing (autoFocusInputCmd, focusSelectorIfNoFocusCmd)
+import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd, focusSelectorIfNoFocusRCmd)
 import Entity
 import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
@@ -24,6 +24,7 @@ import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.Form
+import Todo.FormTypes
 import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
@@ -95,14 +96,14 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnStartEditingContext todo ->
+        OnStartEditingTodoContext todo ->
             map
                 (setEditMode (XMEditTodoContext)
                     >> createAndSetTodoEditForm todo
                 )
                 >> Return.command (positionContextMenuCmd todo)
 
-        OnStartEditingProject todo ->
+        OnStartEditingTodoProject todo ->
             map
                 (setEditMode (XMEditTodoProject)
                     >> createAndSetTodoEditForm todo
@@ -121,16 +122,24 @@ update andThenUpdate msg =
 
         OnUpdateTodoForm form action ->
             map
-                (setTodoEditForm (Todo.Form.update action form))
-                >> autoFocusInputCmd
+                (setTodoEditForm (Todo.Form.updateEditTodoForm action form))
+                >> Return.command
+                    (case action of
+                        Todo.FormTypes.SetTodoMenuState _ ->
+                            autoFocusInputCmd
 
+                        _ ->
+                            Cmd.none
+                    )
+
+        -- bug: causes reminder form focus to jump, but needed for menu updates.
         OnMainMenuStateChanged menuState ->
             map
                 (menuState
                     |> XMMainMenu
                     >> setEditMode
                 )
-                >> autoFocusInputCmd
+                >> autoFocusInputRCmd
 
         OnUpdateRemoteSyncFormUri form uri ->
             map

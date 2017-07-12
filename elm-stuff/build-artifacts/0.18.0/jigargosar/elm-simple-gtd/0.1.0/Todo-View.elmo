@@ -334,8 +334,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$new = function (form) {
 													_jigargosar$elm_simple_gtd$Msg$OnNewTodoTextChanged(form)),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$defaultValue(
-														_jigargosar$elm_simple_gtd$Todo_NewForm$getText(form)),
+													_0: _elm_lang$html$Html_Attributes$defaultValue(form.text),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -867,9 +866,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'Delete':
 						return toggleDeleteMsg;
 					case 'CharP':
-						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject(todo);
+						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoProject(todo);
 					case 'CharC':
-						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext(todo);
+						return _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoContext(todo);
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
@@ -896,8 +895,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			displayText: _jigargosar$elm_simple_gtd$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingContext(todo),
-			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingProject(todo),
+			showContextDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoContext(todo),
+			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodoProject(todo),
 			startEditingMsg: startEditingMsg,
 			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,

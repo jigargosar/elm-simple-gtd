@@ -89,7 +89,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$todoMoreMenu = function (_p9) {
 var _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-		A2(_jigargosar$elm_simple_gtd$Todo_NewForm$create, _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity, '')));
+		A2(_jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm, _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity, '')));
 var _jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView = F2(
 	function (todo, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -302,7 +302,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model_Internal$setEditMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p18._1, _p18._0))));
+							A2(_jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText, _p18._1, _p18._0))));
 			case 'OnShowMoreMenu':
 				var _p20 = _p18._0;
 				return function (_p19) {
@@ -396,7 +396,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				};
 			case 'OnNewTodoForInbox':
 				return function (_p29) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(_jigargosar$elm_simple_gtd$Todo_Main$map, _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference, _p29));
 				};
 			default:

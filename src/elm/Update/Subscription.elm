@@ -1,6 +1,6 @@
 module Update.Subscription exposing (..)
 
-import DomPorts exposing (focusSelectorIfNoFocusCmd)
+import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Model
@@ -34,7 +34,7 @@ onSubMsg andThenUpdate subMsg =
 
         OnKeyboardMsg msg ->
             map (updateKeyboardState (X.Keyboard.update msg))
-                >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
+                >> focusSelectorIfNoFocusRCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
             onGlobalKeyUp andThenUpdate key

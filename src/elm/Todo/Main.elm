@@ -179,7 +179,7 @@ update andThenUpdate now todoMsg =
 
         OnNewTodoForInbox ->
             map (activateNewTodoModeWithInboxAsReference)
-                >> DomPorts.autoFocusInputCmd
+                >> DomPorts.autoFocusInputRCmd
 
         OnReminderOverlayAction action ->
             reminderOverlayAction action

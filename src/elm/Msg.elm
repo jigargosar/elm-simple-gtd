@@ -46,8 +46,8 @@ type Msg
     | OnNewTodoTextChanged AddTodoForm TodoText
     | OnDeactivateEditingMode
     | OnStartEditingReminder TodoDoc
-    | OnStartEditingContext TodoDoc
-    | OnStartEditingProject TodoDoc
+    | OnStartEditingTodoContext TodoDoc
+    | OnStartEditingTodoProject TodoDoc
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnUpdateTodoForm TodoEditForm EditTodoFormAction

@@ -16,15 +16,19 @@ port focusSelector : DomSelector -> Cmd msg
 port focusSelectorIfNoFocus : DomSelector -> Cmd msg
 
 
+autoFocusInputRCmd =
+    Return.command autoFocusInputCmd
+
+
 autoFocusInputCmd =
-    focusInputCmd ".auto-focus"
+    focusInput ".auto-focus"
 
 
-focusInputCmd =
+focusInputRCmd =
     focusInput >> Return.command
 
 
-focusSelectorIfNoFocusCmd =
+focusSelectorIfNoFocusRCmd =
     focusSelectorIfNoFocus >> Return.command
 
 

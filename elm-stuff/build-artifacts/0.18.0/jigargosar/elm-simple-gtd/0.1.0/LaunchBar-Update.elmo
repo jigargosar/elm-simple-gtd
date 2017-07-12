@@ -110,7 +110,7 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F2(
 							A2(_jigargosar$elm_simple_gtd$LaunchBar_Update$updateInput, config, _p6._1));
 					case 'Open':
 						return function (_p7) {
-							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd(
+							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 								A2(
 									_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
 									function (m) {

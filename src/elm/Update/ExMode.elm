@@ -36,11 +36,11 @@ saveCurrentForm model =
             case t of
                 XMEditTodo form ->
                     case form.xmType of
-                        XMEditTodoText ->
+                        ETFM_EditTodoText ->
                             model
                                 |> Stores.updateTodo (TA_SetText form.name) form.id
 
-                        XMEditTodoReminder ->
+                        ETFM_EditTodoReminder ->
                             model
                                 |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
 

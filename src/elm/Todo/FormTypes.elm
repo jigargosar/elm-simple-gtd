@@ -17,7 +17,7 @@ type alias EditTodoForm =
     , menuState : MenuState
     , date : String
     , time : String
-    , xmType : XMEditTodoFormMode
+    , xmType : EditTodoFormMode
     }
 
 
@@ -47,16 +47,16 @@ type EditTodoFormAction
     | SetTodoReminderTime String
 
 
-type XMEditTodoFormMode
-    = XMEditTodoText
-    | XMEditTodoReminder
-    | XMEditTodoContext
-    | XMEditTodoProject
+type EditTodoFormMode
+    = ETFM_EditTodoText
+    | ETFM_EditTodoReminder
+    | ETFM_EditTodoContext
+    | ETFM_XMEditTodoProject
 
 
-type NewTodoFormMode
-    = NewTodo
-    | SetupNewTodo
+type AddTodoFormMode
+    = NTFM_NewTodo
+    | NTFM_SetupFirstTodo
 
 
 type XMTodoForm

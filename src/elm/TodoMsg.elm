@@ -33,19 +33,19 @@ onNewTodoForInbox =
 
 
 onStartEditingTodoText todo =
-    Msg.OnStartEditingTodo todo XMEditTodoText
+    Msg.OnStartEditingTodo todo ETFM_EditTodoText
 
 
 onStartEditingTodoContext todo =
-    Msg.OnStartEditingTodo todo XMEditTodoContext
+    Msg.OnStartEditingTodo todo ETFM_EditTodoContext
 
 
 onStartEditingTodoProject todo =
-    Msg.OnStartEditingTodo todo XMEditTodoProject
+    Msg.OnStartEditingTodo todo ETFM_XMEditTodoProject
 
 
 onStartEditingReminder todo =
-    Msg.OnStartEditingTodo todo XMEditTodoReminder
+    Msg.OnStartEditingTodo todo ETFM_EditTodoReminder
 
 
 onSetTodoFormMenuState form =

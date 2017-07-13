@@ -21,7 +21,7 @@ import Stores
 import Time exposing (Time)
 import Todo
 import Todo.Form
-import Todo.FormTypes exposing (XMEditTodoFormMode(..))
+import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelF, ModelReturnF, ReturnF)

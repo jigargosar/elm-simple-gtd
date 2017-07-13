@@ -104,16 +104,16 @@ update andThenUpdate msg =
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
                         (case t of
-                            XMEditTodoText ->
+                            ETFM_EditTodoText ->
                                 autoFocusInputCmd
 
-                            XMEditTodoContext ->
+                            ETFM_EditTodoContext ->
                                 positionContextMenuCmd todo
 
-                            XMEditTodoProject ->
+                            ETFM_XMEditTodoProject ->
                                 positionProjectMenuCmd todo
 
-                            XMEditTodoReminder ->
+                            ETFM_EditTodoReminder ->
                                 positionScheduleMenuCmd todo
                         )
 

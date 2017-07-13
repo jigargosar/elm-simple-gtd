@@ -39,7 +39,7 @@ type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode
-    | OnStartEditingTodo TodoDoc XMEditTodoFormMode
+    | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState

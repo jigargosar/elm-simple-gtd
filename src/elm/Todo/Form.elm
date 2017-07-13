@@ -39,7 +39,7 @@ createNewTodoForm referenceEntity text =
     { text = text, referenceEntity = referenceEntity }
 
 
-setNewTodoFormText text form =
+updateNewTodoForm text form =
     { form | text = text }
 
 

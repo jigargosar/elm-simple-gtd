@@ -302,7 +302,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-							A2(_jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText, _p18._1, _p18._0))));
+							A2(_jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm, _p18._1, _p18._0))));
 			case 'OnShowMoreMenu':
 				var _p20 = _p18._0;
 				return function (_p19) {

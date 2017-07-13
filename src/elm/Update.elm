@@ -123,8 +123,8 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnNewTodoTextChanged form text ->
-            map (setExclusiveMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
+        OnUpdateAddTodoForm form text ->
+            map (setExclusiveMode (Todo.Form.updateNewTodoForm text form |> XMNewTodo))
 
         OnUpdateEditTodoForm form action ->
             map

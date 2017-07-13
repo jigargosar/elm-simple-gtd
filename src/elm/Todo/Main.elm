@@ -93,7 +93,7 @@ update andThenUpdate now todoMsg =
     case todoMsg of
         UpdateSetupFormTodoText form todoText ->
             Return.map
-                (Todo.Form.setNewTodoFormText todoText form
+                (Todo.Form.updateNewTodoForm todoText form
                     |> XMSetup
                     |> setExclusiveMode
                 )

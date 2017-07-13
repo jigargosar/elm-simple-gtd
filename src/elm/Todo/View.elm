@@ -406,7 +406,7 @@ new form =
                 [ div [ class "input-field" ]
                     [ textarea
                         [ class "materialize-textarea auto-focus"
-                        , onInput (Msg.OnNewTodoTextChanged form)
+                        , onInput (Msg.OnUpdateAddTodoForm form)
                         , form.text |> defaultValue
                         ]
                         []
@@ -427,40 +427,36 @@ contextMenu =
 
 
 reminderPopup form =
-    let
-        updateReminderForm =
-            Msg.OnUpdateEditTodoForm form
-    in
-        div
-            [ class "overlay"
-            , onClickStopPropagation Msg.OnDeactivateEditingMode
-            , onKeyDownStopPropagation (\_ -> Model.noop)
+    div
+        [ class "overlay"
+        , onClickStopPropagation Msg.OnDeactivateEditingMode
+        , onKeyDownStopPropagation (\_ -> Model.noop)
+        ]
+        [ div
+            [ id "popup-menu"
+            , class "z-depth-4 static"
+            , onClickStopPropagation Model.noop
             ]
-            [ div
-                [ id "popup-menu"
-                , class "z-depth-4 static"
-                , onClickStopPropagation Model.noop
-                ]
-                [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                , div [ class "input-field" ]
-                    [ Html.input
-                        [ type_ "date"
-                        , class "auto-focus"
-                        , value form.date
-                        , TodoMsg.onSetTodoFormReminderDate form |> onChange
-                        ]
-                        []
-                    , Html.label [ class "active" ] [ "Date" |> text ]
+            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+            , div [ class "input-field" ]
+                [ Html.input
+                    [ type_ "date"
+                    , class "auto-focus"
+                    , value form.date
+                    , TodoMsg.onSetTodoFormReminderDate form |> onChange
                     ]
-                , div [ class "input-field" ]
-                    [ Html.input
-                        [ type_ "time"
-                        , value form.time
-                        , TodoMsg.onSetTodoFormReminderTime form |> onChange
-                        ]
-                        []
-                    , Html.label [ class "active" ] [ "Time" |> text ]
-                    ]
-                , defaultOkCancelButtons
+                    []
+                , Html.label [ class "active" ] [ "Date" |> text ]
                 ]
+            , div [ class "input-field" ]
+                [ Html.input
+                    [ type_ "time"
+                    , value form.time
+                    , TodoMsg.onSetTodoFormReminderTime form |> onChange
+                    ]
+                    []
+                , Html.label [ class "active" ] [ "Time" |> text ]
+                ]
+            , defaultOkCancelButtons
             ]
+        ]

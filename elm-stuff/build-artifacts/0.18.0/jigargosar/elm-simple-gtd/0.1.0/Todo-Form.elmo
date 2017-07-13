@@ -72,7 +72,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm = function (action) 
 			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$time, _p3._0);
 	}
 };
-var _jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText = F2(
+var _jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm = F2(
 	function (text, form) {
 		return _elm_lang$core$Native_Utils.update(
 			form,

@@ -159,12 +159,12 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode, _p13));
 				};
-			case 'OnNewTodoTextChanged':
+			case 'OnUpdateAddTodoForm':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-							A2(_jigargosar$elm_simple_gtd$Todo_Form$setNewTodoFormText, _p0._1, _p0._0))));
-			case 'OnUpdateTodoForm':
+							A2(_jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm, _p0._1, _p0._0))));
+			case 'OnUpdateEditTodoForm':
 				var _p16 = _p0._1;
 				return function (_p14) {
 					return A2(

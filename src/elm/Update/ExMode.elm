@@ -47,6 +47,9 @@ saveCurrentForm model =
                         _ ->
                             model |> Return.singleton
 
+                TFT_NONE ->
+                    model |> Return.singleton
+
         XMNewTodo form ->
             saveNewTodoForm form model
 

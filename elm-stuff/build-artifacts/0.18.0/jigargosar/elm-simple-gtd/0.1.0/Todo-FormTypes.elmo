@@ -18,8 +18,12 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 	return {ctor: 'SetTodoText', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$NTFM_SetupFirstTodo = {ctor: 'NTFM_SetupFirstTodo'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$NTFM_NewTodo = {ctor: 'NTFM_NewTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo = {ctor: 'ATFM_SetupFirstTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox = {ctor: 'ATFM_AddToInbox'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddByFocusInEntity = {ctor: 'ATFM_AddByFocusInEntity'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_ADD = function (a) {
+	return {ctor: 'TFT_ADD', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_NONE = {ctor: 'TFT_NONE'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_Edit = function (a) {
 	return {ctor: 'TFT_Edit', _0: a};

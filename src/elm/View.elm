@@ -78,6 +78,9 @@ overlayViews appModel =
                         TFT_NONE ->
                             def
 
+                        TFT_ADD form ->
+                            def
+
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
 

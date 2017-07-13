@@ -3,7 +3,7 @@ var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
 		var _p0 = msg;
 		var inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 		var createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-			A2(_jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm, inboxEntity, ''));
+			A3(_jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm, _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo, inboxEntity, ''));
 		var onSwitchToNewUserSetupModeIfNeeded = function (model) {
 			return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(createSetupExclusiveMode) : _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode) : _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay))(model);
 		};

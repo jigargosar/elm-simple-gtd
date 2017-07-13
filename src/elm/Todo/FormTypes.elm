@@ -57,13 +57,15 @@ type EditTodoFormAction
 
 
 type AddTodoFormMode
-    = NTFM_NewTodo
-    | NTFM_SetupFirstTodo
+    = ATFM_AddByFocusInEntity
+    | ATFM_AddToInbox
+    | ATFM_SetupFirstTodo
 
 
 type TodoForm
     = TFT_Edit EditTodoForm
     | TFT_NONE
+    | TFT_ADD AddTodoFormMode
 
 
 

@@ -2,7 +2,7 @@ module Update.ExMode exposing (..)
 
 import Context
 import Document.Types exposing (getDocId)
-import Entity.Types exposing (Entity(..), GroupEntityType(..))
+import Entity.Types exposing (Entity(..), GroupEntityType(..), createContextEntity)
 import ExclusiveMode.Types exposing (..)
 import Project
 import Return
@@ -18,6 +18,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Stores
 import Todo.Types exposing (TodoAction(..))
+import Types exposing (ModelReturnF)
 
 
 saveCurrentForm model =
@@ -52,6 +53,9 @@ saveCurrentForm model =
                 TFT_NONE ->
                     model |> Return.singleton
 
+                TFT_ADD form ->
+                    model |> Return.singleton
+
         XMNewTodo form ->
             saveNewTodoForm form model
 
@@ -66,24 +70,41 @@ saveCurrentForm model =
             model |> Return.singleton
 
 
+inboxEntity =
+    createContextEntity Context.null
+
+
+saveNewTodoForm : AddTodoForm -> ModelReturnF
 saveNewTodoForm form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
         |> uncurry
             (\todoId ->
-                Stores.updateTodo
-                    (case form.referenceEntity of
-                        TodoEntity fromTodo ->
-                            (TA_CopyProjectAndContextId fromTodo)
+                let
+                    referenceEntity =
+                        case form.atfMode of
+                            ATFM_AddToInbox ->
+                                inboxEntity
 
-                        GroupEntity g ->
-                            case g of
-                                ContextEntity context ->
-                                    (TA_SetContext context)
+                            ATFM_SetupFirstTodo ->
+                                inboxEntity
 
-                                ProjectEntity project ->
-                                    (TA_SetProject project)
-                    )
-                    todoId
-                    >> Tuple.mapFirst (Stores.setFocusInEntityFromTodoId todoId)
+                            ATFM_AddByFocusInEntity ->
+                                model.focusInEntity
+                in
+                    Stores.updateTodo
+                        (case referenceEntity of
+                            TodoEntity fromTodo ->
+                                (TA_CopyProjectAndContextId fromTodo)
+
+                            GroupEntity g ->
+                                case g of
+                                    ContextEntity context ->
+                                        (TA_SetContext context)
+
+                                    ProjectEntity project ->
+                                        (TA_SetProject project)
+                        )
+                        todoId
+                        >> Return.map (Stores.setFocusInEntityFromTodoId todoId)
             )

@@ -21,6 +21,7 @@ type alias TodoFormUpdateFields a =
 type alias AddTodoForm =
     TodoFormUpdateFields
         { referenceEntity : Entity
+        , atfMode : AddTodoFormMode
         }
 
 

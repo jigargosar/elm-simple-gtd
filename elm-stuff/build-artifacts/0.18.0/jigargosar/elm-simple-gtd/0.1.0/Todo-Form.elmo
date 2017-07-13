@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime = function (_p0) {
+var _jigargosar$elm_simple_gtd$Todo_Form$computeMaybeTime = function (_p0) {
 	var _p1 = _p0;
 	var dateTimeString = A2(
 		_elm_lang$core$Basics_ops['++'],
@@ -15,6 +15,18 @@ var _jigargosar$elm_simple_gtd$Todo_Form$getMaybeTime = function (_p0) {
 			}),
 		_elm_lang$core$Maybe$Nothing);
 };
+var _jigargosar$elm_simple_gtd$Todo_Form$maybeComputedTime = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.maybeComputedTime;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{maybeComputedTime: s});
+		}));
+var _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime = A2(_jigargosar$elm_simple_gtd$X_Record$overM, _jigargosar$elm_simple_gtd$Todo_Form$maybeComputedTime, _jigargosar$elm_simple_gtd$Todo_Form$computeMaybeTime);
 var _jigargosar$elm_simple_gtd$Todo_Form$time = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -48,28 +60,34 @@ var _jigargosar$elm_simple_gtd$Todo_Form$menuState = A2(
 				b,
 				{menuState: s});
 		}));
-var _jigargosar$elm_simple_gtd$Todo_Form$name = A2(
+var _jigargosar$elm_simple_gtd$Todo_Form$text = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
-		return _.name;
+		return _.text;
 	},
 	F2(
 		function (s, b) {
 			return _elm_lang$core$Native_Utils.update(
 				b,
-				{name: s});
+				{text: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm = function (action) {
 	var _p3 = action;
 	switch (_p3.ctor) {
 		case 'SetTodoText':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$name, _p3._0);
+			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$text, _p3._0);
 		case 'SetTodoMenuState':
 			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$menuState, _p3._0);
 		case 'SetTodoReminderDate':
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$date, _p3._0);
+			return function (_p4) {
+				return _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime(
+					A3(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$date, _p3._0, _p4));
+			};
 		default:
-			return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$time, _p3._0);
+			return function (_p5) {
+				return _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime(
+					A3(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Form$time, _p3._0, _p5));
+			};
 	}
 };
 var _jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm = F2(
@@ -78,9 +96,9 @@ var _jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm = F2(
 			form,
 			{text: text});
 	});
-var _jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm = F2(
-	function (referenceEntity, text) {
-		return {text: text, referenceEntity: referenceEntity};
+var _jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm = F3(
+	function (atfMode, referenceEntity, text) {
+		return {text: text, referenceEntity: referenceEntity, menuState: _jigargosar$elm_simple_gtd$Menu$initState, date: '', time: '', maybeComputedTime: _elm_lang$core$Maybe$Nothing, atfMode: atfMode};
 	});
 var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 	function (etfMode, now, todo) {
@@ -88,9 +106,9 @@ var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(todo),
 			now + _elm_lang$core$Time$hour);
-		return {
+		var form = {
 			id: _jigargosar$elm_simple_gtd$Document_Types$getDocId(todo),
-			name: _jigargosar$elm_simple_gtd$Todo_Types$getTodoText(todo),
+			text: _jigargosar$elm_simple_gtd$Todo_Types$getTodoText(todo),
 			entity: _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo),
 			todoId: _jigargosar$elm_simple_gtd$Document_Types$getDocId(todo),
 			contextId: _jigargosar$elm_simple_gtd$Todo$getContextId(todo),
@@ -98,6 +116,8 @@ var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 			menuState: _jigargosar$elm_simple_gtd$Menu$initState,
 			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
 			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
-			etfMode: etfMode
+			etfMode: etfMode,
+			maybeComputedTime: _elm_lang$core$Maybe$Nothing
 		};
+		return _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime(form);
 	});

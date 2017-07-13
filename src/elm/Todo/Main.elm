@@ -9,6 +9,7 @@ import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
+import Todo.FormTypes exposing (..)
 import Todo.Menu
 import Todo.Form
 import Todo.Notification.Model
@@ -291,7 +292,7 @@ inboxEntity =
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setExclusiveMode (Todo.Form.createNewTodoForm inboxEntity "" |> XMNewTodo)
+    setExclusiveMode (Todo.Form.createNewTodoForm NTFM_NewTodo inboxEntity "" |> XMNewTodo)
 
 
 todoMoreMenu =

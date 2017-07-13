@@ -160,7 +160,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
 		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg, form.entity, _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
 		var fireTextChanged = _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText(form);
-		var todoText = form.name;
+		var todoText = form.text;
 		return A2(
 			_elm_lang$html$Html$div,
 			{

@@ -1,35 +1,6 @@
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i, etfMode: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
 	function (a, b) {
 		return {todoId: a, menuState: b};
-	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm = F2(
-	function (a, b) {
-		return {text: a, referenceEntity: b};
-	});
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoReminderForm = F3(
-	function (a, b, c) {
-		return {id: a, date: b, time: c};
 	});
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_XMEditTodoProject = {ctor: 'ETFM_XMEditTodoProject'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext = {ctor: 'ETFM_EditTodoContext'};

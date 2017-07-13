@@ -21,6 +21,14 @@ var _jigargosar$elm_simple_gtd$X_Record$maybeSetIn = F3(
 	function (big, field, maybeSmall) {
 		return A3(_jigargosar$elm_simple_gtd$X_Record$maybeSet, field, maybeSmall, big);
 	});
+var _jigargosar$elm_simple_gtd$X_Record$overM = F3(
+	function (field, bigToSmall, big) {
+		return A3(
+			_jigargosar$elm_simple_gtd$X_Record$setIn,
+			big,
+			field,
+			bigToSmall(big));
+	});
 var _jigargosar$elm_simple_gtd$X_Record$get = F2(
 	function (_p2, big) {
 		var _p3 = _p2;

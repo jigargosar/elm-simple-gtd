@@ -9,6 +9,7 @@ import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)
 import Store
 import Todo.Form
+import Todo.FormTypes exposing (..)
 import Types exposing (ReturnF)
 
 
@@ -34,6 +35,6 @@ update andThenUpdate msg =
                     createContextEntity Context.null
 
                 createSetupExclusiveMode =
-                    XMSetup (Todo.Form.createNewTodoForm inboxEntity "")
+                    XMSetup (Todo.Form.createNewTodoForm NTFM_SetupFirstTodo inboxEntity "")
             in
                 map onSwitchToNewUserSetupModeIfNeeded

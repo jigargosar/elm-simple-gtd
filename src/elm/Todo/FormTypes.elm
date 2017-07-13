@@ -4,6 +4,7 @@ import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity)
 import Menu
 import Menu.Types exposing (MenuState)
+import Time exposing (Time)
 import Todo.Types exposing (TodoDoc, TodoText)
 
 
@@ -25,6 +26,17 @@ type alias EditTodoForm =
     , date : String
     , time : String
     , etfMode : EditTodoFormMode
+    , maybeComputedTime : Maybe Time
+    }
+
+
+type alias EditTodoFormSubset a =
+    { a
+        | name : String
+        , menuState : MenuState
+        , date : String
+        , time : String
+        , maybeComputedTime : Maybe Time
     }
 
 

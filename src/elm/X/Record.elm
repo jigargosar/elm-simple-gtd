@@ -13,6 +13,7 @@ module X.Record
         , maybeSet
         , maybeSetIn
         , maybeOver
+        , overM
         )
 
 import Return
@@ -80,6 +81,10 @@ overT2 field smallFT2 b =
     get field b
         |> smallFT2
         |> Tuple.mapSecond (setIn b field)
+
+
+overM field bigToSmall big =
+    setIn big field (bigToSmall big)
 
 
 maybeOverT2 field smallFT2 b =

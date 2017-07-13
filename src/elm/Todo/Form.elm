@@ -10,7 +10,7 @@ import Time.Format
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, getTodoText)
-import X.Record exposing (field, set)
+import X.Record exposing (field, over, overM, set)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
@@ -20,18 +20,22 @@ createEditTodoForm etfMode now todo =
     let
         timeInMilli =
             Todo.getMaybeReminderTime todo ?= now + Time.hour
+
+        form =
+            { id = getDocId todo
+            , name = getTodoText todo
+            , entity = TodoEntity todo
+            , todoId = getDocId todo
+            , contextId = Todo.getContextId todo
+            , projectId = Todo.getProjectId todo
+            , menuState = Menu.initState
+            , date = (Time.Format.format "%Y-%m-%d") timeInMilli
+            , time = (Time.Format.format "%H:%M") timeInMilli
+            , etfMode = etfMode
+            , maybeComputedTime = Nothing
+            }
     in
-        { id = getDocId todo
-        , name = getTodoText todo
-        , entity = TodoEntity todo
-        , todoId = getDocId todo
-        , contextId = Todo.getContextId todo
-        , projectId = Todo.getProjectId todo
-        , menuState = Menu.initState
-        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
-        , time = (Time.Format.format "%H:%M") timeInMilli
-        , etfMode = etfMode
-        }
+        updateMaybeTime form
 
 
 createNewTodoForm : Entity -> Todo.Text -> AddTodoForm
@@ -59,7 +63,11 @@ time =
     field .time (\s b -> { b | time = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> EditTodoForm -> EditTodoForm
+maybeComputedTime =
+    field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
+
+
+updateEditTodoForm : EditTodoFormAction -> EditTodoFormSubset a -> EditTodoFormSubset a
 updateEditTodoForm action =
     case action of
         SetTodoText value ->
@@ -70,13 +78,20 @@ updateEditTodoForm action =
 
         SetTodoReminderDate value ->
             set date value
+                >> updateMaybeTime
 
         SetTodoReminderTime value ->
             set time value
+                >> updateMaybeTime
 
 
-getMaybeTime : EditTodoForm -> Maybe Time
-getMaybeTime { id, date, time } =
+updateMaybeTime : EditTodoFormSubset a -> EditTodoFormSubset a
+updateMaybeTime =
+    overM maybeComputedTime computeMaybeTime
+
+
+computeMaybeTime : EditTodoFormSubset a -> Maybe Time
+computeMaybeTime { date, time } =
     let
         dateTimeString =
             date ++ " " ++ time

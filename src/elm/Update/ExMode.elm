@@ -35,17 +35,19 @@ saveCurrentForm model =
         XMTodo t ->
             case t of
                 TFT_Edit form ->
-                    case form.etfMode of
-                        ETFM_EditTodoText ->
-                            model
-                                |> Stores.updateTodo (TA_SetText form.name) form.id
+                    let
+                        updateTodo action =
+                            Stores.updateTodo action form.id model
+                    in
+                        case form.etfMode of
+                            ETFM_EditTodoText ->
+                                updateTodo (TA_SetText form.name)
 
-                        ETFM_EditTodoReminder ->
-                            model
-                                |> Stores.updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.getMaybeTime form)) form.id
+                            ETFM_EditTodoReminder ->
+                                updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.computeMaybeTime form))
 
-                        _ ->
-                            model |> Return.singleton
+                            _ ->
+                                model |> Return.singleton
 
                 TFT_NONE ->
                     model |> Return.singleton

@@ -16,7 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEditForm)
+import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection
@@ -127,16 +127,19 @@ update andThenUpdate msg =
             map (setExclusiveMode (Todo.Form.updateNewTodoForm text form |> XMNewTodo))
 
         OnUpdateEditTodoForm form action ->
-            map
-                (setTodoEditForm (Todo.Form.updateEditTodoForm action form))
-                >> Return.command
-                    (case action of
-                        Todo.FormTypes.SetTodoMenuState _ ->
-                            autoFocusInputCmd
+            let
+                xm =
+                    Todo.Form.updateEditTodoForm action form |> XMEditTodo >> XMTodo
+            in
+                map (setExclusiveMode xm)
+                    >> Return.command
+                        (case action of
+                            Todo.FormTypes.SetTodoMenuState _ ->
+                                autoFocusInputCmd
 
-                        _ ->
-                            Cmd.none
-                    )
+                            _ ->
+                                Cmd.none
+                        )
 
         OnMainMenuStateChanged menuState ->
             map

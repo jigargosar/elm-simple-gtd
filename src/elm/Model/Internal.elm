@@ -20,9 +20,5 @@ setExclusiveMode =
     set exclusiveMode
 
 
-setTodoEditForm f m =
-    { m | maybeTodoEditForm = Just f }
-
-
 deactivateEditingMode =
     setExclusiveMode XMNone

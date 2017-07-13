@@ -7,7 +7,7 @@ import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 
 
-type alias TodoFormUpdateFields a =
+type alias TodoFormCommon a =
     { a
         | text : String
         , menuState : MenuState
@@ -18,7 +18,7 @@ type alias TodoFormUpdateFields a =
 
 
 type alias AddTodoForm =
-    TodoFormUpdateFields
+    TodoFormCommon
         { atfMode : AddTodoFormMode
         }
 
@@ -31,7 +31,7 @@ type EditTodoFormMode
 
 
 type alias EditTodoForm =
-    TodoFormUpdateFields
+    TodoFormCommon
         { id : DocId
         , entity : Entity
         , todoId : DocId

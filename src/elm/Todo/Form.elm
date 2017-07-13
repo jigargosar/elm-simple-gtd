@@ -77,7 +77,7 @@ maybeComputedTime =
     field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> TodoFormUpdateFields a -> TodoFormUpdateFields a
+updateEditTodoForm : EditTodoFormAction -> TodoFormCommon a -> TodoFormCommon a
 updateEditTodoForm action =
     case action of
         SetTodoText value ->
@@ -95,12 +95,12 @@ updateEditTodoForm action =
                 >> updateMaybeTime
 
 
-updateMaybeTime : TodoFormUpdateFields a -> TodoFormUpdateFields a
+updateMaybeTime : TodoFormCommon a -> TodoFormCommon a
 updateMaybeTime =
     overM maybeComputedTime computeMaybeTime
 
 
-computeMaybeTime : TodoFormUpdateFields a -> Maybe Time
+computeMaybeTime : TodoFormCommon a -> Maybe Time
 computeMaybeTime { date, time } =
     let
         dateTimeString =

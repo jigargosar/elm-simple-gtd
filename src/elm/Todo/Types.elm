@@ -10,7 +10,7 @@ type alias TodoText =
     String
 
 
-type alias Record =
+type alias TodoRecord =
     { done : Bool
     , text : TodoText
     , schedule : TodoSchedule
@@ -20,7 +20,7 @@ type alias Record =
 
 
 type alias TodoDoc =
-    Document.Types.Document Record
+    Document.Types.Document TodoRecord
 
 
 type TodoSchedule
@@ -51,4 +51,4 @@ type TodoAction
 
 
 type alias TodoStore =
-    Store Record
+    Store TodoRecord

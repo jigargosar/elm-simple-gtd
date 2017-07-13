@@ -41,7 +41,7 @@ saveCurrentForm model =
                     in
                         case form.etfMode of
                             ETFM_EditTodoText ->
-                                updateTodo (TA_SetText form.name)
+                                updateTodo (TA_SetText form.text)
 
                             ETFM_EditTodoReminder ->
                                 updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.computeMaybeTime form))

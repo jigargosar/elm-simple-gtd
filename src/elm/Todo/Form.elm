@@ -23,7 +23,7 @@ createEditTodoForm etfMode now todo =
 
         form =
             { id = getDocId todo
-            , name = getTodoText todo
+            , text = getTodoText todo
             , entity = TodoEntity todo
             , todoId = getDocId todo
             , contextId = Todo.getContextId todo
@@ -47,8 +47,8 @@ updateNewTodoForm text form =
     { form | text = text }
 
 
-name =
-    field .name (\s b -> { b | name = s })
+text =
+    field .text (\s b -> { b | text = s })
 
 
 menuState =
@@ -67,11 +67,11 @@ maybeComputedTime =
     field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> EditTodoFormSubset a -> EditTodoFormSubset a
+updateEditTodoForm : EditTodoFormAction -> TodoFormUpdateFields a -> TodoFormUpdateFields a
 updateEditTodoForm action =
     case action of
         SetTodoText value ->
-            set name value
+            set text value
 
         SetTodoMenuState value ->
             set menuState value
@@ -85,12 +85,12 @@ updateEditTodoForm action =
                 >> updateMaybeTime
 
 
-updateMaybeTime : EditTodoFormSubset a -> EditTodoFormSubset a
+updateMaybeTime : TodoFormUpdateFields a -> TodoFormUpdateFields a
 updateMaybeTime =
     overM maybeComputedTime computeMaybeTime
 
 
-computeMaybeTime : EditTodoFormSubset a -> Maybe Time
+computeMaybeTime : TodoFormUpdateFields a -> Maybe Time
 computeMaybeTime { date, time } =
     let
         dateTimeString =

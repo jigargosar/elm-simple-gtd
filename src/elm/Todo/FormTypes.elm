@@ -16,23 +16,19 @@ type EditTodoFormMode
 
 
 type alias EditTodoForm =
-    { id : DocId
-    , name : TodoText
-    , entity : Entity
-    , todoId : DocId
-    , contextId : DocId
-    , projectId : DocId
-    , menuState : MenuState
-    , date : String
-    , time : String
-    , etfMode : EditTodoFormMode
-    , maybeComputedTime : Maybe Time
-    }
+    TodoFormUpdateFields
+        { id : DocId
+        , entity : Entity
+        , todoId : DocId
+        , contextId : DocId
+        , projectId : DocId
+        , etfMode : EditTodoFormMode
+        }
 
 
-type alias EditTodoFormSubset a =
+type alias TodoFormUpdateFields a =
     { a
-        | name : String
+        | text : String
         , menuState : MenuState
         , date : String
         , time : String

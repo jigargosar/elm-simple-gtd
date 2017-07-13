@@ -65,36 +65,6 @@ update andThenUpdate msg =
         OnSubMsg subMsg ->
             Update.Subscription.onSubMsg andThenUpdate subMsg
 
-        OnStartExclusiveMode exclusiveMode ->
-            ExclusiveMode.Main.start exclusiveMode
-
-        OnStartTodoEXMode todoExMode ->
-            map (setExclusiveMode (XMTodo todoExMode))
-
-        OnStartEditingTodo todo t ->
-            let
-                createForm now =
-                    Todo.Form.createEditTodoForm t now todo
-
-                createXM model =
-                    XMEditTodo (createForm model.now)
-            in
-                Return.with (createXM >> OnStartTodoEXMode) andThenUpdate
-                    >> command
-                        (case t of
-                            XMEditTodoText ->
-                                autoFocusInputCmd
-
-                            XMEditTodoContext ->
-                                positionContextMenuCmd todo
-
-                            XMEditTodoProject ->
-                                positionProjectMenuCmd todo
-
-                            XMEditTodoReminder ->
-                                positionScheduleMenuCmd todo
-                        )
-
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg
 
@@ -122,6 +92,30 @@ update andThenUpdate msg =
         OnDeactivateEditingMode ->
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
+
+        OnStartExclusiveMode exclusiveMode ->
+            ExclusiveMode.Main.start exclusiveMode
+
+        OnStartEditingTodo todo t ->
+            let
+                createXM model =
+                    Todo.Form.createEditTodoForm t model.now todo |> XMEditTodo >> XMTodo
+            in
+                Return.mapModelWith createXM setExclusiveMode
+                    >> command
+                        (case t of
+                            XMEditTodoText ->
+                                autoFocusInputCmd
+
+                            XMEditTodoContext ->
+                                positionContextMenuCmd todo
+
+                            XMEditTodoProject ->
+                                positionProjectMenuCmd todo
+
+                            XMEditTodoReminder ->
+                                positionScheduleMenuCmd todo
+                        )
 
         OnUpdateAddTodoForm form text ->
             map (setExclusiveMode (Todo.Form.updateNewTodoForm text form |> XMNewTodo))

@@ -91,6 +91,24 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
+        OnStartAddingTodo atfMode ->
+            let
+                createXM model =
+                    Todo.Form.createAddTodoForm atfMode |> AddTodoForm >> XMTodo
+            in
+                Return.mapModelWith createXM setExclusiveMode
+                    >> command autoFocusInputCmd
+
+        OnUpdateAddTodoForm form text ->
+            let
+                xm =
+                    form
+                        |> Todo.Form.updateEditTodoForm (SetTodoText text)
+                        >> AddTodoForm
+                        >> XMTodo
+            in
+                map (setExclusiveMode xm)
+
         OnStartEditingTodo todo t ->
             let
                 createXM model =
@@ -111,24 +129,6 @@ update andThenUpdate msg =
                             ETFM_EditTodoReminder ->
                                 positionScheduleMenuCmd todo
                         )
-
-        OnStartAddingTodo atfMode ->
-            let
-                createXM model =
-                    Todo.Form.createAddTodoForm atfMode |> AddTodoForm >> XMTodo
-            in
-                Return.mapModelWith createXM setExclusiveMode
-                    >> command autoFocusInputCmd
-
-        OnUpdateAddTodoForm form text ->
-            let
-                xm =
-                    form
-                        |> Todo.Form.updateEditTodoForm (SetTodoText text)
-                        >> AddTodoForm
-                        >> XMTodo
-            in
-                map (setExclusiveMode xm)
 
         OnUpdateEditTodoForm form action ->
             let

@@ -222,7 +222,13 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 					return A2(
 						andThenUpdate,
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-						A2(_Fresheyeball$elm_return$Return$andThen, _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm, _p24));
+						A3(
+							_jigargosar$elm_simple_gtd$X_Return$with,
+							function (_) {
+								return _.editMode;
+							},
+							_jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm,
+							_p24));
 				};
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);

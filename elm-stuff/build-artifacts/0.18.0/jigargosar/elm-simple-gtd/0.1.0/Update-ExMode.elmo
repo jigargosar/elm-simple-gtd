@@ -46,30 +46,31 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm = F2(
 					A2(_jigargosar$elm_simple_gtd$Todo$init, model.now, form.text),
 					model)));
 	});
-var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) {
-	var _p4 = model.editMode;
+var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (editMode) {
+	var _p4 = editMode;
 	switch (_p4.ctor) {
 		case 'XMEditContext':
 			var _p5 = _p4._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateContext,
-				_p5.id,
-				_jigargosar$elm_simple_gtd$Context$setName(_p5.name),
-				model);
+			return _Fresheyeball$elm_return$Return$andThen(
+				A2(
+					_jigargosar$elm_simple_gtd$Stores$updateContext,
+					_p5.id,
+					_jigargosar$elm_simple_gtd$Context$setName(_p5.name)));
 		case 'XMEditProject':
 			var _p6 = _p4._0;
-			return A3(
-				_jigargosar$elm_simple_gtd$Stores$updateProject,
-				_p6.id,
-				_jigargosar$elm_simple_gtd$Project$setName(_p6.name),
-				model);
+			return _Fresheyeball$elm_return$Return$andThen(
+				A2(
+					_jigargosar$elm_simple_gtd$Stores$updateProject,
+					_p6.id,
+					_jigargosar$elm_simple_gtd$Project$setName(_p6.name)));
 		case 'XMTodo':
 			var _p7 = _p4._0;
 			switch (_p7.ctor) {
 				case 'EditTodoForm':
 					var _p9 = _p7._0;
 					var updateTodo = function (action) {
-						return A3(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id, model);
+						return _Fresheyeball$elm_return$Return$andThen(
+							A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id));
 					};
 					var _p8 = _p9.etfMode;
 					switch (_p8.ctor) {
@@ -78,22 +79,24 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 								_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p9.text));
 						case 'ETFM_EditTodoReminder':
 							return updateTodo(
-								_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(
-									_jigargosar$elm_simple_gtd$Todo_Form$computeMaybeTime(_p9)));
+								_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(_p9.maybeComputedTime));
 						default:
-							return _Fresheyeball$elm_return$Return$singleton(model);
+							return _elm_lang$core$Basics$identity;
 					}
 				case 'NoTodoForm':
-					return _Fresheyeball$elm_return$Return$singleton(model);
+					return _elm_lang$core$Basics$identity;
 				default:
-					return A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm, _p7._0, model);
+					return _Fresheyeball$elm_return$Return$andThen(
+						_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm(_p7._0));
 			}
 		case 'XMEditSyncSettings':
-			return _Fresheyeball$elm_return$Return$singleton(
-				_elm_lang$core$Native_Utils.update(
-					model,
-					{pouchDBRemoteSyncURI: _p4._0.uri}));
+			return _Fresheyeball$elm_return$Return$map(
+				function (model) {
+					return _elm_lang$core$Native_Utils.update(
+						model,
+						{pouchDBRemoteSyncURI: _p4._0.uri});
+				});
 		default:
-			return _Fresheyeball$elm_return$Return$singleton(model);
+			return _elm_lang$core$Basics$identity;
 	}
 };

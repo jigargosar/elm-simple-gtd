@@ -90,7 +90,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm = function (action) 
 			};
 	}
 };
-var _jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm = F2(
+var _jigargosar$elm_simple_gtd$Todo_Form$updateAddTodoForm = F2(
 	function (text, form) {
 		return _elm_lang$core$Native_Utils.update(
 			form,

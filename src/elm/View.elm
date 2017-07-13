@@ -20,7 +20,6 @@ import Todo.View
 import ViewModel
 import LaunchBar.View
 import GroupDoc.EditView
-import Todo.MoreMenu
 import View.GetStarted
 import View.MainMenu
 import View.Mat
@@ -48,14 +47,9 @@ overlayViews appModel =
 
         editModeOverlayView =
             case appModel.editMode of
-                --                XMLaunchBar form ->
-                --                    LaunchBar.View.init form appModel
                 XMLaunchBar ->
                     LaunchBar.View.init appModel.launchBar
                         |> Html.map Msg.LaunchBarMsg
-
-                XMTodoMoreMenu model ->
-                    Todo.MoreMenu.view model
 
                 XMTodo t ->
                     case t of

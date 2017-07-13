@@ -9,7 +9,7 @@ import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
-import Todo.Menu
+import Todo.Msg exposing (TodoMsg(..))
 import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
@@ -21,7 +21,6 @@ import Notification
 import Return
 import Time
 import Todo
-import Todo.Msg exposing (TodoMsg(..))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -90,10 +89,6 @@ update :
     -> ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
-        OnShowMoreMenu todoId ->
-            Return.map (todoMoreMenu todoId |> setExclusiveMode)
-                >> Return.command (positionMoreMenuCmd todoId)
-
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)
 
@@ -275,10 +270,6 @@ setReminderOverlayToInitialView todo model =
 
 inboxEntity =
     Entity.Types.createContextEntity Context.null
-
-
-todoMoreMenu =
-    Todo.Menu.init >> XMTodoMoreMenu
 
 
 reminderOverlayAction action =

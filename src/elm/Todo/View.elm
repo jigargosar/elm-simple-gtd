@@ -53,7 +53,6 @@ type alias TodoViewModel =
     , onFocusIn : Msg
     , tabindexAV : Int
     , isSelected : Bool
-    , onMoreMenuClicked : Msg
     , mdl : Material.Model
     }
 
@@ -188,7 +187,6 @@ createTodoViewModel appM canBeFocused todo =
         , onFocusIn = createEntityActionMsg Entity.Types.OnOnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
-        , onMoreMenuClicked = Todo.Msg.OnShowMoreMenu todoId |> onTodoMsg
         , mdl = appM.mdl
         }
 
@@ -216,12 +214,7 @@ item vm =
             , onMouseDown vm.startEditingMsg
             ]
             [ div [ class "self-start" ] [ doneIconButton vm ]
-            , div
-                [ class "display-text"
-                ]
-              <|
-                parseDisplayText vm
-            , div [ class "self-start" ] [ moreIconButton vm ]
+            , div [ class "display-text" ] (parseDisplayText vm)
             ]
         , div
             [ class "layout horizontal end-justified"
@@ -287,17 +280,6 @@ doneIconButton vm =
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
         vm.toggleDoneMsg
-
-
-moreIconButton : TodoViewModel -> Html Msg
-moreIconButton vm =
-    Mat.iconBtn Msg.OnMdl
-        vm.mdl
-        [ Mat.id ("todo-more-menu-button-" ++ vm.key)
-        , Mat.onClickStopPropagation vm.onMoreMenuClicked
-        , Mat.tabIndex vm.tabindexAV
-        ]
-        [ Mat.iconSmall "more_vert" ]
 
 
 editScheduleButton vm =

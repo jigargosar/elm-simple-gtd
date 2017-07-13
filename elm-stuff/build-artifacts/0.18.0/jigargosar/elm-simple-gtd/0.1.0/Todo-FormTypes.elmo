@@ -8,7 +8,7 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i, xmType: j};
+										return {id: a, name: b, entity: c, todoId: d, contextId: e, projectId: f, menuState: g, date: h, time: i, etfMode: j};
 									};
 								};
 							};
@@ -31,6 +31,10 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoReminderForm = F3(
 	function (a, b, c) {
 		return {id: a, date: b, time: c};
 	});
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_XMEditTodoProject = {ctor: 'ETFM_XMEditTodoProject'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext = {ctor: 'ETFM_EditTodoContext'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoReminder = {ctor: 'ETFM_EditTodoReminder'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoText = {ctor: 'ETFM_EditTodoText'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime = function (a) {
 	return {ctor: 'SetTodoReminderTime', _0: a};
 };
@@ -43,12 +47,9 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 	return {ctor: 'SetTodoText', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject = {ctor: 'XMEditTodoProject'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext = {ctor: 'XMEditTodoContext'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder = {ctor: 'XMEditTodoReminder'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText = {ctor: 'XMEditTodoText'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetupNewTodo = {ctor: 'SetupNewTodo'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$NewTodo = {ctor: 'NewTodo'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodo = function (a) {
-	return {ctor: 'XMEditTodo', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$NTFM_SetupFirstTodo = {ctor: 'NTFM_SetupFirstTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$NTFM_NewTodo = {ctor: 'NTFM_NewTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_NONE = {ctor: 'TFT_NONE'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_Edit = function (a) {
+	return {ctor: 'TFT_Edit', _0: a};
 };

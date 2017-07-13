@@ -59,8 +59,9 @@ type AddTodoFormMode
     | NTFM_SetupFirstTodo
 
 
-type TodoFormType
+type TodoForm
     = TFT_Edit EditTodoForm
+    | TFT_NONE
 
 
 

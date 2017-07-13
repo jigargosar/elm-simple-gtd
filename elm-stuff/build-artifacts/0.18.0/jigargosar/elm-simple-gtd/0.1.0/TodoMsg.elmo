@@ -31,16 +31,16 @@ var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState = function (form) 
 	};
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder);
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoReminder);
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoProject);
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_XMEditTodoProject);
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoContext);
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext);
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText);
+	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoText);
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onNewTodoForInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox);
 var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p4) {

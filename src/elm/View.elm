@@ -8,7 +8,7 @@ import Entity.View
 import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
-import Todo.FormTypes exposing (EditTodoFormMode(..), TodoFormType(TFT_Edit))
+import Todo.FormTypes exposing (..)
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -74,6 +74,9 @@ overlayViews appModel =
 
                                 ETFM_EditTodoText ->
                                     Todo.View.edit form appModel
+
+                        TFT_NONE ->
+                            def
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

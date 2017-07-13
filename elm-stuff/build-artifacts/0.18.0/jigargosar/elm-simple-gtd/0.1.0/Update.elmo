@@ -126,7 +126,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				var createXM = function (model) {
 					return function (_p9) {
 						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-							_jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodo(_p9));
+							_jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_Edit(_p9));
 					}(
 						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p12, model.now, _p13));
 				};
@@ -136,11 +136,11 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						function () {
 							var _p11 = _p12;
 							switch (_p11.ctor) {
-								case 'XMEditTodoText':
+								case 'ETFM_EditTodoText':
 									return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd;
-								case 'XMEditTodoContext':
+								case 'ETFM_EditTodoContext':
 									return _jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p13);
-								case 'XMEditTodoProject':
+								case 'ETFM_XMEditTodoProject':
 									return _jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p13);
 								default:
 									return _jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p13);
@@ -157,7 +157,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				var _p17 = _p0._1;
 				var xm = function (_p14) {
 					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-						_jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodo(_p14));
+						_jigargosar$elm_simple_gtd$Todo_FormTypes$TFT_Edit(_p14));
 				}(
 					A2(_jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm, _p17, _p0._0));
 				return function (_p15) {

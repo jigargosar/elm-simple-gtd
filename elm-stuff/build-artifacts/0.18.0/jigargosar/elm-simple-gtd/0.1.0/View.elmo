@@ -252,13 +252,13 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMTodo':
 				var _p2 = _p1._0;
 				var _p4 = _p2._0;
-				var _p3 = _p4.xmType;
+				var _p3 = _p4.etfMode;
 				switch (_p3.ctor) {
-					case 'XMEditTodoContext':
+					case 'ETFM_EditTodoContext':
 						return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p4, appModel);
-					case 'XMEditTodoProject':
+					case 'ETFM_XMEditTodoProject':
 						return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p4, appModel);
-					case 'XMEditTodoReminder':
+					case 'ETFM_EditTodoReminder':
 						return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p4);
 					default:
 						return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p4, appModel);

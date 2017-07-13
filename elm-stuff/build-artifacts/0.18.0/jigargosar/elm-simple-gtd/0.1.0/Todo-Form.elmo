@@ -83,7 +83,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm = F2(
 		return {text: text, referenceEntity: referenceEntity};
 	});
 var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
-	function (xmType, now, todo) {
+	function (etfMode, now, todo) {
 		var timeInMilli = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(todo),
@@ -98,6 +98,6 @@ var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 			menuState: _jigargosar$elm_simple_gtd$Menu$initState,
 			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
 			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
-			xmType: xmType
+			etfMode: etfMode
 		};
 	});

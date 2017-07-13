@@ -54,15 +54,15 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 		case 'XMTodo':
 			var _p6 = _p3._0;
 			var _p8 = _p6._0;
-			var _p7 = _p8.xmType;
+			var _p7 = _p8.etfMode;
 			switch (_p7.ctor) {
-				case 'XMEditTodoText':
+				case 'ETFM_EditTodoText':
 					return A3(
 						_jigargosar$elm_simple_gtd$Stores$updateTodo,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p8.name),
 						_p8.id,
 						model);
-				case 'XMEditTodoReminder':
+				case 'ETFM_EditTodoReminder':
 					return A3(
 						_jigargosar$elm_simple_gtd$Stores$updateTodo,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(

@@ -34,7 +34,7 @@ saveCurrentForm model =
 
         XMTodo t ->
             case t of
-                XMEditTodo form ->
+                TFT_Edit form ->
                     case form.xmType of
                         ETFM_EditTodoText ->
                             model

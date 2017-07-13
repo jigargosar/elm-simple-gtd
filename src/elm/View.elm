@@ -8,7 +8,7 @@ import Entity.View
 import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
-import Todo.FormTypes exposing (EditTodoFormMode(..), XMTodoForm(XMEditTodo))
+import Todo.FormTypes exposing (EditTodoFormMode(..), TodoFormType(TFT_Edit))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -61,7 +61,7 @@ overlayViews appModel =
 
                 XMTodo t ->
                     case t of
-                        XMEditTodo form ->
+                        TFT_Edit form ->
                             case form.xmType of
                                 ETFM_EditTodoContext ->
                                     Todo.View.contextMenu form appModel

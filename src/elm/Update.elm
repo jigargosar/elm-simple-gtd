@@ -99,7 +99,7 @@ update andThenUpdate msg =
         OnStartEditingTodo todo t ->
             let
                 createXM model =
-                    Todo.Form.createEditTodoForm t model.now todo |> XMEditTodo >> XMTodo
+                    Todo.Form.createEditTodoForm t model.now todo |> TFT_Edit >> XMTodo
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
@@ -123,7 +123,7 @@ update andThenUpdate msg =
         OnUpdateEditTodoForm form action ->
             let
                 xm =
-                    Todo.Form.updateEditTodoForm action form |> XMEditTodo >> XMTodo
+                    Todo.Form.updateEditTodoForm action form |> TFT_Edit >> XMTodo
             in
                 map (setExclusiveMode xm)
                     >> Return.command

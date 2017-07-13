@@ -40,7 +40,13 @@ createEditTodoForm etfMode now todo =
 
 createNewTodoForm : Entity -> Todo.Text -> AddTodoForm
 createNewTodoForm referenceEntity text =
-    { text = text, referenceEntity = referenceEntity }
+    { text = text
+    , referenceEntity = referenceEntity
+    , menuState = Menu.initState
+    , date = ""
+    , time = ""
+    , maybeComputedTime = Nothing
+    }
 
 
 updateNewTodoForm text form =

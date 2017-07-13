@@ -8,6 +8,22 @@ import Time exposing (Time)
 import Todo.Types exposing (TodoDoc, TodoText)
 
 
+type alias TodoFormUpdateFields a =
+    { a
+        | text : String
+        , menuState : MenuState
+        , date : String
+        , time : String
+        , maybeComputedTime : Maybe Time
+    }
+
+
+type alias AddTodoForm =
+    TodoFormUpdateFields
+        { referenceEntity : Entity
+        }
+
+
 type EditTodoFormMode
     = ETFM_EditTodoText
     | ETFM_EditTodoReminder
@@ -26,32 +42,9 @@ type alias EditTodoForm =
         }
 
 
-type alias TodoFormUpdateFields a =
-    { a
-        | text : String
-        , menuState : MenuState
-        , date : String
-        , time : String
-        , maybeComputedTime : Maybe Time
-    }
-
-
 type alias TodoMoreMenuForm =
     { todoId : DocId
     , menuState : MenuState
-    }
-
-
-type alias AddTodoForm =
-    { text : TodoText
-    , referenceEntity : Entity
-    }
-
-
-type alias EditTodoReminderForm =
-    { id : DocId
-    , date : String
-    , time : String
     }
 
 

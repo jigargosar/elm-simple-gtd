@@ -31,8 +31,8 @@ function fixWarningsFrom(warnFilePath) {
     })
 }
 export const removeUnusedImports = function() {
-    // run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
-    run(`fish -c "rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.* ; or echo no match"`)
+    run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
+    // run(`fish -c "rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.* ; or echo no match"`)
 
     const warnFilePath = '/tmp/main-warn.txt'
 

@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$TodoMsg$onUpdateAddTodoFormSetText = _jigargosar$elm_simple_gtd$Msg$OnUpdateAddTodoForm;
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo);
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoByFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddByFocusInEntity);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoWithFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference);
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox);
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
 	return function (_p0) {

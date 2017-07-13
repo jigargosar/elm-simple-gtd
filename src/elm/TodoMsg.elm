@@ -46,3 +46,19 @@ onStartEditingTodoProject todo =
 
 onStartEditingReminder todo =
     Msg.OnStartEditingTodo todo XMEditTodoReminder
+
+
+onSetTodoFormMenuState form =
+    SetTodoMenuState >> Msg.OnUpdateEditTodoForm form
+
+
+onSetTodoFormReminderDate form =
+    SetTodoReminderDate >> Msg.OnUpdateEditTodoForm form
+
+
+onSetTodoFormReminderTime form =
+    SetTodoReminderTime >> Msg.OnUpdateEditTodoForm form
+
+
+onSetTodoFormText form =
+    SetTodoText >> Msg.OnUpdateEditTodoForm form

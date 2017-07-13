@@ -368,7 +368,7 @@ edit form appModel =
             form.name
 
         fireTextChanged =
-            SetTodoText >> Msg.OnUpdateTodoForm form
+            TodoMsg.onSetTodoFormText form
 
         fireToggleDelete =
             Msg.onEntityUpdateMsg form.entity Entity.Types.OnToggleDeleted
@@ -429,7 +429,7 @@ contextMenu =
 reminderPopup form =
     let
         updateReminderForm =
-            Msg.OnUpdateTodoForm form
+            Msg.OnUpdateEditTodoForm form
     in
         div
             [ class "overlay"
@@ -447,7 +447,7 @@ reminderPopup form =
                         [ type_ "date"
                         , class "auto-focus"
                         , value form.date
-                        , SetTodoReminderDate >> updateReminderForm |> onChange
+                        , TodoMsg.onSetTodoFormReminderDate form |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Date" |> text ]
@@ -456,7 +456,7 @@ reminderPopup form =
                     [ Html.input
                         [ type_ "time"
                         , value form.time
-                        , SetTodoReminderTime >> updateReminderForm |> onChange
+                        , TodoMsg.onSetTodoFormReminderTime form |> onChange
                         ]
                         []
                     , Html.label [ class "active" ] [ "Time" |> text ]

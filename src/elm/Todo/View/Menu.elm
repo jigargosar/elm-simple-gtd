@@ -11,6 +11,7 @@ import Html exposing (..)
 import Todo.FormTypes exposing (..)
 import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
+import TodoMsg
 import Types exposing (AppModel)
 
 
@@ -25,7 +26,7 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
     , itemView = Project.getName >> text
-    , onStateChanged = SetTodoMenuState >> Msg.OnUpdateTodoForm form
+    , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
     , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }
@@ -42,7 +43,7 @@ createContextMenuConfig ({ todoId, contextId } as form) model =
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName
     , itemView = Context.getName >> text
-    , onStateChanged = SetTodoMenuState >> Msg.OnUpdateTodoForm form
+    , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
     , onOutsideMouseDown = Msg.OnDeactivateEditingMode
     }

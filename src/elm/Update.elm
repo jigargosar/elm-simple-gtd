@@ -126,7 +126,7 @@ update andThenUpdate msg =
         OnNewTodoTextChanged form text ->
             map (setExclusiveMode (Todo.Form.setNewTodoFormText text form |> XMNewTodo))
 
-        OnUpdateTodoForm form action ->
+        OnUpdateEditTodoForm form action ->
             map
                 (setTodoEditForm (Todo.Form.updateEditTodoForm action form))
                 >> Return.command

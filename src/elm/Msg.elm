@@ -49,7 +49,7 @@ type Msg
     | OnDeactivateEditingMode
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnUpdateTodoForm EditTodoForm EditTodoFormAction
+    | OnUpdateEditTodoForm EditTodoForm EditTodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg Entity.Types.EntityMsg

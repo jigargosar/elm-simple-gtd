@@ -28,12 +28,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 				return _elm_lang$html$Html$text(
 					_jigargosar$elm_simple_gtd$Context$getName(_p4));
 			},
-			onStateChanged: function (_p5) {
-				return A2(
-					_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-					_p2,
-					_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p5));
-			},
+			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(_p2),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};
@@ -47,30 +42,25 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
 			A2(_jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
-	function (_p6, model) {
-		var _p7 = _p6;
+	function (_p5, model) {
+		var _p6 = _p5;
 		return {
-			onSelect: function (_p8) {
+			onSelect: function (_p7) {
 				return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 					A2(
 						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
-						_p7.todoId,
+						_p6.todoId,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetProjectId(
-							_jigargosar$elm_simple_gtd$Document$getId(_p8))));
+							_jigargosar$elm_simple_gtd$Document$getId(_p7))));
 			},
-			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p7.projectId),
+			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p6.projectId),
 			itemKey: _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey('project'),
 			itemSearchText: _jigargosar$elm_simple_gtd$Project$getName,
-			itemView: function (_p9) {
+			itemView: function (_p8) {
 				return _elm_lang$html$Html$text(
-					_jigargosar$elm_simple_gtd$Project$getName(_p9));
+					_jigargosar$elm_simple_gtd$Project$getName(_p8));
 			},
-			onStateChanged: function (_p10) {
-				return A2(
-					_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-					_p7,
-					_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p10));
-			},
+			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(_p6),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};

@@ -1,3 +1,35 @@
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
+	return function (_p0) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			form,
+			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p0));
+	};
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderTime = function (form) {
+	return function (_p1) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			form,
+			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime(_p1));
+	};
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderDate = function (form) {
+	return function (_p2) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			form,
+			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate(_p2));
+	};
+};
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState = function (form) {
+	return function (_p3) {
+		return A2(
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			form,
+			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p3));
+	};
+};
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder = function (todo) {
 	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoReminder);
 };
@@ -11,9 +43,9 @@ var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText = function (todo) 
 	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$XMEditTodoText);
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onNewTodoForInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnNewTodoForInbox);
-var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p0) {
+var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p4) {
 	return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-		_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderOverlayAction(_p0));
+		_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderOverlayAction(_p4));
 };
 var _jigargosar$elm_simple_gtd$TodoMsg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
 var _jigargosar$elm_simple_gtd$TodoMsg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);

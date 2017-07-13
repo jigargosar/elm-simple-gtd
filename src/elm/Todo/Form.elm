@@ -40,7 +40,7 @@ createEditTodoForm etfMode now todo =
 
 createNewTodoForm : AddTodoFormMode -> AddTodoForm
 createNewTodoForm atfMode =
-    { text = text
+    { text = ""
     , menuState = Menu.initState
     , date = ""
     , time = ""

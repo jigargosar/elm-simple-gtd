@@ -96,10 +96,9 @@ var _jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm = F2(
 			form,
 			{text: text});
 	});
-var _jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm = F3(
-	function (atfMode, referenceEntity, text) {
-		return {text: text, referenceEntity: referenceEntity, menuState: _jigargosar$elm_simple_gtd$Menu$initState, date: '', time: '', maybeComputedTime: _elm_lang$core$Maybe$Nothing, atfMode: atfMode};
-	});
+var _jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm = function (atfMode) {
+	return {text: '', menuState: _jigargosar$elm_simple_gtd$Menu$initState, date: '', time: '', maybeComputedTime: _elm_lang$core$Maybe$Nothing, atfMode: atfMode};
+};
 var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 	function (etfMode, now, todo) {
 		var timeInMilli = A2(

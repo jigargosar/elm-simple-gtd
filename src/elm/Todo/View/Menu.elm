@@ -15,7 +15,7 @@ import TodoMsg
 import Types exposing (AppModel)
 
 
-createProjectMenuConfig : EditTodoForm -> AppModel -> Menu.Config Project.Model Msg.Msg
+createProjectMenuConfig : EditTodoFormModel -> AppModel -> Menu.Config Project.Model Msg.Msg
 createProjectMenuConfig ({ todoId, projectId } as form) model =
     { onSelect =
         Document.getId
@@ -32,7 +32,7 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
     }
 
 
-createContextMenuConfig : EditTodoForm -> AppModel -> Menu.Config Context.Model Msg.Msg
+createContextMenuConfig : EditTodoFormModel -> AppModel -> Menu.Config Context.Model Msg.Msg
 createContextMenuConfig ({ todoId, contextId } as form) model =
     { onSelect =
         Document.getId

@@ -35,7 +35,7 @@ saveCurrentForm model =
 
         XMTodo t ->
             case t of
-                TFT_Edit form ->
+                EditTodoForm form ->
                     let
                         updateTodo action =
                             Stores.updateTodo action form.id model
@@ -50,10 +50,10 @@ saveCurrentForm model =
                             _ ->
                                 model |> Return.singleton
 
-                TFT_NONE ->
+                NoTodoForm ->
                     model |> Return.singleton
 
-                TFT_ADD form ->
+                AddTodoForm form ->
                     model |> Return.singleton
 
         XMNewTodo form ->
@@ -74,7 +74,7 @@ inboxEntity =
     createContextEntity Context.null
 
 
-saveNewTodoForm : AddTodoForm -> ModelReturnF
+saveNewTodoForm : AddTodoFormModel -> ModelReturnF
 saveNewTodoForm form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId

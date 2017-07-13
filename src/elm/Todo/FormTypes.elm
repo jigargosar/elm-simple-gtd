@@ -18,7 +18,7 @@ type alias TodoFormUpdateFields a =
     }
 
 
-type alias AddTodoForm =
+type alias AddTodoFormModel =
     TodoFormUpdateFields
         { atfMode : AddTodoFormMode
         }
@@ -31,7 +31,7 @@ type EditTodoFormMode
     | ETFM_XMEditTodoProject
 
 
-type alias EditTodoForm =
+type alias EditTodoFormModel =
     TodoFormUpdateFields
         { id : DocId
         , entity : Entity
@@ -62,9 +62,9 @@ type AddTodoFormMode
 
 
 type TodoForm
-    = TFT_Edit EditTodoForm
-    | TFT_NONE
-    | TFT_ADD AddTodoFormMode
+    = EditTodoForm EditTodoFormModel
+    | NoTodoForm
+    | AddTodoForm AddTodoFormModel
 
 
 

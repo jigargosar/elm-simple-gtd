@@ -61,7 +61,7 @@ overlayViews appModel =
 
                 XMTodo t ->
                     case t of
-                        TFT_Edit form ->
+                        EditTodoForm form ->
                             case form.etfMode of
                                 ETFM_EditTodoContext ->
                                     Todo.View.contextMenu form appModel
@@ -75,11 +75,11 @@ overlayViews appModel =
                                 ETFM_EditTodoText ->
                                     Todo.View.edit form appModel
 
-                        TFT_NONE ->
+                        NoTodoForm ->
                             def
 
-                        TFT_ADD form ->
-                            def
+                        AddTodoForm form ->
+                            Todo.View.new form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

@@ -15,7 +15,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoForm
+createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoFormModel
 createEditTodoForm etfMode now todo =
     let
         timeInMilli =
@@ -38,8 +38,8 @@ createEditTodoForm etfMode now todo =
         updateMaybeTime form
 
 
-createNewTodoForm : AddTodoFormMode -> AddTodoForm
-createNewTodoForm atfMode =
+createAddTodoForm : AddTodoFormMode -> AddTodoFormModel
+createAddTodoForm atfMode =
     { text = ""
     , menuState = Menu.initState
     , date = ""

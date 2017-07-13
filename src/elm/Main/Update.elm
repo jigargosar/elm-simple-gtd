@@ -35,6 +35,6 @@ update andThenUpdate msg =
                     createContextEntity Context.null
 
                 createSetupExclusiveMode =
-                    XMSetup (Todo.Form.createNewTodoForm ATFM_SetupFirstTodo)
+                    XMSetup (Todo.Form.createAddTodoForm ATFM_SetupFirstTodo)
             in
                 map onSwitchToNewUserSetupModeIfNeeded

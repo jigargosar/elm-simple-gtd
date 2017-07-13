@@ -39,16 +39,17 @@ type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartExclusiveMode ExclusiveMode
+    | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnUpdateAddTodoForm AddTodoForm TodoText
+    | OnUpdateAddTodoForm AddTodoFormModel TodoText
     | OnDeactivateEditingMode
     | OnSaveCurrentForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnUpdateEditTodoForm EditTodoForm EditTodoFormAction
+    | OnUpdateEditTodoForm EditTodoFormModel EditTodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg Entity.Types.EntityMsg

@@ -292,7 +292,7 @@ inboxEntity =
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setExclusiveMode (Todo.Form.createNewTodoForm ATFM_AddToInbox |> XMNewTodo)
+    setExclusiveMode (Todo.Form.createAddTodoForm ATFM_AddToInbox |> XMNewTodo)
 
 
 todoMoreMenu =

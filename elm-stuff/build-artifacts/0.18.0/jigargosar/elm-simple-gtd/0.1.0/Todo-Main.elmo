@@ -86,10 +86,10 @@ var _jigargosar$elm_simple_gtd$Todo_Main$todoMoreMenu = function (_p9) {
 	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu(
 		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p9));
 };
-var _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
 	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-		A3(_jigargosar$elm_simple_gtd$Todo_Form$createNewTodoForm, _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox, _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity, '')));
+		_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox)));
+var _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView = F2(
 	function (todo, model) {
 		return _elm_lang$core$Native_Utils.update(

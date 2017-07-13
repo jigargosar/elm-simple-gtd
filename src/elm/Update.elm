@@ -99,7 +99,7 @@ update andThenUpdate msg =
         OnStartEditingTodo todo t ->
             let
                 createXM model =
-                    Todo.Form.createEditTodoForm t model.now todo |> TFT_Edit >> XMTodo
+                    Todo.Form.createEditTodoForm t model.now todo |> EditTodoForm >> XMTodo
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
@@ -117,13 +117,28 @@ update andThenUpdate msg =
                                 positionScheduleMenuCmd todo
                         )
 
+        OnStartAddingTodo atfMode ->
+            let
+                createXM model =
+                    Todo.Form.createAddTodoForm atfMode |> AddTodoForm >> XMTodo
+            in
+                Return.mapModelWith createXM setExclusiveMode
+                    >> command autoFocusInputCmd
+
         OnUpdateAddTodoForm form text ->
-            map (setExclusiveMode (Todo.Form.updateNewTodoForm text form |> XMNewTodo))
+            let
+                xm =
+                    form
+                        |> Todo.Form.updateEditTodoForm (SetTodoText text)
+                        >> AddTodoForm
+                        >> XMTodo
+            in
+                map (setExclusiveMode xm)
 
         OnUpdateEditTodoForm form action ->
             let
                 xm =
-                    Todo.Form.updateEditTodoForm action form |> TFT_Edit >> XMTodo
+                    Todo.Form.updateEditTodoForm action form |> EditTodoForm >> XMTodo
             in
                 map (setExclusiveMode xm)
                     >> Return.command

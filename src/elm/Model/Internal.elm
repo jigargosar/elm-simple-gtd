@@ -11,22 +11,17 @@ import Maybe.Extra as Maybe
 import X.Record exposing (set)
 
 
-editMode =
+exclusiveMode =
     X.Record.field .editMode (\s b -> { b | editMode = s })
 
 
 setExclusiveMode : ExclusiveMode -> ModelF
 setExclusiveMode =
-    set editMode
+    set exclusiveMode
 
 
 setTodoEditForm f m =
     { m | maybeTodoEditForm = Just f }
-
-
-updateEditModeM : (AppModel -> ExclusiveMode) -> ModelF
-updateEditModeM updater model =
-    setExclusiveMode (updater model) model
 
 
 deactivateEditingMode =

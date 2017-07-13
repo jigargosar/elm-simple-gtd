@@ -16,7 +16,7 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEditForm, updateEditModeM)
+import Model.Internal exposing (deactivateEditingMode, setExclusiveMode, setTodoEditForm)
 import Model.Keyboard
 import Model.Msg
 import Model.Selection

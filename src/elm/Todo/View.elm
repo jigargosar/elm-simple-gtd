@@ -442,7 +442,7 @@ reminderPopup form =
                 [ Html.input
                     [ type_ "date"
                     , class "auto-focus"
-                    , value form.date
+                    , defaultValue form.date
                     , TodoMsg.onSetTodoFormReminderDate form |> onChange
                     ]
                     []
@@ -451,7 +451,7 @@ reminderPopup form =
             , div [ class "input-field" ]
                 [ Html.input
                     [ type_ "time"
-                    , value form.time
+                    , defaultValue form.time
                     , TodoMsg.onSetTodoFormReminderTime form |> onChange
                     ]
                     []

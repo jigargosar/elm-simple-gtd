@@ -69,7 +69,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(form.date),
+												_0: _elm_lang$html$Html_Attributes$defaultValue(form.date),
 												_1: {
 													ctor: '::',
 													_0: _jigargosar$elm_simple_gtd$X_Html$onChange(
@@ -115,7 +115,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$reminderPopup = function (form) {
 											_0: _elm_lang$html$Html_Attributes$type_('time'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(form.time),
+												_0: _elm_lang$html$Html_Attributes$defaultValue(form.time),
 												_1: {
 													ctor: '::',
 													_0: _jigargosar$elm_simple_gtd$X_Html$onChange(

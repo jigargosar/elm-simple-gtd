@@ -155,7 +155,7 @@ update andThenUpdate msg =
             map (Model.ViewType.switchToView viewType)
 
         OnSaveCurrentForm ->
-            Return.andThen Update.ExMode.saveCurrentForm
+            Return.with .editMode Update.ExMode.saveCurrentForm
                 >> andThenUpdate OnDeactivateEditingMode
 
         OnEntityMsg entityMsg ->

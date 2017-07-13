@@ -15,49 +15,47 @@ import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelReturnF)
 
 
-saveCurrentForm model =
-    model
-        |> Return.singleton
-        >> case model.editMode of
-            XMEditContext form ->
-                Stores.updateContext form.id (Context.setName form.name)
-                    |> andThen
+saveCurrentForm editMode =
+    case editMode of
+        XMEditContext form ->
+            Stores.updateContext form.id (Context.setName form.name)
+                |> andThen
 
-            XMEditProject form ->
-                Stores.updateProject form.id
-                    (Project.setName form.name)
-                    |> andThen
+        XMEditProject form ->
+            Stores.updateProject form.id
+                (Project.setName form.name)
+                |> andThen
 
-            XMTodo t ->
-                case t of
-                    EditTodoForm form ->
-                        let
-                            updateTodo action =
-                                Stores.updateTodo action form.id
-                                    |> andThen
-                        in
-                            case form.etfMode of
-                                ETFM_EditTodoText ->
-                                    updateTodo <| TA_SetText form.text
+        XMTodo t ->
+            case t of
+                EditTodoForm form ->
+                    let
+                        updateTodo action =
+                            Stores.updateTodo action form.id
+                                |> andThen
+                    in
+                        case form.etfMode of
+                            ETFM_EditTodoText ->
+                                updateTodo <| TA_SetText form.text
 
-                                ETFM_EditTodoReminder ->
-                                    updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+                            ETFM_EditTodoReminder ->
+                                updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
-                                _ ->
-                                    identity
+                            _ ->
+                                identity
 
-                    NoTodoForm ->
-                        identity
+                NoTodoForm ->
+                    identity
 
-                    AddTodoForm form ->
-                        saveNewTodoForm form |> andThen
+                AddTodoForm form ->
+                    saveNewTodoForm form |> andThen
 
-            XMEditSyncSettings form ->
-                (\model -> { model | pouchDBRemoteSyncURI = form.uri })
-                    |> map
+        XMEditSyncSettings form ->
+            (\model -> { model | pouchDBRemoteSyncURI = form.uri })
+                |> map
 
-            _ ->
-                identity
+        _ ->
+            identity
 
 
 inboxEntity =

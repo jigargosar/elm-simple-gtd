@@ -1,6 +1,5 @@
 module Routes exposing (..)
 
-import Entity
 import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType

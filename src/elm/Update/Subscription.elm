@@ -8,13 +8,8 @@ import Model.Selection
 import Msg exposing (Msg(..), SubMsg(..))
 import Stores
 import Todo.Msg
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
 import Tuple2
-import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Return exposing (map)
 import Time exposing (Time)
 import Types exposing (ModelF)

@@ -9,9 +9,7 @@ import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
-import Todo.FormTypes exposing (..)
 import Todo.Menu
-import Todo.Form
 import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg

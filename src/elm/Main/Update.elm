@@ -1,15 +1,11 @@
 module Main.Update exposing (..)
 
-import Context
-import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.SignIn
 import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
 import Return exposing (map)
 import Store
-import Todo.Form
-import Todo.FormTypes exposing (..)
 import TodoMsg
 import Types exposing (ReturnF)
 

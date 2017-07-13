@@ -3,12 +3,6 @@ module TodoMsg exposing (..)
 import Msg exposing (Msg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Todo.Notification.Model
 
 

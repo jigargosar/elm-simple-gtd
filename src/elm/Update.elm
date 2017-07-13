@@ -9,41 +9,32 @@ import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (..)
 import Firebase.Main
-import LaunchBar.Messages
-import LaunchBar.Models exposing (SearchItem(..))
 import LocalPref
 import Main.Update
 import Material
 import Menu
 import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Model.Keyboard
-import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Todo.Form
 import Todo.FormTypes exposing (..)
-import TodoMsg
 import Update.ExMode
 import Update.LaunchBar
 import Update.Subscription
-import X.Keyboard as Keyboard exposing (Key)
 import X.Return as Return
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
 import Todo.Form
-import Todo.Msg
 import Return
 import Task
 import Time exposing (Time)
 import Model exposing (..)
 import Todo.Main
 import Json.Decode as D exposing (Decoder)
-import LaunchBar.Update
-import Tuple2
 import Types exposing (AppModel, ModelF, Return, ReturnF)
-import Toolkit.Helpers exposing (..)
 import X.Record exposing (maybeOver)
 
 

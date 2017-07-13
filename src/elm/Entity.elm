@@ -4,12 +4,10 @@ import Document
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
 import X.List as List
-import RouteUrl.Builder
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Todo
 import Tuple2
 
 

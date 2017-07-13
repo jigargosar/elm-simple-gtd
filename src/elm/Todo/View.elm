@@ -26,7 +26,6 @@ import String.Extra as String
 import Time exposing (Time)
 import Todo
 import Todo.Msg
-import Todo.Form
 import Todo.View.Menu
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)

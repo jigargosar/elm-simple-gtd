@@ -5,7 +5,6 @@ import Mat exposing (..)
 import Material.Button
 import Material.Options exposing (div)
 import Material.Tooltip
-import Material.Typography exposing (..)
 import Msg
 import TodoMsg
 

@@ -3,7 +3,6 @@ module Todo.Notification.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Mat
-import Msg
 import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model

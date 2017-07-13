@@ -1,22 +1,15 @@
 module LaunchBar.Update exposing (..)
 
-import Context
 import DomPorts exposing (autoFocusInputRCmd)
-import Entity.Types
 import Fuzzy
 import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
 import LaunchBar.Messages exposing (Msg(..))
 import LaunchBar.Models exposing (..)
-import Model.ViewType
-import Msg
-import Project
 import Regex
 import Return exposing (Return)
 import String.Extra
 import Time exposing (Time)
-import Types exposing (ReturnF)
 import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
 
 
 type alias Config =

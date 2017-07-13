@@ -5,7 +5,6 @@ import Entity.Types exposing (Entity)
 import Menu
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
-import Todo.Types exposing (TodoDoc, TodoText)
 
 
 type alias TodoFormUpdateFields a =

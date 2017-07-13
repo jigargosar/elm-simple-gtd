@@ -25,8 +25,6 @@ import View.GetStarted
 import View.MainMenu
 import View.Mat
 import ViewType exposing (ViewType(EntityListView, SyncView))
-import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
 
 
 init model =

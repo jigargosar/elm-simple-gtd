@@ -1,19 +1,14 @@
 module LaunchBar.View exposing (..)
 
-import GroupDoc
 import LaunchBar.Messages exposing (Msg(..))
 import LaunchBar.Models exposing (..)
-import Msg
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))
-import Model
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
-import Model
-import Stores
 
 
 init model =

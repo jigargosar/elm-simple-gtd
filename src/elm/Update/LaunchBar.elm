@@ -1,6 +1,6 @@
 module Update.LaunchBar exposing (..)
 
-import Entity.Types
+
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
@@ -8,12 +8,12 @@ import LaunchBar.Update
 import Model.Internal exposing (setExclusiveMode)
 import Msg exposing (Msg(LaunchBarMsg))
 import Return
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
+
+
+
+
 import Model.ViewType
 import Stores
 import Tuple2

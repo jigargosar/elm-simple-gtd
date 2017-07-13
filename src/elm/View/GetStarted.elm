@@ -4,7 +4,6 @@ import AppUrl
 import Firebase.Types exposing (FirebaseMsg(OnFBNOOP, OnFBSignIn, OnFBSkipSignIn))
 import Model
 import Msg
-import Todo.Msg
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

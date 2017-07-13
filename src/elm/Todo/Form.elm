@@ -1,7 +1,6 @@
 module Todo.Form exposing (..)
 
 import Date
-import Document
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(TodoEntity))
 import Menu
@@ -12,7 +11,6 @@ import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, getTodoText)
 import X.Record exposing (field, over, overM, set)
 import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
 
 
 createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoFormModel

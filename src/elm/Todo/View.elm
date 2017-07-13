@@ -128,7 +128,7 @@ createTodoViewModel appM canBeFocused todo =
             if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
-                        createEntityActionMsg Entity.Types.OnToggleSelected
+                        createEntityActionMsg Entity.Types.OnToggleSelectedEntity
 
                     Key.CharE ->
                         startEditingMsg
@@ -149,7 +149,7 @@ createTodoViewModel appM canBeFocused todo =
                         reminder.startEditingMsg
 
                     Key.CharG ->
-                        createEntityActionMsg Entity.Types.OnGoto
+                        createEntityActionMsg Entity.Types.OnGotoEntity
 
                     Key.CharS ->
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
@@ -166,10 +166,10 @@ createTodoViewModel appM canBeFocused todo =
                 Model.noop
 
         toggleDeleteMsg =
-            createEntityActionMsg Entity.Types.OnToggleDeleted
+            createEntityActionMsg Entity.Types.OnEntityToggleDeleted
 
         toggleDoneMsg =
-            createEntityActionMsg Entity.Types.OnToggleArchived
+            createEntityActionMsg Entity.Types.OnEntityToggleArchived
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -184,7 +184,7 @@ createTodoViewModel appM canBeFocused todo =
         , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
-        , onFocusIn = createEntityActionMsg Entity.Types.OnOnFocusIn
+        , onFocusIn = createEntityActionMsg Entity.Types.OnFocusInEntity
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , mdl = appM.mdl
@@ -352,7 +352,7 @@ edit form appModel =
             TodoMsg.onSetTodoFormText form
 
         fireToggleDelete =
-            Msg.onEntityUpdateMsg form.entity Entity.Types.OnToggleDeleted
+            Msg.onEntityUpdateMsg form.entity Entity.Types.OnEntityToggleDeleted
     in
         div
             [ class "overlay"

@@ -80,13 +80,13 @@ create config todoList groupDoc =
             if isNull then
                 Model.noop
             else
-                onEntityAction Entity.Types.OnToggleDeleted
+                onEntityAction Entity.Types.OnEntityToggleDeleted
 
         startEditingMsg =
             if isNull then
                 Model.noop
             else
-                onEntityAction Entity.Types.OnStartEditing
+                onEntityAction Entity.Types.OnStartEditingEntity
 
         icon =
             if isNull then
@@ -109,7 +109,7 @@ create config todoList groupDoc =
                     toggleDeleteMsg
 
                 Key.CharG ->
-                    onEntityAction Entity.Types.OnGoto
+                    onEntityAction Entity.Types.OnGotoEntity
 
                 _ ->
                     Model.noop
@@ -126,7 +126,7 @@ create config todoList groupDoc =
                         "archive"
             in
                 { iconName = iconName
-                , onClick = onEntityAction Entity.Types.OnToggleArchived
+                , onClick = onEntityAction Entity.Types.OnEntityToggleArchived
                 , isArchived = isArchived
                 }
     in
@@ -139,11 +139,11 @@ create config todoList groupDoc =
         , archive = archive
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = onEntityAction Entity.Types.OnSave
-        , onNameChanged = Entity.Types.OnNameChanged >> onEntityAction
+        , onSaveClicked = onEntityAction Entity.Types.OnSaveEntityForm
+        , onNameChanged = Entity.Types.OnEntityTextChanged >> onEntityAction
         , onCancelClicked = Msg.OnDeactivateEditingMode
         , icon = icon
-        , onFocusIn = onEntityAction Entity.Types.OnOnFocusIn
+        , onFocusIn = onEntityAction Entity.Types.OnFocusInEntity
         , onKeyDownMsg = onKeyDownMsg
         , tabindexAV = config.getTabIndexAVForEntity (config.toEntity groupDoc)
         , todoList = todoList

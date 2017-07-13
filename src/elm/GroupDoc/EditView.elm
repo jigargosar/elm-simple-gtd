@@ -19,7 +19,7 @@ init form =
             Msg.onEntityUpdateMsg form.entity
 
         fireNameChanged =
-            Entity.Types.OnNameChanged >> toMsg
+            Entity.Types.OnEntityTextChanged >> toMsg
 
         fireSaveForm =
             Msg.OnSaveCurrentForm
@@ -28,7 +28,7 @@ init form =
             Msg.OnDeactivateEditingMode
 
         fireToggleArchive =
-            toMsg Entity.Types.OnToggleArchived
+            toMsg Entity.Types.OnEntityToggleArchived
     in
         div
             [ class "overlay"

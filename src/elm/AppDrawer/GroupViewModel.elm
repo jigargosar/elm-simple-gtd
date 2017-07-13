@@ -123,7 +123,7 @@ create getTodoListByEntityId config entity =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
 
         startEditingMsg =
-            createEntityActionMsg Entity.Types.OnStartEditing
+            createEntityActionMsg Entity.Types.OnStartEditingEntity
     in
         { id = id
         , name = name

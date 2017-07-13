@@ -56,21 +56,21 @@ onUpdate :
     -> ReturnF
 onUpdate andThenUpdate entity msg =
     case msg of
-        Entity.Types.OnStartEditing ->
+        Entity.Types.OnStartEditingEntity ->
             andThen (\model -> startEditingEntity andThenUpdate model.now entity model)
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnNameChanged newName ->
+        Entity.Types.OnEntityTextChanged newName ->
             Return.map (updateEditModeNameChanged newName entity)
 
-        Entity.Types.OnSave ->
+        Entity.Types.OnSaveEntityForm ->
             andThenUpdate Msg.OnSaveCurrentForm
 
-        Entity.Types.OnToggleDeleted ->
+        Entity.Types.OnEntityToggleDeleted ->
             Return.andThen (toggleDeleteEntity entity)
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.Types.OnToggleArchived ->
+        Entity.Types.OnEntityToggleArchived ->
             let
                 toggleArchivedEntity entity =
                     let
@@ -96,13 +96,13 @@ onUpdate andThenUpdate entity msg =
                 toggleArchivedEntity entity
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.Types.OnOnFocusIn ->
+        Entity.Types.OnFocusInEntity ->
             Return.map (Stores.setFocusInEntity entity)
 
-        Entity.Types.OnToggleSelected ->
+        Entity.Types.OnToggleSelectedEntity ->
             Return.map (toggleEntitySelection entity)
 
-        Entity.Types.OnGoto ->
+        Entity.Types.OnGotoEntity ->
             Return.map (switchToEntityListViewFromEntity entity)
 
 

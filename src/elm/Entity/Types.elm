@@ -32,14 +32,14 @@ type EntityMsg
 
 
 type EntityUpdateMsg
-    = OnStartEditing
-    | OnToggleDeleted
-    | OnToggleArchived
-    | OnSave
-    | OnNameChanged String
-    | OnOnFocusIn
-    | OnToggleSelected
-    | OnGoto
+    = OnStartEditingEntity
+    | OnEntityToggleDeleted
+    | OnEntityToggleArchived
+    | OnSaveEntityForm
+    | OnEntityTextChanged String
+    | OnFocusInEntity
+    | OnToggleSelectedEntity
+    | OnGotoEntity
 
 
 createContextEntity =

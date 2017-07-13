@@ -65,29 +65,26 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (editMod
 					_jigargosar$elm_simple_gtd$Project$setName(_p6.name)));
 		case 'XMTodo':
 			var _p7 = _p4._0;
-			switch (_p7.ctor) {
-				case 'EditTodoForm':
-					var _p9 = _p7._0;
-					var updateTodo = function (action) {
-						return _Fresheyeball$elm_return$Return$andThen(
-							A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id));
-					};
-					var _p8 = _p9.etfMode;
-					switch (_p8.ctor) {
-						case 'ETFM_EditTodoText':
-							return updateTodo(
-								_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p9.text));
-						case 'ETFM_EditTodoReminder':
-							return updateTodo(
-								_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(_p9.maybeComputedTime));
-						default:
-							return _elm_lang$core$Basics$identity;
-					}
-				case 'NoTodoForm':
-					return _elm_lang$core$Basics$identity;
-				default:
+			if (_p7.ctor === 'TXM_EditTodoForm') {
+				var _p9 = _p7._0;
+				var updateTodo = function (action) {
 					return _Fresheyeball$elm_return$Return$andThen(
-						_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm(_p7._0));
+						A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id));
+				};
+				var _p8 = _p9.etfMode;
+				switch (_p8.ctor) {
+					case 'ETFM_EditTodoText':
+						return updateTodo(
+							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p9.text));
+					case 'ETFM_EditTodoReminder':
+						return updateTodo(
+							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(_p9.maybeComputedTime));
+					default:
+						return _elm_lang$core$Basics$identity;
+				}
+			} else {
+				return _Fresheyeball$elm_return$Return$andThen(
+					_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm(_p7._0));
 			}
 		case 'XMEditSyncSettings':
 			return _Fresheyeball$elm_return$Return$map(

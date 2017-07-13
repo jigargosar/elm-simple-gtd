@@ -55,59 +55,63 @@ onUpdate :
     -> Entity.Types.EntityUpdateMsg
     -> ReturnF
 onUpdate andThenUpdate entity msg =
-    case msg of
-        Entity.Types.OnStartEditingEntity ->
-            andThen (\model -> startEditingEntity andThenUpdate model.now entity model)
-                >> DomPorts.autoFocusInputRCmd
+    let
+        entityId =
+            Entity.toEntityId entity
+    in
+        case msg of
+            Entity.Types.OnStartEditingEntity ->
+                andThen (\model -> startEditingEntity andThenUpdate model.now entity model)
+                    >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnEntityTextChanged newName ->
-            Return.map (updateEditModeNameChanged newName)
+            Entity.Types.OnEntityTextChanged newName ->
+                Return.map (updateEditModeNameChanged newName)
 
-        Entity.Types.OnSaveEntityForm ->
-            andThenUpdate Msg.OnSaveCurrentForm
+            Entity.Types.OnSaveEntityForm ->
+                andThenUpdate Msg.OnSaveCurrentForm
 
-        Entity.Types.OnEntityToggleDeleted ->
-            Return.andThen (toggleDeleteEntity entity)
-                >> andThenUpdate Msg.OnDeactivateEditingMode
-
-        Entity.Types.OnEntityToggleArchived ->
-            let
-                toggleArchivedEntity entity =
-                    let
-                        entityId =
-                            Entity.getDocId entity
-                    in
-                        case entity of
-                            Entity.Types.GroupEntity g ->
-                                (case g of
-                                    Entity.Types.ContextEntity context ->
-                                        Stores.updateContext entityId GroupDoc.toggleArchived
-
-                                    Entity.Types.ProjectEntity project ->
-                                        Stores.updateProject entityId GroupDoc.toggleArchived
-                                )
-                                    |> Return.andThen
-
-                            Entity.Types.TodoEntity todo ->
-                                Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityId TA_ToggleDone
-                                    |> Msg.OnTodoMsg
-                                    |> andThenUpdate
-            in
-                toggleArchivedEntity entity
+            Entity.Types.OnEntityToggleDeleted ->
+                Return.andThen (toggleDeleteEntity entity)
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.Types.OnFocusInEntity ->
-            Return.map (Stores.setFocusInEntity entity)
+            Entity.Types.OnEntityToggleArchived ->
+                let
+                    toggleArchivedEntity entity =
+                        let
+                            entityDocId =
+                                Entity.getEntityDocId entity
+                        in
+                            case entity of
+                                Entity.Types.GroupEntity g ->
+                                    (case g of
+                                        Entity.Types.ContextEntity context ->
+                                            Stores.updateContext entityDocId GroupDoc.toggleArchived
 
-        Entity.Types.OnToggleSelectedEntity ->
-            Return.map (toggleEntitySelection entity)
+                                        Entity.Types.ProjectEntity project ->
+                                            Stores.updateProject entityDocId GroupDoc.toggleArchived
+                                    )
+                                        |> Return.andThen
 
-        Entity.Types.OnGotoEntity ->
-            Return.map (switchToEntityListViewFromEntity entity)
+                                Entity.Types.TodoEntity todo ->
+                                    Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityDocId TA_ToggleDone
+                                        |> Msg.OnTodoMsg
+                                        |> andThenUpdate
+                in
+                    toggleArchivedEntity entity
+                        >> andThenUpdate Msg.OnDeactivateEditingMode
+
+            Entity.Types.OnFocusInEntity ->
+                Return.map (Stores.setFocusInEntity entity)
+
+            Entity.Types.OnToggleSelectedEntity ->
+                Return.map (toggleEntitySelection entity)
+
+            Entity.Types.OnGotoEntity ->
+                Return.map (switchToEntityListViewFromEntity entity)
 
 
 toggleEntitySelection entity =
-    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getDocId entity))
+    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getEntityDocId entity))
 
 
 toggleSetMember item set =
@@ -131,7 +135,7 @@ toggleDeleteEntity : Entity -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
-            Entity.getDocId entity
+            Entity.getEntityDocId entity
     in
         model
             |> case entity of

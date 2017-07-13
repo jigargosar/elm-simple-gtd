@@ -21,10 +21,9 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo = {ctor: 'ATFM_SetupFirstTodo'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox = {ctor: 'ATFM_AddToInbox'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference = {ctor: 'ATFM_AddWithFocusInEntityAsReference'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm = function (a) {
-	return {ctor: 'AddTodoForm', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_AddTodoForm = function (a) {
+	return {ctor: 'TXM_AddTodoForm', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$NoTodoForm = {ctor: 'NoTodoForm'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm = function (a) {
-	return {ctor: 'EditTodoForm', _0: a};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_EditTodoForm = function (a) {
+	return {ctor: 'TXM_EditTodoForm', _0: a};
 };

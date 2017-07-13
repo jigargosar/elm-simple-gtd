@@ -158,7 +158,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$projectMenu = _jigargosar$elm_simple_gt
 var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
-		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg, form.entity, _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
+		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg, form.entity, _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
 		var fireTextChanged = _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText(form);
 		var todoText = form.text;
 		return A2(
@@ -770,8 +770,8 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg;
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo));
-		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
-		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived);
+		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
+		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
 		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);
 		var projectId = _jigargosar$elm_simple_gtd$Todo$getProjectId(todo);
 		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
@@ -806,7 +806,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 				var _p11 = _p10.key;
 				switch (_p11.ctor) {
 					case 'Space':
-						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelected);
+						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelectedEntity);
 					case 'CharE':
 						return startEditingMsg;
 					case 'CharD':
@@ -820,7 +820,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
-						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnGoto);
+						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
 					case 'CharS':
 						return onTodoMsg(
 							_jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning(todoId));
@@ -849,7 +849,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,
 			reminder: reminder,
-			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn),
+			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, appM.selectedEntityIdSet),
 			mdl: appM.mdl

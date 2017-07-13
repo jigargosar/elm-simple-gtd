@@ -39,18 +39,18 @@ type alias Msg =
     Entity.Types.EntityUpdateMsg
 
 
-getDocId entity =
+getEntityDocId entity =
     case entity of
         TodoEntity model ->
-            Document.getId model
+            getDocId model
 
         GroupEntity group ->
             case group of
                 ProjectEntity model ->
-                    Document.getId model
+                    getDocId model
 
                 ContextEntity model ->
-                    Document.getId model
+                    getDocId model
 
 
 toEntityId entity =

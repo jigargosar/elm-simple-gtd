@@ -36,16 +36,16 @@ var _jigargosar$elm_simple_gtd$Entity_Types$OnUpdate = F2(
 	});
 var _jigargosar$elm_simple_gtd$Entity_Types$OnNewContext = {ctor: 'OnNewContext'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnNewProject = {ctor: 'OnNewProject'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnGoto = {ctor: 'OnGoto'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelected = {ctor: 'OnToggleSelected'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn = {ctor: 'OnOnFocusIn'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnNameChanged = function (a) {
-	return {ctor: 'OnNameChanged', _0: a};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity = {ctor: 'OnGotoEntity'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelectedEntity = {ctor: 'OnToggleSelectedEntity'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity = {ctor: 'OnFocusInEntity'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged = function (a) {
+	return {ctor: 'OnEntityTextChanged', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Entity_Types$OnSave = {ctor: 'OnSave'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived = {ctor: 'OnToggleArchived'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted = {ctor: 'OnToggleDeleted'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing = {ctor: 'OnStartEditing'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnSaveEntityForm = {ctor: 'OnSaveEntityForm'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived = {ctor: 'OnEntityToggleArchived'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted = {ctor: 'OnEntityToggleDeleted'};
+var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity = {ctor: 'OnStartEditingEntity'};
 var _jigargosar$elm_simple_gtd$Entity_Types$TodoId = function (a) {
 	return {ctor: 'TodoId', _0: a};
 };

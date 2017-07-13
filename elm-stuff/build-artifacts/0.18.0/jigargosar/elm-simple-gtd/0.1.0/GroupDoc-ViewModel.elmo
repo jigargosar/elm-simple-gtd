@@ -10,8 +10,8 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 		};
 		var onEntityAction = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			config.toEntity(groupDoc));
-		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleDeleted);
-		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditing);
+		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
+		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;
@@ -21,7 +21,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				case 'CharG':
-					return onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnGoto);
+					return onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
 				default:
 					return _jigargosar$elm_simple_gtd$Model$noop;
 			}
@@ -31,7 +31,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			var iconName = isArchived ? 'unarchive' : 'archive';
 			return {
 				iconName: iconName,
-				onClick: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleArchived),
+				onClick: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived),
 				isArchived: isArchived
 			};
 		}();
@@ -46,14 +46,14 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			archive: archive,
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnSave),
+			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnSaveEntityForm),
 			onNameChanged: function (_p3) {
 				return onEntityAction(
-					_jigargosar$elm_simple_gtd$Entity_Types$OnNameChanged(_p3));
+					_jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged(_p3));
 			},
 			onCancelClicked: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 			icon: icon,
-			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnOnFocusIn),
+			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: config.getTabIndexAVForEntity(
 				config.toEntity(groupDoc)),

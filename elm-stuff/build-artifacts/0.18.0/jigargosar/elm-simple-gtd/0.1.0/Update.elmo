@@ -122,7 +122,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				var createXM = function (model) {
 					return function (_p9) {
 						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-							_jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm(_p9));
+							_jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_AddTodoForm(_p9));
 					}(
 						_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_p0._0));
 				};
@@ -135,7 +135,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnUpdateAddTodoForm':
 				var xm = function (_p11) {
 					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-						_jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm(
+						_jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_AddTodoForm(
 							A2(
 								_jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm,
 								_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p0._1),
@@ -149,7 +149,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				var createXM = function (model) {
 					return function (_p12) {
 						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-							_jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm(_p12));
+							_jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_EditTodoForm(_p12));
 					}(
 						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p15, model.now, _p16));
 				};
@@ -175,7 +175,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				var _p20 = _p0._1;
 				var xm = function (_p17) {
 					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-						_jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm(_p17));
+						_jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_EditTodoForm(_p17));
 				}(
 					A2(_jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm, _p20, _p0._0));
 				return function (_p18) {

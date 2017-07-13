@@ -249,7 +249,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
 			case 'XMTodo':
 				var _p2 = _p1._0;
-				if (_p2.ctor === 'EditTodoForm') {
+				if (_p2.ctor === 'TXM_EditTodoForm') {
 					var _p4 = _p2._0;
 					var _p3 = _p4.etfMode;
 					switch (_p3.ctor) {

@@ -268,18 +268,20 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					case 'NoTodoForm':
 						return def;
 					default:
-						return _jigargosar$elm_simple_gtd$Todo_View$new(_p2._0);
+						var _p6 = _p2._0;
+						var _p5 = _p6.atfMode;
+						if (_p5.ctor === 'ATFM_SetupFirstTodo') {
+							return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p6);
+						} else {
+							return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
+						}
 				}
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
-			case 'XMSetup':
-				return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p1._0);
 			case 'XMEditProject':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
 			case 'XMEditContext':
 				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
-			case 'XMNewTodo':
-				return _jigargosar$elm_simple_gtd$Todo_View$new(_p1._0);
 			case 'XMMainMenu':
 				return A2(_jigargosar$elm_simple_gtd$View_MainMenu$init, _p1._0, appModel);
 			default:

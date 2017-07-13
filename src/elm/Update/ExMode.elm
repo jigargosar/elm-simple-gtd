@@ -60,9 +60,6 @@ saveCurrentForm model =
             { model | pouchDBRemoteSyncURI = form.uri }
                 |> Return.singleton
 
-        XMSetup form ->
-            saveNewTodoForm form model
-
         _ ->
             model |> Return.singleton
 

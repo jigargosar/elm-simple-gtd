@@ -8,6 +8,7 @@ import Todo.Msg
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import TodoMsg
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
 
@@ -45,7 +46,7 @@ setup form =
             Msg.OnSaveCurrentForm
 
         updateSetupFormTodoText =
-            Todo.Msg.UpdateSetupFormTodoText form >> Msg.OnTodoMsg
+            TodoMsg.onUpdateAddTodoFormSetText form
     in
         div
             [ class "overlay"

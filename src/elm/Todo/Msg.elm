@@ -16,7 +16,6 @@ type TodoMsg
     | ShowReminderOverlayForTodoId DocId
     | GotoRunning
     | UpdateTimeTracker
-    | UpdateSetupFormTodoText AddTodoFormModel String
     | Upsert TodoDoc
     | OnShowMoreMenu DocId
     | OnProcessPendingNotificationCronTick

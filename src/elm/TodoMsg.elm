@@ -70,3 +70,11 @@ onStartAddingTodoToInbox =
 
 onStartAddingTodoByFocusInEntityAsReference =
     Msg.OnStartAddingTodo ATFM_AddByFocusInEntity
+
+
+onStartSetupAddTodo =
+    Msg.OnStartAddingTodo ATFM_SetupFirstTodo
+
+
+onUpdateAddTodoFormSetText =
+    Msg.OnUpdateAddTodoForm

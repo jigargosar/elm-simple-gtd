@@ -92,13 +92,6 @@ update :
     -> ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
-        UpdateSetupFormTodoText form todoText ->
-            Return.map
-                (Todo.Form.updateNewTodoForm todoText form
-                    |> XMSetup
-                    |> setExclusiveMode
-                )
-
         OnShowMoreMenu todoId ->
             Return.map (todoMoreMenu todoId |> setExclusiveMode)
                 >> Return.command (positionMoreMenuCmd todoId)

@@ -79,13 +79,15 @@ overlayViews appModel =
                             def
 
                         AddTodoForm form ->
-                            Todo.View.new form
+                            case form.atfMode of
+                                ATFM_SetupFirstTodo ->
+                                    View.GetStarted.setup form
+
+                                _ ->
+                                    Todo.View.new form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
-
-                XMSetup form ->
-                    View.GetStarted.setup form
 
                 XMEditProject form ->
                     GroupDoc.EditView.init form

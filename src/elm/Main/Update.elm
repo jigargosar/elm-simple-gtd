@@ -2,7 +2,7 @@ module Main.Update exposing (..)
 
 import Context
 import Entity.Types exposing (Entity(GroupEntity), GroupEntityType(ContextEntity), createContextEntity)
-import ExclusiveMode.Types exposing (ExclusiveMode(XMSetup, XMSignInOverlay))
+import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.SignIn
 import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
@@ -10,6 +10,7 @@ import Return exposing (map)
 import Store
 import Todo.Form
 import Todo.FormTypes exposing (..)
+import TodoMsg
 import Types exposing (ReturnF)
 
 
@@ -22,19 +23,13 @@ update andThenUpdate msg =
         OnSwitchToNewUserSetupModeIfNeeded ->
             let
                 onSwitchToNewUserSetupModeIfNeeded model =
-                    model
+                    Return.singleton model
                         |> if Firebase.SignIn.shouldSkipSignIn model.signInModel then
                             if Store.isEmpty model.todoStore then
-                                setExclusiveMode createSetupExclusiveMode
+                                andThenUpdate TodoMsg.onStartSetupAddTodo
                             else
-                                deactivateEditingMode
+                                andThenUpdate Msg.OnDeactivateEditingMode
                            else
-                            setExclusiveMode XMSignInOverlay
-
-                inboxEntity =
-                    createContextEntity Context.null
-
-                createSetupExclusiveMode =
-                    XMSetup (Todo.Form.createAddTodoForm ATFM_SetupFirstTodo)
+                            map (setExclusiveMode XMSignInOverlay)
             in
-                map onSwitchToNewUserSetupModeIfNeeded
+                Return.andThen onSwitchToNewUserSetupModeIfNeeded

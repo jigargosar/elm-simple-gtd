@@ -22,9 +22,3 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo = function (a) {
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
 	return {ctor: 'XMTodoMoreMenu', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup = function (a) {
-	return {ctor: 'XMSetup', _0: a};
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo = function (a) {
-	return {ctor: 'XMNewTodo', _0: a};
-};

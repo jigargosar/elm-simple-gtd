@@ -1,11 +1,10 @@
 var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
 	function (andThenUpdate, msg) {
 		var _p0 = msg;
-		var createSetupExclusiveMode = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-			_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo));
-		var inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 		var onSwitchToNewUserSetupModeIfNeeded = function (model) {
-			return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(createSetupExclusiveMode) : _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode) : _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay))(model);
+			return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo) : andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode)) : _Fresheyeball$elm_return$Return$map(
+				_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay)))(
+				_Fresheyeball$elm_return$Return$singleton(model));
 		};
-		return _Fresheyeball$elm_return$Return$map(onSwitchToNewUserSetupModeIfNeeded);
+		return _Fresheyeball$elm_return$Return$andThen(onSwitchToNewUserSetupModeIfNeeded);
 	});

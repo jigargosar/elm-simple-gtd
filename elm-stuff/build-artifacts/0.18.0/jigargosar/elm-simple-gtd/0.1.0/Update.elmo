@@ -118,61 +118,59 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode, _p8));
 				};
-			case 'OnStartExclusiveMode':
-				return _jigargosar$elm_simple_gtd$ExclusiveMode_Main$start(_p0._0);
-			case 'OnStartEditingTodo':
-				var _p13 = _p0._0;
-				var _p12 = _p0._1;
+			case 'OnStartAddingTodo':
 				var createXM = function (model) {
 					return function (_p9) {
 						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-							_jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm(_p9));
+							_jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm(_p9));
 					}(
-						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p12, model.now, _p13));
+						_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_p0._0));
 				};
 				return function (_p10) {
 					return A2(
 						_jigargosar$elm_simple_gtd$Update$command,
-						function () {
-							var _p11 = _p12;
-							switch (_p11.ctor) {
-								case 'ETFM_EditTodoText':
-									return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd;
-								case 'ETFM_EditTodoContext':
-									return _jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p13);
-								case 'ETFM_XMEditTodoProject':
-									return _jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p13);
-								default:
-									return _jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p13);
-							}
-						}(),
+						_jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd,
 						A3(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode, _p10));
 				};
-			case 'OnStartAddingTodo':
-				var createXM = function (model) {
-					return function (_p14) {
-						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
-							_jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm(_p14));
-					}(
-						_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_p0._0));
-				};
-				return function (_p15) {
-					return A2(
-						_jigargosar$elm_simple_gtd$Update$command,
-						_jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd,
-						A3(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode, _p15));
-				};
 			case 'OnUpdateAddTodoForm':
-				var xm = function (_p16) {
+				var xm = function (_p11) {
 					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
 						_jigargosar$elm_simple_gtd$Todo_FormTypes$AddTodoForm(
 							A2(
 								_jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm,
 								_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p0._1),
-								_p16)));
+								_p11)));
 				}(_p0._0);
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(xm));
+			case 'OnStartEditingTodo':
+				var _p16 = _p0._0;
+				var _p15 = _p0._1;
+				var createXM = function (model) {
+					return function (_p12) {
+						return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo(
+							_jigargosar$elm_simple_gtd$Todo_FormTypes$EditTodoForm(_p12));
+					}(
+						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p15, model.now, _p16));
+				};
+				return function (_p13) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Update$command,
+						function () {
+							var _p14 = _p15;
+							switch (_p14.ctor) {
+								case 'ETFM_EditTodoText':
+									return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd;
+								case 'ETFM_EditTodoContext':
+									return _jigargosar$elm_simple_gtd$Update$positionContextMenuCmd(_p16);
+								case 'ETFM_XMEditTodoProject':
+									return _jigargosar$elm_simple_gtd$Update$positionProjectMenuCmd(_p16);
+								default:
+									return _jigargosar$elm_simple_gtd$Update$positionScheduleMenuCmd(_p16);
+							}
+						}(),
+						A3(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode, _p13));
+				};
 			case 'OnUpdateEditTodoForm':
 				var _p20 = _p0._1;
 				var xm = function (_p17) {

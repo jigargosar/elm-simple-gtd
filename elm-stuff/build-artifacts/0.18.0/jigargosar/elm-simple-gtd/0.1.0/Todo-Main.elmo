@@ -86,9 +86,6 @@ var _jigargosar$elm_simple_gtd$Todo_Main$todoMoreMenu = function (_p9) {
 	return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu(
 		_jigargosar$elm_simple_gtd$Todo_Menu$init(_p9));
 };
-var _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference = _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-	_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNewTodo(
-		_jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox)));
 var _jigargosar$elm_simple_gtd$Todo_Main$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
 var _jigargosar$elm_simple_gtd$Todo_Main$setReminderOverlayToInitialView = F2(
 	function (todo, model) {
@@ -298,11 +295,6 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p18 = todoMsg;
 		switch (_p18.ctor) {
-			case 'UpdateSetupFormTodoText':
-				return _Fresheyeball$elm_return$Return$map(
-					_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSetup(
-							A2(_jigargosar$elm_simple_gtd$Todo_Form$updateNewTodoForm, _p18._1, _p18._0))));
 			case 'OnShowMoreMenu':
 				var _p20 = _p18._0;
 				return function (_p19) {

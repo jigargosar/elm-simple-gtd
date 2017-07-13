@@ -35,7 +35,7 @@ saveCurrentForm model =
         XMTodo t ->
             case t of
                 TFT_Edit form ->
-                    case form.xmType of
+                    case form.etfMode of
                         ETFM_EditTodoText ->
                             model
                                 |> Stores.updateTodo (TA_SetText form.name) form.id

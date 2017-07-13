@@ -62,7 +62,7 @@ overlayViews appModel =
                 XMTodo t ->
                     case t of
                         TFT_Edit form ->
-                            case form.xmType of
+                            case form.etfMode of
                                 ETFM_EditTodoContext ->
                                     Todo.View.contextMenu form appModel
 

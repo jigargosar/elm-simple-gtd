@@ -7,6 +7,13 @@ import Menu.Types exposing (MenuState)
 import Todo.Types exposing (TodoDoc, TodoText)
 
 
+type EditTodoFormMode
+    = ETFM_EditTodoText
+    | ETFM_EditTodoReminder
+    | ETFM_EditTodoContext
+    | ETFM_XMEditTodoProject
+
+
 type alias EditTodoForm =
     { id : DocId
     , name : TodoText
@@ -17,7 +24,7 @@ type alias EditTodoForm =
     , menuState : MenuState
     , date : String
     , time : String
-    , xmType : EditTodoFormMode
+    , etfMode : EditTodoFormMode
     }
 
 
@@ -45,13 +52,6 @@ type EditTodoFormAction
     | SetTodoMenuState Menu.State
     | SetTodoReminderDate String
     | SetTodoReminderTime String
-
-
-type EditTodoFormMode
-    = ETFM_EditTodoText
-    | ETFM_EditTodoReminder
-    | ETFM_EditTodoContext
-    | ETFM_XMEditTodoProject
 
 
 type AddTodoFormMode

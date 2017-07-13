@@ -16,7 +16,7 @@ import Toolkit.Helpers exposing (..)
 
 
 createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoForm
-createEditTodoForm xmType now todo =
+createEditTodoForm etfMode now todo =
     let
         timeInMilli =
             Todo.getMaybeReminderTime todo ?= now + Time.hour
@@ -30,7 +30,7 @@ createEditTodoForm xmType now todo =
         , menuState = Menu.initState
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
-        , xmType = xmType
+        , etfMode = etfMode
         }
 
 

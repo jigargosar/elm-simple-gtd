@@ -7,4 +7,4 @@ import Todo.FormTypes exposing (AddTodoFormMode(ATFM_AddByFocusInEntity))
 
 
 onNewTodoModeWithFocusInEntityAsReference model =
-    Todo.Form.createNewTodoForm ATFM_AddByFocusInEntity (model.focusInEntity) "" |> XMNewTodo |> Msg.OnStartExclusiveMode
+    Todo.Form.createNewTodoForm ATFM_AddByFocusInEntity |> XMNewTodo |> Msg.OnStartExclusiveMode

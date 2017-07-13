@@ -38,10 +38,9 @@ createEditTodoForm etfMode now todo =
         updateMaybeTime form
 
 
-createNewTodoForm : AddTodoFormMode -> Entity -> Todo.Text -> AddTodoForm
-createNewTodoForm atfMode referenceEntity text =
+createNewTodoForm : AddTodoFormMode -> AddTodoForm
+createNewTodoForm atfMode =
     { text = text
-    , referenceEntity = referenceEntity
     , menuState = Menu.initState
     , date = ""
     , time = ""

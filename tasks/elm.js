@@ -29,6 +29,10 @@ function fixWarningsFrom(warnFilePath) {
             }
         }
     })
+    /*return new Promise(function (resolve, reject) {
+
+    })*/
+
 }
 export const removeUnusedImports = function() {
     run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")

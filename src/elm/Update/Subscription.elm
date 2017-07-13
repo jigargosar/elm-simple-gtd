@@ -80,7 +80,7 @@ onGlobalKeyUp andThenUpdate key =
                                 andThenUpdate TodoMsg.onStartAddingTodoByFocusInEntityAsReference
 
                             Key.CharI ->
-                                andThenUpdate TodoMsg.onNewTodoForInbox
+                                andThenUpdate TodoMsg.onStartAddingTodoToInbox
 
                             Key.Slash ->
                                 Update.LaunchBar.open andThenUpdate

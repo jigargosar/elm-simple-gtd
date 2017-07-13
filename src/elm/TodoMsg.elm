@@ -27,11 +27,6 @@ onReminderOverlayAction =
     Todo.Msg.OnReminderOverlayAction >> OnTodoMsg
 
 
-onNewTodoForInbox : Msg
-onNewTodoForInbox =
-    Todo.Msg.OnNewTodoForInbox |> OnTodoMsg
-
-
 onStartEditingTodoText todo =
     Msg.OnStartEditingTodo todo ETFM_EditTodoText
 

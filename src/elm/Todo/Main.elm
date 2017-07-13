@@ -171,9 +171,6 @@ update andThenUpdate now todoMsg =
                 -- such direct calls are messy. :(
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        OnNewTodoForInbox ->
-            andThenUpdate TodoMsg.onStartAddingTodoToInbox
-
         OnReminderOverlayAction action ->
             reminderOverlayAction action
 

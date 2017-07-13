@@ -1,8 +1,5 @@
 var _jigargosar$elm_simple_gtd$View_GetStarted$setup = function (form) {
-	var updateSetupFormTodoText = function (_p0) {
-		return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-			A2(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateSetupFormTodoText, form, _p0));
-	};
+	var updateSetupFormTodoText = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateAddTodoFormSetText(form);
 	var addTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
 	return A2(
 		_elm_lang$html$Html$div,

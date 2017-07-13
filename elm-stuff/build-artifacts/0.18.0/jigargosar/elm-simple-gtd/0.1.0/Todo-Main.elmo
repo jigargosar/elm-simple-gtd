@@ -386,8 +386,6 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
 							A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, _p18._1, _p18._0))(_p28));
 				};
-			case 'OnNewTodoForInbox':
-				return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox);
 			default:
 				return _jigargosar$elm_simple_gtd$Todo_Main$reminderOverlayAction(_p18._0);
 		}

@@ -1,11 +1,3 @@
-var _jigargosar$elm_simple_gtd$Model_Internal$setTodoEditForm = F2(
-	function (f, m) {
-		return _elm_lang$core$Native_Utils.update(
-			m,
-			{
-				maybeTodoEditForm: _elm_lang$core$Maybe$Just(f)
-			});
-	});
 var _jigargosar$elm_simple_gtd$Model_Internal$exclusiveMode = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {

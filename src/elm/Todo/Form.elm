@@ -1,4 +1,10 @@
-module Todo.Form exposing (..)
+module Todo.Form
+    exposing
+        ( createEditTodoForm
+        , createAddTodoForm
+        , updateAddTodoForm
+        , updateEditTodoForm
+        )
 
 import Date
 import Document.Types exposing (getDocId)
@@ -47,7 +53,7 @@ createAddTodoForm atfMode =
     }
 
 
-updateNewTodoForm text form =
+updateAddTodoForm text form =
     { form | text = text }
 
 

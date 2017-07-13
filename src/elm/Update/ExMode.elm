@@ -10,12 +10,6 @@ import Todo
 import Todo.Form
 import Todo.Form
 import Todo.FormTypes exposing (..)
-
-
-
-
-
-
 import Stores
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelReturnF)
@@ -45,7 +39,7 @@ saveCurrentForm model =
                                 updateTodo (TA_SetText form.text)
 
                             ETFM_EditTodoReminder ->
-                                updateTodo (TA_SetScheduleFromMaybeTime (Todo.Form.computeMaybeTime form))
+                                updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
                             _ ->
                                 model |> Return.singleton

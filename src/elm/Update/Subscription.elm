@@ -77,7 +77,7 @@ onGlobalKeyUp andThenUpdate key =
                                 clear
 
                             Key.CharQ ->
-                                andThenUpdate TodoMsg.onStartAddingTodoByFocusInEntityAsReference
+                                andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
 
                             Key.CharI ->
                                 andThenUpdate TodoMsg.onStartAddingTodoToInbox

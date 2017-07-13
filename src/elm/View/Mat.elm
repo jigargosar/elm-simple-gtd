@@ -17,7 +17,7 @@ newTodoFab alv m =
                 m.mdl
                 [ id "add-fab"
                 , Material.Button.colored
-                , onClickStopPropagation TodoMsg.onStartAddingTodoByFocusInEntityAsReference
+                , onClickStopPropagation TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
                 , resourceId "add-todo-fab"
                 ]
                 [ icon "add" ]

@@ -56,7 +56,7 @@ type EditTodoFormAction
 
 
 type AddTodoFormMode
-    = ATFM_AddByFocusInEntity
+    = ATFM_AddWithFocusInEntityAsReference
     | ATFM_AddToInbox
     | ATFM_SetupFirstTodo
 

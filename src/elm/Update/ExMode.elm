@@ -83,7 +83,7 @@ saveNewTodoForm form model =
                             ATFM_SetupFirstTodo ->
                                 inboxEntity
 
-                            ATFM_AddByFocusInEntity ->
+                            ATFM_AddWithFocusInEntityAsReference ->
                                 model.focusInEntity
                 in
                     Stores.updateTodo

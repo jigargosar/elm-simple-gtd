@@ -63,8 +63,8 @@ onStartAddingTodoToInbox =
     Msg.OnStartAddingTodo ATFM_AddToInbox
 
 
-onStartAddingTodoByFocusInEntityAsReference =
-    Msg.OnStartAddingTodo ATFM_AddByFocusInEntity
+onStartAddingTodoWithFocusInEntityAsReference =
+    Msg.OnStartAddingTodo ATFM_AddWithFocusInEntityAsReference
 
 
 onStartSetupAddTodo =

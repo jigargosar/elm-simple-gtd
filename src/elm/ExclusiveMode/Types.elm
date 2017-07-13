@@ -14,9 +14,7 @@ type alias SyncForm =
 
 
 type ExclusiveMode
-    = XMNewTodo AddTodoFormModel
-    | XMSetup AddTodoFormModel
-    | XMTodoMoreMenu TodoMoreMenuForm
+    = XMTodoMoreMenu TodoMoreMenuForm
     | XMTodo TodoForm
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm

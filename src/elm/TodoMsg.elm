@@ -62,3 +62,11 @@ onSetTodoFormReminderTime form =
 
 onSetTodoFormText form =
     SetTodoText >> Msg.OnUpdateEditTodoForm form
+
+
+onStartAddingTodoToInbox =
+    Msg.OnStartAddingTodo ATFM_AddToInbox
+
+
+onStartAddingTodoByFocusInEntityAsReference =
+    Msg.OnStartAddingTodo ATFM_AddByFocusInEntity

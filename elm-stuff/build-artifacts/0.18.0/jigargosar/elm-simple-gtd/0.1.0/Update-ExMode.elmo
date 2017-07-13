@@ -86,7 +86,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (model) 
 				case 'NoTodoForm':
 					return _Fresheyeball$elm_return$Return$singleton(model);
 				default:
-					return _Fresheyeball$elm_return$Return$singleton(model);
+					return A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm, _p7._0, model);
 			}
 		case 'XMNewTodo':
 			return A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm, _p4._0, model);

@@ -6,8 +6,8 @@ import Material.Button
 import Material.Options exposing (div)
 import Material.Tooltip
 import Material.Typography exposing (..)
-import Model.Msg
 import Msg
+import TodoMsg
 
 
 newTodoFab alv m =
@@ -17,7 +17,7 @@ newTodoFab alv m =
                 m.mdl
                 [ id "add-fab"
                 , Material.Button.colored
-                , onClickStopPropagation (Model.Msg.onNewTodoModeWithFocusInEntityAsReference m)
+                , onClickStopPropagation TodoMsg.onStartAddingTodoByFocusInEntityAsReference
                 , resourceId "add-todo-fab"
                 ]
                 [ icon "add" ]

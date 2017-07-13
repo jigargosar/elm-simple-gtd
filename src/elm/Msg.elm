@@ -38,7 +38,6 @@ type MainMsg
 type Msg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
-    | OnStartExclusiveMode ExclusiveMode
     | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnMainMsg MainMsg

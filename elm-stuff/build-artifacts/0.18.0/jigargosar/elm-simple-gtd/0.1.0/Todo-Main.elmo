@@ -395,10 +395,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, _p18._1, _p18._0))(_p28));
 				};
 			case 'OnNewTodoForInbox':
-				return function (_p29) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-						A2(_jigargosar$elm_simple_gtd$Todo_Main$map, _jigargosar$elm_simple_gtd$Todo_Main$activateNewTodoModeWithInboxAsReference, _p29));
-				};
+				return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox);
 			default:
 				return _jigargosar$elm_simple_gtd$Todo_Main$reminderOverlayAction(_p18._0);
 		}
@@ -442,7 +439,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 						_0: A2(
 							_elm_lang$core$Time$every,
 							_elm_lang$core$Time$second * 1,
-							function (_p30) {
+							function (_p29) {
 								return _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker;
 							}),
 						_1: {
@@ -450,7 +447,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 							_0: A2(
 								_elm_lang$core$Time$every,
 								_elm_lang$core$Time$second * 30,
-								function (_p31) {
+								function (_p30) {
 									return _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick;
 								}),
 							_1: {ctor: '[]'}

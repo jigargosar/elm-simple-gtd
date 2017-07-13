@@ -22,7 +22,6 @@ import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (over)
 import X.Return
 import Keyboard.Extra as Key
-import Model.Msg
 import TodoMsg
 import Update.LaunchBar
 
@@ -78,13 +77,7 @@ onGlobalKeyUp andThenUpdate key =
                                 clear
 
                             Key.CharQ ->
-                                Return.andThen
-                                    (apply2
-                                        ( Model.Msg.onNewTodoModeWithFocusInEntityAsReference
-                                        , Return.singleton
-                                        )
-                                        >> uncurry andThenUpdate
-                                    )
+                                andThenUpdate TodoMsg.onStartAddingTodoByFocusInEntityAsReference
 
                             Key.CharI ->
                                 andThenUpdate TodoMsg.onNewTodoForInbox

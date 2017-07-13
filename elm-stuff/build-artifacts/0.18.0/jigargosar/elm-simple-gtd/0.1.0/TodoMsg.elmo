@@ -1,3 +1,5 @@
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoByFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddByFocusInEntity);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox);
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
 	return function (_p0) {
 		return A2(

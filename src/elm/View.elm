@@ -93,9 +93,6 @@ overlayViews appModel =
                 XMEditContext form ->
                     GroupDoc.EditView.init form
 
-                XMNewTodo form ->
-                    Todo.View.new form
-
                 XMMainMenu menuState ->
                     View.MainMenu.init menuState appModel
 

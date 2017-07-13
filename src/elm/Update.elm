@@ -7,7 +7,6 @@ import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd, focusSelectorIf
 import Entity
 import Entity.Main
 import Entity.Types exposing (Entity(TodoEntity))
-import ExclusiveMode.Main
 import ExclusiveMode.Types exposing (..)
 import Firebase.Main
 import LaunchBar.Messages
@@ -18,7 +17,6 @@ import Material
 import Menu
 import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Model.Keyboard
-import Model.Msg
 import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
@@ -92,9 +90,6 @@ update andThenUpdate msg =
         OnDeactivateEditingMode ->
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
-
-        OnStartExclusiveMode exclusiveMode ->
-            ExclusiveMode.Main.start exclusiveMode
 
         OnStartEditingTodo todo t ->
             let

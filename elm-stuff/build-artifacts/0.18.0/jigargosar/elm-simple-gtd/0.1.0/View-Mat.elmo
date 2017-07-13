@@ -37,8 +37,7 @@ var _jigargosar$elm_simple_gtd$View_Mat$newTodoFab = F2(
 									_0: _debois$elm_mdl$Material_Button$colored,
 									_1: {
 										ctor: '::',
-										_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(
-											_jigargosar$elm_simple_gtd$Model_Msg$onNewTodoModeWithFocusInEntityAsReference(m)),
+										_0: _jigargosar$elm_simple_gtd$Mat$onClickStopPropagation(_jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoByFocusInEntityAsReference),
 										_1: {
 											ctor: '::',
 											_0: _jigargosar$elm_simple_gtd$Mat$resourceId('add-todo-fab'),

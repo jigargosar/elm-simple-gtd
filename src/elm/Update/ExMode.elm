@@ -54,10 +54,7 @@ saveCurrentForm model =
                     model |> Return.singleton
 
                 AddTodoForm form ->
-                    model |> Return.singleton
-
-        XMNewTodo form ->
-            saveNewTodoForm form model
+                    saveNewTodoForm form model
 
         XMEditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }

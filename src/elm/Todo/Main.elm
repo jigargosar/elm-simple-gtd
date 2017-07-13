@@ -179,8 +179,7 @@ update andThenUpdate now todoMsg =
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
         OnNewTodoForInbox ->
-            map (activateNewTodoModeWithInboxAsReference)
-                >> DomPorts.autoFocusInputRCmd
+            andThenUpdate TodoMsg.onStartAddingTodoToInbox
 
         OnReminderOverlayAction action ->
             reminderOverlayAction action
@@ -288,11 +287,6 @@ setReminderOverlayToInitialView todo model =
 
 inboxEntity =
     Entity.Types.createContextEntity Context.null
-
-
-activateNewTodoModeWithInboxAsReference : ModelF
-activateNewTodoModeWithInboxAsReference =
-    setExclusiveMode (Todo.Form.createAddTodoForm ATFM_AddToInbox |> XMNewTodo)
 
 
 todoMoreMenu =

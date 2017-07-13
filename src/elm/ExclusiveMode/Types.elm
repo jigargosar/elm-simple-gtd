@@ -12,7 +12,7 @@ type alias SyncForm =
 
 
 type ExclusiveMode
-    = XMTodo TodoForm
+    = XMTodo TodoExclusiveMode
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
     | XMLaunchBar

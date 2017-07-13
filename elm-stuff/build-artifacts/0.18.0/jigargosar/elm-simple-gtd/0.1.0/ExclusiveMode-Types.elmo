@@ -19,6 +19,3 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) 
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo = function (a) {
 	return {ctor: 'XMTodo', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoMoreMenu = function (a) {
-	return {ctor: 'XMTodoMoreMenu', _0: a};
-};

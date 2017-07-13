@@ -247,34 +247,29 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					_elm_lang$html$Html$map,
 					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg,
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
-			case 'XMTodoMoreMenu':
-				return _jigargosar$elm_simple_gtd$Todo_MoreMenu$view(_p1._0);
 			case 'XMTodo':
 				var _p2 = _p1._0;
-				switch (_p2.ctor) {
-					case 'EditTodoForm':
-						var _p4 = _p2._0;
-						var _p3 = _p4.etfMode;
-						switch (_p3.ctor) {
-							case 'ETFM_EditTodoContext':
-								return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p4, appModel);
-							case 'ETFM_XMEditTodoProject':
-								return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p4, appModel);
-							case 'ETFM_EditTodoReminder':
-								return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p4);
-							default:
-								return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p4, appModel);
-						}
-					case 'NoTodoForm':
-						return def;
-					default:
-						var _p6 = _p2._0;
-						var _p5 = _p6.atfMode;
-						if (_p5.ctor === 'ATFM_SetupFirstTodo') {
-							return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p6);
-						} else {
-							return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
-						}
+				if (_p2.ctor === 'EditTodoForm') {
+					var _p4 = _p2._0;
+					var _p3 = _p4.etfMode;
+					switch (_p3.ctor) {
+						case 'ETFM_EditTodoContext':
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$contextMenu, _p4, appModel);
+						case 'ETFM_XMEditTodoProject':
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$projectMenu, _p4, appModel);
+						case 'ETFM_EditTodoReminder':
+							return _jigargosar$elm_simple_gtd$Todo_View$reminderPopup(_p4);
+						default:
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$edit, _p4, appModel);
+					}
+				} else {
+					var _p6 = _p2._0;
+					var _p5 = _p6.atfMode;
+					if (_p5.ctor === 'ATFM_SetupFirstTodo') {
+						return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p6);
+					} else {
+						return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
+					}
 				}
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;

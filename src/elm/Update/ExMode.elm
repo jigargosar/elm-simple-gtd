@@ -28,7 +28,7 @@ saveCurrentForm editMode =
 
         XMTodo t ->
             case t of
-                EditTodoForm form ->
+                TXM_EditTodoForm form ->
                     let
                         updateTodo action =
                             Stores.updateTodo action form.id
@@ -44,10 +44,7 @@ saveCurrentForm editMode =
                             _ ->
                                 identity
 
-                NoTodoForm ->
-                    identity
-
-                AddTodoForm form ->
+                TXM_AddTodoForm form ->
                     saveNewTodoForm form |> andThen
 
         XMEditSyncSettings form ->
@@ -62,7 +59,7 @@ inboxEntity =
     createContextEntity Context.null
 
 
-saveNewTodoForm : AddTodoFormModel -> ModelReturnF
+saveNewTodoForm : AddTodoForm -> ModelReturnF
 saveNewTodoForm form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId

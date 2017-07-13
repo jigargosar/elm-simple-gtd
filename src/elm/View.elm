@@ -53,7 +53,7 @@ overlayViews appModel =
 
                 XMTodo t ->
                     case t of
-                        EditTodoForm form ->
+                        TXM_EditTodoForm form ->
                             case form.etfMode of
                                 ETFM_EditTodoContext ->
                                     Todo.View.contextMenu form appModel
@@ -67,10 +67,7 @@ overlayViews appModel =
                                 ETFM_EditTodoText ->
                                     Todo.View.edit form appModel
 
-                        NoTodoForm ->
-                            def
-
-                        AddTodoForm form ->
+                        TXM_AddTodoForm form ->
                             case form.atfMode of
                                 ATFM_SetupFirstTodo ->
                                     View.GetStarted.setup form

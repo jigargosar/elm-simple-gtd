@@ -19,7 +19,7 @@ import X.Record exposing (field, over, overM, set)
 import Toolkit.Operators exposing (..)
 
 
-createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoFormModel
+createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoForm
 createEditTodoForm etfMode now todo =
     let
         timeInMilli =
@@ -42,7 +42,7 @@ createEditTodoForm etfMode now todo =
         updateMaybeTime form
 
 
-createAddTodoForm : AddTodoFormMode -> AddTodoFormModel
+createAddTodoForm : AddTodoFormMode -> AddTodoForm
 createAddTodoForm atfMode =
     { text = ""
     , menuState = Menu.initState

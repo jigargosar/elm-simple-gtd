@@ -39,7 +39,7 @@ type alias Msg =
     Entity.Types.EntityUpdateMsg
 
 
-getId entity =
+getDocId entity =
     case entity of
         TodoEntity model ->
             Document.getId model

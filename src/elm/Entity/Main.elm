@@ -61,7 +61,7 @@ onUpdate andThenUpdate entity msg =
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnEntityTextChanged newName ->
-            Return.map (updateEditModeNameChanged newName entity)
+            Return.map (updateEditModeNameChanged newName)
 
         Entity.Types.OnSaveEntityForm ->
             andThenUpdate Msg.OnSaveCurrentForm
@@ -75,7 +75,7 @@ onUpdate andThenUpdate entity msg =
                 toggleArchivedEntity entity =
                     let
                         entityId =
-                            Entity.getId entity
+                            Entity.getDocId entity
                     in
                         case entity of
                             Entity.Types.GroupEntity g ->
@@ -107,7 +107,7 @@ onUpdate andThenUpdate entity msg =
 
 
 toggleEntitySelection entity =
-    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getId entity))
+    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getDocId entity))
 
 
 toggleSetMember item set =
@@ -131,7 +131,7 @@ toggleDeleteEntity : Entity -> ModelReturnF
 toggleDeleteEntity entity model =
     let
         entityId =
-            Entity.getId entity
+            Entity.getDocId entity
     in
         model
             |> case entity of
@@ -188,7 +188,7 @@ startEditingEntity andThenUpdate now entity model =
                 Debug.log "startEditingEntity : This method should not be called for todo. We should probably get rid of entity Main stuff, or bring all types of edits here. which doesn't seem fesable, since there are different types of edit modes for todo."
 
 
-updateEditModeNameChanged newName entity model =
+updateEditModeNameChanged newName model =
     model
         |> case model.editMode of
             XMEditContext ecm ->

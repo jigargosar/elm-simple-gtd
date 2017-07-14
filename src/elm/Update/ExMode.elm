@@ -36,24 +36,26 @@ saveExclusiveModeForm exMode =
         XMTodo t ->
             -- todo move to TodoStore update
             case t of
-                TXM_EditTodoForm form ->
-                    let
-                        updateTodo action =
-                            Stores.updateTodo action form.id
-                                |> andThen
-                    in
-                        case form.etfMode of
-                            ETFM_EditTodoText ->
-                                updateTodo <| TA_SetText form.text
+                TXM_Form form ->
+                    case form.mode of
+                        TFM_Edit editMode ->
+                            let
+                                updateTodo action =
+                                    Stores.updateTodo action form.id
+                                        |> andThen
+                            in
+                                case editMode of
+                                    ETFM_EditTodoText ->
+                                        updateTodo <| TA_SetText form.text
 
-                            ETFM_EditTodoReminder ->
-                                updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+                                    ETFM_EditTodoReminder ->
+                                        updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
-                            _ ->
-                                identity
+                                    _ ->
+                                        identity
 
-                TXM_AddTodoForm form ->
-                    saveNewTodoForm form |> andThen
+                        TFM_Add addMode ->
+                            saveAddTodoForm addMode form |> andThen
 
         XMEditSyncSettings form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })
@@ -67,15 +69,15 @@ inboxEntity =
     createContextEntity Context.null
 
 
-saveNewTodoForm : AddTodoForm -> ModelReturnF
-saveNewTodoForm form model =
+saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
+saveAddTodoForm addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
         |> uncurry
             (\todoId ->
                 let
                     referenceEntity =
-                        case form.atfMode of
+                        case addMode of
                             ATFM_AddToInbox ->
                                 inboxEntity
 

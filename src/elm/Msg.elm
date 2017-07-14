@@ -44,11 +44,11 @@ type AppMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnUpdateAddTodoForm AddTodoForm TodoText
+    | OnUpdateAddTodoForm TodoForm TodoText
     | OnDeactivateEditingMode
     | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnUpdateEditTodoForm EditTodoForm EditTodoFormAction
+    | OnUpdateEditTodoForm TodoForm EditTodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg

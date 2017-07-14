@@ -10,25 +10,24 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey = function (prefix) {
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
-	function (_p1, model) {
-		var _p2 = _p1;
+	function (form, model) {
 		return {
-			onSelect: function (_p3) {
+			onSelect: function (_p1) {
 				return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 					A2(
 						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
-						_p2.todoId,
+						form.id,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetContextId(
-							_jigargosar$elm_simple_gtd$Document$getId(_p3))));
+							_jigargosar$elm_simple_gtd$Document$getId(_p1))));
 			},
-			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p2.contextId),
+			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(form.contextId),
 			itemKey: _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey('context'),
 			itemSearchText: _jigargosar$elm_simple_gtd$Context$getName,
-			itemView: function (_p4) {
+			itemView: function (_p2) {
 				return _elm_lang$html$Html$text(
-					_jigargosar$elm_simple_gtd$Context$getName(_p4));
+					_jigargosar$elm_simple_gtd$Context$getName(_p2));
 			},
-			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(_p2),
+			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(form),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};
@@ -42,25 +41,24 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
 			A2(_jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
-	function (_p5, model) {
-		var _p6 = _p5;
+	function (form, model) {
 		return {
-			onSelect: function (_p7) {
+			onSelect: function (_p3) {
 				return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
 					A2(
 						_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode,
-						_p6.todoId,
+						form.id,
 						_jigargosar$elm_simple_gtd$Todo_Types$TA_SetProjectId(
-							_jigargosar$elm_simple_gtd$Document$getId(_p7))));
+							_jigargosar$elm_simple_gtd$Document$getId(_p3))));
 			},
-			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(_p6.projectId),
+			isSelected: _jigargosar$elm_simple_gtd$Document$hasId(form.projectId),
 			itemKey: _jigargosar$elm_simple_gtd$Todo_View_Menu$getMenuKey('project'),
 			itemSearchText: _jigargosar$elm_simple_gtd$Project$getName,
-			itemView: function (_p8) {
+			itemView: function (_p4) {
 				return _elm_lang$html$Html$text(
-					_jigargosar$elm_simple_gtd$Project$getName(_p8));
+					_jigargosar$elm_simple_gtd$Project$getName(_p4));
 			},
-			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(_p6),
+			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(form),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
 		};

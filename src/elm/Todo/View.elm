@@ -351,7 +351,7 @@ fireCancel =
     Msg.OnDeactivateEditingMode
 
 
-editTodoTextView : EditTodoForm -> AppModel -> Html AppMsg
+editTodoTextView : TodoForm -> AppModel -> Html AppMsg
 editTodoTextView form appModel =
     let
         todoText =

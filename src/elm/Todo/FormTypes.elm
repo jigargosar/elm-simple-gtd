@@ -7,29 +7,22 @@ import Menu.Types exposing (MenuState)
 import Time exposing (Time)
 
 
-type alias TodoFormCommon a =
-    { a
-        | id : DocId
-        , contextId : DocId
-        , projectId : DocId
-        , text : String
-        , menuState : MenuState
-        , date : String
-        , time : String
-        , maybeComputedTime : Maybe Time
-        , mode : TodoFormMode
+type alias TodoForm =
+    { id : DocId
+    , contextId : DocId
+    , projectId : DocId
+    , text : String
+    , menuState : MenuState
+    , date : String
+    , time : String
+    , maybeComputedTime : Maybe Time
+    , mode : TodoFormMode
     }
 
 
 type TodoFormMode
     = TFM_Edit EditTodoFormMode
     | TFM_Add AddTodoFormMode
-
-
-type alias AddTodoForm =
-    TodoFormCommon
-        { atfMode : AddTodoFormMode
-        }
 
 
 type AddTodoFormMode
@@ -42,13 +35,7 @@ type EditTodoFormMode
     = ETFM_EditTodoText
     | ETFM_EditTodoReminder
     | ETFM_EditTodoContext
-    | ETFM_XMEditTodoProject
-
-
-type alias EditTodoForm =
-    TodoFormCommon
-        { etfMode : EditTodoFormMode
-        }
+    | ETFM_EditTodoProject
 
 
 type EditTodoFormAction
@@ -59,5 +46,4 @@ type EditTodoFormAction
 
 
 type TodoExclusiveMode
-    = TXM_EditTodoForm EditTodoForm
-    | TXM_AddTodoForm AddTodoForm
+    = TXM_Form TodoForm

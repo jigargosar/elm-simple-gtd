@@ -19,8 +19,8 @@ import X.Record exposing (field, over, overM, set)
 import Toolkit.Operators exposing (..)
 
 
-createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> EditTodoForm
-createEditTodoForm etfMode now todo =
+createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> TodoForm
+createEditTodoForm editMode now todo =
     let
         timeInMilli =
             Todo.getMaybeReminderTime todo ?= now + Time.hour
@@ -33,16 +33,15 @@ createEditTodoForm etfMode now todo =
             , menuState = Menu.initState
             , date = (Time.Format.format "%Y-%m-%d") timeInMilli
             , time = (Time.Format.format "%H:%M") timeInMilli
-            , etfMode = etfMode
             , maybeComputedTime = Nothing
-            , mode = TFM_Edit etfMode
+            , mode = TFM_Edit editMode
             }
     in
         updateMaybeTime form
 
 
-createAddTodoForm : AddTodoFormMode -> AddTodoForm
-createAddTodoForm atfMode =
+createAddTodoForm : AddTodoFormMode -> TodoForm
+createAddTodoForm addMode =
     { id = ""
     , contextId = ""
     , projectId = ""
@@ -51,8 +50,7 @@ createAddTodoForm atfMode =
     , date = ""
     , time = ""
     , maybeComputedTime = Nothing
-    , atfMode = atfMode
-    , mode = TFM_Add atfMode
+    , mode = TFM_Add addMode
     }
 
 
@@ -80,7 +78,7 @@ maybeComputedTime =
     field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> TodoFormCommon a -> TodoFormCommon a
+updateEditTodoForm : EditTodoFormAction -> TodoForm -> TodoForm
 updateEditTodoForm action =
     case action of
         SetTodoText value ->
@@ -98,12 +96,12 @@ updateEditTodoForm action =
                 >> updateMaybeTime
 
 
-updateMaybeTime : TodoFormCommon a -> TodoFormCommon a
+updateMaybeTime : TodoForm -> TodoForm
 updateMaybeTime =
     overM maybeComputedTime computeMaybeTime
 
 
-computeMaybeTime : TodoFormCommon a -> Maybe Time
+computeMaybeTime : TodoForm -> Maybe Time
 computeMaybeTime { date, time } =
     let
         dateTimeString =

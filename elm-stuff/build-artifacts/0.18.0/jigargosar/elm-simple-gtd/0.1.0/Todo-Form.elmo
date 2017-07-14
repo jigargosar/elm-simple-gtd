@@ -96,19 +96,21 @@ var _jigargosar$elm_simple_gtd$Todo_Form$updateAddTodoForm = F2(
 			form,
 			{text: text});
 	});
-var _jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm = function (atfMode) {
+var _jigargosar$elm_simple_gtd$Todo_Form$createAddTodoForm = function (addMode) {
 	return {
+		id: '',
+		contextId: '',
+		projectId: '',
 		text: '',
 		menuState: _jigargosar$elm_simple_gtd$Menu$initState,
 		date: '',
 		time: '',
 		maybeComputedTime: _elm_lang$core$Maybe$Nothing,
-		atfMode: atfMode,
-		mode: _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Add(atfMode)
+		mode: _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Add(addMode)
 	};
 };
 var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
-	function (etfMode, now, todo) {
+	function (editMode, now, todo) {
 		var timeInMilli = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			_jigargosar$elm_simple_gtd$Todo$getMaybeReminderTime(todo),
@@ -121,9 +123,8 @@ var _jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm = F3(
 			menuState: _jigargosar$elm_simple_gtd$Menu$initState,
 			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
 			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
-			etfMode: etfMode,
 			maybeComputedTime: _elm_lang$core$Maybe$Nothing,
-			mode: _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Edit(etfMode)
+			mode: _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Edit(editMode)
 		};
 		return _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime(form);
 	});

@@ -85,7 +85,7 @@ update andThenUpdate msg =
         OnStartAddingTodo atfMode ->
             let
                 createXM model =
-                    Todo.Form.createAddTodoForm atfMode |> TXM_AddTodoForm >> XMTodo
+                    Todo.Form.createAddTodoForm atfMode |> TXM_Form >> XMTodo
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command autoFocusInputCmd
@@ -95,7 +95,7 @@ update andThenUpdate msg =
                 xm =
                     form
                         |> Todo.Form.updateEditTodoForm (SetTodoText text)
-                        >> TXM_AddTodoForm
+                        >> TXM_Form
                         >> XMTodo
             in
                 map (setExclusiveMode xm)
@@ -103,7 +103,7 @@ update andThenUpdate msg =
         OnStartEditingTodo todo t ->
             let
                 createXM model =
-                    Todo.Form.createEditTodoForm t model.now todo |> TXM_EditTodoForm >> XMTodo
+                    Todo.Form.createEditTodoForm t model.now todo |> TXM_Form >> XMTodo
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
@@ -114,7 +114,7 @@ update andThenUpdate msg =
                             ETFM_EditTodoContext ->
                                 positionContextMenuCmd todo
 
-                            ETFM_XMEditTodoProject ->
+                            ETFM_EditTodoProject ->
                                 positionProjectMenuCmd todo
 
                             ETFM_EditTodoReminder ->
@@ -124,7 +124,7 @@ update andThenUpdate msg =
         OnUpdateEditTodoForm form action ->
             let
                 xm =
-                    Todo.Form.updateEditTodoForm action form |> TXM_EditTodoForm >> XMTodo
+                    Todo.Form.updateEditTodoForm action form |> TXM_Form >> XMTodo
             in
                 map (setExclusiveMode xm)
                     >> Return.command

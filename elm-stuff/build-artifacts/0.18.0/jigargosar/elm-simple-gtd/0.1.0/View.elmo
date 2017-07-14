@@ -249,26 +249,29 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
 			case 'XMTodo':
 				var _p2 = _p1._0;
-				if (_p2.ctor === 'TXM_EditTodoForm') {
-					var _p4 = _p2._0;
-					var _p3 = _p4.etfMode;
-					switch (_p3.ctor) {
+				var _p6 = _p2._0;
+				var _p3 = _p6.mode;
+				if (_p3.ctor === 'TFM_Edit') {
+					var _p4 = _p3._0;
+					switch (_p4.ctor) {
 						case 'ETFM_EditTodoContext':
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoContextPopupView, _p4, appModel);
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoContextPopupView, _p6, appModel);
 						case 'ETFM_XMEditTodoProject':
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoProjectPopupView, _p4, appModel);
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoProjectPopupView, _p6, appModel);
 						case 'ETFM_EditTodoReminder':
-							return _jigargosar$elm_simple_gtd$Todo_View$editTodoSchedulePopupView(_p4);
+							return _jigargosar$elm_simple_gtd$Todo_View$editTodoSchedulePopupView(_p6);
 						default:
-							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoTextView, _p4, appModel);
+							return A2(_jigargosar$elm_simple_gtd$Todo_View$editTodoTextView, _p6, appModel);
 					}
 				} else {
-					var _p6 = _p2._0;
-					var _p5 = _p6.atfMode;
-					if (_p5.ctor === 'ATFM_SetupFirstTodo') {
-						return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p6);
-					} else {
-						return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
+					var _p5 = _p3._0;
+					switch (_p5.ctor) {
+						case 'ATFM_SetupFirstTodo':
+							return _jigargosar$elm_simple_gtd$View_GetStarted$setup(_p6);
+						case 'ATFM_AddWithFocusInEntityAsReference':
+							return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
+						default:
+							return _jigargosar$elm_simple_gtd$Todo_View$new(_p6);
 					}
 				}
 			case 'XMSignInOverlay':

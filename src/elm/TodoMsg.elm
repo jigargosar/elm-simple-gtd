@@ -34,7 +34,7 @@ onStartEditingTodoContext todo =
 
 
 onStartEditingTodoProject todo =
-    Msg.OnStartEditingTodo todo ETFM_XMEditTodoProject
+    Msg.OnStartEditingTodo todo ETFM_EditTodoProject
 
 
 onStartEditingReminder todo =

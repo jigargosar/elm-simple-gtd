@@ -8,7 +8,7 @@ import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
-import GroupDoc.EditForm exposing (createEditContextForm, createEditProjectForm)
+import GroupDoc.Form exposing (createEditContextForm, createEditProjectForm)
 import Maybe.Extra
 import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
@@ -161,11 +161,11 @@ createAndEditNewContext andThenUpdate model =
 
 
 editProjectSetName =
-    GroupDoc.EditForm.setName >>> XMEditProject
+    GroupDoc.Form.setName >>> XMEditProject
 
 
 editContextSetName =
-    GroupDoc.EditForm.setName >>> XMEditContext
+    GroupDoc.Form.setName >>> XMEditContext
 
 
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF

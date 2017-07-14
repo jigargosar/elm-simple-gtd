@@ -1,9 +1,8 @@
-module GroupDoc.EditForm exposing (..)
+module GroupDoc.Form exposing (..)
 
-import Document.Types exposing (getDocId)
-import Entity.Types exposing (Entity, createContextEntity, createProjectEntity)
-import GroupDoc.FormTypes exposing (GroupDocEditForm, NameInputLabel)
-import GroupDoc.Types exposing (GroupDoc, GroupDocType(..), getGroupDocName, isGroupDocArchived)
+import Document.Types exposing (..)
+import GroupDoc.FormTypes exposing (..)
+import GroupDoc.Types exposing (..)
 
 
 init : GroupDocType -> GroupDoc -> GroupDocEditForm

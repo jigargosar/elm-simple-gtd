@@ -351,8 +351,8 @@ fireCancel =
     Msg.OnDeactivateEditingMode
 
 
-edit : EditTodoForm -> AppModel -> Html AppMsg
-edit form appModel =
+editTodoTextView : EditTodoForm -> AppModel -> Html AppMsg
+editTodoTextView form appModel =
     let
         todoText =
             form.text
@@ -408,15 +408,15 @@ new form =
         ]
 
 
-projectMenu =
+editTodoProjectPopupView =
     Todo.View.Menu.project
 
 
-contextMenu =
+editTodoContextPopupView =
     Todo.View.Menu.context
 
 
-reminderPopup form =
+editTodoSchedulePopupView form =
     div
         [ class "overlay"
         , onClickStopPropagation Msg.OnDeactivateEditingMode

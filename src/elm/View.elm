@@ -52,20 +52,21 @@ overlayViews appModel =
                         |> Html.map Msg.LaunchBarMsg
 
                 XMTodo t ->
+                    -- todo extract this into todo view
                     case t of
                         TXM_EditTodoForm form ->
                             case form.etfMode of
                                 ETFM_EditTodoContext ->
-                                    Todo.View.contextMenu form appModel
+                                    Todo.View.editTodoContextPopupView form appModel
 
                                 ETFM_XMEditTodoProject ->
-                                    Todo.View.projectMenu form appModel
+                                    Todo.View.editTodoProjectPopupView form appModel
 
                                 ETFM_EditTodoReminder ->
-                                    Todo.View.reminderPopup form
+                                    Todo.View.editTodoSchedulePopupView form
 
                                 ETFM_EditTodoText ->
-                                    Todo.View.edit form appModel
+                                    Todo.View.editTodoTextView form appModel
 
                         TXM_AddTodoForm form ->
                             case form.atfMode of

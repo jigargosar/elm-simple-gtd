@@ -69,15 +69,15 @@ onSetEntityListView =
 
 
 onNewProject =
-    OnEntityMsg Entity.Types.OnNewProject
+    OnEntityMsg Entity.Types.EM_NewProject
 
 
 onNewContext =
-    OnEntityMsg Entity.Types.OnNewContext
+    OnEntityMsg Entity.Types.EM_NewContext
 
 
 onEntityUpdateMsg =
-    Entity.Types.OnEntityUpdate >>> OnEntityMsg
+    Entity.Types.EM_EntityUpdate >>> OnEntityMsg
 
 
 onSwitchToNewUserSetupModeIfNeeded =

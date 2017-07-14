@@ -5,7 +5,7 @@ import Document
 import Document.Types exposing (getDocId)
 import DomPorts
 import Entity
-import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityId(..), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity, getDocIdFromEntityId)
+import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
 import GroupDoc.EditForm exposing (createEditContextForm, createEditProjectForm)
@@ -40,37 +40,37 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
-        Entity.Types.OnNewProject ->
+        EM_NewProject ->
             andThen (createAndEditNewProject andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnNewContext ->
+        EM_NewContext ->
             andThen (createAndEditNewContext andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnEntityUpdate entityId entityUpdateMsg ->
+        EM_EntityUpdate entityId entityUpdateMsg ->
             onUpdate andThenUpdate entityId entityUpdateMsg
 
 
 onUpdate :
     (AppMsg -> ReturnF)
     -> EntityId
-    -> Entity.Types.EntityUpdateMsg
+    -> Entity.Types.EntityUpdateAction
     -> ReturnF
 onUpdate andThenUpdate entityId msg =
     case msg of
-        Entity.Types.OnStartEditingEntity ->
+        EUA_StartEditing ->
             startEditingEntity andThenUpdate entityId
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnEntityTextChanged newName ->
+        EUA_SetFormText newName ->
             Return.map (updateEditModeTextChanged newName)
 
-        Entity.Types.OnEntityToggleDeleted ->
+        EUA_ToggleDeleted ->
             Return.andThen (toggleDeleteEntity entityId)
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.Types.OnEntityToggleArchived ->
+        EUA_ToggleArchived ->
             let
                 toggleArchivedEntity =
                     case entityId of
@@ -90,10 +90,10 @@ onUpdate andThenUpdate entityId msg =
                 toggleArchivedEntity
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        Entity.Types.OnFocusInEntity ->
+        EUA_OnFocusIn ->
             Return.map (Stores.setFocusInEntityWithEntityId entityId)
 
-        Entity.Types.OnToggleSelectedEntity ->
+        EUA_ToggleSelection ->
             Return.map (toggleEntitySelection entityId)
 
         Entity.Types.OnGotoEntity ->

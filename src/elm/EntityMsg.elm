@@ -1,6 +1,6 @@
 module EntityMsg exposing (..)
 
-import Entity.Types exposing (EntityMsg(..), EntityUpdateMsg(..))
+import Entity.Types exposing (EntityMsg(..), EntityUpdateAction(..))
 import Msg
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -15,8 +15,8 @@ onEntityIdUpdateMsg =
 
 
 onToggleEntitySelection =
-    OnEntityUpdate # OnToggleSelectedEntity >> Msg.OnEntityMsg
+    EM_EntityUpdate # EUA_ToggleSelection >> Msg.OnEntityMsg
 
 
 onStartEditingEntity =
-    OnEntityUpdate # OnStartEditingEntity >> Msg.OnEntityMsg
+    EM_EntityUpdate # EUA_StartEditing >> Msg.OnEntityMsg

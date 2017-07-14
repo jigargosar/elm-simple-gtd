@@ -39,7 +39,7 @@ initContextGroup =
 
 
 type alias Msg =
-    Entity.Types.EntityUpdateMsg
+    Entity.Types.EntityUpdateAction
 
 
 getEntityDocId entity =

@@ -26,18 +26,18 @@ type EntityListViewType
 
 
 type EntityMsg
-    = OnNewProject
-    | OnNewContext
-    | OnEntityUpdate EntityId EntityUpdateMsg
+    = EM_NewProject
+    | EM_NewContext
+    | EM_EntityUpdate EntityId EntityUpdateAction
 
 
-type EntityUpdateMsg
-    = OnStartEditingEntity
-    | OnEntityToggleDeleted
-    | OnEntityToggleArchived
-    | OnEntityTextChanged String
-    | OnFocusInEntity
-    | OnToggleSelectedEntity
+type EntityUpdateAction
+    = EUA_StartEditing
+    | EUA_ToggleDeleted
+    | EUA_ToggleArchived
+    | EUA_SetFormText String
+    | EUA_OnFocusIn
+    | EUA_ToggleSelection
     | OnGotoEntity
 
 

@@ -171,10 +171,10 @@ createTodoViewModel appM isFocusable todo =
                 Model.noop
 
         toggleDeleteMsg =
-            createEntityUpdateMsg Entity.Types.OnEntityToggleDeleted
+            createEntityUpdateMsg Entity.Types.EUA_ToggleDeleted
 
         toggleDoneMsg =
-            createEntityUpdateMsg Entity.Types.OnEntityToggleArchived
+            createEntityUpdateMsg Entity.Types.EUA_ToggleArchived
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -189,7 +189,7 @@ createTodoViewModel appM isFocusable todo =
         , canBeFocused = isFocusable
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
-        , onFocusIn = createEntityUpdateMsg Entity.Types.OnFocusInEntity
+        , onFocusIn = createEntityUpdateMsg Entity.Types.EUA_OnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , mdl = appM.mdl
@@ -361,7 +361,7 @@ edit form appModel =
             TodoMsg.onSetTodoFormText form
 
         fireToggleDelete =
-            Msg.onEntityUpdateMsg (TodoId form.id) Entity.Types.OnEntityToggleDeleted
+            Msg.onEntityUpdateMsg (TodoId form.id) Entity.Types.EUA_ToggleDeleted
     in
         div
             [ class "overlay"

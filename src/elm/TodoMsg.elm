@@ -25,6 +25,10 @@ onStartEditingTodoText todo =
     Msg.OnStartEditingTodo todo ETFM_EditTodoText
 
 
+onStartEditingTodo =
+    onStartEditingTodoText
+
+
 onStartEditingTodoContext todo =
     Msg.OnStartEditingTodo todo ETFM_EditTodoContext
 

@@ -22,6 +22,7 @@ import Stores
 import Todo
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
+import TodoMsg
 import Types exposing (AppModel, ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
 import Tuple2
@@ -40,7 +41,7 @@ update :
 update andThenUpdate msg =
     case msg of
         Entity.Types.OnNewProject ->
-            andThen (createAndEditNewProject)
+            andThen (createAndEditNewProject andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNewContext ->
@@ -59,7 +60,7 @@ onUpdate :
 onUpdate andThenUpdate entityId msg =
     case msg of
         Entity.Types.OnStartEditingEntity ->
-            andThen (startEditingEntity entityId)
+            startEditingEntity andThenUpdate entityId
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnEntityTextChanged newName ->
@@ -136,7 +137,7 @@ toggleDeleteEntity entityId =
             Stores.updateTodo (TA_ToggleDeleted) id
 
 
-createAndEditNewProject model =
+createAndEditNewProject andThenUpdate model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (Stores.setProjectStore # model)
         |> (\( project, model ) ->
@@ -144,8 +145,8 @@ createAndEditNewProject model =
                     entity =
                         (createProjectEntity project)
                 in
-                    model
-                        |> startEditingEntity (Entity.toEntityId entity)
+                    Return.singleton model
+                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
            )
 
 
@@ -157,8 +158,8 @@ createAndEditNewContext andThenUpdate model =
                     entity =
                         (createContextEntity context)
                 in
-                    model
-                        |> startEditingEntity (Entity.toEntityId entity)
+                    Return.singleton model
+                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
            )
 
 
@@ -170,21 +171,22 @@ editContextSetName =
     GroupDoc.EditForm.setName >>> XMEditContext
 
 
-startEditingEntity entityId model =
-    Return.singleton model
-        |> case entityId of
-            ContextId id ->
-                X.Return.mapModelWithMaybeF
-                    (Stores.findContextById id)
-                    (createEditContextForm >> XMEditContext >> setExclusiveMode)
+startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF
+startEditingEntity andThenUpdate entityId =
+    case entityId of
+        ContextId id ->
+            X.Return.mapModelWithMaybeF
+                (Stores.findContextById id)
+                (createEditContextForm >> XMEditContext >> setExclusiveMode)
 
-            ProjectId id ->
-                X.Return.mapModelWithMaybeF
-                    (Stores.findProjectById id)
-                    (createEditProjectForm >> XMEditContext >> setExclusiveMode)
+        ProjectId id ->
+            X.Return.mapModelWithMaybeF
+                (Stores.findProjectById id)
+                (createEditProjectForm >> XMEditContext >> setExclusiveMode)
 
-            TodoId id ->
-                Debug.log "startEditingEntity : This method should not be called for todo. We should probably get rid of entity Main stuff, or bring all types of edits here. which doesn't seem fesable, since there are different types of edit modes for todo."
+        TodoId id ->
+            X.Return.withMaybe (Stores.findTodoById id)
+                (TodoMsg.onStartEditingTodo >> andThenUpdate)
 
 
 updateEditModeNameChanged newName model =

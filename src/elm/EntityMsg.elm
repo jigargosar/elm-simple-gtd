@@ -16,3 +16,7 @@ onEntityIdUpdateMsg =
 
 onToggleEntitySelection =
     OnEntityUpdate # OnToggleSelectedEntity >> Msg.OnEntityMsg
+
+
+onStartEditingEntity =
+    OnEntityUpdate # OnStartEditingEntity >> Msg.OnEntityMsg

@@ -77,7 +77,7 @@ onNewContext =
 
 
 onEntityUpdateMsg =
-    Entity.Types.EM_EntityUpdate >>> OnEntityMsg
+    Entity.Types.EM_Update >>> OnEntityMsg
 
 
 onSwitchToNewUserSetupModeIfNeeded =

@@ -48,8 +48,8 @@ update andThenUpdate msg =
             andThen (createAndEditNewContext andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
-        EM_EntityUpdate entityId entityUpdateMsg ->
-            onUpdate andThenUpdate entityId entityUpdateMsg
+        EM_Update entityId action ->
+            onUpdate andThenUpdate entityId action
 
 
 onUpdate :
@@ -57,8 +57,8 @@ onUpdate :
     -> EntityId
     -> Entity.Types.EntityUpdateAction
     -> ReturnF
-onUpdate andThenUpdate entityId msg =
-    case msg of
+onUpdate andThenUpdate entityId action =
+    case action of
         EUA_StartEditing ->
             startEditingEntity andThenUpdate entityId
                 >> DomPorts.autoFocusInputRCmd

@@ -28,7 +28,7 @@ type EntityListViewType
 type EntityMsg
     = EM_NewProject
     | EM_NewContext
-    | EM_EntityUpdate EntityId EntityUpdateAction
+    | EM_Update EntityId EntityUpdateAction
 
 
 type EntityUpdateAction

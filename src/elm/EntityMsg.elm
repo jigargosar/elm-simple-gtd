@@ -15,8 +15,8 @@ onEntityIdUpdateMsg =
 
 
 onToggleEntitySelection =
-    EM_EntityUpdate # EUA_ToggleSelection >> Msg.OnEntityMsg
+    EM_Update # EUA_ToggleSelection >> Msg.OnEntityMsg
 
 
 onStartEditingEntity =
-    EM_EntityUpdate # EUA_StartEditing >> Msg.OnEntityMsg
+    EM_Update # EUA_StartEditing >> Msg.OnEntityMsg

@@ -40,7 +40,7 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
-        EM_NewContext ->
+        EM_StartAddingContext ->
             let
                 createAndEditNewContext andThenUpdate model =
                     Store.insert (Context.init "<New Context>" model.now) model.contextStore
@@ -57,7 +57,7 @@ update andThenUpdate msg =
                 andThen (createAndEditNewContext andThenUpdate)
                     >> DomPorts.autoFocusInputRCmd
 
-        EM_NewProject ->
+        EM_StartAddingProject ->
             let
                 createAndEditNewProject andThenUpdate model =
                     Store.insert (Project.init "<New Project>" model.now) model.projectStore

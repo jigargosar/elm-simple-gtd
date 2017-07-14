@@ -69,11 +69,11 @@ onSetEntityListView =
 
 
 onNewProject =
-    OnEntityMsg Entity.Types.EM_NewProject
+    OnEntityMsg Entity.Types.EM_StartAddingProject
 
 
 onNewContext =
-    OnEntityMsg Entity.Types.EM_NewContext
+    OnEntityMsg Entity.Types.EM_StartAddingContext
 
 
 onEntityUpdateMsg =

@@ -2,11 +2,16 @@ port module Todo.Main exposing (..)
 
 import Context
 import Document
-import DomPorts
+import Document.Types exposing (getDocId)
+import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types
+import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
+import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
+import Todo.Form
+import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.Msg exposing (TodoMsg(..))
 import Todo.Notification.Model
 import Todo.Notification.Types
@@ -93,10 +98,10 @@ update andThenUpdate now todoMsg =
         SwitchOrStartRunning todoId ->
             mapOver timeTracker (Tracker.switchOrStartRunning todoId now)
 
-        StopRunning ->
+        OnStopRunningTodo ->
             mapSet timeTracker Tracker.none
 
-        GotoRunning ->
+        OnGotoRunningTodo ->
             map (gotoRunningTodo)
                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
@@ -162,8 +167,56 @@ update andThenUpdate now todoMsg =
                 -- such direct calls are messy. :(
                 >> andThenUpdate Msg.OnDeactivateEditingMode
 
-        OnReminderOverlayAction action ->
+        OnTodoReminderOverlayAction action ->
             reminderOverlayAction action
+
+        OnStartAddingTodo addFormMode ->
+            -- todo: think about merging 4 messages into one.
+            let
+                createXM model =
+                    Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
+            in
+                X.Return.mapModelWith createXM setExclusiveMode
+                    >> autoFocusInputRCmd
+
+        OnStartEditingTodo todo editFormMode ->
+            let
+                createXM model =
+                    Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
+
+                positionPopup idPrefix =
+                    DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
+            in
+                X.Return.mapModelWith createXM setExclusiveMode
+                    >> command
+                        (case editFormMode of
+                            ETFM_EditTodoText ->
+                                autoFocusInputCmd
+
+                            ETFM_EditTodoContext ->
+                                positionPopup "#edit-context-button-"
+
+                            ETFM_EditTodoProject ->
+                                positionPopup "#edit-project-button-"
+
+                            ETFM_EditTodoReminder ->
+                                positionPopup "#edit-schedule-button-"
+                        )
+
+        OnUpdateTodoForm form action ->
+            let
+                xm =
+                    Todo.Form.updateTodoForm action form |> XMTodoForm
+            in
+                map (setExclusiveMode xm)
+                    >> Return.command
+                        (case action of
+                            Todo.FormTypes.SetTodoMenuState _ ->
+                                autoFocusInputCmd
+
+                            _ ->
+                                Cmd.none
+                        )
 
 
 showReminderNotificationCmd ( todo, model ) =

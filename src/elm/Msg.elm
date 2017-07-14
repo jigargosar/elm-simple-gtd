@@ -38,8 +38,6 @@ type MainMsg
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
-    | OnStartAddingTodo AddTodoFormMode
-    | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
@@ -47,7 +45,6 @@ type AppMsg
     | OnDeactivateEditingMode
     | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnUpdateTodoForm TodoForm TodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg

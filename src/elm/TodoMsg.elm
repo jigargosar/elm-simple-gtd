@@ -2,68 +2,73 @@ module TodoMsg exposing (..)
 
 import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
-import Todo.Msg
+import Todo.Msg exposing (TodoMsg(..))
 import Todo.Notification.Model
+import X.Function.Infix exposing (..)
 
 
 onStopRunningTodo : AppMsg
 onStopRunningTodo =
-    Todo.Msg.StopRunning |> OnTodoMsg
+    OnStopRunningTodo |> OnTodoMsg
 
 
 onGotoRunningTodo : AppMsg
 onGotoRunningTodo =
-    Todo.Msg.GotoRunning |> OnTodoMsg
+    OnGotoRunningTodo |> OnTodoMsg
 
 
 onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
 onReminderOverlayAction =
-    Todo.Msg.OnReminderOverlayAction >> OnTodoMsg
-
-
-onStartEditingTodoText todo =
-    Msg.OnStartEditingTodo todo ETFM_EditTodoText
+    OnTodoReminderOverlayAction >> OnTodoMsg
 
 
 onStartEditingTodo =
     onStartEditingTodoText
 
 
-onStartEditingTodoContext todo =
-    Msg.OnStartEditingTodo todo ETFM_EditTodoContext
+createStartEditingTodoMsg editMode todo =
+    OnStartEditingTodo todo editMode |> OnTodoMsg
 
 
-onStartEditingTodoProject todo =
-    Msg.OnStartEditingTodo todo ETFM_EditTodoProject
+onStartEditingTodoText =
+    createStartEditingTodoMsg ETFM_EditTodoText
 
 
-onStartEditingReminder todo =
-    Msg.OnStartEditingTodo todo ETFM_EditTodoReminder
+onStartEditingTodoContext =
+    createStartEditingTodoMsg ETFM_EditTodoContext
+
+
+onStartEditingTodoProject =
+    createStartEditingTodoMsg ETFM_EditTodoProject
+
+
+onStartEditingReminder =
+    createStartEditingTodoMsg ETFM_EditTodoReminder
 
 
 onSetTodoFormMenuState form =
-    SetTodoMenuState >> Msg.OnUpdateTodoForm form
+    SetTodoMenuState >> OnUpdateTodoForm form >> OnTodoMsg
 
 
 onSetTodoFormReminderDate form =
-    SetTodoReminderDate >> Msg.OnUpdateTodoForm form
+    SetTodoReminderDate >> OnUpdateTodoForm form >> OnTodoMsg
 
 
 onSetTodoFormReminderTime form =
-    SetTodoReminderTime >> Msg.OnUpdateTodoForm form
+    SetTodoReminderTime >> OnUpdateTodoForm form >> OnTodoMsg
 
 
 onSetTodoFormText form =
-    SetTodoText >> Msg.OnUpdateTodoForm form
+    SetTodoText >> OnUpdateTodoForm form >> OnTodoMsg
 
 
 onStartAddingTodoToInbox =
-    Msg.OnStartAddingTodo ATFM_AddToInbox
+    OnStartAddingTodo ATFM_AddToInbox |> OnTodoMsg
 
 
 onStartAddingTodoWithFocusInEntityAsReference =
-    Msg.OnStartAddingTodo ATFM_AddWithFocusInEntityAsReference
+    OnStartAddingTodo ATFM_AddWithFocusInEntityAsReference |> OnTodoMsg
 
 
 onStartSetupAddTodo =
-    Msg.OnStartAddingTodo ATFM_SetupFirstTodo
+    OnStartAddingTodo ATFM_SetupFirstTodo |> OnTodoMsg

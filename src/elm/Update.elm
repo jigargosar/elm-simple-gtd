@@ -86,54 +86,6 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnStartAddingTodo addFormMode ->
-            -- todo: think about merging 4 messages into one.
-            let
-                createXM model =
-                    Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
-            in
-                Return.mapModelWith createXM setExclusiveMode
-                    >> command autoFocusInputCmd
-
-        OnStartEditingTodo todo editFormMode ->
-            let
-                createXM model =
-                    Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
-
-                positionPopup idPrefix =
-                    DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
-            in
-                Return.mapModelWith createXM setExclusiveMode
-                    >> command
-                        (case editFormMode of
-                            ETFM_EditTodoText ->
-                                autoFocusInputCmd
-
-                            ETFM_EditTodoContext ->
-                                positionPopup "#edit-context-button-"
-
-                            ETFM_EditTodoProject ->
-                                positionPopup "#edit-project-button-"
-
-                            ETFM_EditTodoReminder ->
-                                positionPopup "#edit-schedule-button-"
-                        )
-
-        OnUpdateTodoForm form action ->
-            let
-                xm =
-                    Todo.Form.updateTodoForm action form |> XMTodoForm
-            in
-                map (setExclusiveMode xm)
-                    >> Return.command
-                        (case action of
-                            Todo.FormTypes.SetTodoMenuState _ ->
-                                autoFocusInputCmd
-
-                            _ ->
-                                Cmd.none
-                        )
-
         OnMainMenuStateChanged menuState ->
             map
                 (menuState

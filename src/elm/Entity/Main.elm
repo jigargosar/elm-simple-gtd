@@ -66,9 +66,6 @@ onUpdate andThenUpdate entityId msg =
         Entity.Types.OnEntityTextChanged newName ->
             Return.map (updateEditModeTextChanged newName)
 
-        Entity.Types.OnSaveEntityForm ->
-            andThenUpdate Msg.OnSaveCurrentForm
-
         Entity.Types.OnEntityToggleDeleted ->
             Return.andThen (toggleDeleteEntity entityId)
                 >> andThenUpdate Msg.OnDeactivateEditingMode

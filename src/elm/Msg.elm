@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (Entity)
+import Entity.Types exposing (Entity, EntityMsg)
 import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
@@ -51,7 +51,7 @@ type AppMsg
     | OnUpdateEditTodoForm EditTodoForm EditTodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
-    | OnEntityMsg Entity.Types.EntityMsg
+    | OnEntityMsg EntityMsg
     | LaunchBarMsg LaunchBar.Messages.Msg
     | LaunchBarMsgWithNow LaunchBar.Messages.Msg Time
     | OnTodoMsg TodoMsg

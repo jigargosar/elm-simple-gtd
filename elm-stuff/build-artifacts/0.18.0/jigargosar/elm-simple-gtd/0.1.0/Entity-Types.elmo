@@ -53,7 +53,6 @@ var _jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity = {ctor: 'OnFocusInE
 var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged = function (a) {
 	return {ctor: 'OnEntityTextChanged', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Entity_Types$OnSaveEntityForm = {ctor: 'OnSaveEntityForm'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived = {ctor: 'OnEntityToggleArchived'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted = {ctor: 'OnEntityToggleDeleted'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity = {ctor: 'OnStartEditingEntity'};

@@ -46,7 +46,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			archive: archive,
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnSaveEntityForm),
+			onSaveClicked: _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm,
 			onNameChanged: function (_p3) {
 				return onEntityAction(
 					_jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged(_p3));

@@ -35,7 +35,6 @@ type EntityUpdateMsg
     = OnStartEditingEntity
     | OnEntityToggleDeleted
     | OnEntityToggleArchived
-    | OnSaveEntityForm
     | OnEntityTextChanged String
     | OnFocusInEntity
     | OnToggleSelectedEntity

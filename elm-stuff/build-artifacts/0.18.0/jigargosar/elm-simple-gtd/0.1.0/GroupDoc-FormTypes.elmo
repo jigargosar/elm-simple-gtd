@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GroupDocEditForm = F5(
-	function (a, b, c, d, e) {
-		return {id: a, name: b, groupDocType: c, isArchived: d, nameLabel: e};
+var _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GroupDocEditForm = F4(
+	function (a, b, c, d) {
+		return {id: a, name: b, groupDocType: c, isArchived: d};
 	});

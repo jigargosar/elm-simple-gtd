@@ -20,8 +20,8 @@ setName name model =
 
 
 createEditContextForm =
-    init ContextGroupDoc "Context Name"
+    init ContextGroupDoc
 
 
 createEditProjectForm =
-    init ProjectGroupDoc "Project Name"
+    init ProjectGroupDoc

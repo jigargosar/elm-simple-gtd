@@ -5,7 +5,6 @@ import _ from "ramda"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
 import SWPrecacheWebpackPlugin from "sw-precache-webpack-plugin"
-import DashboardPlugin from "webpack-dashboard/plugin"
 
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER === "true"
@@ -30,7 +29,6 @@ const outputPath = path.resolve(__dirname, "build", envOutputDir)
 
 
 const commonPlugins = [
-    new DashboardPlugin(),
     // new ExtractTextPlugin(styleFileName),
     new webpack["ProvidePlugin"]({
         jQuery: "jquery",

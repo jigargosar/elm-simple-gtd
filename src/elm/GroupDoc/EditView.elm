@@ -4,6 +4,7 @@ import Entity.Types exposing (EntityId(..))
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
 import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
+import Tuple2
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import Model
 import Html exposing (..)
@@ -11,19 +12,23 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (defaultOkCancelArchiveButtons)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
+import X.Function exposing (..)
 
 
 init : GroupDocEditForm -> Html Msg.AppMsg
 init form =
     let
-        entityId =
-            form.id
-                |> case form.groupDocType of
-                    ContextGroupDoc ->
-                        ContextId
+        ( entityId, nameLabel ) =
+            (case form.groupDocType of
+                ContextGroupDoc ->
+                    ( ContextId, "Context" )
 
-                    ProjectGroupDoc ->
-                        ProjectId
+                ProjectGroupDoc ->
+                    ( ProjectId, "Project" )
+            )
+                |> Tuple2.mapEach (apply form.id) (String.append # " Name")
 
         toMsg =
             Msg.onEntityUpdateMsg entityId
@@ -60,7 +65,7 @@ init form =
                             , onInput fireNameChanged
                             ]
                             []
-                        , label [ class "active" ] [ text form.nameLabel ]
+                        , label [ class "active" ] [ text nameLabel ]
                         ]
                     , defaultOkCancelArchiveButtons form.isArchived fireToggleArchive
                     ]

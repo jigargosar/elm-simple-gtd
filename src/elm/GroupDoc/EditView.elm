@@ -1,7 +1,7 @@
 module GroupDoc.EditView exposing (..)
 
 import Entity.Types exposing (EntityId(..))
-import GroupDoc.FormTypes exposing (GroupDocEditForm)
+import GroupDoc.FormTypes exposing (GroupDocForm)
 import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
 import Tuple2
@@ -17,7 +17,7 @@ import Toolkit.Helpers exposing (..)
 import X.Function exposing (..)
 
 
-init : GroupDocEditForm -> Html Msg.AppMsg
+init : GroupDocForm -> Html Msg.AppMsg
 init form =
     let
         ( entityId, nameLabel ) =

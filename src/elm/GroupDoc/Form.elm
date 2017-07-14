@@ -5,7 +5,7 @@ import GroupDoc.FormTypes exposing (..)
 import GroupDoc.Types exposing (..)
 
 
-init : GroupDocType -> GroupDoc -> GroupDocEditForm
+init : GroupDocType -> GroupDoc -> GroupDocForm
 init groupDocType groupDoc =
     { id = getDocId groupDoc
     , name = getGroupDocName groupDoc

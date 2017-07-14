@@ -5,7 +5,7 @@ import Entity.Types exposing (Entity)
 import GroupDoc.Types exposing (..)
 
 
-type alias GroupDocEditForm =
+type alias GroupDocForm =
     { id : DocId
     , name : GroupDocName
     , groupDocType : GroupDocType

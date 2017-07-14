@@ -28,7 +28,7 @@ type EntityListViewType
 type EntityMsg
     = OnNewProject
     | OnNewContext
-    | OnUpdate EntityId EntityUpdateMsg
+    | OnEntityUpdate EntityId EntityUpdateMsg
 
 
 type EntityUpdateMsg

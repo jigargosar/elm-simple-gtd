@@ -5,6 +5,7 @@ import Date
 import Document
 import Entity.Types exposing (EntityId(TodoId))
 import EntityId
+import EntityMsg
 import Material
 import Msg exposing (AppMsg)
 import Store
@@ -116,7 +117,10 @@ createTodoViewModel appM isFocusable todo =
                 |> String.append "@"
                 |> truncateName
 
-        createEntityActionMsg =
+        entityId =
+            EntityId.fromTodoDocId todoId
+
+        createEntityUpdateMsg =
             Msg.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
 
         onTodoMsg =
@@ -129,7 +133,7 @@ createTodoViewModel appM isFocusable todo =
             if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
-                        createEntityActionMsg Entity.Types.OnToggleSelectedEntity
+                        EntityMsg.onToggleEntitySelection entityId
 
                     Key.CharE ->
                         startEditingMsg
@@ -150,7 +154,7 @@ createTodoViewModel appM isFocusable todo =
                         reminder.startEditingMsg
 
                     Key.CharG ->
-                        createEntityActionMsg Entity.Types.OnGotoEntity
+                        createEntityUpdateMsg Entity.Types.OnGotoEntity
 
                     Key.CharS ->
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
@@ -167,10 +171,10 @@ createTodoViewModel appM isFocusable todo =
                 Model.noop
 
         toggleDeleteMsg =
-            createEntityActionMsg Entity.Types.OnEntityToggleDeleted
+            createEntityUpdateMsg Entity.Types.OnEntityToggleDeleted
 
         toggleDoneMsg =
-            createEntityActionMsg Entity.Types.OnEntityToggleArchived
+            createEntityUpdateMsg Entity.Types.OnEntityToggleArchived
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -185,7 +189,7 @@ createTodoViewModel appM isFocusable todo =
         , canBeFocused = isFocusable
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
-        , onFocusIn = createEntityActionMsg Entity.Types.OnFocusInEntity
+        , onFocusIn = createEntityUpdateMsg Entity.Types.OnFocusInEntity
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , mdl = appM.mdl

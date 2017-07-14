@@ -797,10 +797,11 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 						_jigargosar$elm_simple_gtd$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
+		var entityId = _jigargosar$elm_simple_gtd$EntityId$fromTodoDocId(todoId);
+		var createEntityUpdateMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			_jigargosar$elm_simple_gtd$EntityId$fromTodoDocId(todoId));
-		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
-		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
+		var toggleDeleteMsg = createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
+		var toggleDoneMsg = createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
 		var now = appM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p9) {
@@ -809,7 +810,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 				var _p11 = _p10.key;
 				switch (_p11.ctor) {
 					case 'Space':
-						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelectedEntity);
+						return _jigargosar$elm_simple_gtd$EntityMsg$onToggleEntitySelection(entityId);
 					case 'CharE':
 						return startEditingMsg;
 					case 'CharD':
@@ -823,7 +824,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
-						return createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
+						return createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
 					case 'CharS':
 						return onTodoMsg(
 							_jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning(todoId));
@@ -852,7 +853,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			canBeFocused: isFocusable,
 			toggleDoneMsg: toggleDoneMsg,
 			reminder: reminder,
-			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),
+			onFocusIn: createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, appM.selectedEntityIdSet),
 			mdl: appM.mdl

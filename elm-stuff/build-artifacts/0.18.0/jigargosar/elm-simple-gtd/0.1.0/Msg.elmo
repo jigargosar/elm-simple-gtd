@@ -51,7 +51,7 @@ var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewProject);
 var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewContext);
-var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$OnUpdate, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
+var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$OnEntityUpdate, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };

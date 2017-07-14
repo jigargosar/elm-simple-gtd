@@ -47,7 +47,7 @@ update andThenUpdate msg =
             andThen (createAndEditNewContext andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnUpdate entityId entityUpdateMsg ->
+        Entity.Types.OnEntityUpdate entityId entityUpdateMsg ->
             onUpdate andThenUpdate entityId entityUpdateMsg
 
 

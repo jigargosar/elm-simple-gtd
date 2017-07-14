@@ -42,19 +42,19 @@ onStartEditingReminder todo =
 
 
 onSetTodoFormMenuState form =
-    SetTodoMenuState >> Msg.OnUpdateEditTodoForm form
+    SetTodoMenuState >> Msg.OnUpdateTodoForm form
 
 
 onSetTodoFormReminderDate form =
-    SetTodoReminderDate >> Msg.OnUpdateEditTodoForm form
+    SetTodoReminderDate >> Msg.OnUpdateTodoForm form
 
 
 onSetTodoFormReminderTime form =
-    SetTodoReminderTime >> Msg.OnUpdateEditTodoForm form
+    SetTodoReminderTime >> Msg.OnUpdateTodoForm form
 
 
 onSetTodoFormText form =
-    SetTodoText >> Msg.OnUpdateEditTodoForm form
+    SetTodoText >> Msg.OnUpdateTodoForm form
 
 
 onStartAddingTodoToInbox =

@@ -37,7 +37,7 @@ type EditTodoFormMode
     | ETFM_EditTodoProject
 
 
-type EditTodoFormAction
+type TodoFormAction
     = SetTodoText String
     | SetTodoMenuState Menu.State
     | SetTodoReminderDate String

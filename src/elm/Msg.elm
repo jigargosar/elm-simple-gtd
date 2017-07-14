@@ -48,7 +48,7 @@ type AppMsg
     | OnDeactivateEditingMode
     | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String
-    | OnUpdateEditTodoForm TodoForm EditTodoFormAction
+    | OnUpdateTodoForm TodoForm TodoFormAction
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg

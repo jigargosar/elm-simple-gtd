@@ -396,7 +396,7 @@ new form =
                 [ div [ class "input-field" ]
                     [ textarea
                         [ class "materialize-textarea auto-focus"
-                        , onInput (Msg.OnUpdateAddTodoForm form)
+                        , onInput (TodoMsg.onSetTodoFormText form)
                         , form.text |> defaultValue
                         ]
                         []

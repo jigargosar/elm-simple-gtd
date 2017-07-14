@@ -86,32 +86,23 @@ update andThenUpdate msg =
             map (deactivateEditingMode)
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
-        OnStartAddingTodo atfMode ->
+        OnStartAddingTodo addFormMode ->
             -- todo: think about merging 4 messages into one.
             let
                 createXM model =
-                    Todo.Form.createAddTodoForm atfMode |> XMTodoForm
+                    Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command autoFocusInputCmd
 
-        OnUpdateAddTodoForm form text ->
-            let
-                xm =
-                    form
-                        |> Todo.Form.updateEditTodoForm (SetTodoText text)
-                        >> XMTodoForm
-            in
-                map (setExclusiveMode xm)
-
-        OnStartEditingTodo todo t ->
+        OnStartEditingTodo todo editFormMode ->
             let
                 createXM model =
-                    Todo.Form.createEditTodoForm t model.now todo |> XMTodoForm
+                    Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
-                        (case t of
+                        (case editFormMode of
                             ETFM_EditTodoText ->
                                 autoFocusInputCmd
 
@@ -125,10 +116,19 @@ update andThenUpdate msg =
                                 positionScheduleMenuCmd todo
                         )
 
-        OnUpdateEditTodoForm form action ->
+        OnUpdateAddTodoForm form text ->
             let
                 xm =
-                    Todo.Form.updateEditTodoForm action form |> XMTodoForm
+                    form
+                        |> Todo.Form.updateTodoForm (SetTodoText text)
+                        >> XMTodoForm
+            in
+                map (setExclusiveMode xm)
+
+        OnUpdateTodoForm form action ->
+            let
+                xm =
+                    Todo.Form.updateTodoForm action form |> XMTodoForm
             in
                 map (setExclusiveMode xm)
                     >> Return.command

@@ -3,7 +3,7 @@ module Todo.Form
         ( createEditTodoForm
         , createAddTodoForm
         , updateAddTodoForm
-        , updateEditTodoForm
+        , updateTodoForm
         )
 
 import Date
@@ -77,8 +77,8 @@ maybeComputedTime =
     field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
 
 
-updateEditTodoForm : EditTodoFormAction -> TodoForm -> TodoForm
-updateEditTodoForm action =
+updateTodoForm : TodoFormAction -> TodoForm -> TodoForm
+updateTodoForm action =
     case action of
         SetTodoText value ->
             set text value

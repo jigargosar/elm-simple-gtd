@@ -1,4 +1,4 @@
-module GroupDoc.EditView exposing (..)
+module GroupDoc.FormView exposing (..)
 
 import Entity.Types exposing (EntityId(..))
 import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(..))

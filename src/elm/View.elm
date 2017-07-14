@@ -19,7 +19,7 @@ import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import ViewModel
 import LaunchBar.View
-import GroupDoc.EditView
+import GroupDoc.FormView
 import View.GetStarted
 import View.MainMenu
 import View.Mat
@@ -83,7 +83,7 @@ overlayViews appModel =
                     View.GetStarted.signInOverlay
 
                 XMGroupDocForm form ->
-                    GroupDoc.EditView.init form
+                    GroupDoc.FormView.init form
 
                 XMMainMenu menuState ->
                     View.MainMenu.init menuState appModel

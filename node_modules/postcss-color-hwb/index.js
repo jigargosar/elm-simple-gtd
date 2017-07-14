@@ -6,6 +6,10 @@ var helpers = require("postcss-message-helpers")
 var color = require("color")
 var reduceFunctionCall = require("reduce-function-call")
 
+function reduceHwb(body) {
+  return color("hwb(" + body + ")").rgb().string()
+}
+
 /**
  * PostCSS plugin to transform hwb() to rgb()
  */
@@ -17,9 +21,7 @@ module.exports = postcss.plugin("postcss-color-hwb", function() {
       }
 
       decl.value = helpers.try(function transformHwb() {
-        return reduceFunctionCall(decl.value, "hwb", function reduceHwb(body, fn) {
-          return color(fn + "(" + body + ")").rgbString()
-        })
+        return reduceFunctionCall(decl.value, "hwb", reduceHwb)
       }, decl.source)
     })
   }

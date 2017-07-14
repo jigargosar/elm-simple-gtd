@@ -1,11 +1,11 @@
 "use strict";
 
-const PouchDB = require("pouchdb-browser")
-const _ = require("ramda")
+import PouchDB from "pouchdb-browser"
 
-// PouchDB.debug.enable("*")
-PouchDB.debug.disable()
-PouchDB.plugin(require('pouchdb-find'))
+import findPlugin from  'pouchdb-find'
+import _ from "ramda"
+
+PouchDB.plugin(findPlugin)
 PouchDB.plugin(require('pouchdb-upsert'))
 
 

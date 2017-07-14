@@ -1,9 +1,8 @@
-
 var postcss = require('postcss');
 
-module.exports = postcss.plugin('pseudoelements', function(options) {
+module.exports = postcss.plugin('pseudoelements', (options) => {
 
-  options = options || {};
+  options = options || { single: true };
 
   var selectors = options.selectors || [
     'before',
@@ -12,11 +11,12 @@ module.exports = postcss.plugin('pseudoelements', function(options) {
     'first-line'
   ]
 
-  var replacements = new RegExp('::(' + selectors.join('|') + ')', 'gi');
+  var replacements = new RegExp(':{1,}(' + selectors.join('|') + ')', 'gi');
+	var replaceWith = options.single ? ':$1' : '::$1'
 
-  return function(css) {
-    css.walkRules(function(rule) {
-      rule.selector = rule.selector.replace(replacements, ':$1');
-    });
-  }
+  return (css) => {
+    css.walkRules((rule) => {
+      rule.selector = rule.selector.replace(replacements, replaceWith);
+  	});
+  };
 });

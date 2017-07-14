@@ -41,6 +41,7 @@ var _jigargosar$elm_simple_gtd$Update$moveFocusBy = A2(
 	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
 	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
 var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
+var _jigargosar$elm_simple_gtd$Update$foo = 2;
 var _jigargosar$elm_simple_gtd$Update$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
 	'syncWithRemotePouch',
 	function (v) {

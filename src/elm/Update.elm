@@ -38,6 +38,10 @@ import Types exposing (AppModel, ModelF, Return, ReturnF)
 import X.Record exposing (maybeOver)
 
 
+foo =
+    2
+
+
 map =
     Return.map
 

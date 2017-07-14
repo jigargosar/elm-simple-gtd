@@ -1,6 +1,6 @@
 {
   "name": "postcss-replace-overflow-wrap",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "PostCSS plugin to replace overflow-wrap with word-wrap or optionally retain both declarations.",
   "keywords": [
     "postcss",
@@ -16,13 +16,16 @@
     "url": "https://github.com/MattDiMu/postcss-replace-overflow-wrap/issues"
   },
   "homepage": "https://github.com/MattDiMu/postcss-replace-overflow-wrap",
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
-    "postcss": "^5.0.16"
+    "postcss": "^6.0.1"
   },
   "devDependencies": {
-    "ava": "^0.14.0",
-    "eslint": "^2.1.0",
-    "eslint-config-postcss": "^2.0.0"
+    "ava": "^0.19.1",
+    "eslint": "^3.19.0",
+    "eslint-config-postcss": "^2.0.2"
   },
   "scripts": {
     "test": "ava && eslint *.js"

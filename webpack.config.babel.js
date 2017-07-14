@@ -156,6 +156,7 @@ export default {
                     },
                 ],
             },
+
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: 'file-loader',
@@ -174,7 +175,8 @@ export default {
         overlay: true,
         watchContentBase: true,
         // open:true,
-        inline: true,
+        // hot:true,
+        // inline: true,
         contentBase: [path.join(__dirname, "static")],
         host: "localhost",
         /*watchOptions: {

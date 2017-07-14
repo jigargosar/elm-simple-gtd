@@ -9,7 +9,10 @@ import Time exposing (Time)
 
 type alias TodoFormCommon a =
     { a
-        | text : String
+        | id : DocId
+        , contextId : DocId
+        , projectId : DocId
+        , text : String
         , menuState : MenuState
         , date : String
         , time : String
@@ -44,10 +47,7 @@ type EditTodoFormMode
 
 type alias EditTodoForm =
     TodoFormCommon
-        { id : DocId
-        , contextId : DocId
-        , projectId : DocId
-        , etfMode : EditTodoFormMode
+        { etfMode : EditTodoFormMode
         }
 
 

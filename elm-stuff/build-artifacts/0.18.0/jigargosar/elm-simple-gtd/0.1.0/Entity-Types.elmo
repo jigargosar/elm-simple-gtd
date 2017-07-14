@@ -41,21 +41,21 @@ var _jigargosar$elm_simple_gtd$Entity_Types$ContextView = function (a) {
 	return {ctor: 'ContextView', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Entity_Types$ContextsView = {ctor: 'ContextsView'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityUpdate = F2(
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_Update = F2(
 	function (a, b) {
-		return {ctor: 'OnEntityUpdate', _0: a, _1: b};
+		return {ctor: 'EM_Update', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Entity_Types$OnNewContext = {ctor: 'OnNewContext'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnNewProject = {ctor: 'OnNewProject'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_NewContext = {ctor: 'EM_NewContext'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_NewProject = {ctor: 'EM_NewProject'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity = {ctor: 'OnGotoEntity'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelectedEntity = {ctor: 'OnToggleSelectedEntity'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity = {ctor: 'OnFocusInEntity'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged = function (a) {
-	return {ctor: 'OnEntityTextChanged', _0: a};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleSelection = {ctor: 'EUA_ToggleSelection'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_OnFocusIn = {ctor: 'EUA_OnFocusIn'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText = function (a) {
+	return {ctor: 'EUA_SetFormText', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived = {ctor: 'OnEntityToggleArchived'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted = {ctor: 'OnEntityToggleDeleted'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity = {ctor: 'OnStartEditingEntity'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleArchived = {ctor: 'EUA_ToggleArchived'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleDeleted = {ctor: 'EUA_ToggleDeleted'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_StartEditing = {ctor: 'EUA_StartEditing'};
 var _jigargosar$elm_simple_gtd$Entity_Types$TodoId = function (a) {
 	return {ctor: 'TodoId', _0: a};
 };

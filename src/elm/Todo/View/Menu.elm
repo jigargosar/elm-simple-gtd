@@ -16,13 +16,13 @@ import Types exposing (AppModel)
 
 
 createProjectMenuConfig : EditTodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
-createProjectMenuConfig ({ todoId, projectId } as form) model =
+createProjectMenuConfig form model =
     { onSelect =
         Document.getId
             >> TA_SetProjectId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode form.id
             >> Msg.OnTodoMsg
-    , isSelected = Document.hasId projectId
+    , isSelected = Document.hasId form.projectId
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
     , itemView = Project.getName >> text
@@ -33,13 +33,13 @@ createProjectMenuConfig ({ todoId, projectId } as form) model =
 
 
 createContextMenuConfig : EditTodoForm -> AppModel -> Menu.Config Context.Model Msg.AppMsg
-createContextMenuConfig ({ todoId, contextId } as form) model =
+createContextMenuConfig form model =
     { onSelect =
         Document.getId
             >> TA_SetContextId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId
+            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode form.id
             >> Msg.OnTodoMsg
-    , isSelected = Document.hasId contextId
+    , isSelected = Document.hasId form.contextId
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName
     , itemView = Context.getName >> text

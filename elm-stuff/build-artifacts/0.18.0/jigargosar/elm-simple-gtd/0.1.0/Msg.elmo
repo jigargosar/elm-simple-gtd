@@ -49,9 +49,9 @@ var _jigargosar$elm_simple_gtd$Msg$LaunchBarMsg = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
 	return {ctor: 'OnEntityMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewProject);
-var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnNewContext);
-var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$OnEntityUpdate, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
+var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$EM_NewProject);
+var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$EM_NewContext);
+var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$EM_Update, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
@@ -71,7 +71,7 @@ var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 	function (a, b) {
 		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm = {ctor: 'OnSaveCurrentForm'};
+var _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm = {ctor: 'OnSaveExclusiveModeForm'};
 var _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _jigargosar$elm_simple_gtd$Msg$OnUpdateAddTodoForm = F2(
 	function (a, b) {

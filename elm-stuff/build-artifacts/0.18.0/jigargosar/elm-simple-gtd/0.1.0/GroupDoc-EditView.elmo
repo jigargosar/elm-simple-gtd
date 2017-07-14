@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 	var fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
-	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
+	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm;
 	var entityId = function () {
 		var _p0 = form.groupDocType;
 		if (_p0.ctor === 'ContextGroupDoc') {
@@ -12,9 +12,9 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 	var toMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(entityId);
 	var fireNameChanged = function (_p1) {
 		return toMsg(
-			_jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged(_p1));
+			_jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText(_p1));
 	};
-	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
+	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleArchived);
 	return A2(
 		_elm_lang$html$Html$div,
 		{

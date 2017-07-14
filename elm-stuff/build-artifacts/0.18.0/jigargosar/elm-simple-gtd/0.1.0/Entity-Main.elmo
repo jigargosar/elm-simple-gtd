@@ -168,18 +168,18 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toggleEntitySelection = function (ent
 			_jigargosar$elm_simple_gtd$Entity_Types$getDocIdFromEntityId(entityId)));
 };
 var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
-	function (andThenUpdate, entityId, msg) {
-		var _p12 = msg;
+	function (andThenUpdate, entityId, action) {
+		var _p12 = action;
 		switch (_p12.ctor) {
-			case 'OnStartEditingEntity':
+			case 'EUA_StartEditing':
 				return function (_p13) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A3(_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity, andThenUpdate, entityId, _p13));
 				};
-			case 'OnEntityTextChanged':
+			case 'EUA_SetFormText':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Entity_Main$updateEditModeTextChanged(_p12._0));
-			case 'OnEntityToggleDeleted':
+			case 'EUA_ToggleDeleted':
 				return function (_p14) {
 					return A2(
 						andThenUpdate,
@@ -189,7 +189,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 							_jigargosar$elm_simple_gtd$Entity_Main$toggleDeleteEntity(entityId),
 							_p14));
 				};
-			case 'OnEntityToggleArchived':
+			case 'EUA_ToggleArchived':
 				var toggleArchivedEntity = function () {
 					var _p15 = entityId;
 					switch (_p15.ctor) {
@@ -211,10 +211,10 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
 						toggleArchivedEntity(_p16));
 				};
-			case 'OnFocusInEntity':
+			case 'EUA_OnFocusIn':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithEntityId(entityId));
-			case 'OnToggleSelectedEntity':
+			case 'EUA_ToggleSelection':
 				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Entity_Main$toggleEntitySelection(entityId));
 			default:
@@ -226,7 +226,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p17 = msg;
 		switch (_p17.ctor) {
-			case 'OnNewProject':
+			case 'EM_NewProject':
 				return function (_p18) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(
@@ -234,7 +234,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 							_jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewProject(andThenUpdate),
 							_p18));
 				};
-			case 'OnNewContext':
+			case 'EM_NewContext':
 				return function (_p19) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(

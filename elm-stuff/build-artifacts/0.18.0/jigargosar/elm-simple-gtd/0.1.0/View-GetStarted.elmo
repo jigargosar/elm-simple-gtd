@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$View_GetStarted$setup = function (form) {
 	var updateSetupFormTodoText = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateAddTodoFormSetText(form);
-	var addTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
+	var addTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm;
 	return A2(
 		_elm_lang$html$Html$div,
 		{

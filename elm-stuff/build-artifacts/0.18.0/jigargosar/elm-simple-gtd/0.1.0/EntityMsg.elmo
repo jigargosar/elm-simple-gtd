@@ -1,9 +1,9 @@
 var _jigargosar$elm_simple_gtd$EntityMsg$onStartEditingEntity = function (_p0) {
 	return _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
-		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Entity_Types$OnEntityUpdate, _jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity)(_p0));
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Entity_Types$EM_Update, _jigargosar$elm_simple_gtd$Entity_Types$EUA_StartEditing)(_p0));
 };
 var _jigargosar$elm_simple_gtd$EntityMsg$onToggleEntitySelection = function (_p1) {
 	return _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(
-		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Entity_Types$OnEntityUpdate, _jigargosar$elm_simple_gtd$Entity_Types$OnToggleSelectedEntity)(_p1));
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Entity_Types$EM_Update, _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleSelection)(_p1));
 };
 var _jigargosar$elm_simple_gtd$EntityMsg$onEntityIdUpdateMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg;

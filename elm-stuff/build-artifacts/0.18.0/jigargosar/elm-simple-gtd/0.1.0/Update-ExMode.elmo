@@ -46,8 +46,8 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm = F2(
 					A2(_jigargosar$elm_simple_gtd$Todo$init, model.now, form.text),
 					model)));
 	});
-var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (editMode) {
-	var _p4 = editMode;
+var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (exMode) {
+	var _p4 = exMode;
 	switch (_p4.ctor) {
 		case 'XMEditContext':
 			var _p5 = _p4._0;
@@ -96,4 +96,18 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm = function (editMod
 		default:
 			return _elm_lang$core$Basics$identity;
 	}
+};
+var _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm = function (andThenUpdate) {
+	return function (_p10) {
+		return A2(
+			andThenUpdate,
+			_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+			A3(
+				_jigargosar$elm_simple_gtd$X_Return$with,
+				function (_) {
+					return _.editMode;
+				},
+				_jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm,
+				_p10));
+	};
 };

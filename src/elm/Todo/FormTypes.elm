@@ -45,7 +45,6 @@ type EditTodoFormMode
 type alias EditTodoForm =
     TodoFormCommon
         { id : DocId
-        , todoId : DocId
         , contextId : DocId
         , projectId : DocId
         , etfMode : EditTodoFormMode

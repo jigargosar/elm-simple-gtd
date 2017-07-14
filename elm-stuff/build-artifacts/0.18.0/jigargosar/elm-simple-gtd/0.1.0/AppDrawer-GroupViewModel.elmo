@@ -10,7 +10,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);
 		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
 			config.toEntityId(id));
-		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity);
+		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$EUA_StartEditing);
 		var count = _elm_lang$core$List$length(
 			getTodoListByEntityId(id));
 		return {

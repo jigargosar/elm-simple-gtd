@@ -1,7 +1,12 @@
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TodoMoreMenuForm = F2(
-	function (a, b) {
-		return {todoId: a, menuState: b};
-	});
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Add = function (a) {
+	return {ctor: 'TFM_Add', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$TFM_Edit = function (a) {
+	return {ctor: 'TFM_Edit', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo = {ctor: 'ATFM_SetupFirstTodo'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox = {ctor: 'ATFM_AddToInbox'};
+var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference = {ctor: 'ATFM_AddWithFocusInEntityAsReference'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_XMEditTodoProject = {ctor: 'ETFM_XMEditTodoProject'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext = {ctor: 'ETFM_EditTodoContext'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoReminder = {ctor: 'ETFM_EditTodoReminder'};
@@ -18,9 +23,6 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 	return {ctor: 'SetTodoText', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo = {ctor: 'ATFM_SetupFirstTodo'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox = {ctor: 'ATFM_AddToInbox'};
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference = {ctor: 'ATFM_AddWithFocusInEntityAsReference'};
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_AddTodoForm = function (a) {
 	return {ctor: 'TXM_AddTodoForm', _0: a};
 };

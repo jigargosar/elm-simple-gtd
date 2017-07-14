@@ -109,7 +109,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 									return _.pouchDBRemoteSyncURI;
 								}(_p7));
 						},
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm, _p6));
+						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm, _p6));
 				};
 			case 'OnDeactivateEditingMode':
 				return function (_p8) {
@@ -217,19 +217,8 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnSetViewType':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p0._0));
-			case 'OnSaveCurrentForm':
-				return function (_p24) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
-						A3(
-							_jigargosar$elm_simple_gtd$X_Return$with,
-							function (_) {
-								return _.editMode;
-							},
-							_jigargosar$elm_simple_gtd$Update_ExMode$saveCurrentForm,
-							_p24));
-				};
+			case 'OnSaveExclusiveModeForm':
+				return _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm(andThenUpdate);
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);
 			case 'LaunchBarMsgWithNow':
@@ -254,9 +243,9 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, andThenUpdate, _p0._0);
 			case 'OnPersistLocalPref':
 				return _Fresheyeball$elm_return$Return$effect_(
-					function (_p25) {
+					function (_p24) {
 						return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
-							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p25));
+							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p24));
 					});
 			default:
 				return _Fresheyeball$elm_return$Return$andThen(

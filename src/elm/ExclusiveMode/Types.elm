@@ -15,6 +15,7 @@ type ExclusiveMode
     = XMTodo TodoExclusiveMode
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
+      -- todo: merge above into EntityExclusiveMode. we will need to add new project and new context mode.
     | XMLaunchBar
     | XMMainMenu MenuState
     | XMEditSyncSettings SyncForm

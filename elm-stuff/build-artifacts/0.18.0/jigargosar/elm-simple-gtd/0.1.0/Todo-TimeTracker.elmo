@@ -80,10 +80,9 @@ var _jigargosar$elm_simple_gtd$Todo_TimeTracker$toggleStartStop = F3(
 	});
 var _jigargosar$elm_simple_gtd$Todo_TimeTracker$switchOrStartRunning = F2(
 	function (todoId, now) {
-		var _p4 = A2(_jigargosar$elm_simple_gtd$X_Debug$log, 'switchOrStartRunning', 'foo');
 		return A2(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p5) {
+			function (_p4) {
 				return A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$initRunning, todoId, now);
 			},
 			function (rec) {

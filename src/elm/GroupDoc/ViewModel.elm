@@ -5,7 +5,6 @@ import Color
 import Context
 import Document
 import Document.Types exposing (DocId)
-import Entity
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)

@@ -1,10 +1,7 @@
 module Entity.Main exposing (..)
 
-import Context
 import Document
-import Document.Types exposing (getDocId)
 import DomPorts
-import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
@@ -15,10 +12,8 @@ import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (AppMsg)
-import Project
 import Return exposing (andThen)
 import Set
-import Store
 import Stores
 import Todo
 import Todo.Msg
@@ -26,8 +21,6 @@ import Todo.Types exposing (TodoAction(..))
 import TodoMsg
 import Types exposing (AppModel, ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
-import Tuple2
-import X.Function.Infix exposing (..)
 import X.Return
 
 

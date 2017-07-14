@@ -13,7 +13,7 @@ import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (..)
 import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
+
 import X.Function exposing (..)
 
 

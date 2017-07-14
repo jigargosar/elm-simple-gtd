@@ -8,16 +8,12 @@ import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
-import Project
 import Return exposing (andThen, map)
 import Store
 import Todo
-import Todo.Form
-import Todo.Form
 import Todo.FormTypes exposing (..)
 import Stores
 import Todo.Types exposing (TodoAction(..))
-import Tuple2
 import Types exposing (ModelReturnF)
 import X.Record exposing (over, overT2)
 import X.Return

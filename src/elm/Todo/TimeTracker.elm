@@ -4,7 +4,6 @@ import Document
 import Document.Types exposing (DocId)
 import Time exposing (Time)
 import Maybe.Extra as Maybe
-import X.Debug
 
 
 type State

@@ -21,7 +21,7 @@ import Todo.View exposing (TodoKeyedItemView, TodoViewModel)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
-import X.Html
+
 
 
 type alias KeyedView =

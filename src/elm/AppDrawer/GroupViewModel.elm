@@ -9,7 +9,6 @@ import Dict
 import Dict.Extra
 import Document
 import Document.Types exposing (DocId)
-import Entity
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types

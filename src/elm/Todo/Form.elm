@@ -8,7 +8,6 @@ module Todo.Form
 
 import Date
 import Document.Types exposing (getDocId)
-import Entity.Types exposing (Entity(TodoEntity))
 import Menu
 import Time exposing (Time)
 import Time.Format

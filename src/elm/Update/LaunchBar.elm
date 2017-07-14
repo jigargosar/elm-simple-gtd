@@ -1,6 +1,5 @@
 module Update.LaunchBar exposing (..)
 
-
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
@@ -8,12 +7,6 @@ import LaunchBar.Update
 import Model.Internal exposing (setExclusiveMode)
 import Msg exposing (AppMsg(LaunchBarMsg))
 import Return
-
-
-
-
-
-
 import Model.ViewType
 import Stores
 import Tuple2

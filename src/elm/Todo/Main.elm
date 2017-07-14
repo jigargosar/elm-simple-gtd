@@ -4,8 +4,6 @@ import Context
 import Document
 import DomPorts
 import Entity.Types
-import ExclusiveMode.Types exposing (..)
-import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)

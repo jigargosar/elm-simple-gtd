@@ -6,7 +6,6 @@ import GroupDoc.Types exposing (..)
 import X.Function exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random
-import Time exposing (Time)
 
 
 type alias Model =

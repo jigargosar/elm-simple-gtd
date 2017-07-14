@@ -1,18 +1,24 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 	var fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm;
-	var entityId = function () {
-		var _p0 = form.groupDocType;
-		if (_p0.ctor === 'ContextGroupDoc') {
-			return _jigargosar$elm_simple_gtd$Entity_Types$ContextId;
-		} else {
-			return _jigargosar$elm_simple_gtd$Entity_Types$ProjectId;
-		}
-	}()(form.id);
+	var _p0 = A3(
+		_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
+		_jigargosar$elm_simple_gtd$X_Function$apply(form.id),
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$String$append, ' Name'),
+		function () {
+			var _p1 = form.groupDocType;
+			if (_p1.ctor === 'ContextGroupDoc') {
+				return {ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$Entity_Types$ContextId, _1: 'Context'};
+			} else {
+				return {ctor: '_Tuple2', _0: _jigargosar$elm_simple_gtd$Entity_Types$ProjectId, _1: 'Project'};
+			}
+		}());
+	var entityId = _p0._0;
+	var nameLabel = _p0._1;
 	var toMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(entityId);
-	var fireNameChanged = function (_p1) {
+	var fireNameChanged = function (_p2) {
 		return toMsg(
-			_jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText(_p1));
+			_jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText(_p2));
 	};
 	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleArchived);
 	return A2(
@@ -26,7 +32,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-						function (_p2) {
+						function (_p3) {
 							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
@@ -65,7 +71,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 									_1: {
 										ctor: '::',
 										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-											function (_p3) {
+											function (_p4) {
 												return _jigargosar$elm_simple_gtd$Model$noop;
 											}),
 										_1: {
@@ -112,7 +118,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text(form.nameLabel),
+												_0: _elm_lang$html$Html$text(nameLabel),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

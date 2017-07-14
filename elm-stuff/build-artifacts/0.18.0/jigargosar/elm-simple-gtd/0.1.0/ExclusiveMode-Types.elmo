@@ -16,6 +16,6 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) 
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
 	return {ctor: 'XMEditContext', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodo = function (a) {
-	return {ctor: 'XMTodo', _0: a};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoForm = function (a) {
+	return {ctor: 'XMTodoForm', _0: a};
 };

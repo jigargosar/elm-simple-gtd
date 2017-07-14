@@ -6,13 +6,12 @@ import GroupDoc.FormTypes exposing (GroupDocEditForm, NameInputLabel)
 import GroupDoc.Types exposing (GroupDoc, GroupDocType(..), getGroupDocName, isGroupDocArchived)
 
 
-init : GroupDocType -> NameInputLabel -> GroupDoc -> GroupDocEditForm
-init groupDocType nameLabel groupDoc =
+init : GroupDocType -> GroupDoc -> GroupDocEditForm
+init groupDocType groupDoc =
     { id = getDocId groupDoc
     , name = getGroupDocName groupDoc
     , groupDocType = groupDocType
     , isArchived = isGroupDocArchived groupDoc
-    , nameLabel = nameLabel
     }
 
 

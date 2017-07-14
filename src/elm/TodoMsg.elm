@@ -1,22 +1,22 @@
 module TodoMsg exposing (..)
 
-import Msg exposing (Msg(OnTodoMsg))
+import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg
 import Todo.Notification.Model
 
 
-onStopRunningTodo : Msg
+onStopRunningTodo : AppMsg
 onStopRunningTodo =
     Todo.Msg.StopRunning |> OnTodoMsg
 
 
-onGotoRunningTodo : Msg
+onGotoRunningTodo : AppMsg
 onGotoRunningTodo =
     Todo.Msg.GotoRunning |> OnTodoMsg
 
 
-onReminderOverlayAction : Todo.Notification.Model.Action -> Msg
+onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
 onReminderOverlayAction =
     Todo.Msg.OnReminderOverlayAction >> OnTodoMsg
 

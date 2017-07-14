@@ -118,7 +118,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId = F2(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
 			function (_p10) {
 				return _jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView(
-					A2(_jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId, todoId, model));
+					A2(_jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithTodoId, todoId, model));
 			},
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setFocusInEntity, model),
 			maybeTodoEntity);

@@ -6,7 +6,7 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity
-import Entity.Types exposing (EntityListViewType, Entity)
+import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
@@ -25,25 +25,25 @@ type alias IconVM =
     }
 
 
-type alias ViewModel =
+type alias GroupDocViewModel =
     { id : String
     , count : Int
     , name : String
     , namePrefix : String
     , isDeleted : Bool
-    , archive : { iconName : String, onClick : Msg, isArchived : Bool }
+    , archive : { iconName : String, onClick : AppMsg, isArchived : Bool }
     , isEditable : Bool
-    , startEditingMsg : Msg
-    , onDeleteClicked : Msg
-    , onSaveClicked : Msg
-    , onNameChanged : String -> Msg
-    , onCancelClicked : Msg
+    , startEditingMsg : AppMsg
+    , onDeleteClicked : AppMsg
+    , onSaveClicked : AppMsg
+    , onNameChanged : String -> AppMsg
+    , onCancelClicked : AppMsg
     , icon : IconVM
-    , onFocusIn : Msg
-    , onKeyDownMsg : KeyboardEvent -> Msg
+    , onFocusIn : AppMsg
+    , onKeyDownMsg : KeyboardEvent -> AppMsg
     , tabindexAV : Int
     , todoList : List TodoDoc
-    , getTabIndexAVForEntity : Entity -> Int
+    , getTabIndexAVForEntityId : EntityId -> Int
     }
 
 
@@ -54,24 +54,28 @@ type alias GroupDoc =
 type alias Config =
     { groupByFn : TodoDoc -> DocId
     , namePrefix : String
-    , toEntity : GroupDoc -> Entity
+    , toEntityId : DocId -> EntityId
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : DocId -> EntityListViewType
-    , getTabIndexAVForEntity : Entity -> Int
+    , getTabIndexAVForEntityId : EntityId -> Int
     }
 
 
+create : Config -> List TodoDoc -> GroupDoc -> GroupDocViewModel
 create config todoList groupDoc =
     let
         id =
             Document.getId groupDoc
 
+        entityId =
+            config.toEntityId id
+
         onEntityAction =
-            Msg.onEntityUpdateMsg (config.toEntity groupDoc)
+            Msg.onEntityUpdateMsg entityId
 
         isNull =
             config.isNull groupDoc
@@ -145,47 +149,47 @@ create config todoList groupDoc =
         , icon = icon
         , onFocusIn = onEntityAction Entity.Types.OnFocusInEntity
         , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = config.getTabIndexAVForEntity (config.toEntity groupDoc)
+        , tabindexAV = config.getTabIndexAVForEntityId entityId
         , todoList = todoList
-        , getTabIndexAVForEntity = config.getTabIndexAVForEntity
+        , getTabIndexAVForEntityId = config.getTabIndexAVForEntityId
         }
 
 
-contextGroup : (Entity -> Int) -> List TodoDoc -> Context.Model -> ViewModel
-contextGroup getTabIndexAVForEntity todoList context =
+contextGroup : (EntityId -> Int) -> List TodoDoc -> Context.Model -> GroupDocViewModel
+contextGroup getTabIndexAVForEntityId todoList context =
     let
         config : Config
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , toEntity = Entity.fromContext
+            , toEntityId = ContextId
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ContextView
-            , getTabIndexAVForEntity = getTabIndexAVForEntity
+            , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             }
     in
         create config todoList context
 
 
-projectGroup : (Entity -> Int) -> List TodoDoc -> Project.Model -> ViewModel
-projectGroup getTabIndexAVForEntity todoList project =
+projectGroup : (EntityId -> Int) -> List TodoDoc -> Project.Model -> GroupDocViewModel
+projectGroup getTabIndexAVForEntityId todoList project =
     let
         config : Config
         config =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
-            , toEntity = Entity.fromProject
+            , toEntityId = ProjectId
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ProjectView
-            , getTabIndexAVForEntity = getTabIndexAVForEntity
+            , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             }
     in
         create config todoList project

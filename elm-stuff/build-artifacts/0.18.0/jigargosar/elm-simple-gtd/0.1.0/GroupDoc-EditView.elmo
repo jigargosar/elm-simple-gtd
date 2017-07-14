@@ -1,10 +1,18 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 	var fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveCurrentForm;
-	var toMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(form.entity);
-	var fireNameChanged = function (_p0) {
+	var entityId = function () {
+		var _p0 = form.groupDocType;
+		if (_p0.ctor === 'ContextGroupDoc') {
+			return _jigargosar$elm_simple_gtd$Entity_Types$ContextId;
+		} else {
+			return _jigargosar$elm_simple_gtd$Entity_Types$ProjectId;
+		}
+	}()(form.id);
+	var toMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(entityId);
+	var fireNameChanged = function (_p1) {
 		return toMsg(
-			_jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged(_p0));
+			_jigargosar$elm_simple_gtd$Entity_Types$OnEntityTextChanged(_p1));
 	};
 	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
 	return A2(
@@ -18,7 +26,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-						function (_p1) {
+						function (_p2) {
 							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
@@ -57,7 +65,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 									_1: {
 										ctor: '::',
 										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-											function (_p2) {
+											function (_p3) {
 												return _jigargosar$elm_simple_gtd$Model$noop;
 											}),
 										_1: {

@@ -37,6 +37,18 @@ mapModelWith f1 f2 =
         )
 
 
+maybeMapModelWith f1 f2 =
+    Return.map <|
+        \m ->
+            f2 (f1 m) m ?= m
+
+
+mapModelWithMaybeF mf1 f2 =
+    Return.map <|
+        \m ->
+            mf1 m ?|> f2 # m ?= m
+
+
 andThenApplyWith f1 f2 =
     Return.andThen
         (\m ->

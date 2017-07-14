@@ -3,25 +3,32 @@ module Entity.View exposing (..)
 import Entity
 import Entity.Tree
 import Entity.Types exposing (EntityListViewType)
+import EntityId
 import GroupDoc.View
-import GroupDoc.ViewModel
+import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Html
 import List.Extra
 import Maybe.Extra
 import Stores
+import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Msg exposing (..)
-import Todo.View exposing (TodoViewModel)
+import Todo.View exposing (TodoKeyedItemView, TodoViewModel)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
+import X.Html
 
 
-list : EntityListViewType -> AppModel -> Html.Html Msg
+type alias KeyedView =
+    ( String, Html AppMsg )
+
+
+list : EntityListViewType -> AppModel -> Html.Html AppMsg
 list viewType model =
     let
         grouping =
@@ -48,44 +55,46 @@ getMaybeFocusInEntity entityList model =
 
 keyedViewList grouping maybeFocusInEntity model =
     let
-        hasFocusIn entity =
-            maybeFocusInEntity ?|> Entity.equalById entity ?= False
+        entityIdHasFocusIn entityId =
+            maybeFocusInEntity ?|> Entity.hasEntityId entityId ?= False
 
-        getTabIndexForEntity entity =
-            if hasFocusIn entity then
+        getTabIndexForEntityId entityId =
+            if entityIdHasFocusIn entityId then
                 0
             else
                 -1
 
         createContextVM { context, todoList } =
             GroupDoc.ViewModel.contextGroup
-                getTabIndexForEntity
+                getTabIndexForEntityId
                 todoList
                 context
 
         multiContextView list =
-            list .|> (createContextVM >> groupView todoView)
+            list .|> (createContextVM >> groupView todoViewFromTodo)
 
         createProjectVM { project, todoList } =
             GroupDoc.ViewModel.projectGroup
-                getTabIndexForEntity
+                getTabIndexForEntityId
                 todoList
                 project
 
         multiProjectView list =
-            list .|> (createProjectVM >> groupView todoView)
+            list .|> (createProjectVM >> groupView todoViewFromTodo)
 
-        todoView todo =
+        todoViewFromTodo : TodoDoc -> KeyedView
+        todoViewFromTodo todo =
             let
-                canBeFocused =
-                    Entity.Types.TodoEntity todo |> hasFocusIn
+                isFocusable =
+                    EntityId.fromTodo todo |> entityIdHasFocusIn
             in
                 todo
-                    |> Todo.View.createTodoViewModel model canBeFocused
+                    |> Todo.View.createTodoViewModel model isFocusable
                     |> Todo.View.keyedItem
 
+        todoListView : List TodoDoc -> List KeyedView
         todoListView =
-            List.map todoView
+            List.map todoViewFromTodo
     in
         case grouping of
             Entity.Tree.ContextRoot contextGroup subGroupList ->
@@ -117,6 +126,7 @@ groupView todoView vm =
     GroupDoc.View.initKeyed todoView vm
 
 
+groupHeaderView : GroupDocViewModel -> KeyedView
 groupHeaderView vm =
     GroupDoc.View.initHeaderKeyed vm
 

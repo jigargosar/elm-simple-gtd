@@ -5,7 +5,10 @@ import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
 import X.List as List
 import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 import X.Function exposing (..)
+import X.Function.Infix exposing (..)
+import Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Tuple2
@@ -67,10 +70,12 @@ toEntityId entity =
                     ContextId (getDocId m)
 
 
-equalById e1 e2 =
-    ( e1, e2 )
-        |> Tuple2.mapBoth toEntityId
-        |> uncurry equals
+equalById =
+    tuple2 >>> mapAllT2 toEntityId >> equalsT2
+
+
+hasEntityId entityId entity =
+    toEntityId entity |> equals entityId
 
 
 findEntityByOffsetIn offsetIndex entityList fromEntity =

@@ -14,15 +14,12 @@ var _jigargosar$elm_simple_gtd$Entity$toEntityId = function (entity) {
 		}
 	}
 };
-var _jigargosar$elm_simple_gtd$Entity$equalById = F2(
-	function (e1, e2) {
-		return A2(
-			_elm_lang$core$Basics$uncurry,
-			_jigargosar$elm_simple_gtd$X_Function$equals,
-			A2(
-				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
-				_jigargosar$elm_simple_gtd$Entity$toEntityId,
-				{ctor: '_Tuple2', _0: e1, _1: e2}));
+var _jigargosar$elm_simple_gtd$Entity$equalById = A2(
+	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
+	_jigargosar$elm_simple_gtd$X_Function$tuple2,
+	function (_p2) {
+		return _jigargosar$elm_simple_gtd$X_Function$equalsT2(
+			A2(_jigargosar$elm_simple_gtd$X_Function$mapAllT2, _jigargosar$elm_simple_gtd$Entity$toEntityId, _p2));
 	});
 var _jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn = F3(
 	function (offsetIndex, entityList, fromEntity) {
@@ -46,27 +43,34 @@ var _jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn = F3(
 								entityList),
 							0)))));
 	});
-var _jigargosar$elm_simple_gtd$Entity$getId = function (entity) {
-	var _p2 = entity;
-	if (_p2.ctor === 'TodoEntity') {
-		return _jigargosar$elm_simple_gtd$Document$getId(_p2._0);
+var _jigargosar$elm_simple_gtd$Entity$hasEntityId = F2(
+	function (entityId, entity) {
+		return A2(
+			_jigargosar$elm_simple_gtd$X_Function$equals,
+			entityId,
+			_jigargosar$elm_simple_gtd$Entity$toEntityId(entity));
+	});
+var _jigargosar$elm_simple_gtd$Entity$getEntityDocId = function (entity) {
+	var _p3 = entity;
+	if (_p3.ctor === 'TodoEntity') {
+		return _jigargosar$elm_simple_gtd$Document_Types$getDocId(_p3._0);
 	} else {
-		var _p3 = _p2._0;
-		if (_p3.ctor === 'ProjectEntity') {
-			return _jigargosar$elm_simple_gtd$Document$getId(_p3._0);
+		var _p4 = _p3._0;
+		if (_p4.ctor === 'ProjectEntity') {
+			return _jigargosar$elm_simple_gtd$Document_Types$getDocId(_p4._0);
 		} else {
-			return _jigargosar$elm_simple_gtd$Document$getId(_p3._0);
+			return _jigargosar$elm_simple_gtd$Document_Types$getDocId(_p4._0);
 		}
 	}
 };
 var _jigargosar$elm_simple_gtd$Entity$initContextGroup = _jigargosar$elm_simple_gtd$Entity_Types$ContextEntity;
 var _jigargosar$elm_simple_gtd$Entity$initProjectGroup = _jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity;
 var _jigargosar$elm_simple_gtd$Entity$fromTodo = _jigargosar$elm_simple_gtd$Entity_Types$TodoEntity;
-var _jigargosar$elm_simple_gtd$Entity$fromProject = function (_p4) {
+var _jigargosar$elm_simple_gtd$Entity$fromProject = function (_p5) {
 	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
-		_jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity(_p4));
+		_jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity(_p5));
 };
-var _jigargosar$elm_simple_gtd$Entity$fromContext = function (_p5) {
+var _jigargosar$elm_simple_gtd$Entity$fromContext = function (_p6) {
 	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
-		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p5));
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p6));
 };

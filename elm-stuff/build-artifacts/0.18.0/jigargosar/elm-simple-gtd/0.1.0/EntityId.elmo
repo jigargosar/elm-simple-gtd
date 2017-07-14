@@ -1,0 +1,7 @@
+var _jigargosar$elm_simple_gtd$EntityId$fromContextDocId = _jigargosar$elm_simple_gtd$Entity_Types$ContextId;
+var _jigargosar$elm_simple_gtd$EntityId$fromProjectDocId = _jigargosar$elm_simple_gtd$Entity_Types$ProjectId;
+var _jigargosar$elm_simple_gtd$EntityId$fromTodo = function (_p0) {
+	return _jigargosar$elm_simple_gtd$Entity_Types$TodoId(
+		_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p0));
+};
+var _jigargosar$elm_simple_gtd$EntityId$fromTodoDocId = _jigargosar$elm_simple_gtd$Entity_Types$TodoId;

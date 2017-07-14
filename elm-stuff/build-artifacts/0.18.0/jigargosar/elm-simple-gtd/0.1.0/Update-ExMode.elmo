@@ -18,7 +18,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm = F2(
 				return function (_p1) {
 					return A2(
 						_Fresheyeball$elm_return$Return$map,
-						_jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId(todoId),
+						_jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithTodoId(todoId),
 						A3(
 							_jigargosar$elm_simple_gtd$Stores$updateTodo,
 							function () {

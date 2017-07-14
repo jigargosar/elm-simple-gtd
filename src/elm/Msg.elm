@@ -35,7 +35,7 @@ type MainMsg
     = OnSwitchToNewUserSetupModeIfNeeded
 
 
-type Msg
+type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubMsg SubMsg
     | OnStartAddingTodo AddTodoFormMode
@@ -61,7 +61,7 @@ type Msg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Types.Msg
     | OnPersistLocalPref
-    | OnMdl (Material.Msg Msg)
+    | OnMdl (Material.Msg AppMsg)
 
 
 onSetEntityListView =

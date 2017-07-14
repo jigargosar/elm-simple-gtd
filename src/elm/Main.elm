@@ -26,7 +26,7 @@ import Update
 import View
 import X.Keyboard
 import Json.Encode as E
-import Msg exposing (Msg)
+import Msg exposing (AppMsg)
 import Types exposing (AppModel, Flags, LocalPref, Return, defaultView)
 import X.Random
 import Json.Encode as E
@@ -40,7 +40,7 @@ onFirebaseDatabaseChangeSub tagger =
     onFirebaseDatabaseChange (uncurry tagger)
 
 
-main : RouteUrl.RouteUrlProgram Flags AppModel Msg.Msg
+main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
@@ -52,7 +52,7 @@ main =
         }
 
 
-subscriptions : AppModel -> Sub Msg.Msg
+subscriptions : AppModel -> Sub Msg.AppMsg
 subscriptions model =
     Sub.batch
         [ Sub.batch
@@ -127,14 +127,14 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
+keyboardCombos : List (Keyboard.Combo.KeyCombo AppMsg)
 keyboardCombos =
     [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (TodoMsg.onStopRunningTodo)
     , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (TodoMsg.onGotoRunningTodo)
     ]
 
 
-update : Msg -> AppModel -> Return
+update : AppMsg -> AppModel -> Return
 update msg =
     let
         andThenUpdate =

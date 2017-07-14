@@ -160,7 +160,7 @@ view items state config =
 
         itemViewList =
             items
-                .#|> createItemViewModel menuVM
+                #.|> createItemViewModel menuVM
                 >>> menuItemView
     in
         div

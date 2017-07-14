@@ -6,7 +6,7 @@ import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
 import Model.Internal exposing (setExclusiveMode)
-import Msg exposing (Msg(LaunchBarMsg))
+import Msg exposing (AppMsg(LaunchBarMsg))
 import Return
 
 

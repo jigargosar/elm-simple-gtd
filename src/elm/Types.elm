@@ -9,7 +9,7 @@ import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Keyboard.Combo
 import Material
-import Msg exposing (Msg)
+import Msg exposing (AppMsg)
 import Return
 import Set exposing (Set)
 import Time exposing (Time)
@@ -68,7 +68,7 @@ type alias AppModel =
     , deviceId : String
     , focusInEntity : Entity
     , timeTracker : Todo.TimeTracker.Model
-    , keyComboModel : Keyboard.Combo.Model Msg
+    , keyComboModel : Keyboard.Combo.Model AppMsg
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model
@@ -78,7 +78,7 @@ type alias AppModel =
 
 
 type alias Return =
-    Return.Return Msg AppModel
+    Return.Return AppMsg AppModel
 
 
 type alias ModelReturnF =
@@ -86,7 +86,7 @@ type alias ModelReturnF =
 
 
 type alias ReturnF =
-    Return.Return Msg AppModel -> Return.Return Msg AppModel
+    Return.Return AppMsg AppModel -> Return.Return AppMsg AppModel
 
 
 type alias ModelF =
@@ -98,4 +98,4 @@ defaultView =
 
 
 type alias Subscriptions =
-    AppModel -> Sub Msg
+    AppModel -> Sub AppMsg

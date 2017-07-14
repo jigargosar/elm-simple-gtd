@@ -91,5 +91,5 @@ saveNewTodoForm form model =
                                         (TA_SetProject project)
                         )
                         todoId
-                        >> Return.map (Stores.setFocusInEntityFromTodoId todoId)
+                        >> Return.map (Stores.setFocusInEntityWithTodoId todoId)
             )

@@ -16,14 +16,14 @@ import Types exposing (AppModel)
 
 type ItemType
     = URL String
-    | Msg Msg.Msg
+    | Msg Msg.AppMsg
 
 
 type alias Item =
     ( String, ItemType )
 
 
-menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.Msg
+menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.AppMsg
 menuConfig menuState appModel =
     { onSelect = onSelect
     , isSelected = (\_ -> False)

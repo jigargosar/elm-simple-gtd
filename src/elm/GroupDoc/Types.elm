@@ -4,6 +4,11 @@ import Document.Types
 import Store.Types exposing (Store)
 
 
+type GroupDocType
+    = ContextGroupDoc
+    | ProjectGroupDoc
+
+
 type alias GroupDocName =
     String
 

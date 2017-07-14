@@ -75,7 +75,7 @@ overSignInModel =
 
 
 update :
-    (Msg.Msg -> ReturnF)
+    (Msg.AppMsg -> ReturnF)
     -> FirebaseMsg
     -> ReturnF
 update andThenUpdate msg =

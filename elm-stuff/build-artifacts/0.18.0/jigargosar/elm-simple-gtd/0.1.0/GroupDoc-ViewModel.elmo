@@ -8,8 +8,9 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var onEntityAction = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
-			config.toEntity(groupDoc));
+		var id = _jigargosar$elm_simple_gtd$Document$getId(groupDoc);
+		var entityId = config.toEntityId(id);
+		var onEntityAction = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(entityId);
 		var toggleDeleteMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
 		var startEditingMsg = isNull ? _jigargosar$elm_simple_gtd$Model$noop : onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity);
 		var onKeyDownMsg = function (_p0) {
@@ -35,7 +36,6 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				isArchived: isArchived
 			};
 		}();
-		var id = _jigargosar$elm_simple_gtd$Document$getId(groupDoc);
 		return {
 			id: id,
 			name: name,
@@ -55,41 +55,40 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			icon: icon,
 			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),
 			onKeyDownMsg: onKeyDownMsg,
-			tabindexAV: config.getTabIndexAVForEntity(
-				config.toEntity(groupDoc)),
+			tabindexAV: config.getTabIndexAVForEntityId(entityId),
 			todoList: todoList,
-			getTabIndexAVForEntity: config.getTabIndexAVForEntity
+			getTabIndexAVForEntityId: config.getTabIndexAVForEntityId
 		};
 	});
 var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$contextGroup = F3(
-	function (getTabIndexAVForEntity, todoList, context) {
+	function (getTabIndexAVForEntityId, todoList, context) {
 		var config = {
 			groupByFn: _jigargosar$elm_simple_gtd$Todo$getContextId,
 			namePrefix: '@',
-			toEntity: _jigargosar$elm_simple_gtd$Entity$fromContext,
+			toEntityId: _jigargosar$elm_simple_gtd$Entity_Types$ContextId,
 			nullEntity: _jigargosar$elm_simple_gtd$Context$null,
 			isNull: _jigargosar$elm_simple_gtd$Context$isNull,
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
 			defaultColor: _jigargosar$elm_x$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ContextView,
-			getTabIndexAVForEntity: getTabIndexAVForEntity
+			getTabIndexAVForEntityId: getTabIndexAVForEntityId
 		};
 		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, context);
 	});
 var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$projectGroup = F3(
-	function (getTabIndexAVForEntity, todoList, project) {
+	function (getTabIndexAVForEntityId, todoList, project) {
 		var config = {
 			groupByFn: _jigargosar$elm_simple_gtd$Todo$getProjectId,
 			namePrefix: '#',
-			toEntity: _jigargosar$elm_simple_gtd$Entity$fromProject,
+			toEntityId: _jigargosar$elm_simple_gtd$Entity_Types$ProjectId,
 			nullEntity: _jigargosar$elm_simple_gtd$Project$null,
 			isNull: _jigargosar$elm_simple_gtd$Project$isNull,
 			nullIcon: {name: 'inbox', color: _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$inboxColor},
 			defaultColor: _jigargosar$elm_x$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _jigargosar$elm_simple_gtd$Entity_Types$ProjectView,
-			getTabIndexAVForEntity: getTabIndexAVForEntity
+			getTabIndexAVForEntityId: getTabIndexAVForEntityId
 		};
 		return A3(_jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create, config, todoList, project);
 	});
@@ -97,7 +96,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
 	});
-var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$ViewModel = function (a) {
+var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$GroupDocViewModel = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -115,7 +114,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$ViewModel = function (a) {
 															return function (p) {
 																return function (q) {
 																	return function (r) {
-																		return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, archive: f, isEditable: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o, tabindexAV: p, todoList: q, getTabIndexAVForEntity: r};
+																		return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, archive: f, isEditable: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o, tabindexAV: p, todoList: q, getTabIndexAVForEntityId: r};
 																	};
 																};
 															};
@@ -144,7 +143,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$Config = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {groupByFn: a, namePrefix: b, toEntity: c, nullEntity: d, isNull: e, nullIcon: f, defaultColor: g, defaultIconName: h, getViewType: i, getTabIndexAVForEntity: j};
+										return {groupByFn: a, namePrefix: b, toEntityId: c, nullEntity: d, isNull: e, nullIcon: f, defaultColor: g, defaultIconName: h, getViewType: i, getTabIndexAVForEntityId: j};
 									};
 								};
 							};

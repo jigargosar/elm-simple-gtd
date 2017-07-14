@@ -3,9 +3,10 @@ module Todo.View exposing (..)
 import Context
 import Date
 import Document
-import Entity.Types
+import Entity.Types exposing (EntityId(TodoId))
+import EntityId
 import Material
-import Msg exposing (Msg)
+import Msg exposing (AppMsg)
 import Store
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc)
@@ -41,16 +42,16 @@ type alias TodoViewModel =
     , displayText : String
     , isDone : Bool
     , isDeleted : Bool
-    , onKeyDownMsg : KeyboardEvent -> Msg
+    , onKeyDownMsg : KeyboardEvent -> AppMsg
     , projectDisplayName : String
     , contextDisplayName : String
-    , startEditingMsg : Msg
-    , toggleDoneMsg : Msg
+    , startEditingMsg : AppMsg
+    , toggleDoneMsg : AppMsg
     , canBeFocused : Bool
-    , showContextDropDownMsg : Msg
-    , showProjectDropDownMsg : Msg
+    , showContextDropDownMsg : AppMsg
+    , showProjectDropDownMsg : AppMsg
     , reminder : ScheduleViewModel
-    , onFocusIn : Msg
+    , onFocusIn : AppMsg
     , tabindexAV : Int
     , isSelected : Bool
     , mdl : Material.Model
@@ -74,12 +75,12 @@ getDisplayText todo =
 
 
 createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel
-createTodoViewModel appM canBeFocused todo =
+createTodoViewModel appM isFocusable todo =
     let
         tabindexAV =
             let
                 tabindexValue =
-                    if canBeFocused then
+                    if isFocusable then
                         0
                     else
                         -1
@@ -116,7 +117,7 @@ createTodoViewModel appM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Msg.onEntityUpdateMsg (Entity.Types.TodoEntity todo)
+            Msg.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
 
         onTodoMsg =
             Msg.OnTodoMsg
@@ -160,7 +161,7 @@ createTodoViewModel appM canBeFocused todo =
                 Model.noop
 
         startEditingMsg =
-            if canBeFocused then
+            if isFocusable then
                 TodoMsg.onStartEditingTodoText todo
             else
                 Model.noop
@@ -181,7 +182,7 @@ createTodoViewModel appM canBeFocused todo =
         , showContextDropDownMsg = TodoMsg.onStartEditingTodoContext todo
         , showProjectDropDownMsg = TodoMsg.onStartEditingTodoProject todo
         , startEditingMsg = startEditingMsg
-        , canBeFocused = canBeFocused
+        , canBeFocused = isFocusable
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
         , onFocusIn = createEntityActionMsg Entity.Types.OnFocusInEntity
@@ -191,12 +192,16 @@ createTodoViewModel appM canBeFocused todo =
         }
 
 
-keyedItem : TodoViewModel -> ( String, Html Msg )
+type alias TodoKeyedItemView =
+    ( String, Html AppMsg )
+
+
+keyedItem : TodoViewModel -> TodoKeyedItemView
 keyedItem vm =
     ( vm.key, item vm )
 
 
-item : TodoViewModel -> Html Msg
+item : TodoViewModel -> Html AppMsg
 item vm =
     div
         [ classList
@@ -273,7 +278,7 @@ classListAsClass list =
         |> String.join " "
 
 
-doneIconButton : TodoViewModel -> Html Msg
+doneIconButton : TodoViewModel -> Html AppMsg
 doneIconButton vm =
     Mat.iconBtn4 Msg.OnMdl
         "done"
@@ -306,7 +311,7 @@ editScheduleButton vm =
 type alias ScheduleViewModel =
     { displayText : String
     , isOverDue : Bool
-    , startEditingMsg : Msg
+    , startEditingMsg : AppMsg
     }
 
 
@@ -342,7 +347,7 @@ fireCancel =
     Msg.OnDeactivateEditingMode
 
 
-edit : EditTodoForm -> AppModel -> Html Msg
+edit : EditTodoForm -> AppModel -> Html AppMsg
 edit form appModel =
     let
         todoText =
@@ -352,7 +357,7 @@ edit form appModel =
             TodoMsg.onSetTodoFormText form
 
         fireToggleDelete =
-            Msg.onEntityUpdateMsg form.entity Entity.Types.OnEntityToggleDeleted
+            Msg.onEntityUpdateMsg (TodoId form.id) Entity.Types.OnEntityToggleDeleted
     in
         div
             [ class "overlay"

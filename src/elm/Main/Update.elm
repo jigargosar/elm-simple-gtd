@@ -3,7 +3,7 @@ module Main.Update exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.SignIn
 import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
-import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), Msg)
+import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), AppMsg)
 import Return exposing (map)
 import Store
 import TodoMsg
@@ -11,7 +11,7 @@ import Types exposing (ReturnF)
 
 
 update :
-    (Msg -> ReturnF)
+    (AppMsg -> ReturnF)
     -> MainMsg
     -> ReturnF
 update andThenUpdate msg =

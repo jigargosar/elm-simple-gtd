@@ -1,18 +1,18 @@
 module Entity.Types exposing (..)
 
 import Document.Types exposing (DocId)
-import GroupDoc.Types
-import Todo.Types
+import GroupDoc.Types exposing (GroupDoc)
+import Todo.Types exposing (TodoDoc)
 
 
 type GroupEntityType
-    = ProjectEntity GroupDoc.Types.GroupDoc
-    | ContextEntity GroupDoc.Types.GroupDoc
+    = ProjectEntity GroupDoc
+    | ContextEntity GroupDoc
 
 
 type Entity
     = GroupEntity GroupEntityType
-    | TodoEntity Todo.Types.TodoDoc
+    | TodoEntity TodoDoc
 
 
 type EntityListViewType
@@ -28,7 +28,7 @@ type EntityListViewType
 type EntityMsg
     = OnNewProject
     | OnNewContext
-    | OnUpdate Entity EntityUpdateMsg
+    | OnUpdate EntityId EntityUpdateMsg
 
 
 type EntityUpdateMsg
@@ -58,3 +58,15 @@ type EntityId
     = ContextId DocId
     | ProjectId DocId
     | TodoId DocId
+
+
+getDocIdFromEntityId entityId =
+    case entityId of
+        ContextId id ->
+            id
+
+        ProjectId id ->
+            id
+
+        TodoId id ->
+            id

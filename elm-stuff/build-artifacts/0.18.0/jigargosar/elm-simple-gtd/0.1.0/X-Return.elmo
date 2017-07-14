@@ -41,6 +41,32 @@ var _jigargosar$elm_simple_gtd$X_Return$andThenApplyWith = F2(
 					m);
 			});
 	});
+var _jigargosar$elm_simple_gtd$X_Return$mapModelWithMaybeF = F2(
+	function (mf1, f2) {
+		return _Fresheyeball$elm_return$Return$map(
+			function (m) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						mf1(m),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], f2, m)),
+					m);
+			});
+	});
+var _jigargosar$elm_simple_gtd$X_Return$maybeMapModelWith = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$map(
+			function (m) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						f2,
+						f1(m),
+						m),
+					m);
+			});
+	});
 var _jigargosar$elm_simple_gtd$X_Return$mapModelWith = F2(
 	function (f1, f2) {
 		return _Fresheyeball$elm_return$Return$map(

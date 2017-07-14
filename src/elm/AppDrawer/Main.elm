@@ -21,7 +21,7 @@ subscriptions model =
 
 
 update :
-    (Msg.Msg -> ReturnF)
+    (Msg.AppMsg -> ReturnF)
     -> AppDrawer.Types.Msg
     -> ReturnF
 update andThenUpdate msg =

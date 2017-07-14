@@ -5,14 +5,15 @@ import Document
 import Document.Types exposing (getDocId)
 import DomPorts
 import Entity
-import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity)
+import Entity.Types exposing (Entity(GroupEntity, TodoEntity), EntityId(..), EntityListViewType(BinView, ContextView, ContextsView, DoneView, ProjectView, ProjectsView, RecentView), GroupEntityType(ContextEntity, ProjectEntity), createContextEntity, createProjectEntity, getDocIdFromEntityId)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
-import GroupDoc.EditForm
+import GroupDoc.EditForm exposing (createEditContextForm, createEditProjectForm)
+import Maybe.Extra
 import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
 import Model.ViewType
-import Msg exposing (Msg)
+import Msg exposing (AppMsg)
 import Project
 import Return exposing (andThen)
 import Set
@@ -21,10 +22,11 @@ import Stores
 import Todo
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
-import Types exposing (ModelF, ModelReturnF, ReturnF)
+import Types exposing (AppModel, ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function.Infix exposing (..)
+import X.Return
 
 
 map =
@@ -32,86 +34,76 @@ map =
 
 
 update :
-    (Msg -> ReturnF)
+    (AppMsg -> ReturnF)
     -> Entity.Types.EntityMsg
     -> ReturnF
 update andThenUpdate msg =
     case msg of
         Entity.Types.OnNewProject ->
-            andThen (createAndEditNewProject andThenUpdate)
+            andThen (createAndEditNewProject)
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnNewContext ->
             andThen (createAndEditNewContext andThenUpdate)
                 >> DomPorts.autoFocusInputRCmd
 
-        Entity.Types.OnUpdate entity entityUpdateMsg ->
-            onUpdate andThenUpdate entity entityUpdateMsg
+        Entity.Types.OnUpdate entityId entityUpdateMsg ->
+            onUpdate andThenUpdate entityId entityUpdateMsg
 
 
 onUpdate :
-    (Msg -> ReturnF)
-    -> Entity
+    (AppMsg -> ReturnF)
+    -> EntityId
     -> Entity.Types.EntityUpdateMsg
     -> ReturnF
-onUpdate andThenUpdate entity msg =
-    let
-        entityId =
-            Entity.toEntityId entity
-    in
-        case msg of
-            Entity.Types.OnStartEditingEntity ->
-                andThen (\model -> startEditingEntity andThenUpdate model.now entity model)
-                    >> DomPorts.autoFocusInputRCmd
+onUpdate andThenUpdate entityId msg =
+    case msg of
+        Entity.Types.OnStartEditingEntity ->
+            andThen (startEditingEntity entityId)
+                >> DomPorts.autoFocusInputRCmd
 
-            Entity.Types.OnEntityTextChanged newName ->
-                Return.map (updateEditModeNameChanged newName)
+        Entity.Types.OnEntityTextChanged newName ->
+            Return.map (updateEditModeNameChanged newName)
 
-            Entity.Types.OnSaveEntityForm ->
-                andThenUpdate Msg.OnSaveCurrentForm
+        Entity.Types.OnSaveEntityForm ->
+            andThenUpdate Msg.OnSaveCurrentForm
 
-            Entity.Types.OnEntityToggleDeleted ->
-                Return.andThen (toggleDeleteEntity entity)
+        Entity.Types.OnEntityToggleDeleted ->
+            Return.andThen (toggleDeleteEntity entityId)
+                >> andThenUpdate Msg.OnDeactivateEditingMode
+
+        Entity.Types.OnEntityToggleArchived ->
+            let
+                toggleArchivedEntity =
+                    case entityId of
+                        ContextId id ->
+                            Stores.updateContext id GroupDoc.toggleArchived
+                                |> Return.andThen
+
+                        ProjectId id ->
+                            Stores.updateProject id GroupDoc.toggleArchived
+                                |> Return.andThen
+
+                        TodoId id ->
+                            Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode id TA_ToggleDone
+                                |> Msg.OnTodoMsg
+                                |> andThenUpdate
+            in
+                toggleArchivedEntity
                     >> andThenUpdate Msg.OnDeactivateEditingMode
 
-            Entity.Types.OnEntityToggleArchived ->
-                let
-                    toggleArchivedEntity entity =
-                        let
-                            entityDocId =
-                                Entity.getEntityDocId entity
-                        in
-                            case entity of
-                                Entity.Types.GroupEntity g ->
-                                    (case g of
-                                        Entity.Types.ContextEntity context ->
-                                            Stores.updateContext entityDocId GroupDoc.toggleArchived
+        Entity.Types.OnFocusInEntity ->
+            Return.map (Stores.setFocusInEntityWithEntityId entityId)
 
-                                        Entity.Types.ProjectEntity project ->
-                                            Stores.updateProject entityDocId GroupDoc.toggleArchived
-                                    )
-                                        |> Return.andThen
+        Entity.Types.OnToggleSelectedEntity ->
+            Return.map (toggleEntitySelection entityId)
 
-                                Entity.Types.TodoEntity todo ->
-                                    Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode entityDocId TA_ToggleDone
-                                        |> Msg.OnTodoMsg
-                                        |> andThenUpdate
-                in
-                    toggleArchivedEntity entity
-                        >> andThenUpdate Msg.OnDeactivateEditingMode
-
-            Entity.Types.OnFocusInEntity ->
-                Return.map (Stores.setFocusInEntity entity)
-
-            Entity.Types.OnToggleSelectedEntity ->
-                Return.map (toggleEntitySelection entity)
-
-            Entity.Types.OnGotoEntity ->
-                Return.map (switchToEntityListViewFromEntity entity)
+        Entity.Types.OnGotoEntity ->
+            Return.map (switchToEntityListViewFromEntity entityId)
 
 
-toggleEntitySelection entity =
-    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (Entity.getEntityDocId entity))
+toggleEntitySelection entityId =
+    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (getDocIdFromEntityId entityId))
 
 
 toggleSetMember item set =
@@ -121,42 +113,39 @@ toggleSetMember item set =
         Set.insert item set
 
 
-switchToEntityListViewFromEntity entity model =
+switchToEntityListViewFromEntity entityId model =
     let
         maybeEntityListViewType =
             Model.ViewType.maybeGetCurrentEntityListViewType model
     in
-        entity
-            |> toViewType maybeEntityListViewType
+        entityId
+            |> toViewType model maybeEntityListViewType
             |> (Model.ViewType.setEntityListViewType # model)
 
 
-toggleDeleteEntity : Entity -> ModelReturnF
-toggleDeleteEntity entity model =
-    let
-        entityId =
-            Entity.getEntityDocId entity
-    in
-        model
-            |> case entity of
-                Entity.Types.GroupEntity g ->
-                    case g of
-                        Entity.Types.ContextEntity context ->
-                            Stores.updateContext entityId Document.toggleDeleted
+toggleDeleteEntity : EntityId -> ModelReturnF
+toggleDeleteEntity entityId =
+    case entityId of
+        ContextId id ->
+            Stores.updateContext id Document.toggleDeleted
 
-                        Entity.Types.ProjectEntity project ->
-                            Stores.updateProject entityId Document.toggleDeleted
+        ProjectId id ->
+            Stores.updateProject id Document.toggleDeleted
 
-                Entity.Types.TodoEntity todo ->
-                    Stores.updateTodo (TA_ToggleDeleted) entityId
+        TodoId id ->
+            Stores.updateTodo (TA_ToggleDeleted) id
 
 
-createAndEditNewProject andThenUpdate model =
+createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (Stores.setProjectStore # model)
         |> (\( project, model ) ->
-                model
-                    |> startEditingEntity andThenUpdate model.now (createProjectEntity project)
+                let
+                    entity =
+                        (createProjectEntity project)
+                in
+                    model
+                        |> startEditingEntity (Entity.toEntityId entity)
            )
 
 
@@ -164,8 +153,12 @@ createAndEditNewContext andThenUpdate model =
     Store.insert (Context.init "<New Context>" model.now) model.contextStore
         |> Tuple2.mapSecond (Stores.setContextStore # model)
         |> (\( context, model ) ->
-                model
-                    |> startEditingEntity andThenUpdate model.now (createContextEntity context)
+                let
+                    entity =
+                        (createContextEntity context)
+                in
+                    model
+                        |> startEditingEntity (Entity.toEntityId entity)
            )
 
 
@@ -177,18 +170,20 @@ editContextSetName =
     GroupDoc.EditForm.setName >>> XMEditContext
 
 
-startEditingEntity andThenUpdate now entity model =
+startEditingEntity entityId model =
     Return.singleton model
-        |> case entity of
-            GroupEntity g ->
-                case g of
-                    ContextEntity context ->
-                        map (setExclusiveMode (context |> GroupDoc.EditForm.forContext >> XMEditContext))
+        |> case entityId of
+            ContextId id ->
+                X.Return.mapModelWithMaybeF
+                    (Stores.findContextById id)
+                    (createEditContextForm >> XMEditContext >> setExclusiveMode)
 
-                    ProjectEntity p ->
-                        map (setExclusiveMode (p |> GroupDoc.EditForm.forProject >> XMEditProject))
+            ProjectId id ->
+                X.Return.mapModelWithMaybeF
+                    (Stores.findProjectById id)
+                    (createEditProjectForm >> XMEditContext >> setExclusiveMode)
 
-            TodoEntity todo ->
+            TodoId id ->
                 Debug.log "startEditingEntity : This method should not be called for todo. We should probably get rid of entity Main stuff, or bring all types of edits here. which doesn't seem fesable, since there are different types of edit modes for todo."
 
 
@@ -205,21 +200,26 @@ updateEditModeNameChanged newName model =
                 identity
 
 
-toViewType : Maybe EntityListViewType -> Entity -> EntityListViewType
-toViewType maybePrevView entity =
-    case entity of
-        GroupEntity group ->
-            case group of
-                ContextEntity model ->
-                    getDocId model |> ContextView
+toViewType : AppModel -> Maybe EntityListViewType -> EntityId -> EntityListViewType
+toViewType appModel maybeCurrentEntityListViewType entityId =
+    case entityId of
+        ContextId id ->
+            ContextView id
 
-                ProjectEntity model ->
-                    getDocId model |> ProjectView
+        ProjectId id ->
+            ProjectView id
 
-        TodoEntity model ->
-            maybePrevView
-                ?|> getTodoGotoGroupView model
-                ?= (Todo.getContextId model |> ContextView)
+        TodoId id ->
+            let
+                getViewTypeForTodo todo =
+                    maybeCurrentEntityListViewType
+                        ?|> getTodoGotoGroupView todo
+                        ?= (Todo.getContextId todo |> ContextView)
+            in
+                Stores.findTodoById id appModel
+                    ?|> getViewTypeForTodo
+                    |> Maybe.Extra.orElse maybeCurrentEntityListViewType
+                    ?= ContextsView
 
 
 getTodoGotoGroupView todo prevView =

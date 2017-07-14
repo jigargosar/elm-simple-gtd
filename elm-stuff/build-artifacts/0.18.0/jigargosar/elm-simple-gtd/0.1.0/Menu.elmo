@@ -196,7 +196,7 @@ var _jigargosar$elm_simple_gtd$Menu$view = F3(
 	function (items, state, config) {
 		var menuVM = A3(_jigargosar$elm_simple_gtd$Menu$createViewModel, items, state, config);
 		var itemViewList = A2(
-			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['.#|>'],
+			_jigargosar$elm_simple_gtd$X_Function_Infix_ops['#.|>'],
 			items,
 			A2(
 				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],

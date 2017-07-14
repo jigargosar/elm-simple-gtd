@@ -5,7 +5,7 @@ import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Model
 import Model.Selection
-import Msg exposing (Msg(..), SubMsg(..))
+import Msg exposing (AppMsg(..), SubMsg(..))
 import Stores
 import Todo.Msg
 import Tuple2

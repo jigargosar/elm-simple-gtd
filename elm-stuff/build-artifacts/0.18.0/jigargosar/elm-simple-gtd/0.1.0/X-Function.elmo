@@ -11,10 +11,16 @@ var _jigargosar$elm_simple_gtd$X_Function$notEquals = F2(
 	function (x, y) {
 		return !_elm_lang$core$Native_Utils.eq(x, y);
 	});
+var _jigargosar$elm_simple_gtd$X_Function$mapAllT2 = _Fresheyeball$elm_tuple_extra$Tuple2$mapBoth;
+var _jigargosar$elm_simple_gtd$X_Function$tuple2 = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});
 var _jigargosar$elm_simple_gtd$X_Function$equals = F2(
 	function (x, y) {
 		return _elm_lang$core$Native_Utils.eq(x, y);
 	});
+var _jigargosar$elm_simple_gtd$X_Function$equalsT2 = _elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$X_Function$equals);
 var _jigargosar$elm_simple_gtd$X_Function$and = F2(
 	function (x, y) {
 		return x && y;

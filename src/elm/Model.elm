@@ -9,7 +9,7 @@ import Time exposing (Time)
 import Toolkit.Operators exposing (..)
 
 
-commonMsg : CommonMsg.Helper Msg
+commonMsg : CommonMsg.Helper AppMsg
 commonMsg =
     CommonMsg.createHelper OnCommonMsg
 

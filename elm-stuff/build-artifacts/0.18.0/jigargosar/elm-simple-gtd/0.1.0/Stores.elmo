@@ -173,6 +173,26 @@ var _jigargosar$elm_simple_gtd$Stores$findTodoById = function (id) {
 			}(_p11));
 	};
 };
+var _jigargosar$elm_simple_gtd$Stores$findEntityByEntityId = function (entityId) {
+	var _p12 = entityId;
+	switch (_p12.ctor) {
+		case 'ContextId':
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+				_jigargosar$elm_simple_gtd$Stores$findContextById(_p12._0),
+				_jigargosar$elm_simple_gtd$Entity_Types$createContextEntity);
+		case 'ProjectId':
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+				_jigargosar$elm_simple_gtd$Stores$findProjectById(_p12._0),
+				_jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity);
+		default:
+			return A2(
+				_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+				_jigargosar$elm_simple_gtd$Stores$findTodoById(_p12._0),
+				_jigargosar$elm_simple_gtd$Entity_Types$createTodoEntity);
+	}
+};
 var _jigargosar$elm_simple_gtd$Stores$filterProjects = F2(
 	function (pred, model) {
 		return _jigargosar$elm_simple_gtd$Project$sort(
@@ -202,9 +222,9 @@ var _jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestCreated = functi
 	return A2(
 		_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortBy,
 		pred,
-		function (_p12) {
+		function (_p13) {
 			return _elm_lang$core$Basics$negate(
-				_jigargosar$elm_simple_gtd$Todo$getCreatedAt(_p12));
+				_jigargosar$elm_simple_gtd$Todo$getCreatedAt(_p13));
 		});
 };
 var _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForContext = F2(
@@ -251,9 +271,9 @@ var _jigargosar$elm_simple_gtd$Stores$filterTodosAndSortByLatestModified = funct
 	return A2(
 		_jigargosar$elm_simple_gtd$Stores$filterTodosAndSortBy,
 		pred,
-		function (_p13) {
+		function (_p14) {
 			return _elm_lang$core$Basics$negate(
-				_jigargosar$elm_simple_gtd$Todo$getModifiedAt(_p13));
+				_jigargosar$elm_simple_gtd$Todo$getModifiedAt(_p14));
 		});
 };
 var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
@@ -262,8 +282,8 @@ var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
 		var findProjectByIdHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$findProjectById, model);
 		var getActiveTodoListForProjectHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForProject, model);
 		var getActiveTodoListForContextHelp = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getActiveTodoListForContext, model);
-		var _p14 = viewType;
-		switch (_p14.ctor) {
+		var _p15 = viewType;
+		switch (_p15.ctor) {
 			case 'ContextsView':
 				return A2(
 					_jigargosar$elm_simple_gtd$Entity_Tree$initContextForest,
@@ -281,7 +301,7 @@ var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
 					findProjectByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_jigargosar$elm_simple_gtd$Stores$findContextById, _p14._0, model),
+						A2(_jigargosar$elm_simple_gtd$Stores$findContextById, _p15._0, model),
 						_jigargosar$elm_simple_gtd$Context$null));
 			case 'ProjectView':
 				return A3(
@@ -290,7 +310,7 @@ var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
 					findContextByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_jigargosar$elm_simple_gtd$Stores$findProjectById, _p14._0, model),
+						A2(_jigargosar$elm_simple_gtd$Stores$findProjectById, _p15._0, model),
 						_jigargosar$elm_simple_gtd$Project$null));
 			case 'BinView':
 				return A2(
@@ -322,10 +342,10 @@ var _jigargosar$elm_simple_gtd$Stores$createGrouping = F2(
 		}
 	});
 var _jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList = function (model) {
-	var _p15 = model.mainViewType;
-	if (_p15.ctor === 'EntityListView') {
+	var _p16 = model.mainViewType;
+	if (_p16.ctor === 'EntityListView') {
 		return _jigargosar$elm_simple_gtd$Entity_Tree$flatten(
-			A2(_jigargosar$elm_simple_gtd$Stores$createGrouping, _p15._0, model));
+			A2(_jigargosar$elm_simple_gtd$Stores$createGrouping, _p16._0, model));
 	} else {
 		return {ctor: '[]'};
 	}
@@ -371,9 +391,9 @@ var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursorOnGroupDocChange = F
 						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(model));
 				};
 				return function () {
-					var _p16 = indexTuple;
-					if (((_p16.ctor === '_Tuple2') && (_p16._0.ctor === 'Just')) && (_p16._1.ctor === 'Nothing')) {
-						return setFocusInIndex(_p16._0._0);
+					var _p17 = indexTuple;
+					if (((_p17.ctor === '_Tuple2') && (_p17._0.ctor === 'Just')) && (_p17._1.ctor === 'Nothing')) {
+						return setFocusInIndex(_p17._0._0);
 					} else {
 						return _elm_lang$core$Basics$identity;
 					}
@@ -384,9 +404,9 @@ var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursorOnGroupDocChange = F
 			newModel,
 			A2(
 				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
-				function (_p17) {
+				function (_p18) {
 					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex, oldModel)(
-						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p17));
+						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p18));
 				},
 				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
 	});
@@ -403,9 +423,9 @@ var _jigargosar$elm_simple_gtd$Stores$updateAllNamedDocsDocs = F4(
 						_jigargosar$elm_simple_gtd$Store$updateAndPersist,
 						A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-							function (_p18) {
+							function (_p19) {
 								return _elm_lang$core$Set$member(
-									_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p18));
+									_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p19));
 							},
 							idSet),
 						model.now,
@@ -433,14 +453,14 @@ var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursorFromEntityIndexTuple
 				_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(model));
 		};
 		return function () {
-			var _p19 = indexTuple;
-			if ((_p19.ctor === '_Tuple2') && (_p19._0.ctor === 'Just')) {
-				if (_p19._1.ctor === 'Just') {
-					var _p21 = _p19._0._0;
-					var _p20 = _p19._1._0;
-					return (_elm_lang$core$Native_Utils.cmp(_p21, _p20) < 0) ? setFocusInIndex(_p21) : ((_elm_lang$core$Native_Utils.cmp(_p21, _p20) > 0) ? setFocusInIndex(_p21 + 1) : _elm_lang$core$Basics$identity);
+			var _p20 = indexTuple;
+			if ((_p20.ctor === '_Tuple2') && (_p20._0.ctor === 'Just')) {
+				if (_p20._1.ctor === 'Just') {
+					var _p22 = _p20._0._0;
+					var _p21 = _p20._1._0;
+					return (_elm_lang$core$Native_Utils.cmp(_p22, _p21) < 0) ? setFocusInIndex(_p22) : ((_elm_lang$core$Native_Utils.cmp(_p22, _p21) > 0) ? setFocusInIndex(_p22 + 1) : _elm_lang$core$Basics$identity);
 				} else {
-					return setFocusInIndex(_p19._0._0);
+					return setFocusInIndex(_p20._0._0);
 				}
 			} else {
 				return _elm_lang$core$Basics$identity;
@@ -454,33 +474,29 @@ var _jigargosar$elm_simple_gtd$Stores$updateEntityListCursor = F2(
 			newModel,
 			A2(
 				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
-				function (_p22) {
+				function (_p23) {
 					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex, oldModel)(
-						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p22));
+						_jigargosar$elm_simple_gtd$Stores$getCurrentViewEntityList(_p23));
 				},
 				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
 	});
 var _jigargosar$elm_simple_gtd$Stores$setFocusInEntity = function (entity) {
 	return A2(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Stores$focusInEntity, entity);
 };
-var _jigargosar$elm_simple_gtd$Stores$setFocusInEntityFromTodoId = F2(
-	function (todoId, model) {
+var _jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithEntityId = F2(
+	function (entityId, model) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
-					{
-						ctor: '_Tuple2',
-						_0: A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, model),
-							_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity),
-						_1: _elm_lang$core$Maybe$Just(model)
-					}),
-				_elm_lang$core$Basics$uncurry(_jigargosar$elm_simple_gtd$Stores$setFocusInEntity)),
+				A2(_jigargosar$elm_simple_gtd$Stores$findEntityByEntityId, entityId, model),
+				A2(_jigargosar$elm_simple_gtd$X_Record$setIn, model, _jigargosar$elm_simple_gtd$Stores$focusInEntity)),
 			model);
 	});
+var _jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithTodoId = function (_p24) {
+	return _jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithEntityId(
+		_jigargosar$elm_simple_gtd$EntityId$fromTodoDocId(_p24));
+};
 var _jigargosar$elm_simple_gtd$Stores$todoStore = A2(
 	_jigargosar$elm_simple_gtd$X_Record$field,
 	function (_) {
@@ -528,17 +544,17 @@ var _jigargosar$elm_simple_gtd$Stores$updateTodo = F2(
 	});
 var _jigargosar$elm_simple_gtd$Stores$findAndSnoozeOverDueTodo = function (model) {
 	var snooze = function (todoId) {
-		return function (_p23) {
-			var _p24 = _p23;
-			var _p25 = _p24._0;
+		return function (_p25) {
+			var _p26 = _p25;
+			var _p27 = _p26._0;
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, _p25),
+				A2(_jigargosar$elm_simple_gtd$Stores$findTodoById, todoId, _p27),
 				function (todo) {
 					return {
 						ctor: '_Tuple2',
-						_0: {ctor: '_Tuple2', _0: todo, _1: _p25},
-						_1: _p24._1
+						_0: {ctor: '_Tuple2', _0: todo, _1: _p27},
+						_1: _p26._1
 					};
 				});
 		}(
@@ -554,9 +570,9 @@ var _jigargosar$elm_simple_gtd$Stores$findAndSnoozeOverDueTodo = function (model
 			_jigargosar$elm_simple_gtd$Store$findBy,
 			_jigargosar$elm_simple_gtd$Todo$isReminderOverdue(model.now),
 			model.todoStore),
-		function (_p26) {
+		function (_p28) {
 			return snooze(
-				_jigargosar$elm_simple_gtd$Document$getId(_p26));
+				_jigargosar$elm_simple_gtd$Document$getId(_p28));
 		});
 };
 var _jigargosar$elm_simple_gtd$Stores$updateAllTodos = F3(
@@ -565,9 +581,9 @@ var _jigargosar$elm_simple_gtd$Stores$updateAllTodos = F3(
 			_jigargosar$elm_simple_gtd$Stores$findAndUpdateAllTodos,
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-				function (_p27) {
+				function (_p29) {
 					return _elm_lang$core$Set$member(
-						_jigargosar$elm_simple_gtd$Document$getId(_p27));
+						_jigargosar$elm_simple_gtd$Document$getId(_p29));
 				},
 				idSet),
 			action,
@@ -630,8 +646,8 @@ var _jigargosar$elm_simple_gtd$Stores$createContext = F2(
 	});
 var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
 	function (dbName, encodedEntity) {
-		var _p28 = dbName;
-		switch (_p28) {
+		var _p30 = dbName;
+		switch (_p30) {
 			case 'todo-db':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
@@ -657,7 +673,7 @@ var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(
 						_jigargosar$elm_simple_gtd$Store$upsertOnPouchDBChange(encodedEntity)),
 					_elm_lang$core$Tuple$mapFirst(_jigargosar$elm_simple_gtd$Entity_Types$createContextEntity));
 			default:
-				return function (_p29) {
+				return function (_p31) {
 					return _elm_lang$core$Maybe$Nothing;
 				};
 		}

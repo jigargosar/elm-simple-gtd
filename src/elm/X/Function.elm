@@ -2,6 +2,7 @@ module X.Function exposing (..)
 
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import Tuple2
 
 
 increment num =
@@ -99,6 +100,18 @@ and =
 
 equals =
     (==)
+
+
+equalsT2 =
+    uncurry equals
+
+
+tuple2 =
+    (,)
+
+
+mapAllT2 =
+    Tuple2.mapBoth
 
 
 notEquals =

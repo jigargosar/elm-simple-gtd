@@ -83,7 +83,7 @@ subscriptions m =
 
 
 update :
-    (Msg.Msg -> ReturnF)
+    (Msg.AppMsg -> ReturnF)
     -> Time.Time
     -> TodoMsg
     -> ReturnF
@@ -249,7 +249,7 @@ gotoTodoWithId todoId model =
             |> Maybe.unpack
                 (\_ ->
                     model
-                        |> Stores.setFocusInEntityFromTodoId todoId
+                        |> Stores.setFocusInEntityWithTodoId todoId
                         |> Model.ViewType.switchToContextsView
                 )
                 (Stores.setFocusInEntity # model)

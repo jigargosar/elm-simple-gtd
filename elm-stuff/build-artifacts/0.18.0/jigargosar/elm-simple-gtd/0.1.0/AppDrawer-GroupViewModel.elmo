@@ -7,10 +7,10 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
-			config.toEntity(entity));
-		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity);
 		var id = _jigargosar$elm_simple_gtd$Document$getId(entity);
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
+			config.toEntityId(id));
+		var startEditingMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnStartEditingEntity);
 		var count = _elm_lang$core$List$length(
 			getTodoListByEntityId(id));
 		return {
@@ -50,7 +50,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$contexts = function (mod
 		todoList: _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveProject(model),
 		namePrefix: '@',
 		filter: activeFilter,
-		toEntity: _jigargosar$elm_simple_gtd$Entity$fromContext,
+		toEntityId: _jigargosar$elm_simple_gtd$Entity_Types$ContextId,
 		nullEntity: _jigargosar$elm_simple_gtd$Context$null,
 		isNull: _jigargosar$elm_simple_gtd$Context$isNull,
 		nullIcon: {name: 'inbox', color: _jigargosar$elm_x$AppColors$nullContextColor},
@@ -87,7 +87,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$projects = function (mod
 		todoList: _jigargosar$elm_simple_gtd$Stores$getActiveTodoListHavingActiveContext(model),
 		namePrefix: '#',
 		filter: activeFilter,
-		toEntity: _jigargosar$elm_simple_gtd$Entity$fromProject,
+		toEntityId: _jigargosar$elm_simple_gtd$Entity_Types$ProjectId,
 		nullEntity: _jigargosar$elm_simple_gtd$Project$null,
 		isNull: _jigargosar$elm_simple_gtd$Project$isNull,
 		nullIcon: {name: 'apps', color: _jigargosar$elm_x$AppColors$nullProjectColor},
@@ -161,7 +161,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_GroupViewModel$Config = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {groupByFn: a, todoList: b, namePrefix: c, filter: d, toEntity: e, nullEntity: f, isNull: g, nullIcon: h, defaultColor: i, defaultIconName: j, getViewType: k};
+											return {groupByFn: a, todoList: b, namePrefix: c, filter: d, toEntityId: e, nullEntity: f, isNull: g, nullIcon: h, defaultColor: i, defaultIconName: j, getViewType: k};
 										};
 									};
 								};

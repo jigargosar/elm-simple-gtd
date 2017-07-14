@@ -150,7 +150,7 @@ archivedItems vm =
         ]
 
 
-entityListItem : AppDrawer.GroupViewModel.DocumentWithNameViewModel -> Html Msg
+entityListItem : AppDrawer.GroupViewModel.DocumentWithNameViewModel -> Html AppMsg
 entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)

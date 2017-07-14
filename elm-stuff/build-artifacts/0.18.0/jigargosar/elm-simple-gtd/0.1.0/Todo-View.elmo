@@ -158,7 +158,10 @@ var _jigargosar$elm_simple_gtd$Todo_View$projectMenu = _jigargosar$elm_simple_gt
 var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
 var _jigargosar$elm_simple_gtd$Todo_View$edit = F2(
 	function (form, appModel) {
-		var fireToggleDelete = A2(_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg, form.entity, _jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
+		var fireToggleDelete = A2(
+			_jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg,
+			_jigargosar$elm_simple_gtd$Entity_Types$TodoId(form.id),
+			_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
 		var fireTextChanged = _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText(form);
 		var todoText = form.text;
 		return A2(
@@ -765,13 +768,9 @@ var _jigargosar$elm_simple_gtd$Todo_View$getDisplayText = function (todo) {
 			_jigargosar$elm_simple_gtd$Todo$getText(todo)));
 };
 var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
-	function (appM, canBeFocused, todo) {
-		var startEditingMsg = canBeFocused ? _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText(todo) : _jigargosar$elm_simple_gtd$Model$noop;
+	function (appM, isFocusable, todo) {
+		var startEditingMsg = isFocusable ? _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText(todo) : _jigargosar$elm_simple_gtd$Model$noop;
 		var onTodoMsg = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg;
-		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
-			_jigargosar$elm_simple_gtd$Entity_Types$TodoEntity(todo));
-		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
-		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
 		var contextId = _jigargosar$elm_simple_gtd$Todo$getContextId(todo);
 		var projectId = _jigargosar$elm_simple_gtd$Todo$getProjectId(todo);
 		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
@@ -798,6 +797,10 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 						_jigargosar$elm_simple_gtd$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
+		var createEntityActionMsg = _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg(
+			_jigargosar$elm_simple_gtd$EntityId$fromTodoDocId(todoId));
+		var toggleDeleteMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleDeleted);
+		var toggleDoneMsg = createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnEntityToggleArchived);
 		var now = appM.now;
 		var reminder = A2(_jigargosar$elm_simple_gtd$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p9) {
@@ -832,7 +835,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			}
 		};
 		var tabindexAV = function () {
-			var tabindexValue = canBeFocused ? 0 : -1;
+			var tabindexValue = isFocusable ? 0 : -1;
 			return tabindexValue;
 		}();
 		return {
@@ -846,7 +849,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 			showContextDropDownMsg: _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext(todo),
 			showProjectDropDownMsg: _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject(todo),
 			startEditingMsg: startEditingMsg,
-			canBeFocused: canBeFocused,
+			canBeFocused: isFocusable,
 			toggleDoneMsg: toggleDoneMsg,
 			reminder: reminder,
 			onFocusIn: createEntityActionMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnFocusInEntity),

@@ -63,7 +63,7 @@ _jigargosar$elm_simple_gtd$X_Function_Infix_ops['?>>'] = F2(
 		};
 	});
 var _jigargosar$elm_simple_gtd$X_Function_Infix_ops = _jigargosar$elm_simple_gtd$X_Function_Infix_ops || {};
-_jigargosar$elm_simple_gtd$X_Function_Infix_ops['.#|>'] = _elm_lang$core$Basics$flip(_elm_lang$core$List$indexedMap);
+_jigargosar$elm_simple_gtd$X_Function_Infix_ops['#.|>'] = _elm_lang$core$Basics$flip(_elm_lang$core$List$indexedMap);
 var _jigargosar$elm_simple_gtd$X_Function_Infix_ops = _jigargosar$elm_simple_gtd$X_Function_Infix_ops || {};
 _jigargosar$elm_simple_gtd$X_Function_Infix_ops['=>'] = F2(
 	function (v0, v1) {

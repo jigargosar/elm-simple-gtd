@@ -10,7 +10,7 @@ import Dict.Extra
 import Document
 import Document.Types exposing (DocId)
 import Entity
-import Entity.Types exposing (EntityListViewType, Entity)
+import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types
 import Msg
@@ -41,9 +41,9 @@ type alias ViewModel =
     , title : String
     , className : String
     , showArchived : Bool
-    , onAddClicked : Msg
-    , onToggleExpanded : Msg
-    , onToggleShowArchived : Msg
+    , onAddClicked : AppMsg
+    , onToggleExpanded : AppMsg
+    , onToggleShowArchived : AppMsg
     , isExpanded : Bool
     , icon : IconVM
     }
@@ -56,7 +56,7 @@ type alias DocumentWithNameViewModel =
     , isDeleted : Bool
     , isEmpty : Bool
     , count : Int
-    , onActiveStateChanged : Bool -> Msg
+    , onActiveStateChanged : Bool -> AppMsg
     , icon : IconVM
     }
 
@@ -70,7 +70,7 @@ type alias Config =
     , todoList : List TodoDoc
     , namePrefix : String
     , filter : AppModel -> List GroupDoc
-    , toEntity : GroupDoc -> Entity
+    , toEntityId : DocId -> EntityId
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
@@ -102,7 +102,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Msg.onEntityUpdateMsg (config.toEntity entity)
+            Msg.onEntityUpdateMsg (config.toEntityId id)
 
         count =
             getTodoListByEntityId id |> List.length
@@ -157,7 +157,7 @@ contexts model =
             , todoList = Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
-            , toEntity = Entity.fromContext
+            , toEntityId = ContextId
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
@@ -205,7 +205,7 @@ projects model =
             , todoList = Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
-            , toEntity = Entity.fromProject
+            , toEntityId = ProjectId
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }

@@ -34,7 +34,7 @@ delta2hash =
     delta2builder >>> Maybe.map toHashChange
 
 
-builder2messages : Builder -> List Msg
+builder2messages : Builder -> List AppMsg
 builder2messages builder =
     routeUrlBuilderToMaybeListViewType builder
         |> Maybe.Extra.unpack
@@ -50,7 +50,7 @@ builder2messages builder =
             (Msg.onSetEntityListView >> X.List.singleton)
 
 
-hash2messages : Location -> List Msg
+hash2messages : Location -> List AppMsg
 hash2messages location =
     builder2messages (fromHash location.href)
 

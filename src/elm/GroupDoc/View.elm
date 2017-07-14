@@ -1,8 +1,9 @@
 module GroupDoc.View exposing (..)
 
-import Entity.Types
-import GroupDoc.ViewModel exposing (ViewModel)
-import Msg
+import EntityId
+import GroupDoc.ViewModel exposing (GroupDocViewModel)
+import Msg exposing (AppMsg)
+import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -14,14 +15,19 @@ import View.Shared exposing (defaultOkCancelDeleteButtons)
 import X.Html exposing (onClickStopPropagation)
 
 
+type alias KeyedView =
+    ( String, Html AppMsg )
+
+
 initKeyed todoView vm =
     ( vm.id, item todoView vm )
 
 
+item : (TodoDoc -> KeyedView) -> GroupDocViewModel -> Html AppMsg
 item todoView vm =
     let
         getTabIndexAVForTodo =
-            Entity.Types.TodoEntity >> vm.getTabIndexAVForEntity
+            EntityId.fromTodo >> vm.getTabIndexAVForEntityId
     in
         Html.Keyed.node "div"
             [ class "collection" ]
@@ -32,7 +38,7 @@ initHeaderKeyed vm =
     ( vm.id, headerItem vm )
 
 
-headerItem : ViewModel -> Html Msg.Msg
+headerItem : GroupDocViewModel -> Html Msg.AppMsg
 headerItem vm =
     let
         editButton =

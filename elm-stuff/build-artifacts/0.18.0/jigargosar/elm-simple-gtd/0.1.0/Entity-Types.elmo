@@ -1,3 +1,14 @@
+var _jigargosar$elm_simple_gtd$Entity_Types$getDocIdFromEntityId = function (entityId) {
+	var _p0 = entityId;
+	switch (_p0.ctor) {
+		case 'ContextId':
+			return _p0._0;
+		case 'ProjectId':
+			return _p0._0;
+		default:
+			return _p0._0;
+	}
+};
 var _jigargosar$elm_simple_gtd$Entity_Types$ContextEntity = function (a) {
 	return {ctor: 'ContextEntity', _0: a};
 };
@@ -11,13 +22,13 @@ var _jigargosar$elm_simple_gtd$Entity_Types$createTodoEntity = _jigargosar$elm_s
 var _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity = function (a) {
 	return {ctor: 'GroupEntity', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity = function (_p0) {
+var _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity = function (_p1) {
 	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
-		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p0));
+		_jigargosar$elm_simple_gtd$Entity_Types$ContextEntity(_p1));
 };
-var _jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity = function (_p1) {
+var _jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity = function (_p2) {
 	return _jigargosar$elm_simple_gtd$Entity_Types$GroupEntity(
-		_jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity(_p1));
+		_jigargosar$elm_simple_gtd$Entity_Types$ProjectEntity(_p2));
 };
 var _jigargosar$elm_simple_gtd$Entity_Types$RecentView = {ctor: 'RecentView'};
 var _jigargosar$elm_simple_gtd$Entity_Types$DoneView = {ctor: 'DoneView'};

@@ -6,9 +6,9 @@ module X.Function.Infix exposing (..)
 infixr 5 =>
 
 
-(.#|>) =
+(#.|>) =
     flip List.indexedMap
-infixl 0 .#|>
+infixl 0 #.|>
 
 
 (?>>) f1 f2 =
@@ -34,6 +34,13 @@ infixl 9 >>?+
 (>>>) : (a -> b -> c) -> (c -> d) -> a -> b -> d
 (>>>) ff f x y =
     ff x y |> f
+infixl 8 >>>
+
+
+
+--infixl 9 <<<
+--infixl 9 <<<<
+--infixr 9 >>>>
 
 
 {-|

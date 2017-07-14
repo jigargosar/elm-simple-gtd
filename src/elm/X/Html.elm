@@ -1,10 +1,14 @@
 module X.Html exposing (..)
 
-import Html exposing (Attribute)
+import Html exposing (Attribute, Html)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onWithOptions, targetValue)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
+
+
+type alias KeyedNode msg =
+    ( String, Html msg )
 
 
 stopPropagation =

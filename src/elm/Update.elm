@@ -43,8 +43,8 @@ map =
 
 
 update :
-    (Msg -> ReturnF)
-    -> Msg
+    (AppMsg -> ReturnF)
+    -> AppMsg
     -> ReturnF
 update andThenUpdate msg =
     case msg of
@@ -197,7 +197,7 @@ moveFocusBy =
     Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
-withNow : (Time -> Msg) -> ReturnF
+withNow : (Time -> AppMsg) -> ReturnF
 withNow toMsg =
     command (Task.perform toMsg Time.now)
 

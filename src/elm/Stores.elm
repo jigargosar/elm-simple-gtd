@@ -5,10 +5,11 @@ import Document
 import Document.Types exposing (DeviceId, DocId, getDocId)
 import Entity
 import Entity.Tree
-import Entity.Types exposing (Entity, EntityListViewType, createContextEntity, createProjectEntity, createTodoEntity)
+import Entity.Types exposing (..)
+import EntityId
 import GroupDoc
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
-import Msg exposing (Msg)
+import Msg exposing (AppMsg)
 import Project
 import Return
 import Store
@@ -22,7 +23,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import X.Record exposing (maybeOverT2, maybeSetIn, overT2, set)
+import X.Record exposing (maybeOverT2, maybeSetIn, overT2, set, setIn)
 import Json.Encode as E
 import Set
 import Tuple2
@@ -400,7 +401,7 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
-findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd Msg )
+findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
@@ -439,12 +440,28 @@ setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-setFocusInEntityFromTodoId : DocId -> ModelF
-setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.Types.TodoEntity, Just model )
-        ?|> uncurry setFocusInEntity
-        ?= model
+setFocusInEntityWithTodoId : DocId -> ModelF
+setFocusInEntityWithTodoId =
+    EntityId.fromTodoDocId >> setFocusInEntityWithEntityId
 
 
 setFocusInEntity entity =
     set focusInEntity entity
+
+
+setFocusInEntityWithEntityId entityId model =
+    findEntityByEntityId entityId model
+        ?|> setIn model focusInEntity
+        ?= model
+
+
+findEntityByEntityId entityId =
+    case entityId of
+        ContextId id ->
+            findContextById id >>? createContextEntity
+
+        ProjectId id ->
+            findProjectById id >>? createProjectEntity
+
+        TodoId id ->
+            findTodoById id >>? createTodoEntity

@@ -1,7 +1,8 @@
 module GroupDoc.EditView exposing (..)
 
-import Entity.Types
+import Entity.Types exposing (EntityId(..))
 import GroupDoc.FormTypes exposing (GroupDocEditForm)
+import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import Model
@@ -12,11 +13,20 @@ import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (defaultOkCancelArchiveButtons)
 
 
-init : GroupDocEditForm -> Html Msg.Msg
+init : GroupDocEditForm -> Html Msg.AppMsg
 init form =
     let
+        entityId =
+            form.id
+                |> case form.groupDocType of
+                    ContextGroupDoc ->
+                        ContextId
+
+                    ProjectGroupDoc ->
+                        ProjectId
+
         toMsg =
-            Msg.onEntityUpdateMsg form.entity
+            Msg.onEntityUpdateMsg entityId
 
         fireNameChanged =
             Entity.Types.OnEntityTextChanged >> toMsg

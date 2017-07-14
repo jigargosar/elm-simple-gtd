@@ -8,7 +8,7 @@ import Entity.Tree
 import Entity.Types exposing (..)
 import EntityId
 import GroupDoc
-import GroupDoc.Types exposing (ContextStore, ProjectStore)
+import GroupDoc.Types exposing (ContextStore, GroupDoc, ProjectStore)
 import Msg exposing (AppMsg)
 import Project
 import Return
@@ -49,13 +49,13 @@ focusInEntity =
 
 createContext text model =
     model
-        |> overT2 contextStore (Store.insert (Context.init text model.now))
+        |> overT2 contextStore (Store.insert (GroupDoc.init text model.now))
         |> Tuple.second
 
 
 createProject text model =
     model
-        |> overT2 projectStore (Store.insert (Project.init text model.now))
+        |> overT2 projectStore (Store.insert (GroupDoc.init text model.now))
         |> Tuple.second
 
 
@@ -358,10 +358,12 @@ createGrouping viewType model =
                     (filterTodosAndSortByLatestModified X.Predicate.always model)
 
 
+updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
 updateContext id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
 
 
+updateProject : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
 updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 

@@ -179,66 +179,36 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 					_jigargosar$elm_simple_gtd$Entity_Main$switchToEntityListViewFromEntity(entityId));
 		}
 	});
+var _jigargosar$elm_simple_gtd$Entity_Main$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p13 = msg;
 		switch (_p13.ctor) {
-			case 'EM_NewContext':
-				var createAndEditNewContext = F2(
-					function (andThenUpdate, model) {
-						return function (_p14) {
-							var _p15 = _p14;
-							var entity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_p15._0);
-							return A3(
-								_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity,
-								andThenUpdate,
-								_jigargosar$elm_simple_gtd$Entity$toEntityId(entity),
-								_Fresheyeball$elm_return$Return$singleton(_p15._1));
-						}(
-							A2(
-								_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-								A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setContextStore, model),
-								A2(
-									_jigargosar$elm_simple_gtd$Store$insert,
-									A2(_jigargosar$elm_simple_gtd$Context$init, '<New Context>', model.now),
-									model.contextStore)));
-					});
+			case 'EM_StartAddingContext':
+				return function (_p14) {
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
+						A2(
+							_jigargosar$elm_simple_gtd$Entity_Main$map,
+							function (_p15) {
+								return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
+									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm(_p15));
+							}(
+								_jigargosar$elm_simple_gtd$GroupDoc_Form$createAddGroupDocForm(_jigargosar$elm_simple_gtd$GroupDoc_Types$ContextGroupDoc)),
+							_p14));
+				};
+			case 'EM_StartAddingProject':
 				return function (_p16) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A2(
-							_Fresheyeball$elm_return$Return$andThen,
-							createAndEditNewContext(andThenUpdate),
+							_jigargosar$elm_simple_gtd$Entity_Main$map,
+							function (_p17) {
+								return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
+									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm(_p17));
+							}(
+								_jigargosar$elm_simple_gtd$GroupDoc_Form$createAddGroupDocForm(_jigargosar$elm_simple_gtd$GroupDoc_Types$ProjectGroupDoc)),
 							_p16));
-				};
-			case 'EM_NewProject':
-				var createAndEditNewProject = F2(
-					function (andThenUpdate, model) {
-						return function (_p17) {
-							var _p18 = _p17;
-							var entity = _jigargosar$elm_simple_gtd$Entity_Types$createProjectEntity(_p18._0);
-							return A3(
-								_jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity,
-								andThenUpdate,
-								_jigargosar$elm_simple_gtd$Entity$toEntityId(entity),
-								_Fresheyeball$elm_return$Return$singleton(_p18._1));
-						}(
-							A2(
-								_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
-								A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Stores$setProjectStore, model),
-								A2(
-									_jigargosar$elm_simple_gtd$Store$insert,
-									A2(_jigargosar$elm_simple_gtd$Project$init, '<New Project>', model.now),
-									model.projectStore)));
-					});
-				return function (_p19) {
-					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-						A2(
-							_Fresheyeball$elm_return$Return$andThen,
-							createAndEditNewProject(andThenUpdate),
-							_p19));
 				};
 			default:
 				return A3(_jigargosar$elm_simple_gtd$Entity_Main$onUpdate, andThenUpdate, _p13._0, _p13._1);
 		}
 	});
-var _jigargosar$elm_simple_gtd$Entity_Main$map = _Fresheyeball$elm_return$Return$map;

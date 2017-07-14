@@ -32,11 +32,6 @@ constructor =
     GroupDoc.constructor
 
 
-init : GroupDocName -> Time -> DeviceId -> DocId -> Model
-init name now deviceId id =
-    constructor id "" now now False deviceId name False
-
-
 null : Model
 null =
     constructor nullId "" 0 0 False "" "No Project" False

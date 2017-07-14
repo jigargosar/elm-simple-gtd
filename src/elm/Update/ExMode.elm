@@ -5,17 +5,21 @@ import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), GroupEntityType(..), createContextEntity)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
+import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
 import Project
 import Return exposing (andThen, map)
+import Store
 import Todo
 import Todo.Form
 import Todo.Form
 import Todo.FormTypes exposing (..)
 import Stores
 import Todo.Types exposing (TodoAction(..))
+import Tuple2
 import Types exposing (ModelReturnF)
+import X.Record exposing (over, overT2)
 import X.Return
 
 
@@ -31,13 +35,30 @@ saveExclusiveModeForm exMode =
                 update fn =
                     fn form.id (GroupDoc.setName form.name)
                         |> andThen
+
+                insert store updateFn =
+                    andThen
+                        (\model ->
+                            overT2 store (Store.insert (GroupDoc.init form.name model.now)) model
+                                |> (\( gd, model ) -> updateFn (getDocId gd) identity model)
+                        )
             in
                 case form.groupDocType of
                     ContextGroupDoc ->
-                        update Stores.updateContext
+                        case form.mode of
+                            GDFM_Add ->
+                                insert Stores.contextStore Stores.updateContext
+
+                            GDFM_Edit ->
+                                update Stores.updateContext
 
                     ProjectGroupDoc ->
-                        update Stores.updateProject
+                        case form.mode of
+                            GDFM_Add ->
+                                insert Stores.projectStore Stores.updateProject
+
+                            GDFM_Edit ->
+                                update Stores.updateProject
 
         --                case form.mode of
         --                    GroupDoc.FormTypes.GDFM_Edit ->

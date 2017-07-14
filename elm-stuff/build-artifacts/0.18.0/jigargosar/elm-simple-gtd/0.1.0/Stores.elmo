@@ -612,7 +612,7 @@ var _jigargosar$elm_simple_gtd$Stores$createProject = F2(
 				_jigargosar$elm_simple_gtd$X_Record$overT2,
 				_jigargosar$elm_simple_gtd$Stores$projectStore,
 				_jigargosar$elm_simple_gtd$Store$insert(
-					A2(_jigargosar$elm_simple_gtd$Project$init, text, model.now)),
+					A2(_jigargosar$elm_simple_gtd$GroupDoc$init, text, model.now)),
 				model));
 	});
 var _jigargosar$elm_simple_gtd$Stores$updateProject = F2(
@@ -641,7 +641,7 @@ var _jigargosar$elm_simple_gtd$Stores$createContext = F2(
 				_jigargosar$elm_simple_gtd$X_Record$overT2,
 				_jigargosar$elm_simple_gtd$Stores$contextStore,
 				_jigargosar$elm_simple_gtd$Store$insert(
-					A2(_jigargosar$elm_simple_gtd$Context$init, text, model.now)),
+					A2(_jigargosar$elm_simple_gtd$GroupDoc$init, text, model.now)),
 				model));
 	});
 var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange = F2(

@@ -125,6 +125,10 @@ var _jigargosar$elm_simple_gtd$GroupDoc$constructor = F8(
 			name: name
 		};
 	});
+var _jigargosar$elm_simple_gtd$GroupDoc$init = F4(
+	function (name, now, deviceId, id) {
+		return A8(_jigargosar$elm_simple_gtd$GroupDoc$constructor, id, '', now, now, false, deviceId, name, false);
+	});
 var _jigargosar$elm_simple_gtd$GroupDoc$decoder = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 	'archived',

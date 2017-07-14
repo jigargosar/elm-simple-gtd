@@ -8,7 +8,8 @@ import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
-import GroupDoc.Form exposing (createEditContextForm, createEditProjectForm)
+import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
+import GroupDoc.Types exposing (GroupDocType(..))
 import Maybe.Extra
 import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
@@ -41,38 +42,38 @@ update :
 update andThenUpdate msg =
     case msg of
         EM_StartAddingContext ->
-            let
-                createAndEditNewContext andThenUpdate model =
-                    Store.insert (Context.init "<New Context>" model.now) model.contextStore
-                        |> Tuple2.mapSecond (Stores.setContextStore # model)
-                        |> (\( context, model ) ->
-                                let
-                                    entity =
-                                        (createContextEntity context)
-                                in
-                                    Return.singleton model
-                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-                           )
-            in
-                andThen (createAndEditNewContext andThenUpdate)
-                    >> DomPorts.autoFocusInputRCmd
+            --            let
+            --                createAndEditNewContext andThenUpdate model =
+            --                    Store.insert (Context.init "<New Context>" model.now) model.contextStore
+            --                        |> Tuple2.mapSecond (Stores.setContextStore # model)
+            --                        |> (\( context, model ) ->
+            --                                let
+            --                                    entity =
+            --                                        (createContextEntity context)
+            --                                in
+            --                                    Return.singleton model
+            --                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
+            --                           )
+            --            in
+            map (createAddGroupDocForm ContextGroupDoc |> XMGroupDocForm >> setExclusiveMode)
+                >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
-            let
-                createAndEditNewProject andThenUpdate model =
-                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
-                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
-                        |> (\( project, model ) ->
-                                let
-                                    entity =
-                                        (createProjectEntity project)
-                                in
-                                    Return.singleton model
-                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-                           )
-            in
-                andThen (createAndEditNewProject andThenUpdate)
-                    >> DomPorts.autoFocusInputRCmd
+            --            let
+            --                createAndEditNewProject andThenUpdate model =
+            --                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
+            --                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
+            --                        |> (\( project, model ) ->
+            --                                let
+            --                                    entity =
+            --                                        (createProjectEntity project)
+            --                                in
+            --                                    Return.singleton model
+            --                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
+            --                           )
+            --            in
+            map (createAddGroupDocForm ProjectGroupDoc |> XMGroupDocForm >> setExclusiveMode)
+                >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->
             onUpdate andThenUpdate entityId action

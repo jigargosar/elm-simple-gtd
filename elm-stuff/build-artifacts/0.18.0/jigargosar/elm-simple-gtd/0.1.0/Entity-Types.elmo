@@ -45,8 +45,8 @@ var _jigargosar$elm_simple_gtd$Entity_Types$EM_Update = F2(
 	function (a, b) {
 		return {ctor: 'EM_Update', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Entity_Types$EM_NewContext = {ctor: 'EM_NewContext'};
-var _jigargosar$elm_simple_gtd$Entity_Types$EM_NewProject = {ctor: 'EM_NewProject'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingContext = {ctor: 'EM_StartAddingContext'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingProject = {ctor: 'EM_StartAddingProject'};
 var _jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity = {ctor: 'OnGotoEntity'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleSelection = {ctor: 'EUA_ToggleSelection'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EUA_OnFocusIn = {ctor: 'EUA_OnFocusIn'};

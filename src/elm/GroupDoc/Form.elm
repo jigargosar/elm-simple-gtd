@@ -5,8 +5,8 @@ import GroupDoc.FormTypes exposing (..)
 import GroupDoc.Types exposing (..)
 
 
-createEditForm : GroupDocType -> GroupDoc -> GroupDocForm
-createEditForm groupDocType groupDoc =
+createEditGroupDocForm : GroupDocType -> GroupDoc -> GroupDocForm
+createEditGroupDocForm groupDocType groupDoc =
     { id = getDocId groupDoc
     , name = getGroupDocName groupDoc
     , groupDocType = groupDocType
@@ -15,10 +15,10 @@ createEditForm groupDocType groupDoc =
     }
 
 
-createAddForm : GroupDocType -> GroupDocForm
-createAddForm groupDocType =
+createAddGroupDocForm : GroupDocType -> GroupDocForm
+createAddGroupDocForm groupDocType =
     { id = ""
-    , name = ""
+    , name = "<Name>"
     , groupDocType = groupDocType
     , isArchived = False
     , mode = GDFM_Add
@@ -30,8 +30,8 @@ setName name model =
 
 
 createEditContextForm =
-    createEditForm ContextGroupDoc
+    createEditGroupDocForm ContextGroupDoc
 
 
 createEditProjectForm =
-    createEditForm ProjectGroupDoc
+    createEditGroupDocForm ProjectGroupDoc

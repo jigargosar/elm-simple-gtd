@@ -46,6 +46,11 @@ constructor id rev createdAt modifiedAt deleted deviceId name archived =
     }
 
 
+init : GroupDocName -> Time -> DeviceId -> DocId -> GroupDoc
+init name now deviceId id =
+    constructor id "" now now False deviceId name False
+
+
 decoder : Decoder GroupDoc
 decoder =
     D.decode constructor

@@ -2,7 +2,7 @@ port module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg
-import Document
+import Document.Types exposing (getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd, focusSelectorIfNoFocusRCmd)
 import Entity
 import Entity.Main
@@ -99,6 +99,9 @@ update andThenUpdate msg =
             let
                 createXM model =
                     Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
+
+                positionPopup idPrefix =
+                    DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
@@ -107,13 +110,13 @@ update andThenUpdate msg =
                                 autoFocusInputCmd
 
                             ETFM_EditTodoContext ->
-                                positionContextMenuCmd todo
+                                positionPopup "#edit-context-button-"
 
                             ETFM_EditTodoProject ->
-                                positionProjectMenuCmd todo
+                                positionPopup "#edit-project-button-"
 
                             ETFM_EditTodoReminder ->
-                                positionScheduleMenuCmd todo
+                                positionPopup "#edit-schedule-button-"
                         )
 
         OnUpdateTodoForm form action ->
@@ -208,20 +211,8 @@ command =
     Return.command
 
 
-positionContextMenuCmd todo =
-    DomPorts.positionPopupMenu ("#edit-context-button-" ++ Document.getId todo)
-
-
 positionMainMenuCmd =
     DomPorts.positionPopupMenu "#main-menu-button"
-
-
-positionProjectMenuCmd todo =
-    DomPorts.positionPopupMenu ("#edit-project-button-" ++ Document.getId todo)
-
-
-positionScheduleMenuCmd todo =
-    DomPorts.positionPopupMenu ("#edit-schedule-button-" ++ Document.getId todo)
 
 
 port syncWithRemotePouch : String -> Cmd msg

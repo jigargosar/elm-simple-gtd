@@ -40,23 +40,6 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
-        EM_NewProject ->
-            let
-                createAndEditNewProject andThenUpdate model =
-                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
-                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
-                        |> (\( project, model ) ->
-                                let
-                                    entity =
-                                        (createProjectEntity project)
-                                in
-                                    Return.singleton model
-                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-                           )
-            in
-                andThen (createAndEditNewProject andThenUpdate)
-                    >> DomPorts.autoFocusInputRCmd
-
         EM_NewContext ->
             let
                 createAndEditNewContext andThenUpdate model =
@@ -72,6 +55,23 @@ update andThenUpdate msg =
                            )
             in
                 andThen (createAndEditNewContext andThenUpdate)
+                    >> DomPorts.autoFocusInputRCmd
+
+        EM_NewProject ->
+            let
+                createAndEditNewProject andThenUpdate model =
+                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
+                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
+                        |> (\( project, model ) ->
+                                let
+                                    entity =
+                                        (createProjectEntity project)
+                                in
+                                    Return.singleton model
+                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
+                           )
+            in
+                andThen (createAndEditNewProject andThenUpdate)
                     >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->

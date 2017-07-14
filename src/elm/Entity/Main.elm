@@ -41,12 +41,38 @@ update :
 update andThenUpdate msg =
     case msg of
         EM_NewProject ->
-            andThen (createAndEditNewProject andThenUpdate)
-                >> DomPorts.autoFocusInputRCmd
+            let
+                createAndEditNewProject andThenUpdate model =
+                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
+                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
+                        |> (\( project, model ) ->
+                                let
+                                    entity =
+                                        (createProjectEntity project)
+                                in
+                                    Return.singleton model
+                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
+                           )
+            in
+                andThen (createAndEditNewProject andThenUpdate)
+                    >> DomPorts.autoFocusInputRCmd
 
         EM_NewContext ->
-            andThen (createAndEditNewContext andThenUpdate)
-                >> DomPorts.autoFocusInputRCmd
+            let
+                createAndEditNewContext andThenUpdate model =
+                    Store.insert (Context.init "<New Context>" model.now) model.contextStore
+                        |> Tuple2.mapSecond (Stores.setContextStore # model)
+                        |> (\( context, model ) ->
+                                let
+                                    entity =
+                                        (createContextEntity context)
+                                in
+                                    Return.singleton model
+                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
+                           )
+            in
+                andThen (createAndEditNewContext andThenUpdate)
+                    >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->
             onUpdate andThenUpdate entityId action
@@ -132,32 +158,6 @@ toggleDeleteEntity entityId =
 
         TodoId id ->
             Stores.updateTodo (TA_ToggleDeleted) id
-
-
-createAndEditNewProject andThenUpdate model =
-    Store.insert (Project.init "<New Project>" model.now) model.projectStore
-        |> Tuple2.mapSecond (Stores.setProjectStore # model)
-        |> (\( project, model ) ->
-                let
-                    entity =
-                        (createProjectEntity project)
-                in
-                    Return.singleton model
-                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-           )
-
-
-createAndEditNewContext andThenUpdate model =
-    Store.insert (Context.init "<New Context>" model.now) model.contextStore
-        |> Tuple2.mapSecond (Stores.setContextStore # model)
-        |> (\( context, model ) ->
-                let
-                    entity =
-                        (createContextEntity context)
-                in
-                    Return.singleton model
-                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-           )
 
 
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF

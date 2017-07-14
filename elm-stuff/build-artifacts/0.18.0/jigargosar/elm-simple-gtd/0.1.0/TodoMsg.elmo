@@ -1,11 +1,10 @@
-var _jigargosar$elm_simple_gtd$TodoMsg$onUpdateAddTodoFormSetText = _jigargosar$elm_simple_gtd$Msg$OnUpdateAddTodoForm;
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo);
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoWithFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference);
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox);
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
 	return function (_p0) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 			form,
 			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p0));
 	};
@@ -13,7 +12,7 @@ var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderTime = function (form) {
 	return function (_p1) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 			form,
 			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime(_p1));
 	};
@@ -21,7 +20,7 @@ var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderTime = function (for
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderDate = function (form) {
 	return function (_p2) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 			form,
 			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate(_p2));
 	};
@@ -29,7 +28,7 @@ var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderDate = function (for
 var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState = function (form) {
 	return function (_p3) {
 		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm,
+			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
 			form,
 			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p3));
 	};

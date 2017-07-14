@@ -71,7 +71,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$text = A2(
 				b,
 				{text: s});
 		}));
-var _jigargosar$elm_simple_gtd$Todo_Form$updateEditTodoForm = function (action) {
+var _jigargosar$elm_simple_gtd$Todo_Form$updateTodoForm = function (action) {
 	var _p3 = action;
 	switch (_p3.ctor) {
 		case 'SetTodoText':

@@ -45,7 +45,7 @@ setup form =
             Msg.OnSaveExclusiveModeForm
 
         updateSetupFormTodoText =
-            TodoMsg.onUpdateAddTodoFormSetText form
+            TodoMsg.onSetTodoFormText form
     in
         div
             [ class "overlay"

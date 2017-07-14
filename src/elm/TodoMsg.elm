@@ -67,7 +67,3 @@ onStartAddingTodoWithFocusInEntityAsReference =
 
 onStartSetupAddTodo =
     Msg.OnStartAddingTodo ATFM_SetupFirstTodo
-
-
-onUpdateAddTodoFormSetText =
-    Msg.OnUpdateAddTodoForm

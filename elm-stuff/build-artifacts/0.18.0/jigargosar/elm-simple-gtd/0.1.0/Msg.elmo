@@ -63,9 +63,9 @@ var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnUpdateEditTodoForm = F2(
+var _jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm = F2(
 	function (a, b) {
-		return {ctor: 'OnUpdateEditTodoForm', _0: a, _1: b};
+		return {ctor: 'OnUpdateTodoForm', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 	function (a, b) {
@@ -73,10 +73,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 	});
 var _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm = {ctor: 'OnSaveExclusiveModeForm'};
 var _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
-var _jigargosar$elm_simple_gtd$Msg$OnUpdateAddTodoForm = F2(
-	function (a, b) {
-		return {ctor: 'OnUpdateAddTodoForm', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Msg$OnRemotePouchSync = function (a) {
 	return {ctor: 'OnRemotePouchSync', _0: a};
 };

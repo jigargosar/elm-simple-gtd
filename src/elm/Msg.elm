@@ -44,7 +44,6 @@ type AppMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnUpdateAddTodoForm TodoForm TodoText
     | OnDeactivateEditingMode
     | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String

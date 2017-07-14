@@ -116,15 +116,6 @@ update andThenUpdate msg =
                                 positionScheduleMenuCmd todo
                         )
 
-        OnUpdateAddTodoForm form text ->
-            let
-                xm =
-                    form
-                        |> Todo.Form.updateTodoForm (SetTodoText text)
-                        >> XMTodoForm
-            in
-                map (setExclusiveMode xm)
-
         OnUpdateTodoForm form action ->
             let
                 xm =

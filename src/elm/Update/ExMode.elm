@@ -33,29 +33,27 @@ saveExclusiveModeForm exMode =
                 (Project.setName form.name)
                 |> andThen
 
-        XMTodo t ->
+        XMTodoForm form ->
             -- todo move to TodoStore update
-            case t of
-                TXM_Form form ->
-                    case form.mode of
-                        TFM_Edit editMode ->
-                            let
-                                updateTodo action =
-                                    Stores.updateTodo action form.id
-                                        |> andThen
-                            in
-                                case editMode of
-                                    ETFM_EditTodoText ->
-                                        updateTodo <| TA_SetText form.text
+            case form.mode of
+                TFM_Edit editMode ->
+                    let
+                        updateTodo action =
+                            Stores.updateTodo action form.id
+                                |> andThen
+                    in
+                        case editMode of
+                            ETFM_EditTodoText ->
+                                updateTodo <| TA_SetText form.text
 
-                                    ETFM_EditTodoReminder ->
-                                        updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+                            ETFM_EditTodoReminder ->
+                                updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
-                                    _ ->
-                                        identity
+                            _ ->
+                                identity
 
-                        TFM_Add addMode ->
-                            saveAddTodoForm addMode form |> andThen
+                TFM_Add addMode ->
+                    saveAddTodoForm addMode form |> andThen
 
         XMEditSyncSettings form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })

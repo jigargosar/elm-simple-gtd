@@ -12,7 +12,7 @@ type alias SyncForm =
 
 
 type ExclusiveMode
-    = XMTodo TodoExclusiveMode
+    = XMTodoForm TodoForm
     | XMEditContext GroupDocEditForm
     | XMEditProject GroupDocEditForm
       -- todo: merge above into EntityExclusiveMode. we will need to add new project and new context mode.

@@ -43,7 +43,3 @@ type EditTodoFormAction
     | SetTodoMenuState Menu.State
     | SetTodoReminderDate String
     | SetTodoReminderTime String
-
-
-type TodoExclusiveMode
-    = TXM_Form TodoForm

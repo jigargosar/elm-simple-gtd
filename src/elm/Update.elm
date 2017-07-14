@@ -83,9 +83,10 @@ update andThenUpdate msg =
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnStartAddingTodo atfMode ->
+            -- todo: think about merging 4 messages into one.
             let
                 createXM model =
-                    Todo.Form.createAddTodoForm atfMode |> TXM_Form >> XMTodo
+                    Todo.Form.createAddTodoForm atfMode |> XMTodoForm
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command autoFocusInputCmd
@@ -95,15 +96,14 @@ update andThenUpdate msg =
                 xm =
                     form
                         |> Todo.Form.updateEditTodoForm (SetTodoText text)
-                        >> TXM_Form
-                        >> XMTodo
+                        >> XMTodoForm
             in
                 map (setExclusiveMode xm)
 
         OnStartEditingTodo todo t ->
             let
                 createXM model =
-                    Todo.Form.createEditTodoForm t model.now todo |> TXM_Form >> XMTodo
+                    Todo.Form.createEditTodoForm t model.now todo |> XMTodoForm
             in
                 Return.mapModelWith createXM setExclusiveMode
                     >> command
@@ -124,7 +124,7 @@ update andThenUpdate msg =
         OnUpdateEditTodoForm form action ->
             let
                 xm =
-                    Todo.Form.updateEditTodoForm action form |> TXM_Form >> XMTodo
+                    Todo.Form.updateEditTodoForm action form |> XMTodoForm
             in
                 map (setExclusiveMode xm)
                     >> Return.command

@@ -1,11 +1,11 @@
 var _jigargosar$elm_simple_gtd$Update_ExMode$inboxEntity = _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null);
-var _jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm = F2(
-	function (form, model) {
+var _jigargosar$elm_simple_gtd$Update_ExMode$saveAddTodoForm = F3(
+	function (addMode, form, model) {
 		return A2(
 			_elm_lang$core$Basics$uncurry,
 			function (todoId) {
 				var referenceEntity = function () {
-					var _p0 = form.atfMode;
+					var _p0 = addMode;
 					switch (_p0.ctor) {
 						case 'ATFM_AddToInbox':
 							return _jigargosar$elm_simple_gtd$Update_ExMode$inboxEntity;
@@ -63,15 +63,15 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (e
 					_jigargosar$elm_simple_gtd$Stores$updateProject,
 					_p6.id,
 					_jigargosar$elm_simple_gtd$Project$setName(_p6.name)));
-		case 'XMTodo':
-			var _p7 = _p4._0;
-			if (_p7.ctor === 'TXM_EditTodoForm') {
-				var _p9 = _p7._0;
+		case 'XMTodoForm':
+			var _p9 = _p4._0;
+			var _p7 = _p9.mode;
+			if (_p7.ctor === 'TFM_Edit') {
 				var updateTodo = function (action) {
 					return _Fresheyeball$elm_return$Return$andThen(
 						A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id));
 				};
-				var _p8 = _p9.etfMode;
+				var _p8 = _p7._0;
 				switch (_p8.ctor) {
 					case 'ETFM_EditTodoText':
 						return updateTodo(
@@ -84,7 +84,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (e
 				}
 			} else {
 				return _Fresheyeball$elm_return$Return$andThen(
-					_jigargosar$elm_simple_gtd$Update_ExMode$saveNewTodoForm(_p7._0));
+					A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveAddTodoForm, _p7._0, _p9));
 			}
 		case 'XMEditSyncSettings':
 			return _Fresheyeball$elm_return$Return$map(

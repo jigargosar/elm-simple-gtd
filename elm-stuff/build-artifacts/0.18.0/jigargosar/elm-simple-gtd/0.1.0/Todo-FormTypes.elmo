@@ -27,6 +27,3 @@ var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState = function (a) {
 var _jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText = function (a) {
 	return {ctor: 'SetTodoText', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Todo_FormTypes$TXM_Form = function (a) {
-	return {ctor: 'TXM_Form', _0: a};
-};

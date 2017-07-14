@@ -51,35 +51,33 @@ overlayViews appModel =
                     LaunchBar.View.init appModel.launchBar
                         |> Html.map Msg.LaunchBarMsg
 
-                XMTodo t ->
+                XMTodoForm form ->
                     -- todo extract this into todo view
-                    case t of
-                        TXM_Form form ->
-                            case form.mode of
-                                TFM_Edit editMode ->
-                                    case editMode of
-                                        ETFM_EditTodoContext ->
-                                            Todo.View.editTodoContextPopupView form appModel
+                    case form.mode of
+                        TFM_Edit editMode ->
+                            case editMode of
+                                ETFM_EditTodoContext ->
+                                    Todo.View.editTodoContextPopupView form appModel
 
-                                        ETFM_EditTodoProject ->
-                                            Todo.View.editTodoProjectPopupView form appModel
+                                ETFM_EditTodoProject ->
+                                    Todo.View.editTodoProjectPopupView form appModel
 
-                                        ETFM_EditTodoReminder ->
-                                            Todo.View.editTodoSchedulePopupView form
+                                ETFM_EditTodoReminder ->
+                                    Todo.View.editTodoSchedulePopupView form
 
-                                        ETFM_EditTodoText ->
-                                            Todo.View.editTodoTextView form appModel
+                                ETFM_EditTodoText ->
+                                    Todo.View.editTodoTextView form appModel
 
-                                TFM_Add addMode ->
-                                    case addMode of
-                                        ATFM_SetupFirstTodo ->
-                                            View.GetStarted.setup form
+                        TFM_Add addMode ->
+                            case addMode of
+                                ATFM_SetupFirstTodo ->
+                                    View.GetStarted.setup form
 
-                                        ATFM_AddWithFocusInEntityAsReference ->
-                                            Todo.View.new form
+                                ATFM_AddWithFocusInEntityAsReference ->
+                                    Todo.View.new form
 
-                                        ATFM_AddToInbox ->
-                                            Todo.View.new form
+                                ATFM_AddToInbox ->
+                                    Todo.View.new form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

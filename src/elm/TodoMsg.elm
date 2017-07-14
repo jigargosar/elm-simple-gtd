@@ -9,41 +9,45 @@ import X.Function.Infix exposing (..)
 
 onStopRunningTodo : AppMsg
 onStopRunningTodo =
-    OnStopRunningTodo |> OnTodoMsg
+    OnStopRunningTodo |> Msg.OnTodoMsg
 
 
 onGotoRunningTodo : AppMsg
 onGotoRunningTodo =
-    OnGotoRunningTodo |> OnTodoMsg
+    OnGotoRunningTodo |> Msg.OnTodoMsg
 
 
 onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
 onReminderOverlayAction =
-    OnTodoReminderOverlayAction >> OnTodoMsg
+    OnTodoReminderOverlayAction >> Msg.OnTodoMsg
 
 
 
 -- start add
 
 
+onStartAdding__ =
+    OnStartAddingTodo >> Msg.OnTodoMsg
+
+
 onStartAddingTodoToInbox =
-    OnStartAddingTodo ATFM_AddToInbox |> OnTodoMsg
+    onStartAdding__ ATFM_AddToInbox
 
 
 onStartAddingTodoWithFocusInEntityAsReference =
-    OnStartAddingTodo ATFM_AddWithFocusInEntityAsReference |> OnTodoMsg
+    onStartAdding__ ATFM_AddWithFocusInEntityAsReference
 
 
 onStartSetupAddTodo =
-    OnStartAddingTodo ATFM_SetupFirstTodo |> OnTodoMsg
+    onStartAdding__ ATFM_SetupFirstTodo
 
 
 
 -- start edit
 
 
-onStartEditing editMode todo =
-    OnStartEditingTodo todo editMode |> OnTodoMsg
+onStartEditing__ editMode todo =
+    OnStartEditingTodo todo editMode |> Msg.OnTodoMsg
 
 
 onStartEditingTodo =
@@ -51,40 +55,40 @@ onStartEditingTodo =
 
 
 onStartEditingTodoText =
-    onStartEditing ETFM_EditTodoText
+    onStartEditing__ ETFM_EditTodoText
 
 
 onStartEditingTodoContext =
-    onStartEditing ETFM_EditTodoContext
+    onStartEditing__ ETFM_EditTodoContext
 
 
 onStartEditingTodoProject =
-    onStartEditing ETFM_EditTodoProject
+    onStartEditing__ ETFM_EditTodoProject
 
 
 onStartEditingReminder =
-    onStartEditing ETFM_EditTodoReminder
+    onStartEditing__ ETFM_EditTodoReminder
 
 
 
 -- update
 
 
-onUpdateFormAction setterAction form =
-    setterAction >> OnUpdateTodoFormAction form >> OnTodoMsg
+onUpdateFormAction__ setterAction form =
+    setterAction >> OnUpdateTodoFormAction form >> Msg.OnTodoMsg
 
 
 onSetTodoFormMenuState =
-    onUpdateFormAction SetTodoMenuState
+    onUpdateFormAction__ SetTodoMenuState
 
 
 onSetTodoFormReminderDate =
-    onUpdateFormAction SetTodoReminderDate
+    onUpdateFormAction__ SetTodoReminderDate
 
 
 onSetTodoFormReminderTime =
-    onUpdateFormAction SetTodoReminderTime
+    onUpdateFormAction__ SetTodoReminderTime
 
 
 onSetTodoFormText =
-    onUpdateFormAction SetTodoText
+    onUpdateFormAction__ SetTodoText

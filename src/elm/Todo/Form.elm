@@ -28,7 +28,6 @@ createEditTodoForm etfMode now todo =
         form =
             { id = getDocId todo
             , text = getTodoText todo
-            , entity = TodoEntity todo
             , todoId = getDocId todo
             , contextId = Todo.getContextId todo
             , projectId = Todo.getProjectId todo

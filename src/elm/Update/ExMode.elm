@@ -31,6 +31,7 @@ onSaveExclusiveModeForm andThenUpdate =
 saveExclusiveModeForm exMode =
     case exMode of
         XMGroupDocForm form ->
+            -- todo: cleanup and move
             let
                 update fn =
                     fn form.id (GroupDoc.setName form.name)
@@ -60,8 +61,6 @@ saveExclusiveModeForm exMode =
                             GDFM_Edit ->
                                 update Stores.updateProject
 
-        --                case form.mode of
-        --                    GroupDoc.FormTypes.GDFM_Edit ->
         XMTodoForm form ->
             -- todo move to TodoStore update
             case form.mode of

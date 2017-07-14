@@ -50,42 +50,72 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (e
 	var _p4 = exMode;
 	switch (_p4.ctor) {
 		case 'XMGroupDocForm':
-			var _p6 = _p4._0;
+			var _p10 = _p4._0;
+			var insert = F2(
+				function (store, updateFn) {
+					return _Fresheyeball$elm_return$Return$andThen(
+						function (model) {
+							return function (_p5) {
+								var _p6 = _p5;
+								return A3(
+									updateFn,
+									_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p6._0),
+									_elm_lang$core$Basics$identity,
+									_p6._1);
+							}(
+								A3(
+									_jigargosar$elm_simple_gtd$X_Record$overT2,
+									store,
+									_jigargosar$elm_simple_gtd$Store$insert(
+										A2(_jigargosar$elm_simple_gtd$GroupDoc$init, _p10.name, model.now)),
+									model));
+						});
+				});
 			var update = function (fn) {
 				return _Fresheyeball$elm_return$Return$andThen(
 					A2(
 						fn,
-						_p6.id,
-						_jigargosar$elm_simple_gtd$GroupDoc$setName(_p6.name)));
+						_p10.id,
+						_jigargosar$elm_simple_gtd$GroupDoc$setName(_p10.name)));
 			};
-			var _p5 = _p6.groupDocType;
-			if (_p5.ctor === 'ContextGroupDoc') {
-				return update(_jigargosar$elm_simple_gtd$Stores$updateContext);
+			var _p7 = _p10.groupDocType;
+			if (_p7.ctor === 'ContextGroupDoc') {
+				var _p8 = _p10.mode;
+				if (_p8.ctor === 'GDFM_Add') {
+					return A2(insert, _jigargosar$elm_simple_gtd$Stores$contextStore, _jigargosar$elm_simple_gtd$Stores$updateContext);
+				} else {
+					return update(_jigargosar$elm_simple_gtd$Stores$updateContext);
+				}
 			} else {
-				return update(_jigargosar$elm_simple_gtd$Stores$updateProject);
+				var _p9 = _p10.mode;
+				if (_p9.ctor === 'GDFM_Add') {
+					return A2(insert, _jigargosar$elm_simple_gtd$Stores$projectStore, _jigargosar$elm_simple_gtd$Stores$updateProject);
+				} else {
+					return update(_jigargosar$elm_simple_gtd$Stores$updateProject);
+				}
 			}
 		case 'XMTodoForm':
-			var _p9 = _p4._0;
-			var _p7 = _p9.mode;
-			if (_p7.ctor === 'TFM_Edit') {
+			var _p13 = _p4._0;
+			var _p11 = _p13.mode;
+			if (_p11.ctor === 'TFM_Edit') {
 				var updateTodo = function (action) {
 					return _Fresheyeball$elm_return$Return$andThen(
-						A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p9.id));
+						A2(_jigargosar$elm_simple_gtd$Stores$updateTodo, action, _p13.id));
 				};
-				var _p8 = _p7._0;
-				switch (_p8.ctor) {
+				var _p12 = _p11._0;
+				switch (_p12.ctor) {
 					case 'ETFM_EditTodoText':
 						return updateTodo(
-							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p9.text));
+							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetText(_p13.text));
 					case 'ETFM_EditTodoReminder':
 						return updateTodo(
-							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(_p9.maybeComputedTime));
+							_jigargosar$elm_simple_gtd$Todo_Types$TA_SetScheduleFromMaybeTime(_p13.maybeComputedTime));
 					default:
 						return _elm_lang$core$Basics$identity;
 				}
 			} else {
 				return _Fresheyeball$elm_return$Return$andThen(
-					A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveAddTodoForm, _p7._0, _p9));
+					A2(_jigargosar$elm_simple_gtd$Update_ExMode$saveAddTodoForm, _p11._0, _p13));
 			}
 		case 'XMEditSyncSettings':
 			return _Fresheyeball$elm_return$Return$map(
@@ -99,7 +129,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (e
 	}
 };
 var _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm = function (andThenUpdate) {
-	return function (_p10) {
+	return function (_p14) {
 		return A2(
 			andThenUpdate,
 			_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
@@ -109,6 +139,6 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm = function 
 					return _.editMode;
 				},
 				_jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm,
-				_p10));
+				_p14));
 	};
 };

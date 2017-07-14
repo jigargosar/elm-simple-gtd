@@ -37,6 +37,7 @@ createEditTodoForm etfMode now todo =
             , time = (Time.Format.format "%H:%M") timeInMilli
             , etfMode = etfMode
             , maybeComputedTime = Nothing
+            , mode = TFM_Edit etfMode
             }
     in
         updateMaybeTime form
@@ -50,6 +51,7 @@ createAddTodoForm atfMode =
     , time = ""
     , maybeComputedTime = Nothing
     , atfMode = atfMode
+    , mode = TFM_Add atfMode
     }
 
 

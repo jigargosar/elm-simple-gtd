@@ -14,13 +14,25 @@ type alias TodoFormCommon a =
         , date : String
         , time : String
         , maybeComputedTime : Maybe Time
+        , mode : TodoFormMode
     }
+
+
+type TodoFormMode
+    = TFM_Edit EditTodoFormMode
+    | TFM_Add AddTodoFormMode
 
 
 type alias AddTodoForm =
     TodoFormCommon
         { atfMode : AddTodoFormMode
         }
+
+
+type AddTodoFormMode
+    = ATFM_AddWithFocusInEntityAsReference
+    | ATFM_AddToInbox
+    | ATFM_SetupFirstTodo
 
 
 type EditTodoFormMode
@@ -41,12 +53,6 @@ type alias EditTodoForm =
         }
 
 
-type alias TodoMoreMenuForm =
-    { todoId : DocId
-    , menuState : MenuState
-    }
-
-
 type EditTodoFormAction
     = SetTodoText String
     | SetTodoMenuState Menu.State
@@ -54,16 +60,6 @@ type EditTodoFormAction
     | SetTodoReminderTime String
 
 
-type AddTodoFormMode
-    = ATFM_AddWithFocusInEntityAsReference
-    | ATFM_AddToInbox
-    | ATFM_SetupFirstTodo
-
-
 type TodoExclusiveMode
     = TXM_EditTodoForm EditTodoForm
     | TXM_AddTodoForm AddTodoForm
-
-
-
---        | NewTodoFormType NewTodoFormMode

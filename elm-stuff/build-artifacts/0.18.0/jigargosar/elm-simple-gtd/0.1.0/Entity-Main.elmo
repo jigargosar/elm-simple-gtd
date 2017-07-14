@@ -53,55 +53,50 @@ var _jigargosar$elm_simple_gtd$Entity_Main$toViewType = F3(
 					_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
 		}
 	});
+var _jigargosar$elm_simple_gtd$Entity_Main$updateEditModeTextChanged = F2(
+	function (newName, model) {
+		return function () {
+			var _p2 = model.editMode;
+			if (_p2.ctor === 'XMGroupDocForm') {
+				return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
+					_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm(
+						A2(_jigargosar$elm_simple_gtd$GroupDoc_Form$setName, newName, _p2._0)));
+			} else {
+				return _elm_lang$core$Basics$identity;
+			}
+		}()(model);
+	});
 var _jigargosar$elm_simple_gtd$Entity_Main$startEditingEntity = F2(
 	function (andThenUpdate, entityId) {
-		var _p2 = entityId;
-		switch (_p2.ctor) {
+		var _p3 = entityId;
+		switch (_p3.ctor) {
 			case 'ContextId':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Return$mapModelWithMaybeF,
-					_jigargosar$elm_simple_gtd$Stores$findContextById(_p2._0),
-					function (_p3) {
+					_jigargosar$elm_simple_gtd$Stores$findContextById(_p3._0),
+					function (_p4) {
 						return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
-								_jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditContextForm(_p3)));
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm(
+								_jigargosar$elm_simple_gtd$GroupDoc_Form$createEditContextForm(_p4)));
 					});
 			case 'ProjectId':
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Return$mapModelWithMaybeF,
-					_jigargosar$elm_simple_gtd$Stores$findProjectById(_p2._0),
-					function (_p4) {
+					_jigargosar$elm_simple_gtd$Stores$findProjectById(_p3._0),
+					function (_p5) {
 						return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext(
-								_jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditProjectForm(_p4)));
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm(
+								_jigargosar$elm_simple_gtd$GroupDoc_Form$createEditProjectForm(_p5)));
 					});
 			default:
 				return A2(
 					_jigargosar$elm_simple_gtd$X_Return$withMaybe,
-					_jigargosar$elm_simple_gtd$Stores$findTodoById(_p2._0),
-					function (_p5) {
+					_jigargosar$elm_simple_gtd$Stores$findTodoById(_p3._0),
+					function (_p6) {
 						return andThenUpdate(
-							_jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodo(_p5));
+							_jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodo(_p6));
 					});
 		}
-	});
-var _jigargosar$elm_simple_gtd$Entity_Main$editContextSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext);
-var _jigargosar$elm_simple_gtd$Entity_Main$editProjectSetName = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName, _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject);
-var _jigargosar$elm_simple_gtd$Entity_Main$updateEditModeTextChanged = F2(
-	function (newName, model) {
-		return function () {
-			var _p6 = model.editMode;
-			switch (_p6.ctor) {
-				case 'XMEditContext':
-					return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-						A2(_jigargosar$elm_simple_gtd$Entity_Main$editContextSetName, newName, _p6._0));
-				case 'XMEditProject':
-					return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-						A2(_jigargosar$elm_simple_gtd$Entity_Main$editProjectSetName, newName, _p6._0));
-				default:
-					return _elm_lang$core$Basics$identity;
-			}
-		}()(model);
 	});
 var _jigargosar$elm_simple_gtd$Entity_Main$createAndEditNewContext = F2(
 	function (andThenUpdate, model) {

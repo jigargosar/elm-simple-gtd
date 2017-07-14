@@ -82,10 +82,7 @@ overlayViews appModel =
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
 
-                XMEditProject form ->
-                    GroupDoc.EditView.init form
-
-                XMEditContext form ->
+                XMGroupDocForm form ->
                     GroupDoc.EditView.init form
 
                 XMMainMenu menuState ->

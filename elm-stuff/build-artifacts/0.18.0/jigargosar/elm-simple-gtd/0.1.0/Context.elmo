@@ -1,10 +1,4 @@
 var _jigargosar$elm_simple_gtd$Context$storeGenerator = _jigargosar$elm_simple_gtd$GroupDoc$storeGenerator('context-db');
-var _jigargosar$elm_simple_gtd$Context$setName = F2(
-	function (name, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{name: name});
-	});
 var _jigargosar$elm_simple_gtd$Context$getName = function (_) {
 	return _.name;
 };

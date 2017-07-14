@@ -28,11 +28,6 @@ getName =
     (.name)
 
 
-setName : GroupDocName -> ModelF
-setName name model =
-    { model | name = name }
-
-
 constructor =
     GroupDoc.constructor
 

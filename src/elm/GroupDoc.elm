@@ -132,3 +132,7 @@ isActive =
 
 archivedButNotDeletedPred =
     X.Predicate.all [ Document.isNotDeleted, isArchived ]
+
+
+setName name model =
+    { model | name = name }

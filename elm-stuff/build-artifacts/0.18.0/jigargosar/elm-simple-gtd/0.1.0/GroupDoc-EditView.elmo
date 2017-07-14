@@ -21,6 +21,14 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 			_jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText(_p2));
 	};
 	var fireToggleArchive = toMsg(_jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleArchived);
+	var defaultButtons = function () {
+		var _p3 = form.mode;
+		if (_p3.ctor === 'GDFM_Edit') {
+			return A2(_jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelArchiveButtons, form.isArchived, fireToggleArchive);
+		} else {
+			return _jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelButtons;
+		}
+	}();
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -32,7 +40,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-						function (_p3) {
+						function (_p4) {
 							return _jigargosar$elm_simple_gtd$Model$noop;
 						}),
 					_1: {ctor: '[]'}
@@ -71,7 +79,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 									_1: {
 										ctor: '::',
 										_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
-											function (_p4) {
+											function (_p5) {
 												return _jigargosar$elm_simple_gtd$Model$noop;
 											}),
 										_1: {
@@ -126,7 +134,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditView$init = function (form) {
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(_jigargosar$elm_simple_gtd$View_Shared$defaultOkCancelArchiveButtons, form.isArchived, fireToggleArchive),
+								_0: defaultButtons,
 								_1: {ctor: '[]'}
 							}
 						}),

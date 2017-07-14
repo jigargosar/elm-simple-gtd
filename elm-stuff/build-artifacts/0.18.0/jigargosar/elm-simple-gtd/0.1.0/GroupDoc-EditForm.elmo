@@ -4,15 +4,14 @@ var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$setName = F2(
 			model,
 			{name: name});
 	});
-var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init = F3(
-	function (groupDocType, nameLabel, groupDoc) {
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init = F2(
+	function (groupDocType, groupDoc) {
 		return {
 			id: _jigargosar$elm_simple_gtd$Document_Types$getDocId(groupDoc),
 			name: _jigargosar$elm_simple_gtd$GroupDoc_Types$getGroupDocName(groupDoc),
 			groupDocType: groupDocType,
-			isArchived: _jigargosar$elm_simple_gtd$GroupDoc_Types$isGroupDocArchived(groupDoc),
-			nameLabel: nameLabel
+			isArchived: _jigargosar$elm_simple_gtd$GroupDoc_Types$isGroupDocArchived(groupDoc)
 		};
 	});
-var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditContextForm = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$GroupDoc_Types$ContextGroupDoc, 'Context Name');
-var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditProjectForm = A2(_jigargosar$elm_simple_gtd$GroupDoc_EditForm$init, _jigargosar$elm_simple_gtd$GroupDoc_Types$ProjectGroupDoc, 'Project Name');
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditContextForm = _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init(_jigargosar$elm_simple_gtd$GroupDoc_Types$ContextGroupDoc);
+var _jigargosar$elm_simple_gtd$GroupDoc_EditForm$createEditProjectForm = _jigargosar$elm_simple_gtd$GroupDoc_EditForm$init(_jigargosar$elm_simple_gtd$GroupDoc_Types$ProjectGroupDoc);

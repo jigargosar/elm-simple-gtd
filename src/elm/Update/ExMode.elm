@@ -4,6 +4,8 @@ import Context
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), GroupEntityType(..), createContextEntity)
 import ExclusiveMode.Types exposing (..)
+import GroupDoc
+import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
 import Project
 import Return exposing (andThen, map)
@@ -24,15 +26,21 @@ onSaveExclusiveModeForm andThenUpdate =
 
 saveExclusiveModeForm exMode =
     case exMode of
-        XMEditContext form ->
-            Stores.updateContext form.id (Context.setName form.name)
-                |> andThen
+        XMGroupDocForm form ->
+            let
+                update fn =
+                    fn form.id (GroupDoc.setName form.name)
+                        |> andThen
+            in
+                case form.groupDocType of
+                    ContextGroupDoc ->
+                        update Stores.updateContext
 
-        XMEditProject form ->
-            Stores.updateProject form.id
-                (Project.setName form.name)
-                |> andThen
+                    ProjectGroupDoc ->
+                        update Stores.updateProject
 
+        --                case form.mode of
+        --                    GroupDoc.FormTypes.GDFM_Edit ->
         XMTodoForm form ->
             -- todo move to TodoStore update
             case form.mode of

@@ -10,4 +10,10 @@ type alias GroupDocForm =
     , name : GroupDocName
     , groupDocType : GroupDocType
     , isArchived : Bool
+    , mode : GroupDocFormMode
     }
+
+
+type GroupDocFormMode
+    = GDFM_Add
+    | GDFM_Edit

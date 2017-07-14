@@ -10,11 +10,8 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 	return {ctor: 'XMMainMenu', _0: a};
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = {ctor: 'XMLaunchBar'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditProject = function (a) {
-	return {ctor: 'XMEditProject', _0: a};
-};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditContext = function (a) {
-	return {ctor: 'XMEditContext', _0: a};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm = function (a) {
+	return {ctor: 'XMGroupDocForm', _0: a};
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoForm = function (a) {
 	return {ctor: 'XMTodoForm', _0: a};

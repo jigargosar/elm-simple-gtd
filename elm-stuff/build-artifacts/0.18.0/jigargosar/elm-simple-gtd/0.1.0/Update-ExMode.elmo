@@ -49,20 +49,21 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$saveAddTodoForm = F3(
 var _jigargosar$elm_simple_gtd$Update_ExMode$saveExclusiveModeForm = function (exMode) {
 	var _p4 = exMode;
 	switch (_p4.ctor) {
-		case 'XMEditContext':
-			var _p5 = _p4._0;
-			return _Fresheyeball$elm_return$Return$andThen(
-				A2(
-					_jigargosar$elm_simple_gtd$Stores$updateContext,
-					_p5.id,
-					_jigargosar$elm_simple_gtd$Context$setName(_p5.name)));
-		case 'XMEditProject':
+		case 'XMGroupDocForm':
 			var _p6 = _p4._0;
-			return _Fresheyeball$elm_return$Return$andThen(
-				A2(
-					_jigargosar$elm_simple_gtd$Stores$updateProject,
-					_p6.id,
-					_jigargosar$elm_simple_gtd$Project$setName(_p6.name)));
+			var update = function (fn) {
+				return _Fresheyeball$elm_return$Return$andThen(
+					A2(
+						fn,
+						_p6.id,
+						_jigargosar$elm_simple_gtd$GroupDoc$setName(_p6.name)));
+			};
+			var _p5 = _p6.groupDocType;
+			if (_p5.ctor === 'ContextGroupDoc') {
+				return update(_jigargosar$elm_simple_gtd$Stores$updateContext);
+			} else {
+				return update(_jigargosar$elm_simple_gtd$Stores$updateProject);
+			}
 		case 'XMTodoForm':
 			var _p9 = _p4._0;
 			var _p7 = _p9.mode;

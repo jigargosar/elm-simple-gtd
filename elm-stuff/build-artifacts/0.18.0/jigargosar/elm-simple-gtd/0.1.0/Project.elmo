@@ -18,12 +18,6 @@ var _jigargosar$elm_simple_gtd$Project$filterNull = function (pred) {
 };
 var _jigargosar$elm_simple_gtd$Project$isNull = _jigargosar$elm_simple_gtd$X_Function$equals(_jigargosar$elm_simple_gtd$Project$null);
 var _jigargosar$elm_simple_gtd$Project$sort = _jigargosar$elm_simple_gtd$GroupDoc$sort(_jigargosar$elm_simple_gtd$Project$isNull);
-var _jigargosar$elm_simple_gtd$Project$setName = F2(
-	function (name, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{name: name});
-	});
 var _jigargosar$elm_simple_gtd$Project$getName = function (_) {
 	return _.name;
 };

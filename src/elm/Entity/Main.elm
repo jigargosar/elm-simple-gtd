@@ -160,26 +160,18 @@ createAndEditNewContext andThenUpdate model =
            )
 
 
-editProjectSetName =
-    GroupDoc.Form.setName >>> XMEditProject
-
-
-editContextSetName =
-    GroupDoc.Form.setName >>> XMEditContext
-
-
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF
 startEditingEntity andThenUpdate entityId =
     case entityId of
         ContextId id ->
             X.Return.mapModelWithMaybeF
                 (Stores.findContextById id)
-                (createEditContextForm >> XMEditContext >> setExclusiveMode)
+                (createEditContextForm >> XMGroupDocForm >> setExclusiveMode)
 
         ProjectId id ->
             X.Return.mapModelWithMaybeF
                 (Stores.findProjectById id)
-                (createEditProjectForm >> XMEditContext >> setExclusiveMode)
+                (createEditProjectForm >> XMGroupDocForm >> setExclusiveMode)
 
         TodoId id ->
             X.Return.withMaybe (Stores.findTodoById id)
@@ -189,11 +181,8 @@ startEditingEntity andThenUpdate entityId =
 updateEditModeTextChanged newName model =
     model
         |> case model.editMode of
-            XMEditContext ecm ->
-                setExclusiveMode (editContextSetName newName ecm)
-
-            XMEditProject epm ->
-                setExclusiveMode (editProjectSetName newName epm)
+            XMGroupDocForm form ->
+                setExclusiveMode (GroupDoc.Form.setName newName form |> XMGroupDocForm)
 
             _ ->
                 identity

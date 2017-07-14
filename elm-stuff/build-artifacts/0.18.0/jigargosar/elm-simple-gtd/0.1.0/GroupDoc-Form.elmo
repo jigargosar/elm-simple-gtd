@@ -1,0 +1,21 @@
+var _jigargosar$elm_simple_gtd$GroupDoc_Form$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_Form$createAddForm = function (groupDocType) {
+	return {id: '', name: '', groupDocType: groupDocType, isArchived: false, mode: _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GDFM_Add};
+};
+var _jigargosar$elm_simple_gtd$GroupDoc_Form$createEditForm = F2(
+	function (groupDocType, groupDoc) {
+		return {
+			id: _jigargosar$elm_simple_gtd$Document_Types$getDocId(groupDoc),
+			name: _jigargosar$elm_simple_gtd$GroupDoc_Types$getGroupDocName(groupDoc),
+			groupDocType: groupDocType,
+			isArchived: _jigargosar$elm_simple_gtd$GroupDoc_Types$isGroupDocArchived(groupDoc),
+			mode: _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GDFM_Edit
+		};
+	});
+var _jigargosar$elm_simple_gtd$GroupDoc_Form$createEditContextForm = _jigargosar$elm_simple_gtd$GroupDoc_Form$createEditForm(_jigargosar$elm_simple_gtd$GroupDoc_Types$ContextGroupDoc);
+var _jigargosar$elm_simple_gtd$GroupDoc_Form$createEditProjectForm = _jigargosar$elm_simple_gtd$GroupDoc_Form$createEditForm(_jigargosar$elm_simple_gtd$GroupDoc_Types$ProjectGroupDoc);

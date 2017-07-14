@@ -51,10 +51,6 @@ getName =
     .name
 
 
-setName name model =
-    { model | name = name }
-
-
 storeGenerator : DeviceId -> List E.Value -> Random.Generator ContextStore
 storeGenerator =
     GroupDoc.storeGenerator "context-db"

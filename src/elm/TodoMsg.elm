@@ -23,7 +23,7 @@ onReminderOverlayAction =
 
 
 
--- start add
+-- form add
 
 
 onStartAdding__ =
@@ -43,7 +43,7 @@ onStartSetupAddTodo =
 
 
 
--- start edit
+-- form edit
 
 
 onStartEditing__ editMode todo =
@@ -71,7 +71,7 @@ onStartEditingReminder =
 
 
 
--- update
+-- form update
 
 
 onUpdateFormAction__ setterAction form =

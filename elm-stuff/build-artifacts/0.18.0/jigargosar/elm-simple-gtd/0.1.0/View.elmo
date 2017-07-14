@@ -276,7 +276,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			case 'XMSignInOverlay':
 				return _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay;
 			case 'XMGroupDocForm':
-				return _jigargosar$elm_simple_gtd$GroupDoc_EditView$init(_p1._0);
+				return _jigargosar$elm_simple_gtd$GroupDoc_FormView$init(_p1._0);
 			case 'XMMainMenu':
 				return A2(_jigargosar$elm_simple_gtd$View_MainMenu$init, _p1._0, appModel);
 			default:

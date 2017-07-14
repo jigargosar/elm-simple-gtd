@@ -42,36 +42,10 @@ update :
 update andThenUpdate msg =
     case msg of
         EM_StartAddingContext ->
-            --            let
-            --                createAndEditNewContext andThenUpdate model =
-            --                    Store.insert (Context.init "<New Context>" model.now) model.contextStore
-            --                        |> Tuple2.mapSecond (Stores.setContextStore # model)
-            --                        |> (\( context, model ) ->
-            --                                let
-            --                                    entity =
-            --                                        (createContextEntity context)
-            --                                in
-            --                                    Return.singleton model
-            --                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-            --                           )
-            --            in
             map (createAddGroupDocForm ContextGroupDoc |> XMGroupDocForm >> setExclusiveMode)
                 >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
-            --            let
-            --                createAndEditNewProject andThenUpdate model =
-            --                    Store.insert (Project.init "<New Project>" model.now) model.projectStore
-            --                        |> Tuple2.mapSecond (Stores.setProjectStore # model)
-            --                        |> (\( project, model ) ->
-            --                                let
-            --                                    entity =
-            --                                        (createProjectEntity project)
-            --                                in
-            --                                    Return.singleton model
-            --                                        |> startEditingEntity andThenUpdate (Entity.toEntityId entity)
-            --                           )
-            --            in
             map (createAddGroupDocForm ProjectGroupDoc |> XMGroupDocForm >> setExclusiveMode)
                 >> DomPorts.autoFocusInputRCmd
 

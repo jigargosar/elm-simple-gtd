@@ -66,11 +66,7 @@ initRunning todoId now =
 
 switchOrStartRunning : DocId -> Time -> Model -> Model
 switchOrStartRunning todoId now =
-    let
-        _ =
-            X.Debug.log "switchOrStartRunning" "foo"
-    in
-        Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
+    Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
 
 
 getMaybeTodoId =

@@ -1,54 +1,36 @@
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo);
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoWithFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference);
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox = _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox);
-var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = function (form) {
-	return function (_p0) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-			form,
-			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText(_p0));
-	};
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderTime = function (form) {
-	return function (_p1) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-			form,
-			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime(_p1));
-	};
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderDate = function (form) {
-	return function (_p2) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-			form,
-			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate(_p2));
-	};
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState = function (form) {
-	return function (_p3) {
-		return A2(
-			_jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm,
-			form,
-			_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState(_p3));
-	};
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoReminder);
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoProject);
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext);
-};
-var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText = function (todo) {
-	return A2(_jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo, todo, _jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoText);
-};
+var _jigargosar$elm_simple_gtd$TodoMsg$onUpdateFormAction = F2(
+	function (setterAction, form) {
+		return function (_p0) {
+			return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+				A2(
+					_jigargosar$elm_simple_gtd$Todo_Msg$OnUpdateTodoFormAction,
+					form,
+					setterAction(_p0)));
+		};
+	});
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateFormAction(_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoMenuState);
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderDate = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateFormAction(_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderDate);
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormReminderTime = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateFormAction(_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoReminderTime);
+var _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormText = _jigargosar$elm_simple_gtd$TodoMsg$onUpdateFormAction(_jigargosar$elm_simple_gtd$Todo_FormTypes$SetTodoText);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditing = F2(
+	function (editMode, todo) {
+		return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+			A2(_jigargosar$elm_simple_gtd$Todo_Msg$OnStartEditingTodo, todo, editMode));
+	});
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText = _jigargosar$elm_simple_gtd$TodoMsg$onStartEditing(_jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoText);
 var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodo = _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoText;
-var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p4) {
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoContext = _jigargosar$elm_simple_gtd$TodoMsg$onStartEditing(_jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoContext);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingTodoProject = _jigargosar$elm_simple_gtd$TodoMsg$onStartEditing(_jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoProject);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartEditingReminder = _jigargosar$elm_simple_gtd$TodoMsg$onStartEditing(_jigargosar$elm_simple_gtd$Todo_FormTypes$ETFM_EditTodoReminder);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+	_jigargosar$elm_simple_gtd$Todo_Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_SetupFirstTodo));
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoWithFocusInEntityAsReference = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+	_jigargosar$elm_simple_gtd$Todo_Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddWithFocusInEntityAsReference));
+var _jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
+	_jigargosar$elm_simple_gtd$Todo_Msg$OnStartAddingTodo(_jigargosar$elm_simple_gtd$Todo_FormTypes$ATFM_AddToInbox));
+var _jigargosar$elm_simple_gtd$TodoMsg$onReminderOverlayAction = function (_p1) {
 	return _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(
-		_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderOverlayAction(_p4));
+		_jigargosar$elm_simple_gtd$Todo_Msg$OnTodoReminderOverlayAction(_p1));
 };
-var _jigargosar$elm_simple_gtd$TodoMsg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$GotoRunning);
-var _jigargosar$elm_simple_gtd$TodoMsg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$StopRunning);
+var _jigargosar$elm_simple_gtd$TodoMsg$onGotoRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnGotoRunningTodo);
+var _jigargosar$elm_simple_gtd$TodoMsg$onStopRunningTodo = _jigargosar$elm_simple_gtd$Msg$OnTodoMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnStopRunningTodo);

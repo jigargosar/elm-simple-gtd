@@ -203,7 +203,7 @@ update andThenUpdate now todoMsg =
                                 positionPopup "#edit-schedule-button-"
                         )
 
-        OnUpdateTodoForm form action ->
+        OnUpdateTodoFormAction form action ->
             let
                 xm =
                     Todo.Form.updateTodoForm action form |> XMTodoForm

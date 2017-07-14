@@ -22,4 +22,4 @@ type TodoMsg
     | OnTodoReminderOverlayAction Todo.Notification.Model.Action
     | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode
-    | OnUpdateTodoForm TodoForm TodoFormAction
+    | OnUpdateTodoFormAction TodoForm TodoFormAction

@@ -63,10 +63,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
 	});
-var _jigargosar$elm_simple_gtd$Msg$OnUpdateTodoForm = F2(
-	function (a, b) {
-		return {ctor: 'OnUpdateTodoForm', _0: a, _1: b};
-	});
 var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 	function (a, b) {
 		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
@@ -84,13 +80,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnMainMsg = function (a) {
 	return {ctor: 'OnMainMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded = _jigargosar$elm_simple_gtd$Msg$OnMainMsg(_jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded);
-var _jigargosar$elm_simple_gtd$Msg$OnStartEditingTodo = F2(
-	function (a, b) {
-		return {ctor: 'OnStartEditingTodo', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Msg$OnStartAddingTodo = function (a) {
-	return {ctor: 'OnStartAddingTodo', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Msg$OnSubMsg = function (a) {
 	return {ctor: 'OnSubMsg', _0: a};
 };

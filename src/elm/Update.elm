@@ -75,7 +75,7 @@ update andThenUpdate msg =
                     identity
 
         OnRemotePouchSync form ->
-            andThenUpdate OnSaveCurrentForm
+            andThenUpdate OnSaveExclusiveModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         OnDeactivateEditingMode ->
@@ -154,9 +154,8 @@ update andThenUpdate msg =
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)
 
-        OnSaveCurrentForm ->
-            Return.with .editMode Update.ExMode.saveCurrentForm
-                >> andThenUpdate OnDeactivateEditingMode
+        OnSaveExclusiveModeForm ->
+            Update.ExMode.onSaveExclusiveModeForm andThenUpdate
 
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg

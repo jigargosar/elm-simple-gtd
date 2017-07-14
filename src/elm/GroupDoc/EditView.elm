@@ -32,7 +32,7 @@ init form =
             Entity.Types.EUA_SetFormText >> toMsg
 
         fireSaveForm =
-            Msg.OnSaveCurrentForm
+            Msg.OnSaveExclusiveModeForm
 
         fireCancel =
             Msg.OnDeactivateEditingMode

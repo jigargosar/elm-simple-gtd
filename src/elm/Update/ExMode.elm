@@ -4,6 +4,7 @@ import Context
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (Entity(..), GroupEntityType(..), createContextEntity)
 import ExclusiveMode.Types exposing (..)
+import Msg
 import Project
 import Return exposing (andThen, map)
 import Todo
@@ -13,10 +14,16 @@ import Todo.FormTypes exposing (..)
 import Stores
 import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelReturnF)
+import X.Return
 
 
-saveCurrentForm editMode =
-    case editMode of
+onSaveExclusiveModeForm andThenUpdate =
+    X.Return.with .editMode saveExclusiveModeForm
+        >> andThenUpdate Msg.OnDeactivateEditingMode
+
+
+saveExclusiveModeForm exMode =
+    case exMode of
         XMEditContext form ->
             Stores.updateContext form.id (Context.setName form.name)
                 |> andThen
@@ -27,6 +34,7 @@ saveCurrentForm editMode =
                 |> andThen
 
         XMTodo t ->
+            -- todo move to TodoStore update
             case t of
                 TXM_EditTodoForm form ->
                     let

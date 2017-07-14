@@ -22,7 +22,7 @@ defaultOkCancelButtons =
 
 
 defaultOkCancelButtonsWith list =
-    okCancelButtonsWith Msg.OnSaveCurrentForm Msg.OnDeactivateEditingMode list
+    okCancelButtonsWith Msg.OnSaveExclusiveModeForm Msg.OnDeactivateEditingMode list
 
 
 defaultOkCancelDeleteButtons deleteMsg =

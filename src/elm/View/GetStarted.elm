@@ -42,7 +42,7 @@ signInOverlay =
 setup form =
     let
         addTodoMsg =
-            Msg.OnSaveCurrentForm
+            Msg.OnSaveExclusiveModeForm
 
         updateSetupFormTodoText =
             TodoMsg.onUpdateAddTodoFormSetText form

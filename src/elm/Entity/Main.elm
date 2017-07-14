@@ -64,7 +64,7 @@ onUpdate andThenUpdate entityId msg =
                 >> DomPorts.autoFocusInputRCmd
 
         Entity.Types.OnEntityTextChanged newName ->
-            Return.map (updateEditModeNameChanged newName)
+            Return.map (updateEditModeTextChanged newName)
 
         Entity.Types.OnSaveEntityForm ->
             andThenUpdate Msg.OnSaveCurrentForm
@@ -189,7 +189,7 @@ startEditingEntity andThenUpdate entityId =
                 (TodoMsg.onStartEditingTodo >> andThenUpdate)
 
 
-updateEditModeNameChanged newName model =
+updateEditModeTextChanged newName model =
     model
         |> case model.editMode of
             XMEditContext ecm ->

@@ -44,7 +44,7 @@ type AppMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
-    | OnRemotePouchSync SyncForm
+    | OnStartCustomRemotePouchSync SyncForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType

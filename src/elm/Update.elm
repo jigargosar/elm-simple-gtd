@@ -67,7 +67,7 @@ update andThenUpdate msg =
             )
                 >> autoFocusInputRCmd
 
-        OnRemotePouchSync form ->
+        OnStartCustomRemotePouchSync form ->
             andThenUpdate XMMsg.onSaveExclusiveModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 

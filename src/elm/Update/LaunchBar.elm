@@ -49,30 +49,6 @@ update andThenUpdate msg now =
         )
 
 
-
---   >> X.Return.withMaybe (.launchBar >> .maybeResult)
---      (\result ->
---          andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
---              >> case result of
---                  LaunchBar.Models.Selected entity ->
---                      case entity of
---                          SI_Project project ->
---                              map (Model.ViewType.switchToProjectView project)
---
---                          SI_Projects ->
---                              map Model.ViewType.switchToProjectsView
---
---                          SI_Context context ->
---                              map (Model.ViewType.switchToContextView context)
---
---                          SI_Contexts ->
---                              map Model.ViewType.switchToContextsView
---
---                  LaunchBar.Models.Canceled ->
---                      identity
---      )
-
-
 type alias Config =
     { now : Time
     , activeProjects : List ContextDoc

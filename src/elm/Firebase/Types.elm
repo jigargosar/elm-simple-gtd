@@ -4,7 +4,8 @@ import Json.Encode as E
 
 
 type FirebaseMsg
-    = OnFBNOOP
+    = OnFB_NOOP
+    | OnFB_SwitchToNewUserSetupModeIfNeeded
     | OnFBSignIn
     | OnFBSignOut
     | OnFBAfterUserChanged

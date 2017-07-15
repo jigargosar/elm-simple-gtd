@@ -1,12 +1,15 @@
 port module Firebase.Main exposing (..)
 
 import AppUrl
+import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
 import Navigation
 import Return
+import Store
+import TodoMsg
 import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
@@ -15,6 +18,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg
 import Types exposing (ReturnF, Subscriptions)
+import XMMsg
 
 
 port signIn : () -> Cmd msg
@@ -80,8 +84,22 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
-        OnFBNOOP ->
+        OnFB_NOOP ->
             identity
+
+        OnFB_SwitchToNewUserSetupModeIfNeeded ->
+            let
+                onSwitchToNewUserSetupModeIfNeeded model =
+                    Return.singleton model
+                        |> if Firebase.SignIn.shouldSkipSignIn model.signInModel then
+                            if Store.isEmpty model.todoStore then
+                                andThenUpdate TodoMsg.onStartSetupAddTodo
+                            else
+                                andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                           else
+                            andThenUpdate (XMMsg.onSetExclusiveMode XMSignInOverlay)
+            in
+                Return.andThen onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignIn ->
             Return.command (signIn ())

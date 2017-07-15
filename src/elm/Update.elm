@@ -117,8 +117,8 @@ update andThenUpdate msg =
         OnTodoMsgWithNow todoMsg now ->
             Todo.Main.update andThenUpdate now todoMsg
 
-        OnFirebaseMsg firebaseMsg ->
-            Firebase.Main.update andThenUpdate firebaseMsg
+        OnFirebaseMsg msg_ ->
+            Firebase.Main.update andThenUpdate msg_
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg

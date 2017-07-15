@@ -1,7 +1,7 @@
 module View.GetStarted exposing (..)
 
 import AppUrl
-import Firebase.Types exposing (FirebaseMsg(OnFBNOOP, OnFBSignIn, OnFBSkipSignIn))
+import Firebase.Types exposing (FirebaseMsg(OnFB_NOOP, OnFBSignIn, OnFBSkipSignIn))
 import Model
 import Msg
 import Html exposing (..)
@@ -16,7 +16,7 @@ import XMMsg
 signInOverlay =
     div
         [ class "overlay"
-        , onClickStopPropagation OnFBNOOP
+        , onClickStopPropagation OnFB_NOOP
         ]
         [ div [ class "modal fixed-center" ]
             [ div [ class "modal-content" ]

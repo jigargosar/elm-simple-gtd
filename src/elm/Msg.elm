@@ -33,8 +33,7 @@ type SubscriptionMsg
 
 
 type MainMsg
-    = OnSwitchToNewUserSetupModeIfNeeded
-    | OnExclusiveModeMsg ExclusiveModeMsg
+    = OnExclusiveModeMsg ExclusiveModeMsg
 
 
 type ExclusiveModeMsg
@@ -82,4 +81,4 @@ onEntityUpdateMsg =
 
 
 onSwitchToNewUserSetupModeIfNeeded =
-    OnMainMsg OnSwitchToNewUserSetupModeIfNeeded
+    OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded

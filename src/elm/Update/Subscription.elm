@@ -3,18 +3,19 @@ module Update.Subscription exposing (..)
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
+import Keyboard.Combo
 import Model
 import Model.Selection
-import Msg exposing (AppMsg(..), SubMsg(..))
+import Msg exposing (AppMsg(..), SubscriptionMsg(..))
 import Stores
 import Todo.Msg
 import Tuple2
 import X.Function.Infix exposing (..)
 import Return exposing (map)
 import Time exposing (Time)
-import Types exposing (ModelF)
+import Types exposing (ModelF, ModelReturnF)
 import X.Keyboard exposing (KeyboardState)
-import X.Record exposing (over)
+import X.Record exposing (over, overReturn)
 import X.Return
 import Keyboard.Extra as Key
 import TodoMsg
@@ -33,6 +34,9 @@ update andThenUpdate subMsg =
 
         OnGlobalKeyUp key ->
             onGlobalKeyUp andThenUpdate key
+
+        OnKeyCombo comboMsg ->
+            Return.andThen (updateKeyCombo comboMsg)
 
         OnPouchDBChange dbName encodedDoc ->
             let
@@ -104,3 +108,14 @@ keyboardState =
 updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
 updateKeyboardState =
     over keyboardState
+
+
+keyComboModel =
+    X.Record.fieldLens .keyComboModel (\s b -> { b | keyComboModel = s })
+
+
+updateKeyCombo : Keyboard.Combo.Msg -> ModelReturnF
+updateKeyCombo comboMsg =
+    overReturn
+        keyComboModel
+        (Keyboard.Combo.update comboMsg)

@@ -1,3 +1,20 @@
+var _jigargosar$elm_simple_gtd$Update_Subscription$keyComboModel = A2(
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
+	function (_) {
+		return _.keyComboModel;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{keyComboModel: s});
+		}));
+var _jigargosar$elm_simple_gtd$Update_Subscription$updateKeyCombo = function (comboMsg) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Record$overReturn,
+		_jigargosar$elm_simple_gtd$Update_Subscription$keyComboModel,
+		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
+};
 var _jigargosar$elm_simple_gtd$Update_Subscription$keyboardState = A2(
 	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
@@ -64,7 +81,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
 				return _elm_lang$core$Basics$identity;
 			});
 	});
-var _jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg = F2(
+var _jigargosar$elm_simple_gtd$Update_Subscription$update = F2(
 	function (andThenUpdate, subMsg) {
 		var _p3 = subMsg;
 		switch (_p3.ctor) {
@@ -84,6 +101,9 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg = F2(
 				};
 			case 'OnGlobalKeyUp':
 				return A2(_jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp, andThenUpdate, _p3._0);
+			case 'OnKeyCombo':
+				return _Fresheyeball$elm_return$Return$andThen(
+					_jigargosar$elm_simple_gtd$Update_Subscription$updateKeyCombo(_p3._0));
 			case 'OnPouchDBChange':
 				var afterEntityUpsertOnPouchDBChange = function (entity) {
 					var _p5 = entity;
@@ -106,6 +126,6 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onSubMsg = F2(
 						}));
 			default:
 				return _Fresheyeball$elm_return$Return$effect_(
-					A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange, _p3._0, _p3._1));
+					A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseDatabaseChange, _p3._0, _p3._1));
 		}
 	});

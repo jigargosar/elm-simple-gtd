@@ -23,12 +23,13 @@ import Keyboard.Combo
 import ViewType exposing (ViewType(EntityListView))
 
 
-type SubMsg
+type SubscriptionMsg
     = OnNowChanged Time
     | OnKeyboardMsg X.Keyboard.Msg
     | OnGlobalKeyUp X.Keyboard.Key
     | OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
+    | OnKeyCombo Keyboard.Combo.Msg
 
 
 type MainMsg
@@ -44,7 +45,7 @@ type ExclusiveModeMsg
 
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
-    | OnSubscriptionMsg SubMsg
+    | OnSubscriptionMsg SubscriptionMsg
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
@@ -58,7 +59,6 @@ type AppMsg
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
-    | OnKeyCombo Keyboard.Combo.Msg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Types.Msg
     | OnPersistLocalPref

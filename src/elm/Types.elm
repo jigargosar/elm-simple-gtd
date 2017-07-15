@@ -68,7 +68,7 @@ type alias AppModel =
     , deviceId : String
     , focusInEntity : Entity
     , timeTracker : Todo.TimeTracker.Model
-    , keyComboModel : Keyboard.Combo.Model AppMsg
+    , keyComboModel : Keyboard.Combo.Model Msg.AppMsg
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model

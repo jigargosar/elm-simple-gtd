@@ -2,10 +2,10 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$SyncForm = function (a) {
 	return {uri: a};
 };
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone = {ctor: 'XMNone'};
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay = {ctor: 'XMSignInOverlay'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings = function (a) {
 	return {ctor: 'XMEditSyncSettings', _0: a};
 };
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay = {ctor: 'XMSignInOverlay'};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 	return {ctor: 'XMMainMenu', _0: a};
 };

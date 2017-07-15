@@ -13,7 +13,6 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Keyboard
 import Model.ViewType
 import Msg exposing (..)
 import Stores
@@ -115,9 +114,6 @@ update andThenUpdate msg =
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
-
-        OnKeyCombo comboMsg ->
-            Return.andThen (Model.Keyboard.updateCombo comboMsg)
 
         OnTodoMsg todoMsg ->
             withNow (OnTodoMsgWithNow todoMsg)

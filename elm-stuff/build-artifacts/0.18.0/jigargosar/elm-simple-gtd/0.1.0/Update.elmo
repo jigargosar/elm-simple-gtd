@@ -131,9 +131,6 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnCloseNotification':
 				return _jigargosar$elm_simple_gtd$Update$command(
 					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p0._0));
-			case 'OnKeyCombo':
-				return _Fresheyeball$elm_return$Return$andThen(
-					_jigargosar$elm_simple_gtd$Model_Keyboard$updateCombo(_p0._0));
 			case 'OnTodoMsg':
 				return _jigargosar$elm_simple_gtd$Update$withNow(
 					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithNow(_p0._0));

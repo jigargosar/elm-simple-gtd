@@ -113,7 +113,7 @@ init flags =
             , timeTracker = Todo.TimeTracker.none
             , keyComboModel =
                 Keyboard.Combo.init
-                    { toMsg = Msg.OnKeyCombo
+                    { toMsg = Msg.OnKeyCombo >> Msg.OnSubscriptionMsg
                     , combos = keyboardCombos
                     }
             , config = flags.config

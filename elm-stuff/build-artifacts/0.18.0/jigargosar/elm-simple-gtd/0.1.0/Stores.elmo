@@ -10,7 +10,7 @@ var _jigargosar$elm_simple_gtd$Stores$setProjectStore = F2(
 			model,
 			{projectStore: projectStore});
 	});
-var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseChange = F2(
+var _jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnFirebaseDatabaseChange = F2(
 	function (dbName, encodedEntity) {
 		var _p0 = dbName;
 		switch (_p0) {

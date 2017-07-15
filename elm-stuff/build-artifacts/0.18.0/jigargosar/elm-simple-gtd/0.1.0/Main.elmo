@@ -72,7 +72,13 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		focusInEntity: _jigargosar$elm_simple_gtd$Entity_Types$createContextEntity(_jigargosar$elm_simple_gtd$Context$null),
 		timeTracker: _jigargosar$elm_simple_gtd$Todo_TimeTracker$none,
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
-			{toMsg: _jigargosar$elm_simple_gtd$Msg$OnKeyCombo, combos: _jigargosar$elm_simple_gtd$Main$keyboardCombos}),
+			{
+				toMsg: function (_p4) {
+					return _jigargosar$elm_simple_gtd$Msg$OnSubscriptionMsg(
+						_jigargosar$elm_simple_gtd$Msg$OnKeyCombo(_p4));
+				},
+				combos: _jigargosar$elm_simple_gtd$Main$keyboardCombos
+			}),
 		config: flags.config,
 		appDrawerModel: localPref.appDrawer,
 		signInModel: localPref.signIn,
@@ -106,7 +112,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (model) {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$core$Platform_Sub$map,
-				_jigargosar$elm_simple_gtd$Msg$OnSubMsg,
+				_jigargosar$elm_simple_gtd$Msg$OnSubscriptionMsg,
 				_elm_lang$core$Platform_Sub$batch(
 					{
 						ctor: '::',

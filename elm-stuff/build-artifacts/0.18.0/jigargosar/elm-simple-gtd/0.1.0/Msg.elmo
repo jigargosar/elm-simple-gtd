@@ -1,3 +1,6 @@
+var _jigargosar$elm_simple_gtd$Msg$OnKeyCombo = function (a) {
+	return {ctor: 'OnKeyCombo', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Msg$OnFirebaseDatabaseChange = F2(
 	function (a, b) {
 		return {ctor: 'OnFirebaseDatabaseChange', _0: a, _1: b};
@@ -33,9 +36,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnAppDrawerMsg = function (a) {
 };
 var _jigargosar$elm_simple_gtd$Msg$OnCloseNotification = function (a) {
 	return {ctor: 'OnCloseNotification', _0: a};
-};
-var _jigargosar$elm_simple_gtd$Msg$OnKeyCombo = function (a) {
-	return {ctor: 'OnKeyCombo', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg = function (a) {
 	return {ctor: 'OnFirebaseMsg', _0: a};

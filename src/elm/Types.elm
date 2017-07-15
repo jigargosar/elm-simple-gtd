@@ -54,7 +54,6 @@ type alias AppModel =
     , projectStore : ProjectStore
     , contextStore : ContextStore
     , editMode : ExclusiveMode
-    , launchBar : LaunchBar
     , maybeTodoEditForm : Maybe TodoForm
     , mainViewType : ViewType
     , reminderOverlay : TodoReminderOverlayModel

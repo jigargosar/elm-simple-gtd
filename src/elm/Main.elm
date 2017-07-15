@@ -120,7 +120,6 @@ init flags =
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
             , mdl = Material.model
-            , launchBar = LaunchBar.Models.initialModel now
             , maybeTodoEditForm = Nothing
             }
     in

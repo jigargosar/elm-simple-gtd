@@ -17,7 +17,7 @@ import String.Extra
 import Time exposing (Time)
 import Tuple2
 import Types exposing (AndThenUpdate, ReturnF)
-import X.Return
+import X.Return exposing (returnWith)
 import XMMsg
 import LaunchBar.Messages exposing (..)
 import Project
@@ -35,18 +35,14 @@ update :
     -> Time
     -> ReturnF
 update andThenUpdate msg now =
-    andThen
+    returnWith
         (\m ->
-            let
-                config : Config
-                config =
-                    { now = now
-                    , activeProjects = (Stores.getActiveProjects m)
-                    , activeContexts = (Stores.getActiveContexts m)
-                    }
-            in
-                m |> Return.singleton >> update2 config andThenUpdate msg
+            { now = now
+            , activeProjects = (Stores.getActiveProjects m)
+            , activeContexts = (Stores.getActiveContexts m)
+            }
         )
+        (\config -> updateWithConfig config andThenUpdate msg)
 
 
 type alias Config =
@@ -56,12 +52,12 @@ type alias Config =
     }
 
 
-update2 :
+updateWithConfig :
     Config
     -> AndThenUpdate
     -> LaunchBarMsg
     -> ReturnF
-update2 config andThenUpdate msg =
+updateWithConfig config andThenUpdate msg =
     case msg of
         NOOP ->
             identity

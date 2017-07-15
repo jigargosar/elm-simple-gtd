@@ -4,6 +4,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
+import Model
 import Msg exposing (AppMsg(LaunchBarMsg))
 import Return
 import Model.ViewType
@@ -27,6 +28,7 @@ update andThenUpdate msg now =
                     , activeProjects = (Stores.getActiveProjects m)
                     , activeContexts = (Stores.getActiveContexts m)
                     , onCancel = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                    , onSelect = (\entity -> Model.noop)
                     }
             in
                 m.launchBar

@@ -18,8 +18,7 @@ type alias Config msg =
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
     , onCancel : msg
-
-    --    , onSelect : SearchItem -> msg
+    , onSelect : SearchItem -> msg
     }
 
 
@@ -39,8 +38,12 @@ update config msg =
                 map (tuple2 Nothing)
 
             OnLBEnter entity ->
-                map (\model -> { model | maybeResult = Selected entity |> Just })
-                    >> map (tuple2 Nothing)
+                map
+                    (\model ->
+                        ( config.onSelect entity |> Just
+                        , { model | maybeResult = Selected entity |> Just }
+                        )
+                    )
 
             OnLBInputChanged form text ->
                 map (updateInput config text)
@@ -52,8 +55,7 @@ update config msg =
                     >> DomPorts.autoFocusInputRCmd
 
             OnCancel ->
-                map (\m -> { m | maybeResult = Just Canceled })
-                    >> map (tuple2 Nothing)
+                map (\m -> ( Just config.onCancel, { m | maybeResult = Just Canceled } ))
 
 
 type alias LaunchBarF =

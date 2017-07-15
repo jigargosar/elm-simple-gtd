@@ -32,10 +32,6 @@ type SubscriptionMsg
     | OnKeyCombo Keyboard.Combo.Msg
 
 
-type MainMsg
-    = OnExclusiveModeMsg ExclusiveModeMsg
-
-
 type ExclusiveModeMsg
     = OnSetExclusiveMode ExclusiveMode
     | OnSetExclusiveModeToNoneAndTryRevertingFocus
@@ -45,7 +41,7 @@ type ExclusiveModeMsg
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
-    | OnMainMsg MainMsg
+    | OnExclusiveModeMsg ExclusiveModeMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm

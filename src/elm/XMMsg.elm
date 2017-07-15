@@ -10,12 +10,12 @@ import Maybe.Extra as Maybe
 
 
 onSetExclusiveModeToNoneAndTryRevertingFocus =
-    Msg.OnSetExclusiveModeToNoneAndTryRevertingFocus |> Msg.OnExclusiveModeMsg |> Msg.OnMainMsg
+    Msg.OnSetExclusiveModeToNoneAndTryRevertingFocus |> Msg.OnExclusiveModeMsg
 
 
 onSetExclusiveMode =
-    Msg.OnSetExclusiveMode >> Msg.OnExclusiveModeMsg >> Msg.OnMainMsg
+    Msg.OnSetExclusiveMode >> Msg.OnExclusiveModeMsg
 
 
 onSaveExclusiveModeForm =
-    Msg.OnSaveExclusiveModeForm |> Msg.OnExclusiveModeMsg >> Msg.OnMainMsg
+    Msg.OnSaveExclusiveModeForm |> Msg.OnExclusiveModeMsg

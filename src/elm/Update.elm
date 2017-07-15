@@ -10,7 +10,6 @@ import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (..)
 import Firebase.Main
 import LocalPref
-import Main.Update
 import Material
 import Menu
 import Model.ViewType
@@ -18,6 +17,7 @@ import Msg exposing (..)
 import Stores
 import Todo.Form
 import Todo.FormTypes exposing (..)
+import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
 import X.Return as Return
@@ -52,8 +52,8 @@ update andThenUpdate msg =
         OnSubscriptionMsg msg_ ->
             Update.Subscription.update andThenUpdate msg_
 
-        OnMainMsg msg_ ->
-            Main.Update.update andThenUpdate msg_
+        OnExclusiveModeMsg msg_ ->
+            Update.ExclusiveMode.update andThenUpdate msg_
 
         OnShowMainMenu ->
             andThenUpdate (XMMsg.onSetExclusiveMode (XMMainMenu Menu.initState))

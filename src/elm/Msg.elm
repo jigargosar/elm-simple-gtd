@@ -33,6 +33,12 @@ type SubMsg
 
 type MainMsg
     = OnSwitchToNewUserSetupModeIfNeeded
+    | OnExclusiveModeMsg ExclusiveModeMsg
+
+
+type ExclusiveModeMsg
+    = OnSetExclusiveMode ExclusiveMode
+    | OnSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 type AppMsg
@@ -42,7 +48,6 @@ type AppMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnDeactivateEditingMode
     | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent

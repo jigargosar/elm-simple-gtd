@@ -15,7 +15,14 @@ var _jigargosar$elm_simple_gtd$Msg$OnKeyboardMsg = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnNowChanged = function (a) {
 	return {ctor: 'OnNowChanged', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg = function (a) {
+	return {ctor: 'OnExclusiveModeMsg', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
+var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveModeToNoneAndTryRevertingFocus = {ctor: 'OnSetExclusiveModeToNoneAndTryRevertingFocus'};
+var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveMode = function (a) {
+	return {ctor: 'OnSetExclusiveMode', _0: a};
+};
 var _jigargosar$elm_simple_gtd$Msg$OnMdl = function (a) {
 	return {ctor: 'OnMdl', _0: a};
 };
@@ -68,7 +75,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
 		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm = {ctor: 'OnSaveExclusiveModeForm'};
-var _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _jigargosar$elm_simple_gtd$Msg$OnRemotePouchSync = function (a) {
 	return {ctor: 'OnRemotePouchSync', _0: a};
 };

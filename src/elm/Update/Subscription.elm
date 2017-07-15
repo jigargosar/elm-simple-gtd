@@ -19,6 +19,7 @@ import X.Return
 import Keyboard.Extra as Key
 import TodoMsg
 import Update.LaunchBar
+import XMMsg
 
 
 onSubMsg andThenUpdate subMsg =
@@ -62,7 +63,7 @@ onGlobalKeyUp andThenUpdate key =
                     let
                         clear =
                             map (Model.Selection.clearSelection)
-                                >> andThenUpdate OnDeactivateEditingMode
+                                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                     in
                         case key of
                             Key.Escape ->
@@ -84,7 +85,7 @@ onGlobalKeyUp andThenUpdate key =
                                 identity
 
                 ( Key.Escape, _ ) ->
-                    andThenUpdate OnDeactivateEditingMode
+                    andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
                 _ ->
                     identity

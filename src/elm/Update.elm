@@ -13,7 +13,6 @@ import LocalPref
 import Main.Update
 import Material
 import Menu
-import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
 import Model.Keyboard
 import Model.ViewType
 import Msg exposing (..)
@@ -28,7 +27,7 @@ import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
 import Todo.Form
-import Return
+import Return exposing (andThen)
 import Task
 import Time exposing (Time)
 import Model exposing (..)
@@ -36,6 +35,7 @@ import Todo.Main
 import Json.Decode as D exposing (Decoder)
 import Types exposing (AppModel, ModelF, Return, ReturnF)
 import X.Record exposing (maybeOver)
+import XMMsg
 
 
 foo =
@@ -62,7 +62,7 @@ update andThenUpdate msg =
             Main.Update.update andThenUpdate mainMsg
 
         OnShowMainMenu ->
-            map (setExclusiveMode (Menu.initState |> XMMainMenu))
+            andThenUpdate (XMMsg.onSetExclusiveMode (XMMainMenu Menu.initState))
                 >> Return.command positionMainMenuCmd
 
         OnEntityListKeyDown entityList { key, isShiftDown } ->
@@ -82,24 +82,19 @@ update andThenUpdate msg =
             andThenUpdate OnSaveExclusiveModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
-        OnDeactivateEditingMode ->
-            map (deactivateEditingMode)
-                >> andThenUpdate setDomFocusToFocusInEntityCmd
-
         OnMainMenuStateChanged menuState ->
-            map
-                (menuState
-                    |> XMMainMenu
-                    >> setExclusiveMode
-                )
+            (menuState
+                |> XMMainMenu
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
+            )
                 >> autoFocusInputRCmd
 
         OnUpdateRemoteSyncFormUri form uri ->
-            map
-                ({ form | uri = uri }
-                    |> XMEditSyncSettings
-                    >> setExclusiveMode
-                )
+            { form | uri = uri }
+                |> XMEditSyncSettings
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
 
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)

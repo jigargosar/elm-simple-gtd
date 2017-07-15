@@ -6,7 +6,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$editTodoSchedulePopupView = function (f
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus),
 				_1: {
 					ctor: '::',
 					_0: _jigargosar$elm_simple_gtd$X_Keyboard$onKeyDownStopPropagation(
@@ -155,7 +155,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$editTodoSchedulePopupView = function (f
 };
 var _jigargosar$elm_simple_gtd$Todo_View$editTodoContextPopupView = _jigargosar$elm_simple_gtd$Todo_View_Menu$context;
 var _jigargosar$elm_simple_gtd$Todo_View$editTodoProjectPopupView = _jigargosar$elm_simple_gtd$Todo_View_Menu$project;
-var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
+var _jigargosar$elm_simple_gtd$Todo_View$fireCancel = _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus;
 var _jigargosar$elm_simple_gtd$Todo_View$editTodoTextView = F2(
 	function (form, appModel) {
 		var fireToggleDelete = A2(

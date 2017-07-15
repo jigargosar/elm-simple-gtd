@@ -4,13 +4,13 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import LaunchBar.Messages
 import LaunchBar.Models exposing (SearchItem(..))
 import LaunchBar.Update
-import Model.Internal exposing (setExclusiveMode)
 import Msg exposing (AppMsg(LaunchBarMsg))
 import Return
 import Model.ViewType
 import Stores
 import Tuple2
 import X.Return
+import XMMsg
 
 
 map =
@@ -35,7 +35,7 @@ update andThenUpdate msg now =
         )
         >> X.Return.withMaybe (.launchBar >> .maybeResult)
             (\result ->
-                andThenUpdate Msg.OnDeactivateEditingMode
+                andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                     >> case result of
                         LaunchBar.Models.Selected entity ->
                             case entity of
@@ -57,5 +57,5 @@ update andThenUpdate msg now =
 
 
 open andThenUpdate =
-    map (setExclusiveMode XMLaunchBar)
+    andThenUpdate (XMMsg.onSetExclusiveMode XMLaunchBar)
         >> (LaunchBar.Messages.Open |> LaunchBarMsg |> andThenUpdate)

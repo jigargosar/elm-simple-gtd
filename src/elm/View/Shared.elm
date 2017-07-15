@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Mat
 import X.Function.Infix exposing (..)
 import Msg
+import XMMsg
 
 
 badge : String -> Int -> Html msg
@@ -22,7 +23,10 @@ defaultOkCancelButtons =
 
 
 defaultOkCancelButtonsWith list =
-    okCancelButtonsWith Msg.OnSaveExclusiveModeForm Msg.OnDeactivateEditingMode list
+    okCancelButtonsWith
+        XMMsg.onSaveExclusiveModeForm
+        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+        list
 
 
 defaultOkCancelDeleteButtons deleteMsg =

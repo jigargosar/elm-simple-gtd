@@ -6,7 +6,6 @@ import Document.Types exposing (getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Model.Internal exposing (setExclusiveMode)
 import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
@@ -33,6 +32,7 @@ import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
 import Types exposing (ModelF, ReturnF)
 import X.Function exposing (applyMaybeWith)
+import XMMsg
 
 
 port showTodoReminderNotification : Notification.TodoNotification -> Cmd msg
@@ -165,7 +165,7 @@ update andThenUpdate now todoMsg =
                 -- todo: if we had use save editing form, we would't missed calling on deactivate.
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(
-                >> andThenUpdate Msg.OnDeactivateEditingMode
+                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action
@@ -176,7 +176,7 @@ update andThenUpdate now todoMsg =
                 createXM model =
                     Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
             in
-                X.Return.mapModelWith createXM setExclusiveMode
+                X.Return.with createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
                     >> autoFocusInputRCmd
 
         OnStartEditingTodo todo editFormMode ->
@@ -187,7 +187,7 @@ update andThenUpdate now todoMsg =
                 positionPopup idPrefix =
                     DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
             in
-                X.Return.mapModelWith createXM setExclusiveMode
+                X.Return.with createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
                     >> command
                         (case editFormMode of
                             ETFM_EditTodoText ->
@@ -208,7 +208,7 @@ update andThenUpdate now todoMsg =
                 xm =
                     Todo.Form.updateTodoForm action form |> XMTodoForm
             in
-                map (setExclusiveMode xm)
+                andThenUpdate (XMMsg.onSetExclusiveMode xm)
                     >> Return.command
                         (case action of
                             Todo.FormTypes.SetTodoMenuState _ ->

@@ -132,7 +132,7 @@ var _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm = function 
 	return function (_p14) {
 		return A2(
 			andThenUpdate,
-			_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+			_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus,
 			A3(
 				_jigargosar$elm_simple_gtd$X_Return$with,
 				function (_) {

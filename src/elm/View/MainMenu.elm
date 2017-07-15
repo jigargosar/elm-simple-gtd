@@ -12,6 +12,7 @@ import Toolkit.Operators exposing (..)
 import Model
 import Tuple2
 import Types exposing (AppModel)
+import XMMsg
 
 
 type ItemType
@@ -32,7 +33,7 @@ menuConfig menuState appModel =
     , itemView = itemView
     , onStateChanged = Msg.OnMainMenuStateChanged
     , noOp = Model.noop
-    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
+    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
     }
 
 
@@ -48,7 +49,7 @@ itemView ( textV, itemType ) =
 onSelect ( _, itemType ) =
     case itemType of
         URL url ->
-            Msg.OnDeactivateEditingMode
+            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         Msg msg ->
             msg

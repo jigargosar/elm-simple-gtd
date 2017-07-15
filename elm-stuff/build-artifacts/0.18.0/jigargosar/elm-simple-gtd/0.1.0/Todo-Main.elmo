@@ -366,7 +366,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return function (_p25) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+						_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus,
 						_jigargosar$elm_simple_gtd$Todo_Main$andThen(
 							A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, _p17._1, _p17._0))(_p25));
 				};
@@ -379,28 +379,35 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				};
 				return function (_p26) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-						A3(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode, _p26));
+						A3(
+							_jigargosar$elm_simple_gtd$X_Return$with,
+							createXM,
+							function (_p27) {
+								return andThenUpdate(
+									_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_p27));
+							},
+							_p26));
 				};
 			case 'OnStartEditingTodo':
-				var _p30 = _p17._0;
-				var _p29 = _p17._1;
+				var _p32 = _p17._0;
+				var _p31 = _p17._1;
 				var positionPopup = function (idPrefix) {
 					return _jigargosar$elm_simple_gtd$DomPorts$positionPopupMenu(
 						A2(
 							_elm_lang$core$Basics_ops['++'],
 							idPrefix,
-							_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p30)));
+							_jigargosar$elm_simple_gtd$Document_Types$getDocId(_p32)));
 				};
 				var createXM = function (model) {
 					return _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoForm(
-						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p29, model.now, _p30));
+						A3(_jigargosar$elm_simple_gtd$Todo_Form$createEditTodoForm, _p31, model.now, _p32));
 				};
-				return function (_p27) {
+				return function (_p28) {
 					return A2(
 						_jigargosar$elm_simple_gtd$Todo_Main$command,
 						function () {
-							var _p28 = _p29;
-							switch (_p28.ctor) {
+							var _p29 = _p31;
+							switch (_p29.ctor) {
 								case 'ETFM_EditTodoText':
 									return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd;
 								case 'ETFM_EditTodoContext':
@@ -411,27 +418,34 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 									return positionPopup('#edit-schedule-button-');
 							}
 						}(),
-						A3(_jigargosar$elm_simple_gtd$X_Return$mapModelWith, createXM, _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode, _p27));
+						A3(
+							_jigargosar$elm_simple_gtd$X_Return$with,
+							createXM,
+							function (_p30) {
+								return andThenUpdate(
+									_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_p30));
+							},
+							_p28));
 				};
 			default:
-				var _p33 = _p17._1;
+				var _p35 = _p17._1;
 				var xm = _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMTodoForm(
-					A2(_jigargosar$elm_simple_gtd$Todo_Form$updateTodoForm, _p33, _p17._0));
-				return function (_p31) {
+					A2(_jigargosar$elm_simple_gtd$Todo_Form$updateTodoForm, _p35, _p17._0));
+				return function (_p33) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
 						function () {
-							var _p32 = _p33;
-							if (_p32.ctor === 'SetTodoMenuState') {
+							var _p34 = _p35;
+							if (_p34.ctor === 'SetTodoMenuState') {
 								return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputCmd;
 							} else {
 								return _elm_lang$core$Platform_Cmd$none;
 							}
 						}(),
 						A2(
-							_jigargosar$elm_simple_gtd$Todo_Main$map,
-							_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(xm),
-							_p31));
+							andThenUpdate,
+							_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(xm),
+							_p33));
 				};
 		}
 	});
@@ -474,7 +488,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 						_0: A2(
 							_elm_lang$core$Time$every,
 							_elm_lang$core$Time$second * 1,
-							function (_p34) {
+							function (_p36) {
 								return _jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker;
 							}),
 						_1: {
@@ -482,7 +496,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
 							_0: A2(
 								_elm_lang$core$Time$every,
 								_elm_lang$core$Time$second * 30,
-								function (_p35) {
+								function (_p37) {
 									return _jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick;
 								}),
 							_1: {ctor: '[]'}

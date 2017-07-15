@@ -2,12 +2,13 @@ module Main.Update exposing (..)
 
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Firebase.SignIn
-import Model.Internal exposing (deactivateEditingMode, setExclusiveMode)
-import Msg exposing (MainMsg(OnSwitchToNewUserSetupModeIfNeeded), AppMsg)
+import Msg exposing (MainMsg(..), AppMsg)
 import Return exposing (map)
 import Store
 import TodoMsg
 import Types exposing (ReturnF)
+import Update.ExclusiveMode
+import XMMsg
 
 
 update :
@@ -24,8 +25,11 @@ update andThenUpdate msg =
                             if Store.isEmpty model.todoStore then
                                 andThenUpdate TodoMsg.onStartSetupAddTodo
                             else
-                                andThenUpdate Msg.OnDeactivateEditingMode
+                                andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                            else
-                            map (setExclusiveMode XMSignInOverlay)
+                            andThenUpdate (XMMsg.onSetExclusiveMode XMSignInOverlay)
             in
                 Return.andThen onSwitchToNewUserSetupModeIfNeeded
+
+        OnExclusiveModeMsg msg_ ->
+            Update.ExclusiveMode.update andThenUpdate msg_

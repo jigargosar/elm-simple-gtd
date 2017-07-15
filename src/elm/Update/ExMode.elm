@@ -17,11 +17,12 @@ import Todo.Types exposing (TodoAction(..))
 import Types exposing (ModelReturnF)
 import X.Record exposing (over, overT2)
 import X.Return
+import XMMsg
 
 
 onSaveExclusiveModeForm andThenUpdate =
     X.Return.with .editMode saveExclusiveModeForm
-        >> andThenUpdate Msg.OnDeactivateEditingMode
+        >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 saveExclusiveModeForm exMode =

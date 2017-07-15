@@ -36,6 +36,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
+import XMMsg
 
 
 type alias TodoViewModel =
@@ -348,7 +349,7 @@ createScheduleViewModel now todo =
 
 
 fireCancel =
-    Msg.OnDeactivateEditingMode
+    XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 editTodoTextView : TodoForm -> AppModel -> Html AppMsg
@@ -419,7 +420,7 @@ editTodoContextPopupView =
 editTodoSchedulePopupView form =
     div
         [ class "overlay"
-        , onClickStopPropagation Msg.OnDeactivateEditingMode
+        , onClickStopPropagation XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
         , onKeyDownStopPropagation (\_ -> Model.noop)
         ]
         [ div

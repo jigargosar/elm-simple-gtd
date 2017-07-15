@@ -13,6 +13,7 @@ import Todo.Msg
 import Todo.Types exposing (TodoAction(TA_SetContextId, TA_SetProjectId))
 import TodoMsg
 import Types exposing (AppModel)
+import XMMsg
 
 
 createProjectMenuConfig : TodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
@@ -28,7 +29,7 @@ createProjectMenuConfig form model =
     , itemView = Project.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
-    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
+    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
     }
 
 
@@ -45,7 +46,7 @@ createContextMenuConfig form model =
     , itemView = Context.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
-    , onOutsideMouseDown = Msg.OnDeactivateEditingMode
+    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
     }
 
 

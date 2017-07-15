@@ -47,8 +47,8 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						_Fresheyeball$elm_return$Return$command,
 						_jigargosar$elm_simple_gtd$Update$positionMainMenuCmd,
 						A2(
-							_jigargosar$elm_simple_gtd$Update$map,
-							_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
+							andThenUpdate,
+							_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
 								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState)),
 							_p1));
 				};
@@ -91,33 +91,24 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 						},
 						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm, _p6));
 				};
-			case 'OnDeactivateEditingMode':
-				return function (_p8) {
-					return A2(
-						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
-						A2(_jigargosar$elm_simple_gtd$Update$map, _jigargosar$elm_simple_gtd$Model_Internal$deactivateEditingMode, _p8));
-				};
 			case 'OnMainMenuStateChanged':
-				return function (_p9) {
+				return function (_p8) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-						A2(
-							_jigargosar$elm_simple_gtd$Update$map,
-							function (_p10) {
-								return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p10));
-							}(_p0._0),
-							_p9));
+						function (_p9) {
+							return andThenUpdate(
+								_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p9)));
+						}(_p0._0)(_p8));
 				};
 			case 'OnUpdateRemoteSyncFormUri':
-				return _jigargosar$elm_simple_gtd$Update$map(
-					function (_p11) {
-						return _jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p11));
-					}(
-						_elm_lang$core$Native_Utils.update(
-							_p0._0,
-							{uri: _p0._1})));
+				return function (_p10) {
+					return andThenUpdate(
+						_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p10)));
+				}(
+					_elm_lang$core$Native_Utils.update(
+						_p0._0,
+						{uri: _p0._1}));
 			case 'OnSetViewType':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p0._0));
@@ -147,9 +138,9 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return A2(_jigargosar$elm_simple_gtd$AppDrawer_Main$update, andThenUpdate, _p0._0);
 			case 'OnPersistLocalPref':
 				return _Fresheyeball$elm_return$Return$effect_(
-					function (_p12) {
+					function (_p11) {
 						return _jigargosar$elm_simple_gtd$Update$persistLocalPref(
-							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p12));
+							_jigargosar$elm_simple_gtd$LocalPref$encodeLocalPref(_p11));
 					});
 			default:
 				return _Fresheyeball$elm_return$Return$andThen(

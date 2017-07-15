@@ -13,8 +13,8 @@ import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (..)
 import Toolkit.Operators exposing (..)
-
 import X.Function exposing (..)
+import XMMsg
 
 
 init : GroupDocForm -> Html Msg.AppMsg
@@ -40,7 +40,7 @@ init form =
             Msg.OnSaveExclusiveModeForm
 
         fireCancel =
-            Msg.OnDeactivateEditingMode
+            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         fireToggleArchive =
             toMsg Entity.Types.EUA_ToggleArchived

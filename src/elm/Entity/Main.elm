@@ -8,7 +8,6 @@ import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
 import GroupDoc.Types exposing (GroupDocType(..))
 import Maybe.Extra
-import Model.Internal exposing (setExclusiveMode)
 import Model.Selection
 import Model.ViewType
 import Msg exposing (AppMsg)
@@ -22,6 +21,7 @@ import TodoMsg
 import Types exposing (AppModel, ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
 import X.Return
+import XMMsg
 
 
 map =
@@ -35,11 +35,19 @@ update :
 update andThenUpdate msg =
     case msg of
         EM_StartAddingContext ->
-            map (createAddGroupDocForm ContextGroupDoc |> XMGroupDocForm >> setExclusiveMode)
+            (createAddGroupDocForm ContextGroupDoc
+                |> XMGroupDocForm
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
+            )
                 >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
-            map (createAddGroupDocForm ProjectGroupDoc |> XMGroupDocForm >> setExclusiveMode)
+            (createAddGroupDocForm ProjectGroupDoc
+                |> XMGroupDocForm
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
+            )
                 >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->
@@ -58,11 +66,22 @@ onUpdate andThenUpdate entityId action =
                 >> DomPorts.autoFocusInputRCmd
 
         EUA_SetFormText newName ->
-            Return.map (updateEditModeTextChanged newName)
+            X.Return.with (.editMode)
+                (\xMode ->
+                    case xMode of
+                        XMGroupDocForm form ->
+                            GroupDoc.Form.setName newName form
+                                |> XMGroupDocForm
+                                >> XMMsg.onSetExclusiveMode
+                                >> andThenUpdate
+
+                        _ ->
+                            identity
+                )
 
         EUA_ToggleDeleted ->
             Return.andThen (toggleDeleteEntity entityId)
-                >> andThenUpdate Msg.OnDeactivateEditingMode
+                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         EUA_ToggleArchived ->
             let
@@ -82,7 +101,7 @@ onUpdate andThenUpdate entityId action =
                                 |> andThenUpdate
             in
                 toggleArchivedEntity
-                    >> andThenUpdate Msg.OnDeactivateEditingMode
+                    >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         EUA_OnFocusIn ->
             Return.map (Stores.setFocusInEntityWithEntityId entityId)
@@ -132,28 +151,18 @@ startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF
 startEditingEntity andThenUpdate entityId =
     case entityId of
         ContextId id ->
-            X.Return.mapModelWithMaybeF
+            X.Return.withMaybe
                 (Stores.findContextById id)
-                (createEditContextForm >> XMGroupDocForm >> setExclusiveMode)
+                (createEditContextForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
 
         ProjectId id ->
-            X.Return.mapModelWithMaybeF
+            X.Return.withMaybe
                 (Stores.findProjectById id)
-                (createEditProjectForm >> XMGroupDocForm >> setExclusiveMode)
+                (createEditProjectForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
 
         TodoId id ->
             X.Return.withMaybe (Stores.findTodoById id)
                 (TodoMsg.onStartEditingTodo >> andThenUpdate)
-
-
-updateEditModeTextChanged newName model =
-    model
-        |> case model.editMode of
-            XMGroupDocForm form ->
-                setExclusiveMode (GroupDoc.Form.setName newName form |> XMGroupDocForm)
-
-            _ ->
-                identity
 
 
 toViewType : AppModel -> Maybe EntityListViewType -> EntityId -> EntityListViewType

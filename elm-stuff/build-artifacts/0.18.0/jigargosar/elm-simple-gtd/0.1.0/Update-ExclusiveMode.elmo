@@ -1,0 +1,29 @@
+var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
+var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$exclusiveMode = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.editMode;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{editMode: s});
+		}));
+var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveMode = _jigargosar$elm_simple_gtd$X_Record$set(_jigargosar$elm_simple_gtd$Update_ExclusiveMode$exclusiveMode);
+var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveModeToNone = _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone);
+var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$update = F2(
+	function (andThenUpdate, msg) {
+		var _p0 = msg;
+		if (_p0.ctor === 'OnSetExclusiveMode') {
+			return _Fresheyeball$elm_return$Return$map(
+				_jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveMode(_p0._0));
+		} else {
+			return function (_p1) {
+				return A2(
+					andThenUpdate,
+					_jigargosar$elm_simple_gtd$Update_ExclusiveMode$setDomFocusToFocusInEntityCmd,
+					A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveModeToNone, _p1));
+			};
+		}
+	});

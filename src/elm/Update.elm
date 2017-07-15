@@ -44,8 +44,8 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
-        OnCommonMsg msg ->
-            CommonMsg.update msg
+        OnCommonMsg msg_ ->
+            CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
             Update.Subscription.update andThenUpdate msg_
@@ -68,8 +68,8 @@ update andThenUpdate msg =
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)
 
-        OnEntityMsg entityMsg ->
-            Entity.Main.update andThenUpdate entityMsg
+        OnEntityMsg msg_ ->
+            Entity.Main.update andThenUpdate msg_
 
         LaunchBarMsgWithNow msg now ->
             Update.LaunchBar.update andThenUpdate msg now

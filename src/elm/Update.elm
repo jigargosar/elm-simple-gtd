@@ -44,6 +44,16 @@ update :
     -> ReturnF
 update andThenUpdate msg =
     case msg of
+        OnMdl msg_ ->
+            andThen (Material.update OnMdl msg_)
+
+        OnSetViewType viewType ->
+            map (Model.ViewType.switchToView viewType)
+
+        OnPersistLocalPref ->
+            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
+
+        -- non delegated
         OnCommonMsg msg_ ->
             CommonMsg.update msg_
 
@@ -59,32 +69,23 @@ update andThenUpdate msg =
         OnCustomSyncMsg msg_ ->
             Update.CustomSync.update andThenUpdate msg_
 
-        OnPersistLocalPref ->
-            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
-
-        OnMdl msg_ ->
-            andThen (Material.update OnMdl msg_)
-
-        OnSetViewType viewType ->
-            map (Model.ViewType.switchToView viewType)
-
         OnEntityMsg msg_ ->
             Entity.Main.update andThenUpdate msg_
 
-        LaunchBarMsgWithNow msg now ->
-            Update.LaunchBar.update andThenUpdate msg now
+        LaunchBarMsgWithNow msg_ now ->
+            Update.LaunchBar.update andThenUpdate msg_ now
 
-        LaunchBarMsg msg ->
-            LaunchBarMsgWithNow msg |> returnWithNow
+        LaunchBarMsg msg_ ->
+            LaunchBarMsgWithNow msg_ |> returnWithNow
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
 
-        OnTodoMsg todoMsg ->
-            returnWithNow (OnTodoMsgWithNow todoMsg)
+        OnTodoMsg msg_ ->
+            returnWithNow (OnTodoMsgWithNow msg_)
 
-        OnTodoMsgWithNow todoMsg now ->
-            Todo.Main.update andThenUpdate now todoMsg
+        OnTodoMsgWithNow msg_ now ->
+            Todo.Main.update andThenUpdate now msg_
 
         OnFirebaseMsg msg_ ->
             Firebase.Main.update andThenUpdate msg_

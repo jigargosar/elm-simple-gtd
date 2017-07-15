@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (Entity, EntityMsg)
+import Entity.Types
 import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
@@ -51,7 +51,7 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnSetViewType ViewType
-    | OnEntityMsg EntityMsg
+    | OnEntityMsg Entity.Types.EntityMsg
     | LaunchBarMsg LaunchBar.Messages.LaunchBarMsg
     | LaunchBarMsgWithNow LaunchBar.Messages.LaunchBarMsg Time
     | OnTodoMsg TodoMsg
@@ -68,11 +68,11 @@ onSetEntityListView =
 
 
 onNewProject =
-    OnEntityMsg Entity.Types.EM_StartAddingProject
+    Entity.Types.EM_StartAddingProject |> OnEntityMsg
 
 
 onNewContext =
-    OnEntityMsg Entity.Types.EM_StartAddingContext
+    Entity.Types.EM_StartAddingContext |> OnEntityMsg
 
 
 onEntityUpdateMsg =

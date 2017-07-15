@@ -38,7 +38,7 @@ type EntityUpdateAction
     | EUA_SetFormText String
     | EUA_OnFocusIn
     | EUA_ToggleSelection
-    | OnGotoEntity
+    | EUA_OnGotoEntity
 
 
 createContextEntity =

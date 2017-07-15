@@ -64,6 +64,33 @@ update andThenUpdate msg =
             andThenUpdate (XMMsg.onSetExclusiveMode (XMMainMenu Menu.initState))
                 >> Return.command positionMainMenuCmd
 
+        OnMainMenuStateChanged menuState ->
+            (menuState
+                |> XMMainMenu
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
+            )
+                >> autoFocusInputRCmd
+
+        OnRemotePouchSync form ->
+            andThenUpdate XMMsg.onSaveExclusiveModeForm
+                >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
+
+        OnUpdateRemoteSyncFormUri form uri ->
+            { form | uri = uri }
+                |> XMEditSyncSettings
+                >> XMMsg.onSetExclusiveMode
+                >> andThenUpdate
+
+        OnPersistLocalPref ->
+            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
+
+        OnMdl msg_ ->
+            Return.andThen (Material.update OnMdl msg_)
+
+        OnSetViewType viewType ->
+            map (Model.ViewType.switchToView viewType)
+
         OnEntityListKeyDown entityList { key, isShiftDown } ->
             case key of
                 Key.ArrowUp ->
@@ -76,27 +103,6 @@ update andThenUpdate msg =
 
                 _ ->
                     identity
-
-        OnRemotePouchSync form ->
-            andThenUpdate XMMsg.onSaveExclusiveModeForm
-                >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
-
-        OnMainMenuStateChanged menuState ->
-            (menuState
-                |> XMMainMenu
-                >> XMMsg.onSetExclusiveMode
-                >> andThenUpdate
-            )
-                >> autoFocusInputRCmd
-
-        OnUpdateRemoteSyncFormUri form uri ->
-            { form | uri = uri }
-                |> XMEditSyncSettings
-                >> XMMsg.onSetExclusiveMode
-                >> andThenUpdate
-
-        OnSetViewType viewType ->
-            map (Model.ViewType.switchToView viewType)
 
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg
@@ -114,9 +120,9 @@ update andThenUpdate msg =
             Return.andThen (Model.Keyboard.updateCombo comboMsg)
 
         OnTodoMsg todoMsg ->
-            withNow (OnTodoMsgWithTime todoMsg)
+            withNow (OnTodoMsgWithNow todoMsg)
 
-        OnTodoMsgWithTime todoMsg now ->
+        OnTodoMsgWithNow todoMsg now ->
             Todo.Main.update andThenUpdate now todoMsg
 
         OnFirebaseMsg firebaseMsg ->
@@ -124,12 +130,6 @@ update andThenUpdate msg =
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg
-
-        OnPersistLocalPref ->
-            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
-
-        OnMdl msg_ ->
-            Return.andThen (Material.update OnMdl msg_)
 
 
 moveFocusBy : Int -> List Entity -> ModelF

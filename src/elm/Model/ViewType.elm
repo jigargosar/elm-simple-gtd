@@ -1,7 +1,7 @@
 module Model.ViewType exposing (..)
 
 import Document.Types exposing (getDocId)
-import Entity.Types
+import Entity.Types exposing (EntityListViewType(..))
 import Model.Selection
 import Types exposing (AppModel, ModelF)
 import ViewType exposing (ViewType(EntityListView))
@@ -30,11 +30,11 @@ switchToView mainViewType model =
 
 
 switchToContextsView =
-    EntityListView Entity.Types.ContextsView |> switchToView
+    setEntityListViewType ContextsView
 
 
 switchToProjectsView =
-    EntityListView Entity.Types.ProjectsView |> switchToView
+    setEntityListViewType ProjectsView
 
 
 setEntityListViewType =

@@ -113,7 +113,7 @@ create config todoList groupDoc =
                     toggleDeleteMsg
 
                 Key.CharG ->
-                    onEntityAction Entity.Types.OnGotoEntity
+                    onEntityAction Entity.Types.EUA_OnGotoEntity
 
                 _ ->
                     Model.noop

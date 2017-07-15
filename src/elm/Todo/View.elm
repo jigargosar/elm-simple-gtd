@@ -155,7 +155,7 @@ createTodoViewModel appM isFocusable todo =
                         reminder.startEditingMsg
 
                     Key.CharG ->
-                        createEntityUpdateMsg Entity.Types.OnGotoEntity
+                        createEntityUpdateMsg Entity.Types.EUA_OnGotoEntity
 
                     Key.CharS ->
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg

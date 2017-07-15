@@ -56,7 +56,7 @@ type AppMsg
     | LaunchBarMsg LaunchBar.Messages.Msg
     | LaunchBarMsgWithNow LaunchBar.Messages.Msg Time
     | OnTodoMsg TodoMsg
-    | OnTodoMsgWithTime TodoMsg Time
+    | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
     | OnKeyCombo Keyboard.Combo.Msg
     | OnCloseNotification String

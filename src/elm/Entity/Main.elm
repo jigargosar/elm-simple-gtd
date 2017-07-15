@@ -109,7 +109,7 @@ onUpdate andThenUpdate entityId action =
         EUA_ToggleSelection ->
             Return.map (toggleEntitySelection entityId)
 
-        Entity.Types.OnGotoEntity ->
+        EUA_OnGotoEntity ->
             Return.map (switchToEntityListViewFromEntity entityId)
 
 

@@ -27,7 +27,7 @@ var _jigargosar$elm_simple_gtd$LocalPref$localPrefDecoder = A4(
 		'appDrawer',
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$decoder,
 		_jigargosar$elm_simple_gtd$AppDrawer_Model$default,
-		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$Types$LocalPref)));
+		_elm_lang$core$Json_Decode$succeed(_jigargosar$elm_simple_gtd$LocalPref_Types$LocalPref)));
 var _jigargosar$elm_simple_gtd$LocalPref$decode = function (encoded) {
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],

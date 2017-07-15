@@ -1,8 +1,4 @@
 var _jigargosar$elm_simple_gtd$Types$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
-var _jigargosar$elm_simple_gtd$Types$LocalPref = F2(
-	function (a, b) {
-		return {appDrawer: a, signIn: b};
-	});
 var _jigargosar$elm_simple_gtd$Types$Flags = function (a) {
 	return function (b) {
 		return function (c) {

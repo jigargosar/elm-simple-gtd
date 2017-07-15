@@ -48,7 +48,7 @@ update andThenUpdate subMsg =
                         _ ->
                             Model.noop
             in
-                X.Return.andThenMaybe
+                X.Return.rAndThenMaybe
                     (Stores.upsertEncodedDocOnPouchDBChange dbName encodedDoc
                         >>? (Tuple2.mapEach afterEntityUpsertOnPouchDBChange Return.singleton
                                 >> uncurry andThenUpdate

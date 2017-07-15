@@ -78,7 +78,7 @@ apply =
     flip Return.andThen
 
 
-andThenMaybe f =
+rAndThenMaybe f =
     Return.andThen
         (\m ->
             f m ?= Return.singleton m

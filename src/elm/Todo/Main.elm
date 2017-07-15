@@ -16,7 +16,7 @@ import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
 import X.Record as Record exposing (set)
-import X.Return
+import X.Return exposing (rAndThenMaybe)
 import X.Time
 import Model
 import Notification
@@ -109,56 +109,20 @@ update andThenUpdate now todoMsg =
             updateTimeTracker now
 
         Upsert todo ->
-            map
-                (\model ->
-                    let
-                        isTrackerTodoInactive =
-                            Todo.isInActive todo
-                                && Tracker.isTrackingTodo todo model.timeTracker
-                    in
-                        if isTrackerTodoInactive then
-                            set timeTracker Tracker.none model
-                        else
-                            model
-                )
+            onUpsertTodo todo
 
-        OnReminderNotificationClicked { action, data } ->
-            let
-                todoId =
-                    data.id
-            in
-                if action == "mark-done" then
-                    Return.andThen (Stores.updateTodo TA_MarkDone todoId)
-                        >> command (Notification.closeNotification todoId)
-                else
-                    todoId
-                        |> ShowReminderOverlayForTodoId
-                        >> Msg.OnTodoMsg
-                        >> andThenUpdate
+        OnReminderNotificationClicked notif ->
+            onReminderNotificationClicked andThenUpdate notif
 
         ShowReminderOverlayForTodoId todoId ->
-            Return.map (showReminderOverlayForTodoId todoId)
+            map (showReminderOverlayForTodoId todoId)
 
         RunningNotificationResponse res ->
-            let
-                todoId =
-                    res.data.id
-            in
-                (case res.action of
-                    "stop" ->
-                        andThenUpdate TodoMsg.onStopRunningTodo
-
-                    "continue" ->
-                        identity
-
-                    _ ->
-                        andThenUpdate TodoMsg.onGotoRunningTodo
-                )
-                    >> andThenUpdate (Msg.OnCloseNotification todoId)
+            onRunningNotificationResponse andThenUpdate res
 
         OnProcessPendingNotificationCronTick ->
-            X.Return.andThenMaybe
-                (Stores.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
+            rAndThenMaybe
+                (Stores.findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
 
         OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId action ->
             (Stores.updateTodoAndMaybeAlsoSelected action todoId |> andThen)
@@ -171,13 +135,7 @@ update andThenUpdate now todoMsg =
             reminderOverlayAction action
 
         OnStartAddingTodo addFormMode ->
-            -- todo: think about merging 4 messages into one.
-            let
-                createXM model =
-                    Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
-            in
-                X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
-                    >> autoFocusInputRCmd
+            onStartAddingTodo andThenUpdate addFormMode
 
         OnStartEditingTodo todo editFormMode ->
             let
@@ -217,6 +175,67 @@ update andThenUpdate now todoMsg =
                             _ ->
                                 Cmd.none
                         )
+
+
+onStartAddingTodo andThenUpdate addFormMode =
+    -- todo: think about merging 4 messages into one.
+    let
+        createXM model =
+            Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
+    in
+        X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+            >> autoFocusInputRCmd
+
+
+onRunningNotificationResponse andThenUpdate res =
+    let
+        todoId =
+            res.data.id
+    in
+        (case res.action of
+            "stop" ->
+                andThenUpdate TodoMsg.onStopRunningTodo
+
+            "continue" ->
+                identity
+
+            _ ->
+                andThenUpdate TodoMsg.onGotoRunningTodo
+        )
+            >> andThenUpdate (Msg.OnCloseNotification todoId)
+
+
+onReminderNotificationClicked andThenUpdate notif =
+    let
+        { action, data } =
+            notif
+
+        todoId =
+            data.id
+    in
+        if action == "mark-done" then
+            Return.andThen (Stores.updateTodo TA_MarkDone todoId)
+                >> command (Notification.closeNotification todoId)
+        else
+            todoId
+                |> ShowReminderOverlayForTodoId
+                >> Msg.OnTodoMsg
+                >> andThenUpdate
+
+
+onUpsertTodo todo =
+    map
+        (\model ->
+            let
+                isTrackerTodoInactive =
+                    Todo.isInActive todo
+                        && Tracker.isTrackingTodo todo model.timeTracker
+            in
+                if isTrackerTodoInactive then
+                    set timeTracker Tracker.none model
+                else
+                    model
+        )
 
 
 showReminderNotificationCmd ( todo, model ) =

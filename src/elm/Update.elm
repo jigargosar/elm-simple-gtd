@@ -53,6 +53,9 @@ update andThenUpdate msg =
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
 
+        OnCloseNotification tag ->
+            command (Notification.closeNotification tag)
+
         -- non delegated
         OnCommonMsg msg_ ->
             CommonMsg.update msg_
@@ -77,9 +80,6 @@ update andThenUpdate msg =
 
         LaunchBarMsg msg_ ->
             LaunchBarMsgWithNow msg_ |> returnWithNow
-
-        OnCloseNotification tag ->
-            command (Notification.closeNotification tag)
 
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)

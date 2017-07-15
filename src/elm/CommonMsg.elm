@@ -6,10 +6,6 @@ import Return
 import X.Debug
 
 
-type alias Msg =
-    CommonMsg.Types.Msg
-
-
 update msg =
     case msg of
         NoOp ->

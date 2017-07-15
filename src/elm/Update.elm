@@ -36,10 +36,6 @@ import X.Record exposing (maybeOver)
 import XMMsg
 
 
-foo =
-    2
-
-
 map =
     Return.map
 
@@ -56,8 +52,8 @@ update andThenUpdate msg =
         OnSubscriptionMsg msg_ ->
             Update.Subscription.update andThenUpdate msg_
 
-        OnMainMsg mainMsg ->
-            Main.Update.update andThenUpdate mainMsg
+        OnMainMsg msg_ ->
+            Main.Update.update andThenUpdate msg_
 
         OnShowMainMenu ->
             andThenUpdate (XMMsg.onSetExclusiveMode (XMMainMenu Menu.initState))

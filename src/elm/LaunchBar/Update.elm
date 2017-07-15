@@ -3,19 +3,23 @@ module LaunchBar.Update exposing (..)
 import DomPorts exposing (autoFocusInputRCmd)
 import Fuzzy
 import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
-import LaunchBar.Messages exposing (Msg(..))
+import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (..)
 import Regex
 import Return exposing (Return)
 import String.Extra
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
+import X.Function exposing (tuple2)
 
 
-type alias Config =
+type alias Config msg =
     { now : Time
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
+    , onCancel : msg
+
+    --    , onSelect : SearchItem -> msg
     }
 
 
@@ -24,35 +28,39 @@ map =
 
 
 update :
-    Config
+    Config msg
     -> Msg
     -> LaunchBar
-    -> Return Msg LaunchBar
+    -> Return Msg ( Maybe msg, LaunchBar )
 update config msg =
     Return.singleton
         >> case msg of
             NOOP ->
-                identity
+                map (tuple2 Nothing)
 
             OnLBEnter entity ->
                 map (\model -> { model | maybeResult = Selected entity |> Just })
+                    >> map (tuple2 Nothing)
 
             OnLBInputChanged form text ->
                 map (updateInput config text)
+                    >> map (tuple2 Nothing)
 
             Open ->
                 map (\m -> { m | maybeResult = Nothing })
+                    >> map (tuple2 Nothing)
                     >> DomPorts.autoFocusInputRCmd
 
             OnCancel ->
                 map (\m -> { m | maybeResult = Just Canceled })
+                    >> map (tuple2 Nothing)
 
 
 type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config -> String -> LaunchBarF
+updateInput : Config msg -> String -> LaunchBarF
 updateInput config input model =
     let
         now =

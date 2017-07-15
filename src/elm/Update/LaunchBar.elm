@@ -21,17 +21,19 @@ update andThenUpdate msg now =
     Return.andThen
         (\m ->
             let
+                config : LaunchBar.Update.Config AppMsg
                 config =
-                    LaunchBar.Update.Config
-                        now
-                        (Stores.getActiveProjects m)
-                        (Stores.getActiveContexts m)
+                    { now = now
+                    , activeProjects = (Stores.getActiveProjects m)
+                    , activeContexts = (Stores.getActiveContexts m)
+                    , onCancel = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                    }
             in
                 m.launchBar
                     |> LaunchBar.Update.update config msg
-                    |> Tuple2.mapEach
-                        (\l -> { m | launchBar = l })
-                        (Cmd.map Msg.LaunchBarMsg)
+                    |> Return.map
+                        (\( msg, l ) -> { m | launchBar = l })
+                    |> Return.mapCmd Msg.LaunchBarMsg
         )
         >> X.Return.withMaybe (.launchBar >> .maybeResult)
             (\result ->

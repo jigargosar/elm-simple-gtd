@@ -20,8 +20,8 @@ withMaybe f1 f2 =
         )
 
 
-rWithNowCommand : (Time -> msg) -> ReturnF msg model
-rWithNowCommand toMsg =
+returnWithNow : (Time -> msg) -> ReturnF msg model
+returnWithNow toMsg =
     Return.command (Task.perform toMsg Time.now)
 
 

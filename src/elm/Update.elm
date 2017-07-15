@@ -22,7 +22,7 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import X.Return as Return exposing (rWithNowCommand)
+import X.Return as Return exposing (returnWithNow)
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
@@ -75,13 +75,13 @@ update andThenUpdate msg =
             Update.LaunchBar.update andThenUpdate msg now
 
         LaunchBarMsg msg ->
-            rWithNowCommand (LaunchBarMsgWithNow msg)
+            returnWithNow (LaunchBarMsgWithNow msg)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
 
         OnTodoMsg todoMsg ->
-            rWithNowCommand (OnTodoMsgWithNow todoMsg)
+            returnWithNow (OnTodoMsgWithNow todoMsg)
 
         OnTodoMsgWithNow todoMsg now ->
             Todo.Main.update andThenUpdate now todoMsg

@@ -37,7 +37,7 @@ update andThenUpdate msg =
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
             map setExclusiveModeToNone
-                >> andThenUpdate setDomFocusToFocusInEntityCmd
+                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         OnSaveExclusiveModeForm ->
             returnWith .editMode saveExclusiveModeForm
@@ -55,10 +55,6 @@ setExclusiveMode =
 
 setExclusiveModeToNone =
     setExclusiveMode XMNone
-
-
-setDomFocusToFocusInEntityCmd =
-    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")
 
 
 saveExclusiveModeForm exMode =

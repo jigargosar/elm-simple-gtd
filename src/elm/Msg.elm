@@ -43,13 +43,17 @@ type AppHeaderMsg
     | OnMainMenuStateChanged MenuState
 
 
+type CustomSyncMsg
+    = OnStartCustomSync SyncForm
+    | OnUpdateCustomSyncFormUri SyncForm String
+
+
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
-    | OnStartCustomRemotePouchSync SyncForm
-    | OnUpdateRemoteSyncFormUri SyncForm String
+    | OnCustomSyncMsg CustomSyncMsg
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg
@@ -90,3 +94,11 @@ onShowMainMenu =
 
 onMainMenuStateChanged =
     OnMainMenuStateChanged >> OnAppHeaderMsg
+
+
+onStartCustomRemotePouchSync =
+    OnStartCustomSync >> OnCustomSyncMsg
+
+
+onUpdateCustomSyncFormUri =
+    OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg

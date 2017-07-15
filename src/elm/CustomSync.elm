@@ -22,13 +22,13 @@ view model =
                     [ input
                         [ defaultValue form.uri
                         , autofocus True
-                        , onInput (Msg.OnUpdateRemoteSyncFormUri form)
+                        , onInput (Msg.onUpdateCustomSyncFormUri form)
                         ]
                         []
                     , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
                     ]
                 , div []
-                    [ Mat.submit "Sync Now" [ form |> Msg.OnStartCustomRemotePouchSync >> onClick ]
+                    [ Mat.submit "Sync Now" [ form |> Msg.onStartCustomRemotePouchSync >> onClick ]
                     ]
                 ]
             ]

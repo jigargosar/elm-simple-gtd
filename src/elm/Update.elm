@@ -18,6 +18,7 @@ import Stores
 import Todo.Form
 import Todo.FormTypes exposing (..)
 import Update.AppHeader
+import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
@@ -59,21 +60,14 @@ update andThenUpdate msg =
         OnAppHeaderMsg msg_ ->
             Update.AppHeader.update andThenUpdate msg_
 
-        OnStartCustomRemotePouchSync form ->
-            andThenUpdate XMMsg.onSaveExclusiveModeForm
-                >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
-
-        OnUpdateRemoteSyncFormUri form uri ->
-            { form | uri = uri }
-                |> XMEditSyncSettings
-                >> XMMsg.onSetExclusiveMode
-                >> andThenUpdate
+        OnCustomSyncMsg msg_ ->
+            Update.CustomSync.update andThenUpdate msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
 
         OnMdl msg_ ->
-            Return.andThen (Material.update OnMdl msg_)
+            andThen (Material.update OnMdl msg_)
 
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)
@@ -82,11 +76,11 @@ update andThenUpdate msg =
             case key of
                 Key.ArrowUp ->
                     map (moveFocusBy -1 entityList)
-                        >> andThenUpdate setDomFocusToFocusInEntityCmd
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
                     map (moveFocusBy 1 entityList)
-                        >> andThenUpdate setDomFocusToFocusInEntityCmd
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
                 _ ->
                     identity
@@ -136,9 +130,6 @@ maybeMapToCmd fn =
 
 command =
     Return.command
-
-
-port syncWithRemotePouch : String -> Cmd msg
 
 
 port persistLocalPref : D.Value -> Cmd msg

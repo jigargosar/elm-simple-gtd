@@ -151,7 +151,7 @@ var _jigargosar$elm_simple_gtd$View_GetStarted$signInOverlay = A2(
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Firebase_Types$OnFBNOOP),
+				_0: _jigargosar$elm_simple_gtd$X_Html$onClickStopPropagation(_jigargosar$elm_simple_gtd$Firebase_Types$OnFB_NOOP),
 				_1: {ctor: '[]'}
 			}
 		},

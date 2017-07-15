@@ -23,7 +23,8 @@ var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSkipSignIn = {ctor: 'OnFBSkipS
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBAfterUserChanged = {ctor: 'OnFBAfterUserChanged'};
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignOut = {ctor: 'OnFBSignOut'};
 var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBSignIn = {ctor: 'OnFBSignIn'};
-var _jigargosar$elm_simple_gtd$Firebase_Types$OnFBNOOP = {ctor: 'OnFBNOOP'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFB_SwitchToNewUserSetupModeIfNeeded = {ctor: 'OnFB_SwitchToNewUserSetupModeIfNeeded'};
+var _jigargosar$elm_simple_gtd$Firebase_Types$OnFB_NOOP = {ctor: 'OnFB_NOOP'};
 var _jigargosar$elm_simple_gtd$Firebase_Types$SignedIn = function (a) {
 	return {ctor: 'SignedIn', _0: a};
 };

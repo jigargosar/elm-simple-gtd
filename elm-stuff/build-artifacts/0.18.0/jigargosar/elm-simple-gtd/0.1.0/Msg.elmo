@@ -21,7 +21,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnNowChanged = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg = function (a) {
 	return {ctor: 'OnExclusiveModeMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded = {ctor: 'OnSwitchToNewUserSetupModeIfNeeded'};
 var _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm = {ctor: 'OnSaveExclusiveModeForm'};
 var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveModeToNoneAndTryRevertingFocus = {ctor: 'OnSetExclusiveModeToNoneAndTryRevertingFocus'};
 var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveMode = function (a) {
@@ -40,6 +39,7 @@ var _jigargosar$elm_simple_gtd$Msg$OnCloseNotification = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg = function (a) {
 	return {ctor: 'OnFirebaseMsg', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded = _jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg(_jigargosar$elm_simple_gtd$Firebase_Types$OnFB_SwitchToNewUserSetupModeIfNeeded);
 var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnTodoMsgWithNow', _0: a, _1: b};
@@ -85,7 +85,6 @@ var _jigargosar$elm_simple_gtd$Msg$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
 var _jigargosar$elm_simple_gtd$Msg$OnMainMsg = function (a) {
 	return {ctor: 'OnMainMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded = _jigargosar$elm_simple_gtd$Msg$OnMainMsg(_jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded);
 var _jigargosar$elm_simple_gtd$Msg$OnSubscriptionMsg = function (a) {
 	return {ctor: 'OnSubscriptionMsg', _0: a};
 };

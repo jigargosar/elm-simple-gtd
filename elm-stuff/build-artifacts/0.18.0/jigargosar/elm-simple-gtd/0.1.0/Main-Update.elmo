@@ -1,14 +1,5 @@
 var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
 	function (andThenUpdate, msg) {
 		var _p0 = msg;
-		if (_p0.ctor === 'OnSwitchToNewUserSetupModeIfNeeded') {
-			var onSwitchToNewUserSetupModeIfNeeded = function (model) {
-				return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo) : andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus)) : andThenUpdate(
-					_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay)))(
-					_Fresheyeball$elm_return$Return$singleton(model));
-			};
-			return _Fresheyeball$elm_return$Return$andThen(onSwitchToNewUserSetupModeIfNeeded);
-		} else {
-			return A2(_jigargosar$elm_simple_gtd$Update_ExclusiveMode$update, andThenUpdate, _p0._0);
-		}
+		return A2(_jigargosar$elm_simple_gtd$Update_ExclusiveMode$update, andThenUpdate, _p0._0);
 	});

@@ -124,8 +124,15 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p1 = msg;
 		switch (_p1.ctor) {
-			case 'OnFBNOOP':
+			case 'OnFB_NOOP':
 				return _elm_lang$core$Basics$identity;
+			case 'OnFB_SwitchToNewUserSetupModeIfNeeded':
+				var onSwitchToNewUserSetupModeIfNeeded = function (model) {
+					return (_jigargosar$elm_simple_gtd$Firebase_SignIn$shouldSkipSignIn(model.signInModel) ? (_jigargosar$elm_simple_gtd$Store$isEmpty(model.todoStore) ? andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartSetupAddTodo) : andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus)) : andThenUpdate(
+						_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay)))(
+						_Fresheyeball$elm_return$Return$singleton(model));
+				};
+				return _Fresheyeball$elm_return$Return$andThen(onSwitchToNewUserSetupModeIfNeeded);
 			case 'OnFBSignIn':
 				return _Fresheyeball$elm_return$Return$command(
 					_jigargosar$elm_simple_gtd$Firebase_Main$signIn(

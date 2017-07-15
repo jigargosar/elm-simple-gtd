@@ -94,47 +94,68 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Update$update = F2(
 				var _p6 = msg;
 				switch (_p6.ctor) {
 					case 'NOOP':
-						return _elm_lang$core$Basics$identity;
+						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
+							_jigargosar$elm_simple_gtd$X_Function$tuple2(_elm_lang$core$Maybe$Nothing));
 					case 'OnLBEnter':
+						var _p7 = _p6._0;
 						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
 							function (model) {
-								return _elm_lang$core$Native_Utils.update(
-									model,
-									{
-										maybeResult: _elm_lang$core$Maybe$Just(
-											_jigargosar$elm_simple_gtd$LaunchBar_Models$Selected(_p6._0))
-									});
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Just(
+										config.onSelect(_p7)),
+									_1: _elm_lang$core$Native_Utils.update(
+										model,
+										{
+											maybeResult: _elm_lang$core$Maybe$Just(
+												_jigargosar$elm_simple_gtd$LaunchBar_Models$Selected(_p7))
+										})
+								};
 							});
 					case 'OnLBInputChanged':
-						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
-							A2(_jigargosar$elm_simple_gtd$LaunchBar_Update$updateInput, config, _p6._1));
+						return function (_p8) {
+							return A2(
+								_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
+								_jigargosar$elm_simple_gtd$X_Function$tuple2(_elm_lang$core$Maybe$Nothing),
+								A2(
+									_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
+									A2(_jigargosar$elm_simple_gtd$LaunchBar_Update$updateInput, config, _p6._1),
+									_p8));
+						};
 					case 'Open':
-						return function (_p7) {
+						return function (_p9) {
 							return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 								A2(
 									_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
-									function (m) {
-										return _elm_lang$core$Native_Utils.update(
-											m,
-											{maybeResult: _elm_lang$core$Maybe$Nothing});
-									},
-									_p7));
+									_jigargosar$elm_simple_gtd$X_Function$tuple2(_elm_lang$core$Maybe$Nothing),
+									A2(
+										_jigargosar$elm_simple_gtd$LaunchBar_Update$map,
+										function (m) {
+											return _elm_lang$core$Native_Utils.update(
+												m,
+												{maybeResult: _elm_lang$core$Maybe$Nothing});
+										},
+										_p9)));
 						};
 					default:
 						return _jigargosar$elm_simple_gtd$LaunchBar_Update$map(
 							function (m) {
-								return _elm_lang$core$Native_Utils.update(
-									m,
-									{
-										maybeResult: _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$LaunchBar_Models$Canceled)
-									});
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Just(config.onCancel),
+									_1: _elm_lang$core$Native_Utils.update(
+										m,
+										{
+											maybeResult: _elm_lang$core$Maybe$Just(_jigargosar$elm_simple_gtd$LaunchBar_Models$Canceled)
+										})
+								};
 							});
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p5));
 		};
 	});
-var _jigargosar$elm_simple_gtd$LaunchBar_Update$Config = F3(
-	function (a, b, c) {
-		return {now: a, activeProjects: b, activeContexts: c};
+var _jigargosar$elm_simple_gtd$LaunchBar_Update$Config = F5(
+	function (a, b, c, d, e) {
+		return {now: a, activeProjects: b, activeContexts: c, onCancel: d, onSelect: e};
 	});

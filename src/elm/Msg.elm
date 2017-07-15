@@ -56,8 +56,8 @@ type AppMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg
-    | LaunchBarMsg LaunchBar.Messages.Msg
-    | LaunchBarMsgWithNow LaunchBar.Messages.Msg Time
+    | LaunchBarMsg LaunchBar.Messages.LaunchBarMsg
+    | LaunchBarMsgWithNow LaunchBar.Messages.LaunchBarMsg Time
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
@@ -105,3 +105,7 @@ onStartCustomRemotePouchSync =
 
 onUpdateCustomSyncFormUri =
     OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
+
+
+openLaunchBarMsg =
+    LaunchBar.Messages.Open |> LaunchBarMsg

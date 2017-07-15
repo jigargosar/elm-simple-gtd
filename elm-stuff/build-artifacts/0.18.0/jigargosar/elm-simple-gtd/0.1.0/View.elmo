@@ -246,7 +246,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 				return A2(
 					_elm_lang$html$Html$map,
 					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg,
-					_jigargosar$elm_simple_gtd$LaunchBar_View$init(appModel.launchBar));
+					_jigargosar$elm_simple_gtd$LaunchBar_View$init(_p1._0));
 			case 'XMTodoForm':
 				var _p5 = _p1._0;
 				var _p2 = _p5.mode;

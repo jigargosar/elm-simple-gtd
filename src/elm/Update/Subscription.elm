@@ -83,7 +83,7 @@ onGlobalKeyUp andThenUpdate key =
                                 andThenUpdate TodoMsg.onStartAddingTodoToInbox
 
                             Key.Slash ->
-                                Update.LaunchBar.open andThenUpdate
+                                andThenUpdate Msg.openLaunchBarMsg
 
                             _ ->
                                 identity

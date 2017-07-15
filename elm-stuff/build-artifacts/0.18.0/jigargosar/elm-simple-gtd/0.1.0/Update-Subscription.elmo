@@ -63,7 +63,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
 								case 'CharI':
 									return andThenUpdate(_jigargosar$elm_simple_gtd$TodoMsg$onStartAddingTodoToInbox);
 								case 'Slash':
-									return _jigargosar$elm_simple_gtd$Update_LaunchBar$open(andThenUpdate);
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$openLaunchBarMsg);
 								default:
 									return _elm_lang$core$Basics$identity;
 							}

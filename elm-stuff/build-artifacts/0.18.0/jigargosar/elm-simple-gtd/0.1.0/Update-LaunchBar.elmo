@@ -1,70 +1,155 @@
-var _jigargosar$elm_simple_gtd$Update_LaunchBar$open = function (andThenUpdate) {
-	return function (_p0) {
-		return andThenUpdate(
-			_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open))(
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$fuzzyMatch = F2(
+	function (needle, searchItem) {
+		var match = function (n) {
+			return A3(
+				_tripokey$elm_fuzzy$Fuzzy$match,
+				{ctor: '[]'},
+				{ctor: '[]'},
+				n);
+		};
+		var boil = _elm_community$string_extra$String_Extra$underscored;
+		var boiledHay = function (_p0) {
+			return boil(
+				_jigargosar$elm_simple_gtd$LaunchBar_Models$getSearchItemName(_p0));
+		}(searchItem);
+		var boiledNeedle = boil(needle);
+		return {
+			ctor: '_Tuple2',
+			_0: searchItem,
+			_1: A2(match, boiledNeedle, boiledHay)
+		};
+	});
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$getFuzzyResults = F2(
+	function (needle, _p1) {
+		var _p2 = _p1;
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p2.activeProjects, _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Project);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p2.activeContexts, _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Context);
+		var all = A2(
+			_elm_lang$core$Basics_ops['++'],
+			projects,
 			A2(
-				andThenUpdate,
-				_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
-				_p0));
-	};
-};
+				_elm_lang$core$Basics_ops['++'],
+				contexts,
+				{
+					ctor: '::',
+					_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Projects,
+					_1: {
+						ctor: '::',
+						_0: _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Contexts,
+						_1: {ctor: '[]'}
+					}
+				}));
+		return A2(
+			_elm_lang$core$List$sortBy,
+			function (_p3) {
+				return function (_) {
+					return _.score;
+				}(
+					_elm_lang$core$Tuple$second(_p3));
+			},
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				all,
+				_jigargosar$elm_simple_gtd$Update_LaunchBar$fuzzyMatch(needle)));
+	});
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$updateInputHelp = F3(
+	function (input, model, now) {
+		return function (model) {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{updatedAt: now});
+		}(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{input: input}));
+	});
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$updateInput = F3(
+	function (config, input, form) {
+		var now = config.now;
+		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - form.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$AtMost(1),
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'^',
+					_elm_lang$core$Regex$escape(form.input))),
+			function (_p4) {
+				return '';
+			}) : _elm_lang$core$Basics$identity)(input);
+		return function (form) {
+			return _elm_lang$core$Native_Utils.update(
+				form,
+				{
+					searchResults: A2(_jigargosar$elm_simple_gtd$Update_LaunchBar$getFuzzyResults, input, config)
+				});
+		}(
+			A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateInputHelp, newInput, form, now));
+	});
 var _jigargosar$elm_simple_gtd$Update_LaunchBar$map = _Fresheyeball$elm_return$Return$map;
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$update2 = F3(
+	function (config, andThenUpdate, msg) {
+		var _p5 = msg;
+		switch (_p5.ctor) {
+			case 'NOOP':
+				return _elm_lang$core$Basics$identity;
+			case 'OnLBEnter':
+				var _p6 = _p5._0;
+				switch (_p6.ctor) {
+					case 'SI_Project':
+						return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+							_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p6._0));
+					case 'SI_Projects':
+						return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
+					case 'SI_Context':
+						return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+							_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p6._0));
+					default:
+						return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
+				}
+			case 'OnLBInputChanged':
+				return andThenUpdate(
+					function (_p7) {
+						return _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(_p7));
+					}(
+						A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateInput, config, _p5._1, _p5._0)));
+			case 'Open':
+				return function (_p8) {
+					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
+						A2(
+							andThenUpdate,
+							function (_p9) {
+								return _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
+										_jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(_p9)));
+							}(config.now),
+							_p8));
+				};
+			default:
+				return andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus);
+		}
+	});
 var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 	function (andThenUpdate, msg, now) {
-		return function (_p1) {
-			return A3(
-				_jigargosar$elm_simple_gtd$X_Return$withMaybe,
-				function (_p2) {
-					return function (_) {
-						return _.maybeResult;
-					}(
-						function (_) {
-							return _.launchBar;
-						}(_p2));
-				},
-				function (result) {
-					return function (_p3) {
-						return function () {
-							var _p4 = result;
-							if (_p4.ctor === 'Selected') {
-								var _p5 = _p4._0;
-								switch (_p5.ctor) {
-									case 'SI_Project':
-										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
-											_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p5._0));
-									case 'SI_Projects':
-										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
-									case 'SI_Context':
-										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
-											_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p5._0));
-									default:
-										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
-								}
-							} else {
-								return _elm_lang$core$Basics$identity;
-							}
-						}()(
-							A2(andThenUpdate, _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus, _p3));
-					};
-				},
-				A2(
-					_Fresheyeball$elm_return$Return$andThen,
-					function (m) {
-						var config = A3(
-							_jigargosar$elm_simple_gtd$LaunchBar_Update$Config,
-							now,
-							_jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
-							_jigargosar$elm_simple_gtd$Stores$getActiveContexts(m));
-						return A3(
-							_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
-							function (l) {
-								return _elm_lang$core$Native_Utils.update(
-									m,
-									{launchBar: l});
-							},
-							_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg),
-							A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update, config, msg, m.launchBar));
-					},
-					_p1));
-		};
+		return _Fresheyeball$elm_return$Return$andThen(
+			function (m) {
+				var config = {
+					now: now,
+					activeProjects: _jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
+					activeContexts: _jigargosar$elm_simple_gtd$Stores$getActiveContexts(m)
+				};
+				return function (_p10) {
+					return A4(
+						_jigargosar$elm_simple_gtd$Update_LaunchBar$update2,
+						config,
+						andThenUpdate,
+						msg,
+						_Fresheyeball$elm_return$Return$singleton(_p10));
+				}(m);
+			});
+	});
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$Config = F3(
+	function (a, b, c) {
+		return {now: a, activeProjects: b, activeContexts: c};
 	});

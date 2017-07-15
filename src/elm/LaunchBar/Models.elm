@@ -23,7 +23,6 @@ type alias LaunchBar =
     { input : String
     , updatedAt : Time
     , searchResults : List ( SearchItem, Fuzzy.Result )
-    , maybeResult : Maybe Result
     }
 
 
@@ -32,7 +31,6 @@ initialModel now =
     { input = ""
     , updatedAt = now
     , searchResults = []
-    , maybeResult = Nothing
     }
 
 

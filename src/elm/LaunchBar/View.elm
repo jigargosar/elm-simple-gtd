@@ -1,6 +1,6 @@
 module LaunchBar.View exposing (..)
 
-import LaunchBar.Messages exposing (Msg(..))
+import LaunchBar.Messages exposing (LaunchBarMsg(..))
 import LaunchBar.Models exposing (..)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Keyboard.Extra as Key exposing (Key(..))

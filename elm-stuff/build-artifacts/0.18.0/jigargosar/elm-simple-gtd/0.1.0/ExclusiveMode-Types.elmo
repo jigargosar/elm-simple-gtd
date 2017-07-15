@@ -9,7 +9,9 @@ var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMSignInOverlay = {ctor: 'XMS
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu = function (a) {
 	return {ctor: 'XMMainMenu', _0: a};
 };
-var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = {ctor: 'XMLaunchBar'};
+var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar = function (a) {
+	return {ctor: 'XMLaunchBar', _0: a};
+};
 var _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMGroupDocForm = function (a) {
 	return {ctor: 'XMGroupDocForm', _0: a};
 };

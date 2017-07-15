@@ -62,6 +62,7 @@ var _jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow = F2(
 var _jigargosar$elm_simple_gtd$Msg$LaunchBarMsg = function (a) {
 	return {ctor: 'LaunchBarMsg', _0: a};
 };
+var _jigargosar$elm_simple_gtd$Msg$openLaunchBarMsg = _jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open);
 var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
 	return {ctor: 'OnEntityMsg', _0: a};
 };

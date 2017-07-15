@@ -3,7 +3,7 @@ module LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (SearchItem, LaunchBar)
 
 
-type Msg
+type LaunchBarMsg
     = NOOP
     | OnLBEnter SearchItem
     | OnLBInputChanged LaunchBar String

@@ -27,7 +27,7 @@ import X.Return exposing (returnWith)
 
 
 update :
-    (AppMsg -> ReturnF)
+    AndThenUpdate
     -> ExclusiveModeMsg
     -> ReturnF
 update andThenUpdate msg =

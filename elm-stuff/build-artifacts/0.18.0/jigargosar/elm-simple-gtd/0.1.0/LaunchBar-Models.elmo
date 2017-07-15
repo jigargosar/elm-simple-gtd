@@ -15,13 +15,12 @@ var _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel = function (now) {
 	return {
 		input: '',
 		updatedAt: now,
-		searchResults: {ctor: '[]'},
-		maybeResult: _elm_lang$core$Maybe$Nothing
+		searchResults: {ctor: '[]'}
 	};
 };
-var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F4(
-	function (a, b, c, d) {
-		return {input: a, updatedAt: b, searchResults: c, maybeResult: d};
+var _jigargosar$elm_simple_gtd$LaunchBar_Models$LaunchBar = F3(
+	function (a, b, c) {
+		return {input: a, updatedAt: b, searchResults: c};
 	});
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Contexts = {ctor: 'SI_Contexts'};
 var _jigargosar$elm_simple_gtd$LaunchBar_Models$SI_Projects = {ctor: 'SI_Projects'};

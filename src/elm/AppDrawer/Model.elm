@@ -94,11 +94,11 @@ default =
 
 
 contexts =
-    X.Record.field .contexts (\s b -> { b | contexts = s })
+    X.Record.fieldLens .contexts (\s b -> { b | contexts = s })
 
 
 projects =
-    X.Record.field .projects (\s b -> { b | projects = s })
+    X.Record.fieldLens .projects (\s b -> { b | projects = s })
 
 
 

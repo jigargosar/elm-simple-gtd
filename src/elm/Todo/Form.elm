@@ -14,7 +14,7 @@ import Time.Format
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, getTodoText)
-import X.Record exposing (field, over, overM, set)
+import X.Record exposing (fieldLens, over, overM, set)
 import Toolkit.Operators exposing (..)
 
 
@@ -58,23 +58,23 @@ updateAddTodoForm text form =
 
 
 text =
-    field .text (\s b -> { b | text = s })
+    fieldLens .text (\s b -> { b | text = s })
 
 
 menuState =
-    field .menuState (\s b -> { b | menuState = s })
+    fieldLens .menuState (\s b -> { b | menuState = s })
 
 
 date =
-    field .date (\s b -> { b | date = s })
+    fieldLens .date (\s b -> { b | date = s })
 
 
 time =
-    field .time (\s b -> { b | time = s })
+    fieldLens .time (\s b -> { b | time = s })
 
 
 maybeComputedTime =
-    field .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
+    fieldLens .maybeComputedTime (\s b -> { b | maybeComputedTime = s })
 
 
 updateTodoForm : TodoFormAction -> TodoForm -> TodoForm

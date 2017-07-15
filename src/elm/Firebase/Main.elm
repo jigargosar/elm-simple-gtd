@@ -67,7 +67,7 @@ subscriptions model =
 
 
 signInModel =
-    X.Record.field .signInModel (\s b -> { b | signInModel = s })
+    X.Record.fieldLens .signInModel (\s b -> { b | signInModel = s })
 
 
 overSignInModel =
@@ -170,8 +170,8 @@ setUser =
 
 
 firebaseClient =
-    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
+    X.Record.fieldLens .firebaseClient (\s b -> { b | firebaseClient = s })
 
 
 user =
-    X.Record.field .user (\s b -> { b | user = s })
+    X.Record.fieldLens .user (\s b -> { b | user = s })

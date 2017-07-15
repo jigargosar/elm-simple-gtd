@@ -91,27 +91,27 @@ getMaybeTime model =
 
 
 done =
-    X.Record.field .done (\s b -> { b | done = s })
+    X.Record.fieldLens .done (\s b -> { b | done = s })
 
 
 text =
-    X.Record.field .text (\s b -> { b | text = s })
+    X.Record.fieldLens .text (\s b -> { b | text = s })
 
 
 schedule =
-    X.Record.field .schedule (\s b -> { b | schedule = s })
+    X.Record.fieldLens .schedule (\s b -> { b | schedule = s })
 
 
 projectId =
-    X.Record.field .projectId (\s b -> { b | projectId = s })
+    X.Record.fieldLens .projectId (\s b -> { b | projectId = s })
 
 
 contextId =
-    X.Record.field .contextId (\s b -> { b | contextId = s })
+    X.Record.fieldLens .contextId (\s b -> { b | contextId = s })
 
 
 deleted =
-    X.Record.field .deleted (\s b -> { b | deleted = s })
+    X.Record.fieldLens .deleted (\s b -> { b | deleted = s })
 
 
 updateSchedule fn model =

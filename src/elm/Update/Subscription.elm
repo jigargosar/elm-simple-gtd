@@ -56,7 +56,7 @@ onSubMsg andThenUpdate subMsg =
 
 
 onGlobalKeyUp andThenUpdate key =
-    X.Return.with (.editMode)
+    X.Return.returnWith (.editMode)
         (\editMode ->
             case ( key, editMode ) of
                 ( key, XMNone ) ->
@@ -98,7 +98,7 @@ setNow now model =
 
 
 keyboardState =
-    X.Record.field .keyboardState (\s b -> { b | keyboardState = s })
+    X.Record.fieldLens .keyboardState (\s b -> { b | keyboardState = s })
 
 
 updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF

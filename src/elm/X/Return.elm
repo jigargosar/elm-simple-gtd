@@ -18,12 +18,12 @@ withMaybe f1 f2 =
         )
 
 
-with :
+returnWith :
     (a -> x)
     -> (x -> Return msg a -> Return msg b)
     -> Return msg a
     -> Return msg b
-with f1 f2 =
+returnWith f1 f2 =
     Return.andThen
         (\m ->
             (f2 (f1 m)) (Return.singleton m)

@@ -1,6 +1,6 @@
 module X.Record
     exposing
-        ( field
+        ( fieldLens
         , bool
         , toggle
         , get
@@ -32,8 +32,8 @@ type alias BoolField big =
     Field Bool big
 
 
-field : (big -> small) -> (small -> big -> big) -> Field small big
-field getter setter =
+fieldLens : (big -> small) -> (small -> big -> big) -> Field small big
+fieldLens getter setter =
     Field { get = getter, set = setter }
 
 

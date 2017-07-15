@@ -6,7 +6,7 @@ import X.Record exposing (over, overReturn)
 
 
 keyComboModel =
-    X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
+    X.Record.fieldLens .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
 updateCombo : Keyboard.Combo.Msg -> ModelReturnF

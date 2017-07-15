@@ -66,7 +66,7 @@ onUpdate andThenUpdate entityId action =
                 >> DomPorts.autoFocusInputRCmd
 
         EUA_SetFormText newName ->
-            X.Return.with (.editMode)
+            X.Return.returnWith (.editMode)
                 (\xMode ->
                     case xMode of
                         XMGroupDocForm form ->

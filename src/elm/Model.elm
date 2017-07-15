@@ -31,15 +31,15 @@ logString =
 
 
 appDrawerModel =
-    X.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
+    X.Record.fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
 
 
 now =
-    X.Record.field .now (\s b -> { b | now = s })
+    X.Record.fieldLens .now (\s b -> { b | now = s })
 
 
 focusInEntity =
-    X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
+    X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 getRemoteSyncForm model =

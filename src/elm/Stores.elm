@@ -31,19 +31,19 @@ import X.Predicate
 
 
 contextStore =
-    X.Record.field .contextStore (\s b -> { b | contextStore = s })
+    X.Record.fieldLens .contextStore (\s b -> { b | contextStore = s })
 
 
 projectStore =
-    X.Record.field .projectStore (\s b -> { b | projectStore = s })
+    X.Record.fieldLens .projectStore (\s b -> { b | projectStore = s })
 
 
 todoStore =
-    X.Record.field .todoStore (\s b -> { b | todoStore = s })
+    X.Record.fieldLens .todoStore (\s b -> { b | todoStore = s })
 
 
 focusInEntity =
-    X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
+    X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 createContext text model =

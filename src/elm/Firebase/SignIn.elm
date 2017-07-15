@@ -48,7 +48,7 @@ type alias Model =
 
 
 state =
-    X.Record.field .state (\s b -> { b | state = s })
+    X.Record.fieldLens .state (\s b -> { b | state = s })
 
 
 decoder : Decoder Model

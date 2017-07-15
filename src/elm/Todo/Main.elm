@@ -48,7 +48,7 @@ port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub ms
 
 
 timeTracker =
-    Record.field .timeTracker (\s b -> { b | timeTracker = s })
+    Record.fieldLens .timeTracker (\s b -> { b | timeTracker = s })
 
 
 mapOver =
@@ -176,7 +176,7 @@ update andThenUpdate now todoMsg =
                 createXM model =
                     Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
             in
-                X.Return.with createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+                X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
                     >> autoFocusInputRCmd
 
         OnStartEditingTodo todo editFormMode ->
@@ -187,7 +187,7 @@ update andThenUpdate now todoMsg =
                 positionPopup idPrefix =
                     DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
             in
-                X.Return.with createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+                X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
                     >> command
                         (case editFormMode of
                             ETFM_EditTodoText ->

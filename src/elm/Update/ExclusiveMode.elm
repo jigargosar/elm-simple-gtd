@@ -23,7 +23,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Types exposing (..)
 import X.Record exposing (..)
-import X.Return
+import X.Return exposing (returnWith)
 
 
 update :
@@ -33,20 +33,19 @@ update :
 update andThenUpdate msg =
     case msg of
         OnSetExclusiveMode mode ->
-            setExclusiveMode mode
-                |> map
+            setExclusiveMode mode |> map
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
             map setExclusiveModeToNone
                 >> andThenUpdate setDomFocusToFocusInEntityCmd
 
         OnSaveExclusiveModeForm ->
-            X.Return.with .editMode saveExclusiveModeForm
+            returnWith .editMode saveExclusiveModeForm
                 >> update andThenUpdate OnSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 exclusiveMode =
-    X.Record.field .editMode (\s b -> { b | editMode = s })
+    fieldLens .editMode (\s b -> { b | editMode = s })
 
 
 setExclusiveMode : ExclusiveMode -> ModelF

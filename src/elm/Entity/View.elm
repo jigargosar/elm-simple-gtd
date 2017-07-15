@@ -23,7 +23,6 @@ import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
 
 
-
 type alias KeyedView =
     ( String, Html AppMsg )
 
@@ -42,7 +41,7 @@ list viewType model =
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"
-            , Msg.OnEntityListKeyDown entityList |> onKeyDown
+            , Msg.onEntityListKeyDown entityList |> onKeyDown
             ]
             (keyedViewList grouping maybeFocusInEntity model)
 

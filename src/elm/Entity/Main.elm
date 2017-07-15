@@ -2,12 +2,15 @@ module Entity.Main exposing (..)
 
 import Document
 import DomPorts
+import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
 import GroupDoc.Types exposing (GroupDocType(..))
+import Keyboard.Extra as Key
 import Maybe.Extra
+import Model
 import Model.Selection
 import Model.ViewType
 import Msg exposing (AppMsg)
@@ -20,8 +23,10 @@ import Todo.Types exposing (TodoAction(..))
 import TodoMsg
 import Types exposing (AppModel, ModelF, ModelReturnF, ReturnF)
 import Toolkit.Operators exposing (..)
+import X.Record exposing (maybeOver)
 import X.Return
 import XMMsg
+import X.Function.Infix exposing (..)
 
 
 map =
@@ -52,6 +57,24 @@ update andThenUpdate msg =
 
         EM_Update entityId action ->
             onUpdate andThenUpdate entityId action
+
+        EM_EntityListKeyDown entityList { key, isShiftDown } ->
+            case key of
+                Key.ArrowUp ->
+                    map (moveFocusBy -1 entityList)
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+
+                Key.ArrowDown ->
+                    map (moveFocusBy 1 entityList)
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+
+                _ ->
+                    identity
+
+
+moveFocusBy : Int -> List Entity -> ModelF
+moveFocusBy =
+    Entity.findEntityByOffsetIn >>> maybeOver Model.focusInEntity
 
 
 onUpdate :

@@ -54,7 +54,6 @@ type AppMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
-    | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType
     | OnEntityMsg EntityMsg
     | LaunchBarMsg LaunchBar.Messages.Msg
@@ -82,6 +81,10 @@ onNewContext =
 
 onEntityUpdateMsg =
     Entity.Types.EM_Update >>> OnEntityMsg
+
+
+onEntityListKeyDown =
+    Entity.Types.EM_EntityListKeyDown >>> OnEntityMsg
 
 
 onSwitchToNewUserSetupModeIfNeeded =

@@ -72,19 +72,6 @@ update andThenUpdate msg =
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)
 
-        OnEntityListKeyDown entityList { key, isShiftDown } ->
-            case key of
-                Key.ArrowUp ->
-                    map (moveFocusBy -1 entityList)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
-
-                Key.ArrowDown ->
-                    map (moveFocusBy 1 entityList)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
-
-                _ ->
-                    identity
-
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg
 
@@ -108,11 +95,6 @@ update andThenUpdate msg =
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg
-
-
-moveFocusBy : Int -> List Entity -> ModelF
-moveFocusBy =
-    Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
 withNow : (Time -> AppMsg) -> ReturnF

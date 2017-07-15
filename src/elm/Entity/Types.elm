@@ -3,6 +3,7 @@ module Entity.Types exposing (..)
 import Document.Types exposing (DocId)
 import GroupDoc.Types exposing (GroupDoc)
 import Todo.Types exposing (TodoDoc)
+import X.Keyboard
 
 
 type GroupEntityType
@@ -29,6 +30,7 @@ type EntityMsg
     = EM_StartAddingProject
     | EM_StartAddingContext
     | EM_Update EntityId EntityUpdateAction
+    | EM_EntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
 
 
 type EntityUpdateAction

@@ -91,18 +91,19 @@ update2 config andThenUpdate msg =
             identity
 
         OnLBEnter entity ->
-            case entity of
-                SI_Project project ->
-                    map (Model.ViewType.switchToProjectView project)
+            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                >> case entity of
+                    SI_Project project ->
+                        map (Model.ViewType.switchToProjectView project)
 
-                SI_Projects ->
-                    map Model.ViewType.switchToProjectsView
+                    SI_Projects ->
+                        map Model.ViewType.switchToProjectsView
 
-                SI_Context context ->
-                    map (Model.ViewType.switchToContextView context)
+                    SI_Context context ->
+                        map (Model.ViewType.switchToContextView context)
 
-                SI_Contexts ->
-                    map Model.ViewType.switchToContextsView
+                    SI_Contexts ->
+                        map Model.ViewType.switchToContextsView
 
         OnLBInputChanged form text ->
             andThenUpdate

@@ -87,7 +87,7 @@ var _jigargosar$elm_simple_gtd$X_Return$returnWith = F2(
 					_Fresheyeball$elm_return$Return$singleton(m));
 			});
 	});
-var _jigargosar$elm_simple_gtd$X_Return$rWithNowCommand = function (toMsg) {
+var _jigargosar$elm_simple_gtd$X_Return$returnWithNow = function (toMsg) {
 	return _Fresheyeball$elm_return$Return$command(
 		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
 };

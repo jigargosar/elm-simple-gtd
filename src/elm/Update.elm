@@ -75,7 +75,7 @@ update andThenUpdate msg =
             Update.LaunchBar.update andThenUpdate msg now
 
         LaunchBarMsg msg ->
-            returnWithNow (LaunchBarMsgWithNow msg)
+            LaunchBarMsgWithNow msg |> returnWithNow
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)

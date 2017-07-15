@@ -34,13 +34,13 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'LaunchBarMsgWithNow':
 				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p0._0, _p0._1);
 			case 'LaunchBarMsg':
-				return _jigargosar$elm_simple_gtd$X_Return$rWithNowCommand(
+				return _jigargosar$elm_simple_gtd$X_Return$returnWithNow(
 					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow(_p0._0));
 			case 'OnCloseNotification':
 				return _Fresheyeball$elm_return$Return$command(
 					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p0._0));
 			case 'OnTodoMsg':
-				return _jigargosar$elm_simple_gtd$X_Return$rWithNowCommand(
+				return _jigargosar$elm_simple_gtd$X_Return$returnWithNow(
 					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithNow(_p0._0));
 			case 'OnTodoMsgWithNow':
 				return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, andThenUpdate, _p0._1, _p0._0);

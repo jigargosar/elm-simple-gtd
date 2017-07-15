@@ -89,7 +89,7 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 									return _.pouchDBRemoteSyncURI;
 								}(_p7));
 						},
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm, _p6));
+						A2(andThenUpdate, _jigargosar$elm_simple_gtd$XMMsg$onSaveExclusiveModeForm, _p6));
 				};
 			case 'OnMainMenuStateChanged':
 				return function (_p8) {
@@ -112,8 +112,6 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnSetViewType':
 				return _jigargosar$elm_simple_gtd$Update$map(
 					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p0._0));
-			case 'OnSaveExclusiveModeForm':
-				return _jigargosar$elm_simple_gtd$Update_ExMode$onSaveExclusiveModeForm(andThenUpdate);
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);
 			case 'LaunchBarMsgWithNow':

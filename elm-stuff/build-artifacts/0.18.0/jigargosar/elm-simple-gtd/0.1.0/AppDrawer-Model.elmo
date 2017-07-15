@@ -12,7 +12,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen = A2(
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$toggleOverlay = _jigargosar$elm_simple_gtd$X_Record$toggle(_jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen);
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$getIsOverlayOpen = _jigargosar$elm_simple_gtd$X_Record$get(_jigargosar$elm_simple_gtd$AppDrawer_Model$isOverlayOpen);
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$projects = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.projects;
 	},
@@ -23,7 +23,7 @@ var _jigargosar$elm_simple_gtd$AppDrawer_Model$projects = A2(
 				{projects: s});
 		}));
 var _jigargosar$elm_simple_gtd$AppDrawer_Model$contexts = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.contexts;
 	},

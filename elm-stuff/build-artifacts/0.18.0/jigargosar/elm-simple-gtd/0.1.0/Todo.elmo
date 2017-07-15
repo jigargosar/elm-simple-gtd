@@ -153,7 +153,7 @@ var _jigargosar$elm_simple_gtd$Todo$hasReminderChanged = function (_p5) {
 	return A2(_jigargosar$elm_simple_gtd$Todo_Schedule$hasReminderChanged, _p6._0.schedule, _p6._1.schedule);
 };
 var _jigargosar$elm_simple_gtd$Todo$deleted = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.deleted;
 	},
@@ -164,7 +164,7 @@ var _jigargosar$elm_simple_gtd$Todo$deleted = A2(
 				{deleted: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo$contextId = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.contextId;
 	},
@@ -175,7 +175,7 @@ var _jigargosar$elm_simple_gtd$Todo$contextId = A2(
 				{contextId: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo$projectId = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.projectId;
 	},
@@ -186,7 +186,7 @@ var _jigargosar$elm_simple_gtd$Todo$projectId = A2(
 				{projectId: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo$schedule = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.schedule;
 	},
@@ -201,7 +201,7 @@ var _jigargosar$elm_simple_gtd$Todo$updateSchedule = F2(
 		return A3(_jigargosar$elm_simple_gtd$X_Record$over, _jigargosar$elm_simple_gtd$Todo$schedule, fn, model);
 	});
 var _jigargosar$elm_simple_gtd$Todo$text = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.text;
 	},
@@ -212,7 +212,7 @@ var _jigargosar$elm_simple_gtd$Todo$text = A2(
 				{text: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo$done = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.done;
 	},

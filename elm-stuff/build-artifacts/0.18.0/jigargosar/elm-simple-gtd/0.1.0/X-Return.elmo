@@ -77,7 +77,7 @@ var _jigargosar$elm_simple_gtd$X_Return$mapModelWith = F2(
 					m);
 			});
 	});
-var _jigargosar$elm_simple_gtd$X_Return$with = F2(
+var _jigargosar$elm_simple_gtd$X_Return$returnWith = F2(
 	function (f1, f2) {
 		return _Fresheyeball$elm_return$Return$andThen(
 			function (m) {

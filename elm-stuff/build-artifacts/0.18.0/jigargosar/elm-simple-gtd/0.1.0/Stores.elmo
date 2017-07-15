@@ -358,7 +358,7 @@ var _jigargosar$elm_simple_gtd$Stores$getMaybeFocusInEntityIndex = F2(
 			entityList);
 	});
 var _jigargosar$elm_simple_gtd$Stores$focusInEntity = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.focusInEntity;
 	},
@@ -498,7 +498,7 @@ var _jigargosar$elm_simple_gtd$Stores$setFocusInEntityWithTodoId = function (_p2
 		_jigargosar$elm_simple_gtd$EntityId$fromTodoDocId(_p24));
 };
 var _jigargosar$elm_simple_gtd$Stores$todoStore = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.todoStore;
 	},
@@ -595,7 +595,7 @@ var _jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected = F3(
 		return A3(_jigargosar$elm_simple_gtd$Stores$updateAllTodos, action, idSet, model);
 	});
 var _jigargosar$elm_simple_gtd$Stores$projectStore = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.projectStore;
 	},
@@ -624,7 +624,7 @@ var _jigargosar$elm_simple_gtd$Stores$updateProject = F2(
 			_jigargosar$elm_simple_gtd$Stores$projectStore);
 	});
 var _jigargosar$elm_simple_gtd$Stores$contextStore = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.contextStore;
 	},

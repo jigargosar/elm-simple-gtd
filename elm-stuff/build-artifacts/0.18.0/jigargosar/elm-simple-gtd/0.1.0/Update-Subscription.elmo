@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$Update_Subscription$keyboardState = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.keyboardState;
 	},
@@ -19,7 +19,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$setNow = F2(
 var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
 	function (andThenUpdate, key) {
 		return A2(
-			_jigargosar$elm_simple_gtd$X_Return$with,
+			_jigargosar$elm_simple_gtd$X_Return$returnWith,
 			function (_) {
 				return _.editMode;
 			},

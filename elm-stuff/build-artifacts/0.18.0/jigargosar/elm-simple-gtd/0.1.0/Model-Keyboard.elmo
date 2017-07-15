@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$Model_Keyboard$keyComboModel = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.keyComboModel;
 	},

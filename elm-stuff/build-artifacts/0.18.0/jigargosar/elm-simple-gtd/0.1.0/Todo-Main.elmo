@@ -145,7 +145,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$map = _Fresheyeball$elm_return$Return$m
 var _jigargosar$elm_simple_gtd$Todo_Main$mapSet = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$set, _Fresheyeball$elm_return$Return$map);
 var _jigargosar$elm_simple_gtd$Todo_Main$mapOver = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$over, _Fresheyeball$elm_return$Return$map);
 var _jigargosar$elm_simple_gtd$Todo_Main$timeTracker = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.timeTracker;
 	},
@@ -380,7 +380,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 				return function (_p26) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
 						A3(
-							_jigargosar$elm_simple_gtd$X_Return$with,
+							_jigargosar$elm_simple_gtd$X_Return$returnWith,
 							createXM,
 							function (_p27) {
 								return andThenUpdate(
@@ -419,7 +419,7 @@ var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
 							}
 						}(),
 						A3(
-							_jigargosar$elm_simple_gtd$X_Return$with,
+							_jigargosar$elm_simple_gtd$X_Return$returnWith,
 							createXM,
 							function (_p30) {
 								return andThenUpdate(

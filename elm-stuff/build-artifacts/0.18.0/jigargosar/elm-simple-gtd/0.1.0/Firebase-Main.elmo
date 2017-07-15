@@ -1,5 +1,5 @@
 var _jigargosar$elm_simple_gtd$Firebase_Main$user = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.user;
 	},
@@ -10,7 +10,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$user = A2(
 				{user: s});
 		}));
 var _jigargosar$elm_simple_gtd$Firebase_Main$firebaseClient = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.firebaseClient;
 	},
@@ -44,7 +44,7 @@ var _jigargosar$elm_simple_gtd$Firebase_Main$setFCMToken = F2(
 				{fcmToken: fcmToken}));
 	});
 var _jigargosar$elm_simple_gtd$Firebase_Main$signInModel = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.signInModel;
 	},

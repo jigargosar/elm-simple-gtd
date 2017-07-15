@@ -124,7 +124,7 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 				};
 			case 'EUA_SetFormText':
 				return A2(
-					_jigargosar$elm_simple_gtd$X_Return$with,
+					_jigargosar$elm_simple_gtd$X_Return$returnWith,
 					function (_) {
 						return _.editMode;
 					},

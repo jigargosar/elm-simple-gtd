@@ -90,7 +90,7 @@ var _jigargosar$elm_simple_gtd$X_Record$FieldModel = F2(
 var _jigargosar$elm_simple_gtd$X_Record$Field = function (a) {
 	return {ctor: 'Field', _0: a};
 };
-var _jigargosar$elm_simple_gtd$X_Record$field = F2(
+var _jigargosar$elm_simple_gtd$X_Record$fieldLens = F2(
 	function (getter, setter) {
 		return _jigargosar$elm_simple_gtd$X_Record$Field(
 			{get: getter, set: setter});

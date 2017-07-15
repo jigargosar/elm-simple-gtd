@@ -64,7 +64,7 @@ var _jigargosar$elm_simple_gtd$Store$encode = F2(
 		return A2(_jigargosar$elm_simple_gtd$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _jigargosar$elm_simple_gtd$Store$dict = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.dict;
 	},

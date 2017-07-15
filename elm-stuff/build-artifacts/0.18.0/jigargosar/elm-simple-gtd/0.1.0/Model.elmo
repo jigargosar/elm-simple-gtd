@@ -19,7 +19,7 @@ var _jigargosar$elm_simple_gtd$Model$getRemoteSyncForm = function (model) {
 		_jigargosar$elm_simple_gtd$Model$createRemoteSyncForm(model));
 };
 var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.focusInEntity;
 	},
@@ -30,7 +30,7 @@ var _jigargosar$elm_simple_gtd$Model$focusInEntity = A2(
 				{focusInEntity: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$now = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.now;
 	},
@@ -41,7 +41,7 @@ var _jigargosar$elm_simple_gtd$Model$now = A2(
 				{now: s});
 		}));
 var _jigargosar$elm_simple_gtd$Model$appDrawerModel = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.appDrawerModel;
 	},

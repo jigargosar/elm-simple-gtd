@@ -16,7 +16,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$computeMaybeTime = function (_p0) {
 		_elm_lang$core$Maybe$Nothing);
 };
 var _jigargosar$elm_simple_gtd$Todo_Form$maybeComputedTime = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.maybeComputedTime;
 	},
@@ -28,7 +28,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$maybeComputedTime = A2(
 		}));
 var _jigargosar$elm_simple_gtd$Todo_Form$updateMaybeTime = A2(_jigargosar$elm_simple_gtd$X_Record$overM, _jigargosar$elm_simple_gtd$Todo_Form$maybeComputedTime, _jigargosar$elm_simple_gtd$Todo_Form$computeMaybeTime);
 var _jigargosar$elm_simple_gtd$Todo_Form$time = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.time;
 	},
@@ -39,7 +39,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$time = A2(
 				{time: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo_Form$date = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.date;
 	},
@@ -50,7 +50,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$date = A2(
 				{date: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo_Form$menuState = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.menuState;
 	},
@@ -61,7 +61,7 @@ var _jigargosar$elm_simple_gtd$Todo_Form$menuState = A2(
 				{menuState: s});
 		}));
 var _jigargosar$elm_simple_gtd$Todo_Form$text = A2(
-	_jigargosar$elm_simple_gtd$X_Record$field,
+	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
 		return _.text;
 	},

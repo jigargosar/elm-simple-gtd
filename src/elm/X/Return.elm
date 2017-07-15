@@ -1,6 +1,8 @@
 module X.Return exposing (..)
 
 import Return exposing (Return, ReturnF)
+import Task
+import Time exposing (Time)
 import Toolkit.Operators exposing (..)
 import X.Debug
 import X.Function as F exposing (..)
@@ -16,6 +18,11 @@ withMaybe f1 f2 =
         (\m ->
             f1 m ?|> f2 ?= identity |> F.apply (Return.singleton m)
         )
+
+
+returnWithNowCommand : (Time -> msg) -> ReturnF msg model
+returnWithNowCommand toMsg =
+    Return.command (Task.perform toMsg Time.now)
 
 
 returnWith :

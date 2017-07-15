@@ -22,7 +22,7 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import X.Return as Return
+import X.Return as Return exposing (returnWithNowCommand)
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
@@ -79,13 +79,13 @@ update andThenUpdate msg =
             Update.LaunchBar.update andThenUpdate msg now
 
         LaunchBarMsg msg ->
-            withNow (LaunchBarMsgWithNow msg)
+            returnWithNowCommand (LaunchBarMsgWithNow msg)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
 
         OnTodoMsg todoMsg ->
-            withNow (OnTodoMsgWithNow todoMsg)
+            returnWithNowCommand (OnTodoMsgWithNow todoMsg)
 
         OnTodoMsgWithNow todoMsg now ->
             Todo.Main.update andThenUpdate now todoMsg
@@ -95,11 +95,6 @@ update andThenUpdate msg =
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg
-
-
-withNow : (Time -> AppMsg) -> ReturnF
-withNow toMsg =
-    command (Task.perform toMsg Time.now)
 
 
 updateTodoAndMaybeAlsoSelected action todoId =

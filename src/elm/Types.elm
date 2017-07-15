@@ -86,7 +86,7 @@ type alias ModelReturnF =
 
 
 type alias ReturnF =
-    Return.Return AppMsg AppModel -> Return.Return AppMsg AppModel
+    Return.ReturnF AppMsg AppModel
 
 
 type alias ModelF =

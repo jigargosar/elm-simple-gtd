@@ -91,7 +91,7 @@ update2 config andThenUpdate msg =
             identity
 
         OnLBEnter entity ->
-            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+            andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                 >> case entity of
                     SI_Project project ->
                         map (Model.ViewType.switchToProjectView project)

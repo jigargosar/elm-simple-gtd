@@ -157,3 +157,11 @@ var _jigargosar$elm_simple_gtd$X_Function$decrement = function (num) {
 var _jigargosar$elm_simple_gtd$X_Function$increment = function (num) {
 	return num + 1;
 };
+var _jigargosar$elm_simple_gtd$X_Function$maybeMapToCmd = function (fn) {
+	return function (_p6) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_elm_lang$core$Platform_Cmd$none,
+			A2(_elm_lang$core$Maybe$map, fn, _p6));
+	};
+};

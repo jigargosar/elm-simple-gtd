@@ -22,12 +22,12 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import X.Return as Return exposing (returnWithNowCommand)
+import X.Return as Return exposing (rWithNowCommand)
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
 import Todo.Form
-import Return exposing (andThen)
+import Return exposing (andThen, command, map)
 import Task
 import Time exposing (Time)
 import Model exposing (..)
@@ -36,10 +36,6 @@ import Json.Decode as D exposing (Decoder)
 import Types exposing (AppModel, ModelF, Return, ReturnF)
 import X.Record exposing (maybeOver)
 import XMMsg
-
-
-map =
-    Return.map
 
 
 update :
@@ -79,13 +75,13 @@ update andThenUpdate msg =
             Update.LaunchBar.update andThenUpdate msg now
 
         LaunchBarMsg msg ->
-            returnWithNowCommand (LaunchBarMsgWithNow msg)
+            rWithNowCommand (LaunchBarMsgWithNow msg)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
 
         OnTodoMsg todoMsg ->
-            returnWithNowCommand (OnTodoMsgWithNow todoMsg)
+            rWithNowCommand (OnTodoMsgWithNow todoMsg)
 
         OnTodoMsgWithNow todoMsg now ->
             Todo.Main.update andThenUpdate now todoMsg
@@ -95,18 +91,6 @@ update andThenUpdate msg =
 
         OnAppDrawerMsg msg ->
             AppDrawer.Main.update andThenUpdate msg
-
-
-updateTodoAndMaybeAlsoSelected action todoId =
-    Return.andThen (Stores.updateTodoAndMaybeAlsoSelected action todoId)
-
-
-maybeMapToCmd fn =
-    Maybe.map fn >>?= Cmd.none
-
-
-command =
-    Return.command
 
 
 port persistLocalPref : D.Value -> Cmd msg

@@ -5,6 +5,10 @@ import Toolkit.Operators exposing (..)
 import Tuple2
 
 
+maybeMapToCmd fn =
+    Maybe.map fn >> Maybe.withDefault Cmd.none
+
+
 increment num =
     num + 1
 

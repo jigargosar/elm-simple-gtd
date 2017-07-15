@@ -1,20 +1,3 @@
-var _jigargosar$elm_simple_gtd$Update$command = _Fresheyeball$elm_return$Return$command;
-var _jigargosar$elm_simple_gtd$Update$maybeMapToCmd = function (fn) {
-	return A2(
-		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
-		_elm_lang$core$Maybe$map(fn),
-		_elm_lang$core$Platform_Cmd$none);
-};
-var _jigargosar$elm_simple_gtd$Update$updateTodoAndMaybeAlsoSelected = F2(
-	function (action, todoId) {
-		return _Fresheyeball$elm_return$Return$andThen(
-			A2(_jigargosar$elm_simple_gtd$Stores$updateTodoAndMaybeAlsoSelected, action, todoId));
-	});
-var _jigargosar$elm_simple_gtd$Update$withNow = function (toMsg) {
-	return _jigargosar$elm_simple_gtd$Update$command(
-		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
-};
-var _jigargosar$elm_simple_gtd$Update$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update$persistLocalPref = _elm_lang$core$Native_Platform.outgoingPort(
 	'persistLocalPref',
 	function (v) {
@@ -44,20 +27,20 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 				return _Fresheyeball$elm_return$Return$andThen(
 					A2(_debois$elm_mdl$Material$update, _jigargosar$elm_simple_gtd$Msg$OnMdl, _p0._0));
 			case 'OnSetViewType':
-				return _jigargosar$elm_simple_gtd$Update$map(
+				return _Fresheyeball$elm_return$Return$map(
 					_jigargosar$elm_simple_gtd$Model_ViewType$switchToView(_p0._0));
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);
 			case 'LaunchBarMsgWithNow':
 				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p0._0, _p0._1);
 			case 'LaunchBarMsg':
-				return _jigargosar$elm_simple_gtd$Update$withNow(
+				return _jigargosar$elm_simple_gtd$X_Return$rWithNowCommand(
 					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow(_p0._0));
 			case 'OnCloseNotification':
-				return _jigargosar$elm_simple_gtd$Update$command(
+				return _Fresheyeball$elm_return$Return$command(
 					_jigargosar$elm_simple_gtd$Notification$closeNotification(_p0._0));
 			case 'OnTodoMsg':
-				return _jigargosar$elm_simple_gtd$Update$withNow(
+				return _jigargosar$elm_simple_gtd$X_Return$rWithNowCommand(
 					_jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithNow(_p0._0));
 			case 'OnTodoMsgWithNow':
 				return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, andThenUpdate, _p0._1, _p0._0);

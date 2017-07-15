@@ -37,7 +37,7 @@ init form =
             Entity.Types.EUA_SetFormText >> toMsg
 
         fireSaveForm =
-            Msg.OnSaveExclusiveModeForm
+            XMMsg.onSaveExclusiveModeForm
 
         fireCancel =
             XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus

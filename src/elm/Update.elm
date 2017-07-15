@@ -19,7 +19,6 @@ import Msg exposing (..)
 import Stores
 import Todo.Form
 import Todo.FormTypes exposing (..)
-import Update.ExMode
 import Update.LaunchBar
 import Update.Subscription
 import X.Return as Return
@@ -79,7 +78,7 @@ update andThenUpdate msg =
                     identity
 
         OnRemotePouchSync form ->
-            andThenUpdate OnSaveExclusiveModeForm
+            andThenUpdate XMMsg.onSaveExclusiveModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         OnMainMenuStateChanged menuState ->
@@ -98,9 +97,6 @@ update andThenUpdate msg =
 
         OnSetViewType viewType ->
             map (Model.ViewType.switchToView viewType)
-
-        OnSaveExclusiveModeForm ->
-            Update.ExMode.onSaveExclusiveModeForm andThenUpdate
 
         OnEntityMsg entityMsg ->
             Entity.Main.update andThenUpdate entityMsg

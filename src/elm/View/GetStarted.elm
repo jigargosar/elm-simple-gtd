@@ -10,6 +10,7 @@ import Html.Events exposing (..)
 import TodoMsg
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
+import XMMsg
 
 
 signInOverlay =
@@ -42,7 +43,7 @@ signInOverlay =
 setup form =
     let
         addTodoMsg =
-            Msg.OnSaveExclusiveModeForm
+            XMMsg.onSaveExclusiveModeForm
 
         updateSetupFormTodoText =
             TodoMsg.onSetTodoFormText form

@@ -1,32 +1,42 @@
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$open = function (andThenUpdate) {
+	return function (_p0) {
+		return andThenUpdate(
+			_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open))(
+			A2(
+				andThenUpdate,
+				_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
+				_p0));
+	};
+};
 var _jigargosar$elm_simple_gtd$Update_LaunchBar$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 	function (andThenUpdate, msg, now) {
-		return function (_p0) {
+		return function (_p1) {
 			return A3(
 				_jigargosar$elm_simple_gtd$X_Return$withMaybe,
-				function (_p1) {
+				function (_p2) {
 					return function (_) {
 						return _.maybeResult;
 					}(
 						function (_) {
 							return _.launchBar;
-						}(_p1));
+						}(_p2));
 				},
 				function (result) {
-					return function (_p2) {
+					return function (_p3) {
 						return function () {
-							var _p3 = result;
-							if (_p3.ctor === 'Selected') {
-								var _p4 = _p3._0;
-								switch (_p4.ctor) {
+							var _p4 = result;
+							if (_p4.ctor === 'Selected') {
+								var _p5 = _p4._0;
+								switch (_p5.ctor) {
 									case 'SI_Project':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
-											_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p4._0));
+											_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p5._0));
 									case 'SI_Projects':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
 									case 'SI_Context':
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
-											_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p4._0));
+											_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p5._0));
 									default:
 										return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
 								}
@@ -34,7 +44,7 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 								return _elm_lang$core$Basics$identity;
 							}
 						}()(
-							A2(andThenUpdate, _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode, _p2));
+							A2(andThenUpdate, _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus, _p3));
 					};
 				},
 				A2(
@@ -55,16 +65,6 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
 							_elm_lang$core$Platform_Cmd$map(_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg),
 							A3(_jigargosar$elm_simple_gtd$LaunchBar_Update$update, config, msg, m.launchBar));
 					},
-					_p0));
+					_p1));
 		};
 	});
-var _jigargosar$elm_simple_gtd$Update_LaunchBar$open = function (andThenUpdate) {
-	return function (_p5) {
-		return andThenUpdate(
-			_jigargosar$elm_simple_gtd$Msg$LaunchBarMsg(_jigargosar$elm_simple_gtd$LaunchBar_Messages$Open))(
-			A2(
-				_jigargosar$elm_simple_gtd$Update_LaunchBar$map,
-				_jigargosar$elm_simple_gtd$Model_Internal$setExclusiveMode(_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar),
-				_p5));
-	};
-};

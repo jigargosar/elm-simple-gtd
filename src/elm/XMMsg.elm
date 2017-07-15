@@ -18,4 +18,4 @@ onSetExclusiveMode =
 
 
 onSaveExclusiveModeForm =
-    Msg.OnSaveExclusiveModeForm
+    Msg.OnSaveExclusiveModeForm |> Msg.OnExclusiveModeMsg >> Msg.OnMainMsg

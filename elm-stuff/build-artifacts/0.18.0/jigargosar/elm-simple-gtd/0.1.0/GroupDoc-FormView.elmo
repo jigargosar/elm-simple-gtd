@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$GroupDoc_FormView$init = function (form) {
-	var fireCancel = _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
-	var fireSaveForm = _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm;
+	var fireCancel = _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus;
+	var fireSaveForm = _jigargosar$elm_simple_gtd$XMMsg$onSaveExclusiveModeForm;
 	var _p0 = A3(
 		_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
 		_jigargosar$elm_simple_gtd$X_Function$apply(form.id),

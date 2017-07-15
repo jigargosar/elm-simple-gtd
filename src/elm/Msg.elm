@@ -39,6 +39,7 @@ type MainMsg
 type ExclusiveModeMsg
     = OnSetExclusiveMode ExclusiveMode
     | OnSetExclusiveModeToNoneAndTryRevertingFocus
+    | OnSaveExclusiveModeForm
 
 
 type AppMsg
@@ -48,7 +49,6 @@ type AppMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState
     | OnRemotePouchSync SyncForm
-    | OnSaveExclusiveModeForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
     | OnSetViewType ViewType

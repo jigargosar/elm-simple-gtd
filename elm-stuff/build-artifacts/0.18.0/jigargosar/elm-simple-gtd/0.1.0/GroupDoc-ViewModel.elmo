@@ -46,12 +46,12 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 			archive: archive,
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm,
+			onSaveClicked: _jigargosar$elm_simple_gtd$XMMsg$onSaveExclusiveModeForm,
 			onNameChanged: function (_p3) {
 				return onEntityAction(
 					_jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText(_p3));
 			},
-			onCancelClicked: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+			onCancelClicked: _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus,
 			icon: icon,
 			onFocusIn: onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$EUA_OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,

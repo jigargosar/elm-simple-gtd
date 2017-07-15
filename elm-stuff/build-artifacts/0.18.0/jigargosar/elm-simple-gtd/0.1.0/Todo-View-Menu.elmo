@@ -29,7 +29,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createContextMenuConfig = F2(
 			},
 			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(form),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$context = F2(
@@ -60,7 +60,7 @@ var _jigargosar$elm_simple_gtd$Todo_View_Menu$createProjectMenuConfig = F2(
 			},
 			onStateChanged: _jigargosar$elm_simple_gtd$TodoMsg$onSetTodoFormMenuState(form),
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus
 		};
 	});
 var _jigargosar$elm_simple_gtd$Todo_View_Menu$project = F2(

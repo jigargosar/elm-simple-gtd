@@ -32,7 +32,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
 							var clear = function (_p1) {
 								return A2(
 									andThenUpdate,
-									_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode,
+									_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus,
 									A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Model_Selection$clearSelection, _p1));
 							};
 							var _p2 = _p0._0;
@@ -52,7 +52,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$onGlobalKeyUp = F2(
 							}
 						} else {
 							if (_p0._0.ctor === 'Escape') {
-								return andThenUpdate(_jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode);
+								return andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus);
 							} else {
 								break _v0_2;
 							}

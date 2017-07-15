@@ -2,7 +2,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$onSelect = function (_p0) {
 	var _p1 = _p0;
 	var _p2 = _p1._1;
 	if (_p2.ctor === 'URL') {
-		return _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode;
+		return _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus;
 	} else {
 		return _p2._0;
 	}
@@ -44,7 +44,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
 			itemView: _jigargosar$elm_simple_gtd$View_MainMenu$itemView,
 			onStateChanged: _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged,
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
-			onOutsideMouseDown: _jigargosar$elm_simple_gtd$Msg$OnDeactivateEditingMode
+			onOutsideMouseDown: _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus
 		};
 	});
 var _jigargosar$elm_simple_gtd$View_MainMenu$Msg = function (a) {

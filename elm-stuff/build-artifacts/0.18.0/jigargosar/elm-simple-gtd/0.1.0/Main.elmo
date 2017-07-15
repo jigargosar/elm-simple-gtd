@@ -83,7 +83,6 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		appDrawerModel: localPref.appDrawer,
 		signInModel: localPref.signIn,
 		mdl: _debois$elm_mdl$Material$model,
-		launchBar: _jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(now),
 		maybeTodoEditForm: _elm_lang$core$Maybe$Nothing
 	};
 	return A2(_jigargosar$elm_simple_gtd$Main$update, _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded, model);

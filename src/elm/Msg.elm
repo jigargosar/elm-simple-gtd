@@ -12,10 +12,6 @@ import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, TodoText)
 import Json.Encode as E
 import X.Function.Infix exposing (..)
-
-
-----safe
-
 import Todo.Msg exposing (TodoMsg)
 import Material
 import X.Keyboard

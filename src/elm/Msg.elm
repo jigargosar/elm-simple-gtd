@@ -44,7 +44,7 @@ type ExclusiveModeMsg
 
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
-    | OnSubMsg SubMsg
+    | OnSubscriptionMsg SubMsg
     | OnMainMsg MainMsg
     | OnShowMainMenu
     | OnMainMenuStateChanged MenuState

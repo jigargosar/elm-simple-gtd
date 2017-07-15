@@ -54,8 +54,8 @@ update andThenUpdate msg =
         OnCommonMsg msg ->
             CommonMsg.update msg
 
-        OnSubMsg subMsg ->
-            Update.Subscription.onSubMsg andThenUpdate subMsg
+        OnSubscriptionMsg msg_ ->
+            Update.Subscription.update andThenUpdate msg_
 
         OnMainMsg mainMsg ->
             Main.Update.update andThenUpdate mainMsg

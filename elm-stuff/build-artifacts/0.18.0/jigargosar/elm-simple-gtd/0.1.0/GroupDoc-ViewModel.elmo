@@ -22,7 +22,7 @@ var _jigargosar$elm_simple_gtd$GroupDoc_ViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				case 'CharG':
-					return onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
+					return onEntityAction(_jigargosar$elm_simple_gtd$Entity_Types$EUA_OnGotoEntity);
 				default:
 					return _jigargosar$elm_simple_gtd$Model$noop;
 			}

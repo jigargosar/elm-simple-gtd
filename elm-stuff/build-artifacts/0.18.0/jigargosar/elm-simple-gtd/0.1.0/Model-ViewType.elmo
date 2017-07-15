@@ -16,14 +16,12 @@ var _jigargosar$elm_simple_gtd$Model_ViewType$switchToView = F2(
 				model,
 				{mainViewType: mainViewType}));
 	});
-var _jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView = _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
-	_jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView));
-var _jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView = _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
-	_jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView));
 var _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType = function (_p1) {
 	return _jigargosar$elm_simple_gtd$Model_ViewType$switchToView(
 		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p1));
 };
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView = _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
+var _jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView = _jigargosar$elm_simple_gtd$Model_ViewType$setEntityListViewType(_jigargosar$elm_simple_gtd$Entity_Types$ProjectsView);
 var _jigargosar$elm_simple_gtd$Model_ViewType$contextView = function (_p2) {
 	return _jigargosar$elm_simple_gtd$ViewType$EntityListView(
 		_jigargosar$elm_simple_gtd$Entity_Types$ContextView(

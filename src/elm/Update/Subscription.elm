@@ -22,7 +22,7 @@ import Update.LaunchBar
 import XMMsg
 
 
-onSubMsg andThenUpdate subMsg =
+update andThenUpdate subMsg =
     case subMsg of
         OnNowChanged now ->
             map (setNow now)

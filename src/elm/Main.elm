@@ -62,7 +62,7 @@ subscriptions model =
             , Store.onChange Msg.OnPouchDBChange
             , onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
             ]
-            |> Sub.map Msg.OnSubMsg
+            |> Sub.map Msg.OnSubscriptionMsg
         , Keyboard.Combo.subscriptions model.keyComboModel
         , Todo.Main.subscriptions model
         , Firebase.Main.subscriptions model

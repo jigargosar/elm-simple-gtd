@@ -47,7 +47,7 @@ var _jigargosar$elm_simple_gtd$Entity_Types$EM_Update = F2(
 	});
 var _jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingContext = {ctor: 'EM_StartAddingContext'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingProject = {ctor: 'EM_StartAddingProject'};
-var _jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity = {ctor: 'OnGotoEntity'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EUA_OnGotoEntity = {ctor: 'EUA_OnGotoEntity'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EUA_ToggleSelection = {ctor: 'EUA_ToggleSelection'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EUA_OnFocusIn = {ctor: 'EUA_OnFocusIn'};
 var _jigargosar$elm_simple_gtd$Entity_Types$EUA_SetFormText = function (a) {

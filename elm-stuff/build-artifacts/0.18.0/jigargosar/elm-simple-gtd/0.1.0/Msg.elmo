@@ -40,9 +40,9 @@ var _jigargosar$elm_simple_gtd$Msg$OnKeyCombo = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnFirebaseMsg = function (a) {
 	return {ctor: 'OnFirebaseMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithTime = F2(
+var _jigargosar$elm_simple_gtd$Msg$OnTodoMsgWithNow = F2(
 	function (a, b) {
-		return {ctor: 'OnTodoMsgWithTime', _0: a, _1: b};
+		return {ctor: 'OnTodoMsgWithNow', _0: a, _1: b};
 	});
 var _jigargosar$elm_simple_gtd$Msg$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
@@ -86,8 +86,8 @@ var _jigargosar$elm_simple_gtd$Msg$OnMainMsg = function (a) {
 	return {ctor: 'OnMainMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$onSwitchToNewUserSetupModeIfNeeded = _jigargosar$elm_simple_gtd$Msg$OnMainMsg(_jigargosar$elm_simple_gtd$Msg$OnSwitchToNewUserSetupModeIfNeeded);
-var _jigargosar$elm_simple_gtd$Msg$OnSubMsg = function (a) {
-	return {ctor: 'OnSubMsg', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$OnSubscriptionMsg = function (a) {
+	return {ctor: 'OnSubscriptionMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};

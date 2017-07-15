@@ -824,7 +824,7 @@ var _jigargosar$elm_simple_gtd$Todo_View$createTodoViewModel = F3(
 					case 'CharR':
 						return reminder.startEditingMsg;
 					case 'CharG':
-						return createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$OnGotoEntity);
+						return createEntityUpdateMsg(_jigargosar$elm_simple_gtd$Entity_Types$EUA_OnGotoEntity);
 					case 'CharS':
 						return onTodoMsg(
 							_jigargosar$elm_simple_gtd$Todo_Msg$SwitchOrStartRunning(todoId));

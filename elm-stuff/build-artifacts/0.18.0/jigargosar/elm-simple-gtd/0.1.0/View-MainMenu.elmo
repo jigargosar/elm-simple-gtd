@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$View_MainMenu$menuConfig = F2(
 			itemKey: _elm_lang$core$Tuple$first,
 			itemSearchText: _elm_lang$core$Tuple$first,
 			itemView: _jigargosar$elm_simple_gtd$View_MainMenu$itemView,
-			onStateChanged: _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged,
+			onStateChanged: _jigargosar$elm_simple_gtd$Msg$onMainMenuStateChanged,
 			noOp: _jigargosar$elm_simple_gtd$Model$noop,
 			onOutsideMouseDown: _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus
 		};

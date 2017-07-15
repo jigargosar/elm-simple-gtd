@@ -1,0 +1,26 @@
+var _jigargosar$elm_simple_gtd$Update_AppHeader$positionMainMenuCmd = _jigargosar$elm_simple_gtd$DomPorts$positionPopupMenu('#main-menu-button');
+var _jigargosar$elm_simple_gtd$Update_AppHeader$update = F2(
+	function (andThenUpdate, msg) {
+		var _p0 = msg;
+		if (_p0.ctor === 'OnShowMainMenu') {
+			return function (_p1) {
+				return A2(
+					_Fresheyeball$elm_return$Return$command,
+					_jigargosar$elm_simple_gtd$Update_AppHeader$positionMainMenuCmd,
+					A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_jigargosar$elm_simple_gtd$Menu$initState)),
+						_p1));
+			};
+		} else {
+			return function (_p2) {
+				return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
+					function (_p3) {
+						return andThenUpdate(
+							_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMMainMenu(_p3)));
+					}(_p0._0)(_p2));
+			};
+		}
+	});

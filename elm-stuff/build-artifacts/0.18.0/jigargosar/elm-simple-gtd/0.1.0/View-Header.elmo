@@ -42,7 +42,7 @@ var _jigargosar$elm_simple_gtd$View_Header$menu = function (m) {
 			_0: _elm_lang$html$Html_Attributes$id('main-menu-button'),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Msg$OnShowMainMenu),
+				_0: _elm_lang$html$Html_Events$onClick(_jigargosar$elm_simple_gtd$Msg$onShowMainMenu),
 				_1: {ctor: '[]'}
 			}
 		},

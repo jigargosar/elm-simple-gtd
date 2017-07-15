@@ -184,6 +184,11 @@ var _jigargosar$elm_simple_gtd$Entity_Main$onUpdate = F3(
 					_jigargosar$elm_simple_gtd$Entity_Main$switchToEntityListViewFromEntity(entityId));
 		}
 	});
+var _jigargosar$elm_simple_gtd$Entity_Main$moveFocusBy = A2(
+	_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'],
+	_jigargosar$elm_simple_gtd$Entity$findEntityByOffsetIn,
+	_jigargosar$elm_simple_gtd$X_Record$maybeOver(_jigargosar$elm_simple_gtd$Model$focusInEntity));
+var _jigargosar$elm_simple_gtd$Entity_Main$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p14 = msg;
@@ -208,8 +213,34 @@ var _jigargosar$elm_simple_gtd$Entity_Main$update = F2(
 						}(
 							_jigargosar$elm_simple_gtd$GroupDoc_Form$createAddGroupDocForm(_jigargosar$elm_simple_gtd$GroupDoc_Types$ProjectGroupDoc))(_p17));
 				};
-			default:
+			case 'EM_Update':
 				return A3(_jigargosar$elm_simple_gtd$Entity_Main$onUpdate, andThenUpdate, _p14._0, _p14._1);
+			default:
+				var _p22 = _p14._0;
+				var _p19 = _p14._1.key;
+				switch (_p19.ctor) {
+					case 'ArrowUp':
+						return function (_p20) {
+							return A2(
+								andThenUpdate,
+								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
+								A2(
+									_jigargosar$elm_simple_gtd$Entity_Main$map,
+									A2(_jigargosar$elm_simple_gtd$Entity_Main$moveFocusBy, -1, _p22),
+									_p20));
+						};
+					case 'ArrowDown':
+						return function (_p21) {
+							return A2(
+								andThenUpdate,
+								_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
+								A2(
+									_jigargosar$elm_simple_gtd$Entity_Main$map,
+									A2(_jigargosar$elm_simple_gtd$Entity_Main$moveFocusBy, 1, _p22),
+									_p21));
+						};
+					default:
+						return _elm_lang$core$Basics$identity;
+				}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Entity_Main$map = _Fresheyeball$elm_return$Return$map;

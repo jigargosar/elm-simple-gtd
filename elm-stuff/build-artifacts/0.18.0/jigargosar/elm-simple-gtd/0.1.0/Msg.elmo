@@ -18,13 +18,21 @@ var _jigargosar$elm_simple_gtd$Msg$OnKeyboardMsg = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$OnNowChanged = function (a) {
 	return {ctor: 'OnNowChanged', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg = function (a) {
-	return {ctor: 'OnExclusiveModeMsg', _0: a};
-};
 var _jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm = {ctor: 'OnSaveExclusiveModeForm'};
 var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveModeToNoneAndTryRevertingFocus = {ctor: 'OnSetExclusiveModeToNoneAndTryRevertingFocus'};
 var _jigargosar$elm_simple_gtd$Msg$OnSetExclusiveMode = function (a) {
 	return {ctor: 'OnSetExclusiveMode', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged = function (a) {
+	return {ctor: 'OnMainMenuStateChanged', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
+var _jigargosar$elm_simple_gtd$Msg$OnUpdateCustomSyncFormUri = F2(
+	function (a, b) {
+		return {ctor: 'OnUpdateCustomSyncFormUri', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Msg$OnStartCustomSync = function (a) {
+	return {ctor: 'OnStartCustomSync', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnMdl = function (a) {
 	return {ctor: 'OnMdl', _0: a};
@@ -60,6 +68,7 @@ var _jigargosar$elm_simple_gtd$Msg$OnEntityMsg = function (a) {
 var _jigargosar$elm_simple_gtd$Msg$onNewProject = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingProject);
 var _jigargosar$elm_simple_gtd$Msg$onNewContext = _jigargosar$elm_simple_gtd$Msg$OnEntityMsg(_jigargosar$elm_simple_gtd$Entity_Types$EM_StartAddingContext);
 var _jigargosar$elm_simple_gtd$Msg$onEntityUpdateMsg = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$EM_Update, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
+var _jigargosar$elm_simple_gtd$Msg$onEntityListKeyDown = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Entity_Types$EM_EntityListKeyDown, _jigargosar$elm_simple_gtd$Msg$OnEntityMsg);
 var _jigargosar$elm_simple_gtd$Msg$OnSetViewType = function (a) {
 	return {ctor: 'OnSetViewType', _0: a};
 };
@@ -67,23 +76,24 @@ var _jigargosar$elm_simple_gtd$Msg$onSetEntityListView = function (_p0) {
 	return _jigargosar$elm_simple_gtd$Msg$OnSetViewType(
 		_jigargosar$elm_simple_gtd$ViewType$EntityListView(_p0));
 };
-var _jigargosar$elm_simple_gtd$Msg$OnEntityListKeyDown = F2(
-	function (a, b) {
-		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Msg$OnUpdateRemoteSyncFormUri = F2(
-	function (a, b) {
-		return {ctor: 'OnUpdateRemoteSyncFormUri', _0: a, _1: b};
-	});
-var _jigargosar$elm_simple_gtd$Msg$OnRemotePouchSync = function (a) {
-	return {ctor: 'OnRemotePouchSync', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$OnCustomSyncMsg = function (a) {
+	return {ctor: 'OnCustomSyncMsg', _0: a};
 };
-var _jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged = function (a) {
-	return {ctor: 'OnMainMenuStateChanged', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$onStartCustomRemotePouchSync = function (_p1) {
+	return _jigargosar$elm_simple_gtd$Msg$OnCustomSyncMsg(
+		_jigargosar$elm_simple_gtd$Msg$OnStartCustomSync(_p1));
 };
-var _jigargosar$elm_simple_gtd$Msg$OnShowMainMenu = {ctor: 'OnShowMainMenu'};
-var _jigargosar$elm_simple_gtd$Msg$OnMainMsg = function (a) {
-	return {ctor: 'OnMainMsg', _0: a};
+var _jigargosar$elm_simple_gtd$Msg$onUpdateCustomSyncFormUri = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$Msg$OnUpdateCustomSyncFormUri, _jigargosar$elm_simple_gtd$Msg$OnCustomSyncMsg);
+var _jigargosar$elm_simple_gtd$Msg$OnAppHeaderMsg = function (a) {
+	return {ctor: 'OnAppHeaderMsg', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Msg$onShowMainMenu = _jigargosar$elm_simple_gtd$Msg$OnAppHeaderMsg(_jigargosar$elm_simple_gtd$Msg$OnShowMainMenu);
+var _jigargosar$elm_simple_gtd$Msg$onMainMenuStateChanged = function (_p2) {
+	return _jigargosar$elm_simple_gtd$Msg$OnAppHeaderMsg(
+		_jigargosar$elm_simple_gtd$Msg$OnMainMenuStateChanged(_p2));
+};
+var _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg = function (a) {
+	return {ctor: 'OnExclusiveModeMsg', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Msg$OnSubscriptionMsg = function (a) {
 	return {ctor: 'OnSubscriptionMsg', _0: a};

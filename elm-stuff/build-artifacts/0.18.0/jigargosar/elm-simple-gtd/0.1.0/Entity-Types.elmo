@@ -41,6 +41,10 @@ var _jigargosar$elm_simple_gtd$Entity_Types$ContextView = function (a) {
 	return {ctor: 'ContextView', _0: a};
 };
 var _jigargosar$elm_simple_gtd$Entity_Types$ContextsView = {ctor: 'ContextsView'};
+var _jigargosar$elm_simple_gtd$Entity_Types$EM_EntityListKeyDown = F2(
+	function (a, b) {
+		return {ctor: 'EM_EntityListKeyDown', _0: a, _1: b};
+	});
 var _jigargosar$elm_simple_gtd$Entity_Types$EM_Update = F2(
 	function (a, b) {
 		return {ctor: 'EM_Update', _0: a, _1: b};

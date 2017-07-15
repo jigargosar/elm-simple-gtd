@@ -1,0 +1,31 @@
+var _jigargosar$elm_simple_gtd$Update_CustomSync$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
+	'syncWithRemotePouch',
+	function (v) {
+		return v;
+	});
+var _jigargosar$elm_simple_gtd$Update_CustomSync$update = F2(
+	function (andThenUpdate, msg) {
+		var _p0 = msg;
+		if (_p0.ctor === 'OnStartCustomSync') {
+			return function (_p1) {
+				return A2(
+					_Fresheyeball$elm_return$Return$effect_,
+					function (_p2) {
+						return _jigargosar$elm_simple_gtd$Update_CustomSync$syncWithRemotePouch(
+							function (_) {
+								return _.pouchDBRemoteSyncURI;
+							}(_p2));
+					},
+					A2(andThenUpdate, _jigargosar$elm_simple_gtd$XMMsg$onSaveExclusiveModeForm, _p1));
+			};
+		} else {
+			return function (_p3) {
+				return andThenUpdate(
+					_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMEditSyncSettings(_p3)));
+			}(
+				_elm_lang$core$Native_Utils.update(
+					_p0._0,
+					{uri: _p0._1}));
+		}
+	});

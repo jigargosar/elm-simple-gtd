@@ -128,7 +128,6 @@ var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$saveExclusiveModeForm = func
 			return _elm_lang$core$Basics$identity;
 	}
 };
-var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setDomFocusToFocusInEntityCmd = _jigargosar$elm_simple_gtd$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
 var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$exclusiveMode = A2(
 	_jigargosar$elm_simple_gtd$X_Record$fieldLens,
 	function (_) {
@@ -153,7 +152,7 @@ var _jigargosar$elm_simple_gtd$Update_ExclusiveMode$update = F2(
 				return function (_p15) {
 					return A2(
 						andThenUpdate,
-						_jigargosar$elm_simple_gtd$Update_ExclusiveMode$setDomFocusToFocusInEntityCmd,
+						_jigargosar$elm_simple_gtd$Model$setDomFocusToFocusInEntityCmd,
 						A2(_Fresheyeball$elm_return$Return$map, _jigargosar$elm_simple_gtd$Update_ExclusiveMode$setExclusiveModeToNone, _p15));
 				};
 			default:

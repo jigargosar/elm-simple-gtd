@@ -17,6 +17,7 @@ import Msg exposing (..)
 import Stores
 import Todo.Form
 import Todo.FormTypes exposing (..)
+import Update.AppHeader
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
@@ -55,17 +56,8 @@ update andThenUpdate msg =
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update andThenUpdate msg_
 
-        OnShowMainMenu ->
-            andThenUpdate (XMMsg.onSetExclusiveMode (XMMainMenu Menu.initState))
-                >> Return.command positionMainMenuCmd
-
-        OnMainMenuStateChanged menuState ->
-            (menuState
-                |> XMMainMenu
-                >> XMMsg.onSetExclusiveMode
-                >> andThenUpdate
-            )
-                >> autoFocusInputRCmd
+        OnAppHeaderMsg msg_ ->
+            Update.AppHeader.update andThenUpdate msg_
 
         OnStartCustomRemotePouchSync form ->
             andThenUpdate XMMsg.onSaveExclusiveModeForm
@@ -144,10 +136,6 @@ maybeMapToCmd fn =
 
 command =
     Return.command
-
-
-positionMainMenuCmd =
-    DomPorts.positionPopupMenu "#main-menu-button"
 
 
 port syncWithRemotePouch : String -> Cmd msg

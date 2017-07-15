@@ -59,7 +59,7 @@ headerWithContent content m =
 
 
 menu m =
-    div [ id "main-menu-button", onClick Msg.OnShowMainMenu ] [ menuIcon m ]
+    div [ id "main-menu-button", onClick Msg.onShowMainMenu ] [ menuIcon m ]
 
 
 menuIcon m =

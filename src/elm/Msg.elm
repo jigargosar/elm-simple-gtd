@@ -38,12 +38,16 @@ type ExclusiveModeMsg
     | OnSaveExclusiveModeForm
 
 
+type AppHeaderMsg
+    = OnShowMainMenu
+    | OnMainMenuStateChanged MenuState
+
+
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
-    | OnShowMainMenu
-    | OnMainMenuStateChanged MenuState
+    | OnAppHeaderMsg AppHeaderMsg
     | OnStartCustomRemotePouchSync SyncForm
     | OnUpdateRemoteSyncFormUri SyncForm String
     | OnEntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
@@ -78,3 +82,11 @@ onEntityUpdateMsg =
 
 onSwitchToNewUserSetupModeIfNeeded =
     OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded
+
+
+onShowMainMenu =
+    OnShowMainMenu |> OnAppHeaderMsg
+
+
+onMainMenuStateChanged =
+    OnMainMenuStateChanged >> OnAppHeaderMsg

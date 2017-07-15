@@ -31,7 +31,7 @@ menuConfig menuState appModel =
     , itemKey = Tuple.first
     , itemSearchText = Tuple.first
     , itemView = itemView
-    , onStateChanged = Msg.OnMainMenuStateChanged
+    , onStateChanged = Msg.onMainMenuStateChanged
     , noOp = Model.noop
     , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
     }

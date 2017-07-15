@@ -138,43 +138,51 @@ update andThenUpdate now todoMsg =
             onStartAddingTodo andThenUpdate addFormMode
 
         OnStartEditingTodo todo editFormMode ->
-            let
-                createXM model =
-                    Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
-
-                positionPopup idPrefix =
-                    DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
-            in
-                X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
-                    >> command
-                        (case editFormMode of
-                            ETFM_EditTodoText ->
-                                autoFocusInputCmd
-
-                            ETFM_EditTodoContext ->
-                                positionPopup "#edit-context-button-"
-
-                            ETFM_EditTodoProject ->
-                                positionPopup "#edit-project-button-"
-
-                            ETFM_EditTodoReminder ->
-                                positionPopup "#edit-schedule-button-"
-                        )
+            onStartEditingTodo andThenUpdate todo editFormMode
 
         OnUpdateTodoFormAction form action ->
-            let
-                xm =
-                    Todo.Form.updateTodoForm action form |> XMTodoForm
-            in
-                andThenUpdate (XMMsg.onSetExclusiveMode xm)
-                    >> Return.command
-                        (case action of
-                            Todo.FormTypes.SetTodoMenuState _ ->
-                                autoFocusInputCmd
+            onUpdateTodoFormAction andThenUpdate form action
 
-                            _ ->
-                                Cmd.none
-                        )
+
+onUpdateTodoFormAction andThenUpdate form action =
+    let
+        xm =
+            Todo.Form.updateTodoForm action form |> XMTodoForm
+    in
+        andThenUpdate (XMMsg.onSetExclusiveMode xm)
+            >> Return.command
+                (case action of
+                    Todo.FormTypes.SetTodoMenuState _ ->
+                        autoFocusInputCmd
+
+                    _ ->
+                        Cmd.none
+                )
+
+
+onStartEditingTodo andThenUpdate todo editFormMode =
+    let
+        createXM model =
+            Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
+
+        positionPopup idPrefix =
+            DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
+    in
+        X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+            >> command
+                (case editFormMode of
+                    ETFM_EditTodoText ->
+                        autoFocusInputCmd
+
+                    ETFM_EditTodoContext ->
+                        positionPopup "#edit-context-button-"
+
+                    ETFM_EditTodoProject ->
+                        positionPopup "#edit-project-button-"
+
+                    ETFM_EditTodoReminder ->
+                        positionPopup "#edit-schedule-button-"
+                )
 
 
 onStartAddingTodo andThenUpdate addFormMode =

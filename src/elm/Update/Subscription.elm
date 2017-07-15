@@ -52,7 +52,7 @@ update andThenUpdate subMsg =
                     )
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (Stores.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
+            Return.effect_ (Stores.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 onGlobalKeyUp andThenUpdate key =

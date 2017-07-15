@@ -415,8 +415,8 @@ findAndSnoozeOverDueTodo model =
             ?+> (Document.getId >> snooze)
 
 
-upsertEncodedDocOnFirebaseChange : String -> E.Value -> AppModel -> Cmd msg
-upsertEncodedDocOnFirebaseChange dbName encodedEntity =
+upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
+upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
             .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)

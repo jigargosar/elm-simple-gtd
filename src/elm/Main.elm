@@ -27,7 +27,7 @@ import View
 import X.Keyboard
 import Json.Encode as E
 import Msg exposing (AppMsg)
-import Types exposing (AppModel, Flags, LocalPref, Return, defaultView)
+import Types exposing (AppModel, Flags, Return, defaultView)
 import X.Random
 import Json.Encode as E
 import TodoMsg

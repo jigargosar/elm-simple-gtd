@@ -23,12 +23,6 @@ import LaunchBar.Models exposing (LaunchBar)
 import Todo.FormTypes exposing (..)
 
 
-type alias LocalPref =
-    { appDrawer : AppDrawer.Model.Model
-    , signIn : Firebase.SignIn.Model
-    }
-
-
 type alias Flags =
     { now : Time
     , encodedTodoList : List E.Value

@@ -21,20 +21,6 @@ import Json.Encode as E
 import Todo.FormTypes exposing (..)
 
 
-type alias Flags =
-    { now : Time
-    , encodedTodoList : List E.Value
-    , encodedProjectList : List E.Value
-    , encodedContextList : List E.Value
-    , pouchDBRemoteSyncURI : String
-    , developmentMode : Bool
-    , appVersion : String
-    , deviceId : String
-    , config : AppConfig
-    , localPref : E.Value
-    }
-
-
 type alias AppConfig =
     { isFirstVisit : Bool
     }

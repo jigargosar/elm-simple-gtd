@@ -16,7 +16,7 @@ import RouteUrl
 import Routes
 import Set
 import Store
-import Time
+import Time exposing (Time)
 import Todo.Main
 import Todo.Notification.Model
 import Todo.Store
@@ -68,6 +68,20 @@ subscriptions model =
         , Firebase.Main.subscriptions model
         , AppDrawer.Main.subscriptions model
         ]
+
+
+type alias Flags =
+    { now : Time
+    , encodedTodoList : List E.Value
+    , encodedProjectList : List E.Value
+    , encodedContextList : List E.Value
+    , pouchDBRemoteSyncURI : String
+    , developmentMode : Bool
+    , appVersion : String
+    , deviceId : String
+    , config : AppConfig
+    , localPref : E.Value
+    }
 
 
 init : Flags -> Return

@@ -1,6 +1,5 @@
 module Update.LaunchBar exposing (..)
 
-import Context
 import Document.Types exposing (DocId)
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
@@ -8,18 +7,15 @@ import Fuzzy
 import GroupDoc.Types exposing (..)
 import LaunchBar.Messages
 import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
-import Model
 import Regex
 import Return exposing (andThen, map)
 import Model.ViewType
 import Set exposing (Set)
-import Stores
 import String.Extra
 import Time exposing (Time)
 import Tuple2
 import X.Return exposing (returnWith)
 import LaunchBar.Messages exposing (..)
-import Project
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import ViewType exposing (ViewType)

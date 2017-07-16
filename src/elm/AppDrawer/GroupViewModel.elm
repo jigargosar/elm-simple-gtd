@@ -130,12 +130,11 @@ create getTodoListByEntityId config entity =
         , isEmpty = count == 0
         , count = count
         , onActiveStateChanged =
-            (\bool ->
+            \bool ->
                 if bool then
                     Msg.switchToView (config.getViewType id |> EntityListView)
                 else
                     Model.noop
-            )
         , icon = icon
         , appHeader = appHeader
         }

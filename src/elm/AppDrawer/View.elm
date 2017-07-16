@@ -4,7 +4,7 @@ import AppColors
 import AppUrl
 import Entity.Types
 import Msg exposing (..)
-import X.Html exposing (boolProperty, onClickStopPropagation)
+import X.Html
 import Mat
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)

@@ -7,7 +7,7 @@ import Msg
 import Return
 import ReturnTypes exposing (..)
 import Window
-import X.Record exposing (over, set, toggle)
+import X.Record exposing (over, set)
 
 
 mapOver =

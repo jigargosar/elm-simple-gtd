@@ -17,7 +17,7 @@ update msg =
         LogString string ->
             let
                 _ =
-                    X.Debug.log "CM:LogString" (string)
+                    X.Debug.log "CM:LogString" string
             in
                 update NoOp
 

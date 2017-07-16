@@ -1,3 +1,0 @@
-var _jigargosar$elm_simple_gtd$Menu_Types$MenuState = function (a) {
-	return {maybeFocusKey: a};
-};

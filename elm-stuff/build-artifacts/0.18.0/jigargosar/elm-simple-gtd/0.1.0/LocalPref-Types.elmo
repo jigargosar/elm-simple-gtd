@@ -1,4 +1,0 @@
-var _jigargosar$elm_simple_gtd$LocalPref_Types$LocalPref = F2(
-	function (a, b) {
-		return {appDrawer: a, signIn: b};
-	});

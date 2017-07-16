@@ -1,6 +1,0 @@
-var _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GroupDocForm = F5(
-	function (a, b, c, d, e) {
-		return {id: a, name: b, groupDocType: c, isArchived: d, mode: e};
-	});
-var _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GDFM_Edit = {ctor: 'GDFM_Edit'};
-var _jigargosar$elm_simple_gtd$GroupDoc_FormTypes$GDFM_Add = {ctor: 'GDFM_Add'};

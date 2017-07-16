@@ -1,1 +1,0 @@
-var _jigargosar$elm_simple_gtd$Todo_Store$generator = A3(_jigargosar$elm_simple_gtd$Store$generator, 'todo-db', _jigargosar$elm_simple_gtd$Todo$encodeOtherFields, _jigargosar$elm_simple_gtd$Todo$decoder);

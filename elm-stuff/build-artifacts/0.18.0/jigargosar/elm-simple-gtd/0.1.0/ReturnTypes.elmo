@@ -1,1 +1,0 @@
-var _jigargosar$elm_simple_gtd$ReturnTypes$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);

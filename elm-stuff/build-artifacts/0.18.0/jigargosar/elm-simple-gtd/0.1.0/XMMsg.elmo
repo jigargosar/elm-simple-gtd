@@ -1,6 +1,0 @@
-var _jigargosar$elm_simple_gtd$XMMsg$onSaveExclusiveModeForm = _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg(_jigargosar$elm_simple_gtd$Msg$OnSaveExclusiveModeForm);
-var _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode = function (_p0) {
-	return _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg(
-		_jigargosar$elm_simple_gtd$Msg$OnSetExclusiveMode(_p0));
-};
-var _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus = _jigargosar$elm_simple_gtd$Msg$OnExclusiveModeMsg(_jigargosar$elm_simple_gtd$Msg$OnSetExclusiveModeToNoneAndTryRevertingFocus);

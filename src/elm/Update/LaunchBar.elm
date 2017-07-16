@@ -5,7 +5,6 @@ import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
-import LaunchBar.Messages
 import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
 import Regex
 import Return exposing (andThen, map)

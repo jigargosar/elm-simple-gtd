@@ -21,7 +21,6 @@ import X.Keyboard exposing (KeyboardState)
 import Json.Encode as E
 import LaunchBar.Models exposing (LaunchBar)
 import Todo.FormTypes exposing (..)
-import Types2
 
 
 type alias Flags =
@@ -39,11 +38,40 @@ type alias Flags =
 
 
 type alias AppConfig =
-    Types2.AppConfig
+    { isFirstVisit : Bool
+    }
 
 
 type alias AppModel =
-    Types2.AppModel
+    { now : Time
+    , todoStore : TodoStore
+    , projectStore : ProjectStore
+    , contextStore : ContextStore
+    , editMode : ExclusiveMode
+    , maybeTodoEditForm : Maybe TodoForm
+    , mainViewType : ViewType
+    , reminderOverlay : TodoReminderOverlayModel
+    , pouchDBRemoteSyncURI : String
+    , user : FirebaseUser
+    , fcmToken : FCMToken
+    , firebaseClient : FirebaseClient
+    , developmentMode : Bool
+    , selectedEntityIdSet : Set DocId
+    , appVersion : String
+    , deviceId : String
+    , focusInEntity : Entity
+    , timeTracker : Todo.TimeTracker.Model
+    , keyComboModel : Keyboard.Combo.Model Msg.AppMsg
+    , config : AppConfig
+    , appDrawerModel : AppDrawer.Model.Model
+    , signInModel : Firebase.SignIn.Model
+    , mdl : Material.Model
+    , keyboardState : KeyboardState
+    }
+
+
+
+-- todo VIMP get rid of msg dep from types ;(
 
 
 type alias Return =

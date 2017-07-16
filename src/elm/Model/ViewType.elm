@@ -3,7 +3,6 @@ module Model.ViewType exposing (..)
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (EntityListViewType(..))
 import Model.Selection
-import Types exposing (AppModel, ModelF)
 import ViewType exposing (ViewType(EntityListView))
 
 
@@ -53,6 +52,9 @@ maybeGetCurrentEntityListViewType model =
             Nothing
 
 
-getMainViewType : AppModel -> ViewType
+
+--getMainViewType : AppModel -> ViewType
+
+
 getMainViewType =
     (.mainViewType)

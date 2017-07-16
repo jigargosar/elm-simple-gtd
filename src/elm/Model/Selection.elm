@@ -2,7 +2,9 @@ module Model.Selection exposing (..)
 
 import Document.Types exposing (DocId)
 import Set exposing (Set)
-import Types exposing (AppModel, ModelF)
+
+
+--import Types exposing (AppModel, ModelF)
 
 
 clearSelection =

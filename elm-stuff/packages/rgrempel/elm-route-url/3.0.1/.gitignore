@@ -1,0 +1,6 @@
+.*.swp
+.DS_Store
+elm-stuff
+elm.js
+elm.html
+node_modules

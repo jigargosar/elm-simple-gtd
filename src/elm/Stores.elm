@@ -12,6 +12,7 @@ import GroupDoc.Types exposing (ContextStore, GroupDoc, ProjectStore)
 import Model.EntityTree
 import Model.GroupDocStore exposing (..)
 import Model.TodoStore exposing (..)
+import Model.ViewType
 import Msg exposing (AppMsg)
 import Project
 import Return exposing (andThen)
@@ -99,7 +100,7 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
                 setFocusInIndex index =
                     setFocusInEntityByIndex
                         index
-                        (createEntityList model)
+                        (createEntityListForCurrentView model)
             in
                 model
                     |> case indexTuple of
@@ -120,7 +121,7 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
     in
         ( oldModel, newModel )
             |> Tuple2.mapBoth
-                (createEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+                (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
             |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
@@ -137,7 +138,7 @@ findAndUpdateAllTodos findFn action model =
 updateEntityListCursor oldModel newModel =
     ( oldModel, newModel )
         |> Tuple2.mapBoth
-            (createEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+            (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
         |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
@@ -157,7 +158,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
         setFocusInIndex index =
             setFocusInEntityByIndex
                 index
-                (createEntityList model)
+                (createEntityListForCurrentView model)
     in
         model
             |> case indexTuple of
@@ -176,14 +177,10 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
-createEntityList model =
-    --todo: can use maybeGetCurrentEntityListViewType
-    case model.mainViewType of
-        EntityListView viewType ->
-            Model.EntityTree.createEntityTreeForViewType viewType model |> Entity.Tree.flatten
-
-        _ ->
-            []
+createEntityListForCurrentView model =
+    Model.ViewType.maybeGetEntityListViewType model
+        ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
+        ?= []
 
 
 updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF

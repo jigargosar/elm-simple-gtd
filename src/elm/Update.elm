@@ -8,6 +8,7 @@ import LocalPref
 import Material
 import Model.Selection
 import Msg exposing (..)
+import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
 import Stores
 import Update.AppHeader
 import Update.CustomSync
@@ -22,6 +23,10 @@ import Update.Todo
 import Json.Decode as D exposing (Decoder)
 import ReturnTypes exposing (..)
 import XMMsg
+
+
+switchToContextsViewMsg =
+    SwitchToContextsView |> OnViewTypeMsg
 
 
 update :
@@ -92,7 +97,11 @@ update andThenUpdate msg =
             returnWithNow (OnTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
-            Update.Todo.update andThenUpdate now msg_
+            let
+                config =
+                    { switchToContextsView = switchToContextsViewMsg |> andThenUpdate }
+            in
+                Update.Todo.update config andThenUpdate now msg_
 
         OnFirebaseMsg msg_ ->
             Firebase.Main.update andThenUpdate msg_

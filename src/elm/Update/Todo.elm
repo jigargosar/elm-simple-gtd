@@ -24,12 +24,18 @@ subscriptions m =
         |> Sub.map Msg.OnTodoMsg
 
 
+type alias Config =
+    { switchToContextsView : ReturnF
+    }
+
+
 update :
-    (Msg.AppMsg -> ReturnF)
+    Config
+    -> (Msg.AppMsg -> ReturnF)
     -> Time.Time
     -> TodoMsg
     -> ReturnF
-update andThenUpdate now todoMsg =
+update config andThenUpdate now todoMsg =
     case todoMsg of
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)

@@ -18,7 +18,7 @@ import Update.MainViewType
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
-import Todo.Main
+import Update.Todo
 import Json.Decode as D exposing (Decoder)
 import ReturnTypes exposing (..)
 import XMMsg
@@ -92,7 +92,7 @@ update andThenUpdate msg =
             returnWithNow (OnTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
-            Todo.Main.update andThenUpdate now msg_
+            Update.Todo.update andThenUpdate now msg_
 
         OnFirebaseMsg msg_ ->
             Firebase.Main.update andThenUpdate msg_

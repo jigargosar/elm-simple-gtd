@@ -1,4 +1,4 @@
-module Todo.Main exposing (..)
+module Update.Todo exposing (..)
 
 import Msg
 import Stores exposing (findTodoById)

@@ -17,7 +17,7 @@ import Routes
 import Set
 import Store
 import Time exposing (Time)
-import Todo.Main
+import Update.Todo
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
@@ -64,7 +64,7 @@ subscriptions model =
             ]
             |> Sub.map Msg.OnSubscriptionMsg
         , Keyboard.Combo.subscriptions model.keyComboModel
-        , Todo.Main.subscriptions model
+        , Update.Todo.subscriptions model
         , Firebase.Main.subscriptions model
         , AppDrawer.Main.subscriptions model
         ]

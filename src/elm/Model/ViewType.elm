@@ -3,7 +3,7 @@ module Model.ViewType exposing (..)
 import ViewType exposing (ViewType(EntityListView))
 
 
-maybeGetCurrentEntityListViewType model =
+maybeGetEntityListViewType model =
     case model.mainViewType of
         EntityListView viewType ->
             Just viewType

@@ -134,7 +134,7 @@ onUpdate andThenUpdate entityId action =
                 switchToEntityListViewFromEntity entityId model =
                     let
                         maybeEntityListViewType =
-                            Model.ViewType.maybeGetCurrentEntityListViewType model
+                            Model.ViewType.maybeGetEntityListViewType model
                     in
                         entityId
                             |> toViewType model maybeEntityListViewType

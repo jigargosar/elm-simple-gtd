@@ -15,7 +15,7 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import Update.ViewType
+import Update.MainViewType
 import ViewType exposing (ViewTypeMsg(OnSetViewType))
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
@@ -36,7 +36,7 @@ update andThenUpdate msg =
             andThen (Material.update OnMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            Update.ViewType.update msg_
+            Update.MainViewType.update msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)

@@ -1,4 +1,4 @@
-module Update.ViewType exposing (..)
+module Update.MainViewType exposing (..)
 
 import Model.Selection
 import Model.ViewType

@@ -6,6 +6,7 @@ import Entity.Main
 import Firebase.Main
 import LocalPref
 import Material
+import Model.Selection
 import Model.ViewType
 import Msg exposing (..)
 import Stores
@@ -33,7 +34,7 @@ update andThenUpdate msg =
             andThen (Material.update OnMdl msg_)
 
         OnSetViewType viewType ->
-            map (Model.ViewType.switchToView viewType)
+            map (Model.ViewType.switchToView viewType >> Model.Selection.clearSelection)
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)

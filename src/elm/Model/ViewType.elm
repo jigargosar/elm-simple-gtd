@@ -2,7 +2,6 @@ module Model.ViewType exposing (..)
 
 import Document.Types exposing (getDocId)
 import Entity.Types exposing (EntityListViewType(..))
-import Model.Selection
 import ViewType exposing (ViewType(EntityListView))
 
 
@@ -28,7 +27,6 @@ switchToContextView =
 
 switchToView mainViewType model =
     { model | mainViewType = mainViewType }
-        |> Model.Selection.clearSelection
 
 
 switchToContextsView =

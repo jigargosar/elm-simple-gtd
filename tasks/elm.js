@@ -82,10 +82,15 @@ export const parseWPD = function() {
     // run("tail -F wp-dev-server.log")
 }
 
-export function rui(elmFile) {
-    // fs.existsSync(elmFile)
+function ruiHelp(elmFile) {
+    if (_.isNil(elmFile) || !_.endsWith(".elm", elmFile) || !fs.existsSync(elmFile)) {
+        console.error("Invalid file:", elmFile)
+        return
+    }
+
     const tmpFile = tempy.file({extension: 'log'});
-    run(`elm-make --warn src/elm/L/Main.elm --output /dev/null 2> ${tmpFile}`)
+    run(`echo " " >> ${elmFile}`)
+    run(`elm-make --warn ${elmFile} --output /dev/null 2> ${tmpFile}`)
     LineDriver.read({
         sync: true,
         in: tmpFile,
@@ -114,4 +119,9 @@ export function rui(elmFile) {
     })
     // console.log(tmpFile)
     run(`elm-format --yes ${elmFile}`)
+}
+
+export function rui(...fileNames) {
+    _.forEach(ruiHelp, fileNames)
+
 }

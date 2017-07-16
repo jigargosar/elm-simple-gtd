@@ -33,8 +33,14 @@ update andThenUpdate msg =
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
 
-        OnSetViewType viewType ->
-            map (Model.ViewType.switchToView viewType >> Model.Selection.clearSelection)
+        OnViewTypeMsg msg_ ->
+            let
+                update msg =
+                    case msg of
+                        OnSetViewType viewType ->
+                            map (Model.ViewType.switchToView viewType >> Model.Selection.clearSelection)
+            in
+                update msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)

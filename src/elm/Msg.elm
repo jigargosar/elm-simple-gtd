@@ -42,13 +42,17 @@ type CustomSyncMsg
     | OnUpdateCustomSyncFormUri SyncForm String
 
 
+type ViewTypeMsg
+    = OnSetViewType ViewType
+
+
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
+    | OnViewTypeMsg ViewTypeMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
-    | OnSetViewType ViewType
     | OnEntityMsg Entity.Types.EntityMsg
     | LaunchBarMsg LaunchBar.Messages.LaunchBarMsg
     | LaunchBarMsgWithNow LaunchBar.Messages.LaunchBarMsg Time
@@ -62,7 +66,11 @@ type AppMsg
 
 
 onSetEntityListView =
-    EntityListView >> OnSetViewType
+    EntityListView >> onSetViewType
+
+
+onSetViewType =
+    OnSetViewType >> OnViewTypeMsg
 
 
 foo =

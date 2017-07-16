@@ -77,7 +77,7 @@ entityGroupView vm mainViewType =
             EntityListView viewType == mainViewType
 
         fireSwitchView =
-            OnSetViewType (EntityListView viewType)
+            Msg.onSetViewType (EntityListView viewType)
 
         fireSmart =
             if isCurrentView then
@@ -163,7 +163,7 @@ entityListItem vm =
 switchViewItem iconName viewType title =
     li
         [ class ""
-        , onClick (OnSetViewType viewType)
+        , onClick (Msg.onSetViewType viewType)
         ]
         [ Mat.icon iconName
         , h5 [] [ text title ]
@@ -173,7 +173,7 @@ switchViewItem iconName viewType title =
 switchViewItemSmall iconName viewType title =
     li
         [ class ""
-        , onClick (OnSetViewType viewType)
+        , onClick (Msg.onSetViewType viewType)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]

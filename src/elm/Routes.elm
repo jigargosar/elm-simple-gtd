@@ -42,11 +42,11 @@ builder2messages builder =
             (\_ ->
                 case path builder of
                     "custom-sync" :: [] ->
-                        [ Msg.OnSetViewType SyncView ]
+                        [ Msg.onSetViewType SyncView ]
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ Msg.OnSetViewType defaultView ]
+                        [ Msg.onSetViewType defaultView ]
             )
             (Msg.onSetEntityListView >> X.List.singleton)
 

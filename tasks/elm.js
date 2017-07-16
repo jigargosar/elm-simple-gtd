@@ -1,6 +1,8 @@
 import {run} from 'runjs'
 import * as _ from "ramda"
 import LineDriver from "line-driver"
+import fs from "fs"
+import tempy from "tempy"
 
 function fixWarningsFrom(warnFilePath) {
     LineDriver.read({
@@ -80,6 +82,36 @@ export const parseWPD = function() {
     // run("tail -F wp-dev-server.log")
 }
 
-export function rui(fileName) {
-    fs.existsSync(path)
+export function rui(elmFile) {
+    // fs.existsSync(elmFile)
+    const tmpFile = tempy.file({extension: 'log'});
+    run(`elm-make --warn src/elm/L/Main.elm --output /dev/null 2> ${tmpFile}`)
+    LineDriver.read({
+        sync: true,
+        in: tmpFile,
+        line: function (props, parser) {
+            const line = parser.line
+            // console.log(parser.line);
+
+            if (props.fileName) {
+                const lineNumRegexp = /^([0-9]+)\|/
+                const match = lineNumRegexp.exec(line)
+                if (match) {
+                    run("line-replace " + props.fileName + ":" + match[1] + " > /dev/null")
+                    props.fileName = null
+                }
+
+            } else {
+                const unusedImportRegexp = /^-- unused import -* ([./a-zA-Z0-9]+)$/
+                const match = unusedImportRegexp.exec(line)
+                if (match) {
+                    console.log(match[1]);
+                    props.fileName = match[1]
+                    // console.log("fileName", props.fileName)
+                }
+            }
+        }
+    })
+    // console.log(tmpFile)
+    run(`elm-format --yes ${elmFile}`)
 }

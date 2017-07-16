@@ -10,13 +10,13 @@ import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
 import Model
 import Msg exposing (AppMsg(LaunchBarMsg))
 import Regex
-import Return exposing (andThen)
+import Return exposing (andThen, map)
 import Model.ViewType
 import Stores
 import String.Extra
 import Time exposing (Time)
 import Tuple2
-import Types exposing (AndThenUpdate, ReturnF)
+import Types exposing (AndThenUpdate, AppModel, ReturnF)
 import X.Return exposing (returnWith)
 import XMMsg
 import LaunchBar.Messages exposing (..)
@@ -25,8 +25,12 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-map =
-    Return.map
+type alias ReturnF =
+    Return.ReturnF AppMsg AppModel
+
+
+type alias AndThenUpdate =
+    AppMsg -> ReturnF
 
 
 update :

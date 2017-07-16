@@ -22,21 +22,21 @@ type alias SubModel a =
     { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
 
 
-type alias SubReturnF msg a =
-    Return.ReturnF msg (SubModel a)
+type alias SubReturnF msg model =
+    Return.ReturnF msg model
 
 
-type alias SubAndThenUpdate msg a =
-    msg -> SubReturnF msg a
+type alias SubAndThenUpdate msg model =
+    msg -> SubReturnF msg model
 
 
-type alias Config msg a =
+type alias Config msg model =
     { now : Time
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
-    , onComplete : SubReturnF msg a
-    , setXMode : ExclusiveMode -> SubReturnF msg a
-    , onSwitchView : EntityListViewType -> SubReturnF msg a
+    , onComplete : SubReturnF msg model
+    , setXMode : ExclusiveMode -> SubReturnF msg model
+    , onSwitchView : EntityListViewType -> SubReturnF msg model
     }
 
 
@@ -90,7 +90,7 @@ type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config msg a -> String -> LaunchBarF
+updateInput : Config msg model -> String -> LaunchBarF
 updateInput config input form =
     let
         now =

@@ -17,7 +17,7 @@ update config msg =
     case msg of
         SwitchView viewType ->
             map (switchToView viewType)
-                >> map Model.Selection.clearSelection
+                >> config.clearSelection
 
         SwitchToEntityListView listView ->
             listView |> EntityListView >> SwitchView >> update config

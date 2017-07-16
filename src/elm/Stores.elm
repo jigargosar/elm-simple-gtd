@@ -189,7 +189,7 @@ getCurrentViewEntityList model =
     --todo: can use maybeGetCurrentEntityListViewType
     case model.mainViewType of
         EntityListView viewType ->
-            createGrouping viewType model |> Entity.Tree.flatten
+            createEntityTreeForViewType viewType model |> Entity.Tree.flatten
 
         _ ->
             []
@@ -299,8 +299,8 @@ getActiveContexts =
     filterContexts GroupDoc.isActive
 
 
-createGrouping : EntityListViewType -> AppModel -> Entity.Tree.Tree
-createGrouping viewType model =
+createEntityTreeForViewType : EntityListViewType -> AppModel -> Entity.Tree.Tree
+createEntityTreeForViewType viewType model =
     let
         getActiveTodoListForContextHelp =
             getActiveTodoListForContext # model

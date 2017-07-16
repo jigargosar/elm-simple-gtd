@@ -31,7 +31,7 @@ list : EntityListViewType -> AppModel -> Html.Html AppMsg
 list viewType model =
     let
         grouping =
-            Stores.createGrouping viewType model
+            Stores.createEntityTreeForViewType viewType model
 
         entityList =
             grouping |> Entity.Tree.flatten

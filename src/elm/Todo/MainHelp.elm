@@ -263,10 +263,6 @@ setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
 
-inboxEntity =
-    Entity.Types.createContextEntity Context.null
-
-
 reminderOverlayAction action =
     Return.andThen
         (\model ->

@@ -18,8 +18,8 @@ import Toolkit.Operators exposing (..)
 import ViewType exposing (ViewType)
 
 
-type alias SubModel a =
-    { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
+--type alias SubModel a =
+--    { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
 
 
 type alias SubReturnF msg model =

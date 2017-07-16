@@ -15,6 +15,8 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
+import Update.ViewType
+import ViewType exposing (ViewTypeMsg(OnSetViewType))
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
@@ -34,13 +36,7 @@ update andThenUpdate msg =
             andThen (Material.update OnMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            let
-                update msg =
-                    case msg of
-                        OnSetViewType viewType ->
-                            map (Model.ViewType.switchToView viewType >> Model.Selection.clearSelection)
-            in
-                update msg_
+            Update.ViewType.update msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)

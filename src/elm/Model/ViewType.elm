@@ -3,10 +3,6 @@ module Model.ViewType exposing (..)
 import ViewType exposing (ViewType(EntityListView))
 
 
-switchToView mainViewType model =
-    { model | mainViewType = mainViewType }
-
-
 maybeGetCurrentEntityListViewType model =
     case model.mainViewType of
         EntityListView viewType ->
@@ -16,9 +12,5 @@ maybeGetCurrentEntityListViewType model =
             Nothing
 
 
-
---getMainViewType : AppModel -> ViewType
-
-
 getMainViewType =
-    (.mainViewType)
+    .mainViewType

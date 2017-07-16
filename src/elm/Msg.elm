@@ -14,7 +14,7 @@ import Todo.Msg exposing (TodoMsg)
 import Material
 import X.Keyboard
 import Keyboard.Combo
-import ViewType exposing (ViewType(EntityListView))
+import ViewType exposing (ViewType(EntityListView), ViewTypeMsg(OnSetViewType))
 
 
 type SubscriptionMsg
@@ -42,10 +42,6 @@ type CustomSyncMsg
     | OnUpdateCustomSyncFormUri SyncForm String
 
 
-type ViewTypeMsg
-    = OnSetViewType ViewType
-
-
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
@@ -71,27 +67,6 @@ onSetEntityListView =
 
 switchToContextsView =
     ContextsView |> onSetEntityListView
-
-
-
---switchToProjectsView =
---    ProjectsView |> onSetEntityListView
---
---
---projectView =
---    getDocId >> Entity.Types.ProjectView >> EntityListView
---
---
---contextView =
---    getDocId >> Entity.Types.ContextView >> EntityListView
---
---
---switchToProjectView =
---    projectView >> switchToView
---
---
---switchToContextView =
---    contextView >> switchToView
 
 
 switchToView =

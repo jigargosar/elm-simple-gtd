@@ -98,6 +98,7 @@ update andThenUpdate msg =
 
         OnTodoMsgWithNow msg_ now ->
             let
+                config : Update.Todo.Config
                 config =
                     { switchToContextsView = switchToContextsViewMsg |> andThenUpdate }
             in

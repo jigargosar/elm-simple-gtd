@@ -14,9 +14,8 @@
     "_postinstall": "yarn global add elm-github-install@1.0.1 elm@0.18.0 elm-format@0.6.1-alpha firebase-tools@3.9.1",
     "dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "nodemon": "nodemon --exec 'npm run dev'",
-    "dash": "webpack-dashboard -m -- nodemon --exec 'npm run dev'",
-    "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
-    "start": "http-server docs"
+    "xx_link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
+    "xx_start": "http-server docs"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",

@@ -17,7 +17,6 @@ import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
-import Json.Encode as E
 import Todo.FormTypes exposing (..)
 
 

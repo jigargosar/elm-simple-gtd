@@ -130,9 +130,9 @@ function sleep(ms) {
 
 
 export async function rui(...fileNames) {
-    // run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/nodemon")
-    run("pgrep -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
-    run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
+    // run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/nodemon || true")
+    // run("pgrep -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
+    // run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
     await sleep(100)
     _.forEach(ruiHelp, fileNames)
 

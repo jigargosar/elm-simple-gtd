@@ -8,7 +8,7 @@ import Fuzzy
 import GroupDoc.Types exposing (..)
 import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
 import Regex
-import Return exposing (andThen, map)
+import Return
 import Model.ViewType
 import Set exposing (Set)
 import String.Extra
@@ -106,9 +106,8 @@ updateInput config input form =
                     identity
     in
         updateInputHelp newInput form now
-            |> (\form ->
-                    { form | searchResults = getFuzzyResults input config }
-               )
+            |> \form ->
+                { form | searchResults = getFuzzyResults input config }
 
 
 updateInputHelp input model now =
@@ -147,4 +146,4 @@ getFuzzyResults needle { activeContexts, activeProjects } =
     in
         all
             .|> fuzzyMatch needle
-            |> List.sortBy (Tuple.second >> (.score))
+            |> List.sortBy (Tuple.second >> .score)

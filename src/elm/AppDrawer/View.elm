@@ -20,11 +20,11 @@ import ViewType exposing (ViewType(EntityListView, SyncView))
 
 sidebarHeader appVM m =
     let
-        ( t1, t2 ) =
+        t1 =
             if m.developmentMode then
-                ( "Dev v" ++ m.appVersion, "v" ++ m.appVersion )
+                "Dev v" ++ m.appVersion
             else
-                ( "SimpleGTD.com", "v" ++ m.appVersion )
+                "SimpleGTD.com"
     in
         div
             [ id "layout-sidebar-header"
@@ -122,7 +122,7 @@ entityGroupView vm mainViewType =
 archivedItems vm =
     let
         badgeCount =
-            (vm.archivedEntityList |> List.length)
+            vm.archivedEntityList |> List.length
 
         ( iconName, buttonText, viewItems ) =
             if vm.showArchived then

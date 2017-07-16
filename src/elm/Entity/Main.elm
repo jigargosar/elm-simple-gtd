@@ -14,7 +14,7 @@ import Model
 import Model.Selection
 import Model.ViewType
 import Msg exposing (AppMsg)
-import Return exposing (andThen, map)
+import Return exposing (map)
 import Set
 import Stores
 import Todo
@@ -55,7 +55,7 @@ update andThenUpdate msg =
         EM_Update entityId action ->
             onUpdate andThenUpdate entityId action
 
-        EM_EntityListKeyDown entityList { key, isShiftDown } ->
+        EM_EntityListKeyDown entityList { key } ->
             case key of
                 Key.ArrowUp ->
                     map (moveFocusBy -1 entityList)
@@ -86,7 +86,7 @@ onUpdate andThenUpdate entityId action =
                 >> DomPorts.autoFocusInputRCmd
 
         EUA_SetFormText newName ->
-            X.Return.returnWith (.editMode)
+            X.Return.returnWith .editMode
                 (\xMode ->
                     case xMode of
                         XMGroupDocForm form ->
@@ -165,7 +165,7 @@ toggleDeleteEntity entityId =
             Stores.updateProject id Document.toggleDeleted
 
         TodoId id ->
-            Stores.updateTodo (TA_ToggleDeleted) id
+            Stores.updateTodo TA_ToggleDeleted id
 
 
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF

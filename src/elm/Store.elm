@@ -18,7 +18,7 @@ port module Store
         , ChangeList
         )
 
-import Dict exposing (Dict)
+import Dict
 import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Store.Types
@@ -33,7 +33,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Json.Decode as J exposing (Decoder)
 import Json.Encode as J
-import Random.Pcg as Random exposing (Seed)
+import Random.Pcg as Random
 import Set exposing (Set)
 import Time exposing (Time)
 import Tuple2
@@ -161,13 +161,12 @@ findAndUpdateAll pred now updateFn_ store =
             (getUpdateFnDecorator updateFn_ now store)
 
         updateAndCollectChanges =
-            (\id oldDoc ( changeList, dict ) ->
+            \id oldDoc ( changeList, dict ) ->
                 let
                     newDoc =
                         updateFn oldDoc
                 in
                     ( ( oldDoc, newDoc ) :: changeList, replaceDocIn dict newDoc )
-            )
     in
         store
             |> overT2 dict

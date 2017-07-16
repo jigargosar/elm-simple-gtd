@@ -217,15 +217,20 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : (Msg.AppMsg -> ReturnF) -> AppModel -> Return
-gotoRunningTodo andThenUpdate model =
+type alias Config =
+    { switchToContextsView : ReturnF
+    }
+
+
+gotoRunningTodo : Config -> AppModel -> Return
+gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
-        ?|> gotoTodoWithId andThenUpdate model
+        ?|> gotoTodoWithId config model
         ?= Return.singleton model
 
 
-gotoTodoWithId : (Msg.AppMsg -> ReturnF) -> AppModel -> DocId -> Return
-gotoTodoWithId andThenUpdate model todoId =
+gotoTodoWithId : Config -> AppModel -> DocId -> Return
+gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
             Stores.getCurrentViewEntityList model
@@ -245,7 +250,7 @@ gotoTodoWithId andThenUpdate model todoId =
                     model
                         |> Stores.setFocusInEntityWithTodoId todoId
                         |> Return.singleton
-                        |> andThenUpdate (Msg.switchToEntityListView ContextsView)
+                        |> config.switchToContextsView
                 )
                 (\e -> Stores.setFocusInEntity e model |> Return.singleton)
 

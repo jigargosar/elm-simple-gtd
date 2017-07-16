@@ -25,8 +25,7 @@ subscriptions m =
 
 
 type alias Config =
-    { switchToContextsView : ReturnF
-    }
+    Todo.MainHelp.Config
 
 
 update :
@@ -47,7 +46,7 @@ update config andThenUpdate now todoMsg =
             mapSet timeTracker Tracker.none
 
         OnGotoRunningTodo ->
-            andThen (gotoRunningTodo andThenUpdate)
+            andThen (gotoRunningTodo config)
                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         UpdateTimeTracker ->

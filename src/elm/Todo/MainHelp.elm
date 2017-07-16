@@ -6,7 +6,6 @@ import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Model.ViewType
 import Msg
 import ReturnTypes exposing (Return, ReturnF)
 import Stores exposing (findTodoById)

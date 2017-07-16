@@ -7,7 +7,6 @@ import Firebase.Main
 import LocalPref
 import Material
 import Model.Selection
-import Model.ViewType
 import Msg exposing (..)
 import Stores
 import Update.AppHeader

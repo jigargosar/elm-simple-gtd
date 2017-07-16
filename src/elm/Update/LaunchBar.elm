@@ -9,13 +9,10 @@ import GroupDoc.Types exposing (..)
 import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
 import Regex
 import Return
-import Model.ViewType
-import Set exposing (Set)
 import String.Extra
 import Time exposing (Time)
 import LaunchBar.Messages exposing (..)
 import Toolkit.Operators exposing (..)
-import ViewType exposing (ViewType)
 
 
 --type alias SubModel a =

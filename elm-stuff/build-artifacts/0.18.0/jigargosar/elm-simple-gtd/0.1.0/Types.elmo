@@ -1,4 +1,3 @@
-var _jigargosar$elm_simple_gtd$Types$defaultView = _jigargosar$elm_simple_gtd$ViewType$EntityListView(_jigargosar$elm_simple_gtd$Entity_Types$ContextsView);
 var _jigargosar$elm_simple_gtd$Types$Flags = function (a) {
 	return function (b) {
 		return function (c) {
@@ -10,6 +9,58 @@ var _jigargosar$elm_simple_gtd$Types$Flags = function (a) {
 								return function (i) {
 									return function (j) {
 										return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h, config: i, localPref: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _jigargosar$elm_simple_gtd$Types$AppConfig = function (a) {
+	return {isFirstVisit: a};
+};
+var _jigargosar$elm_simple_gtd$Types$AppModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return function (t) {
+																				return function (u) {
+																					return function (v) {
+																						return function (w) {
+																							return function (x) {
+																								return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, maybeTodoEditForm: f, mainViewType: g, reminderOverlay: h, pouchDBRemoteSyncURI: i, user: j, fcmToken: k, firebaseClient: l, developmentMode: m, selectedEntityIdSet: n, appVersion: o, deviceId: p, focusInEntity: q, timeTracker: r, keyComboModel: s, config: t, appDrawerModel: u, signInModel: v, mdl: w, keyboardState: x};
+																							};
+																						};
+																					};
+																				};
+																			};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
 									};
 								};
 							};

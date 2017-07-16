@@ -13,7 +13,8 @@ import Tuple2
 import X.Function.Infix exposing (..)
 import Return exposing (map)
 import Time exposing (Time)
-import Types exposing (ModelF, ModelReturnF)
+import ReturnTypes exposing (..)
+import Types exposing (..)
 import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (over, overReturn)
 import X.Return

@@ -33,7 +33,8 @@ import Time exposing (Time)
 import Model exposing (..)
 import Todo.Main
 import Json.Decode as D exposing (Decoder)
-import Types exposing (AppModel, ModelF, Return, ReturnF)
+import ReturnTypes exposing (..)
+import Types exposing (..)
 import X.Record exposing (maybeOver)
 import XMMsg
 

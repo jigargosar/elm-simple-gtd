@@ -11,7 +11,8 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (ReturnF)
+import ReturnTypes exposing (..)
+import Types exposing (..)
 import XMMsg
 
 

@@ -58,7 +58,7 @@ var _jigargosar$elm_simple_gtd$Main$init = function (flags) {
 		projectStore: projectStore,
 		contextStore: contextStore,
 		editMode: _jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMNone,
-		mainViewType: _jigargosar$elm_simple_gtd$Types$defaultView,
+		mainViewType: _jigargosar$elm_simple_gtd$ReturnTypes$defaultView,
 		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
 		reminderOverlay: _jigargosar$elm_simple_gtd$Todo_Notification_Model$none,
 		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,

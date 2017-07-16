@@ -68,35 +68,3 @@ type alias AppModel =
     , mdl : Material.Model
     , keyboardState : KeyboardState
     }
-
-
-
--- todo VIMP get rid of msg dep from types ;(
-
-
-type alias Return =
-    Return.Return AppMsg AppModel
-
-
-type alias ModelReturnF =
-    AppModel -> Return
-
-
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
-
-
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
-
-
-type alias ModelF =
-    AppModel -> AppModel
-
-
-defaultView =
-    EntityListView ContextsView
-
-
-type alias Subscriptions =
-    AppModel -> Sub AppMsg

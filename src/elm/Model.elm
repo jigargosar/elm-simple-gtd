@@ -3,10 +3,11 @@ module Model exposing (..)
 import CommonMsg
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import Msg exposing (..)
-import Types exposing (AppConfig, AppModel, ModelF, ModelReturnF)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
+import ReturnTypes exposing (..)
+import Types exposing (..)
 
 
 commonMsg : CommonMsg.Helper AppMsg

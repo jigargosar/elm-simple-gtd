@@ -144,7 +144,7 @@ var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
 			} else {
 				return {
 					ctor: '::',
-					_0: _jigargosar$elm_simple_gtd$Msg$OnSetViewType(_jigargosar$elm_simple_gtd$Types$defaultView),
+					_0: _jigargosar$elm_simple_gtd$Msg$OnSetViewType(_jigargosar$elm_simple_gtd$ReturnTypes$defaultView),
 					_1: {ctor: '[]'}
 				};
 			}

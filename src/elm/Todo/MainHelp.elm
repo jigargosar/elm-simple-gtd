@@ -31,7 +31,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
-import Types exposing (ModelF, ReturnF)
+import ReturnTypes exposing (..)
 import X.Function exposing (applyMaybeWith)
 import XMMsg
 

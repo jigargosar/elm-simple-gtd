@@ -16,7 +16,8 @@ import Store
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
-import Types exposing (AppModel, ModelF, ModelReturnF)
+import ReturnTypes exposing (..)
+import Types exposing (..)
 import ViewType exposing (ViewType(EntityListView))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

@@ -17,7 +17,7 @@ import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg
-import Types exposing (ReturnF, Subscriptions)
+import ReturnTypes exposing (..)
 import XMMsg
 
 

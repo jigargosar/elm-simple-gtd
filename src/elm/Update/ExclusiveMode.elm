@@ -10,6 +10,7 @@ import GroupDoc.Types exposing (GroupDocType(..))
 import Model exposing (commonMsg)
 import Msg exposing (..)
 import Return exposing (andThen, map)
+import ReturnTypes exposing (..)
 import Store
 import Stores
 import Todo

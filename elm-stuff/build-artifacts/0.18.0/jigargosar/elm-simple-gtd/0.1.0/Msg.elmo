@@ -1,4 +1,4 @@
-var _jigargosar$elm_simple_gtd$Msg$foo = 6;
+var _jigargosar$elm_simple_gtd$Msg$foo = 9;
 var _jigargosar$elm_simple_gtd$Msg$OnKeyCombo = function (a) {
 	return {ctor: 'OnKeyCombo', _0: a};
 };

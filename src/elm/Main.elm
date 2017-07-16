@@ -27,10 +27,11 @@ import View
 import X.Keyboard
 import Json.Encode as E
 import Msg exposing (AppMsg)
-import Types exposing (AppModel, Flags, Return, defaultView)
+import ReturnTypes exposing (..)
 import X.Random
 import Json.Encode as E
 import TodoMsg
+import Types exposing (..)
 
 
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg

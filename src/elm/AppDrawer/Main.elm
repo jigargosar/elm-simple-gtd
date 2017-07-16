@@ -5,7 +5,7 @@ import AppDrawer.Types exposing (Msg(..))
 import Model
 import Msg
 import Return
-import Types exposing (ReturnF)
+import ReturnTypes exposing (..)
 import Window
 import X.Record exposing (over, set, toggle)
 

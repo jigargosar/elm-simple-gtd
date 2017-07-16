@@ -22,7 +22,7 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import X.Return as Return exposing (returnWithNow)
+import X.Return as Return exposing (returnWith, returnWithNow)
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Notification
@@ -76,8 +76,20 @@ update andThenUpdate msg =
             Entity.Main.update andThenUpdate msg_
 
         LaunchBarMsgWithNow msg_ now ->
-            Update.LaunchBar.update andThenUpdate msg_ now
+            returnWith
+                (\m ->
+                    { now = now
+                    , activeProjects = (Stores.getActiveProjects m)
+                    , activeContexts = (Stores.getActiveContexts m)
+                    , onComplete =
+                        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                            |> andThenUpdate
+                    , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    }
+                )
+                (\config -> Update.LaunchBar.updateWithConfig config andThenUpdate msg_)
 
+        --            Update.LaunchBar.update andThenUpdate msg_ now
         LaunchBarMsg msg_ ->
             LaunchBarMsgWithNow msg_ |> returnWithNow
 

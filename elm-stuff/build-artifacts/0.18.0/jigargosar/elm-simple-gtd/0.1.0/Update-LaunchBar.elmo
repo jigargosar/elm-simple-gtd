@@ -86,7 +86,6 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$updateInput = F3(
 		}(
 			A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateInputHelp, newInput, form, now));
 	});
-var _jigargosar$elm_simple_gtd$Update_LaunchBar$map = _Fresheyeball$elm_return$Return$map;
 var _jigargosar$elm_simple_gtd$Update_LaunchBar$updateWithConfig = F3(
 	function (config, andThenUpdate, msg) {
 		var _p5 = msg;
@@ -99,58 +98,39 @@ var _jigargosar$elm_simple_gtd$Update_LaunchBar$updateWithConfig = F3(
 						var _p7 = _p5._0;
 						switch (_p7.ctor) {
 							case 'SI_Project':
-								return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+								return _Fresheyeball$elm_return$Return$map(
 									_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectView(_p7._0));
 							case 'SI_Projects':
-								return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
+								return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToProjectsView);
 							case 'SI_Context':
-								return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(
+								return _Fresheyeball$elm_return$Return$map(
 									_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextView(_p7._0));
 							default:
-								return _jigargosar$elm_simple_gtd$Update_LaunchBar$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
+								return _Fresheyeball$elm_return$Return$map(_jigargosar$elm_simple_gtd$Model_ViewType$switchToContextsView);
 						}
 					}()(
-						A2(andThenUpdate, _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus, _p6));
+						config.onComplete(_p6));
 				};
 			case 'OnLBInputChanged':
-				return andThenUpdate(
-					function (_p8) {
-						return _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
-							_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(_p8));
-					}(
-						A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateInput, config, _p5._1, _p5._0)));
+				return function (_p8) {
+					return config.setXMode(
+						_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(_p8));
+				}(
+					A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateInput, config, _p5._1, _p5._0));
 			case 'Open':
 				return function (_p9) {
 					return _jigargosar$elm_simple_gtd$DomPorts$autoFocusInputRCmd(
-						A2(
-							andThenUpdate,
-							function (_p10) {
-								return _jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(
-									_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
-										_jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(_p10)));
-							}(config.now),
-							_p9));
+						function (_p10) {
+							return config.setXMode(
+								_jigargosar$elm_simple_gtd$ExclusiveMode_Types$XMLaunchBar(
+									_jigargosar$elm_simple_gtd$LaunchBar_Models$initialModel(_p10)));
+						}(config.now)(_p9));
 				};
 			default:
-				return andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus);
+				return config.onComplete;
 		}
 	});
-var _jigargosar$elm_simple_gtd$Update_LaunchBar$update = F3(
-	function (andThenUpdate, msg, now) {
-		return A2(
-			_jigargosar$elm_simple_gtd$X_Return$returnWith,
-			function (m) {
-				return {
-					now: now,
-					activeProjects: _jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
-					activeContexts: _jigargosar$elm_simple_gtd$Stores$getActiveContexts(m)
-				};
-			},
-			function (config) {
-				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateWithConfig, config, andThenUpdate, msg);
-			});
-	});
-var _jigargosar$elm_simple_gtd$Update_LaunchBar$Config = F3(
-	function (a, b, c) {
-		return {now: a, activeProjects: b, activeContexts: c};
+var _jigargosar$elm_simple_gtd$Update_LaunchBar$Config = F5(
+	function (a, b, c, d, e) {
+		return {now: a, activeProjects: b, activeContexts: c, onComplete: d, setXMode: e};
 	});

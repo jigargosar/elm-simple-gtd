@@ -35,7 +35,23 @@ var _jigargosar$elm_simple_gtd$Update$update = F2(
 			case 'OnEntityMsg':
 				return A2(_jigargosar$elm_simple_gtd$Entity_Main$update, andThenUpdate, _p0._0);
 			case 'LaunchBarMsgWithNow':
-				return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$update, andThenUpdate, _p0._0, _p0._1);
+				return A2(
+					_jigargosar$elm_simple_gtd$X_Return$returnWith,
+					function (m) {
+						return {
+							now: _p0._1,
+							activeProjects: _jigargosar$elm_simple_gtd$Stores$getActiveProjects(m),
+							activeContexts: _jigargosar$elm_simple_gtd$Stores$getActiveContexts(m),
+							onComplete: andThenUpdate(_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveModeToNoneAndTryRevertingFocus),
+							setXMode: function (_p2) {
+								return andThenUpdate(
+									_jigargosar$elm_simple_gtd$XMMsg$onSetExclusiveMode(_p2));
+							}
+						};
+					},
+					function (config) {
+						return A3(_jigargosar$elm_simple_gtd$Update_LaunchBar$updateWithConfig, config, andThenUpdate, _p0._0);
+					});
 			case 'LaunchBarMsg':
 				return _jigargosar$elm_simple_gtd$X_Return$returnWithNow(
 					_jigargosar$elm_simple_gtd$Msg$LaunchBarMsgWithNow(_p0._0));

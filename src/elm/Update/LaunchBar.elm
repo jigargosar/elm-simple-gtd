@@ -25,49 +25,35 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
+type alias ReturnF msg =
+    Return.ReturnF msg AppModel
 
 
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
+type alias AndThenUpdate msg =
+    msg -> ReturnF msg
 
 
-update :
-    AndThenUpdate
-    -> LaunchBarMsg
-    -> Time
-    -> ReturnF
-update andThenUpdate msg now =
-    returnWith
-        (\m ->
-            { now = now
-            , activeProjects = (Stores.getActiveProjects m)
-            , activeContexts = (Stores.getActiveContexts m)
-            }
-        )
-        (\config -> updateWithConfig config andThenUpdate msg)
-
-
-type alias Config =
+type alias Config msg =
     { now : Time
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
+    , onComplete : ReturnF msg
+    , setXMode : ExclusiveMode -> ReturnF msg
     }
 
 
 updateWithConfig :
-    Config
-    -> AndThenUpdate
+    Config msg
+    -> AndThenUpdate msg
     -> LaunchBarMsg
-    -> ReturnF
+    -> ReturnF msg
 updateWithConfig config andThenUpdate msg =
     case msg of
         NOOP ->
             identity
 
         OnLBEnter entity ->
-            andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+            config.onComplete
                 >> case entity of
                     SI_Project project ->
                         map (Model.ViewType.switchToProjectView project)
@@ -82,25 +68,27 @@ updateWithConfig config andThenUpdate msg =
                         map Model.ViewType.switchToContextsView
 
         OnLBInputChanged form text ->
-            andThenUpdate
-                (updateInput config text form
-                    |> XMLaunchBar
-                    >> XMMsg.onSetExclusiveMode
-                )
+            updateInput config text form
+                |> XMLaunchBar
+                >> config.setXMode
 
         Open ->
-            andThenUpdate (config.now |> LaunchBar.Models.initialModel >> XMLaunchBar >> XMMsg.onSetExclusiveMode)
+            (config.now
+                |> LaunchBar.Models.initialModel
+                >> XMLaunchBar
+                >> config.setXMode
+            )
                 >> DomPorts.autoFocusInputRCmd
 
         OnCancel ->
-            andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+            config.onComplete
 
 
 type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config -> String -> LaunchBarF
+updateInput : Config msg -> String -> LaunchBarF
 updateInput config input form =
     let
         now =

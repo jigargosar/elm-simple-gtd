@@ -1,0 +1,76 @@
+var _jigargosar$elm_simple_gtd$Todo_MainHelpPort$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showTodoReminderNotification',
+	function (v) {
+		return {
+			title: v.title,
+			tag: v.tag,
+			data: {id: v.data.id}
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_MainHelpPort$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'notificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _jigargosar$elm_simple_gtd$Todo_MainHelpPort$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showRunningTodoNotification',
+	function (v) {
+		return {
+			tag: v.tag,
+			title: v.title,
+			body: v.body,
+			actions: _elm_lang$core$Native_List.toArray(v.actions).map(
+				function (v) {
+					return {title: v.title, action: v.action};
+				}),
+			data: {
+				id: v.data.id,
+				notificationClickedPort: v.data.notificationClickedPort,
+				skipFocusActionList: _elm_lang$core$Native_List.toArray(v.data.skipFocusActionList).map(
+					function (v) {
+						return v;
+					})
+			}
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_MainHelpPort$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'onRunningTodoNotificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));

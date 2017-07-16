@@ -236,7 +236,7 @@ gotoTodoWithId : Config -> AppModel -> DocId -> ReturnF
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
-            Stores.getCurrentViewEntityList model
+            Stores.createEntityList model
                 |> List.find
                     (\entity ->
                         case entity of

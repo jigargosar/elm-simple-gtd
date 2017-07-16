@@ -99,7 +99,7 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
                 setFocusInIndex index =
                     setFocusInEntityByIndex
                         index
-                        (getCurrentViewEntityList model)
+                        (createEntityList model)
             in
                 model
                     |> case indexTuple of
@@ -120,7 +120,7 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
     in
         ( oldModel, newModel )
             |> Tuple2.mapBoth
-                (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+                (createEntityList >> (getMaybeFocusInEntityIndex # oldModel))
             |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
@@ -137,7 +137,7 @@ findAndUpdateAllTodos findFn action model =
 updateEntityListCursor oldModel newModel =
     ( oldModel, newModel )
         |> Tuple2.mapBoth
-            (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+            (createEntityList >> (getMaybeFocusInEntityIndex # oldModel))
         |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
@@ -157,7 +157,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
         setFocusInIndex index =
             setFocusInEntityByIndex
                 index
-                (getCurrentViewEntityList model)
+                (createEntityList model)
     in
         model
             |> case indexTuple of
@@ -176,7 +176,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
-getCurrentViewEntityList model =
+createEntityList model =
     --todo: can use maybeGetCurrentEntityListViewType
     case model.mainViewType of
         EntityListView viewType ->

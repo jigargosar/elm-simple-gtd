@@ -2,12 +2,13 @@ port module Todo.MainHelp exposing (..)
 
 import Context
 import Document
-import Document.Types exposing (getDocId)
+import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.ViewType
 import Msg
+import ReturnTypes exposing (Return, ReturnF)
 import Stores exposing (findTodoById)
 import Todo.Form
 import Todo.FormTypes exposing (EditTodoFormMode(..))
@@ -16,6 +17,7 @@ import Todo.Msg exposing (TodoMsg(ShowReminderOverlayForTodoId))
 import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
+import Types exposing (AppModel)
 import X.Record as Record exposing (set)
 import X.Return exposing (rAndThenMaybe)
 import X.Time
@@ -216,17 +218,15 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo model =
+gotoRunningTodo : (Msg.AppMsg -> ReturnF) -> AppModel -> Return
+gotoRunningTodo andThenUpdate model =
     Tracker.getMaybeTodoId model.timeTracker
-        ?|> gotoTodoWithIdIn model
-        ?= model
+        ?|> gotoTodoWithId andThenUpdate model
+        ?= Return.singleton model
 
 
-gotoTodoWithIdIn =
-    flip gotoTodoWithId
-
-
-gotoTodoWithId todoId model =
+gotoTodoWithId : (Msg.AppMsg -> ReturnF) -> AppModel -> DocId -> Return
+gotoTodoWithId andThenUpdate model todoId =
     let
         maybeTodoEntity =
             Stores.getCurrentViewEntityList model
@@ -245,9 +245,10 @@ gotoTodoWithId todoId model =
                 (\_ ->
                     model
                         |> Stores.setFocusInEntityWithTodoId todoId
-                        |> Model.ViewType.switchToContextsView
+                        |> Return.singleton
+                        |> andThenUpdate Msg.switchToContextsView
                 )
-                (Stores.setFocusInEntity # model)
+                (\e -> Stores.setFocusInEntity e model |> Return.singleton)
 
 
 positionMoreMenuCmd todoId =

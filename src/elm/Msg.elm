@@ -2,7 +2,8 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types
+import Document.Types exposing (getDocId)
+import Entity.Types exposing (EntityListViewType(..))
 import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
@@ -66,10 +67,34 @@ type AppMsg
 
 
 onSetEntityListView =
-    EntityListView >> onSetViewType
+    EntityListView >> switchToView
 
 
-onSetViewType =
+switchToContextsView =
+    ContextsView |> onSetEntityListView
+
+
+switchToProjectsView =
+    ProjectsView |> onSetEntityListView
+
+
+projectView =
+    getDocId >> Entity.Types.ProjectView >> EntityListView
+
+
+contextView =
+    getDocId >> Entity.Types.ContextView >> EntityListView
+
+
+switchToProjectView =
+    projectView >> switchToView
+
+
+switchToContextView =
+    contextView >> switchToView
+
+
+switchToView =
     OnSetViewType >> OnViewTypeMsg
 
 

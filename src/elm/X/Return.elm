@@ -20,6 +20,17 @@ withMaybe f1 f2 =
         )
 
 
+returnWithMaybe2 :
+    (a -> x)
+    -> (x -> Maybe (ReturnF msg a))
+    -> ReturnF msg a
+returnWithMaybe2 f1 f2 =
+    Return.andThen
+        (\m ->
+            f1 m |> f2 ?= identity |> F.apply (Return.singleton m)
+        )
+
+
 returnWithNow : (Time -> msg) -> ReturnF msg model
 returnWithNow toMsg =
     Return.command (Task.perform toMsg Time.now)

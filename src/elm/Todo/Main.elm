@@ -5,7 +5,7 @@ import Stores exposing (findTodoById)
 import Todo.MainHelp exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
-import X.Return exposing (rAndThenMaybe)
+import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
 import Model
 import Time
 import X.Function.Infix exposing (..)
@@ -41,7 +41,7 @@ update andThenUpdate now todoMsg =
             mapSet timeTracker Tracker.none
 
         OnGotoRunningTodo ->
-            map (gotoRunningTodo)
+            andThen (gotoRunningTodo andThenUpdate)
                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         UpdateTimeTracker ->

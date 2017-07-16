@@ -6,7 +6,6 @@ import Msg exposing (..)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-import ReturnTypes exposing (..)
 import Types exposing (..)
 
 

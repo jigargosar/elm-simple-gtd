@@ -5,7 +5,6 @@ import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
 import Mat
 import X.Function.Infix exposing (..)
-import Msg
 import XMMsg
 
 

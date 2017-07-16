@@ -7,7 +7,6 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import Firebase.Main
 import Keyboard.Combo exposing (combo2)
-import LaunchBar.Models
 import LocalPref
 import Material
 import Project

@@ -1,39 +1,16 @@
 module Todo.Main exposing (..)
 
-import Context
-import Document
-import Document.Types exposing (getDocId)
-import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
-import Entity.Types
-import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Model.ViewType
 import Msg
 import Stores exposing (findTodoById)
-import Todo.Form
-import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.MainHelp exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
-import Todo.Notification.Model
-import Todo.Notification.Types
-import TodoMsg
-import X.Record as Record exposing (set)
 import X.Return exposing (rAndThenMaybe)
-import X.Time
 import Model
-import Notification
-import Return
 import Time
-import Todo
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
 import ReturnTypes exposing (..)
-import X.Function exposing (applyMaybeWith)
 import XMMsg
 
 

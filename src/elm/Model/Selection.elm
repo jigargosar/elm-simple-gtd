@@ -1,6 +1,5 @@
 module Model.Selection exposing (..)
 
-import Document.Types exposing (DocId)
 import Set exposing (Set)
 
 

@@ -10,7 +10,6 @@ import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Keyboard.Combo
 import Material
 import Msg exposing (AppMsg)
-import Return
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
@@ -19,7 +18,6 @@ import Todo.Types exposing (TodoStore)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
 import Json.Encode as E
-import LaunchBar.Models exposing (LaunchBar)
 import Todo.FormTypes exposing (..)
 
 

@@ -1,5 +1,0 @@
-var _jigargosar$elm_simple_gtd$Main_Update$update = F2(
-	function (andThenUpdate, msg) {
-		var _p0 = msg;
-		return A2(_jigargosar$elm_simple_gtd$Update_ExclusiveMode$update, andThenUpdate, _p0._0);
-	});

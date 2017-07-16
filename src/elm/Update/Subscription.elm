@@ -14,13 +14,11 @@ import X.Function.Infix exposing (..)
 import Return exposing (map)
 import Time exposing (Time)
 import ReturnTypes exposing (..)
-import Types exposing (..)
 import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (over, overReturn)
 import X.Return
 import Keyboard.Extra as Key
 import TodoMsg
-import Update.LaunchBar
 import XMMsg
 
 

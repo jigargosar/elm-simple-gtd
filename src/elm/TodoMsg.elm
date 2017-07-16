@@ -4,7 +4,6 @@ import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
 import Todo.Notification.Model
-import X.Function.Infix exposing (..)
 
 
 onStopRunningTodo : AppMsg

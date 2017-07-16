@@ -19,10 +19,8 @@ import TodoMsg
 import X.Record as Record exposing (set)
 import X.Return exposing (rAndThenMaybe)
 import X.Time
-import Model
 import Notification
 import Return exposing (command, map)
-import Time
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -31,7 +29,6 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
-import ReturnTypes exposing (..)
 import X.Function exposing (applyMaybeWith)
 import XMMsg
 

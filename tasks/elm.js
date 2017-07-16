@@ -79,3 +79,7 @@ export const parseWPD = function() {
     })
     // run("tail -F wp-dev-server.log")
 }
+
+export function rui(fileName) {
+    fs.existsSync(path)
+}

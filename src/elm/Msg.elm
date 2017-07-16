@@ -8,8 +8,6 @@ import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
-import Todo.FormTypes exposing (..)
-import Todo.Types exposing (TodoDoc, TodoText)
 import Json.Encode as E
 import X.Function.Infix exposing (..)
 import Todo.Msg exposing (TodoMsg)

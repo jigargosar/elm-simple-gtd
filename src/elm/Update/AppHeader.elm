@@ -5,14 +5,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))
 import Menu
 import Msg exposing (..)
 import Return exposing (command)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import ReturnTypes exposing (..)
-import Types exposing (..)
 import XMMsg
 
 

@@ -2,40 +2,24 @@ port module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg
-import Document.Types exposing (getDocId)
-import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd, focusSelectorIfNoFocusRCmd)
-import Entity
 import Entity.Main
-import Entity.Types exposing (Entity(TodoEntity))
-import ExclusiveMode.Types exposing (..)
 import Firebase.Main
 import LocalPref
 import Material
-import Menu
 import Model.ViewType
 import Msg exposing (..)
 import Stores
-import Todo.Form
-import Todo.FormTypes exposing (..)
 import Update.AppHeader
 import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
 import X.Return as Return exposing (returnWith, returnWithNow)
-import X.Function.Infix exposing (..)
-import Keyboard.Extra as Key
 import Notification
-import Todo.Form
 import Return exposing (andThen, command, map)
-import Task
-import Time exposing (Time)
-import Model exposing (..)
 import Todo.Main
 import Json.Decode as D exposing (Decoder)
 import ReturnTypes exposing (..)
-import Types exposing (..)
-import X.Record exposing (maybeOver)
 import XMMsg
 
 

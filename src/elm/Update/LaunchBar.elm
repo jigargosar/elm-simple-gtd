@@ -12,11 +12,8 @@ import Model.ViewType
 import Set exposing (Set)
 import String.Extra
 import Time exposing (Time)
-import Tuple2
-import X.Return exposing (returnWith)
 import LaunchBar.Messages exposing (..)
 import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
 import ViewType exposing (ViewType)
 
 

@@ -9,9 +9,11 @@ import Entity.Types exposing (..)
 import EntityId
 import GroupDoc
 import GroupDoc.Types exposing (ContextStore, GroupDoc, ProjectStore)
+import Model.GroupDocStore exposing (..)
+import Model.TodoStore exposing (..)
 import Msg exposing (AppMsg)
 import Project
-import Return
+import Return exposing (andThen)
 import Store
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
@@ -31,32 +33,20 @@ import X.List
 import X.Predicate
 
 
-contextStore =
-    X.Record.fieldLens .contextStore (\s b -> { b | contextStore = s })
+insertGroupDoc name store updateFn =
+    andThen
+        (\model ->
+            overT2 store (Store.insert (GroupDoc.init name model.now)) model
+                |> (\( gd, model ) -> updateFn (getDocId gd) identity model)
+        )
 
 
-projectStore =
-    X.Record.fieldLens .projectStore (\s b -> { b | projectStore = s })
+insertProject name =
+    insertGroupDoc name projectStore updateProject
 
 
-todoStore =
-    X.Record.fieldLens .todoStore (\s b -> { b | todoStore = s })
-
-
-focusInEntity =
-    X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
-
-
-createContext text model =
-    model
-        |> overT2 contextStore (Store.insert (GroupDoc.init text model.now))
-        |> Tuple.second
-
-
-createProject text model =
-    model
-        |> overT2 projectStore (Store.insert (GroupDoc.init text model.now))
-        |> Tuple.second
+insertContext name =
+    insertGroupDoc name contextStore updateContext
 
 
 insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
@@ -206,18 +196,6 @@ filterTodosAndSortByLatestCreated pred =
 
 filterTodosAndSortByLatestModified pred =
     filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
-
-
-filterContexts pred model =
-    Store.filterDocs pred model.contextStore
-        |> List.append (Context.filterNull pred)
-        |> Context.sort
-
-
-filterProjects pred model =
-    Store.filterDocs pred model.projectStore
-        |> List.append (Project.filterNull pred)
-        |> Project.sort
 
 
 findTodoById : DocId -> AppModel -> Maybe TodoDoc

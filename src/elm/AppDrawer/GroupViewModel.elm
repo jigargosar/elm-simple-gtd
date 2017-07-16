@@ -12,6 +12,7 @@ import Document.Types exposing (DocId)
 import Entity.Types exposing (EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types
+import Model.GroupDocStore
 import Msg
 import Model
 import Msg exposing (..)
@@ -144,10 +145,10 @@ contexts : AppModel -> ViewModel
 contexts model =
     let
         archivedFilter =
-            Stores.filterContexts GroupDoc.archivedButNotDeletedPred
+            Model.GroupDocStore.filterContexts GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Stores.filterContexts GroupDoc.isActive
+            Model.GroupDocStore.filterContexts GroupDoc.isActive
 
         config : Config
         config =
@@ -192,10 +193,10 @@ projects : AppModel -> ViewModel
 projects model =
     let
         archivedFilter =
-            Stores.filterProjects GroupDoc.archivedButNotDeletedPred
+            Model.GroupDocStore.filterProjects GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Stores.filterProjects GroupDoc.isActive
+            Model.GroupDocStore.filterProjects GroupDoc.isActive
 
         config : Config
         config =

@@ -59,19 +59,12 @@ saveExclusiveModeForm exMode =
                 update fn =
                     fn form.id (GroupDoc.setName form.name)
                         |> andThen
-
-                insert store updateFn =
-                    andThen
-                        (\model ->
-                            overT2 store (Store.insert (GroupDoc.init form.name model.now)) model
-                                |> (\( gd, model ) -> updateFn (getDocId gd) identity model)
-                        )
             in
                 case form.groupDocType of
                     ContextGroupDoc ->
                         case form.mode of
                             GDFM_Add ->
-                                insert Stores.contextStore Stores.updateContext
+                                Stores.insertContext form.name
 
                             GDFM_Edit ->
                                 update Stores.updateContext
@@ -79,7 +72,7 @@ saveExclusiveModeForm exMode =
                     ProjectGroupDoc ->
                         case form.mode of
                             GDFM_Add ->
-                                insert Stores.projectStore Stores.updateProject
+                                Stores.insertProject form.name
 
                             GDFM_Edit ->
                                 update Stores.updateProject

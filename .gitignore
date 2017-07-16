@@ -8,3 +8,4 @@
 /.gtm/
 node_modules/
 elm-stuff/build-artifacts
+elm-stuff/.elm-analyse/

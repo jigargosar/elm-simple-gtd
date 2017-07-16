@@ -91,7 +91,7 @@ documentFieldsDecoder =
     D.required "_id" D.string
         >> D.optional "_rev" D.string defaultRevision
         >> D.optional "createdAt" (D.float) 0
-        >> D.optional "modifiedAt" (D.float) 0
+        >> D.optional "modifiedAt" D.float 0
         >> D.optional "deleted" D.bool False
         >> D.optional "deviceId" D.string ""
 
@@ -105,7 +105,7 @@ isNotDeleted =
 
 
 getModifiedAt =
-    (.modifiedAt)
+    .modifiedAt
 
 
 setDeleted deleted model =

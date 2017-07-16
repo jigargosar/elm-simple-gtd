@@ -64,14 +64,13 @@ encode =
             1
     in
         Color.toRgb
-            >> (\{ red, green, blue, alpha } ->
-                    "rgba("
-                        ++ toString red
-                        ++ ","
-                        ++ toString green
-                        ++ ","
-                        ++ toString blue
-                        ++ ","
-                        ++ toString alpha
-                        ++ ")"
-               )
+            >> \{ red, green, blue, alpha } ->
+                "rgba("
+                    ++ toString red
+                    ++ ","
+                    ++ toString green
+                    ++ ","
+                    ++ toString blue
+                    ++ ","
+                    ++ toString alpha
+                    ++ ")"

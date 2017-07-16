@@ -1,8 +1,10 @@
 {
-  "checks" : {
-    "ImportAll": false,
-    "DebugLog": false,
-    "DuplicateImport": false,
-    "ExposeAll": false
-  }
+    "checks": {
+        "ImportAll": false,
+        "DebugLog": false,
+        "DuplicateImport": false,
+        "ExposeAll": false,
+        "NoTopLevelSignature": false,
+        "MultiLineRecordFormatting":false
+    }
 }

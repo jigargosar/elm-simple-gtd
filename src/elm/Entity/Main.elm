@@ -14,7 +14,7 @@ import Model
 import Model.Selection
 import Model.ViewType
 import Msg exposing (AppMsg)
-import Return exposing (andThen)
+import Return exposing (andThen, map)
 import Set
 import Stores
 import Todo
@@ -25,13 +25,9 @@ import ReturnTypes exposing (..)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
 import X.Record exposing (maybeOver)
-import X.Return
+import X.Return exposing (returnWith)
 import XMMsg
 import X.Function.Infix exposing (..)
-
-
-map =
-    Return.map
 
 
 update :
@@ -128,13 +124,24 @@ onUpdate andThenUpdate entityId action =
                     >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
 
         EUA_OnFocusIn ->
-            Return.map (Stores.setFocusInEntityWithEntityId entityId)
+            map (Stores.setFocusInEntityWithEntityId entityId)
 
         EUA_ToggleSelection ->
-            Return.map (toggleEntitySelection entityId)
+            map (toggleEntitySelection entityId)
 
         EUA_OnGotoEntity ->
-            Return.map (switchToEntityListViewFromEntity entityId)
+            let
+                switchToEntityListViewFromEntity entityId model =
+                    let
+                        maybeEntityListViewType =
+                            Model.ViewType.maybeGetCurrentEntityListViewType model
+                    in
+                        entityId
+                            |> toViewType model maybeEntityListViewType
+                            |> Msg.onSetEntityListView
+                            |> andThenUpdate
+            in
+                returnWith identity (switchToEntityListViewFromEntity entityId)
 
 
 toggleEntitySelection entityId =
@@ -146,16 +153,6 @@ toggleSetMember item set =
         Set.remove item set
     else
         Set.insert item set
-
-
-switchToEntityListViewFromEntity entityId model =
-    let
-        maybeEntityListViewType =
-            Model.ViewType.maybeGetCurrentEntityListViewType model
-    in
-        entityId
-            |> toViewType model maybeEntityListViewType
-            |> (Model.ViewType.setEntityListViewType # model)
 
 
 toggleDeleteEntity : EntityId -> ModelReturnF

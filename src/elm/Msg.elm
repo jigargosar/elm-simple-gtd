@@ -68,7 +68,7 @@ onSetEntityListView =
 
 
 foo =
-    3
+    6
 
 
 onNewProject =

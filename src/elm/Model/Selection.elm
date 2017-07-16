@@ -9,16 +9,25 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-getSelectedEntityIdSet : AppModel -> Set DocId
+
+--getSelectedEntityIdSet : AppModel -> Set DocId
+
+
 getSelectedEntityIdSet =
     (.selectedEntityIdSet)
 
 
-setSelectedEntityIdSet : Set DocId -> ModelF
+
+--setSelectedEntityIdSet : Set DocId -> ModelF
+
+
 setSelectedEntityIdSet selectedEntityIdSet model =
     { model | selectedEntityIdSet = selectedEntityIdSet }
 
 
-updateSelectedEntityIdSet : (Set DocId -> Set DocId) -> ModelF
+
+--updateSelectedEntityIdSet : (Set DocId -> Set DocId) -> ModelF
+
+
 updateSelectedEntityIdSet updater model =
     setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model

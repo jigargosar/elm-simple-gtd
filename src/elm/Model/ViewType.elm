@@ -23,7 +23,10 @@ switchToContextView =
     contextView >> switchToView
 
 
-switchToView : ViewType -> ModelF
+
+--switchToView : ViewType -> ModelF
+
+
 switchToView mainViewType model =
     { model | mainViewType = mainViewType }
         |> Model.Selection.clearSelection

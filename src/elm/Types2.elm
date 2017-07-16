@@ -1,4 +1,4 @@
-module Types exposing (..)
+module Types2 exposing (..)
 
 import AppDrawer.Model
 import Document.Types exposing (DocId)
@@ -21,54 +21,36 @@ import X.Keyboard exposing (KeyboardState)
 import Json.Encode as E
 import LaunchBar.Models exposing (LaunchBar)
 import Todo.FormTypes exposing (..)
-import Types2
-
-
-type alias Flags =
-    { now : Time
-    , encodedTodoList : List E.Value
-    , encodedProjectList : List E.Value
-    , encodedContextList : List E.Value
-    , pouchDBRemoteSyncURI : String
-    , developmentMode : Bool
-    , appVersion : String
-    , deviceId : String
-    , config : AppConfig
-    , localPref : E.Value
-    }
 
 
 type alias AppConfig =
-    Types2.AppConfig
+    { isFirstVisit : Bool
+    }
 
 
 type alias AppModel =
-    Types2.AppModel
-
-
-type alias Return =
-    Return.Return AppMsg AppModel
-
-
-type alias ModelReturnF =
-    AppModel -> Return
-
-
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
-
-
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
-
-
-type alias ModelF =
-    AppModel -> AppModel
-
-
-defaultView =
-    EntityListView ContextsView
-
-
-type alias Subscriptions =
-    AppModel -> Sub AppMsg
+    { now : Time
+    , todoStore : TodoStore
+    , projectStore : ProjectStore
+    , contextStore : ContextStore
+    , editMode : ExclusiveMode
+    , maybeTodoEditForm : Maybe TodoForm
+    , mainViewType : ViewType
+    , reminderOverlay : TodoReminderOverlayModel
+    , pouchDBRemoteSyncURI : String
+    , user : FirebaseUser
+    , fcmToken : FCMToken
+    , firebaseClient : FirebaseClient
+    , developmentMode : Bool
+    , selectedEntityIdSet : Set DocId
+    , appVersion : String
+    , deviceId : String
+    , focusInEntity : Entity
+    , timeTracker : Todo.TimeTracker.Model
+    , keyComboModel : Keyboard.Combo.Model Msg.AppMsg
+    , config : AppConfig
+    , appDrawerModel : AppDrawer.Model.Model
+    , signInModel : Firebase.SignIn.Model
+    , mdl : Material.Model
+    , keyboardState : KeyboardState
+    }

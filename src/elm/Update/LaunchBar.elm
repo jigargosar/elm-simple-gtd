@@ -1,6 +1,7 @@
 module Update.LaunchBar exposing (..)
 
 import Context
+import Document.Types exposing (DocId)
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
@@ -8,45 +9,48 @@ import GroupDoc.Types exposing (..)
 import LaunchBar.Messages
 import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
 import Model
-import Msg exposing (AppMsg(LaunchBarMsg))
 import Regex
 import Return exposing (andThen, map)
 import Model.ViewType
+import Set exposing (Set)
 import Stores
 import String.Extra
 import Time exposing (Time)
 import Tuple2
-import Types exposing (AndThenUpdate, AppModel, ReturnF)
 import X.Return exposing (returnWith)
-import XMMsg
 import LaunchBar.Messages exposing (..)
 import Project
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
+import ViewType exposing (ViewType)
 
 
-type alias ReturnF msg =
-    Return.ReturnF msg AppModel
+type alias SubModel a =
+    { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
 
 
-type alias AndThenUpdate msg =
-    msg -> ReturnF msg
+type alias ReturnF msg a =
+    Return.ReturnF msg (SubModel a)
 
 
-type alias Config msg =
+type alias AndThenUpdate msg a =
+    msg -> ReturnF msg a
+
+
+type alias Config msg a =
     { now : Time
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
-    , onComplete : ReturnF msg
-    , setXMode : ExclusiveMode -> ReturnF msg
+    , onComplete : ReturnF msg a
+    , setXMode : ExclusiveMode -> ReturnF msg a
     }
 
 
 updateWithConfig :
-    Config msg
-    -> AndThenUpdate msg
+    Config msg a
+    -> AndThenUpdate msg a
     -> LaunchBarMsg
-    -> ReturnF msg
+    -> ReturnF msg a
 updateWithConfig config andThenUpdate msg =
     case msg of
         NOOP ->
@@ -88,7 +92,7 @@ type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config msg -> String -> LaunchBarF
+updateInput : Config msg a -> String -> LaunchBarF
 updateInput config input form =
     let
         now =

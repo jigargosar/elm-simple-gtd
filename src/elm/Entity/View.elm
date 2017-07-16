@@ -9,6 +9,7 @@ import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Html
 import List.Extra
 import Maybe.Extra
+import Model.EntityTree
 import Stores
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
@@ -31,7 +32,7 @@ list : EntityListViewType -> AppModel -> Html.Html AppMsg
 list viewType model =
     let
         grouping =
-            Stores.createEntityTreeForViewType viewType model
+            Model.EntityTree.createEntityTreeForViewType viewType model
 
         entityList =
             grouping |> Entity.Tree.flatten

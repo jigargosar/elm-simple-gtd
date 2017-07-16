@@ -13,6 +13,7 @@ import Entity.Types exposing (EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types
 import Model.GroupDocStore
+import Model.Stores
 import Msg
 import Model
 import Msg exposing (..)
@@ -153,7 +154,7 @@ contexts model =
         config : Config
         config =
             { groupByFn = Todo.getContextId
-            , todoList = Stores.getActiveTodoListHavingActiveProject model
+            , todoList = Model.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
             , toEntityId = ContextId
@@ -201,7 +202,7 @@ projects model =
         config : Config
         config =
             { groupByFn = Todo.getProjectId
-            , todoList = Stores.getActiveTodoListHavingActiveContext model
+            , todoList = Model.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
             , toEntityId = ProjectId

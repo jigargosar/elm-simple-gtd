@@ -2,6 +2,7 @@ module Model.TodoStore exposing (..)
 
 import Document.Types exposing (DocId)
 import Store
+import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

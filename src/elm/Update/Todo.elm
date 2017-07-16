@@ -46,7 +46,7 @@ update config andThenUpdate now todoMsg =
             mapSet timeTracker Tracker.none
 
         OnGotoRunningTodo ->
-            andThen (gotoRunningTodo config)
+            returnWith identity (gotoRunningTodo config)
                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         UpdateTimeTracker ->

@@ -101,7 +101,10 @@ update andThenUpdate msg =
             let
                 config : Update.Todo.Config
                 config =
-                    { switchToContextsView = switchToContextsViewMsg |> andThenUpdate }
+                    { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
+                    , setFocusInEntityWithTodoId = Stores.setFocusInEntityWithTodoId >> map
+                    , setFocusInEntity = Stores.setFocusInEntity >> map
+                    }
             in
                 Update.Todo.update config andThenUpdate now msg_
 

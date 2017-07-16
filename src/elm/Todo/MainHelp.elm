@@ -4,7 +4,7 @@ import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
-import Entity.Types exposing (EntityListViewType(ContextsView))
+import Entity.Types exposing (Entity, EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.TodoStore exposing (findTodoById)
 import Msg
@@ -220,17 +220,19 @@ updateTimeTracker now =
 
 type alias Config =
     { switchToContextsView : ReturnF
+    , setFocusInEntityWithTodoId : DocId -> ReturnF
+    , setFocusInEntity : Entity -> ReturnF
     }
 
 
-gotoRunningTodo : Config -> AppModel -> Return
+gotoRunningTodo : Config -> AppModel -> ReturnF
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
-        ?= Return.singleton model
+        ?= identity
 
 
-gotoTodoWithId : Config -> AppModel -> DocId -> Return
+gotoTodoWithId : Config -> AppModel -> DocId -> ReturnF
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
@@ -248,12 +250,10 @@ gotoTodoWithId config model todoId =
         maybeTodoEntity
             |> Maybe.unpack
                 (\_ ->
-                    model
-                        |> Stores.setFocusInEntityWithTodoId todoId
-                        |> Return.singleton
-                        |> config.switchToContextsView
+                    config.setFocusInEntityWithTodoId todoId
+                        >> config.switchToContextsView
                 )
-                (\e -> Stores.setFocusInEntity e model |> Return.singleton)
+                config.setFocusInEntity
 
 
 positionMoreMenuCmd todoId =

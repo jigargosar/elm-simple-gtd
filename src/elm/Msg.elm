@@ -7,6 +7,7 @@ import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
 import Menu.Types exposing (MenuState)
+import Msg.ViewType exposing (ViewTypeMsg(..))
 import Time exposing (Time)
 import Json.Encode as E
 import X.Function.Infix exposing (..)
@@ -14,7 +15,6 @@ import Todo.Msg exposing (TodoMsg)
 import Material
 import X.Keyboard
 import Keyboard.Combo
-import ViewType exposing (ViewType(EntityListView), ViewTypeMsg(OnSetViewType))
 
 
 type SubscriptionMsg
@@ -61,16 +61,12 @@ type AppMsg
     | OnMdl (Material.Msg AppMsg)
 
 
-onSetEntityListView =
-    EntityListView >> switchToView
-
-
-switchToContextsView =
-    ContextsView |> onSetEntityListView
+switchToEntityListView =
+    SwitchToEntityListView >> OnViewTypeMsg
 
 
 switchToView =
-    OnSetViewType >> OnViewTypeMsg
+    SwitchView >> OnViewTypeMsg
 
 
 foo =

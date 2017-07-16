@@ -16,7 +16,6 @@ import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
 import Update.MainViewType
-import ViewType exposing (ViewTypeMsg(OnSetViewType))
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
@@ -76,7 +75,7 @@ update andThenUpdate msg =
                         XMMsg.onSetExclusiveMode
                             >> andThenUpdate
                     , onSwitchView =
-                        Msg.onSetEntityListView
+                        Msg.switchToEntityListView
                             >> andThenUpdate
                     }
                 )

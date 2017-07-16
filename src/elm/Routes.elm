@@ -48,7 +48,7 @@ builder2messages builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ Msg.switchToView defaultView ]
             )
-            (Msg.onSetEntityListView >> X.List.singleton)
+            (Msg.switchToEntityListView >> X.List.singleton)
 
 
 hash2messages : Location -> List AppMsg

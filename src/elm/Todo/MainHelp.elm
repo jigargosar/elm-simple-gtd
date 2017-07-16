@@ -4,7 +4,7 @@ import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
-import Entity.Types
+import Entity.Types exposing (EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.ViewType
 import Msg
@@ -246,7 +246,7 @@ gotoTodoWithId andThenUpdate model todoId =
                     model
                         |> Stores.setFocusInEntityWithTodoId todoId
                         |> Return.singleton
-                        |> andThenUpdate Msg.switchToContextsView
+                        |> andThenUpdate (Msg.switchToEntityListView ContextsView)
                 )
                 (\e -> Stores.setFocusInEntity e model |> Return.singleton)
 

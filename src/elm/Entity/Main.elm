@@ -138,7 +138,7 @@ onUpdate andThenUpdate entityId action =
                     in
                         entityId
                             |> toViewType model maybeEntityListViewType
-                            |> Msg.onSetEntityListView
+                            |> Msg.switchToEntityListView
                             |> andThenUpdate
             in
                 returnWith identity (switchToEntityListViewFromEntity entityId)

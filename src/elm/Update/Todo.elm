@@ -1,7 +1,7 @@
 module Update.Todo exposing (..)
 
 import Msg
-import Stores exposing (findTodoById)
+import Stores
 import Todo.MainHelp exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Msg exposing (TodoMsg(..))

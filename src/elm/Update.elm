@@ -6,6 +6,7 @@ import Entity.Main
 import Firebase.Main
 import LocalPref
 import Material
+import Model.GroupDocStore
 import Model.Selection
 import Msg exposing (..)
 import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
@@ -74,8 +75,8 @@ update andThenUpdate msg =
             returnWith
                 (\m ->
                     { now = now
-                    , activeProjects = (Stores.getActiveProjects m)
-                    , activeContexts = (Stores.getActiveContexts m)
+                    , activeProjects = (Model.GroupDocStore.getActiveProjects m)
+                    , activeContexts = (Model.GroupDocStore.getActiveContexts m)
                     , onComplete =
                         XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                             |> andThenUpdate

@@ -6,9 +6,10 @@ import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
+import Model.TodoStore exposing (findTodoById)
 import Msg
 import ReturnTypes exposing (Return, ReturnF)
-import Stores exposing (findTodoById)
+import Stores
 import Todo.Form
 import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.MainHelpPort exposing (..)
@@ -207,7 +208,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                 }
     in
         maybeTrackerInfo
-            ?+> (\info -> Stores.findTodoById info.todoId model ?|> createRequest info)
+            ?+> (\info -> findTodoById info.todoId model ?|> createRequest info)
             |> maybeMapToCmd showRunningTodoNotification
 
 

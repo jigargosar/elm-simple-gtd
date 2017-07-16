@@ -1,5 +1,6 @@
 module Todo.TimeTracker.View exposing (..)
 
+import Model.TodoStore
 import Msg
 import X.Time
 import Mat
@@ -22,7 +23,7 @@ createViewModel appModel tracker =
             Todo.TimeTracker.getElapsedTime appModel.now tracker
 
         todoText =
-            Stores.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
+            Model.TodoStore.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
     in
         { displayText = todoText
         , displayTime = X.Time.toHHMMSS elapsedTime

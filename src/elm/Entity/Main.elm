@@ -11,7 +11,9 @@ import GroupDoc.Types exposing (GroupDocType(..))
 import Keyboard.Extra as Key
 import Maybe.Extra
 import Model
+import Model.GroupDocStore
 import Model.Selection
+import Model.TodoStore
 import Model.ViewType
 import Msg exposing (AppMsg)
 import Return exposing (map)
@@ -173,16 +175,16 @@ startEditingEntity andThenUpdate entityId =
     case entityId of
         ContextId id ->
             X.Return.withMaybe
-                (Stores.findContextById id)
+                (Model.GroupDocStore.findContextById id)
                 (createEditContextForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
 
         ProjectId id ->
             X.Return.withMaybe
-                (Stores.findProjectById id)
+                (Model.GroupDocStore.findProjectById id)
                 (createEditProjectForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
 
         TodoId id ->
-            X.Return.withMaybe (Stores.findTodoById id)
+            X.Return.withMaybe (Model.TodoStore.findTodoById id)
                 (TodoMsg.onStartEditingTodo >> andThenUpdate)
 
 
@@ -203,7 +205,7 @@ toViewType appModel maybeCurrentEntityListViewType entityId =
                         ?|> getTodoGotoGroupView todo
                         ?= (Todo.getContextId todo |> ContextView)
             in
-                Stores.findTodoById id appModel
+                Model.TodoStore.findTodoById id appModel
                     ?|> getViewTypeForTodo
                     |> Maybe.Extra.orElse maybeCurrentEntityListViewType
                     ?= ContextsView

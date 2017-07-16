@@ -4,6 +4,7 @@ import Context
 import Document exposing (Document)
 import Menu
 import Model
+import Model.GroupDocStore
 import Msg
 import Project
 import Stores
@@ -51,13 +52,13 @@ createContextMenuConfig form model =
 
 
 project form model =
-    Menu.view (Stores.getActiveProjects model)
+    Menu.view (Model.GroupDocStore.getActiveProjects model)
         form.menuState
         (createProjectMenuConfig form model)
 
 
 context form model =
-    Menu.view (Stores.getActiveContexts model)
+    Menu.view (Model.GroupDocStore.getActiveContexts model)
         form.menuState
         (createContextMenuConfig form model)
 

@@ -198,33 +198,6 @@ filterTodosAndSortByLatestModified pred =
     filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
 
 
-findTodoById : DocId -> AppModel -> Maybe TodoDoc
-findTodoById id =
-    .todoStore >> Store.findById id
-
-
-findProjectById : DocId -> AppModel -> Maybe Project.Model
-findProjectById id =
-    .projectStore
-        >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> ([ Project.null ] |> List.find (Document.hasId id)))
-
-
-findProjectByIdIn =
-    flip findProjectById
-
-
-findContextById : DocId -> AppModel -> Maybe Context.Model
-findContextById id =
-    .contextStore
-        >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
-
-
-findContextByIdIn =
-    flip findContextById
-
-
 isTodoContextActive model =
     Todo.getContextId
         >> findContextByIdIn model
@@ -267,14 +240,6 @@ getActiveTodoListForProject project model =
             ]
         )
         model
-
-
-getActiveProjects =
-    filterProjects GroupDoc.isActive
-
-
-getActiveContexts =
-    filterContexts GroupDoc.isActive
 
 
 createEntityTreeForViewType : EntityListViewType -> AppModel -> Entity.Tree.Tree
@@ -356,12 +321,6 @@ updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
 
-createTodo text model =
-    model
-        |> insertTodo (Todo.init model.now text)
-        |> Tuple.second
-
-
 updateTodoAndMaybeAlsoSelected action todoId model =
     let
         idSet =
@@ -371,10 +330,6 @@ updateTodoAndMaybeAlsoSelected action todoId model =
                 Set.singleton todoId
     in
         model |> updateAllTodos action idSet
-
-
-getActiveTodoListWithReminderTime model =
-    model.todoStore |> Store.filterDocs (Todo.isReminderOverdue model.now)
 
 
 findTodoWithOverDueReminder model =

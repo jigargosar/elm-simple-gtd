@@ -76,10 +76,15 @@ update andThenUpdate msg =
                     , onComplete =
                         XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
                             |> andThenUpdate
-                    , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    , setXMode =
+                        XMMsg.onSetExclusiveMode
+                            >> andThenUpdate
+                    , onSwitchView =
+                        Msg.onSetEntityListView
+                            >> andThenUpdate
                     }
                 )
-                (\config -> Update.LaunchBar.updateWithConfig config andThenUpdate msg_)
+                (\config -> Update.LaunchBar.updateWithConfig config msg_)
 
         --            Update.LaunchBar.update andThenUpdate msg_ now
         LaunchBarMsg msg_ ->

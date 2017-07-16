@@ -1,7 +1,8 @@
 module Update.LaunchBar exposing (..)
 
-import Document.Types exposing (DocId)
+import Document.Types exposing (DocId, getDocId)
 import DomPorts
+import Entity.Types exposing (EntityListViewType)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
@@ -21,48 +22,52 @@ type alias SubModel a =
     { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
 
 
-type alias ReturnF msg a =
+type alias SubReturnF msg a =
     Return.ReturnF msg (SubModel a)
 
 
-type alias AndThenUpdate msg a =
-    msg -> ReturnF msg a
+type alias SubAndThenUpdate msg a =
+    msg -> SubReturnF msg a
 
 
 type alias Config msg a =
     { now : Time
     , activeProjects : List ContextDoc
     , activeContexts : List ProjectDoc
-    , onComplete : ReturnF msg a
-    , setXMode : ExclusiveMode -> ReturnF msg a
+    , onComplete : SubReturnF msg a
+    , setXMode : ExclusiveMode -> SubReturnF msg a
+    , onSwitchView : EntityListViewType -> SubReturnF msg a
     }
 
 
 updateWithConfig :
     Config msg a
-    -> AndThenUpdate msg a
     -> LaunchBarMsg
-    -> ReturnF msg a
-updateWithConfig config andThenUpdate msg =
+    -> SubReturnF msg a
+updateWithConfig config msg =
     case msg of
         NOOP ->
             identity
 
         OnLBEnter entity ->
-            config.onComplete
-                >> case entity of
-                    SI_Project project ->
-                        -- todo: use config's setViewType (msg func) , and use entitylist.types to create the viewname.
-                        map (Model.ViewType.switchToProjectView project)
+            let
+                v =
+                    (case entity of
+                        SI_Project project ->
+                            project |> getDocId >> Entity.Types.ProjectView
 
-                    SI_Projects ->
-                        map Model.ViewType.switchToProjectsView
+                        SI_Projects ->
+                            Entity.Types.ProjectsView
 
-                    SI_Context context ->
-                        map (Model.ViewType.switchToContextView context)
+                        SI_Context context ->
+                            context |> getDocId >> Entity.Types.ContextView
 
-                    SI_Contexts ->
-                        map Model.ViewType.switchToContextsView
+                        SI_Contexts ->
+                            Entity.Types.ContextsView
+                    )
+            in
+                config.onComplete
+                    >> config.onSwitchView v
 
         OnLBInputChanged form text ->
             updateInput config text form

@@ -2,7 +2,7 @@ module Update.MainViewType exposing (..)
 
 import Model.Selection
 import Model.ViewType
-import Return exposing (map)
+import Return exposing (andThen, map)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -13,13 +13,14 @@ import Msg.ViewType exposing (..)
 import ViewType exposing (..)
 
 
-update msg =
+update config msg =
     case msg of
         SwitchView viewType ->
-            map (switchToView viewType >> Model.Selection.clearSelection)
+            map (switchToView viewType)
+                >> map Model.Selection.clearSelection
 
         SwitchToEntityListView listView ->
-            listView |> EntityListView >> SwitchView >> update
+            listView |> EntityListView >> SwitchView >> update config
 
 
 switchToView mainViewType model =

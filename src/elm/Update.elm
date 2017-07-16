@@ -35,7 +35,11 @@ update andThenUpdate msg =
             andThen (Material.update OnMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            Update.MainViewType.update msg_
+            let
+                config =
+                    { clearSelection = map Model.Selection.clearSelection }
+            in
+                Update.MainViewType.update config msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)

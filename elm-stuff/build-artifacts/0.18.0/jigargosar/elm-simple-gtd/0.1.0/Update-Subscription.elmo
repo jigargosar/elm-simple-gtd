@@ -114,7 +114,7 @@ var _jigargosar$elm_simple_gtd$Update_Subscription$update = F2(
 						return _jigargosar$elm_simple_gtd$Model$noop;
 					}
 				};
-				return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
+				return _jigargosar$elm_simple_gtd$X_Return$rAndThenMaybe(
 					A2(
 						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
 						A2(_jigargosar$elm_simple_gtd$Stores$upsertEncodedDocOnPouchDBChange, _p3._0, _p3._1),

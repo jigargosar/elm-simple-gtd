@@ -67,6 +67,10 @@ onSetEntityListView =
     EntityListView >> OnSetViewType
 
 
+foo =
+    3
+
+
 onNewProject =
     Entity.Types.EM_StartAddingProject |> OnEntityMsg
 

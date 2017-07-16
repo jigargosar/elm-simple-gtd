@@ -56,6 +56,7 @@ updateWithConfig config andThenUpdate msg =
             config.onComplete
                 >> case entity of
                     SI_Project project ->
+                        -- todo: use config's setViewType (msg func) , and use entitylist.types to create the viewname.
                         map (Model.ViewType.switchToProjectView project)
 
                     SI_Projects ->

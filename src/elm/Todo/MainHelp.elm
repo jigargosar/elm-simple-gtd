@@ -17,7 +17,7 @@ import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
 import Types exposing (AppModel)
-import X.Record as Record exposing (set)
+import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
 import Notification
@@ -50,12 +50,12 @@ timeTracker =
     Record.fieldLens .timeTracker (\s b -> { b | timeTracker = s })
 
 
-onUpdateTodoFormAction andThenUpdate form action =
+onUpdateTodoFormAction config form action =
     let
-        xm =
+        xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-        andThenUpdate (XMMsg.onSetExclusiveMode xm)
+        config.setXMode xMode
             >> Return.command
                 (case action of
                     Todo.FormTypes.SetTodoMenuState _ ->
@@ -66,15 +66,15 @@ onUpdateTodoFormAction andThenUpdate form action =
                 )
 
 
-onStartEditingTodo andThenUpdate todo editFormMode =
+onStartEditingTodo config todo editFormMode =
     let
-        createXM model =
+        createXMode model =
             Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
 
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-        X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+        X.Return.returnWith createXMode config.setXMode
             >> command
                 (case editFormMode of
                     ETFM_EditTodoText ->
@@ -91,13 +91,13 @@ onStartEditingTodo andThenUpdate todo editFormMode =
                 )
 
 
-onStartAddingTodo andThenUpdate addFormMode =
+onStartAddingTodo config addFormMode =
     -- todo: think about merging 4 messages into one.
     let
-        createXM model =
+        createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-        X.Return.returnWith createXM (XMMsg.onSetExclusiveMode >> andThenUpdate)
+        X.Return.returnWith createXMode config.setXMode
             >> autoFocusInputRCmd
 
 
@@ -205,7 +205,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
 
 
 updateTimeTracker now =
-    Record.overT2 timeTracker (Tracker.updateNextAlarmAt now)
+    overT2 timeTracker (Tracker.updateNextAlarmAt now)
         >> apply2 ( Tuple.second, showRunningNotificationCmd )
         |> andThen
 
@@ -215,6 +215,8 @@ type alias Config =
     , setFocusInEntityWithTodoId : DocId -> ReturnF
     , setFocusInEntity : Entity -> ReturnF
     , closeNotification : String -> ReturnF
+    , afterTodoUpdate : ReturnF
+    , setXMode : ExclusiveMode -> ReturnF
     }
 
 

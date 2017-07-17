@@ -70,16 +70,16 @@ update config andThenUpdate now todoMsg =
                 -- todo: if we had use save editing form, we would't missed calling on deactivate.
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(
-                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                >> config.afterTodoUpdate
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action
 
         OnStartAddingTodo addFormMode ->
-            onStartAddingTodo andThenUpdate addFormMode
+            onStartAddingTodo config addFormMode
 
         OnStartEditingTodo todo editFormMode ->
-            onStartEditingTodo andThenUpdate todo editFormMode
+            onStartEditingTodo config todo editFormMode
 
         OnUpdateTodoFormAction form action ->
-            onUpdateTodoFormAction andThenUpdate form action
+            onUpdateTodoFormAction config form action

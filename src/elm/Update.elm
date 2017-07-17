@@ -115,6 +115,12 @@ update andThenUpdate msg =
                                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                         )
                     , closeNotification = Msg.OnCloseNotification >> andThenUpdate
+                    , afterTodoUpdate =
+                        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                            |> andThenUpdate
+                    , setXMode =
+                        XMMsg.onSetExclusiveMode
+                            >> andThenUpdate
                     }
             in
                 Update.Todo.update config andThenUpdate now msg_

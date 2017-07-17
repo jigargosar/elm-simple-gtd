@@ -16,7 +16,7 @@ type TodoMsg
     | ShowReminderOverlayForTodoId DocId
     | OnGotoRunningTodo
     | UpdateTimeTracker
-    | Upsert TodoDoc
+    | AfterUpsert TodoDoc
     | OnProcessPendingNotificationCronTick
     | OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode DocId TodoAction
     | OnTodoReminderOverlayAction Todo.Notification.Model.Action

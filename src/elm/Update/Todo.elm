@@ -52,8 +52,8 @@ update config andThenUpdate now todoMsg =
         UpdateTimeTracker ->
             updateTimeTracker now
 
-        Upsert todo ->
-            onUpsertTodo todo
+        AfterUpsert todo ->
+            onAfterUpsertTodo todo
 
         OnReminderNotificationClicked notif ->
             onReminderNotificationClicked andThenUpdate notif

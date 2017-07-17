@@ -42,7 +42,7 @@ update andThenUpdate subMsg =
                 afterEntityUpsertOnPouchDBChange entity =
                     case entity of
                         TodoEntity model ->
-                            Todo.Msg.Upsert model |> OnTodoMsg
+                            Todo.Msg.AfterUpsert model |> OnTodoMsg
 
                         _ ->
                             Model.noop

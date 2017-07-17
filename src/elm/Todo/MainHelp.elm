@@ -150,7 +150,7 @@ onReminderNotificationClicked andThenUpdate notif =
                 >> andThenUpdate
 
 
-onUpsertTodo todo =
+onAfterUpsertTodo todo =
     map
         (\model ->
             let

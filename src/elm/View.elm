@@ -3,12 +3,12 @@ module View exposing (init)
 import AppDrawer.Model
 import AppDrawer.Types
 import AppDrawer.View
-import CustomSync
 import Entity.View
 import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
 import Todo.FormTypes exposing (..)
+import View.CustomSync
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -181,5 +181,5 @@ appMainContent model =
                 Entity.View.list viewType model
 
             SyncView ->
-                CustomSync.view model
+                View.CustomSync.view model
         ]

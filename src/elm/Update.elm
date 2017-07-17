@@ -2,7 +2,7 @@ port module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg
-import Entity.Main
+import Update.Entity
 import Firebase.Main
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import LocalPref
@@ -95,7 +95,7 @@ update andThenUpdate msg =
                 Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
-            Entity.Main.update andThenUpdate msg_
+            Update.Entity.update andThenUpdate msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             onLaunchBarMsgWithNow andThenUpdate msg_ now

@@ -1,4 +1,4 @@
-module CustomSync exposing (..)
+module View.CustomSync exposing (..)
 
 import Msg
 import X.Keyboard exposing (onKeyDownStopPropagation)

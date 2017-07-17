@@ -1,4 +1,4 @@
-module Entity.Main exposing (..)
+module Update.Entity exposing (..)
 
 import Document
 import DomPorts

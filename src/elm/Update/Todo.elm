@@ -43,7 +43,7 @@ update config andThenUpdate now todoMsg =
             mapOver timeTracker (Tracker.switchOrStartRunning todoId now)
 
         OnStopRunningTodo ->
-            mapSet timeTracker Tracker.none
+            onStopRunningTodo
 
         OnGotoRunningTodo ->
             returnWith identity (gotoRunningTodo config)

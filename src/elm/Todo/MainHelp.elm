@@ -113,6 +113,10 @@ onStartAddingTodo andThenUpdate addFormMode =
             >> autoFocusInputRCmd
 
 
+onStopRunningTodo =
+    mapSet timeTracker Tracker.none
+
+
 onRunningNotificationResponse andThenUpdate res =
     let
         todoId =
@@ -120,7 +124,7 @@ onRunningNotificationResponse andThenUpdate res =
     in
         (case res.action of
             "stop" ->
-                andThenUpdate TodoMsg.onStopRunningTodo
+                onStopRunningTodo
 
             "continue" ->
                 identity

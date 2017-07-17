@@ -6,6 +6,7 @@ import Entity.Main
 import Firebase.Main
 import LocalPref
 import Material
+import Model
 import Model.GroupDocStore
 import Model.Selection
 import Msg exposing (..)
@@ -102,8 +103,16 @@ update andThenUpdate msg =
                 config : Update.Todo.Config
                 config =
                     { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
-                    , setFocusInEntityWithTodoId = Stores.setFocusInEntityWithTodoId >> map
-                    , setFocusInEntity = Stores.setFocusInEntity >> map
+                    , setFocusInEntityWithTodoId =
+                        (\todoId ->
+                            map (Stores.setFocusInEntityWithTodoId todoId)
+                                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        )
+                    , setFocusInEntity =
+                        (\entity ->
+                            map (Stores.setFocusInEntity entity)
+                                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        )
                     }
             in
                 Update.Todo.update config andThenUpdate now msg_

@@ -21,7 +21,7 @@ import X.Record as Record exposing (set)
 import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
 import Notification
-import Return exposing (command, map)
+import Return exposing (andThen, command, map)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -34,24 +34,8 @@ import X.Function exposing (applyMaybeWith)
 import XMMsg
 
 
-mapOver =
-    Record.over >>> Return.map
-
-
 mapSet =
     Record.set >>> Return.map
-
-
-map =
-    Return.map
-
-
-command =
-    Return.command
-
-
-andThen =
-    Return.andThen
 
 
 maybeMapToCmd fn =

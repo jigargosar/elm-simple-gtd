@@ -34,6 +34,10 @@ import X.Function exposing (applyMaybeWith)
 import XMMsg
 
 
+mapOver =
+    Record.over >>> Return.map
+
+
 mapSet =
     Record.set >>> Return.map
 

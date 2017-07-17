@@ -1,6 +1,5 @@
 module Update.Todo exposing (..)
 
-import Msg
 import Return exposing (andThen)
 import Stores
 import Todo.MainHelp exposing (..)
@@ -12,7 +11,6 @@ import Time
 import X.Function.Infix exposing (..)
 import Todo.TimeTracker as Tracker
 import ReturnTypes exposing (..)
-import XMMsg
 
 
 subscriptions m =
@@ -22,7 +20,6 @@ subscriptions m =
         , Time.every (Time.second * 1) (\_ -> UpdateTimeTracker)
         , Time.every (Time.second * 30) (\_ -> OnProcessPendingNotificationCronTick)
         ]
-        |> Sub.map Msg.OnTodoMsg
 
 
 type alias Config msg =
@@ -34,8 +31,8 @@ update :
     -> Time.Time
     -> TodoMsg
     -> SubReturnF msg
-update config now todoMsg =
-    case todoMsg of
+update config now msg =
+    case msg of
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)
 

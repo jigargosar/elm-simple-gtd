@@ -64,7 +64,7 @@ subscriptions model =
             ]
             |> Sub.map Msg.OnSubscriptionMsg
         , Keyboard.Combo.subscriptions model.keyComboModel
-        , Update.Todo.subscriptions model
+        , Update.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg
         , Firebase.Main.subscriptions model
         , AppDrawer.Main.subscriptions model
         ]

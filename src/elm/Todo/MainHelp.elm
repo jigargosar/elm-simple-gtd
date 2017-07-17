@@ -7,7 +7,6 @@ import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity, EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.TodoStore exposing (findTodoById)
-import Msg
 import ReturnTypes exposing (Return)
 import Stores
 import Todo.Form
@@ -15,7 +14,6 @@ import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types
-import TodoMsg
 import Types exposing (AppModel)
 import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
@@ -31,7 +29,6 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
 import X.Function exposing (applyMaybeWith)
-import XMMsg
 
 
 type alias SubReturnF msg =

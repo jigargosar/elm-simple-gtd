@@ -165,3 +165,19 @@ onSaveTodoForm =
 
 onSaveGroupDocForm =
     Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
+
+
+onToggleContextArchived =
+    Msg.GroupDoc.OnToggleContextArchived >> OnGroupDocMsg
+
+
+onToggleProjectArchived =
+    Msg.GroupDoc.OnToggleProjectArchived >> OnGroupDocMsg
+
+
+onToggleContextDeleted =
+    Msg.GroupDoc.OnToggleContextDeleted >> OnGroupDocMsg
+
+
+onToggleProjectDeleted =
+    Msg.GroupDoc.OnToggleProjectDeleted >> OnGroupDocMsg

@@ -16,7 +16,7 @@ import Model.Selection
 import Model.TodoStore
 import Model.ViewType
 import Msg exposing (AppMsg)
-import Return exposing (map)
+import Return exposing (andThen, map)
 import Set
 import Stores
 import Todo
@@ -101,7 +101,7 @@ onUpdate andThenUpdate entityId action =
                 )
 
         EUA_ToggleDeleted ->
-            Return.andThen (toggleDeleteEntity entityId)
+            toggleDeleteEntity andThenUpdate entityId
                 >> andThenUpdate Msg.revertExclusiveMode
 
         EUA_ToggleArchived ->
@@ -109,12 +109,12 @@ onUpdate andThenUpdate entityId action =
                 toggleArchivedEntity =
                     case entityId of
                         ContextId id ->
-                            Stores.updateContext id GroupDoc.toggleArchived
-                                |> Return.andThen
+                            Msg.onToggleContextArchived id
+                                |> andThenUpdate
 
                         ProjectId id ->
-                            Stores.updateProject id GroupDoc.toggleArchived
-                                |> Return.andThen
+                            Msg.onToggleProjectArchived id
+                                |> andThenUpdate
 
                         TodoId id ->
                             Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode id TA_ToggleDone
@@ -156,17 +156,20 @@ toggleSetMember item set =
         Set.insert item set
 
 
-toggleDeleteEntity : EntityId -> ModelReturnF
-toggleDeleteEntity entityId =
+
+--toggleDeleteEntity : EntityId -> ModelReturnF
+
+
+toggleDeleteEntity andThenUpdate entityId =
     case entityId of
         ContextId id ->
-            Stores.updateContext id Document.toggleDeleted
+            Msg.onToggleContextDeleted id |> andThenUpdate
 
         ProjectId id ->
-            Stores.updateProject id Document.toggleDeleted
+            Msg.onToggleProjectDeleted id |> andThenUpdate
 
         TodoId id ->
-            Stores.updateTodo TA_ToggleDeleted id
+            Stores.updateTodo TA_ToggleDeleted id |> andThen
 
 
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF

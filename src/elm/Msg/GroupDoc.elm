@@ -1,5 +1,6 @@
 module Msg.GroupDoc exposing (..)
 
+import Document.Types exposing (DocId)
 import GroupDoc.FormTypes exposing (GroupDocForm)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -11,3 +12,7 @@ import Maybe.Extra as Maybe
 
 type GroupDocMsg
     = OnSaveGroupDocForm GroupDocForm
+    | OnToggleContextArchived DocId
+    | OnToggleProjectArchived DocId
+    | OnToggleContextDeleted DocId
+    | OnToggleProjectDeleted DocId

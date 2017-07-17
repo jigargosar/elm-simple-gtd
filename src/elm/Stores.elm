@@ -27,23 +27,6 @@ import Tuple2
 import X.List
 
 
-insertGroupDoc name store updateFn =
-    andThen
-        (\model ->
-            overT2 store (Store.insert (GroupDoc.init name model.now)) model
-                |> (\( gd, model ) -> updateFn (getDocId gd) identity model)
-        )
-
-
-insertProject name =
-    insertGroupDoc name projectStore updateProject
-
-
-insertContext name =
-    insertGroupDoc name contextStore updateContext
-
-
-
 --insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
 
 
@@ -71,18 +54,6 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
 
         _ ->
             (\_ -> Nothing)
-
-
-updateAllNamedDocsDocs idSet updateFn store model =
-    X.Record.overT2 store
-        (Store.updateAndPersist
-            (getDocId >> Set.member # idSet)
-            model.now
-            updateFn
-        )
-        model
-        |> Tuple2.swap
-        |> Return.map (updateEntityListCursorOnGroupDocChange model)
 
 
 updateEntityListCursorOnGroupDocChange oldModel newModel =
@@ -179,22 +150,6 @@ createEntityListForCurrentView model =
     Model.ViewType.maybeGetEntityListViewType model
         ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
         ?= []
-
-
-
---updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
-
-
-updateContext id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
-
-
-
---updateProject : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
-
-
-updateProject id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
 

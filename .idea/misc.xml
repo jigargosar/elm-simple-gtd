@@ -44,7 +44,7 @@
     <stackPath>/usr/local/bin/stack</stackPath>
   </component>
   <component name="JavaScriptSettings">
-    <option name="languageLevel" value="FLOW" />
+    <option name="languageLevel" value="ES6" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="false" project-jdk-name="IDEA jdk" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

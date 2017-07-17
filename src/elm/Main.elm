@@ -134,13 +134,6 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-keyboardCombos : List (Keyboard.Combo.KeyCombo AppMsg)
-keyboardCombos =
-    [ combo2 ( Keyboard.Combo.shift, Keyboard.Combo.s ) (TodoMsg.onStopRunningTodo)
-    , combo2 ( Keyboard.Combo.shift, Keyboard.Combo.r ) (TodoMsg.onGotoRunningTodo)
-    ]
-
-
 update : AppMsg -> AppModel -> Return
 update msg =
     let

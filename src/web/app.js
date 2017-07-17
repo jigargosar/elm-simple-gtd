@@ -1,5 +1,3 @@
-"use strict";
-
 import "./vendor"
 import sound from "./sound"
 import Fire from "./fire"
@@ -10,6 +8,7 @@ import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
 import autosize from "autosize"
 import localforage from "localforage"
+import  {Main} from "elm/Main.elm"
 
 //noinspection JSUnresolvedVariable
 const isDevelopmentMode = process.env["NODE_ENV"] === "development"
@@ -20,11 +19,11 @@ const npmPackageVersion = env["npm_package_version"]
 
 /*global.xhot = module.hot
 
-if(module.hot){
-  module.hot.addStatusHandler(status => {
-    console.warn("hot status", status);
-  })
-}*/
+ if(module.hot){
+ module.hot.addStatusHandler(status => {
+ console.warn("hot status", status);
+ })
+ }*/
 
 window.appBoot = async function appBoot() {
     const deviceId = getOrCreateDeviceId()
@@ -62,7 +61,7 @@ window.appBoot = async function appBoot() {
     const db = await DB()
 
     const store = localforage.createInstance({
-        name: "SimpleGTD.com offline store"
+        name: "SimpleGTD.com offline store",
     });
 
     const localPref = await store.getItem("local-pref")
@@ -81,11 +80,11 @@ window.appBoot = async function appBoot() {
         appVersion: npmPackageVersion,
         deviceId,
         config: {isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
-        localPref: localPref
+        localPref: localPref,
     }, db.allDocsMap)
 
-    const Elm = require("elm/Main.elm")
-    const app = Elm["Main"]
+
+    const app = Main
         .embed(document.getElementById("elm-container"), flags)
 
 
@@ -126,7 +125,7 @@ window.appBoot = async function appBoot() {
                 at: "right top",
                 of: $(ofSelector),
                 within: ".overlay",
-                collision: "fit"
+                collision: "fit",
             })
             $popup.find(".auto-focus").first().focus()
 

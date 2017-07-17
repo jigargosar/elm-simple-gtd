@@ -10,7 +10,6 @@ import Project
 import Store
 import Todo
 import Toolkit.Operators exposing (..)
-import Types exposing (..)
 import X.Predicate
 
 

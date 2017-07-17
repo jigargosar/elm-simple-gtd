@@ -14,7 +14,6 @@ import Time exposing (Time)
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (..)
-import Types exposing (AppModel)
 import ViewType exposing (ViewType)
 import X.Record exposing (..)
 import X.Return exposing (returnWith)
@@ -140,10 +139,6 @@ saveExclusiveModeForm exMode =
 
 inboxEntity =
     createContextEntity Context.null
-
-
-
---saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
 
 
 saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturn msg model

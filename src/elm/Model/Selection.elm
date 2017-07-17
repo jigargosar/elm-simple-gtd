@@ -3,9 +3,6 @@ module Model.Selection exposing (..)
 import Set exposing (Set)
 
 
---import Types exposing (AppModel, ModelF)
-
-
 clearSelection =
     setSelectedEntityIdSet Set.empty
 

@@ -6,7 +6,6 @@ import Document.Types exposing (DocId)
 import GroupDoc
 import Project
 import Store
-import Types exposing (AppModel)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import X.Record

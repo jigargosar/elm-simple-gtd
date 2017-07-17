@@ -6,10 +6,11 @@ import Msg exposing (..)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-import Types exposing (..)
 
 
-commonMsg : CommonMsg.Helper AppMsg
+--commonMsg : CommonMsg.Helper AppMsg
+
+
 commonMsg =
     CommonMsg.createHelper OnCommonMsg
 
@@ -55,12 +56,18 @@ getRemoteSyncForm model =
         maybeForm ?= createRemoteSyncForm model
 
 
-createRemoteSyncForm : AppModel -> SyncForm
+
+--createRemoteSyncForm : AppModel -> SyncForm
+
+
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-getNow : AppModel -> Time
+
+--getNow : AppModel -> Time
+
+
 getNow =
     (.now)
 

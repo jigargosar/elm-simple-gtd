@@ -18,7 +18,7 @@ import Todo.Notification.Types
 import TodoMsg
 import Types exposing (AppModel)
 import X.Record as Record exposing (set)
-import X.Return exposing (rAndThenMaybe)
+import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
 import Notification
 import Return exposing (command, map)
@@ -117,7 +117,11 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onRunningNotificationResponse andThenUpdate res =
+onGotoRunningTodo config =
+    returnWith identity (gotoRunningTodo config)
+
+
+onRunningNotificationResponse config res =
     let
         todoId =
             res.data.id
@@ -130,9 +134,9 @@ onRunningNotificationResponse andThenUpdate res =
                 identity
 
             _ ->
-                andThenUpdate TodoMsg.onGotoRunningTodo
+                onGotoRunningTodo config
         )
-            >> andThenUpdate (Msg.OnCloseNotification todoId)
+            >> config.closeNotification todoId
 
 
 onReminderNotificationClicked notif =
@@ -222,6 +226,7 @@ type alias Config =
     { switchToContextsView : ReturnF
     , setFocusInEntityWithTodoId : DocId -> ReturnF
     , setFocusInEntity : Entity -> ReturnF
+    , closeNotification : String -> ReturnF
     }
 
 

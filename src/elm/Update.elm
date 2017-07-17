@@ -114,6 +114,7 @@ update andThenUpdate msg =
                             map (Stores.setFocusInEntity entity)
                                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                         )
+                    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
                     }
             in
                 Update.Todo.update config andThenUpdate now msg_

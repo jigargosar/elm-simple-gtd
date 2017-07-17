@@ -46,7 +46,7 @@ update config andThenUpdate now todoMsg =
             onStopRunningTodo
 
         OnGotoRunningTodo ->
-            returnWith identity (gotoRunningTodo config)
+            onGotoRunningTodo config
 
         UpdateTimeTracker ->
             updateTimeTracker now
@@ -58,7 +58,7 @@ update config andThenUpdate now todoMsg =
             onReminderNotificationClicked notif
 
         RunningNotificationResponse res ->
-            onRunningNotificationResponse andThenUpdate res
+            onRunningNotificationResponse config res
 
         OnProcessPendingNotificationCronTick ->
             rAndThenMaybe

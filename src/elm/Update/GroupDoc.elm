@@ -27,8 +27,7 @@ import X.Record exposing (overT2)
 
 type alias SubModel model =
     { model
-        | todoStore : TodoStore
-        , projectStore : ProjectStore
+        | projectStore : ProjectStore
         , contextStore : ContextStore
         , now : Time
         , focusInEntity : Entity

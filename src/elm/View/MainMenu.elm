@@ -33,7 +33,7 @@ menuConfig menuState appModel =
     , itemView = itemView
     , onStateChanged = Msg.onMainMenuStateChanged
     , noOp = Model.noop
-    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+    , onOutsideMouseDown = XMMsg.revertExclusiveMode
     }
 
 
@@ -49,7 +49,7 @@ itemView ( textV, itemType ) =
 onSelect ( _, itemType ) =
     case itemType of
         URL url ->
-            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+            XMMsg.revertExclusiveMode
 
         Msg msg ->
             msg

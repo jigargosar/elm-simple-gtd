@@ -31,8 +31,11 @@ import Types exposing (..)
 import XMMsg
 
 
-switchToContextsViewMsg =
-    SwitchToContextsView |> OnViewTypeMsg
+port persistLocalPref : D.Value -> Cmd msg
+
+
+type alias ReturnF =
+    Return.ReturnF AppMsg AppModel
 
 
 type alias AndThenUpdate =
@@ -113,7 +116,8 @@ update andThenUpdate msg =
             AppDrawer.Main.update andThenUpdate msg
 
 
-port persistLocalPref : D.Value -> Cmd msg
+switchToContextsViewMsg =
+    SwitchToContextsView |> OnViewTypeMsg
 
 
 onViewTypeMsg : AndThenUpdate -> ViewTypeMsg -> ReturnF
@@ -135,15 +139,9 @@ onLaunchBarMsgWithNow andThenUpdate msg now =
                 { now = now
                 , activeProjects = (Model.GroupDocStore.getActiveProjects m)
                 , activeContexts = (Model.GroupDocStore.getActiveContexts m)
-                , onComplete =
-                    XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
-                        |> andThenUpdate
-                , setXMode =
-                    XMMsg.onSetExclusiveMode
-                        >> andThenUpdate
-                , onSwitchView =
-                    Msg.switchToEntityListView
-                        >> andThenUpdate
+                , onComplete = XMMsg.revertExclusiveMode |> andThenUpdate
+                , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
                 }
             )
     in
@@ -171,7 +169,7 @@ onTodoMsgWithNow andThenUpdate msg now =
                 )
             , closeNotification = Msg.OnCloseNotification >> andThenUpdate
             , afterTodoUpdate =
-                XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                XMMsg.revertExclusiveMode
                     |> andThenUpdate
             , setXMode =
                 XMMsg.onSetExclusiveMode

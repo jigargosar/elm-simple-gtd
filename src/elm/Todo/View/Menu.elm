@@ -29,7 +29,7 @@ createProjectMenuConfig form model =
     , itemView = Project.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
-    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+    , onOutsideMouseDown = XMMsg.revertExclusiveMode
     }
 
 
@@ -46,7 +46,7 @@ createContextMenuConfig form model =
     , itemView = Context.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
     , noOp = Model.noop
-    , onOutsideMouseDown = XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+    , onOutsideMouseDown = XMMsg.revertExclusiveMode
     }
 
 

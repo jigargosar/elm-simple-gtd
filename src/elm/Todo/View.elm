@@ -349,7 +349,7 @@ createScheduleViewModel now todo =
 
 
 fireCancel =
-    XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+    XMMsg.revertExclusiveMode
 
 
 editTodoTextView : TodoForm -> AppModel -> Html AppMsg
@@ -420,7 +420,7 @@ editTodoContextPopupView =
 editTodoSchedulePopupView form =
     div
         [ class "overlay"
-        , onClickStopPropagation XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+        , onClickStopPropagation XMMsg.revertExclusiveMode
         , onKeyDownStopPropagation (\_ -> Model.noop)
         ]
         [ div

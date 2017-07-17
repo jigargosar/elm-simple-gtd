@@ -24,7 +24,7 @@ defaultOkCancelButtons =
 defaultOkCancelButtonsWith list =
     okCancelButtonsWith
         XMMsg.onSaveExclusiveModeForm
-        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+        XMMsg.revertExclusiveMode
         list
 
 

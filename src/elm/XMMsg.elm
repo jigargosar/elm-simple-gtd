@@ -4,7 +4,7 @@ import Msg
 import Msg.ExclusiveMode exposing (..)
 
 
-onSetExclusiveModeToNoneAndTryRevertingFocus =
+revertExclusiveMode =
     OnSetExclusiveModeToNoneAndTryRevertingFocus |> Msg.OnExclusiveModeMsg
 
 

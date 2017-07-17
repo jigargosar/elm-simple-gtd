@@ -63,7 +63,7 @@ onGlobalKeyUp andThenUpdate key =
                     let
                         clear =
                             map (Model.Selection.clearSelection)
-                                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                                >> andThenUpdate XMMsg.revertExclusiveMode
                     in
                         case key of
                             Key.Escape ->
@@ -85,7 +85,7 @@ onGlobalKeyUp andThenUpdate key =
                                 identity
 
                 ( Key.Escape, _ ) ->
-                    andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                    andThenUpdate XMMsg.revertExclusiveMode
 
                 _ ->
                     identity

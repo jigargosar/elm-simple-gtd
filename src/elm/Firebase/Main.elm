@@ -95,7 +95,7 @@ update andThenUpdate msg =
                             if Store.isEmpty model.todoStore then
                                 andThenUpdate TodoMsg.onStartSetupAddTodo
                             else
-                                andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                                andThenUpdate XMMsg.revertExclusiveMode
                            else
                             andThenUpdate (XMMsg.onSetExclusiveMode XMSignInOverlay)
             in

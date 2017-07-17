@@ -102,7 +102,7 @@ onUpdate andThenUpdate entityId action =
 
         EUA_ToggleDeleted ->
             Return.andThen (toggleDeleteEntity entityId)
-                >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                >> andThenUpdate XMMsg.revertExclusiveMode
 
         EUA_ToggleArchived ->
             let
@@ -122,7 +122,7 @@ onUpdate andThenUpdate entityId action =
                                 |> andThenUpdate
             in
                 toggleArchivedEntity
-                    >> andThenUpdate XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                    >> andThenUpdate XMMsg.revertExclusiveMode
 
         EUA_OnFocusIn ->
             map (Stores.setFocusInEntityWithEntityId entityId)

@@ -40,7 +40,7 @@ init form =
             XMMsg.onSaveExclusiveModeForm
 
         fireCancel =
-            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+            XMMsg.revertExclusiveMode
 
         fireToggleArchive =
             toMsg Entity.Types.EUA_ToggleArchived

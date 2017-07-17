@@ -49,7 +49,7 @@ overlayViews appModel =
             case appModel.editMode of
                 XMLaunchBar launchBar ->
                     LaunchBar.View.init launchBar
-                        |> Html.map Msg.LaunchBarMsg
+                        |> Html.map Msg.OnLaunchBarMsg
 
                 XMTodoForm form ->
                     -- todo extract this into todo view

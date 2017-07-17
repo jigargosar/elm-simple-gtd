@@ -4,6 +4,7 @@ import AppDrawer.Main
 import CommonMsg
 import Entity.Main
 import Firebase.Main
+import LaunchBar.Messages exposing (LaunchBarMsg)
 import LocalPref
 import Material
 import Model
@@ -12,6 +13,7 @@ import Model.Selection
 import Msg exposing (..)
 import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
 import Stores
+import Time exposing (Time)
 import Types exposing (AppModel)
 import Update.AppHeader
 import Update.CustomSync
@@ -33,7 +35,7 @@ switchToContextsViewMsg =
 
 
 update :
-    (AppMsg -> ReturnF)
+    AndThenUpdate
     -> AppMsg
     -> ReturnF
 update andThenUpdate msg =
@@ -42,12 +44,7 @@ update andThenUpdate msg =
             andThen (Material.update OnMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            let
-                config : Update.MainViewType.Config AppMsg
-                config =
-                    { clearSelection = map Model.Selection.clearSelection }
-            in
-                Update.MainViewType.update config msg_
+            onViewTypeMsg andThenUpdate msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
@@ -92,7 +89,7 @@ update andThenUpdate msg =
         OnEntityMsg msg_ ->
             Entity.Main.update andThenUpdate msg_
 
-        LaunchBarMsgWithNow msg_ now ->
+        OnLaunchBarMsgWithNow msg_ now ->
             let
                 createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
                 createConfig =
@@ -116,8 +113,8 @@ update andThenUpdate msg =
                     createConfig
                     (\config -> Update.LaunchBar.update config msg_)
 
-        LaunchBarMsg msg_ ->
-            LaunchBarMsgWithNow msg_ |> returnWithNow
+        OnLaunchBarMsg msg_ ->
+            OnLaunchBarMsgWithNow msg_ |> returnWithNow
 
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
@@ -157,3 +154,39 @@ update andThenUpdate msg =
 
 
 port persistLocalPref : D.Value -> Cmd msg
+
+
+onViewTypeMsg : AndThenUpdate -> ViewTypeMsg -> ReturnF
+onViewTypeMsg andThenUpdate msg =
+    let
+        config : Update.MainViewType.Config AppMsg
+        config =
+            { clearSelection = map Model.Selection.clearSelection }
+    in
+        Update.MainViewType.update config msg
+
+
+onLaunchBarMsgWithNow : AndThenUpdate -> LaunchBarMsg -> Time -> ReturnF
+onLaunchBarMsgWithNow andThenUpdate msg_ now =
+    let
+        createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
+        createConfig =
+            (\m ->
+                { now = now
+                , activeProjects = (Model.GroupDocStore.getActiveProjects m)
+                , activeContexts = (Model.GroupDocStore.getActiveContexts m)
+                , onComplete =
+                    XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                        |> andThenUpdate
+                , setXMode =
+                    XMMsg.onSetExclusiveMode
+                        >> andThenUpdate
+                , onSwitchView =
+                    Msg.switchToEntityListView
+                        >> andThenUpdate
+                }
+            )
+    in
+        returnWith
+            createConfig
+            (\config -> Update.LaunchBar.update config msg_)

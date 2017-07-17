@@ -5,7 +5,7 @@ import CommonMsg.Types
 import Entity.Types exposing (EntityListViewType(..))
 import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
-import LaunchBar.Messages
+import LaunchBar.Messages exposing (LaunchBarMsg)
 import Menu.Types exposing (MenuState)
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.ViewType exposing (ViewTypeMsg(..))
@@ -36,8 +36,8 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsg Entity.Types.EntityMsg
-    | LaunchBarMsg LaunchBar.Messages.LaunchBarMsg
-    | LaunchBarMsgWithNow LaunchBar.Messages.LaunchBarMsg Time
+    | OnLaunchBarMsg LaunchBarMsg
+    | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
@@ -92,4 +92,4 @@ onUpdateCustomSyncFormUri =
 
 
 openLaunchBarMsg =
-    LaunchBar.Messages.Open |> LaunchBarMsg
+    LaunchBar.Messages.Open |> OnLaunchBarMsg

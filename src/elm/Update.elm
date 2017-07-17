@@ -29,6 +29,7 @@ import Update.Todo
 import Json.Decode as D exposing (Decoder)
 import Types exposing (..)
 import Msg
+import Update.GroupDoc
 
 
 port persistLocalPref : D.Value -> Cmd msg
@@ -67,12 +68,16 @@ update andThenUpdate msg =
         OnSubscriptionMsg msg_ ->
             Update.Subscription.update andThenUpdate msg_
 
+        OnGroupDocMsg msg_ ->
+            Update.GroupDoc.update msg_
+
         OnExclusiveModeMsg msg_ ->
             let
                 config : Update.ExclusiveMode.Config AppMsg AppModel
                 config =
                     { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd
                     , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
+                    , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
                     }
             in
                 Update.ExclusiveMode.update config msg_

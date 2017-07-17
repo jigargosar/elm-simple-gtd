@@ -8,6 +8,7 @@ import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Menu.Types exposing (MenuState)
 import Msg.AppHeader exposing (AppHeaderMsg(..))
+import Msg.GroupDoc exposing (GroupDocMsg)
 import Msg.ViewType exposing (ViewTypeMsg(..))
 import Time exposing (Time)
 import Json.Encode as E
@@ -40,6 +41,7 @@ type AppMsg
     | OnEntityMsg Entity.Types.EntityMsg
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
+    | OnGroupDocMsg GroupDocMsg
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
@@ -155,3 +157,11 @@ onStartEditingEntity =
 
 onSaveTodoForm =
     Todo.Msg.OnSaveTodoForm >> OnTodoMsg
+
+
+
+-- gd
+
+
+onSaveGroupDocForm =
+    Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg

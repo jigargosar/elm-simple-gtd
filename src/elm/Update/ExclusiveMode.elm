@@ -5,7 +5,7 @@ import Document.Types exposing (getDocId)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc
-import GroupDoc.FormTypes exposing (GroupDocFormMode(GDFM_Add, GDFM_Edit))
+import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
@@ -43,6 +43,7 @@ type alias SubReturnF msg model =
 type alias Config msg model =
     { focusEntityList : SubReturnF msg model
     , saveTodoForm : TodoForm -> SubReturnF msg model
+    , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
     }
 
 
@@ -85,28 +86,7 @@ saveExclusiveModeForm : Config msg model -> ExclusiveMode -> SubReturnF msg mode
 saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->
-            -- todo: cleanup and move
-            let
-                update fn =
-                    fn form.id (GroupDoc.setName form.name)
-                        |> andThen
-            in
-                case form.groupDocType of
-                    ContextGroupDoc ->
-                        case form.mode of
-                            GDFM_Add ->
-                                Stores.insertContext form.name
-
-                            GDFM_Edit ->
-                                update Stores.updateContext
-
-                    ProjectGroupDoc ->
-                        case form.mode of
-                            GDFM_Add ->
-                                Stores.insertProject form.name
-
-                            GDFM_Edit ->
-                                update Stores.updateProject
+            config.saveGroupDocForm form
 
         XMTodoForm form ->
             config.saveTodoForm form

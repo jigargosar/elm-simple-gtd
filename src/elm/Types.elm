@@ -51,3 +51,7 @@ type alias AppModel =
     , mdl : Material.Model
     , keyboardState : KeyboardState
     }
+
+
+type alias AppModelF =
+    AppModel -> AppModel

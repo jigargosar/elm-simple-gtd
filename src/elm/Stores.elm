@@ -255,26 +255,17 @@ upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
             (\_ -> Cmd.none)
 
 
-
---setProjectStore : ProjectStore -> ModelF
-
-
+setProjectStore : ProjectStore -> AppModelF
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-
---setContextStore : ContextStore -> ModelF
-
-
+setContextStore : ContextStore -> AppModelF
 setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-
---setFocusInEntityWithTodoId : DocId -> ModelF
-
-
+setFocusInEntityWithTodoId : DocId -> AppModelF
 setFocusInEntityWithTodoId =
     EntityId.fromTodoDocId >> setFocusInEntityWithEntityId
 

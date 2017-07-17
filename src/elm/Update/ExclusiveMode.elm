@@ -33,8 +33,12 @@ type alias SubModel model =
     }
 
 
+type alias SubReturn msg model =
+    Return.Return msg (SubModel model)
+
+
 type alias SubReturnF msg model =
-    Return.ReturnF msg (SubModel model)
+    SubReturn msg model -> SubReturn msg model
 
 
 type alias Config msg model =
@@ -142,7 +146,7 @@ inboxEntity =
 --saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
 
 
-saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturnF msg model
+saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturn msg model
 saveAddTodoForm addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId

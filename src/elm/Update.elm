@@ -42,6 +42,7 @@ update andThenUpdate msg =
 
         OnViewTypeMsg msg_ ->
             let
+                config : Update.MainViewType.Config AppMsg
                 config =
                     { clearSelection = map Model.Selection.clearSelection }
             in
@@ -62,6 +63,7 @@ update andThenUpdate msg =
 
         OnExclusiveModeMsg msg_ ->
             let
+                config : Update.ExclusiveMode.Config AppMsg
                 config =
                     { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd }
             in
@@ -69,6 +71,7 @@ update andThenUpdate msg =
 
         OnAppHeaderMsg msg_ ->
             let
+                config : Update.AppHeader.Config AppMsg
                 config =
                     { setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
                     }
@@ -77,6 +80,7 @@ update andThenUpdate msg =
 
         OnCustomSyncMsg msg_ ->
             let
+                config : Update.CustomSync.Config AppMsg
                 config =
                     { saveXModeForm = XMMsg.onSaveExclusiveModeForm |> andThenUpdate
                     , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate

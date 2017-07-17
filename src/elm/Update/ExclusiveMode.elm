@@ -13,17 +13,21 @@ import Stores
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (..)
+import Types exposing (AppModel)
+import Update.Types exposing (SubReturnF)
 import X.Record exposing (..)
 import X.Return exposing (returnWith)
 
 
-{- update :
-   AndThenUpdate
-   -> ExclusiveModeMsg
-   -> ReturnF
--}
+type alias Config msg =
+    { focusEntityList : SubReturnF msg
+    }
 
 
+update :
+    Config msg
+    -> ExclusiveModeMsg
+    -> SubReturnF msg
 update config msg =
     case msg of
         OnSetExclusiveMode mode ->

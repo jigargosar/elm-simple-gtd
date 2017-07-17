@@ -3,9 +3,19 @@ module Update.MainViewType exposing (..)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Return exposing (andThen, map)
 import Msg.ViewType exposing (..)
+import Update.Types exposing (SubReturnF)
 import ViewType exposing (..)
 
 
+type alias Config msg =
+    { clearSelection : SubReturnF msg
+    }
+
+
+update :
+    Config msg
+    -> ViewTypeMsg
+    -> SubReturnF msg
 update config msg =
     case msg of
         SwitchView viewType ->

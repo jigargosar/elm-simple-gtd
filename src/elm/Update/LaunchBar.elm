@@ -15,12 +15,12 @@ import LaunchBar.Messages exposing (..)
 import Toolkit.Operators exposing (..)
 
 
---type alias SubModel a =
---    { a | mainViewType : ViewType, selectedEntityIdSet : Set DocId }
+type alias SubModel model =
+    model
 
 
 type alias SubReturnF msg model =
-    Return.ReturnF msg model
+    Return.ReturnF msg (SubModel model)
 
 
 type alias SubAndThenUpdate msg model =
@@ -102,14 +102,7 @@ updateInput config input form =
                    else
                     identity
     in
-        updateInputHelp newInput form now
-            |> \form ->
-                { form | searchResults = getFuzzyResults input config }
-
-
-updateInputHelp input model now =
-    { model | input = input }
-        |> (\model -> { model | updatedAt = now })
+        { form | searchResults = getFuzzyResults input config, input = input, updatedAt = now }
 
 
 fuzzyMatch needle searchItem =

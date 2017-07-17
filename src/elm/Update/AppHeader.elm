@@ -6,7 +6,10 @@ import Menu
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Return exposing (command)
 import Types exposing (AppModel)
-import Update.Types exposing (SubReturnF)
+
+
+type alias SubReturnF msg =
+    Return.ReturnF msg AppModel
 
 
 type alias Config msg =

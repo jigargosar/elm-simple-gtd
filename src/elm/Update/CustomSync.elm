@@ -3,10 +3,14 @@ port module Update.CustomSync exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditSyncSettings, XMMainMenu))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Return exposing (command)
-import Update.Types exposing (SubReturnF)
+import Types exposing (AppModel)
 
 
 port syncWithRemotePouch : String -> Cmd msg
+
+
+type alias SubReturnF msg =
+    Return.ReturnF msg AppModel
 
 
 type alias Config msg =

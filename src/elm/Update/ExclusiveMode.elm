@@ -14,9 +14,12 @@ import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (..)
 import Types exposing (AppModel)
-import Update.Types exposing (SubReturnF)
 import X.Record exposing (..)
 import X.Return exposing (returnWith)
+
+
+type alias SubReturnF msg =
+    Return.ReturnF msg AppModel
 
 
 type alias Config msg =

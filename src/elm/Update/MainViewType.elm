@@ -3,8 +3,12 @@ module Update.MainViewType exposing (..)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Return exposing (andThen, map)
 import Msg.ViewType exposing (..)
-import Update.Types exposing (SubReturnF)
+import Types exposing (AppModel)
 import ViewType exposing (..)
+
+
+type alias SubReturnF msg =
+    Return.ReturnF msg AppModel
 
 
 type alias Config msg =

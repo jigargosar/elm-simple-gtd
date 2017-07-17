@@ -9,7 +9,6 @@ import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
 import Time
 import X.Function.Infix exposing (..)
 import Todo.TimeTracker as Tracker
-import Update.Types exposing (SubReturnF)
 
 
 subscriptions : model -> Sub TodoMsg

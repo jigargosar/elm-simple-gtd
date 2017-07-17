@@ -13,7 +13,6 @@ import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types
 import Types exposing (AppModel)
-import Update.Types exposing (SubReturnF)
 import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
@@ -28,6 +27,10 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
 import X.Function exposing (applyMaybeWith)
+
+
+type alias SubReturnF msg =
+    Return.ReturnF msg AppModel
 
 
 type alias Config msg =

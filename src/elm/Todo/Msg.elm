@@ -13,7 +13,6 @@ type TodoMsg
     | OnStopRunningTodo
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | ShowReminderOverlayForTodoId DocId
     | OnGotoRunningTodo
     | UpdateTimeTracker
     | AfterUpsert TodoDoc

@@ -56,10 +56,7 @@ update config andThenUpdate now todoMsg =
             onAfterUpsertTodo todo
 
         OnReminderNotificationClicked notif ->
-            onReminderNotificationClicked andThenUpdate notif
-
-        ShowReminderOverlayForTodoId todoId ->
-            map (showReminderOverlayForTodoId todoId)
+            onReminderNotificationClicked notif
 
         RunningNotificationResponse res ->
             onRunningNotificationResponse andThenUpdate res

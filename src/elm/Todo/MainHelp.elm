@@ -13,7 +13,6 @@ import Stores
 import Todo.Form
 import Todo.FormTypes exposing (EditTodoFormMode(..))
 import Todo.MainHelpPort exposing (..)
-import Todo.Msg exposing (TodoMsg(ShowReminderOverlayForTodoId))
 import Todo.Notification.Model
 import Todo.Notification.Types
 import TodoMsg
@@ -132,7 +131,7 @@ onRunningNotificationResponse andThenUpdate res =
             >> andThenUpdate (Msg.OnCloseNotification todoId)
 
 
-onReminderNotificationClicked andThenUpdate notif =
+onReminderNotificationClicked notif =
     let
         { action, data } =
             notif
@@ -144,10 +143,7 @@ onReminderNotificationClicked andThenUpdate notif =
             Return.andThen (Stores.updateTodo TA_MarkDone todoId)
                 >> command (Notification.closeNotification todoId)
         else
-            todoId
-                |> ShowReminderOverlayForTodoId
-                >> Msg.OnTodoMsg
-                >> andThenUpdate
+            map (showReminderOverlayForTodoId todoId)
 
 
 onAfterUpsertTodo todo =

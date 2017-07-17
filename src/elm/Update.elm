@@ -12,6 +12,7 @@ import Model.Selection
 import Msg exposing (..)
 import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
 import Stores
+import Types exposing (AppModel)
 import Update.AppHeader
 import Update.CustomSync
 import Update.ExclusiveMode
@@ -92,25 +93,29 @@ update andThenUpdate msg =
             Entity.Main.update andThenUpdate msg_
 
         LaunchBarMsgWithNow msg_ now ->
-            returnWith
-                (\m ->
-                    { now = now
-                    , activeProjects = (Model.GroupDocStore.getActiveProjects m)
-                    , activeContexts = (Model.GroupDocStore.getActiveContexts m)
-                    , onComplete =
-                        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
-                            |> andThenUpdate
-                    , setXMode =
-                        XMMsg.onSetExclusiveMode
-                            >> andThenUpdate
-                    , onSwitchView =
-                        Msg.switchToEntityListView
-                            >> andThenUpdate
-                    }
-                )
-                (\config -> Update.LaunchBar.update config msg_)
+            let
+                createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
+                createConfig =
+                    (\m ->
+                        { now = now
+                        , activeProjects = (Model.GroupDocStore.getActiveProjects m)
+                        , activeContexts = (Model.GroupDocStore.getActiveContexts m)
+                        , onComplete =
+                            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                                |> andThenUpdate
+                        , setXMode =
+                            XMMsg.onSetExclusiveMode
+                                >> andThenUpdate
+                        , onSwitchView =
+                            Msg.switchToEntityListView
+                                >> andThenUpdate
+                        }
+                    )
+            in
+                returnWith
+                    createConfig
+                    (\config -> Update.LaunchBar.update config msg_)
 
-        --            Update.LaunchBar.update andThenUpdate msg_ now
         LaunchBarMsg msg_ ->
             LaunchBarMsgWithNow msg_ |> returnWithNow
 

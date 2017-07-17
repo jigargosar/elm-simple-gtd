@@ -31,11 +31,10 @@ type alias Config =
 
 update :
     Config
-    -> (Msg.AppMsg -> ReturnF)
     -> Time.Time
     -> TodoMsg
     -> ReturnF
-update config andThenUpdate now todoMsg =
+update config now todoMsg =
     case todoMsg of
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)

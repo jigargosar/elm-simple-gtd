@@ -123,7 +123,7 @@ update andThenUpdate msg =
                             >> andThenUpdate
                     }
             in
-                Update.Todo.update config andThenUpdate now msg_
+                Update.Todo.update config now msg_
 
         OnFirebaseMsg msg_ ->
             Firebase.Main.update andThenUpdate msg_

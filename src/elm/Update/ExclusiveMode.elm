@@ -22,13 +22,7 @@ import X.Return exposing (returnWith)
 type alias SubModel model =
     { model
         | editMode : ExclusiveMode
-        , todoStore : TodoStore
-        , projectStore : ProjectStore
-        , contextStore : ContextStore
         , pouchDBRemoteSyncURI : String
-        , now : Time
-        , focusInEntity : Entity
-        , mainViewType : ViewType
     }
 
 

@@ -64,7 +64,12 @@ update andThenUpdate msg =
             Update.ExclusiveMode.update andThenUpdate msg_
 
         OnAppHeaderMsg msg_ ->
-            Update.AppHeader.update andThenUpdate msg_
+            let
+                config =
+                    { setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    }
+            in
+                Update.AppHeader.update config msg_
 
         OnCustomSyncMsg msg_ ->
             let

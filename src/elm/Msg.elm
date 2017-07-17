@@ -7,6 +7,7 @@ import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages
 import Menu.Types exposing (MenuState)
+import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.ViewType exposing (ViewTypeMsg(..))
 import Time exposing (Time)
 import Json.Encode as E
@@ -31,11 +32,6 @@ type ExclusiveModeMsg
     = OnSetExclusiveMode ExclusiveMode
     | OnSetExclusiveModeToNoneAndTryRevertingFocus
     | OnSaveExclusiveModeForm
-
-
-type AppHeaderMsg
-    = OnShowMainMenu
-    | OnMainMenuStateChanged MenuState
 
 
 type AppMsg
@@ -66,7 +62,7 @@ switchToView =
 
 
 foo =
-    13
+    15
 
 
 onNewProject =

@@ -90,28 +90,7 @@ update andThenUpdate msg =
             Entity.Main.update andThenUpdate msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
-            let
-                createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
-                createConfig =
-                    (\m ->
-                        { now = now
-                        , activeProjects = (Model.GroupDocStore.getActiveProjects m)
-                        , activeContexts = (Model.GroupDocStore.getActiveContexts m)
-                        , onComplete =
-                            XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
-                                |> andThenUpdate
-                        , setXMode =
-                            XMMsg.onSetExclusiveMode
-                                >> andThenUpdate
-                        , onSwitchView =
-                            Msg.switchToEntityListView
-                                >> andThenUpdate
-                        }
-                    )
-            in
-                returnWith
-                    createConfig
-                    (\config -> Update.LaunchBar.update config msg_)
+            onLaunchBarMsgWithNow andThenUpdate msg_ now
 
         OnLaunchBarMsg msg_ ->
             OnLaunchBarMsgWithNow msg_ |> returnWithNow
@@ -167,7 +146,7 @@ onViewTypeMsg andThenUpdate msg =
 
 
 onLaunchBarMsgWithNow : AndThenUpdate -> LaunchBarMsg -> Time -> ReturnF
-onLaunchBarMsgWithNow andThenUpdate msg_ now =
+onLaunchBarMsgWithNow andThenUpdate msg now =
     let
         createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
         createConfig =
@@ -189,4 +168,4 @@ onLaunchBarMsgWithNow andThenUpdate msg_ now =
     in
         returnWith
             createConfig
-            (\config -> Update.LaunchBar.update config msg_)
+            (\config -> Update.LaunchBar.update config msg)

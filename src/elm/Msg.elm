@@ -26,7 +26,6 @@ type SubscriptionMsg
     | OnGlobalKeyUp X.Keyboard.Key
     | OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
-    | OnKeyCombo Keyboard.Combo.Msg
 
 
 type AppMsg

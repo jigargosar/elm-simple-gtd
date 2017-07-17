@@ -34,9 +34,6 @@ update andThenUpdate subMsg =
         OnGlobalKeyUp key ->
             onGlobalKeyUp andThenUpdate key
 
-        OnKeyCombo comboMsg ->
-            Return.andThen (updateKeyCombo comboMsg)
-
         OnPouchDBChange dbName encodedDoc ->
             let
                 afterEntityUpsertOnPouchDBChange entity =
@@ -107,14 +104,3 @@ keyboardState =
 updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
 updateKeyboardState =
     over keyboardState
-
-
-keyComboModel =
-    X.Record.fieldLens .keyComboModel (\s b -> { b | keyComboModel = s })
-
-
-updateKeyCombo : Keyboard.Combo.Msg -> ModelReturnF
-updateKeyCombo comboMsg =
-    overReturn
-        keyComboModel
-        (Keyboard.Combo.update comboMsg)

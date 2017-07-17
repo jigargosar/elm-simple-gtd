@@ -9,7 +9,6 @@ import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Keyboard.Combo
 import Material
-import Msg exposing (AppMsg)
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
@@ -44,7 +43,6 @@ type alias AppModel =
     , deviceId : String
     , focusInEntity : Entity
     , timeTracker : Todo.TimeTracker.Model
-    , keyComboModel : Keyboard.Combo.Model Msg.AppMsg
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model

@@ -63,7 +63,6 @@ subscriptions model =
             , onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
             ]
             |> Sub.map Msg.OnSubscriptionMsg
-        , Keyboard.Combo.subscriptions model.keyComboModel
         , Update.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg
         , Firebase.Main.subscriptions model
         , AppDrawer.Main.subscriptions model
@@ -125,11 +124,6 @@ init flags =
             , deviceId = flags.deviceId
             , focusInEntity = createContextEntity Context.null
             , timeTracker = Todo.TimeTracker.none
-            , keyComboModel =
-                Keyboard.Combo.init
-                    { toMsg = Msg.OnKeyCombo >> Msg.OnSubscriptionMsg
-                    , combos = keyboardCombos
-                    }
             , config = flags.config
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn

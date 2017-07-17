@@ -105,6 +105,7 @@ update andThenUpdate msg =
                     { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
                     , setFocusInEntityWithTodoId =
                         (\todoId ->
+                            -- todo: things conscerning todoId should probably be moved into todo update module
                             map (Stores.setFocusInEntityWithTodoId todoId)
                                 >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                         )

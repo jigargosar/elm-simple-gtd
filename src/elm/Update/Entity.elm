@@ -198,7 +198,7 @@ toViewType appModel maybeCurrentEntityListViewType entityId =
             ProjectView id
 
         TodoId id ->
-            -- todo: where should this code belong!!
+            -- todo: where should this code belong? collaborate with todo and viewType
             let
                 getViewTypeForTodo todo =
                     maybeCurrentEntityListViewType

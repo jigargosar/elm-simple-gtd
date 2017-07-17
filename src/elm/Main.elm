@@ -126,7 +126,6 @@ init flags =
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
             , mdl = Material.model
-            , maybeTodoEditForm = Nothing
             }
     in
         update Msg.onSwitchToNewUserSetupModeIfNeeded model

@@ -49,7 +49,10 @@ getActiveTodoListForProject project model =
         model
 
 
-createEntityTreeForViewType : EntityListViewType -> AppModel -> Entity.Tree.Tree
+
+--createEntityTreeForViewType : EntityListViewType -> AppModel -> Entity.Tree.Tree
+
+
 createEntityTreeForViewType viewType model =
     let
         getActiveTodoListForContextHelp =

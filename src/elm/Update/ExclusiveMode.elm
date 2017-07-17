@@ -6,31 +6,46 @@ import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(GDFM_Add, GDFM_Edit))
-import GroupDoc.Types exposing (GroupDocType(..))
+import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
 import Stores
+import Time exposing (Time)
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (..)
 import Types exposing (AppModel)
+import ViewType exposing (ViewType)
 import X.Record exposing (..)
 import X.Return exposing (returnWith)
 
 
-type alias SubReturnF msg =
-    Return.ReturnF msg AppModel
+type alias SubModel model =
+    { model
+        | editMode : ExclusiveMode
+        , todoStore : TodoStore
+        , projectStore : ProjectStore
+        , contextStore : ContextStore
+        , pouchDBRemoteSyncURI : String
+        , now : Time
+        , focusInEntity : Entity
+        , mainViewType : ViewType
+    }
 
 
-type alias Config msg =
-    { focusEntityList : SubReturnF msg
+type alias SubReturnF msg model =
+    Return.ReturnF msg (SubModel model)
+
+
+type alias Config msg model =
+    { focusEntityList : SubReturnF msg model
     }
 
 
 update :
-    Config msg
+    Config msg model
     -> ExclusiveModeMsg
-    -> SubReturnF msg
+    -> SubReturnF msg model
 update config msg =
     case msg of
         OnSetExclusiveMode mode ->
@@ -41,16 +56,17 @@ update config msg =
                 >> config.focusEntityList
 
         OnSaveExclusiveModeForm ->
-            returnWith .editMode saveExclusiveModeForm
-                >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
+            onSaveExclusiveModeForm config
 
 
 exclusiveMode =
     fieldLens .editMode (\s b -> { b | editMode = s })
 
 
-
---setExclusiveMode : ExclusiveMode -> ModelF
+onSaveExclusiveModeForm : Config msg model -> SubReturnF msg model
+onSaveExclusiveModeForm config =
+    returnWith .editMode saveExclusiveModeForm
+        >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 setExclusiveMode =
@@ -61,6 +77,7 @@ setExclusiveModeToNone =
     setExclusiveMode XMNone
 
 
+saveExclusiveModeForm : ExclusiveMode -> SubReturnF msg model
 saveExclusiveModeForm exMode =
     case exMode of
         XMGroupDocForm form ->
@@ -125,6 +142,7 @@ inboxEntity =
 --saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
 
 
+saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturnF msg model
 saveAddTodoForm addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId

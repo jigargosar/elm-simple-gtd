@@ -44,12 +44,18 @@ insertContext name =
     insertGroupDoc name contextStore updateContext
 
 
-insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
+
+--insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
+
+
 insertTodo constructWithId =
     X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
+
+--upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
+
+
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -239,7 +245,10 @@ findAndSnoozeOverDueTodo model =
             ?+> (Document.getId >> snooze)
 
 
-upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
+
+--upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
+
+
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -255,17 +264,26 @@ upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
             (\_ -> Cmd.none)
 
 
-setProjectStore : ProjectStore -> AppModelF
+
+{- setProjectStore : ProjectStore -> AppModelF -}
+
+
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-setContextStore : ContextStore -> AppModelF
+
+{- setContextStore : ContextStore -> AppModelF -}
+
+
 setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-setFocusInEntityWithTodoId : DocId -> AppModelF
+
+{- setFocusInEntityWithTodoId : DocId -> AppModelF -}
+
+
 setFocusInEntityWithTodoId =
     EntityId.fromTodoDocId >> setFocusInEntityWithEntityId
 

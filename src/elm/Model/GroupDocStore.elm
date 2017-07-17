@@ -32,7 +32,10 @@ filterProjects pred model =
         |> Project.sort
 
 
-findProjectById : DocId -> AppModel -> Maybe Project.Model
+
+--findProjectById : DocId -> AppModel -> Maybe Project.Model
+
+
 findProjectById id =
     .projectStore
         >> Store.findById id
@@ -43,7 +46,10 @@ findProjectByIdIn =
     flip findProjectById
 
 
-findContextById : DocId -> AppModel -> Maybe Context.Model
+
+--findContextById : DocId -> AppModel -> Maybe Context.Model
+
+
 findContextById id =
     .contextStore
         >> Store.findById id

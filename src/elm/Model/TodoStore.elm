@@ -15,6 +15,9 @@ focusInEntity =
     X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
-findTodoById : DocId -> AppModel -> Maybe TodoDoc
+
+--findTodoById : DocId -> AppModel -> Maybe TodoDoc
+
+
 findTodoById id =
     .todoStore >> Store.findById id

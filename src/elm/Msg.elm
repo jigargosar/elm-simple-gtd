@@ -17,6 +17,7 @@ import Material
 import X.Keyboard
 import Keyboard.Combo
 import Msg.CustomSync exposing (CustomSyncMsg(..))
+import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 
 
 type SubscriptionMsg
@@ -26,12 +27,6 @@ type SubscriptionMsg
     | OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
     | OnKeyCombo Keyboard.Combo.Msg
-
-
-type ExclusiveModeMsg
-    = OnSetExclusiveMode ExclusiveMode
-    | OnSetExclusiveModeToNoneAndTryRevertingFocus
-    | OnSaveExclusiveModeForm
 
 
 type AppMsg
@@ -62,7 +57,7 @@ switchToView =
 
 
 foo =
-    15
+    16
 
 
 onNewProject =

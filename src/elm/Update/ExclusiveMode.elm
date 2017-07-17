@@ -8,7 +8,7 @@ import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(GDFM_Add, GDFM_Edit))
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model exposing (commonMsg)
-import Msg exposing (..)
+import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
 import ReturnTypes exposing (..)
 import Stores

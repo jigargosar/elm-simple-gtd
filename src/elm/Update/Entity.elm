@@ -1,11 +1,9 @@
 module Update.Entity exposing (..)
 
-import Document
 import DomPorts
 import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
-import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
 import GroupDoc.Types exposing (GroupDocType(..))
 import Keyboard.Extra as Key

@@ -6,7 +6,6 @@ import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntit
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import Firebase.Main
-import Keyboard.Combo exposing (combo2)
 import LocalPref
 import Material
 import Model.ViewType
@@ -29,7 +28,6 @@ import Json.Encode as E
 import Msg exposing (AppMsg)
 import X.Random
 import Json.Encode as E
-import TodoMsg
 import Types exposing (..)
 
 

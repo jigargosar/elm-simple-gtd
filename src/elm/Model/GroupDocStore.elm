@@ -2,7 +2,6 @@ module Model.GroupDocStore exposing (..)
 
 import Context
 import Document
-import Document.Types exposing (DocId)
 import GroupDoc
 import Project
 import Store

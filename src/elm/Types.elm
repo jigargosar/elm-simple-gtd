@@ -7,7 +7,6 @@ import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
-import Keyboard.Combo
 import Material
 import Set exposing (Set)
 import Time exposing (Time)

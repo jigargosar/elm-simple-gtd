@@ -1,13 +1,10 @@
 module Stores exposing (..)
 
 import Document
-import Document.Types exposing (DeviceId, DocId, getDocId)
 import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
 import EntityId
-import GroupDoc
-import GroupDoc.Types exposing (ContextStore, GroupDoc, ProjectStore)
 import Model.EntityTree
 import Model.GroupDocStore exposing (..)
 import Model.TodoStore exposing (..)
@@ -21,7 +18,6 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import X.Record exposing (maybeOverT2, maybeSetIn, overT2, set, setIn)
-import Json.Encode as E
 import Set
 import Tuple2
 import X.List

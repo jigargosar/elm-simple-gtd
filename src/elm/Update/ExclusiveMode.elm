@@ -1,20 +1,10 @@
 module Update.ExclusiveMode exposing (..)
 
-import Context
-import Document.Types exposing (getDocId)
-import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
-import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))
-import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
-import Stores
-import Time exposing (Time)
-import Todo
 import Todo.FormTypes exposing (..)
-import Todo.Types exposing (..)
-import ViewType exposing (ViewType)
 import X.Record exposing (..)
 import X.Return exposing (returnWith)
 

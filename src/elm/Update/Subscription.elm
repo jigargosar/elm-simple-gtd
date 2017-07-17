@@ -3,7 +3,6 @@ module Update.Subscription exposing (..)
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (Entity(TodoEntity))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
-import Keyboard.Combo
 import Model
 import Model.Selection
 import Msg exposing (AppMsg(..), SubscriptionMsg(..))

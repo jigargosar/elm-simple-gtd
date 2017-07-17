@@ -2,7 +2,6 @@ module Update.GroupDoc exposing (..)
 
 import Document
 import Document.Types exposing (getDocId)
-import Entity.Types exposing (Entity)
 import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
@@ -11,17 +10,9 @@ import Msg.GroupDoc exposing (..)
 import Return exposing (andThen)
 import Set
 import Store
-import Stores
-import Todo.Types exposing (TodoStore)
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Time exposing (Time)
-import ViewType exposing (ViewType)
 import X.Record exposing (overT2)
 
 
@@ -30,8 +21,6 @@ type alias SubModel model =
         | projectStore : ProjectStore
         , contextStore : ContextStore
         , now : Time
-        , focusInEntity : Entity
-        , mainViewType : ViewType
     }
 
 

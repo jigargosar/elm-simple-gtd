@@ -65,7 +65,7 @@ const excludeInDevServerModePlugins = [
         maximumFileSizeToCacheInBytes: 5242880, // 5mb
     }),
 ]
-const plugins = _.concat(commonPlugins, isWebPackDevServer? [] : excludeInDevServerModePlugins)
+const plugins = _.concat(commonPlugins, isWebPackDevServer ? [] : excludeInDevServerModePlugins)
 
 export default {
     resolve: {
@@ -177,8 +177,8 @@ export default {
         // inline: true,
         contentBase: [path.join(__dirname, "static")],
         host: "localhost",
-        /*watchOptions: {
-         aggregateTimeout: 700,
-         },*/
+        watchOptions: {
+            aggregateTimeout: 700,
+        },
     },
 };

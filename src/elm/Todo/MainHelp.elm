@@ -6,14 +6,17 @@ import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
+import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Model.TodoStore exposing (findTodoById)
+import Set exposing (Set)
 import Stores
+import Time exposing (Time)
 import Todo.Form
 import Todo.FormTypes exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
-import Todo.Notification.Types
-import Types exposing (AppModel)
+import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import ViewType exposing (ViewType)
 import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
@@ -26,34 +29,39 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(..))
+import Todo.Types exposing (TodoAction(..), TodoStore)
 import X.Function exposing (applyMaybeWith)
 
 
-type alias SubModel =
-    AppModel
+type alias SubModel model =
+    { model
+        | now : Time
+        , todoStore : TodoStore
+        , projectStore : ProjectStore
+        , contextStore : ContextStore
+        , reminderOverlay : TodoReminderOverlayModel
+        , timeTracker : Tracker.Model
+        , mainViewType : ViewType
+        , focusInEntity : Entity
+        , selectedEntityIdSet : Set DocId
+    }
 
 
-type alias SubReturn msg =
-    Return.Return msg SubModel
+type alias SubReturn msg model =
+    Return.Return msg (SubModel model)
 
 
-
---type alias SubReturn msg model =
---    Return.Return msg (SubModel model)
-
-
-type alias SubReturnF msg =
-    SubReturn msg -> SubReturn msg
+type alias SubReturnF msg model =
+    SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg =
-    { switchToContextsView : SubReturnF msg
-    , setFocusInEntityWithTodoId : DocId -> SubReturnF msg
-    , setFocusInEntity : Entity -> SubReturnF msg
-    , closeNotification : String -> SubReturnF msg
-    , afterTodoUpdate : SubReturnF msg
-    , setXMode : ExclusiveMode -> SubReturnF msg
+type alias Config msg model =
+    { switchToContextsView : SubReturnF msg model
+    , setFocusInEntityWithTodoId : DocId -> SubReturnF msg model
+    , setFocusInEntity : Entity -> SubReturnF msg model
+    , closeNotification : String -> SubReturnF msg model
+    , afterTodoUpdate : SubReturnF msg model
+    , setXMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
@@ -83,7 +91,7 @@ inboxEntity =
     Entity.Types.createContextEntity Context.null
 
 
-saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel -> SubReturn msg
+saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturn msg model
 saveAddTodoForm addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
@@ -190,7 +198,7 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config msg -> SubReturnF msg
+onGotoRunningTodo : Config msg model -> SubReturnF msg model
 onGotoRunningTodo config =
     returnWith identity (gotoRunningTodo config)
 
@@ -296,14 +304,14 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : Config msg -> AppModel -> SubReturnF msg
+gotoRunningTodo : Config msg model -> SubModel model -> SubReturnF msg model
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
         ?= identity
 
 
-gotoTodoWithId : Config msg -> AppModel -> DocId -> SubReturnF msg
+gotoTodoWithId : Config msg model -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
@@ -340,7 +348,7 @@ setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
 
-reminderOverlayAction : Todo.Notification.Model.Action -> SubReturnF msg
+reminderOverlayAction : Todo.Notification.Model.Action -> SubReturnF msg model
 reminderOverlayAction action =
     returnWith identity
         (\model ->
@@ -356,7 +364,7 @@ reminderOverlayAction action =
 onActive :
     Todo.Notification.Types.TodoDetails
     -> Todo.Notification.Model.Action
-    -> SubReturnF msg
+    -> SubReturnF msg model
 onActive todoDetails action =
     let
         todoId =

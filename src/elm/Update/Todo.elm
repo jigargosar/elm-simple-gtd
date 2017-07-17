@@ -21,15 +21,15 @@ subscriptions _ =
         ]
 
 
-type alias Config msg =
-    Todo.MainHelp.Config msg
+type alias Config msg model =
+    Todo.MainHelp.Config msg model
 
 
 update :
-    Config msg
+    Config msg model
     -> Time.Time
     -> TodoMsg
-    -> SubReturnF msg
+    -> SubReturnF msg model
 update config now msg =
     case msg of
         ToggleRunning todoId ->

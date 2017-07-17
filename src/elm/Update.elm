@@ -163,7 +163,7 @@ onLaunchBarMsgWithNow andThenUpdate msg now =
 onTodoMsgWithNow : AndThenUpdate -> TodoMsg -> Time -> ReturnF
 onTodoMsgWithNow andThenUpdate msg now =
     let
-        config : Update.Todo.Config AppMsg
+        config : Update.Todo.Config AppMsg AppModel
         config =
             { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
             , setFocusInEntityWithTodoId =

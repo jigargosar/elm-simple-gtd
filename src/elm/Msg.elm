@@ -49,6 +49,10 @@ type AppMsg
     | OnMdl (Material.Msg AppMsg)
 
 
+
+--  view type
+
+
 switchToEntityListView =
     SwitchToEntityListView >> OnViewTypeMsg
 
@@ -57,8 +61,20 @@ switchToView =
     SwitchView >> OnViewTypeMsg
 
 
+switchToContextsViewMsg =
+    SwitchToContextsView |> OnViewTypeMsg
+
+
+
+-- fb
+
+
 onSwitchToNewUserSetupModeIfNeeded =
     OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded
+
+
+
+-- mm
 
 
 onShowMainMenu =
@@ -69,6 +85,10 @@ onMainMenuStateChanged =
     OnMainMenuStateChanged >> OnAppHeaderMsg
 
 
+
+--cs
+
+
 onStartCustomRemotePouchSync =
     OnStartCustomSync >> OnCustomSyncMsg
 
@@ -77,8 +97,16 @@ onUpdateCustomSyncFormUri =
     OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
 
 
+
+-- lbm
+
+
 openLaunchBarMsg =
     LaunchBar.Messages.Open |> OnLaunchBarMsg
+
+
+
+-- ex mode
 
 
 revertExclusiveMode =
@@ -119,3 +147,7 @@ onToggleEntitySelection =
 
 onStartEditingEntity =
     EM_Update # EUA_StartEditing >> OnEntityMsg
+
+
+
+--

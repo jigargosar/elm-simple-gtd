@@ -116,10 +116,6 @@ update andThenUpdate msg =
             AppDrawer.Main.update andThenUpdate msg
 
 
-switchToContextsViewMsg =
-    SwitchToContextsView |> OnViewTypeMsg
-
-
 onViewTypeMsg : AndThenUpdate -> ViewTypeMsg -> ReturnF
 onViewTypeMsg andThenUpdate msg =
     let
@@ -155,7 +151,7 @@ onTodoMsgWithNow andThenUpdate msg now =
     let
         config : Update.Todo.Config AppMsg
         config =
-            { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
+            { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
             , setFocusInEntityWithTodoId =
                 (\todoId ->
                     -- todo: things concerning todoId should probably be moved into todo update module

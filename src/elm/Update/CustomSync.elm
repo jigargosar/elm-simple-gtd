@@ -1,28 +1,31 @@
 port module Update.CustomSync exposing (..)
 
-import ExclusiveMode.Types exposing (ExclusiveMode(XMEditSyncSettings, XMMainMenu))
+import ExclusiveMode.Types exposing (..)
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Return exposing (command)
-import Types exposing (AppModel)
 
 
 port syncWithRemotePouch : String -> Cmd msg
 
 
-type alias SubReturnF msg =
-    Return.ReturnF msg AppModel
+type alias SubModel model =
+    { model | pouchDBRemoteSyncURI : String }
 
 
-type alias Config msg =
-    { saveXModeForm : SubReturnF msg
-    , setXMode : ExclusiveMode -> SubReturnF msg
+type alias SubReturnF msg model =
+    Return.ReturnF msg (SubModel model)
+
+
+type alias Config msg model =
+    { saveXModeForm : SubReturnF msg model
+    , setXMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
 update :
-    Config msg
+    Config msg model
     -> CustomSyncMsg
-    -> SubReturnF msg
+    -> SubReturnF msg model
 update config msg =
     case msg of
         OnStartCustomSync form ->
@@ -31,5 +34,5 @@ update config msg =
 
         OnUpdateCustomSyncFormUri form uri ->
             { form | uri = uri }
-                |> XMEditSyncSettings
+                |> XMCustomSync
                 >> config.setXMode

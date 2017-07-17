@@ -109,7 +109,7 @@ saveExclusiveModeForm exMode =
                 TFM_Add addMode ->
                     saveAddTodoForm addMode form |> andThen
 
-        XMEditSyncSettings form ->
+        XMCustomSync form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })
                 |> map
 

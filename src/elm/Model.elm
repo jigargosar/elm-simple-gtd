@@ -46,7 +46,7 @@ getRemoteSyncForm model =
     let
         maybeForm =
             case model.editMode of
-                XMEditSyncSettings form ->
+                XMCustomSync form ->
                     Just form
 
                 _ ->

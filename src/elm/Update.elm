@@ -86,7 +86,7 @@ update andThenUpdate msg =
 
         OnCustomSyncMsg msg_ ->
             let
-                config : Update.CustomSync.Config AppMsg
+                config : Update.CustomSync.Config AppMsg AppModel
                 config =
                     { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
                     , setXMode = Msg.onSetExclusiveMode >> andThenUpdate

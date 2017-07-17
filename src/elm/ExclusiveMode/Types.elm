@@ -19,5 +19,5 @@ type ExclusiveMode
     | XMLaunchBar LaunchBar.Models.LaunchBar
     | XMMainMenu MenuState
     | XMSignInOverlay
-    | XMEditSyncSettings SyncForm
+    | XMCustomSync SyncForm
     | XMNone

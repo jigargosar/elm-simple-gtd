@@ -61,7 +61,11 @@ update andThenUpdate msg =
             Update.Subscription.update andThenUpdate msg_
 
         OnExclusiveModeMsg msg_ ->
-            Update.ExclusiveMode.update andThenUpdate msg_
+            let
+                config =
+                    { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd }
+            in
+                Update.ExclusiveMode.update config msg_
 
         OnAppHeaderMsg msg_ ->
             let

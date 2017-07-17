@@ -7,10 +7,8 @@ import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(GDFM_Add, GDFM_Edit))
 import GroupDoc.Types exposing (GroupDocType(..))
-import Model exposing (commonMsg)
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
-import ReturnTypes exposing (..)
 import Stores
 import Todo
 import Todo.FormTypes exposing (..)
@@ -19,29 +17,35 @@ import X.Record exposing (..)
 import X.Return exposing (returnWith)
 
 
-update :
-    AndThenUpdate
-    -> ExclusiveModeMsg
-    -> ReturnF
-update andThenUpdate msg =
+{- update :
+   AndThenUpdate
+   -> ExclusiveModeMsg
+   -> ReturnF
+-}
+
+
+update config msg =
     case msg of
         OnSetExclusiveMode mode ->
             setExclusiveMode mode |> map
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
             map setExclusiveModeToNone
-                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                >> config.focusEntityList
 
         OnSaveExclusiveModeForm ->
             returnWith .editMode saveExclusiveModeForm
-                >> update andThenUpdate OnSetExclusiveModeToNoneAndTryRevertingFocus
+                >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
 
 
 exclusiveMode =
     fieldLens .editMode (\s b -> { b | editMode = s })
 
 
-setExclusiveMode : ExclusiveMode -> ModelF
+
+--setExclusiveMode : ExclusiveMode -> ModelF
+
+
 setExclusiveMode =
     set exclusiveMode
 
@@ -110,7 +114,10 @@ inboxEntity =
     createContextEntity Context.null
 
 
-saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
+
+--saveAddTodoForm : AddTodoFormMode -> TodoForm -> ModelReturnF
+
+
 saveAddTodoForm addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId

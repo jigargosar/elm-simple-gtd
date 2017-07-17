@@ -17,7 +17,6 @@ import Store
 import Todo
 import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
-import ReturnTypes exposing (..)
 import Types exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
@@ -177,12 +176,18 @@ createEntityListForCurrentView model =
         ?= []
 
 
-updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
+
+--updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
+
+
 updateContext id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
 
 
-updateProject : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
+
+--updateProject : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
+
+
 updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
@@ -250,17 +255,26 @@ upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
             (\_ -> Cmd.none)
 
 
-setProjectStore : ProjectStore -> ModelF
+
+--setProjectStore : ProjectStore -> ModelF
+
+
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-setContextStore : ContextStore -> ModelF
+
+--setContextStore : ContextStore -> ModelF
+
+
 setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-setFocusInEntityWithTodoId : DocId -> ModelF
+
+--setFocusInEntityWithTodoId : DocId -> ModelF
+
+
 setFocusInEntityWithTodoId =
     EntityId.fromTodoDocId >> setFocusInEntityWithEntityId
 

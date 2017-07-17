@@ -67,7 +67,13 @@ update andThenUpdate msg =
             Update.AppHeader.update andThenUpdate msg_
 
         OnCustomSyncMsg msg_ ->
-            Update.CustomSync.update andThenUpdate msg_
+            let
+                config =
+                    { saveXModeForm = XMMsg.onSaveExclusiveModeForm |> andThenUpdate
+                    , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    }
+            in
+                Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
             Entity.Main.update andThenUpdate msg_

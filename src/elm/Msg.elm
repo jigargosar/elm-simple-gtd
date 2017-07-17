@@ -15,6 +15,7 @@ import Todo.Msg exposing (TodoMsg)
 import Material
 import X.Keyboard
 import Keyboard.Combo
+import Msg.CustomSync exposing (CustomSyncMsg(..))
 
 
 type SubscriptionMsg
@@ -35,11 +36,6 @@ type ExclusiveModeMsg
 type AppHeaderMsg
     = OnShowMainMenu
     | OnMainMenuStateChanged MenuState
-
-
-type CustomSyncMsg
-    = OnStartCustomSync SyncForm
-    | OnUpdateCustomSyncFormUri SyncForm String
 
 
 type AppMsg
@@ -70,7 +66,7 @@ switchToView =
 
 
 foo =
-    10
+    12
 
 
 onNewProject =

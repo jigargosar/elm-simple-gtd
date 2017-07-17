@@ -14,6 +14,7 @@ import Msg exposing (..)
 import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
 import Stores
 import Time exposing (Time)
+import Todo.Msg exposing (TodoMsg)
 import Types exposing (AppModel)
 import Update.AppHeader
 import Update.CustomSync
@@ -99,31 +100,7 @@ update andThenUpdate msg =
             returnWithNow (OnTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
-            let
-                config : Update.Todo.Config AppMsg
-                config =
-                    { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
-                    , setFocusInEntityWithTodoId =
-                        (\todoId ->
-                            -- todo: things concerning todoId should probably be moved into todo update module
-                            map (Stores.setFocusInEntityWithTodoId todoId)
-                                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
-                        )
-                    , setFocusInEntity =
-                        (\entity ->
-                            map (Stores.setFocusInEntity entity)
-                                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
-                        )
-                    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-                    , afterTodoUpdate =
-                        XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
-                            |> andThenUpdate
-                    , setXMode =
-                        XMMsg.onSetExclusiveMode
-                            >> andThenUpdate
-                    }
-            in
-                Update.Todo.update config now msg_
+            onTodoMsgWithNow andThenUpdate msg_ now
 
         OnFirebaseMsg msg_ ->
             Firebase.Main.update andThenUpdate msg_
@@ -169,3 +146,32 @@ onLaunchBarMsgWithNow andThenUpdate msg now =
         returnWith
             createConfig
             (\config -> Update.LaunchBar.update config msg)
+
+
+onTodoMsgWithNow : AndThenUpdate -> TodoMsg -> Time -> ReturnF
+onTodoMsgWithNow andThenUpdate msg now =
+    let
+        config : Update.Todo.Config AppMsg
+        config =
+            { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
+            , setFocusInEntityWithTodoId =
+                (\todoId ->
+                    -- todo: things concerning todoId should probably be moved into todo update module
+                    map (Stores.setFocusInEntityWithTodoId todoId)
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                )
+            , setFocusInEntity =
+                (\entity ->
+                    map (Stores.setFocusInEntity entity)
+                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                )
+            , closeNotification = Msg.OnCloseNotification >> andThenUpdate
+            , afterTodoUpdate =
+                XMMsg.onSetExclusiveModeToNoneAndTryRevertingFocus
+                    |> andThenUpdate
+            , setXMode =
+                XMMsg.onSetExclusiveMode
+                    >> andThenUpdate
+            }
+    in
+        Update.Todo.update config now msg

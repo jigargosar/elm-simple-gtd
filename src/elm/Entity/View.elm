@@ -10,7 +10,6 @@ import Html
 import List.Extra
 import Maybe.Extra
 import Model.EntityTree
-import Stores
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)

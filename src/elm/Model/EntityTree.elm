@@ -2,35 +2,15 @@ module Model.EntityTree exposing (..)
 
 import Context
 import Document
-import Document.Types exposing (DeviceId, DocId, getDocId)
-import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
-import EntityId
-import GroupDoc
-import GroupDoc.Types exposing (ContextStore, GroupDoc, ProjectStore)
 import Model.GroupDocStore exposing (..)
 import Model.Stores
-import Model.TodoStore exposing (..)
-import Msg exposing (AppMsg)
 import Project
-import Return exposing (andThen)
 import Store
 import Todo
-import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
-import ReturnTypes exposing (..)
 import Types exposing (..)
-import ViewType exposing (ViewType(EntityListView))
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import X.Record exposing (maybeOverT2, maybeSetIn, overT2, set, setIn)
-import Json.Encode as E
-import Set
-import Tuple2
-import X.List
 import X.Predicate
 
 

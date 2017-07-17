@@ -7,7 +7,6 @@ import Model
 import Model.GroupDocStore
 import Msg
 import Project
-import Stores
 import Html exposing (..)
 import Todo.FormTypes exposing (..)
 import Todo.Msg

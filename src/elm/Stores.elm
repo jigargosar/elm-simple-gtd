@@ -1,6 +1,5 @@
 module Stores exposing (..)
 
-import Context
 import Document
 import Document.Types exposing (DeviceId, DocId, getDocId)
 import Entity
@@ -13,8 +12,6 @@ import Model.EntityTree
 import Model.GroupDocStore exposing (..)
 import Model.TodoStore exposing (..)
 import Model.ViewType
-import Msg exposing (AppMsg)
-import Project
 import Return exposing (andThen)
 import Store
 import Todo
@@ -22,8 +19,6 @@ import Todo.Types exposing (TodoAction(TA_AutoSnooze), TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import ReturnTypes exposing (..)
 import Types exposing (..)
-import ViewType exposing (ViewType(EntityListView))
-import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -32,7 +27,6 @@ import Json.Encode as E
 import Set
 import Tuple2
 import X.List
-import X.Predicate
 
 
 insertGroupDoc name store updateFn =

@@ -17,7 +17,6 @@ import Model.Stores
 import Msg
 import Model
 import Msg exposing (..)
-import Stores
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)

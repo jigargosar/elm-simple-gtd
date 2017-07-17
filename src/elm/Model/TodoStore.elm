@@ -2,15 +2,8 @@ module Model.TodoStore exposing (..)
 
 import Document.Types exposing (DocId)
 import Store
-import Todo
 import Todo.Types exposing (TodoDoc)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import X.Record
 
 

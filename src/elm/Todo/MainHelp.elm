@@ -1,13 +1,11 @@
 port module Todo.MainHelp exposing (..)
 
-import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity, EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.TodoStore exposing (findTodoById)
-import ReturnTypes exposing (Return)
 import Stores
 import Todo.Form
 import Todo.FormTypes exposing (EditTodoFormMode(..))

@@ -10,7 +10,6 @@ import X.Function.Infix exposing (..)
 import Todo
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Stores
 import TodoMsg
 
 

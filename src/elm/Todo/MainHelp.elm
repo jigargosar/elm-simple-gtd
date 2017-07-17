@@ -1,14 +1,15 @@
 port module Todo.MainHelp exposing (..)
 
+import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
-import Entity.Types exposing (Entity, EntityListViewType(ContextsView))
+import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model.TodoStore exposing (findTodoById)
 import Stores
 import Todo.Form
-import Todo.FormTypes exposing (EditTodoFormMode(..))
+import Todo.FormTypes exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types
@@ -25,12 +26,25 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(TA_MarkDone, TA_SnoozeTill, TA_TurnReminderOff))
+import Todo.Types exposing (TodoAction(..))
 import X.Function exposing (applyMaybeWith)
 
 
+type alias SubModel =
+    AppModel
+
+
+type alias SubReturn msg =
+    Return.Return msg SubModel
+
+
+
+--type alias SubReturn msg model =
+--    Return.Return msg (SubModel model)
+
+
 type alias SubReturnF msg =
-    Return.ReturnF msg AppModel
+    SubReturn msg -> SubReturn msg
 
 
 type alias Config msg =
@@ -41,6 +55,68 @@ type alias Config msg =
     , afterTodoUpdate : SubReturnF msg
     , setXMode : ExclusiveMode -> SubReturnF msg
     }
+
+
+onSaveTodoForm form =
+    case form.mode of
+        TFM_Edit editMode ->
+            let
+                updateTodo action =
+                    Stores.updateTodo action form.id
+                        |> andThen
+            in
+                case editMode of
+                    ETFM_EditTodoText ->
+                        updateTodo <| TA_SetText form.text
+
+                    ETFM_EditTodoReminder ->
+                        updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+
+                    _ ->
+                        identity
+
+        TFM_Add addMode ->
+            saveAddTodoForm addMode form |> andThen
+
+
+inboxEntity =
+    Entity.Types.createContextEntity Context.null
+
+
+saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel -> SubReturn msg
+saveAddTodoForm addMode form model =
+    Stores.insertTodo (Todo.init model.now form.text) model
+        |> Tuple.mapFirst getDocId
+        |> uncurry
+            (\todoId ->
+                let
+                    referenceEntity =
+                        case addMode of
+                            ATFM_AddToInbox ->
+                                inboxEntity
+
+                            ATFM_SetupFirstTodo ->
+                                inboxEntity
+
+                            ATFM_AddWithFocusInEntityAsReference ->
+                                model.focusInEntity
+                in
+                    Stores.updateTodo
+                        (case referenceEntity of
+                            TodoEntity fromTodo ->
+                                (TA_CopyProjectAndContextId fromTodo)
+
+                            GroupEntity g ->
+                                case g of
+                                    ContextEntity context ->
+                                        (TA_SetContext context)
+
+                                    ProjectEntity project ->
+                                        (TA_SetProject project)
+                        )
+                        todoId
+                        >> Return.map (Stores.setFocusInEntityWithTodoId todoId)
+            )
 
 
 mapOver =

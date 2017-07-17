@@ -78,3 +78,6 @@ update config now msg =
 
         OnUpdateTodoFormAction form action ->
             onUpdateTodoFormAction config form action
+
+        OnSaveTodoForm form ->
+            onSaveTodoForm form

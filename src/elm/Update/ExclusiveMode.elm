@@ -42,6 +42,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg model =
     { focusEntityList : SubReturnF msg model
+    , saveTodoForm : TodoForm -> SubReturnF msg model
     }
 
 
@@ -68,7 +69,7 @@ exclusiveMode =
 
 onSaveExclusiveModeForm : Config msg model -> SubReturnF msg model
 onSaveExclusiveModeForm config =
-    returnWith .editMode saveExclusiveModeForm
+    returnWith .editMode (saveExclusiveModeForm config)
         >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
 
 
@@ -80,8 +81,8 @@ setExclusiveModeToNone =
     setExclusiveMode XMNone
 
 
-saveExclusiveModeForm : ExclusiveMode -> SubReturnF msg model
-saveExclusiveModeForm exMode =
+saveExclusiveModeForm : Config msg model -> ExclusiveMode -> SubReturnF msg model
+saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->
             -- todo: cleanup and move
@@ -108,26 +109,7 @@ saveExclusiveModeForm exMode =
                                 update Stores.updateProject
 
         XMTodoForm form ->
-            -- todo move to TodoStore update
-            case form.mode of
-                TFM_Edit editMode ->
-                    let
-                        updateTodo action =
-                            Stores.updateTodo action form.id
-                                |> andThen
-                    in
-                        case editMode of
-                            ETFM_EditTodoText ->
-                                updateTodo <| TA_SetText form.text
-
-                            ETFM_EditTodoReminder ->
-                                updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
-
-                            _ ->
-                                identity
-
-                TFM_Add addMode ->
-                    saveAddTodoForm addMode form |> andThen
+            config.saveTodoForm form
 
         XMCustomSync form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })
@@ -135,43 +117,3 @@ saveExclusiveModeForm exMode =
 
         _ ->
             identity
-
-
-inboxEntity =
-    createContextEntity Context.null
-
-
-saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturn msg model
-saveAddTodoForm addMode form model =
-    Stores.insertTodo (Todo.init model.now form.text) model
-        |> Tuple.mapFirst getDocId
-        |> uncurry
-            (\todoId ->
-                let
-                    referenceEntity =
-                        case addMode of
-                            ATFM_AddToInbox ->
-                                inboxEntity
-
-                            ATFM_SetupFirstTodo ->
-                                inboxEntity
-
-                            ATFM_AddWithFocusInEntityAsReference ->
-                                model.focusInEntity
-                in
-                    Stores.updateTodo
-                        (case referenceEntity of
-                            TodoEntity fromTodo ->
-                                (TA_CopyProjectAndContextId fromTodo)
-
-                            GroupEntity g ->
-                                case g of
-                                    ContextEntity context ->
-                                        (TA_SetContext context)
-
-                                    ProjectEntity project ->
-                                        (TA_SetProject project)
-                        )
-                        todoId
-                        >> Return.map (Stores.setFocusInEntityWithTodoId todoId)
-            )

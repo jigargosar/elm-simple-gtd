@@ -22,3 +22,4 @@ type TodoMsg
     | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnUpdateTodoFormAction TodoForm TodoFormAction
+    | OnSaveTodoForm TodoForm

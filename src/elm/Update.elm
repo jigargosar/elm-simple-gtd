@@ -71,7 +71,9 @@ update andThenUpdate msg =
             let
                 config : Update.ExclusiveMode.Config AppMsg AppModel
                 config =
-                    { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd }
+                    { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                    , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
+                    }
             in
                 Update.ExclusiveMode.update config msg_
 

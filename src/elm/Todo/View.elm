@@ -5,7 +5,6 @@ import Date
 import Document
 import Entity.Types exposing (EntityId(TodoId))
 import EntityId
-import EntityMsg
 import Material
 import Msg exposing (AppMsg)
 import Store
@@ -134,7 +133,7 @@ createTodoViewModel appM isFocusable todo =
             if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
-                        EntityMsg.onToggleEntitySelection entityId
+                        Msg.onToggleEntitySelection entityId
 
                     Key.CharE ->
                         startEditingMsg

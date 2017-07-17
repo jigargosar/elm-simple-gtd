@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import AppDrawer.Types
 import CommonMsg.Types
-import Entity.Types exposing (EntityListViewType(..))
+import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages exposing (LaunchBarMsg)
@@ -18,6 +18,8 @@ import X.Keyboard
 import Keyboard.Combo
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 type SubscriptionMsg
@@ -55,22 +57,6 @@ switchToView =
     SwitchView >> OnViewTypeMsg
 
 
-onNewProject =
-    Entity.Types.EM_StartAddingProject |> OnEntityMsg
-
-
-onNewContext =
-    Entity.Types.EM_StartAddingContext |> OnEntityMsg
-
-
-onEntityUpdateMsg =
-    Entity.Types.EM_Update >>> OnEntityMsg
-
-
-onEntityListKeyDown =
-    Entity.Types.EM_EntityListKeyDown >>> OnEntityMsg
-
-
 onSwitchToNewUserSetupModeIfNeeded =
     OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded
 
@@ -105,3 +91,31 @@ onSetExclusiveMode =
 
 onSaveExclusiveModeForm =
     Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
+
+
+
+-- entityMsg
+
+
+onNewProject =
+    Entity.Types.EM_StartAddingProject |> OnEntityMsg
+
+
+onNewContext =
+    Entity.Types.EM_StartAddingContext |> OnEntityMsg
+
+
+onEntityUpdateMsg =
+    Entity.Types.EM_Update >>> OnEntityMsg
+
+
+onEntityListKeyDown =
+    Entity.Types.EM_EntityListKeyDown >>> OnEntityMsg
+
+
+onToggleEntitySelection =
+    EM_Update # EUA_ToggleSelection >> OnEntityMsg
+
+
+onStartEditingEntity =
+    EM_Update # EUA_StartEditing >> OnEntityMsg

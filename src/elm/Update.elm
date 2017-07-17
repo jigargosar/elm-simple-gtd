@@ -100,7 +100,7 @@ update andThenUpdate msg =
 
         OnTodoMsgWithNow msg_ now ->
             let
-                config : Update.Todo.Config
+                config : Update.Todo.Config AppMsg
                 config =
                     { switchToContextsView = switchToContextsViewMsg |> andThenUpdate
                     , setFocusInEntityWithTodoId =

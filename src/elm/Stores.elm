@@ -193,12 +193,18 @@ updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
-updateTodo : TodoAction -> DocId -> ModelReturnF
+
+--updateTodo : TodoAction -> DocId -> ModelReturnF
+
+
 updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 
 
-updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
+
+--updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
+
+
 updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
@@ -218,7 +224,10 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
-findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
+
+--findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
+
+
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =

@@ -1,15 +1,16 @@
 module XMMsg exposing (..)
 
 import Msg
+import Msg.ExclusiveMode exposing (..)
 
 
 onSetExclusiveModeToNoneAndTryRevertingFocus =
-    Msg.OnSetExclusiveModeToNoneAndTryRevertingFocus |> Msg.OnExclusiveModeMsg
+    OnSetExclusiveModeToNoneAndTryRevertingFocus |> Msg.OnExclusiveModeMsg
 
 
 onSetExclusiveMode =
-    Msg.OnSetExclusiveMode >> Msg.OnExclusiveModeMsg
+    OnSetExclusiveMode >> Msg.OnExclusiveModeMsg
 
 
 onSaveExclusiveModeForm =
-    Msg.OnSaveExclusiveModeForm |> Msg.OnExclusiveModeMsg
+    OnSaveExclusiveModeForm |> Msg.OnExclusiveModeMsg

@@ -77,7 +77,7 @@ update andThenUpdate msg =
 
         OnAppHeaderMsg msg_ ->
             let
-                config : Update.AppHeader.Config AppMsg
+                config : Update.AppHeader.Config AppMsg AppModel
                 config =
                     { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }

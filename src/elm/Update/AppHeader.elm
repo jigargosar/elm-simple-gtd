@@ -5,22 +5,25 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))
 import Menu
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Return exposing (command)
-import Types exposing (AppModel)
 
 
-type alias SubReturnF msg =
-    Return.ReturnF msg AppModel
+type alias SubModel model =
+    model
 
 
-type alias Config msg =
-    { setXMode : ExclusiveMode -> SubReturnF msg
+type alias SubReturnF msg model =
+    Return.ReturnF msg (SubModel model)
+
+
+type alias Config msg model =
+    { setXMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
 update :
-    Config msg
+    Config msg model
     -> AppHeaderMsg
-    -> SubReturnF msg
+    -> SubReturnF msg model
 update config msg =
     case msg of
         OnShowMainMenu ->

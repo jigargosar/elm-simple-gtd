@@ -27,12 +27,16 @@ import Notification
 import Return exposing (andThen, command, map)
 import Update.Todo
 import Json.Decode as D exposing (Decoder)
-import ReturnTypes exposing (..)
+import Types exposing (..)
 import XMMsg
 
 
 switchToContextsViewMsg =
     SwitchToContextsView |> OnViewTypeMsg
+
+
+type alias AndThenUpdate =
+    AppMsg -> ReturnF
 
 
 update :

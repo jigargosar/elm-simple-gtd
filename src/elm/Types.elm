@@ -63,3 +63,15 @@ type alias AppModelF =
 
 type alias ReturnF =
     Return.ReturnF AppMsg AppModel
+
+
+type alias Return =
+    Return.Return AppMsg AppModel
+
+
+type alias ModelReturnF =
+    AppModel -> Return
+
+
+type alias ModelF =
+    AppModel -> AppModel

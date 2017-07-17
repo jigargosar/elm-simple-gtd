@@ -9,6 +9,7 @@ import Firebase.Main
 import Keyboard.Combo exposing (combo2)
 import LocalPref
 import Material
+import Model.ViewType
 import Project
 import Random.Pcg
 import Return
@@ -26,7 +27,6 @@ import View
 import X.Keyboard
 import Json.Encode as E
 import Msg exposing (AppMsg)
-import ReturnTypes exposing (..)
 import X.Random
 import Json.Encode as E
 import TodoMsg
@@ -111,7 +111,7 @@ init flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = XMNone
-            , mainViewType = defaultView
+            , mainViewType = Model.ViewType.defaultView
             , keyboardState = X.Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI

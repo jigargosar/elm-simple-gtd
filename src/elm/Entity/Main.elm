@@ -23,9 +23,8 @@ import Todo
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
 import TodoMsg
-import ReturnTypes exposing (..)
 import Toolkit.Operators exposing (..)
-import Types exposing (AppModel)
+import Types exposing (..)
 import X.Record exposing (maybeOver)
 import X.Return exposing (returnWith)
 import XMMsg

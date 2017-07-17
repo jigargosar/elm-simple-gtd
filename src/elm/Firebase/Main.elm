@@ -10,14 +10,14 @@ import Navigation
 import Return
 import Store
 import TodoMsg
+import Types exposing (..)
 import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
-import Msg
-import ReturnTypes exposing (..)
+import Msg exposing (AppMsg)
 import XMMsg
 
 
@@ -60,7 +60,7 @@ updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
 
 
-subscriptions : Subscriptions
+subscriptions : AppModel -> Sub AppMsg
 subscriptions model =
     Sub.batch
         [ onFirebaseUserChanged OnFBUserChanged

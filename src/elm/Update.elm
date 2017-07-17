@@ -123,7 +123,7 @@ switchToContextsViewMsg =
 onViewTypeMsg : AndThenUpdate -> ViewTypeMsg -> ReturnF
 onViewTypeMsg andThenUpdate msg =
     let
-        config : Update.MainViewType.Config AppMsg
+        config : Update.MainViewType.Config AppMsg AppModel
         config =
             { clearSelection = map Model.Selection.clearSelection }
     in

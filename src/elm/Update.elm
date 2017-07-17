@@ -28,7 +28,7 @@ import Return exposing (andThen, command, map)
 import Update.Todo
 import Json.Decode as D exposing (Decoder)
 import Types exposing (..)
-import XMMsg
+import Msg
 
 
 port persistLocalPref : D.Value -> Cmd msg
@@ -79,7 +79,7 @@ update andThenUpdate msg =
             let
                 config : Update.AppHeader.Config AppMsg
                 config =
-                    { setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
             in
                 Update.AppHeader.update config msg_
@@ -88,8 +88,8 @@ update andThenUpdate msg =
             let
                 config : Update.CustomSync.Config AppMsg
                 config =
-                    { saveXModeForm = XMMsg.onSaveExclusiveModeForm |> andThenUpdate
-                    , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
+                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
             in
                 Update.CustomSync.update config msg_
@@ -139,8 +139,8 @@ onLaunchBarMsgWithNow andThenUpdate msg now =
                 { now = now
                 , activeProjects = (Model.GroupDocStore.getActiveProjects m)
                 , activeContexts = (Model.GroupDocStore.getActiveContexts m)
-                , onComplete = XMMsg.revertExclusiveMode |> andThenUpdate
-                , setXMode = XMMsg.onSetExclusiveMode >> andThenUpdate
+                , onComplete = Msg.revertExclusiveMode |> andThenUpdate
+                , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                 , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
                 }
             )
@@ -169,10 +169,10 @@ onTodoMsgWithNow andThenUpdate msg now =
                 )
             , closeNotification = Msg.OnCloseNotification >> andThenUpdate
             , afterTodoUpdate =
-                XMMsg.revertExclusiveMode
+                Msg.revertExclusiveMode
                     |> andThenUpdate
             , setXMode =
-                XMMsg.onSetExclusiveMode
+                Msg.onSetExclusiveMode
                     >> andThenUpdate
             }
     in

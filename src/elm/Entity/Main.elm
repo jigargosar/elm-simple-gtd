@@ -27,7 +27,7 @@ import Toolkit.Operators exposing (..)
 import Types exposing (..)
 import X.Record exposing (maybeOver)
 import X.Return exposing (returnWith)
-import XMMsg
+import Msg
 import X.Function.Infix exposing (..)
 
 
@@ -40,7 +40,7 @@ update andThenUpdate msg =
         EM_StartAddingContext ->
             (createAddGroupDocForm ContextGroupDoc
                 |> XMGroupDocForm
-                >> XMMsg.onSetExclusiveMode
+                >> Msg.onSetExclusiveMode
                 >> andThenUpdate
             )
                 >> DomPorts.autoFocusInputRCmd
@@ -48,7 +48,7 @@ update andThenUpdate msg =
         EM_StartAddingProject ->
             (createAddGroupDocForm ProjectGroupDoc
                 |> XMGroupDocForm
-                >> XMMsg.onSetExclusiveMode
+                >> Msg.onSetExclusiveMode
                 >> andThenUpdate
             )
                 >> DomPorts.autoFocusInputRCmd
@@ -93,7 +93,7 @@ onUpdate andThenUpdate entityId action =
                         XMGroupDocForm form ->
                             GroupDoc.Form.setName newName form
                                 |> XMGroupDocForm
-                                >> XMMsg.onSetExclusiveMode
+                                >> Msg.onSetExclusiveMode
                                 >> andThenUpdate
 
                         _ ->
@@ -102,7 +102,7 @@ onUpdate andThenUpdate entityId action =
 
         EUA_ToggleDeleted ->
             Return.andThen (toggleDeleteEntity entityId)
-                >> andThenUpdate XMMsg.revertExclusiveMode
+                >> andThenUpdate Msg.revertExclusiveMode
 
         EUA_ToggleArchived ->
             let
@@ -122,7 +122,7 @@ onUpdate andThenUpdate entityId action =
                                 |> andThenUpdate
             in
                 toggleArchivedEntity
-                    >> andThenUpdate XMMsg.revertExclusiveMode
+                    >> andThenUpdate Msg.revertExclusiveMode
 
         EUA_OnFocusIn ->
             map (Stores.setFocusInEntityWithEntityId entityId)
@@ -175,12 +175,12 @@ startEditingEntity andThenUpdate entityId =
         ContextId id ->
             X.Return.withMaybe
                 (Model.GroupDocStore.findContextById id)
-                (createEditContextForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
+                (createEditContextForm >> XMGroupDocForm >> Msg.onSetExclusiveMode >> andThenUpdate)
 
         ProjectId id ->
             X.Return.withMaybe
                 (Model.GroupDocStore.findProjectById id)
-                (createEditProjectForm >> XMGroupDocForm >> XMMsg.onSetExclusiveMode >> andThenUpdate)
+                (createEditProjectForm >> XMGroupDocForm >> Msg.onSetExclusiveMode >> andThenUpdate)
 
         TodoId id ->
             X.Return.withMaybe (Model.TodoStore.findTodoById id)

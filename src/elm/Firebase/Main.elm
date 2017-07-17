@@ -18,7 +18,7 @@ import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg exposing (AppMsg)
-import XMMsg
+import Msg
 
 
 port signIn : () -> Cmd msg
@@ -95,9 +95,9 @@ update andThenUpdate msg =
                             if Store.isEmpty model.todoStore then
                                 andThenUpdate TodoMsg.onStartSetupAddTodo
                             else
-                                andThenUpdate XMMsg.revertExclusiveMode
+                                andThenUpdate Msg.revertExclusiveMode
                            else
-                            andThenUpdate (XMMsg.onSetExclusiveMode XMSignInOverlay)
+                            andThenUpdate (Msg.onSetExclusiveMode XMSignInOverlay)
             in
                 Return.andThen onSwitchToNewUserSetupModeIfNeeded
 

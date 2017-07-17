@@ -93,3 +93,15 @@ onUpdateCustomSyncFormUri =
 
 openLaunchBarMsg =
     LaunchBar.Messages.Open |> OnLaunchBarMsg
+
+
+revertExclusiveMode =
+    Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus |> OnExclusiveModeMsg
+
+
+onSetExclusiveMode =
+    Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
+
+
+onSaveExclusiveModeForm =
+    Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg

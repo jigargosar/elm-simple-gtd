@@ -19,7 +19,7 @@ import X.Record exposing (over, overReturn)
 import X.Return
 import Keyboard.Extra as Key
 import TodoMsg
-import XMMsg
+import Msg
 
 
 update andThenUpdate subMsg =
@@ -63,7 +63,7 @@ onGlobalKeyUp andThenUpdate key =
                     let
                         clear =
                             map (Model.Selection.clearSelection)
-                                >> andThenUpdate XMMsg.revertExclusiveMode
+                                >> andThenUpdate Msg.revertExclusiveMode
                     in
                         case key of
                             Key.Escape ->
@@ -85,7 +85,7 @@ onGlobalKeyUp andThenUpdate key =
                                 identity
 
                 ( Key.Escape, _ ) ->
-                    andThenUpdate XMMsg.revertExclusiveMode
+                    andThenUpdate Msg.revertExclusiveMode
 
                 _ ->
                     identity

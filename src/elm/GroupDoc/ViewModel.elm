@@ -16,7 +16,7 @@ import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)
-import XMMsg
+import Msg
 
 
 type alias IconVM =
@@ -143,9 +143,9 @@ create config todoList groupDoc =
         , archive = archive
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = XMMsg.onSaveExclusiveModeForm
+        , onSaveClicked = Msg.onSaveExclusiveModeForm
         , onNameChanged = Entity.Types.EUA_SetFormText >> onEntityAction
-        , onCancelClicked = XMMsg.revertExclusiveMode
+        , onCancelClicked = Msg.revertExclusiveMode
         , icon = icon
         , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn
         , onKeyDownMsg = onKeyDownMsg

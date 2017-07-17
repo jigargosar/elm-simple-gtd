@@ -5,7 +5,7 @@ import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
 import Mat
 import X.Function.Infix exposing (..)
-import XMMsg
+import Msg
 
 
 badge : String -> Int -> Html msg
@@ -23,8 +23,8 @@ defaultOkCancelButtons =
 
 defaultOkCancelButtonsWith list =
     okCancelButtonsWith
-        XMMsg.onSaveExclusiveModeForm
-        XMMsg.revertExclusiveMode
+        Msg.onSaveExclusiveModeForm
+        Msg.revertExclusiveMode
         list
 
 

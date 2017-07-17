@@ -17,6 +17,8 @@ import Todo.Types exposing (TodoStore)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
 import Todo.FormTypes exposing (..)
+import Msg exposing (AppMsg)
+import Return
 
 
 type alias AppConfig =
@@ -53,3 +55,11 @@ type alias AppModel =
 
 type alias AppModelF =
     AppModel -> AppModel
+
+
+
+-- todo: IMP note if we remove appMsg dep from here. changing msg file takes 1.5mins as opposed to 36s
+
+
+type alias ReturnF =
+    Return.ReturnF AppMsg AppModel

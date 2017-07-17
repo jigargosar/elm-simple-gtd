@@ -56,10 +56,6 @@ switchToView =
     SwitchView >> OnViewTypeMsg
 
 
-foo =
-    16
-
-
 onNewProject =
     Entity.Types.EM_StartAddingProject |> OnEntityMsg
 

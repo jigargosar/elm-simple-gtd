@@ -3,7 +3,6 @@ port module Update.CustomSync exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMEditSyncSettings, XMMainMenu))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Return exposing (command)
-import ReturnTypes exposing (ReturnF)
 
 
 port syncWithRemotePouch : String -> Cmd msg

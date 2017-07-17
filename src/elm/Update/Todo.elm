@@ -47,7 +47,6 @@ update config andThenUpdate now todoMsg =
 
         OnGotoRunningTodo ->
             returnWith identity (gotoRunningTodo config)
-                >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
 
         UpdateTimeTracker ->
             updateTimeTracker now

@@ -89,7 +89,7 @@ update andThenUpdate msg =
                             >> andThenUpdate
                     }
                 )
-                (\config -> Update.LaunchBar.updateWithConfig config msg_)
+                (\config -> Update.LaunchBar.update config msg_)
 
         --            Update.LaunchBar.update andThenUpdate msg_ now
         LaunchBarMsg msg_ ->

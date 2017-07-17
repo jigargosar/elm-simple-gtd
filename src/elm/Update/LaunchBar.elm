@@ -37,11 +37,11 @@ type alias Config msg model =
     }
 
 
-updateWithConfig :
+update :
     Config msg a
     -> LaunchBarMsg
     -> SubReturnF msg a
-updateWithConfig config msg =
+update config msg =
     case msg of
         NOOP ->
             identity

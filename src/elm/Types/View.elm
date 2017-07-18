@@ -1,4 +1,4 @@
-module ViewType exposing (..)
+module Types.View exposing (..)
 
 import Entity.Types exposing (EntityListViewType)
 

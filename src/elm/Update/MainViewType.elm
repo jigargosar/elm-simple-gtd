@@ -3,7 +3,7 @@ module Update.MainViewType exposing (..)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Return exposing (andThen, map)
 import Msg.ViewType exposing (..)
-import ViewType exposing (..)
+import Types.View exposing (..)
 
 
 type alias SubModel model =

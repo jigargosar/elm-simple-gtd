@@ -15,7 +15,7 @@ import Html.Events exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import View.Shared exposing (..)
-import ViewType exposing (ViewType(EntityListView, SyncView))
+import Types.View exposing (ViewType(EntityListView, SyncView))
 
 
 sidebarHeader appVM m =

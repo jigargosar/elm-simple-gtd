@@ -23,7 +23,7 @@ import GroupDoc.FormView
 import View.GetStarted
 import View.MainMenu
 import View.Mat
-import ViewType exposing (ViewType(EntityListView, SyncView))
+import Types.View exposing (ViewType(EntityListView, SyncView))
 
 
 init model =

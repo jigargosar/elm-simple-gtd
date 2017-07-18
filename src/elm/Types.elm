@@ -13,7 +13,7 @@ import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
-import ViewType exposing (ViewType(EntityListView))
+import Types.View exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
 import Msg exposing (AppMsg)
 import Return

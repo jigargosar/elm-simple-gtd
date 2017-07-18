@@ -18,7 +18,6 @@ import X.Return exposing (rAndThenMaybe)
 import Keyboard.Extra as Key exposing (Key)
 import Store
 import Todo.Types exposing (TodoDoc, TodoStore)
-import Json.Encode as E
 
 
 type alias SubModel model =

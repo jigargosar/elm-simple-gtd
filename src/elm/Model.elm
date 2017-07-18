@@ -1,12 +1,11 @@
 module Model exposing (..)
 
-import Entity.Types exposing (Entity)
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import X.Record exposing (..)
 import Toolkit.Operators exposing (..)
-import Types
 
 
+--import Types
 --commonMsg : CommonMsg.Helper AppMsg
 -- Model Lens
 
@@ -19,12 +18,18 @@ now =
     fieldLens .now (\s b -> { b | now = s })
 
 
-focusInEntity : Field Entity (Types.HasFocusInEntity a)
+
+--focusInEntity : Field Entity (Types.HasFocusInEntity a)
+
+
 focusInEntity =
     fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
-setFocusInEntity : Entity -> Types.HasFocusInEntityF a
+
+--setFocusInEntity : Entity -> Types.HasFocusInEntityF a
+
+
 setFocusInEntity entity =
     set focusInEntity entity
 

@@ -1,4 +1,4 @@
-module LocalPref exposing (..)
+module LocalPref exposing (encodeLocalPref, decode)
 
 import AppDrawer.Model
 import Firebase.SignIn

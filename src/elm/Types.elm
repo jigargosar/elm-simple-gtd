@@ -48,17 +48,18 @@ type alias AppModel =
     }
 
 
-type alias HasFocusInEntity a =
-    { a | focusInEntity : Entity }
 
-
-type alias HasFocusInEntityF a =
-    HasFocusInEntity a -> HasFocusInEntity a
-
-
-type alias HasTodoStore a =
-    { a | todoStore : TodoStore }
-
-
-type alias HasTodoStoreF a =
-    HasTodoStore a -> HasTodoStore a
+--type alias HasFocusInEntity a =
+--    { a | focusInEntity : Entity }
+--
+--
+--type alias HasFocusInEntityF a =
+--    HasFocusInEntity a -> HasFocusInEntity a
+--
+--
+--type alias HasTodoStore a =
+--    { a | todoStore : TodoStore }
+--
+--
+--type alias HasTodoStoreF a =
+--    HasTodoStore a -> HasTodoStore a

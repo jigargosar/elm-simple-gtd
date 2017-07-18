@@ -7,7 +7,6 @@ import Ports
 import Update.Firebase
 import LocalPref
 import Material
-import Msg exposing (..)
 import Update.AppHeader
 import Update.ExclusiveMode
 import Update.LaunchBar
@@ -32,18 +31,20 @@ import Types exposing (..)
 import Update.GroupDoc
 
 
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
+{-
+   type alias ReturnF =
+       Return.ReturnF AppMsg AppModel
 
 
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
+   type alias AndThenUpdate =
+       AppMsg -> ReturnF
+-}
 
 
 update :
-    AndThenUpdate
+    (AppMsg -> Return.ReturnF AppMsg AppModel)
     -> AppMsg
-    -> ReturnF
+    -> Return.ReturnF AppMsg AppModel
 update andThenUpdate msg =
     case msg of
         OnMdl msg_ ->

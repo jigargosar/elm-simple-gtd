@@ -18,11 +18,7 @@ import Msg
 
 createProjectMenuConfig : TodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
 createProjectMenuConfig form model =
-    { onSelect =
-        Document.getId
-            >> TA_SetProjectId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode form.id
-            >> Msg.OnTodoMsg
+    { onSelect = TodoMsg.onSetProject form.id
     , isSelected = Document.hasId form.projectId
     , itemKey = getMenuKey "project"
     , itemSearchText = Project.getName
@@ -35,11 +31,7 @@ createProjectMenuConfig form model =
 
 createContextMenuConfig : TodoForm -> AppModel -> Menu.Config Context.Model Msg.AppMsg
 createContextMenuConfig form model =
-    { onSelect =
-        Document.getId
-            >> TA_SetContextId
-            >> Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode form.id
-            >> Msg.OnTodoMsg
+    { onSelect = TodoMsg.onSetContext form.id
     , isSelected = Document.hasId form.contextId
     , itemKey = getMenuKey "context"
     , itemSearchText = Context.getName

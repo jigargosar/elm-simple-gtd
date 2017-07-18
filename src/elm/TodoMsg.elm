@@ -1,9 +1,11 @@
 module TodoMsg exposing (..)
 
+import Document.Types exposing (getDocId)
 import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
 import Todo.Notification.Model
+import Todo.Types exposing (TodoAction(..))
 
 
 onStopRunningTodo : AppMsg
@@ -94,4 +96,26 @@ onSetTodoFormText =
 
 
 
---
+-- direct
+
+
+onToggleDeleted id =
+    Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDeleted
+        |> Msg.OnTodoMsg
+
+
+onToggleDone id =
+    Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDone
+        |> Msg.OnTodoMsg
+
+
+onSetProject id =
+    TA_SetProject
+        >> Todo.Msg.UpdateTodoOrAllSelected__ id
+        >> Msg.OnTodoMsg
+
+
+onSetContext id =
+    TA_SetContext
+        >> Todo.Msg.UpdateTodoOrAllSelected__ id
+        >> Msg.OnTodoMsg

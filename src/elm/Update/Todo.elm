@@ -47,10 +47,11 @@ update config now msg =
 
         OnProcessPendingNotificationCronTick ->
             rAndThenMaybe
-                (Stores.findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
+                (findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
 
-        OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode todoId action ->
-            (Stores.updateTodoAndMaybeAlsoSelected action todoId |> andThen)
+        UpdateTodoOrAllSelected__ todoId action ->
+            -- todo: think about creating direct messages or wrappers in TodoMsg
+            (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
                 -- todo: if we had use save editing form, we would't missed calling on deactivate.
                 -- todo: also it seems an appropriate place for any exclusive mode form saves.
                 -- such direct calls are messy. :(

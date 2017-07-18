@@ -149,53 +149,6 @@ createEntityListForCurrentView model =
 
 
 
---updateTodo : TodoAction -> DocId -> ModelReturnF
-
-
-updateTodo action todoId =
-    findAndUpdateAllTodos (Document.hasId todoId) action
-
-
-
---updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
-
-
-updateAllTodos action idSet model =
-    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
-
-
-updateTodoAndMaybeAlsoSelected action todoId model =
-    let
-        idSet =
-            if model.selectedEntityIdSet |> Set.member todoId then
-                model.selectedEntityIdSet
-            else
-                Set.singleton todoId
-    in
-        model |> updateAllTodos action idSet
-
-
-findTodoWithOverDueReminder model =
-    model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
-
-
-
---findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
-
-
-findAndSnoozeOverDueTodo model =
-    let
-        snooze todoId =
-            updateTodo (TA_AutoSnooze model.now) todoId model
-                |> (\( model, cmd ) ->
-                        findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
-                   )
-    in
-        Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
-            ?+> (Document.getId >> snooze)
-
-
-
 --upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
 
 

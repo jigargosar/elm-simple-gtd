@@ -186,4 +186,8 @@ onTodoMsgWithNow andThenUpdate msg now =
                     >> andThenUpdate
             }
     in
-        Update.Todo.update config now msg
+        returnWith identity
+            (\oldModel ->
+                Update.Todo.update config now msg
+                    >> map (Stores.updateEntityListCursor oldModel)
+            )

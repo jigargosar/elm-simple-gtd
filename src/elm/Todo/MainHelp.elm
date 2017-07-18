@@ -9,6 +9,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Model.TodoStore exposing (findTodoById)
 import Set exposing (Set)
+import Store
 import Stores
 import Time exposing (Time)
 import Todo.Form
@@ -65,20 +66,67 @@ type alias Config msg model =
     }
 
 
+
+--updateTodo : TodoAction -> DocId -> ModelReturnF
+
+
+updateTodo action todoId =
+    Stores.findAndUpdateAllTodos (Document.hasId todoId) action
+
+
+
+--updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
+
+
+updateAllTodos action idSet model =
+    Stores.findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
+
+
+updateTodoAndMaybeAlsoSelected action todoId model =
+    let
+        idSet =
+            if model.selectedEntityIdSet |> Set.member todoId then
+                model.selectedEntityIdSet
+            else
+                Set.singleton todoId
+    in
+        model |> updateAllTodos action idSet
+
+
+findTodoWithOverDueReminder model =
+    model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
+
+
+
+--findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
+
+
+findAndSnoozeOverDueTodo model =
+    let
+        snooze todoId =
+            updateTodo (TA_AutoSnooze model.now) todoId model
+                |> (\( model, cmd ) ->
+                        findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
+                   )
+    in
+        Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
+            ?+> (Document.getId >> snooze)
+
+
 onSaveTodoForm form =
     case form.mode of
         TFM_Edit editMode ->
             let
-                updateTodo action =
-                    Stores.updateTodo action form.id
+                updateTodoHelp action =
+                    updateTodo action form.id
                         |> andThen
             in
                 case editMode of
                     ETFM_EditTodoText ->
-                        updateTodo <| TA_SetText form.text
+                        updateTodoHelp <| TA_SetText form.text
 
                     ETFM_EditTodoReminder ->
-                        updateTodo <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+                        updateTodoHelp <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
                     _ ->
                         identity
@@ -109,7 +157,7 @@ saveAddTodoForm addMode form model =
                             ATFM_AddWithFocusInEntityAsReference ->
                                 model.focusInEntity
                 in
-                    Stores.updateTodo
+                    updateTodo
                         (case referenceEntity of
                             TodoEntity fromTodo ->
                                 (TA_CopyProjectAndContextId fromTodo)
@@ -230,7 +278,7 @@ onReminderNotificationClicked notif =
             data.id
     in
         if action == "mark-done" then
-            Return.andThen (Stores.updateTodo TA_MarkDone todoId)
+            Return.andThen (updateTodo TA_MarkDone todoId)
                 >> command (Notification.closeNotification todoId)
         else
             map (showReminderOverlayForTodoId todoId)
@@ -372,7 +420,7 @@ onActive todoDetails action =
     in
         case action of
             Todo.Notification.Model.Dismiss ->
-                andThen (Stores.updateTodo (TA_TurnReminderOff) todoId)
+                andThen (updateTodo (TA_TurnReminderOff) todoId)
                     >> map removeReminderOverlay
                     >> Return.command (Notification.closeNotification todoId)
 
@@ -387,7 +435,7 @@ onActive todoDetails action =
                 map removeReminderOverlay
 
             Todo.Notification.Model.MarkDone ->
-                andThen (Stores.updateTodo TA_MarkDone todoId)
+                andThen (updateTodo TA_MarkDone todoId)
                     >> map removeReminderOverlay
                     >> Return.command (Notification.closeNotification todoId)
 
@@ -398,7 +446,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> Stores.updateTodo (time |> TA_SnoozeTill) todoId
+            |> updateTodo (time |> TA_SnoozeTill) todoId
             >> Tuple.mapFirst removeReminderOverlay
 
 

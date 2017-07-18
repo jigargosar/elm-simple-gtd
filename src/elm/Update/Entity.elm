@@ -115,9 +115,7 @@ onUpdate andThenUpdate entityId action =
                                 |> andThenUpdate
 
                         TodoId id ->
-                            Todo.Msg.OnUpdateTodoAndMaybeSelectedAndDeactivateEditingMode id TA_ToggleDone
-                                |> Msg.OnTodoMsg
-                                |> andThenUpdate
+                            TodoMsg.onToggleDone id |> andThenUpdate
             in
                 toggleArchivedEntity
                     >> andThenUpdate Msg.revertExclusiveMode
@@ -167,7 +165,7 @@ toggleDeleteEntity andThenUpdate entityId =
             Msg.onToggleProjectDeleted id |> andThenUpdate
 
         TodoId id ->
-            Stores.updateTodo TA_ToggleDeleted id |> andThen
+            TodoMsg.onToggleDeleted id |> andThenUpdate
 
 
 startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF

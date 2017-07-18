@@ -14,12 +14,6 @@ mapOver =
     over Model.appDrawerModel >> Return.map
 
 
-subscriptions model =
-    Sub.batch
-        [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
-        |> Sub.map Msg.OnAppDrawerMsg
-
-
 update :
     (Msg.AppMsg -> ReturnF)
     -> AppDrawer.Types.Msg

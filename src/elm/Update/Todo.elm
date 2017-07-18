@@ -11,16 +11,6 @@ import X.Function.Infix exposing (..)
 import Todo.TimeTracker as Tracker
 
 
-subscriptions : model -> Sub TodoMsg
-subscriptions _ =
-    Sub.batch
-        [ notificationClicked OnReminderNotificationClicked
-        , onRunningTodoNotificationClicked RunningNotificationResponse
-        , Time.every (Time.second * 1) (\_ -> UpdateTimeTracker)
-        , Time.every (Time.second * 30) (\_ -> OnProcessPendingNotificationCronTick)
-        ]
-
-
 type alias Config msg model =
     Todo.MainHelp.Config msg model
 

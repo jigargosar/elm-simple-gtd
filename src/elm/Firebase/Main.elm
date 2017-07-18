@@ -1,4 +1,4 @@
-port module Firebase.Main exposing (..)
+module Firebase.Main exposing (..)
 
 import AppUrl
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
@@ -19,33 +19,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Msg exposing (AppMsg)
 import Msg
-
-
-port signIn : () -> Cmd msg
-
-
-port signOut : () -> Cmd msg
-
-
-port firebaseRefSet : ( String, E.Value ) -> Cmd msg
-
-
-port firebaseRefPush : ( String, E.Value ) -> Cmd msg
-
-
-port fireStartSync : String -> Cmd msg
-
-
-port firebaseSetupOnDisconnect : ( Firebase.UID, Firebase.Types.DeviceId ) -> Cmd msg
-
-
-port onFirebaseUserChanged : (E.Value -> msg) -> Sub msg
-
-
-port onFCMTokenChanged : (E.Value -> msg) -> Sub msg
-
-
-port onFirebaseConnectionChanged : (Bool -> msg) -> Sub msg
+import Ports.Firebase exposing (..)
 
 
 setupOnDisconnectCmd client uid =
@@ -58,16 +32,6 @@ startSyncCmd =
 
 updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
-
-
-subscriptions : AppModel -> Sub AppMsg
-subscriptions model =
-    Sub.batch
-        [ onFirebaseUserChanged OnFBUserChanged
-        , onFCMTokenChanged OnFBFCMTokenChanged
-        , onFirebaseConnectionChanged OnFBConnectionChanged
-        ]
-        |> Sub.map Msg.OnFirebaseMsg
 
 
 signInModel =

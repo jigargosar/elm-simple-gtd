@@ -1,4 +1,4 @@
-port module Firebase exposing (..)
+module Firebase exposing (..)
 
 import Firebase.Model as Model
 import X.Html

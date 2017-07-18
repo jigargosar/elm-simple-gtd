@@ -1,11 +1,9 @@
 port module Main exposing (main)
 
-import AppDrawer.Main
 import Context
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
-import Firebase.Main
 import LocalPref
 import Material
 import Model.ViewType
@@ -16,8 +14,8 @@ import RouteUrl
 import Routes
 import Set
 import Store
+import Subscriptions
 import Time exposing (Time)
-import Update.Todo
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
@@ -31,13 +29,6 @@ import Json.Encode as E
 import Types exposing (..)
 
 
-port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
-
-
-onFirebaseDatabaseChangeSub tagger =
-    onFirebaseDatabaseChange (uncurry tagger)
-
-
 main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
 main =
     RouteUrl.programWithFlags
@@ -46,25 +37,8 @@ main =
         , init = init
         , update = update
         , view = View.init
-        , subscriptions = subscriptions
+        , subscriptions = Subscriptions.subscriptions
         }
-
-
-subscriptions : AppModel -> Sub Msg.AppMsg
-subscriptions model =
-    Sub.batch
-        [ Sub.batch
-            [ Time.every (Time.second * 1) Msg.OnNowChanged
-            , X.Keyboard.subscription Msg.OnKeyboardMsg
-            , X.Keyboard.ups Msg.OnGlobalKeyUp
-            , Store.onChange Msg.OnPouchDBChange
-            , onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
-            ]
-            |> Sub.map Msg.OnSubscriptionMsg
-        , Update.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg
-        , Firebase.Main.subscriptions model
-        , AppDrawer.Main.subscriptions model
-        ]
 
 
 type alias Flags =

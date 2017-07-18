@@ -118,6 +118,7 @@ update andThenUpdate msg =
 
         OnEntityMsg msg_ ->
             let
+                config : Update.Entity.Config AppMsg AppModel
                 config =
                     { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate

@@ -7,22 +7,15 @@ import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
 import Navigation
-import Return
+import Return exposing (command)
 import Store
-import TodoMsg
-import Types exposing (..)
 import X.Record exposing (over, set)
 import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
-import Msg exposing (AppMsg)
-import Msg
 import Ports.Firebase exposing (..)
-
-
-type alias AppReturnF =
-    Return.ReturnF AppMsg AppModel
+import Todo.Types exposing (TodoStore)
 
 
 type alias SubModel model =
@@ -31,6 +24,7 @@ type alias SubModel model =
         , fcmToken : FCMToken
         , firebaseClient : FirebaseClient
         , signInModel : Firebase.SignIn.Model
+        , todoStore : TodoStore
     }
 
 
@@ -42,14 +36,15 @@ type alias Config msg model =
     { onStartSetupAddTodo : SubReturnF msg model
     , revertExclusiveMode : SubReturnF msg model
     , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    , onSwitchToNewUserSetupModeIfNeeded : SubReturnF msg model
     }
 
 
 update :
-    (Msg.AppMsg -> AppReturnF)
+    Config msg model
     -> FirebaseMsg
-    -> AppReturnF
-update andThenUpdate msg =
+    -> SubReturnF msg model
+update config msg =
     case msg of
         OnFB_NOOP ->
             identity
@@ -57,30 +52,27 @@ update andThenUpdate msg =
         OnFB_SwitchToNewUserSetupModeIfNeeded ->
             let
                 onSwitchToNewUserSetupModeIfNeeded model =
-                    Return.singleton model
-                        |> if Firebase.SignIn.shouldSkipSignIn model.signInModel then
-                            if Store.isEmpty model.todoStore then
-                                andThenUpdate TodoMsg.onStartSetupAddTodo
-                            else
-                                andThenUpdate Msg.revertExclusiveMode
-                           else
-                            andThenUpdate (Msg.onSetExclusiveMode XMSignInOverlay)
+                    if Firebase.SignIn.shouldSkipSignIn model.signInModel then
+                        if Store.isEmpty model.todoStore then
+                            config.onStartSetupAddTodo
+                        else
+                            config.revertExclusiveMode
+                    else
+                        config.onSetExclusiveMode XMSignInOverlay
             in
-                Return.andThen onSwitchToNewUserSetupModeIfNeeded
+                returnWith identity onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignIn ->
-            Return.command (signIn ())
+            command (signIn ())
 
         OnFBSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
-                >> andThenUpdate Msg.OnPersistLocalPref
-                >> andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
+                >> config.onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
-                >> andThenUpdate Msg.OnPersistLocalPref
-                >> Return.command (Navigation.load AppUrl.landing)
+                >> command (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
             Return.andThen
@@ -93,8 +85,7 @@ update andThenUpdate msg =
                             SignedIn user ->
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
-                                    >> andThenUpdate Msg.OnPersistLocalPref
-                                    >> andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
+                                    >> config.onSwitchToNewUserSetupModeIfNeeded
                 )
 
         OnFBUserChanged encodedUser ->
@@ -102,7 +93,7 @@ update andThenUpdate msg =
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
                         Return.map (setUser user)
-                            >> update andThenUpdate OnFBAfterUserChanged
+                            >> update config OnFBAfterUserChanged
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
                             >> startSyncWithFirebase

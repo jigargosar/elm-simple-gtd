@@ -170,7 +170,18 @@ update andThenUpdate msg =
                     )
 
         OnFirebaseMsg msg_ ->
-            Update.Firebase.update andThenUpdate msg_
+            let
+                config : Update.Firebase.Config AppMsg AppModel
+                config =
+                    { onStartSetupAddTodo = andThenUpdate TodoMsg.onStartSetupAddTodo
+                    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    , onSwitchToNewUserSetupModeIfNeeded =
+                        andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
+                    }
+            in
+                Update.Firebase.update config msg_
+                    >> andThenUpdate Msg.OnPersistLocalPref
 
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg

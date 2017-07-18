@@ -29,8 +29,7 @@ import X.Function.Infix exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
-import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
+import X.Keyboard exposing (KeyboardEvent, onKeyDown)
 
 
 type alias TodoViewModel msg =

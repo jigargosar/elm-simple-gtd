@@ -6,7 +6,6 @@ import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Lazy exposing (Lazy)
 import Model.TodoStore exposing (findTodoById, todoStore)
 import Set exposing (Set)
@@ -18,7 +17,6 @@ import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Tuple2
-import ViewType exposing (ViewType)
 import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
 import X.Time
@@ -39,11 +37,8 @@ type alias SubModel model =
     { model
         | now : Time
         , todoStore : TodoStore
-        , projectStore : ProjectStore
-        , contextStore : ContextStore
         , reminderOverlay : TodoReminderOverlayModel
         , timeTracker : Tracker.Model
-        , mainViewType : ViewType
         , focusInEntity : Entity
         , selectedEntityIdSet : Set DocId
     }

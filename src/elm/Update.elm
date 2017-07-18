@@ -73,7 +73,7 @@ update andThenUpdate msg =
         OnGroupDocMsg msg_ ->
             returnWith identity
                 (\oldModel ->
-                    Update.GroupDoc.update msg
+                    Update.GroupDoc.update msg_
                         >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
                 )
 

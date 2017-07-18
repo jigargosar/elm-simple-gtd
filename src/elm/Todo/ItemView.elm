@@ -1,7 +1,6 @@
 module Todo.ItemView exposing (TodoViewModel, ScheduleViewModel, keyedItem)
 
 import Material
-import Todo.Types exposing (TodoDoc)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import List.Extra as List
 import Mat

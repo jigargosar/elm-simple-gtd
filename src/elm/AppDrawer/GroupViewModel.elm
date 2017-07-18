@@ -23,7 +23,7 @@ import Toolkit.Operators exposing (..)
 import Model
 import Project
 import Types exposing (AppModel)
-import Types.View exposing (ViewType(EntityListView))
+import Types.ViewType exposing (ViewType(EntityListView))
 import X.Maybe
 
 

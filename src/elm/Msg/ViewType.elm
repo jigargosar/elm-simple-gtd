@@ -1,7 +1,7 @@
 module Msg.ViewType exposing (..)
 
 import Entity.Types exposing (EntityListViewType)
-import Types.View exposing (ViewType)
+import Types.ViewType exposing (ViewType)
 
 
 type ViewTypeMsg

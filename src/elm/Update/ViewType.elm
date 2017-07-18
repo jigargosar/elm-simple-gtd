@@ -1,9 +1,9 @@
-module Update.MainViewType exposing (..)
+module Update.ViewType exposing (..)
 
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Return exposing (andThen, map)
 import Msg.ViewType exposing (..)
-import Types.View exposing (..)
+import Types.ViewType exposing (..)
 
 
 type alias SubModel model =

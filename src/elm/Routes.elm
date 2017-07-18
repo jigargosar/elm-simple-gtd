@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RouteUrl.Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import Types exposing (..)
-import Types.View exposing (ViewType(EntityListView, SyncView))
+import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.List
 

@@ -10,7 +10,7 @@ import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Types exposing (AppModel)
-import Types.View exposing (ViewType(EntityListView, SyncView))
+import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 
 
 type alias Model =

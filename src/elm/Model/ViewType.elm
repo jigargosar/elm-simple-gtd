@@ -1,7 +1,7 @@
 module Model.ViewType exposing (..)
 
 import Entity.Types exposing (EntityListViewType(ContextsView))
-import Types.View exposing (ViewType(EntityListView))
+import Types.ViewType exposing (ViewType(EntityListView))
 
 
 maybeGetEntityListViewType model =

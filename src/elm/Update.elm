@@ -23,7 +23,7 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.LaunchBar
 import Update.Subscription
-import Update.MainViewType
+import Update.ViewType
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
@@ -140,11 +140,11 @@ update andThenUpdate msg =
 onViewTypeMsg : AndThenUpdate -> ViewTypeMsg -> ReturnF
 onViewTypeMsg andThenUpdate msg =
     let
-        config : Update.MainViewType.Config AppMsg AppModel
+        config : Update.ViewType.Config AppMsg AppModel
         config =
             { clearSelection = map Model.Selection.clearSelection }
     in
-        Update.MainViewType.update config msg
+        Update.ViewType.update config msg
 
 
 onLaunchBarMsgWithNow : AndThenUpdate -> LaunchBarMsg -> Time -> ReturnF

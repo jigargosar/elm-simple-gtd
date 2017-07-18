@@ -32,16 +32,21 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { updateEntityListCursorOnGroupDocChange : SubReturnF msg model
-    }
+
+{-
+   type alias Config msg model =
+       { updateEntityListCursorOnGroupDocChange : SubReturnF msg model
+       }
+-}
 
 
 update :
-    Config msg model
-    -> GroupDocMsg
+    {- Config msg model
+       ->
+    -}
+    GroupDocMsg
     -> SubReturnF msg model
-update config msg =
+update msg =
     case msg of
         OnSaveGroupDocForm form ->
             let
@@ -49,7 +54,7 @@ update config msg =
                     fn form.id (GroupDoc.setName form.name)
                         |> andThen
             in
-                (case form.groupDocType of
+                case form.groupDocType of
                     ContextGroupDoc ->
                         case form.mode of
                             GDFM_Add ->
@@ -65,33 +70,19 @@ update config msg =
 
                             GDFM_Edit ->
                                 update updateProject
-                )
-                    >> config.updateEntityListCursorOnGroupDocChange
 
         -- todo: remove duplication, very error prone.
         OnToggleContextArchived id ->
-            (updateContext id GroupDoc.toggleArchived
-                |> andThen
-            )
-                >> config.updateEntityListCursorOnGroupDocChange
+            updateContext id GroupDoc.toggleArchived |> andThen
 
         OnToggleProjectArchived id ->
-            (updateProject id GroupDoc.toggleArchived
-                |> andThen
-            )
-                >> config.updateEntityListCursorOnGroupDocChange
+            updateProject id GroupDoc.toggleArchived |> andThen
 
         OnToggleContextDeleted id ->
-            (updateContext id Document.toggleDeleted
-                |> andThen
-            )
-                >> config.updateEntityListCursorOnGroupDocChange
+            updateContext id Document.toggleDeleted |> andThen
 
         OnToggleProjectDeleted id ->
-            (updateProject id Document.toggleDeleted
-                |> andThen
-            )
-                >> config.updateEntityListCursorOnGroupDocChange
+            updateProject id Document.toggleDeleted |> andThen
 
 
 contextStore =

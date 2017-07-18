@@ -47,9 +47,5 @@ findByEntityId entityId =
             findTodoById id >>? createTodoEntity
 
 
-setFocusInEntityWithTodoId =
-    EntityId.fromTodoDocId >> setFocusInEntityWithEntityId
-
-
 setFocusInEntityWithEntityId entityId =
     applyMaybeWith (findByEntityId entityId) Model.setFocusInEntity

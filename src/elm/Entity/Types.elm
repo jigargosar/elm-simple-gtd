@@ -71,3 +71,7 @@ getDocIdFromEntityId entityId =
 
         TodoId id ->
             id
+
+
+createTodoEntityId =
+    TodoId

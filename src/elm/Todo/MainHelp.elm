@@ -4,7 +4,7 @@ import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
 import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
-import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
+import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Lazy exposing (Lazy)
 import Model.Todo exposing (findTodoById, todoStore)
@@ -54,7 +54,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg model =
     { switchToContextsView : SubReturnF msg model
-    , setFocusInEntityWithTodoId : DocId -> SubReturnF msg model
+    , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
     , setFocusInEntity : Entity -> SubReturnF msg model
     , closeNotification : String -> SubReturnF msg model
     , afterTodoUpdate : SubReturnF msg model
@@ -190,7 +190,7 @@ saveAddTodoForm config addMode form model =
                                         (TA_SetProject project)
                         )
                         todoId
-                        >> config.setFocusInEntityWithTodoId todoId
+                        >> setFocusInEntityWithTodoId config todoId
             )
 
 
@@ -396,10 +396,14 @@ gotoTodoWithId config model todoId =
         maybeTodoEntity
             |> Maybe.unpack
                 (\_ ->
-                    config.setFocusInEntityWithTodoId todoId
+                    setFocusInEntityWithTodoId config todoId
                         >> config.switchToContextsView
                 )
                 config.setFocusInEntity
+
+
+setFocusInEntityWithTodoId config =
+    createTodoEntityId >> config.setFocusInEntityWithEntityId
 
 
 positionMoreMenuCmd todoId =

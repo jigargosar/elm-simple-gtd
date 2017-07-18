@@ -62,45 +62,45 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
 
 
 updateEntityListCursorOnTodoChange oldModel newModel =
-    ( oldModel, newModel )
-        |> Tuple2.mapBoth
-            (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
-        |> updateEntityListCursorFromEntityIndexTupleOnTodoChange newModel
+    let
+        updateEntityListCursorFromEntityIndexTuple model indexTuple =
+            let
+                setFocusInEntityByIndex index entityList model =
+                    X.List.clampIndex index entityList
+                        |> (List.getAt # entityList)
+                        |> Maybe.orElse (List.head entityList)
+                        |> maybeSetIn model focusInEntity
+
+                setFocusInIndex index =
+                    setFocusInEntityByIndex
+                        index
+                        (createEntityListForCurrentView model)
+            in
+                model
+                    |> case indexTuple of
+                        ( Just oldIndex, Just newIndex ) ->
+                            if oldIndex < newIndex then
+                                setFocusInIndex (oldIndex)
+                            else if oldIndex > newIndex then
+                                setFocusInIndex (oldIndex + 1)
+                            else
+                                identity
+
+                        ( Just oldIndex, Nothing ) ->
+                            setFocusInIndex oldIndex
+
+                        _ ->
+                            identity
+    in
+        ( oldModel, newModel )
+            |> Tuple2.mapBoth
+                (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
+            |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
 getMaybeFocusInEntityIndex entityList model =
     entityList
         |> List.findIndex (Entity.equalById model.focusInEntity)
-
-
-updateEntityListCursorFromEntityIndexTupleOnTodoChange model indexTuple =
-    let
-        setFocusInEntityByIndex index entityList model =
-            X.List.clampIndex index entityList
-                |> (List.getAt # entityList)
-                |> Maybe.orElse (List.head entityList)
-                |> maybeSetIn model focusInEntity
-
-        setFocusInIndex index =
-            setFocusInEntityByIndex
-                index
-                (createEntityListForCurrentView model)
-    in
-        model
-            |> case indexTuple of
-                ( Just oldIndex, Just newIndex ) ->
-                    if oldIndex < newIndex then
-                        setFocusInIndex (oldIndex)
-                    else if oldIndex > newIndex then
-                        setFocusInIndex (oldIndex + 1)
-                    else
-                        identity
-
-                ( Just oldIndex, Nothing ) ->
-                    setFocusInIndex oldIndex
-
-                _ ->
-                    identity
 
 
 createEntityListForCurrentView model =

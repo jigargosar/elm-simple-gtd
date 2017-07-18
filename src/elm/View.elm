@@ -64,7 +64,7 @@ overlayViews appModel =
                                     Todo.View.editTodoSchedulePopupView form
 
                                 ETFM_EditTodoText ->
-                                    Todo.View.editTodoTextView form appModel
+                                    Todo.View.editTodoTextView form
 
                         TFM_Add addMode ->
                             case addMode of

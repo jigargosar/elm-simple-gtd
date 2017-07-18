@@ -11,6 +11,7 @@ import List.Extra
 import Maybe.Extra
 import Model.EntityTree
 import Todo.Types exposing (TodoDoc)
+import Todo.ViewModel
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
 import X.Keyboard exposing (onKeyDown)
@@ -88,7 +89,7 @@ keyedViewList grouping maybeFocusInEntity model =
                     EntityId.fromTodo todo |> entityIdHasFocusIn
             in
                 todo
-                    |> Todo.View.createTodoViewModel model isFocusable
+                    |> Todo.ViewModel.createTodoViewModel model isFocusable
                     |> Todo.View.keyedItem
 
         todoListView : List TodoDoc -> List KeyedView

@@ -11,7 +11,6 @@ import Store
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc)
 import TodoMsg
-import Types exposing (AppModel)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import X.Time
 import Keyboard.Extra as Key exposing (Key)
@@ -55,145 +54,15 @@ type alias TodoViewModel =
     , isSelected : Bool
     , mdl : Material.Model
     , noop : AppMsg
+    , onMdl : Material.Msg AppMsg -> AppMsg
     }
 
 
-getDisplayText todo =
-    let
-        tripleNewLineAndRestRegex =
-            (Regex.regex "\\n\\n\\n(.|\n)*")
-
-        trimAndReplaceEmptyWithDefault =
-            String.trim >> String.nonEmpty >>?= "< empty >"
-    in
-        Todo.getText todo
-            |> trimAndReplaceEmptyWithDefault
-            |> Regex.replace
-                (Regex.AtMost 1)
-                tripleNewLineAndRestRegex
-                (\match -> "\n...")
-
-
-createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel
-createTodoViewModel appM isFocusable todo =
-    let
-        tabindexAV =
-            let
-                tabindexValue =
-                    if isFocusable then
-                        0
-                    else
-                        -1
-            in
-                tabindexValue
-
-        now =
-            appM.now
-
-        todoId =
-            Document.getId todo
-
-        truncateName =
-            String.ellipsis 15
-
-        projectId =
-            Todo.getProjectId todo
-
-        projectDisplayName =
-            projectId
-                |> (Store.findById # appM.projectStore >>? Project.getName)
-                ?= ""
-                |> truncateName
-                |> String.append "#"
-
-        contextId =
-            Todo.getContextId todo
-
-        contextDisplayName =
-            contextId
-                |> (Store.findById # appM.contextStore >>? Context.getName)
-                ?= "Inbox"
-                |> String.append "@"
-                |> truncateName
-
-        entityId =
-            EntityId.fromTodoDocId todoId
-
-        createEntityUpdateMsg =
-            Msg.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
-
-        onTodoMsg =
-            Msg.OnTodoMsg
-
-        reminder =
-            createScheduleViewModel now todo
-
-        onKeyDownMsg ({ key } as ke) =
-            if X.Keyboard.isNoSoftKeyDown ke then
-                case key of
-                    Key.Space ->
-                        Msg.onToggleEntitySelection entityId
-
-                    Key.CharE ->
-                        startEditingMsg
-
-                    Key.CharD ->
-                        toggleDoneMsg
-
-                    Key.Delete ->
-                        toggleDeleteMsg
-
-                    Key.CharP ->
-                        TodoMsg.onStartEditingTodoProject todo
-
-                    Key.CharC ->
-                        TodoMsg.onStartEditingTodoContext todo
-
-                    Key.CharR ->
-                        reminder.startEditingMsg
-
-                    Key.CharG ->
-                        createEntityUpdateMsg Entity.Types.EUA_OnGotoEntity
-
-                    Key.CharS ->
-                        Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
-
-                    _ ->
-                        Msg.noop
-            else
-                Msg.noop
-
-        startEditingMsg =
-            if isFocusable then
-                TodoMsg.onStartEditingTodoText todo
-            else
-                Msg.noop
-
-        toggleDeleteMsg =
-            createEntityUpdateMsg Entity.Types.EUA_ToggleDeleted
-
-        toggleDoneMsg =
-            createEntityUpdateMsg Entity.Types.EUA_ToggleArchived
-    in
-        { isDone = Todo.isDone todo
-        , key = todoId
-        , isDeleted = Todo.getDeleted todo
-        , onKeyDownMsg = onKeyDownMsg
-        , displayText = getDisplayText todo
-        , projectDisplayName = projectDisplayName
-        , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = TodoMsg.onStartEditingTodoContext todo
-        , showProjectDropDownMsg = TodoMsg.onStartEditingTodoProject todo
-        , startEditingMsg = startEditingMsg
-        , canBeFocused = isFocusable
-        , toggleDoneMsg = toggleDoneMsg
-        , reminder = reminder
-        , onFocusIn = createEntityUpdateMsg Entity.Types.EUA_OnFocusIn
-        , tabindexAV = tabindexAV
-        , isSelected = appM.selectedEntityIdSet |> Set.member todoId
-        , mdl = appM.mdl
-        , noop = Msg.noop
-        }
+type alias ScheduleViewModel =
+    { displayText : String
+    , isOverDue : Bool
+    , startEditingMsg : AppMsg
+    }
 
 
 type alias TodoKeyedItemView =
@@ -251,7 +120,7 @@ item vm =
         ]
 
 
-parseDisplayText { displayText, tabindexAV } =
+parseDisplayText vm =
     --Markdown.toHtml Nothing displayText
     let
         createLink url =
@@ -259,17 +128,17 @@ parseDisplayText { displayText, tabindexAV } =
                 [ href url
                 , target "_blank"
                 , onMouseDownStopPropagation Msg.noop
-                , tabindex tabindexAV
+                , tabindex vm.tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
 
         linkStrings =
-            Regex.find Regex.All RegexHelper.url displayText
+            Regex.find Regex.All RegexHelper.url vm.displayText
                 .|> .match
                 >> createLink
 
         nonLinkStrings =
-            Regex.split Regex.All RegexHelper.url displayText
+            Regex.split Regex.All RegexHelper.url vm.displayText
                 .|> text
     in
         List.interweave nonLinkStrings linkStrings
@@ -284,7 +153,7 @@ classListAsClass list =
 
 doneIconButton : TodoViewModel -> Html AppMsg
 doneIconButton vm =
-    Mat.iconBtn4 Msg.OnMdl
+    Mat.iconBtn4 vm.onMdl
         "done"
         vm.tabindexAV
         (classListAsClass [ "done-icon" => True, "is-done" => vm.isDone ])
@@ -312,47 +181,12 @@ editScheduleButton vm =
         ]
 
 
-type alias ScheduleViewModel =
-    { displayText : String
-    , isOverDue : Bool
-    , startEditingMsg : AppMsg
-    }
-
-
-createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel
-createScheduleViewModel now todo =
-    let
-        overDueText =
-            "Overdue"
-
-        formatReminderTime time =
-            let
-                dueDate =
-                    Date.fromTime time
-
-                nowDate =
-                    Date.fromTime now
-            in
-                if time < now then
-                    overDueText
-                else
-                    X.Time.smartFormat now time
-
-        displayText =
-            Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
-    in
-        { displayText = displayText
-        , isOverDue = displayText == overDueText
-        , startEditingMsg = TodoMsg.onStartEditingReminder todo
-        }
-
-
 fireCancel =
     Msg.revertExclusiveMode
 
 
-editTodoTextView : TodoForm -> AppModel -> Html AppMsg
-editTodoTextView form appModel =
+editTodoTextView : TodoForm -> Html AppMsg
+editTodoTextView form =
     let
         todoText =
             form.text

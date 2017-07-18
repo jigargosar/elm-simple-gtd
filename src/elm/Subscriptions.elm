@@ -7,12 +7,6 @@ import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
 import Time
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Types exposing (AppModel)
 import X.Keyboard
 

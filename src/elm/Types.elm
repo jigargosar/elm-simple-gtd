@@ -15,7 +15,6 @@ import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
-import Todo.FormTypes exposing (..)
 import Msg exposing (AppMsg)
 import Return
 

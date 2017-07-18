@@ -16,7 +16,6 @@ import X.Return exposing (..)
 import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
 import Json.Decode as D exposing (Decoder)
-import Json.Encode as E
 import Msg exposing (AppMsg)
 import Msg
 import Ports.Firebase exposing (..)

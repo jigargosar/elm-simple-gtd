@@ -6,7 +6,6 @@ import Model
 import Msg
 import Return
 import Types exposing (..)
-import Window
 import X.Record exposing (over, set)
 
 

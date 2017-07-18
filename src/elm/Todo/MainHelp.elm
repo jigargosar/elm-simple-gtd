@@ -149,6 +149,14 @@ inboxEntity =
     Entity.Types.createContextEntity Context.null
 
 
+
+--insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
+
+
+insertTodo constructWithId =
+    overT2 todoStore (Store.insert (constructWithId))
+
+
 saveAddTodoForm :
     Config msg model
     -> AddTodoFormMode
@@ -156,7 +164,7 @@ saveAddTodoForm :
     -> SubModel model
     -> SubReturn msg model
 saveAddTodoForm config addMode form model =
-    Stores.insertTodo (Todo.init model.now form.text) model
+    insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
         |> uncurry
             (\todoId ->

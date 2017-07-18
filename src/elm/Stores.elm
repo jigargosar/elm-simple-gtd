@@ -23,14 +23,6 @@ import Tuple2
 import X.List
 
 
---insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
-
-
-insertTodo constructWithId =
-    X.Record.overT2 todoStore (Store.insert (constructWithId))
-
-
-
 --upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
 
 

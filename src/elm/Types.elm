@@ -46,3 +46,11 @@ type alias AppModel =
     , mdl : Material.Model
     , keyboardState : KeyboardState
     }
+
+
+type alias HasFocusInEntity a =
+    { a | focusInEntity : Entity }
+
+
+type alias HasFocusInEntityF a =
+    HasFocusInEntity a -> HasFocusInEntity a

@@ -14,6 +14,7 @@ module X.Record
         , maybeSetIn
         , maybeOver
         , overM
+        , Field
         )
 
 import Return

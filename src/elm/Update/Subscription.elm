@@ -3,7 +3,6 @@ module Update.Subscription exposing (..)
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
-import Model
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)

@@ -9,7 +9,6 @@ import Menu.Types exposing (MenuState)
 import Msg
 import Menu
 import Toolkit.Operators exposing (..)
-import Model
 import Tuple2
 import Types exposing (AppModel)
 import Msg

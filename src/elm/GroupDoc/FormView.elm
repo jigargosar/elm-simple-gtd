@@ -6,7 +6,6 @@ import GroupDoc.Types exposing (GroupDocType(..))
 import Msg
 import Tuple2
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
-import Model
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

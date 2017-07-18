@@ -15,12 +15,10 @@ import GroupDoc.Types
 import Model.GroupDocStore
 import Model.Stores
 import Msg
-import Model
 import Msg exposing (..)
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
-import Model
 import Project
 import Types exposing (AppModel)
 import Types.ViewType exposing (ViewType(EntityListView))

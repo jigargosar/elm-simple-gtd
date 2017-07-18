@@ -13,7 +13,6 @@ import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model
 import View.Header
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View

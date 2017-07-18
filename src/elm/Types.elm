@@ -15,7 +15,6 @@ import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import Types.ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
-import Return
 
 
 type alias AppConfig =

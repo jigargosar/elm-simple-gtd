@@ -5,7 +5,6 @@ import Html.Attributes exposing (..)
 import Mat
 import Msg
 import X.Html exposing (onClickStopPropagation)
-import Model
 import Todo.Notification.Model
 import Time
 import Todo.Notification.Types

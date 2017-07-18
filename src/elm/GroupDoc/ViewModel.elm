@@ -11,7 +11,6 @@ import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Todo
-import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)

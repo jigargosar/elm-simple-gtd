@@ -17,7 +17,6 @@ import X.Time
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Mat
-import Model
 import Project
 import Regex
 import RegexHelper

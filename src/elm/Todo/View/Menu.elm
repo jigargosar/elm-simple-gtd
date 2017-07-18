@@ -3,7 +3,6 @@ module Todo.View.Menu exposing (..)
 import Context
 import Document exposing (Document)
 import Menu
-import Model
 import Model.GroupDocStore
 import Msg
 import Project

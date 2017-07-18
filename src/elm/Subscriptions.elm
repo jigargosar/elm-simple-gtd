@@ -1,6 +1,7 @@
 module Subscriptions exposing (..)
 
 import Msg
+import Msg.Subscription
 import Ports exposing (onFirebaseDatabaseChangeSub)
 import Store
 import Subscriptions.AppDrawer
@@ -15,11 +16,11 @@ subscriptions : AppModel -> Sub Msg.AppMsg
 subscriptions model =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1) Msg.OnNowChanged
-            , X.Keyboard.subscription Msg.OnKeyboardMsg
-            , X.Keyboard.ups Msg.OnGlobalKeyUp
-            , Store.onChange Msg.OnPouchDBChange
-            , onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
+            [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
+            , X.Keyboard.subscription Msg.Subscription.OnKeyboardMsg
+            , X.Keyboard.ups Msg.Subscription.OnGlobalKeyUp
+            , Store.onChange Msg.Subscription.OnPouchDBChange
+            , onFirebaseDatabaseChangeSub Msg.Subscription.OnFirebaseDatabaseChange
             ]
             |> Sub.map Msg.OnSubscriptionMsg
         , Subscriptions.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg

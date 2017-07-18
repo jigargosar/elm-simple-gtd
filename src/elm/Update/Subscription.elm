@@ -6,7 +6,8 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
-import Msg exposing (AppMsg(..), SubscriptionMsg(..))
+import Msg exposing (AppMsg(..))
+import Msg.Subscription exposing (SubscriptionMsg(..))
 import Todo.Msg
 import Tuple2
 import X.Function.Infix exposing (..)

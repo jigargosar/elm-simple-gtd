@@ -1,10 +1,14 @@
-port module Update exposing (update)
+module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg
+import Entity.Types exposing (EntityMsg)
 import Lazy
 import Model.EntityList
 import Model.Stores
+import Msg.CustomSync exposing (CustomSyncMsg)
+import Msg.GroupDoc exposing (GroupDocMsg)
+import Ports
 import TodoMsg
 import Update.Entity
 import Firebase.Main
@@ -33,9 +37,7 @@ import Json.Decode as D exposing (Decoder)
 import Types exposing (..)
 import Msg
 import Update.GroupDoc
-
-
-port persistLocalPref : D.Value -> Cmd msg
+import Toolkit.Operators exposing (..)
 
 
 type alias ReturnF =
@@ -59,12 +61,11 @@ update andThenUpdate msg =
             onViewTypeMsg andThenUpdate msg_
 
         OnPersistLocalPref ->
-            Return.effect_ (LocalPref.encodeLocalPref >> persistLocalPref)
+            Return.effect_ (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
 
-        -- non delegated
         OnCommonMsg msg_ ->
             CommonMsg.update msg_
 
@@ -72,19 +73,7 @@ update andThenUpdate msg =
             Update.Subscription.update andThenUpdate msg_
 
         OnGroupDocMsg msg_ ->
-            {- let
-                   config : AppModel -> Update.GroupDoc.Config AppMsg AppModel
-                   config oldModel =
-                       { updateEntityListCursorOnGroupDocChange =
-                           map (Stores.updateEntityListCursorOnGroupDocChange oldModel)
-                       }
-               in
-            -}
-            returnWith identity
-                (\oldModel ->
-                    Update.GroupDoc.update {- (config oldModel) -} msg_
-                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
-                )
+            onGroupDocMsg msg_
 
         OnExclusiveModeMsg msg_ ->
             let
@@ -107,40 +96,16 @@ update andThenUpdate msg =
                 Update.AppHeader.update config msg_
 
         OnCustomSyncMsg msg_ ->
-            let
-                config : Update.CustomSync.Config AppMsg AppModel
-                config =
-                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    }
-            in
-                Update.CustomSync.update config msg_
+            onCustomSyncMsg andThenUpdate msg_
 
         OnEntityMsg msg_ ->
-            let
-                config : Update.Entity.Config AppMsg AppModel
-                config =
-                    { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
-                    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
-                    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
-                    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
-                    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
-                    , onToggleTodoArchived = TodoMsg.onToggleDone >> andThenUpdate
-                    , onToggleTodoDeleted = TodoMsg.onToggleDeleted >> andThenUpdate
-                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
-                    , setDomFocusToFocusInEntityCmd =
-                        Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate
-                    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
-                    }
-            in
-                Update.Entity.update config msg_
+            onEntityMsg andThenUpdate msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             onLaunchBarMsgWithNow andThenUpdate msg_ now
 
         OnLaunchBarMsg msg_ ->
-            OnLaunchBarMsgWithNow msg_ |> returnWithNow
+            returnWithNow (OnLaunchBarMsgWithNow msg_)
 
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
@@ -169,20 +134,16 @@ onLaunchBarMsgWithNow : AndThenUpdate -> LaunchBarMsg -> Time -> ReturnF
 onLaunchBarMsgWithNow andThenUpdate msg now =
     let
         createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
-        createConfig =
-            (\m ->
-                { now = now
-                , activeProjects = (Model.GroupDocStore.getActiveProjects m)
-                , activeContexts = (Model.GroupDocStore.getActiveContexts m)
-                , onComplete = Msg.revertExclusiveMode |> andThenUpdate
-                , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-                , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
-                }
-            )
+        createConfig model =
+            { now = now
+            , activeProjects = (Model.GroupDocStore.getActiveProjects model)
+            , activeContexts = (Model.GroupDocStore.getActiveContexts model)
+            , onComplete = Msg.revertExclusiveMode |> andThenUpdate
+            , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+            , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
+            }
     in
-        returnWith
-            createConfig
-            (\config -> Update.LaunchBar.update config msg)
+        returnWith createConfig (Update.LaunchBar.update # msg)
 
 
 onTodoMsgWithNow : AndThenUpdate -> TodoMsg -> Time -> ReturnF
@@ -213,3 +174,46 @@ onTodoMsgWithNow andThenUpdate msg now =
                 Update.Todo.update (config oldModel) now msg
                     >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
             )
+
+
+onEntityMsg : AndThenUpdate -> EntityMsg -> ReturnF
+onEntityMsg andThenUpdate msg =
+    let
+        config : Update.Entity.Config AppMsg AppModel
+        config =
+            { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+            , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
+            , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
+            , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
+            , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
+            , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
+            , onToggleTodoArchived = TodoMsg.onToggleDone >> andThenUpdate
+            , onToggleTodoDeleted = TodoMsg.onToggleDeleted >> andThenUpdate
+            , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
+            , setDomFocusToFocusInEntityCmd =
+                Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate
+            , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
+            }
+    in
+        Update.Entity.update config msg
+
+
+onCustomSyncMsg : AndThenUpdate -> CustomSyncMsg -> ReturnF
+onCustomSyncMsg andThenUpdate msg =
+    let
+        config : Update.CustomSync.Config AppMsg AppModel
+        config =
+            { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
+            , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+            }
+    in
+        Update.CustomSync.update config msg
+
+
+onGroupDocMsg : GroupDocMsg -> ReturnF
+onGroupDocMsg msg =
+    returnWith identity
+        (\oldModel ->
+            Update.GroupDoc.update msg
+                >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
+        )

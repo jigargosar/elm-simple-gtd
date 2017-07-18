@@ -8,24 +8,15 @@ import Firebase.Types exposing (FirebaseMsg)
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.GroupDoc exposing (GroupDocMsg)
+import Msg.Subscription exposing (SubscriptionMsg)
 import Msg.ViewType exposing (ViewTypeMsg(..))
 import Time exposing (Time)
-import Json.Encode as E
 import X.Function.Infix exposing (..)
 import Todo.Msg exposing (TodoMsg)
 import Material
-import X.Keyboard
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Toolkit.Operators exposing (..)
-
-
-type SubscriptionMsg
-    = OnNowChanged Time
-    | OnKeyboardMsg X.Keyboard.Msg
-    | OnGlobalKeyUp X.Keyboard.Key
-    | OnPouchDBChange String E.Value
-    | OnFirebaseDatabaseChange String E.Value
 
 
 type AppMsg

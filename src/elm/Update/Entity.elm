@@ -1,11 +1,12 @@
 module Update.Entity exposing (..)
 
+import Document.Types exposing (DocId)
 import DomPorts
 import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
-import GroupDoc.Types exposing (GroupDocType(..))
+import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
 import Maybe.Extra
 import Model
@@ -14,72 +15,109 @@ import Model.Selection
 import Model.Stores
 import Model.Todo
 import Model.ViewType
-import Msg exposing (AppMsg)
 import Return exposing (andThen, map)
 import Set
+import Time exposing (Time)
 import Todo
-import TodoMsg
+import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
-import Types exposing (..)
+import Types.ViewType exposing (ViewType)
 import X.Record exposing (maybeOver)
 import X.Return exposing (returnWith)
-import Msg
 import X.Function.Infix exposing (..)
 
 
+type alias SubModel model =
+    { model
+        | contextStore : ContextStore
+        , editMode : ExclusiveMode
+        , focusInEntity : Entity
+        , now : Time
+        , projectStore : ProjectStore
+        , todoStore : TodoStore
+        , viewType : ViewType
+        , selectedEntityIdSet : Set.Set String
+    }
+
+
+type alias SubModelF model =
+    SubModel model -> SubModel model
+
+
+type alias SubReturn msg model =
+    Return.Return msg (SubModel model)
+
+
+type alias SubReturnF msg model =
+    SubReturn msg model -> SubReturn msg model
+
+
+type alias Config msg model =
+    { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , onToggleContextArchived : DocId -> SubReturnF msg model
+    , onToggleContextDeleted : DocId -> SubReturnF msg model
+    , onToggleProjectArchived : DocId -> SubReturnF msg model
+    , onToggleProjectDeleted : DocId -> SubReturnF msg model
+    , onToggleTodoArchived : DocId -> SubReturnF msg model
+    , onToggleTodoDeleted : DocId -> SubReturnF msg model
+    , switchToEntityListView : EntityListViewType -> SubReturnF msg model
+    , setDomFocusToFocusInEntityCmd : SubReturnF msg model
+    , onStartEditingTodo : TodoDoc -> SubReturnF msg model
+    }
+
+
 update :
-    (AppMsg -> ReturnF)
-    -> Entity.Types.EntityMsg
-    -> ReturnF
-update andThenUpdate msg =
+    Config msg model
+    -> EntityMsg
+    -> SubReturnF msg model
+update config msg =
     case msg of
         EM_StartAddingContext ->
             (createAddGroupDocForm ContextGroupDoc
                 |> XMGroupDocForm
-                >> Msg.onSetExclusiveMode
-                >> andThenUpdate
+                >> config.onSetExclusiveMode
             )
                 >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
             (createAddGroupDocForm ProjectGroupDoc
                 |> XMGroupDocForm
-                >> Msg.onSetExclusiveMode
-                >> andThenUpdate
+                >> config.onSetExclusiveMode
             )
                 >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->
-            onUpdate andThenUpdate entityId action
+            onUpdate config entityId action
 
         EM_EntityListKeyDown entityList { key } ->
             case key of
                 Key.ArrowUp ->
                     map (moveFocusBy -1 entityList)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        >> config.setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
                     map (moveFocusBy 1 entityList)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        >> config.setDomFocusToFocusInEntityCmd
 
                 _ ->
                     identity
 
 
-moveFocusBy : Int -> List Entity -> ModelF
+moveFocusBy : Int -> List Entity -> SubModelF model
 moveFocusBy =
     Entity.findEntityByOffsetIn >>> maybeOver Model.focusInEntity
 
 
 onUpdate :
-    (AppMsg -> ReturnF)
+    Config msg model
     -> EntityId
     -> Entity.Types.EntityUpdateAction
-    -> ReturnF
-onUpdate andThenUpdate entityId action =
+    -> SubReturnF msg model
+onUpdate config entityId action =
     case action of
         EUA_StartEditing ->
-            startEditingEntity andThenUpdate entityId
+            startEditingEntity config entityId
                 >> DomPorts.autoFocusInputRCmd
 
         EUA_SetFormText newName ->
@@ -89,34 +127,30 @@ onUpdate andThenUpdate entityId action =
                         XMGroupDocForm form ->
                             GroupDoc.Form.setName newName form
                                 |> XMGroupDocForm
-                                >> Msg.onSetExclusiveMode
-                                >> andThenUpdate
+                                >> config.onSetExclusiveMode
 
                         _ ->
                             identity
                 )
 
         EUA_ToggleDeleted ->
-            toggleDeleteEntity andThenUpdate entityId
-                >> andThenUpdate Msg.revertExclusiveMode
+            toggleDeleteEntity config entityId >> config.revertExclusiveMode
 
         EUA_ToggleArchived ->
             let
                 toggleArchivedEntity =
                     case entityId of
                         ContextId id ->
-                            Msg.onToggleContextArchived id
-                                |> andThenUpdate
+                            config.onToggleContextArchived id
 
                         ProjectId id ->
-                            Msg.onToggleProjectArchived id
-                                |> andThenUpdate
+                            config.onToggleProjectArchived id
 
                         TodoId id ->
-                            TodoMsg.onToggleDone id |> andThenUpdate
+                            config.onToggleTodoArchived id
             in
                 toggleArchivedEntity
-                    >> andThenUpdate Msg.revertExclusiveMode
+                    >> config.revertExclusiveMode
 
         EUA_OnFocusIn ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
@@ -133,8 +167,7 @@ onUpdate andThenUpdate entityId action =
                     in
                         entityId
                             |> toViewType model maybeEntityListViewType
-                            |> Msg.switchToEntityListView
-                            |> andThenUpdate
+                            |> config.switchToEntityListView
             in
                 returnWith identity (switchToEntityListViewFromEntity entityId)
 
@@ -154,37 +187,37 @@ toggleSetMember item set =
 --toggleDeleteEntity : EntityId -> ModelReturnF
 
 
-toggleDeleteEntity andThenUpdate entityId =
+toggleDeleteEntity config entityId =
     case entityId of
         ContextId id ->
-            Msg.onToggleContextDeleted id |> andThenUpdate
+            config.onToggleContextDeleted id
 
         ProjectId id ->
-            Msg.onToggleProjectDeleted id |> andThenUpdate
+            config.onToggleProjectDeleted id
 
         TodoId id ->
-            TodoMsg.onToggleDeleted id |> andThenUpdate
+            config.onToggleTodoDeleted id
 
 
-startEditingEntity : (AppMsg -> ReturnF) -> EntityId -> ReturnF
-startEditingEntity andThenUpdate entityId =
+startEditingEntity : Config msg model -> EntityId -> SubReturnF msg model
+startEditingEntity config entityId =
     case entityId of
         ContextId id ->
             X.Return.withMaybe
                 (Model.GroupDocStore.findContextById id)
-                (createEditContextForm >> XMGroupDocForm >> Msg.onSetExclusiveMode >> andThenUpdate)
+                (createEditContextForm >> XMGroupDocForm >> config.onSetExclusiveMode)
 
         ProjectId id ->
             X.Return.withMaybe
                 (Model.GroupDocStore.findProjectById id)
-                (createEditProjectForm >> XMGroupDocForm >> Msg.onSetExclusiveMode >> andThenUpdate)
+                (createEditProjectForm >> XMGroupDocForm >> config.onSetExclusiveMode)
 
         TodoId id ->
             X.Return.withMaybe (Model.Todo.findTodoById id)
-                (TodoMsg.onStartEditingTodo >> andThenUpdate)
+                (config.onStartEditingTodo)
 
 
-toViewType : AppModel -> Maybe EntityListViewType -> EntityId -> EntityListViewType
+toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType
 toViewType appModel maybeCurrentEntityListViewType entityId =
     case entityId of
         ContextId id ->

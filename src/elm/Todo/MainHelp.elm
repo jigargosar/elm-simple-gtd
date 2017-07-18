@@ -123,7 +123,7 @@ findAndSnoozeOverDueTodo model =
             ?+> (Document.getId >> snooze)
 
 
-onSaveTodoForm form =
+onSaveTodoForm config form =
     case form.mode of
         TFM_Edit editMode ->
             let
@@ -142,15 +142,20 @@ onSaveTodoForm form =
                         identity
 
         TFM_Add addMode ->
-            saveAddTodoForm addMode form |> andThen
+            saveAddTodoForm config addMode form |> andThen
 
 
 inboxEntity =
     Entity.Types.createContextEntity Context.null
 
 
-saveAddTodoForm : AddTodoFormMode -> TodoForm -> SubModel model -> SubReturn msg model
-saveAddTodoForm addMode form model =
+saveAddTodoForm :
+    Config msg model
+    -> AddTodoFormMode
+    -> TodoForm
+    -> SubModel model
+    -> SubReturn msg model
+saveAddTodoForm config addMode form model =
     Stores.insertTodo (Todo.init model.now form.text) model
         |> Tuple.mapFirst getDocId
         |> uncurry
@@ -181,7 +186,7 @@ saveAddTodoForm addMode form model =
                                         (TA_SetProject project)
                         )
                         todoId
-                        >> Return.map (Stores.setFocusInEntityWithTodoId todoId)
+                        >> config.setFocusInEntityWithTodoId todoId
             )
 
 

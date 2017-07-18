@@ -70,4 +70,4 @@ update config now msg =
             onUpdateTodoFormAction config form action
 
         OnSaveTodoForm form ->
-            onSaveTodoForm form
+            onSaveTodoForm config form

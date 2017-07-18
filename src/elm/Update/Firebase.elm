@@ -25,6 +25,26 @@ type alias AppReturnF =
     Return.ReturnF AppMsg AppModel
 
 
+type alias SubModel model =
+    { model
+        | user : FirebaseUser
+        , fcmToken : FCMToken
+        , firebaseClient : FirebaseClient
+        , signInModel : Firebase.SignIn.Model
+    }
+
+
+type alias SubReturnF msg model =
+    Return.ReturnF msg (SubModel model)
+
+
+type alias Config msg model =
+    { onStartSetupAddTodo : SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    }
+
+
 update :
     (Msg.AppMsg -> AppReturnF)
     -> FirebaseMsg
@@ -82,7 +102,7 @@ update andThenUpdate msg =
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
                         Return.map (setUser user)
-                            >> andThenUpdate (Msg.OnFirebaseMsg OnFBAfterUserChanged)
+                            >> update andThenUpdate OnFBAfterUserChanged
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
                             >> startSyncWithFirebase
@@ -103,20 +123,16 @@ update andThenUpdate msg =
                 >> maybeEffect firebaseUpdateClientCmd
 
 
-setupOnDisconnectCmd client uid =
-    firebaseSetupOnDisconnect ( uid, client.id )
-
-
-startSyncCmd =
-    fireStartSync
-
-
-updateClientCmd client uid =
-    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
-
-
 signInModel =
     X.Record.fieldLens .signInModel (\s b -> { b | signInModel = s })
+
+
+firebaseClient =
+    X.Record.fieldLens .firebaseClient (\s b -> { b | firebaseClient = s })
+
+
+user =
+    X.Record.fieldLens .user (\s b -> { b | user = s })
 
 
 overSignInModel =
@@ -154,9 +170,13 @@ setUser =
     set user
 
 
-firebaseClient =
-    X.Record.fieldLens .firebaseClient (\s b -> { b | firebaseClient = s })
+setupOnDisconnectCmd client uid =
+    firebaseSetupOnDisconnect ( uid, client.id )
 
 
-user =
-    X.Record.fieldLens .user (\s b -> { b | user = s })
+startSyncCmd =
+    fireStartSync
+
+
+updateClientCmd client uid =
+    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )

@@ -23,7 +23,7 @@ import Tuple2
 import X.List
 
 
-updateEntityListCursorOnGroupDocChange oldModel newModel =
+updateEntityListCursor focusNextOnIndexChange oldModel newModel =
     let
         updateEntityListCursorFromEntityIndexTuple model indexTuple =
             let
@@ -37,52 +37,24 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
                     setFocusInEntityByIndex
                         index
                         (createEntityListForCurrentView model)
-            in
-                model
-                    |> case indexTuple of
-                        -- not we want focus to remain on group entity, when edited, since its sort order may change. But if removed from view, we want to focus on next entity.
-                        {- ( Just oldIndex, Just newIndex ) ->
-                           if oldIndex < newIndex then
-                               setFocusInIndex (oldIndex)
-                           else if oldIndex > newIndex then
-                               setFocusInIndex (oldIndex + 1)
-                           else
-                               identity
-                        -}
-                        ( Just oldIndex, Nothing ) ->
-                            setFocusInIndex oldIndex
 
-                        _ ->
+                focusNext oldIndex newIndex =
+                    case compare oldIndex newIndex of
+                        LT ->
+                            setFocusInIndex (oldIndex)
+
+                        GT ->
+                            setFocusInIndex (oldIndex + 1)
+
+                        EQ ->
                             identity
-    in
-        ( oldModel, newModel )
-            |> Tuple2.mapBoth
-                (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
-            |> updateEntityListCursorFromEntityIndexTuple newModel
-
-
-updateEntityListCursorOnTodoChange oldModel newModel =
-    let
-        updateEntityListCursorFromEntityIndexTuple model indexTuple =
-            let
-                setFocusInEntityByIndex index entityList model =
-                    X.List.clampIndex index entityList
-                        |> (List.getAt # entityList)
-                        |> Maybe.orElse (List.head entityList)
-                        |> maybeSetIn model focusInEntity
-
-                setFocusInIndex index =
-                    setFocusInEntityByIndex
-                        index
-                        (createEntityListForCurrentView model)
             in
                 model
                     |> case indexTuple of
+                        -- note we want focus to remain on group entity, when edited, since its sort order may change. But if removed from view, we want to focus on next entity.
                         ( Just oldIndex, Just newIndex ) ->
-                            if oldIndex < newIndex then
-                                setFocusInIndex (oldIndex)
-                            else if oldIndex > newIndex then
-                                setFocusInIndex (oldIndex + 1)
+                            if focusNextOnIndexChange then
+                                focusNext oldIndex newIndex
                             else
                                 identity
 
@@ -96,6 +68,14 @@ updateEntityListCursorOnTodoChange oldModel newModel =
             |> Tuple2.mapBoth
                 (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
             |> updateEntityListCursorFromEntityIndexTuple newModel
+
+
+updateEntityListCursorOnGroupDocChange =
+    updateEntityListCursor False
+
+
+updateEntityListCursorOnTodoChange =
+    updateEntityListCursor True
 
 
 getMaybeFocusInEntityIndex entityList model =

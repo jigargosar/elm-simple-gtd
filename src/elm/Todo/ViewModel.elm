@@ -10,9 +10,9 @@ import Regex
 import Set
 import Store
 import Time exposing (Time)
+import Todo.ItemView exposing (ScheduleViewModel, TodoViewModel)
 import Todo.Msg
 import Todo.Types exposing (TodoDoc)
-import Todo.View exposing (ScheduleViewModel, TodoViewModel)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)

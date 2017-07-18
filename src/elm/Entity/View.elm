@@ -10,6 +10,7 @@ import Html
 import List.Extra
 import Maybe.Extra
 import Model.EntityTree
+import Todo.ItemView
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
 import Toolkit.Operators exposing (..)
@@ -18,7 +19,6 @@ import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Msg exposing (..)
-import Todo.View exposing (TodoKeyedItemView, TodoViewModel)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import View.Shared exposing (badge)
@@ -90,7 +90,7 @@ keyedViewList grouping maybeFocusInEntity model =
             in
                 todo
                     |> Todo.ViewModel.createTodoViewModel model isFocusable
-                    |> Todo.View.keyedItem
+                    |> Todo.ItemView.keyedItem
 
         todoListView : List TodoDoc -> List KeyedView
         todoListView =

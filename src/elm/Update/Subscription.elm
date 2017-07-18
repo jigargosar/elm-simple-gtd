@@ -1,4 +1,4 @@
-module Update.Subscription exposing (..)
+module Update.Subscription exposing (Config, update)
 
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
@@ -9,20 +9,15 @@ import Model.Selection
 import Model.Todo exposing (todoStore)
 import Msg.Subscription exposing (SubscriptionMsg(..))
 import Set
-import Todo.Msg
-import Tuple2
 import X.Function.Infix exposing (..)
 import Return exposing (map)
 import Time exposing (Time)
 import X.Keyboard exposing (KeyboardState)
-import X.Record exposing (maybeOverT2, over, overReturn)
+import X.Record exposing (..)
 import X.Return exposing (rAndThenMaybe)
 import Keyboard.Extra as Key exposing (Key)
 import Store
 import Todo.Types exposing (TodoDoc, TodoStore)
-import Toolkit.Operators exposing (..)
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
@@ -138,15 +133,21 @@ setNow now model =
 
 
 keyboardState =
-    X.Record.fieldLens .keyboardState (\s b -> { b | keyboardState = s })
+    fieldLens .keyboardState (\s b -> { b | keyboardState = s })
 
 
-updateKeyboardState : (KeyboardState -> KeyboardState) -> SubModelF model
+
+--updateKeyboardState : (KeyboardState -> KeyboardState) -> SubModelF model
+
+
 updateKeyboardState =
     over keyboardState
 
 
-upsertEncodedDocOnPouchDBChange : String -> E.Value -> SubModel model -> Maybe ( Entity, SubModel model )
+
+--upsertEncodedDocOnPouchDBChange : String -> E.Value -> SubModel model -> Maybe ( Entity, SubModel model )
+
+
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -165,7 +166,10 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
             (\_ -> Nothing)
 
 
-upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> SubModel model -> Cmd msg
+
+--upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> SubModel model -> Cmd msg
+
+
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->

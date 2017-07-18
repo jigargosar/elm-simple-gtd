@@ -4,7 +4,7 @@ import Update.AppDrawer
 import CommonMsg
 import Model.GroupDocStore
 import Ports
-import Firebase.Main
+import Update.Firebase
 import LocalPref
 import Material
 import Msg exposing (..)
@@ -170,7 +170,7 @@ update andThenUpdate msg =
                     )
 
         OnFirebaseMsg msg_ ->
-            Firebase.Main.update andThenUpdate msg_
+            Update.Firebase.update andThenUpdate msg_
 
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg

@@ -2,7 +2,6 @@ module Update.AppDrawer exposing (..)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
-import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Model
 import Return
 import X.Record exposing (over, set)

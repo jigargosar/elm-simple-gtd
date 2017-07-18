@@ -7,7 +7,7 @@ import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
-import Model.TodoStore exposing (findTodoById)
+import Model.TodoStore exposing (findTodoById, todoStore)
 import Set exposing (Set)
 import Store
 import Stores
@@ -17,6 +17,7 @@ import Todo.FormTypes exposing (..)
 import Todo.MainHelpPort exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import Tuple2
 import ViewType exposing (ViewType)
 import X.Record as Record exposing (overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith)
@@ -66,12 +67,21 @@ type alias Config msg model =
     }
 
 
+findAndUpdateAllTodos findFn action model =
+    let
+        updateFn =
+            Todo.update action
+    in
+        overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
+            |> Tuple2.swap
+
+
 
 --updateTodo : TodoAction -> DocId -> ModelReturnF
 
 
 updateTodo action todoId =
-    Stores.findAndUpdateAllTodos (Document.hasId todoId) action
+    findAndUpdateAllTodos (Document.hasId todoId) action
 
 
 
@@ -79,7 +89,7 @@ updateTodo action todoId =
 
 
 updateAllTodos action idSet model =
-    Stores.findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
+    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
 
 updateTodoAndMaybeAlsoSelected action todoId model =

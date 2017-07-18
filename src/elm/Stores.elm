@@ -90,16 +90,6 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
             |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
-findAndUpdateAllTodos findFn action model =
-    let
-        updateFn =
-            Todo.update action
-    in
-        X.Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
-            |> Tuple2.swap
-            |> Return.map (updateEntityListCursor model)
-
-
 updateEntityListCursor oldModel newModel =
     ( oldModel, newModel )
         |> Tuple2.mapBoth

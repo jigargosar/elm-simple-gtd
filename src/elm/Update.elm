@@ -76,7 +76,11 @@ update andThenUpdate msg =
                         map (Stores.updateEntityListCursorOnGroupDocChange oldModel)
                     }
             in
-                returnWith identity (\model -> Update.GroupDoc.update (config model) msg_)
+                returnWith identity
+                    (\oldModel ->
+                        Update.GroupDoc.update (config oldModel) msg_
+                            >> map (Stores.updateEntityListCursorOnGroupDocChange oldModel)
+                    )
 
         OnExclusiveModeMsg msg_ ->
             let

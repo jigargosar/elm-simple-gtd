@@ -1,6 +1,6 @@
 module Update exposing (update)
 
-import AppDrawer.Main
+import Update.AppDrawer
 import CommonMsg
 import Model.GroupDocStore
 import Ports
@@ -173,5 +173,5 @@ update andThenUpdate msg =
             Firebase.Main.update andThenUpdate msg_
 
         OnAppDrawerMsg msg ->
-            AppDrawer.Main.update msg
+            Update.AppDrawer.update msg
                 >> andThenUpdate Msg.OnPersistLocalPref

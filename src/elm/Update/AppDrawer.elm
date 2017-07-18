@@ -1,4 +1,4 @@
-module AppDrawer.Main exposing (..)
+module Update.AppDrawer exposing (..)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))

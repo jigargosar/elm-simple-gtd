@@ -54,6 +54,7 @@ type alias TodoViewModel =
     , tabindexAV : Int
     , isSelected : Bool
     , mdl : Material.Model
+    , noop : AppMsg
     }
 
 
@@ -191,6 +192,7 @@ createTodoViewModel appM isFocusable todo =
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , mdl = appM.mdl
+        , noop = Msg.noop
         }
 
 

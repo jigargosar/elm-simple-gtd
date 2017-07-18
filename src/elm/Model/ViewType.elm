@@ -5,7 +5,7 @@ import Types.ViewType exposing (ViewType(EntityListView))
 
 
 maybeGetEntityListViewType model =
-    case model.mainViewType of
+    case model.viewType of
         EntityListView viewType ->
             Just viewType
 
@@ -14,7 +14,7 @@ maybeGetEntityListViewType model =
 
 
 getMainViewType =
-    .mainViewType
+    .viewType
 
 
 defaultView =

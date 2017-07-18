@@ -55,8 +55,8 @@ sidebarContent appVM model =
         div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
             [ ul []
                 ([]
-                    ++ entityGroupView contexts model.mainViewType
-                    ++ entityGroupView projects model.mainViewType
+                    ++ entityGroupView contexts model.viewType
+                    ++ entityGroupView projects model.viewType
                     ++ [ Mat.divider ]
                     ++ [ onSetEntityListViewItem "sort" Entity.Types.RecentView "Recent"
                        , onSetEntityListViewItem "delete" Entity.Types.BinView "Bin"
@@ -68,16 +68,16 @@ sidebarContent appVM model =
             ]
 
 
-entityGroupView vm mainViewType =
+entityGroupView vm viewType =
     let
-        { viewType, onAddClicked, onToggleExpanded, isExpanded } =
+        { onAddClicked, onToggleExpanded, isExpanded } =
             vm
 
         isCurrentView =
-            EntityListView viewType == mainViewType
+            EntityListView vm.viewType == viewType
 
         fireSwitchView =
-            Msg.switchToView (EntityListView viewType)
+            Msg.switchToView (EntityListView vm.viewType)
 
         fireSmart =
             if isCurrentView then

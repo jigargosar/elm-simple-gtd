@@ -31,11 +31,11 @@ create model =
         projectsVM =
             AppDrawer.GroupViewModel.projects model
 
-        mainViewType =
-            model.mainViewType
+        viewType =
+            model.viewType
 
         ( viewName, headerBackgroundColor ) =
-            getViewInfo mainViewType projectsVM contextsVM model
+            getViewInfo viewType projectsVM contextsVM model
 
         editMode =
             model.editMode
@@ -51,7 +51,7 @@ create model =
         }
 
 
-getViewInfo mainViewType projectsVM contextsVM model =
+getViewInfo viewType projectsVM contextsVM model =
     let
         entityById id =
             List.find (.id >> equals id)
@@ -64,7 +64,7 @@ getViewInfo mainViewType projectsVM contextsVM model =
                 >>?= { name = "o_O", backgroundColor = sgtdBlue }
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
-        case mainViewType of
+        case viewType of
             EntityListView viewType ->
                 case viewType of
                     Entity.Types.ContextsView ->

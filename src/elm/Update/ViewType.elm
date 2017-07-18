@@ -7,7 +7,7 @@ import Types.ViewType exposing (..)
 
 
 type alias SubModel model =
-    { model | mainViewType : ViewType }
+    { model | viewType : ViewType }
 
 
 type alias SubReturnF msg model =
@@ -36,5 +36,5 @@ update config msg =
             ContextsView |> SwitchToEntityListView >> update config
 
 
-switchToView mainViewType model =
-    { model | mainViewType = mainViewType }
+switchToView viewType model =
+    { model | viewType = viewType }

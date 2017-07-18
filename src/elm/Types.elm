@@ -30,7 +30,7 @@ type alias AppModel =
     , projectStore : ProjectStore
     , contextStore : ContextStore
     , editMode : ExclusiveMode
-    , mainViewType : ViewType
+    , viewType : ViewType
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String
     , user : FirebaseUser

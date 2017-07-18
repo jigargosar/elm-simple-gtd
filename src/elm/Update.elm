@@ -5,6 +5,7 @@ import CommonMsg
 import Lazy
 import Model.EntityList
 import Model.Stores
+import TodoMsg
 import Update.Entity
 import Firebase.Main
 import LaunchBar.Messages exposing (LaunchBarMsg)
@@ -116,7 +117,23 @@ update andThenUpdate msg =
                 Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
-            Update.Entity.update andThenUpdate msg_
+            let
+                config =
+                    { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
+                    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
+                    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
+                    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
+                    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
+                    , onToggleTodoArchived = TodoMsg.onToggleDone >> andThenUpdate
+                    , onToggleTodoDeleted = TodoMsg.onToggleDeleted >> andThenUpdate
+                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
+                    , setDomFocusToFocusInEntityCmd =
+                        Model.setDomFocusToFocusInEntityCmd |> andThenUpdate
+                    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
+                    }
+            in
+                Update.Entity.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             onLaunchBarMsgWithNow andThenUpdate msg_ now

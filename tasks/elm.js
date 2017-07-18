@@ -82,13 +82,13 @@ export const parseWPD = function() {
     // run("tail -F wp-dev-server.log")
 }
 
-function ruiHelp(elmFile) {
+const ruiHelp = _.curry((tmpFile, elmFile) =>{
     if (_.isNil(elmFile) || !_.endsWith(".elm", elmFile) || !fs.existsSync(elmFile)) {
         console.error("Invalid file:", elmFile)
         return
     }
 
-    const tmpFile = tempy.file({extension: 'log'});
+
     run(`echo " " >> ${elmFile}`)
     run(`elm-make --warn ${elmFile} --output /dev/null 2> ${tmpFile}`)
     LineDriver.read({
@@ -120,7 +120,7 @@ function ruiHelp(elmFile) {
     // console.log(tmpFile)
     run(`elm-format --yes ${elmFile}`)
 }
-
+)
 
 function sleep(ms) {
     return new Promise(resolve => {
@@ -134,7 +134,9 @@ export async function rui(...fileNames) {
     // run("pgrep -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
     // run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
     // await sleep(100)
+    const tmpFile = tempy.file({extension: 'log'});
     console.log(fileNames)
-    _.forEach(ruiHelp, fileNames)
+    _.forEach(ruiHelp(tmpFile), fileNames)
+    run("rimraf " + tmpFile)
 
 }

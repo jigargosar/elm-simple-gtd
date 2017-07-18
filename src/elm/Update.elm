@@ -173,4 +173,5 @@ update andThenUpdate msg =
             Firebase.Main.update andThenUpdate msg_
 
         OnAppDrawerMsg msg ->
-            AppDrawer.Main.update andThenUpdate msg
+            AppDrawer.Main.update msg
+                >> andThenUpdate Msg.OnPersistLocalPref

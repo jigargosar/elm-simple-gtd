@@ -2,6 +2,7 @@ module AppDrawer.Main exposing (..)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
+import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Model
 import Msg exposing (AppMsg)
 import Return
@@ -9,8 +10,14 @@ import Types exposing (..)
 import X.Record exposing (over, set)
 
 
-type alias AppReturnF =
-    Return.ReturnF AppMsg AppModel
+type alias SubModel model =
+    { model
+        | appDrawerModel : AppDrawer.Model.Model
+    }
+
+
+type alias SubReturnF msg model =
+    Return.ReturnF msg (SubModel model)
 
 
 mapOver =
@@ -18,11 +25,10 @@ mapOver =
 
 
 update :
-    (Msg.AppMsg -> AppReturnF)
-    -> AppDrawer.Types.Msg
-    -> AppReturnF
-update andThenUpdate msg =
-    (case msg of
+    AppDrawer.Types.Msg
+    -> SubReturnF msg model
+update msg =
+    case msg of
         OnToggleContextsExpanded ->
             mapOver (toggleGroupListExpanded contexts)
 
@@ -40,5 +46,3 @@ update andThenUpdate msg =
 
         OnWindowResizeTurnOverlayOff ->
             mapOver (set isOverlayOpen False)
-    )
-        >> andThenUpdate Msg.OnPersistLocalPref

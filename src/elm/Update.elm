@@ -3,6 +3,8 @@ port module Update exposing (update)
 import AppDrawer.Main
 import CommonMsg
 import Lazy
+import Model.EntityList
+import Model.Stores
 import Update.Entity
 import Firebase.Main
 import LaunchBar.Messages exposing (LaunchBarMsg)
@@ -13,7 +15,6 @@ import Model.GroupDocStore
 import Model.Selection
 import Msg exposing (..)
 import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
-import Stores
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Types exposing (AppModel)
@@ -81,7 +82,7 @@ update andThenUpdate msg =
             returnWith identity
                 (\oldModel ->
                     Update.GroupDoc.update {- (config oldModel) -} msg_
-                        >> map (Stores.updateEntityListCursorOnGroupDocChange oldModel)
+                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
                 )
 
         OnExclusiveModeMsg msg_ ->
@@ -175,22 +176,22 @@ onTodoMsgWithNow andThenUpdate msg now =
             , setFocusInEntityWithTodoId =
                 (\todoId ->
                     -- todo: things concerning todoId should probably be moved into todo update module
-                    map (Stores.setFocusInEntityWithTodoId todoId)
+                    map (Model.Stores.setFocusInEntityWithTodoId todoId)
                         >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                 )
             , setFocusInEntity =
                 (\entity ->
-                    map (Stores.setFocusInEntity entity)
+                    map (Model.setFocusInEntity entity)
                         >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                 )
             , closeNotification = Msg.OnCloseNotification >> andThenUpdate
             , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
             , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-            , currentViewEntityList = Lazy.lazy (\_ -> Stores.createEntityListForCurrentView model)
+            , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
             }
     in
         returnWith identity
             (\oldModel ->
                 Update.Todo.update (config oldModel) now msg
-                    >> map (Stores.updateEntityListCursorOnTodoChange oldModel)
+                    >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
             )

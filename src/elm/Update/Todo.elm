@@ -1,7 +1,6 @@
 module Update.Todo exposing (..)
 
 import Return exposing (andThen)
-import Stores
 import Todo.MainHelp exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)

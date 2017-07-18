@@ -11,12 +11,12 @@ import Maybe.Extra
 import Model
 import Model.GroupDocStore
 import Model.Selection
+import Model.Stores
 import Model.Todo
 import Model.ViewType
 import Msg exposing (AppMsg)
 import Return exposing (andThen, map)
 import Set
-import Stores
 import Todo
 import Todo.Msg
 import Todo.Types exposing (TodoAction(..))
@@ -121,7 +121,7 @@ onUpdate andThenUpdate entityId action =
                     >> andThenUpdate Msg.revertExclusiveMode
 
         EUA_OnFocusIn ->
-            map (Stores.setFocusInEntityWithEntityId entityId)
+            map (Model.Stores.setFocusInEntityWithEntityId entityId)
 
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)

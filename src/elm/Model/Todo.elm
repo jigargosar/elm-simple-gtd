@@ -8,10 +8,6 @@ todoStore =
     X.Record.fieldLens .todoStore (\s b -> { b | todoStore = s })
 
 
-focusInEntity =
-    X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
-
-
 
 --findTodoById : DocId -> AppModel -> Maybe TodoDoc
 

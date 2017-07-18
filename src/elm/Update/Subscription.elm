@@ -3,36 +3,69 @@ module Update.Subscription exposing (..)
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
+import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
-import Msg exposing (AppMsg(..))
 import Msg.Subscription exposing (SubscriptionMsg(..))
+import Set
 import Todo.Msg
 import Tuple2
 import X.Function.Infix exposing (..)
 import Return exposing (map)
 import Time exposing (Time)
-import Types exposing (..)
 import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (maybeOverT2, over, overReturn)
-import X.Return
-import Keyboard.Extra as Key
-import TodoMsg
-import Msg
+import X.Return exposing (rAndThenMaybe)
+import Keyboard.Extra as Key exposing (Key)
 import Store
+import Todo.Types exposing (TodoDoc, TodoStore)
+import Toolkit.Operators exposing (..)
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
-type alias AppModelF =
-    AppModel -> AppModel
+type alias SubModel model =
+    { model
+        | now : Time
+        , todoStore : TodoStore
+        , projectStore : ProjectStore
+        , contextStore : ContextStore
+        , editMode : ExclusiveMode
+        , selectedEntityIdSet : Set.Set String
+        , keyboardState : KeyboardState
+    }
+
+
+type alias SubModelF model =
+    SubModel model -> SubModel model
+
+
+type alias SubReturn msg model =
+    Return.Return msg (SubModel model)
+
+
+type alias SubReturnF msg model =
+    SubReturn msg model -> SubReturn msg model
 
 
 type alias Config msg model =
-    {}
+    { noop : SubReturnF msg model
+    , onStartAddingTodoToInbox : SubReturnF msg model
+    , onStartAddingTodoWithFocusInEntityAsReference : SubReturnF msg model
+    , openLaunchBarMsg : SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , afterTodoUpsert : TodoDoc -> SubReturnF msg model
+    }
 
 
-update andThenUpdate subMsg =
-    case subMsg of
+update :
+    Config msg model
+    -> SubscriptionMsg
+    -> SubReturnF msg model
+update config msg =
+    case msg of
         OnNowChanged now ->
             map (setNow now)
 
@@ -41,30 +74,28 @@ update andThenUpdate subMsg =
                 >> focusSelectorIfNoFocusRCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
-            onGlobalKeyUp andThenUpdate key
+            onGlobalKeyUp config key
 
         OnPouchDBChange dbName encodedDoc ->
             let
-                afterEntityUpsertOnPouchDBChange entity =
-                    case entity of
-                        TodoEntity todo ->
-                            TodoMsg.afterUpsert todo
+                afterEntityUpsertOnPouchDBChange ( entity, model ) =
+                    map (\_ -> model)
+                        >> case entity of
+                            TodoEntity todo ->
+                                config.afterTodoUpsert todo
 
-                        _ ->
-                            Msg.noop
+                            _ ->
+                                config.noop
             in
-                X.Return.rAndThenMaybe
-                    (upsertEncodedDocOnPouchDBChange dbName encodedDoc
-                        >>? (Tuple2.mapEach afterEntityUpsertOnPouchDBChange Return.singleton
-                                >> uncurry andThenUpdate
-                            )
-                    )
+                X.Return.returnWithMaybe2 identity
+                    (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
-onGlobalKeyUp andThenUpdate key =
+onGlobalKeyUp : Config msg model -> Key -> SubReturnF msg model
+onGlobalKeyUp config key =
     X.Return.returnWith (.editMode)
         (\editMode ->
             case ( key, editMode ) of
@@ -72,7 +103,7 @@ onGlobalKeyUp andThenUpdate key =
                     let
                         clear =
                             map (Model.Selection.clearSelection)
-                                >> andThenUpdate Msg.revertExclusiveMode
+                                >> config.revertExclusiveMode
                     in
                         case key of
                             Key.Escape ->
@@ -82,26 +113,26 @@ onGlobalKeyUp andThenUpdate key =
                                 clear
 
                             Key.CharQ ->
-                                andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+                                config.onStartAddingTodoWithFocusInEntityAsReference
 
                             Key.CharI ->
-                                andThenUpdate TodoMsg.onStartAddingTodoToInbox
+                                config.onStartAddingTodoToInbox
 
                             Key.Slash ->
-                                andThenUpdate Msg.openLaunchBarMsg
+                                config.openLaunchBarMsg
 
                             _ ->
                                 identity
 
                 ( Key.Escape, _ ) ->
-                    andThenUpdate Msg.revertExclusiveMode
+                    config.revertExclusiveMode
 
                 _ ->
                     identity
         )
 
 
-setNow : Time -> AppModelF
+setNow : Time -> SubModelF model
 setNow now model =
     { model | now = now }
 
@@ -110,15 +141,12 @@ keyboardState =
     X.Record.fieldLens .keyboardState (\s b -> { b | keyboardState = s })
 
 
-updateKeyboardState : (KeyboardState -> KeyboardState) -> AppModelF
+updateKeyboardState : (KeyboardState -> KeyboardState) -> SubModelF model
 updateKeyboardState =
     over keyboardState
 
 
-
---upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
-
-
+upsertEncodedDocOnPouchDBChange : String -> E.Value -> SubModel model -> Maybe ( Entity, SubModel model )
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -137,10 +165,7 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
             (\_ -> Nothing)
 
 
-
---upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
-
-
+upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> SubModel model -> Cmd msg
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->

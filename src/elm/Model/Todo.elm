@@ -1,16 +1,17 @@
 module Model.Todo exposing (..)
 
+import Document.Types exposing (DocId)
 import Store
-import X.Record
+import Todo.Types exposing (TodoDoc)
+import Types exposing (..)
+import X.Record exposing (..)
 
 
+todoStore : Field (HasTodoStore a)
 todoStore =
-    X.Record.fieldLens .todoStore (\s b -> { b | todoStore = s })
+    fieldLens .todoStore (\s b -> { b | todoStore = s })
 
 
-
---findTodoById : DocId -> AppModel -> Maybe TodoDoc
-
-
+findTodoById : DocId -> HasTodoStore a -> Maybe TodoDoc
 findTodoById id =
     .todoStore >> Store.findById id

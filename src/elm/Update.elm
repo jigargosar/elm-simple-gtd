@@ -60,7 +60,21 @@ update andThenUpdate msg =
             CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
-            Update.Subscription.update andThenUpdate msg_
+            let
+                config : Update.Subscription.Config AppMsg AppModel
+                config =
+                    { noop = andThenUpdate Msg.noop
+                    , onStartAddingTodoToInbox =
+                        andThenUpdate TodoMsg.onStartAddingTodoToInbox
+                    , onStartAddingTodoWithFocusInEntityAsReference =
+                        andThenUpdate
+                            TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+                    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
+                    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
+                    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
+                    }
+            in
+                Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
             returnWith identity

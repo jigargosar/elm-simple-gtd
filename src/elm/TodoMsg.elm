@@ -120,5 +120,5 @@ onSetContext id =
         >> Msg.OnTodoMsg
 
 
-afterUpsert todo =
+afterTodoUpsert todo =
     Todo.Msg.AfterUpsert todo |> OnTodoMsg

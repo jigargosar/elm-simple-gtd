@@ -18,7 +18,6 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Mat
 import Model
-import Model exposing (commonMsg)
 import Project
 import Regex
 import RegexHelper
@@ -160,15 +159,15 @@ createTodoViewModel appM isFocusable todo =
                         Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
 
                     _ ->
-                        Model.noop
+                        Msg.noop
             else
-                Model.noop
+                Msg.noop
 
         startEditingMsg =
             if isFocusable then
                 TodoMsg.onStartEditingTodoText todo
             else
-                Model.noop
+                Msg.noop
 
         toggleDeleteMsg =
             createEntityUpdateMsg Entity.Types.EUA_ToggleDeleted
@@ -258,7 +257,7 @@ parseDisplayText { displayText, tabindexAV } =
             a
                 [ href url
                 , target "_blank"
-                , onMouseDownStopPropagation Model.noop
+                , onMouseDownStopPropagation Msg.noop
                 , tabindex tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
@@ -366,11 +365,11 @@ editTodoTextView form appModel =
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Model.noop)
+            , onKeyDownStopPropagation (\_ -> Msg.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
                 [ div [ class "modal-content" ]
-                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.noop) ]
+                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Msg.noop) ]
                         [ textarea
                             [ class "materialize-textarea auto-focus"
                             , defaultValue todoText
@@ -389,9 +388,9 @@ new form =
     div
         [ class "overlay"
         , onClickStopPropagation fireCancel
-        , onKeyDownStopPropagation (\_ -> Model.noop)
+        , onKeyDownStopPropagation (\_ -> Msg.noop)
         ]
-        [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
+        [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
             [ div [ class "modal-content" ]
                 [ div [ class "input-field" ]
                     [ textarea
@@ -420,12 +419,12 @@ editTodoSchedulePopupView form =
     div
         [ class "overlay"
         , onClickStopPropagation Msg.revertExclusiveMode
-        , onKeyDownStopPropagation (\_ -> Model.noop)
+        , onKeyDownStopPropagation (\_ -> Msg.noop)
         ]
         [ div
             [ id "popup-menu"
             , class "z-depth-4 static"
-            , onClickStopPropagation Model.noop
+            , onClickStopPropagation Msg.noop
             ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , div [ class "input-field" ]

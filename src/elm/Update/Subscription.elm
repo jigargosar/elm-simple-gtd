@@ -43,7 +43,7 @@ update andThenUpdate subMsg =
                             Todo.Msg.AfterUpsert model |> OnTodoMsg
 
                         _ ->
-                            Model.noop
+                            Msg.noop
             in
                 X.Return.rAndThenMaybe
                     (upsertEncodedDocOnPouchDBChange dbName encodedDoc

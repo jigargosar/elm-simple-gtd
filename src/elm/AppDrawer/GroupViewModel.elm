@@ -135,7 +135,7 @@ create getTodoListByEntityId config entity =
                 if bool then
                     Msg.switchToView (config.getViewType id |> EntityListView)
                 else
-                    Model.noop
+                    Msg.noop
         , icon = icon
         , appHeader = appHeader
         }

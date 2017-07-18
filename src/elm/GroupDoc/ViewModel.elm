@@ -10,7 +10,6 @@ import GroupDoc.Types
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
-import Model exposing (commonMsg)
 import Todo
 import Model
 import Project
@@ -82,13 +81,13 @@ create config todoList groupDoc =
 
         toggleDeleteMsg =
             if isNull then
-                Model.noop
+                Msg.noop
             else
                 onEntityAction Entity.Types.EUA_ToggleDeleted
 
         startEditingMsg =
             if isNull then
-                Model.noop
+                Msg.noop
             else
                 onEntityAction Entity.Types.EUA_StartEditing
 
@@ -116,7 +115,7 @@ create config todoList groupDoc =
                     onEntityAction Entity.Types.EUA_OnGotoEntity
 
                 _ ->
-                    Model.noop
+                    Msg.noop
 
         archive =
             let

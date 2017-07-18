@@ -50,7 +50,7 @@ setup form =
     in
         div
             [ class "overlay"
-            , onClickStopPropagation Model.noop
+            , onClickStopPropagation Msg.noop
             ]
             [ div [ class "modal fixed-center" ]
                 [ div [ class "modal-content" ]

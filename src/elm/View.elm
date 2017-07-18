@@ -132,7 +132,7 @@ appLayoutView m =
                     ]
                 ]
                 [ div
-                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
                     [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM m ]
                     , AppDrawer.View.sidebarContent appVM m
                     ]
@@ -140,7 +140,7 @@ appLayoutView m =
                     [ id "layout-main"
                     , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
-                    [ div [ X.Html.onClickStopPropagation Model.noop ]
+                    [ div [ X.Html.onClickStopPropagation Msg.noop ]
                         [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
                         , div [ id "layout-main-content" ] [ appMainContent m ]
                         ]
@@ -158,14 +158,14 @@ appLayoutView m =
                     , View.Header.appMainHeader appVM m
                     ]
                 , div
-                    [ id "layout-sidebar", X.Html.onClickStopPropagation Model.noop ]
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
                     [ AppDrawer.View.sidebarContent appVM m
                     ]
                 , div
                     [ id "layout-main"
                     , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
-                    [ div [ X.Html.onClickStopPropagation Model.noop ]
+                    [ div [ X.Html.onClickStopPropagation Msg.noop ]
                         [ div [ id "layout-main-content" ] [ appMainContent m ]
                         ]
                     ]

@@ -1,45 +1,24 @@
 module Model exposing (..)
 
-import CommonMsg
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
-import Msg exposing (..)
-import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
+import X.Record exposing (..)
 import Toolkit.Operators exposing (..)
 
 
 --commonMsg : CommonMsg.Helper AppMsg
-
-
-commonMsg =
-    CommonMsg.createHelper OnCommonMsg
-
-
-noop =
-    commonMsg.noOp
-
-
-logString =
-    let
-        _ =
-            2
-    in
-        commonMsg.logString
-
-
-
 -- Model Lens
 
 
 appDrawerModel =
-    X.Record.fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
+    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
 
 
 now =
-    X.Record.fieldLens .now (\s b -> { b | now = s })
+    fieldLens .now (\s b -> { b | now = s })
 
 
 focusInEntity =
-    X.Record.fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
+    fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 setFocusInEntity entity =
@@ -77,7 +56,3 @@ getNow =
 
 
 -- Focus Functions
-
-
-setDomFocusToFocusInEntityCmd =
-    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")

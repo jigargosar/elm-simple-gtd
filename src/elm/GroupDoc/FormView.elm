@@ -56,14 +56,14 @@ init form =
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Model.noop)
+            , onKeyDownStopPropagation (\_ -> Msg.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Model.noop ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
                 [ div [ class "modal-content" ]
                     [ div
                         [ class "input-field"
-                        , onKeyDownStopPropagation (\_ -> Model.noop)
-                        , onClickStopPropagation Model.noop
+                        , onKeyDownStopPropagation (\_ -> Msg.noop)
+                        , onClickStopPropagation Msg.noop
                         ]
                         [ input
                             [ class "auto-focus"

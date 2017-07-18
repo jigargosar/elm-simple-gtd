@@ -3,6 +3,7 @@ module Todo.Notification.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Mat
+import Msg
 import X.Html exposing (onClickStopPropagation)
 import Model
 import Todo.Notification.Model
@@ -62,7 +63,7 @@ activeViewShell todoDetails children =
             TodoMsg.onReminderOverlayAction Todo.Notification.Model.Close
     in
         div [ class "notification overlay", onClickStopPropagation onOutsideMouseDown ]
-            [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation Model.noop ]
+            [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation Msg.noop ]
                 [ h5 [] [ text todoDetails.text ]
                 , div [ class "layout horizontal wrap flex-auto-children " ]
                     children

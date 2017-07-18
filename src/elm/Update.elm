@@ -90,7 +90,7 @@ update andThenUpdate msg =
             let
                 config : Update.ExclusiveMode.Config AppMsg AppModel
                 config =
-                    { focusEntityList = andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                    { focusEntityList = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
                     , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
                     , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
                     }
@@ -130,7 +130,7 @@ update andThenUpdate msg =
                     , onToggleTodoDeleted = TodoMsg.onToggleDeleted >> andThenUpdate
                     , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
                     , setDomFocusToFocusInEntityCmd =
-                        Model.setDomFocusToFocusInEntityCmd |> andThenUpdate
+                        Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate
                     , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
                     }
             in
@@ -195,12 +195,12 @@ onTodoMsgWithNow andThenUpdate msg now =
                 -- later: create and move focusInEntity related methods to corresponding update
                 (\entityId ->
                     map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
                 )
             , setFocusInEntity =
                 (\entity ->
                     map (Model.setFocusInEntity entity)
-                        >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
+                        >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
                 )
             , closeNotification = Msg.OnCloseNotification >> andThenUpdate
             , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate

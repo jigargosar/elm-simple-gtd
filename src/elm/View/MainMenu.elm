@@ -32,7 +32,7 @@ menuConfig menuState appModel =
     , itemSearchText = Tuple.first
     , itemView = itemView
     , onStateChanged = Msg.onMainMenuStateChanged
-    , noOp = Model.noop
+    , noOp = Msg.noop
     , onOutsideMouseDown = Msg.revertExclusiveMode
     }
 

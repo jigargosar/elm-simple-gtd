@@ -22,7 +22,7 @@ createProjectMenuConfig form model =
     , itemSearchText = Project.getName
     , itemView = Project.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
-    , noOp = Model.noop
+    , noOp = Msg.noop
     , onOutsideMouseDown = Msg.revertExclusiveMode
     }
 
@@ -35,7 +35,7 @@ createContextMenuConfig form model =
     , itemSearchText = Context.getName
     , itemView = Context.getName >> text
     , onStateChanged = TodoMsg.onSetTodoFormMenuState form
-    , noOp = Model.noop
+    , noOp = Msg.noop
     , onOutsideMouseDown = Msg.revertExclusiveMode
     }
 

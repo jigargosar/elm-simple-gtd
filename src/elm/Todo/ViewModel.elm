@@ -5,7 +5,7 @@ import Document.Types exposing (getDocId)
 import Entity.Types
 import EntityId
 import GroupDoc
-import Msg
+import Msg exposing (AppMsg)
 import Regex
 import Set
 import Store
@@ -44,7 +44,7 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel
+createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
 createTodoViewModel appM isFocusable todo =
     let
         tabindexAV =
@@ -167,7 +167,7 @@ createTodoViewModel appM isFocusable todo =
         }
 
 
-createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel
+createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel AppMsg
 createScheduleViewModel now todo =
     let
         overDueText =

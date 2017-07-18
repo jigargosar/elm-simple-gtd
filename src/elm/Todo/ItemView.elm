@@ -1,4 +1,4 @@
-module Todo.ItemView exposing (TodoKeyedItemView, TodoViewModel, ScheduleViewModel, keyedItem)
+module Todo.ItemView exposing (TodoViewModel, ScheduleViewModel, keyedItem)
 
 import Context
 import Date
@@ -6,7 +6,6 @@ import Document
 import Entity.Types exposing (EntityId(TodoId))
 import EntityId
 import Material
-import Msg exposing (AppMsg)
 import Store
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc)
@@ -32,49 +31,48 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
-import Msg
 
 
-type alias TodoViewModel =
+type alias TodoViewModel msg =
     { key : String
     , displayText : String
     , isDone : Bool
     , isDeleted : Bool
-    , onKeyDownMsg : KeyboardEvent -> AppMsg
+    , onKeyDownMsg : KeyboardEvent -> msg
     , projectDisplayName : String
     , contextDisplayName : String
-    , startEditingMsg : AppMsg
-    , toggleDoneMsg : AppMsg
+    , startEditingMsg : msg
+    , toggleDoneMsg : msg
     , canBeFocused : Bool
-    , showContextDropDownMsg : AppMsg
-    , showProjectDropDownMsg : AppMsg
-    , reminder : ScheduleViewModel
-    , onFocusIn : AppMsg
+    , showContextDropDownMsg : msg
+    , showProjectDropDownMsg : msg
+    , reminder : ScheduleViewModel msg
+    , onFocusIn : msg
     , tabindexAV : Int
     , isSelected : Bool
     , mdl : Material.Model
-    , noop : AppMsg
-    , onMdl : Material.Msg AppMsg -> AppMsg
+    , noop : msg
+    , onMdl : Material.Msg msg -> msg
     }
 
 
-type alias ScheduleViewModel =
+type alias ScheduleViewModel msg =
     { displayText : String
     , isOverDue : Bool
-    , startEditingMsg : AppMsg
+    , startEditingMsg : msg
     }
 
 
-type alias TodoKeyedItemView =
-    ( String, Html AppMsg )
+type alias TodoKeyedItemView msg =
+    ( String, Html msg )
 
 
-keyedItem : TodoViewModel -> TodoKeyedItemView
+keyedItem : TodoViewModel msg -> TodoKeyedItemView msg
 keyedItem vm =
     ( vm.key, item vm )
 
 
-item : TodoViewModel -> Html AppMsg
+item : TodoViewModel msg -> Html msg
 item vm =
     div
         [ classList
@@ -127,7 +125,7 @@ parseDisplayText vm =
             a
                 [ href url
                 , target "_blank"
-                , onMouseDownStopPropagation Msg.noop
+                , onMouseDownStopPropagation vm.noop
                 , tabindex vm.tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
@@ -151,7 +149,7 @@ classListAsClass list =
         |> String.join " "
 
 
-doneIconButton : TodoViewModel -> Html AppMsg
+doneIconButton : TodoViewModel msg -> Html msg
 doneIconButton vm =
     Mat.iconBtn4 vm.onMdl
         "done"
@@ -173,7 +171,7 @@ editScheduleButton vm =
                 ]
             ]
             [ vm.reminder.displayText |> text ]
-        , Mat.iconBtn Msg.OnMdl
+        , Mat.iconBtn vm.onMdl
             vm.mdl
             [ Mat.tabIndex vm.tabindexAV
             ]

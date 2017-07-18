@@ -1,29 +1,15 @@
 module Todo.ItemView exposing (TodoViewModel, ScheduleViewModel, keyedItem)
 
-import Context
-import Date
-import Document
-import Entity.Types exposing (EntityId(TodoId))
-import EntityId
 import Material
-import Store
-import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc)
-import TodoMsg
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
-import X.Time
-import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Mat
-import Project
 import Regex
 import RegexHelper
-import Set
 import String.Extra as String
 import Time exposing (Time)
 import Todo
-import Todo.Msg
-import Todo.View.Menu
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Html exposing (..)

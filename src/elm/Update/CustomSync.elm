@@ -1,4 +1,4 @@
-port module Update.CustomSync exposing (..)
+port module Update.CustomSync exposing (Config, update)
 
 import ExclusiveMode.Types exposing (..)
 import Msg.CustomSync exposing (CustomSyncMsg(..))

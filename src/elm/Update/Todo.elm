@@ -1,4 +1,4 @@
-module Update.Todo exposing (..)
+module Update.Todo exposing (Config, update)
 
 import Return exposing (andThen)
 import Update.Todo.Internal exposing (..)

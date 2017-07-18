@@ -1,4 +1,4 @@
-module Update.LaunchBar exposing (..)
+module Update.LaunchBar exposing (Config, update)
 
 import Document.Types exposing (DocId, getDocId)
 import DomPorts

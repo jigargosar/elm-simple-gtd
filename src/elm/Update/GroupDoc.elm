@@ -1,4 +1,4 @@
-module Update.GroupDoc exposing (..)
+module Update.GroupDoc exposing (update)
 
 import Document
 import Document.Types exposing (getDocId)

@@ -1,4 +1,4 @@
-module Update.Firebase exposing (..)
+module Update.Firebase exposing (Config, update)
 
 import AppUrl
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))

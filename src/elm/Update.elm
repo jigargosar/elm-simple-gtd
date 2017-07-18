@@ -30,7 +30,14 @@ import Update.ViewType
 import Update.Todo
 import Types exposing (..)
 import Update.GroupDoc
-import Update.Types exposing (..)
+
+
+type alias ReturnF =
+    Return.ReturnF AppMsg AppModel
+
+
+type alias AndThenUpdate =
+    AppMsg -> ReturnF
 
 
 update :

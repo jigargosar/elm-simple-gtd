@@ -1,4 +1,4 @@
-module Update.AppHeader exposing (..)
+module Update.AppHeader exposing (Config, update)
 
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))

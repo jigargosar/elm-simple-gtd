@@ -89,7 +89,10 @@ update config msg =
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
-onGlobalKeyUp : Config msg model -> Key -> SubReturnF msg model
+
+--onGlobalKeyUp : Config msg model -> Key -> SubReturnF msg model
+
+
 onGlobalKeyUp config key =
     X.Return.returnWith (.editMode)
         (\editMode ->
@@ -127,7 +130,10 @@ onGlobalKeyUp config key =
         )
 
 
-setNow : Time -> SubModelF model
+
+--setNow : Time -> SubModelF model
+
+
 setNow now model =
     { model | now = now }
 

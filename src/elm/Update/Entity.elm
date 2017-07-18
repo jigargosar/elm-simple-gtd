@@ -1,4 +1,4 @@
-module Update.Entity exposing (..)
+module Update.Entity exposing (Config, update)
 
 import Document.Types exposing (DocId)
 import DomPorts

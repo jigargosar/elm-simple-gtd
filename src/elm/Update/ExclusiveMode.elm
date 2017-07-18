@@ -1,4 +1,4 @@
-module Update.ExclusiveMode exposing (..)
+module Update.ExclusiveMode exposing (Config, update)
 
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))

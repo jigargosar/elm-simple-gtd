@@ -11,7 +11,7 @@ import Maybe.Extra
 import Model
 import Model.GroupDocStore
 import Model.Selection
-import Model.TodoStore
+import Model.Todo
 import Model.ViewType
 import Msg exposing (AppMsg)
 import Return exposing (andThen, map)
@@ -182,7 +182,7 @@ startEditingEntity andThenUpdate entityId =
                 (createEditProjectForm >> XMGroupDocForm >> Msg.onSetExclusiveMode >> andThenUpdate)
 
         TodoId id ->
-            X.Return.withMaybe (Model.TodoStore.findTodoById id)
+            X.Return.withMaybe (Model.Todo.findTodoById id)
                 (TodoMsg.onStartEditingTodo >> andThenUpdate)
 
 
@@ -203,7 +203,7 @@ toViewType appModel maybeCurrentEntityListViewType entityId =
                         ?|> getTodoGotoGroupView todo
                         ?= (Todo.getContextId todo |> ContextView)
             in
-                Model.TodoStore.findTodoById id appModel
+                Model.Todo.findTodoById id appModel
                     ?|> getViewTypeForTodo
                     |> Maybe.Extra.orElse maybeCurrentEntityListViewType
                     ?= ContextsView

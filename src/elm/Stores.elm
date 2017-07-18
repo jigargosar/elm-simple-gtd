@@ -7,7 +7,7 @@ import Entity.Types exposing (..)
 import EntityId
 import Model.EntityTree
 import Model.GroupDocStore exposing (..)
-import Model.TodoStore exposing (..)
+import Model.Todo exposing (..)
 import Model.ViewType
 import Return exposing (andThen)
 import Store

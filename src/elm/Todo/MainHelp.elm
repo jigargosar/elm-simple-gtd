@@ -7,7 +7,7 @@ import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Lazy exposing (Lazy)
-import Model.TodoStore exposing (findTodoById, todoStore)
+import Model.Todo exposing (findTodoById, todoStore)
 import Set exposing (Set)
 import Store
 import Time exposing (Time)

@@ -8,7 +8,6 @@ import Firebase.Main
 import LocalPref
 import Material
 import Msg exposing (..)
-import Time exposing (Time)
 import Update.AppHeader
 import Update.ExclusiveMode
 import Update.LaunchBar
@@ -16,23 +15,16 @@ import Update.Subscription
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
-import Update.Types exposing (..)
 import Toolkit.Operators exposing (..)
-import Entity.Types exposing (EntityMsg)
 import Lazy
 import Model.EntityList
 import Model.Stores
-import Msg.CustomSync exposing (CustomSyncMsg)
-import Msg.GroupDoc exposing (GroupDocMsg)
 import TodoMsg
 import Update.Entity
 import Model
 import Model.GroupDocStore
 import Model.Selection
 import Msg exposing (..)
-import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
-import Time exposing (Time)
-import Todo.Msg exposing (TodoMsg)
 import Update.CustomSync
 import Update.ViewType
 import Update.Todo

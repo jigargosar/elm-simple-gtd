@@ -5,11 +5,8 @@ import Entity.Tree
 import Model exposing (focusInEntity)
 import Model.EntityTree
 import Model.ViewType
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import X.List

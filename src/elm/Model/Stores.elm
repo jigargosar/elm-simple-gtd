@@ -1,7 +1,6 @@
 module Model.Stores exposing (..)
 
 import Entity.Types exposing (..)
-import EntityId
 import GroupDoc
 import Model
 import Model.GroupDocStore exposing (..)
@@ -10,7 +9,6 @@ import Todo
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import Store
-import X.Record exposing (setIn)
 
 
 isTodoContextActive model =

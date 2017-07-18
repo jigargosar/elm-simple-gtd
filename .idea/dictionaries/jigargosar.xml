@@ -3,6 +3,7 @@
     <words>
       <w>accesskey</w>
       <w>autosize</w>
+      <w>bowerrc</w>
       <w>cloudflare</w>
       <w>cname</w>
       <w>cssnext</w>
@@ -39,6 +40,7 @@
       <w>uglify</w>
       <w>vaadin</w>
       <w>woff</w>
+      <w>yaml</w>
     </words>
   </dictionary>
 </component>

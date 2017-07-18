@@ -1,7 +1,7 @@
 module Update.Todo exposing (..)
 
 import Return exposing (andThen)
-import Todo.MainHelp exposing (..)
+import Update.Todo.Internal exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
 import Time
@@ -10,7 +10,7 @@ import Todo.TimeTracker as Tracker
 
 
 type alias Config msg model =
-    Todo.MainHelp.Config msg model
+    Update.Todo.Internal.Config msg model
 
 
 update :
@@ -49,11 +49,7 @@ update config now msg =
                 (findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
 
         UpdateTodoOrAllSelected__ todoId action ->
-            -- todo: think about creating direct messages or wrappers in TodoMsg
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
-                -- todo: if we had use save editing form, we would't missed calling on deactivate.
-                -- todo: also it seems an appropriate place for any exclusive mode form saves.
-                -- such direct calls are messy. :(
                 >> config.afterTodoUpdate
 
         OnTodoReminderOverlayAction action ->

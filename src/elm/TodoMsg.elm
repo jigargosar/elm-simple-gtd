@@ -1,6 +1,5 @@
 module TodoMsg exposing (..)
 
-import Document.Types exposing (getDocId)
 import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg exposing (TodoMsg(..))

@@ -18,8 +18,6 @@ import Msg exposing (AppMsg)
 import Return exposing (andThen, map)
 import Set
 import Todo
-import Todo.Msg
-import Todo.Types exposing (TodoAction(..))
 import TodoMsg
 import Toolkit.Operators exposing (..)
 import Types exposing (..)

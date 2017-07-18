@@ -1,4 +1,4 @@
-port module Todo.MainHelp exposing (..)
+port module Update.Todo.Internal exposing (..)
 
 import Context
 import Document
@@ -13,7 +13,7 @@ import Store
 import Time exposing (Time)
 import Todo.Form
 import Todo.FormTypes exposing (..)
-import Todo.MainHelpPort exposing (..)
+import Ports.Todo exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Tuple2

@@ -1,9 +1,7 @@
 module Model exposing (..)
 
 import CommonMsg
-import Entity
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
-import List.Extra
 import Msg exposing (..)
 import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Toolkit.Operators exposing (..)

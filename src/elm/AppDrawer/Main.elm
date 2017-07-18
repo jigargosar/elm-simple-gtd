@@ -4,9 +4,7 @@ import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Model
-import Msg exposing (AppMsg)
 import Return
-import Types exposing (..)
 import X.Record exposing (over, set)
 
 

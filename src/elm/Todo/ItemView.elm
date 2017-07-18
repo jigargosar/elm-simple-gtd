@@ -8,8 +8,6 @@ import Mat
 import Regex
 import RegexHelper
 import String.Extra as String
-import Time exposing (Time)
-import Todo
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import Html exposing (..)

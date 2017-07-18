@@ -23,27 +23,6 @@ import Tuple2
 import X.List
 
 
---upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
-
-
-upsertEncodedDocOnPouchDBChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createTodoEntity
-
-        "project-db" ->
-            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createProjectEntity
-
-        "context-db" ->
-            maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createContextEntity
-
-        _ ->
-            (\_ -> Nothing)
-
-
 updateEntityListCursorOnGroupDocChange oldModel newModel =
     let
         updateEntityListCursorFromEntityIndexTuple model indexTuple =
@@ -82,11 +61,11 @@ updateEntityListCursorOnGroupDocChange oldModel newModel =
             |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
-updateEntityListCursor oldModel newModel =
+updateEntityListCursorOnTodoChange oldModel newModel =
     ( oldModel, newModel )
         |> Tuple2.mapBoth
             (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
-        |> updateEntityListCursorFromEntityIndexTuple newModel
+        |> updateEntityListCursorFromEntityIndexTupleOnTodoChange newModel
 
 
 getMaybeFocusInEntityIndex entityList model =
@@ -94,7 +73,7 @@ getMaybeFocusInEntityIndex entityList model =
         |> List.findIndex (Entity.equalById model.focusInEntity)
 
 
-updateEntityListCursorFromEntityIndexTuple model indexTuple =
+updateEntityListCursorFromEntityIndexTupleOnTodoChange model indexTuple =
     let
         setFocusInEntityByIndex index entityList model =
             X.List.clampIndex index entityList
@@ -131,25 +110,6 @@ createEntityListForCurrentView model =
 
 
 
---upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
-
-
-upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        "project-db" ->
-            .projectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        "context-db" ->
-            .contextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
-
-        _ ->
-            (\_ -> Cmd.none)
-
-
-
 {- setFocusInEntityWithTodoId : DocId -> AppModelF -}
 
 
@@ -162,12 +122,12 @@ setFocusInEntity entity =
 
 
 setFocusInEntityWithEntityId entityId model =
-    findEntityByEntityId entityId model
+    findByEntityId entityId model
         ?|> setIn model focusInEntity
         ?= model
 
 
-findEntityByEntityId entityId =
+findByEntityId entityId =
     case entityId of
         ContextId id ->
             findContextById id >>? createContextEntity

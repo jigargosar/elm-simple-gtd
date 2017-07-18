@@ -192,5 +192,5 @@ onTodoMsgWithNow andThenUpdate msg now =
         returnWith identity
             (\oldModel ->
                 Update.Todo.update (config oldModel) now msg
-                    >> map (Stores.updateEntityListCursor oldModel)
+                    >> map (Stores.updateEntityListCursorOnTodoChange oldModel)
             )

@@ -1,12 +1,13 @@
 module Update.Subscription exposing (..)
 
 import DomPorts exposing (focusSelectorIfNoFocusRCmd)
-import Entity.Types exposing (Entity(TodoEntity))
+import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Model
+import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
+import Model.Todo exposing (todoStore)
 import Msg exposing (AppMsg(..), SubscriptionMsg(..))
-import Stores
 import Todo.Msg
 import Tuple2
 import X.Function.Infix exposing (..)
@@ -14,11 +15,12 @@ import Return exposing (map)
 import Time exposing (Time)
 import Types exposing (..)
 import X.Keyboard exposing (KeyboardState)
-import X.Record exposing (over, overReturn)
+import X.Record exposing (maybeOverT2, over, overReturn)
 import X.Return
 import Keyboard.Extra as Key
 import TodoMsg
 import Msg
+import Store
 
 
 update andThenUpdate subMsg =
@@ -44,14 +46,14 @@ update andThenUpdate subMsg =
                             Model.noop
             in
                 X.Return.rAndThenMaybe
-                    (Stores.upsertEncodedDocOnPouchDBChange dbName encodedDoc
+                    (upsertEncodedDocOnPouchDBChange dbName encodedDoc
                         >>? (Tuple2.mapEach afterEntityUpsertOnPouchDBChange Return.singleton
                                 >> uncurry andThenUpdate
                             )
                     )
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (Stores.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+            Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 onGlobalKeyUp andThenUpdate key =
@@ -103,3 +105,44 @@ keyboardState =
 updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
 updateKeyboardState =
     over keyboardState
+
+
+
+--upsertEncodedDocOnPouchDBChange : String -> E.Value -> AppModel -> Maybe ( Entity, AppModel )
+
+
+upsertEncodedDocOnPouchDBChange dbName encodedEntity =
+    case dbName of
+        "todo-db" ->
+            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst createTodoEntity
+
+        "project-db" ->
+            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst createProjectEntity
+
+        "context-db" ->
+            maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst createContextEntity
+
+        _ ->
+            (\_ -> Nothing)
+
+
+
+--upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> AppModel -> Cmd msg
+
+
+upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
+    case dbName of
+        "todo-db" ->
+            .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+
+        "project-db" ->
+            .projectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+
+        "context-db" ->
+            .contextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+
+        _ ->
+            (\_ -> Cmd.none)

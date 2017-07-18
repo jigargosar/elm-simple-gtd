@@ -25,26 +25,6 @@ type alias AppReturnF =
     Return.ReturnF AppMsg AppModel
 
 
-setupOnDisconnectCmd client uid =
-    firebaseSetupOnDisconnect ( uid, client.id )
-
-
-startSyncCmd =
-    fireStartSync
-
-
-updateClientCmd client uid =
-    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
-
-
-signInModel =
-    X.Record.fieldLens .signInModel (\s b -> { b | signInModel = s })
-
-
-overSignInModel =
-    X.Record.over signInModel
-
-
 update :
     (Msg.AppMsg -> AppReturnF)
     -> FirebaseMsg
@@ -121,6 +101,26 @@ update andThenUpdate msg =
         OnFBConnectionChanged connected ->
             Return.map (updateFirebaseConnection connected)
                 >> maybeEffect firebaseUpdateClientCmd
+
+
+setupOnDisconnectCmd client uid =
+    firebaseSetupOnDisconnect ( uid, client.id )
+
+
+startSyncCmd =
+    fireStartSync
+
+
+updateClientCmd client uid =
+    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
+
+
+signInModel =
+    X.Record.fieldLens .signInModel (\s b -> { b | signInModel = s })
+
+
+overSignInModel =
+    X.Record.over signInModel
 
 
 firebaseUpdateClientCmd model =

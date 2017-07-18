@@ -23,6 +23,10 @@ import Msg
 import Store
 
 
+type alias AppModelF =
+    AppModel -> AppModel
+
+
 update andThenUpdate subMsg =
     case subMsg of
         OnNowChanged now ->

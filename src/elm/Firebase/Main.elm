@@ -21,6 +21,10 @@ import Msg
 import Ports.Firebase exposing (..)
 
 
+type alias AppReturnF =
+    Return.ReturnF AppMsg AppModel
+
+
 setupOnDisconnectCmd client uid =
     firebaseSetupOnDisconnect ( uid, client.id )
 

@@ -3,10 +3,14 @@ module AppDrawer.Main exposing (..)
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
 import Model
-import Msg
+import Msg exposing (AppMsg)
 import Return
 import Types exposing (..)
 import X.Record exposing (over, set)
+
+
+type alias AppReturnF =
+    Return.ReturnF AppMsg AppModel
 
 
 mapOver =

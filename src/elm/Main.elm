@@ -28,16 +28,8 @@ import Json.Encode as E
 import Types exposing (..)
 
 
-main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
-main =
-    RouteUrl.programWithFlags
-        { delta2url = Routes.delta2hash
-        , location2messages = Routes.hash2messages
-        , init = init
-        , update = update
-        , view = View.init
-        , subscriptions = Subscriptions.subscriptions
-        }
+type alias AppReturn =
+    Return.Return AppMsg AppModel
 
 
 type alias Flags =
@@ -112,3 +104,15 @@ update msg =
     in
         Return.singleton
             >> Update.update andThenUpdate msg
+
+
+main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
+main =
+    RouteUrl.programWithFlags
+        { delta2url = Routes.delta2hash
+        , location2messages = Routes.hash2messages
+        , init = init
+        , update = update
+        , view = View.init
+        , subscriptions = Subscriptions.subscriptions
+        }

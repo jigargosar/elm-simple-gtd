@@ -15,7 +15,6 @@ import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import Types.ViewType exposing (ViewType(EntityListView))
 import X.Keyboard exposing (KeyboardState)
-import Msg exposing (AppMsg)
 import Return
 
 
@@ -48,23 +47,3 @@ type alias AppModel =
     , mdl : Material.Model
     , keyboardState : KeyboardState
     }
-
-
-
--- note: IMP note if we remove appMsg dep from here. changing msg file takes 1.5mins as opposed to 36s
-
-
-type alias AppReturnF =
-    Return.ReturnF AppMsg AppModel
-
-
-type alias AppReturn =
-    Return.Return AppMsg AppModel
-
-
-type alias AppModelReturnF =
-    AppModel -> AppReturn
-
-
-type alias AppModelF =
-    AppModel -> AppModel

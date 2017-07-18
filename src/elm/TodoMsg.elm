@@ -118,3 +118,7 @@ onSetContext id =
     TA_SetContext
         >> Todo.Msg.UpdateTodoOrAllSelected__ id
         >> Msg.OnTodoMsg
+
+
+afterUpsert todo =
+    Todo.Msg.AfterUpsert todo |> OnTodoMsg

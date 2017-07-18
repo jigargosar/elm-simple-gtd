@@ -27,6 +27,10 @@ type alias AppModelF =
     AppModel -> AppModel
 
 
+type alias Config msg model =
+    {}
+
+
 update andThenUpdate subMsg =
     case subMsg of
         OnNowChanged now ->
@@ -43,8 +47,8 @@ update andThenUpdate subMsg =
             let
                 afterEntityUpsertOnPouchDBChange entity =
                     case entity of
-                        TodoEntity model ->
-                            Todo.Msg.AfterUpsert model |> OnTodoMsg
+                        TodoEntity todo ->
+                            TodoMsg.afterUpsert todo
 
                         _ ->
                             Msg.noop

@@ -1,4 +1,9 @@
-module Model.Selection exposing (..)
+module Model.Selection
+    exposing
+        ( clearSelection
+        , setSelectedEntityIdSet
+        , updateSelectedEntityIdSet
+        )
 
 import Set exposing (Set)
 
@@ -9,13 +14,10 @@ clearSelection =
 
 
 --getSelectedEntityIdSet : AppModel -> Set DocId
-
-
-getSelectedEntityIdSet =
-    (.selectedEntityIdSet)
-
-
-
+{-
+   getSelectedEntityIdSet =
+       (.selectedEntityIdSet)
+-}
 --setSelectedEntityIdSet : Set DocId -> ModelF
 
 
@@ -28,4 +30,4 @@ setSelectedEntityIdSet selectedEntityIdSet model =
 
 
 updateSelectedEntityIdSet updater model =
-    setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model
+    setSelectedEntityIdSet (updater model.selectedEntityIdSet) model

@@ -1,4 +1,4 @@
-module Types exposing (AppModel)
+module Types exposing (AppModel, AppConfig)
 
 import AppDrawer.Model
 import Document.Types exposing (DocId)

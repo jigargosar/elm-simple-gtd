@@ -1,4 +1,4 @@
-module CommonMsg exposing (..)
+module CommonMsg exposing (update, createHelper)
 
 import CommonMsg.Types exposing (Msg(..))
 import DomPorts exposing (DomSelector)

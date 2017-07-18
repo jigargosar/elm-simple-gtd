@@ -42,9 +42,9 @@ overSignInModel =
 
 
 update :
-    (Msg.AppMsg -> ReturnF)
+    (Msg.AppMsg -> AppReturnF)
     -> FirebaseMsg
-    -> ReturnF
+    -> AppReturnF
 update andThenUpdate msg =
     case msg of
         OnFB_NOOP ->

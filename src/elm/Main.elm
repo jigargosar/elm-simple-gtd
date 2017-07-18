@@ -54,7 +54,7 @@ type alias Flags =
     }
 
 
-init : Flags -> Return
+init : Flags -> AppReturn
 init flags =
     let
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
@@ -104,7 +104,7 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-update : AppMsg -> AppModel -> Return
+update : AppMsg -> AppModel -> AppReturn
 update msg =
     let
         andThenUpdate =

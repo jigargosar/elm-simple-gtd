@@ -3,6 +3,7 @@ module Model exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
 import X.Record exposing (..)
 import Toolkit.Operators exposing (..)
+import Types
 
 
 --commonMsg : CommonMsg.Helper AppMsg

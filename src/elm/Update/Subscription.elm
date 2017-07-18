@@ -93,7 +93,7 @@ onGlobalKeyUp andThenUpdate key =
         )
 
 
-setNow : Time -> ModelF
+setNow : Time -> AppModelF
 setNow now model =
     { model | now = now }
 
@@ -102,7 +102,7 @@ keyboardState =
     X.Record.fieldLens .keyboardState (\s b -> { b | keyboardState = s })
 
 
-updateKeyboardState : (KeyboardState -> KeyboardState) -> ModelF
+updateKeyboardState : (KeyboardState -> KeyboardState) -> AppModelF
 updateKeyboardState =
     over keyboardState
 

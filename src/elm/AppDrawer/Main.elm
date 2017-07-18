@@ -14,9 +14,9 @@ mapOver =
 
 
 update :
-    (Msg.AppMsg -> ReturnF)
+    (Msg.AppMsg -> AppReturnF)
     -> AppDrawer.Types.Msg
-    -> ReturnF
+    -> AppReturnF
 update andThenUpdate msg =
     (case msg of
         OnToggleContextsExpanded ->

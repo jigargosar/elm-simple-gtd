@@ -50,25 +50,21 @@ type alias AppModel =
     }
 
 
-type alias AppModelF =
-    AppModel -> AppModel
-
-
 
 -- note: IMP note if we remove appMsg dep from here. changing msg file takes 1.5mins as opposed to 36s
 
 
-type alias ReturnF =
+type alias AppReturnF =
     Return.ReturnF AppMsg AppModel
 
 
-type alias Return =
+type alias AppReturn =
     Return.Return AppMsg AppModel
 
 
-type alias ModelReturnF =
-    AppModel -> Return
+type alias AppModelReturnF =
+    AppModel -> AppReturn
 
 
-type alias ModelF =
+type alias AppModelF =
     AppModel -> AppModel

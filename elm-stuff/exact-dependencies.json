@@ -12,6 +12,7 @@
     "mgold/elm-random-pcg": "5.0.0",
     "mgold/elm-date-format": "1.4.0",
     "ohanhi/keyboard-extra": "2.1.0",
+    "elm-lang/lazy": "2.0.0",
     "elm-lang/dom": "1.1.1",
     "elm-lang/html": "2.0.0",
     "rgrempel/elm-route-url": "3.0.1",

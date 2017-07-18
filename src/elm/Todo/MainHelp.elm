@@ -7,10 +7,10 @@ import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
 import Entity.Types exposing (Entity(..), EntityListViewType(ContextsView), GroupEntityType(..))
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
+import Lazy exposing (Lazy)
 import Model.TodoStore exposing (findTodoById, todoStore)
 import Set exposing (Set)
 import Store
-import Stores
 import Time exposing (Time)
 import Todo.Form
 import Todo.FormTypes exposing (..)
@@ -64,6 +64,7 @@ type alias Config msg model =
     , closeNotification : String -> SubReturnF msg model
     , afterTodoUpdate : SubReturnF msg model
     , setXMode : ExclusiveMode -> SubReturnF msg model
+    , currentViewEntityList : Lazy (List Entity)
     }
 
 
@@ -386,7 +387,7 @@ gotoTodoWithId : Config msg model -> SubModel model -> DocId -> SubReturnF msg m
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
-            Stores.createEntityListForCurrentView model
+            Lazy.force config.currentViewEntityList
                 |> List.find
                     (\entity ->
                         case entity of

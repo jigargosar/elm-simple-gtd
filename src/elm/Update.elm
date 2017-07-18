@@ -2,6 +2,7 @@ port module Update exposing (update)
 
 import AppDrawer.Main
 import CommonMsg
+import Lazy
 import Update.Entity
 import Firebase.Main
 import LaunchBar.Messages exposing (LaunchBarMsg)
@@ -168,8 +169,8 @@ onLaunchBarMsgWithNow andThenUpdate msg now =
 onTodoMsgWithNow : AndThenUpdate -> TodoMsg -> Time -> ReturnF
 onTodoMsgWithNow andThenUpdate msg now =
     let
-        config : Update.Todo.Config AppMsg AppModel
-        config =
+        config : AppModel -> Update.Todo.Config AppMsg AppModel
+        config model =
             { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
             , setFocusInEntityWithTodoId =
                 (\todoId ->
@@ -183,16 +184,13 @@ onTodoMsgWithNow andThenUpdate msg now =
                         >> andThenUpdate Model.setDomFocusToFocusInEntityCmd
                 )
             , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-            , afterTodoUpdate =
-                Msg.revertExclusiveMode
-                    |> andThenUpdate
-            , setXMode =
-                Msg.onSetExclusiveMode
-                    >> andThenUpdate
+            , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
+            , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+            , currentViewEntityList = Lazy.lazy (\_ -> Stores.createEntityListForCurrentView model)
             }
     in
         returnWith identity
             (\oldModel ->
-                Update.Todo.update config now msg
+                Update.Todo.update (config oldModel) now msg
                     >> map (Stores.updateEntityListCursor oldModel)
             )

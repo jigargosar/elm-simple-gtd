@@ -1,20 +1,14 @@
 module Update.Internal exposing (..)
 
-import AppDrawer.Main
-import CommonMsg
 import Entity.Types exposing (EntityMsg)
 import Lazy
 import Model.EntityList
 import Model.Stores
 import Msg.CustomSync exposing (CustomSyncMsg)
 import Msg.GroupDoc exposing (GroupDocMsg)
-import Ports
 import TodoMsg
 import Update.Entity
-import Firebase.Main
 import LaunchBar.Messages exposing (LaunchBarMsg)
-import LocalPref
-import Material
 import Model
 import Model.GroupDocStore
 import Model.Selection
@@ -23,17 +17,12 @@ import Msg.ViewType exposing (ViewTypeMsg(SwitchToContextsView))
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Types exposing (AppModel)
-import Update.AppHeader
 import Update.CustomSync
-import Update.ExclusiveMode
 import Update.LaunchBar
-import Update.Subscription
 import Update.ViewType
 import X.Return as Return exposing (returnWith, returnWithNow)
-import Notification
 import Return exposing (andThen, command, map)
 import Update.Todo
-import Json.Decode as D exposing (Decoder)
 import Types exposing (..)
 import Msg
 import Update.GroupDoc

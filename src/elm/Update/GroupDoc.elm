@@ -71,7 +71,7 @@ update msg =
                             GDFM_Edit ->
                                 update updateProject
 
-        -- todo: remove duplication, very error prone.
+        -- later: remove duplication, very error prone.
         OnToggleContextArchived id ->
             updateContext id GroupDoc.toggleArchived |> andThen
 

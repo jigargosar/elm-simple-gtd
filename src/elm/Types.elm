@@ -55,7 +55,7 @@ type alias AppModelF =
 
 
 
--- todo: IMP note if we remove appMsg dep from here. changing msg file takes 1.5mins as opposed to 36s
+-- note: IMP note if we remove appMsg dep from here. changing msg file takes 1.5mins as opposed to 36s
 
 
 type alias ReturnF =

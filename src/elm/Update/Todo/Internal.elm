@@ -252,7 +252,6 @@ onStartEditingTodo config todo editFormMode =
 
 
 onStartAddingTodo config addFormMode =
-    -- todo: think about merging 4 messages into one.
     let
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm

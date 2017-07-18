@@ -52,7 +52,6 @@ overlayViews appModel =
                         |> Html.map Msg.OnLaunchBarMsg
 
                 XMTodoForm form ->
-                    -- todo extract this into todo view
                     case form.mode of
                         TFM_Edit editMode ->
                             case editMode of
@@ -125,7 +124,6 @@ appLayoutView m =
         appVM =
             ViewModel.create m
     in
-        -- todo : remove duplication
         if AppDrawer.Model.getIsOverlayOpen m.appDrawerModel then
             div
                 [ id "app-layout"

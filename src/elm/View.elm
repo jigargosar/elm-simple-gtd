@@ -119,28 +119,6 @@ overlayViews appModel =
 
 
 
---appLayoutView m =
---    let
---        appVM =
---            ViewModel.create m
---    in
---        div [ class "x-layout" ]
---            [ div [ class "x-sidebar" ]
---                [ div [ class "x-sidebar-header" ]
---                    [ div [ class "x-sidebar-header__inner" ]
---                        [ text "foo" ]
---                    ]
---                ]
---            , div [ class "x-main" ]
---                [ div [ class "x-main-header" ]
---                    [ div [ class "x-main-header__inner" ]
---                        [ div [] [ text "a" ]
---                        ]
---                    ]
---                ]
---            ]
-
-
 appLayoutView model =
     let
         appVM =

@@ -5,10 +5,6 @@ import AppDrawer.Types
 import AppDrawer.View
 import Entity.View
 import Model.ViewType
-
-
---import Msg
-
 import Types.ViewType exposing (ViewType(..))
 import View.CustomSync
 import X.Html exposing (boolProperty, onClickStopPropagation)
@@ -33,15 +29,15 @@ appLayoutView config model =
                     ]
                 ]
                 [ div
-                    [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation config.noop ]
                     [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM model ]
                     , AppDrawer.View.sidebarContent appVM model
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
+                    , onClick config.onToggleAppDrawerOverlay
                     ]
-                    [ div [ X.Html.onClickStopPropagation Msg.noop ]
+                    [ div [ X.Html.onClickStopPropagation config.noop ]
                         [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM model ]
                         , div [ id "layout-main-content" ] [ appMainContent model ]
                         ]
@@ -59,14 +55,14 @@ appLayoutView config model =
                     , View.Header.appMainHeader appVM model
                     ]
                 , div
-                    [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
+                    [ id "layout-sidebar", X.Html.onClickStopPropagation config.noop ]
                     [ AppDrawer.View.sidebarContent appVM model
                     ]
                 , div
                     [ id "layout-main"
-                    , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
+                    , onClick (config.onToggleAppDrawerOverlay)
                     ]
-                    [ div [ X.Html.onClickStopPropagation Msg.noop ]
+                    [ div [ X.Html.onClickStopPropagation config.noop ]
                         [ div [ id "layout-main-content" ] [ appMainContent model ]
                         ]
                     ]

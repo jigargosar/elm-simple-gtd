@@ -201,3 +201,11 @@ onToggleContextDeleted =
 
 onToggleProjectDeleted =
     Msg.GroupDoc.OnToggleProjectDeleted >> OnGroupDocMsg
+
+
+
+--drawer
+
+
+onToggleAppDrawerOverlay =
+    OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay

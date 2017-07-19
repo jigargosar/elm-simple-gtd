@@ -29,8 +29,7 @@ type alias SubAndThenUpdate msg model =
 
 type alias Config a msg model =
     { a
-        | now : Time
-        , activeProjects : List ContextDoc
+        | activeProjects : List ContextDoc
         , activeContexts : List ProjectDoc
         , revertExclusiveMode : SubReturnF msg model
         , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
@@ -40,9 +39,10 @@ type alias Config a msg model =
 
 update :
     Config a msg model
+    -> Time
     -> LaunchBarMsg
     -> SubReturnF msg model
-update config msg =
+update config now msg =
     case msg of
         NOOP ->
             identity
@@ -68,12 +68,12 @@ update config msg =
                     >> config.switchToEntityListView v
 
         OnLBInputChanged form text ->
-            updateInput config text form
+            updateInput config now text form
                 |> XMLaunchBar
                 >> config.onSetExclusiveMode
 
         Open ->
-            (config.now
+            (now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
                 >> config.onSetExclusiveMode
@@ -88,12 +88,9 @@ type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config a msg model -> String -> LaunchBarF
-updateInput config input form =
+updateInput : Config a msg model -> Time -> String -> LaunchBarF
+updateInput config now input form =
     let
-        now =
-            config.now
-
         newInput =
             input
                 |> if now - form.updatedAt > 1 * Time.second then

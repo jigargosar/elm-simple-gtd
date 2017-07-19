@@ -130,7 +130,8 @@ init flags =
 
 updateConfig model =
     { --model
-      activeProjects = (Model.GroupDocStore.getActiveProjects model)
+      now = model.now
+    , activeProjects = (Model.GroupDocStore.getActiveProjects model)
     , activeContexts = (Model.GroupDocStore.getActiveContexts model)
 
     --msg

@@ -86,11 +86,7 @@ update config andThenUpdate msg =
             Update.Entity.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
-            let
-                configWithNow =
-                    { config | now = now }
-            in
-                Update.LaunchBar.update configWithNow msg_
+            Update.LaunchBar.update config now msg_
 
         OnLaunchBarMsg msg_ ->
             returnWithNow (OnLaunchBarMsgWithNow msg_)

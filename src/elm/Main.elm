@@ -7,9 +7,11 @@ import Firebase
 import Lazy
 import LocalPref
 import Material
+import Model
 import Model.EntityList
 import Model.GroupDocStore
 import Model.Selection
+import Model.Stores
 import Model.ViewType
 import Project
 import Random.Pcg
@@ -135,6 +137,9 @@ updateConfig model =
       now = model.now
     , activeProjects = (Model.GroupDocStore.getActiveProjects model)
     , activeContexts = (Model.GroupDocStore.getActiveContexts model)
+    , updateEntityListCursorOnTodoChange = map (Model.EntityList.updateEntityListCursorOnTodoChange model)
+    , updateEntityListCursorOnGroupDocChange =
+        map (Model.EntityList.updateEntityListCursorOnGroupDocChange model)
     , currentViewEntityListLazy =
         Lazy.lazy
             (\_ ->
@@ -155,6 +160,18 @@ updateConfig model =
     , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
     , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
     , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
+    , switchToContextsView = Msg.switchToContextsView |> andThenUpdate
+    , setFocusInEntityWithEntityId =
+        (\entityId ->
+            map (Model.Stores.setFocusInEntityWithEntityId entityId)
+                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
+        )
+    , setFocusInEntity =
+        (\entity ->
+            map (Model.setFocusInEntity entity)
+                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
+        )
+    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
 
     -- todo msg
     , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate

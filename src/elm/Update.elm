@@ -67,11 +67,8 @@ update config andThenUpdate msg =
             Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
-            returnWith identity
-                (\oldModel ->
-                    Update.GroupDoc.update msg_
-                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
-                )
+            Update.GroupDoc.update msg_
+                >> config.updateEntityListCursorOnGroupDocChange
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -95,31 +92,8 @@ update config andThenUpdate msg =
             returnWithNow (OnTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
-            let
-                config model =
-                    { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
-                    , setFocusInEntityWithEntityId =
-                        -- later: create and move focusInEntity related methods to corresponding update
-                        (\entityId ->
-                            map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                        )
-                    , setFocusInEntity =
-                        (\entity ->
-                            map (Model.setFocusInEntity entity)
-                                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                        )
-                    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-                    , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , currentViewEntityListLazy = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
-                    }
-            in
-                returnWith identity
-                    (\oldModel ->
-                        Update.Todo.update (config oldModel) now msg_
-                            >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
-                    )
+            Update.Todo.update config now msg_
+                >> config.updateEntityListCursorOnTodoChange
 
         OnFirebaseMsg msg_ ->
             let

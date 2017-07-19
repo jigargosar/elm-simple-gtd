@@ -58,7 +58,7 @@ type alias Config a msg model =
         , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
         , setFocusInEntity : Entity -> SubReturnF msg model
         , closeNotification : String -> SubReturnF msg model
-        , afterTodoUpdate : SubReturnF msg model
+        , revertExclusiveMode : SubReturnF msg model
         , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
         , currentViewEntityListLazy : Lazy (List Entity)
     }

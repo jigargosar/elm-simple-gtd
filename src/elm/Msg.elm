@@ -71,7 +71,7 @@ switchToView =
     SwitchView >> OnViewTypeMsg
 
 
-switchToContextsViewMsg =
+switchToContextsView =
     SwitchToContextsView |> OnViewTypeMsg
 
 

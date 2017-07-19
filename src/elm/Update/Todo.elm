@@ -51,11 +51,11 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
-                >> config.afterTodoUpdate
+                >> config.revertExclusiveMode
 
         UpdateTodo__ todoId action ->
             (updateAllTodos action (Set.singleton todoId) |> andThen)
-                >> config.afterTodoUpdate
+                >> config.revertExclusiveMode
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action

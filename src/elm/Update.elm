@@ -131,8 +131,8 @@ update andThenUpdate msg =
                     , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
                     , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
                     , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
-                    , onToggleTodoArchived = TodoMsg.onToggleDone >> andThenUpdate
-                    , onToggleTodoDeleted = TodoMsg.onToggleDeleted >> andThenUpdate
+                    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
+                    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
                     , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
                     , setDomFocusToFocusInEntityCmd =
                         Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate

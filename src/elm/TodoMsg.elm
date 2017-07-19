@@ -98,23 +98,23 @@ onSetTodoFormText =
 -- direct
 
 
-onToggleDeleted id =
+onToggleDeletedAndMaybeSelection id =
     Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDeleted
         |> Msg.OnTodoMsg
 
 
-onToggleDone id =
+onToggleDoneAndMaybeSelection id =
     Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDone
         |> Msg.OnTodoMsg
 
 
-onSetProject id =
+onSetProjectAndMaybeSelection id =
     TA_SetProject
         >> Todo.Msg.UpdateTodoOrAllSelected__ id
         >> Msg.OnTodoMsg
 
 
-onSetContext id =
+onSetContextAndMaybeSelection id =
     TA_SetContext
         >> Todo.Msg.UpdateTodoOrAllSelected__ id
         >> Msg.OnTodoMsg

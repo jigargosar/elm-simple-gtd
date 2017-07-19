@@ -55,8 +55,8 @@ overlayViews appModel =
                 XMTodoForm form ->
                     let
                         config =
-                            { onSetProject = TodoMsg.onSetProject
-                            , onSetContext = TodoMsg.onSetContext
+                            { onSetProject = TodoMsg.onSetProjectAndMaybeSelection
+                            , onSetContext = TodoMsg.onSetContextAndMaybeSelection
                             , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
                             , noop = Msg.noop
                             , revertExclusiveMode = Msg.revertExclusiveMode

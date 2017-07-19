@@ -1,4 +1,4 @@
-module Todo.View.Menu exposing (..)
+module Todo.GroupEditView exposing (..)
 
 import Context
 import Document exposing (Document)

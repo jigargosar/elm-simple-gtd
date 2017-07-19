@@ -5,13 +5,13 @@ import Msg exposing (AppMsg)
 import Todo.FormTypes exposing (..)
 import TodoMsg
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
-import Todo.View.Menu
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import Msg
+import Todo.GroupEditView
 
 
 fireCancel =
@@ -76,11 +76,11 @@ new form =
 
 
 editTodoProjectPopupView =
-    Todo.View.Menu.project
+    Todo.GroupEditView.project
 
 
 editTodoContextPopupView =
-    Todo.View.Menu.context
+    Todo.GroupEditView.context
 
 
 editTodoSchedulePopupView form =

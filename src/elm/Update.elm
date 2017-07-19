@@ -87,18 +87,10 @@ update config andThenUpdate msg =
 
         OnLaunchBarMsgWithNow msg_ now ->
             let
-                createConfig model =
-                    { now = now
-                    , activeProjects = (Model.GroupDocStore.getActiveProjects model)
-                    , activeContexts = (Model.GroupDocStore.getActiveContexts model)
-                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
-                    }
+                configWithNow =
+                    { config | now = now }
             in
-                returnWith
-                    (createConfig)
-                    (Update.LaunchBar.update # msg_)
+                Update.LaunchBar.update configWithNow msg_
 
         OnLaunchBarMsg msg_ ->
             returnWithNow (OnLaunchBarMsgWithNow msg_)

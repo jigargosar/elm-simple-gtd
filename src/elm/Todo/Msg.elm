@@ -18,6 +18,7 @@ type TodoMsg
     | AfterUpsert TodoDoc
     | OnProcessPendingNotificationCronTick
     | UpdateTodoOrAllSelected__ DocId TodoAction
+    | UpdateTodo__ DocId TodoAction
     | OnTodoReminderOverlayAction Todo.Notification.Model.Action
     | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode

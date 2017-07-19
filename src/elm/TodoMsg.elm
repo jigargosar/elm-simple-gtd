@@ -98,6 +98,11 @@ onSetTodoFormText =
 -- direct
 
 
+onToggleDeleted id =
+    Todo.Msg.UpdateTodo__ id TA_ToggleDeleted
+        |> Msg.OnTodoMsg
+
+
 onToggleDeletedAndMaybeSelection id =
     Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDeleted
         |> Msg.OnTodoMsg

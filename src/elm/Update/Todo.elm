@@ -1,6 +1,7 @@
 module Update.Todo exposing (Config, update)
 
 import Return exposing (andThen)
+import Set
 import Update.Todo.Internal exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
@@ -50,6 +51,10 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
+                >> config.afterTodoUpdate
+
+        UpdateTodo__ todoId action ->
+            (updateAllTodos action (Set.singleton todoId) |> andThen)
                 >> config.afterTodoUpdate
 
         OnTodoReminderOverlayAction action ->

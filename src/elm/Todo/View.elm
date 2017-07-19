@@ -22,7 +22,7 @@ editTodoTextView config form =
             config.onSetTodoFormText form
 
         fireToggleDelete =
-            config.onEntityUpdateMsg (TodoId form.id) Entity.Types.EUA_ToggleDeleted
+            config.onToggleDeleted form.id
     in
         div
             [ class "overlay"

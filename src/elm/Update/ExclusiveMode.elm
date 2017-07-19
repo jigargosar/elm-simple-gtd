@@ -26,7 +26,7 @@ type alias SubReturnF msg model =
 
 type alias Config a msg model =
     { a
-        | focusEntityList : SubReturnF msg model
+        | setDomFocusToFocusInEntityCmd : SubReturnF msg model
         , saveTodoForm : TodoForm -> SubReturnF msg model
         , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
     }
@@ -43,7 +43,7 @@ update config msg =
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
             map setExclusiveModeToNone
-                >> config.focusEntityList
+                >> config.setDomFocusToFocusInEntityCmd
 
         OnSaveExclusiveModeForm ->
             onSaveExclusiveModeForm config

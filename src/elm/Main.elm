@@ -134,6 +134,9 @@ updateConfig andThenUpdate =
     , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
     , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
     , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
+    , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
+    , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
+    , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
     }
 
 

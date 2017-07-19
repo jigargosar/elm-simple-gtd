@@ -27,7 +27,6 @@ import Msg exposing (..)
 import Update.CustomSync
 import Update.ViewType
 import Update.Todo
-import Types exposing (..)
 import Update.GroupDoc
 
 
@@ -65,20 +64,7 @@ update config andThenUpdate msg =
             CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
-            let
-                config =
-                    { noop = andThenUpdate Msg.noop
-                    , onStartAddingTodoToInbox =
-                        andThenUpdate TodoMsg.onStartAddingTodoToInbox
-                    , onStartAddingTodoWithFocusInEntityAsReference =
-                        andThenUpdate
-                            TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-                    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
-                    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-                    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
-                    }
-            in
-                Update.Subscription.update config msg_
+            Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
             returnWith identity
@@ -88,14 +74,7 @@ update config andThenUpdate msg =
                 )
 
         OnExclusiveModeMsg msg_ ->
-            let
-                config =
-                    { focusEntityList = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                    , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
-                    , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
-                    }
-            in
-                Update.ExclusiveMode.update config msg_
+            Update.ExclusiveMode.update config msg_
 
         OnAppHeaderMsg msg_ ->
             let

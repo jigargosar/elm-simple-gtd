@@ -199,6 +199,14 @@ onToggleProjectDeleted =
     Msg.GroupDoc.OnToggleProjectDeleted >> OnGroupDocMsg
 
 
+onToggleGroupDocArchived gdType id =
+    Msg.GroupDoc.OnToggleGroupDocArchived >>> OnGroupDocMsg
+
+
+onToggleGroupDocDeleted gdType id =
+    Msg.GroupDoc.OnToggleGroupDocDeleted >>> OnGroupDocMsg
+
+
 
 --drawer
 

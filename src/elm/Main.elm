@@ -4,8 +4,10 @@ import Context
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
+import Lazy
 import LocalPref
 import Material
+import Model.EntityList
 import Model.GroupDocStore
 import Model.Selection
 import Model.ViewType
@@ -133,6 +135,11 @@ updateConfig model =
       now = model.now
     , activeProjects = (Model.GroupDocStore.getActiveProjects model)
     , activeContexts = (Model.GroupDocStore.getActiveContexts model)
+    , currentViewEntityListLazy =
+        Lazy.lazy
+            (\_ ->
+                Model.EntityList.createEntityListForCurrentView model
+            )
 
     --msg
     , clearSelection = map Model.Selection.clearSelection

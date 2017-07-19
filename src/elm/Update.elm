@@ -112,7 +112,7 @@ update config andThenUpdate msg =
                     , closeNotification = Msg.OnCloseNotification >> andThenUpdate
                     , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
                     , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
+                    , currentViewEntityListLazy = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in
                 returnWith identity

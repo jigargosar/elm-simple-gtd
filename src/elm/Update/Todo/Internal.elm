@@ -60,7 +60,7 @@ type alias Config a msg model =
         , closeNotification : String -> SubReturnF msg model
         , afterTodoUpdate : SubReturnF msg model
         , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , currentViewEntityList : Lazy (List Entity)
+        , currentViewEntityListLazy : Lazy (List Entity)
     }
 
 
@@ -382,7 +382,7 @@ gotoTodoWithId : Config a msg model -> SubModel model -> DocId -> SubReturnF msg
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
-            Lazy.force config.currentViewEntityList
+            Lazy.force config.currentViewEntityListLazy
                 |> List.find
                     (\entity ->
                         case entity of

@@ -52,24 +52,23 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config a msg model =
-    { a
-        | onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , revertExclusiveMode : SubReturnF msg model
-        , onToggleContextArchived : DocId -> SubReturnF msg model
-        , onToggleContextDeleted : DocId -> SubReturnF msg model
-        , onToggleProjectArchived : DocId -> SubReturnF msg model
-        , onToggleProjectDeleted : DocId -> SubReturnF msg model
-        , onToggleTodoArchived : DocId -> SubReturnF msg model
-        , onToggleTodoDeleted : DocId -> SubReturnF msg model
-        , switchToEntityListView : EntityListViewType -> SubReturnF msg model
-        , setDomFocusToFocusInEntityCmd : SubReturnF msg model
-        , onStartEditingTodo : TodoDoc -> SubReturnF msg model
+type alias Config msg model =
+    { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , onToggleContextArchived : DocId -> SubReturnF msg model
+    , onToggleContextDeleted : DocId -> SubReturnF msg model
+    , onToggleProjectArchived : DocId -> SubReturnF msg model
+    , onToggleProjectDeleted : DocId -> SubReturnF msg model
+    , onToggleTodoArchived : DocId -> SubReturnF msg model
+    , onToggleTodoDeleted : DocId -> SubReturnF msg model
+    , switchToEntityListView : EntityListViewType -> SubReturnF msg model
+    , setDomFocusToFocusInEntityCmd : SubReturnF msg model
+    , onStartEditingTodo : TodoDoc -> SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
+    Config msg model
     -> EntityMsg
     -> SubReturnF msg model
 update config msg =
@@ -111,7 +110,7 @@ moveFocusBy =
 
 
 onUpdate :
-    Config a msg model
+    Config msg model
     -> EntityId
     -> Entity.Types.EntityUpdateAction
     -> SubReturnF msg model
@@ -200,7 +199,7 @@ toggleDeleteEntity config entityId =
             config.onToggleTodoDeleted id
 
 
-startEditingEntity : Config a msg model -> EntityId -> SubReturnF msg model
+startEditingEntity : Config msg model -> EntityId -> SubReturnF msg model
 startEditingEntity config entityId =
     case entityId of
         ContextId id ->

@@ -32,17 +32,16 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config a msg model =
-    { a
-        | onStartSetupAddTodo : SubReturnF msg model
-        , revertExclusiveMode : SubReturnF msg model
-        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , onSwitchToNewUserSetupModeIfNeeded : SubReturnF msg model
+type alias Config msg model =
+    { onStartSetupAddTodo : SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    , onSwitchToNewUserSetupModeIfNeeded : SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
+    Config msg model
     -> FirebaseMsg
     -> SubReturnF msg model
 update config msg =

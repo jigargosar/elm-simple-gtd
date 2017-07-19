@@ -52,15 +52,14 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config a msg model =
-    { a
-        | switchToContextsView : SubReturnF msg model
-        , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
-        , setFocusInEntity : Entity -> SubReturnF msg model
-        , closeNotification : String -> SubReturnF msg model
-        , revertExclusiveMode : SubReturnF msg model
-        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , currentViewEntityListLazy : Lazy (List Entity)
+type alias Config msg model =
+    { switchToContextsView : SubReturnF msg model
+    , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
+    , setFocusInEntity : Entity -> SubReturnF msg model
+    , closeNotification : String -> SubReturnF msg model
+    , afterTodoUpdate : SubReturnF msg model
+    , setXMode : ExclusiveMode -> SubReturnF msg model
+    , currentViewEntityList : Lazy (List Entity)
     }
 
 
@@ -155,7 +154,7 @@ insertTodo constructWithId =
 
 
 saveAddTodoForm :
-    Config a msg model
+    Config msg model
     -> AddTodoFormMode
     -> TodoForm
     -> SubModel model
@@ -216,7 +215,7 @@ onUpdateTodoFormAction config form action =
         xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-        config.onSetExclusiveMode xMode
+        config.setXMode xMode
             >> Return.command
                 (case action of
                     Todo.FormTypes.SetTodoMenuState _ ->
@@ -235,7 +234,7 @@ onStartEditingTodo config todo editFormMode =
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-        X.Return.returnWith createXMode config.onSetExclusiveMode
+        X.Return.returnWith createXMode config.setXMode
             >> command
                 (case editFormMode of
                     ETFM_EditTodoText ->
@@ -257,7 +256,7 @@ onStartAddingTodo config addFormMode =
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-        X.Return.returnWith createXMode config.onSetExclusiveMode
+        X.Return.returnWith createXMode config.setXMode
             >> autoFocusInputRCmd
 
 
@@ -265,7 +264,7 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config a msg model -> SubReturnF msg model
+onGotoRunningTodo : Config msg model -> SubReturnF msg model
 onGotoRunningTodo config =
     returnWith identity (gotoRunningTodo config)
 
@@ -371,18 +370,18 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : Config a msg model -> SubModel model -> SubReturnF msg model
+gotoRunningTodo : Config msg model -> SubModel model -> SubReturnF msg model
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
         ?= identity
 
 
-gotoTodoWithId : Config a msg model -> SubModel model -> DocId -> SubReturnF msg model
+gotoTodoWithId : Config msg model -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
-            Lazy.force config.currentViewEntityListLazy
+            Lazy.force config.currentViewEntityList
                 |> List.find
                     (\entity ->
                         case entity of

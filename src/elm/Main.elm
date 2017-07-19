@@ -1,7 +1,7 @@
 port module Main exposing (main)
 
 import Context
-import Entity.Types exposing (createContextEntity)
+import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import LocalPref
@@ -9,7 +9,7 @@ import Material
 import Model.ViewType
 import Project
 import Random.Pcg
-import Return exposing (map)
+import Return
 import RouteUrl
 import Routes
 import Set
@@ -124,14 +124,14 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-andThenUpdate =
-    update >> Return.andThen
-
-
 update : AppMsg -> AppModel -> AppReturn
 update msg =
-    Return.singleton
-        >> (Update.update andThenUpdate msg)
+    let
+        andThenUpdate =
+            update >> Return.andThen
+    in
+        Return.singleton
+            >> Update.update andThenUpdate msg
 
 
 viewConfig =

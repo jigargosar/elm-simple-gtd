@@ -27,22 +27,21 @@ type alias SubAndThenUpdate msg model =
     msg -> SubReturnF msg model
 
 
-type alias Config a msg model =
-    { a
-        | activeProjects : List ContextDoc
-        , activeContexts : List ProjectDoc
-        , revertExclusiveMode : SubReturnF msg model
-        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , switchToEntityListView : EntityListViewType -> SubReturnF msg model
+type alias Config msg model =
+    { now : Time
+    , activeProjects : List ContextDoc
+    , activeContexts : List ProjectDoc
+    , onComplete : SubReturnF msg model
+    , setXMode : ExclusiveMode -> SubReturnF msg model
+    , onSwitchView : EntityListViewType -> SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
-    -> Time
+    Config msg a
     -> LaunchBarMsg
-    -> SubReturnF msg model
-update config now msg =
+    -> SubReturnF msg a
+update config msg =
     case msg of
         NOOP ->
             identity
@@ -64,33 +63,36 @@ update config now msg =
                             Entity.Types.ContextsView
                     )
             in
-                config.revertExclusiveMode
-                    >> config.switchToEntityListView v
+                config.onComplete
+                    >> config.onSwitchView v
 
         OnLBInputChanged form text ->
-            updateInput config now text form
+            updateInput config text form
                 |> XMLaunchBar
-                >> config.onSetExclusiveMode
+                >> config.setXMode
 
         Open ->
-            (now
+            (config.now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
-                >> config.onSetExclusiveMode
+                >> config.setXMode
             )
                 >> DomPorts.autoFocusInputRCmd
 
         OnCancel ->
-            config.revertExclusiveMode
+            config.onComplete
 
 
 type alias LaunchBarF =
     LaunchBar -> LaunchBar
 
 
-updateInput : Config a msg model -> Time -> String -> LaunchBarF
-updateInput config now input form =
+updateInput : Config msg model -> String -> LaunchBarF
+updateInput config input form =
     let
+        now =
+            config.now
+
         newInput =
             input
                 |> if now - form.updatedAt > 1 * Time.second then

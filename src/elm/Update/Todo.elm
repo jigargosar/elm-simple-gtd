@@ -10,12 +10,12 @@ import X.Function.Infix exposing (..)
 import Todo.TimeTracker as Tracker
 
 
-type alias Config a msg model =
-    Update.Todo.Internal.Config a msg model
+type alias Config msg model =
+    Update.Todo.Internal.Config msg model
 
 
 update :
-    Config a msg model
+    Config msg model
     -> Time.Time
     -> TodoMsg
     -> SubReturnF msg model
@@ -51,11 +51,11 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
-                >> config.revertExclusiveMode
+                >> config.afterTodoUpdate
 
         UpdateTodo__ todoId action ->
             (updateAllTodos action (Set.singleton todoId) |> andThen)
-                >> config.revertExclusiveMode
+                >> config.afterTodoUpdate
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action

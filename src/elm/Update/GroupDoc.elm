@@ -34,14 +34,14 @@ type alias SubReturnF msg model =
 
 
 {-
-   type alias Config a msg model =
+   type alias Config msg model =
        { updateEntityListCursorOnGroupDocChange : SubReturnF msg model
        }
 -}
 
 
 update :
-    {- Config a msg model
+    {- Config msg model
        ->
     -}
     GroupDocMsg

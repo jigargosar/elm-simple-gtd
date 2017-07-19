@@ -71,7 +71,7 @@ switchToView =
     SwitchView >> OnViewTypeMsg
 
 
-switchToContextsView =
+switchToContextsViewMsg =
     SwitchToContextsView |> OnViewTypeMsg
 
 
@@ -213,11 +213,3 @@ onToggleAppDrawerOverlay =
 
 onMdl =
     OnMdl
-
-
-
---localpref
-
-
-onPersistLocalPref =
-    OnPersistLocalPref

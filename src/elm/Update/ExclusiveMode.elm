@@ -24,16 +24,15 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config a msg model =
-    { a
-        | setDomFocusToFocusInEntityCmd : SubReturnF msg model
-        , onSaveTodoForm : TodoForm -> SubReturnF msg model
-        , onSaveGroupDocForm : GroupDocForm -> SubReturnF msg model
+type alias Config msg model =
+    { focusEntityList : SubReturnF msg model
+    , saveTodoForm : TodoForm -> SubReturnF msg model
+    , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
+    Config msg model
     -> ExclusiveModeMsg
     -> SubReturnF msg model
 update config msg =
@@ -43,7 +42,7 @@ update config msg =
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
             map setExclusiveModeToNone
-                >> config.setDomFocusToFocusInEntityCmd
+                >> config.focusEntityList
 
         OnSaveExclusiveModeForm ->
             onSaveExclusiveModeForm config
@@ -53,7 +52,7 @@ exclusiveMode =
     fieldLens .editMode (\s b -> { b | editMode = s })
 
 
-onSaveExclusiveModeForm : Config a msg model -> SubReturnF msg model
+onSaveExclusiveModeForm : Config msg model -> SubReturnF msg model
 onSaveExclusiveModeForm config =
     returnWith .editMode (saveExclusiveModeForm config)
         >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
@@ -67,14 +66,14 @@ setExclusiveModeToNone =
     setExclusiveMode XMNone
 
 
-saveExclusiveModeForm : Config a msg model -> ExclusiveMode -> SubReturnF msg model
+saveExclusiveModeForm : Config msg model -> ExclusiveMode -> SubReturnF msg model
 saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->
-            config.onSaveGroupDocForm form
+            config.saveGroupDocForm form
 
         XMTodoForm form ->
-            config.onSaveTodoForm form
+            config.saveTodoForm form
 
         XMCustomSync form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })

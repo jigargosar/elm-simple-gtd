@@ -14,14 +14,13 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config a msg model =
-    { a
-        | clearSelection : SubReturnF msg model
+type alias Config msg model =
+    { clearSelection : SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
+    Config msg model
     -> ViewTypeMsg
     -> SubReturnF msg model
 update config msg =

@@ -44,19 +44,18 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config a msg model =
-    { a
-        | noop : SubReturnF msg model
-        , onStartAddingTodoToInbox : SubReturnF msg model
-        , onStartAddingTodoWithFocusInEntityAsReference : SubReturnF msg model
-        , openLaunchBarMsg : SubReturnF msg model
-        , revertExclusiveMode : SubReturnF msg model
-        , afterTodoUpsert : TodoDoc -> SubReturnF msg model
+type alias Config msg model =
+    { noop : SubReturnF msg model
+    , onStartAddingTodoToInbox : SubReturnF msg model
+    , onStartAddingTodoWithFocusInEntityAsReference : SubReturnF msg model
+    , openLaunchBarMsg : SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
+    , afterTodoUpsert : TodoDoc -> SubReturnF msg model
     }
 
 
 update :
-    Config a msg model
+    Config msg model
     -> SubscriptionMsg
     -> SubReturnF msg model
 update config msg =
@@ -90,7 +89,7 @@ update config msg =
 
 
 
---onGlobalKeyUp : Config a msg model -> Key -> SubReturnF msg model
+--onGlobalKeyUp : Config msg model -> Key -> SubReturnF msg model
 
 
 onGlobalKeyUp config key =

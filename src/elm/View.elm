@@ -39,6 +39,8 @@ config =
     , onFirebaseMsg = Msg.OnFirebaseMsg
     , onReminderOverlayAction = TodoMsg.onReminderOverlayAction
     , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
+    , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
+    , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
     }
 
 

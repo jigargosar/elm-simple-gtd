@@ -33,7 +33,7 @@ appLayoutView config appVM model =
                         Entity.View.list viewType model
 
                     SyncView ->
-                        View.CustomSync.view model
+                        View.CustomSync.view config model
                 ]
 
         isOverlayOpen =

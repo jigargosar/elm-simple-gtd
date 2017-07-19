@@ -131,7 +131,7 @@ onSaveTodoForm config form =
                     ETFM_EditTodoText ->
                         updateTodoHelp <| TA_SetText form.text
 
-                    ETFM_EditTodoReminder ->
+                    ETFM_EditTodoSchedule ->
                         updateTodoHelp <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
                     _ ->
@@ -246,7 +246,7 @@ onStartEditingTodo config todo editFormMode =
                     ETFM_EditTodoProject ->
                         positionPopup "#edit-project-button-"
 
-                    ETFM_EditTodoReminder ->
+                    ETFM_EditTodoSchedule ->
                         positionPopup "#edit-schedule-button-"
                 )
 

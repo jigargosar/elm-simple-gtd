@@ -67,7 +67,7 @@ onStartEditingTodoProject =
 
 
 onStartEditingReminder =
-    onStartEditing__ ETFM_EditTodoReminder
+    onStartEditing__ ETFM_EditTodoSchedule
 
 
 

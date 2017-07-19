@@ -71,7 +71,7 @@ overlayViews appModel =
                                     ETFM_EditTodoProject ->
                                         Todo.GroupEditView.project geConfig form appModel
 
-                                    ETFM_EditTodoReminder ->
+                                    ETFM_EditTodoSchedule ->
                                         Todo.View.editTodoSchedulePopupView form
 
                                     ETFM_EditTodoText ->

@@ -32,7 +32,7 @@ type AddTodoFormMode
 
 type EditTodoFormMode
     = ETFM_EditTodoText
-    | ETFM_EditTodoReminder
+    | ETFM_EditTodoSchedule
     | ETFM_EditTodoContext
     | ETFM_EditTodoProject
 

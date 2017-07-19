@@ -24,7 +24,7 @@ appLayoutView config appVM model =
             AppDrawer.View.sidebarContent config appVM model
 
         layoutMainHeader =
-            View.Header.appMainHeader appVM model
+            View.Header.appMainHeader config appVM model
 
         mainViewContainer =
             div [ id "main-view-container" ]

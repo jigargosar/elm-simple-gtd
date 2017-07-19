@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="no-msg-dep" pattern="file:src/elm/AppDrawer/View.elm||file:src/elm/View/Layout.elm" />
+</component>

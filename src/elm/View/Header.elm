@@ -1,4 +1,4 @@
-module View.Header exposing (..)
+module View.Header exposing (appMainHeader)
 
 import AppColors
 import AppDrawer.Types
@@ -14,7 +14,7 @@ import X.Function.Infix exposing (..)
 import X.List
 
 
-appMainHeader viewModel m =
+appMainHeader config viewModel m =
     let
         content =
             Todo.TimeTracker.View.maybe m
@@ -43,12 +43,12 @@ titleHeaderContent viewModel m =
 headerWithContent content m =
     let
         menuButton =
-            Mat.headerIconBtn Msg.OnMdl
+            Mat.headerIconBtn Msg.onMdl
                 m.mdl
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
+                , Mat.onClickStopPropagation (Msg.onToggleAppDrawerOverlay)
                 ]
                 [ Mat.icon "menu" ]
     in
@@ -65,7 +65,7 @@ menu m =
 menuIcon m =
     case Firebase.getMaybeUserProfile m of
         Nothing ->
-            Mat.headerIconBtn Msg.OnMdl
+            Mat.headerIconBtn Msg.onMdl
                 m.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"
                 , Mat.tabIndex -1

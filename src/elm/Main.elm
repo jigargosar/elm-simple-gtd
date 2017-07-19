@@ -169,6 +169,8 @@ viewConfig =
     , onSwitchOrStartTrackingTodo = TodoMsg.onSwitchOrStartTrackingTodo
     , onStartEditingTodoText = TodoMsg.onStartEditingTodoText
     , onStartEditingReminder = TodoMsg.onStartEditingReminder
+    , onToggleDeletedAndMaybeSelection = TodoMsg.onToggleDeletedAndMaybeSelection
+    , onToggleDoneAndMaybeSelection = TodoMsg.onToggleDoneAndMaybeSelection
     }
 
 

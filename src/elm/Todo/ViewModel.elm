@@ -132,10 +132,10 @@ createTodoViewModel config appM isFocusable todo =
                 config.noop
 
         toggleDeleteMsg =
-            createEntityUpdateMsg Entity.Types.EUA_ToggleDeleted
+            config.onToggleDeletedAndMaybeSelection todoId
 
         toggleDoneMsg =
-            createEntityUpdateMsg Entity.Types.EUA_ToggleArchived
+            config.onToggleDoneAndMaybeSelection todoId
     in
         { isDone = Todo.isDone todo
         , key = todoId

@@ -11,7 +11,6 @@ import Html.Events exposing (..)
 import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import Msg
-import Todo.GroupEditView
 
 
 fireCancel =
@@ -73,14 +72,6 @@ new form =
                 ]
             ]
         ]
-
-
-editTodoProjectPopupView =
-    Todo.GroupEditView.project
-
-
-editTodoContextPopupView =
-    Todo.GroupEditView.context
 
 
 editTodoSchedulePopupView form =

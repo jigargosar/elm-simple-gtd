@@ -8,6 +8,8 @@ import ExclusiveMode.Types exposing (..)
 import Model.ViewType
 import Msg
 import Todo.FormTypes exposing (..)
+import Todo.GroupEditView
+import TodoMsg
 import View.CustomSync
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
@@ -51,31 +53,40 @@ overlayViews appModel =
                         |> Html.map Msg.OnLaunchBarMsg
 
                 XMTodoForm form ->
-                    case form.mode of
-                        TFM_Edit editMode ->
-                            case editMode of
-                                ETFM_EditTodoContext ->
-                                    Todo.View.editTodoContextPopupView form appModel
+                    let
+                        geConfig =
+                            { onSetProject = TodoMsg.onSetProject
+                            , onSetContext = TodoMsg.onSetContext
+                            , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
+                            , noop = Msg.noop
+                            , revertExclusiveMode = Msg.revertExclusiveMode
+                            }
+                    in
+                        case form.mode of
+                            TFM_Edit editMode ->
+                                case editMode of
+                                    ETFM_EditTodoContext ->
+                                        Todo.GroupEditView.context geConfig form appModel
 
-                                ETFM_EditTodoProject ->
-                                    Todo.View.editTodoProjectPopupView form appModel
+                                    ETFM_EditTodoProject ->
+                                        Todo.GroupEditView.project geConfig form appModel
 
-                                ETFM_EditTodoReminder ->
-                                    Todo.View.editTodoSchedulePopupView form
+                                    ETFM_EditTodoReminder ->
+                                        Todo.View.editTodoSchedulePopupView form
 
-                                ETFM_EditTodoText ->
-                                    Todo.View.editTodoTextView form
+                                    ETFM_EditTodoText ->
+                                        Todo.View.editTodoTextView form
 
-                        TFM_Add addMode ->
-                            case addMode of
-                                ATFM_SetupFirstTodo ->
-                                    View.GetStarted.setup form
+                            TFM_Add addMode ->
+                                case addMode of
+                                    ATFM_SetupFirstTodo ->
+                                        View.GetStarted.setup form
 
-                                ATFM_AddWithFocusInEntityAsReference ->
-                                    Todo.View.new form
+                                    ATFM_AddWithFocusInEntityAsReference ->
+                                        Todo.View.new form
 
-                                ATFM_AddToInbox ->
-                                    Todo.View.new form
+                                    ATFM_AddToInbox ->
+                                        Todo.View.new form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay

@@ -1,56 +1,77 @@
 module Todo.GroupEditView exposing (..)
 
-import Context
 import Document exposing (Document)
+import Document.Types exposing (DocId, getDocId)
+import GroupDoc
 import Menu
+import Menu.Types exposing (MenuState)
 import Model.GroupDocStore
-import Msg
-import Project
+
+
+--import Msg
+
 import Html exposing (..)
 import Todo.FormTypes exposing (..)
-import TodoMsg
-import Types exposing (AppModel)
-import Msg
 
 
-createProjectMenuConfig : TodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
-createProjectMenuConfig form model =
-    { onSelect = TodoMsg.onSetProject form.id
+--import TodoMsg
+--import Types exposing (AppModel)
+--import Msg
+
+
+type alias Config msg =
+    { onSetProject : DocId -> msg
+    , onSetContext : DocId -> msg
+    , onSetTodoFormMenuState : MenuState -> msg
+    , noop : msg
+    , revertExclusiveMode : msg
+    }
+
+
+
+--createProjectMenuConfig : TodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
+
+
+createProjectMenuConfig config form =
+    { onSelect = config.onSetProject form.id
     , isSelected = Document.hasId form.projectId
     , itemKey = getMenuKey "project"
-    , itemSearchText = Project.getName
-    , itemView = Project.getName >> text
-    , onStateChanged = TodoMsg.onSetTodoFormMenuState form
-    , noOp = Msg.noop
-    , onOutsideMouseDown = Msg.revertExclusiveMode
+    , itemSearchText = GroupDoc.getName
+    , itemView = GroupDoc.getName >> text
+    , onStateChanged = config.onSetTodoFormMenuState form
+    , noOp = config.noop
+    , onOutsideMouseDown = config.revertExclusiveMode
     }
 
 
-createContextMenuConfig : TodoForm -> AppModel -> Menu.Config Context.Model Msg.AppMsg
-createContextMenuConfig form model =
-    { onSelect = TodoMsg.onSetContext form.id
+
+--createContextMenuConfig : TodoForm -> AppModel -> Menu.Config Context.Model Msg.AppMsg
+
+
+createContextMenuConfig config form =
+    { onSelect = config.onSetContext form.id
     , isSelected = Document.hasId form.contextId
     , itemKey = getMenuKey "context"
-    , itemSearchText = Context.getName
-    , itemView = Context.getName >> text
-    , onStateChanged = TodoMsg.onSetTodoFormMenuState form
-    , noOp = Msg.noop
-    , onOutsideMouseDown = Msg.revertExclusiveMode
+    , itemSearchText = GroupDoc.getName
+    , itemView = GroupDoc.getName >> text
+    , onStateChanged = config.onSetTodoFormMenuState form
+    , noOp = config.noop
+    , onOutsideMouseDown = config.revertExclusiveMode
     }
 
 
-project form model =
+project config form model =
     Menu.view (Model.GroupDocStore.getActiveProjects model)
         form.menuState
-        (createProjectMenuConfig form model)
+        (createProjectMenuConfig config form)
 
 
-context form model =
+context config form model =
     Menu.view (Model.GroupDocStore.getActiveContexts model)
         form.menuState
-        (createContextMenuConfig form model)
+        (createContextMenuConfig config form)
 
 
 getMenuKey : String -> Document x -> String
 getMenuKey prefix =
-    Document.getId >> String.append "-menu-key-" >> String.append prefix
+    getDocId >> String.append "-menu-key-" >> String.append prefix

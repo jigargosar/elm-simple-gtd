@@ -23,7 +23,10 @@ type alias Item =
     ( String, ItemType )
 
 
-menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.AppMsg
+
+--menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.AppMsg
+
+
 menuConfig menuState appModel =
     { onSelect = onSelect
     , isSelected = (\_ -> False)
@@ -54,7 +57,10 @@ onSelect ( _, itemType ) =
             msg
 
 
-getItems : AppModel -> List Item
+
+--getItems : AppModel -> List Item
+
+
 getItems appModel =
     let
         maybeUserProfile =

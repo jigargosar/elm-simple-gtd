@@ -203,17 +203,17 @@ startEditingEntity : Config msg model -> EntityId -> SubReturnF msg model
 startEditingEntity config entityId =
     case entityId of
         ContextId id ->
-            X.Return.withMaybe
+            X.Return.returnWithMaybe1
                 (Model.GroupDocStore.findContextById id)
                 (createEditContextForm >> XMGroupDocForm >> config.onSetExclusiveMode)
 
         ProjectId id ->
-            X.Return.withMaybe
+            X.Return.returnWithMaybe1
                 (Model.GroupDocStore.findProjectById id)
                 (createEditProjectForm >> XMGroupDocForm >> config.onSetExclusiveMode)
 
         TodoId id ->
-            X.Return.withMaybe (Model.Todo.findTodoById id)
+            X.Return.returnWithMaybe1 (Model.Todo.findTodoById id)
                 (config.onStartEditingTodo)
 
 

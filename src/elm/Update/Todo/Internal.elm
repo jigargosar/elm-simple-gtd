@@ -18,7 +18,7 @@ import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Tuple2
 import X.Record as Record exposing (overT2, set)
-import X.Return exposing (rAndThenMaybe, returnWith)
+import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe1)
 import X.Time
 import Notification
 import Return exposing (andThen, command, map)
@@ -420,22 +420,14 @@ setReminderOverlayToInitialView todo model =
 
 reminderOverlayAction : Todo.Notification.Model.Action -> SubReturnF msg model
 reminderOverlayAction action =
-    returnWith identity
-        (\model ->
-            case model.reminderOverlay of
-                Todo.Notification.Types.Active activeView todoDetails ->
-                    onActive todoDetails action
-
-                _ ->
-                    identity
-        )
+    returnWithMaybe1 .reminderOverlay (onActive action)
 
 
 onActive :
-    Todo.Notification.Types.TodoDetails
-    -> Todo.Notification.Model.Action
+    Todo.Notification.Model.Action
+    -> Todo.Notification.Types.InnerModel
     -> SubReturnF msg model
-onActive todoDetails action =
+onActive action ( _, todoDetails ) =
     let
         todoId =
             todoDetails.id

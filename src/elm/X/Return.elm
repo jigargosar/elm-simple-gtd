@@ -9,11 +9,11 @@ import X.Function as F exposing (..)
 import X.Function.Infix exposing (..)
 
 
-withMaybe :
+returnWithMaybe1 :
     (a -> Maybe x)
     -> (x -> ReturnF msg a)
     -> ReturnF msg a
-withMaybe f1 f2 =
+returnWithMaybe1 f1 f2 =
     Return.andThen
         (\m ->
             f1 m ?|> f2 ?= identity |> F.apply (Return.singleton m)
@@ -83,10 +83,6 @@ andThenApplyWithMaybe f1 f2 =
 
 maybeEffect f =
     Return.effect_ (\m -> f m ?= Cmd.none)
-
-
-apply =
-    flip Return.andThen
 
 
 rAndThenMaybe f =

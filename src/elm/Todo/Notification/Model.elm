@@ -7,6 +7,7 @@ import Todo
 import Time exposing (Time)
 import Todo.Notification.Types exposing (..)
 import Todo.Types exposing (TodoDoc)
+import X.Function exposing (..)
 
 
 type Action
@@ -33,7 +34,7 @@ addSnoozeOffset time offset =
 
 initialView : TodoDoc -> TodoReminderOverlayModel
 initialView =
-    createTodoDetails >> Active InitialView
+    createTodoDetails >> tuple2 InitialView >> Just
 
 
 createTodoDetails todo =
@@ -41,13 +42,9 @@ createTodoDetails todo =
 
 
 none =
-    None
+    Nothing
 
 
 snoozeView : TodoDetails -> TodoReminderOverlayModel
 snoozeView =
-    Active SnoozeView
-
-
-dummy =
-    Active InitialView (TodoDetails "dummy-todo-id" "dummy todo")
+    tuple2 SnoozeView >> Just

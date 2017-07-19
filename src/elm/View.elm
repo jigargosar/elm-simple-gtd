@@ -5,6 +5,7 @@ import AppDrawer.Types
 import AppDrawer.View
 import Entity.View
 import ExclusiveMode.Types exposing (..)
+import Lazy exposing (Lazy)
 import Model.ViewType
 import Msg
 import Todo.FormTypes exposing (..)
@@ -105,9 +106,14 @@ overlayViews appModel =
 
                 _ ->
                     def
+
+        reminderOverlayConfig =
+            { onReminderOverlayAction = TodoMsg.onReminderOverlayAction
+            , noop = Msg.noop
+            }
     in
         [ Just editModeOverlayView
-        , Todo.Notification.View.maybeOverlay appModel
+        , Todo.Notification.View.maybeOverlay reminderOverlayConfig appModel
         ]
             |> List.filterMap identity
 

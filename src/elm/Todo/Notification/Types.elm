@@ -13,6 +13,9 @@ type alias TodoDetails =
     { id : DocId, text : TodoText }
 
 
-type TodoReminderOverlayModel
-    = None
-    | Active ActiveView TodoDetails
+type alias InnerModel =
+    ( ActiveView, TodoDetails )
+
+
+type alias TodoReminderOverlayModel =
+    Maybe ( ActiveView, TodoDetails )

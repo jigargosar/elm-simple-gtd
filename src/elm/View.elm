@@ -42,6 +42,21 @@ init model =
         div [ class "mdl-typography--body-1" ] children
 
 
+config =
+    { onSetProject = TodoMsg.onSetProjectAndMaybeSelection
+    , onSetContext = TodoMsg.onSetContextAndMaybeSelection
+    , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
+    , noop = Msg.noop
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , onSetTodoFormText = TodoMsg.onSetTodoFormText
+    , onToggleDeleted = TodoMsg.onToggleDeleted
+    , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
+    , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onEntityUpdateMsg = Msg.onEntityUpdateMsg
+    }
+
+
 overlayViews appModel =
     let
         def =
@@ -54,52 +69,38 @@ overlayViews appModel =
                         |> Html.map Msg.OnLaunchBarMsg
 
                 XMTodoForm form ->
-                    let
-                        config =
-                            { onSetProject = TodoMsg.onSetProjectAndMaybeSelection
-                            , onSetContext = TodoMsg.onSetContextAndMaybeSelection
-                            , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
-                            , noop = Msg.noop
-                            , revertExclusiveMode = Msg.revertExclusiveMode
-                            , onSetTodoFormText = TodoMsg.onSetTodoFormText
-                            , onToggleDeleted = TodoMsg.onToggleDeleted
-                            , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
-                            , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
-                            , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-                            }
-                    in
-                        case form.mode of
-                            TFM_Edit editMode ->
-                                case editMode of
-                                    ETFM_EditTodoContext ->
-                                        Todo.GroupEditView.context config form appModel
+                    case form.mode of
+                        TFM_Edit editMode ->
+                            case editMode of
+                                ETFM_EditTodoContext ->
+                                    Todo.GroupEditView.context config form appModel
 
-                                    ETFM_EditTodoProject ->
-                                        Todo.GroupEditView.project config form appModel
+                                ETFM_EditTodoProject ->
+                                    Todo.GroupEditView.project config form appModel
 
-                                    ETFM_EditTodoSchedule ->
-                                        Todo.View.editTodoSchedulePopupView config form
+                                ETFM_EditTodoSchedule ->
+                                    Todo.View.editTodoSchedulePopupView config form
 
-                                    ETFM_EditTodoText ->
-                                        Todo.View.editTodoTextView config form
+                                ETFM_EditTodoText ->
+                                    Todo.View.editTodoTextView config form
 
-                            TFM_Add addMode ->
-                                case addMode of
-                                    ATFM_SetupFirstTodo ->
-                                        View.GetStarted.setup config form
+                        TFM_Add addMode ->
+                            case addMode of
+                                ATFM_SetupFirstTodo ->
+                                    View.GetStarted.setup config form
 
-                                    ATFM_AddWithFocusInEntityAsReference ->
-                                        Todo.View.new config form
+                                ATFM_AddWithFocusInEntityAsReference ->
+                                    Todo.View.new config form
 
-                                    ATFM_AddToInbox ->
-                                        Todo.View.new config form
+                                ATFM_AddToInbox ->
+                                    Todo.View.new config form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
                         |> Html.map Msg.OnFirebaseMsg
 
                 XMGroupDocForm form ->
-                    GroupDoc.FormView.init form
+                    GroupDoc.FormView.init config form
 
                 XMMainMenu menuState ->
                     View.MainMenu.init menuState appModel
@@ -116,7 +117,6 @@ overlayViews appModel =
         , Todo.Notification.View.maybeOverlay reminderOverlayConfig appModel
         ]
             |> List.filterMap identity
-
 
 
 appLayoutView model =

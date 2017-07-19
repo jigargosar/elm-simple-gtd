@@ -3,21 +3,21 @@ module GroupDoc.FormView exposing (..)
 import Entity.Types exposing (EntityId(..))
 import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(..))
 import GroupDoc.Types exposing (GroupDocType(..))
-import Msg
+import Mat
 import Tuple2
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
-import View.Shared exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
-import Msg
 
 
-init : GroupDocForm -> Html Msg.AppMsg
-init form =
+--init : GroupDocForm -> Html Msg.AppMsg
+
+
+init config form =
     let
         ( entityId, nameLabel ) =
             (case form.groupDocType of
@@ -30,16 +30,16 @@ init form =
                 |> Tuple2.mapEach (apply form.id) (String.append # " Name")
 
         toMsg =
-            Msg.onEntityUpdateMsg entityId
+            config.onEntityUpdateMsg entityId
 
         fireNameChanged =
             Entity.Types.EUA_SetFormText >> toMsg
 
         fireSaveForm =
-            Msg.onSaveExclusiveModeForm
+            config.onSaveExclusiveModeForm
 
         fireCancel =
-            Msg.revertExclusiveMode
+            config.revertExclusiveMode
 
         fireToggleArchive =
             toMsg Entity.Types.EUA_ToggleArchived
@@ -47,22 +47,22 @@ init form =
         defaultButtons =
             case form.mode of
                 GDFM_Edit ->
-                    defaultOkCancelArchiveButtons form.isArchived fireToggleArchive
+                    Mat.okCancelArchiveButtons config form.isArchived fireToggleArchive
 
                 GDFM_Add ->
-                    defaultOkCancelButtons
+                    Mat.okCancelButtons config
     in
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Msg.noop)
+            , onKeyDownStopPropagation (\_ -> config.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
+            [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
                 [ div [ class "modal-content" ]
                     [ div
                         [ class "input-field"
-                        , onKeyDownStopPropagation (\_ -> Msg.noop)
-                        , onClickStopPropagation Msg.noop
+                        , onKeyDownStopPropagation (\_ -> config.noop)
+                        , onClickStopPropagation config.noop
                         ]
                         [ input
                             [ class "auto-focus"

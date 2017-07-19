@@ -21,16 +21,25 @@ defaultOkCancelButtons =
     defaultOkCancelButtonsWith []
 
 
-defaultOkCancelButtonsWith list =
-    Mat.okCancelButtonsWith
-        Msg.onSaveExclusiveModeForm
-        Msg.revertExclusiveMode
-        list
-
-
 defaultOkCancelDeleteButtons deleteMsg =
     defaultOkCancelButtonsWith [ Mat.deleteButton deleteMsg ]
 
 
 defaultOkCancelArchiveButtons isArchived archiveMsg =
     defaultOkCancelButtonsWith [ Mat.archiveButton isArchived archiveMsg ]
+
+
+defaultOkCancelButtonsWith list =
+    okCancelButtonsWith
+        Msg.onSaveExclusiveModeForm
+        Msg.revertExclusiveMode
+        list
+
+
+okCancelButtonsWith okMsg cancelMsg list =
+    div [ class "layout horizontal-reverse" ]
+        ([ Mat.okButton okMsg
+         , Mat.cancelButton cancelMsg
+         ]
+            ++ list
+        )

@@ -208,10 +208,27 @@ divider =
     div [ HA.class "divider" ] []
 
 
-okCancelButtonsWith okMsg cancelMsg list =
+modalButtonPanel config =
+    let
+        btn ( txt, msg ) =
+            btnFlat txt [ HE.onClick msg ]
+    in
+        div [ HA.class "layout horizontal-reverse" ]
+            (config .|> btn)
+
+
+okCancelDeleteButtons config msg =
+    okCancelButtonsWith config [ deleteButton msg ]
+
+
+okCancelButtons config =
+    okCancelButtonsWith config []
+
+
+okCancelButtonsWith config list =
     div [ HA.class "layout horizontal-reverse" ]
-        ([ okButton okMsg
-         , cancelButton cancelMsg
+        ([ okButton config.onSaveExclusiveModeForm
+         , cancelButton config.revertExclusiveMode
          ]
             ++ list
         )

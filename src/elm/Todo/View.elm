@@ -1,13 +1,13 @@
 module Todo.View exposing (..)
 
 import Entity.Types exposing (EntityId(TodoId))
+import Mat
 import Todo.FormTypes exposing (..)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Keyboard exposing (..)
-import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 
 
 --editTodoTextView : TodoForm -> Html AppMsg
@@ -40,7 +40,7 @@ editTodoTextView config form =
                             []
                         , Html.label [] [ text "Todo" ]
                         ]
-                    , defaultOkCancelDeleteButtons fireToggleDelete
+                    , Mat.okCancelDeleteButtons config fireToggleDelete
                     ]
                 ]
             ]
@@ -63,7 +63,7 @@ new config form =
                         []
                     , label [ class "active" ] [ text "New Todo" ]
                     ]
-                , defaultOkCancelButtons
+                , Mat.okCancelButtons config
                 ]
             ]
         ]
@@ -100,6 +100,6 @@ editTodoSchedulePopupView config form =
                     []
                 , Html.label [ class "active" ] [ "Time" |> text ]
                 ]
-            , defaultOkCancelButtons
+            , Mat.okCancelButtons config
             ]
         ]

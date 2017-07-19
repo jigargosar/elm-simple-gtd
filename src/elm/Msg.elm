@@ -200,11 +200,11 @@ onToggleProjectDeleted =
 
 
 onToggleGroupDocArchived gdType id =
-    Msg.GroupDoc.OnToggleGroupDocArchived >>> OnGroupDocMsg
+    Msg.GroupDoc.OnToggleGroupDocArchived gdType id |> OnGroupDocMsg
 
 
 onToggleGroupDocDeleted gdType id =
-    Msg.GroupDoc.OnToggleGroupDocDeleted >>> OnGroupDocMsg
+    Msg.GroupDoc.OnToggleGroupDocDeleted gdType id |> OnGroupDocMsg
 
 
 

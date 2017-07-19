@@ -85,7 +85,7 @@ create config todoList groupDoc =
             if isNull then
                 Msg.noop
             else
-                onEntityAction Entity.Types.EUA_ToggleDeleted
+                Msg.onToggleGroupDocArchived config.groupDocType id
 
         startEditingMsg =
             if isNull then

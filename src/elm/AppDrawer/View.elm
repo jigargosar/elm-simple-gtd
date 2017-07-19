@@ -3,7 +3,6 @@ module AppDrawer.View exposing (..)
 import AppColors
 import AppUrl
 import Entity.Types
-import Msg
 import X.Html
 import Mat
 import Toolkit.Operators exposing (..)
@@ -77,7 +76,7 @@ entityGroupView config vm viewType =
             EntityListView vm.viewType == viewType
 
         fireSwitchView =
-            Msg.switchToEntityListView vm.viewType
+            config.switchToEntityListView vm.viewType
 
         fireSmart =
             if isCurrentView then
@@ -98,7 +97,7 @@ entityGroupView config vm viewType =
             ++ [ li [ onClick fireSmart ]
                     [ Mat.iconM vm.icon
                     , Html.h5 [] [ text vm.title ]
-                    , Mat.iconBtn2 Msg.onMdl expandIconName onToggleExpanded
+                    , Mat.iconBtn2 config.onMdl expandIconName onToggleExpanded
                     ]
                , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
                     [ ul []
@@ -166,7 +165,7 @@ entityListItem vm =
 switchViewItemSmall config iconName viewType title =
     li
         [ class ""
-        , onClick (Msg.switchToView viewType)
+        , onClick (config.switchToView viewType)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]
@@ -176,7 +175,7 @@ switchViewItemSmall config iconName viewType title =
 onSetEntityListViewItem config iconName viewType title =
     li
         [ class ""
-        , onClick (Msg.switchToEntityListView viewType)
+        , onClick (config.switchToEntityListView viewType)
         ]
         [ Mat.icon iconName
         , h5 [] [ text title ]

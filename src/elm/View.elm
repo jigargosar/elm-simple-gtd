@@ -118,30 +118,30 @@ overlayViews appModel =
 --            ]
 
 
-appLayoutView m =
+appLayoutView model =
     let
         appVM =
-            ViewModel.create m
+            ViewModel.create model
     in
-        if AppDrawer.Model.getIsOverlayOpen m.appDrawerModel then
+        if AppDrawer.Model.getIsOverlayOpen model.appDrawerModel then
             div
                 [ id "app-layout"
                 , classList
-                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen model.appDrawerModel )
                     ]
                 ]
                 [ div
                     [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
-                    [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM m ]
-                    , AppDrawer.View.sidebarContent appVM m
+                    [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM model ]
+                    , AppDrawer.View.sidebarContent appVM model
                     ]
                 , div
                     [ id "layout-main"
                     , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Msg.noop ]
-                        [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM m ]
-                        , div [ id "layout-main-content" ] [ appMainContent m ]
+                        [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM model ]
+                        , div [ id "layout-main-content" ] [ appMainContent model ]
                         ]
                     ]
                 ]
@@ -149,23 +149,23 @@ appLayoutView m =
             div
                 [ id "app-layout"
                 , classList
-                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen m.appDrawerModel )
+                    [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen model.appDrawerModel )
                     ]
                 ]
                 [ div [ class "bottom-shadow" ]
-                    [ AppDrawer.View.sidebarHeader appVM m
-                    , View.Header.appMainHeader appVM m
+                    [ AppDrawer.View.sidebarHeader appVM model
+                    , View.Header.appMainHeader appVM model
                     ]
                 , div
                     [ id "layout-sidebar", X.Html.onClickStopPropagation Msg.noop ]
-                    [ AppDrawer.View.sidebarContent appVM m
+                    [ AppDrawer.View.sidebarContent appVM model
                     ]
                 , div
                     [ id "layout-main"
                     , onClick (Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay)
                     ]
                     [ div [ X.Html.onClickStopPropagation Msg.noop ]
-                        [ div [ id "layout-main-content" ] [ appMainContent m ]
+                        [ div [ id "layout-main-content" ] [ appMainContent model ]
                         ]
                     ]
                 ]

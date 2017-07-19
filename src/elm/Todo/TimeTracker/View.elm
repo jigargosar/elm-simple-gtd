@@ -1,7 +1,6 @@
 module Todo.TimeTracker.View exposing (..)
 
 import Model.Todo
-import Msg
 import X.Time
 import Mat
 import Todo.TimeTracker exposing (State(..))
@@ -10,13 +9,12 @@ import X.Function.Infix exposing (..)
 import Todo
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import TodoMsg
 
 
 -- View
 
 
-createViewModel appModel tracker =
+createViewModel config appModel tracker =
     let
         elapsedTime =
             Todo.TimeTracker.getElapsedTime appModel.now tracker
@@ -26,12 +24,13 @@ createViewModel appModel tracker =
     in
         { displayText = todoText
         , displayTime = X.Time.toHHMMSS elapsedTime
-        , onStop = TodoMsg.onStopRunningTodo
+        , onStop = config.onStopRunningTodo
+        , onMdl = config.onMdl
         }
 
 
-maybe appModel =
-    appModel.timeTracker ?|> createViewModel appModel >> view
+maybe config appModel =
+    appModel.timeTracker ?|> createViewModel config appModel >> view
 
 
 view vm =
@@ -43,6 +42,6 @@ view vm =
                 , style [ "margin-right" => "1rem" ]
                 ]
                 [ text vm.displayTime ]
-            , Mat.iconBtn2 Msg.OnMdl "stop" vm.onStop
+            , Mat.iconBtn2 vm.onMdl "stop" vm.onStop
             ]
         ]

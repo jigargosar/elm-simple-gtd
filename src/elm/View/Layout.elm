@@ -1,7 +1,6 @@
 module View.Layout exposing (..)
 
 import AppDrawer.Model
-import AppDrawer.Types
 import AppDrawer.View
 import Entity.View
 import Model.ViewType
@@ -12,7 +11,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import View.Header
-import View.Mat
 
 
 appLayoutView config appVM model =

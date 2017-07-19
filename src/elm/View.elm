@@ -1,22 +1,12 @@
 module View exposing (init)
 
-import AppDrawer.Model
-import AppDrawer.Types
-import AppDrawer.View
-import Entity.View
-import Model.ViewType
 import Msg
 import TodoMsg
-import View.CustomSync
 import View.Layout
-import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import View.Header
 import ViewModel
 import View.Mat
-import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import View.Overlays
 
 
@@ -46,6 +36,7 @@ config =
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
     , onEntityListKeyDown = Msg.onEntityListKeyDown
+    , onStopRunningTodo = TodoMsg.onStopRunningTodo
     }
 
 

@@ -2,7 +2,6 @@ module Entity.View exposing (list)
 
 import Entity
 import Entity.Tree
-import Entity.Types exposing (EntityListViewType)
 import EntityId
 import GroupDoc.View
 import Html
@@ -10,7 +9,6 @@ import List.Extra
 import Maybe.Extra
 import Model.EntityTree
 import Todo.ItemView
-import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)

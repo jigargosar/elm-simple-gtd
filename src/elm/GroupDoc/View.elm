@@ -1,7 +1,6 @@
 module GroupDoc.View exposing (..)
 
 import EntityId
-import Todo.Types exposing (TodoDoc)
 import View.Badge
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)

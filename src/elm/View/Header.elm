@@ -1,7 +1,6 @@
 module View.Header exposing (appMainHeader)
 
 import AppColors
-import AppDrawer.Types
 import Mat
 import Firebase
 import Html exposing (..)
@@ -16,7 +15,7 @@ import X.List
 appMainHeader config viewModel m =
     let
         content =
-            Todo.TimeTracker.View.maybe m
+            Todo.TimeTracker.View.maybe config m
                 ?|> X.List.singleton
                 ?= titleHeaderContent viewModel
     in

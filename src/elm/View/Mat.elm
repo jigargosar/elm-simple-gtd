@@ -9,7 +9,7 @@ import Msg
 import TodoMsg
 
 
-newTodoFab alv m =
+newTodoFab m =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach Msg.OnMdl [ 0 ] ]
             [ Mat.fab Msg.OnMdl

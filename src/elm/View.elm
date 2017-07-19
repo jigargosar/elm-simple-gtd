@@ -44,12 +44,12 @@ config =
 
 init model =
     let
-        alv =
-            View.Layout.appLayoutView config model
+        appVM =
+            ViewModel.create model
 
         children =
-            [ alv
-            , View.Mat.newTodoFab alv model
+            [ View.Layout.appLayoutView config appVM model
+            , View.Mat.newTodoFab model
             ]
                 ++ View.Overlays.overlayViews config model
     in

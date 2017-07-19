@@ -18,10 +18,10 @@ import View.Mat
 appLayoutView config appVM model =
     let
         layoutSideBarHeader =
-            AppDrawer.View.sidebarHeader config appVM model
+            AppDrawer.View.sidebarHeader appVM model
 
         layoutSideBarContent =
-            AppDrawer.View.sidebarContent appVM model
+            AppDrawer.View.sidebarContent config appVM model
 
         layoutMainHeader =
             View.Header.appMainHeader appVM model

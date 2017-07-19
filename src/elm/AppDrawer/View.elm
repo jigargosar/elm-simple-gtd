@@ -3,7 +3,7 @@ module AppDrawer.View exposing (..)
 import AppColors
 import AppUrl
 import Entity.Types
-import Msg exposing (..)
+import Msg
 import X.Html
 import Mat
 import Toolkit.Operators exposing (..)
@@ -14,11 +14,11 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import View.Shared exposing (..)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
+import View.Badge
 
 
-sidebarHeader config appVM m =
+sidebarHeader appVM m =
     let
         t1 =
             if m.developmentMode then
@@ -47,7 +47,7 @@ sidebarHeader config appVM m =
             ]
 
 
-sidebarContent appVM model =
+sidebarContent config appVM model =
     let
         { contexts, projects } =
             appVM
@@ -55,20 +55,20 @@ sidebarContent appVM model =
         div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
             [ ul []
                 ([]
-                    ++ entityGroupView contexts model.viewType
-                    ++ entityGroupView projects model.viewType
+                    ++ entityGroupView config contexts model.viewType
+                    ++ entityGroupView config projects model.viewType
                     ++ [ Mat.divider ]
-                    ++ [ onSetEntityListViewItem "sort" Entity.Types.RecentView "Recent"
-                       , onSetEntityListViewItem "delete" Entity.Types.BinView "Bin"
-                       , onSetEntityListViewItem "done" Entity.Types.DoneView "Done"
+                    ++ [ onSetEntityListViewItem config "sort" Entity.Types.RecentView "Recent"
+                       , onSetEntityListViewItem config "delete" Entity.Types.BinView "Bin"
+                       , onSetEntityListViewItem config "done" Entity.Types.DoneView "Done"
                        , Mat.divider
-                       , switchViewItemSmall "settings" SyncView "Advance Settings"
+                       , switchViewItemSmall config "settings" SyncView "Advance Settings"
                        ]
                 )
             ]
 
 
-entityGroupView vm viewType =
+entityGroupView config vm viewType =
     let
         { onAddClicked, onToggleExpanded, isExpanded } =
             vm
@@ -77,7 +77,7 @@ entityGroupView vm viewType =
             EntityListView vm.viewType == viewType
 
         fireSwitchView =
-            Msg.switchToView (EntityListView vm.viewType)
+            Msg.switchToEntityListView vm.viewType
 
         fireSmart =
             if isCurrentView then
@@ -142,7 +142,7 @@ archivedItems vm =
             ]
             [ Mat.icon iconName
             , div [ class "font-nowrap" ]
-                [ View.Shared.badge buttonText badgeCount
+                [ View.Badge.badge buttonText badgeCount
                 ]
             ]
         , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
@@ -150,27 +150,20 @@ archivedItems vm =
         ]
 
 
-entityListItem : AppDrawer.GroupViewModel.DocumentWithNameViewModel -> Html AppMsg
+
+--entityListItem : AppDrawer.GroupViewModel.DocumentWithNameViewModel -> Html AppMsg
+
+
 entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)
         ]
         [ Mat.iconM vm.icon
-        , div [ class "font-nowrap" ] [ View.Shared.badge vm.name vm.count ]
+        , div [ class "font-nowrap" ] [ View.Badge.badge vm.name vm.count ]
         ]
 
 
-switchViewItem iconName viewType title =
-    li
-        [ class ""
-        , onClick (Msg.switchToView viewType)
-        ]
-        [ Mat.icon iconName
-        , h5 [] [ text title ]
-        ]
-
-
-switchViewItemSmall iconName viewType title =
+switchViewItemSmall config iconName viewType title =
     li
         [ class ""
         , onClick (Msg.switchToView viewType)
@@ -180,7 +173,7 @@ switchViewItemSmall iconName viewType title =
         ]
 
 
-onSetEntityListViewItem iconName viewType title =
+onSetEntityListViewItem config iconName viewType title =
     li
         [ class ""
         , onClick (Msg.switchToEntityListView viewType)

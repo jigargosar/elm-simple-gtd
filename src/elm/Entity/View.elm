@@ -21,7 +21,7 @@ import Html.Keyed
 import Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import View.Shared exposing (badge)
+import View.Badge
 
 
 type alias KeyedView =
@@ -142,6 +142,6 @@ flatTodoListView title todoListView =
         [ ( title
           , Html.Keyed.node "div"
                 [ class "todo-list collection" ]
-                (( title, div [ class "collection-item" ] [ h5 [] [ badge title count ] ] ) :: truncatedList)
+                (( title, div [ class "collection-item" ] [ h5 [] [ View.Badge.badge title count ] ] ) :: truncatedList)
           )
         ]

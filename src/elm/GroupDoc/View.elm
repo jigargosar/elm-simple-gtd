@@ -4,6 +4,7 @@ import EntityId
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Msg exposing (AppMsg)
 import Todo.Types exposing (TodoDoc)
+import View.Badge
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -11,7 +12,6 @@ import Html.Keyed
 import Mat
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import View.Shared exposing (defaultOkCancelDeleteButtons)
 import X.Html exposing (onClickStopPropagation)
 
 
@@ -70,7 +70,7 @@ headerItem vm =
             ]
             [ div [ class "layout horizontal justified center" ]
                 [ h5 [ class "font-nowrap ellipsis" ]
-                    [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
+                    [ View.Badge.badge (vm.namePrefix ++ vm.name) vm.count
                     ]
                 , div [ class "layout horizontal center" ] [ editOrArchiveButton ]
                 ]

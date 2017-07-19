@@ -6,10 +6,11 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import LocalPref
 import Material
+import Model.Selection
 import Model.ViewType
 import Project
 import Random.Pcg
-import Return
+import Return exposing (map)
 import RouteUrl
 import Routes
 import Set
@@ -124,6 +125,18 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
+updateConfig andThenUpdate =
+    { clearSelection = map Model.Selection.clearSelection
+    , noop = andThenUpdate Msg.noop
+    , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
+    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
+    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
+    }
+
+
 update : AppMsg -> AppModel -> AppReturn
 update msg =
     let
@@ -131,7 +144,7 @@ update msg =
             update >> Return.andThen
     in
         Return.singleton
-            >> Update.update andThenUpdate msg
+            >> Update.update (updateConfig andThenUpdate) andThenUpdate msg
 
 
 viewConfig =

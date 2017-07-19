@@ -39,24 +39,21 @@ import Update.GroupDoc
    type alias AndThenUpdate =
        AppMsg -> ReturnF
 -}
+{-
+   update :
+       (AppMsg -> Return.ReturnF AppMsg AppModel)
+       -> AppMsg
+       -> Return.ReturnF AppMsg AppModel
+-}
 
 
-update :
-    (AppMsg -> Return.ReturnF AppMsg AppModel)
-    -> AppMsg
-    -> Return.ReturnF AppMsg AppModel
-update andThenUpdate msg =
+update config andThenUpdate msg =
     case msg of
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            let
-                config : Update.ViewType.Config AppMsg AppModel
-                config =
-                    { clearSelection = map Model.Selection.clearSelection }
-            in
-                Update.ViewType.update config msg_
+            Update.ViewType.update config msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> Ports.persistLocalPref)

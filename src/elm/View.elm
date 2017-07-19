@@ -37,7 +37,7 @@ init model =
             [ alv
             , View.Mat.newTodoFab alv model
             ]
-                ++ overlayViews model
+                ++ overlayViews config model
     in
         div [ class "mdl-typography--body-1" ] children
 
@@ -57,10 +57,13 @@ config =
     , onMainMenuStateChanged = Msg.onMainMenuStateChanged
     , onSignIn = Msg.onSignIn
     , onSignOut = Msg.onSignOut
+    , onLaunchBarMsg = Msg.OnLaunchBarMsg
+    , onFirebaseMsg = Msg.OnFirebaseMsg
+    , onReminderOverlayAction = TodoMsg.onReminderOverlayAction
     }
 
 
-overlayViews appModel =
+overlayViews config appModel =
     let
         def =
             span [] []
@@ -69,7 +72,7 @@ overlayViews appModel =
             case appModel.editMode of
                 XMLaunchBar launchBar ->
                     LaunchBar.View.init launchBar
-                        |> Html.map Msg.OnLaunchBarMsg
+                        |> Html.map config.onLaunchBarMsg
 
                 XMTodoForm form ->
                     case form.mode of
@@ -100,7 +103,7 @@ overlayViews appModel =
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
-                        |> Html.map Msg.OnFirebaseMsg
+                        |> Html.map config.onFirebaseMsg
 
                 XMGroupDocForm form ->
                     GroupDoc.FormView.init config form
@@ -110,14 +113,9 @@ overlayViews appModel =
 
                 _ ->
                     def
-
-        reminderOverlayConfig =
-            { onReminderOverlayAction = TodoMsg.onReminderOverlayAction
-            , noop = Msg.noop
-            }
     in
         [ Just editModeOverlayView
-        , Todo.Notification.View.maybeOverlay reminderOverlayConfig appModel
+        , Todo.Notification.View.maybeOverlay config appModel
         ]
             |> List.filterMap identity
 

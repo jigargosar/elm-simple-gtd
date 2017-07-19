@@ -45,6 +45,7 @@ config =
     , switchToView = Msg.switchToView
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
+    , onEntityListKeyDown = Msg.onEntityListKeyDown
     }
 
 

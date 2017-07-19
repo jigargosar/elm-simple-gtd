@@ -6,7 +6,7 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
-import GroupDoc.Types
+import GroupDoc.Types exposing (..)
 import Material
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
@@ -156,8 +156,8 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (EntityId -> Int) -> List TodoDoc -> Context.Model -> GroupDocViewModel
-contextGroup getTabIndexAVForEntityId todoList context =
+createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
+createContextGroupVM getTabIndexAVForEntityId todoList context =
     let
         config : Config
         config =
@@ -176,8 +176,8 @@ contextGroup getTabIndexAVForEntityId todoList context =
         create config todoList context
 
 
-projectGroup : (EntityId -> Int) -> List TodoDoc -> Project.Model -> GroupDocViewModel
-projectGroup getTabIndexAVForEntityId todoList project =
+createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
+createProjectGroupVM getTabIndexAVForEntityId todoList project =
     let
         config : Config
         config =

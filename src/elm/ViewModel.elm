@@ -3,8 +3,14 @@ module ViewModel exposing (..)
 import AppColors
 import Color
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
-import Entity.Types
+import Entity.Types exposing (EntityId)
+import GroupDoc.Types exposing (..)
+import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Material
+import Msg exposing (AppMsg)
+import Todo.ItemView exposing (TodoViewModel)
+import Todo.Types exposing (TodoDoc)
+import Todo.ViewModel
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import List.Extra as List
@@ -19,6 +25,9 @@ type alias Model =
     , viewName : String
     , header : { backgroundColor : Color.Color }
     , mdl : Material.Model
+    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
+    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
+    , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
     }
 
 
@@ -48,6 +57,9 @@ create model =
         , viewName = viewName
         , header = { backgroundColor = headerBackgroundColor }
         , mdl = model.mdl
+        , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM
+        , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM
+        , createTodoViewModel = Todo.ViewModel.createTodoViewModel
         }
 
 

@@ -1,27 +1,12 @@
 module Update exposing (update)
 
 import CommonMsg
-import Document.Types exposing (..)
-import Entity.Types exposing (..)
-import ExclusiveMode.Types exposing (ExclusiveMode)
-import GroupDoc.FormTypes exposing (GroupDocForm)
-import GroupDoc.Types exposing (..)
-import Lazy exposing (Lazy)
 import LocalPref
 import Material
-import Model
-import Model.EntityList
-import Model.GroupDocStore
-import Model.Selection
-import Model.Stores
 import Msg exposing (AppMsg(..))
 import Notification
 import Ports
-import Return exposing (andThen, command, map)
-import Time exposing (Time)
-import Todo.FormTypes exposing (..)
-import Todo.Types exposing (TodoDoc)
-import TodoMsg
+import Return exposing (andThen, command)
 import Update.AppDrawer
 import Update.AppHeader
 import Update.CustomSync
@@ -36,132 +21,66 @@ import Update.ViewType
 import X.Return exposing (returnWith, returnWithNow)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
+import Update.Config
 
 
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
+--type alias ReturnF =
+--    Return.ReturnF AppMsg AppModel
+--
+--
+--type alias AndThenUpdate =
+--    AppMsg -> ReturnF
+--type alias UpdateConfig =
+--    { --model
+--      now : Time
+--    , activeProjects : List ProjectDoc
+--    , activeContexts : List ContextDoc
+--    , updateEntityListCursorOnTodoChange : ReturnF
+--    , updateEntityListCursorOnGroupDocChange : ReturnF
+--    , currentViewEntityListLazy : Lazy (List Entity)
+--
+--    --msg
+--    , clearSelection : ReturnF
+--    , noop : ReturnF
+--    , openLaunchBarMsg : ReturnF
+--    , revertExclusiveMode : ReturnF
+--    , setDomFocusToFocusInEntityCmd : ReturnF
+--    , onSaveTodoForm : TodoForm -> ReturnF
+--    , onSaveGroupDocForm : GroupDocForm -> ReturnF
+--    , onSetExclusiveMode : ExclusiveMode -> ReturnF
+--    , onSaveExclusiveModeForm : ReturnF
+--    , onToggleContextArchived : DocId -> ReturnF
+--    , onToggleContextDeleted : DocId -> ReturnF
+--    , onToggleProjectArchived : DocId -> ReturnF
+--    , onToggleProjectDeleted : DocId -> ReturnF
+--    , switchToContextsView : ReturnF
+--    , setFocusInEntityWithEntityId : EntityId -> ReturnF
+--    , setFocusInEntity : Entity -> ReturnF
+--    , closeNotification : String -> ReturnF
+--    , onStartSetupAddTodo : ReturnF
+--    , onSwitchToNewUserSetupModeIfNeeded : ReturnF
+--    , onPersistLocalPref : ReturnF
+--
+--    -- todo msg
+--    , afterTodoUpsert : TodoDoc -> ReturnF
+--    , onStartAddingTodoWithFocusInEntityAsReference : ReturnF
+--    , onStartAddingTodoToInbox : ReturnF
+--    , onToggleTodoArchived : DocId -> ReturnF
+--    , onToggleTodoDeleted : DocId -> ReturnF
+--    , switchToEntityListView : EntityListViewType -> ReturnF
+--    , onStartEditingTodo : TodoDoc -> ReturnF
+--    }
+--updateConfig : AndThenUpdate -> AppModel -> UpdateConfig
+--update :    AndThenUpdate    -> AppMsg    -> ReturnF
 
 
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
-
-
-
-{-
-   update :
-       (AppMsg -> Return.ReturnF AppMsg AppModel)
-       -> AppMsg
-       -> Return.ReturnF AppMsg AppModel
--}
-
-
-type alias UpdateConfig =
-    { --model
-      now : Time
-    , activeProjects : List ProjectDoc
-    , activeContexts : List ContextDoc
-    , updateEntityListCursorOnTodoChange : ReturnF
-    , updateEntityListCursorOnGroupDocChange : ReturnF
-    , currentViewEntityListLazy : Lazy (List Entity)
-
-    --msg
-    , clearSelection : ReturnF
-    , noop : ReturnF
-    , openLaunchBarMsg : ReturnF
-    , revertExclusiveMode : ReturnF
-    , setDomFocusToFocusInEntityCmd : ReturnF
-    , onSaveTodoForm : TodoForm -> ReturnF
-    , onSaveGroupDocForm : GroupDocForm -> ReturnF
-    , onSetExclusiveMode : ExclusiveMode -> ReturnF
-    , onSaveExclusiveModeForm : ReturnF
-    , onToggleContextArchived : DocId -> ReturnF
-    , onToggleContextDeleted : DocId -> ReturnF
-    , onToggleProjectArchived : DocId -> ReturnF
-    , onToggleProjectDeleted : DocId -> ReturnF
-    , switchToContextsView : ReturnF
-    , setFocusInEntityWithEntityId : EntityId -> ReturnF
-    , setFocusInEntity : Entity -> ReturnF
-    , closeNotification : String -> ReturnF
-    , onStartSetupAddTodo : ReturnF
-    , onSwitchToNewUserSetupModeIfNeeded : ReturnF
-    , onPersistLocalPref : ReturnF
-
-    -- todo msg
-    , afterTodoUpsert : TodoDoc -> ReturnF
-    , onStartAddingTodoWithFocusInEntityAsReference : ReturnF
-    , onStartAddingTodoToInbox : ReturnF
-    , onToggleTodoArchived : DocId -> ReturnF
-    , onToggleTodoDeleted : DocId -> ReturnF
-    , switchToEntityListView : EntityListViewType -> ReturnF
-    , onStartEditingTodo : TodoDoc -> ReturnF
-    }
-
-
-updateConfig : (AppMsg -> Return.ReturnF AppMsg AppModel) -> AppModel -> UpdateConfig
-updateConfig andThenUpdate model =
-    { --model
-      now = model.now
-    , activeProjects = (Model.GroupDocStore.getActiveProjects model)
-    , activeContexts = (Model.GroupDocStore.getActiveContexts model)
-    , updateEntityListCursorOnTodoChange = map (Model.EntityList.updateEntityListCursorOnTodoChange model)
-    , updateEntityListCursorOnGroupDocChange =
-        map (Model.EntityList.updateEntityListCursorOnGroupDocChange model)
-    , currentViewEntityListLazy =
-        Lazy.lazy
-            (\_ ->
-                Model.EntityList.createEntityListForCurrentView model
-            )
-
-    --msg
-    , clearSelection = map Model.Selection.clearSelection
-    , noop = andThenUpdate Msg.noop
-    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
-    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-    , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-    , onSaveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
-    , onSaveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
-    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
-    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
-    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
-    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
-    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
-    , switchToContextsView = Msg.switchToContextsView |> andThenUpdate
-    , setFocusInEntityWithEntityId =
-        (\entityId ->
-            map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-        )
-    , setFocusInEntity =
-        (\entity ->
-            map (Model.setFocusInEntity entity)
-                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-        )
-    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-    , onStartSetupAddTodo = andThenUpdate TodoMsg.onStartSetupAddTodo
-    , onSwitchToNewUserSetupModeIfNeeded =
-        andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
-    , onPersistLocalPref = andThenUpdate Msg.onPersistLocalPref
-
-    -- todo msg
-    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
-    , onStartAddingTodoWithFocusInEntityAsReference =
-        andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-    , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
-    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
-    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
-    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
-    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
-    }
-
-
-update :
-    (AppMsg -> Return.ReturnF AppMsg AppModel)
-    -> AppMsg
-    -> Return.ReturnF AppMsg AppModel
 update andThenUpdate msg =
-    returnWith (updateConfig andThenUpdate)
+    returnWith (Update.Config.updateConfig andThenUpdate)
         (updateInner # msg)
+
+
+
+--updateInner : UpdateConfig -> AppMsg -> ReturnF
 
 
 updateInner config msg =

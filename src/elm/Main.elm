@@ -161,6 +161,7 @@ viewConfig =
     , onShowMainMenu = Msg.onShowMainMenu
     , onEntityListKeyDown = Msg.onEntityListKeyDown
     , onStopRunningTodo = TodoMsg.onStopRunningTodo
+    , onStartAddingTodoWithFocusInEntityAsReference = TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
     }
 
 

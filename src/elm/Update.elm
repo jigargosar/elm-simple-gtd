@@ -83,23 +83,7 @@ update config andThenUpdate msg =
             Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
-            let
-                config =
-                    { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
-                    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
-                    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
-                    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
-                    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
-                    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
-                    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
-                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
-                    , setDomFocusToFocusInEntityCmd =
-                        Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate
-                    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
-                    }
-            in
-                Update.Entity.update config msg_
+            Update.Entity.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             let

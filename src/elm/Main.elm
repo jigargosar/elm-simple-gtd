@@ -135,10 +135,18 @@ updateConfig andThenUpdate =
     , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
     , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
     , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-    , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
-    , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
+    , onSaveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
+    , onSaveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
     , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
+    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
+    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
+    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
+    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
+    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
+    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
+    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
+    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
     }
 
 

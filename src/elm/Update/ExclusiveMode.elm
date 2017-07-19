@@ -27,8 +27,8 @@ type alias SubReturnF msg model =
 type alias Config a msg model =
     { a
         | setDomFocusToFocusInEntityCmd : SubReturnF msg model
-        , saveTodoForm : TodoForm -> SubReturnF msg model
-        , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
+        , onSaveTodoForm : TodoForm -> SubReturnF msg model
+        , onSaveGroupDocForm : GroupDocForm -> SubReturnF msg model
     }
 
 
@@ -71,10 +71,10 @@ saveExclusiveModeForm : Config a msg model -> ExclusiveMode -> SubReturnF msg mo
 saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->
-            config.saveGroupDocForm form
+            config.onSaveGroupDocForm form
 
         XMTodoForm form ->
-            config.saveTodoForm form
+            config.onSaveTodoForm form
 
         XMCustomSync form ->
             (\model -> { model | pouchDBRemoteSyncURI = form.uri })

@@ -14,7 +14,6 @@ import GroupDoc
 import GroupDoc.Types
 import Model.GroupDocStore
 import Model.Stores
-import Msg
 import Msg exposing (..)
 import Todo
 import Todo.Types exposing (TodoDoc)

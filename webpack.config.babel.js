@@ -42,7 +42,7 @@ const commonPlugins = [
     new ServiceWorkerWebpackPlugin({
         entry: './notification-sw.js',
         filename: "notification-sw.js",
-        transformOptions(options){
+        transformOptions(_){
             return {isDevEnv: isWebPackDevServer}
         },
     }),

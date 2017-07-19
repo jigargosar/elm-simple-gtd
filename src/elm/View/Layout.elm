@@ -16,60 +16,73 @@ import View.Mat
 
 
 appLayoutView config appVM model =
-    if AppDrawer.Model.getIsOverlayOpen model.appDrawerModel then
-        div
-            [ id "app-layout"
-            , classList
-                [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen model.appDrawerModel )
+    let
+        sideBarHeaderView =
+            AppDrawer.View.sidebarHeader config appVM model
+
+        sideBarContentView =
+            AppDrawer.View.sidebarContent appVM model
+
+        appMainHeaderView =
+            View.Header.appMainHeader appVM model
+
+        appMainViewContainer =
+            div [ id "main-view-container" ]
+                [ case Model.ViewType.getMainViewType model of
+                    EntityListView viewType ->
+                        Entity.View.list viewType model
+
+                    SyncView ->
+                        View.CustomSync.view model
                 ]
-            ]
-            [ div
-                [ id "layout-sidebar", X.Html.onClickStopPropagation config.noop ]
-                [ div [ class "bottom-shadow" ] [ AppDrawer.View.sidebarHeader appVM model ]
-                , AppDrawer.View.sidebarContent appVM model
+
+        isOverlayOpen =
+            AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
+
+        onClickStopPropagationAV =
+            X.Html.onClickStopPropagation config.noop
+    in
+        if isOverlayOpen then
+            div
+                [ id "app-layout"
+                , classList [ ( "sidebar-overlay", isOverlayOpen ) ]
                 ]
-            , div
-                [ id "layout-main"
-                , onClick config.onToggleAppDrawerOverlay
-                ]
-                [ div [ X.Html.onClickStopPropagation config.noop ]
-                    [ div [ class "bottom-shadow" ] [ View.Header.appMainHeader appVM model ]
-                    , div [ id "layout-main-content" ] [ appMainContent model ]
+                [ div
+                    [ id "layout-sidebar", onClickStopPropagationAV ]
+                    [ div [ class "bottom-shadow" ] [ sideBarHeaderView ]
+                    , sideBarContentView
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick config.onToggleAppDrawerOverlay
+                    ]
+                    [ div [ onClickStopPropagationAV ]
+                        [ div [ class "bottom-shadow" ] [ appMainHeaderView ]
+                        , div [ id "layout-main-content" ] [ appMainViewContainer ]
+                        ]
                     ]
                 ]
-            ]
-    else
-        div
-            [ id "app-layout"
-            , classList
-                [ ( "sidebar-overlay", AppDrawer.Model.getIsOverlayOpen model.appDrawerModel )
-                ]
-            ]
-            [ div [ class "bottom-shadow" ]
-                [ AppDrawer.View.sidebarHeader appVM model
-                , View.Header.appMainHeader appVM model
-                ]
-            , div
-                [ id "layout-sidebar", X.Html.onClickStopPropagation config.noop ]
-                [ AppDrawer.View.sidebarContent appVM model
-                ]
-            , div
-                [ id "layout-main"
-                , onClick (config.onToggleAppDrawerOverlay)
-                ]
-                [ div [ X.Html.onClickStopPropagation config.noop ]
-                    [ div [ id "layout-main-content" ] [ appMainContent model ]
+        else
+            div
+                [ id "app-layout"
+                , classList
+                    [ ( "sidebar-overlay", isOverlayOpen )
                     ]
                 ]
-            ]
-
-
-appMainContent model =
-    div [ id "main-view-container" ]
-        [ case Model.ViewType.getMainViewType model of
-            EntityListView viewType ->
-                Entity.View.list viewType model
-
-            SyncView ->
-                View.CustomSync.view model
-        ]
+                [ div [ class "bottom-shadow" ]
+                    [ sideBarHeaderView
+                    , appMainHeaderView
+                    ]
+                , div
+                    [ id "layout-sidebar", onClickStopPropagationAV ]
+                    [ sideBarContentView
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick (config.onToggleAppDrawerOverlay)
+                    ]
+                    [ div [ onClickStopPropagationAV ]
+                        [ div [ id "layout-main-content" ] [ appMainViewContainer ]
+                        ]
+                    ]
+                ]

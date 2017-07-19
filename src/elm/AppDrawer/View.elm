@@ -18,7 +18,7 @@ import View.Shared exposing (..)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 
 
-sidebarHeader appVM m =
+sidebarHeader config appVM m =
     let
         t1 =
             if m.developmentMode then

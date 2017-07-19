@@ -7,7 +7,6 @@ import X.Html
 import Mat
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import AppDrawer.GroupViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

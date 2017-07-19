@@ -1,8 +1,6 @@
 module GroupDoc.View exposing (..)
 
 import EntityId
-import GroupDoc.ViewModel exposing (GroupDocViewModel)
-import Msg exposing (AppMsg)
 import Todo.Types exposing (TodoDoc)
 import View.Badge
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
@@ -15,15 +13,18 @@ import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
 
-type alias KeyedView =
-    ( String, Html AppMsg )
+--type alias KeyedView =
+--    ( String, Html AppMsg )
 
 
 initKeyed todoView vm =
     ( vm.id, item todoView vm )
 
 
-item : (TodoDoc -> KeyedView) -> GroupDocViewModel -> Html AppMsg
+
+--item : (TodoDoc -> KeyedView) -> GroupDocViewModel -> Html AppMsg
+
+
 item todoView vm =
     let
         getTabIndexAVForTodo =
@@ -38,12 +39,15 @@ initHeaderKeyed vm =
     ( vm.id, headerItem vm )
 
 
-headerItem : GroupDocViewModel -> Html Msg.AppMsg
+
+--headerItem : GroupDocViewModel -> Html Msg.AppMsg
+
+
 headerItem vm =
     let
         editButton =
             if vm.isEditable then
-                Mat.iconBtn3 Msg.OnMdl
+                Mat.iconBtn3 vm.onMdl
                     "create"
                     vm.tabindexAV
                     vm.startEditingMsg
@@ -51,7 +55,7 @@ headerItem vm =
                 span [] []
 
         archiveButton =
-            Mat.iconBtn3 Msg.OnMdl
+            Mat.iconBtn3 vm.onMdl
                 vm.archive.iconName
                 vm.tabindexAV
                 vm.archive.onClick

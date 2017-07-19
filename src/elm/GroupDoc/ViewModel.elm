@@ -7,6 +7,7 @@ import Document
 import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc.Types
+import Material
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
@@ -42,6 +43,7 @@ type alias GroupDocViewModel =
     , tabindexAV : Int
     , todoList : List TodoDoc
     , getTabIndexAVForEntityId : EntityId -> Int
+    , onMdl : Material.Msg AppMsg -> Msg.AppMsg
     }
 
 
@@ -150,6 +152,7 @@ create config todoList groupDoc =
         , tabindexAV = config.getTabIndexAVForEntityId entityId
         , todoList = todoList
         , getTabIndexAVForEntityId = config.getTabIndexAVForEntityId
+        , onMdl = Msg.onMdl
         }
 
 

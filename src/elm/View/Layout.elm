@@ -17,16 +17,16 @@ import View.Mat
 
 appLayoutView config appVM model =
     let
-        sideBarHeaderView =
+        layoutSideBarHeader =
             AppDrawer.View.sidebarHeader config appVM model
 
-        sideBarContentView =
+        layoutSideBarContent =
             AppDrawer.View.sidebarContent appVM model
 
-        appMainHeaderView =
+        layoutMainHeader =
             View.Header.appMainHeader appVM model
 
-        appMainViewContainer =
+        mainViewContainer =
             div [ id "main-view-container" ]
                 [ case Model.ViewType.getMainViewType model of
                     EntityListView viewType ->
@@ -43,7 +43,7 @@ appLayoutView config appVM model =
             X.Html.onClickStopPropagation config.noop
 
         layoutMainContent =
-            div [ id "layout-main-content" ] [ appMainViewContainer ]
+            div [ id "layout-main-content" ] [ mainViewContainer ]
     in
         if isOverlayOpen then
             div
@@ -52,15 +52,15 @@ appLayoutView config appVM model =
                 ]
                 [ div
                     [ id "layout-sidebar", onClickStopPropagationAV ]
-                    [ div [ class "bottom-shadow" ] [ sideBarHeaderView ]
-                    , sideBarContentView
+                    [ div [ class "bottom-shadow" ] [ layoutSideBarHeader ]
+                    , layoutSideBarContent
                     ]
                 , div
                     [ id "layout-main"
                     , onClick config.onToggleAppDrawerOverlay
                     ]
                     [ div [ onClickStopPropagationAV ]
-                        [ div [ class "bottom-shadow" ] [ appMainHeaderView ]
+                        [ div [ class "bottom-shadow" ] [ layoutMainHeader ]
                         , layoutMainContent
                         ]
                     ]
@@ -71,12 +71,12 @@ appLayoutView config appVM model =
                 , classList [ ( "sidebar-overlay", isOverlayOpen ) ]
                 ]
                 [ div [ class "bottom-shadow" ]
-                    [ sideBarHeaderView
-                    , appMainHeaderView
+                    [ layoutSideBarHeader
+                    , layoutMainHeader
                     ]
                 , div
                     [ id "layout-sidebar", onClickStopPropagationAV ]
-                    [ sideBarContentView
+                    [ layoutSideBarContent
                     ]
                 , div
                     [ id "layout-main"

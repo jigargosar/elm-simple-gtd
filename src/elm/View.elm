@@ -41,6 +41,9 @@ config =
     , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
     , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
     , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
+    , switchToEntityListView = Msg.switchToEntityListView
+    , switchToView = Msg.switchToView
+    , onMdl = Msg.onMdl
     }
 
 

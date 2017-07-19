@@ -38,6 +38,8 @@ import Subscriptions.Todo
 import Time
 import Types exposing (AppModel)
 import X.Keyboard
+import X.Return exposing (returnWith)
+import Toolkit.Operators exposing (..)
 
 
 type alias AppReturn =
@@ -125,7 +127,7 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-updateConfig andThenUpdate =
+updateConfig model =
     { clearSelection = map Model.Selection.clearSelection
     , noop = andThenUpdate Msg.noop
     , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
@@ -150,14 +152,15 @@ updateConfig andThenUpdate =
     }
 
 
+andThenUpdate =
+    update >> Return.andThen
+
+
 update : AppMsg -> AppModel -> AppReturn
 update msg =
-    let
-        andThenUpdate =
-            update >> Return.andThen
-    in
-        Return.singleton
-            >> Update.update (updateConfig andThenUpdate) andThenUpdate msg
+    Return.singleton
+        >> returnWith updateConfig
+            (Update.update # andThenUpdate # msg)
 
 
 viewConfig =

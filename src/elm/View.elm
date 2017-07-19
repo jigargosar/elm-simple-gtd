@@ -4,12 +4,8 @@ import AppDrawer.Model
 import AppDrawer.Types
 import AppDrawer.View
 import Entity.View
-import ExclusiveMode.Types exposing (..)
-import Lazy exposing (Lazy)
 import Model.ViewType
 import Msg
-import Todo.FormTypes exposing (..)
-import Todo.GroupEditView
 import TodoMsg
 import View.CustomSync
 import X.Html exposing (boolProperty, onClickStopPropagation)
@@ -17,13 +13,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import View.Header
-import Todo.Notification.View exposing (maybeOverlay)
-import Todo.View
 import ViewModel
-import LaunchBar.View
-import GroupDoc.FormView
-import View.GetStarted
-import View.MainMenu
 import View.Mat
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import View.Overlays

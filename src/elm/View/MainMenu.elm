@@ -2,10 +2,8 @@ module View.MainMenu exposing (..)
 
 import AppUrl
 import Firebase
-import Firebase.Types exposing (FirebaseMsg(OnFBSignIn, OnFBSignOut))
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Menu.Types exposing (MenuState)
 import Menu
 import Toolkit.Operators exposing (..)
 import Tuple2

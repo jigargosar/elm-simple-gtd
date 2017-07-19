@@ -1,19 +1,9 @@
 module View.Overlays exposing (overlayViews)
 
-import AppDrawer.Model
-import AppDrawer.Types
-import AppDrawer.View
-import Entity.View
 import ExclusiveMode.Types exposing (..)
-import Model.ViewType
 import Todo.FormTypes exposing (..)
 import Todo.GroupEditView
-import View.CustomSync
-import X.Html exposing (boolProperty, onClickStopPropagation)
 import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import View.Header
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
 import LaunchBar.View

@@ -1,8 +1,6 @@
 module Todo.View exposing (..)
 
-import Entity.Types exposing (EntityId(TodoId))
 import Mat
-import Todo.FormTypes exposing (..)
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)

@@ -11,7 +11,6 @@ import Model.GroupDocStore
 --import Msg
 
 import Html exposing (..)
-import Todo.FormTypes exposing (..)
 
 
 --import TodoMsg

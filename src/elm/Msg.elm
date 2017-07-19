@@ -52,11 +52,7 @@ noop =
 
 
 logString =
-    let
-        _ =
-            2
-    in
-        commonMsg.logString
+    commonMsg.logString
 
 
 setDomFocusToFocusInEntityCmd =

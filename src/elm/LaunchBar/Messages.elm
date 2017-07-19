@@ -1,11 +1,11 @@
 module LaunchBar.Messages exposing (..)
 
-import LaunchBar.Models exposing (SearchItem, LaunchBar)
+import LaunchBar.Models exposing (SearchItem, LaunchBarForm)
 
 
 type LaunchBarMsg
     = NOOP
     | OnLBEnter SearchItem
-    | OnLBInputChanged LaunchBar String
+    | OnLBInputChanged LaunchBarForm String
     | Open
     | OnCancel

@@ -2,7 +2,6 @@ module Update exposing (update)
 
 import Update.AppDrawer
 import CommonMsg
-import Model.GroupDocStore
 import Ports
 import Update.Firebase
 import LocalPref
@@ -14,14 +13,12 @@ import Update.Subscription
 import X.Return as Return exposing (returnWith, returnWithNow)
 import Notification
 import Return exposing (andThen, command, map)
-import Toolkit.Operators exposing (..)
 import Lazy
 import Model.EntityList
 import Model.Stores
 import TodoMsg
 import Update.Entity
 import Model
-import Model.GroupDocStore
 import Model.Selection
 import Msg exposing (..)
 import Update.CustomSync
@@ -141,19 +138,15 @@ update andThenUpdate msg =
 
         OnLaunchBarMsgWithNow msg_ now ->
             let
-                createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
-                createConfig model =
+                config : Update.LaunchBar.Config AppMsg AppModel
+                config =
                     { now = now
-                    , activeProjects = (Model.GroupDocStore.getActiveProjects model)
-                    , activeContexts = (Model.GroupDocStore.getActiveContexts model)
                     , onComplete = Msg.revertExclusiveMode |> andThenUpdate
                     , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
                     }
             in
-                returnWith
-                    (createConfig)
-                    (Update.LaunchBar.update # msg_)
+                Update.LaunchBar.update config msg_
 
         OnLaunchBarMsg msg_ ->
             returnWithNow (OnLaunchBarMsgWithNow msg_)

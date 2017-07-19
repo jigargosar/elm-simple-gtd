@@ -15,7 +15,7 @@ type alias SyncForm =
 type ExclusiveMode
     = XMTodoForm TodoForm
     | XMGroupDocForm GroupDocForm
-    | XMLaunchBar LaunchBar.Models.LaunchBar
+    | XMLaunchBar LaunchBar.Models.LaunchBarForm
     | XMMainMenu MenuState
     | XMSignInOverlay
     | XMCustomSync SyncForm

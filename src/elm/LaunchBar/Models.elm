@@ -19,14 +19,14 @@ type Result
     | Selected SearchItem
 
 
-type alias LaunchBar =
+type alias LaunchBarForm =
     { input : String
     , updatedAt : Time
     , searchResults : List ( SearchItem, Fuzzy.Result )
     }
 
 
-initialModel : Time -> LaunchBar
+initialModel : Time -> LaunchBarForm
 initialModel now =
     { input = ""
     , updatedAt = now

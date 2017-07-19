@@ -6,17 +6,23 @@ import Entity.Types exposing (EntityListViewType)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
-import LaunchBar.Models exposing (LaunchBar, SearchItem(..))
+import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
+import Model.GroupDocStore
 import Regex
 import Return
 import String.Extra
 import Time exposing (Time)
 import LaunchBar.Messages exposing (..)
+import Toolkit.Helpers exposing (apply2)
 import Toolkit.Operators exposing (..)
+import X.Return exposing (returnWith)
 
 
 type alias SubModel model =
-    model
+    { model
+        | projectStore : ProjectStore
+        , contextStore : ContextStore
+    }
 
 
 type alias SubReturnF msg model =
@@ -29,8 +35,6 @@ type alias SubAndThenUpdate msg model =
 
 type alias Config msg model =
     { now : Time
-    , activeProjects : List ContextDoc
-    , activeContexts : List ProjectDoc
     , onComplete : SubReturnF msg model
     , setXMode : ExclusiveMode -> SubReturnF msg model
     , onSwitchView : EntityListViewType -> SubReturnF msg model
@@ -67,9 +71,11 @@ update config msg =
                     >> config.onSwitchView v
 
         OnLBInputChanged form text ->
-            updateInput config text form
-                |> XMLaunchBar
-                >> config.setXMode
+            returnWith identity
+                (\model ->
+                    XMLaunchBar (updateInput config text model form)
+                        |> config.setXMode
+                )
 
         Open ->
             (config.now
@@ -83,12 +89,12 @@ update config msg =
             config.onComplete
 
 
-type alias LaunchBarF =
-    LaunchBar -> LaunchBar
+type alias LaunchBarFormF =
+    LaunchBarForm -> LaunchBarForm
 
 
-updateInput : Config msg model -> String -> LaunchBarF
-updateInput config input form =
+updateInput : Config msg model -> String -> SubModel model -> LaunchBarFormF
+updateInput config input subModel form =
     let
         now =
             config.now
@@ -101,8 +107,19 @@ updateInput config input form =
                         (\_ -> "")
                    else
                     identity
+
+        ( activeContexts, activeProjects ) =
+            subModel
+                |> apply2
+                    ( Model.GroupDocStore.getActiveContexts
+                    , Model.GroupDocStore.getActiveProjects
+                    )
     in
-        { form | searchResults = getFuzzyResults input config, input = input, updatedAt = now }
+        { form
+            | searchResults = getFuzzyResults input activeContexts activeProjects
+            , input = input
+            , updatedAt = now
+        }
 
 
 fuzzyMatch needle searchItem =
@@ -123,7 +140,7 @@ fuzzyMatch needle searchItem =
         ( searchItem, match boiledNeedle boiledHay )
 
 
-getFuzzyResults needle { activeContexts, activeProjects } =
+getFuzzyResults needle activeContexts activeProjects =
     let
         contexts =
             activeContexts .|> SI_Context

@@ -84,6 +84,12 @@ update msg =
         OnToggleProjectDeleted id ->
             updateProject id Document.toggleDeleted |> andThen
 
+        OnToggleGroupDocArchived gdType id ->
+            updateGroupDoc id Document.toggleDeleted gdType |> andThen
+
+        OnToggleGroupDocDeleted gdType id ->
+            updateGroupDoc id GroupDoc.toggleArchived gdType |> andThen
+
 
 contextStore =
     Model.GroupDocStore.contextStore
@@ -123,6 +129,19 @@ updateContext id updateFn =
 
 updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
+
+
+updateGroupDoc id updateFn gdType =
+    updateAllNamedDocsDocs (Set.singleton id) updateFn (getStoreFromGroupDocType gdType)
+
+
+getStoreFromGroupDocType gdType =
+    case gdType of
+        ProjectGroupDocType ->
+            projectStore
+
+        ContextGroupDocType ->
+            contextStore
 
 
 updateAllNamedDocsDocs idSet updateFn store model =

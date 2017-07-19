@@ -17,8 +17,10 @@ import Time exposing (Time)
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
+import TodoMsg
 import Update
 import View
+import ViewModel
 import X.Keyboard
 import Json.Encode as E
 import Msg exposing (AppMsg)
@@ -132,6 +134,40 @@ update msg =
             >> Update.update andThenUpdate msg
 
 
+viewConfig =
+    { onSetProject = TodoMsg.onSetProjectAndMaybeSelection
+    , onSetContext = TodoMsg.onSetContextAndMaybeSelection
+    , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
+    , noop = Msg.noop
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , onSetTodoFormText = TodoMsg.onSetTodoFormText
+    , onToggleDeleted = TodoMsg.onToggleDeleted
+    , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
+    , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onEntityUpdateMsg = Msg.onEntityUpdateMsg
+    , onMainMenuStateChanged = Msg.onMainMenuStateChanged
+    , onSignIn = Msg.onSignIn
+    , onSignOut = Msg.onSignOut
+    , onLaunchBarMsg = Msg.OnLaunchBarMsg
+    , onFirebaseMsg = Msg.OnFirebaseMsg
+    , onReminderOverlayAction = TodoMsg.onReminderOverlayAction
+    , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
+    , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
+    , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
+    , switchToEntityListView = Msg.switchToEntityListView
+    , switchToView = Msg.switchToView
+    , onMdl = Msg.onMdl
+    , onShowMainMenu = Msg.onShowMainMenu
+    , onEntityListKeyDown = Msg.onEntityListKeyDown
+    , onStopRunningTodo = TodoMsg.onStopRunningTodo
+    }
+
+
+view model =
+    View.init viewConfig (ViewModel.create model) model
+
+
 main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
 main =
     RouteUrl.programWithFlags
@@ -139,6 +175,6 @@ main =
         , location2messages = Routes.hash2messages
         , init = init
         , update = update
-        , view = View.init
+        , view = view
         , subscriptions = subscriptions
         }

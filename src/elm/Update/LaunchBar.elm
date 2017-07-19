@@ -32,9 +32,9 @@ type alias Config a msg model =
         | now : Time
         , activeProjects : List ContextDoc
         , activeContexts : List ProjectDoc
-        , onComplete : SubReturnF msg model
+        , revertExclusiveMode : SubReturnF msg model
         , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-        , onSwitchView : EntityListViewType -> SubReturnF msg model
+        , switchToEntityListView : EntityListViewType -> SubReturnF msg model
     }
 
 
@@ -64,8 +64,8 @@ update config msg =
                             Entity.Types.ContextsView
                     )
             in
-                config.onComplete
-                    >> config.onSwitchView v
+                config.revertExclusiveMode
+                    >> config.switchToEntityListView v
 
         OnLBInputChanged form text ->
             updateInput config text form
@@ -81,7 +81,7 @@ update config msg =
                 >> DomPorts.autoFocusInputRCmd
 
         OnCancel ->
-            config.onComplete
+            config.revertExclusiveMode
 
 
 type alias LaunchBarF =

@@ -91,9 +91,9 @@ update config andThenUpdate msg =
                     { now = now
                     , activeProjects = (Model.GroupDocStore.getActiveProjects model)
                     , activeContexts = (Model.GroupDocStore.getActiveContexts model)
-                    , onComplete = Msg.revertExclusiveMode |> andThenUpdate
+                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
                     , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
+                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
                     }
             in
                 returnWith

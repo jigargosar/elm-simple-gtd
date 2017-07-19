@@ -6,6 +6,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import LocalPref
 import Material
+import Model.GroupDocStore
 import Model.Selection
 import Model.ViewType
 import Project
@@ -128,14 +129,15 @@ init flags =
 
 
 updateConfig model =
-    { clearSelection = map Model.Selection.clearSelection
+    { --model
+      activeProjects = (Model.GroupDocStore.getActiveProjects model)
+    , activeContexts = (Model.GroupDocStore.getActiveContexts model)
+
+    --msg
+    , clearSelection = map Model.Selection.clearSelection
     , noop = andThenUpdate Msg.noop
-    , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
-    , onStartAddingTodoWithFocusInEntityAsReference =
-        andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
     , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
     , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
     , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
     , onSaveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
     , onSaveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
@@ -145,6 +147,12 @@ updateConfig model =
     , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
     , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
     , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
+
+    -- todo msg
+    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
     , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
     , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
     , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate

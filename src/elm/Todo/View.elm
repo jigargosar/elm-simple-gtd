@@ -8,9 +8,8 @@ import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropaga
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
+import X.Keyboard exposing (..)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
-import Msg
 
 
 fireCancel =

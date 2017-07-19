@@ -4,6 +4,7 @@ import AppColors
 import Html exposing (..)
 import Html.Attributes
 import Html.Attributes as HA
+import Html.Events as HE
 import Material
 import Material.Button
 import Material.Icon
@@ -205,3 +206,34 @@ btnFlat textV attributes =
 
 divider =
     div [ HA.class "divider" ] []
+
+
+okCancelButtonsWith okMsg cancelMsg list =
+    div [ HA.class "layout horizontal-reverse" ]
+        ([ okButton okMsg
+         , cancelButton cancelMsg
+         ]
+            ++ list
+        )
+
+
+okButton msg =
+    btnFlat "Ok" [ HE.onClick msg ]
+
+
+cancelButton msg =
+    btnFlat "Cancel" [ HE.onClick msg ]
+
+
+deleteButton msg =
+    btnFlat "Delete" [ HE.onClick msg ]
+
+
+archiveButton isArchived msg =
+    btnFlat
+        (if isArchived then
+            "Unarchive"
+         else
+            "Archive"
+        )
+        [ HE.onClick msg ]

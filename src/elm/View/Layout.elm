@@ -41,6 +41,9 @@ appLayoutView config appVM model =
 
         onClickStopPropagationAV =
             X.Html.onClickStopPropagation config.noop
+
+        layoutMainContent =
+            div [ id "layout-main-content" ] [ appMainViewContainer ]
     in
         if isOverlayOpen then
             div
@@ -58,16 +61,14 @@ appLayoutView config appVM model =
                     ]
                     [ div [ onClickStopPropagationAV ]
                         [ div [ class "bottom-shadow" ] [ appMainHeaderView ]
-                        , div [ id "layout-main-content" ] [ appMainViewContainer ]
+                        , layoutMainContent
                         ]
                     ]
                 ]
         else
             div
                 [ id "app-layout"
-                , classList
-                    [ ( "sidebar-overlay", isOverlayOpen )
-                    ]
+                , classList [ ( "sidebar-overlay", isOverlayOpen ) ]
                 ]
                 [ div [ class "bottom-shadow" ]
                     [ sideBarHeaderView
@@ -82,7 +83,7 @@ appLayoutView config appVM model =
                     , onClick (config.onToggleAppDrawerOverlay)
                     ]
                     [ div [ onClickStopPropagationAV ]
-                        [ div [ id "layout-main-content" ] [ appMainViewContainer ]
+                        [ layoutMainContent
                         ]
                     ]
                 ]

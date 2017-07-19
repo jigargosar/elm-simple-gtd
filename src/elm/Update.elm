@@ -31,20 +31,18 @@ import Types exposing (..)
 import Update.GroupDoc
 
 
-{-
-   type alias ReturnF =
-       Return.ReturnF AppMsg AppModel
+type alias ReturnF =
+    Return.ReturnF AppMsg AppModel
 
 
-   type alias AndThenUpdate =
-       AppMsg -> ReturnF
--}
+type alias AndThenUpdate =
+    AppMsg -> ReturnF
 
 
 update :
-    (AppMsg -> Return.ReturnF AppMsg AppModel)
+    AndThenUpdate
     -> AppMsg
-    -> Return.ReturnF AppMsg AppModel
+    -> ReturnF
 update andThenUpdate msg =
     case msg of
         OnMdl msg_ ->

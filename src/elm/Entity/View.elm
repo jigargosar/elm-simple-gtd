@@ -28,8 +28,11 @@ type alias KeyedView =
     ( String, Html AppMsg )
 
 
-list : EntityListViewType -> AppModel -> Html.Html AppMsg
-list viewType model =
+
+--list : EntityListViewType -> AppModel -> Html.Html AppMsg
+
+
+list config viewType model =
     let
         grouping =
             Model.EntityTree.createEntityTreeForViewType viewType model
@@ -126,7 +129,10 @@ groupView todoView vm =
     GroupDoc.View.initKeyed todoView vm
 
 
-groupHeaderView : GroupDocViewModel -> KeyedView
+
+--groupHeaderView : GroupDocViewModel -> KeyedView
+
+
 groupHeaderView vm =
     GroupDoc.View.initHeaderKeyed vm
 

@@ -30,7 +30,7 @@ appLayoutView config appVM model =
             div [ id "main-view-container" ]
                 [ case Model.ViewType.getMainViewType model of
                     EntityListView viewType ->
-                        Entity.View.list viewType model
+                        Entity.View.list config viewType model
 
                     SyncView ->
                         View.CustomSync.view config model

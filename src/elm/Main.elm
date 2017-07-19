@@ -1,17 +1,11 @@
 port module Main exposing (main)
 
 import Context
-import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
+import Entity.Types exposing (createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
-import Lazy
 import LocalPref
 import Material
-import Model
-import Model.EntityList
-import Model.GroupDocStore
-import Model.Selection
-import Model.Stores
 import Model.ViewType
 import Project
 import Random.Pcg
@@ -43,8 +37,6 @@ import Subscriptions.Todo
 import Time
 import Types exposing (AppModel)
 import X.Keyboard
-import X.Return exposing (returnWith)
-import Toolkit.Operators exposing (..)
 
 
 type alias AppReturn =
@@ -132,59 +124,6 @@ init flags =
         update Msg.onSwitchToNewUserSetupModeIfNeeded model
 
 
-updateConfig model =
-    { --model
-      now = model.now
-    , activeProjects = (Model.GroupDocStore.getActiveProjects model)
-    , activeContexts = (Model.GroupDocStore.getActiveContexts model)
-    , updateEntityListCursorOnTodoChange = map (Model.EntityList.updateEntityListCursorOnTodoChange model)
-    , updateEntityListCursorOnGroupDocChange =
-        map (Model.EntityList.updateEntityListCursorOnGroupDocChange model)
-    , currentViewEntityListLazy =
-        Lazy.lazy
-            (\_ ->
-                Model.EntityList.createEntityListForCurrentView model
-            )
-
-    --msg
-    , clearSelection = map Model.Selection.clearSelection
-    , noop = andThenUpdate Msg.noop
-    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
-    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-    , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-    , onSaveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
-    , onSaveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
-    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
-    , onToggleContextArchived = Msg.onToggleContextArchived >> andThenUpdate
-    , onToggleContextDeleted = Msg.onToggleContextDeleted >> andThenUpdate
-    , onToggleProjectArchived = Msg.onToggleProjectArchived >> andThenUpdate
-    , onToggleProjectDeleted = Msg.onToggleProjectDeleted >> andThenUpdate
-    , switchToContextsView = Msg.switchToContextsView |> andThenUpdate
-    , setFocusInEntityWithEntityId =
-        (\entityId ->
-            map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-        )
-    , setFocusInEntity =
-        (\entity ->
-            map (Model.setFocusInEntity entity)
-                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-        )
-    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-
-    -- todo msg
-    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
-    , onStartAddingTodoWithFocusInEntityAsReference =
-        andThenUpdate TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-    , onStartAddingTodoToInbox = andThenUpdate TodoMsg.onStartAddingTodoToInbox
-    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
-    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
-    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
-    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
-    }
-
-
 andThenUpdate =
     update >> Return.andThen
 
@@ -192,8 +131,7 @@ andThenUpdate =
 update : AppMsg -> AppModel -> AppReturn
 update msg =
     Return.singleton
-        >> returnWith updateConfig
-            (Update.update # andThenUpdate # msg)
+        >> (Update.update andThenUpdate msg)
 
 
 viewConfig =

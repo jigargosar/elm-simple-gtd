@@ -213,3 +213,11 @@ onToggleAppDrawerOverlay =
 
 onMdl =
     OnMdl
+
+
+
+--localpref
+
+
+onPersistLocalPref =
+    OnPersistLocalPref

@@ -36,7 +36,6 @@ signInOverlay =
                 ]
             ]
         ]
-        |> Html.map Msg.OnFirebaseMsg
 
 
 setup form =

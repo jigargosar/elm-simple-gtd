@@ -1,9 +1,7 @@
 module Todo.View exposing (..)
 
 import Entity.Types exposing (EntityId(TodoId))
-import Msg exposing (AppMsg)
 import Todo.FormTypes exposing (..)
-import TodoMsg
 import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -12,30 +10,28 @@ import X.Keyboard exposing (..)
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 
 
-fireCancel =
-    Msg.revertExclusiveMode
+--editTodoTextView : TodoForm -> Html AppMsg
 
 
-editTodoTextView : TodoForm -> Html AppMsg
-editTodoTextView form =
+editTodoTextView config form =
     let
         todoText =
             form.text
 
         fireTextChanged =
-            TodoMsg.onSetTodoFormText form
+            config.onSetTodoFormText form
 
         fireToggleDelete =
-            Msg.onEntityUpdateMsg (TodoId form.id) Entity.Types.EUA_ToggleDeleted
+            config.onEntityUpdateMsg (TodoId form.id) Entity.Types.EUA_ToggleDeleted
     in
         div
             [ class "overlay"
-            , onClickStopPropagation fireCancel
-            , onKeyDownStopPropagation (\_ -> Msg.noop)
+            , onClickStopPropagation config.revertExclusiveMode
+            , onKeyDownStopPropagation (\_ -> config.noop)
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
+            [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
                 [ div [ class "modal-content" ]
-                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Msg.noop) ]
+                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> config.noop) ]
                         [ textarea
                             [ class "materialize-textarea auto-focus"
                             , defaultValue todoText
@@ -50,18 +46,18 @@ editTodoTextView form =
             ]
 
 
-new form =
+new config form =
     div
         [ class "overlay"
-        , onClickStopPropagation fireCancel
-        , onKeyDownStopPropagation (\_ -> Msg.noop)
+        , onClickStopPropagation config.revertExclusiveMode
+        , onKeyDownStopPropagation (\_ -> config.noop)
         ]
-        [ div [ class "modal fixed-center", onClickStopPropagation Msg.noop ]
+        [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
             [ div [ class "modal-content" ]
                 [ div [ class "input-field" ]
                     [ textarea
                         [ class "materialize-textarea auto-focus"
-                        , onInput (TodoMsg.onSetTodoFormText form)
+                        , onInput (config.onSetTodoFormText form)
                         , form.text |> defaultValue
                         ]
                         []
@@ -73,16 +69,16 @@ new form =
         ]
 
 
-editTodoSchedulePopupView form =
+editTodoSchedulePopupView config form =
     div
         [ class "overlay"
-        , onClickStopPropagation Msg.revertExclusiveMode
-        , onKeyDownStopPropagation (\_ -> Msg.noop)
+        , onClickStopPropagation config.revertExclusiveMode
+        , onKeyDownStopPropagation (\_ -> config.noop)
         ]
         [ div
             [ id "popup-menu"
             , class "z-depth-4 static"
-            , onClickStopPropagation Msg.noop
+            , onClickStopPropagation config.noop
             ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , div [ class "input-field" ]
@@ -90,7 +86,7 @@ editTodoSchedulePopupView form =
                     [ type_ "date"
                     , class "auto-focus"
                     , defaultValue form.date
-                    , TodoMsg.onSetTodoFormReminderDate form |> onChange
+                    , config.onSetTodoFormReminderDate form |> onChange
                     ]
                     []
                 , Html.label [ class "active" ] [ "Date" |> text ]
@@ -99,7 +95,7 @@ editTodoSchedulePopupView form =
                 [ Html.input
                     [ type_ "time"
                     , defaultValue form.time
-                    , TodoMsg.onSetTodoFormReminderTime form |> onChange
+                    , config.onSetTodoFormReminderTime form |> onChange
                     ]
                     []
                 , Html.label [ class "active" ] [ "Time" |> text ]

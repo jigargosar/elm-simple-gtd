@@ -54,28 +54,32 @@ overlayViews appModel =
 
                 XMTodoForm form ->
                     let
-                        geConfig =
+                        config =
                             { onSetProject = TodoMsg.onSetProject
                             , onSetContext = TodoMsg.onSetContext
                             , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
                             , noop = Msg.noop
                             , revertExclusiveMode = Msg.revertExclusiveMode
+                            , onSetTodoFormText = TodoMsg.onSetTodoFormText
+                            , onEntityUpdateMsg = Msg.onEntityUpdateMsg
+                            , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
+                            , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
                             }
                     in
                         case form.mode of
                             TFM_Edit editMode ->
                                 case editMode of
                                     ETFM_EditTodoContext ->
-                                        Todo.GroupEditView.context geConfig form appModel
+                                        Todo.GroupEditView.context config form appModel
 
                                     ETFM_EditTodoProject ->
-                                        Todo.GroupEditView.project geConfig form appModel
+                                        Todo.GroupEditView.project config form appModel
 
                                     ETFM_EditTodoSchedule ->
-                                        Todo.View.editTodoSchedulePopupView form
+                                        Todo.View.editTodoSchedulePopupView config form
 
                                     ETFM_EditTodoText ->
-                                        Todo.View.editTodoTextView form
+                                        Todo.View.editTodoTextView config form
 
                             TFM_Add addMode ->
                                 case addMode of
@@ -83,13 +87,14 @@ overlayViews appModel =
                                         View.GetStarted.setup form
 
                                     ATFM_AddWithFocusInEntityAsReference ->
-                                        Todo.View.new form
+                                        Todo.View.new config form
 
                                     ATFM_AddToInbox ->
-                                        Todo.View.new form
+                                        Todo.View.new config form
 
                 XMSignInOverlay ->
                     View.GetStarted.signInOverlay
+                        |> Html.map Msg.OnFirebaseMsg
 
                 XMGroupDocForm form ->
                     GroupDoc.FormView.init form

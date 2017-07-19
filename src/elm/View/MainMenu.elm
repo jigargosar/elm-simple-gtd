@@ -6,17 +6,14 @@ import Firebase.Types exposing (FirebaseMsg(OnFBSignIn, OnFBSignOut))
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Menu.Types exposing (MenuState)
-import Msg
 import Menu
 import Toolkit.Operators exposing (..)
 import Tuple2
-import Types exposing (AppModel)
-import Msg
 
 
-type ItemType
-    = URL String
-    | Msg Msg.AppMsg
+type ItemType msg
+    = URLItem String
+    | MsgItem msg
 
 
 type alias Item =
@@ -27,33 +24,33 @@ type alias Item =
 --menuConfig : MenuState -> AppModel -> Menu.Config Item Msg.AppMsg
 
 
-menuConfig menuState appModel =
-    { onSelect = onSelect
+menuConfig config menuState =
+    { onSelect = onItemSelect config
     , isSelected = (\_ -> False)
     , itemKey = Tuple.first
     , itemSearchText = Tuple.first
     , itemView = itemView
-    , onStateChanged = Msg.onMainMenuStateChanged
-    , noOp = Msg.noop
-    , onOutsideMouseDown = Msg.revertExclusiveMode
+    , onStateChanged = config.onMainMenuStateChanged
+    , noOp = config.noop
+    , onOutsideMouseDown = config.revertExclusiveMode
     }
 
 
 itemView ( textV, itemType ) =
     case itemType of
-        URL url ->
+        URLItem url ->
             a [ href url, target "_blank" ] [ text textV ]
 
-        Msg _ ->
+        MsgItem _ ->
             text textV
 
 
-onSelect ( _, itemType ) =
+onItemSelect config ( _, itemType ) =
     case itemType of
-        URL url ->
-            Msg.revertExclusiveMode
+        URLItem url ->
+            config.revertExclusiveMode
 
-        Msg msg ->
+        MsgItem msg ->
             msg
 
 
@@ -61,27 +58,27 @@ onSelect ( _, itemType ) =
 --getItems : AppModel -> List Item
 
 
-getItems appModel =
+getItems config appModel =
     let
         maybeUserProfile =
             Firebase.getMaybeUserProfile appModel
 
         signInMenuItem =
             maybeUserProfile
-                ?|> (\_ -> ( "SignOut", OnFBSignOut ))
-                ?= ( "SignIn", OnFBSignIn )
-                |> Tuple2.map (Msg.OnFirebaseMsg >> Msg)
+                ?|> (\_ -> ( "SignOut", config.onSignOut ))
+                ?= ( "SignIn", config.onSignIn )
+                |> Tuple2.mapSecond MsgItem
 
         linkMenuItems =
-            [ ( "Forums", URL AppUrl.forumsURL )
-            , ( "Changelog v" ++ appModel.appVersion, URL AppUrl.changeLogURL )
-            , ( "Github", URL AppUrl.github )
+            [ ( "Forums", URLItem AppUrl.forumsURL )
+            , ( "Changelog v" ++ appModel.appVersion, URLItem AppUrl.changeLogURL )
+            , ( "Github", URLItem AppUrl.github )
             ]
     in
         signInMenuItem :: linkMenuItems
 
 
-init menuState appModel =
-    Menu.view (getItems appModel)
+init config menuState appModel =
+    Menu.view (getItems config appModel)
         menuState
-        (menuConfig menuState appModel)
+        (menuConfig config menuState)

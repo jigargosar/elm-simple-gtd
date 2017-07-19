@@ -54,6 +54,9 @@ config =
     , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onEntityUpdateMsg = Msg.onEntityUpdateMsg
+    , onMainMenuStateChanged = Msg.onMainMenuStateChanged
+    , onSignIn = Msg.onSignIn
+    , onSignOut = Msg.onSignOut
     }
 
 
@@ -103,7 +106,7 @@ overlayViews appModel =
                     GroupDoc.FormView.init config form
 
                 XMMainMenu menuState ->
-                    View.MainMenu.init menuState appModel
+                    View.MainMenu.init config menuState appModel
 
                 _ ->
                     def

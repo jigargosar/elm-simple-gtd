@@ -30,3 +30,7 @@ customSw =
 
 type alias AppAttributes =
     List ( String, String )
+
+
+
+--getCurrentUserSignInOutMenuAction =

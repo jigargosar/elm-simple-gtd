@@ -87,6 +87,14 @@ onSwitchToNewUserSetupModeIfNeeded =
     OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded
 
 
+onSignIn =
+    OnFirebaseMsg Firebase.Types.OnFBSignIn
+
+
+onSignOut =
+    OnFirebaseMsg Firebase.Types.OnFBSignOut
+
+
 
 -- mm
 

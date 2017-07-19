@@ -4,7 +4,6 @@ import AppColors
 import AppDrawer.Types
 import Mat
 import Firebase
-import Msg exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -19,7 +18,7 @@ appMainHeader config viewModel m =
         content =
             Todo.TimeTracker.View.maybe m
                 ?|> X.List.singleton
-                ?= titleHeaderContent viewModel m
+                ?= titleHeaderContent viewModel
     in
         div
             [ id "layout-main-header"
@@ -28,10 +27,10 @@ appMainHeader config viewModel m =
                 , "background-color" => AppColors.encode viewModel.header.backgroundColor
                 ]
             ]
-            (headerWithContent content m)
+            (headerWithContent config content m)
 
 
-titleHeaderContent viewModel m =
+titleHeaderContent viewModel =
     let
         titleText =
             viewModel.viewName
@@ -40,32 +39,28 @@ titleHeaderContent viewModel m =
         ]
 
 
-headerWithContent content m =
+headerWithContent config content m =
     let
         menuButton =
-            Mat.headerIconBtn Msg.onMdl
+            Mat.headerIconBtn config.onMdl
                 m.mdl
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation (Msg.onToggleAppDrawerOverlay)
+                , Mat.onClickStopPropagation (config.onToggleAppDrawerOverlay)
                 ]
                 [ Mat.icon "menu" ]
     in
         [ menuButton
         , div [ class "flex-auto font-nowrap" ] content
-        , menu m
+        , div [ id "main-menu-button", onClick config.onShowMainMenu ] [ menuIcon config m ]
         ]
 
 
-menu m =
-    div [ id "main-menu-button", onClick Msg.onShowMainMenu ] [ menuIcon m ]
-
-
-menuIcon m =
+menuIcon config m =
     case Firebase.getMaybeUserProfile m of
         Nothing ->
-            Mat.headerIconBtn Msg.onMdl
+            Mat.headerIconBtn config.onMdl
                 m.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"
                 , Mat.tabIndex -1

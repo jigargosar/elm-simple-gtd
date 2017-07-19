@@ -137,6 +137,8 @@ updateConfig andThenUpdate =
     , setDomFocusToFocusInEntityCmd = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
     , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
     , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
+    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
     }
 
 

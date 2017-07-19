@@ -33,7 +33,7 @@ type alias Config a msg model =
         , activeProjects : List ContextDoc
         , activeContexts : List ProjectDoc
         , onComplete : SubReturnF msg model
-        , setXMode : ExclusiveMode -> SubReturnF msg model
+        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
         , onSwitchView : EntityListViewType -> SubReturnF msg model
     }
 
@@ -70,13 +70,13 @@ update config msg =
         OnLBInputChanged form text ->
             updateInput config text form
                 |> XMLaunchBar
-                >> config.setXMode
+                >> config.onSetExclusiveMode
 
         Open ->
             (config.now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
-                >> config.setXMode
+                >> config.onSetExclusiveMode
             )
                 >> DomPorts.autoFocusInputRCmd
 

@@ -18,8 +18,8 @@ type alias SubReturnF msg model =
 
 type alias Config a msg model =
     { a
-        | saveXModeForm : SubReturnF msg model
-        , setXMode : ExclusiveMode -> SubReturnF msg model
+        | onSaveExclusiveModeForm : SubReturnF msg model
+        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
@@ -30,10 +30,10 @@ update :
 update config msg =
     case msg of
         OnStartCustomSync form ->
-            config.saveXModeForm
+            config.onSaveExclusiveModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         OnUpdateCustomSyncFormUri form uri ->
             { form | uri = uri }
                 |> XMCustomSync
-                >> config.setXMode
+                >> config.onSetExclusiveMode

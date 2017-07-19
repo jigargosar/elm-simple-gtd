@@ -77,21 +77,10 @@ update config andThenUpdate msg =
             Update.ExclusiveMode.update config msg_
 
         OnAppHeaderMsg msg_ ->
-            let
-                config =
-                    { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    }
-            in
-                Update.AppHeader.update config msg_
+            Update.AppHeader.update config msg_
 
         OnCustomSyncMsg msg_ ->
-            let
-                config =
-                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    }
-            in
-                Update.CustomSync.update config msg_
+            Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
             let
@@ -119,7 +108,7 @@ update config andThenUpdate msg =
                     , activeProjects = (Model.GroupDocStore.getActiveProjects model)
                     , activeContexts = (Model.GroupDocStore.getActiveContexts model)
                     , onComplete = Msg.revertExclusiveMode |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
                     }
             in
@@ -150,7 +139,7 @@ update config andThenUpdate msg =
                         )
                     , closeNotification = Msg.OnCloseNotification >> andThenUpdate
                     , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in

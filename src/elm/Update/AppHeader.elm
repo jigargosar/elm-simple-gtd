@@ -17,7 +17,7 @@ type alias SubReturnF msg model =
 
 type alias Config a msg model =
     { a
-        | setXMode : ExclusiveMode -> SubReturnF msg model
+        | onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
@@ -28,13 +28,13 @@ update :
 update config msg =
     case msg of
         OnShowMainMenu ->
-            config.setXMode (XMMainMenu Menu.initState)
+            config.onSetExclusiveMode (XMMainMenu Menu.initState)
                 >> command positionMainMenuCmd
 
         OnMainMenuStateChanged menuState ->
             (menuState
                 |> XMMainMenu
-                >> config.setXMode
+                >> config.onSetExclusiveMode
             )
                 >> DomPorts.autoFocusInputRCmd
 

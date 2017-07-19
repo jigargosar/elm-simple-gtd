@@ -59,7 +59,7 @@ type alias Config a msg model =
         , setFocusInEntity : Entity -> SubReturnF msg model
         , closeNotification : String -> SubReturnF msg model
         , afterTodoUpdate : SubReturnF msg model
-        , setXMode : ExclusiveMode -> SubReturnF msg model
+        , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
         , currentViewEntityList : Lazy (List Entity)
     }
 
@@ -216,7 +216,7 @@ onUpdateTodoFormAction config form action =
         xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-        config.setXMode xMode
+        config.onSetExclusiveMode xMode
             >> Return.command
                 (case action of
                     Todo.FormTypes.SetTodoMenuState _ ->
@@ -235,7 +235,7 @@ onStartEditingTodo config todo editFormMode =
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-        X.Return.returnWith createXMode config.setXMode
+        X.Return.returnWith createXMode config.onSetExclusiveMode
             >> command
                 (case editFormMode of
                     ETFM_EditTodoText ->
@@ -257,7 +257,7 @@ onStartAddingTodo config addFormMode =
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-        X.Return.returnWith createXMode config.setXMode
+        X.Return.returnWith createXMode config.onSetExclusiveMode
             >> autoFocusInputRCmd
 
 

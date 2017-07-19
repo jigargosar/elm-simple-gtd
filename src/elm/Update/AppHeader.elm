@@ -15,13 +15,14 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config msg model =
-    { setXMode : ExclusiveMode -> SubReturnF msg model
+type alias Config a msg model =
+    { a
+        | setXMode : ExclusiveMode -> SubReturnF msg model
     }
 
 
 update :
-    Config msg model
+    Config a msg model
     -> AppHeaderMsg
     -> SubReturnF msg model
 update config msg =

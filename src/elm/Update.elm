@@ -66,7 +66,6 @@ update config andThenUpdate msg =
 
         OnSubscriptionMsg msg_ ->
             let
-                config : Update.Subscription.Config AppMsg AppModel
                 config =
                     { noop = andThenUpdate Msg.noop
                     , onStartAddingTodoToInbox =
@@ -90,7 +89,6 @@ update config andThenUpdate msg =
 
         OnExclusiveModeMsg msg_ ->
             let
-                config : Update.ExclusiveMode.Config AppMsg AppModel
                 config =
                     { focusEntityList = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
                     , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
@@ -101,7 +99,6 @@ update config andThenUpdate msg =
 
         OnAppHeaderMsg msg_ ->
             let
-                config : Update.AppHeader.Config AppMsg AppModel
                 config =
                     { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
@@ -110,7 +107,6 @@ update config andThenUpdate msg =
 
         OnCustomSyncMsg msg_ ->
             let
-                config : Update.CustomSync.Config AppMsg AppModel
                 config =
                     { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
                     , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
@@ -120,7 +116,6 @@ update config andThenUpdate msg =
 
         OnEntityMsg msg_ ->
             let
-                config : Update.Entity.Config AppMsg AppModel
                 config =
                     { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
@@ -140,7 +135,6 @@ update config andThenUpdate msg =
 
         OnLaunchBarMsgWithNow msg_ now ->
             let
-                createConfig : AppModel -> Update.LaunchBar.Config AppMsg AppModel
                 createConfig model =
                     { now = now
                     , activeProjects = (Model.GroupDocStore.getActiveProjects model)
@@ -162,7 +156,6 @@ update config andThenUpdate msg =
 
         OnTodoMsgWithNow msg_ now ->
             let
-                config : AppModel -> Update.Todo.Config AppMsg AppModel
                 config model =
                     { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
                     , setFocusInEntityWithEntityId =
@@ -190,7 +183,6 @@ update config andThenUpdate msg =
 
         OnFirebaseMsg msg_ ->
             let
-                config : Update.Firebase.Config AppMsg AppModel
                 config =
                     { onStartSetupAddTodo = andThenUpdate TodoMsg.onStartSetupAddTodo
                     , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode

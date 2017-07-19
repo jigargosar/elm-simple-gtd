@@ -52,14 +52,15 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { switchToContextsView : SubReturnF msg model
-    , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
-    , setFocusInEntity : Entity -> SubReturnF msg model
-    , closeNotification : String -> SubReturnF msg model
-    , afterTodoUpdate : SubReturnF msg model
-    , setXMode : ExclusiveMode -> SubReturnF msg model
-    , currentViewEntityList : Lazy (List Entity)
+type alias Config a msg model =
+    { a
+        | switchToContextsView : SubReturnF msg model
+        , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
+        , setFocusInEntity : Entity -> SubReturnF msg model
+        , closeNotification : String -> SubReturnF msg model
+        , afterTodoUpdate : SubReturnF msg model
+        , setXMode : ExclusiveMode -> SubReturnF msg model
+        , currentViewEntityList : Lazy (List Entity)
     }
 
 
@@ -154,7 +155,7 @@ insertTodo constructWithId =
 
 
 saveAddTodoForm :
-    Config msg model
+    Config a msg model
     -> AddTodoFormMode
     -> TodoForm
     -> SubModel model
@@ -264,7 +265,7 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config msg model -> SubReturnF msg model
+onGotoRunningTodo : Config a msg model -> SubReturnF msg model
 onGotoRunningTodo config =
     returnWith identity (gotoRunningTodo config)
 
@@ -370,14 +371,14 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : Config msg model -> SubModel model -> SubReturnF msg model
+gotoRunningTodo : Config a msg model -> SubModel model -> SubReturnF msg model
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
         ?= identity
 
 
-gotoTodoWithId : Config msg model -> SubModel model -> DocId -> SubReturnF msg model
+gotoTodoWithId : Config a msg model -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =

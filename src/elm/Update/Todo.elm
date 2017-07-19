@@ -10,12 +10,12 @@ import X.Function.Infix exposing (..)
 import Todo.TimeTracker as Tracker
 
 
-type alias Config msg model =
-    Update.Todo.Internal.Config msg model
+type alias Config a msg model =
+    Update.Todo.Internal.Config a msg model
 
 
 update :
-    Config msg model
+    Config a msg model
     -> Time.Time
     -> TodoMsg
     -> SubReturnF msg model

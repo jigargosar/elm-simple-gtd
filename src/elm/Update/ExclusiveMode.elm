@@ -24,15 +24,16 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { focusEntityList : SubReturnF msg model
-    , saveTodoForm : TodoForm -> SubReturnF msg model
-    , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
+type alias Config a msg model =
+    { a
+        | focusEntityList : SubReturnF msg model
+        , saveTodoForm : TodoForm -> SubReturnF msg model
+        , saveGroupDocForm : GroupDocForm -> SubReturnF msg model
     }
 
 
 update :
-    Config msg model
+    Config a msg model
     -> ExclusiveModeMsg
     -> SubReturnF msg model
 update config msg =
@@ -52,7 +53,7 @@ exclusiveMode =
     fieldLens .editMode (\s b -> { b | editMode = s })
 
 
-onSaveExclusiveModeForm : Config msg model -> SubReturnF msg model
+onSaveExclusiveModeForm : Config a msg model -> SubReturnF msg model
 onSaveExclusiveModeForm config =
     returnWith .editMode (saveExclusiveModeForm config)
         >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
@@ -66,7 +67,7 @@ setExclusiveModeToNone =
     setExclusiveMode XMNone
 
 
-saveExclusiveModeForm : Config msg model -> ExclusiveMode -> SubReturnF msg model
+saveExclusiveModeForm : Config a msg model -> ExclusiveMode -> SubReturnF msg model
 saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->

@@ -22,6 +22,10 @@ onReminderOverlayAction =
     OnTodoReminderOverlayAction >> Msg.OnTodoMsg
 
 
+onSwitchOrStartTrackingTodo todoId =
+    OnSwitchOrStartTrackingTodo todoId |> Msg.OnTodoMsg
+
+
 
 -- form add
 

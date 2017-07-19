@@ -9,7 +9,7 @@ import Todo.Types exposing (TodoAction, TodoDoc)
 
 type TodoMsg
     = ToggleRunning DocId
-    | SwitchOrStartRunning DocId
+    | OnSwitchOrStartTrackingTodo DocId
     | OnStopRunningTodo
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent

@@ -161,12 +161,19 @@ viewConfig =
     , onShowMainMenu = Msg.onShowMainMenu
     , onEntityListKeyDown = Msg.onEntityListKeyDown
     , onStopRunningTodo = TodoMsg.onStopRunningTodo
-    , onStartAddingTodoWithFocusInEntityAsReference = TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , onToggleEntitySelection = Msg.onToggleEntitySelection
+    , onStartEditingTodoProject = TodoMsg.onStartEditingTodoProject
+    , onStartEditingTodoContext = TodoMsg.onStartEditingTodoContext
+    , onSwitchOrStartTrackingTodo = TodoMsg.onSwitchOrStartTrackingTodo
+    , onStartEditingTodoText = TodoMsg.onStartEditingTodoText
+    , onStartEditingReminder = TodoMsg.onStartEditingReminder
     }
 
 
 view model =
-    View.init viewConfig (ViewModel.create model) model
+    View.init viewConfig (ViewModel.create viewConfig model) model
 
 
 main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg

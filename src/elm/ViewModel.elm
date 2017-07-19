@@ -31,8 +31,11 @@ type alias Model =
     }
 
 
-create : AppModel -> Model
-create model =
+
+--create : AppModel -> Model
+
+
+create config model =
     let
         contextsVM =
             AppDrawer.GroupViewModel.contexts model
@@ -59,7 +62,7 @@ create model =
         , mdl = model.mdl
         , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM
         , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM
-        , createTodoViewModel = Todo.ViewModel.createTodoViewModel
+        , createTodoViewModel = Todo.ViewModel.createTodoViewModel config
         }
 
 

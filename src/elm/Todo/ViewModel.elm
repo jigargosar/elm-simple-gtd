@@ -5,22 +5,18 @@ import Document.Types exposing (getDocId)
 import Entity.Types
 import EntityId
 import GroupDoc
-import Msg exposing (AppMsg)
 import Regex
 import Set
 import Store
 import Time exposing (Time)
 import Todo.ItemView exposing (ScheduleViewModel, TodoViewModel)
-import Todo.Msg
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import String.Extra
 import Todo
-import Types exposing (AppModel)
 import X.Keyboard
 import Keyboard.Extra as Key
-import TodoMsg
 import X.Time
 
 
@@ -40,8 +36,11 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
-createTodoViewModel appM isFocusable todo =
+
+--createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
+
+
+createTodoViewModel config appM isFocusable todo =
     let
         tabindexAV =
             let
@@ -86,19 +85,16 @@ createTodoViewModel appM isFocusable todo =
             EntityId.fromTodoDocId todoId
 
         createEntityUpdateMsg =
-            Msg.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
-
-        onTodoMsg =
-            Msg.OnTodoMsg
+            config.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
 
         reminder =
-            createScheduleViewModel now todo
+            createScheduleViewModel config now todo
 
         onKeyDownMsg ({ key } as ke) =
             if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
-                        Msg.onToggleEntitySelection entityId
+                        config.onToggleEntitySelection entityId
 
                     Key.CharE ->
                         startEditingMsg
@@ -110,10 +106,10 @@ createTodoViewModel appM isFocusable todo =
                         toggleDeleteMsg
 
                     Key.CharP ->
-                        TodoMsg.onStartEditingTodoProject todo
+                        config.onStartEditingTodoProject todo
 
                     Key.CharC ->
-                        TodoMsg.onStartEditingTodoContext todo
+                        config.onStartEditingTodoContext todo
 
                     Key.CharR ->
                         reminder.startEditingMsg
@@ -122,18 +118,18 @@ createTodoViewModel appM isFocusable todo =
                         createEntityUpdateMsg Entity.Types.EUA_OnGotoEntity
 
                     Key.CharS ->
-                        Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
+                        config.onSwitchOrStartTrackingTodo todoId
 
                     _ ->
-                        Msg.noop
+                        config.noop
             else
-                Msg.noop
+                config.noop
 
         startEditingMsg =
             if isFocusable then
-                TodoMsg.onStartEditingTodoText todo
+                config.onStartEditingTodoText todo
             else
-                Msg.noop
+                config.noop
 
         toggleDeleteMsg =
             createEntityUpdateMsg Entity.Types.EUA_ToggleDeleted
@@ -148,8 +144,8 @@ createTodoViewModel appM isFocusable todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = TodoMsg.onStartEditingTodoContext todo
-        , showProjectDropDownMsg = TodoMsg.onStartEditingTodoProject todo
+        , showContextDropDownMsg = config.onStartEditingTodoContext todo
+        , showProjectDropDownMsg = config.onStartEditingTodoProject todo
         , startEditingMsg = startEditingMsg
         , canBeFocused = isFocusable
         , toggleDoneMsg = toggleDoneMsg
@@ -158,13 +154,16 @@ createTodoViewModel appM isFocusable todo =
         , tabindexAV = tabindexAV
         , isSelected = appM.selectedEntityIdSet |> Set.member todoId
         , mdl = appM.mdl
-        , onMdl = Msg.OnMdl
-        , noop = Msg.noop
+        , onMdl = config.onMdl
+        , noop = config.noop
         }
 
 
-createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel AppMsg
-createScheduleViewModel now todo =
+
+--createScheduleViewModel : Time -> TodoDoc -> ScheduleViewModel AppMsg
+
+
+createScheduleViewModel config now todo =
     let
         overDueText =
             "Overdue"
@@ -187,5 +186,5 @@ createScheduleViewModel now todo =
     in
         { displayText = displayText
         , isOverDue = displayText == overDueText
-        , startEditingMsg = TodoMsg.onStartEditingReminder todo
+        , startEditingMsg = config.onStartEditingReminder todo
         }

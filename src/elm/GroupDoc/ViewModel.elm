@@ -62,6 +62,7 @@ type alias Config =
     , defaultIconName : String
     , getViewType : DocId -> EntityListViewType
     , getTabIndexAVForEntityId : EntityId -> Int
+    , groupDocType : GroupDoc.Types.GroupDocType
     }
 
 
@@ -171,6 +172,7 @@ createContextGroupVM getTabIndexAVForEntityId todoList context =
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
+            , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }
     in
         create config todoList context
@@ -191,6 +193,7 @@ createProjectGroupVM getTabIndexAVForEntityId todoList project =
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
+            , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
     in
         create config todoList project

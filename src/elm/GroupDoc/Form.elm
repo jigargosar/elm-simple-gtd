@@ -30,8 +30,8 @@ setName name model =
 
 
 createEditContextForm =
-    createEditGroupDocForm ContextGroupDoc
+    createEditGroupDocForm ContextGroupDocType
 
 
 createEditProjectForm =
-    createEditGroupDocForm ProjectGroupDoc
+    createEditGroupDocForm ProjectGroupDocType

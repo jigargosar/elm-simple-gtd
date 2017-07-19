@@ -21,10 +21,10 @@ init config form =
     let
         ( entityId, nameLabel ) =
             (case form.groupDocType of
-                ContextGroupDoc ->
+                ContextGroupDocType ->
                     ( ContextId, "Context" )
 
-                ProjectGroupDoc ->
+                ProjectGroupDocType ->
                     ( ProjectId, "Project" )
             )
                 |> Tuple2.mapEach (apply form.id) (String.append # " Name")

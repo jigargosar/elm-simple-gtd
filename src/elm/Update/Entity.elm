@@ -74,14 +74,14 @@ update :
 update config msg =
     case msg of
         EM_StartAddingContext ->
-            (createAddGroupDocForm ContextGroupDoc
+            (createAddGroupDocForm ContextGroupDocType
                 |> XMGroupDocForm
                 >> config.onSetExclusiveMode
             )
                 >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
-            (createAddGroupDocForm ProjectGroupDoc
+            (createAddGroupDocForm ProjectGroupDocType
                 |> XMGroupDocForm
                 >> config.onSetExclusiveMode
             )

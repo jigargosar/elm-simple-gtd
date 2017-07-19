@@ -5,8 +5,8 @@ import Store.Types exposing (Store)
 
 
 type GroupDocType
-    = ContextGroupDoc
-    | ProjectGroupDoc
+    = ContextGroupDocType
+    | ProjectGroupDocType
 
 
 type alias GroupDocName =

@@ -55,7 +55,7 @@ update msg =
                         |> andThen
             in
                 case form.groupDocType of
-                    ContextGroupDoc ->
+                    ContextGroupDocType ->
                         case form.mode of
                             GDFM_Add ->
                                 insertContext form.name
@@ -63,7 +63,7 @@ update msg =
                             GDFM_Edit ->
                                 update updateContext
 
-                    ProjectGroupDoc ->
+                    ProjectGroupDocType ->
                         case form.mode of
                             GDFM_Add ->
                                 insertProject form.name

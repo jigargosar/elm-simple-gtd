@@ -64,6 +64,7 @@ overlayViews appModel =
                             , onEntityUpdateMsg = Msg.onEntityUpdateMsg
                             , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
                             , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
+                            , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
                             }
                     in
                         case form.mode of
@@ -84,7 +85,7 @@ overlayViews appModel =
                             TFM_Add addMode ->
                                 case addMode of
                                     ATFM_SetupFirstTodo ->
-                                        View.GetStarted.setup form
+                                        View.GetStarted.setup config form
 
                                     ATFM_AddWithFocusInEntityAsReference ->
                                         Todo.View.new config form

@@ -2,14 +2,11 @@ module View.GetStarted exposing (..)
 
 import AppUrl
 import Firebase.Types exposing (FirebaseMsg(OnFB_NOOP, OnFBSignIn, OnFBSkipSignIn))
-import Msg
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import TodoMsg
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
-import Msg
 
 
 signInOverlay =
@@ -38,17 +35,17 @@ signInOverlay =
         ]
 
 
-setup form =
+setup config form =
     let
         addTodoMsg =
-            Msg.onSaveExclusiveModeForm
+            config.onSaveExclusiveModeForm
 
         updateSetupFormTodoText =
-            TodoMsg.onSetTodoFormText form
+            config.onSetTodoFormText form
     in
         div
             [ class "overlay"
-            , onClickStopPropagation Msg.noop
+            , onClickStopPropagation config.noop
             ]
             [ div [ class "modal fixed-center" ]
                 [ div [ class "modal-content" ]

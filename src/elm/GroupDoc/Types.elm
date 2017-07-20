@@ -14,6 +14,15 @@ type GroupDocId
     | ProjectGroupDocId DocId
 
 
+createGroupDocIdFromType gdType =
+    case gdType of
+        ContextGroupDocType ->
+            ContextGroupDocId
+
+        ProjectGroupDocType ->
+            ProjectGroupDocId
+
+
 type GroupDocIdAction
     = GDA_ToggleArchived
     | GDA_ToggleDeleted

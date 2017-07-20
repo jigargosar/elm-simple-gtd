@@ -7,22 +7,32 @@ import GroupDoc.Types exposing (..)
 
 createEditGroupDocForm : GroupDocType -> GroupDoc -> GroupDocForm
 createEditGroupDocForm groupDocType groupDoc =
-    { id = getDocId groupDoc
-    , name = getGroupDocName groupDoc
-    , groupDocType = groupDocType
-    , isArchived = isGroupDocArchived groupDoc
-    , mode = GDFM_Edit
-    }
+    let
+        id =
+            getDocId groupDoc
+    in
+        { id = id
+        , groupDocType = groupDocType
+        , groupDocId = createGroupDocIdFromType groupDocType id
+        , name = getGroupDocName groupDoc
+        , isArchived = isGroupDocArchived groupDoc
+        , mode = GDFM_Edit
+        }
 
 
 createAddGroupDocForm : GroupDocType -> GroupDocForm
 createAddGroupDocForm groupDocType =
-    { id = ""
-    , name = "<Name>"
-    , groupDocType = groupDocType
-    , isArchived = False
-    , mode = GDFM_Add
-    }
+    let
+        id =
+            ""
+    in
+        { id = id
+        , name = "<Name>"
+        , groupDocType = groupDocType
+        , groupDocId = createGroupDocIdFromType groupDocType id
+        , isArchived = False
+        , mode = GDFM_Add
+        }
 
 
 setName name model =

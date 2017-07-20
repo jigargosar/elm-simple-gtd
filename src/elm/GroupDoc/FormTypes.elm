@@ -6,8 +6,9 @@ import GroupDoc.Types exposing (..)
 
 type alias GroupDocForm =
     { id : DocId
-    , name : GroupDocName
     , groupDocType : GroupDocType
+    , groupDocId : GroupDocId
+    , name : GroupDocName
     , isArchived : Bool
     , mode : GroupDocFormMode
     }

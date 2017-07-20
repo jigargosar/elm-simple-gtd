@@ -6,5 +6,6 @@ import GroupDoc.Types exposing (..)
 
 
 type GroupDocMsg
-    = OnSaveGroupDocForm GroupDocForm
+    = OnGroupDocAction GroupDocType GroupDocAction
+    | OnSaveGroupDocForm GroupDocForm
     | OnGroupDocIdAction GroupDocId GroupDocIdAction

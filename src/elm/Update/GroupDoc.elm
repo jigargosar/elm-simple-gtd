@@ -4,7 +4,7 @@ import Document
 import Document.Types exposing (getDocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
-import GroupDoc.Form
+import GroupDoc.Form exposing (createAddGroupDocForm)
 import GroupDoc.Types exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
@@ -47,6 +47,13 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
+        OnGroupDocAction gdType groupDocAction ->
+            case groupDocAction of
+                GDA_StartAdding ->
+                    createAddGroupDocForm gdType
+                        |> XMGroupDocForm
+                        >> config.onSetExclusiveMode
+
         OnSaveGroupDocForm form ->
             onGroupDocIdAction config form.groupDocId (GDA_SaveForm form)
 

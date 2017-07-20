@@ -23,6 +23,10 @@ createGroupDocIdFromType gdType =
             ProjectGroupDocId
 
 
+type GroupDocAction
+    = GDA_StartAdding
+
+
 type GroupDocIdAction
     = GDA_ToggleArchived
     | GDA_ToggleDeleted

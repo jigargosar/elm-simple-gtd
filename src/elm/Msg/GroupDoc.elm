@@ -9,5 +9,4 @@ type GroupDocMsg
     = OnSaveGroupDocForm GroupDocForm
     | OnToggleContextDeleted DocId
     | OnToggleProjectDeleted DocId
-    | OnToggleGroupDocArchived GroupDocType DocId
     | OnGroupDocIdAction GroupDocId GroupDocIdAction

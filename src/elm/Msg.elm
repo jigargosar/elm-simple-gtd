@@ -5,6 +5,7 @@ import CommonMsg
 import CommonMsg.Types
 import Entity.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
+import GroupDoc.Types exposing (GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.GroupDoc exposing (GroupDocMsg)
@@ -191,8 +192,8 @@ onToggleProjectDeleted =
     Msg.GroupDoc.OnToggleProjectDeleted >> OnGroupDocMsg
 
 
-onToggleGroupDocArchived gdType id =
-    Msg.GroupDoc.OnToggleGroupDocArchived gdType id |> OnGroupDocMsg
+onToggleGroupDocArchived groupDocId =
+    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_ToggleArchived |> OnGroupDocMsg
 
 
 

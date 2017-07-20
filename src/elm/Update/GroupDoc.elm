@@ -2,6 +2,7 @@ module Update.GroupDoc exposing (update)
 
 import Document
 import Document.Types exposing (getDocId)
+import ExclusiveMode.Types exposing (ExclusiveMode)
 import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (..)
@@ -33,12 +34,9 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-
-{-
-   type alias Config msg model =
-       { updateEntityListCursorOnGroupDocChange : SubReturnF msg model
-       }
--}
+type alias Config msg model =
+    { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    }
 
 
 update :
@@ -64,9 +62,6 @@ update msg =
 
         OnToggleProjectDeleted id ->
             updateProject id Document.toggleDeleted |> andThen
-
-        OnToggleGroupDocArchived gdType id ->
-            updateGroupDoc gdType id GroupDoc.toggleArchived
 
         OnGroupDocIdAction groupDocId groupDocIdAction ->
             onGroupDocIdAction groupDocId groupDocIdAction

@@ -42,7 +42,7 @@ init config form =
             config.revertExclusiveMode
 
         fireToggleArchive =
-            config.onToggleGroupDocArchived form.groupDocType form.id
+            config.onToggleGroupDocArchived form.groupDocId
 
         defaultButtons =
             case form.mode of

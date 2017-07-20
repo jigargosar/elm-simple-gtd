@@ -16,6 +16,7 @@ import Project
 import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)
 import Msg
+import Toolkit.Helpers exposing (apply2)
 
 
 type alias IconVM =
@@ -78,17 +79,24 @@ create config configInner todoList groupDoc =
         entityId =
             configInner.toEntityId id
 
+        groupDocId =
+            createGroupDocIdFromType configInner.groupDocType id
+
         onEntityAction =
             Msg.onEntityUpdateMsg entityId
 
         isNull =
             configInner.isNull groupDoc
 
-        toggleDeleteMsg =
+        ( toggleDeleteMsg, toggleArchiveMsg ) =
             if isNull then
-                Msg.noop
+                ( Msg.noop, Msg.noop )
             else
-                Msg.onToggleGroupDocArchived configInner.groupDocType id
+                groupDocId
+                    |> apply2
+                        ( config.onToggleGroupDocArchived
+                        , config.onToggleGroupDocArchived
+                        )
 
         startEditingMsg =
             if isNull then
@@ -134,7 +142,7 @@ create config configInner todoList groupDoc =
                         "archive"
             in
                 { iconName = iconName
-                , onClick = config.onToggleGroupDocArchived configInner.groupDocType id
+                , onClick = toggleArchiveMsg
                 , isArchived = isArchived
                 }
     in

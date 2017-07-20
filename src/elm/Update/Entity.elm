@@ -55,11 +55,9 @@ type alias SubReturnF msg model =
 type alias Config msg model =
     { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
     , revertExclusiveMode : SubReturnF msg model
-    , onToggleContextArchived : DocId -> SubReturnF msg model
-    , onToggleContextDeleted : DocId -> SubReturnF msg model
-    , onToggleProjectArchived : DocId -> SubReturnF msg model
-    , onToggleProjectDeleted : DocId -> SubReturnF msg model
     , onToggleTodoArchived : DocId -> SubReturnF msg model
+    , onToggleContextDeleted : DocId -> SubReturnF msg model
+    , onToggleProjectDeleted : DocId -> SubReturnF msg model
     , onToggleTodoDeleted : DocId -> SubReturnF msg model
     , switchToEntityListView : EntityListViewType -> SubReturnF msg model
     , setDomFocusToFocusInEntityCmd : SubReturnF msg model
@@ -136,22 +134,22 @@ onUpdate config entityId action =
         EUA_ToggleDeleted ->
             toggleDeleteEntity config entityId >> config.revertExclusiveMode
 
-        EUA_ToggleArchived ->
-            let
-                toggleArchivedEntity =
-                    case entityId of
-                        ContextId id ->
-                            config.onToggleContextArchived id
+        {- EUA_ToggleArchived ->
+           let
+               toggleArchivedEntity =
+                   case entityId of
+                       ContextId id ->
+                           config.onToggleContextArchived id
 
-                        ProjectId id ->
-                            config.onToggleProjectArchived id
+                       ProjectId id ->
+                           config.onToggleProjectArchived id
 
-                        TodoId id ->
-                            config.onToggleTodoArchived id
-            in
-                toggleArchivedEntity
-                    >> config.revertExclusiveMode
-
+                       TodoId id ->
+                           config.onToggleTodoArchived id
+           in
+               toggleArchivedEntity
+                   >> config.revertExclusiveMode
+        -}
         EUA_OnFocusIn ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
 

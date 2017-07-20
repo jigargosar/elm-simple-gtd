@@ -171,6 +171,7 @@ viewConfig =
     , onStartEditingReminder = TodoMsg.onStartEditingReminder
     , onToggleDeletedAndMaybeSelection = TodoMsg.onToggleDeletedAndMaybeSelection
     , onToggleDoneAndMaybeSelection = TodoMsg.onToggleDoneAndMaybeSelection
+    , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
     }
 
 

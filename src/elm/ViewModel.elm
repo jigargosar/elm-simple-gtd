@@ -60,8 +60,8 @@ create config model =
         , viewName = viewName
         , header = { backgroundColor = headerBackgroundColor }
         , mdl = model.mdl
-        , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM
-        , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM
+        , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
+        , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
         , createTodoViewModel = Todo.ViewModel.createTodoViewModel config
         }
 

@@ -66,26 +66,29 @@ type alias Config =
     }
 
 
-create : Config -> List TodoDoc -> GroupDoc -> GroupDocViewModel
-create config todoList groupDoc =
+
+--create : Config -> List TodoDoc -> GroupDoc -> GroupDocViewModel
+
+
+create config configInner todoList groupDoc =
     let
         id =
             Document.getId groupDoc
 
         entityId =
-            config.toEntityId id
+            configInner.toEntityId id
 
         onEntityAction =
             Msg.onEntityUpdateMsg entityId
 
         isNull =
-            config.isNull groupDoc
+            configInner.isNull groupDoc
 
         toggleDeleteMsg =
             if isNull then
                 Msg.noop
             else
-                Msg.onToggleGroupDocArchived config.groupDocType id
+                Msg.onToggleGroupDocArchived configInner.groupDocType id
 
         startEditingMsg =
             if isNull then
@@ -95,15 +98,15 @@ create config todoList groupDoc =
 
         icon =
             if isNull then
-                config.nullIcon
+                configInner.nullIcon
             else
-                { name = config.defaultIconName, color = config.defaultColor }
+                { name = configInner.defaultIconName, color = configInner.defaultColor }
 
         name =
             groupDoc.name
 
         appHeader =
-            { name = config.namePrefix ++ name, backgroundColor = icon.color }
+            { name = configInner.namePrefix ++ name, backgroundColor = icon.color }
 
         onKeyDownMsg { key } =
             case key of
@@ -131,13 +134,13 @@ create config todoList groupDoc =
                         "archive"
             in
                 { iconName = iconName
-                , onClick = onEntityAction Entity.Types.EUA_ToggleArchived
+                , onClick = config.onToggleGroupDocArchived configInner.groupDocType id
                 , isArchived = isArchived
                 }
     in
         { id = id
         , name = name
-        , namePrefix = config.namePrefix
+        , namePrefix = configInner.namePrefix
         , count = todoList |> List.length
         , isEditable = not isNull
         , isDeleted = Document.isDeleted groupDoc
@@ -150,18 +153,21 @@ create config todoList groupDoc =
         , icon = icon
         , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn
         , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = config.getTabIndexAVForEntityId entityId
+        , tabindexAV = configInner.getTabIndexAVForEntityId entityId
         , todoList = todoList
-        , getTabIndexAVForEntityId = config.getTabIndexAVForEntityId
+        , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
         , onMdl = Msg.onMdl
         }
 
 
-createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
-createContextGroupVM getTabIndexAVForEntityId todoList context =
+
+--createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
+
+
+createContextGroupVM config getTabIndexAVForEntityId todoList context =
     let
-        config : Config
-        config =
+        configInner : Config
+        configInner =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
             , toEntityId = ContextId
@@ -175,14 +181,17 @@ createContextGroupVM getTabIndexAVForEntityId todoList context =
             , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }
     in
-        create config todoList context
+        create config configInner todoList context
 
 
-createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
-createProjectGroupVM getTabIndexAVForEntityId todoList project =
+
+--createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
+
+
+createProjectGroupVM config getTabIndexAVForEntityId todoList project =
     let
-        config : Config
-        config =
+        configInner : Config
+        configInner =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
             , toEntityId = ProjectId
@@ -196,7 +205,7 @@ createProjectGroupVM getTabIndexAVForEntityId todoList project =
             , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
     in
-        create config todoList project
+        create config configInner todoList project
 
 
 inboxColor =

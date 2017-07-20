@@ -71,13 +71,6 @@ update msg =
                             GDFM_Edit ->
                                 update updateProject
 
-        -- later: remove duplication, very error prone.
-        OnToggleContextArchived id ->
-            updateContext id GroupDoc.toggleArchived |> andThen
-
-        OnToggleProjectArchived id ->
-            updateProject id GroupDoc.toggleArchived |> andThen
-
         OnToggleContextDeleted id ->
             updateContext id Document.toggleDeleted |> andThen
 
@@ -85,10 +78,14 @@ update msg =
             updateProject id Document.toggleDeleted |> andThen
 
         OnToggleGroupDocArchived gdType id ->
-            updateGroupDoc id Document.toggleDeleted gdType |> andThen
+            let
+                _ =
+                    Debug.log "gdType, id" ( gdType, id )
+            in
+                updateGroupDoc gdType id GroupDoc.toggleArchived |> andThen
 
         OnToggleGroupDocDeleted gdType id ->
-            updateGroupDoc id GroupDoc.toggleArchived gdType |> andThen
+            updateGroupDoc gdType id Document.toggleDeleted |> andThen
 
 
 contextStore =
@@ -131,8 +128,9 @@ updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
-updateGroupDoc id updateFn gdType =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn (getStoreFromGroupDocType gdType)
+updateGroupDoc gdType id updateFn =
+    getStoreFromGroupDocType gdType
+        |> updateAllNamedDocsDocs (Set.singleton id) updateFn
 
 
 getStoreFromGroupDocType gdType =

@@ -42,7 +42,7 @@ init config form =
             config.revertExclusiveMode
 
         fireToggleArchive =
-            toMsg Entity.Types.EUA_ToggleArchived
+            config.onToggleGroupDocArchived form.groupDocType form.id
 
         defaultButtons =
             case form.mode of

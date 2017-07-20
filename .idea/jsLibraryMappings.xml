@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{firebase-DefinitelyTyped, jquery-DefinitelyTyped, jqueryui-DefinitelyTyped, materialize, ramda-DefinitelyTyped, webfont}" />
+    <file url="PROJECT" libraries="{firebase-DefinitelyTyped, jquery-DefinitelyTyped, jqueryui-DefinitelyTyped, kefir-DefinitelyTyped, materialize, ramda-DefinitelyTyped, webfont}" />
     <includedPredefinedLibrary name="Node.js Core" />
     <excludedPredefinedLibrary name="elm-simple-gtd/functions/node_modules" />
     <excludedPredefinedLibrary name="elm-simple-gtd/node_modules" />

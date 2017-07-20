@@ -21,5 +21,6 @@
     <orderEntry type="library" name="materialize" level="application" />
     <orderEntry type="library" name="ramda-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="webfont" level="application" />
+    <orderEntry type="library" name="kefir-DefinitelyTyped" level="application" />
   </component>
 </module>

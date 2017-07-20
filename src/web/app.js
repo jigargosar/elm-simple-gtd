@@ -8,7 +8,8 @@ import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
 import autosize from "autosize"
 import localforage from "localforage"
-import  MutationSummary from "mutation-summary"
+import MutationSummary from "mutation-summary"
+import Kefir from "kefir"
 
 // noinspection NpmUsedModulesInstalled
 import {Main} from "elm/Main.elm"
@@ -29,7 +30,7 @@ const npmPackageVersion = env["npm_package_version"]
  }*/
 
 const observer = new MutationSummary({
-    callback: summaries =>{
+    callback: summaries => {
         // console.log(summaries)
 
         const autoFocusSummary = summaries[0]
@@ -60,8 +61,21 @@ window.appBoot = async function appBoot() {
 
     })
 
-    $elm.on("focusin", console.log)
-    $elm.on("focusout", console.log)
+
+    Kefir.merge(
+        [Kefir.fromEvents($elm.get(0), "focusin"),
+         Kefir.fromEvents($elm.get(0), "focusout"),
+        ],
+         )
+         .debounce(100)
+         .filter(_.propEq("type", "focusout"))
+         .log()
+         .observe({value(){
+             requestAnimationFrame(()=>{
+                 $(".entity-list .focusable-list-item[tabindex=0]").first().focus()
+             })
+         }})
+
 
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")

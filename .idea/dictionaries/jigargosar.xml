@@ -14,6 +14,8 @@
       <w>dropdowns</w>
       <w>entrypoint</w>
       <w>focusable</w>
+      <w>focusin</w>
+      <w>focusout</w>
       <w>gdfm</w>
       <w>github</w>
       <w>goto</w>

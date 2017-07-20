@@ -35,7 +35,6 @@ update config msg =
                 |> XMMainMenu
                 >> config.setXMode
             )
-                >> DomPorts.autoFocusInputRCmd
 
 
 positionMainMenuCmd =

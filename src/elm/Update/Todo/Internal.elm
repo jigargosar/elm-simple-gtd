@@ -3,7 +3,7 @@ port module Update.Todo.Internal exposing (..)
 import Context
 import Document
 import Document.Types exposing (DocId, getDocId)
-import DomPorts exposing (autoFocusInputCmd, autoFocusInputRCmd)
+import DomPorts
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Lazy exposing (Lazy)
@@ -215,14 +215,18 @@ onUpdateTodoFormAction config form action =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
         config.setXMode xMode
-            >> Return.command
-                (case action of
-                    Todo.FormTypes.SetTodoMenuState _ ->
-                        autoFocusInputCmd
 
-                    _ ->
-                        Cmd.none
-                )
+
+
+{- >> Return.command
+   (case action of
+       Todo.FormTypes.SetTodoMenuState _ ->
+           autoFocusInputCmd
+
+       _ ->
+           Cmd.none
+   )
+-}
 
 
 onStartEditingTodo config todo editFormMode =
@@ -237,7 +241,7 @@ onStartEditingTodo config todo editFormMode =
             >> command
                 (case editFormMode of
                     ETFM_EditTodoText ->
-                        autoFocusInputCmd
+                        Cmd.none
 
                     ETFM_EditTodoContext ->
                         positionPopup "#edit-context-button-"

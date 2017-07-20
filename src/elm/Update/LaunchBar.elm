@@ -83,7 +83,6 @@ update config msg =
                 >> XMLaunchBar
                 >> config.setXMode
             )
-                >> DomPorts.autoFocusInputRCmd
 
         OnCancel ->
             config.onComplete

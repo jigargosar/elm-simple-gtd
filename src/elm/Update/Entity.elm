@@ -76,14 +76,12 @@ update config msg =
                 |> XMGroupDocForm
                 >> config.onSetExclusiveMode
             )
-                >> DomPorts.autoFocusInputRCmd
 
         EM_StartAddingProject ->
             (createAddGroupDocForm ProjectGroupDocType
                 |> XMGroupDocForm
                 >> config.onSetExclusiveMode
             )
-                >> DomPorts.autoFocusInputRCmd
 
         EM_Update entityId action ->
             onUpdate config entityId action
@@ -116,7 +114,6 @@ onUpdate config entityId action =
     case action of
         EUA_StartEditing ->
             startEditingEntity config entityId
-                >> DomPorts.autoFocusInputRCmd
 
         EUA_ToggleDeleted ->
             toggleDeleteEntity config entityId >> config.revertExclusiveMode

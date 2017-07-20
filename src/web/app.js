@@ -181,32 +181,6 @@ window.appBoot = async function appBoot() {
         })
     })
 
-    app.ports["focusInput"].subscribe((selector) => {
-        console.log("focusInput: selector", selector)
-        requestAnimationFrame(() => {
-            $(".materialize-textarea.auto-focus").each(function () {
-                // autosize(this); // for some reason, this is not needed when using keyboard shortcut. ?!! but only
-                // when mouse click. this.focus()
-            });
-        })
-
-        // setTimeout(() => {
-        //     requestAnimationFrame(() => {
-        //         const toFocus = document.querySelector(selector)
-        //         // console.log("toFocus", toFocus, document.activeElement)
-        //         if (toFocus && document.activeElement !== toFocus) {
-        //             toFocus.focus();
-        //             // console.log("focusing")
-        //         }
-        //         if (toFocus && toFocus.inputElement) {
-        //             // console.log(toFocus.inputElement, toFocus.$.input)
-        //             toFocus.inputElement.focus()
-        //             // toFocus.$.input.focus()
-        //         }
-        //     })
-        // }, 0)
-    })
-
 
     app.ports["startAlarm"].subscribe(() => {
         sound.start()

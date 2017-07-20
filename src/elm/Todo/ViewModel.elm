@@ -8,9 +8,6 @@ import GroupDoc
 import Regex
 import Set
 import Store
-import Time exposing (Time)
-import Todo.ItemView exposing (ScheduleViewModel, TodoViewModel)
-import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import String.Extra

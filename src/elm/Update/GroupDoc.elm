@@ -4,8 +4,8 @@ import Document
 import Document.Types exposing (getDocId)
 import GroupDoc
 import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
-import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
-import Model.GroupDocStore
+import GroupDoc.Types exposing (..)
+import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
 import Return exposing (andThen)
 import Set
@@ -13,7 +13,7 @@ import Store
 import Toolkit.Operators exposing (..)
 import Tuple2
 import Time exposing (Time)
-import X.Record exposing (overT2)
+import X.Record exposing (Field, fieldLens, overT2)
 
 
 type alias SubModel model =
@@ -80,20 +80,12 @@ update msg =
         OnToggleGroupDocArchived gdType id ->
             let
                 _ =
-                    Debug.log "gdType, id" ( gdType, id )
+                    Debug.log "\"archiving\"" ("archiving")
             in
                 updateGroupDoc gdType id GroupDoc.toggleArchived |> andThen
 
         OnToggleGroupDocDeleted gdType id ->
             updateGroupDoc gdType id Document.toggleDeleted |> andThen
-
-
-contextStore =
-    Model.GroupDocStore.contextStore
-
-
-projectStore =
-    Model.GroupDocStore.projectStore
 
 
 insertProject name =
@@ -129,21 +121,22 @@ updateProject id updateFn =
 
 
 updateGroupDoc gdType id updateFn =
-    getStoreFromGroupDocType gdType
-        |> updateAllNamedDocsDocs (Set.singleton id) updateFn
+    updateAllGroupDocs gdType updateFn (Set.singleton id)
 
 
-getStoreFromGroupDocType gdType =
-    case gdType of
-        ProjectGroupDocType ->
-            projectStore
-
-        ContextGroupDocType ->
-            contextStore
+updateAllGroupDocs gdType updateFn idSet model =
+    overT2 (Model.GroupDocStore.storeFieldFromGDType gdType)
+        (Store.updateAndPersist
+            (getDocId >> Set.member # idSet)
+            model.now
+            updateFn
+        )
+        model
+        |> Tuple2.swap
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    X.Record.overT2 store
+    overT2 store
         (Store.updateAndPersist
             (getDocId >> Set.member # idSet)
             model.now

@@ -3,11 +3,12 @@ module Model.GroupDocStore exposing (..)
 import Context
 import Document
 import GroupDoc
+import GroupDoc.Types exposing (GroupDocStore, GroupDocType(ContextGroupDocType, ProjectGroupDocType))
 import Project
 import Store
 import List.Extra as List
 import Maybe.Extra as Maybe
-import X.Record
+import X.Record exposing (Field, fieldLens)
 
 
 contextStore =
@@ -64,3 +65,20 @@ getActiveProjects =
 
 getActiveContexts =
     filterContexts GroupDoc.isActive
+
+
+storeFieldFromGDType :
+    GroupDocType
+    ->
+        Field GroupDocStore
+            { model
+                | projectStore : GroupDocStore
+                , contextStore : GroupDocStore
+            }
+storeFieldFromGDType gdType =
+    case gdType of
+        ProjectGroupDocType ->
+            fieldLens .projectStore (\s b -> { b | projectStore = s })
+
+        ContextGroupDocType ->
+            fieldLens .contextStore (\s b -> { b | contextStore = s })

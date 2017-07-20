@@ -60,6 +60,9 @@ window.appBoot = async function appBoot() {
 
     })
 
+    $elm.on("focusin", console.log)
+    $elm.on("focusout", console.log)
+
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")
         if ($closest.length === 0) return

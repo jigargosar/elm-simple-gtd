@@ -1,4 +1,4 @@
-module Update.GroupDoc exposing (update)
+module Update.GroupDoc exposing (Config, update)
 
 import Document
 import Document.Types exposing (getDocId)
@@ -36,16 +36,15 @@ type alias SubReturnF msg model =
 
 type alias Config msg model =
     { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
+    , revertExclusiveMode : SubReturnF msg model
     }
 
 
 update :
-    {- Config msg model
-       ->
-    -}
-    GroupDocMsg
+    Config msg model
+    -> GroupDocMsg
     -> SubReturnF msg model
-update msg =
+update config msg =
     case msg of
         OnSaveGroupDocForm form ->
             onGroupDocIdAction form.groupDocId (GDA_FormAction form)

@@ -80,11 +80,18 @@ update andThenUpdate msg =
                 Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
-            returnWith identity
-                (\oldModel ->
-                    Update.GroupDoc.update msg_
-                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
-                )
+            let
+                config : Update.GroupDoc.Config AppMsg AppModel
+                config =
+                    { revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    }
+            in
+                returnWith identity
+                    (\oldModel ->
+                        Update.GroupDoc.update config msg_
+                            >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
+                    )
 
         OnExclusiveModeMsg msg_ ->
             let

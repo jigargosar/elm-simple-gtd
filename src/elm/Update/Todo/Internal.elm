@@ -217,18 +217,6 @@ onUpdateTodoFormAction config form action =
         config.setXMode xMode
 
 
-
-{- >> Return.command
-   (case action of
-       Todo.FormTypes.SetTodoMenuState _ ->
-           autoFocusInputCmd
-
-       _ ->
-           Cmd.none
-   )
--}
-
-
 onStartEditingTodo config todo editFormMode =
     let
         createXMode model =

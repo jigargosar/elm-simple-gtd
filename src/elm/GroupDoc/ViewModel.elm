@@ -178,7 +178,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = GroupDoc.Types.ProjectGroupDocType
+            , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
     in
         create config configInner todoList context
@@ -202,7 +202,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.Types.ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = GroupDoc.Types.ContextGroupDocType
+            , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }
     in
         create config configInner todoList project

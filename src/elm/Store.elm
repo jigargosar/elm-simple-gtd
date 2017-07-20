@@ -181,6 +181,7 @@ findAndUpdateAll pred now updateFn_ store =
 updateAndPersist pred now updateFn_ store =
     findAndUpdateAll pred now updateFn_ store
         |> Tuple2.mapFirst (List.map (Tuple.second >> upsertIn store) >> Cmd.batch)
+        |> Tuple2.swap
 
 
 decode : D.Value -> Store x -> Maybe (Document x)
@@ -238,10 +239,11 @@ insert constructor store =
            )
 
 
-insertAndPersist : (DeviceId -> DocId -> Document x) -> Store x -> ( Cmd msg, Store x )
+insertAndPersist : (DeviceId -> DocId -> Document x) -> Store x -> ( Store x, Cmd msg )
 insertAndPersist constructor store =
     insert constructor store
         |> Tuple2.mapFirst (upsertIn store)
+        |> Tuple2.swap
 
 
 insertDocInDict : Document x -> Store x -> Store x

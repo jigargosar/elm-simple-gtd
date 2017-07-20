@@ -17,7 +17,7 @@ import Ports.Todo exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Tuple2
-import X.Record as Record exposing (overT2, set)
+import X.Record as Record exposing (overReturn, overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe1)
 import X.Time
 import Notification
@@ -68,8 +68,7 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update action
     in
-        overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
-            |> Tuple2.swap
+        overReturn todoStore (Store.updateAndPersist findFn model.now updateFn) model
 
 
 

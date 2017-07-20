@@ -14,7 +14,7 @@ import Toolkit.Operators exposing (..)
 import Tuple2
 import Time exposing (Time)
 import X.Function exposing (applyWith)
-import X.Record exposing (Field, fieldLens, overT2)
+import X.Record exposing (Field, fieldLens, overReturn, overT2)
 
 
 type alias SubModel model =
@@ -106,18 +106,11 @@ insertGroupDoc gdType name =
     in
         andThen
             (\model ->
-                overT2 store (Store.insertAndPersist (GroupDoc.init name model.now)) model
-                    |> Tuple2.swap
+                overReturn store (Store.insertAndPersist (GroupDoc.init name model.now)) model
             )
 
 
 
-{- (\model ->
-       overT2 (Model.GroupDocStore.storeFieldFromGDType gdType)
-           (Store.insertAndPersist (GroupDoc.init name model.now))
-           model
-   )
--}
 --updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
 
 
@@ -138,22 +131,20 @@ updateGroupDoc gdType id updateFn =
 
 
 updateAllGroupDocs gdType updateFn idSet model =
-    overT2 (Model.GroupDocStore.storeFieldFromGDType gdType)
+    overReturn (Model.GroupDocStore.storeFieldFromGDType gdType)
         (Store.updateAndPersist
             (getDocId >> Set.member # idSet)
             model.now
             updateFn
         )
         model
-        |> Tuple2.swap
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    overT2 store
+    overReturn store
         (Store.updateAndPersist
             (getDocId >> Set.member # idSet)
             model.now
             updateFn
         )
         model
-        |> Tuple2.swap

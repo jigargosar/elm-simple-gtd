@@ -50,12 +50,6 @@ update config msg =
         OnSaveGroupDocForm form ->
             onGroupDocIdAction config form.groupDocId (GDA_SaveForm form)
 
-        OnToggleContextDeleted id ->
-            updateContext id Document.toggleDeleted |> andThen
-
-        OnToggleProjectDeleted id ->
-            updateProject id Document.toggleDeleted |> andThen
-
         OnGroupDocIdAction groupDocId groupDocIdAction ->
             onGroupDocIdAction config groupDocId groupDocIdAction
 

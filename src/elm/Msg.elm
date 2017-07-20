@@ -184,14 +184,6 @@ onSaveGroupDocForm =
     Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
 
 
-onToggleContextDeleted =
-    Msg.GroupDoc.OnToggleContextDeleted >> OnGroupDocMsg
-
-
-onToggleProjectDeleted =
-    Msg.GroupDoc.OnToggleProjectDeleted >> OnGroupDocMsg
-
-
 onToggleGroupDocArchived groupDocId =
     Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_ToggleArchived |> OnGroupDocMsg
 

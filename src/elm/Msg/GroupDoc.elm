@@ -7,6 +7,4 @@ import GroupDoc.Types exposing (..)
 
 type GroupDocMsg
     = OnSaveGroupDocForm GroupDocForm
-    | OnToggleContextDeleted DocId
-    | OnToggleProjectDeleted DocId
     | OnGroupDocIdAction GroupDocId GroupDocIdAction

@@ -70,6 +70,7 @@ init config form =
                             , defaultValue (form.name)
                             , onEnter fireSaveForm
                             , onInput fireNameChanged
+                            , placeholder "E.g. Trip Planning, Home Decoration"
                             ]
                             []
                         , label [ class "active" ] [ text nameLabel ]

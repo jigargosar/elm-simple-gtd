@@ -27,7 +27,7 @@ createAddGroupDocForm groupDocType =
             ""
     in
         { id = id
-        , name = "<Name>"
+        , name = ""
         , groupDocType = groupDocType
         , groupDocId = createGroupDocIdFromType groupDocType id
         , isArchived = False

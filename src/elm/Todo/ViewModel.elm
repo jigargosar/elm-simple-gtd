@@ -123,11 +123,11 @@ createTodoViewModel config appM isFocusable todo =
                 config.noop
 
         startEditingMsg =
-            if isFocusable then
-                config.onStartEditingTodoText todo
-            else
-                config.noop
+            --            if isFocusable then
+            config.onStartEditingTodoText todo
 
+        --            else
+        --                config.noop
         toggleDeleteMsg =
             config.onToggleDeletedAndMaybeSelection todoId
 

@@ -69,10 +69,9 @@ item vm =
         ]
         [ div
             [ class "display-text-container layout horizontal"
-            , onMouseDown vm.startEditingMsg
             ]
             [ div [ class "self-start" ] [ doneIconButton vm ]
-            , div [ class "display-text" ] (parseDisplayText vm)
+            , div [ class "display-text", onClick vm.startEditingMsg ] (parseDisplayText vm)
             ]
         , div
             [ class "layout horizontal end-justified"

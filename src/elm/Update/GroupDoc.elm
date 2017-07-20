@@ -99,7 +99,35 @@ update msg =
             updateGroupDoc gdType id Document.toggleDeleted
 
         OnGroupDocIdAction groupDocId groupDocIdAction ->
-            identity
+            onGroupDocIdAction groupDocId groupDocIdAction
+
+
+onGroupDocIdAction groupDocId groupDocIdAction =
+    let
+        ( gdType, id ) =
+            case groupDocId of
+                ContextGroupDocId id ->
+                    ( ContextGroupDocType, id )
+
+                ProjectGroupDocId id ->
+                    ( ProjectGroupDocType, id )
+
+        updateGroupDocHelp updateFn =
+            updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen
+    in
+        case groupDocIdAction of
+            GDA_ToggleArchived ->
+                updateGroupDocHelp GroupDoc.toggleArchived
+
+            GDA_SetFormName name ->
+                {- GroupDoc.Form.setName newName form
+                   |> XMGroupDocForm
+                   >> config.onSetExclusiveMode
+                -}
+                identity
+
+            _ ->
+                identity
 
 
 insertGroupDoc gdType name =

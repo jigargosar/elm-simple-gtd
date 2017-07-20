@@ -14,7 +14,7 @@ type GroupDocId
     | ProjectGroupDocId DocId
 
 
-type GroupDocAction
+type GroupDocIdAction
     = GDA_ToggleArchived
     | GDA_ToggleDeleted
     | GDA_SetFormName GroupDocName

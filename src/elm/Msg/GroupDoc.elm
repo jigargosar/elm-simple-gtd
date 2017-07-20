@@ -2,12 +2,13 @@ module Msg.GroupDoc exposing (..)
 
 import Document.Types exposing (DocId)
 import GroupDoc.FormTypes exposing (GroupDocForm)
-import GroupDoc.Types
+import GroupDoc.Types exposing (..)
 
 
 type GroupDocMsg
     = OnSaveGroupDocForm GroupDocForm
     | OnToggleContextDeleted DocId
     | OnToggleProjectDeleted DocId
-    | OnToggleGroupDocArchived GroupDoc.Types.GroupDocType DocId
-    | OnToggleGroupDocDeleted GroupDoc.Types.GroupDocType DocId
+    | OnToggleGroupDocArchived GroupDocType DocId
+    | OnToggleGroupDocDeleted GroupDocType DocId
+    | OnGroupDocIdAction GroupDocId GroupDocIdAction

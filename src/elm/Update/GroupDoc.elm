@@ -98,6 +98,9 @@ update msg =
         OnToggleGroupDocDeleted gdType id ->
             updateGroupDoc gdType id Document.toggleDeleted
 
+        OnGroupDocIdAction groupDocId groupDocIdAction ->
+            identity
+
 
 insertGroupDoc gdType name =
     let

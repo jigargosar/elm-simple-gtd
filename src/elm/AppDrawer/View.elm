@@ -114,7 +114,6 @@ entityGroupView config vm viewType =
                                     ]
                                ]
                             ++ archivedItems vm
-                         --                            ++ [ Mat.divider ]
                         )
                     ]
                ]

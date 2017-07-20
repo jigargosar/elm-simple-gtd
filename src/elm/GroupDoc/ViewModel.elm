@@ -36,7 +36,6 @@ type alias GroupDocViewModel =
     , startEditingMsg : AppMsg
     , onDeleteClicked : AppMsg
     , onSaveClicked : AppMsg
-    , onNameChanged : String -> AppMsg
     , onCancelClicked : AppMsg
     , icon : IconVM
     , onFocusIn : AppMsg
@@ -156,7 +155,6 @@ create config configInner todoList groupDoc =
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = Msg.onSaveExclusiveModeForm
-        , onNameChanged = Entity.Types.EUA_SetFormText >> onEntityAction
         , onCancelClicked = Msg.revertExclusiveMode
         , icon = icon
         , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn

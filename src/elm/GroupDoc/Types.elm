@@ -26,7 +26,8 @@ createGroupDocIdFromType gdType =
 type GroupDocIdAction
     = GDA_ToggleArchived
     | GDA_ToggleDeleted
-    | GDA_FormAction GroupDocForm
+    | GDA_UpdateFormName GroupDocForm GroupDocName
+    | GDA_SaveForm GroupDocForm
 
 
 type alias GroupDocForm =

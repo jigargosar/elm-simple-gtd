@@ -2,8 +2,9 @@ module Update.GroupDoc exposing (Config, update)
 
 import Document
 import Document.Types exposing (getDocId)
-import ExclusiveMode.Types exposing (ExclusiveMode)
+import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
+import GroupDoc.Form
 import GroupDoc.Types exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
@@ -47,7 +48,7 @@ update :
 update config msg =
     case msg of
         OnSaveGroupDocForm form ->
-            onGroupDocIdAction form.groupDocId (GDA_FormAction form)
+            onGroupDocIdAction config form.groupDocId (GDA_SaveForm form)
 
         OnToggleContextDeleted id ->
             updateContext id Document.toggleDeleted |> andThen
@@ -56,10 +57,10 @@ update config msg =
             updateProject id Document.toggleDeleted |> andThen
 
         OnGroupDocIdAction groupDocId groupDocIdAction ->
-            onGroupDocIdAction groupDocId groupDocIdAction
+            onGroupDocIdAction config groupDocId groupDocIdAction
 
 
-onGroupDocIdAction groupDocId groupDocIdAction =
+onGroupDocIdAction config groupDocId groupDocIdAction =
     let
         ( gdType, id ) =
             case groupDocId of
@@ -70,7 +71,8 @@ onGroupDocIdAction groupDocId groupDocIdAction =
                     ( ProjectGroupDocType, id )
 
         updateGroupDocHelp updateFn =
-            updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen
+            (updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen)
+                >> config.revertExclusiveMode
     in
         case groupDocIdAction of
             GDA_ToggleArchived ->
@@ -79,21 +81,18 @@ onGroupDocIdAction groupDocId groupDocIdAction =
             GDA_ToggleDeleted ->
                 updateGroupDocHelp Document.toggleDeleted
 
-            GDA_FormAction form ->
+            GDA_UpdateFormName form newName ->
+                GroupDoc.Form.setName newName form
+                    |> XMGroupDocForm
+                    |> config.onSetExclusiveMode
+
+            GDA_SaveForm form ->
                 case form.mode of
                     GDFM_Add ->
                         insertGroupDoc form.groupDocType form.name
 
                     GDFM_Edit ->
                         updateGroupDocHelp (GroupDoc.setName form.name)
-
-
-
-{- GroupDoc.Form.setName newName form
-   |> XMGroupDocForm
-   >> config.onSetExclusiveMode
--}
---                identity
 
 
 insertGroupDoc gdType name =

@@ -172,6 +172,7 @@ viewConfig =
     , onToggleDeletedAndMaybeSelection = TodoMsg.onToggleDeletedAndMaybeSelection
     , onToggleDoneAndMaybeSelection = TodoMsg.onToggleDoneAndMaybeSelection
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
+    , onGD_UpdateFormName = Msg.onGD_UpdateFormName
     }
 
 

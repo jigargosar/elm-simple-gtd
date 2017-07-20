@@ -33,7 +33,7 @@ init config form =
             config.onEntityUpdateMsg entityId
 
         fireNameChanged =
-            Entity.Types.EUA_SetFormText >> toMsg
+            config.onGD_UpdateFormName form
 
         fireSaveForm =
             config.onSaveExclusiveModeForm

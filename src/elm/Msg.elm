@@ -196,6 +196,12 @@ onToggleGroupDocArchived groupDocId =
     Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_ToggleArchived |> OnGroupDocMsg
 
 
+onGD_UpdateFormName form newName =
+    Msg.GroupDoc.OnGroupDocIdAction form.groupDocId
+        (GDA_UpdateFormName form newName)
+        |> OnGroupDocMsg
+
+
 
 --drawer
 

@@ -10,5 +10,4 @@ type GroupDocMsg
     | OnToggleContextDeleted DocId
     | OnToggleProjectDeleted DocId
     | OnToggleGroupDocArchived GroupDocType DocId
-    | OnToggleGroupDocDeleted GroupDocType DocId
     | OnGroupDocIdAction GroupDocId GroupDocIdAction

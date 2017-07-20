@@ -50,29 +50,6 @@ update :
 update msg =
     case msg of
         OnSaveGroupDocForm form ->
-            {- let
-                   update fn =
-                       fn form.id (GroupDoc.setName form.name)
-                           |> andThen
-               in
-            -}
-            {- case form.groupDocType of
-               ContextGroupDocType ->
-                   case form.mode of
-                       GDFM_Add ->
-                           insertContext form.name
-
-                       GDFM_Edit ->
-                           update updateContext
-
-               ProjectGroupDocType ->
-                   case form.mode of
-                       GDFM_Add ->
-                           insertProject form.name
-
-                       GDFM_Edit ->
-                           update updateProject
-            -}
             case form.mode of
                 GDFM_Add ->
                     insertGroupDoc form.groupDocType form.name
@@ -89,14 +66,7 @@ update msg =
             updateProject id Document.toggleDeleted |> andThen
 
         OnToggleGroupDocArchived gdType id ->
-            let
-                _ =
-                    Debug.log "\"archiving\"" ("archiving")
-            in
-                updateGroupDoc gdType id GroupDoc.toggleArchived
-
-        OnToggleGroupDocDeleted gdType id ->
-            updateGroupDoc gdType id Document.toggleDeleted
+            updateGroupDoc gdType id GroupDoc.toggleArchived
 
         OnGroupDocIdAction groupDocId groupDocIdAction ->
             onGroupDocIdAction groupDocId groupDocIdAction
@@ -119,14 +89,14 @@ onGroupDocIdAction groupDocId groupDocIdAction =
             GDA_ToggleArchived ->
                 updateGroupDocHelp GroupDoc.toggleArchived
 
+            GDA_ToggleDeleted ->
+                updateGroupDocHelp Document.toggleDeleted
+
             GDA_SetFormName name ->
                 {- GroupDoc.Form.setName newName form
                    |> XMGroupDocForm
                    >> config.onSetExclusiveMode
                 -}
-                identity
-
-            _ ->
                 identity
 
 

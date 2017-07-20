@@ -195,10 +195,6 @@ onToggleGroupDocArchived gdType id =
     Msg.GroupDoc.OnToggleGroupDocArchived gdType id |> OnGroupDocMsg
 
 
-onToggleGroupDocDeleted gdType id =
-    Msg.GroupDoc.OnToggleGroupDocDeleted gdType id |> OnGroupDocMsg
-
-
 
 --drawer
 

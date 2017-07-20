@@ -118,19 +118,6 @@ onUpdate config entityId action =
             startEditingEntity config entityId
                 >> DomPorts.autoFocusInputRCmd
 
-        EUA_SetFormText newName ->
-            X.Return.returnWith .editMode
-                (\xMode ->
-                    case xMode of
-                        XMGroupDocForm form ->
-                            GroupDoc.Form.setName newName form
-                                |> XMGroupDocForm
-                                >> config.onSetExclusiveMode
-
-                        _ ->
-                            identity
-                )
-
         EUA_ToggleDeleted ->
             toggleDeleteEntity config entityId >> config.revertExclusiveMode
 

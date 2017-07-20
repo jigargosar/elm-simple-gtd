@@ -13,6 +13,7 @@ import Store
 import Toolkit.Operators exposing (..)
 import Tuple2
 import Time exposing (Time)
+import X.Function exposing (applyWith)
 import X.Record exposing (Field, fieldLens, overT2)
 
 
@@ -49,27 +50,37 @@ update :
 update msg =
     case msg of
         OnSaveGroupDocForm form ->
-            let
-                update fn =
-                    fn form.id (GroupDoc.setName form.name)
-                        |> andThen
-            in
-                case form.groupDocType of
-                    ContextGroupDocType ->
-                        case form.mode of
-                            GDFM_Add ->
-                                insertContext form.name
+            {- let
+                   update fn =
+                       fn form.id (GroupDoc.setName form.name)
+                           |> andThen
+               in
+            -}
+            {- case form.groupDocType of
+               ContextGroupDocType ->
+                   case form.mode of
+                       GDFM_Add ->
+                           insertContext form.name
 
-                            GDFM_Edit ->
-                                update updateContext
+                       GDFM_Edit ->
+                           update updateContext
 
-                    ProjectGroupDocType ->
-                        case form.mode of
-                            GDFM_Add ->
-                                insertProject form.name
+               ProjectGroupDocType ->
+                   case form.mode of
+                       GDFM_Add ->
+                           insertProject form.name
 
-                            GDFM_Edit ->
-                                update updateProject
+                       GDFM_Edit ->
+                           update updateProject
+            -}
+            case form.mode of
+                GDFM_Add ->
+                    insertGroupDoc form.groupDocType form.name
+
+                GDFM_Edit ->
+                    updateGroupDoc form.groupDocType
+                        form.id
+                        (GroupDoc.setName form.name)
 
         OnToggleContextDeleted id ->
             updateContext id Document.toggleDeleted |> andThen
@@ -82,29 +93,31 @@ update msg =
                 _ =
                     Debug.log "\"archiving\"" ("archiving")
             in
-                updateGroupDoc gdType id GroupDoc.toggleArchived |> andThen
+                updateGroupDoc gdType id GroupDoc.toggleArchived
 
         OnToggleGroupDocDeleted gdType id ->
-            updateGroupDoc gdType id Document.toggleDeleted |> andThen
+            updateGroupDoc gdType id Document.toggleDeleted
 
 
-insertProject name =
-    insertGroupDoc name projectStore updateProject
-
-
-insertContext name =
-    insertGroupDoc name contextStore updateContext
-
-
-insertGroupDoc name store updateFn =
-    andThen
-        (\model ->
-            overT2 store (Store.insert (GroupDoc.init name model.now)) model
-                |> (\( gd, model ) -> updateFn (getDocId gd) identity model)
-        )
+insertGroupDoc gdType name =
+    let
+        store =
+            (Model.GroupDocStore.storeFieldFromGDType gdType)
+    in
+        andThen
+            (\model ->
+                overT2 store (Store.insertAndPersist (GroupDoc.init name model.now)) model
+                    |> Tuple2.swap
+            )
 
 
 
+{- (\model ->
+       overT2 (Model.GroupDocStore.storeFieldFromGDType gdType)
+           (Store.insertAndPersist (GroupDoc.init name model.now))
+           model
+   )
+-}
 --updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
 
 
@@ -121,7 +134,7 @@ updateProject id updateFn =
 
 
 updateGroupDoc gdType id updateFn =
-    updateAllGroupDocs gdType updateFn (Set.singleton id)
+    updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen
 
 
 updateAllGroupDocs gdType updateFn idSet model =

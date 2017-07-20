@@ -4,6 +4,7 @@ port module Store
         , Store
         , generator
         , insert
+        , insertAndPersist
         , findById
         , findBy
         , mapDocs
@@ -235,6 +236,12 @@ insert constructor store =
         |> (\( doc, store ) ->
                 ( doc, insertDocInDict doc store )
            )
+
+
+insertAndPersist : (DeviceId -> DocId -> Document x) -> Store x -> ( Cmd msg, Store x )
+insertAndPersist constructor store =
+    insert constructor store
+        |> Tuple2.mapFirst (upsertIn store)
 
 
 insertDocInDict : Document x -> Store x -> Store x

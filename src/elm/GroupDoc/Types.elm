@@ -1,12 +1,23 @@
 module GroupDoc.Types exposing (..)
 
-import Document.Types
+import Document.Types exposing (DocId)
 import Store.Types exposing (Store)
 
 
 type GroupDocType
     = ContextGroupDocType
     | ProjectGroupDocType
+
+
+type GroupDocId
+    = ContextGroupDocId DocId
+    | ProjectGroupDocId DocId
+
+
+type GroupDocAction
+    = GDA_ToggleArchived
+    | GDA_ToggleDeleted
+    | GDA_SetFormName GroupDocName
 
 
 type alias GroupDocName =

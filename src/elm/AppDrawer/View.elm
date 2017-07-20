@@ -96,7 +96,10 @@ entityGroupView config vm viewType =
             ++ [ li [ onClick fireSmart ]
                     [ Mat.iconM vm.icon
                     , Html.h5 [] [ text vm.title ]
-                    , Mat.iconBtn2 config.onMdl expandIconName onToggleExpanded
+                    , div []
+                        [ Mat.iconBtn2 config.onMdl "add" onAddClicked
+                        , Mat.iconBtn2 config.onMdl expandIconName onToggleExpanded
+                        ]
                     ]
                , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
                     [ ul []

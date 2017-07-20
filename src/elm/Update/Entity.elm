@@ -121,22 +121,6 @@ onUpdate config entityId action =
         EUA_ToggleDeleted ->
             toggleDeleteEntity config entityId >> config.revertExclusiveMode
 
-        {- EUA_ToggleArchived ->
-           let
-               toggleArchivedEntity =
-                   case entityId of
-                       ContextId id ->
-                           config.onToggleContextArchived id
-
-                       ProjectId id ->
-                           config.onToggleProjectArchived id
-
-                       TodoId id ->
-                           config.onToggleTodoArchived id
-           in
-               toggleArchivedEntity
-                   >> config.revertExclusiveMode
-        -}
         EUA_OnFocusIn ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
 

@@ -15,12 +15,14 @@ import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
 import Msg exposing (..)
+import String.Extra
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Project
 import Types exposing (AppModel)
 import Types.ViewType exposing (ViewType(EntityListView))
+import X.Function exposing (when)
 import X.Maybe
 
 
@@ -93,10 +95,10 @@ createList config model =
         list .|> create getTodoListWithGroupId config
 
 
-create getTodoListByEntityId config entity =
+create getTodoListByEntityId config groupDoc =
     let
         id =
-            Document.getId entity
+            Document.getId groupDoc
 
         createEntityActionMsg =
             Msg.onEntityUpdateMsg (config.toEntityId id)
@@ -105,7 +107,7 @@ create getTodoListByEntityId config entity =
             getTodoListByEntityId id |> List.length
 
         isNull =
-            config.isNull entity
+            config.isNull groupDoc
 
         icon =
             if isNull then
@@ -114,7 +116,7 @@ create getTodoListByEntityId config entity =
                 { name = config.defaultIconName, color = config.defaultColor }
 
         name =
-            entity.name
+            when String.Extra.isBlank (\_ -> "<no name>") groupDoc.name
 
         appHeader =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
@@ -124,7 +126,7 @@ create getTodoListByEntityId config entity =
     in
         { id = id
         , name = name
-        , isDeleted = Document.isDeleted entity
+        , isDeleted = Document.isDeleted groupDoc
         , isEmpty = count == 0
         , count = count
         , onActiveStateChanged =

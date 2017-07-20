@@ -55,8 +55,6 @@ type alias SubReturnF msg model =
 type alias Config msg model =
     { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
     , revertExclusiveMode : SubReturnF msg model
-    , onToggleTodoArchived : DocId -> SubReturnF msg model
-    , onToggleTodoDeleted : DocId -> SubReturnF msg model
     , switchToEntityListView : EntityListViewType -> SubReturnF msg model
     , setDomFocusToFocusInEntityCmd : SubReturnF msg model
     , onStartEditingTodo : TodoDoc -> SubReturnF msg model

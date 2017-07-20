@@ -129,8 +129,6 @@ update andThenUpdate msg =
                 config =
                     { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
-                    , onToggleTodoArchived = TodoMsg.onToggleDoneAndMaybeSelection >> andThenUpdate
-                    , onToggleTodoDeleted = TodoMsg.onToggleDeletedAndMaybeSelection >> andThenUpdate
                     , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
                     , setDomFocusToFocusInEntityCmd =
                         Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate

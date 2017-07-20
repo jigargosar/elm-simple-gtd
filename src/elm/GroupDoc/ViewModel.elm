@@ -8,6 +8,7 @@ import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc.Types exposing (..)
 import Material
+import String.Extra
 import Todo.Types exposing (TodoDoc)
 import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
@@ -17,6 +18,7 @@ import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)
 import Msg
 import Toolkit.Helpers exposing (apply2)
+import X.Function exposing (when)
 
 
 type alias IconVM =
@@ -110,7 +112,7 @@ create config configInner todoList groupDoc =
                 { name = configInner.defaultIconName, color = configInner.defaultColor }
 
         name =
-            groupDoc.name
+            when String.Extra.isBlank (\_ -> "<no name>") groupDoc.name
 
         appHeader =
             { name = configInner.namePrefix ++ name, backgroundColor = icon.color }

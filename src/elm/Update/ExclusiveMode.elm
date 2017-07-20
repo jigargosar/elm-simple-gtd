@@ -1,7 +1,7 @@
 module Update.ExclusiveMode exposing (Config, update)
 
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
-import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))
+import GroupDoc.Types exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return exposing (andThen, map)
 import Todo.FormTypes exposing (..)

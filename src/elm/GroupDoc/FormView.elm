@@ -1,7 +1,7 @@
 module GroupDoc.FormView exposing (..)
 
 import Entity.Types exposing (EntityId(..))
-import GroupDoc.FormTypes exposing (GroupDocForm, GroupDocFormMode(..))
+import GroupDoc.Types exposing (GroupDocForm, GroupDocFormMode(..))
 import GroupDoc.Types exposing (GroupDocType(..))
 import Mat
 import Tuple2

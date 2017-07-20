@@ -1,7 +1,7 @@
 module Msg.GroupDoc exposing (..)
 
 import Document.Types exposing (DocId)
-import GroupDoc.FormTypes exposing (GroupDocForm)
+import GroupDoc.Types exposing (GroupDocForm)
 import GroupDoc.Types exposing (..)
 
 

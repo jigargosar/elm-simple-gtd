@@ -2,7 +2,7 @@ module ExclusiveMode.Types exposing (..)
 
 -- small so safe
 
-import GroupDoc.FormTypes exposing (GroupDocForm)
+import GroupDoc.Types exposing (GroupDocForm)
 import LaunchBar.Models
 import Menu.Types exposing (MenuState)
 import Todo.FormTypes exposing (..)

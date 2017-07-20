@@ -4,7 +4,7 @@ import Document
 import Document.Types exposing (getDocId)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import GroupDoc
-import GroupDoc.FormTypes exposing (GroupDocFormMode(..))
+import GroupDoc.Types exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
@@ -48,14 +48,7 @@ update :
 update msg =
     case msg of
         OnSaveGroupDocForm form ->
-            case form.mode of
-                GDFM_Add ->
-                    insertGroupDoc form.groupDocType form.name
-
-                GDFM_Edit ->
-                    updateGroupDoc form.groupDocType
-                        form.id
-                        (GroupDoc.setName form.name)
+            onGroupDocIdAction form.groupDocId (GDA_FormAction form)
 
         OnToggleContextDeleted id ->
             updateContext id Document.toggleDeleted |> andThen
@@ -87,12 +80,21 @@ onGroupDocIdAction groupDocId groupDocIdAction =
             GDA_ToggleDeleted ->
                 updateGroupDocHelp Document.toggleDeleted
 
-            GDA_SetFormName name ->
-                {- GroupDoc.Form.setName newName form
-                   |> XMGroupDocForm
-                   >> config.onSetExclusiveMode
-                -}
-                identity
+            GDA_FormAction form ->
+                case form.mode of
+                    GDFM_Add ->
+                        insertGroupDoc form.groupDocType form.name
+
+                    GDFM_Edit ->
+                        updateGroupDocHelp (GroupDoc.setName form.name)
+
+
+
+{- GroupDoc.Form.setName newName form
+   |> XMGroupDocForm
+   >> config.onSetExclusiveMode
+-}
+--                identity
 
 
 insertGroupDoc gdType name =

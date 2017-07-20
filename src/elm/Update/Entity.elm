@@ -56,8 +56,6 @@ type alias Config msg model =
     { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
     , revertExclusiveMode : SubReturnF msg model
     , onToggleTodoArchived : DocId -> SubReturnF msg model
-    , onToggleContextDeleted : DocId -> SubReturnF msg model
-    , onToggleProjectDeleted : DocId -> SubReturnF msg model
     , onToggleTodoDeleted : DocId -> SubReturnF msg model
     , switchToEntityListView : EntityListViewType -> SubReturnF msg model
     , setDomFocusToFocusInEntityCmd : SubReturnF msg model
@@ -115,9 +113,6 @@ onUpdate config entityId action =
         EUA_StartEditing ->
             startEditingEntity config entityId
 
-        EUA_ToggleDeleted ->
-            toggleDeleteEntity config entityId >> config.revertExclusiveMode
-
         EUA_OnFocusIn ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
 
@@ -147,22 +142,6 @@ toggleSetMember item set =
         Set.remove item set
     else
         Set.insert item set
-
-
-
---toggleDeleteEntity : EntityId -> ModelReturnF
-
-
-toggleDeleteEntity config entityId =
-    case entityId of
-        ContextId id ->
-            config.onToggleContextDeleted id
-
-        ProjectId id ->
-            config.onToggleProjectDeleted id
-
-        TodoId id ->
-            config.onToggleTodoDeleted id
 
 
 startEditingEntity : Config msg model -> EntityId -> SubReturnF msg model

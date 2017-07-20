@@ -35,7 +35,6 @@ type EntityMsg
 
 type EntityUpdateAction
     = EUA_StartEditing
-    | EUA_ToggleDeleted
     | EUA_OnFocusIn
     | EUA_ToggleSelection
     | EUA_OnGotoEntity

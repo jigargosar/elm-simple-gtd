@@ -256,7 +256,10 @@ onStartAddingTodo config addFormMode =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
         X.Return.returnWith createXMode config.setXMode
-            >> autoFocusInputRCmd
+
+
+
+--            >> autoFocusInputRCmd
 
 
 onStopRunningTodo =

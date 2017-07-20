@@ -8,7 +8,10 @@ import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
 import autosize from "autosize"
 import localforage from "localforage"
-import  {Main} from "elm/Main.elm"
+import  MutationSummary from "mutation-summary"
+
+// noinspection NpmUsedModulesInstalled
+import {Main} from "elm/Main.elm"
 
 //noinspection JSUnresolvedVariable
 const isDevelopmentMode = process.env["NODE_ENV"] === "development"
@@ -24,6 +27,17 @@ const npmPackageVersion = env["npm_package_version"]
  console.warn("hot status", status);
  })
  }*/
+
+const observer = new MutationSummary({
+    callback: summaries =>{
+        // console.log(summaries)
+
+        const autoFocusSummary = summaries[0]
+        $(autoFocusSummary.added).first().focus()
+        console.log(autoFocusSummary.added)
+    },
+    queries: [{element: ".auto-focus"}],
+})
 
 window.appBoot = async function appBoot() {
     const deviceId = getOrCreateDeviceId()
@@ -48,7 +62,7 @@ window.appBoot = async function appBoot() {
 
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")
-        if ($closest.length === 0)return
+        if ($closest.length === 0) return
         const preventDefaultKeys =
             $closest.data("prevent-default-keys").split(",")
         // console.log(e.keyCode, e.key, e, preventDefaultKey);
@@ -168,29 +182,29 @@ window.appBoot = async function appBoot() {
     })
 
     app.ports["focusInput"].subscribe((selector) => {
-        // console.log("focusInput: selector", selector)
+        console.log("focusInput: selector", selector)
         requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
-                autosize(this); // for some reason, this is not needed when using keyboard shortcut. ?!! but only when mouse click.
-                this.focus()
+                // autosize(this); // for some reason, this is not needed when using keyboard shortcut. ?!! but only
+                // when mouse click. this.focus()
             });
         })
 
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                const toFocus = document.querySelector(selector)
-                // console.log("toFocus", toFocus, document.activeElement)
-                if (toFocus && document.activeElement !== toFocus) {
-                    toFocus.focus();
-                    // console.log("focusing")
-                }
-                if (toFocus && toFocus.inputElement) {
-                    // console.log(toFocus.inputElement, toFocus.$.input)
-                    toFocus.inputElement.focus()
-                    // toFocus.$.input.focus()
-                }
-            })
-        }, 0)
+        // setTimeout(() => {
+        //     requestAnimationFrame(() => {
+        //         const toFocus = document.querySelector(selector)
+        //         // console.log("toFocus", toFocus, document.activeElement)
+        //         if (toFocus && document.activeElement !== toFocus) {
+        //             toFocus.focus();
+        //             // console.log("focusing")
+        //         }
+        //         if (toFocus && toFocus.inputElement) {
+        //             // console.log(toFocus.inputElement, toFocus.$.input)
+        //             toFocus.inputElement.focus()
+        //             // toFocus.$.input.focus()
+        //         }
+        //     })
+        // }, 0)
     })
 
 
@@ -212,6 +226,7 @@ function getOrCreateDeviceId() {
     }
     return deviceId
 }
+
 function getOrCreateFirstVisit() {
     let firstVisit = localStorage.getItem("first-visit")
     if (!firstVisit) {

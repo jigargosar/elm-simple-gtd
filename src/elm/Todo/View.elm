@@ -59,7 +59,7 @@ new config form =
                         , form.text |> defaultValue
                         ]
                         []
-                    , label [ class "active" ] [ text "New Todo" ]
+                    , label [] [ text "New Todo" ]
                     ]
                 , Mat.okCancelButtons config
                 ]

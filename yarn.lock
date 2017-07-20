@@ -3665,6 +3665,10 @@ multicast-dns@^6.0.1:
     dns-packet "^1.0.1"
     thunky "^0.1.0"
 
+mutation-summary@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/mutation-summary/-/mutation-summary-0.1.1.tgz#0cbdb0c991b1fb259657cc82b9e5710a53a416a9"
+
 nan@^2.3.0, nan@^2.3.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"

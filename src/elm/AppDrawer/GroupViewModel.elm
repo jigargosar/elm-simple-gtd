@@ -11,7 +11,7 @@ import Document
 import Document.Types exposing (DocId)
 import Entity.Types exposing (EntityId(..), EntityListViewType)
 import GroupDoc
-import GroupDoc.Types
+import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
 import Msg exposing (..)
@@ -178,7 +178,7 @@ contexts model =
         , title = "Contexts"
         , className = "contexts"
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
-        , onAddClicked = Msg.onNewContext
+        , onAddClicked = Msg.onStartAddingGroupDoc ContextGroupDocType
         , icon = { name = "group_work", color = AppColors.contextsColor }
         , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
         , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
@@ -226,7 +226,7 @@ projects model =
         , title = "Projects"
         , className = "projects"
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
-        , onAddClicked = Msg.onNewProject
+        , onAddClicked = Msg.onStartAddingGroupDoc ProjectGroupDocType
         , icon = { name = "group_work", color = AppColors.projectsColor }
         , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
         , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects

@@ -5,7 +5,7 @@ import CommonMsg
 import CommonMsg.Types
 import Entity.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
-import GroupDoc.Types exposing (GroupDocIdAction(..))
+import GroupDoc.Types exposing (GroupDocAction(..), GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.GroupDoc exposing (GroupDocMsg)
@@ -192,6 +192,10 @@ onGD_UpdateFormName form newName =
     Msg.GroupDoc.OnGroupDocIdAction form.groupDocId
         (GDA_UpdateFormName form newName)
         |> OnGroupDocMsg
+
+
+onStartAddingGroupDoc gdType =
+    Msg.GroupDoc.OnGroupDocAction gdType GDA_StartAdding |> OnGroupDocMsg
 
 
 

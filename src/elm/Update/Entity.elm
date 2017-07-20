@@ -69,18 +69,6 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
-        EM_StartAddingContext ->
-            (createAddGroupDocForm ContextGroupDocType
-                |> XMGroupDocForm
-                >> config.onSetExclusiveMode
-            )
-
-        EM_StartAddingProject ->
-            (createAddGroupDocForm ProjectGroupDocType
-                |> XMGroupDocForm
-                >> config.onSetExclusiveMode
-            )
-
         EM_Update entityId action ->
             onUpdate config entityId action
 

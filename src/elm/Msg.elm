@@ -144,14 +144,6 @@ onSaveExclusiveModeForm =
 -- entityMsg
 
 
-onNewProject =
-    Entity.Types.EM_StartAddingProject |> OnEntityMsg
-
-
-onNewContext =
-    Entity.Types.EM_StartAddingContext |> OnEntityMsg
-
-
 onEntityUpdateMsg =
     Entity.Types.EM_Update >>> OnEntityMsg
 

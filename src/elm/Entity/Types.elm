@@ -27,9 +27,7 @@ type EntityListViewType
 
 
 type EntityMsg
-    = EM_StartAddingProject
-    | EM_StartAddingContext
-    | EM_Update EntityId EntityUpdateAction
+    = EM_Update EntityId EntityUpdateAction
     | EM_EntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
 
 

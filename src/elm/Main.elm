@@ -8,7 +8,6 @@ import Time exposing (Time)
 import TodoMsg
 import Update
 import View
-import ViewModel
 import X.Keyboard
 import Msg exposing (AppMsg)
 import Types exposing (..)
@@ -80,6 +79,8 @@ viewConfig =
     , onFirebaseMsg = Msg.OnFirebaseMsg
     , onReminderOverlayAction = TodoMsg.onReminderOverlayAction
     , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
+    , onAppDrawerMsg = Msg.onAppDrawerMsg
+    , onStartAddingGroupDoc = Msg.onStartAddingGroupDoc
     , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
     , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
     , switchToEntityListView = Msg.switchToEntityListView

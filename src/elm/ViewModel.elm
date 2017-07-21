@@ -19,8 +19,8 @@ import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 
 
 type alias Model msg =
-    { contexts : AppDrawer.GroupViewModel.ViewModel
-    , projects : AppDrawer.GroupViewModel.ViewModel
+    { contexts : AppDrawer.GroupViewModel.ViewModel msg
+    , projects : AppDrawer.GroupViewModel.ViewModel msg
     , viewName : String
     , header : { backgroundColor : Color.Color }
     , mdl : Material.Model
@@ -37,10 +37,10 @@ type alias Model msg =
 create config model =
     let
         contextsVM =
-            AppDrawer.GroupViewModel.contexts model
+            AppDrawer.GroupViewModel.contexts config model
 
         projectsVM =
-            AppDrawer.GroupViewModel.projects model
+            AppDrawer.GroupViewModel.projects config model
 
         viewType =
             model.viewType

@@ -14,7 +14,6 @@ import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
-import Msg exposing (..)
 import String.Extra
 import Todo
 import Todo.Types exposing (TodoDoc)
@@ -32,30 +31,30 @@ type alias IconVM =
     }
 
 
-type alias ViewModel =
-    { nullVMAsList : List DocumentWithNameViewModel
-    , entityList : List DocumentWithNameViewModel
-    , archivedEntityList : List DocumentWithNameViewModel
+type alias ViewModel msg =
+    { nullVMAsList : List (DocumentWithNameViewModel msg)
+    , entityList : List (DocumentWithNameViewModel msg)
+    , archivedEntityList : List (DocumentWithNameViewModel msg)
     , viewType : EntityListViewType
     , title : String
     , className : String
     , showArchived : Bool
-    , onAddClicked : AppMsg
-    , onToggleExpanded : AppMsg
-    , onToggleShowArchived : AppMsg
+    , onAddClicked : msg
+    , onToggleExpanded : msg
+    , onToggleShowArchived : msg
     , isExpanded : Bool
     , icon : IconVM
     }
 
 
-type alias DocumentWithNameViewModel =
+type alias DocumentWithNameViewModel msg =
     { id : String
     , name : String
     , appHeader : { name : String, backgroundColor : Color.Color }
     , isDeleted : Bool
     , isEmpty : Bool
     , count : Int
-    , onActiveStateChanged : Bool -> AppMsg
+    , onActiveStateChanged : Bool -> msg
     , icon : IconVM
     }
 
@@ -79,47 +78,50 @@ type alias Config =
     }
 
 
-createList : Config -> AppModel -> List DocumentWithNameViewModel
-createList config model =
+
+--createList : Config -> AppModel -> List DocumentWithNameViewModel
+
+
+createList config innerConfig model =
     let
         todoListDict =
-            config.todoList |> Dict.Extra.groupBy config.groupByFn
+            innerConfig.todoList |> Dict.Extra.groupBy innerConfig.groupByFn
 
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
         list : List GroupDoc
         list =
-            config.filter model
+            innerConfig.filter model
     in
-        list .|> create getTodoListWithGroupId config
+        list .|> create getTodoListWithGroupId config innerConfig
 
 
-create getTodoListByEntityId config groupDoc =
+create getTodoListByEntityId config innerConFig groupDoc =
     let
         id =
             Document.getId groupDoc
 
         createEntityActionMsg =
-            Msg.onEntityUpdateMsg (config.toEntityId id)
+            config.onEntityUpdateMsg (innerConFig.toEntityId id)
 
         count =
             getTodoListByEntityId id |> List.length
 
         isNull =
-            config.isNull groupDoc
+            innerConFig.isNull groupDoc
 
         icon =
             if isNull then
-                config.nullIcon
+                innerConFig.nullIcon
             else
-                { name = config.defaultIconName, color = config.defaultColor }
+                { name = innerConFig.defaultIconName, color = innerConFig.defaultColor }
 
         name =
             when String.Extra.isBlank (\_ -> "<no name>") groupDoc.name
 
         appHeader =
-            { name = config.namePrefix ++ name, backgroundColor = icon.color }
+            { name = innerConFig.namePrefix ++ name, backgroundColor = icon.color }
 
         startEditingMsg =
             createEntityActionMsg Entity.Types.EUA_StartEditing
@@ -132,16 +134,19 @@ create getTodoListByEntityId config groupDoc =
         , onActiveStateChanged =
             \bool ->
                 if bool then
-                    Msg.switchToView (config.getViewType id |> EntityListView)
+                    config.switchToView (innerConFig.getViewType id |> EntityListView)
                 else
-                    Msg.noop
+                    config.noop
         , icon = icon
         , appHeader = appHeader
         }
 
 
-contexts : AppModel -> ViewModel
-contexts model =
+
+--contexts : AppModel -> ViewModel
+
+
+contexts config model =
     let
         archivedFilter =
             Model.GroupDocStore.filterContexts GroupDoc.archivedButNotDeletedPred
@@ -149,8 +154,8 @@ contexts model =
         activeFilter =
             Model.GroupDocStore.filterContexts GroupDoc.isActive
 
-        config : Config
-        config =
+        innerConfig : Config
+        innerConfig =
             { groupByFn = Todo.getContextId
             , todoList = Model.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
@@ -165,31 +170,34 @@ contexts model =
             }
 
         archivedConfig =
-            { config | filter = archivedFilter }
+            { innerConfig | filter = archivedFilter }
 
         entityList =
-            createList config model
+            createList config innerConfig model
 
         nullVMAsList =
             entityList |> List.head |> X.Maybe.toList
     in
         { entityList = entityList |> List.drop 1
         , nullVMAsList = nullVMAsList
-        , archivedEntityList = createList archivedConfig model
+        , archivedEntityList = createList config archivedConfig model
         , viewType = Entity.Types.ContextsView
         , title = "Contexts"
         , className = "contexts"
         , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
-        , onAddClicked = Msg.onStartAddingGroupDoc ContextGroupDocType
+        , onAddClicked = config.onStartAddingGroupDoc ContextGroupDocType
         , icon = { name = "group_work", color = AppColors.contextsColor }
-        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
-        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
+        , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
+        , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
         , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
         }
 
 
-projects : AppModel -> ViewModel
-projects model =
+
+--projects : AppModel -> ViewModel
+
+
+projects config model =
     let
         archivedFilter =
             Model.GroupDocStore.filterProjects GroupDoc.archivedButNotDeletedPred
@@ -197,8 +205,8 @@ projects model =
         activeFilter =
             Model.GroupDocStore.filterProjects GroupDoc.isActive
 
-        config : Config
-        config =
+        innerConfig : Config
+        innerConfig =
             { groupByFn = Todo.getProjectId
             , todoList = Model.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
@@ -213,24 +221,24 @@ projects model =
             }
 
         archivedConfig =
-            { config | filter = archivedFilter }
+            { innerConfig | filter = archivedFilter }
 
         entityList =
-            createList config model
+            createList config innerConfig model
 
         nullVMAsList =
             entityList |> List.head |> X.Maybe.toList
     in
         { entityList = entityList |> List.drop 1
         , nullVMAsList = []
-        , archivedEntityList = createList archivedConfig model
+        , archivedEntityList = createList config archivedConfig model
         , viewType = Entity.Types.ProjectsView
         , title = "Projects"
         , className = "projects"
         , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
-        , onAddClicked = Msg.onStartAddingGroupDoc ProjectGroupDocType
+        , onAddClicked = config.onStartAddingGroupDoc ProjectGroupDocType
         , icon = { name = "group_work", color = AppColors.projectsColor }
-        , onToggleExpanded = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
-        , onToggleShowArchived = Msg.OnAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
+        , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
+        , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
         , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
         }

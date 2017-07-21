@@ -198,6 +198,10 @@ onToggleAppDrawerOverlay =
     OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
 
 
+onAppDrawerMsg =
+    OnAppDrawerMsg
+
+
 
 -- mdl
 

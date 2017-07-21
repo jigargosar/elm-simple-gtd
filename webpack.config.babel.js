@@ -86,7 +86,6 @@ export default {
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],
-        "imports":["./imports.html", "./imports.js"]
     },
 
     output: {

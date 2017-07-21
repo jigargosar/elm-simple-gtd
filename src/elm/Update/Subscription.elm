@@ -14,7 +14,7 @@ import Return exposing (map)
 import Time exposing (Time)
 import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (..)
-import X.Return exposing (rAndThenMaybe)
+import X.Return exposing (rAndThenMaybe, returnWith)
 import Keyboard.Extra as Key exposing (Key)
 import Store
 import Todo.Types exposing (TodoDoc, TodoStore)
@@ -93,7 +93,7 @@ update config msg =
 
 
 onGlobalKeyUp config key =
-    X.Return.returnWith (.editMode)
+    returnWith (.editMode)
         (\editMode ->
             case ( key, editMode ) of
                 ( key, XMNone ) ->

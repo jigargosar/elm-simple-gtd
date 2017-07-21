@@ -179,13 +179,11 @@ saveAddTodoForm config addMode form model =
                             TodoEntity fromTodo ->
                                 (TA_CopyProjectAndContextId fromTodo)
 
-                            GroupEntity g ->
-                                case g of
-                                    ContextEntity context ->
-                                        (TA_SetContext context)
+                            GroupEntity (ContextEntity context) ->
+                                (TA_SetContext context)
 
-                                    ProjectEntity project ->
-                                        (TA_SetProject project)
+                            GroupEntity (ProjectEntity project) ->
+                                (TA_SetProject project)
                         )
                         todoId
                         >> setFocusInEntityWithTodoId config todoId

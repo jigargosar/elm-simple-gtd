@@ -6,12 +6,10 @@ import Return
 
 
 main =
-    Html.program
-        { init = init
+    Html.beginnerProgram
+        { model = ()
         , view = L.View.view
         , update = update
-        , subscriptions =
-            (\_ -> Sub.none)
         }
 
 
@@ -19,13 +17,5 @@ type Msg
     = NOOP
 
 
-type alias Model =
-    {}
-
-
-init =
-    Return.singleton {}
-
-
 update msg =
-    Return.singleton
+    identity

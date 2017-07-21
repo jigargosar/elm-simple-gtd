@@ -131,7 +131,7 @@ function findAllDependenciesHelp(file, knownDependencies, sourceDirectories, kno
             return resolve({
                 file: file,
                 error: false,
-                knownDependencies: knownDependencies
+                knownDependencies: knownDependencies,
             });
         }
         // read the imports then parse each of them
@@ -142,7 +142,7 @@ function findAllDependenciesHelp(file, knownDependencies, sourceDirectories, kno
                 return resolve({
                     file: file,
                     error: true,
-                    knownDependencies: knownDependencies
+                    knownDependencies: knownDependencies,
                 });
             }
 
@@ -189,7 +189,7 @@ function findAllDependenciesHelp(file, knownDependencies, sourceDirectories, kno
                 return path.extname(dependency) === ".elm" ? findAllDependenciesHelp(dependency,
                     newDependencies,
                     sourceDirectories,
-                    knownFiles
+                    knownFiles,
                 ) : null;
             }));
 
@@ -213,14 +213,13 @@ function findAllDependenciesHelp(file, knownDependencies, sourceDirectories, kno
                 resolve({
                     file: file,
                     error: false,
-                    knownDependencies: flat
+                    knownDependencies: flat,
                 });
 
             }).catch(reject);
         }).catch(reject);
     });
 }
-
 
 
 /* Read imports from a given file and return them

@@ -23,12 +23,9 @@ import View
 import ViewModel
 import X.Keyboard
 import Json.Encode as E
-import Msg exposing (AppMsg)
 import X.Random
 import Json.Encode as E
 import Types exposing (..)
-import Msg
-import Msg.Subscription
 import Ports exposing (onFirebaseDatabaseChangeSub)
 import Store
 import Subscriptions.AppDrawer

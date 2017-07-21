@@ -11,7 +11,6 @@ import View
 import X.Keyboard
 import Msg exposing (AppMsg)
 import Types exposing (..)
-import Msg
 import Msg.Subscription
 import Ports exposing (onFirebaseDatabaseChangeSub)
 import Store

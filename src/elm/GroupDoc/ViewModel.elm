@@ -16,7 +16,6 @@ import Todo
 import Project
 import Keyboard.Extra as Key exposing (Key)
 import Msg exposing (..)
-import Msg
 import Toolkit.Helpers exposing (apply2)
 import X.Function exposing (when)
 

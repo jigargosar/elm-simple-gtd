@@ -40,7 +40,8 @@ const observer = new MutationSummary({
     queries: [{element: ".auto-focus"}],
 })
 
-window.appBoot = async function appBoot() {
+window.appBoot = async function appBoot(elmMain=Main) {
+    
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-container")
@@ -115,7 +116,7 @@ window.appBoot = async function appBoot() {
     }, db.allDocsMap)
 
 
-    const app = Main
+    const app = elmMain
         .embed(document.getElementById("elm-container"), flags)
 
 

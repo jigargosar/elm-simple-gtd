@@ -1,5 +1,7 @@
 <component name="DependencyValidationManager">
   <state>
-    <deny_rule from_scope="no-msg-dep" to_scope="Msg" is_deny="true" />
+    <unnamed_scope value="file:src/elm/Msg.elm" />
+    <unnamed_scope value="file[elm-simple-gtd]:src/elm/Todo//*" />
+    <deny_rule from_scope="file[elm-simple-gtd]:src/elm/Todo//*" to_scope="file:src/elm/Msg.elm" is_deny="true" />
   </state>
 </component>

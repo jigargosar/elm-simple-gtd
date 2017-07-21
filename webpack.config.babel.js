@@ -86,6 +86,7 @@ export default {
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],
+        "imports":["babel-polyfill", "./imports.html", "./imports.js"]
     },
 
     output: {
@@ -159,6 +160,17 @@ export default {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: 'file-loader',
             },
+            {
+                test: /\.(html)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: "[path][name].[ext]",
+                        },
+                    },
+                ],
+            },
         ],
 
         // noParse: [/\.elm$/],
@@ -168,7 +180,7 @@ export default {
     devServer: {
         // stats: {colors: false, "errors-only":true},
         // stats: "errors-only",
-        stats: "minimal",
+        // stats: "minimal",
         port: 8020,
         overlay: true,
         watchContentBase: true,

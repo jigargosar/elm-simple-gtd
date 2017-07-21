@@ -7,7 +7,6 @@ import Entity.Types exposing (EntityId)
 import GroupDoc.Types exposing (..)
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Material
-import Msg exposing (AppMsg)
 import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
@@ -19,15 +18,15 @@ import Types exposing (AppModel)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 
 
-type alias Model =
+type alias Model msg =
     { contexts : AppDrawer.GroupViewModel.ViewModel
     , projects : AppDrawer.GroupViewModel.ViewModel
     , viewName : String
     , header : { backgroundColor : Color.Color }
     , mdl : Material.Model
-    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel AppMsg
-    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel AppMsg
-    , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
+    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel msg
+    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel msg
+    , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel msg
     }
 
 

@@ -1,7 +1,6 @@
 module Update.LaunchBar exposing (Config, update)
 
 import Document.Types exposing (DocId, getDocId)
-import DomPorts
 import Entity.Types exposing (EntityListViewType)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy

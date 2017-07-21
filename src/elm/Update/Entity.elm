@@ -1,7 +1,5 @@
 module Update.Entity exposing (Config, update)
 
-import Document.Types exposing (DocId)
-import DomPorts
 import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)

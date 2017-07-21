@@ -1,32 +1,16 @@
 port module Main exposing (main)
 
-import Context
-import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
-import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
-import Firebase
-import LocalPref
-import Material
 import Model.Internal exposing (Flags)
-import Model.ViewType
-import Project
-import Random.Pcg
 import Return
 import RouteUrl
 import Routes
-import Set
 import Time exposing (Time)
-import Todo.Notification.Model
-import Todo.Store
-import Todo.TimeTracker
 import TodoMsg
 import Update
 import View
 import ViewModel
 import X.Keyboard
-import Json.Encode as E
 import Msg exposing (AppMsg)
-import X.Random
-import Json.Encode as E
 import Types exposing (..)
 import Msg
 import Msg.Subscription

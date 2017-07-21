@@ -16,7 +16,6 @@ import Todo.FormTypes exposing (..)
 import Ports.Todo exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import Tuple2
 import X.Record as Record exposing (overReturn, overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe1)
 import X.Time

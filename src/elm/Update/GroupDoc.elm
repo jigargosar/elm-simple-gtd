@@ -13,9 +13,7 @@ import Return exposing (andThen)
 import Set
 import Store
 import Toolkit.Operators exposing (..)
-import Tuple2
 import Time exposing (Time)
-import X.Function exposing (applyWith)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
 
 

@@ -2,7 +2,6 @@ module L.Main exposing (..)
 
 import Html
 import L.View
-import Return
 
 
 main =

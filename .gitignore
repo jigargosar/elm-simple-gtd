@@ -7,5 +7,6 @@
 .idea/shelf/
 /.gtm/
 node_modules/
-elm-stuff/build-artifacts
 elm-stuff/.elm-analyse/
+.elm-static-html/
+elm-stuff/build-artifacts/

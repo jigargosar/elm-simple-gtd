@@ -7,7 +7,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 
 
-view model =
+view =
     div [ id "landing" ]
         [ navHeader
         , banner

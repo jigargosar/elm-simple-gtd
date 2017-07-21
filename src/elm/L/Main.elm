@@ -7,7 +7,7 @@ import L.View
 main =
     Html.beginnerProgram
         { model = ()
-        , view = L.View.view
+        , view = (\_ -> L.View.view)
         , update = update
         }
 

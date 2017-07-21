@@ -3,17 +3,17 @@ module Routes exposing (..)
 import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType
-import Msg exposing (..)
 import Navigation exposing (Location)
 import RouteUrl.Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Types exposing (..)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.List
 
 
-delta2builder : AppModel -> AppModel -> Maybe Builder
+--delta2builder : AppModel -> AppModel -> Maybe Builder
+
+
 delta2builder previous current =
     builder
         |> replacePath (getPathFromModel current)
@@ -29,33 +29,45 @@ getPathFromModel model =
             [ "custom-sync" ]
 
 
-delta2hash : AppModel -> AppModel -> Maybe UrlChange
+
+--delta2hash : AppModel -> AppModel -> Maybe UrlChange
+
+
 delta2hash =
     delta2builder >>> Maybe.map toHashChange
 
 
-builder2messages : Builder -> List AppMsg
-builder2messages builder =
+
+--builder2messages : Builder -> List AppMsg
+
+
+builder2messages config builder =
     routeUrlBuilderToMaybeListViewType builder
         |> Maybe.Extra.unpack
             (\_ ->
                 case path builder of
                     "custom-sync" :: [] ->
-                        [ Msg.switchToView SyncView ]
+                        [ config.switchToView SyncView ]
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ Msg.switchToView Model.ViewType.defaultView ]
+                        [ config.switchToView Model.ViewType.defaultView ]
             )
-            (Msg.switchToEntityListView >> X.List.singleton)
+            (config.switchToEntityListView >> X.List.singleton)
 
 
-hash2messages : Location -> List AppMsg
-hash2messages location =
-    builder2messages (fromHash location.href)
+
+--hash2messages : Location -> List AppMsg
 
 
-routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
+hash2messages config location =
+    builder2messages config (fromHash location.href)
+
+
+
+--routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
+
+
 routeUrlBuilderToMaybeListViewType builder =
     case RouteUrl.Builder.path builder of
         "lists" :: "contexts" :: [] ->

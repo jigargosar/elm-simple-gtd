@@ -111,7 +111,7 @@ main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
-        , location2messages = Routes.hash2messages
+        , location2messages = Routes.hash2messages viewConfig
         , init = init
         , update = update
         , view = view

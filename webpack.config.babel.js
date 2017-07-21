@@ -86,7 +86,7 @@ export default {
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],
-        "imports":["babel-polyfill", "./imports.html", "./imports.js"]
+        "imports":["./imports.html", "./imports.js"]
     },
 
     output: {

@@ -6,16 +6,7 @@ import GroupDoc
 import Menu
 import Menu.Types exposing (MenuState)
 import Model.GroupDocStore
-
-
---import Msg
-
 import Html exposing (..)
-
-
---import TodoMsg
---import Types exposing (AppModel)
---import Msg
 
 
 type alias Config msg =

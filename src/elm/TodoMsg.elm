@@ -3,27 +3,34 @@ module TodoMsg exposing (..)
 import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
-import Todo.Notification.Model
 import Todo.Types exposing (TodoAction(..))
 
 
-onStopRunningTodo : AppMsg
+--onStopRunningTodo : AppMsg
+
+
 onStopRunningTodo =
-    OnStopRunningTodo |> Msg.OnTodoMsg
+    OnStopRunningTodo |> OnTodoMsg
 
 
-onGotoRunningTodo : AppMsg
+
+--onGotoRunningTodo : AppMsg
+
+
 onGotoRunningTodo =
-    OnGotoRunningTodo |> Msg.OnTodoMsg
+    OnGotoRunningTodo |> OnTodoMsg
 
 
-onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
+
+--onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
+
+
 onReminderOverlayAction =
-    OnTodoReminderOverlayAction >> Msg.OnTodoMsg
+    OnTodoReminderOverlayAction >> OnTodoMsg
 
 
 onSwitchOrStartTrackingTodo todoId =
-    OnSwitchOrStartTrackingTodo todoId |> Msg.OnTodoMsg
+    OnSwitchOrStartTrackingTodo todoId |> OnTodoMsg
 
 
 
@@ -31,7 +38,7 @@ onSwitchOrStartTrackingTodo todoId =
 
 
 onStartAdding__ =
-    OnStartAddingTodo >> Msg.OnTodoMsg
+    OnStartAddingTodo >> OnTodoMsg
 
 
 onStartAddingTodoToInbox =
@@ -51,7 +58,7 @@ onStartSetupAddTodo =
 
 
 onStartEditing__ editMode todo =
-    OnStartEditingTodo todo editMode |> Msg.OnTodoMsg
+    OnStartEditingTodo todo editMode |> OnTodoMsg
 
 
 onStartEditingTodo =
@@ -79,7 +86,7 @@ onStartEditingReminder =
 
 
 onUpdateFormAction__ setterAction form =
-    setterAction >> OnUpdateTodoFormAction form >> Msg.OnTodoMsg
+    setterAction >> OnUpdateTodoFormAction form >> OnTodoMsg
 
 
 onSetTodoFormMenuState =
@@ -104,29 +111,29 @@ onSetTodoFormText =
 
 onToggleDeleted id =
     Todo.Msg.UpdateTodo__ id TA_ToggleDeleted
-        |> Msg.OnTodoMsg
+        |> OnTodoMsg
 
 
 onToggleDeletedAndMaybeSelection id =
     Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDeleted
-        |> Msg.OnTodoMsg
+        |> OnTodoMsg
 
 
 onToggleDoneAndMaybeSelection id =
     Todo.Msg.UpdateTodoOrAllSelected__ id TA_ToggleDone
-        |> Msg.OnTodoMsg
+        |> OnTodoMsg
 
 
 onSetProjectAndMaybeSelection id =
     TA_SetProject
         >> Todo.Msg.UpdateTodoOrAllSelected__ id
-        >> Msg.OnTodoMsg
+        >> OnTodoMsg
 
 
 onSetContextAndMaybeSelection id =
     TA_SetContext
         >> Todo.Msg.UpdateTodoOrAllSelected__ id
-        >> Msg.OnTodoMsg
+        >> OnTodoMsg
 
 
 afterTodoUpsert todo =

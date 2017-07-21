@@ -3,6 +3,7 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
 import * as elm from "./tasks/elm"
+import * as ElmDep from "./tasks/elm-dep"
 import path from "path"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)
@@ -212,3 +213,4 @@ dummy.help = 'logs all options and args to console'
 export const removeUnusedImports = elm.removeUnusedImports
 export const parseWPD = elm.parseWPD
 export const rui = elm.rui
+export const dep = ElmDep.dep

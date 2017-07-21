@@ -13,8 +13,9 @@
   "scripts": {
     "_postinstall": "yarn global add elm-github-install@1.0.1 elm@0.18.0 elm-format@0.6.1-alpha firebase-tools@3.9.1",
     "dev": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER=true webpack-dev-server --hot --inline",
-    "watch":"cross-env NODE_ENV=development WEBPACK_DEV_SERVER=true webpack -w",
+    "watch": "cross-env NODE_ENV=development WEBPACK_DEV_SERVER=true webpack -w",
     "nodemon": "nodemon --exec 'npm run dev'",
+    "nodemon-dep": "nodemon --watch tasks/elm-dep.js --exec 'run dep'",
     "xx_link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "xx_start": "http-server docs"
   },
@@ -32,9 +33,12 @@
     "elm-webpack-loader": "4.3.1",
     "extract-text-webpack-plugin": "3.0.0",
     "file-loader": "0.11.2",
+    "find-elm-dependencies": "1.0.1",
+    "firstline": "1.2.1",
     "html-webpack-plugin": "2.29.0",
     "jsonfile": "3.0.1",
     "line-driver": "1.1.9",
+    "lodash": "4.17.4",
     "nodemon": "1.11.0",
     "postcss": "6.0.7",
     "postcss-cssnext": "3.0.2",

@@ -178,6 +178,7 @@ export default {
 
     devServer: {
         // stats: {colors: false, "errors-only":true},
+        stats: {modules:false, assets:false},
         // stats: "errors-only",
         // stats: "minimal",
         port: 8020,

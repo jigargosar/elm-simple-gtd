@@ -1,6 +1,6 @@
 port module Imports exposing (..)
 
-import Return exposing (return, singleton)
+import Return exposing (command, return, singleton)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -17,15 +17,18 @@ type alias Model =
 
 
 type Msg
-    = NOOP
+    = ParseImports
 
 
 init =
     singleton ()
+        |> update ParseImports
 
 
-update msg model =
-    singleton model
+update msg =
+    case msg of
+        ParseImports ->
+            "hw" |> output >> command
 
 
 subscriptions model =
@@ -36,6 +39,6 @@ main : Program Never Model Msg
 main =
     Platform.program
         { init = init
-        , update = update
+        , update = (\msg -> singleton >> update msg)
         , subscriptions = subscriptions
         }

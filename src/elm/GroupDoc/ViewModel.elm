@@ -15,7 +15,6 @@ import GroupDoc
 import Todo
 import Project
 import Keyboard.Extra as Key exposing (Key)
-import Msg exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import X.Function exposing (when)
 
@@ -26,25 +25,25 @@ type alias IconVM =
     }
 
 
-type alias GroupDocViewModel =
+type alias GroupDocViewModel msg =
     { id : String
     , count : Int
     , name : String
     , namePrefix : String
     , isDeleted : Bool
-    , archive : { iconName : String, onClick : AppMsg, isArchived : Bool }
+    , archive : { iconName : String, onClick : msg, isArchived : Bool }
     , isEditable : Bool
-    , startEditingMsg : AppMsg
-    , onDeleteClicked : AppMsg
-    , onSaveClicked : AppMsg
-    , onCancelClicked : AppMsg
+    , startEditingMsg : msg
+    , onDeleteClicked : msg
+    , onSaveClicked : msg
+    , onCancelClicked : msg
     , icon : IconVM
-    , onFocusIn : AppMsg
-    , onKeyDownMsg : KeyboardEvent -> AppMsg
+    , onFocusIn : msg
+    , onKeyDownMsg : KeyboardEvent -> msg
     , tabindexAV : Int
     , todoList : List TodoDoc
     , getTabIndexAVForEntityId : EntityId -> Int
-    , onMdl : Material.Msg AppMsg -> Msg.AppMsg
+    , onMdl : Material.Msg msg -> msg
     }
 
 
@@ -83,14 +82,14 @@ create config configInner todoList groupDoc =
             createGroupDocIdFromType configInner.groupDocType id
 
         onEntityAction =
-            Msg.onEntityUpdateMsg entityId
+            config.onEntityUpdateMsg entityId
 
         isNull =
             configInner.isNull groupDoc
 
         ( toggleDeleteMsg, toggleArchiveMsg ) =
             if isNull then
-                ( Msg.noop, Msg.noop )
+                ( config.noop, config.noop )
             else
                 groupDocId
                     |> apply2
@@ -100,7 +99,7 @@ create config configInner todoList groupDoc =
 
         startEditingMsg =
             if isNull then
-                Msg.noop
+                config.noop
             else
                 onEntityAction Entity.Types.EUA_StartEditing
 
@@ -128,7 +127,7 @@ create config configInner todoList groupDoc =
                     onEntityAction Entity.Types.EUA_OnGotoEntity
 
                 _ ->
-                    Msg.noop
+                    config.noop
 
         archive =
             let
@@ -155,15 +154,15 @@ create config configInner todoList groupDoc =
         , archive = archive
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = Msg.onSaveExclusiveModeForm
-        , onCancelClicked = Msg.revertExclusiveMode
+        , onSaveClicked = config.onSaveExclusiveModeForm
+        , onCancelClicked = config.revertExclusiveMode
         , icon = icon
         , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn
         , onKeyDownMsg = onKeyDownMsg
         , tabindexAV = configInner.getTabIndexAVForEntityId entityId
         , todoList = todoList
         , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
-        , onMdl = Msg.onMdl
+        , onMdl = config.onMdl
         }
 
 

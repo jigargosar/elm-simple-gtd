@@ -25,8 +25,8 @@ type alias Model =
     , viewName : String
     , header : { backgroundColor : Color.Color }
     , mdl : Material.Model
-    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
-    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
+    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel AppMsg
+    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel AppMsg
     , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
     }
 

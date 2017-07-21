@@ -104,7 +104,7 @@ viewConfig =
 
 
 view model =
-    View.init viewConfig (ViewModel.create viewConfig model) model
+    View.init viewConfig model
 
 
 main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg

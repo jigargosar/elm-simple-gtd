@@ -7,10 +7,14 @@ import View.Layout
 import View.Overlays
 import Mat exposing (..)
 import Material.Tooltip
+import ViewModel
 
 
-init config appVM model =
+init config model =
     let
+        appVM =
+            ViewModel.create config model
+
         children =
             [ View.Layout.appLayoutView config appVM model
             , newTodoFab config model

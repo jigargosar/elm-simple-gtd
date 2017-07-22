@@ -3,7 +3,7 @@ module Routes exposing (..)
 import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType
-import RouteUrl.Builder exposing (..)
+import RouteUrl.Builder
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.List
@@ -13,8 +13,8 @@ import X.List
 
 
 delta2builder previous current =
-    builder
-        |> replacePath (getPathFromModel current)
+    RouteUrl.Builder.builder
+        |> RouteUrl.Builder.replacePath (getPathFromModel current)
         |> Just
 
 
@@ -32,7 +32,7 @@ getPathFromModel model =
 
 
 delta2hash =
-    delta2builder >>> Maybe.map toHashChange
+    delta2builder >>> Maybe.map RouteUrl.Builder.toHashChange
 
 
 
@@ -43,7 +43,7 @@ builder2messages config builder =
     routeUrlBuilderToMaybeListViewType builder
         |> Maybe.Extra.unpack
             (\_ ->
-                case path builder of
+                case RouteUrl.Builder.path builder of
                     "custom-sync" :: [] ->
                         [ config.switchToView SyncView ]
 
@@ -59,7 +59,7 @@ builder2messages config builder =
 
 
 hash2messages config location =
-    builder2messages config (fromHash location.href)
+    builder2messages config (RouteUrl.Builder.fromHash location.href)
 
 
 

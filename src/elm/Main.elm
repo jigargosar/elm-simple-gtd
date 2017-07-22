@@ -1,17 +1,14 @@
 module Main exposing (main)
 
-import Keyboard
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
-import Msg.Subscription
-import Ports
 import Return
 import RouteUrl
 import Routes
+import Subscriptions
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
-import Time exposing (Time)
 import TodoMsg
 import Types exposing (..)
 import Update
@@ -25,13 +22,7 @@ type alias AppReturn =
 subscriptions : AppModel -> Sub Msg.AppMsg
 subscriptions model =
     Sub.batch
-        [ Sub.batch
-            [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
-            , Keyboard.ups Msg.Subscription.OnGlobalKeyUp
-            , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
-            , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
-            ]
-            |> Sub.map Msg.OnSubscriptionMsg
+        [ Subscriptions.subscriptions |> Sub.map Msg.OnSubscriptionMsg
         , Subscriptions.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg
         , Subscriptions.Firebase.subscriptions model |> Sub.map Msg.OnFirebaseMsg
         , Subscriptions.AppDrawer.subscriptions model |> Sub.map Msg.OnAppDrawerMsg

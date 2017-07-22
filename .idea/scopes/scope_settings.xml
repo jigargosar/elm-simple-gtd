@@ -2,6 +2,5 @@
   <state>
     <unnamed_scope value="file:src/elm/Msg.elm" />
     <unnamed_scope value="file:src/elm/View.elm" />
-    <deny_rule from_scope="file[elm-simple-gtd]:src/elm/Todo//*" to_scope="file:src/elm/Msg.elm" is_deny="true" />
   </state>
 </component>

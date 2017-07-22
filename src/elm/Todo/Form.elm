@@ -1,7 +1,7 @@
 module Todo.Form
     exposing
-        ( createEditTodoForm
-        , createAddTodoForm
+        ( createAddTodoForm
+        , createEditTodoForm
         , updateAddTodoForm
         , updateTodoForm
         )
@@ -14,8 +14,8 @@ import Time.Format
 import Todo
 import Todo.FormTypes exposing (..)
 import Todo.Types exposing (TodoDoc, getTodoText)
-import X.Record exposing (fieldLens, over, overM, set)
 import Toolkit.Operators exposing (..)
+import X.Record exposing (fieldLens, over, overM, set)
 
 
 createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> TodoForm
@@ -30,13 +30,13 @@ createEditTodoForm editMode now todo =
             , contextId = Todo.getContextId todo
             , projectId = Todo.getProjectId todo
             , menuState = Menu.initState
-            , date = (Time.Format.format "%Y-%m-%d") timeInMilli
-            , time = (Time.Format.format "%H:%M") timeInMilli
+            , date = Time.Format.format "%Y-%m-%d" timeInMilli
+            , time = Time.Format.format "%H:%M" timeInMilli
             , maybeComputedTime = Nothing
             , mode = TFM_Edit editMode
             }
     in
-        updateMaybeTime form
+    updateMaybeTime form
 
 
 createAddTodoForm : AddTodoFormMode -> TodoForm
@@ -106,6 +106,6 @@ computeMaybeTime { date, time } =
         dateTimeString =
             date ++ " " ++ time
     in
-        Date.fromString (dateTimeString)
-            !|> (Date.toTime >> Just)
-            != Nothing
+    Date.fromString dateTimeString
+        !|> (Date.toTime >> Just)
+        != Nothing

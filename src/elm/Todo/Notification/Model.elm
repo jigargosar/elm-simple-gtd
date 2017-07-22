@@ -3,8 +3,8 @@ module Todo.Notification.Model exposing (..)
 import Date
 import Date.Extra as Date
 import Document
-import Todo
 import Time exposing (Time)
+import Todo
 import Todo.Notification.Types exposing (..)
 import Todo.Types exposing (TodoDoc)
 import X.Function exposing (..)

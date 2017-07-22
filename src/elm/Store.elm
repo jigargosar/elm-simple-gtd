@@ -1,43 +1,42 @@
 port module Store
     exposing
-        ( onChange
+        ( ChangeList
         , Store
+        , UpdateAllReturn
+        , asIdDict
+        , filterDocs
+        , findBy
+        , findById
         , generator
         , insert
         , insertAndPersist
-        , findById
-        , findBy
-        , mapDocs
-        , rejectDocs
-        , asIdDict
         , isEmpty
-        , filterDocs
+        , mapDocs
+        , onChange
+        , rejectDocs
         , updateAndPersist
-        , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
-        , UpdateAllReturn
-        , ChangeList
+        , upsertOnPouchDBChange
         )
 
 import Dict
 import Document exposing (Document)
 import Document.Types exposing (DocId)
+import Firebase.Types exposing (DeviceId)
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
+import List.Extra as List
+import Random.Pcg as Random
+import Set exposing (Set)
 import Store.Types
+import Time exposing (Time)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import Tuple2
 import X.Debug
 import X.Random as Random
 import X.Record as Record exposing (get, over, overT2)
-import Firebase.Types exposing (DeviceId)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import List.Extra as List
-import Json.Decode as D exposing (Decoder)
-import Json.Encode as E
-import Json.Decode as J exposing (Decoder)
-import Json.Encode as J
-import Random.Pcg as Random
-import Set exposing (Set)
-import Time exposing (Time)
-import Tuple2
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
@@ -64,7 +63,7 @@ decodeList decoder =
                             _ =
                                 X.Debug.log "Error while decoding Project" x
                         in
-                            Nothing
+                        Nothing
             )
 
 
@@ -159,7 +158,7 @@ findAndUpdateAll :
 findAndUpdateAll pred now updateFn_ store =
     let
         updateFn =
-            (getUpdateFnDecorator updateFn_ now store)
+            getUpdateFnDecorator updateFn_ now store
 
         updateAndCollectChanges =
             \id oldDoc ( changeList, dict ) ->
@@ -167,15 +166,15 @@ findAndUpdateAll pred now updateFn_ store =
                     newDoc =
                         updateFn oldDoc
                 in
-                    ( ( oldDoc, newDoc ) :: changeList, replaceDocIn dict newDoc )
+                ( ( oldDoc, newDoc ) :: changeList, replaceDocIn dict newDoc )
     in
-        store
-            |> overT2 dict
-                (\dict ->
-                    dict
-                        |> Dict.filter (\id doc -> pred doc)
-                        |> Dict.foldl updateAndCollectChanges ( [], dict )
-                )
+    store
+        |> overT2 dict
+            (\dict ->
+                dict
+                    |> Dict.filter (\id doc -> pred doc)
+                    |> Dict.foldl updateAndCollectChanges ( [], dict )
+            )
 
 
 updateAndPersist pred now updateFn_ store =
@@ -214,14 +213,14 @@ updateExternalHelp newDoc store =
                 mergedDoc =
                     1
             in
-                store
+            store
 
         add =
             insertDocInDict newDoc store
     in
-        findById id store
-            ?|> merge
-            ?= add
+    findById id store
+        ?|> merge
+        ?= add
 
 
 generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
@@ -274,7 +273,7 @@ findById id =
 
 
 getSeed =
-    (.seed)
+    .seed
 
 
 setSeed seed model =

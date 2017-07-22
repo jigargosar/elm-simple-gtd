@@ -1,6 +1,6 @@
 module LaunchBar.Messages exposing (..)
 
-import LaunchBar.Models exposing (SearchItem, LaunchBarForm)
+import LaunchBar.Models exposing (LaunchBarForm, SearchItem)
 
 
 type LaunchBarMsg

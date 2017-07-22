@@ -1,4 +1,4 @@
-module CommonMsg exposing (update, createHelper)
+module CommonMsg exposing (createHelper, update)
 
 import CommonMsg.Types exposing (Msg(..))
 import DomPorts exposing (DomSelector)
@@ -19,7 +19,7 @@ update msg =
                 _ =
                     X.Debug.log "CM:LogString" string
             in
-                update NoOp
+            update NoOp
 
 
 type alias Helper msg =

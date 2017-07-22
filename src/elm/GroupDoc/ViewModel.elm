@@ -6,17 +6,17 @@ import Context
 import Document
 import Document.Types exposing (DocId)
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
-import GroupDoc.Types exposing (..)
-import Material
-import String.Extra
-import Todo.Types exposing (TodoDoc)
-import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
-import Todo
-import Project
+import GroupDoc.Types exposing (..)
 import Keyboard.Extra as Key exposing (Key)
+import Material
+import Project
+import String.Extra
+import Todo
+import Todo.Types exposing (TodoDoc)
 import Toolkit.Helpers exposing (apply2)
 import X.Function exposing (when)
+import X.Keyboard exposing (KeyboardEvent)
 
 
 type alias IconVM =
@@ -140,30 +140,30 @@ create config configInner todoList groupDoc =
                     else
                         "archive"
             in
-                { iconName = iconName
-                , onClick = toggleArchiveMsg
-                , isArchived = isArchived
-                }
+            { iconName = iconName
+            , onClick = toggleArchiveMsg
+            , isArchived = isArchived
+            }
     in
-        { id = id
-        , name = name
-        , namePrefix = configInner.namePrefix
-        , count = todoList |> List.length
-        , isEditable = not isNull
-        , isDeleted = Document.isDeleted groupDoc
-        , archive = archive
-        , startEditingMsg = startEditingMsg
-        , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = config.onSaveExclusiveModeForm
-        , onCancelClicked = config.revertExclusiveMode
-        , icon = icon
-        , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn
-        , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = configInner.getTabIndexAVForEntityId entityId
-        , todoList = todoList
-        , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
-        , onMdl = config.onMdl
-        }
+    { id = id
+    , name = name
+    , namePrefix = configInner.namePrefix
+    , count = todoList |> List.length
+    , isEditable = not isNull
+    , isDeleted = Document.isDeleted groupDoc
+    , archive = archive
+    , startEditingMsg = startEditingMsg
+    , onDeleteClicked = toggleDeleteMsg
+    , onSaveClicked = config.onSaveExclusiveModeForm
+    , onCancelClicked = config.revertExclusiveMode
+    , icon = icon
+    , onFocusIn = onEntityAction Entity.Types.EUA_OnFocusIn
+    , onKeyDownMsg = onKeyDownMsg
+    , tabindexAV = configInner.getTabIndexAVForEntityId entityId
+    , todoList = todoList
+    , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
+    , onMdl = config.onMdl
+    }
 
 
 
@@ -187,7 +187,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
     in
-        create config configInner todoList context
+    create config configInner todoList context
 
 
 
@@ -211,7 +211,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }
     in
-        create config configInner todoList project
+    create config configInner todoList project
 
 
 inboxColor =

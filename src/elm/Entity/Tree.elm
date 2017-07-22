@@ -3,11 +3,11 @@ module Entity.Tree exposing (..)
 import Context
 import Entity
 import Entity.Types exposing (Entity)
-import Todo
-import Toolkit.Operators exposing (..)
 import List.Extra as List
 import Project
+import Todo
 import Todo.Types exposing (TodoDoc)
+import Toolkit.Operators exposing (..)
 
 
 type alias TodoNode =
@@ -84,7 +84,7 @@ createProjectSubGroups findProjectById tcg =
             tcg.todoList
                 |> List.filter (Todo.hasProject project)
     in
-        projects .|> initProjectNode filterTodoForProject
+    projects .|> initProjectNode filterTodoForProject
 
 
 initContextRoot getTodoList findContextById context =
@@ -111,7 +111,7 @@ createContextSubGroups findContextById tcg =
             tcg.todoList
                 |> List.filter (Todo.contextFilter context)
     in
-        contexts .|> initContextNode filterTodoForContext
+    contexts .|> initContextNode filterTodoForContext
 
 
 initProjectRoot getTodoList findProjectById project =

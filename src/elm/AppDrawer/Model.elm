@@ -1,11 +1,11 @@
 module AppDrawer.Model exposing (..)
 
-import X.Record exposing (get, over, set, toggle)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import Json.Decode as D
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
+import X.Record exposing (get, over, set, toggle)
 
 
 type alias GroupModel =

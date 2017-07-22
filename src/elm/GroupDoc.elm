@@ -2,18 +2,18 @@ module GroupDoc exposing (..)
 
 import Document
 import Document.Types exposing (DocId)
-import GroupDoc.Types exposing (..)
-import X.Predicate
-import X.Record
 import Firebase.Types exposing (DeviceId)
-import Time exposing (Time)
-import X.Function.Infix exposing (..)
-import Store
-import Tuple2
+import GroupDoc.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
+import Store
+import Time exposing (Time)
+import Tuple2
+import X.Function.Infix exposing (..)
+import X.Predicate
+import X.Record
 
 
 archived =
@@ -113,22 +113,22 @@ compareNotNulls tuple =
         compareModifiedAt =
             Tuple2.mapBoth (Document.getModifiedAt >> negate) >> uncurry compare
     in
-        tuple
-            |> Tuple2.mapBoth isArchived
-            |> (\archivedTuple ->
-                    case archivedTuple of
-                        ( True, False ) ->
-                            LT
+    tuple
+        |> Tuple2.mapBoth isArchived
+        |> (\archivedTuple ->
+                case archivedTuple of
+                    ( True, False ) ->
+                        LT
 
-                        ( False, True ) ->
-                            GT
+                    ( False, True ) ->
+                        GT
 
-                        ( True, True ) ->
-                            compareModifiedAt tuple
+                    ( True, True ) ->
+                        compareModifiedAt tuple
 
-                        ( False, False ) ->
-                            compareName tuple
-               )
+                    ( False, False ) ->
+                        compareName tuple
+           )
 
 
 isActive =

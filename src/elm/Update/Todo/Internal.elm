@@ -7,29 +7,29 @@ import DomPorts
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Lazy exposing (Lazy)
+import List.Extra as List
+import Maybe.Extra as Maybe
 import Model.Todo exposing (findTodoById, todoStore)
+import Notification
+import Ports.Todo exposing (..)
+import Return exposing (andThen, command, map)
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
+import Todo
 import Todo.Form
 import Todo.FormTypes exposing (..)
-import Ports.Todo exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import Todo.TimeTracker as Tracker
+import Todo.Types exposing (TodoAction(..), TodoStore)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import X.Function exposing (applyMaybeWith)
+import X.Function.Infix exposing (..)
 import X.Record as Record exposing (overReturn, overT2, set)
 import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe1)
 import X.Time
-import Notification
-import Return exposing (andThen, command, map)
-import Todo
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(..), TodoStore)
-import X.Function exposing (applyMaybeWith)
 
 
 type alias SubModel model =
@@ -67,7 +67,7 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update action
     in
-        overReturn todoStore (Store.updateAndPersist findFn model.now updateFn) model
+    overReturn todoStore (Store.updateAndPersist findFn model.now updateFn) model
 
 
 
@@ -94,7 +94,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
             else
                 Set.singleton todoId
     in
-        model |> updateAllTodos action idSet
+    model |> updateAllTodos action idSet
 
 
 findTodoWithOverDueReminder model =
@@ -113,8 +113,8 @@ findAndSnoozeOverDueTodo model =
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
     in
-        Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
-            ?+> (Document.getId >> snooze)
+    Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
+        ?+> (Document.getId >> snooze)
 
 
 onSaveTodoForm config form =
@@ -125,15 +125,15 @@ onSaveTodoForm config form =
                     updateTodo action form.id
                         |> andThen
             in
-                case editMode of
-                    ETFM_EditTodoText ->
-                        updateTodoHelp <| TA_SetText form.text
+            case editMode of
+                ETFM_EditTodoText ->
+                    updateTodoHelp <| TA_SetText form.text
 
-                    ETFM_EditTodoSchedule ->
-                        updateTodoHelp <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
+                ETFM_EditTodoSchedule ->
+                    updateTodoHelp <| TA_SetScheduleFromMaybeTime form.maybeComputedTime
 
-                    _ ->
-                        identity
+                _ ->
+                    identity
 
         TFM_Add addMode ->
             saveAddTodoForm config addMode form |> andThen
@@ -148,7 +148,7 @@ inboxEntity =
 
 
 insertTodo constructWithId =
-    overT2 todoStore (Store.insert (constructWithId))
+    overT2 todoStore (Store.insert constructWithId)
 
 
 saveAddTodoForm :
@@ -174,19 +174,19 @@ saveAddTodoForm config addMode form model =
                             ATFM_AddWithFocusInEntityAsReference ->
                                 model.focusInEntity
                 in
-                    updateTodo
-                        (case referenceEntity of
-                            TodoEntity fromTodo ->
-                                (TA_CopyProjectAndContextId fromTodo)
+                updateTodo
+                    (case referenceEntity of
+                        TodoEntity fromTodo ->
+                            TA_CopyProjectAndContextId fromTodo
 
-                            GroupEntity (ContextEntity context) ->
-                                (TA_SetContext context)
+                        GroupEntity (ContextEntity context) ->
+                            TA_SetContext context
 
-                            GroupEntity (ProjectEntity project) ->
-                                (TA_SetProject project)
-                        )
-                        todoId
-                        >> setFocusInEntityWithTodoId config todoId
+                        GroupEntity (ProjectEntity project) ->
+                            TA_SetProject project
+                    )
+                    todoId
+                    >> setFocusInEntityWithTodoId config todoId
             )
 
 
@@ -211,7 +211,7 @@ onUpdateTodoFormAction config form action =
         xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-        config.setXMode xMode
+    config.setXMode xMode
 
 
 onStartEditingTodo config todo editFormMode =
@@ -222,21 +222,21 @@ onStartEditingTodo config todo editFormMode =
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-        X.Return.returnWith createXMode config.setXMode
-            >> command
-                (case editFormMode of
-                    ETFM_EditTodoText ->
-                        Cmd.none
+    X.Return.returnWith createXMode config.setXMode
+        >> command
+            (case editFormMode of
+                ETFM_EditTodoText ->
+                    Cmd.none
 
-                    ETFM_EditTodoContext ->
-                        positionPopup "#edit-context-button-"
+                ETFM_EditTodoContext ->
+                    positionPopup "#edit-context-button-"
 
-                    ETFM_EditTodoProject ->
-                        positionPopup "#edit-project-button-"
+                ETFM_EditTodoProject ->
+                    positionPopup "#edit-project-button-"
 
-                    ETFM_EditTodoSchedule ->
-                        positionPopup "#edit-schedule-button-"
-                )
+                ETFM_EditTodoSchedule ->
+                    positionPopup "#edit-schedule-button-"
+            )
 
 
 onStartAddingTodo config addFormMode =
@@ -244,7 +244,7 @@ onStartAddingTodo config addFormMode =
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-        X.Return.returnWith createXMode config.setXMode
+    X.Return.returnWith createXMode config.setXMode
 
 
 
@@ -265,17 +265,17 @@ onRunningNotificationResponse config res =
         todoId =
             res.data.id
     in
-        (case res.action of
-            "stop" ->
-                onStopRunningTodo
+    (case res.action of
+        "stop" ->
+            onStopRunningTodo
 
-            "continue" ->
-                identity
+        "continue" ->
+            identity
 
-            _ ->
-                onGotoRunningTodo config
-        )
-            >> config.closeNotification todoId
+        _ ->
+            onGotoRunningTodo config
+    )
+        >> config.closeNotification todoId
 
 
 onReminderNotificationClicked notif =
@@ -286,11 +286,11 @@ onReminderNotificationClicked notif =
         todoId =
             data.id
     in
-        if action == "mark-done" then
-            Return.andThen (updateTodo TA_MarkDone todoId)
-                >> command (Notification.closeNotification todoId)
-        else
-            map (showReminderOverlayForTodoId todoId)
+    if action == "mark-done" then
+        Return.andThen (updateTodo TA_MarkDone todoId)
+            >> command (Notification.closeNotification todoId)
+    else
+        map (showReminderOverlayForTodoId todoId)
 
 
 onAfterUpsertTodo todo =
@@ -301,10 +301,10 @@ onAfterUpsertTodo todo =
                     Todo.isInActive todo
                         && Tracker.isTrackingTodo todo model.timeTracker
             in
-                if isTrackerTodoInactive then
-                    set timeTracker Tracker.none model
-                else
-                    model
+            if isTrackerTodoInactive then
+                set timeTracker Tracker.none model
+            else
+                model
         )
 
 
@@ -315,7 +315,7 @@ showReminderNotificationCmd ( todo, model ) =
                 id =
                     Document.getId todo
             in
-                { title = Todo.getText todo, tag = id, data = { id = id } }
+            { title = Todo.getText todo, tag = id, data = { id = id } }
 
         cmds =
             [ createNotification
@@ -323,7 +323,7 @@ showReminderNotificationCmd ( todo, model ) =
             , Notification.startAlarm ()
             ]
     in
-        model ! cmds
+    model ! cmds
 
 
 showRunningNotificationCmd ( maybeTrackerInfo, model ) =
@@ -334,25 +334,25 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                     Document.getId todo
 
                 formattedDuration =
-                    X.Time.toHHMMSSMin (info.elapsedTime)
+                    X.Time.toHHMMSSMin info.elapsedTime
             in
-                { tag = todoId
-                , title = "You have been working for " ++ formattedDuration
-                , body = Todo.getText todo
-                , actions =
-                    [ { title = "Continue", action = "continue" }
-                    , { title = "Stop", action = "stop" }
-                    ]
-                , data =
-                    { id = todoId
-                    , notificationClickedPort = "onRunningTodoNotificationClicked"
-                    , skipFocusActionList = [ "continue" ]
-                    }
+            { tag = todoId
+            , title = "You have been working for " ++ formattedDuration
+            , body = Todo.getText todo
+            , actions =
+                [ { title = "Continue", action = "continue" }
+                , { title = "Stop", action = "stop" }
+                ]
+            , data =
+                { id = todoId
+                , notificationClickedPort = "onRunningTodoNotificationClicked"
+                , skipFocusActionList = [ "continue" ]
                 }
+            }
     in
-        maybeTrackerInfo
-            ?+> (\info -> findTodoById info.todoId model ?|> createRequest info)
-            |> maybeMapToCmd showRunningTodoNotification
+    maybeTrackerInfo
+        ?+> (\info -> findTodoById info.todoId model ?|> createRequest info)
+        |> maybeMapToCmd showRunningTodoNotification
 
 
 updateTimeTracker now =
@@ -383,13 +383,13 @@ gotoTodoWithId config model todoId =
                                 False
                     )
     in
-        maybeTodoEntity
-            |> Maybe.unpack
-                (\_ ->
-                    setFocusInEntityWithTodoId config todoId
-                        >> config.switchToContextsView
-                )
-                config.setFocusInEntity
+    maybeTodoEntity
+        |> Maybe.unpack
+            (\_ ->
+                setFocusInEntityWithTodoId config todoId
+                    >> config.switchToContextsView
+            )
+            config.setFocusInEntity
 
 
 setFocusInEntityWithTodoId config =
@@ -402,7 +402,7 @@ positionMoreMenuCmd todoId =
 
 showReminderOverlayForTodoId todoId =
     applyMaybeWith (findTodoById todoId)
-        (setReminderOverlayToInitialView)
+        setReminderOverlayToInitialView
 
 
 setReminderOverlayToInitialView todo model =
@@ -423,26 +423,26 @@ onActive action ( _, todoDetails ) =
         todoId =
             todoDetails.id
     in
-        case action of
-            Todo.Notification.Model.Dismiss ->
-                andThen (updateTodo (TA_TurnReminderOff) todoId)
-                    >> map removeReminderOverlay
-                    >> Return.command (Notification.closeNotification todoId)
+    case action of
+        Todo.Notification.Model.Dismiss ->
+            andThen (updateTodo TA_TurnReminderOff todoId)
+                >> map removeReminderOverlay
+                >> Return.command (Notification.closeNotification todoId)
 
-            Todo.Notification.Model.ShowSnoozeOptions ->
-                map (setReminderOverlayToSnoozeView todoDetails)
+        Todo.Notification.Model.ShowSnoozeOptions ->
+            map (setReminderOverlayToSnoozeView todoDetails)
 
-            Todo.Notification.Model.SnoozeTill snoozeOffset ->
-                Return.andThen (snoozeTodoWithOffset snoozeOffset todoId)
-                    >> Return.command (Notification.closeNotification todoId)
+        Todo.Notification.Model.SnoozeTill snoozeOffset ->
+            Return.andThen (snoozeTodoWithOffset snoozeOffset todoId)
+                >> Return.command (Notification.closeNotification todoId)
 
-            Todo.Notification.Model.Close ->
-                map removeReminderOverlay
+        Todo.Notification.Model.Close ->
+            map removeReminderOverlay
 
-            Todo.Notification.Model.MarkDone ->
-                andThen (updateTodo TA_MarkDone todoId)
-                    >> map removeReminderOverlay
-                    >> Return.command (Notification.closeNotification todoId)
+        Todo.Notification.Model.MarkDone ->
+            andThen (updateTodo TA_MarkDone todoId)
+                >> map removeReminderOverlay
+                >> Return.command (Notification.closeNotification todoId)
 
 
 snoozeTodoWithOffset snoozeOffset todoId model =
@@ -450,9 +450,9 @@ snoozeTodoWithOffset snoozeOffset todoId model =
         time =
             Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
     in
-        model
-            |> updateTodo (time |> TA_SnoozeTill) todoId
-            >> Tuple.mapFirst removeReminderOverlay
+    model
+        |> updateTodo (time |> TA_SnoozeTill) todoId
+        >> Tuple.mapFirst removeReminderOverlay
 
 
 removeReminderOverlay model =

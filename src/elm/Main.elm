@@ -1,24 +1,21 @@
 port module Main exposing (main)
 
 import Model.Internal exposing (Flags)
+import Msg exposing (AppMsg)
+import Msg.Subscription
+import Ports exposing (onFirebaseDatabaseChangeSub)
 import Return
 import RouteUrl
 import Routes
-import Time exposing (Time)
-import TodoMsg
-import Update
-import View
-import X.Keyboard
-import Msg exposing (AppMsg)
-import Types exposing (..)
-import Msg.Subscription
-import Ports exposing (onFirebaseDatabaseChangeSub)
 import Store
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
-import Time
-import Types exposing (AppModel)
+import Time exposing (Time)
+import TodoMsg
+import Types exposing (..)
+import Update
+import View
 import X.Keyboard
 
 
@@ -55,8 +52,8 @@ update msg =
         andThenUpdate =
             update >> Return.andThen
     in
-        Return.singleton
-            >> Update.update andThenUpdate msg
+    Return.singleton
+        >> Update.update andThenUpdate msg
 
 
 viewConfig =

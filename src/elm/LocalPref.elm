@@ -1,4 +1,4 @@
-module LocalPref exposing (encodeLocalPref, decode)
+module LocalPref exposing (decode, encodeLocalPref)
 
 import AppDrawer.Model
 import Firebase.SignIn
@@ -6,8 +6,8 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LocalPref.Types exposing (LocalPref)
-import X.Function.Infix exposing (..)
 import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 
 
 localPrefDecoder =

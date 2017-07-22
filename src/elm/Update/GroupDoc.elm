@@ -5,15 +5,14 @@ import Document.Types exposing (getDocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm)
-import GroupDoc.Types exposing (GroupDocFormMode(..))
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
 import Return exposing (andThen)
 import Set
 import Store
-import Toolkit.Operators exposing (..)
 import Time exposing (Time)
+import Toolkit.Operators exposing (..)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
 
 
@@ -73,36 +72,36 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
             (updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen)
                 >> config.revertExclusiveMode
     in
-        case groupDocIdAction of
-            GDA_ToggleArchived ->
-                updateGroupDocHelp GroupDoc.toggleArchived
+    case groupDocIdAction of
+        GDA_ToggleArchived ->
+            updateGroupDocHelp GroupDoc.toggleArchived
 
-            GDA_ToggleDeleted ->
-                updateGroupDocHelp Document.toggleDeleted
+        GDA_ToggleDeleted ->
+            updateGroupDocHelp Document.toggleDeleted
 
-            GDA_UpdateFormName form newName ->
-                GroupDoc.Form.setName newName form
-                    |> XMGroupDocForm
-                    |> config.onSetExclusiveMode
+        GDA_UpdateFormName form newName ->
+            GroupDoc.Form.setName newName form
+                |> XMGroupDocForm
+                |> config.onSetExclusiveMode
 
-            GDA_SaveForm form ->
-                case form.mode of
-                    GDFM_Add ->
-                        insertGroupDoc form.groupDocType form.name
+        GDA_SaveForm form ->
+            case form.mode of
+                GDFM_Add ->
+                    insertGroupDoc form.groupDocType form.name
 
-                    GDFM_Edit ->
-                        updateGroupDocHelp (GroupDoc.setName form.name)
+                GDFM_Edit ->
+                    updateGroupDocHelp (GroupDoc.setName form.name)
 
 
 insertGroupDoc gdType name =
     let
         store =
-            (Model.GroupDocStore.storeFieldFromGDType gdType)
+            Model.GroupDocStore.storeFieldFromGDType gdType
     in
-        andThen
-            (\model ->
-                overReturn store (Store.insertAndPersist (GroupDoc.init name model.now)) model
-            )
+    andThen
+        (\model ->
+            overReturn store (Store.insertAndPersist (GroupDoc.init name model.now)) model
+        )
 
 
 

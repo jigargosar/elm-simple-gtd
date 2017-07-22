@@ -6,16 +6,16 @@ import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Firebase.Types exposing (..)
+import Json.Decode as D exposing (Decoder)
 import Navigation
+import Ports.Firebase exposing (..)
 import Return exposing (command)
 import Store
+import Todo.Types exposing (TodoStore)
+import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 import X.Record exposing (over, set)
 import X.Return exposing (..)
-import X.Function.Infix exposing (..)
-import Toolkit.Operators exposing (..)
-import Json.Decode as D exposing (Decoder)
-import Ports.Firebase exposing (..)
-import Todo.Types exposing (TodoStore)
 
 
 type alias SubModel model =
@@ -60,7 +60,7 @@ update config msg =
                     else
                         config.onSetExclusiveMode XMSignInOverlay
             in
-                returnWith identity onSwitchToNewUserSetupModeIfNeeded
+            returnWith identity onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignIn ->
             command (signIn ())
@@ -78,14 +78,15 @@ update config msg =
             Return.andThen
                 (\model ->
                     Return.singleton model
-                        |> case model.user of
-                            SignedOut ->
-                                identity
+                        |> (case model.user of
+                                SignedOut ->
+                                    identity
 
-                            SignedIn user ->
-                                Return.map
-                                    (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
-                                    >> config.onSwitchToNewUserSetupModeIfNeeded
+                                SignedIn user ->
+                                    Return.map
+                                        (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
+                                        >> config.onSwitchToNewUserSetupModeIfNeeded
+                           )
                 )
 
         OnFBUserChanged encodedUser ->

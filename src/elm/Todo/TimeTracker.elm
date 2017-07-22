@@ -2,8 +2,8 @@ module Todo.TimeTracker exposing (..)
 
 import Document
 import Document.Types exposing (DocId)
-import Time exposing (Time)
 import Maybe.Extra as Maybe
+import Time exposing (Time)
 
 
 type State
@@ -65,7 +65,7 @@ initRunning todoId now =
 
 switchOrStartRunning : DocId -> Time -> Model -> Model
 switchOrStartRunning todoId now =
-    Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
+    Maybe.unpack (\_ -> initRunning todoId now) (\rec -> { rec | todoId = todoId } |> wrap)
 
 
 getMaybeTodoId =
@@ -89,7 +89,7 @@ updateNextAlarmAt now model =
                         , elapsedTime = getElapsedTime now newRec
                         }
                 in
-                    ( Just info, newRec )
+                ( Just info, newRec )
              else
                 ( Nothing, rec )
             )

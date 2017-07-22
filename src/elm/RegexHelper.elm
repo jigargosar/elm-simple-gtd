@@ -16,4 +16,4 @@ stripUrlPrefix =
         urlPrefix =
             Regex.regex ("^" ++ urlPrefixRegexString)
     in
-        Regex.replace All urlPrefix (\_ -> "")
+    Regex.replace All urlPrefix (\_ -> "")

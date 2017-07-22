@@ -1,10 +1,10 @@
 module LaunchBar.Models exposing (..)
 
-import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
-import Time exposing (Time)
 import Context
 import Fuzzy
+import GroupDoc.Types exposing (ContextDoc, GroupDoc, ProjectDoc)
 import Project
+import Time exposing (Time)
 
 
 type SearchItem

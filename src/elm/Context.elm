@@ -3,9 +3,9 @@ module Context exposing (..)
 import Document.Types exposing (DeviceId, DocId)
 import GroupDoc
 import GroupDoc.Types exposing (..)
-import X.Function exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random
+import X.Function exposing (..)
 
 
 type alias Model =

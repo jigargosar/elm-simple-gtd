@@ -3,8 +3,8 @@ module View.Shared exposing (..)
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Mat
-import X.Function.Infix exposing (..)
 import Msg
+import X.Function.Infix exposing (..)
 
 
 defaultOkCancelButtons =

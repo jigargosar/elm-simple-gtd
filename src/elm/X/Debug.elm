@@ -1,4 +1,4 @@
-module X.Debug exposing (tap, tapLog, log)
+module X.Debug exposing (log, tap, tapLog)
 
 
 tap : (value -> ignore) -> value -> value
@@ -7,7 +7,7 @@ tap tapperFunction value =
         _ =
             tapperFunction value
     in
-        value
+    value
 
 
 tapLog transformerFunction logString =

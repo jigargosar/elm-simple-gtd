@@ -2,13 +2,13 @@ module Model.EntityList exposing (..)
 
 import Entity
 import Entity.Tree
+import List.Extra as List
+import Maybe.Extra as Maybe
 import Model exposing (focusInEntity)
 import Model.EntityTree
 import Model.ViewType
 import Toolkit.Operators exposing (..)
 import Tuple2
-import List.Extra as List
-import Maybe.Extra as Maybe
 import X.List
 import X.Record exposing (maybeSetIn)
 
@@ -37,7 +37,7 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
                 focusNext oldIndex newIndex =
                     case compare oldIndex newIndex of
                         LT ->
-                            setFocusInIndex (oldIndex)
+                            setFocusInIndex oldIndex
 
                         GT ->
                             setFocusInIndex (oldIndex + 1)
@@ -45,8 +45,8 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
                         EQ ->
                             identity
             in
-                model
-                    |> case indexTuple of
+            model
+                |> (case indexTuple of
                         -- note we want focus to remain on group entity, when edited, since its sort order may change. But if removed from view, we want to focus on next entity.
                         ( Just oldIndex, Just newIndex ) ->
                             if focusNextOnIndexChange then
@@ -59,15 +59,16 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
 
                         _ ->
                             identity
+                   )
 
         getMaybeFocusInEntityIndex entityList model =
             entityList
                 |> List.findIndex (Entity.equalById model.focusInEntity)
     in
-        ( oldModel, newModel )
-            |> Tuple2.mapBoth
-                (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
-            |> updateEntityListCursorFromEntityIndexTuple newModel
+    ( oldModel, newModel )
+        |> Tuple2.mapBoth
+            (createEntityListForCurrentView >> (getMaybeFocusInEntityIndex # oldModel))
+        |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
 updateEntityListCursorOnGroupDocChange =

@@ -63,8 +63,8 @@ encode =
         _ =
             1
     in
-        Color.toRgb
-            >> \{ red, green, blue, alpha } ->
+    Color.toRgb
+        >> (\{ red, green, blue, alpha } ->
                 "rgba("
                     ++ toString red
                     ++ ","
@@ -74,3 +74,4 @@ encode =
                     ++ ","
                     ++ toString alpha
                     ++ ")"
+           )

@@ -5,32 +5,32 @@ import Document.Types exposing (getDocId)
 import Entity.Types
 import EntityId
 import GroupDoc
+import Keyboard.Extra as Key
 import Regex
 import Set
 import Store
-import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
 import String.Extra
 import Todo
+import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 import X.Keyboard
-import Keyboard.Extra as Key
 import X.Time
 
 
 getDisplayText todo =
     let
         tripleNewLineAndRestRegex =
-            (Regex.regex "\\n\\n\\n(.|\n)*")
+            Regex.regex "\\n\\n\\n(.|\n)*"
 
         trimAndReplaceEmptyWithDefault =
             String.trim >> String.Extra.nonEmpty >>?= "< empty >"
     in
-        Todo.getText todo
-            |> trimAndReplaceEmptyWithDefault
-            |> Regex.replace
-                (Regex.AtMost 1)
-                tripleNewLineAndRestRegex
-                (\match -> "\n...")
+    Todo.getText todo
+        |> trimAndReplaceEmptyWithDefault
+        |> Regex.replace
+            (Regex.AtMost 1)
+            tripleNewLineAndRestRegex
+            (\match -> "\n...")
 
 
 
@@ -47,7 +47,7 @@ createTodoViewModel config appM isFocusable todo =
                     else
                         -1
             in
-                tabindexValue
+            tabindexValue
 
         now =
             appM.now
@@ -134,26 +134,26 @@ createTodoViewModel config appM isFocusable todo =
         toggleDoneMsg =
             config.onToggleDoneAndMaybeSelection todoId
     in
-        { isDone = Todo.isDone todo
-        , key = todoId
-        , isDeleted = Todo.getDeleted todo
-        , onKeyDownMsg = onKeyDownMsg
-        , displayText = getDisplayText todo
-        , projectDisplayName = projectDisplayName
-        , contextDisplayName = contextDisplayName
-        , showContextDropDownMsg = config.onStartEditingTodoContext todo
-        , showProjectDropDownMsg = config.onStartEditingTodoProject todo
-        , startEditingMsg = startEditingMsg
-        , canBeFocused = isFocusable
-        , toggleDoneMsg = toggleDoneMsg
-        , reminder = reminder
-        , onFocusIn = createEntityUpdateMsg Entity.Types.EUA_OnFocusIn
-        , tabindexAV = tabindexAV
-        , isSelected = appM.selectedEntityIdSet |> Set.member todoId
-        , mdl = appM.mdl
-        , onMdl = config.onMdl
-        , noop = config.noop
-        }
+    { isDone = Todo.isDone todo
+    , key = todoId
+    , isDeleted = Todo.getDeleted todo
+    , onKeyDownMsg = onKeyDownMsg
+    , displayText = getDisplayText todo
+    , projectDisplayName = projectDisplayName
+    , contextDisplayName = contextDisplayName
+    , showContextDropDownMsg = config.onStartEditingTodoContext todo
+    , showProjectDropDownMsg = config.onStartEditingTodoProject todo
+    , startEditingMsg = startEditingMsg
+    , canBeFocused = isFocusable
+    , toggleDoneMsg = toggleDoneMsg
+    , reminder = reminder
+    , onFocusIn = createEntityUpdateMsg Entity.Types.EUA_OnFocusIn
+    , tabindexAV = tabindexAV
+    , isSelected = appM.selectedEntityIdSet |> Set.member todoId
+    , mdl = appM.mdl
+    , onMdl = config.onMdl
+    , noop = config.noop
+    }
 
 
 
@@ -173,15 +173,15 @@ createScheduleViewModel config now todo =
                 nowDate =
                     Date.fromTime now
             in
-                if time < now then
-                    overDueText
-                else
-                    X.Time.smartFormat now time
+            if time < now then
+                overDueText
+            else
+                X.Time.smartFormat now time
 
         displayText =
             Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
     in
-        { displayText = displayText
-        , isOverDue = displayText == overDueText
-        , startEditingMsg = config.onStartEditingReminder todo
-        }
+    { displayText = displayText
+    , isOverDue = displayText == overDueText
+    , startEditingMsg = config.onStartEditingReminder todo
+    }

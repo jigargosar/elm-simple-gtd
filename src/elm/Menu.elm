@@ -1,20 +1,20 @@
 module Menu exposing (..)
 
-import Menu.Types exposing (MenuState)
-import X.Html exposing (onClickStopPropagation)
-import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
-import X.List as List
-import Html.Keyed
-import Keyboard.Extra as Key
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Html.Keyed
+import Keyboard.Extra as Key
+import List.Extra as List
+import Maybe.Extra as Maybe
+import Menu.Types exposing (MenuState)
+import Toolkit.Operators exposing (..)
 import Tuple2
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
+import X.Html exposing (onClickStopPropagation)
+import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
+import X.List as List
 
 
 type alias State =
@@ -77,7 +77,7 @@ createViewModel items state config =
                 findIndexOfItemWithKey key =
                     List.findIndex (config.itemKey >> equals key) items
             in
-                state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
+            state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
 
         focusedIndex =
             maybeFocusedIndex |> Maybe.orElse maybeSelectedIndex ?= 0
@@ -99,12 +99,12 @@ createViewModel items state config =
                         charString =
                             String.fromChar singleChar
                     in
-                        config.itemSearchText >> boil >> String.startsWith (boil charString)
+                    config.itemSearchText >> boil >> String.startsWith (boil charString)
             in
-                items
-                    |> splitSwapListAt (focusedIndex + 1)
-                    |> List.find findPred
-                    |> stateChangedMsgFromMaybeFocusedItem
+            items
+                |> splitSwapListAt (focusedIndex + 1)
+                |> List.find findPred
+                |> stateChangedMsgFromMaybeFocusedItem
 
         onFocusedItemKeyDown { key, keyString } =
             let
@@ -115,23 +115,23 @@ createViewModel items state config =
                         |> (List.getAt # items)
                         |> stateChangedMsgFromMaybeFocusedItem
             in
-                case key of
-                    Key.Enter ->
-                        List.getAt focusedIndex items ?|> config.onSelect ?= config.noOp
+            case key of
+                Key.Enter ->
+                    List.getAt focusedIndex items ?|> config.onSelect ?= config.noOp
 
-                    Key.ArrowUp ->
-                        onFocusIndexChangeByMsg -1
+                Key.ArrowUp ->
+                    onFocusIndexChangeByMsg -1
 
-                    Key.ArrowDown ->
-                        onFocusIndexChangeByMsg 1
+                Key.ArrowDown ->
+                    onFocusIndexChangeByMsg 1
 
-                    _ ->
-                        case keyString |> String.toList of
-                            singleChar :: [] ->
-                                onFocusItemStartingWithMsg singleChar
+                _ ->
+                    case keyString |> String.toList of
+                        singleChar :: [] ->
+                            onFocusItemStartingWithMsg singleChar
 
-                            _ ->
-                                config.noOp
+                        _ ->
+                            config.noOp
 
         isFocusedAt =
             equals focusedIndex
@@ -140,16 +140,16 @@ createViewModel items state config =
             if isFocusedAt index then
                 onFocusedItemKeyDown
             else
-                (\_ -> config.noOp)
+                \_ -> config.noOp
     in
-        { isFocusedAt = isFocusedAt
-        , isSelectedAt = maybeSelectedIndex ?|> equals ?= (\_ -> False)
-        , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
-        , onKeyDownAt = onKeyDownAt
-        , onSelect = config.onSelect
-        , itemView = config.itemView
-        , itemKey = config.itemKey
-        }
+    { isFocusedAt = isFocusedAt
+    , isSelectedAt = maybeSelectedIndex ?|> equals ?= (\_ -> False)
+    , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
+    , onKeyDownAt = onKeyDownAt
+    , onSelect = config.onSelect
+    , itemView = config.itemView
+    , itemKey = config.itemKey
+    }
 
 
 view : List item -> State -> Config item msg -> Html msg
@@ -163,18 +163,18 @@ view items state config =
                 #.|> createItemViewModel menuVM
                 >>> menuItemView
     in
-        div
-            [ class "overlay"
-            , onClickStopPropagation config.onOutsideMouseDown
-            , onKeyDownStopPropagation (\_ -> config.noOp)
+    div
+        [ class "overlay"
+        , onClickStopPropagation config.onOutsideMouseDown
+        , onKeyDownStopPropagation (\_ -> config.noOp)
+        ]
+        [ Html.Keyed.node "ul"
+            [ id "popup-menu"
+            , class "collection z-depth-4"
+            , attribute "data-prevent-default-keys" "Tab"
             ]
-            [ Html.Keyed.node "ul"
-                [ id "popup-menu"
-                , class "collection z-depth-4"
-                , attribute "data-prevent-default-keys" "Tab"
-                ]
-                itemViewList
-            ]
+            itemViewList
+        ]
 
 
 type alias ItemViewModel msg =

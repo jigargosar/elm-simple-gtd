@@ -20,9 +20,9 @@ import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import Types.ViewType exposing (ViewType)
+import X.Function.Infix exposing (..)
 import X.Record exposing (maybeOver)
 import X.Return exposing (returnWith)
-import X.Function.Infix exposing (..)
 
 
 type alias SubModel model =
@@ -110,11 +110,11 @@ onUpdate config entityId action =
                         maybeEntityListViewType =
                             Model.ViewType.maybeGetEntityListViewType model
                     in
-                        entityId
-                            |> toViewType model maybeEntityListViewType
-                            |> config.switchToEntityListView
+                    entityId
+                        |> toViewType model maybeEntityListViewType
+                        |> config.switchToEntityListView
             in
-                returnWith identity (switchToEntityListViewFromEntity entityId)
+            returnWith identity (switchToEntityListViewFromEntity entityId)
 
 
 toggleEntitySelection entityId =
@@ -143,7 +143,7 @@ startEditingEntity config entityId =
 
         TodoId id ->
             X.Return.returnWithMaybe1 (Model.Todo.findTodoById id)
-                (config.onStartEditingTodo)
+                config.onStartEditingTodo
 
 
 toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType
@@ -162,10 +162,10 @@ toViewType appModel maybeCurrentEntityListViewType entityId =
                         ?|> getTodoGotoGroupView todo
                         ?= (Todo.getContextId todo |> ContextView)
             in
-                Model.Todo.findTodoById id appModel
-                    ?|> getViewTypeForTodo
-                    |> Maybe.Extra.orElse maybeCurrentEntityListViewType
-                    ?= ContextsView
+            Model.Todo.findTodoById id appModel
+                ?|> getViewTypeForTodo
+                |> Maybe.Extra.orElse maybeCurrentEntityListViewType
+                ?= ContextsView
 
 
 getTodoGotoGroupView todo prevView =
@@ -176,24 +176,24 @@ getTodoGotoGroupView todo prevView =
         projectView =
             Todo.getProjectId todo |> ProjectView
     in
-        case prevView of
-            ProjectsView ->
-                contextView
+    case prevView of
+        ProjectsView ->
+            contextView
 
-            ProjectView _ ->
-                contextView
+        ProjectView _ ->
+            contextView
 
-            ContextsView ->
-                projectView
+        ContextsView ->
+            projectView
 
-            ContextView _ ->
-                projectView
+        ContextView _ ->
+            projectView
 
-            BinView ->
-                ContextsView
+        BinView ->
+            ContextsView
 
-            DoneView ->
-                ContextsView
+        DoneView ->
+            ContextsView
 
-            RecentView ->
-                ContextsView
+        RecentView ->
+            ContextsView

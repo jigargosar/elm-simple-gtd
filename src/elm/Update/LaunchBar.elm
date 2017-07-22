@@ -5,13 +5,13 @@ import Entity.Types exposing (EntityListViewType)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
+import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
 import Model.GroupDocStore
 import Regex
 import Return
 import String.Extra
 import Time exposing (Time)
-import LaunchBar.Messages exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import Toolkit.Operators exposing (..)
 import X.Return exposing (returnWith)
@@ -52,7 +52,7 @@ update config msg =
         OnLBEnter entity ->
             let
                 v =
-                    (case entity of
+                    case entity of
                         SI_Project project ->
                             project |> getDocId >> Entity.Types.ProjectView
 
@@ -64,10 +64,9 @@ update config msg =
 
                         SI_Contexts ->
                             Entity.Types.ContextsView
-                    )
             in
-                config.onComplete
-                    >> config.onSwitchView v
+            config.onComplete
+                >> config.onSwitchView v
 
         OnLBInputChanged form text ->
             returnWith identity
@@ -77,11 +76,10 @@ update config msg =
                 )
 
         Open ->
-            (config.now
+            config.now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
                 >> config.setXMode
-            )
 
         OnCancel ->
             config.onComplete
@@ -99,12 +97,13 @@ updateInput config input subModel form =
 
         newInput =
             input
-                |> if now - form.updatedAt > 1 * Time.second then
-                    Regex.replace (Regex.AtMost 1)
-                        (Regex.regex ("^" ++ Regex.escape form.input))
-                        (\_ -> "")
-                   else
-                    identity
+                |> (if now - form.updatedAt > 1 * Time.second then
+                        Regex.replace (Regex.AtMost 1)
+                            (Regex.regex ("^" ++ Regex.escape form.input))
+                            (\_ -> "")
+                    else
+                        identity
+                   )
 
         ( activeContexts, activeProjects ) =
             subModel
@@ -113,11 +112,11 @@ updateInput config input subModel form =
                     , Model.GroupDocStore.getActiveProjects
                     )
     in
-        { form
-            | searchResults = getFuzzyResults input activeContexts activeProjects
-            , input = input
-            , updatedAt = now
-        }
+    { form
+        | searchResults = getFuzzyResults input activeContexts activeProjects
+        , input = input
+        , updatedAt = now
+    }
 
 
 fuzzyMatch needle searchItem =
@@ -135,7 +134,7 @@ fuzzyMatch needle searchItem =
         match n =
             Fuzzy.match [] [] n
     in
-        ( searchItem, match boiledNeedle boiledHay )
+    ( searchItem, match boiledNeedle boiledHay )
 
 
 getFuzzyResults needle activeContexts activeProjects =
@@ -149,6 +148,6 @@ getFuzzyResults needle activeContexts activeProjects =
         all =
             projects ++ contexts ++ [ SI_Projects, SI_Contexts ]
     in
-        all
-            .|> fuzzyMatch needle
-            |> List.sortBy (Tuple.second >> .score)
+    all
+        .|> fuzzyMatch needle
+        |> List.sortBy (Tuple.second >> .score)

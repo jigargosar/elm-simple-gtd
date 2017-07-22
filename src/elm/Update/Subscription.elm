@@ -4,20 +4,20 @@ import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import GroupDoc.Types exposing (..)
+import Keyboard.Extra as Key exposing (Key)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
 import Msg.Subscription exposing (SubscriptionMsg(..))
-import Set
-import X.Function.Infix exposing (..)
 import Return exposing (map)
+import Set
+import Store
 import Time exposing (Time)
+import Todo.Types exposing (TodoDoc, TodoStore)
+import X.Function.Infix exposing (..)
 import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (..)
 import X.Return exposing (rAndThenMaybe, returnWith)
-import Keyboard.Extra as Key exposing (Key)
-import Store
-import Todo.Types exposing (TodoDoc, TodoStore)
 
 
 type alias SubModel model =
@@ -74,15 +74,16 @@ update config msg =
             let
                 afterEntityUpsertOnPouchDBChange ( entity, model ) =
                     map (\_ -> model)
-                        >> case entity of
-                            TodoEntity todo ->
-                                config.afterTodoUpsert todo
+                        >> (case entity of
+                                TodoEntity todo ->
+                                    config.afterTodoUpsert todo
 
-                            _ ->
-                                config.noop
+                                _ ->
+                                    config.noop
+                           )
             in
-                X.Return.returnWithMaybe2 identity
-                    (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
+            X.Return.returnWithMaybe2 identity
+                (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
@@ -93,33 +94,33 @@ update config msg =
 
 
 onGlobalKeyUp config key =
-    returnWith (.editMode)
+    returnWith .editMode
         (\editMode ->
             case ( key, editMode ) of
                 ( key, XMNone ) ->
                     let
                         clear =
-                            map (Model.Selection.clearSelection)
+                            map Model.Selection.clearSelection
                                 >> config.revertExclusiveMode
                     in
-                        case key of
-                            Key.Escape ->
-                                clear
+                    case key of
+                        Key.Escape ->
+                            clear
 
-                            Key.CharX ->
-                                clear
+                        Key.CharX ->
+                            clear
 
-                            Key.CharQ ->
-                                config.onStartAddingTodoWithFocusInEntityAsReference
+                        Key.CharQ ->
+                            config.onStartAddingTodoWithFocusInEntityAsReference
 
-                            Key.CharI ->
-                                config.onStartAddingTodoToInbox
+                        Key.CharI ->
+                            config.onStartAddingTodoToInbox
 
-                            Key.Slash ->
-                                config.openLaunchBarMsg
+                        Key.Slash ->
+                            config.openLaunchBarMsg
 
-                            _ ->
-                                identity
+                        _ ->
+                            identity
 
                 ( Key.Escape, _ ) ->
                     config.revertExclusiveMode
@@ -168,7 +169,7 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
                 >>? Tuple.mapFirst createContextEntity
 
         _ ->
-            (\_ -> Nothing)
+            \_ -> Nothing
 
 
 
@@ -178,13 +179,13 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            .todoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .todoStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
 
         "project-db" ->
-            .projectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .projectStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
 
         "context-db" ->
-            .contextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
+            .contextStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
 
         _ ->
-            (\_ -> Cmd.none)
+            \_ -> Cmd.none

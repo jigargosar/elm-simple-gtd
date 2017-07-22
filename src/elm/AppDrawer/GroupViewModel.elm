@@ -14,11 +14,11 @@ import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
+import Project
 import String.Extra
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
-import Project
 import Types exposing (AppModel)
 import Types.ViewType exposing (ViewType(EntityListView))
 import X.Function exposing (when)
@@ -94,7 +94,7 @@ createList config innerConfig model =
         list =
             innerConfig.filter model
     in
-        list .|> create getTodoListWithGroupId config innerConfig
+    list .|> create getTodoListWithGroupId config innerConfig
 
 
 create getTodoListByEntityId config innerConFig groupDoc =
@@ -126,20 +126,20 @@ create getTodoListByEntityId config innerConFig groupDoc =
         startEditingMsg =
             createEntityActionMsg Entity.Types.EUA_StartEditing
     in
-        { id = id
-        , name = name
-        , isDeleted = Document.isDeleted groupDoc
-        , isEmpty = count == 0
-        , count = count
-        , onActiveStateChanged =
-            \bool ->
-                if bool then
-                    config.switchToView (innerConFig.getViewType id |> EntityListView)
-                else
-                    config.noop
-        , icon = icon
-        , appHeader = appHeader
-        }
+    { id = id
+    , name = name
+    , isDeleted = Document.isDeleted groupDoc
+    , isEmpty = count == 0
+    , count = count
+    , onActiveStateChanged =
+        \bool ->
+            if bool then
+                config.switchToView (innerConFig.getViewType id |> EntityListView)
+            else
+                config.noop
+    , icon = icon
+    , appHeader = appHeader
+    }
 
 
 
@@ -178,19 +178,19 @@ contexts config model =
         nullVMAsList =
             entityList |> List.head |> X.Maybe.toList
     in
-        { entityList = entityList |> List.drop 1
-        , nullVMAsList = nullVMAsList
-        , archivedEntityList = createList config archivedConfig model
-        , viewType = Entity.Types.ContextsView
-        , title = "Contexts"
-        , className = "contexts"
-        , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
-        , onAddClicked = config.onStartAddingGroupDoc ContextGroupDocType
-        , icon = { name = "group_work", color = AppColors.contextsColor }
-        , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
-        , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
-        , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
-        }
+    { entityList = entityList |> List.drop 1
+    , nullVMAsList = nullVMAsList
+    , archivedEntityList = createList config archivedConfig model
+    , viewType = Entity.Types.ContextsView
+    , title = "Contexts"
+    , className = "contexts"
+    , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
+    , onAddClicked = config.onStartAddingGroupDoc ContextGroupDocType
+    , icon = { name = "group_work", color = AppColors.contextsColor }
+    , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
+    , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
+    , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
+    }
 
 
 
@@ -229,16 +229,16 @@ projects config model =
         nullVMAsList =
             entityList |> List.head |> X.Maybe.toList
     in
-        { entityList = entityList |> List.drop 1
-        , nullVMAsList = []
-        , archivedEntityList = createList config archivedConfig model
-        , viewType = Entity.Types.ProjectsView
-        , title = "Projects"
-        , className = "projects"
-        , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
-        , onAddClicked = config.onStartAddingGroupDoc ProjectGroupDocType
-        , icon = { name = "group_work", color = AppColors.projectsColor }
-        , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
-        , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
-        , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
-        }
+    { entityList = entityList |> List.drop 1
+    , nullVMAsList = []
+    , archivedEntityList = createList config archivedConfig model
+    , viewType = Entity.Types.ProjectsView
+    , title = "Projects"
+    , className = "projects"
+    , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
+    , onAddClicked = config.onStartAddingGroupDoc ProjectGroupDocType
+    , icon = { name = "group_work", color = AppColors.projectsColor }
+    , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
+    , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
+    , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel
+    }

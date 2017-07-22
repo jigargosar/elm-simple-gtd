@@ -1,31 +1,31 @@
 module Update exposing (update)
 
-import Update.AppDrawer
 import CommonMsg
-import Ports
-import Update.Firebase
+import Lazy
 import LocalPref
 import Material
+import Model
+import Model.EntityList
+import Model.Selection
+import Model.Stores
+import Msg exposing (..)
+import Notification
+import Ports
+import Return exposing (andThen, command, map)
+import TodoMsg
+import Types exposing (..)
+import Update.AppDrawer
 import Update.AppHeader
+import Update.CustomSync
+import Update.Entity
 import Update.ExclusiveMode
+import Update.Firebase
+import Update.GroupDoc
 import Update.LaunchBar
 import Update.Subscription
-import X.Return as Return exposing (returnWith, returnWithNow)
-import Notification
-import Return exposing (andThen, command, map)
-import Lazy
-import Model.EntityList
-import Model.Stores
-import TodoMsg
-import Update.Entity
-import Model
-import Model.Selection
-import Msg exposing (..)
-import Update.CustomSync
-import Update.ViewType
 import Update.Todo
-import Types exposing (..)
-import Update.GroupDoc
+import Update.ViewType
+import X.Return as Return exposing (returnWith, returnWithNow)
 
 
 type alias ReturnF =
@@ -51,7 +51,7 @@ update andThenUpdate msg =
                 config =
                     { clearSelection = map Model.Selection.clearSelection }
             in
-                Update.ViewType.update config msg_
+            Update.ViewType.update config msg_
 
         OnPersistLocalPref ->
             Return.effect_ (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
@@ -77,7 +77,7 @@ update andThenUpdate msg =
                     , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
                     }
             in
-                Update.Subscription.update config msg_
+            Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
             let
@@ -87,11 +87,11 @@ update andThenUpdate msg =
                     , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
             in
-                returnWith identity
-                    (\oldModel ->
-                        Update.GroupDoc.update config msg_
-                            >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
-                    )
+            returnWith identity
+                (\oldModel ->
+                    Update.GroupDoc.update config msg_
+                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
+                )
 
         OnExclusiveModeMsg msg_ ->
             let
@@ -102,7 +102,7 @@ update andThenUpdate msg =
                     , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
                     }
             in
-                Update.ExclusiveMode.update config msg_
+            Update.ExclusiveMode.update config msg_
 
         OnAppHeaderMsg msg_ ->
             let
@@ -111,7 +111,7 @@ update andThenUpdate msg =
                     { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
             in
-                Update.AppHeader.update config msg_
+            Update.AppHeader.update config msg_
 
         OnCustomSyncMsg msg_ ->
             let
@@ -121,7 +121,7 @@ update andThenUpdate msg =
                     , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     }
             in
-                Update.CustomSync.update config msg_
+            Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
             let
@@ -135,7 +135,7 @@ update andThenUpdate msg =
                     , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
                     }
             in
-                Update.Entity.update config msg_
+            Update.Entity.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             let
@@ -147,7 +147,7 @@ update andThenUpdate msg =
                     , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
                     }
             in
-                Update.LaunchBar.update config msg_
+            Update.LaunchBar.update config msg_
 
         OnLaunchBarMsg msg_ ->
             returnWithNow (OnLaunchBarMsgWithNow msg_)
@@ -162,26 +162,24 @@ update andThenUpdate msg =
                     { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
                     , setFocusInEntityWithEntityId =
                         -- later: create and move focusInEntity related methods to corresponding update
-                        (\entityId ->
+                        \entityId ->
                             map (Model.Stores.setFocusInEntityWithEntityId entityId)
                                 >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                        )
                     , setFocusInEntity =
-                        (\entity ->
+                        \entity ->
                             map (Model.setFocusInEntity entity)
                                 >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                        )
                     , closeNotification = Msg.OnCloseNotification >> andThenUpdate
                     , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
                     , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in
-                returnWith identity
-                    (\oldModel ->
-                        Update.Todo.update (config oldModel) now msg_
-                            >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
-                    )
+            returnWith identity
+                (\oldModel ->
+                    Update.Todo.update (config oldModel) now msg_
+                        >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
+                )
 
         OnFirebaseMsg msg_ ->
             let
@@ -194,8 +192,8 @@ update andThenUpdate msg =
                         andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
                     }
             in
-                Update.Firebase.update config msg_
-                    >> andThenUpdate Msg.OnPersistLocalPref
+            Update.Firebase.update config msg_
+                >> andThenUpdate Msg.OnPersistLocalPref
 
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg

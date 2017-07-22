@@ -31,7 +31,7 @@ get name =
 
 getFields : Model -> Fields
 getFields =
-    (.fields)
+    .fields
 
 
 setFields : Fields -> ModelF

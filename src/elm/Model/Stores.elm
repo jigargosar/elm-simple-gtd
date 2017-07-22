@@ -5,10 +5,10 @@ import GroupDoc
 import Model
 import Model.GroupDocStore exposing (..)
 import Model.Todo exposing (findTodoById)
+import Store
 import Todo
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import Store
 
 
 isTodoContextActive model =

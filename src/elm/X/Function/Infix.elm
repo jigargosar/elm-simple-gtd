@@ -48,6 +48,7 @@ infixl 8 >>>
     (\x y -> bar <| foo x y)
     -- becomes
     bar <<< foo
+
 -}
 (<<<) : (c -> d) -> (a -> b -> c) -> a -> b -> d
 (<<<) =
@@ -59,6 +60,7 @@ infixl 8 >>>
     (\x y z -> foo x y z |> bar)
     -- becomes
     foo >>>> bar
+
 -}
 (>>>>) : (a -> b -> c -> d) -> (d -> e) -> a -> b -> c -> e
 (>>>>) fff f x y z =
@@ -70,6 +72,7 @@ infixl 8 >>>
     (\x y z -> bar <| foo x y z)
     -- becomes
     bar <<<< foo
+
 -}
 (<<<<) : (d -> e) -> (a -> b -> c -> d) -> a -> b -> c -> e
 (<<<<) =

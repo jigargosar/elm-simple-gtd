@@ -1,8 +1,8 @@
 module Msg.Subscription exposing (..)
 
+import Json.Encode as E
 import Time exposing (Time)
 import X.Keyboard
-import Json.Encode as E
 
 
 type SubscriptionMsg

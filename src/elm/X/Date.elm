@@ -23,16 +23,16 @@ smartFormat refDate date =
         diffInDays =
             dayDiff refDate date
     in
-        if diffInDays == 0 then
-            formattedTime
-        else if diffInDays == -1 then
-            "Yesterday " ++ formattedTime
-        else if diffInDays == 1 then
-            "Tomorrow " ++ formattedTime
-        else if diffInDays > 1 && diffInDays < 7 then
-            (Date.format "%A " date) ++ formattedTime
-        else
-            formattedDate ++ " " ++ formattedTime
+    if diffInDays == 0 then
+        formattedTime
+    else if diffInDays == -1 then
+        "Yesterday " ++ formattedTime
+    else if diffInDays == 1 then
+        "Tomorrow " ++ formattedTime
+    else if diffInDays > 1 && diffInDays < 7 then
+        Date.format "%A " date ++ formattedTime
+    else
+        formattedDate ++ " " ++ formattedTime
 
 
 dayDiff refDate date =

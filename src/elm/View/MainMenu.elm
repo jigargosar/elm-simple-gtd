@@ -24,7 +24,7 @@ type alias Item =
 
 menuConfig config menuState =
     { onSelect = onItemSelect config
-    , isSelected = (\_ -> False)
+    , isSelected = \_ -> False
     , itemKey = Tuple.first
     , itemSearchText = Tuple.first
     , itemView = itemView
@@ -73,7 +73,7 @@ getItems config appModel =
             , ( "Github", URLItem AppUrl.github )
             ]
     in
-        signInMenuItem :: linkMenuItems
+    signInMenuItem :: linkMenuItems
 
 
 init config menuState appModel =

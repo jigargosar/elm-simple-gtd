@@ -1,10 +1,10 @@
 module Todo.View exposing (..)
 
-import Mat
-import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Mat
+import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import X.Keyboard exposing (..)
 
 
@@ -22,26 +22,26 @@ editTodoTextView config form =
         fireToggleDelete =
             config.onToggleDeleted form.id
     in
-        div
-            [ class "overlay"
-            , onClickStopPropagation config.revertExclusiveMode
-            , onKeyDownStopPropagation (\_ -> config.noop)
-            ]
-            [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
-                [ div [ class "modal-content" ]
-                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> config.noop) ]
-                        [ textarea
-                            [ class "materialize-textarea auto-focus"
-                            , defaultValue todoText
-                            , onInput fireTextChanged
-                            ]
-                            []
-                        , Html.label [] [ text "Todo" ]
+    div
+        [ class "overlay"
+        , onClickStopPropagation config.revertExclusiveMode
+        , onKeyDownStopPropagation (\_ -> config.noop)
+        ]
+        [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
+            [ div [ class "modal-content" ]
+                [ div [ class "input-field", onKeyDownStopPropagation (\_ -> config.noop) ]
+                    [ textarea
+                        [ class "materialize-textarea auto-focus"
+                        , defaultValue todoText
+                        , onInput fireTextChanged
                         ]
-                    , Mat.okCancelDeleteButtons config fireToggleDelete
+                        []
+                    , Html.label [] [ text "Todo" ]
                     ]
+                , Mat.okCancelDeleteButtons config fireToggleDelete
                 ]
             ]
+        ]
 
 
 new config form =

@@ -1,11 +1,11 @@
 module View.Header exposing (appMainHeader)
 
 import AppColors
-import Mat
 import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Mat
 import Todo.TimeTracker.View
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -19,14 +19,14 @@ appMainHeader config viewModel m =
                 ?|> X.List.singleton
                 ?= titleHeaderContent viewModel
     in
-        div
-            [ id "layout-main-header"
-            , style
-                [ "color" => "white"
-                , "background-color" => AppColors.encode viewModel.header.backgroundColor
-                ]
+    div
+        [ id "layout-main-header"
+        , style
+            [ "color" => "white"
+            , "background-color" => AppColors.encode viewModel.header.backgroundColor
             ]
-            (headerWithContent config content m)
+        ]
+        (headerWithContent config content m)
 
 
 titleHeaderContent viewModel =
@@ -34,8 +34,8 @@ titleHeaderContent viewModel =
         titleText =
             viewModel.viewName
     in
-        [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]
-        ]
+    [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]
+    ]
 
 
 headerWithContent config content m =
@@ -46,14 +46,14 @@ headerWithContent config content m =
                 [ Mat.resourceId "center-header-menu"
                 , Mat.tabIndex -1
                 , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation (config.onToggleAppDrawerOverlay)
+                , Mat.onClickStopPropagation config.onToggleAppDrawerOverlay
                 ]
                 [ Mat.icon "menu" ]
     in
-        [ menuButton
-        , div [ class "flex-auto font-nowrap" ] content
-        , div [ id "main-menu-button", onClick config.onShowMainMenu ] [ menuIcon config m ]
-        ]
+    [ menuButton
+    , div [ class "flex-auto font-nowrap" ] content
+    , div [ id "main-menu-button", onClick config.onShowMainMenu ] [ menuIcon config m ]
+    ]
 
 
 menuIcon config m =

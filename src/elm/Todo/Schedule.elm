@@ -1,11 +1,11 @@
 module Todo.Schedule exposing (..)
 
-import Time exposing (Time)
-import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
+import Time exposing (Time)
 import Todo.Types exposing (TodoSchedule(..))
+import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 
 
 type alias Model =
@@ -39,7 +39,7 @@ encode model =
                 Unscheduled ->
                     []
     in
-        E.object fields
+    E.object fields
 
 
 decodeV2 : Decoder Model
@@ -56,8 +56,8 @@ decodeV2 =
                 , initWithDueAt dueAt |> D.succeed
                 ]
     in
-        D.at [ "schedule", "dueAt" ] D.float
-            |> D.andThen decodeWithDueAt
+    D.at [ "schedule", "dueAt" ] D.float
+        |> D.andThen decodeWithDueAt
 
 
 decodeV1 : Decoder Model
@@ -74,8 +74,8 @@ decodeV1 =
                 , D.succeed (initWithDueAt dueAt)
                 ]
     in
-        D.field "dueAt" D.float
-            |> D.andThen decodeWithDueAt
+    D.field "dueAt" D.float
+        |> D.andThen decodeWithDueAt
 
 
 initWithReminder time =
@@ -153,4 +153,4 @@ snoozeTill snoozedTillTime model =
 
 
 hasReminderChanged old new =
-    (getMaybeReminderTime old) /= (getMaybeReminderTime new)
+    getMaybeReminderTime old /= getMaybeReminderTime new

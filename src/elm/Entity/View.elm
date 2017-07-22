@@ -4,18 +4,16 @@ import Entity
 import Entity.Tree
 import EntityId
 import GroupDoc.View
-import Html
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Keyed
 import List.Extra
 import Maybe.Extra
 import Model.EntityTree
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
-import X.Keyboard exposing (onKeyDown)
-import Html.Attributes exposing (class, tabindex)
-import Html.Keyed
-import Html exposing (..)
-import Html.Attributes exposing (..)
 import View.Badge
+import X.Keyboard exposing (onKeyDown)
 
 
 --type alias KeyedView =
@@ -34,11 +32,11 @@ list config appVM viewType model =
         maybeFocusInEntity =
             getMaybeFocusInEntity entityList model
     in
-        Html.Keyed.node "div"
-            [ class "entity-list focusable-list"
-            , config.onEntityListKeyDown entityList |> onKeyDown
-            ]
-            (keyedViewList appVM grouping maybeFocusInEntity model)
+    Html.Keyed.node "div"
+        [ class "entity-list focusable-list"
+        , config.onEntityListKeyDown entityList |> onKeyDown
+        ]
+        (keyedViewList appVM grouping maybeFocusInEntity model)
 
 
 getMaybeFocusInEntity entityList model =
@@ -82,38 +80,38 @@ keyedViewList appVM grouping maybeFocusInEntity model =
                 isFocusable =
                     EntityId.fromTodo todo |> entityIdHasFocusIn
             in
-                todo
-                    |> appVM.createTodoViewModel model isFocusable
-                    |> Todo.ItemView.keyedItem
+            todo
+                |> appVM.createTodoViewModel model isFocusable
+                |> Todo.ItemView.keyedItem
 
         --        todoListView : List TodoDoc -> List KeyedView
         todoListView =
             List.map todoViewFromTodo
     in
-        case grouping of
-            Entity.Tree.ContextRoot contextGroup subGroupList ->
-                let
-                    header =
-                        createContextVM contextGroup |> groupHeaderView
-                in
-                    header :: multiProjectView subGroupList
+    case grouping of
+        Entity.Tree.ContextRoot contextGroup subGroupList ->
+            let
+                header =
+                    createContextVM contextGroup |> groupHeaderView
+            in
+            header :: multiProjectView subGroupList
 
-            Entity.Tree.ProjectRoot projectGroup subGroupList ->
-                let
-                    header =
-                        createProjectVM projectGroup |> groupHeaderView
-                in
-                    header :: multiContextView subGroupList
+        Entity.Tree.ProjectRoot projectGroup subGroupList ->
+            let
+                header =
+                    createProjectVM projectGroup |> groupHeaderView
+            in
+            header :: multiContextView subGroupList
 
-            Entity.Tree.ContextForest groupList ->
-                multiContextView groupList
+        Entity.Tree.ContextForest groupList ->
+            multiContextView groupList
 
-            Entity.Tree.ProjectForest groupList ->
-                multiProjectView groupList
+        Entity.Tree.ProjectForest groupList ->
+            multiProjectView groupList
 
-            Entity.Tree.TodoForest title todoList ->
-                todoListView todoList
-                    |> flatTodoListView title
+        Entity.Tree.TodoForest title todoList ->
+            todoListView todoList
+                |> flatTodoListView title
 
 
 groupView todoView vm =
@@ -136,9 +134,9 @@ flatTodoListView title todoListView =
         truncatedList =
             todoListView |> List.take 75
     in
-        [ ( title
-          , Html.Keyed.node "div"
-                [ class "todo-list collection" ]
-                (( title, div [ class "collection-item" ] [ h5 [] [ View.Badge.badge title count ] ] ) :: truncatedList)
-          )
-        ]
+    [ ( title
+      , Html.Keyed.node "div"
+            [ class "todo-list collection" ]
+            (( title, div [ class "collection-item" ] [ h5 [] [ View.Badge.badge title count ] ] ) :: truncatedList)
+      )
+    ]

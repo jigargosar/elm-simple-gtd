@@ -34,11 +34,11 @@ applyMaybeWith f1 f2 model =
 
 
 apply2Uncurry f1 f2 model =
-    (uncurry f2) (apply2 f1 model)
+    uncurry f2 (apply2 f1 model)
 
 
 apply3Uncurry f1 f2 model =
-    (uncurry3 f2) (apply3 f1 model)
+    uncurry3 f2 (apply3 f1 model)
 
 
 ifElse : (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b
@@ -71,7 +71,7 @@ reject pred xs =
             else
                 front :: back
     in
-        List.foldr conditionalCons [] xs
+    List.foldr conditionalCons [] xs
 
 
 gt =

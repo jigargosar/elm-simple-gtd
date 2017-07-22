@@ -1,12 +1,12 @@
 module X.Time exposing (..)
 
 import Date
-import X.Date
 import List.Extra
 import Time exposing (Time)
+import Time.Format
+import X.Date
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import Time.Format
 
 
 toHHMMSS : Time -> String
@@ -21,13 +21,13 @@ toHHMMSSMin =
             [ "h", "m", "s" ]
 
         tupleToString ( suffix, part ) =
-            (toString part) ++ suffix
+            toString part ++ suffix
     in
-        toHMSList
-            >> List.Extra.zip suffixList
-            >> List.filterMap
-                (ifElse (Tuple.second >> equals 0) (\_ -> Nothing) (tupleToString >> Just))
-            >> String.join " "
+    toHMSList
+        >> List.Extra.zip suffixList
+        >> List.filterMap
+            (ifElse (Tuple.second >> equals 0) (\_ -> Nothing) (tupleToString >> Just))
+        >> String.join " "
 
 
 formatDateTime =
@@ -47,14 +47,14 @@ dayDiffInWords =
                 dayCountAsString =
                     dayCount |> abs >> toString
             in
-                if dayCount > 0 then
-                    dayCountAsString ++ " days left"
-                else if dayCount < 0 then
-                    dayCountAsString ++ " days ago"
-                else
-                    ""
+            if dayCount > 0 then
+                dayCountAsString ++ " days left"
+            else if dayCount < 0 then
+                dayCountAsString ++ " days ago"
+            else
+                ""
     in
-        dayDiff >>> intToDaysInWords
+    dayDiff >>> intToDaysInWords
 
 
 smartFormat : Time -> Time -> String
@@ -69,7 +69,7 @@ smartFormat refTime time =
         date =
             dateFromTime time
     in
-        X.Date.smartFormat refDate date
+    X.Date.smartFormat refDate date
 
 
 toHMSList : Time -> List Int
@@ -82,12 +82,12 @@ toHMSList time =
             elapsedMilli % 1000
 
         seconds =
-            (elapsedMilli // 1000) % (60)
+            (elapsedMilli // 1000) % 60
 
         minutes =
             (elapsedMilli // (1000 * 60)) % 60
 
         hours =
-            (elapsedMilli // (1000 * 60 * 60))
+            elapsedMilli // (1000 * 60 * 60)
     in
-        [ hours, minutes, seconds ]
+    [ hours, minutes, seconds ]

@@ -1,7 +1,7 @@
 module View.GetStarted exposing (..)
 
 import AppUrl
-import Firebase.Types exposing (FirebaseMsg(OnFB_NOOP, OnFBSignIn, OnFBSkipSignIn))
+import Firebase.Types exposing (FirebaseMsg(OnFBSignIn, OnFBSkipSignIn, OnFB_NOOP))
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -43,30 +43,30 @@ setup config form =
         updateSetupFormTodoText =
             config.onSetTodoFormText form
     in
-        div
-            [ class "overlay"
-            , onClickStopPropagation config.noop
-            ]
-            [ div [ class "modal fixed-center" ]
-                [ div [ class "modal-content" ]
-                    [ h5 [ class "flow-text" ]
-                        [ text "Enter one thing that you would like to get done Today" ]
-                    , div [ class "section" ]
-                        [ div [ class "input-field" ]
-                            [ input
-                                [ autofocus True
-                                , placeholder "E.g. Get Milk, Check Email"
-                                , X.Keyboard.onEnter addTodoMsg
-                                , onInput updateSetupFormTodoText
-                                ]
-                                []
-                            , label [ class "active" ] [ text "Todo" ]
+    div
+        [ class "overlay"
+        , onClickStopPropagation config.noop
+        ]
+        [ div [ class "modal fixed-center" ]
+            [ div [ class "modal-content" ]
+                [ h5 [ class "flow-text" ]
+                    [ text "Enter one thing that you would like to get done Today" ]
+                , div [ class "section" ]
+                    [ div [ class "input-field" ]
+                        [ input
+                            [ autofocus True
+                            , placeholder "E.g. Get Milk, Check Email"
+                            , X.Keyboard.onEnter addTodoMsg
+                            , onInput updateSetupFormTodoText
                             ]
+                            []
+                        , label [ class "active" ] [ text "Todo" ]
                         ]
-                    , div [ class "right-align" ]
-                        [ button [ class "btn", onClick addTodoMsg ]
-                            [ text "Ok" ]
-                        ]
+                    ]
+                , div [ class "right-align" ]
+                    [ button [ class "btn", onClick addTodoMsg ]
+                        [ text "Ok" ]
                     ]
                 ]
             ]
+        ]

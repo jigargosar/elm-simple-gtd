@@ -1,7 +1,7 @@
 module X.Random exposing (..)
 
-import Random.Pcg as Random exposing (Generator, Seed)
 import Char
+import Random.Pcg as Random exposing (Generator, Seed)
 import Time exposing (Time)
 
 
@@ -23,7 +23,7 @@ alphaNumericChar =
 
 idGenerator : Generator String
 idGenerator =
-    Random.map (String.fromList) (Random.list 64 alphaNumericChar)
+    Random.map String.fromList (Random.list 64 alphaNumericChar)
 
 
 seedFromTime : Time -> Seed

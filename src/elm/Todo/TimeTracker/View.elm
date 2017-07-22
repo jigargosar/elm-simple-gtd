@@ -1,14 +1,14 @@
 module Todo.TimeTracker.View exposing (..)
 
-import Model.Todo
-import X.Time
+import Html exposing (..)
+import Html.Attributes exposing (..)
 import Mat
+import Model.Todo
+import Todo
 import Todo.TimeTracker exposing (State(..))
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import Todo
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import X.Time
 
 
 -- View
@@ -22,11 +22,11 @@ createViewModel config appModel tracker =
         todoText =
             Model.Todo.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
     in
-        { displayText = todoText
-        , displayTime = X.Time.toHHMMSS elapsedTime
-        , onStop = config.onStopRunningTodo
-        , onMdl = config.onMdl
-        }
+    { displayText = todoText
+    , displayTime = X.Time.toHHMMSS elapsedTime
+    , onStop = config.onStopRunningTodo
+    , onMdl = config.onMdl
+    }
 
 
 maybe config appModel =

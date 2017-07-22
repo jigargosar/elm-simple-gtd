@@ -3,9 +3,9 @@ module Project exposing (..)
 import Firebase.Types exposing (DeviceId)
 import GroupDoc
 import GroupDoc.Types exposing (..)
-import X.Function exposing (..)
-import Random.Pcg as Random exposing (..)
 import Json.Encode as E
+import Random.Pcg as Random exposing (..)
+import X.Function exposing (..)
 
 
 type alias Model =
@@ -23,7 +23,7 @@ storeGenerator =
 
 getName : Model -> GroupDocName
 getName =
-    (.name)
+    .name
 
 
 constructor =

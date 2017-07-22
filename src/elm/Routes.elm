@@ -4,8 +4,8 @@ import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType
 import Navigation exposing (Location)
-import RouteUrl.Builder exposing (..)
 import RouteUrl exposing (UrlChange)
+import RouteUrl.Builder exposing (..)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.List
@@ -86,16 +86,16 @@ routeUrlBuilderToMaybeListViewType builder =
             RecentView |> Just
 
         "Inbox" :: [] ->
-            (ContextView "") |> Just
+            ContextView "" |> Just
 
         "context" :: id :: [] ->
-            (ContextView id) |> Just
+            ContextView id |> Just
 
         "project" :: "NotAssigned" :: [] ->
-            (ProjectView "") |> Just
+            ProjectView "" |> Just
 
         "project" :: id :: [] ->
-            (ProjectView id) |> Just
+            ProjectView id |> Just
 
         _ ->
             Nothing

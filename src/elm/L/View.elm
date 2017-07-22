@@ -1,10 +1,10 @@
 module L.View exposing (..)
 
 import AppUrl
-import Mat
-import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Mat
+import Toolkit.Operators exposing (..)
 
 
 view =
@@ -103,8 +103,8 @@ primaryFeatures =
               )
             ]
     in
-        div [ class "row features primary" ]
-            (list .|> feature)
+    div [ class "row features primary" ]
+        (list .|> feature)
 
 
 footerView =
@@ -127,10 +127,10 @@ learnMoreLinks =
         linkV ( hrefV, textV ) =
             li [] [ a [ class "white-text", href hrefV, target "_blank" ] [ text textV ] ]
     in
-        ul [ class "layout horizontal center-center wrap" ]
-            [ linkV ( AppUrl.github, "Github" )
-            , linkV ( AppUrl.forumsURL, "Forums" )
-            , linkV ( AppUrl.newIssueURL, "Report Issue" )
-            , linkV ( AppUrl.changeLogURL, "Change Log" )
-            , linkV ( AppUrl.contact, "Contact us" )
-            ]
+    ul [ class "layout horizontal center-center wrap" ]
+        [ linkV ( AppUrl.github, "Github" )
+        , linkV ( AppUrl.forumsURL, "Forums" )
+        , linkV ( AppUrl.newIssueURL, "Report Issue" )
+        , linkV ( AppUrl.changeLogURL, "Change Log" )
+        , linkV ( AppUrl.contact, "Contact us" )
+        ]

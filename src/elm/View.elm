@@ -1,12 +1,12 @@
 module View exposing (init)
 
 import Html exposing (text)
+import Mat exposing (..)
 import Material.Button
 import Material.Options exposing (div)
+import Material.Tooltip
 import View.Layout
 import View.Overlays
-import Mat exposing (..)
-import Material.Tooltip
 import ViewModel
 
 
@@ -21,7 +21,7 @@ init config model =
             ]
                 ++ View.Overlays.overlayViews config model
     in
-        div [ cs "mdl-typography--body-1" ] children
+    div [ cs "mdl-typography--body-1" ] children
 
 
 newTodoFab config m =

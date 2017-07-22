@@ -44,14 +44,14 @@ returnWith :
 returnWith f1 f2 =
     Return.andThen
         (\m ->
-            (f2 (f1 m)) (Return.singleton m)
+            f2 (f1 m) (Return.singleton m)
         )
 
 
 mapModelWith f1 f2 =
     Return.map
         (\m ->
-            (f2 (f1 m)) m
+            f2 (f1 m) m
         )
 
 
@@ -70,7 +70,7 @@ mapModelWithMaybeF mf1 f2 =
 andThenApplyWith f1 f2 =
     Return.andThen
         (\m ->
-            (f2 (f1 m)) m
+            f2 (f1 m) m
         )
 
 

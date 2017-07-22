@@ -2,10 +2,10 @@ module Firebase.Model exposing (..)
 
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser(SignedIn, SignedOut))
 import Firebase.User
-import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Json.Encode.Extra as E
+import X.Function.Infix exposing (..)
 
 
 type alias Model =

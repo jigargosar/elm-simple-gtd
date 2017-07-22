@@ -1,7 +1,7 @@
 module X.List exposing (..)
 
-import Toolkit.Operators exposing (..)
 import List.Extra as List
+import Toolkit.Operators exposing (..)
 
 
 listLastIndex list =
@@ -10,7 +10,7 @@ listLastIndex list =
             0
 
         _ ->
-            (List.length list) - 1
+            List.length list - 1
 
 
 clampIndex index =

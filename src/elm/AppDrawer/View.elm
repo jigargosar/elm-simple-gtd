@@ -3,17 +3,15 @@ module AppDrawer.View exposing (..)
 import AppColors
 import AppUrl
 import Entity.Types
-import X.Html
-import Mat
-import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Mat
 import Toolkit.Operators exposing (..)
-import X.Function.Infix exposing (..)
 import Types.ViewType exposing (ViewType(EntityListView, SyncView))
 import View.Badge
+import X.Function.Infix exposing (..)
+import X.Html
 
 
 sidebarHeader appVM m =
@@ -24,25 +22,25 @@ sidebarHeader appVM m =
             else
                 "SimpleGTD.com"
     in
-        div
-            [ id "layout-sidebar-header"
-            , style
-                [ "color" => "white"
-                , "background-color" => AppColors.encode appVM.header.backgroundColor
+    div
+        [ id "layout-sidebar-header"
+        , style
+            [ "color" => "white"
+            , "background-color" => AppColors.encode appVM.header.backgroundColor
+            ]
+        ]
+        [ div [ class "detail" ]
+            [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text t1 ] ]
+            , div [ class "small layout horizontal " ]
+                [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
+                    [ "v" ++ m.appVersion |> text ]
+                , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
+                    [ text "Discuss" ]
+                , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
+                    [ text "Feedback" ]
                 ]
             ]
-            [ div [ class "detail" ]
-                [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text t1 ] ]
-                , div [ class "small layout horizontal " ]
-                    [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
-                        [ "v" ++ m.appVersion |> text ]
-                    , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
-                        [ text "Discuss" ]
-                    , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
-                        [ text "Feedback" ]
-                    ]
-                ]
-            ]
+        ]
 
 
 sidebarContent config appVM model =
@@ -50,20 +48,20 @@ sidebarContent config appVM model =
         { contexts, projects } =
             appVM
     in
-        div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
-            [ ul []
-                ([]
-                    ++ entityGroupView config contexts model.viewType
-                    ++ entityGroupView config projects model.viewType
-                    ++ [ Mat.divider ]
-                    ++ [ onSetEntityListViewItem config "sort" Entity.Types.RecentView "Recent"
-                       , onSetEntityListViewItem config "delete" Entity.Types.BinView "Bin"
-                       , onSetEntityListViewItem config "done" Entity.Types.DoneView "Done"
-                       , Mat.divider
-                       , switchViewItemSmall config "settings" SyncView "Advance Settings"
-                       ]
-                )
-            ]
+    div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
+        [ ul []
+            ([]
+                ++ entityGroupView config contexts model.viewType
+                ++ entityGroupView config projects model.viewType
+                ++ [ Mat.divider ]
+                ++ [ onSetEntityListViewItem config "sort" Entity.Types.RecentView "Recent"
+                   , onSetEntityListViewItem config "delete" Entity.Types.BinView "Bin"
+                   , onSetEntityListViewItem config "done" Entity.Types.DoneView "Done"
+                   , Mat.divider
+                   , switchViewItemSmall config "settings" SyncView "Advance Settings"
+                   ]
+            )
+        ]
 
 
 entityGroupView config vm viewType =
@@ -92,31 +90,31 @@ entityGroupView config vm viewType =
         nullViewAsList =
             vm.nullVMAsList .|> entityListItem
     in
-        nullViewAsList
-            ++ [ li [ onClick fireSmart ]
-                    [ Mat.iconM vm.icon
-                    , Html.h5 [] [ text vm.title ]
-                    , div []
-                        [ Mat.iconBtn2 config.onMdl "add" onAddClicked
-                        , Mat.iconBtn2 config.onMdl expandIconName onToggleExpanded
-                        ]
+    nullViewAsList
+        ++ [ li [ onClick fireSmart ]
+                [ Mat.iconM vm.icon
+                , Html.h5 [] [ text vm.title ]
+                , div []
+                    [ Mat.iconBtn2 config.onMdl "add" onAddClicked
+                    , Mat.iconBtn2 config.onMdl expandIconName onToggleExpanded
                     ]
-               , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
-                    [ ul []
-                        ([]
-                            ++ List.map entityListItem vm.entityList
-                            ++ [ li
-                                    [ class ""
-                                    , X.Html.onClickStopAll onAddClicked
-                                    ]
-                                    [ Mat.icon "add"
-                                    , div [] [ text "Add New" ]
-                                    ]
-                               ]
-                            ++ archivedItems vm
-                        )
-                    ]
-               ]
+                ]
+           , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
+                [ ul []
+                    ([]
+                        ++ List.map entityListItem vm.entityList
+                        ++ [ li
+                                [ class ""
+                                , X.Html.onClickStopAll onAddClicked
+                                ]
+                                [ Mat.icon "add"
+                                , div [] [ text "Add New" ]
+                                ]
+                           ]
+                        ++ archivedItems vm
+                    )
+                ]
+           ]
 
 
 archivedItems vm =
@@ -136,18 +134,18 @@ archivedItems vm =
                 , []
                 )
     in
-        [ li
-            [ class ""
-            , onClick vm.onToggleShowArchived
-            ]
-            [ Mat.icon iconName
-            , div [ class "font-nowrap" ]
-                [ View.Badge.badge buttonText badgeCount
-                ]
-            ]
-        , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
-            [ ul [] viewItems ]
+    [ li
+        [ class ""
+        , onClick vm.onToggleShowArchived
         ]
+        [ Mat.icon iconName
+        , div [ class "font-nowrap" ]
+            [ View.Badge.badge buttonText badgeCount
+            ]
+        ]
+    , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
+        [ ul [] viewItems ]
+    ]
 
 
 

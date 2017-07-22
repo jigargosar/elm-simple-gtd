@@ -1,17 +1,17 @@
-module Todo.ItemView exposing (TodoViewModel, ScheduleViewModel, keyedItem)
+module Todo.ItemView exposing (ScheduleViewModel, TodoViewModel, keyedItem)
 
-import Material
-import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import List.Extra as List
 import Mat
+import Material
 import Regex
 import RegexHelper
 import String.Extra as String
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import X.Html exposing (onChange, onClickStopPropagation, onMouseDownStopPropagation)
 import X.Keyboard exposing (KeyboardEvent, onKeyDown)
 
 
@@ -120,7 +120,7 @@ parseDisplayText vm =
             Regex.split Regex.All RegexHelper.url vm.displayText
                 .|> text
     in
-        List.interweave nonLinkStrings linkStrings
+    List.interweave nonLinkStrings linkStrings
 
 
 classListAsClass list =

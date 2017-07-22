@@ -1,13 +1,13 @@
 module View.Overlays exposing (overlayViews)
 
 import ExclusiveMode.Types exposing (..)
+import GroupDoc.FormView
+import Html exposing (..)
+import LaunchBar.View
 import Todo.FormTypes exposing (..)
 import Todo.GroupEditView
-import Html exposing (..)
 import Todo.Notification.View exposing (maybeOverlay)
 import Todo.View
-import LaunchBar.View
-import GroupDoc.FormView
 import View.GetStarted
 import View.MainMenu
 
@@ -63,7 +63,7 @@ overlayViews config appModel =
                 _ ->
                     def
     in
-        [ Just editModeOverlayView
-        , Todo.Notification.View.maybeOverlay config appModel
-        ]
-            |> List.filterMap identity
+    [ Just editModeOverlayView
+    , Todo.Notification.View.maybeOverlay config appModel
+    ]
+        |> List.filterMap identity

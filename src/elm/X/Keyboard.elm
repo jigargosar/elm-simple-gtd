@@ -1,13 +1,13 @@
 module X.Keyboard exposing (..)
 
-import X.Decode exposing (traceDecoder)
-import X.Html
 import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
-import Keyboard.Extra as KX exposing (Key)
 import Keyboard
+import Keyboard.Extra as KX exposing (Key)
+import X.Decode exposing (traceDecoder)
+import X.Html
 
 
 onKeyUp : (KeyboardEvent -> msg) -> Attribute msg
@@ -66,7 +66,7 @@ isNoSoftKeyDown =
 
 isOnlyShiftKeyDown ke =
     ke.isShiftDown
-        && (not (ke.isMetaDown || ke.isControlDown || ke.isAltDown))
+        && not (ke.isMetaDown || ke.isControlDown || ke.isAltDown)
 
 
 succeedIfDecodedKeyEquals key msg =

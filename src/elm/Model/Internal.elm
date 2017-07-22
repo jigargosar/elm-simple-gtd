@@ -4,6 +4,7 @@ import Context
 import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
+import Json.Encode as E
 import LocalPref
 import Material
 import Model.ViewType
@@ -14,14 +15,9 @@ import Time exposing (Time)
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
-import X.Keyboard
-import Json.Encode as E
-import X.Random
-import Json.Encode as E
 import Types exposing (..)
-import Time
-import Types exposing (AppModel)
 import X.Keyboard
+import X.Random
 
 
 type alias Flags =
@@ -85,4 +81,4 @@ createAppModel flags =
             , mdl = Material.model
             }
     in
-        model
+    model

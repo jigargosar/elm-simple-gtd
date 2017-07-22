@@ -31,10 +31,9 @@ update config msg =
                 >> command positionMainMenuCmd
 
         OnMainMenuStateChanged menuState ->
-            (menuState
+            menuState
                 |> XMMainMenu
                 >> config.setXMode
-            )
 
 
 positionMainMenuCmd =

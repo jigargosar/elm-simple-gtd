@@ -1,20 +1,20 @@
 module X.Record
     exposing
-        ( fieldLens
+        ( Field
         , bool
-        , toggle
+        , fieldLens
         , get
-        , set
-        , setIn
-        , over
-        , overT2
+        , maybeOver
         , maybeOverT2
-        , overReturn
         , maybeSet
         , maybeSetIn
-        , maybeOver
+        , over
         , overM
-        , Field
+        , overReturn
+        , overT2
+        , set
+        , setIn
+        , toggle
         )
 
 import Return
@@ -45,7 +45,7 @@ bool getter setter =
 
 toggle : BoolField big -> big -> big
 toggle boolField big =
-    over boolField (not) big
+    over boolField not big
 
 
 get (Field field) big =

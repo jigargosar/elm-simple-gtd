@@ -18,4 +18,4 @@ any list =
 
 
 always =
-    (\_ -> True)
+    \_ -> True

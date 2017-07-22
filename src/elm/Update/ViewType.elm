@@ -1,8 +1,8 @@
 module Update.ViewType exposing (Config, update)
 
 import Entity.Types exposing (EntityListViewType(ContextsView))
-import Return exposing (andThen, map)
 import Msg.ViewType exposing (..)
+import Return exposing (andThen, map)
 import Types.ViewType exposing (..)
 
 

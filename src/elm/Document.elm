@@ -1,13 +1,13 @@
 module Document exposing (..)
 
 import Document.Types exposing (DeviceId)
-import Time exposing (Time)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Set exposing (Set)
+import Time exposing (Time)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 
 
 getId =
@@ -68,11 +68,11 @@ type alias Document record =
 
 
 encodeModel doc =
-    [ "_id" => E.string (doc.id)
-    , "_rev" => E.string (doc.rev)
+    [ "_id" => E.string doc.id
+    , "_rev" => E.string doc.rev
     , "createdAt" => E.int (doc.createdAt |> round)
     , "modifiedAt" => E.int (doc.modifiedAt |> round)
-    , "deleted" => E.bool (doc.deleted)
+    , "deleted" => E.bool doc.deleted
     , "deviceId" => E.string doc.deviceId
     ]
 
@@ -90,7 +90,7 @@ documentFieldsDecoder :
 documentFieldsDecoder =
     D.required "_id" D.string
         >> D.optional "_rev" D.string defaultRevision
-        >> D.optional "createdAt" (D.float) 0
+        >> D.optional "createdAt" D.float 0
         >> D.optional "modifiedAt" D.float 0
         >> D.optional "deleted" D.bool False
         >> D.optional "deviceId" D.string ""

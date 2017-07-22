@@ -1,8 +1,8 @@
 module Model exposing (..)
 
 import ExclusiveMode.Types exposing (ExclusiveMode(..), SyncForm)
-import X.Record exposing (..)
 import Toolkit.Operators exposing (..)
+import X.Record exposing (..)
 
 
 --import Types
@@ -44,7 +44,7 @@ getRemoteSyncForm model =
                 _ ->
                     Nothing
     in
-        maybeForm ?= createRemoteSyncForm model
+    maybeForm ?= createRemoteSyncForm model
 
 
 
@@ -60,7 +60,7 @@ createRemoteSyncForm model =
 
 
 getNow =
-    (.now)
+    .now
 
 
 

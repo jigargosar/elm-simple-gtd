@@ -2,19 +2,19 @@ module Todo exposing (..)
 
 import Document exposing (Revision)
 import Document.Types exposing (DocId)
-import X.Record exposing (over, set)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Maybe.Extra as Maybe
-import Toolkit.Operators exposing (..)
-import Toolkit.Helpers exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import List
+import Maybe.Extra as Maybe
 import Time exposing (Time)
 import Todo.Schedule
 import Todo.Types exposing (TodoAction(..))
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
+import X.Record exposing (over, set)
 
 
 type alias Text =
@@ -57,7 +57,7 @@ getMaybeReminderTime =
 
 getDeleted : Model -> Bool
 getDeleted =
-    (.deleted)
+    .deleted
 
 
 isDeleted =
@@ -73,17 +73,17 @@ isInActive =
 
 
 getProjectId =
-    (.projectId)
+    .projectId
 
 
 getCreatedAt : Model -> Time
 getCreatedAt =
-    (.createdAt)
+    .createdAt
 
 
 getModifiedAt : Model -> Time
 getModifiedAt =
-    (.modifiedAt)
+    .modifiedAt
 
 
 getMaybeTime model =
@@ -174,10 +174,10 @@ isReminderOverdue now model =
         isOverDue =
             getMaybeReminderTime >> Maybe.unwrap False (\time -> time <= now)
     in
-        if isActive model then
-            isOverDue model
-        else
-            False
+    if isActive model then
+        isOverDue model
+    else
+        False
 
 
 isSnoozed todo =
@@ -244,7 +244,7 @@ encodeOtherFields todo =
     , "text" => E.string (getText todo)
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
-    , "schedule" => (Todo.Schedule.encode todo.schedule)
+    , "schedule" => Todo.Schedule.encode todo.schedule
     ]
 
 
@@ -268,12 +268,12 @@ init createdAt text deviceId id =
 
 
 getText =
-    (.text)
+    .text
 
 
 isDone : Model -> Bool
 isDone =
-    (.done)
+    .done
 
 
 getContextId =
@@ -314,8 +314,8 @@ projectIdFilter projectId =
 
 
 toAllPassPredicate predicateList =
-    (applyList predicateList >> List.all identity)
+    applyList predicateList >> List.all identity
 
 
 toAnyPassPredicate predicateList =
-    (applyList predicateList >> List.any identity)
+    applyList predicateList >> List.any identity

@@ -1,7 +1,7 @@
 module Subscriptions.Todo exposing (..)
 
-import Time
 import Ports.Todo exposing (..)
+import Time
 import Todo.Msg exposing (TodoMsg(..))
 
 

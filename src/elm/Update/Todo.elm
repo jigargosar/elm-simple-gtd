@@ -2,12 +2,12 @@ module Update.Todo exposing (Config, update)
 
 import Return exposing (andThen)
 import Set
-import Update.Todo.Internal exposing (..)
-import Todo.Msg exposing (TodoMsg(..))
-import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
 import Time
-import X.Function.Infix exposing (..)
+import Todo.Msg exposing (TodoMsg(..))
 import Todo.TimeTracker as Tracker
+import Update.Todo.Internal exposing (..)
+import X.Function.Infix exposing (..)
+import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe2)
 
 
 type alias Config msg model =

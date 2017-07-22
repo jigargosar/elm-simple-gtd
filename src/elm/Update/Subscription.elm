@@ -60,8 +60,8 @@ update config msg =
         OnNowChanged now ->
             map (setNow now)
 
-        OnGlobalKeyUp key ->
-            onGlobalKeyUp config key
+        OnGlobalKeyUp keyCode ->
+            onGlobalKeyUp config (KX.fromCode keyCode)
 
         OnPouchDBChange dbName encodedDoc ->
             let

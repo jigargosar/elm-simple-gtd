@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import Keyboard.Extra
+import Keyboard
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
 import Msg.Subscription
@@ -27,7 +27,7 @@ subscriptions model =
     Sub.batch
         [ Sub.batch
             [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
-            , Keyboard.Extra.ups Msg.Subscription.OnGlobalKeyUp
+            , Keyboard.ups Msg.Subscription.OnGlobalKeyUp
             , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
             ]

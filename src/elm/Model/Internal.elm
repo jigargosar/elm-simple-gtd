@@ -16,7 +16,6 @@ import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
 import Types exposing (..)
-import X.Keyboard
 import X.Random
 
 

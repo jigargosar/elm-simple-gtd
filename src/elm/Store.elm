@@ -24,7 +24,6 @@ import Document exposing (Document)
 import Document.Types exposing (DocId)
 import Firebase.Types exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
 import List.Extra as List
 import Random.Pcg as Random

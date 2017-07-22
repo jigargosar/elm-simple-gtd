@@ -1,6 +1,5 @@
 module Update.Subscription exposing (Config, update)
 
-import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import GroupDoc.Types exposing (..)
@@ -15,7 +14,6 @@ import Store
 import Time exposing (Time)
 import Todo.Types exposing (TodoDoc, TodoStore)
 import X.Function.Infix exposing (..)
-import X.Keyboard exposing (KeyboardState)
 import X.Record exposing (..)
 import X.Return exposing (rAndThenMaybe, returnWith)
 

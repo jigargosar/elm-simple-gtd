@@ -1,4 +1,4 @@
-port module Main exposing (main)
+module Main exposing (main)
 
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)

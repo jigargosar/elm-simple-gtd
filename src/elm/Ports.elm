@@ -1,13 +1,12 @@
-port module Ports exposing (onFirebaseDatabaseChangeSub, persistLocalPref)
+port module Ports exposing (..)
 
 import Json.Encode as E
 
 
+port pouchDBChanges : (( String, E.Value ) -> msg) -> Sub msg
+
+
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
-
-
-onFirebaseDatabaseChangeSub tagger =
-    onFirebaseDatabaseChange (uncurry tagger)
 
 
 port persistLocalPref : E.Value -> Cmd msg

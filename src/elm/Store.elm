@@ -12,7 +12,6 @@ port module Store
         , insertAndPersist
         , isEmpty
         , mapDocs
-        , onChange
         , rejectDocs
         , updateAndPersist
         , upsertInPouchDbOnFirebaseChange
@@ -39,13 +38,6 @@ import X.Record as Record exposing (get, over, overT2)
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
-
-
-port pouchDBChanges : (( String, D.Value ) -> msg) -> Sub msg
-
-
-onChange =
-    uncurry >> pouchDBChanges
 
 
 decodeList : Decoder (Document x) -> List E.Value -> List (Document x)

@@ -8,7 +8,6 @@ import Ports
 import Return
 import RouteUrl
 import Routes
-import Store
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
@@ -29,8 +28,8 @@ subscriptions model =
         [ Sub.batch
             [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
             , Keyboard.Extra.ups Msg.Subscription.OnGlobalKeyUp
-            , Store.onChange Msg.Subscription.OnPouchDBChange
-            , Ports.onFirebaseDatabaseChangeSub Msg.Subscription.OnFirebaseDatabaseChange
+            , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
+            , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
             ]
             |> Sub.map Msg.OnSubscriptionMsg
         , Subscriptions.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg

@@ -67,6 +67,9 @@ const excludeInDevServerModePlugins = [
 ]
 const plugins = _.concat(commonPlugins, isWebPackDevServer ? [] : excludeInDevServerModePlugins)
 
+const disableLanding = true
+const extraEntry = isWebPackDevServer && disableLanding ? {} : {"landing": ["./landing.js"],}
+
 export default {
     resolve: {
         alias: {
@@ -75,7 +78,7 @@ export default {
         },
     },
     context: path.resolve(__dirname, "src/web/"),
-    entry: {
+    entry: _.merge({
         "common": [
             "babel-polyfill",
             "materialize-css/dist/js/materialize",
@@ -87,8 +90,7 @@ export default {
             "./app.html",
         ],
         "app": ["./app.js"],
-        "landing": ["./landing.js"],
-    },
+    }, extraEntry),
 
     output: {
         path: outputPath,

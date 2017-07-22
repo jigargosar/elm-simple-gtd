@@ -2,19 +2,18 @@ module Mat exposing (..)
 
 import AppColors
 import Html exposing (..)
-import Html.Attributes
 import Html.Attributes as HA
 import Html.Events as HE
+import Json.Decode as D exposing (Decoder)
 import Material
 import Material.Button
 import Material.Icon
 import Material.Options
+import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import Toolkit.Operators exposing (..)
 import X.Html
 import X.String
-import Json.Decode as D exposing (Decoder)
 
 
 stopPropagation =
@@ -60,7 +59,7 @@ id =
 
 
 attr =
-    Html.Attributes.attribute >>> fromHtmlAttr
+    HA.attribute >>> fromHtmlAttr
 
 
 fromHtmlAttr =
@@ -72,7 +71,7 @@ resourceId =
 
 
 tabIndex =
-    Html.Attributes.tabindex >> fromHtmlAttr
+    HA.tabindex >> fromHtmlAttr
 
 
 many =
@@ -158,28 +157,28 @@ ibc msg iconName clickHandler config =
 
         btnAttr =
             [ nothingWhen (equals -2) HA.tabindex config.tabIndex
-            , nothingWhen X.String.isBlank Html.Attributes.id config.id
+            , nothingWhen X.String.isBlank HA.id config.id
             ]
                 |> List.filterMap identity
                 .|> Material.Options.attribute
                 |++ [ onStopPropagation2 "click" clickHandler
-                    , Material.Options.attribute <| Html.Attributes.attribute "data-btn-name" trackingId
+                    , Material.Options.attribute <| HA.attribute "data-btn-name" trackingId
                     ]
                 |> Material.Options.many
     in
-        Material.Button.render msg
-            [ 0 ]
-            config.mdl
-            [ Material.Options.many
-                (if config.primaryFAB then
-                    []
-                 else
-                    [ Material.Button.icon ]
-                )
-            , Material.Options.cs cs
-            , btnAttr
-            ]
-            [ Material.Icon.view iconName config.iconProps ]
+    Material.Button.render msg
+        [ 0 ]
+        config.mdl
+        [ Material.Options.many
+            (if config.primaryFAB then
+                []
+             else
+                [ Material.Button.icon ]
+            )
+        , Material.Options.cs cs
+        , btnAttr
+        ]
+        [ Material.Icon.view iconName config.iconProps ]
 
 
 classListAsClass list =
@@ -217,8 +216,8 @@ modalButtonPanel config =
         btn ( txt, msg ) =
             btnFlat txt [ HE.onClick msg ]
     in
-        div [ HA.class "layout horizontal-reverse" ]
-            (config .|> btn)
+    div [ HA.class "layout horizontal-reverse" ]
+        (config .|> btn)
 
 
 okCancelDeleteButtons config msg =

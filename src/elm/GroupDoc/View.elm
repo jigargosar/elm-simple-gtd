@@ -1,15 +1,15 @@
 module GroupDoc.View exposing (..)
 
 import EntityId
-import View.Badge
-import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Keyed
 import Mat
 import Toolkit.Operators exposing (..)
+import View.Badge
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
+import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 
 
 --type alias KeyedView =
@@ -29,9 +29,9 @@ item todoView vm =
         getTabIndexAVForTodo =
             EntityId.fromTodo >> vm.getTabIndexAVForEntityId
     in
-        Html.Keyed.node "div"
-            [ class "collection" ]
-            (( vm.id, headerItem vm ) :: (vm.todoList .|> todoView))
+    Html.Keyed.node "div"
+        [ class "collection" ]
+        (( vm.id, headerItem vm ) :: (vm.todoList .|> todoView))
 
 
 initHeaderKeyed vm =
@@ -65,16 +65,16 @@ headerItem vm =
             else
                 editButton
     in
-        div
-            [ tabindex vm.tabindexAV
-            , X.Html.onFocusIn vm.onFocusIn
-            , onKeyDown vm.onKeyDownMsg
-            , classList [ "entity-item focusable-list-item collection-item" => True ]
-            ]
-            [ div [ class "layout horizontal justified center" ]
-                [ h5 [ class "font-nowrap ellipsis" ]
-                    [ View.Badge.badge (vm.namePrefix ++ vm.name) vm.count
-                    ]
-                , div [ class "layout horizontal center" ] [ editOrArchiveButton ]
+    div
+        [ tabindex vm.tabindexAV
+        , X.Html.onFocusIn vm.onFocusIn
+        , onKeyDown vm.onKeyDownMsg
+        , classList [ "entity-item focusable-list-item collection-item" => True ]
+        ]
+        [ div [ class "layout horizontal justified center" ]
+            [ h5 [ class "font-nowrap ellipsis" ]
+                [ View.Badge.badge (vm.namePrefix ++ vm.name) vm.count
                 ]
+            , div [ class "layout horizontal center" ] [ editOrArchiveButton ]
             ]
+        ]

@@ -7,17 +7,17 @@ import Entity.Types exposing (..)
 import Firebase.Types exposing (FirebaseMsg)
 import GroupDoc.Types exposing (GroupDocAction(..), GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
+import Material
 import Msg.AppHeader exposing (AppHeaderMsg(..))
+import Msg.CustomSync exposing (CustomSyncMsg(..))
+import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Msg.Subscription exposing (SubscriptionMsg)
 import Msg.ViewType exposing (ViewTypeMsg(..))
 import Time exposing (Time)
-import X.Function.Infix exposing (..)
 import Todo.Msg exposing (TodoMsg)
-import Material
-import Msg.CustomSync exposing (CustomSyncMsg(..))
-import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 
 
 type AppMsg
@@ -57,7 +57,7 @@ logString =
 
 
 setDomFocusToFocusInEntityCmd =
-    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")
+    commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]"
 
 
 

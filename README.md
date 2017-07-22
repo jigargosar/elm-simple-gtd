@@ -11,8 +11,8 @@
 ## Build Instructions
 
 ```bash
-git clone https://github.com/jigargosar/elm-simple-gtd.git
+git clone --depth 1 https://github.com/jigargosar/elm-simple-gtd.git
 cd elm-simple-gtd
-yarn install 
-npm run nodemon
+yarn install --offline --force 
+yarn run nodemon
 ```

@@ -2,7 +2,6 @@ module Main exposing (main)
 
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
-import Msg.Subscription
 import Ports
 import Return
 import RouteUrl
@@ -27,11 +26,11 @@ subscriptions : AppModel -> Sub Msg.AppMsg
 subscriptions model =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
-            , X.Keyboard.subscription Msg.Subscription.OnKeyboardMsg
-            , X.Keyboard.ups Msg.Subscription.OnGlobalKeyUp
-            , Store.onChange Msg.Subscription.OnPouchDBChange
-            , Ports.onFirebaseDatabaseChangeSub Msg.Subscription.OnFirebaseDatabaseChange
+            [ Time.every (Time.second * 1) Msg.OnNowChanged
+            , X.Keyboard.subscription Msg.OnKeyboardMsg
+            , X.Keyboard.ups Msg.OnGlobalKeyUp
+            , Store.onChange Msg.OnPouchDBChange
+            , Ports.onFirebaseDatabaseChangeSub Msg.OnFirebaseDatabaseChange
             ]
             |> Sub.map Msg.OnSubscriptionMsg
         , Subscriptions.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg

@@ -8,7 +8,7 @@ import Keyboard.Extra as Key exposing (Key)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
-import Msg.Subscription exposing (SubscriptionMsg(..))
+import Msg exposing (SubscriptionMsg(..))
 import Return exposing (map)
 import Set
 import Store

@@ -4,7 +4,7 @@ import DomPorts exposing (focusSelectorIfNoFocusRCmd)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import GroupDoc.Types exposing (..)
-import Keyboard.Extra as Key exposing (Key)
+import Keyboard.Extra as KX
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
@@ -64,7 +64,7 @@ update config msg =
             map (setNow now)
 
         OnKeyboardMsg msg ->
-            map (updateKeyboardState (X.Keyboard.update msg))
+            map (updateKeyboardState (KX.update msg))
                 >> focusSelectorIfNoFocusRCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
@@ -104,25 +104,25 @@ onGlobalKeyUp config key =
                                 >> config.revertExclusiveMode
                     in
                     case key of
-                        Key.Escape ->
+                        KX.Escape ->
                             clear
 
-                        Key.CharX ->
+                        KX.CharX ->
                             clear
 
-                        Key.CharQ ->
+                        KX.CharQ ->
                             config.onStartAddingTodoWithFocusInEntityAsReference
 
-                        Key.CharI ->
+                        KX.CharI ->
                             config.onStartAddingTodoToInbox
 
-                        Key.Slash ->
+                        KX.Slash ->
                             config.openLaunchBarMsg
 
                         _ ->
                             identity
 
-                ( Key.Escape, _ ) ->
+                ( KX.Escape, _ ) ->
                     config.revertExclusiveMode
 
                 _ ->

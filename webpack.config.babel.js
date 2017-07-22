@@ -83,6 +83,8 @@ export default {
             "./pcss/main.pcss",
             "./font-loader",
             "./analytics.js",
+            "./index.html",
+            "./app.html",
         ],
         "app": ["./app.js"],
         "landing": ["./landing.js"],

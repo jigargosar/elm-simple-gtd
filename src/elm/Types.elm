@@ -14,7 +14,6 @@ import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import Types.ViewType exposing (ViewType(EntityListView))
-import X.Keyboard exposing (KeyboardState)
 
 
 type alias AppConfig =
@@ -44,7 +43,6 @@ type alias AppModel =
     , appDrawerModel : AppDrawer.Model.Model
     , signInModel : Firebase.SignIn.Model
     , mdl : Material.Model
-    , keyboardState : KeyboardState
     }
 
 

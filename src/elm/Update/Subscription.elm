@@ -28,7 +28,6 @@ type alias SubModel model =
         , contextStore : ContextStore
         , editMode : ExclusiveMode
         , selectedEntityIdSet : Set.Set String
-        , keyboardState : KeyboardState
     }
 
 
@@ -62,10 +61,6 @@ update config msg =
     case msg of
         OnNowChanged now ->
             map (setNow now)
-
-        OnKeyboardMsg msg ->
-            map (updateKeyboardState (KX.update msg))
-                >> focusSelectorIfNoFocusRCmd ".entity-list .focusable-list-item[tabindex=0]"
 
         OnGlobalKeyUp key ->
             onGlobalKeyUp config key
@@ -138,19 +133,8 @@ setNow now model =
     { model | now = now }
 
 
-keyboardState =
-    fieldLens .keyboardState (\s b -> { b | keyboardState = s })
-
-
 
 --updateKeyboardState : (KeyboardState -> KeyboardState) -> SubModelF model
-
-
-updateKeyboardState =
-    over keyboardState
-
-
-
 --upsertEncodedDocOnPouchDBChange : String -> E.Value -> SubModel model -> Maybe ( Entity, SubModel model )
 
 

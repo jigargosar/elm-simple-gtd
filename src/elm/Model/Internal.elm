@@ -63,7 +63,6 @@ createAppModel flags =
             , contextStore = contextStore
             , editMode = XMNone
             , viewType = Model.ViewType.defaultView
-            , keyboardState = X.Keyboard.init
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = firebaseModel.user

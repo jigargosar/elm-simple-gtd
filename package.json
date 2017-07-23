@@ -17,7 +17,8 @@
     "nodemon": "nodemon --exec 'npm run dev'",
     "nodemon-dep": "nodemon --watch tasks/elm-dep.js --exec 'run dep'",
     "xx_link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
-    "xx_start": "http-server docs"
+    "xx_start": "http-server docs",
+    "commit": "commit-wizard"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
@@ -42,6 +43,7 @@
     "postcss-cssnext": "3.0.2",
     "postcss-import": "10.0.0",
     "postcss-loader": "2.0.6",
+    "pre-git": "3.15.0",
     "release-tools": "2.5.2",
     "rimraf": "2.6.1",
     "runjs": "3.4.1",
@@ -74,5 +76,15 @@
     "pouchdb-upsert": "2.2.0",
     "ramda": "0.24.1",
     "webfontloader": "1.6.28"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "simple",
+      "pre-commit": ["run preCommit"],
+      "pre-push": [],
+      "post-commit": [],
+      "post-checkout": [],
+      "post-merge": []
+    }
   }
 }

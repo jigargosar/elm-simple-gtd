@@ -9,10 +9,11 @@ import Subscriptions
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
-import TodoMsg
+import Todo.Msg
 import Types exposing (..)
 import Update
 import View
+import X.Function.Infix exposing (..)
 
 
 type alias AppReturn =
@@ -46,15 +47,15 @@ update msg =
 
 
 viewConfig =
-    { onSetProject = TodoMsg.onSetProjectAndMaybeSelection
-    , onSetContext = TodoMsg.onSetContextAndMaybeSelection
-    , onSetTodoFormMenuState = TodoMsg.onSetTodoFormMenuState
+    { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> Msg.OnTodoMsg
+    , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> Msg.OnTodoMsg
+    , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> Msg.OnTodoMsg
     , noop = Msg.noop
     , revertExclusiveMode = Msg.revertExclusiveMode
-    , onSetTodoFormText = TodoMsg.onSetTodoFormText
-    , onToggleDeleted = TodoMsg.onToggleDeleted
-    , onSetTodoFormReminderDate = TodoMsg.onSetTodoFormReminderDate
-    , onSetTodoFormReminderTime = TodoMsg.onSetTodoFormReminderTime
+    , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> Msg.OnTodoMsg
+    , onToggleDeleted = Todo.Msg.onToggleDeleted >> Msg.OnTodoMsg
+    , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> Msg.OnTodoMsg
+    , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> Msg.OnTodoMsg
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onEntityUpdateMsg = Msg.onEntityUpdateMsg
     , onMainMenuStateChanged = Msg.onMainMenuStateChanged
@@ -62,7 +63,7 @@ viewConfig =
     , onSignOut = Msg.onSignOut
     , onLaunchBarMsg = Msg.OnLaunchBarMsg
     , onFirebaseMsg = Msg.OnFirebaseMsg
-    , onReminderOverlayAction = TodoMsg.onReminderOverlayAction
+    , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> Msg.OnTodoMsg
     , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
     , onAppDrawerMsg = Msg.onAppDrawerMsg
     , onStartAddingGroupDoc = Msg.onStartAddingGroupDoc
@@ -73,17 +74,17 @@ viewConfig =
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
     , onEntityListKeyDown = Msg.onEntityListKeyDown
-    , onStopRunningTodo = TodoMsg.onStopRunningTodo
+    , onStopRunningTodo = Todo.Msg.onStopRunningTodo |> Msg.OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
     , onToggleEntitySelection = Msg.onToggleEntitySelection
-    , onStartEditingTodoProject = TodoMsg.onStartEditingTodoProject
-    , onStartEditingTodoContext = TodoMsg.onStartEditingTodoContext
-    , onSwitchOrStartTrackingTodo = TodoMsg.onSwitchOrStartTrackingTodo
-    , onStartEditingTodoText = TodoMsg.onStartEditingTodoText
-    , onStartEditingReminder = TodoMsg.onStartEditingReminder
-    , onToggleDeletedAndMaybeSelection = TodoMsg.onToggleDeletedAndMaybeSelection
-    , onToggleDoneAndMaybeSelection = TodoMsg.onToggleDoneAndMaybeSelection
+    , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> Msg.OnTodoMsg
+    , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> Msg.OnTodoMsg
+    , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> Msg.OnTodoMsg
+    , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> Msg.OnTodoMsg
+    , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> Msg.OnTodoMsg
+    , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> Msg.OnTodoMsg
+    , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> Msg.OnTodoMsg
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
     , onGD_UpdateFormName = Msg.onGD_UpdateFormName
     }

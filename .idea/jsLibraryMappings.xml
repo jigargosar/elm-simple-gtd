@@ -4,6 +4,5 @@
     <file url="PROJECT" libraries="{firebase-DefinitelyTyped, jquery-DefinitelyTyped, jqueryui-DefinitelyTyped, kefir-DefinitelyTyped, materialize, ramda-DefinitelyTyped, webfont}" />
     <includedPredefinedLibrary name="Node.js Core" />
     <excludedPredefinedLibrary name="elm-simple-gtd/functions/node_modules" />
-    <excludedPredefinedLibrary name="elm-simple-gtd/node_modules" />
   </component>
 </project>

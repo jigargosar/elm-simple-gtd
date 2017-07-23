@@ -214,3 +214,12 @@ export const removeUnusedImports = elm.removeUnusedImports
 export const parseWPD = elm.parseWPD
 export const rui = elm.rui
 export const dep = ElmDep.dep
+
+function runFish(command) {
+    run(`fish -c '${command}' `)
+}
+
+export function preCommit() {
+    const statsFile = "stats/elm-simple-gtd-elm-code-size.txt"
+    runFish(`wc -l src/elm/**.elm | sort -r > ${statsFile}`)
+}

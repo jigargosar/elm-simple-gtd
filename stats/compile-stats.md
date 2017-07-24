@@ -30,3 +30,7 @@
 
 # after using config -> msg & returnMsgAsCmd internally 
 * 2.7s Update.Subscription 
+
+
+# after removing all andThenUpdate and using returnMsgAsCmd.
+* 2.3s Update

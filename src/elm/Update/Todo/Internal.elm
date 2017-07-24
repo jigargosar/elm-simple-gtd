@@ -55,8 +55,8 @@ type alias Config msg =
     { switchToContextsView : msg
     , setFocusInEntityWithEntityId : EntityId -> msg
     , setFocusInEntity : Entity -> msg
-    , afterTodoUpdate : msg
-    , setXMode : ExclusiveMode -> msg
+    , revertExclusiveMode : msg
+    , onSetExclusiveMode : ExclusiveMode -> msg
     , currentViewEntityList : Lazy (List Entity)
     }
 
@@ -210,7 +210,7 @@ onUpdateTodoFormAction config form action =
         xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-    config.setXMode xMode |> returnMsgAsCmd
+    config.onSetExclusiveMode xMode |> returnMsgAsCmd
 
 
 onStartEditingTodo config todo editFormMode =
@@ -221,7 +221,7 @@ onStartEditingTodo config todo editFormMode =
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-    X.Return.returnWith createXMode (config.setXMode >> returnMsgAsCmd)
+    X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
         >> command
             (case editFormMode of
                 ETFM_EditTodoText ->
@@ -243,7 +243,7 @@ onStartAddingTodo config addFormMode =
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-    X.Return.returnWith createXMode (config.setXMode >> returnMsgAsCmd)
+    X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
 
 
 

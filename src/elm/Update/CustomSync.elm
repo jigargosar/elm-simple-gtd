@@ -19,7 +19,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg =
     { saveXModeForm : msg
-    , setXMode : ExclusiveMode -> msg
+    , onSetExclusiveMode : ExclusiveMode -> msg
     }
 
 
@@ -36,5 +36,5 @@ update config msg =
         OnUpdateCustomSyncFormUri form uri ->
             { form | uri = uri }
                 |> XMCustomSync
-                >> config.setXMode
+                >> config.onSetExclusiveMode
                 >> returnMsgAsCmd

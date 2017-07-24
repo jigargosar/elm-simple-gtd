@@ -28,8 +28,8 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsg Entity.Types.EntityMsg
-    | OnSetFocusInEntity Entity
-    | OnSetFocusInEntityWithEntityId EntityId
+    | SetFocusInEntity Entity
+    | SetFocusInEntityWithEntityId EntityId
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnGroupDocMsg GroupDocMsg

@@ -35,7 +35,7 @@ type alias SubAndThenUpdate msg model =
 type alias Config msg =
     { now : Time
     , onComplete : msg
-    , setXMode : ExclusiveMode -> msg
+    , onSetExclusiveMode : ExclusiveMode -> msg
     , onSwitchView : EntityListViewType -> msg
     }
 
@@ -72,7 +72,7 @@ update config msg =
             returnWith identity
                 (\model ->
                     XMLaunchBar (updateInput config text model form)
-                        |> config.setXMode
+                        |> config.onSetExclusiveMode
                         |> returnMsgAsCmd
                 )
 
@@ -80,7 +80,7 @@ update config msg =
             config.now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
-                >> config.setXMode
+                >> config.onSetExclusiveMode
                 >> returnMsgAsCmd
 
         OnCancel ->

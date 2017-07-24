@@ -50,11 +50,11 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
-                >> returnMsgAsCmd config.afterTodoUpdate
+                >> returnMsgAsCmd config.revertExclusiveMode
 
         UpdateTodo__ todoId action ->
             (updateAllTodos action (Set.singleton todoId) |> andThen)
-                >> returnMsgAsCmd config.afterTodoUpdate
+                >> returnMsgAsCmd config.revertExclusiveMode
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action

@@ -94,7 +94,7 @@ update msg =
             let
                 config : Update.AppHeader.Config AppMsg
                 config =
-                    { setXMode = Msg.onSetExclusiveMode
+                    { onSetExclusiveMode = Msg.onSetExclusiveMode
                     }
             in
             Update.AppHeader.update config msg_
@@ -104,7 +104,7 @@ update msg =
                 config : Update.CustomSync.Config AppMsg
                 config =
                     { saveXModeForm = Msg.onSaveExclusiveModeForm
-                    , setXMode = Msg.onSetExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode
                     }
             in
             Update.CustomSync.update config msg_
@@ -129,7 +129,7 @@ update msg =
                 config =
                     { now = now
                     , onComplete = Msg.revertExclusiveMode
-                    , setXMode = Msg.onSetExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode
                     , onSwitchView = Msg.switchToEntityListView
                     }
             in
@@ -141,11 +141,11 @@ update msg =
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
 
-        OnSetFocusInEntity entity ->
+        SetFocusInEntity entity ->
             map (Model.setFocusInEntity entity)
                 >> update Msg.setDomFocusToFocusInEntityCmd
 
-        OnSetFocusInEntityWithEntityId entityId ->
+        SetFocusInEntityWithEntityId entityId ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
                 >> update Msg.setDomFocusToFocusInEntityCmd
 
@@ -154,10 +154,10 @@ update msg =
                 config : AppModel -> Update.Todo.Config AppMsg
                 config model =
                     { switchToContextsView = Msg.switchToContextsViewMsg
-                    , setFocusInEntityWithEntityId = OnSetFocusInEntityWithEntityId
-                    , setFocusInEntity = OnSetFocusInEntity
-                    , afterTodoUpdate = Msg.revertExclusiveMode
-                    , setXMode = Msg.onSetExclusiveMode
+                    , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
+                    , setFocusInEntity = Msg.SetFocusInEntity
+                    , revertExclusiveMode = Msg.revertExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in

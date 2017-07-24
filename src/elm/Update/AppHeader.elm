@@ -17,7 +17,7 @@ type alias SubReturnF msg model =
 
 
 type alias Config msg =
-    { setXMode : ExclusiveMode -> msg
+    { onSetExclusiveMode : ExclusiveMode -> msg
     }
 
 
@@ -28,7 +28,7 @@ update :
 update config msg =
     case msg of
         OnShowMainMenu ->
-            (config.setXMode (XMMainMenu Menu.initState)
+            (config.onSetExclusiveMode (XMMainMenu Menu.initState)
                 |> returnMsgAsCmd
             )
                 >> command positionMainMenuCmd
@@ -36,7 +36,7 @@ update config msg =
         OnMainMenuStateChanged menuState ->
             menuState
                 |> XMMainMenu
-                >> config.setXMode
+                >> config.onSetExclusiveMode
                 >> returnMsgAsCmd
 
 

@@ -38,12 +38,7 @@ init =
 
 update : AppMsg -> AppModel -> AppReturn
 update msg =
-    let
-        andThenUpdate =
-            update >> Return.andThen
-    in
-    Return.singleton
-        >> Update.update andThenUpdate msg
+    Return.singleton >> Update.update msg
 
 
 viewConfig =

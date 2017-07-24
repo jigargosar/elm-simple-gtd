@@ -1,4 +1,4 @@
-   10139 total
+   10129 total
      463 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -8,7 +8,7 @@
      218 src/elm/GroupDoc/ViewModel.elm
      209 src/elm/Msg.elm
      208 src/elm/Update/Entity.elm
-     197 src/elm/Update.elm
+     192 src/elm/Update.elm
      187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      173 src/elm/Update/Firebase.elm
@@ -33,9 +33,9 @@
      110 src/elm/ViewModel.elm
      110 src/elm/Model/EntityTree.elm
      106 src/elm/Todo/TimeTracker.elm
-     106 src/elm/Main.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
+     101 src/elm/Main.elm
       95 src/elm/GroupDoc/Types.elm
       94 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm

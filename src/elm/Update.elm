@@ -32,15 +32,10 @@ type alias ReturnF =
     Return.ReturnF AppMsg AppModel
 
 
-type alias AndThenUpdate =
-    AppMsg -> ReturnF
-
-
 update :
-    AndThenUpdate
-    -> AppMsg
+    AppMsg
     -> ReturnF
-update andThenUpdate msg =
+update msg =
     case msg of
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
@@ -93,9 +88,9 @@ update andThenUpdate msg =
             let
                 config : Update.ExclusiveMode.Config AppMsg AppModel
                 config =
-                    { focusEntityList = andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                    , saveTodoForm = Msg.onSaveTodoForm >> andThenUpdate
-                    , saveGroupDocForm = Msg.onSaveGroupDocForm >> andThenUpdate
+                    { focusEntityList = update Msg.setDomFocusToFocusInEntityCmd
+                    , saveTodoForm = Msg.onSaveTodoForm >> update
+                    , saveGroupDocForm = Msg.onSaveGroupDocForm >> update
                     }
             in
             Update.ExclusiveMode.update config msg_
@@ -104,7 +99,7 @@ update andThenUpdate msg =
             let
                 config : Update.AppHeader.Config AppMsg AppModel
                 config =
-                    { setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    { setXMode = Msg.onSetExclusiveMode >> update
                     }
             in
             Update.AppHeader.update config msg_
@@ -113,8 +108,8 @@ update andThenUpdate msg =
             let
                 config : Update.CustomSync.Config AppMsg AppModel
                 config =
-                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> update
+                    , setXMode = Msg.onSetExclusiveMode >> update
                     }
             in
             Update.CustomSync.update config msg_
@@ -155,18 +150,18 @@ update andThenUpdate msg =
             let
                 config : AppModel -> Update.Todo.Config AppMsg AppModel
                 config model =
-                    { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
+                    { switchToContextsView = Msg.switchToContextsViewMsg |> update
                     , setFocusInEntityWithEntityId =
                         \entityId ->
                             map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
+                                >> update Msg.setDomFocusToFocusInEntityCmd
                     , setFocusInEntity =
                         \entity ->
                             map (Model.setFocusInEntity entity)
-                                >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd
-                    , closeNotification = Msg.OnCloseNotification >> andThenUpdate
-                    , afterTodoUpdate = Msg.revertExclusiveMode |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
+                                >> update Msg.setDomFocusToFocusInEntityCmd
+                    , closeNotification = Msg.OnCloseNotification >> update
+                    , afterTodoUpdate = Msg.revertExclusiveMode |> update
+                    , setXMode = Msg.onSetExclusiveMode >> update
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in

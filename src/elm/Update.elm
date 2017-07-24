@@ -54,8 +54,7 @@ update msg =
                 config : Update.Subscription.Config AppMsg
                 config =
                     { noop = Msg.noop
-                    , onStartAddingTodoToInbox =
-                        TodoMsg.onStartAddingTodoToInbox
+                    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
                     , onStartAddingTodoWithFocusInEntityAsReference =
                         TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
                     , openLaunchBarMsg = Msg.openLaunchBarMsg

@@ -8,7 +8,6 @@ import Model
 import Model.EntityList
 import Model.Stores
 import Msg exposing (..)
-import Notification
 import Ports
 import Return
 import TodoMsg

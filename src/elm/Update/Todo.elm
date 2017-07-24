@@ -1,6 +1,5 @@
 module Update.Todo exposing (Config, update)
 
-import Return
 import Set
 import Time
 import Todo.Msg exposing (TodoMsg(..))

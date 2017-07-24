@@ -6,7 +6,6 @@ import LocalPref
 import Material
 import Model
 import Model.EntityList
-import Model.Selection
 import Model.Stores
 import Msg exposing (..)
 import Notification
@@ -146,22 +145,24 @@ update msg =
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
 
+        OnSetFocusInEntity entity ->
+            map (Model.setFocusInEntity entity)
+                >> update Msg.setDomFocusToFocusInEntityCmd
+
+        OnSetFocusInEntityWithEntityId entityId ->
+            map (Model.Stores.setFocusInEntityWithEntityId entityId)
+                >> update Msg.setDomFocusToFocusInEntityCmd
+
         OnTodoMsgWithNow msg_ now ->
             let
-                config : AppModel -> Update.Todo.Config AppMsg AppModel
+                config : AppModel -> Update.Todo.Config AppMsg
                 config model =
-                    { switchToContextsView = Msg.switchToContextsViewMsg |> update
-                    , setFocusInEntityWithEntityId =
-                        \entityId ->
-                            map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                                >> update Msg.setDomFocusToFocusInEntityCmd
-                    , setFocusInEntity =
-                        \entity ->
-                            map (Model.setFocusInEntity entity)
-                                >> update Msg.setDomFocusToFocusInEntityCmd
-                    , closeNotification = Msg.OnCloseNotification >> update
-                    , afterTodoUpdate = Msg.revertExclusiveMode |> update
-                    , setXMode = Msg.onSetExclusiveMode >> update
+                    { switchToContextsView = Msg.switchToContextsViewMsg
+                    , setFocusInEntityWithEntityId = OnSetFocusInEntityWithEntityId
+                    , setFocusInEntity = OnSetFocusInEntity
+                    , closeNotification = Msg.OnCloseNotification
+                    , afterTodoUpdate = Msg.revertExclusiveMode
+                    , setXMode = Msg.onSetExclusiveMode
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
                     }
             in

@@ -51,13 +51,13 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { switchToContextsView : SubReturnF msg model
-    , setFocusInEntityWithEntityId : EntityId -> SubReturnF msg model
-    , setFocusInEntity : Entity -> SubReturnF msg model
-    , closeNotification : String -> SubReturnF msg model
-    , afterTodoUpdate : SubReturnF msg model
-    , setXMode : ExclusiveMode -> SubReturnF msg model
+type alias Config msg =
+    { switchToContextsView : msg
+    , setFocusInEntityWithEntityId : EntityId -> msg
+    , setFocusInEntity : Entity -> msg
+    , closeNotification : String -> msg
+    , afterTodoUpdate : msg
+    , setXMode : ExclusiveMode -> msg
     , currentViewEntityList : Lazy (List Entity)
     }
 
@@ -152,7 +152,7 @@ insertTodo constructWithId =
 
 
 saveAddTodoForm :
-    Config msg model
+    Config msg
     -> AddTodoFormMode
     -> TodoForm
     -> SubModel model
@@ -211,7 +211,7 @@ onUpdateTodoFormAction config form action =
         xMode =
             Todo.Form.updateTodoForm action form |> XMTodoForm
     in
-    config.setXMode xMode
+    config.setXMode xMode |> returnMsgAsCmd
 
 
 onStartEditingTodo config todo editFormMode =
@@ -222,7 +222,7 @@ onStartEditingTodo config todo editFormMode =
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
     in
-    X.Return.returnWith createXMode config.setXMode
+    X.Return.returnWith createXMode (config.setXMode >> returnMsgAsCmd)
         >> command
             (case editFormMode of
                 ETFM_EditTodoText ->
@@ -244,7 +244,7 @@ onStartAddingTodo config addFormMode =
         createXMode model =
             Todo.Form.createAddTodoForm addFormMode |> XMTodoForm
     in
-    X.Return.returnWith createXMode config.setXMode
+    X.Return.returnWith createXMode (config.setXMode >> returnMsgAsCmd)
 
 
 
@@ -255,11 +255,12 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config msg model -> SubReturnF msg model
+onGotoRunningTodo : Config msg -> SubReturnF msg model
 onGotoRunningTodo config =
     returnWith identity (gotoRunningTodo config)
 
 
+onRunningNotificationResponse : Config msg -> Notification.Response -> SubReturnF msg model
 onRunningNotificationResponse config res =
     let
         todoId =
@@ -275,7 +276,7 @@ onRunningNotificationResponse config res =
         _ ->
             onGotoRunningTodo config
     )
-        >> config.closeNotification todoId
+        >> returnMsgAsCmd (config.closeNotification todoId)
 
 
 onReminderNotificationClicked notif =
@@ -361,14 +362,14 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : Config msg model -> SubModel model -> SubReturnF msg model
+gotoRunningTodo : Config msg -> SubModel model -> SubReturnF msg model
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
         ?= identity
 
 
-gotoTodoWithId : Config msg model -> SubModel model -> DocId -> SubReturnF msg model
+gotoTodoWithId : Config msg -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =
@@ -387,13 +388,13 @@ gotoTodoWithId config model todoId =
         |> Maybe.unpack
             (\_ ->
                 setFocusInEntityWithTodoId config todoId
-                    >> config.switchToContextsView
+                    >> returnMsgAsCmd config.switchToContextsView
             )
-            config.setFocusInEntity
+            (config.setFocusInEntity >> returnMsgAsCmd)
 
 
 setFocusInEntityWithTodoId config =
-    createTodoEntityId >> config.setFocusInEntityWithEntityId
+    createTodoEntityId >> config.setFocusInEntityWithEntityId >> returnMsgAsCmd
 
 
 positionMoreMenuCmd todoId =

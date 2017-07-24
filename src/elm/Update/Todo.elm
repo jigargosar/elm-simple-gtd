@@ -10,12 +10,12 @@ import X.Function.Infix exposing (..)
 import X.Return exposing (..)
 
 
-type alias Config msg model =
-    Update.Todo.Internal.Config msg model
+type alias Config msg =
+    Update.Todo.Internal.Config msg
 
 
 update :
-    Config msg model
+    Config msg
     -> Time.Time
     -> TodoMsg
     -> SubReturnF msg model
@@ -51,11 +51,11 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
-                >> config.afterTodoUpdate
+                >> returnMsgAsCmd config.afterTodoUpdate
 
         UpdateTodo__ todoId action ->
             (updateAllTodos action (Set.singleton todoId) |> andThen)
-                >> config.afterTodoUpdate
+                >> returnMsgAsCmd config.afterTodoUpdate
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action

@@ -47,9 +47,6 @@ update msg =
             in
             Update.ViewType.update config msg_
 
-        OnCloseNotification tag ->
-            command (Notification.closeNotification tag)
-
         OnCommonMsg msg_ ->
             CommonMsg.update msg_
 
@@ -160,7 +157,6 @@ update msg =
                     { switchToContextsView = Msg.switchToContextsViewMsg
                     , setFocusInEntityWithEntityId = OnSetFocusInEntityWithEntityId
                     , setFocusInEntity = OnSetFocusInEntity
-                    , closeNotification = Msg.OnCloseNotification
                     , afterTodoUpdate = Msg.revertExclusiveMode
                     , setXMode = Msg.onSetExclusiveMode
                     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)

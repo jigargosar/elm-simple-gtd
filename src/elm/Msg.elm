@@ -36,7 +36,6 @@ type AppMsg
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
-    | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Types.Msg
     | OnMdl (Material.Msg AppMsg)
 

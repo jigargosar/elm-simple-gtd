@@ -55,7 +55,6 @@ type alias Config msg =
     { switchToContextsView : msg
     , setFocusInEntityWithEntityId : EntityId -> msg
     , setFocusInEntity : Entity -> msg
-    , closeNotification : String -> msg
     , afterTodoUpdate : msg
     , setXMode : ExclusiveMode -> msg
     , currentViewEntityList : Lazy (List Entity)
@@ -276,7 +275,7 @@ onRunningNotificationResponse config res =
         _ ->
             onGotoRunningTodo config
     )
-        >> returnMsgAsCmd (config.closeNotification todoId)
+        >> command (Notification.closeNotification todoId)
 
 
 onReminderNotificationClicked notif =

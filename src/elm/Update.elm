@@ -103,7 +103,7 @@ update msg =
             let
                 config : Update.CustomSync.Config AppMsg
                 config =
-                    { saveXModeForm = Msg.onSaveExclusiveModeForm
+                    { onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
                     , onSetExclusiveMode = Msg.onSetExclusiveMode
                     }
             in

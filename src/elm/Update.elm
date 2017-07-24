@@ -161,7 +161,6 @@ update andThenUpdate msg =
                 config model =
                     { switchToContextsView = Msg.switchToContextsViewMsg |> andThenUpdate
                     , setFocusInEntityWithEntityId =
-                        -- later: create and move focusInEntity related methods to corresponding update
                         \entityId ->
                             map (Model.Stores.setFocusInEntityWithEntityId entityId)
                                 >> andThenUpdate Msg.setDomFocusToFocusInEntityCmd

@@ -33,14 +33,14 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-    , revertExclusiveMode : SubReturnF msg model
+type alias Config msg =
+    { onSetExclusiveMode : ExclusiveMode -> msg
+    , revertExclusiveMode : msg
     }
 
 
 update :
-    Config msg model
+    Config msg
     -> GroupDocMsg
     -> SubReturnF msg model
 update config msg =
@@ -51,6 +51,7 @@ update config msg =
                     createAddGroupDocForm gdType
                         |> XMGroupDocForm
                         >> config.onSetExclusiveMode
+                        >> returnMsgAsCmd
 
         OnSaveGroupDocForm form ->
             onGroupDocIdAction config form.groupDocId (GDA_SaveForm form)
@@ -71,7 +72,7 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
 
         updateGroupDocHelp updateFn =
             (updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen)
-                >> config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveMode
     in
     case groupDocIdAction of
         GDA_ToggleArchived ->
@@ -84,6 +85,7 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
             GroupDoc.Form.setName newName form
                 |> XMGroupDocForm
                 |> config.onSetExclusiveMode
+                |> returnMsgAsCmd
 
         GDA_SaveForm form ->
             case form.mode of

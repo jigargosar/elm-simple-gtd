@@ -50,17 +50,17 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-    , revertExclusiveMode : SubReturnF msg model
-    , switchToEntityListView : EntityListViewType -> SubReturnF msg model
-    , setDomFocusToFocusInEntityCmd : SubReturnF msg model
-    , onStartEditingTodo : TodoDoc -> SubReturnF msg model
+type alias Config msg =
+    { onSetExclusiveMode : ExclusiveMode -> msg
+    , revertExclusiveMode : msg
+    , switchToEntityListView : EntityListViewType -> msg
+    , setDomFocusToFocusInEntityCmd : msg
+    , onStartEditingTodo : TodoDoc -> msg
     }
 
 
 update :
-    Config msg model
+    Config msg
     -> EntityMsg
     -> SubReturnF msg model
 update config msg =
@@ -72,11 +72,11 @@ update config msg =
             case key of
                 Key.ArrowUp ->
                     map (moveFocusBy -1 entityList)
-                        >> config.setDomFocusToFocusInEntityCmd
+                        >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
                     map (moveFocusBy 1 entityList)
-                        >> config.setDomFocusToFocusInEntityCmd
+                        >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
                 _ ->
                     identity
@@ -88,7 +88,7 @@ moveFocusBy =
 
 
 onUpdate :
-    Config msg model
+    Config msg
     -> EntityId
     -> Entity.Types.EntityUpdateAction
     -> SubReturnF msg model
@@ -113,6 +113,7 @@ onUpdate config entityId action =
                     entityId
                         |> toViewType model maybeEntityListViewType
                         |> config.switchToEntityListView
+                        |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
 
@@ -128,22 +129,30 @@ toggleSetMember item set =
         Set.insert item set
 
 
-startEditingEntity : Config msg model -> EntityId -> SubReturnF msg model
+startEditingEntity : Config msg -> EntityId -> SubReturnF msg model
 startEditingEntity config entityId =
     case entityId of
         ContextId id ->
             X.Return.returnWithMaybe1
                 (Model.GroupDocStore.findContextById id)
-                (createEditContextForm >> XMGroupDocForm >> config.onSetExclusiveMode)
+                (createEditContextForm
+                    >> XMGroupDocForm
+                    >> config.onSetExclusiveMode
+                    >> returnMsgAsCmd
+                )
 
         ProjectId id ->
             X.Return.returnWithMaybe1
                 (Model.GroupDocStore.findProjectById id)
-                (createEditProjectForm >> XMGroupDocForm >> config.onSetExclusiveMode)
+                (createEditProjectForm
+                    >> XMGroupDocForm
+                    >> config.onSetExclusiveMode
+                    >> returnMsgAsCmd
+                )
 
         TodoId id ->
             X.Return.returnWithMaybe1 (Model.Todo.findTodoById id)
-                config.onStartEditingTodo
+                (config.onStartEditingTodo >> returnMsgAsCmd)
 
 
 toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType

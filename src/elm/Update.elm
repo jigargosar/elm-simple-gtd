@@ -77,10 +77,10 @@ update andThenUpdate msg =
 
         OnGroupDocMsg msg_ ->
             let
-                config : Update.GroupDoc.Config AppMsg AppModel
+                config : Update.GroupDoc.Config AppMsg
                 config =
-                    { revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
+                    { revertExclusiveMode = Msg.revertExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode
                     }
             in
             returnWith identity
@@ -121,14 +121,14 @@ update andThenUpdate msg =
 
         OnEntityMsg msg_ ->
             let
-                config : Update.Entity.Config AppMsg AppModel
+                config : Update.Entity.Config AppMsg
                 config =
-                    { onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , revertExclusiveMode = Msg.revertExclusiveMode |> andThenUpdate
-                    , switchToEntityListView = Msg.switchToEntityListView >> andThenUpdate
+                    { onSetExclusiveMode = Msg.onSetExclusiveMode
+                    , revertExclusiveMode = Msg.revertExclusiveMode
+                    , switchToEntityListView = Msg.switchToEntityListView
                     , setDomFocusToFocusInEntityCmd =
-                        Msg.setDomFocusToFocusInEntityCmd |> andThenUpdate
-                    , onStartEditingTodo = TodoMsg.onStartEditingTodo >> andThenUpdate
+                        Msg.setDomFocusToFocusInEntityCmd
+                    , onStartEditingTodo = TodoMsg.onStartEditingTodo
                     }
             in
             Update.Entity.update config msg_

@@ -32,16 +32,15 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config msg model =
-    { onStartSetupAddTodo : SubReturnF msg model
-    , revertExclusiveMode : SubReturnF msg model
-    , onSetExclusiveMode : ExclusiveMode -> SubReturnF msg model
-    , onSwitchToNewUserSetupModeIfNeeded : SubReturnF msg model
+type alias Config msg =
+    { onStartSetupAddTodo : msg
+    , revertExclusiveMode : msg
+    , onSetExclusiveMode : ExclusiveMode -> msg
     }
 
 
 update :
-    Config msg model
+    Config msg
     -> FirebaseMsg
     -> SubReturnF msg model
 update config msg =
@@ -54,11 +53,11 @@ update config msg =
                 onSwitchToNewUserSetupModeIfNeeded model =
                     if Firebase.SignIn.shouldSkipSignIn model.signInModel then
                         if Store.isEmpty model.todoStore then
-                            config.onStartSetupAddTodo
+                            returnMsgAsCmd config.onStartSetupAddTodo
                         else
-                            config.revertExclusiveMode
+                            returnMsgAsCmd config.revertExclusiveMode
                     else
-                        config.onSetExclusiveMode XMSignInOverlay
+                        config.onSetExclusiveMode XMSignInOverlay |> returnMsgAsCmd
             in
             returnWith identity onSwitchToNewUserSetupModeIfNeeded
 
@@ -67,7 +66,7 @@ update config msg =
 
         OnFBSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
-                >> config.onSwitchToNewUserSetupModeIfNeeded
+                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
@@ -85,7 +84,7 @@ update config msg =
                                 SignedIn user ->
                                     Return.map
                                         (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
-                                        >> config.onSwitchToNewUserSetupModeIfNeeded
+                                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
                            )
                 )
 

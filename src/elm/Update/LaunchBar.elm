@@ -14,7 +14,7 @@ import String.Extra
 import Time exposing (Time)
 import Toolkit.Helpers exposing (apply2)
 import Toolkit.Operators exposing (..)
-import X.Return exposing (returnWith)
+import X.Return exposing (..)
 
 
 type alias SubModel model =
@@ -32,18 +32,18 @@ type alias SubAndThenUpdate msg model =
     msg -> SubReturnF msg model
 
 
-type alias Config msg model =
+type alias Config msg =
     { now : Time
-    , onComplete : SubReturnF msg model
-    , setXMode : ExclusiveMode -> SubReturnF msg model
-    , onSwitchView : EntityListViewType -> SubReturnF msg model
+    , onComplete : msg
+    , setXMode : ExclusiveMode -> msg
+    , onSwitchView : EntityListViewType -> msg
     }
 
 
 update :
-    Config msg a
+    Config msg
     -> LaunchBarMsg
-    -> SubReturnF msg a
+    -> SubReturnF msg model
 update config msg =
     case msg of
         NOOP ->
@@ -65,14 +65,15 @@ update config msg =
                         SI_Contexts ->
                             Entity.Types.ContextsView
             in
-            config.onComplete
-                >> config.onSwitchView v
+            returnMsgAsCmd config.onComplete
+                >> returnMsgAsCmd (config.onSwitchView v)
 
         OnLBInputChanged form text ->
             returnWith identity
                 (\model ->
                     XMLaunchBar (updateInput config text model form)
                         |> config.setXMode
+                        |> returnMsgAsCmd
                 )
 
         Open ->
@@ -80,16 +81,17 @@ update config msg =
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
                 >> config.setXMode
+                >> returnMsgAsCmd
 
         OnCancel ->
-            config.onComplete
+            returnMsgAsCmd config.onComplete
 
 
 type alias LaunchBarFormF =
     LaunchBarForm -> LaunchBarForm
 
 
-updateInput : Config msg model -> String -> SubModel model -> LaunchBarFormF
+updateInput : Config msg -> String -> SubModel model -> LaunchBarFormF
 updateInput config input subModel form =
     let
         now =

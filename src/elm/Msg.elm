@@ -36,7 +36,6 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnCloseNotification String
     | OnAppDrawerMsg AppDrawer.Types.Msg
-    | OnPersistLocalPref
     | OnMdl (Material.Msg AppMsg)
 
 

@@ -47,14 +47,11 @@ update andThenUpdate msg =
 
         OnViewTypeMsg msg_ ->
             let
-                config : Update.ViewType.Config AppMsg AppModel
+                config : Update.ViewType.Config AppMsg
                 config =
-                    { clearSelection = map Model.Selection.clearSelection }
+                    { noop = Msg.noop }
             in
             Update.ViewType.update config msg_
-
-        OnPersistLocalPref ->
-            Return.effect_ (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
 
         OnCloseNotification tag ->
             command (Notification.closeNotification tag)
@@ -139,12 +136,12 @@ update andThenUpdate msg =
 
         OnLaunchBarMsgWithNow msg_ now ->
             let
-                config : Update.LaunchBar.Config AppMsg AppModel
+                config : Update.LaunchBar.Config AppMsg
                 config =
                     { now = now
-                    , onComplete = Msg.revertExclusiveMode |> andThenUpdate
-                    , setXMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , onSwitchView = Msg.switchToEntityListView >> andThenUpdate
+                    , onComplete = Msg.revertExclusiveMode
+                    , setXMode = Msg.onSetExclusiveMode
+                    , onSwitchView = Msg.switchToEntityListView
                     }
             in
             Update.LaunchBar.update config msg_
@@ -182,18 +179,20 @@ update andThenUpdate msg =
 
         OnFirebaseMsg msg_ ->
             let
-                config : Update.Firebase.Config AppMsg AppModel
+                config : Update.Firebase.Config AppMsg
                 config =
-                    { onStartSetupAddTodo = andThenUpdate TodoMsg.onStartSetupAddTodo
-                    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode >> andThenUpdate
-                    , onSwitchToNewUserSetupModeIfNeeded =
-                        andThenUpdate Msg.onSwitchToNewUserSetupModeIfNeeded
+                    { onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
+                    , revertExclusiveMode = Msg.revertExclusiveMode
+                    , onSetExclusiveMode = Msg.onSetExclusiveMode
                     }
             in
             Update.Firebase.update config msg_
-                >> andThenUpdate Msg.OnPersistLocalPref
+                >> onPersistLocalPref
 
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
-                >> andThenUpdate Msg.OnPersistLocalPref
+                >> onPersistLocalPref
+
+
+onPersistLocalPref =
+    effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)

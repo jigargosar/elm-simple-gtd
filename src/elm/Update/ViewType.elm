@@ -2,8 +2,9 @@ module Update.ViewType exposing (Config, update)
 
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Msg.ViewType exposing (..)
-import Return exposing (andThen, map)
+import Return
 import Types.ViewType exposing (..)
+import X.Return exposing (..)
 
 
 type alias SubModel model =

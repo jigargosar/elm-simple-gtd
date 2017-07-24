@@ -11,7 +11,7 @@ import Model.Stores
 import Msg exposing (..)
 import Notification
 import Ports
-import Return exposing (andThen, command, map)
+import Return
 import TodoMsg
 import Types exposing (..)
 import Update.AppDrawer
@@ -25,7 +25,7 @@ import Update.LaunchBar
 import Update.Subscription
 import Update.Todo
 import Update.ViewType
-import X.Return as Return exposing (returnWith, returnWithNow)
+import X.Return exposing (..)
 
 
 type alias ReturnF =

@@ -11,11 +11,6 @@ infixr 5 =>
 infixl 0 #.|>
 
 
-(?>>) f1 f2 =
-    f1 >> Maybe.map f2
-infixl 9 ?>>
-
-
 (>>?) f1 f2 =
     f1 >> Maybe.map f2
 infixl 9 >>?

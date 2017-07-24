@@ -3,10 +3,10 @@ module Update.ExclusiveMode exposing (Config, update)
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc.Types exposing (GroupDocForm, GroupDocFormMode(GDFM_Add, GDFM_Edit))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
-import Return exposing (andThen, map)
+import Return
 import Todo.FormTypes exposing (..)
 import X.Record exposing (..)
-import X.Return exposing (returnWith)
+import X.Return exposing (..)
 
 
 type alias SubModel model =

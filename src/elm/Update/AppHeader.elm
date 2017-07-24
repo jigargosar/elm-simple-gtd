@@ -4,7 +4,8 @@ import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))
 import Menu
 import Msg.AppHeader exposing (AppHeaderMsg(..))
-import Return exposing (command)
+import Return
+import X.Return exposing (..)
 
 
 type alias SubModel model =

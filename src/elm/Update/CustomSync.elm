@@ -2,7 +2,7 @@ port module Update.CustomSync exposing (Config, update)
 
 import ExclusiveMode.Types exposing (..)
 import Msg.CustomSync exposing (CustomSyncMsg(..))
-import Return exposing (command)
+import Return
 
 
 port syncWithRemotePouch : String -> Cmd msg

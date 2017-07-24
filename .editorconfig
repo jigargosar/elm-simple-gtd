@@ -9,11 +9,31 @@ indent_size=4
 indent_style=space
 indent_size=2
 
+[{*.applejs,*.js}]
+indent_style=space
+indent_size=2
+
+[{*.as,*.js2,*.es}]
+indent_style=space
+indent_size=2
+
+[*.js.flow]
+indent_style=space
+indent_size=2
+
 [{jshint.json,*.jshintrc}]
 indent_style=space
 indent_size=2
 
+[{*.jscs.json,*.jscsrc}]
+indent_style=space
+indent_size=2
+
 [*.pcss]
+indent_style=space
+indent_size=2
+
+[*.sass]
 indent_style=space
 indent_size=2
 

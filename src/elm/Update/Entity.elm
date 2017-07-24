@@ -13,7 +13,7 @@ import Model.Selection
 import Model.Stores
 import Model.Todo
 import Model.ViewType
-import Return exposing (andThen, map)
+import Return
 import Set
 import Time exposing (Time)
 import Todo
@@ -22,7 +22,7 @@ import Toolkit.Operators exposing (..)
 import Types.ViewType exposing (ViewType)
 import X.Function.Infix exposing (..)
 import X.Record exposing (maybeOver)
-import X.Return exposing (returnWith)
+import X.Return exposing (..)
 
 
 type alias SubModel model =

@@ -222,4 +222,5 @@ function runFish(command) {
 export function preCommit() {
     const statsFile = "stats/elm-simple-gtd-elm-code-size.txt"
     runFish(`wc -l src/elm/**.elm | sort -r > ${statsFile}`)
+    run(`git add stats/*`)
 }

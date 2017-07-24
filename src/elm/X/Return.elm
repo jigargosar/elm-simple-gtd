@@ -1,6 +1,6 @@
 module X.Return exposing (..)
 
-import Return exposing (Return, ReturnF)
+import Return
 import Task
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
@@ -94,3 +94,39 @@ rAndThenMaybe f =
 
 mapTapLog =
     X.Debug.tapLog >>> Return.map
+
+
+returnMsgAsCmd msg =
+    Task.perform (\_ -> msg) (Task.succeed msg) |> Return.command
+
+
+command =
+    Return.command
+
+
+map =
+    Return.map
+
+
+andThen =
+    Return.andThen
+
+
+type alias ReturnF msg model =
+    Return.ReturnF msg model
+
+
+type alias Return msg model =
+    Return.Return msg model
+
+
+pure =
+    Return.singleton
+
+
+mapCmd =
+    Return.mapCmd
+
+
+effect =
+    Return.effect_

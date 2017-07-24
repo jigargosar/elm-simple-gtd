@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="elm-src" pattern="file[elm-simple-gtd]:src/elm//*" />
+</component>

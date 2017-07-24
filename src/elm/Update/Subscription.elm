@@ -8,14 +8,14 @@ import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
 import Msg.Subscription exposing (SubscriptionMsg(..))
-import Return exposing (map)
+import Return
 import Set
 import Store
 import Time exposing (Time)
 import Todo.Types exposing (TodoDoc, TodoStore)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
-import X.Return exposing (rAndThenMaybe, returnWith)
+import X.Return exposing (..)
 
 
 type alias SubModel model =

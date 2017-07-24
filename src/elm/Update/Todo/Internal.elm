@@ -12,7 +12,7 @@ import Maybe.Extra as Maybe
 import Model.Todo exposing (findTodoById, todoStore)
 import Notification
 import Ports.Todo exposing (..)
-import Return exposing (andThen, command, map)
+import Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
@@ -28,7 +28,7 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
 import X.Record as Record exposing (overReturn, overT2, set)
-import X.Return exposing (rAndThenMaybe, returnWith, returnWithMaybe1)
+import X.Return exposing (..)
 import X.Time
 
 

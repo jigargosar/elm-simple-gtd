@@ -8,12 +8,13 @@ import GroupDoc.Form exposing (createAddGroupDocForm)
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
-import Return exposing (andThen)
+import Return
 import Set
 import Store
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
+import X.Return exposing (..)
 
 
 type alias SubModel model =

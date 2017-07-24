@@ -86,11 +86,11 @@ update msg =
 
         OnExclusiveModeMsg msg_ ->
             let
-                config : Update.ExclusiveMode.Config AppMsg AppModel
+                config : Update.ExclusiveMode.Config AppMsg
                 config =
-                    { focusEntityList = update Msg.setDomFocusToFocusInEntityCmd
-                    , saveTodoForm = Msg.onSaveTodoForm >> update
-                    , saveGroupDocForm = Msg.onSaveGroupDocForm >> update
+                    { focusEntityList = Msg.setDomFocusToFocusInEntityCmd
+                    , saveTodoForm = Msg.onSaveTodoForm
+                    , saveGroupDocForm = Msg.onSaveGroupDocForm
                     }
             in
             Update.ExclusiveMode.update config msg_

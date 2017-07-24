@@ -97,9 +97,9 @@ update msg =
 
         OnAppHeaderMsg msg_ ->
             let
-                config : Update.AppHeader.Config AppMsg AppModel
+                config : Update.AppHeader.Config AppMsg
                 config =
-                    { setXMode = Msg.onSetExclusiveMode >> update
+                    { setXMode = Msg.onSetExclusiveMode
                     }
             in
             Update.AppHeader.update config msg_

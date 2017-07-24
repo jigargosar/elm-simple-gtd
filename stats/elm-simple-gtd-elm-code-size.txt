@@ -1,4 +1,4 @@
-   10129 total
+   10132 total
      463 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -77,9 +77,9 @@
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Update/AppDrawer.elm
+      44 src/elm/Update/AppHeader.elm
       44 src/elm/Todo/FormTypes.elm
       42 src/elm/X/List.elm
-      41 src/elm/Update/AppHeader.elm
       40 src/elm/View/CustomSync.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm

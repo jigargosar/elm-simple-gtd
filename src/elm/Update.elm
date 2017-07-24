@@ -61,17 +61,16 @@ update andThenUpdate msg =
 
         OnSubscriptionMsg msg_ ->
             let
-                config : Update.Subscription.Config AppMsg AppModel
+                config : Update.Subscription.Config AppMsg
                 config =
-                    { noop = andThenUpdate Msg.noop
+                    { noop = Msg.noop
                     , onStartAddingTodoToInbox =
-                        andThenUpdate TodoMsg.onStartAddingTodoToInbox
+                        TodoMsg.onStartAddingTodoToInbox
                     , onStartAddingTodoWithFocusInEntityAsReference =
-                        andThenUpdate
-                            TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-                    , openLaunchBarMsg = andThenUpdate Msg.openLaunchBarMsg
-                    , revertExclusiveMode = andThenUpdate Msg.revertExclusiveMode
-                    , afterTodoUpsert = TodoMsg.afterTodoUpsert >> andThenUpdate
+                        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+                    , openLaunchBarMsg = Msg.openLaunchBarMsg
+                    , revertExclusiveMode = Msg.revertExclusiveMode
+                    , afterTodoUpsert = TodoMsg.afterTodoUpsert
                     }
             in
             Update.Subscription.update config msg_

@@ -3,7 +3,7 @@ module Update.Subscription exposing (Config, update)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import GroupDoc.Types exposing (..)
-import Keyboard.Extra as KX
+import Keyboard.Extra as KX exposing (Key)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
 import Model.Todo exposing (todoStore)
@@ -41,18 +41,18 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg model =
-    { noop : SubReturnF msg model
-    , onStartAddingTodoToInbox : SubReturnF msg model
-    , onStartAddingTodoWithFocusInEntityAsReference : SubReturnF msg model
-    , openLaunchBarMsg : SubReturnF msg model
-    , revertExclusiveMode : SubReturnF msg model
-    , afterTodoUpsert : TodoDoc -> SubReturnF msg model
+type alias Config msg =
+    { noop : msg
+    , onStartAddingTodoToInbox : msg
+    , onStartAddingTodoWithFocusInEntityAsReference : msg
+    , openLaunchBarMsg : msg
+    , revertExclusiveMode : msg
+    , afterTodoUpsert : TodoDoc -> msg
     }
 
 
 update :
-    Config msg model
+    Config msg
     -> SubscriptionMsg
     -> SubReturnF msg model
 update config msg =
@@ -67,13 +67,14 @@ update config msg =
             let
                 afterEntityUpsertOnPouchDBChange ( entity, model ) =
                     map (\_ -> model)
-                        >> (case entity of
+                        >> returnMsgAsCmd
+                            (case entity of
                                 TodoEntity todo ->
                                     config.afterTodoUpsert todo
 
                                 _ ->
                                     config.noop
-                           )
+                            )
             in
             X.Return.returnWithMaybe2 identity
                 (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
@@ -82,10 +83,7 @@ update config msg =
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
-
---onGlobalKeyUp : Config msg model -> Key -> SubReturnF msg model
-
-
+onGlobalKeyUp : Config msg -> Key -> SubReturnF msg model
 onGlobalKeyUp config key =
     returnWith .editMode
         (\editMode ->
@@ -94,7 +92,7 @@ onGlobalKeyUp config key =
                     let
                         clear =
                             map Model.Selection.clearSelection
-                                >> config.revertExclusiveMode
+                                >> returnMsgAsCmd config.revertExclusiveMode
                     in
                     case key of
                         KX.Escape ->
@@ -104,22 +102,22 @@ onGlobalKeyUp config key =
                             clear
 
                         KX.CharQ ->
-                            config.onStartAddingTodoWithFocusInEntityAsReference
+                            returnMsgAsCmd config.onStartAddingTodoWithFocusInEntityAsReference
 
                         KX.CharI ->
-                            config.onStartAddingTodoToInbox
+                            returnMsgAsCmd config.onStartAddingTodoToInbox
 
                         KX.Slash ->
-                            config.openLaunchBarMsg
+                            returnMsgAsCmd config.openLaunchBarMsg
 
                         _ ->
-                            identity
+                            returnMsgAsCmd config.noop
 
                 ( KX.Escape, _ ) ->
-                    config.revertExclusiveMode
+                    returnMsgAsCmd config.revertExclusiveMode
 
                 _ ->
-                    identity
+                    returnMsgAsCmd config.noop
         )
 
 

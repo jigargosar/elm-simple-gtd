@@ -3,6 +3,7 @@ port module Update.CustomSync exposing (Config, update)
 import ExclusiveMode.Types exposing (..)
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Return
+import X.Return exposing (..)
 
 
 port syncWithRemotePouch : String -> Cmd msg
@@ -16,23 +17,24 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config msg model =
-    { saveXModeForm : SubReturnF msg model
-    , setXMode : ExclusiveMode -> SubReturnF msg model
+type alias Config msg =
+    { saveXModeForm : msg
+    , setXMode : ExclusiveMode -> msg
     }
 
 
 update :
-    Config msg model
+    Config msg
     -> CustomSyncMsg
     -> SubReturnF msg model
 update config msg =
     case msg of
         OnStartCustomSync form ->
-            config.saveXModeForm
+            returnMsgAsCmd config.saveXModeForm
                 >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
         OnUpdateCustomSyncFormUri form uri ->
             { form | uri = uri }
                 |> XMCustomSync
                 >> config.setXMode
+                >> returnMsgAsCmd

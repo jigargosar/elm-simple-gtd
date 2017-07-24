@@ -106,10 +106,10 @@ update msg =
 
         OnCustomSyncMsg msg_ ->
             let
-                config : Update.CustomSync.Config AppMsg AppModel
+                config : Update.CustomSync.Config AppMsg
                 config =
-                    { saveXModeForm = Msg.onSaveExclusiveModeForm |> update
-                    , setXMode = Msg.onSetExclusiveMode >> update
+                    { saveXModeForm = Msg.onSaveExclusiveModeForm
+                    , setXMode = Msg.onSetExclusiveMode
                     }
             in
             Update.CustomSync.update config msg_

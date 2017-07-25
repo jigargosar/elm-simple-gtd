@@ -128,17 +128,6 @@ toggleSetMember item set =
         Set.insert item set
 
 
-startEditingEntity : Config msg a -> EntityId -> SubReturnF msg model
-startEditingEntity config entityId =
-    case entityId of
-        TodoId id ->
-            X.Return.returnWithMaybe1 (Model.Todo.findTodoById id)
-                (config.onStartEditingTodo >> returnMsgAsCmd)
-
-        _ ->
-            identity
-
-
 toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType
 toViewType appModel maybeCurrentEntityListViewType entityId =
     case entityId of

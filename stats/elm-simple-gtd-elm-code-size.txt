@@ -1,4 +1,4 @@
-   10113 total
+   10102 total
      466 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -7,8 +7,8 @@
      223 src/elm/Menu.elm
      218 src/elm/GroupDoc/ViewModel.elm
      210 src/elm/Msg.elm
-     192 src/elm/Update/Entity.elm
      187 src/elm/Todo/ViewModel.elm
+     181 src/elm/Update/Entity.elm
      181 src/elm/AppDrawer/View.elm
      174 src/elm/Update/Firebase.elm
      172 src/elm/Update/Subscription.elm

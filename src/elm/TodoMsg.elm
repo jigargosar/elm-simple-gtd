@@ -6,10 +6,10 @@ import Todo.Msg exposing (TodoMsg(..))
 import Todo.Types exposing (TodoAction(..))
 
 
---onStopRunningTodo : AppMsg
+--onStopRunningTodoMsg : AppMsg
 
 
-onStopRunningTodo =
+onStopRunningTodoMsg =
     OnStopRunningTodo |> OnTodoMsg
 
 
@@ -17,7 +17,7 @@ onStopRunningTodo =
 --onGotoRunningTodo : AppMsg
 
 
-onGotoRunningTodo =
+onGotoRunningTodoMsg =
     OnGotoRunningTodo |> OnTodoMsg
 
 

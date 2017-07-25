@@ -24,7 +24,7 @@ createViewModel config appModel tracker =
     in
     { displayText = todoText
     , displayTime = X.Time.toHHMMSS elapsedTime
-    , onStop = config.onStopRunningTodo
+    , onStop = config.onStopRunningTodoMsg
     , onMdl = config.onMdl
     }
 

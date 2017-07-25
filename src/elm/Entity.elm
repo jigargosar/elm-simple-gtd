@@ -56,7 +56,7 @@ equalById =
     tuple2 >>> mapAllT2 toEntityId >> equalsT2
 
 
-hasEntityId entityId entity =
+hasId entityId entity =
     toEntityId entity |> equals entityId
 
 

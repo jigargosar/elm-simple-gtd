@@ -156,6 +156,10 @@ onToggleEntitySelection =
     EM_Update # EUA_ToggleSelection >> OnEntityMsg
 
 
+bringEntityIdInViewMsg =
+    EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
+
+
 
 -- tdo
 

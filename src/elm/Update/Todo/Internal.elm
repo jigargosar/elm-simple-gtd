@@ -61,6 +61,7 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , currentViewEntityList : Lazy (List Entity)
+        , bringEntityIdInViewMsg : EntityId -> msg
     }
 
 
@@ -253,7 +254,7 @@ onStartAddingTodo config addFormMode =
 --            >> autoFocusInputRCmd
 
 
-onStopRunningTodo =
+onStopRunningTodoMsg =
     mapSet timeTracker Tracker.none
 
 
@@ -270,7 +271,7 @@ onRunningNotificationResponse config res =
     in
     (case res.action of
         "stop" ->
-            onStopRunningTodo
+            onStopRunningTodoMsg
 
         "continue" ->
             identity
@@ -373,26 +374,29 @@ gotoRunningTodo config model =
 
 gotoTodoWithId : Config msg a -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
-    let
-        maybeTodoEntity =
-            Lazy.force config.currentViewEntityList
-                |> List.find
-                    (\entity ->
-                        case entity of
-                            Entity.Types.TodoEntity doc ->
-                                Document.hasId todoId doc
+    {- let
+           maybeTodoEntity =
+               Lazy.force config.currentViewEntityList
+                   |> List.find
+                       (\entity ->
+                           case entity of
+                               Entity.Types.TodoEntity doc ->
+                                   Document.hasId todoId doc
 
-                            _ ->
-                                False
-                    )
-    in
-    maybeTodoEntity
-        |> Maybe.unpack
-            (\_ ->
-                setFocusInEntityWithTodoId config todoId
-                    >> returnMsgAsCmd config.switchToContextsView
-            )
-            (config.setFocusInEntityMsg >> returnMsgAsCmd)
+                               _ ->
+                                   False
+                       )
+       in
+       maybeTodoEntity
+           |> Maybe.unpack
+               (\_ ->
+                   setFocusInEntityWithTodoId config todoId
+                       >> returnMsgAsCmd config.switchToContextsView
+               )
+               (config.setFocusInEntityMsg >> returnMsgAsCmd)
+    -}
+    config.bringEntityIdInViewMsg (createTodoEntityId todoId)
+        |> returnMsgAsCmd
 
 
 setFocusInEntityWithTodoId config =

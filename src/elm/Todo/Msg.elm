@@ -27,10 +27,10 @@ type TodoMsg
 
 
 
---onStopRunningTodo : AppMsg
+--onStopRunningTodoMsg : AppMsg
 
 
-onStopRunningTodo =
+onStopRunningTodoMsg =
     OnStopRunningTodo
 
 
@@ -38,7 +38,7 @@ onStopRunningTodo =
 --onGotoRunningTodo : AppMsg
 
 
-onGotoRunningTodo =
+onGotoRunningTodoMsg =
     OnGotoRunningTodo
 
 

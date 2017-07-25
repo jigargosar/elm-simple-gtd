@@ -35,6 +35,7 @@ type EntityUpdateAction
     = EUA_OnFocusIn
     | EUA_ToggleSelection
     | EUA_OnGotoEntity
+    | EUA_BringEntityIdInView
 
 
 createContextEntity =

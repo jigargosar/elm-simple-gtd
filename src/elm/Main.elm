@@ -64,6 +64,7 @@ updateConfig model =
     , onTodoMsgWithNow = Msg.OnTodoMsgWithNow
     , onLaunchBarMsgWithNow = Msg.OnLaunchBarMsgWithNow
     , onMdl = Msg.OnMdl
+    , bringEntityIdInViewMsg = Msg.bringEntityIdInViewMsg
     }
 
 
@@ -100,7 +101,7 @@ viewConfig =
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
     , onEntityListKeyDown = Msg.onEntityListKeyDown
-    , onStopRunningTodo = Todo.Msg.onStopRunningTodo |> Msg.OnTodoMsg
+    , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> Msg.OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
     , onToggleEntitySelection = Msg.onToggleEntitySelection
@@ -114,6 +115,7 @@ viewConfig =
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
     , onGD_UpdateFormName = Msg.onGD_UpdateFormName
     , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
+    , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
     }
 
 

@@ -6,6 +6,8 @@ import ExclusiveMode.Types exposing (..)
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
+import Lazy exposing (Lazy)
+import List.Extra
 import Maybe.Extra
 import Model
 import Model.GroupDocStore
@@ -58,6 +60,8 @@ type alias Config msg a =
         , switchToEntityListView : EntityListViewType -> msg
         , setDomFocusToFocusInEntityCmd : msg
         , onStartEditingTodo : TodoDoc -> msg
+        , currentViewEntityList : Lazy (List Entity)
+        , setFocusInEntityMsg : Entity -> msg
     }
 
 
@@ -115,6 +119,12 @@ onUpdate config entityId action =
                         |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
+
+        EUA_BringEntityIdInView ->
+            Lazy.force config.currentViewEntityList
+                |> List.Extra.find (Entity.hasId entityId)
+                ?|> (config.setFocusInEntityMsg >> returnMsgAsCmd)
+                ?= identity
 
 
 toggleEntitySelection entityId =

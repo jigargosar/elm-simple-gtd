@@ -27,7 +27,7 @@ update config now msg =
             mapOver timeTracker (Tracker.switchOrStartRunning todoId now)
 
         OnStopRunningTodo ->
-            onStopRunningTodo
+            onStopRunningTodoMsg
 
         OnGotoRunningTodo ->
             onGotoRunningTodo config

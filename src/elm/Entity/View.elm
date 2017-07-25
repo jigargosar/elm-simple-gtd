@@ -49,7 +49,7 @@ getMaybeFocusInEntity entityList model =
 keyedViewList appVM grouping maybeFocusInEntity model =
     let
         entityIdHasFocusIn entityId =
-            maybeFocusInEntity ?|> Entity.hasEntityId entityId ?= False
+            maybeFocusInEntity ?|> Entity.hasId entityId ?= False
 
         getTabIndexForEntityId entityId =
             if entityIdHasFocusIn entityId then

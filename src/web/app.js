@@ -32,7 +32,7 @@ const npmPackageVersion = env["npm_package_version"]
 const observer = new MutationSummary({
   callback: summaries => {
     // console.log(summaries)
-    
+
     const autoFocusSummary = summaries[0]
     console.log(autoFocusSummary.added)
     const $first = $(autoFocusSummary.added).first()
@@ -52,17 +52,12 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   $elm.on("keydown", `.entity-list`, e => {
     // console.log(e.keyCode, e.key, e.target, e);
-    
-    if (e.target.tagName !== "PAPER-INPUT") {
+
       // prevent document scrolling
-      if (e.key === " "/*space: 32*/ && e.target.tagName !== "PAPER-INPUT") {
+      if (e.key === " " || e.key === "ArrowUp" || e.key === "ArrowDown") {
         e.preventDefault()
       }
-      else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-        e.preventDefault()
-      }
-    }
-    
+
   })
   
   
@@ -80,18 +75,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
            })
        }})*/
   
-  
-  $elm.get(0).addEventListener("keydown", e => {
-    const $closest = $(e.target).closest("[data-prevent-default-keys]")
-    if ($closest.length === 0) return
-    const preventDefaultKeys =
-        $closest.data("prevent-default-keys").split(",")
-    // console.log(e.keyCode, e.key, e, preventDefaultKey);
-    
-    if (_.contains(e.key)(preventDefaultKeys)) {
-      e.preventDefault()
-    }
-  }, true)
   
   const db = await DB()
   
@@ -139,7 +122,8 @@ window.appBoot = async function appBoot(elmMain = Main) {
     // setTimeout(() => {
     requestAnimationFrame(() => {
       // note - we blur here so that view scrolls to element if it already had focus
-      $(selector).blur().focus()
+      // $(selector).blur().focus() // blur is costly :(
+      $(selector).focus()
     })
     // }, 0)
   })

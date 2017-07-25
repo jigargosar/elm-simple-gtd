@@ -4,7 +4,7 @@ import Document
 import Document.Types exposing (getDocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
-import GroupDoc.Form exposing (createAddGroupDocForm)
+import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
 import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
@@ -76,6 +76,15 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
                 >> returnMsgAsCmd config.revertExclusiveMode
     in
     case groupDocIdAction of
+        GDA_StartEditing ->
+            X.Return.returnWithMaybe1
+                (Model.GroupDocStore.findGroupDocById groupDocId)
+                (createEditGroupDocForm gdType
+                    >> XMGroupDocForm
+                    >> config.onSetExclusiveMode
+                    >> returnMsgAsCmd
+                )
+
         GDA_ToggleArchived ->
             updateGroupDocHelp GroupDoc.toggleArchived
 

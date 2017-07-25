@@ -28,7 +28,8 @@ type GroupDocAction
 
 
 type GroupDocIdAction
-    = GDA_ToggleArchived
+    = GDA_StartEditing
+    | GDA_ToggleArchived
     | GDA_ToggleDeleted
     | GDA_UpdateFormName GroupDocForm GroupDocName
     | GDA_SaveForm GroupDocForm

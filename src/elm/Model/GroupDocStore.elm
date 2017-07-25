@@ -3,7 +3,7 @@ module Model.GroupDocStore exposing (..)
 import Context
 import Document
 import GroupDoc
-import GroupDoc.Types exposing (GroupDocStore, GroupDocType(ContextGroupDocType, ProjectGroupDocType))
+import GroupDoc.Types exposing (GroupDocId(ContextGroupDocId, ProjectGroupDocId), GroupDocStore, GroupDocType(ContextGroupDocType, ProjectGroupDocType))
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Project
@@ -31,10 +31,6 @@ filterProjects pred model =
         |> Project.sort
 
 
-
---findProjectById : DocId -> AppModel -> Maybe Project.Model
-
-
 findProjectById id =
     .projectStore
         >> Store.findById id
@@ -45,10 +41,6 @@ findProjectByIdIn =
     flip findProjectById
 
 
-
---findContextById : DocId -> AppModel -> Maybe Context.Model
-
-
 findContextById id =
     .contextStore
         >> Store.findById id
@@ -57,6 +49,21 @@ findContextById id =
 
 findContextByIdIn =
     flip findContextById
+
+
+findGroupDocById groupDocId =
+    let
+        ( getStore, id, null ) =
+            case groupDocId of
+                ContextGroupDocId id ->
+                    ( .contextStore, id, Context.null )
+
+                ProjectGroupDocId id ->
+                    ( .projectStore, id, Project.null )
+    in
+    getStore
+        >> Store.findById id
+        >> Maybe.orElseLazy (\_ -> [ null ] |> List.find (Document.hasId id))
 
 
 getActiveProjects =

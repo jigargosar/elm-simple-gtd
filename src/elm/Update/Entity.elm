@@ -58,7 +58,6 @@ type alias Config msg a =
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
         , switchToEntityListView : EntityListViewType -> msg
-        , setDomFocusToFocusInEntityCmd : msg
         , onStartEditingTodo : TodoDoc -> msg
         , currentViewEntityList : Lazy (List Entity)
         , setFocusInEntityMsg : Entity -> msg
@@ -78,11 +77,9 @@ update config msg =
             case key of
                 Key.ArrowUp ->
                     map (moveFocusBy -1 entityList)
-                        >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
                 Key.ArrowDown ->
                     map (moveFocusBy 1 entityList)
-                        >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
                 _ ->
                     identity

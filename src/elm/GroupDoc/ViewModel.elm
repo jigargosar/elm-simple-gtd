@@ -27,6 +27,7 @@ type alias IconVM =
 
 type alias GroupDocViewModel msg =
     { id : String
+    , key : String
     , count : Int
     , name : String
     , namePrefix : String
@@ -146,6 +147,7 @@ create config configInner todoList groupDoc =
             }
     in
     { id = id
+    , key = toString groupDocId
     , name = name
     , namePrefix = configInner.namePrefix
     , count = todoList |> List.length

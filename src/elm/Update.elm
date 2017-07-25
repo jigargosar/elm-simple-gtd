@@ -40,7 +40,6 @@ type alias Config msg =
                                         { onTodoMsgWithNow : TodoMsg -> Time -> msg
                                         , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
                                         , onMdl : Material.Msg msg -> msg
-                                        , setDomFocusToFocusInEntityCmd : msg
                                         }
                                     )
                                 )
@@ -100,11 +99,9 @@ update config msg =
 
         SetFocusInEntity entity ->
             map (Model.setFocusInEntity_ entity)
-                >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         SetFocusInEntityWithEntityId entityId ->
             map (Model.Stores.setFocusInEntityWithEntityId_ entityId)
-                >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         OnTodoMsgWithNow msg_ now ->
             returnWith identity

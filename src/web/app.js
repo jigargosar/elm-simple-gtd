@@ -32,15 +32,31 @@ const npmPackageVersion = env["npm_package_version"]
 const observer = new MutationSummary({
   callback: summaries => {
     // console.log(summaries)
-
-    const autoFocusSummary = summaries[0]
-    console.log(autoFocusSummary.added)
-    const $first = $(autoFocusSummary.added).first()
-    // when using keyboard shortcut, focus tends to not work.
-    // hence setTimeout for nextFrame
-    setTimeout(() => $first.focus(), 0)
+    
+    const autoFocusSummaryAdded = summaries[0].added
+    if (!_.isEmpty(autoFocusSummaryAdded)) {
+      // console.log("autoFocusSummary.added", autoFocusSummaryAdded)
+      const $first = $(autoFocusSummaryAdded).first()
+      // when using keyboard shortcut, focus tends to not work.
+      // hence setTimeout for nextFrame
+      setTimeout(() => $first.focus(), 0)
+      // $first.focus() // working now with kb but not with mouse ??!!
+    }
+  
+    const focusInEntitySummary = summaries[1]
+    console.log()
+    const focusInEntitySummaryAdded = focusInEntitySummary.added
+    if (!_.isEmpty(focusInEntitySummaryAdded)) {
+      console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+      const $focusInEntity = $(focusInEntitySummaryAdded).first()
+      setTimeout(() => $focusInEntity.first().focus(), 0) // sometimes on switch view, focus doesn't work.
+      
+    }
+    
   },
-  queries: [{element: ".auto-focus"}],
+  queries: [{element: ".auto-focus"},
+    {element: ".focusable-list-item[tabindex=0]"},
+  ],
 })
 
 window.appBoot = async function appBoot(elmMain = Main) {
@@ -52,12 +68,12 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   $elm.on("keydown", `.entity-list`, e => {
     // console.log(e.keyCode, e.key, e.target, e);
-
-      // prevent document scrolling
-      if (e.key === " " || e.key === "ArrowUp" || e.key === "ArrowDown") {
-        e.preventDefault()
-      }
-
+    
+    // prevent document scrolling
+    if (e.key === " " || e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault()
+    }
+    
   })
   
   
@@ -119,11 +135,12 @@ window.appBoot = async function appBoot(elmMain = Main) {
   Notifications.setup(fire, app).catch(console.error)
   
   app.ports["focusSelector"].subscribe((selector) => {
+    console.log("port: focusSelector received selector", selector)
     // setTimeout(() => {
     requestAnimationFrame(() => {
       // note - we blur here so that view scrolls to element if it already had focus
-      // $(selector).blur().focus() // blur is costly :(
-      $(selector).focus()
+      $(selector).blur().focus() // blur is costly :(
+      // $(selector).focus()
     })
     // }, 0)
   })

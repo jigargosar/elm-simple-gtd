@@ -17,7 +17,7 @@ import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 
 
 initKeyed todoView vm =
-    ( vm.id, item todoView vm )
+    ( vm.key, item todoView vm )
 
 
 
@@ -31,11 +31,11 @@ item todoView vm =
     in
     Html.Keyed.node "div"
         [ class "collection" ]
-        (( vm.id, headerItem vm ) :: (vm.todoList .|> todoView))
+        (( vm.key, headerItem vm ) :: (vm.todoList .|> todoView))
 
 
 initHeaderKeyed vm =
-    ( vm.id, headerItem vm )
+    ( vm.key, headerItem vm )
 
 
 
@@ -70,6 +70,7 @@ headerItem vm =
         , X.Html.onFocusIn vm.onFocusIn
         , onKeyDown vm.onKeyDownMsg
         , classList [ "entity-item focusable-list-item collection-item" => True ]
+        , attribute "data-key" vm.key
         ]
         [ div [ class "layout horizontal justified center" ]
             [ h5 [ class "font-nowrap ellipsis" ]

@@ -10,6 +10,7 @@ import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
 import Todo.Msg
+import TodoMsg
 import Types exposing (..)
 import Update
 import View
@@ -36,9 +37,28 @@ init =
         >> update Msg.onSwitchToNewUserSetupModeIfNeeded
 
 
+updateConfig : Update.Config AppMsg
+updateConfig =
+    { noop = Msg.noop
+    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , openLaunchBarMsg = Msg.openLaunchBarMsg
+    , afterTodoUpsert = TodoMsg.afterTodoUpsert
+    , onSetExclusiveMode = Msg.onSetExclusiveMode
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , switchToEntityListView = Msg.switchToEntityListView
+    , setDomFocusToFocusInEntityCmd =
+        Msg.setDomFocusToFocusInEntityCmd
+    , onStartEditingTodo = TodoMsg.onStartEditingTodo
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
+    }
+
+
 update : AppMsg -> AppModel -> AppReturn
 update msg =
-    Return.singleton >> Update.update msg
+    Return.singleton >> Update.update updateConfig msg
 
 
 viewConfig =

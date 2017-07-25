@@ -1,4 +1,4 @@
-module Update exposing (update)
+module Update exposing (Config, update)
 
 import CommonMsg
 import Lazy
@@ -26,18 +26,19 @@ import Update.ViewType
 import X.Return exposing (..)
 
 
-type alias ReturnF =
-    Return.ReturnF AppMsg AppModel
+type alias ReturnF msg =
+    Return.ReturnF msg AppModel
 
 
-type alias Config =
-    Update.Firebase.Config AppMsg (Update.CustomSync.Config AppMsg (Update.Entity.Config AppMsg (Update.Subscription.Config AppMsg {})))
+type alias Config msg =
+    Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg {})))
 
 
 update :
-    AppMsg
-    -> ReturnF
-update msg =
+    Config AppMsg
+    -> AppMsg
+    -> ReturnF AppMsg
+update config msg =
     case msg of
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
@@ -116,11 +117,11 @@ update msg =
 
         SetFocusInEntity entity ->
             map (Model.setFocusInEntity entity)
-                >> update Msg.setDomFocusToFocusInEntityCmd
+                >> update config Msg.setDomFocusToFocusInEntityCmd
 
         SetFocusInEntityWithEntityId entityId ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                >> update Msg.setDomFocusToFocusInEntityCmd
+                >> update config Msg.setDomFocusToFocusInEntityCmd
 
         OnTodoMsgWithNow msg_ now ->
             let
@@ -151,22 +152,3 @@ update msg =
 
 onPersistLocalPref =
     effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
-
-
-config : Config
-config =
-    { noop = Msg.noop
-    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
-    , onStartAddingTodoWithFocusInEntityAsReference =
-        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-    , openLaunchBarMsg = Msg.openLaunchBarMsg
-    , afterTodoUpsert = TodoMsg.afterTodoUpsert
-    , onSetExclusiveMode = Msg.onSetExclusiveMode
-    , revertExclusiveMode = Msg.revertExclusiveMode
-    , switchToEntityListView = Msg.switchToEntityListView
-    , setDomFocusToFocusInEntityCmd =
-        Msg.setDomFocusToFocusInEntityCmd
-    , onStartEditingTodo = TodoMsg.onStartEditingTodo
-    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-    , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
-    }

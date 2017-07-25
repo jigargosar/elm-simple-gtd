@@ -1,7 +1,7 @@
 module Todo exposing (..)
 
 import Document exposing (Revision)
-import Document.Types exposing (DocId)
+import Document.Types exposing (DocId, Document)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -31,7 +31,7 @@ type alias Record =
 
 
 type alias Model =
-    Document.Document Record
+    Document Record
 
 
 type alias ViewModel =
@@ -55,21 +55,12 @@ getMaybeReminderTime =
     .schedule >> Todo.Schedule.getMaybeReminderTime
 
 
-getDeleted : Model -> Bool
-getDeleted =
-    .deleted
-
-
-isDeleted =
-    getDeleted
-
-
 isActive =
     isInActive >> not
 
 
 isInActive =
-    anyPass [ isDeleted, isDone ]
+    anyPass [ Document.isDeleted, isDone ]
 
 
 getProjectId =
@@ -288,20 +279,16 @@ hasProject project =
     getProjectId >> equals (Document.getId project)
 
 
-isNotDeleted =
-    getDeleted >> not
-
-
 isNotDone =
     isDone >> not
 
 
 binFilter =
-    toAllPassPredicate [ getDeleted ]
+    toAllPassPredicate [ Document.isDeleted ]
 
 
 doneFilter =
-    toAllPassPredicate [ isNotDeleted, isDone ]
+    toAllPassPredicate [ Document.isNotDeleted, isDone ]
 
 
 hasProjectId : DocId -> Model -> Bool
@@ -310,7 +297,7 @@ hasProjectId projectId =
 
 
 projectIdFilter projectId =
-    toAllPassPredicate [ hasProjectId projectId, isNotDeleted, isDone >> not ]
+    toAllPassPredicate [ hasProjectId projectId, Document.isNotDeleted, isDone >> not ]
 
 
 toAllPassPredicate predicateList =

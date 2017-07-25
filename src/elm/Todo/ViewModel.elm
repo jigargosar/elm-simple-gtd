@@ -1,6 +1,7 @@
 module Todo.ViewModel exposing (createTodoViewModel)
 
 import Date
+import Document
 import Document.Types exposing (getDocId)
 import Entity.Types
 import EntityId
@@ -136,7 +137,7 @@ createTodoViewModel config appM isFocusable todo =
     in
     { isDone = Todo.isDone todo
     , key = todoId
-    , isDeleted = Todo.getDeleted todo
+    , isDeleted = Document.isDeleted todo
     , onKeyDownMsg = onKeyDownMsg
     , displayText = getDisplayText todo
     , projectDisplayName = projectDisplayName

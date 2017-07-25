@@ -88,7 +88,7 @@ update config msg =
 
 moveFocusBy : Int -> List Entity -> SubModelF model
 moveFocusBy =
-    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity
+    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity_
 
 
 onUpdate :

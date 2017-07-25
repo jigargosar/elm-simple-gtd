@@ -4,7 +4,7 @@ import Entity
 import Entity.Tree
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model exposing (maybeSetFocusInEntityIn)
+import Model
 import Model.EntityTree
 import Model.ViewType
 import Toolkit.Operators exposing (..)
@@ -27,7 +27,7 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
                     X.List.clampIndex index entityList
                         |> (List.getAt # entityList)
                         |> Maybe.orElse (List.head entityList)
-                        |> maybeSetFocusInEntityIn model
+                        |> Model.maybeSetFocusInEntityIn_ model
 
                 setFocusInIndex index =
                     setFocusInEntityByIndex

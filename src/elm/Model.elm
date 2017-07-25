@@ -34,11 +34,11 @@ updateFocusInEntity =
     over focusInEntity_
 
 
-maybeOverFocusInEntity =
+maybeOverFocusInEntity_ =
     maybeOver focusInEntity_
 
 
-maybeSetFocusInEntityIn model value =
+maybeSetFocusInEntityIn_ model value =
     maybeSet focusInEntity_ value model
 
 

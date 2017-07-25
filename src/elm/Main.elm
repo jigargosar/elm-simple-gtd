@@ -113,6 +113,7 @@ viewConfig =
     , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> Msg.OnTodoMsg
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
     , onGD_UpdateFormName = Msg.onGD_UpdateFormName
+    , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
     }
 
 

@@ -186,6 +186,10 @@ onGD_UpdateFormName form newName =
         |> OnGroupDocMsg
 
 
+onStartEditingGroupDoc groupDocId =
+    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_StartEditing
+
+
 onStartAddingGroupDoc gdType =
     Msg.GroupDoc.OnGroupDocAction gdType GDA_StartAdding |> OnGroupDocMsg
 

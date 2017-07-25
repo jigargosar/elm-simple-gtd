@@ -75,6 +75,7 @@ type alias Config =
     , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : DocId -> EntityListViewType
+    , groupDocType : GroupDocType
     }
 
 
@@ -123,8 +124,11 @@ create getTodoListByEntityId config innerConFig groupDoc =
         appHeader =
             { name = innerConFig.namePrefix ++ name, backgroundColor = icon.color }
 
+        groupDocId =
+            GroupDoc.Types.createGroupDocIdFromType innerConFig.groupDocType id
+
         startEditingMsg =
-            createEntityActionMsg Entity.Types.EUA_StartEditing
+            config.onStartEditingGroupDoc groupDocId
     in
     { id = id
     , name = name
@@ -167,6 +171,7 @@ contexts config model =
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
             , getViewType = Entity.Types.ContextView
+            , groupDocType = ContextGroupDocType
             }
 
         archivedConfig =
@@ -218,6 +223,7 @@ projects config model =
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor
             , getViewType = Entity.Types.ProjectView
+            , groupDocType = ProjectGroupDocType
             }
 
         archivedConfig =

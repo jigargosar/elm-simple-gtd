@@ -133,27 +133,12 @@ toggleSetMember item set =
 startEditingEntity : Config msg a -> EntityId -> SubReturnF msg model
 startEditingEntity config entityId =
     case entityId of
-        ContextId id ->
-            X.Return.returnWithMaybe1
-                (Model.GroupDocStore.findContextById id)
-                (createEditContextForm
-                    >> XMGroupDocForm
-                    >> config.onSetExclusiveMode
-                    >> returnMsgAsCmd
-                )
-
-        ProjectId id ->
-            X.Return.returnWithMaybe1
-                (Model.GroupDocStore.findProjectById id)
-                (createEditProjectForm
-                    >> XMGroupDocForm
-                    >> config.onSetExclusiveMode
-                    >> returnMsgAsCmd
-                )
-
         TodoId id ->
             X.Return.returnWithMaybe1 (Model.Todo.findTodoById id)
                 (config.onStartEditingTodo >> returnMsgAsCmd)
+
+        _ ->
+            identity
 
 
 toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType

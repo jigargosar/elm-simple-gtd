@@ -60,6 +60,7 @@ type alias Config msg a =
         , switchToEntityListView : EntityListViewType -> msg
         , onStartEditingTodo : TodoDoc -> msg
         , currentViewEntityList : Lazy (List Entity)
+        , setFocusInEntityWithEntityId : EntityId -> msg
         , setFocusInEntityMsg : Entity -> msg
     }
 
@@ -120,8 +121,12 @@ onUpdate config entityId action =
         EUA_BringEntityIdInView ->
             Lazy.force config.currentViewEntityList
                 |> List.Extra.find (Entity.hasId entityId)
-                ?|> (config.setFocusInEntityMsg >> returnMsgAsCmd)
-                ?= identity
+                |> Maybe.Extra.unpack
+                    (\_ ->
+                        returnMsgAsCmd (config.switchToEntityListView ContextsView)
+                            >> returnMsgAsCmd (config.setFocusInEntityWithEntityId entityId)
+                    )
+                    (config.setFocusInEntityMsg >> returnMsgAsCmd)
 
 
 toggleEntitySelection entityId =

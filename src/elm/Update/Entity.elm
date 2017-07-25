@@ -50,17 +50,18 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg =
-    { onSetExclusiveMode : ExclusiveMode -> msg
-    , revertExclusiveMode : msg
-    , switchToEntityListView : EntityListViewType -> msg
-    , setDomFocusToFocusInEntityCmd : msg
-    , onStartEditingTodo : TodoDoc -> msg
+type alias Config msg a =
+    { a
+        | onSetExclusiveMode : ExclusiveMode -> msg
+        , revertExclusiveMode : msg
+        , switchToEntityListView : EntityListViewType -> msg
+        , setDomFocusToFocusInEntityCmd : msg
+        , onStartEditingTodo : TodoDoc -> msg
     }
 
 
 update :
-    Config msg
+    Config msg a
     -> EntityMsg
     -> SubReturnF msg model
 update config msg =
@@ -88,7 +89,7 @@ moveFocusBy =
 
 
 onUpdate :
-    Config msg
+    Config msg a
     -> EntityId
     -> Entity.Types.EntityUpdateAction
     -> SubReturnF msg model
@@ -129,7 +130,7 @@ toggleSetMember item set =
         Set.insert item set
 
 
-startEditingEntity : Config msg -> EntityId -> SubReturnF msg model
+startEditingEntity : Config msg a -> EntityId -> SubReturnF msg model
 startEditingEntity config entityId =
     case entityId of
         ContextId id ->

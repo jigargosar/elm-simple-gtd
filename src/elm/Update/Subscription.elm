@@ -41,18 +41,19 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg =
-    { noop : msg
-    , onStartAddingTodoToInbox : msg
-    , onStartAddingTodoWithFocusInEntityAsReference : msg
-    , openLaunchBarMsg : msg
-    , revertExclusiveMode : msg
-    , afterTodoUpsert : TodoDoc -> msg
+type alias Config msg a =
+    { a
+        | noop : msg
+        , onStartAddingTodoToInbox : msg
+        , onStartAddingTodoWithFocusInEntityAsReference : msg
+        , openLaunchBarMsg : msg
+        , revertExclusiveMode : msg
+        , afterTodoUpsert : TodoDoc -> msg
     }
 
 
 update :
-    Config msg
+    Config msg a
     -> SubscriptionMsg
     -> SubReturnF msg model
 update config msg =
@@ -83,7 +84,7 @@ update config msg =
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
-onGlobalKeyUp : Config msg -> Key -> SubReturnF msg model
+onGlobalKeyUp : Config msg a -> Key -> SubReturnF msg model
 onGlobalKeyUp config key =
     returnWith .editMode
         (\editMode ->

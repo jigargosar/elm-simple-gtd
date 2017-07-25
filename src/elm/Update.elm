@@ -30,6 +30,10 @@ type alias ReturnF =
     Return.ReturnF AppMsg AppModel
 
 
+type alias Config =
+    Update.Firebase.Config AppMsg (Update.CustomSync.Config AppMsg (Update.Entity.Config AppMsg (Update.Subscription.Config AppMsg {})))
+
+
 update :
     AppMsg
     -> ReturnF
@@ -50,18 +54,6 @@ update msg =
             CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
-            let
-                config : Update.Subscription.Config AppMsg
-                config =
-                    { noop = Msg.noop
-                    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
-                    , onStartAddingTodoWithFocusInEntityAsReference =
-                        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
-                    , openLaunchBarMsg = Msg.openLaunchBarMsg
-                    , revertExclusiveMode = Msg.revertExclusiveMode
-                    , afterTodoUpsert = TodoMsg.afterTodoUpsert
-                    }
-            in
             Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
@@ -99,27 +91,9 @@ update msg =
             Update.AppHeader.update config msg_
 
         OnCustomSyncMsg msg_ ->
-            let
-                config : Update.CustomSync.Config AppMsg
-                config =
-                    { onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode
-                    }
-            in
             Update.CustomSync.update config msg_
 
         OnEntityMsg msg_ ->
-            let
-                config : Update.Entity.Config AppMsg
-                config =
-                    { onSetExclusiveMode = Msg.onSetExclusiveMode
-                    , revertExclusiveMode = Msg.revertExclusiveMode
-                    , switchToEntityListView = Msg.switchToEntityListView
-                    , setDomFocusToFocusInEntityCmd =
-                        Msg.setDomFocusToFocusInEntityCmd
-                    , onStartEditingTodo = TodoMsg.onStartEditingTodo
-                    }
-            in
             Update.Entity.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
@@ -167,14 +141,6 @@ update msg =
                 )
 
         OnFirebaseMsg msg_ ->
-            let
-                config : Update.Firebase.Config AppMsg
-                config =
-                    { onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
-                    , revertExclusiveMode = Msg.revertExclusiveMode
-                    , onSetExclusiveMode = Msg.onSetExclusiveMode
-                    }
-            in
             Update.Firebase.update config msg_
                 >> onPersistLocalPref
 
@@ -185,3 +151,22 @@ update msg =
 
 onPersistLocalPref =
     effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
+
+
+config : Config
+config =
+    { noop = Msg.noop
+    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+    , openLaunchBarMsg = Msg.openLaunchBarMsg
+    , afterTodoUpsert = TodoMsg.afterTodoUpsert
+    , onSetExclusiveMode = Msg.onSetExclusiveMode
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , switchToEntityListView = Msg.switchToEntityListView
+    , setDomFocusToFocusInEntityCmd =
+        Msg.setDomFocusToFocusInEntityCmd
+    , onStartEditingTodo = TodoMsg.onStartEditingTodo
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
+    }

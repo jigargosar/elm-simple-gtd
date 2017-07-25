@@ -1,4 +1,4 @@
-   10129 total
+   10118 total
      463 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -7,12 +7,12 @@
      223 src/elm/Menu.elm
      218 src/elm/GroupDoc/ViewModel.elm
      210 src/elm/Msg.elm
-     208 src/elm/Update/Entity.elm
-     187 src/elm/Update.elm
+     209 src/elm/Update/Entity.elm
      187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
-     173 src/elm/Update/Firebase.elm
-     171 src/elm/Update/Subscription.elm
+     174 src/elm/Update/Firebase.elm
+     172 src/elm/Update/Subscription.elm
+     172 src/elm/Update.elm
      160 src/elm/Todo/ItemView.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
@@ -80,8 +80,8 @@
       44 src/elm/Update/AppHeader.elm
       44 src/elm/Todo/FormTypes.elm
       42 src/elm/X/List.elm
+      41 src/elm/Update/CustomSync.elm
       40 src/elm/View/CustomSync.elm
-      40 src/elm/Update/CustomSync.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       37 src/elm/CommonMsg.elm

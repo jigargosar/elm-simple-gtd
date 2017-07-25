@@ -17,14 +17,15 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config msg =
-    { onSaveExclusiveModeForm : msg
-    , onSetExclusiveMode : ExclusiveMode -> msg
+type alias Config msg a =
+    { a
+        | onSaveExclusiveModeForm : msg
+        , onSetExclusiveMode : ExclusiveMode -> msg
     }
 
 
 update :
-    Config msg
+    Config msg a
     -> CustomSyncMsg
     -> SubReturnF msg model
 update config msg =

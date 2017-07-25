@@ -156,10 +156,6 @@ onToggleEntitySelection =
     EM_Update # EUA_ToggleSelection >> OnEntityMsg
 
 
-onStartEditingEntity =
-    EM_Update # EUA_StartEditing >> OnEntityMsg
-
-
 
 -- tdo
 

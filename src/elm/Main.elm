@@ -50,15 +50,15 @@ updateConfig model =
     , onSetExclusiveMode = Msg.onSetExclusiveMode
     , revertExclusiveMode = Msg.revertExclusiveMode
     , switchToEntityListView = Msg.switchToEntityListView
-    , setDomFocusToFocusInEntityCmd =
-        Msg.setDomFocusToFocusInEntityCmd
+    , setDomFocusToFocusInEntityCmd = Msg.setDomFocusToFocusInEntityCmd
     , onStartEditingTodo = TodoMsg.onStartEditingTodo
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
     , switchToContextsView = Msg.switchToContextsViewMsg
     , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
     , setFocusInEntity = Msg.SetFocusInEntity
-    , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
+    , currentViewEntityList =
+        Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
     , saveTodoForm = Msg.onSaveTodoForm
     , saveGroupDocForm = Msg.onSaveGroupDocForm
     , onTodoMsgWithNow = Msg.OnTodoMsgWithNow

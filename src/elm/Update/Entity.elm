@@ -95,9 +95,6 @@ onUpdate :
     -> SubReturnF msg model
 onUpdate config entityId action =
     case action of
-        EUA_StartEditing ->
-            startEditingEntity config entityId
-
         EUA_OnFocusIn ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
 

@@ -10,8 +10,8 @@ import Lazy exposing (Lazy)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-import Model.Todo exposing (findTodoById, todoStore)
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
+import Model.Todo exposing (findTodoById, todoStore)
 import Notification
 import Ports.Todo exposing (..)
 import Return

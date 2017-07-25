@@ -9,12 +9,12 @@ import X.Function.Infix exposing (..)
 import X.Return exposing (..)
 
 
-type alias Config msg =
-    Update.Todo.Internal.Config msg
+type alias Config msg a =
+    Update.Todo.Internal.Config msg a
 
 
 update :
-    Config msg
+    Config msg a
     -> Time.Time
     -> TodoMsg
     -> SubReturnF msg model

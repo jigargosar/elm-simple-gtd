@@ -21,13 +21,14 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
-type alias Config msg =
-    { noop : msg
+type alias Config msg a =
+    { a
+        | noop : msg
     }
 
 
 update :
-    Config msg
+    Config msg a
     -> ViewTypeMsg
     -> SubReturnF msg model
 update config msg =

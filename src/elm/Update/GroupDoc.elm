@@ -33,14 +33,15 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg =
-    { onSetExclusiveMode : ExclusiveMode -> msg
-    , revertExclusiveMode : msg
+type alias Config msg a =
+    { a
+        | onSetExclusiveMode : ExclusiveMode -> msg
+        , revertExclusiveMode : msg
     }
 
 
 update :
-    Config msg
+    Config msg a
     -> GroupDocMsg
     -> SubReturnF msg model
 update config msg =

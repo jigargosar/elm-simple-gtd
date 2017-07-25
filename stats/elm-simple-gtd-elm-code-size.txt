@@ -1,5 +1,5 @@
-   10120 total
-     463 src/elm/Update/Todo/Internal.elm
+   10083 total
+     464 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
      263 src/elm/Mat.elm
@@ -16,11 +16,10 @@
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
-     155 src/elm/Update/LaunchBar.elm
-     154 src/elm/Update.elm
+     153 src/elm/Update/LaunchBar.elm
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
-     147 src/elm/Update/GroupDoc.elm
+     148 src/elm/Update/GroupDoc.elm
      146 src/elm/X/Function.elm
      143 src/elm/GroupDoc.elm
      142 src/elm/Entity/View.elm
@@ -28,11 +27,12 @@
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
      129 src/elm/Routes.elm
+     129 src/elm/Main.elm
      124 src/elm/Document.elm
-     121 src/elm/Main.elm
      111 src/elm/Todo/Form.elm
      110 src/elm/ViewModel.elm
      110 src/elm/Model/EntityTree.elm
+     106 src/elm/Update.elm
      106 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
@@ -41,9 +41,9 @@
       93 src/elm/X/Time.elm
       88 src/elm/X/Html.elm
       87 src/elm/View/Layout.elm
+      84 src/elm/Update/ExclusiveMode.elm
       84 src/elm/Model/GroupDocStore.elm
       84 src/elm/Entity.elm
-      83 src/elm/Update/ExclusiveMode.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
       80 src/elm/GroupDoc/View.elm
@@ -71,13 +71,13 @@
       50 src/elm/AppUrl.elm
       49 src/elm/Model/Stores.elm
       49 src/elm/Form.elm
+      48 src/elm/Update/ViewType.elm
       47 src/elm/View.elm
-      47 src/elm/Update/ViewType.elm
       47 src/elm/Todo/TimeTracker/View.elm
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
+      45 src/elm/Update/AppHeader.elm
       45 src/elm/Update/AppDrawer.elm
-      44 src/elm/Update/AppHeader.elm
       44 src/elm/Todo/FormTypes.elm
       42 src/elm/X/List.elm
       41 src/elm/Update/CustomSync.elm

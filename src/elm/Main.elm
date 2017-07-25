@@ -1,5 +1,7 @@
 module Main exposing (main)
 
+import Lazy
+import Model.EntityList
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
 import Return
@@ -37,8 +39,8 @@ init =
         >> update Msg.onSwitchToNewUserSetupModeIfNeeded
 
 
-updateConfig : Update.Config AppMsg
-updateConfig =
+updateConfig : AppModel -> Update.Config AppMsg
+updateConfig model =
     { noop = Msg.noop
     , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
     , onStartAddingTodoWithFocusInEntityAsReference =
@@ -53,12 +55,18 @@ updateConfig =
     , onStartEditingTodo = TodoMsg.onStartEditingTodo
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
+    , switchToContextsView = Msg.switchToContextsViewMsg
+    , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
+    , setFocusInEntity = Msg.SetFocusInEntity
+    , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
+    , saveTodoForm = Msg.onSaveTodoForm
+    , saveGroupDocForm = Msg.onSaveGroupDocForm
     }
 
 
 update : AppMsg -> AppModel -> AppReturn
-update msg =
-    Return.singleton >> Update.update updateConfig msg
+update msg model =
+    Return.singleton model |> Update.update (updateConfig model) msg
 
 
 viewConfig =

@@ -32,19 +32,20 @@ type alias SubAndThenUpdate msg model =
     msg -> SubReturnF msg model
 
 
-type alias Config msg =
-    { now : Time
-    , onComplete : msg
-    , onSetExclusiveMode : ExclusiveMode -> msg
-    , onSwitchView : EntityListViewType -> msg
+type alias Config msg a =
+    { a
+        | revertExclusiveMode : msg
+        , onSetExclusiveMode : ExclusiveMode -> msg
+        , switchToEntityListView : EntityListViewType -> msg
     }
 
 
 update :
-    Config msg
+    Config msg a
+    -> Time
     -> LaunchBarMsg
     -> SubReturnF msg model
-update config msg =
+update config now msg =
     case msg of
         NOOP ->
             identity
@@ -65,38 +66,35 @@ update config msg =
                         SI_Contexts ->
                             Entity.Types.ContextsView
             in
-            returnMsgAsCmd config.onComplete
-                >> returnMsgAsCmd (config.onSwitchView v)
+            returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd (config.switchToEntityListView v)
 
         OnLBInputChanged form text ->
             returnWith identity
                 (\model ->
-                    XMLaunchBar (updateInput config text model form)
+                    XMLaunchBar (updateInput now text model form)
                         |> config.onSetExclusiveMode
                         |> returnMsgAsCmd
                 )
 
         Open ->
-            config.now
+            now
                 |> LaunchBar.Models.initialModel
                 >> XMLaunchBar
                 >> config.onSetExclusiveMode
                 >> returnMsgAsCmd
 
         OnCancel ->
-            returnMsgAsCmd config.onComplete
+            returnMsgAsCmd config.revertExclusiveMode
 
 
 type alias LaunchBarFormF =
     LaunchBarForm -> LaunchBarForm
 
 
-updateInput : Config msg -> String -> SubModel model -> LaunchBarFormF
-updateInput config input subModel form =
+updateInput : Time -> String -> SubModel model -> LaunchBarFormF
+updateInput now input subModel form =
     let
-        now =
-            config.now
-
         newInput =
             input
                 |> (if now - form.updatedAt > 1 * Time.second then

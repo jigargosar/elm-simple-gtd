@@ -51,13 +51,14 @@ type alias SubReturnF msg model =
     SubReturn msg model -> SubReturn msg model
 
 
-type alias Config msg =
-    { switchToContextsView : msg
-    , setFocusInEntityWithEntityId : EntityId -> msg
-    , setFocusInEntity : Entity -> msg
-    , revertExclusiveMode : msg
-    , onSetExclusiveMode : ExclusiveMode -> msg
-    , currentViewEntityList : Lazy (List Entity)
+type alias Config msg a =
+    { a
+        | switchToContextsView : msg
+        , setFocusInEntityWithEntityId : EntityId -> msg
+        , setFocusInEntity : Entity -> msg
+        , revertExclusiveMode : msg
+        , onSetExclusiveMode : ExclusiveMode -> msg
+        , currentViewEntityList : Lazy (List Entity)
     }
 
 
@@ -151,7 +152,7 @@ insertTodo constructWithId =
 
 
 saveAddTodoForm :
-    Config msg
+    Config msg a
     -> AddTodoFormMode
     -> TodoForm
     -> SubModel model
@@ -254,12 +255,12 @@ onStopRunningTodo =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config msg -> SubReturnF msg model
+onGotoRunningTodo : Config msg a -> SubReturnF msg model
 onGotoRunningTodo config =
     returnWith identity (gotoRunningTodo config)
 
 
-onRunningNotificationResponse : Config msg -> Notification.Response -> SubReturnF msg model
+onRunningNotificationResponse : Config msg a -> Notification.Response -> SubReturnF msg model
 onRunningNotificationResponse config res =
     let
         todoId =
@@ -361,14 +362,14 @@ updateTimeTracker now =
         |> andThen
 
 
-gotoRunningTodo : Config msg -> SubModel model -> SubReturnF msg model
+gotoRunningTodo : Config msg a -> SubModel model -> SubReturnF msg model
 gotoRunningTodo config model =
     Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithId config model
         ?= identity
 
 
-gotoTodoWithId : Config msg -> SubModel model -> DocId -> SubReturnF msg model
+gotoTodoWithId : Config msg a -> SubModel model -> DocId -> SubReturnF msg model
 gotoTodoWithId config model todoId =
     let
         maybeTodoEntity =

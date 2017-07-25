@@ -1,4 +1,4 @@
-   10092 total
+   10079 total
      464 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -86,7 +86,6 @@
       39 src/elm/X/Date.elm
       37 src/elm/CommonMsg.elm
       36 src/elm/LocalPref.elm
-      33 src/elm/Model/Selection.elm
       32 src/elm/Ports/Firebase.elm
       30 src/elm/Document/Types.elm
       27 src/elm/Firebase.elm
@@ -95,6 +94,7 @@
       21 src/elm/Todo/Notification/Types.elm
       21 src/elm/Model/ViewType.elm
       21 src/elm/Model/Todo.elm
+      20 src/elm/Model/Selection.elm
       20 src/elm/L/Main.elm
       20 src/elm/Firebase/User.elm
       20 src/elm/EntityId.elm

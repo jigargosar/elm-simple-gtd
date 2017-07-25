@@ -56,7 +56,7 @@ updateConfig model =
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
     , switchToContextsView = Msg.switchToContextsViewMsg
     , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
-    , setFocusInEntity = Msg.SetFocusInEntity
+    , setFocusInEntityMsg = Msg.SetFocusInEntity
     , currentViewEntityList =
         Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
     , saveTodoForm = Msg.onSaveTodoForm

@@ -49,7 +49,7 @@ const observer = new MutationSummary({
     if (!_.isEmpty(focusInEntitySummaryAdded)) {
       console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
       const $focusInEntity = $(focusInEntitySummaryAdded).first()
-      setTimeout(() => $focusInEntity.first().focus(), 0) // sometimes on switch view, focus doesn't work.
+      $focusInEntity.first().focus()
       
     }
     
@@ -138,9 +138,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
     console.log("port: focusSelector received selector", selector)
     // setTimeout(() => {
     requestAnimationFrame(() => {
-      // note - we blur here so that view scrolls to element if it already had focus
-      $(selector).blur().focus() // blur is costly :(
-      // $(selector).focus()
+      $(selector).focus()
     })
     // }, 0)
   })

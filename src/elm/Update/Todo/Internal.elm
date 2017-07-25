@@ -10,6 +10,7 @@ import Lazy exposing (Lazy)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model.Todo exposing (findTodoById, todoStore)
+import Model.Types exposing (HashFocusInEntity)
 import Notification
 import Ports.Todo exposing (..)
 import Return
@@ -33,14 +34,14 @@ import X.Time
 
 
 type alias SubModel model =
-    { model
-        | now : Time
-        , todoStore : TodoStore
-        , reminderOverlay : TodoReminderOverlayModel
-        , timeTracker : Tracker.Model
-        , focusInEntity : Entity
-        , selectedEntityIdSet : Set DocId
-    }
+    HashFocusInEntity
+        { model
+            | now : Time
+            , todoStore : TodoStore
+            , reminderOverlay : TodoReminderOverlayModel
+            , timeTracker : Tracker.Model
+            , selectedEntityIdSet : Set DocId
+        }
 
 
 type alias SubReturn msg model =

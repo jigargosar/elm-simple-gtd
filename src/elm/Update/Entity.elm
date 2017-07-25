@@ -12,6 +12,7 @@ import Model.GroupDocStore
 import Model.Selection
 import Model.Stores
 import Model.Todo
+import Model.Types exposing (HashFocusInEntity)
 import Model.ViewType
 import Return
 import Set
@@ -26,16 +27,16 @@ import X.Return exposing (..)
 
 
 type alias SubModel model =
-    { model
-        | contextStore : ContextStore
-        , editMode : ExclusiveMode
-        , focusInEntity : Entity
-        , now : Time
-        , projectStore : ProjectStore
-        , todoStore : TodoStore
-        , viewType : ViewType
-        , selectedEntityIdSet : Set.Set String
-    }
+    HashFocusInEntity
+        { model
+            | contextStore : ContextStore
+            , editMode : ExclusiveMode
+            , now : Time
+            , projectStore : ProjectStore
+            , todoStore : TodoStore
+            , viewType : ViewType
+            , selectedEntityIdSet : Set.Set String
+        }
 
 
 type alias SubModelF model =
@@ -85,7 +86,7 @@ update config msg =
 
 moveFocusBy : Int -> List Entity -> SubModelF model
 moveFocusBy =
-    Entity.findEntityByOffsetIn >>> maybeOver Model.focusInEntity
+    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity
 
 
 onUpdate :

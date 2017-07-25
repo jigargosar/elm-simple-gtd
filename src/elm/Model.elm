@@ -22,7 +22,7 @@ now =
 --focusInEntity : Field Entity (Types.HasFocusInEntity a)
 
 
-focusInEntity =
+focusInEntity_ =
     fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
@@ -31,7 +31,23 @@ focusInEntity =
 
 
 setFocusInEntity entity =
-    set focusInEntity entity
+    set focusInEntity_ entity
+
+
+getFocusInEntity =
+    get focusInEntity_
+
+
+updateFocusInEntity =
+    over focusInEntity_
+
+
+maybeOverFocusInEntity =
+    maybeOver focusInEntity_
+
+
+maybeSetFocusInEntityIn model value =
+    maybeSet focusInEntity_ value model
 
 
 getRemoteSyncForm model =
@@ -47,16 +63,8 @@ getRemoteSyncForm model =
     maybeForm ?= createRemoteSyncForm model
 
 
-
---createRemoteSyncForm : AppModel -> SyncForm
-
-
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
-
-
-
---getNow : AppModel -> Time
 
 
 getNow =

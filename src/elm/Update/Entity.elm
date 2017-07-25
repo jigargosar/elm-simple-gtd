@@ -97,7 +97,7 @@ onUpdate :
 onUpdate config entityId action =
     case action of
         EUA_OnFocusIn ->
-            map (Model.Stores.setFocusInEntityWithEntityId entityId)
+            map (Model.Stores.setFocusInEntityWithEntityId_ entityId)
 
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)

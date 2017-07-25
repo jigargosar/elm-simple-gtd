@@ -18,19 +18,11 @@ now =
     fieldLens .now (\s b -> { b | now = s })
 
 
-
---focusInEntity : Field Entity (Types.HasFocusInEntity a)
-
-
 focusInEntity_ =
     fieldLens .focusInEntity_ (\s b -> { b | focusInEntity_ = s })
 
 
-
---setFocusInEntity : Entity -> Types.HasFocusInEntityF a
-
-
-setFocusInEntity entity =
+setFocusInEntity_ entity =
     set focusInEntity_ entity
 
 

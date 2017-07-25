@@ -99,11 +99,11 @@ update config msg =
             returnWithNow (config.onTodoMsgWithNow msg_)
 
         SetFocusInEntity entity ->
-            map (Model.setFocusInEntity entity)
+            map (Model.setFocusInEntity_ entity)
                 >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         SetFocusInEntityWithEntityId entityId ->
-            map (Model.Stores.setFocusInEntityWithEntityId entityId)
+            map (Model.Stores.setFocusInEntityWithEntityId_ entityId)
                 >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         OnTodoMsgWithNow msg_ now ->

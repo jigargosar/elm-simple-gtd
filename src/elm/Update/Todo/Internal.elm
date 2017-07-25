@@ -9,8 +9,9 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Lazy exposing (Lazy)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Model
+import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.Todo exposing (findTodoById, todoStore)
-import Model.Types exposing (HashFocusInEntity)
 import Notification
 import Ports.Todo exposing (..)
 import Return
@@ -34,7 +35,7 @@ import X.Time
 
 
 type alias SubModel model =
-    HashFocusInEntity
+    HasFocusInEntity
         { model
             | now : Time
             , todoStore : TodoStore
@@ -173,7 +174,7 @@ saveAddTodoForm config addMode form model =
                                 inboxEntity
 
                             ATFM_AddWithFocusInEntityAsReference ->
-                                model.focusInEntity
+                                Model.getFocusInEntity model
                 in
                 updateTodo
                     (case referenceEntity of

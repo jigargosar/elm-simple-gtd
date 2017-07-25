@@ -9,6 +9,7 @@ import Html.Attributes exposing (..)
 import Html.Keyed
 import List.Extra
 import Maybe.Extra
+import Model
 import Model.EntityTree
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
@@ -41,7 +42,7 @@ list config appVM viewType model =
 
 getMaybeFocusInEntity entityList model =
     entityList
-        |> List.Extra.find (Entity.equalById model.focusInEntity)
+        |> List.Extra.find (Entity.equalById (Model.getFocusInEntity model))
         |> Maybe.Extra.orElse (List.head entityList)
 
 

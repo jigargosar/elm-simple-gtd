@@ -9,10 +9,10 @@ import Keyboard.Extra as Key
 import Maybe.Extra
 import Model
 import Model.GroupDocStore
+import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.Selection
 import Model.Stores
 import Model.Todo
-import Model.Types exposing (HashFocusInEntity)
 import Model.ViewType
 import Return
 import Set
@@ -27,7 +27,7 @@ import X.Return exposing (..)
 
 
 type alias SubModel model =
-    HashFocusInEntity
+    HasFocusInEntity
         { model
             | contextStore : ContextStore
             , editMode : ExclusiveMode

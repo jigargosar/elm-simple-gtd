@@ -63,7 +63,7 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
 
         getMaybeFocusInEntityIndex entityList model =
             entityList
-                |> List.findIndex (Entity.equalById model.focusInEntity)
+                |> List.findIndex (Entity.equalById (Model.getFocusInEntity model))
     in
     ( oldModel, newModel )
         |> Tuple2.mapBoth

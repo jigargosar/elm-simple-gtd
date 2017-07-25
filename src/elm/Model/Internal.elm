@@ -7,6 +7,7 @@ import Firebase
 import Json.Encode as E
 import LocalPref
 import Material
+import Model.HasFocusInEntity
 import Model.ViewType
 import Project
 import Random.Pcg
@@ -71,7 +72,7 @@ createAppModel flags =
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
-            , focusInEntity = createContextEntity Context.null
+            , focusInEntity_ = Model.HasFocusInEntity.init
             , timeTracker = Todo.TimeTracker.none
             , config = flags.config
             , appDrawerModel = localPref.appDrawer

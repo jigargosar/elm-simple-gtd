@@ -23,7 +23,7 @@ now =
 
 
 focusInEntity_ =
-    fieldLens .focusInEntity (\s b -> { b | focusInEntity = s })
+    fieldLens .focusInEntity_ (\s b -> { b | focusInEntity_ = s })
 
 
 

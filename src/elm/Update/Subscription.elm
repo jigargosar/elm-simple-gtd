@@ -49,6 +49,7 @@ type alias Config msg a =
         , openLaunchBarMsg : msg
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
+        , onGotoRunningTodoMsg : msg
     }
 
 
@@ -110,6 +111,9 @@ onGlobalKeyUp config key =
 
                         KX.Slash ->
                             returnMsgAsCmd config.openLaunchBarMsg
+
+                        KX.CharT ->
+                            returnMsgAsCmd config.onGotoRunningTodoMsg
 
                         _ ->
                             returnMsgAsCmd config.noop

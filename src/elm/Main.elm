@@ -65,6 +65,7 @@ updateConfig model =
     , onLaunchBarMsgWithNow = Msg.OnLaunchBarMsgWithNow
     , onMdl = Msg.OnMdl
     , bringEntityIdInViewMsg = Msg.bringEntityIdInViewMsg
+    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> Msg.OnTodoMsg
     }
 
 

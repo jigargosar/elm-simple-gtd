@@ -14,14 +14,6 @@ onStopRunningTodoMsg =
 
 
 
---onGotoRunningTodo : AppMsg
-
-
-onGotoRunningTodoMsg =
-    OnGotoRunningTodo |> OnTodoMsg
-
-
-
 --onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
 
 

@@ -80,11 +80,11 @@ update config msg =
 
         SetFocusInEntity entity ->
             map (Model.setFocusInEntity entity)
-                >> update config Msg.setDomFocusToFocusInEntityCmd
+                >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         SetFocusInEntityWithEntityId entityId ->
             map (Model.Stores.setFocusInEntityWithEntityId entityId)
-                >> update config Msg.setDomFocusToFocusInEntityCmd
+                >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
 
         OnTodoMsgWithNow msg_ now ->
             returnWith identity

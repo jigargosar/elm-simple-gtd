@@ -42,7 +42,7 @@ const observer = new MutationSummary({
       setTimeout(() => $first.focus(), 0)
       // $first.focus() // working now with kb but not with mouse ??!!
     }
-  
+    
     const focusInEntitySummary = summaries[1]
     console.log()
     const focusInEntitySummaryAdded = focusInEntitySummary.added

@@ -1,6 +1,7 @@
 module Update exposing (Config, update)
 
 import CommonMsg
+import LaunchBar.Messages
 import LocalPref
 import Material
 import Model
@@ -9,6 +10,8 @@ import Model.Stores
 import Msg exposing (..)
 import Ports
 import Return
+import Time exposing (Time)
+import Todo.Msg exposing (TodoMsg)
 import Types exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
@@ -24,22 +27,38 @@ import Update.ViewType
 import X.Return exposing (..)
 
 
-type alias ReturnF msg =
-    Return.ReturnF msg AppModel
-
-
 type alias Config msg =
-    Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.ViewType.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
+    Update.LaunchBar.Config msg
+        (Update.AppHeader.Config msg
+            (Update.ExclusiveMode.Config msg
+                (Update.ViewType.Config msg
+                    (Update.Firebase.Config msg
+                        (Update.CustomSync.Config msg
+                            (Update.Entity.Config msg
+                                (Update.Subscription.Config msg
+                                    (Update.Todo.Config msg
+                                        { onTodoMsgWithNow : TodoMsg -> Time -> msg
+                                        , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
+                                        , onMdl : Material.Msg msg -> msg
+                                        }
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
 
 
 update :
     Config AppMsg
     -> AppMsg
-    -> ReturnF AppMsg
+    -> ReturnF AppMsg AppModel
 update config msg =
     case msg of
         OnMdl msg_ ->
-            andThen (Material.update OnMdl msg_)
+            andThen (Material.update config.onMdl msg_)
 
         OnViewTypeMsg msg_ ->
             Update.ViewType.update config msg_
@@ -73,10 +92,10 @@ update config msg =
             Update.LaunchBar.update config now msg_
 
         OnLaunchBarMsg msg_ ->
-            returnWithNow (OnLaunchBarMsgWithNow msg_)
+            returnWithNow (config.onLaunchBarMsgWithNow msg_)
 
         OnTodoMsg msg_ ->
-            returnWithNow (OnTodoMsgWithNow msg_)
+            returnWithNow (config.onTodoMsgWithNow msg_)
 
         SetFocusInEntity entity ->
             map (Model.setFocusInEntity entity)

@@ -61,6 +61,9 @@ updateConfig model =
     , currentViewEntityList = Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
     , saveTodoForm = Msg.onSaveTodoForm
     , saveGroupDocForm = Msg.onSaveGroupDocForm
+    , onTodoMsgWithNow = Msg.OnTodoMsgWithNow
+    , onLaunchBarMsgWithNow = Msg.OnLaunchBarMsgWithNow
+    , onMdl = Msg.OnMdl
     }
 
 

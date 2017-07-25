@@ -88,7 +88,7 @@ update config msg =
 
 moveFocusBy : Int -> List Entity -> SubModelF model
 moveFocusBy =
-    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity_
+    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity__
 
 
 onUpdate :
@@ -99,7 +99,7 @@ onUpdate :
 onUpdate config entityId action =
     case action of
         EUA_OnFocusIn ->
-            map (Model.Stores.setFocusInEntityWithEntityId_ entityId)
+            map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
 
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)

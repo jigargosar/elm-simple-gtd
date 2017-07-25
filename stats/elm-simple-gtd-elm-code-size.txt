@@ -1,4 +1,4 @@
-   10119 total
+   10120 total
      470 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -28,8 +28,8 @@
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
      129 src/elm/Routes.elm
+     124 src/elm/Update.elm
      124 src/elm/Document.elm
-     123 src/elm/Update.elm
      111 src/elm/Todo/Form.elm
      110 src/elm/ViewModel.elm
      110 src/elm/Model/EntityTree.elm

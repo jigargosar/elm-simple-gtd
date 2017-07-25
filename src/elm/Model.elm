@@ -18,24 +18,24 @@ now =
     fieldLens .now (\s b -> { b | now = s })
 
 
-focusInEntity_ =
+focusInEntity__ =
     fieldLens .focusInEntity_ (\s b -> { b | focusInEntity_ = s })
 
 
-setFocusInEntity_ entity =
-    set focusInEntity_ entity
+setFocusInEntity__ entity =
+    set focusInEntity__ entity
 
 
 getFocusInEntity =
-    get focusInEntity_
+    get focusInEntity__
 
 
-maybeOverFocusInEntity_ =
-    maybeOver focusInEntity_
+maybeOverFocusInEntity__ =
+    maybeOver focusInEntity__
 
 
 maybeSetFocusInEntityIn_ model value =
-    maybeSet focusInEntity_ value model
+    maybeSet focusInEntity__ value model
 
 
 getRemoteSyncForm model =

@@ -30,10 +30,6 @@ getFocusInEntity =
     get focusInEntity_
 
 
-updateFocusInEntity =
-    over focusInEntity_
-
-
 maybeOverFocusInEntity_ =
     maybeOver focusInEntity_
 

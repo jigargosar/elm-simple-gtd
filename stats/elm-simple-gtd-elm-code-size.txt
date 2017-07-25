@@ -1,4 +1,4 @@
-   10123 total
+   10119 total
      470 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -59,8 +59,8 @@
       69 src/elm/View/Overlays.elm
       67 src/elm/Types.elm
       67 src/elm/Todo/GroupEditView.elm
-      67 src/elm/Model.elm
       64 src/elm/Todo/Notification/View.elm
+      63 src/elm/Model.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
       54 src/elm/Todo/Types.elm

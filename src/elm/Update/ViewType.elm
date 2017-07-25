@@ -23,7 +23,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg a =
     { a
-        | noop : msg
+        | revertExclusiveMode : msg
     }
 
 
@@ -34,8 +34,9 @@ update :
 update config msg =
     case msg of
         SwitchView viewType ->
-            map (switchToView viewType)
+            map (setViewType viewType)
                 >> map Model.Selection.clearSelection
+                >> returnMsgAsCmd config.revertExclusiveMode
 
         SwitchToEntityListView listView ->
             listView |> EntityListView >> SwitchView >> update config
@@ -44,5 +45,5 @@ update config msg =
             ContextsView |> SwitchToEntityListView >> update config
 
 
-switchToView viewType model =
+setViewType viewType model =
     { model | viewType = viewType }

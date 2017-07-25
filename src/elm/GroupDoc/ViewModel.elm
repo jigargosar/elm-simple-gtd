@@ -101,7 +101,7 @@ create config configInner todoList groupDoc =
             if isNull then
                 config.noop
             else
-                onEntityAction Entity.Types.EUA_StartEditing
+                config.onStartEditingGroupDoc groupDocId
 
         icon =
             if isNull then

@@ -40,6 +40,7 @@ type alias Config msg =
                                         { onTodoMsgWithNow : TodoMsg -> Time -> msg
                                         , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
                                         , onMdl : Material.Msg msg -> msg
+                                        , setDomFocusToFocusInEntityCmd : msg
                                         }
                                     )
                                 )

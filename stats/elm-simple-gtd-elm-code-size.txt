@@ -1,4 +1,4 @@
-   10106 total
+   10092 total
      464 src/elm/Update/Todo/Internal.elm
      321 src/elm/Todo.elm
      291 src/elm/Store.elm
@@ -43,7 +43,6 @@
       87 src/elm/View/Layout.elm
       84 src/elm/Update/ExclusiveMode.elm
       84 src/elm/Model/GroupDocStore.elm
-      84 src/elm/Entity.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
       80 src/elm/GroupDoc/View.elm
@@ -56,6 +55,7 @@
       72 src/elm/View/GetStarted.elm
       72 src/elm/Update/Todo.elm
       72 src/elm/Entity/Types.elm
+      70 src/elm/Entity.elm
       69 src/elm/View/Overlays.elm
       67 src/elm/Todo/GroupEditView.elm
       67 src/elm/Model.elm

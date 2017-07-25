@@ -38,20 +38,6 @@ type alias Msg =
     Entity.Types.EntityUpdateAction
 
 
-getEntityDocId entity =
-    case entity of
-        TodoEntity model ->
-            getDocId model
-
-        GroupEntity group ->
-            case group of
-                ProjectEntity model ->
-                    getDocId model
-
-                ContextEntity model ->
-                    getDocId model
-
-
 toEntityId entity =
     case entity of
         TodoEntity m ->

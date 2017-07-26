@@ -7,9 +7,9 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model.ViewType
-import Types.ViewType exposing (ViewType(..))
 import View.CustomSync
 import View.Header
+import ViewType exposing (ViewType(..))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
 

@@ -20,7 +20,7 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
-import Types.ViewType exposing (ViewType(EntityListView))
+import ViewType exposing (ViewType(EntityListView))
 import X.Function exposing (when)
 import X.Maybe
 

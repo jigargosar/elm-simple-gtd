@@ -13,7 +13,7 @@ import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
 import Types exposing (AppModel)
-import Types.ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

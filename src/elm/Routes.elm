@@ -4,7 +4,7 @@ import Entity.Types exposing (EntityListViewType(..))
 import Maybe.Extra
 import Model.ViewType
 import RouteUrl.Builder
-import Types.ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.List
 
@@ -51,7 +51,7 @@ builder2messages config builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ config.switchToView Model.ViewType.defaultView ]
             )
-            (config.switchToEntityListView >> X.List.singleton)
+            (config.switchToEntityListViewTypeMsg >> X.List.singleton)
 
 
 

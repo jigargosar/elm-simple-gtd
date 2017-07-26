@@ -1,12 +1,12 @@
-   10111 total
-     470 src/elm/Update/Todo/Internal.elm
+   10100 total
+     469 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      291 src/elm/Store.elm
      263 src/elm/Mat.elm
      250 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     220 src/elm/Msg.elm
      220 src/elm/GroupDoc/ViewModel.elm
+     216 src/elm/Msg.elm
      196 src/elm/Update/Entity.elm
      188 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
@@ -23,8 +23,8 @@
      146 src/elm/X/Function.elm
      143 src/elm/GroupDoc.elm
      143 src/elm/Entity/View.elm
-     136 src/elm/Main.elm
      136 src/elm/L/View.elm
+     135 src/elm/Main.elm
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
      129 src/elm/Routes.elm
@@ -48,11 +48,11 @@
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
       79 src/elm/Model/EntityList.elm
+      77 src/elm/Entity/Types.elm
       77 src/elm/AppColors.elm
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm
       73 src/elm/Firebase/Model.elm
-      73 src/elm/Entity/Types.elm
       72 src/elm/View/GetStarted.elm
       72 src/elm/Update/Todo.elm
       70 src/elm/Entity.elm
@@ -69,13 +69,13 @@
       50 src/elm/Firebase/Types.elm
       50 src/elm/Context.elm
       50 src/elm/AppUrl.elm
-      49 src/elm/Update/ViewType.elm
       49 src/elm/Model/Stores.elm
       49 src/elm/Form.elm
       47 src/elm/View.elm
       47 src/elm/Todo/TimeTracker/View.elm
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
+      45 src/elm/Update/ViewType.elm
       45 src/elm/Update/AppHeader.elm
       45 src/elm/Update/AppDrawer.elm
       44 src/elm/Todo/FormTypes.elm
@@ -108,6 +108,7 @@
       15 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm
       14 src/elm/View/Badge.elm
+      13 src/elm/ViewType.elm
       13 src/elm/Subscriptions/Firebase.elm
       12 src/elm/Todo/Store.elm
       12 src/elm/Ports.elm
@@ -115,13 +116,11 @@
       11 src/elm/LaunchBar/Messages.elm
       11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm
-      10 src/elm/Msg/ViewType.elm
       10 src/elm/LocalPref/Types.elm
       10 src/elm/AppDrawer/Types.elm
        9 src/elm/Subscriptions/AppDrawer.elm
        9 src/elm/Msg/GroupDoc.elm
        9 src/elm/Msg/ExclusiveMode.elm
-       8 src/elm/Types/ViewType.elm
        8 src/elm/Msg/CustomSync.elm
        8 src/elm/Msg/AppHeader.elm
        7 src/elm/X/String.elm

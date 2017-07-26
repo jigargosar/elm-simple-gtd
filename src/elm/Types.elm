@@ -14,7 +14,7 @@ import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
-import Types.ViewType exposing (ViewType(EntityListView))
+import ViewType exposing (ViewType(EntityListView))
 
 
 type alias AppConfig =

@@ -55,8 +55,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg a =
     { a
-        | switchToContextsView : msg
-        , setFocusInEntityWithEntityId : EntityId -> msg
+        | setFocusInEntityWithEntityId : EntityId -> msg
         , setFocusInEntityMsg : Entity -> msg
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg

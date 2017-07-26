@@ -1,10 +1,13 @@
-module Msg.ViewType exposing (..)
+module ViewType exposing (..)
 
 import Entity.Types exposing (EntityListViewType)
-import Types.ViewType exposing (ViewType)
+
+
+type ViewType
+    = EntityListView EntityListViewType
+    | SyncView
 
 
 type ViewTypeMsg
     = SwitchView ViewType
     | SwitchToEntityListView EntityListViewType
-    | SwitchToContextsView

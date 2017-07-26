@@ -3,10 +3,9 @@ module Update.ViewType exposing (Config, update)
 import Document.Types exposing (DocId)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Model.Selection
-import Msg.ViewType exposing (..)
 import Return
 import Set exposing (Set)
-import Types.ViewType exposing (..)
+import ViewType exposing (..)
 import X.Return exposing (..)
 
 
@@ -40,9 +39,6 @@ update config msg =
 
         SwitchToEntityListView listView ->
             listView |> EntityListView >> SwitchView >> update config
-
-        SwitchToContextsView ->
-            ContextsView |> SwitchToEntityListView >> update config
 
 
 setViewType viewType model =

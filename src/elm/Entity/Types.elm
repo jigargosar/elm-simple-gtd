@@ -26,6 +26,10 @@ type EntityListViewType
     | RecentView
 
 
+defaultViewType =
+    ContextsView
+
+
 type EntityUpdateAction
     = EUA_ToggleSelection
     | EUA_OnGotoEntity

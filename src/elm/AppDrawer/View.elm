@@ -8,7 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Toolkit.Operators exposing (..)
-import Types.ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (ViewType(EntityListView, SyncView))
 import View.Badge
 import X.Function.Infix exposing (..)
 import X.Html
@@ -73,7 +73,7 @@ entityGroupView config vm viewType =
             EntityListView vm.viewType == viewType
 
         fireSwitchView =
-            config.switchToEntityListView vm.viewType
+            config.switchToEntityListViewTypeMsg vm.viewType
 
         fireSmart =
             if isCurrentView then
@@ -174,7 +174,7 @@ switchViewItemSmall config iconName viewType title =
 onSetEntityListViewItem config iconName viewType title =
     li
         [ class ""
-        , onClick (config.switchToEntityListView viewType)
+        , onClick (config.switchToEntityListViewTypeMsg viewType)
         ]
         [ Mat.icon iconName
         , h5 [] [ text title ]

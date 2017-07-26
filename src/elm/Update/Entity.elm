@@ -22,7 +22,7 @@ import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
-import Types.ViewType exposing (ViewType)
+import ViewType exposing (ViewType)
 import X.Function.Infix exposing (..)
 import X.Record exposing (maybeOver)
 import X.Return exposing (..)
@@ -57,7 +57,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
-        , switchToEntityListView : EntityListViewType -> msg
+        , switchToEntityListViewTypeMsg : EntityListViewType -> msg
         , onStartEditingTodo : TodoDoc -> msg
         , currentViewEntityList : Lazy (List Entity)
         , setFocusInEntityWithEntityId : EntityId -> msg
@@ -116,7 +116,7 @@ onUpdateAction config entityId action =
                     in
                     entityId
                         |> toViewType model maybeEntityListViewType
-                        |> config.switchToEntityListView
+                        |> config.switchToEntityListViewTypeMsg
                         |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
@@ -126,7 +126,7 @@ onUpdateAction config entityId action =
                 |> List.Extra.find (Entity.hasId entityId)
                 |> Maybe.Extra.unpack
                     (\_ ->
-                        returnMsgAsCmd (config.switchToEntityListView ContextsView)
+                        returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
                             >> returnMsgAsCmd (config.setFocusInEntityWithEntityId entityId)
                     )
                     (config.setFocusInEntityMsg >> returnMsgAsCmd)

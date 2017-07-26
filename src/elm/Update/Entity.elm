@@ -64,10 +64,6 @@ type alias Config msg a =
     }
 
 
-maybeOverFocusInEntity__ =
-    maybeOver Model.focusInEntity__
-
-
 update :
     Config msg a
     -> EntityMsg

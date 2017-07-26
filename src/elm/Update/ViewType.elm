@@ -1,6 +1,6 @@
 module Update.ViewType exposing (Config, update)
 
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import Entity.Types exposing (EntityListViewType(ContextsView))
 import Model.Selection
 import Return

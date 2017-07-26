@@ -1,7 +1,6 @@
 module Todo exposing (..)
 
-import Document exposing (Revision)
-import Document.Types exposing (DocId, Document)
+import Document exposing (DocId, Document, Revision)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E

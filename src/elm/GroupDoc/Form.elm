@@ -1,6 +1,6 @@
 module GroupDoc.Form exposing (..)
 
-import Document.Types exposing (..)
+import Document exposing (..)
 import GroupDoc.Types exposing (..)
 
 

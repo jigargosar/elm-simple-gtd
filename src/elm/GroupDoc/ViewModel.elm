@@ -3,8 +3,7 @@ module GroupDoc.ViewModel exposing (..)
 import AppColors
 import Color
 import Context
-import Document
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types exposing (..)

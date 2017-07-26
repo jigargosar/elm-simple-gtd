@@ -1,7 +1,6 @@
 module Todo.GroupEditView exposing (..)
 
-import Document exposing (Document)
-import Document.Types exposing (DocId, getDocId)
+import Document exposing (DocId, Document, getDocId)
 import GroupDoc
 import Html exposing (..)
 import Menu

@@ -1,7 +1,7 @@
 module Store.Types exposing (..)
 
 import Dict exposing (Dict)
-import Document.Types exposing (DeviceId, DocId, Document)
+import Document exposing (DeviceId, DocId, Document)
 import Json.Decode exposing (Decoder)
 import Json.Encode as E
 import Random.Pcg exposing (Seed)

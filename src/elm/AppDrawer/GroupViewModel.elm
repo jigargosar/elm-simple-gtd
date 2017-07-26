@@ -7,8 +7,7 @@ import Color
 import Context
 import Dict
 import Dict.Extra
-import Document
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import Entity.Types exposing (EntityId(..), EntityListViewType)
 import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))

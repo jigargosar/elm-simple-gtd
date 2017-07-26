@@ -1,8 +1,7 @@
 port module Update.Todo.Internal exposing (..)
 
 import Context
-import Document
-import Document.Types exposing (DocId, getDocId)
+import Document exposing (DocId, getDocId)
 import DomPorts
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))

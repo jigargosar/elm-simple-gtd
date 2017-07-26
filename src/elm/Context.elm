@@ -1,6 +1,6 @@
 module Context exposing (..)
 
-import Document.Types exposing (DeviceId, DocId)
+import Document exposing (DeviceId, DocId)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Json.Encode as E

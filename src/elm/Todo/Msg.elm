@@ -1,6 +1,6 @@
 module Todo.Msg exposing (..)
 
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import Notification exposing (Response)
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model

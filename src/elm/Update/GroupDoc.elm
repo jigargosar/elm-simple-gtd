@@ -1,7 +1,6 @@
 module Update.GroupDoc exposing (Config, update)
 
-import Document
-import Document.Types exposing (getDocId)
+import Document exposing (getDocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)

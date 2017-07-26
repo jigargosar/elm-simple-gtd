@@ -1,6 +1,6 @@
 module GroupDoc.Types exposing (..)
 
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import Store.Types exposing (Store)
 
 
@@ -65,7 +65,7 @@ type alias Record =
 
 
 type alias GroupDoc =
-    Document.Types.Document Record
+    Document.Document Record
 
 
 type alias ContextDoc =

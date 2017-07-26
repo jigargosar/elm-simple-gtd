@@ -1,6 +1,6 @@
 module Todo.Types exposing (..)
 
-import Document.Types exposing (DocId)
+import Document exposing (DocId)
 import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
 import Store.Types exposing (Store)
 import Time exposing (Time)
@@ -20,7 +20,7 @@ type alias TodoRecord =
 
 
 type alias TodoDoc =
-    Document.Types.Document TodoRecord
+    Document.Document TodoRecord
 
 
 type TodoSchedule

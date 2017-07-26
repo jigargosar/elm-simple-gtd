@@ -7,7 +7,7 @@ module Todo.Form
         )
 
 import Date
-import Document.Types exposing (getDocId)
+import Document exposing (getDocId)
 import Menu
 import Time exposing (Time)
 import Time.Format

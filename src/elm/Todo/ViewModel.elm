@@ -1,8 +1,7 @@
 module Todo.ViewModel exposing (createTodoViewModel)
 
 import Date
-import Document
-import Document.Types exposing (getDocId)
+import Document exposing (getDocId)
 import Entity.Types
 import EntityId
 import GroupDoc

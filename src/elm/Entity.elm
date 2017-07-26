@@ -1,6 +1,6 @@
 module Entity exposing (..)
 
-import Document.Types exposing (getDocId)
+import Document exposing (getDocId)
 import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
 import List.Extra as List
 import Maybe.Extra as Maybe

@@ -1,6 +1,5 @@
 module Document exposing (..)
 
-import Document.Types exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -10,8 +9,39 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 
 
-getId =
+type alias DocId =
+    String
+
+
+type alias Revision =
+    String
+
+
+type alias DeviceId =
+    String
+
+
+type alias Deleted =
+    Bool
+
+
+type alias Document record =
+    { record
+        | id : DocId
+        , rev : Revision
+        , deleted : Deleted
+        , createdAt : Time
+        , modifiedAt : Time
+        , deviceId : DeviceId
+    }
+
+
+getDocId =
     .id
+
+
+getId =
+    getDocId
 
 
 hasId id =
@@ -20,18 +50,6 @@ hasId id =
 
 equalById doc1 doc2 =
     getId doc1 == getId doc2
-
-
-type alias Id =
-    Document.Types.DocId
-
-
-type alias Revision =
-    String
-
-
-type alias Deleted =
-    Bool
 
 
 type alias DocF record =
@@ -43,7 +61,7 @@ defaultRevision =
 
 
 type alias Model =
-    { id : Id
+    { id : DocId
     , rev : Revision
     , deleted : Bool
     , createdAt : Time
@@ -53,18 +71,7 @@ type alias Model =
 
 
 type alias IdSet =
-    Set Id
-
-
-type alias Document record =
-    { record
-        | id : Id
-        , rev : Revision
-        , deleted : Bool
-        , createdAt : Time
-        , modifiedAt : Time
-        , deviceId : DeviceId
-    }
+    Set DocId
 
 
 encodeModel doc =
@@ -85,7 +92,7 @@ encode encodeRecord doc =
 
 
 documentFieldsDecoder :
-    Decoder (Id -> Revision -> Time -> Time -> Bool -> DeviceId -> record)
+    Decoder (DocId -> Revision -> Time -> Time -> Bool -> DeviceId -> record)
     -> Decoder record
 documentFieldsDecoder =
     D.required "_id" D.string

@@ -1,20 +1,20 @@
-   10100 total
-     469 src/elm/Update/Todo/Internal.elm
-     308 src/elm/Todo.elm
-     291 src/elm/Store.elm
+   10068 total
+     468 src/elm/Update/Todo/Internal.elm
+     307 src/elm/Todo.elm
+     290 src/elm/Store.elm
      263 src/elm/Mat.elm
-     250 src/elm/AppDrawer/GroupViewModel.elm
+     249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     220 src/elm/GroupDoc/ViewModel.elm
+     219 src/elm/GroupDoc/ViewModel.elm
      216 src/elm/Msg.elm
      196 src/elm/Update/Entity.elm
-     188 src/elm/Todo/ViewModel.elm
+     187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      176 src/elm/Update/Subscription.elm
      174 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
-     157 src/elm/Update/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
+     156 src/elm/Update/GroupDoc.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
      153 src/elm/Update/LaunchBar.elm
@@ -27,13 +27,13 @@
      135 src/elm/Main.elm
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
+     131 src/elm/Document.elm
      129 src/elm/Routes.elm
-     124 src/elm/Document.elm
      117 src/elm/Update.elm
      111 src/elm/Todo/Form.elm
      110 src/elm/ViewModel.elm
      110 src/elm/Model/EntityTree.elm
-     106 src/elm/Todo/TimeTracker.elm
+     105 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
       96 src/elm/GroupDoc/Types.elm
@@ -58,7 +58,7 @@
       70 src/elm/Entity.elm
       69 src/elm/View/Overlays.elm
       67 src/elm/Types.elm
-      67 src/elm/Todo/GroupEditView.elm
+      66 src/elm/Todo/GroupEditView.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Model.elm
       55 src/elm/Project.elm
@@ -87,7 +87,6 @@
       37 src/elm/CommonMsg.elm
       36 src/elm/LocalPref.elm
       32 src/elm/Ports/Firebase.elm
-      30 src/elm/Document/Types.elm
       27 src/elm/Firebase.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm

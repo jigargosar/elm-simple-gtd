@@ -41,10 +41,11 @@
       "View.CustomSync",
       "View.Header",
       "View.Layout",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 20
+    "transitiveBackwardImportsCount": 21
   },
   "AppDrawer.GroupViewModel": {
     "fileName": "src/elm/AppDrawer/GroupViewModel.elm",
@@ -2584,6 +2585,7 @@
       "View.Header",
       "View.Layout",
       "View.MainMenu",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
       "ViewType",
@@ -2604,7 +2606,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 165,
+    "transitiveImportsCount": 166,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2665,9 +2667,10 @@
       "Todo.View",
       "View",
       "View.CustomSync",
-      "View.Header"
+      "View.Header",
+      "View.NewTodoFab"
     ],
-    "backwardImportsCount": 11,
+    "backwardImportsCount": 12,
     "transitiveBackwardImports": [
       "AppDrawer.View",
       "Entity.View",
@@ -2684,10 +2687,11 @@
       "View.CustomSync",
       "View.Header",
       "View.Layout",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 17
+    "transitiveBackwardImportsCount": 18
   },
   "Menu": {
     "fileName": "src/elm/Menu.elm",
@@ -7317,16 +7321,15 @@
     "imports": [
       "Html",
       "Mat",
-      "Material.Button",
       "Material.Options",
-      "Material.Tooltip",
       "Types",
       "View.Config",
       "View.Layout",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel"
     ],
-    "importsCount": 10,
+    "importsCount": 9,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -7437,6 +7440,7 @@
       "View.Header",
       "View.Layout",
       "View.MainMenu",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
       "ViewType",
@@ -7455,7 +7459,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 126,
+    "transitiveImportsCount": 127,
     "backwardImports": [
       "Main"
     ],
@@ -7991,6 +7995,53 @@
       "View.Overlays"
     ],
     "transitiveBackwardImportsCount": 3
+  },
+  "View.NewTodoFab": {
+    "fileName": "src/elm/View/NewTodoFab.elm",
+    "moduleName": "View.NewTodoFab",
+    "parentModuleName": "View",
+    "imports": [
+      "Html",
+      "Mat",
+      "Material.Button",
+      "Material.Options",
+      "Material.Tooltip"
+    ],
+    "importsCount": 5,
+    "transitiveImports": [
+      "AppColors",
+      "Color",
+      "Color.Mixing",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "Json.Decode",
+      "Json.Encode",
+      "Mat",
+      "Material",
+      "Material.Button",
+      "Material.Icon",
+      "Material.Options",
+      "Material.Tooltip",
+      "String.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix",
+      "X.Html",
+      "X.String"
+    ],
+    "transitiveImportsCount": 22,
+    "backwardImports": [
+      "View"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main",
+      "View"
+    ],
+    "transitiveBackwardImportsCount": 2
   },
   "View.Overlays": {
     "fileName": "src/elm/View/Overlays.elm",
@@ -8636,13 +8687,14 @@
       "View.Header",
       "View.Layout",
       "View.MainMenu",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
       "ViewType",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 87
+    "transitiveBackwardImportsCount": 88
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -8777,13 +8829,14 @@
       "View.Header",
       "View.Layout",
       "View.MainMenu",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
       "ViewType",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 94
+    "transitiveBackwardImportsCount": 95
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -8882,12 +8935,13 @@
       "View.Header",
       "View.Layout",
       "View.MainMenu",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
       "ViewType",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 65
+    "transitiveBackwardImportsCount": 66
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -9456,10 +9510,11 @@
       "View.CustomSync",
       "View.Header",
       "View.Layout",
+      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 18
+    "transitiveBackwardImportsCount": 19
   },
   "X.Time": {
     "fileName": "src/elm/X/Time.elm",

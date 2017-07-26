@@ -104,9 +104,6 @@ onUpdateAction :
     -> SubReturnF msg model
 onUpdateAction config entityId action =
     case action of
-        EUA_OnFocusIn ->
-            update config (EM_SetFocusInEntityWithEntityId entityId)
-
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)
 

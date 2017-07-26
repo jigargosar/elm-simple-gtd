@@ -59,8 +59,6 @@ type alias Config msg a =
         , switchToEntityListViewTypeMsg : EntityListViewType -> msg
         , onStartEditingTodo : TodoDoc -> msg
         , currentViewEntityList : Lazy (List Entity)
-        , setFocusInEntityWithEntityId : EntityId -> msg
-        , setFocusInEntityMsg : Entity -> msg
     }
 
 
@@ -130,7 +128,7 @@ onUpdateAction config entityId action =
                 |> Maybe.Extra.unpack
                     (\_ ->
                         returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
-                            >> returnMsgAsCmd (config.setFocusInEntityWithEntityId entityId)
+                            >> update config (EM_SetFocusInEntityWithEntityId entityId)
                     )
                     (EM_SetFocusInEntity >> update config)
 

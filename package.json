@@ -80,7 +80,7 @@
   },
   "config": {
     "pre-git": {
-      "commit-msg": "simple",
+      "commit-msg": null,
       "pre-commit": [
         "run preCommit"
       ],

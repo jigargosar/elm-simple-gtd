@@ -5,11 +5,6 @@ import Toolkit.Operators exposing (..)
 import X.Record exposing (..)
 
 
---import Types
---commonMsg : CommonMsg.Helper AppMsg
--- Model Lens
-
-
 now =
     fieldLens .now (\s b -> { b | now = s })
 

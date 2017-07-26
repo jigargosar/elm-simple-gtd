@@ -2,7 +2,7 @@ module Todo.Types exposing (..)
 
 import Document exposing (DocId)
 import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
-import Store.Types exposing (Store)
+import Store exposing (Store)
 import Time exposing (Time)
 
 

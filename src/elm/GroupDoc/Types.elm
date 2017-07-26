@@ -1,7 +1,7 @@
 module GroupDoc.Types exposing (..)
 
 import Document exposing (DocId)
-import Store.Types exposing (Store)
+import Store exposing (Store)
 
 
 type GroupDocType

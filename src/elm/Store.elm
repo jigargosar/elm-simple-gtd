@@ -18,21 +18,20 @@ port module Store
         , upsertOnPouchDBChange
         )
 
-import Dict
+import Dict exposing (Dict)
 import Document exposing (DocId, Document)
 import Firebase.Types exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import List.Extra as List
-import Random.Pcg as Random
+import Random.Pcg
 import Set exposing (Set)
-import Store.Types
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Debug
-import X.Random as Random
+import X.Random
 import X.Record as Record exposing (get, over, overT2)
 
 
@@ -58,7 +57,13 @@ decodeList decoder =
 
 
 type alias Store x =
-    Store.Types.Store x
+    { seed : Random.Pcg.Seed
+    , dict : Dict DocId (Document x)
+    , otherFieldsEncoder : Document x -> List ( String, E.Value )
+    , decoder : Decoder (Document x)
+    , name : String
+    , deviceId : DeviceId
+    }
 
 
 dict =
@@ -75,9 +80,9 @@ generator :
     -> Decoder (Document x)
     -> DeviceId
     -> List E.Value
-    -> Random.Generator (Store x)
+    -> Random.Pcg.Generator (Store x)
 generator name otherFieldsEncoder decoder deviceId encodedList =
-    Random.mapWithIndependentSeed
+    X.Random.mapWithIndependentSeed
         (\seed ->
             { seed = seed
             , dict =
@@ -213,15 +218,15 @@ updateExternalHelp newDoc store =
         ?= add
 
 
-generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
+generate : Random.Pcg.Generator (Document x) -> Store x -> ( Document x, Store x )
 generate generator m =
-    Random.step generator (getSeed m)
+    Random.Pcg.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
 
 
 insert : (DeviceId -> DocId -> Document x) -> Store x -> ( Document x, Store x )
 insert constructor store =
-    Random.mapWithIdGenerator (constructor store.deviceId)
+    X.Random.mapWithIdGenerator (constructor store.deviceId)
         |> (generate # store)
         |> (\( doc, store ) ->
                 ( doc, insertDocInDict doc store )

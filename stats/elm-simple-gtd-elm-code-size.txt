@@ -1,7 +1,7 @@
-   10068 total
+   10056 total
      468 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
-     290 src/elm/Store.elm
+     295 src/elm/Store.elm
      263 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
@@ -102,7 +102,6 @@
       19 src/elm/RegexHelper.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      17 src/elm/Store/Types.elm
       16 src/elm/Subscriptions.elm
       15 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm

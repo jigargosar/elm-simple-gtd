@@ -3,14 +3,12 @@ module Update.Entity exposing (Config, update)
 import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (..)
-import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditProjectForm)
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
 import Lazy exposing (Lazy)
 import List.Extra
 import Maybe.Extra
 import Model
-import Model.GroupDocStore
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.Selection
 import Model.Stores
@@ -24,7 +22,6 @@ import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import ViewType exposing (ViewType)
 import X.Function.Infix exposing (..)
-import X.Record exposing (maybeOver)
 import X.Return exposing (..)
 
 

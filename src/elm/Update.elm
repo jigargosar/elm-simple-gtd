@@ -9,7 +9,6 @@ import Ports
 import Types exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
-import Update.Config
 import Update.CustomSync
 import Update.Entity
 import Update.ExclusiveMode
@@ -28,6 +27,10 @@ update :
     -> AppMsg
     -> ReturnF AppMsg AppModel
 update config msg =
+    let
+        onPersistLocalPref =
+            effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
+    in
     case msg of
         OnMdl msg_ ->
             andThen (Material.update config.onMdl msg_)
@@ -83,11 +86,3 @@ update config msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
-
-
-
---onPersistLocalPref : ReturnF AppMsg AppModel
-
-
-onPersistLocalPref =
-    effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)

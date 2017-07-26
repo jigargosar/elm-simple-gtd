@@ -1,22 +1,11 @@
 module Update.Config exposing (..)
 
-import LaunchBar.Messages
 import Lazy
-import Material
 import Model.EntityList
 import Msg exposing (AppMsg)
-import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import TodoMsg
 import Types exposing (AppModel)
-import Update.AppHeader
-import Update.CustomSync
-import Update.Entity
-import Update.ExclusiveMode
-import Update.Firebase
-import Update.LaunchBar
-import Update.Subscription
-import Update.Todo
 import Update.Types exposing (UpdateConfig)
 
 

@@ -1,7 +1,6 @@
 module Model.Internal exposing (..)
 
 import Context
-import Entity.Types exposing (GroupEntityType(ContextEntity), createContextEntity)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import Json.Encode as E

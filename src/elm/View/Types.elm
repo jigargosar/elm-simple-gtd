@@ -10,14 +10,10 @@ import LaunchBar.Messages
 import Material
 import Menu
 import Menu.Types
-import Msg
-import Msg.GroupDoc
 import Todo.FormTypes
-import Todo.Msg
 import Todo.Notification.Model
 import Todo.Types
 import ViewType
-import X.Function.Infix exposing (..)
 import X.Keyboard
 
 

@@ -202,12 +202,11 @@
       "Update",
       "Update.AppDrawer",
       "Update.Config",
-      "Update.Types",
       "View",
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 12
   },
   "AppDrawer.Types": {
     "fileName": "src/elm/AppDrawer/Types.elm",
@@ -222,10 +221,9 @@
       "Msg",
       "Subscriptions.AppDrawer",
       "Update.AppDrawer",
-      "View.Config",
       "View.Types"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
@@ -235,13 +233,12 @@
       "Update",
       "Update.AppDrawer",
       "Update.Config",
-      "Update.Types",
       "View",
       "View.Config",
       "View.Types",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 12
   },
   "AppDrawer.View": {
     "fileName": "src/elm/AppDrawer/View.elm",
@@ -383,12 +380,9 @@
       "TodoMsg",
       "Update",
       "Update.Config",
-      "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 6
   },
   "CommonMsg.Types": {
     "fileName": "src/elm/CommonMsg/Types.elm",
@@ -410,12 +404,9 @@
       "TodoMsg",
       "Update",
       "Update.Config",
-      "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 7
   },
   "Context": {
     "fileName": "src/elm/Context.elm",
@@ -571,10 +562,9 @@
       "Update.LaunchBar",
       "Update.Todo.Internal",
       "Update.ViewType",
-      "View.Config",
       "View.Types"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 28,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -684,11 +674,9 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 11
   },
   "Entity": {
     "fileName": "src/elm/Entity.elm",
@@ -837,11 +825,10 @@
       "Model.EntityTree",
       "Update",
       "Update.Config",
-      "Update.Types",
       "View",
       "View.Layout"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 8
   },
   "Entity.Types": {
     "fileName": "src/elm/Entity/Types.elm",
@@ -898,24 +885,20 @@
       "GroupDoc.ViewModel",
       "Model.EntityTree",
       "Model.HasFocusInEntity",
-      "Model.Internal",
       "Model.Stores",
       "Model.ViewType",
       "Msg",
       "Routes",
       "Todo.ViewModel",
-      "Types",
       "Update.Entity",
       "Update.LaunchBar",
       "Update.Subscription",
       "Update.Todo.Internal",
-      "Update.ViewType",
-      "View.Config",
       "View.Types",
       "ViewModel",
       "ViewType"
     ],
-    "backwardImportsCount": 25,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -1196,11 +1179,10 @@
       "Update.LaunchBar",
       "Update.Subscription",
       "Update.Todo.Internal",
-      "View.Config",
       "View.Overlays",
       "View.Types"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.View",
@@ -1399,11 +1381,10 @@
       "Todo.Store",
       "Types",
       "Update.Firebase",
-      "View.Config",
       "View.GetStarted",
       "View.Types"
     ],
-    "backwardImportsCount": 14,
+    "backwardImportsCount": 13,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -1691,19 +1672,15 @@
     ],
     "transitiveImportsCount": 22,
     "backwardImports": [
-      "Update.Entity",
       "Update.GroupDoc"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
       "Update",
-      "Update.Config",
-      "Update.Entity",
-      "Update.GroupDoc",
-      "Update.Types"
+      "Update.GroupDoc"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 3
   },
   "GroupDoc.FormView": {
     "fileName": "src/elm/GroupDoc/FormView.elm",
@@ -1833,11 +1810,10 @@
       "Update.GroupDoc",
       "Update.LaunchBar",
       "Update.Subscription",
-      "View.Config",
       "View.Types",
       "ViewModel"
     ],
-    "backwardImportsCount": 23,
+    "backwardImportsCount": 22,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -2200,13 +2176,11 @@
     "backwardImports": [
       "LaunchBar.View",
       "Msg",
-      "Update.Config",
       "Update.LaunchBar",
       "Update.Types",
-      "View.Config",
       "View.Types"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "LaunchBar.View",
       "Main",
@@ -2475,12 +2449,10 @@
       "Types",
       "Update",
       "Update.Config",
-      "Update.Types",
       "View",
-      "View.Config",
-      "X.Return"
+      "View.Config"
     ],
-    "importsCount": 15,
+    "importsCount": 13,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -2790,11 +2762,10 @@
       "Todo.FormTypes",
       "Todo.GroupEditView",
       "Update.AppHeader",
-      "View.Config",
       "View.MainMenu",
       "View.Types"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.View",
@@ -2854,10 +2825,9 @@
       "Msg.AppHeader",
       "Todo.FormTypes",
       "Todo.GroupEditView",
-      "View.Config",
       "View.Types"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.View",
@@ -3006,10 +2976,9 @@
       "Model.ViewType",
       "Toolkit.Operators",
       "Tuple2",
-      "X.List",
-      "X.Record"
+      "X.List"
     ],
-    "importsCount": 11,
+    "importsCount": 10,
     "transitiveImports": [
       "Char",
       "Context",
@@ -3072,17 +3041,15 @@
     "transitiveImportsCount": 57,
     "backwardImports": [
       "Update",
-      "Update.Config",
-      "Update.Types"
+      "Update.Config"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
-      "Update.Config",
-      "Update.Types"
+      "Update.Config"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 3
   },
   "Model.EntityTree": {
     "fileName": "src/elm/Model/EntityTree.elm",
@@ -3170,11 +3137,10 @@
       "Model.EntityList",
       "Update",
       "Update.Config",
-      "Update.Types",
       "View",
       "View.Layout"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 7
   },
   "Model.GroupDocStore": {
     "fileName": "src/elm/Model/GroupDocStore.elm",
@@ -3227,12 +3193,11 @@
       "Model.EntityTree",
       "Model.Stores",
       "Todo.GroupEditView",
-      "Update.Entity",
       "Update.GroupDoc",
       "Update.LaunchBar",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 8,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.View",
@@ -3261,15 +3226,9 @@
     "parentModuleName": "Model",
     "imports": [
       "Context",
-      "Entity.Types",
-      "List.Extra",
-      "Maybe.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "X.Function",
-      "X.Function.Infix"
+      "Entity.Types"
     ],
-    "importsCount": 8,
+    "importsCount": 2,
     "transitiveImports": [
       "Char",
       "Context",
@@ -3288,7 +3247,6 @@
       "Keyboard",
       "Keyboard.Extra",
       "List.Extra",
-      "Maybe.Extra",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3308,7 +3266,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 36,
+    "transitiveImportsCount": 35,
     "backwardImports": [
       "Model.Internal",
       "Types",
@@ -3338,7 +3296,6 @@
     "parentModuleName": "Model",
     "imports": [
       "Context",
-      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase",
       "Json.Encode",
@@ -3356,7 +3313,7 @@
       "Types",
       "X.Random"
     ],
-    "importsCount": 18,
+    "importsCount": 17,
     "transitiveImports": [
       "AppDrawer.Model",
       "Char",
@@ -3786,22 +3743,17 @@
       "TodoMsg",
       "Update",
       "Update.Config",
-      "Update.Types",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Main",
       "TodoMsg",
       "Update",
       "Update.Config",
-      "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 5
   },
   "Msg.AppHeader": {
     "fileName": "src/elm/Msg/AppHeader.elm",
@@ -3828,11 +3780,9 @@
       "Update.AppHeader",
       "Update.Config",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 8
   },
   "Msg.CustomSync": {
     "fileName": "src/elm/Msg/CustomSync.elm",
@@ -3901,11 +3851,9 @@
       "Update.Config",
       "Update.CustomSync",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 8
   },
   "Msg.ExclusiveMode": {
     "fileName": "src/elm/Msg/ExclusiveMode.elm",
@@ -3974,11 +3922,9 @@
       "Update.Config",
       "Update.ExclusiveMode",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 8
   },
   "Msg.GroupDoc": {
     "fileName": "src/elm/Msg/GroupDoc.elm",
@@ -4016,10 +3962,9 @@
     "backwardImports": [
       "Msg",
       "Update.GroupDoc",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "Main",
       "Msg",
@@ -4027,12 +3972,9 @@
       "Update",
       "Update.Config",
       "Update.GroupDoc",
-      "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 7
   },
   "Msg.Subscription": {
     "fileName": "src/elm/Msg/Subscription.elm",
@@ -4063,11 +4005,9 @@
       "Update.Config",
       "Update.Subscription",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 11
+    "transitiveBackwardImportsCount": 9
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -4095,11 +4035,9 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 14
+    "transitiveBackwardImportsCount": 12
   },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
@@ -4888,11 +4826,10 @@
       "TodoMsg",
       "Update.ExclusiveMode",
       "Update.Todo.Internal",
-      "View.Config",
       "View.Overlays",
       "View.Types"
     ],
-    "backwardImportsCount": 9,
+    "backwardImportsCount": 8,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.View",
@@ -5136,10 +5073,9 @@
       "Update.Config",
       "Update.Todo",
       "Update.Types",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "backwardImportsCount": 8,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "Main",
       "Msg",
@@ -5149,11 +5085,9 @@
       "Update.Config",
       "Update.Todo",
       "Update.Types",
-      "View",
-      "View.Config",
-      "View.Types"
+      "View.Config"
     ],
-    "transitiveBackwardImportsCount": 11
+    "transitiveBackwardImportsCount": 9
   },
   "Todo.Notification.Model": {
     "fileName": "src/elm/Todo/Notification/Model.elm",
@@ -5208,10 +5142,9 @@
       "Todo.Msg",
       "Todo.Notification.View",
       "Update.Todo.Internal",
-      "View.Config",
       "View.Types"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Main",
       "Model.Internal",
@@ -5689,11 +5622,10 @@
       "Update.Firebase",
       "Update.Subscription",
       "Update.Todo.Internal",
-      "View.Config",
       "View.Types",
       "ViewModel"
     ],
-    "backwardImportsCount": 20,
+    "backwardImportsCount": 19,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -5967,17 +5899,14 @@
     ],
     "transitiveImportsCount": 67,
     "backwardImports": [
-      "Update.Config",
-      "Update.Types"
+      "Update.Config"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
-      "Update",
-      "Update.Config",
-      "Update.Types"
+      "Update.Config"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 2
   },
   "Types": {
     "fileName": "src/elm/Types.elm",
@@ -5986,7 +5915,6 @@
     "imports": [
       "AppDrawer.Model",
       "Document",
-      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Firebase.Types",
@@ -6000,7 +5928,7 @@
       "Todo.Types",
       "ViewType"
     ],
-    "importsCount": 15,
+    "importsCount": 14,
     "transitiveImports": [
       "AppDrawer.Model",
       "Char",
@@ -6062,22 +5990,20 @@
       "Model.Internal",
       "Update",
       "Update.Config",
-      "Update.Types",
       "View",
       "ViewModel"
     ],
-    "backwardImportsCount": 8,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
       "Model.Internal",
       "Update",
       "Update.Config",
-      "Update.Types",
       "View",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 7
   },
   "Update": {
     "fileName": "src/elm/Update.elm",
@@ -6093,7 +6019,6 @@
       "Types",
       "Update.AppDrawer",
       "Update.AppHeader",
-      "Update.Config",
       "Update.CustomSync",
       "Update.Entity",
       "Update.ExclusiveMode",
@@ -6106,7 +6031,7 @@
       "Update.ViewType",
       "X.Return"
     ],
-    "importsCount": 21,
+    "importsCount": 20,
     "transitiveImports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
@@ -6194,14 +6119,12 @@
       "Todo.Schedule",
       "Todo.TimeTracker",
       "Todo.Types",
-      "TodoMsg",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
       "Types",
       "Update.AppDrawer",
       "Update.AppHeader",
-      "Update.Config",
       "Update.CustomSync",
       "Update.Entity",
       "Update.ExclusiveMode",
@@ -6228,7 +6151,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 119,
+    "transitiveImportsCount": 117,
     "backwardImports": [
       "Main"
     ],
@@ -6374,10 +6297,9 @@
     "transitiveImportsCount": 47,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -6391,26 +6313,15 @@
     "moduleName": "Update.Config",
     "parentModuleName": "Update",
     "imports": [
-      "LaunchBar.Messages",
       "Lazy",
-      "Material",
       "Model.EntityList",
       "Msg",
-      "Time",
       "Todo.Msg",
       "TodoMsg",
       "Types",
-      "Update.AppHeader",
-      "Update.CustomSync",
-      "Update.Entity",
-      "Update.ExclusiveMode",
-      "Update.Firebase",
-      "Update.LaunchBar",
-      "Update.Subscription",
-      "Update.Todo",
       "Update.Types"
     ],
-    "importsCount": 18,
+    "importsCount": 7,
     "transitiveImports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
@@ -6436,7 +6347,6 @@
       "Firebase.User",
       "Fuzzy",
       "GroupDoc",
-      "GroupDoc.Form",
       "GroupDoc.Types",
       "Html",
       "Html.Attributes",
@@ -6526,17 +6436,15 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 113,
+    "transitiveImportsCount": 112,
     "backwardImports": [
-      "Main",
-      "Update"
+      "Main"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
-      "Main",
-      "Update"
+      "Main"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 1
   },
   "Update.CustomSync": {
     "fileName": "src/elm/Update/CustomSync.elm",
@@ -6600,10 +6508,9 @@
     "transitiveImportsCount": 46,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -6620,14 +6527,12 @@
       "Entity",
       "Entity.Types",
       "ExclusiveMode.Types",
-      "GroupDoc.Form",
       "GroupDoc.Types",
       "Keyboard.Extra",
       "Lazy",
       "List.Extra",
       "Maybe.Extra",
       "Model",
-      "Model.GroupDocStore",
       "Model.HasFocusInEntity",
       "Model.Selection",
       "Model.Stores",
@@ -6641,10 +6546,9 @@
       "Toolkit.Operators",
       "ViewType",
       "X.Function.Infix",
-      "X.Record",
       "X.Return"
     ],
-    "importsCount": 26,
+    "importsCount": 23,
     "transitiveImports": [
       "Char",
       "Context",
@@ -6656,7 +6560,6 @@
       "Firebase.Types",
       "Fuzzy",
       "GroupDoc",
-      "GroupDoc.Form",
       "GroupDoc.Types",
       "Html",
       "Html.Attributes",
@@ -6708,13 +6611,12 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 61,
+    "transitiveImportsCount": 60,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -6788,10 +6690,9 @@
     "transitiveImportsCount": 46,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -6882,10 +6783,9 @@
     "transitiveImportsCount": 54,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -7054,10 +6954,9 @@
     "transitiveImportsCount": 51,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -7145,10 +7044,9 @@
     "transitiveImportsCount": 51,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -7245,10 +7143,9 @@
     "transitiveImportsCount": 69,
     "backwardImports": [
       "Update",
-      "Update.Config",
       "Update.Types"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -7268,8 +7165,6 @@
       "Entity.Types",
       "ExclusiveMode.Types",
       "Lazy",
-      "List.Extra",
-      "Maybe.Extra",
       "Model",
       "Model.HasFocusInEntity",
       "Model.Todo",
@@ -7294,7 +7189,7 @@
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 31,
+    "importsCount": 29,
     "transitiveImports": [
       "Char",
       "Context",
@@ -7384,14 +7279,9 @@
     "parentModuleName": "Update",
     "imports": [
       "LaunchBar.Messages",
-      "Lazy",
       "Material",
-      "Model.EntityList",
-      "Msg",
       "Time",
       "Todo.Msg",
-      "TodoMsg",
-      "Types",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.Entity",
@@ -7402,14 +7292,10 @@
       "Update.Todo",
       "Update.ViewType"
     ],
-    "importsCount": 18,
+    "importsCount": 13,
     "transitiveImports": [
-      "AppDrawer.Model",
-      "AppDrawer.Types",
       "AppUrl",
       "Char",
-      "CommonMsg",
-      "CommonMsg.Types",
       "Context",
       "Date",
       "Date.Extra",
@@ -7418,7 +7304,6 @@
       "Document",
       "DomPorts",
       "Entity",
-      "Entity.Tree",
       "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase",
@@ -7428,7 +7313,6 @@
       "Firebase.User",
       "Fuzzy",
       "GroupDoc",
-      "GroupDoc.Form",
       "GroupDoc.Types",
       "Html",
       "Html.Attributes",
@@ -7450,19 +7334,15 @@
       "Menu",
       "Menu.Types",
       "Model",
-      "Model.EntityList",
-      "Model.EntityTree",
       "Model.GroupDocStore",
       "Model.HasFocusInEntity",
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
       "Model.ViewType",
-      "Msg",
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Msg.GroupDoc",
       "Msg.Subscription",
       "Navigation",
       "Notification",
@@ -7487,11 +7367,9 @@
       "Todo.Schedule",
       "Todo.TimeTracker",
       "Todo.Types",
-      "TodoMsg",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
-      "Types",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.Entity",
@@ -7517,13 +7395,12 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 112,
+    "transitiveImportsCount": 100,
     "backwardImports": [
-      "Main",
       "Update",
       "Update.Config"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Update",
@@ -7537,14 +7414,13 @@
     "parentModuleName": "Update",
     "imports": [
       "Document",
-      "Entity.Types",
       "Model.Selection",
       "Return",
       "Set",
       "ViewType",
       "X.Return"
     ],
-    "importsCount": 7,
+    "importsCount": 6,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -7623,8 +7499,6 @@
       "Char",
       "Color",
       "Color.Mixing",
-      "CommonMsg",
-      "CommonMsg.Types",
       "Context",
       "Date",
       "Date.Extra",
@@ -7632,7 +7506,6 @@
       "Dict",
       "Dict.Extra",
       "Document",
-      "DomPorts",
       "Entity",
       "Entity.Tree",
       "Entity.Types",
@@ -7681,13 +7554,6 @@
       "Model.Stores",
       "Model.Todo",
       "Model.ViewType",
-      "Msg",
-      "Msg.AppHeader",
-      "Msg.CustomSync",
-      "Msg.ExclusiveMode",
-      "Msg.GroupDoc",
-      "Msg.Subscription",
-      "Notification",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -7702,7 +7568,6 @@
       "Todo.FormTypes",
       "Todo.GroupEditView",
       "Todo.ItemView",
-      "Todo.Msg",
       "Todo.Notification.Model",
       "Todo.Notification.Types",
       "Todo.Notification.View",
@@ -7742,7 +7607,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 127,
+    "transitiveImportsCount": 116,
     "backwardImports": [
       "Main"
     ],
@@ -7789,28 +7654,13 @@
     "moduleName": "View.Config",
     "parentModuleName": "View",
     "imports": [
-      "AppDrawer.Types",
-      "Document",
-      "Entity.Types",
-      "ExclusiveMode.Types",
-      "Firebase.Types",
-      "GroupDoc.Types",
-      "LaunchBar.Messages",
-      "Material",
-      "Menu",
-      "Menu.Types",
       "Msg",
       "Msg.GroupDoc",
-      "Todo.FormTypes",
       "Todo.Msg",
-      "Todo.Notification.Model",
-      "Todo.Types",
       "View.Types",
-      "ViewType",
-      "X.Function.Infix",
-      "X.Keyboard"
+      "X.Function.Infix"
     ],
-    "importsCount": 20,
+    "importsCount": 5,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -8447,28 +8297,21 @@
       "Material",
       "Menu",
       "Menu.Types",
-      "Msg",
-      "Msg.GroupDoc",
       "Todo.FormTypes",
-      "Todo.Msg",
       "Todo.Notification.Model",
       "Todo.Types",
       "ViewType",
-      "X.Function.Infix",
       "X.Keyboard"
     ],
-    "importsCount": 19,
+    "importsCount": 15,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
-      "CommonMsg",
-      "CommonMsg.Types",
       "Context",
       "Date",
       "Date.Extra",
       "Dict",
       "Document",
-      "DomPorts",
       "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.Types",
@@ -8492,13 +8335,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Msg",
-      "Msg.AppHeader",
-      "Msg.CustomSync",
-      "Msg.ExclusiveMode",
-      "Msg.GroupDoc",
-      "Msg.Subscription",
-      "Notification",
       "Project",
       "Random.Pcg",
       "Return",
@@ -8507,7 +8343,6 @@
       "Time",
       "Todo",
       "Todo.FormTypes",
-      "Todo.Msg",
       "Todo.Notification.Model",
       "Todo.Notification.Types",
       "Todo.Schedule",
@@ -8527,7 +8362,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "View",
       "View.Config"
@@ -8713,12 +8548,11 @@
       "Types",
       "Update.Entity",
       "Update.ViewType",
-      "View.Config",
       "View.Layout",
       "View.Types",
       "ViewModel"
     ],
-    "backwardImportsCount": 12,
+    "backwardImportsCount": 11,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -8992,7 +8826,6 @@
       "GroupDoc.ViewModel",
       "Mat",
       "Menu",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Project",
       "Todo",
@@ -9002,7 +8835,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 18,
+    "backwardImportsCount": 17,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -9118,7 +8951,6 @@
       "LocalPref",
       "Mat",
       "Menu",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Msg",
       "Routes",
@@ -9135,12 +8967,11 @@
       "View.Badge",
       "View.Config",
       "View.Header",
-      "View.Types",
       "ViewModel",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 33,
+    "backwardImportsCount": 31,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -9389,12 +9220,11 @@
       "Todo.ItemView",
       "Todo.View",
       "Todo.ViewModel",
-      "View.Config",
       "View.CustomSync",
       "View.GetStarted",
       "View.Types"
     ],
-    "backwardImportsCount": 14,
+    "backwardImportsCount": 13,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -9737,21 +9567,19 @@
       "Firebase.SignIn",
       "GroupDoc",
       "Model",
-      "Model.EntityList",
       "Model.GroupDocStore",
       "Model.Todo",
       "Store",
       "Todo",
       "Todo.Form",
       "Update.AppDrawer",
-      "Update.Entity",
       "Update.ExclusiveMode",
       "Update.Firebase",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 15,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -9861,7 +9689,6 @@
     ],
     "transitiveImportsCount": 9,
     "backwardImports": [
-      "Main",
       "Update",
       "Update.AppHeader",
       "Update.CustomSync",
@@ -9875,7 +9702,7 @@
       "Update.Todo.Internal",
       "Update.ViewType"
     ],
-    "backwardImportsCount": 13,
+    "backwardImportsCount": 12,
     "transitiveBackwardImports": [
       "Main",
       "Update",

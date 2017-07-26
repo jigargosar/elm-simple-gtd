@@ -2,7 +2,6 @@ module Types exposing (AppConfig, AppModel, AppModelOtherFields)
 
 import AppDrawer.Model
 import Document exposing (DocId)
-import Entity.Types exposing (Entity, EntityListViewType(ContextsView))
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)

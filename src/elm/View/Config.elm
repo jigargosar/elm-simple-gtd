@@ -1,25 +1,10 @@
 module View.Config exposing (..)
 
-import AppDrawer.Types
-import Document
-import Entity.Types
-import ExclusiveMode.Types
-import Firebase.Types
-import GroupDoc.Types
-import LaunchBar.Messages
-import Material
-import Menu
-import Menu.Types
 import Msg
 import Msg.GroupDoc
-import Todo.FormTypes
 import Todo.Msg
-import Todo.Notification.Model
-import Todo.Types
 import View.Types exposing (ViewConfig)
-import ViewType
 import X.Function.Infix exposing (..)
-import X.Keyboard
 
 
 viewConfig : ViewConfig Msg.AppMsg

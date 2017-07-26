@@ -1,14 +1,9 @@
 module Update.Types exposing (..)
 
 import LaunchBar.Messages
-import Lazy
 import Material
-import Model.EntityList
-import Msg exposing (AppMsg)
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
-import TodoMsg
-import Types exposing (AppModel)
 import Update.AppHeader
 import Update.CustomSync
 import Update.Entity

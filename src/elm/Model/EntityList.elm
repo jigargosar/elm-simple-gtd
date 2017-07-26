@@ -10,7 +10,6 @@ import Model.ViewType
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.List
-import X.Record exposing (maybeSet, maybeSetIn)
 
 
 createEntityListForCurrentView model =

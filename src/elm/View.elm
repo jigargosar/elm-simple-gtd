@@ -27,6 +27,7 @@ init config model =
     div [ cs "mdl-typography--body-1" ] children
 
 
+newTodoFab : View.Config.ViewConfig msg -> AppModel -> Html msg
 newTodoFab config m =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach config.onMdl [ 0 ] ]

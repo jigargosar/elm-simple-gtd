@@ -26,7 +26,7 @@ appLayoutView config appVM model =
 
         mainViewContainer =
             div [ id "main-view-container" ]
-                [ case Model.ViewType.getMainViewType model of
+                [ case Model.ViewType.getViewType model of
                     EntityListView viewType ->
                         Entity.View.list config appVM viewType model
 

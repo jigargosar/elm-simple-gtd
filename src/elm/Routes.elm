@@ -19,7 +19,7 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case Model.ViewType.getMainViewType model of
+    case Model.ViewType.getViewType model of
         EntityListView viewType ->
             getPathFromViewType viewType
 

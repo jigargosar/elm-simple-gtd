@@ -13,7 +13,7 @@ maybeGetEntityListViewType model =
             Nothing
 
 
-getMainViewType =
+getViewType =
     .viewType
 
 

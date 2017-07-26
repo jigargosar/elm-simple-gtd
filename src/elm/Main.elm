@@ -4,7 +4,6 @@ module Main exposing (main)
 
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
-import Return
 import RouteUrl
 import Routes
 import Subscriptions
@@ -16,10 +15,11 @@ import Update
 import Update.Config exposing (UpdateConfig)
 import View
 import View.Config
+import X.Return exposing (..)
 
 
 type alias AppReturn =
-    Return.Return AppMsg AppModel
+    Return AppMsg AppModel
 
 
 subscriptions : AppModel -> Sub Msg.AppMsg
@@ -40,7 +40,7 @@ init =
 
 update : AppMsg -> AppModel -> AppReturn
 update msg model =
-    Return.singleton model |> Update.update (Update.Config.updateConfig model) msg
+    pure model |> Update.update (Update.Config.updateConfig model) msg
 
 
 main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg

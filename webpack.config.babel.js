@@ -110,7 +110,7 @@ export default {
                         options: {
                             // pathToMake:"./elm-make.sh",
                             verbose: true,
-                            warn: true,
+                            warn: false,
                             debug: false,
                             cwd: path.resolve(__dirname),
                         },

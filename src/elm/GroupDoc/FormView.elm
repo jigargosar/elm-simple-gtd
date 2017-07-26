@@ -32,7 +32,7 @@ init config form =
             config.onEntityUpdateMsg entityId
 
         fireNameChanged =
-            config.onGD_UpdateFormName form
+            config.updateGroupDocFromNameMsg form
 
         fireSaveForm =
             config.onSaveExclusiveModeForm

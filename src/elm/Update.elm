@@ -4,12 +4,9 @@ import CommonMsg
 import LaunchBar.Messages
 import LocalPref
 import Material
-import Model
 import Model.EntityList
-import Model.Stores
 import Msg exposing (..)
 import Ports
-import Return
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Types exposing (..)
@@ -113,5 +110,6 @@ update config msg =
                 >> onPersistLocalPref
 
 
+onPersistLocalPref : ReturnF AppMsg AppModel
 onPersistLocalPref =
     effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)

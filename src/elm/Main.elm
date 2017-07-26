@@ -1,9 +1,11 @@
 module Main exposing (main)
 
+import Html exposing (Html)
 import Lazy
 import Model.EntityList
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
+import Msg.GroupDoc
 import Return
 import RouteUrl
 import Routes
@@ -73,6 +75,7 @@ update msg model =
     Return.singleton model |> Update.update (updateConfig model) msg
 
 
+viewConfig : View.Config AppMsg
 viewConfig =
     { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> Msg.OnTodoMsg
     , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> Msg.OnTodoMsg
@@ -113,12 +116,14 @@ viewConfig =
     , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> Msg.OnTodoMsg
     , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> Msg.OnTodoMsg
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
-    , onGD_UpdateFormName = Msg.onGD_UpdateFormName
+    , updateGroupDocFromNameMsg =
+        Msg.GroupDoc.updateGroupDocFromNameMsg >>> Msg.OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
     , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
     }
 
 
+view : AppModel -> Html AppMsg
 view model =
     View.init viewConfig model
 

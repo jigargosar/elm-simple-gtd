@@ -74,7 +74,6 @@ export default {
     resolve: {
         alias: {
             elm: path.resolve(__dirname, 'src/elm/'),
-            bower_components: path.resolve(__dirname, 'bower_components/'),
         },
     },
     context: path.resolve(__dirname, "src/web/"),
@@ -111,7 +110,7 @@ export default {
                         options: {
                             // pathToMake:"./elm-make.sh",
                             verbose: true,
-                            warn: false,
+                            warn: true,
                             debug: false,
                             cwd: path.resolve(__dirname),
                         },

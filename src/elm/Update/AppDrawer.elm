@@ -4,7 +4,7 @@ import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
 import Model
 import Return
-import X.Record exposing (over, set)
+import X.Record exposing (..)
 
 
 type alias SubModel model =
@@ -17,8 +17,12 @@ type alias SubReturnF msg model =
     Return.ReturnF msg (SubModel model)
 
 
+appDrawerModel =
+    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
+
+
 mapOver =
-    over Model.appDrawerModel >> Return.map
+    over appDrawerModel >> Return.map
 
 
 update :

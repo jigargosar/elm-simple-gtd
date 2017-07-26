@@ -10,10 +10,6 @@ import X.Record exposing (..)
 -- Model Lens
 
 
-appDrawerModel =
-    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
-
-
 now =
     fieldLens .now (\s b -> { b | now = s })
 

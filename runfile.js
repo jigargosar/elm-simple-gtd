@@ -138,7 +138,11 @@ const prod = () => {
 //
 
 export const bump = function () {
-  run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+  const autoPatchConfig = "--auto --auto-fallback patch"
+  const minorConfig = "--minor"
+  const revisionConfig = this.options && this.options["minor"] ? minorConfig : autoPatchConfig
+  
+  run(`npm_bump ${revisionConfig} 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'`)
   
   if (this.options && (this.options["d"] || this.options["dev"])) {
     bd()

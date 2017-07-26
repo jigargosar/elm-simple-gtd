@@ -43,3 +43,8 @@
 * 3.00s Update
 * 2.17s Main
 
+# after removing all type defs 
+* 2.28s Update
+* 2.40s View
+* 1.62s Main
+

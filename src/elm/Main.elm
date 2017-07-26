@@ -8,14 +8,15 @@ import Subscriptions
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
-import Types exposing (..)
 import Update
 import Update.Config
 import View
 import View.Config
 
 
-main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
+--main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
+
+
 main =
     let
         subscriptions model =

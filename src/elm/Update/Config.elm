@@ -5,11 +5,11 @@ import Model.EntityList
 import Msg exposing (AppMsg)
 import Todo.Msg exposing (TodoMsg)
 import TodoMsg
-import Types exposing (AppModel)
-import Update.Types exposing (UpdateConfig)
 
 
-updateConfig : AppModel -> UpdateConfig AppMsg
+--updateConfig : AppModel -> UpdateConfig AppMsg
+
+
 updateConfig model =
     { noop = Msg.noop
     , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox

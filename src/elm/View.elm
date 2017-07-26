@@ -1,17 +1,16 @@
 module View exposing (..)
 
-import Html exposing (Html)
 import Mat exposing (cs)
 import Material.Options exposing (div)
-import Types exposing (AppModel)
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
-import View.Types exposing (ViewConfig)
 import ViewModel
 
 
-init : ViewConfig msg -> AppModel -> Html msg
+--init : ViewConfig msg -> AppModel -> Html msg
+
+
 init config model =
     let
         appVM =

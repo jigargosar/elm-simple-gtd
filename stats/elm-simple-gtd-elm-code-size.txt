@@ -1,4 +1,4 @@
-   10128 total
+   10126 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -39,8 +39,8 @@
       93 src/elm/X/Time.elm
       91 src/elm/Model/GroupDocStore.elm
       88 src/elm/X/Html.elm
-      88 src/elm/Update.elm
       87 src/elm/View/Layout.elm
+      85 src/elm/Update.elm
       84 src/elm/Update/ExclusiveMode.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
@@ -61,7 +61,7 @@
       66 src/elm/Todo/GroupEditView.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Model.elm
-      55 src/elm/View/Config.elm
+      56 src/elm/View/Config.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
       54 src/elm/Todo/Types.elm
@@ -79,7 +79,7 @@
       45 src/elm/Update/AppDrawer.elm
       44 src/elm/Update/ViewType.elm
       44 src/elm/Todo/FormTypes.elm
-      43 src/elm/Main.elm
+      44 src/elm/Main.elm
       42 src/elm/X/List.elm
       41 src/elm/Update/CustomSync.elm
       40 src/elm/View/CustomSync.elm
@@ -92,7 +92,7 @@
       33 src/elm/View/NewTodoFab.elm
       32 src/elm/Ports/Firebase.elm
       27 src/elm/Firebase.elm
-      26 src/elm/View.elm
+      25 src/elm/View.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm

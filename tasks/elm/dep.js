@@ -3,7 +3,7 @@ import fs from "fs"
 import {runFish} from "../common"
 import {Module, Modules} from "./module"
 
-export async function dep() {
+export function generateDepencencyStatsFile() {
   const srcGlob = "src/elm/**.elm"
   
   const output = runFish(`find ${srcGlob}`, {stdio: 'pipe'})
@@ -20,7 +20,8 @@ export async function dep() {
   
   const modules = Modules(moduleList)
   
-  console.log("deps", modules["Document"])
+  fs.writeFileSync("stats/elm-src-dependencies.json", JSON.stringify(modules,null, 2), "UTF-8")
+  // console.log("deps", modules["Document"])
 }
 
 

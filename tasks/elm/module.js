@@ -1,6 +1,7 @@
 import * as _ from "ramda"
 import {run} from "runjs"
 import assert from "assert"
+import fs from "fs"
 
 function parseModuleName(line) {
   const match = _.match(/^(?:port )?module ((?:\w|\.)+)/)(line)
@@ -20,13 +21,15 @@ const getParentModuleName =
     )
 
 export function Module(fileName) {
-  const lines = _.split("\n")(run("cat " + fileName, {stdio: 'pipe'}))
+  // const lines = _.split("\n")(run("cat " + fileName, {stdio: 'pipe'}))
+  const lines = _.split("\n")(fs.readFileSync(fileName, {encoding: "UTF-8"}))
+  
   const moduleName = parseModuleName(lines[0])
   // console.log("moduleName =", moduleName)
-  const imports = _.pipe(
-      _.map(_.match(/^import ((?:\w|\.)+)/)),
-      _.reject(_.isEmpty),
+  const imports = _.compose(
       _.map(_.nth(1)),
+      _.reject(_.isEmpty),
+      _.map(_.match(/^import ((?:\w|\.)+)/)),
   )(lines)
   // console.log("imports =", imports)
   // console.log(_.take(5, lines))

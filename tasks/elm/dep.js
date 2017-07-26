@@ -1,4 +1,5 @@
 import * as _ from "ramda"
+import fs from "fs"
 import {runFish} from "../common"
 import {Module, Modules} from "./module"
 

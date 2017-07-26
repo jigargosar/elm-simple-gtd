@@ -6,6 +6,8 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Model.EntityTree
+import Model.HasFocusInEntity exposing (HasFocusInEntity)
+import Model.HasStores exposing (..)
 import Model.ViewType
 import Toolkit.Operators exposing (..)
 import Tuple2
@@ -18,6 +20,11 @@ createEntityListForCurrentView model =
         ?= []
 
 
+type alias HasStuff x =
+    HasViewType (HasStores (HasFocusInEntity x))
+
+
+updateEntityListCursor : Bool -> HasStuff x -> HasStuff x -> HasStuff x
 updateEntityListCursor focusNextOnIndexChange oldModel newModel =
     let
         updateEntityListCursorFromEntityIndexTuple model indexTuple =

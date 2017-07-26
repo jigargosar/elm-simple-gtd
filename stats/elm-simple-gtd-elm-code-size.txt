@@ -1,4 +1,4 @@
-   10113 total
+   10139 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -41,12 +41,12 @@
       88 src/elm/X/Html.elm
       87 src/elm/View/Layout.elm
       85 src/elm/Update.elm
+      85 src/elm/Model/EntityList.elm
       84 src/elm/Update/ExclusiveMode.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
-      78 src/elm/Model/EntityList.elm
       77 src/elm/Entity/Types.elm
       77 src/elm/AppColors.elm
       74 src/elm/X/Function/Infix.elm
@@ -104,6 +104,7 @@
       20 src/elm/EntityId.elm
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
+      19 src/elm/Model/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       16 src/elm/Subscriptions.elm

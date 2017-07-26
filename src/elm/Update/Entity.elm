@@ -87,16 +87,18 @@ update config msg =
 
         EM_EntityListKeyDown entityList { key } ->
             let
-                moveFocusBy offset entityList =
-                    Entity.findEntityByOffsetIn offset entityList
-                        >>? (EM_SetFocusInEntity >> update config)
+                moveFocusBy offset =
+                    returnWithMaybe2 Model.getFocusInEntity
+                        (Entity.findEntityByOffsetIn offset entityList
+                            >>? (EM_SetFocusInEntity >> update config)
+                        )
             in
             case key of
                 Key.ArrowUp ->
-                    returnWithMaybe2 Model.getFocusInEntity (moveFocusBy -1 entityList)
+                    moveFocusBy -1
 
                 Key.ArrowDown ->
-                    returnWithMaybe2 Model.getFocusInEntity (moveFocusBy 1 entityList)
+                    moveFocusBy 1
 
                 _ ->
                     identity

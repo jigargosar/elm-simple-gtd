@@ -19,6 +19,13 @@ function parseModuleName(line) {
 assert.equal("aSomePortMod.a.x", parseModuleName("port module aSomePortMod.a.x e"))
 assert.equal("AppColors.a.x", parseModuleName("module AppColors.a.x e"))
 
+const getParentModuleNameOrNull =
+    _.compose(
+        _.join("."),
+        _.init,
+        _.split("."),
+    )
+
 function parseFile(fileName) {
   const lines = _.split("\n")(run("cat " + fileName, {stdio: 'pipe'}))
   const moduleName = parseModuleName(lines[0])
@@ -31,10 +38,7 @@ function parseFile(fileName) {
   // console.log("imports =", imports)
   // console.log(_.take(5, lines))
   
-  const parentModule = _.ifElse(
-      _.anyPass([_.isEmpty, _.propEq("length", 1)]),
-      _.always(null), _.last,
-  )(_.split(".", moduleName))
+  const parentModule = getParentModuleNameOrNull(moduleName)
   
   console.log(_.split(".", moduleName))
   return {moduleName, imports, parentModule, fileName}
@@ -47,9 +51,11 @@ export async function dep() {
   
   const fileNames = _.split("\n", output)
   
+  
   const fileInfo = _.compose(
       _.map(parseFile),
       _.take(2),
+      _.drop(20),
   )(fileNames)
   
   

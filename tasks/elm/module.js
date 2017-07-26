@@ -1,0 +1,123 @@
+import * as _ from "ramda"
+import {run} from "runjs"
+import assert from "assert"
+
+function parseModuleName(line) {
+  const match = _.match(/^(?:port )?module ((?:\w|\.)+)/)(line)
+  if (!match[1]) throw new Error(`Elm module name parse error in line: "${line}"`)
+  return match[1]
+}
+
+// tests
+assert.equal("aSomePortMod.a.x", parseModuleName("port module aSomePortMod.a.x e"))
+assert.equal("AppColors.a.x", parseModuleName("module AppColors.a.x e"))
+
+const getParentModuleNameOrNull =
+    _.compose(
+        _.join("."),
+        _.init,
+        _.split("."),
+    )
+
+export function Module(fileName) {
+  const lines = _.split("\n")(run("cat " + fileName, {stdio: 'pipe'}))
+  const moduleName = parseModuleName(lines[0])
+  // console.log("moduleName =", moduleName)
+  const imports = _.pipe(
+      _.map(_.match(/^import ((?:\w|\.)+)/)),
+      _.reject(_.isEmpty),
+      _.map(_.nth(1)),
+  )(lines)
+  // console.log("imports =", imports)
+  // console.log(_.take(5, lines))
+  
+  const parentModuleName = getParentModuleNameOrNull(moduleName)
+  
+  return {moduleName, imports, importsCount:_.length(imports) ,parentModuleName, fileName}
+}
+
+
+const moduleListToModuleMapWithTransitiveImports = moduleList => {
+  
+  const moduleMap = _.zipObj(_.map(_.prop("moduleName"))(moduleList), moduleList)
+  // const backwardModuleMap = _.compose(
+  //     _.mapObjIndexed(findModulesHavingImport),
+  // )(moduleMap)
+  
+  // console.log(moduleMap)
+  
+  function getImportsOfModule(moduleName) {
+    const module = moduleMap[moduleName]
+    return module ? module.imports : []
+  }
+  
+  const getTransitiveImports = _.memoize(function (moduleName) {
+    // console.log(moduleName)
+    const moduleImports = getImportsOfModule(moduleName)
+    return _.compose(
+        _.uniq,
+        _.sortBy(_.identity),
+        _.concat(moduleImports),
+        _.flatten
+        , _.map(getTransitiveImports),
+    )(moduleImports)
+  })
+  
+  return _.map((module) => {
+    const dependencies = _.pick(module.imports)(moduleMap)
+    const transitiveImports = getTransitiveImports(module.moduleName)
+    return _.merge(module, {
+      transitiveImports,
+      transitiveImportsCount:_.length(transitiveImports),
+      // dependencies,
+      dependenciesCount: _.compose(_.length, _.values)(dependencies)
+    })
+  })(moduleMap)
+  
+}
+
+function addBackwardDependencies(moduleMap) {
+  function getBackwardDependencies(moduleName) {
+    return _.filter(_.compose(
+        _.contains(moduleName),
+        _.prop("imports"),
+    ))(moduleMap)
+  }
+  
+  const getTransitiveBackwardImports = _.memoize(function (moduleName) {
+    const dependentModuleNames = _.compose(
+        _.keys,
+        getBackwardDependencies,
+    )(moduleName)
+    
+    
+    return _.compose(
+        _.uniq,
+        _.sortBy(_.identity),
+        _.flatten,
+        _.concat(dependentModuleNames),
+        _.map(getTransitiveBackwardImports)
+    )(dependentModuleNames)
+  }
+)
+  return _.map(module => {
+    const backwardDependencies = getBackwardDependencies(module.moduleName)
+    const transitiveBackwardImports = getTransitiveBackwardImports(module.moduleName)
+    return _.merge(module, {
+      // backwardDependencies,
+      backwardDependenciesCount:_.compose(_.length, _.values)(backwardDependencies),
+      transitiveBackwardImports,
+      transitiveBackwardImportsCount:_.length(transitiveBackwardImports)
+    })
+  })(moduleMap)
+}
+
+export function Modules(moduleList) {
+  
+  const moduleMap = moduleListToModuleMapWithTransitiveImports(moduleList)
+  const moduleMapWithBackwardDependencies = addBackwardDependencies(moduleMap)
+  
+  // console.log(moduleMapWithBackwardDependencies)
+  
+  return moduleMapWithBackwardDependencies
+}

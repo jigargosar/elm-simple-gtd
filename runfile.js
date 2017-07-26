@@ -10,7 +10,7 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
 import * as elm from "./tasks/elm"
-import * as ElmDep from "./tasks/elm-dep"
+import * as ElmDep from "./tasks/elm/dep"
 import path from "path"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)

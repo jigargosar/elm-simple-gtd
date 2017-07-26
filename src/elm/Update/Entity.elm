@@ -78,7 +78,7 @@ update config msg =
             map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
 
         EM_Update entityId action ->
-            onUpdate config entityId action
+            onUpdateAction config entityId action
 
         EM_EntityListKeyDown entityList { key } ->
             case key of
@@ -97,15 +97,15 @@ moveFocusBy =
     Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity__
 
 
-onUpdate :
+onUpdateAction :
     Config msg a
     -> EntityId
     -> Entity.Types.EntityUpdateAction
     -> SubReturnF msg model
-onUpdate config entityId action =
+onUpdateAction config entityId action =
     case action of
         EUA_OnFocusIn ->
-            map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
+            update config (EM_SetFocusInEntityWithEntityId entityId)
 
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)

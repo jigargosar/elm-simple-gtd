@@ -12,7 +12,7 @@ function parseModuleName(line) {
 assert.equal("aSomePortMod.a.x", parseModuleName("port module aSomePortMod.a.x e"))
 assert.equal("AppColors.a.x", parseModuleName("module AppColors.a.x e"))
 
-const getParentModuleNameOrNull =
+const getParentModuleName =
     _.compose(
         _.join("."),
         _.init,
@@ -31,7 +31,7 @@ export function Module(fileName) {
   // console.log("imports =", imports)
   // console.log(_.take(5, lines))
   
-  const parentModuleName = getParentModuleNameOrNull(moduleName)
+  const parentModuleName = getParentModuleName(moduleName)
   
   return {moduleName, imports, importsCount:_.length(imports) ,parentModuleName, fileName}
 }
@@ -64,25 +64,29 @@ const moduleListToModuleMapWithTransitiveImports = moduleList => {
   })
   
   return _.map((module) => {
-    const dependencies = _.pick(module.imports)(moduleMap)
+    // const dependencies = _.pick(module.imports)(moduleMap)
     const transitiveImports = getTransitiveImports(module.moduleName)
     return _.merge(module, {
       transitiveImports,
       transitiveImportsCount:_.length(transitiveImports),
       // dependencies,
-      dependenciesCount: _.compose(_.length, _.values)(dependencies)
+      // dependenciesCount: _.compose(_.length, _.values)(dependencies)
     })
   })(moduleMap)
   
 }
 
 function addBackwardDependencies(moduleMap) {
+  
   function getBackwardDependencies(moduleName) {
     return _.filter(_.compose(
         _.contains(moduleName),
         _.prop("imports"),
     ))(moduleMap)
   }
+  
+  const getBackwardImports = _.compose(_.keys,getBackwardDependencies)
+  
   
   const getTransitiveBackwardImports = _.memoize(function (moduleName) {
     const dependentModuleNames = _.compose(
@@ -100,12 +104,16 @@ function addBackwardDependencies(moduleMap) {
     )(dependentModuleNames)
   }
 )
+  
   return _.map(module => {
-    const backwardDependencies = getBackwardDependencies(module.moduleName)
+    // const backwardDependencies = getBackwardDependencies(module.moduleName)
     const transitiveBackwardImports = getTransitiveBackwardImports(module.moduleName)
+    const backwardImports = getBackwardImports(module.moduleName)
     return _.merge(module, {
       // backwardDependencies,
-      backwardDependenciesCount:_.compose(_.length, _.values)(backwardDependencies),
+      // backwardDependenciesCount:_.compose(_.length, _.values)(backwardDependencies),
+      backwardImports,
+      backwardImportsCount:_.length(backwardImports),
       transitiveBackwardImports,
       transitiveBackwardImportsCount:_.length(transitiveBackwardImports)
     })

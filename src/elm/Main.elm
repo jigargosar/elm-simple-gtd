@@ -55,8 +55,8 @@ updateConfig model =
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
     , switchToContextsView = Msg.switchToContextsViewMsg
-    , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
-    , setFocusInEntityMsg = Msg.SetFocusInEntity
+    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
+    , setFocusInEntityMsg = Msg.setFocusInEntityMsg
     , currentViewEntityList =
         Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
     , saveTodoForm = Msg.onSaveTodoForm
@@ -116,7 +116,7 @@ viewConfig =
     , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
     , onGD_UpdateFormName = Msg.onGD_UpdateFormName
     , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
-    , setFocusInEntityWithEntityId = Msg.SetFocusInEntityWithEntityId
+    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
     }
 
 

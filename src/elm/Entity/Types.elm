@@ -27,7 +27,9 @@ type EntityListViewType
 
 
 type EntityMsg
-    = EM_Update EntityId EntityUpdateAction
+    = EM_SetFocusInEntity Entity
+    | EM_SetFocusInEntityWithEntityId EntityId
+    | EM_Update EntityId EntityUpdateAction
     | EM_EntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
 
 

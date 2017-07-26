@@ -28,8 +28,6 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsg Entity.Types.EntityMsg
-    | SetFocusInEntity Entity
-    | SetFocusInEntityWithEntityId EntityId
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnGroupDocMsg GroupDocMsg
@@ -158,6 +156,14 @@ onToggleEntitySelection =
 
 bringEntityIdInViewMsg =
     EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
+
+
+setFocusInEntityMsg =
+    EM_SetFocusInEntity >> OnEntityMsg
+
+
+setFocusInEntityWithEntityIdMsg =
+    EM_SetFocusInEntityWithEntityId >> OnEntityMsg
 
 
 

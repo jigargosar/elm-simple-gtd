@@ -71,6 +71,12 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
+        EM_SetFocusInEntity entity ->
+            map (Model.setFocusInEntity__ entity)
+
+        EM_SetFocusInEntityWithEntityId entityId ->
+            map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
+
         EM_Update entityId action ->
             onUpdate config entityId action
 

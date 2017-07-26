@@ -97,13 +97,6 @@ update config msg =
         OnTodoMsg msg_ ->
             returnWithNow (config.onTodoMsgWithNow msg_)
 
-        SetFocusInEntity entity ->
-            -- todo: move these messages to entity
-            map (Model.setFocusInEntity__ entity)
-
-        SetFocusInEntityWithEntityId entityId ->
-            map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
-
         OnTodoMsgWithNow msg_ now ->
             returnWith identity
                 (\oldModel ->

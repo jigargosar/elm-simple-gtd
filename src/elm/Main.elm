@@ -1,7 +1,5 @@
 module Main exposing (main)
 
---import Html exposing (Html)
-
 import Model.Internal exposing (Flags)
 import Msg exposing (AppMsg)
 import RouteUrl

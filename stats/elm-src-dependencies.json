@@ -3340,16 +3340,19 @@
     ],
     "transitiveImportsCount": 33,
     "backwardImports": [
-      "Model.EntityList"
+      "Model.EntityList",
+      "Update.Entity"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "Model.EntityList",
       "Update",
-      "Update.Config"
+      "Update.Config",
+      "Update.Entity",
+      "Update.Types"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 6
   },
   "Model.Internal": {
     "fileName": "src/elm/Model/Internal.elm",
@@ -6548,6 +6551,7 @@
       "Maybe.Extra",
       "Model",
       "Model.HasFocusInEntity",
+      "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
@@ -6564,7 +6568,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 25,
+    "importsCount": 26,
     "transitiveImports": [
       "Char",
       "Context",
@@ -6596,6 +6600,7 @@
       "Model",
       "Model.GroupDocStore",
       "Model.HasFocusInEntity",
+      "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
@@ -6627,7 +6632,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 60,
+    "transitiveImportsCount": 61,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7345,6 +7350,7 @@
       "Model",
       "Model.GroupDocStore",
       "Model.HasFocusInEntity",
+      "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
@@ -7404,7 +7410,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 100,
+    "transitiveImportsCount": 101,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],

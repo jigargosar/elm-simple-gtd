@@ -10,6 +10,7 @@ import List.Extra
 import Maybe.Extra
 import Model
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
+import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
 import Model.Stores
 import Model.Todo
@@ -28,16 +29,14 @@ import X.Return exposing (..)
 
 
 type alias SubModel model =
-    HasFocusInEntity
-        { model
-            | contextStore : ContextStore
-            , editMode : ExclusiveMode
-            , now : Time
-            , projectStore : ProjectStore
-            , todoStore : TodoStore
-            , viewType : ViewType
-            , selectedEntityIdSet : Set.Set String
-        }
+    HasViewType
+        (HasStores
+            (HasFocusInEntity
+                { model
+                    | selectedEntityIdSet : Set.Set String
+                }
+            )
+        )
 
 
 type alias SubModelF model =

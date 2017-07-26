@@ -36,7 +36,7 @@ export function Module(fileName) {
   
   const parentModuleName = getParentModuleName(moduleName)
   
-  return {moduleName, imports, importsCount:_.length(imports) ,parentModuleName, fileName}
+  return {fileName, moduleName, parentModuleName ,imports, importsCount:_.length(imports)}
 }
 
 

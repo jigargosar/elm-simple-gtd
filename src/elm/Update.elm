@@ -6,9 +6,10 @@ import Material
 import Model.EntityList
 import Msg exposing (..)
 import Ports
+import Types exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
-import Update.Config exposing (UpdateConfig)
+import Update.Config
 import Update.CustomSync
 import Update.Entity
 import Update.ExclusiveMode
@@ -17,17 +18,15 @@ import Update.GroupDoc
 import Update.LaunchBar
 import Update.Subscription
 import Update.Todo
+import Update.Types exposing (UpdateConfig)
 import Update.ViewType
 import X.Return exposing (..)
 
 
---import Types exposing (..)
---update :
---    UpdateConfig AppMsg
---    -> AppMsg
---    -> ReturnF AppMsg AppModel
-
-
+update :
+    UpdateConfig AppMsg
+    -> AppMsg
+    -> ReturnF AppMsg AppModel
 update config msg =
     case msg of
         OnMdl msg_ ->

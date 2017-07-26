@@ -1,6 +1,5 @@
 module GroupDoc exposing (..)
 
-import Document
 import Document exposing (DocId)
 import Firebase.Types exposing (DeviceId)
 import GroupDoc.Types exposing (..)

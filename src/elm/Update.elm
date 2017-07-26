@@ -1,17 +1,15 @@
-module Update exposing (Config, update)
+module Update exposing (update)
 
 import CommonMsg
-import LaunchBar.Messages
 import LocalPref
 import Material
 import Model.EntityList
 import Msg exposing (..)
 import Ports
-import Time exposing (Time)
-import Todo.Msg exposing (TodoMsg)
 import Types exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
+import Update.Config exposing (UpdateConfig)
 import Update.CustomSync
 import Update.Entity
 import Update.ExclusiveMode
@@ -24,32 +22,8 @@ import Update.ViewType
 import X.Return exposing (..)
 
 
-type alias Config msg =
-    Update.LaunchBar.Config msg
-        (Update.AppHeader.Config msg
-            (Update.ExclusiveMode.Config msg
-                (Update.ViewType.Config msg
-                    (Update.Firebase.Config msg
-                        (Update.CustomSync.Config msg
-                            (Update.Entity.Config msg
-                                (Update.Subscription.Config msg
-                                    (Update.Todo.Config msg
-                                        { onTodoMsgWithNow : TodoMsg -> Time -> msg
-                                        , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
-                                        , onMdl : Material.Msg msg -> msg
-                                        }
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
-
-
 update :
-    Config AppMsg
+    UpdateConfig AppMsg
     -> AppMsg
     -> ReturnF AppMsg AppModel
 update config msg =

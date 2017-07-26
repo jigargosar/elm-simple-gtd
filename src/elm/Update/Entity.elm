@@ -21,7 +21,9 @@ import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import ViewType exposing (ViewType)
+import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
+import X.Record exposing (..)
 import X.Return exposing (..)
 
 
@@ -69,10 +71,12 @@ update :
 update config msg =
     case msg of
         EM_SetFocusInEntity entity ->
-            map (Model.setFocusInEntity__ entity)
+            map (set Model.focusInEntity__ entity)
 
         EM_SetFocusInEntityWithEntityId entityId ->
-            map (Model.Stores.setFocusInEntityWithEntityId__ entityId)
+            returnWithMaybe1
+                (Model.Stores.findByEntityId entityId)
+                (EM_SetFocusInEntity >> update config)
 
         EM_Update entityId action ->
             onUpdateAction config entityId action
@@ -126,7 +130,7 @@ onUpdateAction config entityId action =
                         returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
                             >> returnMsgAsCmd (config.setFocusInEntityWithEntityId entityId)
                     )
-                    (config.setFocusInEntityMsg >> returnMsgAsCmd)
+                    (EM_SetFocusInEntity >> update config)
 
 
 toggleEntitySelection entityId =

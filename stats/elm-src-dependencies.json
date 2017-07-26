@@ -6482,10 +6482,12 @@
       "Todo.Types",
       "Toolkit.Operators",
       "ViewType",
+      "X.Function",
       "X.Function.Infix",
+      "X.Record",
       "X.Return"
     ],
-    "importsCount": 23,
+    "importsCount": 25,
     "transitiveImports": [
       "Char",
       "Context",
@@ -8738,12 +8740,13 @@
       "Project",
       "Todo",
       "Todo.Notification.Model",
+      "Update.Entity",
       "Update.Todo.Internal",
       "ViewModel",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 18,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -9481,13 +9484,14 @@
       "Todo",
       "Todo.Form",
       "Update.AppDrawer",
+      "Update.Entity",
       "Update.ExclusiveMode",
       "Update.Firebase",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 15,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

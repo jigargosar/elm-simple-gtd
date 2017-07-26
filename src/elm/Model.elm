@@ -13,10 +13,6 @@ focusInEntity__ =
     fieldLens .focusInEntity_ (\s b -> { b | focusInEntity_ = s })
 
 
-setFocusInEntity__ entity =
-    set focusInEntity__ entity
-
-
 getFocusInEntity =
     get focusInEntity__
 

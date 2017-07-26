@@ -7,7 +7,7 @@
      223 src/elm/Menu.elm
      219 src/elm/GroupDoc/ViewModel.elm
      210 src/elm/Msg.elm
-     197 src/elm/Update/Entity.elm
+     201 src/elm/Update/Entity.elm
      187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      176 src/elm/Update/Subscription.elm
@@ -66,7 +66,6 @@
       54 src/elm/Todo/Types.elm
       53 src/elm/LaunchBar/Models.elm
       50 src/elm/Todo/Notification/Model.elm
-      50 src/elm/Model.elm
       50 src/elm/Firebase/Types.elm
       50 src/elm/Context.elm
       50 src/elm/AppUrl.elm
@@ -74,6 +73,7 @@
       49 src/elm/Form.elm
       47 src/elm/Todo/TimeTracker/View.elm
       46 src/elm/Notification.elm
+      46 src/elm/Model.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Update/AppHeader.elm
       45 src/elm/Model/Stores.elm

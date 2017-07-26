@@ -45,7 +45,7 @@ update config now msg =
             onRunningNotificationResponse config res
 
         OnProcessPendingNotificationCronTick ->
-            rAndThenMaybe
+            returnAndThenMaybe
                 (findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
 
         UpdateTodoOrAllSelected__ todoId action ->

@@ -64,6 +64,10 @@ type alias Config msg a =
     }
 
 
+maybeOverFocusInEntity__ =
+    maybeOver Model.focusInEntity__
+
+
 update :
     Config msg a
     -> EntityMsg
@@ -82,20 +86,20 @@ update config msg =
             onUpdateAction config entityId action
 
         EM_EntityListKeyDown entityList { key } ->
+            let
+                moveFocusBy offset entityList =
+                    Entity.findEntityByOffsetIn offset entityList
+                        >>? (EM_SetFocusInEntity >> update config)
+            in
             case key of
                 Key.ArrowUp ->
-                    map (moveFocusBy -1 entityList)
+                    returnWithMaybe2 Model.getFocusInEntity (moveFocusBy -1 entityList)
 
                 Key.ArrowDown ->
-                    map (moveFocusBy 1 entityList)
+                    returnWithMaybe2 Model.getFocusInEntity (moveFocusBy 1 entityList)
 
                 _ ->
                     identity
-
-
-moveFocusBy : Int -> List Entity -> SubModelF model
-moveFocusBy =
-    Entity.findEntityByOffsetIn >>> Model.maybeOverFocusInEntity__
 
 
 onUpdateAction :

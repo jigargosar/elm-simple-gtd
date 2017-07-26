@@ -17,11 +17,7 @@ getFocusInEntity =
     get focusInEntity__
 
 
-maybeOverFocusInEntity__ =
-    maybeOver focusInEntity__
-
-
-maybeSetFocusInEntityIn_ model value =
+maybeSetFocusInEntityIn__ model value =
     maybeSet focusInEntity__ value model
 
 

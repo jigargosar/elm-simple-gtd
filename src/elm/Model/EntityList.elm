@@ -26,7 +26,7 @@ updateEntityListCursor focusNextOnIndexChange oldModel newModel =
                     X.List.clampIndex index entityList
                         |> (List.getAt # entityList)
                         |> Maybe.orElse (List.head entityList)
-                        |> Model.maybeSetFocusInEntityIn_ model
+                        |> Model.maybeSetFocusInEntityIn__ model
 
                 setFocusInIndex index =
                     setFocusInEntityByIndex

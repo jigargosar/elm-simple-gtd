@@ -85,7 +85,7 @@ maybeEffect f =
     Return.effect_ (\m -> f m ?= Cmd.none)
 
 
-rAndThenMaybe f =
+returnAndThenMaybe f =
     Return.andThen
         (\m ->
             f m ?= Return.singleton m

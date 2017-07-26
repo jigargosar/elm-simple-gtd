@@ -2427,14 +2427,13 @@
       "Subscriptions.AppDrawer",
       "Subscriptions.Firebase",
       "Subscriptions.Todo",
-      "Types",
       "Update",
       "Update.Config",
       "View",
       "View.Config",
       "X.Return"
     ],
-    "importsCount": 14,
+    "importsCount": 13,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -5940,13 +5939,11 @@
     "transitiveImportsCount": 52,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
-      "Main",
       "Model.Internal",
-      "Update",
       "Update.Config",
       "ViewModel"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
@@ -5969,7 +5966,6 @@
       "Model.EntityList",
       "Msg",
       "Ports",
-      "Types",
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.Config",
@@ -5984,7 +5980,7 @@
       "Update.ViewType",
       "X.Return"
     ],
-    "importsCount": 20,
+    "importsCount": 19,
     "transitiveImports": [
       "AppDrawer.Model",
       "AppDrawer.Types",

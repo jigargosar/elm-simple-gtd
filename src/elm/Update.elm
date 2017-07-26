@@ -6,7 +6,6 @@ import Material
 import Model.EntityList
 import Msg exposing (..)
 import Ports
-import Types exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
 import Update.Config exposing (UpdateConfig)
@@ -22,10 +21,13 @@ import Update.ViewType
 import X.Return exposing (..)
 
 
-update :
-    UpdateConfig AppMsg
-    -> AppMsg
-    -> ReturnF AppMsg AppModel
+--import Types exposing (..)
+--update :
+--    UpdateConfig AppMsg
+--    -> AppMsg
+--    -> ReturnF AppMsg AppModel
+
+
 update config msg =
     case msg of
         OnMdl msg_ ->
@@ -84,6 +86,9 @@ update config msg =
                 >> onPersistLocalPref
 
 
-onPersistLocalPref : ReturnF AppMsg AppModel
+
+--onPersistLocalPref : ReturnF AppMsg AppModel
+
+
 onPersistLocalPref =
     effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)

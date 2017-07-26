@@ -37,13 +37,7 @@ export function Module(fileName) {
 }
 
 
-const moduleListToModuleMapWithTransitiveImports = moduleList => {
-  
-  const moduleMap = _.zipObj(_.map(_.prop("moduleName"))(moduleList), moduleList)
-  // const backwardModuleMap = _.compose(
-  //     _.mapObjIndexed(findModulesHavingImport),
-  // )(moduleMap)
-  
+const addTransitiveDependencies = moduleMap => {
   // console.log(moduleMap)
   
   function getImportsOfModule(moduleName) {
@@ -121,11 +115,6 @@ function addBackwardDependencies(moduleMap) {
 }
 
 export function Modules(moduleList) {
-  
-  const moduleMap = moduleListToModuleMapWithTransitiveImports(moduleList)
-  const moduleMapWithBackwardDependencies = addBackwardDependencies(moduleMap)
-  
-  // console.log(moduleMapWithBackwardDependencies)
-  
-  return moduleMapWithBackwardDependencies
+  const moduleMap = _.zipObj(_.map(_.prop("moduleName"))(moduleList), moduleList)
+  return addBackwardDependencies(addTransitiveDependencies(moduleMap))
 }

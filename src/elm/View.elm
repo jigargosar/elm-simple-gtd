@@ -1,15 +1,18 @@
 module View exposing (..)
 
-import Html exposing (text)
+import Html exposing (Html, text)
 import Mat exposing (..)
 import Material.Button
 import Material.Options exposing (div)
 import Material.Tooltip
+import Types exposing (AppModel)
+import View.Config
 import View.Layout
 import View.Overlays
 import ViewModel
 
 
+init : View.Config.ViewConfig msg -> AppModel -> Html msg
 init config model =
     let
         appVM =

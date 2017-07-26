@@ -21,7 +21,7 @@ import X.Function.Infix exposing (..)
 import X.Keyboard
 
 
-type alias Config msg =
+type alias ViewConfig msg =
     { noop : msg
     , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
     , onEntityListKeyDown :

@@ -8,8 +8,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Toolkit.Operators exposing (..)
-import ViewType exposing (ViewType(EntityListView, SyncView))
 import View.Badge
+import ViewType exposing (ViewType(EntityListView, SyncView))
 import X.Function.Infix exposing (..)
 import X.Html
 

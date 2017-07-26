@@ -34,3 +34,11 @@
 
 # after removing all andThenUpdate and using returnMsgAsCmd.
 * 2.3s Update
+
+# after some changes (update config extraction)
+* 2.12 main
+* 2.76 Update
+
+# after adding viewConfig :(
+* 3.00s Update
+* 2.17 Main

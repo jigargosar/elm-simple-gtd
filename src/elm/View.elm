@@ -6,13 +6,13 @@ import Material.Button
 import Material.Options exposing (div)
 import Material.Tooltip
 import Types exposing (AppModel)
-import View.Config
+import View.Config exposing (ViewConfig)
 import View.Layout
 import View.Overlays
 import ViewModel
 
 
-init : View.Config.ViewConfig msg -> AppModel -> Html msg
+init : ViewConfig msg -> AppModel -> Html msg
 init config model =
     let
         appVM =
@@ -27,7 +27,7 @@ init config model =
     div [ cs "mdl-typography--body-1" ] children
 
 
-newTodoFab : View.Config.ViewConfig msg -> AppModel -> Html msg
+newTodoFab : ViewConfig msg -> AppModel -> Html msg
 newTodoFab config m =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach config.onMdl [ 0 ] ]

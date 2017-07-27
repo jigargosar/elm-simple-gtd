@@ -138,6 +138,10 @@ onSaveExclusiveModeForm =
 -- entityMsg
 
 
+updateEntityListCursorMsg =
+    EM_UpdateEntityListCursor |> OnEntityMsg
+
+
 onEntityUpdateMsg =
     Entity.Types.EM_Update >>> OnEntityMsg
 

@@ -42,11 +42,8 @@ update config msg =
             Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
-            returnWith identity
-                (\oldModel ->
-                    Update.GroupDoc.update config msg_
-                        >> map (Model.EntityList.updateEntityListCursorOnGroupDocChange oldModel)
-                )
+            Update.GroupDoc.update config msg_
+                >> returnMsgAsCmd Msg.updateEntityListCursorMsg
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -70,11 +67,8 @@ update config msg =
             returnWithNow (config.onTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
-            returnWith identity
-                (\oldModel ->
-                    Update.Todo.update config now msg_
-                        >> map (Model.EntityList.updateEntityListCursorOnTodoChange oldModel)
-                )
+            Update.Todo.update config now msg_
+                >> returnMsgAsCmd Msg.updateEntityListCursorMsg
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_

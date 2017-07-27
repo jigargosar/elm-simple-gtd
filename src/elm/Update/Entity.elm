@@ -2,6 +2,7 @@ module Update.Entity exposing (Config, update)
 
 import Entity
 import Entity.Types exposing (..)
+import EntityList.Types exposing (HasEntityList)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
@@ -31,10 +32,12 @@ import X.Return exposing (..)
 type alias SubModel model =
     HasViewType
         (HasStores
-            (HasFocusInEntity
-                { model
-                    | selectedEntityIdSet : Set.Set String
-                }
+            (HasEntityList
+                (HasFocusInEntity
+                    { model
+                        | selectedEntityIdSet : Set.Set String
+                    }
+                )
             )
         )
 

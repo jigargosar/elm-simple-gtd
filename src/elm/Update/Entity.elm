@@ -75,8 +75,7 @@ update :
 update config msg =
     case msg of
         EM_UpdateEntityListCursor ->
-            --            returnWith identity (updateEntityListCursor config)
-            identity
+            map updateEntityListCursor
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
@@ -109,8 +108,8 @@ update config msg =
                     identity
 
 
-updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
-updateEntityListCursor config model =
+updateEntityListCursor : SubModelF model
+updateEntityListCursor model =
     let
         computeMaybeFEI index =
             X.List.clampIndex index newEntityIdList
@@ -160,10 +159,20 @@ updateEntityListCursor config model =
         newEntityIdList =
             Model.EntityList.createEntityListForCurrentView model
                 .|> Entity.toEntityId
+
+        foo entityId =
+            Model.Stores.findByEntityId entityId model
+                ?|> (\entity ->
+                        model
+                            |> set Model.focusInEntity__ entity
+                            |> over entityListCursor
+                                (\c -> { c | maybeFocusableEntityId = Just entityId })
+                    )
+                ?= model
     in
     model.entityList.prevMaybeFocusableEntityId
-        ?+> (getNewCursorEntityId >>? (EM_SetFocusInEntityWithEntityId >> update config))
-        ?= identity
+        ?+> (getNewCursorEntityId >>? foo)
+        ?= model
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model

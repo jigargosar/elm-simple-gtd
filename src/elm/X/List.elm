@@ -1,6 +1,6 @@
 module X.List exposing (..)
 
-import List.Extra as List
+import List.Extra
 import Toolkit.Operators exposing (..)
 
 
@@ -22,7 +22,7 @@ clampIndexIn =
 
 
 atIndexIn =
-    flip List.getAt
+    flip List.Extra.getAt
 
 
 prependIn =
@@ -40,3 +40,15 @@ toMaybe list =
 
 singleton item =
     [ item ]
+
+
+findIndexIn =
+    flip List.Extra.findIndex
+
+
+firstIndexOf val list =
+    List.Extra.findIndex ((==) val) list
+
+
+firstIndexOfIn =
+    flip firstIndexOf

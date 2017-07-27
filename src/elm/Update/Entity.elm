@@ -22,10 +22,13 @@ import Set
 import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
+import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import Tuple2
 import ViewType exposing (ViewType)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
+import X.List
 import X.Record exposing (..)
 import X.Return exposing (..)
 
@@ -102,15 +105,71 @@ update config msg =
                     identity
 
 
-updateEntityList config maybeEntityId model =
+updateEntityList : Config msg a -> Maybe EntityId -> SubModelF model
+updateEntityList config newMaybeFocusableEntityId model =
     let
-        entityIdList =
+        computeMaybeFEI index =
+            X.List.clampIndex index newEntityIdList
+                |> X.List.atIndexIn newEntityIdList
+
+        computeMaybeNextFEI oldIndex newIndex =
+            case compare oldIndex newIndex of
+                LT ->
+                    computeMaybeFEI oldIndex
+
+                GT ->
+                    computeMaybeFEI (oldIndex + 1)
+
+                EQ ->
+                    Nothing
+
+        updateFromEntityIdTuple : ( EntityId, EntityId ) -> SubModel model
+        updateFromEntityIdTuple tuple =
+            let
+                focusNextOnIndexChange =
+                    case Tuple.second tuple of
+                        TodoId _ ->
+                            True
+
+                        _ ->
+                            False
+
+                meid : Maybe EntityId
+                meid =
+                    tuple
+                        |> Tuple2.mapBoth (X.List.firstIndexOfIn newEntityIdList)
+                        |> (\maybeIndexT2 ->
+                                case maybeIndexT2 of
+                                    ( Just oldIndex, Just newIndex ) ->
+                                        if focusNextOnIndexChange then
+                                            computeMaybeNextFEI oldIndex newIndex
+                                        else
+                                            Nothing
+
+                                    ( Just oldIndex, Nothing ) ->
+                                        computeMaybeFEI oldIndex
+
+                                    _ ->
+                                        Nothing
+                           )
+            in
+            model
+
+        newEntityIdList =
             Model.EntityList.createEntityListForCurrentView model
                 .|> Entity.toEntityId
     in
-    setIn model
-        entityList
-        { entityIdList = entityIdList, maybeFocusableEntityId = maybeEntityId }
+    ( model.entityList.maybeFocusableEntityId, newMaybeFocusableEntityId )
+        |> maybe2Tuple
+        |> Maybe.Extra.unpack
+            (\_ ->
+                setIn model
+                    entityList
+                    { entityIdList = newEntityIdList
+                    , maybeFocusableEntityId = newMaybeFocusableEntityId
+                    }
+            )
+            updateFromEntityIdTuple
 
 
 onUpdateAction :

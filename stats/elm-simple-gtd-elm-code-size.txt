@@ -1,12 +1,12 @@
-   10182 total
+   10253 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
+     271 src/elm/Update/Entity.elm
      263 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
      219 src/elm/GroupDoc/ViewModel.elm
-     212 src/elm/Update/Entity.elm
      210 src/elm/Msg.elm
      187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
@@ -63,6 +63,7 @@
       56 src/elm/View/Config.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
+      54 src/elm/X/List.elm
       54 src/elm/Todo/Types.elm
       53 src/elm/LaunchBar/Models.elm
       50 src/elm/Todo/Notification/Model.elm
@@ -80,7 +81,6 @@
       44 src/elm/Update/ViewType.elm
       44 src/elm/Todo/FormTypes.elm
       44 src/elm/Main.elm
-      42 src/elm/X/List.elm
       41 src/elm/Update/CustomSync.elm
       40 src/elm/View/CustomSync.elm
       39 src/elm/X/Random.elm

@@ -75,7 +75,8 @@ update :
 update config msg =
     case msg of
         EM_UpdateEntityListCursor ->
-            returnWith identity (updateEntityListCursor config)
+            --            returnWith identity (updateEntityListCursor config)
+            identity
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
@@ -126,18 +127,22 @@ updateEntityListCursor config model =
                 EQ ->
                     Nothing
 
-        getNewCursorEntityId : Maybe EntityId
-        getNewCursorEntityId =
+        getNewCursorEntityId : EntityId -> Maybe EntityId
+        getNewCursorEntityId prevFocusableEntityId =
             let
                 focusNextOnIndexChange =
                     True
             in
-            ( model.entityList.prevMaybeFocusableEntityId
-            , model.entityList.prevMaybeFocusableEntityId
+            ( model.entityList.prevEntityIdList
+            , newEntityIdList
             )
-                |> maybe2Tuple
-                ?+> Tuple2.mapBoth (X.List.firstIndexOfIn newEntityIdList)
-                >> (\maybeIndexT2 ->
+                |> Tuple2.mapBoth
+                    (X.List.firstIndexOf prevFocusableEntityId)
+                |> (\maybeIndexT2 ->
+                        --                        let
+                        --                            _ =
+                        --                                Debug.log "maybeIndexT2" maybeIndexT2
+                        --                        in
                         case maybeIndexT2 of
                             ( Just oldIndex, Just newIndex ) ->
                                 if focusNextOnIndexChange then
@@ -156,8 +161,8 @@ updateEntityListCursor config model =
             Model.EntityList.createEntityListForCurrentView model
                 .|> Entity.toEntityId
     in
-    getNewCursorEntityId
-        ?|> (EM_SetFocusInEntityWithEntityId >> update config)
+    model.entityList.prevMaybeFocusableEntityId
+        ?+> (getNewCursorEntityId >>? (EM_SetFocusInEntityWithEntityId >> update config))
         ?= identity
 
 

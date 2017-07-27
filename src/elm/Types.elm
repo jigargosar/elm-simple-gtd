@@ -2,7 +2,7 @@ module Types exposing (AppConfig, AppModel, AppModelOtherFields)
 
 import AppDrawer.Model
 import Document exposing (DocId)
-import EntityList exposing (HasEntityListModel)
+import EntityList exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
@@ -23,7 +23,7 @@ type alias AppConfig =
 
 
 type alias AppModel =
-    HasEntityListModel (HasFocusInEntity AppModelOtherFields)
+    HasEntityListCursor (HasFocusInEntity AppModelOtherFields)
 
 
 type alias AppModelOtherFields =

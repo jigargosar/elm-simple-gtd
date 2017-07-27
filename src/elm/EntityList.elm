@@ -4,22 +4,26 @@ import Entity.Types exposing (EntityId)
 import X.Record exposing (..)
 
 
-type alias EntityListModel =
+type alias EntityListCursor =
     { entityIdList : List EntityId
     , maybeFocusableEntityId : Maybe EntityId
+    , prevEntityIdList : List EntityId
+    , prevMaybeFocusableEntityId : Maybe EntityId
     }
 
 
-type alias HasEntityListModel a =
-    { a | entityList : EntityListModel }
+type alias HasEntityListCursor a =
+    { a | entityList : EntityListCursor }
 
 
-entityList =
+entityListCursor =
     fieldLens .entityList (\s b -> { b | entityList = s })
 
 
-initialValue : EntityListModel
+initialValue : EntityListCursor
 initialValue =
     { entityIdList = []
     , maybeFocusableEntityId = Nothing
+    , prevEntityIdList = []
+    , prevMaybeFocusableEntityId = Nothing
     }

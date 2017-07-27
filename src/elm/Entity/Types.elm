@@ -41,6 +41,7 @@ type EntityMsg
     | EM_SetFocusInEntityWithEntityId EntityId
     | EM_Update EntityId EntityUpdateAction
     | EM_EntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
+    | EM_UpdateEntityListCursor
 
 
 createContextEntity =

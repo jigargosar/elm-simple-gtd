@@ -75,7 +75,7 @@ update :
 update config msg =
     case msg of
         EM_UpdateEntityListCursor ->
-            map updateEntityListCursor
+            returnWith identity (updateEntityListCursor config)
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
@@ -108,12 +108,15 @@ update config msg =
                     identity
 
 
-updateEntityListCursor : SubModelF model
-updateEntityListCursor model =
+
+--updateEntityListCursor : SubModelF model
+
+
+updateEntityListCursor config model =
     let
         computeMaybeFEI index =
-            X.List.clampIndex index newEntityIdList
-                |> X.List.atIndexIn newEntityIdList
+            X.List.clampIndex index model.entityList.entityIdList
+                |> X.List.atIndexIn model.entityList.entityIdList
 
         computeMaybeNextFEI oldIndex newIndex =
             case compare oldIndex newIndex of
@@ -133,7 +136,7 @@ updateEntityListCursor model =
                     True
             in
             ( model.entityList.prevEntityIdList
-            , newEntityIdList
+            , model.entityList.entityIdList
             )
                 |> Tuple2.mapBoth
                     (X.List.firstIndexOf prevFocusableEntityId)
@@ -156,23 +159,15 @@ updateEntityListCursor model =
                                 Nothing
                    )
 
-        newEntityIdList =
-            Model.EntityList.createEntityListForCurrentView model
-                .|> Entity.toEntityId
-
-        foo entityId =
-            Model.Stores.findByEntityId entityId model
-                ?|> (\entity ->
-                        model
-                            |> set Model.focusInEntity__ entity
-                            |> over entityListCursor
-                                (\c -> { c | maybeFocusableEntityId = Just entityId })
-                    )
-                ?= model
+        updateHelp =
+            model.entityList.prevMaybeFocusableEntityId
+                ?+> (getNewCursorEntityId >>? (EM_SetFocusInEntityWithEntityId >> update config))
+                ?= identity
     in
-    model.entityList.prevMaybeFocusableEntityId
-        ?+> (getNewCursorEntityId >>? foo)
-        ?= model
+    if model.entityList.prevEntityIdList == model.entityList.entityIdList then
+        identity
+    else
+        updateHelp
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model

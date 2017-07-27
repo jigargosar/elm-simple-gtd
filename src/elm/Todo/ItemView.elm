@@ -57,7 +57,8 @@ keyedItem vm =
 item : TodoViewModel msg -> Html msg
 item vm =
     div
-        [ classList
+        [ id vm.key
+        , classList
             [ "todo-item focusable-list-item collection-item" => True
             , "selected" => vm.isSelected
             , "can-be-focused" => vm.canBeFocused

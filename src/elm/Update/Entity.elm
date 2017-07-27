@@ -79,7 +79,7 @@ update config msg =
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
-                >> map (setEntityListCursor config (entity |> Entity.toEntityId >> Just))
+                >> map (setEntityListCursor (entity |> Entity.toEntityId >> Just))
 
         EM_SetFocusInEntityWithEntityId entityId ->
             returnWithMaybe1
@@ -108,76 +108,67 @@ update config msg =
                     identity
 
 
+updateEntityListCursor : SubModelF model
+updateEntityListCursor model =
+    let
+        computeMaybeFEI index =
+            X.List.clampIndex index newEntityIdList
+                |> X.List.atIndexIn newEntityIdList
 
---updateEntityListCursor : Config msg a -> Maybe EntityId -> SubModelF model
---updateEntityListCursor config newMaybeFocusableEntityId model =
---    let
---        computeMaybeFEI index =
---            X.List.clampIndex index newEntityIdList
---                |> X.List.atIndexIn newEntityIdList
---
---        computeMaybeNextFEI oldIndex newIndex =
---            case compare oldIndex newIndex of
---                LT ->
---                    computeMaybeFEI oldIndex
---
---                GT ->
---                    computeMaybeFEI (oldIndex + 1)
---
---                EQ ->
---                    Nothing
---
---        updateFromEntityIdTuple : ( EntityId, EntityId ) -> SubModel model
---        updateFromEntityIdTuple tuple =
---            let
---                focusNextOnIndexChange =
---                    case Tuple.second tuple of
---                        TodoId _ ->
---                            True
---
---                        _ ->
---                            False
---
---                meid : Maybe EntityId
---                meid =
---                    tuple
---                        |> Tuple2.mapBoth (X.List.firstIndexOfIn newEntityIdList)
---                        |> (\maybeIndexT2 ->
---                                case maybeIndexT2 of
---                                    ( Just oldIndex, Just newIndex ) ->
---                                        if focusNextOnIndexChange then
---                                            computeMaybeNextFEI oldIndex newIndex
---                                        else
---                                            Nothing
---
---                                    ( Just oldIndex, Nothing ) ->
---                                        computeMaybeFEI oldIndex
---
---                                    _ ->
---                                        Nothing
---                           )
---            in
---            model
---
---        newEntityIdList =
---            Model.EntityList.createEntityListForCurrentView model
---                .|> Entity.toEntityId
---    in
---    ( model.entityList.maybeFocusableEntityId, newMaybeFocusableEntityId )
---        |> maybe2Tuple
---        |> Maybe.Extra.unpack
---            (\_ ->
---                setIn model
---                    entityList
---                    { entityIdList = newEntityIdList
---                    , maybeFocusableEntityId = newMaybeFocusableEntityId
---                    }
---            )
---            updateFromEntityIdTuple
+        computeMaybeNextFEI oldIndex newIndex =
+            case compare oldIndex newIndex of
+                LT ->
+                    computeMaybeFEI oldIndex
+
+                GT ->
+                    computeMaybeFEI (oldIndex + 1)
+
+                EQ ->
+                    Nothing
+
+        getNewCursorEntityId : Maybe EntityId
+        getNewCursorEntityId =
+            let
+                focusNextOnIndexChange =
+                    True
+            in
+            ( model.entityList.prevMaybeFocusableEntityId
+            , model.entityList.prevMaybeFocusableEntityId
+            )
+                |> maybe2Tuple
+                ?+> Tuple2.mapBoth (X.List.firstIndexOfIn newEntityIdList)
+                >> (\maybeIndexT2 ->
+                        case maybeIndexT2 of
+                            ( Just oldIndex, Just newIndex ) ->
+                                if focusNextOnIndexChange then
+                                    computeMaybeNextFEI oldIndex newIndex
+                                else
+                                    Nothing
+
+                            ( Just oldIndex, Nothing ) ->
+                                computeMaybeFEI oldIndex
+
+                            _ ->
+                                Nothing
+                   )
+
+        newEntityIdList =
+            Model.EntityList.createEntityListForCurrentView model
+                .|> Entity.toEntityId
+    in
+    {- ( model.entityList.maybeFocusableEntityId, newMaybeFocusableEntityId )
+       |> maybe2Tuple
+       |> Maybe.Extra.unpack
+           (\_ ->
+               model
+           )
+           getNewCursorEntityId
+    -}
+    model
 
 
-setEntityListCursor : Config msg a -> Maybe EntityId -> SubModelF model
-setEntityListCursor config newMaybeFocusableEntityId model =
+setEntityListCursor : Maybe EntityId -> SubModelF model
+setEntityListCursor newMaybeFocusableEntityId model =
     let
         newEntityIdList =
             Model.EntityList.createEntityListForCurrentView model

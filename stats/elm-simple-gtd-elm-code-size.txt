@@ -1,4 +1,4 @@
-   10222 total
+   10223 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -109,7 +109,7 @@
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       17 src/elm/Subscriptions.elm
-      15 src/elm/Subscriptions/Todo.elm
+      16 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm
       14 src/elm/View/Badge.elm
       14 src/elm/Msg/GroupDoc.elm

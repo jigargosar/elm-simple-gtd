@@ -18,7 +18,7 @@ import ViewType exposing (ViewType(EntityListView))
 
 
 type alias AppConfig =
-    { oneSecond : Int
+    { oneSecond : Float
     , deviceId : String
     , npmPackageVersion : String
     , isDevelopmentMode : Bool

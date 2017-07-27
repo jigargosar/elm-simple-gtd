@@ -100,6 +100,14 @@ window.appBoot = async function appBoot(elmMain = Main) {
   const localPref = await store.getItem("local-pref")
   
   
+  const oneSecond = (()=> {
+    if (WEBPACK_DEV_SERVER) {
+      return 30
+    } else {
+      return 1
+    }
+  })()
+  
   const flags = _.merge({
     now: Date.now(),
     // encodedTodoList: await allDocsMap["todo-db"],
@@ -112,7 +120,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
     deviceId,
-    config: {oneSecond:1, deviceId, npmPackageVersion, isDevelopmentMode},
+    config: {oneSecond, deviceId, npmPackageVersion, isDevelopmentMode},
     localPref: localPref,
   }, db.allDocsMap)
   

@@ -1,4 +1,4 @@
-   10173 total
+   10182 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -6,8 +6,8 @@
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
      219 src/elm/GroupDoc/ViewModel.elm
+     212 src/elm/Update/Entity.elm
      210 src/elm/Msg.elm
-     199 src/elm/Update/Entity.elm
      187 src/elm/Todo/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      176 src/elm/Update/Subscription.elm
@@ -93,6 +93,7 @@
       32 src/elm/Ports/Firebase.elm
       27 src/elm/Firebase.elm
       25 src/elm/View.elm
+      25 src/elm/EntityList.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
@@ -108,7 +109,6 @@
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       16 src/elm/Subscriptions.elm
-      16 src/elm/EntityList.elm
       15 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm
       14 src/elm/View/Badge.elm
@@ -116,7 +116,6 @@
       14 src/elm/Model/HasFocusInEntity.elm
       13 src/elm/ViewType.elm
       13 src/elm/Subscriptions/Firebase.elm
-      13 src/elm/EntityList/Types.elm
       12 src/elm/Todo/Store.elm
       12 src/elm/Ports.elm
       11 src/elm/Msg/Subscription.elm

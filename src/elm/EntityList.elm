@@ -1,16 +1,25 @@
 module EntityList exposing (..)
 
-import EntityList.Types exposing (EntityList)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
+import Entity.Types exposing (EntityId)
+import X.Record exposing (..)
 
 
-initialValue : EntityList
+type alias EntityListModel =
+    { entityIdList : List EntityId
+    , maybeFocusableEntityId : Maybe EntityId
+    }
+
+
+type alias HasEntityListModel a =
+    { a | entityList : EntityListModel }
+
+
+entityList =
+    fieldLens .entityList (\s b -> { b | entityList = s })
+
+
+initialValue : EntityListModel
 initialValue =
-    { idList = []
+    { entityIdList = []
     , maybeFocusableEntityId = Nothing
     }

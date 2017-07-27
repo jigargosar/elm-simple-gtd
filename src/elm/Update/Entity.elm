@@ -2,7 +2,7 @@ module Update.Entity exposing (Config, update)
 
 import Entity
 import Entity.Types exposing (..)
-import EntityList.Types exposing (HasEntityList)
+import EntityList exposing (HasEntityListModel, entityList)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
@@ -10,6 +10,7 @@ import Lazy exposing (Lazy)
 import List.Extra
 import Maybe.Extra
 import Model
+import Model.EntityList
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
@@ -32,7 +33,7 @@ import X.Return exposing (..)
 type alias SubModel model =
     HasViewType
         (HasStores
-            (HasEntityList
+            (HasEntityListModel
                 (HasFocusInEntity
                     { model
                         | selectedEntityIdSet : Set.Set String
@@ -47,7 +48,7 @@ type alias SubModelF model =
 
 
 type alias SubReturn msg model =
-    Return.Return msg (SubModel model)
+    Return msg (SubModel model)
 
 
 type alias SubReturnF msg model =
@@ -72,6 +73,7 @@ update config msg =
     case msg of
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
+                >> map (updateEntityList config (entity |> Entity.toEntityId >> Just))
 
         EM_SetFocusInEntityWithEntityId entityId ->
             returnWithMaybe1
@@ -98,6 +100,17 @@ update config msg =
 
                 _ ->
                     identity
+
+
+updateEntityList config maybeEntityId model =
+    let
+        entityIdList =
+            Model.EntityList.createEntityListForCurrentView model
+                .|> Entity.toEntityId
+    in
+    setIn model
+        entityList
+        { entityIdList = entityIdList, maybeFocusableEntityId = maybeEntityId }
 
 
 onUpdateAction :

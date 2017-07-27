@@ -4,10 +4,11 @@ import Keyboard
 import Msg.Subscription exposing (SubscriptionMsg)
 import Ports
 import Time
+import Types exposing (AppModel)
 
 
-subscriptions : Sub SubscriptionMsg
-subscriptions =
+subscriptions : AppModel -> Sub SubscriptionMsg
+subscriptions model =
     Sub.batch
         [ Time.every (Time.second * 1) Msg.Subscription.OnNowChanged
         , Keyboard.ups Msg.Subscription.OnGlobalKeyUp

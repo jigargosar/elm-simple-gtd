@@ -6,7 +6,7 @@ import Todo.Msg exposing (TodoMsg(..))
 
 
 subscriptions : model -> Sub TodoMsg
-subscriptions _ =
+subscriptions model =
     Sub.batch
         [ notificationClicked OnReminderNotificationClicked
         , onRunningTodoNotificationClicked RunningNotificationResponse

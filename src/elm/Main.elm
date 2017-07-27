@@ -21,7 +21,7 @@ main =
     let
         subscriptions model =
             Sub.batch
-                [ Subscriptions.subscriptions |> Sub.map Msg.OnSubscriptionMsg
+                [ Subscriptions.subscriptions model |> Sub.map Msg.OnSubscriptionMsg
                 , Subscriptions.Todo.subscriptions model |> Sub.map Msg.OnTodoMsg
                 , Subscriptions.Firebase.subscriptions model |> Sub.map Msg.OnFirebaseMsg
                 , Subscriptions.AppDrawer.subscriptions model |> Sub.map Msg.OnAppDrawerMsg

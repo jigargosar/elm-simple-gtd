@@ -62,7 +62,6 @@ const observer = new MutationSummary({
 window.appBoot = async function appBoot(elmMain = Main) {
   
   const deviceId = getOrCreateDeviceId()
-  const isFirstVisit = getOrCreateFirstVisit()
   const $elm = $("#elm-container")
   // $elm.trap();
   
@@ -113,7 +112,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
     deviceId,
-    config: {isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
+    config: {oneSecond:1, deviceId, npmPackageVersion, isDevelopmentMode},
     localPref: localPref,
   }, db.allDocsMap)
   

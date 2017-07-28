@@ -953,6 +953,7 @@
       "Entity",
       "Entity.Tree",
       "EntityId",
+      "EntityListCursor",
       "GroupDoc.View",
       "Html",
       "Html.Attributes",
@@ -964,9 +965,10 @@
       "Todo.ItemView",
       "Toolkit.Operators",
       "View.Badge",
+      "X.Function",
       "X.Keyboard"
     ],
-    "importsCount": 15,
+    "importsCount": 17,
     "transitiveImports": [
       "AppColors",
       "Char",
@@ -979,6 +981,7 @@
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
+      "EntityListCursor",
       "ExclusiveMode.Types",
       "Firebase.Types",
       "Fuzzy",
@@ -1040,7 +1043,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 71,
+    "transitiveImportsCount": 72,
     "backwardImports": [
       "View.Layout"
     ],
@@ -1158,14 +1161,16 @@
     ],
     "transitiveImportsCount": 32,
     "backwardImports": [
+      "Entity.View",
       "Model.Internal",
       "Types",
       "Update.Entity",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
+      "Entity.View",
       "Main",
       "Model.Internal",
       "Subscriptions",
@@ -1177,9 +1182,10 @@
       "Update.Todo.Internal",
       "Update.Types",
       "View",
+      "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 15
   },
   "ExclusiveMode.Types": {
     "fileName": "src/elm/ExclusiveMode/Types.elm",
@@ -7950,6 +7956,7 @@
       "Entity.Types",
       "Entity.View",
       "EntityId",
+      "EntityListCursor",
       "ExclusiveMode.Types",
       "Firebase",
       "Firebase.Model",
@@ -8024,7 +8031,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 91,
+    "transitiveImportsCount": 92,
     "backwardImports": [
       "View"
     ],
@@ -8781,6 +8788,7 @@
       "Context",
       "Document",
       "Entity",
+      "Entity.View",
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
       "Mat",
@@ -8795,7 +8803,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 18,
+    "backwardImportsCount": 19,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

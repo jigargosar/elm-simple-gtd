@@ -3,6 +3,7 @@ module Entity.View exposing (list)
 import Entity
 import Entity.Tree
 import EntityId
+import EntityListCursor
 import GroupDoc.View
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -14,6 +15,7 @@ import Model.EntityTree
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
 import View.Badge
+import X.Function exposing (..)
 import X.Keyboard exposing (onKeyDown)
 
 
@@ -30,29 +32,30 @@ list config appVM viewType model =
         entityList =
             grouping |> Entity.Tree.flatten
 
-        maybeFocusInEntity =
-            getMaybeFocusInEntity entityList model
+        maybeEntityIdAtCursor =
+            getMaybeEntityIdAtCursor entityList model
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         , config.onEntityListKeyDown entityList |> onKeyDown
         ]
-        (keyedViewList appVM grouping maybeFocusInEntity model)
+        (keyedViewList appVM grouping maybeEntityIdAtCursor model)
 
 
-getMaybeFocusInEntity entityList model =
-    entityList
-        |> List.Extra.find (Entity.equalById (Model.getFocusInEntity model))
+getMaybeEntityIdAtCursor entityList model =
+    EntityListCursor.getMaybeEntityIdAtCursor model
+        ?+> (Entity.hasId >> List.Extra.find # entityList)
         |> Maybe.Extra.orElse (List.head entityList)
+        ?|> Entity.toEntityId
 
 
-keyedViewList appVM grouping maybeFocusInEntity model =
+keyedViewList appVM grouping maybeEntityIdAtCursor model =
     let
-        entityIdHasFocusIn entityId =
-            maybeFocusInEntity ?|> Entity.hasId entityId ?= False
+        isCursorAtEntityId entityId =
+            maybeEntityIdAtCursor ?|> equals entityId ?= False
 
         getTabIndexForEntityId entityId =
-            if entityIdHasFocusIn entityId then
+            if isCursorAtEntityId entityId then
                 0
             else
                 -1
@@ -79,7 +82,7 @@ keyedViewList appVM grouping maybeFocusInEntity model =
         todoViewFromTodo todo =
             let
                 isFocusable =
-                    EntityId.fromTodo todo |> entityIdHasFocusIn
+                    EntityId.fromTodo todo |> isCursorAtEntityId
             in
             todo
                 |> appVM.createTodoViewModel model isFocusable

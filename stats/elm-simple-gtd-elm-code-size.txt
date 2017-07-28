@@ -1,4 +1,4 @@
-   10156 total
+   10159 total
      453 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -21,7 +21,7 @@
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     143 src/elm/Entity/View.elm
+     146 src/elm/Entity/View.elm
      142 src/elm/GroupDoc.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm

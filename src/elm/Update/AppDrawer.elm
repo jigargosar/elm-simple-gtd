@@ -2,7 +2,6 @@ module Update.AppDrawer exposing (update)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (Msg(..))
-import Model
 import Return
 import X.Record exposing (..)
 

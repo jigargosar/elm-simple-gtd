@@ -1,6 +1,5 @@
 module Update.Config exposing (..)
 
-import Lazy
 import Msg exposing (AppMsg)
 import Todo.Msg exposing (TodoMsg)
 import TodoMsg

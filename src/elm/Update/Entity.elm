@@ -5,9 +5,7 @@ import Entity.Tree
 import Entity.Types exposing (..)
 import EntityList exposing (HasEntityListCursor, entityListCursor)
 import ExclusiveMode.Types exposing (..)
-import GroupDoc.Types exposing (ContextStore, GroupDocType(..), ProjectStore)
 import Keyboard.Extra as Key
-import Lazy exposing (Lazy)
 import List.Extra
 import Maybe.Extra
 import Model
@@ -18,16 +16,11 @@ import Model.Selection
 import Model.Stores
 import Model.Todo
 import Model.ViewType
-import Return
 import Set
-import Time exposing (Time)
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
-import ViewType exposing (ViewType)
-import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
 import X.List
 import X.Record exposing (..)

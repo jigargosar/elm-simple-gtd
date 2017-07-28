@@ -5,7 +5,6 @@ import Document exposing (DocId, getDocId)
 import DomPorts
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Lazy exposing (Lazy)
 import Model
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.Todo exposing (findTodoById, todoStore)

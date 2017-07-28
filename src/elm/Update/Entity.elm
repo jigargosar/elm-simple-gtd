@@ -80,44 +80,45 @@ update config msg =
             onUpdateAction config entityId action
 
         EM_EntityListKeyDown { key } ->
-            let
-                findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
-                    let
-                        index =
-                            maybeOffsetFromEntityId
-                                ?+> (equals >> X.List.findIndexIn entityIdList)
-                                ?= 0
-                                |> add offsetIndex
-                    in
-                    X.List.clampAndGetAtIndex index entityIdList
-                        |> Maybe.Extra.orElse (List.head entityIdList)
-
-                moveFocusBy offset =
-                    returnWithMaybe2 identity
-                        (\model ->
-                            let
-                                maybeEntityIdAtCursor =
-                                    EntityListCursor.getMaybeEntityIdAtCursor model
-
-                                entityIdList =
-                                    createEntityListForCurrentView model
-                                        .|> Entity.toEntityId
-                            in
-                            findEntityIdByOffsetIn offset
-                                entityIdList
-                                maybeEntityIdAtCursor
-                                ?|> (EM_SetFocusInEntityWithEntityId >> update config)
-                        )
-            in
             case key of
                 Key.ArrowUp ->
-                    moveFocusBy -1
+                    moveFocusBy config -1
 
                 Key.ArrowDown ->
-                    moveFocusBy 1
+                    moveFocusBy config 1
 
                 _ ->
                     identity
+
+
+moveFocusBy config offset =
+    let
+        findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
+            let
+                index =
+                    maybeOffsetFromEntityId
+                        ?+> (equals >> X.List.findIndexIn entityIdList)
+                        ?= 0
+                        |> add offsetIndex
+            in
+            X.List.clampAndGetAtIndex index entityIdList
+                |> Maybe.Extra.orElse (List.head entityIdList)
+    in
+    returnWithMaybe2 identity
+        (\model ->
+            let
+                maybeEntityIdAtCursor =
+                    EntityListCursor.getMaybeEntityIdAtCursor model
+
+                entityIdList =
+                    createEntityListForCurrentView model
+                        .|> Entity.toEntityId
+            in
+            findEntityIdByOffsetIn offset
+                entityIdList
+                maybeEntityIdAtCursor
+                ?|> (EM_SetFocusInEntityWithEntityId >> update config)
+        )
 
 
 updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model

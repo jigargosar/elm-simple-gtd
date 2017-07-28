@@ -104,7 +104,8 @@ onGlobalKeyUp config key =
                             clear
 
                         KX.CharQ ->
-                            returnMsgAsCmd config.onStartAddingTodoWithFocusInEntityAsReference
+                            returnMsgAsCmd
+                                config.onStartAddingTodoWithFocusInEntityAsReference
 
                         KX.CharI ->
                             returnMsgAsCmd config.onStartAddingTodoToInbox
@@ -115,14 +116,20 @@ onGlobalKeyUp config key =
                         KX.CharT ->
                             returnMsgAsCmd config.onGotoRunningTodoMsg
 
+                        KX.ArrowUp ->
+                            identity
+
+                        KX.ArrowDown ->
+                            identity
+
                         _ ->
-                            returnMsgAsCmd config.noop
+                            identity
 
                 ( KX.Escape, _ ) ->
                     returnMsgAsCmd config.revertExclusiveMode
 
                 _ ->
-                    returnMsgAsCmd config.noop
+                    identity
         )
 
 

@@ -5,6 +5,7 @@ import Document exposing (DocId, getDocId)
 import DomPorts
 import Entity
 import Entity.Types exposing (..)
+import EntityListCursor
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
@@ -142,10 +143,6 @@ onSaveTodoForm config form =
             saveAddTodoForm config addMode form |> andThen
 
 
-inboxEntity =
-    Entity.Types.createContextEntity Context.null
-
-
 
 --insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
 
@@ -166,19 +163,23 @@ saveAddTodoForm config addMode form model =
         |> uncurry
             (\todoId ->
                 let
-                    referenceEntity =
+                    inboxEntityId =
+                        Entity.Types.createContextEntityId Context.nullId
+
+                    referenceEntityId =
                         case addMode of
                             ATFM_AddToInbox ->
-                                inboxEntity
+                                inboxEntityId
 
                             ATFM_SetupFirstTodo ->
-                                inboxEntity
+                                inboxEntityId
 
                             ATFM_AddWithFocusInEntityAsReference ->
-                                Model.getFocusInEntity model
+                                EntityListCursor.getMaybeEntityIdAtCursor model
+                                    ?= inboxEntityId
 
                     maybeAction =
-                        case Entity.toEntityId referenceEntity of
+                        case referenceEntityId of
                             TodoId todoId ->
                                 Model.Todo.findTodoById todoId model
                                     ?|> TA_CopyProjectAndContextId

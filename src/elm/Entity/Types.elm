@@ -76,3 +76,11 @@ getDocIdFromEntityId entityId =
 
 createTodoEntityId =
     TodoId
+
+
+createContextEntityId =
+    ContextId
+
+
+createProjectEntityId =
+    ProjectId

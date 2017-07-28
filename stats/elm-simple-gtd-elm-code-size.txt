@@ -1,5 +1,5 @@
-   10145 total
-     450 src/elm/Update/Todo/Internal.elm
+   10154 total
+     451 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
      280 src/elm/Update/Entity.elm
@@ -40,13 +40,13 @@
       91 src/elm/Model/GroupDocStore.elm
       88 src/elm/X/Html.elm
       87 src/elm/View/Layout.elm
+      86 src/elm/Entity/Types.elm
       84 src/elm/Update/ExclusiveMode.elm
       84 src/elm/Model/Internal.elm
       82 src/elm/View/MainMenu.elm
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
       78 src/elm/Update.elm
-      78 src/elm/Entity/Types.elm
       77 src/elm/AppColors.elm
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm

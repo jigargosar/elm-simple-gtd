@@ -29,36 +29,28 @@ const npmPackageVersion = env["npm_package_version"]
  })
  }*/
 
-Kefir.stream(emitter => {
-       const observer = new MutationSummary({
-         callback: summaries => {
-           // console.log(summaries)
+const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
+  const observer = new MutationSummary({
+    callback: summaries => {
+      // console.log(summaries)
       
-           const autoFocusSummaryAdded = summaries[0].added
-           if (!_.isEmpty(autoFocusSummaryAdded)) {
-             emitter.emit(".auto-focus")
-           }
+      const autoFocusSummaryAdded = summaries[0].added
+      if (!_.isEmpty(autoFocusSummaryAdded)) {
+        emitter.emit(".auto-focus")
+      }
       
-           const focusInEntitySummary = summaries[1]
-           const focusInEntitySummaryAdded = focusInEntitySummary.added
-           if (!_.isEmpty(focusInEntitySummaryAdded)) {
-             // console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
-             emitter.emit(".focusable-list-item[tabindex=0]")
-           }
-         },
-         queries: [{element: ".auto-focus"},
-           {element: ".focusable-list-item[tabindex=0]"},
-         ],
-       })
-     })
-     .debounce(1000)
-     .log()
-     .observe({
-       value(selector) {
-         const $focusInEntity = $(selector).first()
-         $focusInEntity.first().focus()
-       },
-     })
+      const focusInEntitySummary = summaries[1]
+      const focusInEntitySummaryAdded = focusInEntitySummary.added
+      if (!_.isEmpty(focusInEntitySummaryAdded)) {
+        // console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+        emitter.emit(".focusable-list-item[tabindex=0]")
+      }
+    },
+    queries: [{element: ".auto-focus"},
+      {element: ".focusable-list-item[tabindex=0]"},
+    ],
+  })
+})
 
 window.appBoot = async function appBoot(elmMain = Main) {
   
@@ -142,14 +134,23 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   Notifications.setup(fire, app).catch(console.error)
   
-  app.ports["focusSelector"].subscribe((selector) => {
-    console.log("port: focusSelector received selector", selector)
-    // setTimeout(() => {
-    requestAnimationFrame(() => {
-      $(selector).focus()
-    })
-    // }, 0)
-  })
+  const portFocusSelectorStream =
+      Kefir.stream(emitter => {
+        app.ports["focusSelector"].subscribe((selector) => {
+          // console.log("port: focusSelector received selector", selector)
+          emitter.emit(selector)
+        })
+      })
+  
+  Kefir.merge([portFocusSelectorStream, mutationObserverFocusSelectorStream])
+       .debounce(100)
+       .log()
+       .observe({
+         value(selector) {
+           const $focusInEntity = $(selector).first()
+           $focusInEntity.first().focus()
+         },
+       })
   
   app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {
     const $focus = $(":focus, [focused]")

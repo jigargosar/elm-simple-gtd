@@ -87,16 +87,19 @@ update config msg =
 
         EM_EntityListKeyDown entityList { key } ->
             let
-                findEntityByOffsetIn offsetIndex entityList fromEntity =
-                    entityList
-                        |> X.List.findIndex (Entity.equalById fromEntity)
-                        ?= 0
-                        |> add offsetIndex
-                        |> X.List.clampAndGetAtIndexIn entityList
+                findEntityByOffsetIn offsetIndex entityList maybeFromEntityId =
+                    let
+                        index =
+                            maybeFromEntityId
+                                ?+> (Entity.hasId >> X.List.findIndex # entityList)
+                                ?= 0
+                                |> add offsetIndex
+                    in
+                    X.List.clampAndGetAtIndex index entityList
                         |> Maybe.Extra.orElse (List.head entityList)
 
                 moveFocusBy offset =
-                    returnWithMaybe2 Model.getFocusInEntity
+                    returnWithMaybe2 EntityListCursor.getMaybeEntityIdAtCursor
                         (findEntityByOffsetIn offset entityList
                             >>? (EM_SetFocusInEntity >> update config)
                         )

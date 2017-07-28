@@ -3,7 +3,7 @@ module Update.Entity exposing (Config, update)
 import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
-import EntityListCursor exposing (HasEntityListCursor, entityListCursor)
+import EntityListCursor exposing (..)
 import ExclusiveMode.Types exposing (..)
 import Keyboard.Extra as Key
 import List.Extra
@@ -141,6 +141,10 @@ updateEntityListCursor config model =
         ?+> computeNewEntityIdAtCursor
         >>? (EM_SetFocusInEntityWithEntityId >> update config)
         ?= identity
+
+
+entityListCursor =
+    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
 setEntityAtCursor : Maybe EntityId -> SubModelF model

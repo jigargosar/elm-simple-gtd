@@ -14,10 +14,6 @@ type alias HasEntityListCursor a =
     { a | entityListCursor : EntityListCursor }
 
 
-entityListCursor =
-    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
-
-
 getMaybeEntityIdAtCursor model =
     model.entityListCursor.maybeEntityIdAtCursor
 

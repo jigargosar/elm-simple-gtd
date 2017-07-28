@@ -56,29 +56,12 @@ $roboto-font-path: $font-path;
 $text-color: $off-black;
 $background: #fff;
 
+i.material-icons {
+  color: color("grey", "darken-2");
+}
+
 @import "landing";
 @import "app";
-
-//<editor-fold desc="flat button like ok cancel, but not skip, they are unimportant ones.">
-// this materializecss sucks. I hope it is easy to use googl's mdl lite.
-// or we will just have to customize material from scratch.
-.btn.btn-flat {
-  color: color("indigo", "accent-3")
-}
-
-.btn.btn-flat:hover {
-  color: color("indigo", "darken-1")
-}
-
-.icon-button .material-icons {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.icon-button.x-fab .material-icons {
-  color: white;
-}
-
-//</editor-fold>
 
 img.account {
   cursor: pointer;
@@ -139,14 +122,6 @@ img.account {
   //background: #000;
 
   will-change: opacity;
-}
-
-button.x-fab.btn-floating > i.material-icons {
-  color: white;
-}
-
-button.btn-flat.btn-floating {
-  z-index: 0;
 }
 
 @import "../blocks/button";

@@ -141,7 +141,7 @@ $sidebar-width: 18rem;
   min-height: 70vh;
 }
 
+.done-icon.is-done i.material-icons {
+  color: color("green", "darken-1");
+}
 
-
-
-@import "../blocks/layout";

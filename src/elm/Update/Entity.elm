@@ -108,10 +108,7 @@ update config msg =
                     identity
 
 
-
---updateEntityListCursor : SubModelF model
-
-
+updateEntityListCursor : Config msg a -> SubReturnF msg model
 updateEntityListCursor config model =
     let
         computeMaybeFEI index =

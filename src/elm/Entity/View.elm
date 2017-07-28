@@ -49,7 +49,7 @@ getMaybeEntityIdAtCursor entityList model =
         ?|> Entity.toEntityId
 
 
-keyedViewList appVM grouping maybeEntityIdAtCursor model =
+keyedViewList appVM entityTree maybeEntityIdAtCursor model =
     let
         isCursorAtEntityId entityId =
             maybeEntityIdAtCursor ?|> equals entityId ?= False
@@ -92,7 +92,7 @@ keyedViewList appVM grouping maybeEntityIdAtCursor model =
         todoListView =
             List.map todoViewFromTodo
     in
-    case grouping of
+    case entityTree of
         Entity.Tree.ContextRoot contextGroup subGroupList ->
             let
                 header =

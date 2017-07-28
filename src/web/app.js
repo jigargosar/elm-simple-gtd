@@ -32,6 +32,7 @@ const npmPackageVersion = env["npm_package_version"]
 const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
   
   const focusableEntityListItemSelector = ".focusable-list-item[tabindex=0]"
+  const autoFocusSelector = ".auto-focus"
   const observer = new MutationSummary({
     callback: summaries => {
       // console.log(summaries)
@@ -48,7 +49,7 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
         emitter.emit(".focusable-list-item[tabindex=0]")
       }
     },
-    queries: [{element: ".auto-focus"},
+    queries: [{element: autoFocusSelector},
       {element: focusableEntityListItemSelector},
     ],
   })
@@ -129,13 +130,29 @@ window.appBoot = async function appBoot(elmMain = Main) {
         })
       })
   
-  Kefir.merge([portFocusSelectorStream, mutationObserverFocusSelectorStream])
+  const addMetadataToFocusSelectorStream =
+      (stream, streamName) => stream.map(selector => ({streamName, selector}))
+  
+  const focusSelectorStreams =
+      [addMetadataToFocusSelectorStream(
+          portFocusSelectorStream,
+          "portFocusSelectorStream",
+      ),
+       addMetadataToFocusSelectorStream(
+           mutationObserverFocusSelectorStream,
+           "mutationObserverFocusSelectorStream",
+       )]
+  Kefir.merge(focusSelectorStreams)
        .debounce(100)
        .observe({
-         value(selector) {
-           const $focusInEntity = $(selector).first()
-           console.log($focusInEntity.data("key"))
-           $focusInEntity.focus()
+         value(options) {
+           const $toFocus = $(options.selector).first()
+      
+           console.log("[Kefir] focusSelector", _.merge(options, {
+             dataKey: $toFocus.data("key"),
+           }))
+      
+           $toFocus.focus()
          },
        })
   

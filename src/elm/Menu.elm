@@ -14,7 +14,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
-import X.List as List
+import X.List
 
 
 type alias State =
@@ -67,17 +67,17 @@ createViewModel : List item -> State -> Config item msg -> ViewModel item msg
 createViewModel items state config =
     let
         clampIndex =
-            List.clampIndexIn items
+            X.List.clampIndexIn items
 
         maybeSelectedIndex =
-            items |> List.findIndex config.isSelected ?|> clampIndex
+            items |> X.List.findIndex config.isSelected ?|> clampIndex
 
         maybeFocusedIndex =
             let
                 findIndexOfItemWithKey key =
                     List.findIndex (config.itemKey >> equals key) items
             in
-            state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
+            state.maybeFocusKey ?+> findIndexOfItemWithKey >>? X.List.clampIndexIn items
 
         focusedIndex =
             maybeFocusedIndex |> Maybe.orElse maybeSelectedIndex ?= 0

@@ -58,13 +58,3 @@ equalById =
 
 hasId entityId entity =
     toEntityId entity |> equals entityId
-
-
-findEntityByOffsetIn offsetIndex entityList fromEntity =
-    entityList
-        |> List.findIndex (equalById fromEntity)
-        ?= 0
-        |> add offsetIndex
-        |> List.clampIndexIn entityList
-        |> List.getAtIndexIn entityList
-        |> Maybe.orElse (List.head entityList)

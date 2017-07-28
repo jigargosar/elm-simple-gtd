@@ -21,6 +21,7 @@ import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import Tuple2
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
 import X.Record exposing (..)
@@ -86,9 +87,17 @@ update config msg =
 
         EM_EntityListKeyDown entityList { key } ->
             let
+                findEntityByOffsetIn offsetIndex entityList fromEntity =
+                    entityList
+                        |> X.List.findIndex (Entity.equalById fromEntity)
+                        ?= 0
+                        |> add offsetIndex
+                        |> X.List.clampAndGetAtIndexIn entityList
+                        |> Maybe.Extra.orElse (List.head entityList)
+
                 moveFocusBy offset =
                     returnWithMaybe2 Model.getFocusInEntity
-                        (Entity.findEntityByOffsetIn offset entityList
+                        (findEntityByOffsetIn offset entityList
                             >>? (EM_SetFocusInEntity >> update config)
                         )
             in

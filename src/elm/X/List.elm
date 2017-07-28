@@ -21,6 +21,10 @@ clampIndexIn =
     flip clampIndex
 
 
+findIndex =
+    List.Extra.findIndex
+
+
 getAtIndexIn =
     flip List.Extra.getAt
 
@@ -28,6 +32,10 @@ getAtIndexIn =
 clampAndGetAtIndex index list =
     clampIndex index list
         |> getAtIndexIn list
+
+
+clampAndGetAtIndexIn =
+    flip clampAndGetAtIndex
 
 
 prependIn =

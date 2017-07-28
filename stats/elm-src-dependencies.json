@@ -6510,12 +6510,13 @@
       "Todo.Types",
       "Toolkit.Operators",
       "Tuple2",
+      "X.Function",
       "X.Function.Infix",
       "X.List",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 25,
+    "importsCount": 26,
     "transitiveImports": [
       "Char",
       "Context",
@@ -8776,12 +8777,13 @@
       "Project",
       "Todo",
       "Todo.Notification.Model",
+      "Update.Entity",
       "Update.Todo.Internal",
       "ViewModel",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 18,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

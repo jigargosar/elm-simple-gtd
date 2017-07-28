@@ -2,7 +2,7 @@ module View.Layout exposing (..)
 
 import AppDrawer.Model
 import AppDrawer.View
-import Entity.View
+import Entity.ListView
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -28,7 +28,7 @@ appLayoutView config appVM model =
             div [ id "main-view-container" ]
                 [ case Model.ViewType.getViewType model of
                     EntityListView viewType ->
-                        Entity.View.list config appVM viewType model
+                        Entity.ListView.listView config appVM viewType model
 
                     SyncView ->
                         View.CustomSync.view config model

@@ -1,4 +1,4 @@
-module Entity.View exposing (list)
+module Entity.ListView exposing (listView)
 
 import Entity
 import Entity.Tree
@@ -24,7 +24,7 @@ import X.Keyboard exposing (onKeyDown)
 --list : EntityListViewType -> AppModel -> Html.Html AppMsg
 
 
-list config appVM viewType model =
+listView config appVM viewType model =
     let
         entityTree =
             Model.EntityTree.createEntityTreeForViewType viewType model

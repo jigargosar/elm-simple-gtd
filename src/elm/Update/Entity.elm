@@ -75,7 +75,8 @@ update :
 update config msg =
     case msg of
         EM_UpdateEntityListCursor ->
-            returnWith identity (updateEntityListCursor config)
+            --            returnWith identity (updateEntityListCursor config)
+            identity
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
@@ -157,10 +158,42 @@ updateEntityListCursor config model =
 
         updateHelp =
             model.entityList.prevMaybeFocusableEntityId
-                ?+> (getNewCursorEntityId >>? (EM_SetFocusInEntityWithEntityId >> update config))
+                ?+> getNewCursorEntityId
+                >>? (\newEID ->
+                        let
+                            _ =
+                                Debug.log "newEID" newEID
+                        in
+                        (newEID |> EM_SetFocusInEntityWithEntityId >> update config)
+                            >> map (setEntityListCursor (Just newEID))
+                    )
                 ?= identity
+
+        _ =
+            Debug.log "model.entityList.prevMaybeFocusableEntityId" model.entityList.prevMaybeFocusableEntityId
     in
     updateHelp
+
+
+
+{- updateHelp =
+           model.entityList.prevMaybeFocusableEntityId
+               ?+> (getNewCursorEntityId
+                       >>? \newEID ->
+                               let
+                                   _ =
+                                       Debug.log "newEID" newEID
+                               in
+                               newEID |> EM_SetFocusInEntityWithEntityId >> update config
+                           --                                    >> map (setEntityListCursor (Just newEID))
+                   )
+               ?= identity
+
+       _ =
+           Debug.log "model.entityList.prevMaybeFocusableEntityId" model.entityList.prevMaybeFocusableEntityId
+   in
+   updateHelp
+-}
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model

@@ -75,8 +75,8 @@ update :
 update config msg =
     case msg of
         EM_UpdateEntityListCursor ->
-            --            returnWith identity (updateEntityListCursor config)
-            identity
+            --            identity
+            returnWith identity (updateEntityListCursor config)
 
         EM_SetFocusInEntity entity ->
             map (set Model.focusInEntity__ entity)
@@ -116,8 +116,8 @@ update config msg =
 updateEntityListCursor config model =
     let
         computeMaybeFEI index =
-            X.List.clampIndex index model.entityList.entityIdList
-                |> X.List.atIndexIn model.entityList.entityIdList
+            X.List.clampIndex index newEntityIdList
+                |> X.List.atIndexIn newEntityIdList
 
         computeMaybeNextFEI oldIndex newIndex =
             case compare oldIndex newIndex of
@@ -136,8 +136,8 @@ updateEntityListCursor config model =
                 focusNextOnIndexChange =
                     True
             in
-            ( model.entityList.prevEntityIdList
-            , model.entityList.entityIdList
+            ( model.entityList.entityIdList
+            , newEntityIdList
             )
                 |> Tuple2.mapBoth
                     (X.List.firstIndexOf prevFocusableEntityId)
@@ -157,7 +157,7 @@ updateEntityListCursor config model =
                    )
 
         updateHelp =
-            model.entityList.prevMaybeFocusableEntityId
+            model.entityList.maybeFocusableEntityId
                 ?+> getNewCursorEntityId
                 >>? (\newEID ->
                         let
@@ -169,8 +169,11 @@ updateEntityListCursor config model =
                     )
                 ?= identity
 
-        _ =
-            Debug.log "model.entityList.prevMaybeFocusableEntityId" model.entityList.prevMaybeFocusableEntityId
+        --        _ =
+        --            Debug.log "model.entityList.prevMaybeFocusableEntityId" model.entityList.prevMaybeFocusableEntityId
+        newEntityIdList =
+            Model.EntityList.createEntityListForCurrentView model
+                .|> Entity.toEntityId
     in
     updateHelp
 

@@ -1,6 +1,6 @@
-   10243 total
+   10246 total
      466 src/elm/Update/Todo/Internal.elm
-     315 src/elm/Update/Entity.elm
+     318 src/elm/Update/Entity.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
      263 src/elm/Mat.elm

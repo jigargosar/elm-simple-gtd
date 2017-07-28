@@ -30,6 +30,8 @@ const npmPackageVersion = env["npm_package_version"]
  }*/
 
 const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
+  
+  const focusableEntityListItemSelector = ".focusable-list-item[tabindex=0]"
   const observer = new MutationSummary({
     callback: summaries => {
       // console.log(summaries)
@@ -47,7 +49,7 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       }
     },
     queries: [{element: ".auto-focus"},
-      {element: ".focusable-list-item[tabindex=0]"},
+      {element: focusableEntityListItemSelector},
     ],
   })
 })

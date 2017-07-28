@@ -30,16 +30,13 @@ list config appVM viewType model =
             Model.EntityTree.createEntityTreeForViewType viewType model
 
         entityList =
-            entityTree |> Entity.Tree.flatten
-
-        maybeEntityIdAtCursor =
-            getMaybeEntityIdAtCursor entityList model
+            Entity.Tree.flatten entityTree
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         , config.onEntityListKeyDown entityList |> onKeyDown
         ]
-        (keyedViewList appVM entityTree maybeEntityIdAtCursor model)
+        (keyedViewList appVM entityTree model)
 
 
 getMaybeEntityIdAtCursor entityList model =
@@ -49,8 +46,11 @@ getMaybeEntityIdAtCursor entityList model =
         ?|> Entity.toEntityId
 
 
-keyedViewList appVM entityTree maybeEntityIdAtCursor model =
+keyedViewList appVM entityTree model =
     let
+        maybeEntityIdAtCursor =
+            getMaybeEntityIdAtCursor (Entity.Tree.flatten entityTree) model
+
         isCursorAtEntityId entityId =
             maybeEntityIdAtCursor ?|> equals entityId ?= False
 

@@ -178,21 +178,18 @@ updateEntityListCursor config model =
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model
-setEntityListCursor newMaybeFocusableEntityId model =
+setEntityListCursor maybeFocusableEntityId model =
     let
-        newEntityIdList =
+        entityIdList =
             Model.EntityList.createEntityListForCurrentView model
                 .|> Entity.toEntityId
 
-        updateELI cursor =
-            { entityIdList = newEntityIdList
-            , maybeFocusableEntityId = newMaybeFocusableEntityId
+        cursor =
+            { entityIdList = entityIdList
+            , maybeFocusableEntityId = maybeFocusableEntityId
             }
     in
-    over
-        entityListCursor
-        updateELI
-        model
+    setIn model entityListCursor cursor
 
 
 onUpdateAction :

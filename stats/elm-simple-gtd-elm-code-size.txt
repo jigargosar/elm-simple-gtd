@@ -1,8 +1,8 @@
-   10218 total
+   10215 total
      466 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
-     294 src/elm/Update/Entity.elm
+     291 src/elm/Update/Entity.elm
      263 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm

@@ -27,16 +27,4 @@ getRemoteSyncForm model =
                 _ ->
                     Nothing
     in
-    maybeForm ?= createRemoteSyncForm model
-
-
-createRemoteSyncForm model =
-    { uri = model.pouchDBRemoteSyncURI }
-
-
-getNow =
-    .now
-
-
-
--- Focus Functions
+    maybeForm ?= { uri = model.pouchDBRemoteSyncURI }

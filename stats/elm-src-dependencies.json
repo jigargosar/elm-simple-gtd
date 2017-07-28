@@ -8007,13 +8007,14 @@
     "moduleName": "View.NewTodoFab",
     "parentModuleName": "View",
     "imports": [
+      "Color",
       "Html",
       "Mat",
       "Material.Button",
       "Material.Options",
       "Material.Tooltip"
     ],
-    "importsCount": 5,
+    "importsCount": 6,
     "transitiveImports": [
       "AppColors",
       "Color",

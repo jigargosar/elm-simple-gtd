@@ -1,5 +1,6 @@
 module View.NewTodoFab exposing (..)
 
+import Color
 import Html exposing (text)
 import Mat exposing (..)
 import Material.Button
@@ -21,7 +22,7 @@ newTodoFab config m =
                     config.onStartAddingTodoWithFocusInEntityAsReference
                 , resourceId "add-todo-fab"
                 ]
-                [ icon "add" ]
+                [ iconM { name = "add", color = Color.white } ]
             ]
         , Material.Tooltip.render config.onMdl
             [ 0 ]

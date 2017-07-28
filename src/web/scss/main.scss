@@ -63,6 +63,7 @@ i.material-icons {
 @import "landing";
 @import "app";
 
+
 img.account {
   cursor: pointer;
   width: 32px;
@@ -122,6 +123,14 @@ img.account {
   //background: #000;
 
   will-change: opacity;
+}
+
+.btn.btn-flat {
+  color: color("indigo", "accent-3")
+}
+
+.btn.btn-flat:hover {
+  color: color("indigo", "darken-1")
 }
 
 @import "../blocks/button";

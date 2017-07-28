@@ -111,9 +111,13 @@ update config msg =
 updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
 updateEntityListCursor config model =
     let
+        newEntityIdList =
+            Model.EntityList.createEntityListForCurrentView model
+                .|> Entity.toEntityId
+
         computeMaybeFEI index =
             X.List.clampIndex index newEntityIdList
-                |> X.List.atIndexIn newEntityIdList
+                |> X.List.getAtIndexIn newEntityIdList
 
         computeMaybeNextFEI oldIndex newIndex =
             case compare oldIndex newIndex of
@@ -128,49 +132,27 @@ updateEntityListCursor config model =
 
         getNewCursorEntityId : EntityId -> Maybe EntityId
         getNewCursorEntityId focusableEntityId =
-            let
-                focusNextOnIndexChange =
-                    case focusableEntityId of
-                        TodoId _ ->
-                            True
-
-                        _ ->
-                            False
-            in
-            ( model.entityList.entityIdList
+            ( model.entityListCursor.entityIdList
             , newEntityIdList
             )
                 |> Tuple2.mapBoth
                     (X.List.firstIndexOf focusableEntityId)
-                |> (\maybeIndexT2 ->
-                        case maybeIndexT2 of
-                            ( Just oldIndex, Just newIndex ) ->
-                                if focusNextOnIndexChange then
-                                    computeMaybeNextFEI oldIndex newIndex
-                                else
-                                    Nothing
+                |> (\( maybeOldIndex, maybeNewIndex ) ->
+                        case ( maybeOldIndex, maybeNewIndex, focusableEntityId ) of
+                            ( Just oldIndex, Just newIndex, TodoId _ ) ->
+                                computeMaybeNextFEI oldIndex newIndex
 
-                            ( Just oldIndex, Nothing ) ->
+                            ( Just oldIndex, Nothing, _ ) ->
                                 computeMaybeFEI oldIndex
 
                             _ ->
                                 Nothing
                    )
-
-        updateHelp =
-            model.entityList.maybeFocusableEntityId
-                ?+> getNewCursorEntityId
-                >>? (\newEID ->
-                        (newEID |> EM_SetFocusInEntityWithEntityId >> update config)
-                            >> map (setEntityListCursor (Just newEID))
-                    )
-                ?= identity
-
-        newEntityIdList =
-            Model.EntityList.createEntityListForCurrentView model
-                .|> Entity.toEntityId
     in
-    updateHelp
+    model.entityListCursor.maybeFocusableEntityId
+        ?+> getNewCursorEntityId
+        >>? (EM_SetFocusInEntityWithEntityId >> update config)
+        ?= identity
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model

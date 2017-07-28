@@ -11,11 +11,11 @@ type alias EntityListCursor =
 
 
 type alias HasEntityListCursor a =
-    { a | entityList : EntityListCursor }
+    { a | entityListCursor : EntityListCursor }
 
 
 entityListCursor =
-    fieldLens .entityList (\s b -> { b | entityList = s })
+    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
 initialValue : EntityListCursor

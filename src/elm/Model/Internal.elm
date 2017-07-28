@@ -78,7 +78,7 @@ createAppModel flags =
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
             , mdl = Material.model
-            , entityList = EntityList.initialValue
+            , entityListCursor = EntityList.initialValue
             }
     in
     model

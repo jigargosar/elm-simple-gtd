@@ -21,7 +21,7 @@ clampIndexIn =
     flip clampIndex
 
 
-atIndexIn =
+getAtIndexIn =
     flip List.Extra.getAt
 
 

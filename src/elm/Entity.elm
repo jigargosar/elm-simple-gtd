@@ -66,5 +66,5 @@ findEntityByOffsetIn offsetIndex entityList fromEntity =
         ?= 0
         |> add offsetIndex
         |> List.clampIndexIn entityList
-        |> List.atIndexIn entityList
+        |> List.getAtIndexIn entityList
         |> Maybe.orElse (List.head entityList)

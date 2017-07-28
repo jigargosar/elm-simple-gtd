@@ -26,11 +26,11 @@ import X.Keyboard exposing (onKeyDown)
 
 list config appVM viewType model =
     let
-        grouping =
+        entityTree =
             Model.EntityTree.createEntityTreeForViewType viewType model
 
         entityList =
-            grouping |> Entity.Tree.flatten
+            entityTree |> Entity.Tree.flatten
 
         maybeEntityIdAtCursor =
             getMaybeEntityIdAtCursor entityList model
@@ -39,7 +39,7 @@ list config appVM viewType model =
         [ class "entity-list focusable-list"
         , config.onEntityListKeyDown entityList |> onKeyDown
         ]
-        (keyedViewList appVM grouping maybeEntityIdAtCursor model)
+        (keyedViewList appVM entityTree maybeEntityIdAtCursor model)
 
 
 getMaybeEntityIdAtCursor entityList model =

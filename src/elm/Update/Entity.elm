@@ -73,7 +73,7 @@ update config msg =
         EM_SetFocusInEntity entity ->
             map
                 (set Model.focusInEntity__ entity
-                    >> setEntityListCursor (entity |> Entity.toEntityId >> Just)
+                    >> setEntityAtCursor (entity |> Entity.toEntityId >> Just)
                 )
 
         EM_SetFocusInEntityWithEntityId entityId ->
@@ -143,8 +143,8 @@ updateEntityListCursor config model =
         ?= identity
 
 
-setEntityListCursor : Maybe EntityId -> SubModelF model
-setEntityListCursor maybeFocusableEntityId model =
+setEntityAtCursor : Maybe EntityId -> SubModelF model
+setEntityAtCursor maybeFocusableEntityId model =
     let
         entityIdList =
             createEntityListForCurrentView model

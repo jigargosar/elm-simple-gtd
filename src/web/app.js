@@ -42,7 +42,7 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       const focusInEntitySummary = summaries[1]
       const focusInEntitySummaryAdded = focusInEntitySummary.added
       if (!_.isEmpty(focusInEntitySummaryAdded)) {
-        // console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+        console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
         emitter.emit(".focusable-list-item[tabindex=0]")
       }
     },
@@ -144,11 +144,11 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   Kefir.merge([portFocusSelectorStream, mutationObserverFocusSelectorStream])
        .debounce(100)
-       .log()
        .observe({
          value(selector) {
            const $focusInEntity = $(selector).first()
-           $focusInEntity.first().focus()
+           console.log($focusInEntity.data("key"))
+           $focusInEntity.focus()
          },
        })
   

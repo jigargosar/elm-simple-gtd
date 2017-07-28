@@ -91,12 +91,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   const flags = _.merge({
     now: Date.now(),
-    // encodedTodoList: await allDocsMap["todo-db"],
-    // encodedProjectList: await allDocsMap["project-db"],
-    // encodedContextList: await allDocsMap["context-db"],
-    // encodedTodoList: [],
-    // encodedProjectList: [],
-    // encodedContextList: [],
     pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
@@ -143,13 +137,14 @@ window.appBoot = async function appBoot(elmMain = Main) {
            "mutationObserverFocusSelectorStream",
        )]
   Kefir.merge(focusSelectorStreams)
+       .spy()
        .debounce(100)
        .observe({
          value(options) {
            const $toFocus = $(options.selector).first()
       
            console.log("[Kefir] focusSelector", _.merge(options, {
-             dataKey: $toFocus.data("key"),
+             // dataKey: $toFocus.data("key"),
            }))
       
            $toFocus.focus()

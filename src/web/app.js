@@ -29,35 +29,43 @@ const npmPackageVersion = env["npm_package_version"]
  })
  }*/
 
-const observer = new MutationSummary({
-  callback: summaries => {
-    // console.log(summaries)
-    
-    const autoFocusSummaryAdded = summaries[0].added
-    if (!_.isEmpty(autoFocusSummaryAdded)) {
-      // console.log("autoFocusSummary.added", autoFocusSummaryAdded)
-      const $first = $(autoFocusSummaryAdded).first()
-      // when using keyboard shortcut, focus tends to not work.
-      // hence setTimeout for nextFrame
-      setTimeout(() => $first.focus(), 0)
-      // $first.focus() // working now with kb but not with mouse ??!!
-    }
-    
-    const focusInEntitySummary = summaries[1]
-    console.log()
-    const focusInEntitySummaryAdded = focusInEntitySummary.added
-    if (!_.isEmpty(focusInEntitySummaryAdded)) {
-      console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
-      const $focusInEntity = $(focusInEntitySummaryAdded).first()
-      $focusInEntity.first().focus()
+Kefir.stream(emitter => {
+       const observer = new MutationSummary({
+         callback: summaries => {
+           // console.log(summaries)
       
-    }
-    
-  },
-  queries: [{element: ".auto-focus"},
-    {element: ".focusable-list-item[tabindex=0]"},
-  ],
-})
+           const autoFocusSummaryAdded = summaries[0].added
+           if (!_.isEmpty(autoFocusSummaryAdded)) {
+             // console.log("autoFocusSummary.added", autoFocusSummaryAdded)
+             const $first = $(autoFocusSummaryAdded).first()
+             // when using keyboard shortcut, focus tends to not work.
+             // hence setTimeout for nextFrame
+             // setTimeout(() => $first.focus(), 0)
+             // $first.focus() // working now with kb but not with mouse ??!!
+             emitter.emit(".auto-focus")
+           }
+      
+           const focusInEntitySummary = summaries[1]
+           const focusInEntitySummaryAdded = focusInEntitySummary.added
+           if (!_.isEmpty(focusInEntitySummaryAdded)) {
+             console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+             emitter.emit(".focusable-list-item[tabindex=0]")
+           }
+      
+         },
+         queries: [{element: ".auto-focus"},
+           {element: ".focusable-list-item[tabindex=0]"},
+         ],
+       })
+     })
+     .debounce(1000)
+     .log()
+     .observe({
+       value(selector) {
+         const $focusInEntity = $(selector).first()
+         $focusInEntity.first().focus()
+       },
+     })
 
 window.appBoot = async function appBoot(elmMain = Main) {
   
@@ -100,9 +108,9 @@ window.appBoot = async function appBoot(elmMain = Main) {
   const localPref = await store.getItem("local-pref")
   
   
-  const oneSecond = (()=> {
+  const debugSecondMultiplier = (() => {
     if (WEBPACK_DEV_SERVER) {
-      return 30
+      return 300000
     } else {
       return 1
     }
@@ -120,7 +128,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
     deviceId,
-    config: {oneSecond, deviceId, npmPackageVersion, isDevelopmentMode},
+    config: {debugSecondMultiplier, deviceId, npmPackageVersion, isDevelopmentMode},
     localPref: localPref,
   }, db.allDocsMap)
   

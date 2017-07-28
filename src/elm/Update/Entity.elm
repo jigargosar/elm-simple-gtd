@@ -78,10 +78,6 @@ update config msg =
             returnWith identity (updateEntityListCursor config)
 
         EM_SetFocusInEntity entity ->
-            let
-                _ =
-                    Debug.log "entity" entity
-            in
             map (set Model.focusInEntity__ entity)
                 >> map (setEntityListCursor (entity |> Entity.toEntityId >> Just))
 

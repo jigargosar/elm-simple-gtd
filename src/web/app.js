@@ -83,7 +83,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   const debugSecondMultiplier = (() => {
     if (WEBPACK_DEV_SERVER) {
-      return 300000
+      return 5000
     } else {
       return 1
     }

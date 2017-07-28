@@ -164,10 +164,7 @@ updateEntityListCursor config model =
                 ?+> (getNewCursorEntityId >>? (EM_SetFocusInEntityWithEntityId >> update config))
                 ?= identity
     in
-    if model.entityList.prevEntityIdList == model.entityList.entityIdList then
-        identity
-    else
-        updateHelp
+    updateHelp
 
 
 setEntityListCursor : Maybe EntityId -> SubModelF model

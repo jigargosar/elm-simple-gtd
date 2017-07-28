@@ -130,16 +130,21 @@ updateEntityListCursor config model =
                     Nothing
 
         getNewCursorEntityId : EntityId -> Maybe EntityId
-        getNewCursorEntityId prevFocusableEntityId =
+        getNewCursorEntityId focusableEntityId =
             let
                 focusNextOnIndexChange =
-                    True
+                    case focusableEntityId of
+                        TodoId _ ->
+                            True
+
+                        _ ->
+                            False
             in
             ( model.entityList.entityIdList
             , newEntityIdList
             )
                 |> Tuple2.mapBoth
-                    (X.List.firstIndexOf prevFocusableEntityId)
+                    (X.List.firstIndexOf focusableEntityId)
                 |> (\maybeIndexT2 ->
                         case maybeIndexT2 of
                             ( Just oldIndex, Just newIndex ) ->

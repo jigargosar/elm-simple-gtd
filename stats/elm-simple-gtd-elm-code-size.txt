@@ -1,4 +1,4 @@
-   10144 total
+   10140 total
      443 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -73,13 +73,13 @@
       48 src/elm/Update/AppDrawer.elm
       47 src/elm/Todo/TimeTracker/View.elm
       46 src/elm/Notification.elm
-      46 src/elm/Model.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Update/AppHeader.elm
       44 src/elm/Update/ViewType.elm
       44 src/elm/Todo/FormTypes.elm
       44 src/elm/Model/Stores.elm
       44 src/elm/Main.elm
+      42 src/elm/Model.elm
       41 src/elm/Update/CustomSync.elm
       40 src/elm/View/CustomSync.elm
       39 src/elm/X/Random.elm

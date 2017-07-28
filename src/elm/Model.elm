@@ -17,10 +17,6 @@ getFocusInEntity =
     get focusInEntity__
 
 
-maybeSetFocusInEntityIn__ model value =
-    maybeSet focusInEntity__ value model
-
-
 getRemoteSyncForm model =
     let
         maybeForm =

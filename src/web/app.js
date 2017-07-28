@@ -36,22 +36,15 @@ Kefir.stream(emitter => {
       
            const autoFocusSummaryAdded = summaries[0].added
            if (!_.isEmpty(autoFocusSummaryAdded)) {
-             // console.log("autoFocusSummary.added", autoFocusSummaryAdded)
-             const $first = $(autoFocusSummaryAdded).first()
-             // when using keyboard shortcut, focus tends to not work.
-             // hence setTimeout for nextFrame
-             // setTimeout(() => $first.focus(), 0)
-             // $first.focus() // working now with kb but not with mouse ??!!
              emitter.emit(".auto-focus")
            }
       
            const focusInEntitySummary = summaries[1]
            const focusInEntitySummaryAdded = focusInEntitySummary.added
            if (!_.isEmpty(focusInEntitySummaryAdded)) {
-             console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+             // console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
              emitter.emit(".focusable-list-item[tabindex=0]")
            }
-      
          },
          queries: [{element: ".auto-focus"},
            {element: ".focusable-list-item[tabindex=0]"},

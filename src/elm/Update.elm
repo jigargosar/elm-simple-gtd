@@ -3,7 +3,6 @@ module Update exposing (update)
 import CommonMsg
 import LocalPref
 import Material
-import Model.EntityList
 import Msg exposing (..)
 import Ports
 import Update.AppDrawer

@@ -1,6 +1,7 @@
 module Update.Entity exposing (Config, update)
 
 import Entity
+import Entity.Tree
 import Entity.Types exposing (..)
 import EntityList exposing (HasEntityListCursor, entityListCursor)
 import ExclusiveMode.Types exposing (..)
@@ -10,7 +11,7 @@ import Lazy exposing (Lazy)
 import List.Extra
 import Maybe.Extra
 import Model
-import Model.EntityList
+import Model.EntityTree
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
@@ -111,7 +112,7 @@ updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
 updateEntityListCursor config model =
     let
         newEntityIdList =
-            Model.EntityList.createEntityListForCurrentView model
+            createEntityListForCurrentView model
                 .|> Entity.toEntityId
 
         computeMaybeFEI index =
@@ -158,7 +159,7 @@ setEntityListCursor : Maybe EntityId -> SubModelF model
 setEntityListCursor maybeFocusableEntityId model =
     let
         entityIdList =
-            Model.EntityList.createEntityListForCurrentView model
+            createEntityListForCurrentView model
                 .|> Entity.toEntityId
 
         cursor =
@@ -167,6 +168,12 @@ setEntityListCursor maybeFocusableEntityId model =
             }
     in
     setIn model entityListCursor cursor
+
+
+createEntityListForCurrentView model =
+    Model.ViewType.maybeGetEntityListViewType model
+        ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
+        ?= []
 
 
 onUpdateAction :
@@ -194,7 +201,7 @@ onUpdateAction config entityId action =
             returnWith identity (switchToEntityListViewFromEntity entityId)
 
         EUA_BringEntityIdInView ->
-            returnWith Model.EntityList.createEntityListForCurrentView
+            returnWith createEntityListForCurrentView
                 (List.Extra.find (Entity.hasId entityId)
                     >> Maybe.Extra.unpack
                         (\_ ->

@@ -137,14 +137,14 @@ updateEntityListCursor config model =
                                 Nothing
                    )
     in
-    model.entityListCursor.maybeFocusableEntityId
+    model.entityListCursor.maybeEntityIdAtCursor
         ?+> computeNewEntityIdAtCursor
         >>? (EM_SetFocusInEntityWithEntityId >> update config)
         ?= identity
 
 
 setEntityAtCursor : Maybe EntityId -> SubModelF model
-setEntityAtCursor maybeFocusableEntityId model =
+setEntityAtCursor maybeEntityIdAtCursor model =
     let
         entityIdList =
             createEntityListForCurrentView model
@@ -152,7 +152,7 @@ setEntityAtCursor maybeFocusableEntityId model =
 
         cursor =
             { entityIdList = entityIdList
-            , maybeFocusableEntityId = maybeFocusableEntityId
+            , maybeEntityIdAtCursor = maybeEntityIdAtCursor
             }
     in
     setIn model entityListCursor cursor

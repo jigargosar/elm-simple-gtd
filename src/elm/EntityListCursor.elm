@@ -6,7 +6,7 @@ import X.Record exposing (..)
 
 type alias EntityListCursor =
     { entityIdList : List EntityId
-    , maybeFocusableEntityId : Maybe EntityId
+    , maybeEntityIdAtCursor : Maybe EntityId
     }
 
 
@@ -18,8 +18,12 @@ entityListCursor =
     fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
+getMaybeEntityIdAtCursor model =
+    model.entityListCursor.maybeEntityIdAtCursor
+
+
 initialValue : EntityListCursor
 initialValue =
     { entityIdList = []
-    , maybeFocusableEntityId = Nothing
+    , maybeEntityIdAtCursor = Nothing
     }

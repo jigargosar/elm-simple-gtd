@@ -85,17 +85,6 @@ update config msg =
         EM_EntityListFocusNext ->
             moveFocusBy config 1
 
-        EM_EntityListKeyDown { key } ->
-            case key of
-                Key.ArrowUp ->
-                    moveFocusBy config -1
-
-                Key.ArrowDown ->
-                    moveFocusBy config 1
-
-                _ ->
-                    identity
-
 
 moveFocusBy config offset =
     let

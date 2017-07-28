@@ -36,7 +36,6 @@ viewConfig =
     , switchToView = Msg.switchToView
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
-    , onEntityListKeyDown = Msg.onEntityListKeyDown
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> Msg.OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg

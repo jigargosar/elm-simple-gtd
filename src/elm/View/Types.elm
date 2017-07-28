@@ -20,9 +20,6 @@ import X.Keyboard
 type alias ViewConfig msg =
     { noop : msg
     , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
-    , onEntityListKeyDown : X.Keyboard.KeyboardEvent -> msg
-    , onEntityUpdateMsg :
-        Entity.Types.EntityId -> Entity.Types.EntityUpdateAction -> msg
     , onFirebaseMsg : Firebase.Types.FirebaseMsg -> msg
     , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg

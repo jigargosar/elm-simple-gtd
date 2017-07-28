@@ -146,10 +146,6 @@ onEntityUpdateMsg =
     Entity.Types.EM_Update >>> OnEntityMsg
 
 
-onEntityListKeyDown =
-    Entity.Types.EM_EntityListKeyDown >> OnEntityMsg
-
-
 entityListFocusPreviousEntityMsg =
     Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
 

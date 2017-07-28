@@ -1,4 +1,4 @@
-module EntityList exposing (..)
+module EntityListCursor exposing (..)
 
 import Entity.Types exposing (EntityId)
 import X.Record exposing (..)

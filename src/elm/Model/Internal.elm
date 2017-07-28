@@ -1,7 +1,7 @@
 module Model.Internal exposing (..)
 
 import Context
-import EntityList
+import EntityListCursor
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Firebase
 import Json.Encode as E
@@ -78,7 +78,7 @@ createAppModel flags =
             , appDrawerModel = localPref.appDrawer
             , signInModel = localPref.signIn
             , mdl = Material.model
-            , entityListCursor = EntityList.initialValue
+            , entityListCursor = EntityListCursor.initialValue
             }
     in
     model

@@ -3,7 +3,7 @@ module Update.Entity exposing (Config, update)
 import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
-import EntityList exposing (HasEntityListCursor, entityListCursor)
+import EntityListCursor exposing (HasEntityListCursor, entityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Keyboard.Extra as Key
 import List.Extra

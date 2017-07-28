@@ -1,4 +1,4 @@
-   10141 total
+   10140 total
      443 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -76,9 +76,9 @@
       46 src/elm/Model.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Update/AppHeader.elm
-      45 src/elm/Model/Stores.elm
       44 src/elm/Update/ViewType.elm
       44 src/elm/Todo/FormTypes.elm
+      44 src/elm/Model/Stores.elm
       44 src/elm/Main.elm
       41 src/elm/Update/CustomSync.elm
       40 src/elm/View/CustomSync.elm
@@ -92,7 +92,7 @@
       32 src/elm/Ports/Firebase.elm
       27 src/elm/Firebase.elm
       25 src/elm/View.elm
-      25 src/elm/EntityList.elm
+      25 src/elm/EntityListCursor.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm

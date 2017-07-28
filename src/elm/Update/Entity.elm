@@ -69,12 +69,10 @@ update config msg =
             returnWith identity (updateEntityListCursor config)
 
         EM_SetFocusInEntity entity ->
-            map (setEntityAtCursor (entity |> Entity.toEntityId >> Just))
+            update config (entity |> Entity.toEntityId >> EM_SetFocusInEntityWithEntityId)
 
         EM_SetFocusInEntityWithEntityId entityId ->
-            returnWithMaybe1
-                (Model.Stores.findByEntityId entityId)
-                (EM_SetFocusInEntity >> update config)
+            map (setEntityAtCursor (entityId |> Just))
 
         EM_Update entityId action ->
             onUpdateAction config entityId action

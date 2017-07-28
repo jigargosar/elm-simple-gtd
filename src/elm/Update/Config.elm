@@ -23,7 +23,6 @@ updateConfig model =
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
     , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
-    , setFocusInEntityMsg = Msg.setFocusInEntityMsg
     , saveTodoForm = Msg.onSaveTodoForm
     , saveGroupDocForm = Msg.onSaveGroupDocForm
     , onTodoMsgWithNow = Msg.OnTodoMsgWithNow

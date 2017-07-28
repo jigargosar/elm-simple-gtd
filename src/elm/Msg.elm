@@ -162,10 +162,6 @@ bringEntityIdInViewMsg =
     EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
 
 
-setFocusInEntityMsg =
-    EM_SetFocusInEntity >> OnEntityMsg
-
-
 setFocusInEntityWithEntityIdMsg =
     EM_SetFocusInEntityWithEntityId >> OnEntityMsg
 

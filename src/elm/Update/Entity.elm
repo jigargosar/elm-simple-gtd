@@ -68,9 +68,6 @@ update config msg =
         EM_UpdateEntityListCursor ->
             returnWith identity (updateEntityListCursor config)
 
-        EM_SetFocusInEntity entity ->
-            update config (entity |> Entity.toEntityId >> EM_SetFocusInEntityWithEntityId)
-
         EM_SetFocusInEntityWithEntityId entityId ->
             map (setEntityAtCursor (entityId |> Just))
 
@@ -211,7 +208,10 @@ onUpdateAction config entityId action =
                             returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
                                 >> update config (EM_SetFocusInEntityWithEntityId entityId)
                         )
-                        (EM_SetFocusInEntity >> update config)
+                        (Entity.toEntityId
+                            >> EM_SetFocusInEntityWithEntityId
+                            >> update config
+                        )
                 )
 
 

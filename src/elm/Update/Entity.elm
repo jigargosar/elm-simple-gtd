@@ -161,10 +161,6 @@ updateEntityListCursor config model =
             model.entityList.maybeFocusableEntityId
                 ?+> getNewCursorEntityId
                 >>? (\newEID ->
-                        let
-                            _ =
-                                Debug.log "newEID" newEID
-                        in
                         (newEID |> EM_SetFocusInEntityWithEntityId >> update config)
                             >> map (setEntityListCursor (Just newEID))
                     )

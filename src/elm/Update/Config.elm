@@ -26,8 +26,6 @@ updateConfig model =
     , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
     , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
     , setFocusInEntityMsg = Msg.setFocusInEntityMsg
-    , currentViewEntityList =
-        Lazy.lazy (\_ -> Model.EntityList.createEntityListForCurrentView model)
     , saveTodoForm = Msg.onSaveTodoForm
     , saveGroupDocForm = Msg.onSaveGroupDocForm
     , onTodoMsgWithNow = Msg.OnTodoMsgWithNow

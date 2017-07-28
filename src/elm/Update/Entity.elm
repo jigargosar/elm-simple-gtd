@@ -64,7 +64,6 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , switchToEntityListViewTypeMsg : EntityListViewType -> msg
         , onStartEditingTodo : TodoDoc -> msg
-        , currentViewEntityList : Lazy (List Entity)
     }
 
 
@@ -195,14 +194,15 @@ onUpdateAction config entityId action =
             returnWith identity (switchToEntityListViewFromEntity entityId)
 
         EUA_BringEntityIdInView ->
-            Lazy.force config.currentViewEntityList
-                |> List.Extra.find (Entity.hasId entityId)
-                |> Maybe.Extra.unpack
-                    (\_ ->
-                        returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
-                            >> update config (EM_SetFocusInEntityWithEntityId entityId)
-                    )
-                    (EM_SetFocusInEntity >> update config)
+            returnWith Model.EntityList.createEntityListForCurrentView
+                (List.Extra.find (Entity.hasId entityId)
+                    >> Maybe.Extra.unpack
+                        (\_ ->
+                            returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
+                                >> update config (EM_SetFocusInEntityWithEntityId entityId)
+                        )
+                        (EM_SetFocusInEntity >> update config)
+                )
 
 
 toggleEntitySelection entityId =

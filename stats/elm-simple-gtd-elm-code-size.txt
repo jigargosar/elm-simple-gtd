@@ -1,5 +1,5 @@
-   10193 total
-     466 src/elm/Update/Todo/Internal.elm
+   10169 total
+     444 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
      269 src/elm/Update/Entity.elm
@@ -85,8 +85,8 @@
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Update/Types.elm
-      38 src/elm/Update/Config.elm
       37 src/elm/CommonMsg.elm
+      36 src/elm/Update/Config.elm
       36 src/elm/LocalPref.elm
       33 src/elm/View/NewTodoFab.elm
       32 src/elm/Ports/Firebase.elm

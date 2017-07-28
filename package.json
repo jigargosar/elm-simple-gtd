@@ -85,7 +85,7 @@
         "run preCommit"
       ],
       "pre-push": [],
-      "post-commit": [],
+      "post-commit": ["git unstage stats/*"],
       "post-checkout": [],
       "post-merge": []
     }

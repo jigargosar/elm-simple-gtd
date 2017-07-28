@@ -34,6 +34,7 @@
       <w>pouchdb</w>
       <w>precache</w>
       <w>prefixer</w>
+      <w>readlink</w>
       <w>rimraf</w>
       <w>roboto</w>
       <w>runfile</w>

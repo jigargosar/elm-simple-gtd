@@ -79,6 +79,12 @@ update config msg =
         EM_Update entityId action ->
             onUpdateAction config entityId action
 
+        EM_EntityListFocusPrev ->
+            moveFocusBy config -1
+
+        EM_EntityListFocusNext ->
+            moveFocusBy config 1
+
         EM_EntityListKeyDown { key } ->
             case key of
                 Key.ArrowUp ->

@@ -1,5 +1,5 @@
-   10154 total
-     451 src/elm/Update/Todo/Internal.elm
+   10156 total
+     453 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
      280 src/elm/Update/Entity.elm

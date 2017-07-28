@@ -5,7 +5,7 @@ import Document exposing (DocId, getDocId)
 import DomPorts
 import Entity
 import Entity.Types exposing (..)
-import EntityListCursor
+import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model
 import Model.HasFocusInEntity exposing (HasFocusInEntity)
@@ -33,14 +33,16 @@ import X.Time
 
 
 type alias SubModel model =
-    HasFocusInEntity
-        { model
-            | now : Time
-            , todoStore : TodoStore
-            , reminderOverlay : TodoReminderOverlayModel
-            , timeTracker : Tracker.Model
-            , selectedEntityIdSet : Set DocId
-        }
+    HasEntityListCursor
+        (HasFocusInEntity
+            { model
+                | now : Time
+                , todoStore : TodoStore
+                , reminderOverlay : TodoReminderOverlayModel
+                , timeTracker : Tracker.Model
+                , selectedEntityIdSet : Set DocId
+            }
+        )
 
 
 type alias SubReturn msg model =

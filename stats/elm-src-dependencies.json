@@ -734,9 +734,10 @@
     "backwardImports": [
       "Entity.Tree",
       "Entity.View",
-      "Update.Entity"
+      "Update.Entity",
+      "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "Entity.Tree",
       "Entity.View",
@@ -744,11 +745,13 @@
       "Model.EntityTree",
       "Update",
       "Update.Entity",
+      "Update.Todo",
+      "Update.Todo.Internal",
       "Update.Types",
       "View",
       "View.Layout"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 11
   },
   "Entity.Tree": {
     "fileName": "src/elm/Entity/Tree.elm",
@@ -7044,6 +7047,7 @@
       "Dict",
       "Document",
       "DomPorts",
+      "Entity",
       "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.Types",
@@ -7105,7 +7109,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7126,6 +7130,7 @@
       "Context",
       "Document",
       "DomPorts",
+      "Entity",
       "Entity.Types",
       "ExclusiveMode.Types",
       "Model",
@@ -7152,7 +7157,7 @@
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 28,
+    "importsCount": 29,
     "transitiveImports": [
       "Char",
       "Context",
@@ -7162,6 +7167,7 @@
       "Dict",
       "Document",
       "DomPorts",
+      "Entity",
       "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.Types",
@@ -7221,7 +7227,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 66,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Update.Todo"
     ],

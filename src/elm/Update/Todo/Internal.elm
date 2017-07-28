@@ -3,6 +3,7 @@ port module Update.Todo.Internal exposing (..)
 import Context
 import Document exposing (DocId, getDocId)
 import DomPorts
+import Entity
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Model
@@ -75,7 +76,12 @@ updateTodo action todoId =
     findAndUpdateAllTodos (Document.hasId todoId) action
 
 
+updateTodoWithMaybeAction maybeAction todoId =
+    maybeAction ?|> updateTodo # todoId ?= Return.singleton
 
+
+
+--    findAndUpdateAllTodos (Document.hasId todoId) action
 --updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
 
 
@@ -170,19 +176,20 @@ saveAddTodoForm config addMode form model =
 
                             ATFM_AddWithFocusInEntityAsReference ->
                                 Model.getFocusInEntity model
+
+                    maybeAction =
+                        case Entity.toEntityId referenceEntity of
+                            TodoId todoId ->
+                                Model.Todo.findTodoById todoId model
+                                    ?|> TA_CopyProjectAndContextId
+
+                            ContextId contextId ->
+                                TA_SetContextId contextId |> Just
+
+                            ProjectId projectId ->
+                                TA_SetProjectId projectId |> Just
                 in
-                updateTodo
-                    (case referenceEntity of
-                        TodoEntity fromTodo ->
-                            TA_CopyProjectAndContextId fromTodo
-
-                        GroupEntity (ContextEntity context) ->
-                            TA_SetContext context
-
-                        GroupEntity (ProjectEntity project) ->
-                            TA_SetProject project
-                    )
-                    todoId
+                updateTodoWithMaybeAction maybeAction todoId
                     >> setFocusInEntityWithTodoId config todoId
             )
 

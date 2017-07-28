@@ -69,21 +69,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
   })
   
   
-  /*Kefir.merge(
-      [Kefir.fromEvents($elm.get(0), "focusin"),
-       Kefir.fromEvents($elm.get(0), "focusout"),
-      ],
-       )
-       .debounce(1)
-       .filter(_.propEq("type", "focusout"))
-       .log()
-       .observe({value(){
-           requestAnimationFrame(()=>{
-               $(".entity-list .focusable-list-item[tabindex=0]").first().focus()
-           })
-       }})*/
-  
-  
   const db = await DB()
   
   const store = localforage.createInstance({

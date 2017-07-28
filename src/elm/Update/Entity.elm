@@ -141,10 +141,6 @@ updateEntityListCursor config model =
                 |> Tuple2.mapBoth
                     (X.List.firstIndexOf prevFocusableEntityId)
                 |> (\maybeIndexT2 ->
-                        --                        let
-                        --                            _ =
-                        --                                Debug.log "maybeIndexT2" maybeIndexT2
-                        --                        in
                         case maybeIndexT2 of
                             ( Just oldIndex, Just newIndex ) ->
                                 if focusNextOnIndexChange then

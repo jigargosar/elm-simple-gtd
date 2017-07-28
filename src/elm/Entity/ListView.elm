@@ -31,7 +31,6 @@ listView config appVM viewType model =
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
-        , onKeyDown config.onEntityListKeyDown
         ]
         (keyedViewList appVM entityTree model)
 

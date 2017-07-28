@@ -150,6 +150,14 @@ onEntityListKeyDown =
     Entity.Types.EM_EntityListKeyDown >> OnEntityMsg
 
 
+entityListFocusPreviousEntityMsg =
+    Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
+
+
+entityListFocusNextEntityMsg =
+    Entity.Types.EM_EntityListFocusNext |> OnEntityMsg
+
+
 onToggleEntitySelection =
     EM_Update # EUA_ToggleSelection >> OnEntityMsg
 

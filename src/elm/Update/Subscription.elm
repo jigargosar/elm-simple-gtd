@@ -50,6 +50,8 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
         , onGotoRunningTodoMsg : msg
+        , entityListFocusPreviousEntityMsg : msg
+        , entityListFocusNextEntityMsg : msg
     }
 
 
@@ -64,6 +66,9 @@ update config msg =
 
         OnGlobalKeyUp keyCode ->
             onGlobalKeyUp config (KX.fromCode keyCode)
+
+        OnGlobalKeyDown keyCode ->
+            onGlobalKeyDown config (KX.fromCode keyCode)
 
         OnPouchDBChange dbName encodedDoc ->
             let
@@ -83,6 +88,28 @@ update config msg =
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+
+
+onGlobalKeyDown config key =
+    returnWith .editMode
+        (\editMode ->
+            case ( key, editMode ) of
+                ( key, XMNone ) ->
+                    case key of
+                        KX.ArrowUp ->
+                            returnMsgAsCmd
+                                config.entityListFocusPreviousEntityMsg
+
+                        KX.ArrowDown ->
+                            returnMsgAsCmd
+                                config.entityListFocusNextEntityMsg
+
+                        _ ->
+                            identity
+
+                _ ->
+                    identity
+        )
 
 
 onGlobalKeyUp : Config msg a -> Key -> SubReturnF msg model
@@ -115,12 +142,6 @@ onGlobalKeyUp config key =
 
                         KX.CharT ->
                             returnMsgAsCmd config.onGotoRunningTodoMsg
-
-                        KX.ArrowUp ->
-                            identity
-
-                        KX.ArrowDown ->
-                            identity
 
                         _ ->
                             identity

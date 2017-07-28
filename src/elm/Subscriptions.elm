@@ -12,6 +12,7 @@ subscriptions model =
     Sub.batch
         [ Time.every (Time.second * 1 * model.config.debugSecondMultiplier) Msg.Subscription.OnNowChanged
         , Keyboard.ups Msg.Subscription.OnGlobalKeyUp
+        , Keyboard.downs Msg.Subscription.OnGlobalKeyDown
         , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
         , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
         ]

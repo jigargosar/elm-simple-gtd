@@ -1,4 +1,4 @@
-   10157 total
+   10189 total
      450 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -6,11 +6,11 @@
      267 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
+     222 src/elm/Msg.elm
      219 src/elm/GroupDoc/ViewModel.elm
-     214 src/elm/Msg.elm
+     204 src/elm/Update/Subscription.elm
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
-     183 src/elm/Update/Subscription.elm
      174 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
      157 src/elm/AppDrawer/Model.elm
@@ -21,8 +21,8 @@
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     143 src/elm/Entity/ListView.elm
      142 src/elm/GroupDoc.elm
+     142 src/elm/Entity/ListView.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
@@ -85,9 +85,9 @@
       39 src/elm/X/Date.elm
       39 src/elm/Update/Types.elm
       37 src/elm/CommonMsg.elm
+      36 src/elm/Update/Config.elm
       36 src/elm/LocalPref.elm
       34 src/elm/View/NewTodoFab.elm
-      34 src/elm/Update/Config.elm
       32 src/elm/Ports/Firebase.elm
       27 src/elm/Firebase.elm
       25 src/elm/View.elm
@@ -107,7 +107,7 @@
       19 src/elm/Model/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      17 src/elm/Subscriptions.elm
+      18 src/elm/Subscriptions.elm
       16 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm
       14 src/elm/View/Badge.elm
@@ -116,7 +116,7 @@
       13 src/elm/Subscriptions/Firebase.elm
       12 src/elm/Todo/Store.elm
       12 src/elm/Ports.elm
-      11 src/elm/Msg/Subscription.elm
+      12 src/elm/Msg/Subscription.elm
       11 src/elm/LaunchBar/Messages.elm
       11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm

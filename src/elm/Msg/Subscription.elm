@@ -7,5 +7,6 @@ import Time exposing (Time)
 type SubscriptionMsg
     = OnNowChanged Time
     | OnGlobalKeyUp Int
+    | OnGlobalKeyDown Int
     | OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value

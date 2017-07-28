@@ -31,4 +31,6 @@ updateConfig model =
     , onMdl = Msg.OnMdl
     , bringEntityIdInViewMsg = Msg.bringEntityIdInViewMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> Msg.OnTodoMsg
+    , entityListFocusPreviousEntityMsg = Msg.entityListFocusPreviousEntityMsg
+    , entityListFocusNextEntityMsg = Msg.entityListFocusNextEntityMsg
     }

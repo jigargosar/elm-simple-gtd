@@ -1,8 +1,8 @@
-   10134 total
+   10141 total
      450 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
-     274 src/elm/Update/Entity.elm
+     285 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
@@ -21,7 +21,7 @@
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     146 src/elm/Entity/View.elm
+     143 src/elm/Entity/View.elm
      142 src/elm/GroupDoc.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
@@ -56,8 +56,8 @@
       69 src/elm/View/Overlays.elm
       69 src/elm/Types.elm
       67 src/elm/X/List.elm
-      66 src/elm/View/Types.elm
       66 src/elm/Todo/GroupEditView.elm
+      65 src/elm/View/Types.elm
       64 src/elm/Todo/Notification/View.elm
       60 src/elm/Entity.elm
       56 src/elm/View/Config.elm

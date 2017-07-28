@@ -147,7 +147,7 @@ onEntityUpdateMsg =
 
 
 onEntityListKeyDown =
-    Entity.Types.EM_EntityListKeyDown >>> OnEntityMsg
+    Entity.Types.EM_EntityListKeyDown >> OnEntityMsg
 
 
 onToggleEntitySelection =

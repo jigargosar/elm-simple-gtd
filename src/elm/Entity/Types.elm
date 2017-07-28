@@ -40,7 +40,7 @@ type EntityMsg
     = EM_SetFocusInEntity Entity
     | EM_SetFocusInEntityWithEntityId EntityId
     | EM_Update EntityId EntityUpdateAction
-    | EM_EntityListKeyDown (List Entity) X.Keyboard.KeyboardEvent
+    | EM_EntityListKeyDown X.Keyboard.KeyboardEvent
     | EM_UpdateEntityListCursor
 
 

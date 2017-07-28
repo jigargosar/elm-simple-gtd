@@ -28,13 +28,10 @@ list config appVM viewType model =
     let
         entityTree =
             Model.EntityTree.createEntityTreeForViewType viewType model
-
-        entityList =
-            Entity.Tree.flatten entityTree
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
-        , config.onEntityListKeyDown entityList |> onKeyDown
+        , onKeyDown config.onEntityListKeyDown
         ]
         (keyedViewList appVM entityTree model)
 

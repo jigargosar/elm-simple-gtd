@@ -79,23 +79,34 @@ update config msg =
         EM_Update entityId action ->
             onUpdateAction config entityId action
 
-        EM_EntityListKeyDown entityList { key } ->
+        EM_EntityListKeyDown { key } ->
             let
-                findEntityByOffsetIn offsetIndex entityList maybeFromEntityId =
+                findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
                     let
                         index =
-                            maybeFromEntityId
-                                ?+> (Entity.hasId >> X.List.findIndex # entityList)
+                            maybeOffsetFromEntityId
+                                ?+> (equals >> X.List.findIndexIn entityIdList)
                                 ?= 0
                                 |> add offsetIndex
                     in
-                    X.List.clampAndGetAtIndex index entityList
-                        |> Maybe.Extra.orElse (List.head entityList)
+                    X.List.clampAndGetAtIndex index entityIdList
+                        |> Maybe.Extra.orElse (List.head entityIdList)
 
                 moveFocusBy offset =
-                    returnWithMaybe2 EntityListCursor.getMaybeEntityIdAtCursor
-                        (findEntityByOffsetIn offset entityList
-                            >>? (EM_SetFocusInEntity >> update config)
+                    returnWithMaybe2 identity
+                        (\model ->
+                            let
+                                maybeEntityIdAtCursor =
+                                    EntityListCursor.getMaybeEntityIdAtCursor model
+
+                                entityIdList =
+                                    createEntityListForCurrentView model
+                                        .|> Entity.toEntityId
+                            in
+                            findEntityIdByOffsetIn offset
+                                entityIdList
+                                maybeEntityIdAtCursor
+                                ?|> (EM_SetFocusInEntityWithEntityId >> update config)
                         )
             in
             case key of

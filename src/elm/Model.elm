@@ -9,14 +9,6 @@ now =
     fieldLens .now (\s b -> { b | now = s })
 
 
-focusInEntity__ =
-    fieldLens .focusInEntity_ (\s b -> { b | focusInEntity_ = s })
-
-
-getFocusInEntity =
-    get focusInEntity__
-
-
 getRemoteSyncForm model =
     let
         maybeForm =

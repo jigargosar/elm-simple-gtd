@@ -10,7 +10,6 @@ import List.Extra
 import Maybe.Extra
 import Model
 import Model.EntityTree
-import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
 import Model.Stores
@@ -32,11 +31,9 @@ type alias SubModel model =
     HasViewType
         (HasStores
             (HasEntityListCursor
-                (HasFocusInEntity
-                    { model
-                        | selectedEntityIdSet : Set.Set String
-                    }
-                )
+                { model
+                    | selectedEntityIdSet : Set.Set String
+                }
             )
         )
 
@@ -72,10 +69,7 @@ update config msg =
             returnWith identity (updateEntityListCursor config)
 
         EM_SetFocusInEntity entity ->
-            map
-                (set Model.focusInEntity__ entity
-                    >> setEntityAtCursor (entity |> Entity.toEntityId >> Just)
-                )
+            map (setEntityAtCursor (entity |> Entity.toEntityId >> Just))
 
         EM_SetFocusInEntityWithEntityId entityId ->
             returnWithMaybe1

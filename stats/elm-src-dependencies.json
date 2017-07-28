@@ -112,7 +112,6 @@
       "Menu",
       "Menu.Types",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Model.Todo",
       "Project",
@@ -145,7 +144,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 66,
     "backwardImports": [
       "ViewModel"
     ],
@@ -455,11 +454,10 @@
       "LaunchBar.Models",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Internal",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 9,
+    "backwardImportsCount": 8,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -473,7 +471,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Internal",
       "Model.Stores",
       "Msg",
@@ -505,7 +502,7 @@
       "View.Types",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 43
+    "transitiveBackwardImportsCount": 42
   },
   "Document": {
     "fileName": "src/elm/Document.elm",
@@ -589,7 +586,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -644,7 +640,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 77
+    "transitiveBackwardImportsCount": 76
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -886,7 +882,6 @@
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Model.ViewType",
       "Msg",
@@ -900,7 +895,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -914,7 +909,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -943,7 +937,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 40
+    "transitiveBackwardImportsCount": 39
   },
   "Entity.View": {
     "fileName": "src/elm/Entity/View.elm",
@@ -1488,7 +1482,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -1545,7 +1538,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 82
+    "transitiveBackwardImportsCount": 81
   },
   "Firebase.User": {
     "fileName": "src/elm/Firebase/User.elm",
@@ -1677,7 +1670,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Internal",
       "Model.Stores",
       "Msg",
@@ -1711,7 +1703,7 @@
       "View.Types",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 46
+    "transitiveBackwardImportsCount": 45
   },
   "GroupDoc.Form": {
     "fileName": "src/elm/GroupDoc/Form.elm",
@@ -1913,7 +1905,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -1964,7 +1955,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 72
+    "transitiveBackwardImportsCount": 71
   },
   "GroupDoc.View": {
     "fileName": "src/elm/GroupDoc/View.elm",
@@ -2595,7 +2586,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Selection",
@@ -2695,7 +2685,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 166,
+    "transitiveImportsCount": 165,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -3177,77 +3167,6 @@
     ],
     "transitiveBackwardImportsCount": 16
   },
-  "Model.HasFocusInEntity": {
-    "fileName": "src/elm/Model/HasFocusInEntity.elm",
-    "moduleName": "Model.HasFocusInEntity",
-    "parentModuleName": "Model",
-    "imports": [
-      "Context",
-      "Entity.Types"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "Char",
-      "Context",
-      "Dict",
-      "Document",
-      "Entity.Types",
-      "Firebase.Types",
-      "GroupDoc",
-      "GroupDoc.Types",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "List.Extra",
-      "Random.Pcg",
-      "Return",
-      "Set",
-      "Store",
-      "Time",
-      "Todo.Types",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Debug",
-      "X.Decode",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.Keyboard",
-      "X.Predicate",
-      "X.Random",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 35,
-    "backwardImports": [
-      "Model.Internal",
-      "Types",
-      "Update.Entity",
-      "Update.Todo.Internal"
-    ],
-    "backwardImportsCount": 4,
-    "transitiveBackwardImports": [
-      "AppDrawer.GroupViewModel",
-      "Main",
-      "Model.Internal",
-      "Subscriptions",
-      "Subscriptions.Todo",
-      "Types",
-      "Update",
-      "Update.Entity",
-      "Update.Todo",
-      "Update.Todo.Internal",
-      "Update.Types",
-      "View",
-      "ViewModel"
-    ],
-    "transitiveBackwardImportsCount": 13
-  },
   "Model.HasStores": {
     "fileName": "src/elm/Model/HasStores.elm",
     "moduleName": "Model.HasStores",
@@ -3318,7 +3237,6 @@
       "Json.Encode",
       "LocalPref",
       "Material",
-      "Model.HasFocusInEntity",
       "Model.ViewType",
       "Project",
       "Random.Pcg",
@@ -3330,7 +3248,7 @@
       "Types",
       "X.Random"
     ],
-    "importsCount": 18,
+    "importsCount": 17,
     "transitiveImports": [
       "AppDrawer.Model",
       "Char",
@@ -3369,7 +3287,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Model.HasFocusInEntity",
       "Model.ViewType",
       "Project",
       "Random.Pcg",
@@ -3401,7 +3318,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Main"
     ],
@@ -4396,7 +4313,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -4448,7 +4364,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 74
+    "transitiveBackwardImportsCount": 73
   },
   "Subscriptions": {
     "fileName": "src/elm/Subscriptions.elm",
@@ -4491,7 +4407,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Model.HasFocusInEntity",
       "Msg.Subscription",
       "Ports",
       "Project",
@@ -4520,7 +4435,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 56,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "Main"
     ],
@@ -4627,7 +4542,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Model.HasFocusInEntity",
       "Notification",
       "Ports.Todo",
       "Project",
@@ -4660,7 +4574,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 63,
+    "transitiveImportsCount": 62,
     "backwardImports": [
       "Main"
     ],
@@ -5705,7 +5619,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -5745,7 +5658,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 52
+    "transitiveBackwardImportsCount": 51
   },
   "Todo.View": {
     "fileName": "src/elm/Todo/View.elm",
@@ -5988,7 +5901,6 @@
       "Firebase.Types",
       "GroupDoc.Types",
       "Material",
-      "Model.HasFocusInEntity",
       "Set",
       "Time",
       "Todo.Notification.Types",
@@ -5996,7 +5908,7 @@
       "Todo.Types",
       "ViewType"
     ],
-    "importsCount": 15,
+    "importsCount": 14,
     "transitiveImports": [
       "AppDrawer.Model",
       "Char",
@@ -6026,7 +5938,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Model.HasFocusInEntity",
       "Project",
       "Random.Pcg",
       "Return",
@@ -6052,7 +5963,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 53,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.Internal",
@@ -6147,7 +6058,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
@@ -6213,7 +6123,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 115,
+    "transitiveImportsCount": 114,
     "backwardImports": [
       "Main"
     ],
@@ -6511,7 +6421,6 @@
       "Maybe.Extra",
       "Model",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
@@ -6528,7 +6437,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 26,
+    "importsCount": 25,
     "transitiveImports": [
       "Char",
       "Context",
@@ -6561,7 +6470,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
@@ -6594,7 +6502,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 63,
+    "transitiveImportsCount": 62,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7080,7 +6988,6 @@
       "Menu",
       "Menu.Types",
       "Model",
-      "Model.HasFocusInEntity",
       "Model.Todo",
       "Notification",
       "Ports.Todo",
@@ -7119,7 +7026,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 70,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7145,7 +7052,6 @@
       "EntityListCursor",
       "ExclusiveMode.Types",
       "Model",
-      "Model.HasFocusInEntity",
       "Model.Todo",
       "Notification",
       "Ports.Todo",
@@ -7168,7 +7074,7 @@
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 30,
+    "importsCount": 29,
     "transitiveImports": [
       "Char",
       "Context",
@@ -7202,7 +7108,6 @@
       "Menu",
       "Menu.Types",
       "Model",
-      "Model.HasFocusInEntity",
       "Model.Todo",
       "Notification",
       "Ports.Todo",
@@ -7239,7 +7144,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Update.Todo"
     ],
@@ -7316,7 +7221,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Selection",
       "Model.Stores",
@@ -7377,7 +7281,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 103,
+    "transitiveImportsCount": 102,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7522,7 +7426,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Model.Todo",
       "Model.ViewType",
@@ -7578,7 +7481,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 116,
+    "transitiveImportsCount": 115,
     "backwardImports": [
       "Main"
     ],
@@ -8407,7 +8310,6 @@
       "Menu",
       "Menu.Types",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Stores",
       "Model.Todo",
       "Project",
@@ -8448,7 +8350,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 85,
+    "transitiveImportsCount": 84,
     "backwardImports": [
       "View"
     ],
@@ -8619,7 +8521,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -8680,7 +8581,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 85
+    "transitiveBackwardImportsCount": 84
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -8718,7 +8619,6 @@
       "Menu",
       "Model",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -8764,7 +8664,7 @@
       "ViewType",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 62
+    "transitiveBackwardImportsCount": 61
   },
   "X.Function": {
     "fileName": "src/elm/X/Function.elm",
@@ -8836,7 +8736,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -8898,7 +8797,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 92
+    "transitiveBackwardImportsCount": 91
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -8978,7 +8877,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -9043,7 +8941,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 99
+    "transitiveBackwardImportsCount": 98
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -9101,7 +8999,6 @@
       "Menu",
       "Model",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -9151,7 +9048,7 @@
       "ViewType",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 69
+    "transitiveBackwardImportsCount": 68
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -9216,7 +9113,6 @@
       "Menu",
       "Model",
       "Model.EntityTree",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -9261,7 +9157,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 61
+    "transitiveBackwardImportsCount": 60
   },
   "X.List": {
     "fileName": "src/elm/X/List.elm",
@@ -9385,7 +9281,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.Internal",
       "Model.Stores",
       "Msg",
@@ -9419,7 +9314,7 @@
       "View.Types",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 47
+    "transitiveBackwardImportsCount": 46
   },
   "X.Random": {
     "fileName": "src/elm/X/Random.elm",
@@ -9466,7 +9361,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -9519,7 +9413,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 75
+    "transitiveBackwardImportsCount": 74
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -9583,7 +9477,6 @@
       "Model",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Model.HasFocusInEntity",
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
@@ -9637,7 +9530,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 80
+    "transitiveBackwardImportsCount": 79
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

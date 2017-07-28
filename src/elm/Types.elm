@@ -8,7 +8,6 @@ import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
-import Model.HasFocusInEntity exposing (HasFocusInEntity)
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
@@ -26,7 +25,7 @@ type alias AppConfig =
 
 
 type alias AppModel =
-    HasEntityListCursor (HasFocusInEntity AppModelOtherFields)
+    HasEntityListCursor AppModelOtherFields
 
 
 type alias AppModelOtherFields =

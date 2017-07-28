@@ -54,9 +54,13 @@ sidebarContent config appVM model =
                 ++ entityGroupView config contexts model.viewType
                 ++ entityGroupView config projects model.viewType
                 ++ [ Mat.divider ]
-                ++ [ onSetEntityListViewItem config "sort" Entity.Types.RecentView "Recent"
-                   , onSetEntityListViewItem config "delete" Entity.Types.BinView "Bin"
-                   , onSetEntityListViewItem config "done" Entity.Types.DoneView "Done"
+                ++ [ onSetEntityListViewItem config (Mat.icon "sort") Entity.Types.RecentView "Recent"
+                   , onSetEntityListViewItem
+                        config
+                        (Mat.iconView "done" [ Mat.cs "done-icon", Mat.cs "is-done" ])
+                        Entity.Types.DoneView
+                        "Done"
+                   , onSetEntityListViewItem config (Mat.icon "delete") Entity.Types.BinView "Bin"
                    , Mat.divider
                    , switchViewItemSmall config "settings" SyncView "Advance Settings"
                    ]
@@ -171,11 +175,11 @@ switchViewItemSmall config iconName viewType title =
         ]
 
 
-onSetEntityListViewItem config iconName viewType title =
+onSetEntityListViewItem config icon viewType title =
     li
         [ class ""
         , onClick (config.switchToEntityListViewTypeMsg viewType)
         ]
-        [ Mat.icon iconName
+        [ icon
         , h5 [] [ text title ]
         ]

@@ -90,6 +90,10 @@ icon =
     Material.Icon.i
 
 
+iconView =
+    Material.Icon.view
+
+
 iconSmall iconName =
     Material.Icon.view iconName [ Material.Icon.size24 ]
 

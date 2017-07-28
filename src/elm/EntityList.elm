@@ -7,8 +7,6 @@ import X.Record exposing (..)
 type alias EntityListCursor =
     { entityIdList : List EntityId
     , maybeFocusableEntityId : Maybe EntityId
-    , prevEntityIdList : List EntityId
-    , prevMaybeFocusableEntityId : Maybe EntityId
     }
 
 
@@ -24,6 +22,4 @@ initialValue : EntityListCursor
 initialValue =
     { entityIdList = []
     , maybeFocusableEntityId = Nothing
-    , prevEntityIdList = []
-    , prevMaybeFocusableEntityId = Nothing
     }

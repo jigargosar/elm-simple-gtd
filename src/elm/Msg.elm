@@ -16,7 +16,6 @@ import Page exposing (PageMsg(..))
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Toolkit.Operators exposing (..)
-import Types.Firebase exposing (..)
 import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 

@@ -498,13 +498,12 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "Set",
       "Time",
       "Types.Document",
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 8,
+    "importsCount": 7,
     "transitiveImports": [
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -537,10 +536,9 @@
       "Todo.ViewModel",
       "Update.GroupDoc",
       "Update.LaunchBar",
-      "Update.Todo.Internal",
-      "View.Config"
+      "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 19,
+    "backwardImportsCount": 18,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Context",
@@ -3135,11 +3133,10 @@
       "Time",
       "Todo.Msg",
       "Toolkit.Operators",
-      "Types.Firebase",
       "Types.GroupDoc",
       "X.Function.Infix"
     ],
-    "importsCount": 19,
+    "importsCount": 18,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -5693,12 +5690,11 @@
       "Todo.Types",
       "Types",
       "Types.GroupDoc",
-      "Update.LaunchBar",
       "Update.Page",
       "Update.Todo.Internal",
       "View.Config"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 20,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -5790,16 +5786,13 @@
     "backwardImports": [
       "Firebase.Model",
       "Firebase.User",
-      "Msg",
       "Ports.Firebase",
       "Project",
       "Todo.Store",
       "Types",
-      "Update.Firebase",
-      "View.Config",
-      "View.GetStarted"
+      "Update.Firebase"
     ],
-    "backwardImportsCount": 10,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.ListView",
@@ -5846,14 +5839,13 @@
       "View",
       "View.Config",
       "View.CustomSync",
-      "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.MainMenu",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 51
+    "transitiveBackwardImportsCount": 50
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -6793,11 +6785,10 @@
       "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
-      "Types.Document",
       "Types.GroupDoc",
       "X.Return"
     ],
-    "importsCount": 16,
+    "importsCount": 15,
     "transitiveImports": [
       "Char",
       "Context",
@@ -7528,7 +7519,6 @@
     "parentModuleName": "View",
     "imports": [
       "AppDrawer.Types",
-      "Document",
       "Entity.Types",
       "ExclusiveMode.Types",
       "LaunchBar.Messages",
@@ -7545,11 +7535,10 @@
       "Todo.Notification.Model",
       "Todo.Types",
       "Types.Document",
-      "Types.Firebase",
       "Types.GroupDoc",
       "X.Function.Infix"
     ],
-    "importsCount": 21,
+    "importsCount": 19,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -7724,11 +7713,10 @@
       "Html.Attributes",
       "Html.Events",
       "Msg.Firebase",
-      "Types.Firebase",
       "X.Html",
       "X.Keyboard"
     ],
-    "importsCount": 8,
+    "importsCount": 7,
     "transitiveImports": [
       "AppUrl",
       "Html",
@@ -7740,13 +7728,12 @@
       "Keyboard",
       "Keyboard.Extra",
       "Msg.Firebase",
-      "Types.Firebase",
       "X.Debug",
       "X.Decode",
       "X.Html",
       "X.Keyboard"
     ],
-    "transitiveImportsCount": 15,
+    "transitiveImportsCount": 14,
     "backwardImports": [
       "View.Overlays"
     ],

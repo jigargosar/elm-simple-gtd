@@ -1,7 +1,6 @@
 module View.Config exposing (..)
 
 import AppDrawer.Types
-import Document
 import Entity.Types exposing (..)
 import ExclusiveMode.Types
 import LaunchBar.Messages
@@ -18,7 +17,6 @@ import Todo.Msg
 import Todo.Notification.Model
 import Todo.Types
 import Types.Document exposing (..)
-import Types.Firebase
 import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 

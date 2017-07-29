@@ -5,7 +5,7 @@
 
 ## Old Screen Shot ;)
 
-![Alt Demo](./demo.gif)
+![Alt Demo](github-assets/demo.gif)
 
 
 ## Build Instructions
@@ -17,3 +17,6 @@ yarn install --offline --force
 yarn run nodemon
 open http://localhost:8020/app.html
 ```
+## Powered By
+
+![BrowserStack](github-assets/browser-stack-logo.svg)

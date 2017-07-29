@@ -1,6 +1,5 @@
 module Page exposing (..)
 
-import Entity.Types exposing (..)
 import Pages.EntityList exposing (..)
 
 
@@ -28,4 +27,4 @@ getPage =
 
 
 initialPage =
-    EntityListPage Pages.EntityList.initialModel
+    EntityListPage Pages.EntityList.initialEntityListPageModel

@@ -2,7 +2,6 @@ module AppDrawer.View exposing (..)
 
 import AppColors
 import AppUrl
-import Entity.Types
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -169,7 +168,7 @@ entityListItem vm =
 switchViewItemSmall config iconName page title =
     li
         [ class ""
-        , onClick (config.gotoPage page)
+        , onClick (config.gotoPageMsg page)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]

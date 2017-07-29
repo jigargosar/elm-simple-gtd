@@ -1,56 +1,35 @@
 module Routes exposing (..)
 
 import Maybe.Extra
-import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
+import Page exposing (..)
 import Pages.EntityList exposing (..)
 import RouteUrl.Builder
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
-
-
---delta2builder : AppModel -> AppModel -> Maybe Builder
-
-
-delta2builder previous current =
-    RouteUrl.Builder.builder
-        |> RouteUrl.Builder.replacePath (getPathFromModel current)
-        |> Just
-
-
-getPathFromModel model =
-    case Page.getPage model of
-        EntityListPage page ->
-            getPathFromPage page
-
-        CustomSyncSettingsPage ->
-            [ "custom-sync" ]
-
 
 
 --delta2hash : AppModel -> AppModel -> Maybe UrlChange
 
 
 delta2hash =
+    let
+        delta2builder previousModel currentModel =
+            RouteUrl.Builder.builder
+                |> RouteUrl.Builder.replacePath (getPathFromModel currentModel)
+                |> Just
+    in
     delta2builder >>> Maybe.map RouteUrl.Builder.toHashChange
 
 
+getPathFromModel model =
+    case Page.getPage model of
+        EntityListPage page ->
+            getPathFromEntityListPageModel page
 
---builder2messages : Builder -> List AppMsg
-
-
-builder2messages config builder =
-    routeUrlBuilderToMaybeListPage builder
-        |> Maybe.Extra.unpack
-            (\_ ->
-                case RouteUrl.Builder.path builder of
-                    "custom-sync" :: [] ->
-                        [ config.gotoPage CustomSyncSettingsPage ]
-
-                    _ ->
-                        -- If nothing provided for this part of the URL, return empty list
-                        [ config.gotoPage Page.initialPage ]
-            )
-            (config.switchToEntityListPageMsg >> X.List.singleton)
+        CustomSyncSettingsPage ->
+            [ "custom-sync" ]
 
 
 
@@ -62,67 +41,15 @@ hash2messages config location =
 
 
 
---routeUrlBuilderToMaybeListPage : RouteUrl.Builder.Builder -> Maybe EntityListPage
+--builder2messages : Builder -> List AppMsg
 
 
-routeUrlBuilderToMaybeListPage builder =
+builder2messages config builder =
     case RouteUrl.Builder.path builder of
-        "lists" :: "contexts" :: [] ->
-            ContextsView |> Just
-
-        "lists" :: "projects" :: [] ->
-            ProjectsView |> Just
-
-        "bin" :: [] ->
-            BinView |> Just
-
-        "done" :: [] ->
-            DoneView |> Just
-
-        "recent" :: [] ->
-            RecentView |> Just
-
-        "Inbox" :: [] ->
-            ContextView "" |> Just
-
-        "context" :: id :: [] ->
-            ContextView id |> Just
-
-        "project" :: "NotAssigned" :: [] ->
-            ProjectView "" |> Just
-
-        "project" :: id :: [] ->
-            ProjectView id |> Just
+        "custom-sync" :: [] ->
+            [ config.gotoPageMsg CustomSyncSettingsPage ]
 
         _ ->
-            Nothing
-
-
-getPathFromPage page =
-    case page of
-        ContextsView ->
-            [ "lists", "contexts" ]
-
-        ProjectsView ->
-            [ "lists", "projects" ]
-
-        ProjectView id ->
-            if String.isEmpty id then
-                [ "project", "NotAssigned" ]
-            else
-                [ "project", id ]
-
-        ContextView id ->
-            if String.isEmpty id then
-                [ "Inbox" ]
-            else
-                [ "context", id ]
-
-        BinView ->
-            [ "bin" ]
-
-        DoneView ->
-            [ "done" ]
-
-        RecentView ->
-            [ "recent" ]
+            routeUrlBuilderToMaybeEntityListPageModel builder
+                ?|> (config.switchToEntityListPageMsg >> X.List.singleton)
+                ?= [ config.gotoPageMsg Page.initialPage ]

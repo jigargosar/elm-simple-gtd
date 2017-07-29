@@ -137,7 +137,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.gotoPage (innerConFig.getEntityListPageModel id |> EntityListPage)
+                config.gotoPageMsg (innerConFig.getEntityListPageModel id |> EntityListPage)
             else
                 config.noop
     , icon = icon

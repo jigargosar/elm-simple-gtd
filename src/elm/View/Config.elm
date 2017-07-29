@@ -19,7 +19,6 @@ import Todo.Msg
 import Todo.Notification.Model
 import Todo.Types
 import X.Function.Infix exposing (..)
-import X.Keyboard
 
 
 type alias ViewConfig msg =
@@ -64,7 +63,7 @@ type alias ViewConfig msg =
     , updateGroupDocFromNameMsg :
         GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
     , switchToEntityListPageMsg : EntityListPageModel -> msg
-    , gotoPage : Page.Page -> msg
+    , gotoPageMsg : Page.Page -> msg
     }
 
 
@@ -93,7 +92,7 @@ viewConfig =
     , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
     , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
     , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
-    , gotoPage = Msg.gotoPage
+    , gotoPageMsg = Msg.gotoPageMsg
     , onMdl = Msg.onMdl
     , onShowMainMenu = Msg.onShowMainMenu
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> Msg.OnTodoMsg

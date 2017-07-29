@@ -3,7 +3,6 @@ module Model.EntityTree exposing (..)
 import Context
 import Document
 import Entity.Tree
-import Entity.Types exposing (..)
 import Model.GroupDocStore exposing (..)
 import Model.Stores
 import Pages.EntityList exposing (..)

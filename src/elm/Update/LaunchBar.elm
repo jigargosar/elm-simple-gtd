@@ -1,7 +1,6 @@
 module Update.LaunchBar exposing (Config, update)
 
 import Document exposing (DocId, getDocId)
-import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)

@@ -66,7 +66,7 @@ switchToEntityListPageMsg =
     SwitchToEntityListView >> OnPageMsg
 
 
-gotoPage =
+gotoPageMsg =
     SwitchView >> OnPageMsg
 
 

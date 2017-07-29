@@ -1,4 +1,4 @@
-   10132 total
+   10115 total
      447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -10,14 +10,14 @@
      214 src/elm/Msg.elm
      204 src/elm/Update/Subscription.elm
      187 src/elm/Todo/ViewModel.elm
-     186 src/elm/AppDrawer/View.elm
+     185 src/elm/AppDrawer/View.elm
      174 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Update/GroupDoc.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
-     154 src/elm/Update/LaunchBar.elm
+     153 src/elm/Update/LaunchBar.elm
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
@@ -27,11 +27,10 @@
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
      131 src/elm/Document.elm
-     128 src/elm/Routes.elm
-     115 src/elm/View/Config.elm
+     114 src/elm/View/Config.elm
      111 src/elm/ViewModel.elm
      111 src/elm/Todo/Form.elm
-     111 src/elm/Model/EntityTree.elm
+     110 src/elm/Model/EntityTree.elm
      105 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
@@ -42,6 +41,7 @@
       88 src/elm/X/Html.elm
       86 src/elm/View/Layout.elm
       84 src/elm/Update/ExclusiveMode.elm
+      84 src/elm/Pages/EntityList.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
       81 src/elm/GroupDoc/View.elm
@@ -59,6 +59,7 @@
       66 src/elm/Todo/GroupEditView.elm
       64 src/elm/Todo/Notification/View.elm
       56 src/elm/Entity.elm
+      55 src/elm/Routes.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
       54 src/elm/Todo/Types.elm
@@ -88,10 +89,9 @@
       35 src/elm/Update/Config.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
-      31 src/elm/Page.elm
+      30 src/elm/Page.elm
       27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
-      23 src/elm/Pages/EntityList.elm
       22 src/elm/View.elm
       22 src/elm/Model.elm
       22 src/elm/ExclusiveMode/Types.elm

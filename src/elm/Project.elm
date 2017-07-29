@@ -1,15 +1,15 @@
 module Project exposing (..)
 
 import GroupDoc
-import GroupDoc.Types exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random exposing (..)
 import Types.Firebase exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 
 
 type alias Model =
-    GroupDoc.Types.GroupDoc
+    Types.GroupDoc.GroupDoc
 
 
 type alias ModelF =

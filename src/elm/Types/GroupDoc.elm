@@ -1,4 +1,4 @@
-module GroupDoc.Types exposing (..)
+module Types.GroupDoc exposing (..)
 
 import Store exposing (Store)
 import Types.Document exposing (..)

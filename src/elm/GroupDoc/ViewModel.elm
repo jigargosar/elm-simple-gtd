@@ -6,7 +6,6 @@ import Context
 import Document
 import Entity.Types exposing (..)
 import GroupDoc
-import GroupDoc.Types exposing (..)
 import Keyboard.Extra as Key exposing (Key)
 import Material
 import Pages.EntityList exposing (..)
@@ -16,6 +15,7 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Helpers exposing (apply2)
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
 
@@ -50,7 +50,7 @@ type alias GroupDocViewModel msg =
 
 
 type alias GroupDoc =
-    GroupDoc.Types.GroupDoc
+    Types.GroupDoc.GroupDoc
 
 
 type alias Config =
@@ -64,7 +64,7 @@ type alias Config =
     , defaultIconName : String
     , getPage : DocId -> EntityListPageModel
     , getTabIndexAVForEntityId : EntityId -> Int
-    , groupDocType : GroupDoc.Types.GroupDocType
+    , groupDocType : Types.GroupDoc.GroupDocType
     }
 
 
@@ -187,7 +187,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , defaultIconName = "av:fiber-manual-record"
             , getPage = ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = GroupDoc.Types.ContextGroupDocType
+            , groupDocType = Types.GroupDoc.ContextGroupDocType
             }
     in
     create config configInner todoList context
@@ -211,7 +211,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , defaultIconName = "av:fiber-manual-record"
             , getPage = ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = GroupDoc.Types.ProjectGroupDocType
+            , groupDocType = Types.GroupDoc.ProjectGroupDocType
             }
     in
     create config configInner todoList project

@@ -44,7 +44,7 @@
       82 src/elm/Model/Internal.elm
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
-      79 src/elm/GroupDoc/Types.elm
+      79 src/elm/Types/GroupDoc.elm
       78 src/elm/Update.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm

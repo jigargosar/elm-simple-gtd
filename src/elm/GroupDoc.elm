@@ -1,7 +1,6 @@
 module GroupDoc exposing (..)
 
 import Document
-import GroupDoc.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -10,6 +9,7 @@ import Store
 import Time exposing (Time)
 import Tuple2
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 import X.Predicate
 import X.Record

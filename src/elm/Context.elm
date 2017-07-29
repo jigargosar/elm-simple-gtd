@@ -1,15 +1,15 @@
 module Context exposing (..)
 
 import GroupDoc
-import GroupDoc.Types exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 
 
 type alias Model =
-    GroupDoc.Types.GroupDoc
+    Types.GroupDoc.GroupDoc
 
 
 constructor =

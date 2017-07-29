@@ -4,7 +4,6 @@ import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
-import GroupDoc.Types exposing (..)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
 import Return
@@ -12,6 +11,7 @@ import Set
 import Store
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
 import X.Return exposing (..)
 

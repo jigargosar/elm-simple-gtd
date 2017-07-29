@@ -2,10 +2,10 @@ module ExclusiveMode.Types exposing (..)
 
 -- small so safe
 
-import GroupDoc.Types exposing (GroupDocForm)
 import LaunchBar.Models
 import Menu.Types exposing (MenuState)
 import Todo.FormTypes exposing (..)
+import Types.GroupDoc exposing (..)
 
 
 type alias SyncForm =

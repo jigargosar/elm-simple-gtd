@@ -2,7 +2,7 @@ module GroupDoc.Form exposing (..)
 
 import Document
 import GroupDoc
-import GroupDoc.Types exposing (..)
+import Types.GroupDoc exposing (..)
 
 
 createEditGroupDocForm : GroupDocType -> GroupDoc -> GroupDocForm

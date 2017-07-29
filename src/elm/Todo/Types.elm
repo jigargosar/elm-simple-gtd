@@ -1,9 +1,9 @@
 module Todo.Types exposing (..)
 
-import GroupDoc.Types exposing (ContextDoc, ProjectDoc)
 import Store exposing (Store)
 import Time exposing (Time)
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 
 
 type alias TodoText =

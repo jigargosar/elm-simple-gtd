@@ -1,6 +1,6 @@
 module Msg.GroupDoc exposing (..)
 
-import GroupDoc.Types exposing (..)
+import Types.GroupDoc exposing (..)
 
 
 type GroupDocMsg

@@ -4,7 +4,6 @@ import AppDrawer.Types
 import Document
 import Entity.Types exposing (..)
 import ExclusiveMode.Types
-import GroupDoc.Types
 import LaunchBar.Messages
 import Material
 import Menu
@@ -20,6 +19,7 @@ import Todo.Notification.Model
 import Todo.Types
 import Types.Document exposing (..)
 import Types.Firebase
+import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 
 
@@ -33,8 +33,8 @@ type alias ViewConfig msg =
     , onMdl : Material.Msg msg -> msg
     , onReminderOverlayAction : Todo.Notification.Model.Action -> msg
     , onSaveExclusiveModeForm : msg
-    , onSetContext : DocId -> GroupDoc.Types.ContextDoc -> msg
-    , onSetProject : DocId -> GroupDoc.Types.ProjectDoc -> msg
+    , onSetContext : DocId -> ContextDoc -> msg
+    , onSetProject : DocId -> ProjectDoc -> msg
     , onSetTodoFormMenuState : Todo.FormTypes.TodoForm -> Menu.State -> msg
     , onSetTodoFormReminderDate : Todo.FormTypes.TodoForm -> String -> msg
     , onSetTodoFormReminderTime : Todo.FormTypes.TodoForm -> String -> msg
@@ -42,10 +42,10 @@ type alias ViewConfig msg =
     , onShowMainMenu : msg
     , onSignIn : msg
     , onSignOut : msg
-    , onStartAddingGroupDoc : GroupDoc.Types.GroupDocType -> msg
+    , onStartAddingGroupDoc : GroupDocType -> msg
     , onStartAddingTodoWithFocusInEntityAsReference : msg
     , onStartCustomRemotePouchSync : ExclusiveMode.Types.SyncForm -> msg
-    , onStartEditingGroupDoc : GroupDoc.Types.GroupDocId -> msg
+    , onStartEditingGroupDoc : GroupDocId -> msg
     , onStartEditingReminder : Todo.Types.TodoDoc -> msg
     , onStartEditingTodoContext : Todo.Types.TodoDoc -> msg
     , onStartEditingTodoProject : Todo.Types.TodoDoc -> msg
@@ -57,13 +57,13 @@ type alias ViewConfig msg =
     , onToggleDeletedAndMaybeSelection : DocId -> msg
     , onToggleDoneAndMaybeSelection : DocId -> msg
     , onToggleEntitySelection : Entity.Types.EntityId -> msg
-    , onToggleGroupDocArchived : GroupDoc.Types.GroupDocId -> msg
+    , onToggleGroupDocArchived : GroupDocId -> msg
     , onUpdateCustomSyncFormUri :
         ExclusiveMode.Types.SyncForm -> String -> msg
     , revertExclusiveMode : msg
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
-        GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
+        GroupDocForm -> GroupDocName -> msg
     , switchToEntityListPageMsg : EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     }

@@ -3,7 +3,6 @@ module Update.LaunchBar exposing (Config, update)
 import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
-import GroupDoc.Types exposing (..)
 import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
 import Model.GroupDocStore
@@ -15,6 +14,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (apply2)
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Return exposing (..)
 
 

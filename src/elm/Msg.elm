@@ -4,7 +4,6 @@ import AppDrawer.Types
 import CommonMsg
 import CommonMsg.Types
 import Entity.Types exposing (..)
-import GroupDoc.Types exposing (GroupDocAction(..), GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Material
 import Msg.AppHeader exposing (AppHeaderMsg(..))
@@ -18,6 +17,7 @@ import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Toolkit.Operators exposing (..)
 import Types.Firebase exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 
 

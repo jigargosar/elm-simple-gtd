@@ -2,7 +2,6 @@ module Update.Subscription exposing (Config, update)
 
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
-import GroupDoc.Types exposing (..)
 import Keyboard.Extra as KX exposing (Key)
 import Model.GroupDocStore exposing (contextStore, projectStore)
 import Model.Selection
@@ -13,6 +12,7 @@ import Set
 import Store
 import Time exposing (Time)
 import Todo.Types exposing (TodoDoc, TodoStore)
+import Types.GroupDoc exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)

@@ -10,7 +10,6 @@ import Dict.Extra
 import Document
 import Entity.Types exposing (..)
 import GroupDoc
-import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
 import Page exposing (Page(EntityListPage))
@@ -22,6 +21,7 @@ import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
 import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
 import X.Function exposing (when)
 import X.Maybe
 
@@ -60,7 +60,7 @@ type alias DocumentWithNameViewModel msg =
 
 
 type alias GroupDoc =
-    GroupDoc.Types.GroupDoc
+    Types.GroupDoc.GroupDoc
 
 
 type alias Config =

@@ -3,11 +3,11 @@ module Model.GroupDocStore exposing (..)
 import Context
 import Document
 import GroupDoc
-import GroupDoc.Types exposing (GroupDocId(ContextGroupDocId, ProjectGroupDocId), GroupDocStore, GroupDocType(ContextGroupDocType, ProjectGroupDocType))
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Project
 import Store
+import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens)
 
 

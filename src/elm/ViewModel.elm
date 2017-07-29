@@ -4,7 +4,6 @@ import AppColors
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Color
 import Entity.Types exposing (..)
-import GroupDoc.Types exposing (..)
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import List.Extra as List
 import Material
@@ -15,6 +14,7 @@ import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
 import Types exposing (AppModel)
+import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

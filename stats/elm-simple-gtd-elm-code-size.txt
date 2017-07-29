@@ -1,4 +1,4 @@
-   10100 total
+   10089 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -65,6 +65,7 @@
       53 src/elm/Routes.elm
       53 src/elm/LaunchBar/Models.elm
       52 src/elm/Types.elm
+      51 src/elm/View/CustomSync.elm
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/Context.elm
       50 src/elm/AppUrl.elm
@@ -79,7 +80,6 @@
       44 src/elm/Model/Stores.elm
       44 src/elm/Main.elm
       41 src/elm/Update/CustomSync.elm
-      40 src/elm/View/CustomSync.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Update/Types.elm
@@ -94,7 +94,6 @@
       30 src/elm/Page.elm
       27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
-      22 src/elm/Model.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm

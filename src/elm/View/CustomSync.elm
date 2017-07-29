@@ -1,17 +1,28 @@
 module View.CustomSync exposing (..)
 
+import ExclusiveMode.Types exposing (ExclusiveMode(XMCustomSync))
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
-import Model
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 import X.Keyboard exposing (onKeyDownStopPropagation)
 
 
 view config model =
     let
         form =
-            Model.getRemoteSyncForm model
+            let
+                maybeForm =
+                    case model.editMode of
+                        XMCustomSync form ->
+                            Just form
+
+                        _ ->
+                            Nothing
+            in
+            maybeForm ?= { uri = model.pouchDBRemoteSyncURI }
     in
     div [ id "custom-sync-container" ]
         [ div [ class "z-depth-2 static layout vertical " ]

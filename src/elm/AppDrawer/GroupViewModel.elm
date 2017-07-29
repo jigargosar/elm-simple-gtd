@@ -59,10 +59,6 @@ type alias DocumentWithNameViewModel msg =
     }
 
 
-type alias GroupDoc =
-    Types.GroupDoc.GroupDoc
-
-
 type alias Config =
     { groupByFn : TodoDoc -> DocId
     , todoList : List TodoDoc

@@ -58,5 +58,5 @@ type alias ViewConfig msg =
     , updateGroupDocFromNameMsg :
         GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
     , switchToEntityListViewTypeMsg : Entity.Types.EntityListPageModel -> msg
-    , switchToView : Page.Page -> msg
+    , gotoPage : Page.Page -> msg
     }

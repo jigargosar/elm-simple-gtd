@@ -13,13 +13,13 @@ import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
+import Page exposing (Page(EntityListPage))
 import Project
 import String.Extra
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
-import Page exposing (Page(EntityListPage))
 import X.Function exposing (when)
 import X.Maybe
 
@@ -137,7 +137,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.switchToView (innerConFig.getViewType id |> EntityListPage)
+                config.gotoPage (innerConFig.getViewType id |> EntityListPage)
             else
                 config.noop
     , icon = icon

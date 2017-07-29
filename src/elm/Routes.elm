@@ -44,11 +44,11 @@ builder2messages config builder =
             (\_ ->
                 case RouteUrl.Builder.path builder of
                     "custom-sync" :: [] ->
-                        [ config.switchToView CustomSyncSettingsPage ]
+                        [ config.gotoPage CustomSyncSettingsPage ]
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ config.switchToView Page.defaultView ]
+                        [ config.gotoPage Page.initialPage ]
             )
             (config.switchToEntityListViewTypeMsg >> X.List.singleton)
 

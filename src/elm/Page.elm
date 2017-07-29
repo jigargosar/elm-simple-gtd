@@ -26,5 +26,5 @@ getViewType =
     .viewType
 
 
-defaultView =
+initialPage =
     EntityListPage Entity.Types.defaultViewType

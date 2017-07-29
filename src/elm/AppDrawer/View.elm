@@ -168,7 +168,7 @@ entityListItem vm =
 switchViewItemSmall config iconName viewType title =
     li
         [ class ""
-        , onClick (config.switchToView viewType)
+        , onClick (config.gotoPage viewType)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]

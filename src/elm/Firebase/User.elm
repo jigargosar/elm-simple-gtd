@@ -1,6 +1,6 @@
 module Firebase.User exposing (..)
 
-import Firebase.Types exposing (Provider, UserInfo)
+import Firebase.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 

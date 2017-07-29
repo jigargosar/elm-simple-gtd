@@ -1,6 +1,6 @@
 module Firebase.Model exposing (..)
 
-import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser(SignedIn, SignedOut))
+import Firebase.Types exposing (..)
 import Firebase.User
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E

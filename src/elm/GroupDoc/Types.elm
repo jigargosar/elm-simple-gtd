@@ -56,7 +56,7 @@ type alias Record =
 
 
 type alias GroupDoc =
-    Document.Document Record
+    Document Record
 
 
 type alias ContextDoc =

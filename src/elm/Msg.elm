@@ -4,7 +4,7 @@ import AppDrawer.Types
 import CommonMsg
 import CommonMsg.Types
 import Entity.Types exposing (..)
-import Firebase.Types exposing (FirebaseMsg)
+import Firebase.Types exposing (..)
 import GroupDoc.Types exposing (GroupDocAction(..), GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Material

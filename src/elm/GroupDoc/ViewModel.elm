@@ -3,7 +3,7 @@ module GroupDoc.ViewModel exposing (..)
 import AppColors
 import Color
 import Context
-import Types.Document exposing(..)
+import Document
 import Entity.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (..)
@@ -15,6 +15,7 @@ import String.Extra
 import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Helpers exposing (apply2)
+import Types.Document exposing (..)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
 

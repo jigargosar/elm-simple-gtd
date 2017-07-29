@@ -1,6 +1,6 @@
 module Project exposing (..)
 
-import Firebase.Types exposing (DeviceId)
+import Firebase.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Json.Encode as E

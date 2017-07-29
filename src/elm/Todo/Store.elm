@@ -1,6 +1,6 @@
 module Todo.Store exposing (..)
 
-import Firebase.Types exposing (DeviceId)
+import Firebase.Types exposing (..)
 import Random.Pcg as Random
 import Store
 import Todo exposing (..)

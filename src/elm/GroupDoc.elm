@@ -1,7 +1,6 @@
 module GroupDoc exposing (..)
 
 import Document
-import Firebase.Types exposing (DeviceId)
 import GroupDoc.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D

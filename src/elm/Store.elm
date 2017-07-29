@@ -20,7 +20,6 @@ port module Store
 
 import Dict exposing (Dict)
 import Document
-import Firebase.Types exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import List.Extra as List

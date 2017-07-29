@@ -1,6 +1,6 @@
 module Subscriptions.Firebase exposing (..)
 
-import Firebase.Types exposing (FirebaseMsg(..))
+import Firebase.Types exposing (..)
 import Ports.Firebase exposing (..)
 
 

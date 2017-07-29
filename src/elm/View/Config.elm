@@ -18,6 +18,7 @@ import Todo.FormTypes
 import Todo.Msg
 import Todo.Notification.Model
 import Todo.Types
+import Types.Document exposing (..)
 import X.Function.Infix exposing (..)
 
 
@@ -31,8 +32,8 @@ type alias ViewConfig msg =
     , onMdl : Material.Msg msg -> msg
     , onReminderOverlayAction : Todo.Notification.Model.Action -> msg
     , onSaveExclusiveModeForm : msg
-    , onSetContext : Document.DocId -> GroupDoc.Types.ContextDoc -> msg
-    , onSetProject : Document.DocId -> GroupDoc.Types.ProjectDoc -> msg
+    , onSetContext : DocId -> GroupDoc.Types.ContextDoc -> msg
+    , onSetProject : DocId -> GroupDoc.Types.ProjectDoc -> msg
     , onSetTodoFormMenuState : Todo.FormTypes.TodoForm -> Menu.State -> msg
     , onSetTodoFormReminderDate : Todo.FormTypes.TodoForm -> String -> msg
     , onSetTodoFormReminderTime : Todo.FormTypes.TodoForm -> String -> msg
@@ -49,11 +50,11 @@ type alias ViewConfig msg =
     , onStartEditingTodoProject : Todo.Types.TodoDoc -> msg
     , onStartEditingTodoText : Todo.Types.TodoDoc -> msg
     , onStopRunningTodoMsg : msg
-    , onSwitchOrStartTrackingTodo : Document.DocId -> msg
+    , onSwitchOrStartTrackingTodo : DocId -> msg
     , onToggleAppDrawerOverlay : msg
-    , onToggleDeleted : Document.DocId -> msg
-    , onToggleDeletedAndMaybeSelection : Document.DocId -> msg
-    , onToggleDoneAndMaybeSelection : Document.DocId -> msg
+    , onToggleDeleted : DocId -> msg
+    , onToggleDeletedAndMaybeSelection : DocId -> msg
+    , onToggleDoneAndMaybeSelection : DocId -> msg
     , onToggleEntitySelection : Entity.Types.EntityId -> msg
     , onToggleGroupDocArchived : GroupDoc.Types.GroupDocId -> msg
     , onUpdateCustomSyncFormUri :

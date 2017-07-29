@@ -80,7 +80,7 @@ create config configInner todoList groupDoc =
             configInner.toEntityId id
 
         groupDocId =
-            createGroupDocIdFromType configInner.groupDocType id
+            GroupDoc.createGroupDocIdFromType configInner.groupDocType id
 
         onEntityAction =
             config.onEntityUpdateMsg entityId

@@ -14,15 +14,6 @@ type GroupDocId
     | ProjectGroupDocId DocId
 
 
-createGroupDocIdFromType gdType =
-    case gdType of
-        ContextGroupDocType ->
-            ContextGroupDocId
-
-        ProjectGroupDocType ->
-            ProjectGroupDocId
-
-
 type GroupDocAction
     = GDA_StartAdding
 
@@ -74,14 +65,6 @@ type alias ContextDoc =
 
 type alias ProjectDoc =
     GroupDoc
-
-
-getGroupDocName =
-    .name
-
-
-isGroupDocArchived =
-    .archived
 
 
 type alias GroupDocStore =

@@ -15,6 +15,23 @@ import X.Predicate
 import X.Record
 
 
+createGroupDocIdFromType gdType =
+    case gdType of
+        ContextGroupDocType ->
+            ContextGroupDocId
+
+        ProjectGroupDocType ->
+            ProjectGroupDocId
+
+
+getGroupDocName =
+    .name
+
+
+isGroupDocArchived =
+    .archived
+
+
 archived =
     X.Record.bool .archived (\s b -> { b | archived = s })
 

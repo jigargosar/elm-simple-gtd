@@ -1,6 +1,7 @@
 module GroupDoc.Form exposing (..)
 
 import Document exposing (..)
+import GroupDoc
 import GroupDoc.Types exposing (..)
 
 
@@ -12,9 +13,9 @@ createEditGroupDocForm groupDocType groupDoc =
     in
     { id = id
     , groupDocType = groupDocType
-    , groupDocId = createGroupDocIdFromType groupDocType id
-    , name = getGroupDocName groupDoc
-    , isArchived = isGroupDocArchived groupDoc
+    , groupDocId = GroupDoc.createGroupDocIdFromType groupDocType id
+    , name = GroupDoc.getGroupDocName groupDoc
+    , isArchived = GroupDoc.isGroupDocArchived groupDoc
     , mode = GDFM_Edit
     }
 
@@ -28,7 +29,7 @@ createAddGroupDocForm groupDocType =
     { id = id
     , name = ""
     , groupDocType = groupDocType
-    , groupDocId = createGroupDocIdFromType groupDocType id
+    , groupDocId = GroupDoc.createGroupDocIdFromType groupDocType id
     , isArchived = False
     , mode = GDFM_Add
     }

@@ -1,4 +1,4 @@
-   10113 total
+   10114 total
      447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -13,6 +13,7 @@
      185 src/elm/AppDrawer/View.elm
      174 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
+     159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Update/GroupDoc.elm
      156 src/elm/Todo/Schedule.elm
@@ -21,7 +22,6 @@
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     142 src/elm/GroupDoc.elm
      140 src/elm/Entity/ListView.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
@@ -34,7 +34,6 @@
      105 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
-      96 src/elm/GroupDoc/Types.elm
       94 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm
       91 src/elm/Model/GroupDocStore.elm
@@ -45,6 +44,7 @@
       82 src/elm/Model/Internal.elm
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
+      79 src/elm/GroupDoc/Types.elm
       78 src/elm/Update.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm
@@ -72,8 +72,8 @@
       49 src/elm/Form.elm
       48 src/elm/Update/AppDrawer.elm
       47 src/elm/Todo/TimeTracker/View.elm
+      47 src/elm/GroupDoc/Form.elm
       46 src/elm/Notification.elm
-      46 src/elm/GroupDoc/Form.elm
       45 src/elm/Update/AppHeader.elm
       44 src/elm/Update/Page.elm
       44 src/elm/Todo/FormTypes.elm

@@ -2,12 +2,9 @@ module View.Layout exposing (..)
 
 import AppDrawer.Model
 import AppDrawer.View
-import Entity.ListView
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Page
-import View.CustomSync
 import View.Header
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
@@ -23,11 +20,6 @@ appLayoutView config appVM model pageContent =
         layoutMainHeader =
             View.Header.appMainHeader config appVM model
 
-        mainViewContainer =
-            div [ id "main-view-container" ]
-                [ pageContent
-                ]
-
         isOverlayOpen =
             AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
 
@@ -35,7 +27,9 @@ appLayoutView config appVM model pageContent =
             X.Html.onClickStopPropagation config.noop
 
         layoutMainContent =
-            div [ id "layout-main-content" ] [ mainViewContainer ]
+            div [ id "layout-main-content" ]
+                [ div [ id "page-container" ] [ pageContent ]
+                ]
     in
     if isOverlayOpen then
         div

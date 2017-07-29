@@ -34,7 +34,6 @@ type alias ViewModel msg =
     { nullVMAsList : List (DocumentWithNameViewModel msg)
     , entityList : List (DocumentWithNameViewModel msg)
     , archivedEntityList : List (DocumentWithNameViewModel msg)
-    , entituListPageModel : EntityListPageModel
     , title : String
     , className : String
     , showArchived : Bool

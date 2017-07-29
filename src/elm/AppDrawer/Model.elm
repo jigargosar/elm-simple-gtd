@@ -59,7 +59,7 @@ isExpanded =
     get expanded
 
 
-type alias Model =
+type alias AppDrawerModel =
     { contexts : GroupModel
     , projects : GroupModel
     , isOverlayOpen : Bool
@@ -71,7 +71,7 @@ defaultIsOverlayOpen =
 
 
 decoder =
-    D.succeed Model
+    D.succeed AppDrawerModel
         |> D.required "contexts" groupModelDecoder
         |> D.required "projects" groupModelDecoder
         |> D.optional "isOverlayOpen" D.bool defaultIsOverlayOpen
@@ -85,7 +85,7 @@ encoder model =
         ]
 
 
-default : Model
+default : AppDrawerModel
 default =
     { contexts = defaultGroupModel
     , projects = defaultGroupModel

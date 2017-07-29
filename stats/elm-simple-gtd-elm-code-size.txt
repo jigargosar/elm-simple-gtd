@@ -1,7 +1,7 @@
-   10083 total
+   10100 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
-     293 src/elm/Store.elm
+     283 src/elm/Store.elm
      277 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
      246 src/elm/AppDrawer/GroupViewModel.elm
@@ -92,6 +92,7 @@
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
       30 src/elm/Page.elm
+      27 src/elm/Types/Store.elm
       27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
       22 src/elm/ExclusiveMode/Types.elm

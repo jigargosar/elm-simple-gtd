@@ -1,7 +1,6 @@
 port module Store
     exposing
-        ( Store
-        , asIdDict
+        ( asIdDict
         , filterDocs
         , findBy
         , findById
@@ -28,6 +27,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import Types.Document exposing (..)
+import Types.Store exposing (..)
 import X.Debug
 import X.Random
 import X.Record as Record exposing (get, over, overT2)
@@ -52,16 +52,6 @@ decodeList decoder =
                         in
                         Nothing
             )
-
-
-type alias Store x =
-    { seed : Random.Pcg.Seed
-    , dict : Dict DocId (Document x)
-    , otherFieldsEncoder : Document x -> List ( String, E.Value )
-    , decoder : Decoder (Document x)
-    , name : String
-    , deviceId : DeviceId
-    }
 
 
 dict =

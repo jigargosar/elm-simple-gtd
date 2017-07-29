@@ -46,7 +46,7 @@ type alias AppModelOtherFields =
     , deviceId : String
     , timeTracker : Todo.TimeTracker.Model
     , config : AppConfig
-    , appDrawerModel : AppDrawer.Model.Model
+    , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , signInModel : Firebase.SignIn.Model
     , mdl : Material.Model
     }

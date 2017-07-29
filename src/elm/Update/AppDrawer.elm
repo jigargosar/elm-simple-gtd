@@ -8,7 +8,7 @@ import X.Record exposing (..)
 
 type alias SubModel model =
     { model
-        | appDrawerModel : AppDrawer.Model.Model
+        | appDrawerModel : AppDrawer.Model.AppDrawerModel
     }
 
 

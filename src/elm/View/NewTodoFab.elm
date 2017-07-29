@@ -8,9 +8,6 @@ import Material.Options exposing (div)
 import Material.Tooltip
 
 
---newTodoFab : ViewConfig msg -> AppModel -> Html msg
-
-
 newTodoFab config m =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach config.onMdl [ 0 ] ]

@@ -8,9 +8,6 @@ import View.Overlays
 import ViewModel
 
 
---init : ViewConfig msg -> AppModel -> Html msg
-
-
 init config model =
     let
         appVM =

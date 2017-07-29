@@ -3,7 +3,7 @@ import fs from "fs"
 import {runFish} from "../common"
 import {Module, Modules} from "./module"
 
-const computeModuleDependencies = function () {
+const computeDependencies = function () {
   const srcGlob = "src/elm/**.elm"
   
   const output = runFish(`find ${srcGlob}`, {stdio: 'pipe'})
@@ -21,8 +21,15 @@ const computeModuleDependencies = function () {
   return Modules(moduleList)
 }
 
+export function logTransitiveBackwardImportsOf(moduleName) {
+  const module = computeDependencies()[moduleName]
+  const transitiveBackwardImports = module ? module["transitiveBackwardImports"] : []
+  console.log(JSON.stringify({transitiveBackwardImports}, null, 2 ))
+  return transitiveBackwardImports
+}
+
 export function generateDependenciesStatsFile() {
-  const modules = computeModuleDependencies()
+  const modules = computeDependencies()
   
   fs.writeFileSync(
       "stats/elm-src-dependencies.json",

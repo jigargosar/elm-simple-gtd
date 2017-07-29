@@ -28,4 +28,4 @@ getPage =
 
 
 initialPage =
-    EntityListPage Pages.EntityList.defaultPage
+    EntityListPage Pages.EntityList.initialModel

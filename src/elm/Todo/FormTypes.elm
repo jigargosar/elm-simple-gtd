@@ -1,9 +1,9 @@
 module Todo.FormTypes exposing (..)
 
-import Document exposing (DocId)
 import Menu
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
+import Types.Document exposing (..)
 
 
 type alias TodoForm =

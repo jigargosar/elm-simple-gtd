@@ -1,6 +1,6 @@
 module GroupDoc exposing (..)
 
-import Document exposing (DocId)
+import Document
 import Firebase.Types exposing (DeviceId)
 import GroupDoc.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
@@ -10,6 +10,7 @@ import Random.Pcg
 import Store
 import Time exposing (Time)
 import Tuple2
+import Types.Document exposing (..)
 import X.Function.Infix exposing (..)
 import X.Predicate
 import X.Record
@@ -38,10 +39,10 @@ archived =
 
 constructor :
     DocId
-    -> Document.Revision
+    -> Revision
     -> Time
     -> Time
-    -> Document.Deleted
+    -> Deleted
     -> DeviceId
     -> GroupDocName
     -> Archived

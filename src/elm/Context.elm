@@ -1,10 +1,10 @@
 module Context exposing (..)
 
-import Document exposing (DeviceId, DocId)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random
+import Types.Document exposing (..)
 import X.Function exposing (..)
 
 

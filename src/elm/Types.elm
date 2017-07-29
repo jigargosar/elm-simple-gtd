@@ -1,7 +1,6 @@
 module Types exposing (AppConfig, AppModel, AppModelOtherFields)
 
 import AppDrawer.Model
-import Document exposing (DocId)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
@@ -14,6 +13,7 @@ import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
+import Types.Document exposing (..)
 
 
 type alias AppConfig =

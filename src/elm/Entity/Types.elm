@@ -1,6 +1,6 @@
 module Entity.Types exposing (..)
 
-import Document exposing (DocId)
+import Types.Document exposing(..)
 import GroupDoc.Types exposing (GroupDoc)
 import Todo.Types exposing (TodoDoc)
 

@@ -73,10 +73,11 @@
       "Todo.Types",
       "Toolkit.Operators",
       "Types",
+      "Types.Document",
       "X.Function",
       "X.Maybe"
     ],
-    "importsCount": 23,
+    "importsCount": 24,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.Model",
@@ -135,6 +136,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -147,7 +149,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "ViewModel"
     ],
@@ -266,12 +268,10 @@
       "AppUrl",
       "Color",
       "Color.Mixing",
-      "Document",
       "Html",
       "Html.Attributes",
       "Html.Events",
       "Json.Decode",
-      "Json.Decode.Pipeline",
       "Json.Encode",
       "Mat",
       "Material",
@@ -287,13 +287,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "View.Badge",
       "X.Function",
       "X.Function.Infix",
       "X.Html",
       "X.String"
     ],
-    "transitiveImportsCount": 30,
+    "transitiveImportsCount": 29,
     "backwardImports": [
       "View.Layout"
     ],
@@ -399,11 +400,11 @@
     "moduleName": "Context",
     "parentModuleName": "",
     "imports": [
-      "Document",
       "GroupDoc",
       "GroupDoc.Types",
       "Json.Encode",
       "Random.Pcg",
+      "Types.Document",
       "X.Function"
     ],
     "importsCount": 6,
@@ -426,6 +427,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -433,7 +435,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -499,10 +501,11 @@
       "Json.Encode",
       "Set",
       "Time",
+      "Types.Document",
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 7,
+    "importsCount": 8,
     "transitiveImports": [
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -512,45 +515,33 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Function",
       "X.Function.Infix"
     ],
-    "transitiveImportsCount": 10,
+    "transitiveImportsCount": 11,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
-      "Context",
       "Entity",
-      "Entity.Types",
       "EntityId",
       "GroupDoc",
       "GroupDoc.Form",
-      "GroupDoc.Types",
-      "GroupDoc.ViewModel",
       "Model.EntityTree",
       "Model.GroupDocStore",
-      "Pages.EntityList",
       "Store",
       "Todo",
       "Todo.Form",
-      "Todo.FormTypes",
       "Todo.GroupEditView",
-      "Todo.Msg",
       "Todo.Notification.Model",
-      "Todo.Notification.Types",
       "Todo.TimeTracker",
-      "Todo.Types",
       "Todo.ViewModel",
-      "Types",
       "Update.GroupDoc",
-      "Update.LaunchBar",
-      "Update.Page",
       "Update.Todo.Internal",
       "View.Config"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 17,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
-      "AppDrawer.View",
       "Context",
       "Entity",
       "Entity.ListView",
@@ -580,16 +571,12 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
-      "Page",
-      "Pages.EntityList",
       "Project",
-      "Routes",
       "Store",
       "Subscriptions",
       "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
-      "Todo.FormTypes",
       "Todo.GroupEditView",
       "Todo.Msg",
       "Todo.Notification.Model",
@@ -612,7 +599,6 @@
       "Update.Firebase",
       "Update.GroupDoc",
       "Update.LaunchBar",
-      "Update.Page",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
@@ -625,7 +611,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 75
+    "transitiveBackwardImportsCount": 69
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -691,13 +677,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "Entity.ListView",
       "Entity.Tree",
@@ -794,6 +781,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "View.Badge",
       "X.Debug",
       "X.Decode",
@@ -806,7 +794,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 66,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "View"
     ],
@@ -860,6 +848,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -867,7 +856,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 33,
+    "transitiveImportsCount": 34,
     "backwardImports": [
       "Entity.ListView",
       "Model.EntityTree",
@@ -890,9 +879,9 @@
     "moduleName": "Entity.Types",
     "parentModuleName": "Entity",
     "imports": [
-      "Document",
       "GroupDoc.Types",
-      "Todo.Types"
+      "Todo.Types",
+      "Types.Document"
     ],
     "importsCount": 3,
     "transitiveImports": [
@@ -914,13 +903,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 23,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity",
@@ -1002,13 +992,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "Entity.ListView",
       "GroupDoc.View",
@@ -1053,13 +1044,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "Entity.ListView",
       "Model.Internal",
@@ -1130,6 +1122,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -1141,7 +1134,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "Model",
       "Model.Internal",
@@ -1509,11 +1502,12 @@
       "Store",
       "Time",
       "Tuple2",
+      "Types.Document",
       "X.Function.Infix",
       "X.Predicate",
       "X.Record"
     ],
-    "importsCount": 13,
+    "importsCount": 14,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -1532,6 +1526,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -1539,7 +1534,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 23,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Context",
@@ -1630,6 +1625,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -1637,7 +1633,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "Update.GroupDoc"
     ],
@@ -1701,6 +1697,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -1711,7 +1708,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -1728,8 +1725,8 @@
     "moduleName": "GroupDoc.Types",
     "parentModuleName": "GroupDoc",
     "imports": [
-      "Document",
-      "Store"
+      "Store",
+      "Types.Document"
     ],
     "importsCount": 2,
     "transitiveImports": [
@@ -1749,13 +1746,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 21,
+    "transitiveImportsCount": 22,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Context",
@@ -1903,6 +1901,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "View.Badge",
       "X.Debug",
       "X.Decode",
@@ -1914,7 +1913,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "Entity.ListView"
     ],
@@ -1934,7 +1933,6 @@
       "AppColors",
       "Color",
       "Context",
-      "Document",
       "Entity.Types",
       "GroupDoc",
       "GroupDoc.Types",
@@ -1946,6 +1944,7 @@
       "Todo",
       "Todo.Types",
       "Toolkit.Helpers",
+      "Types.Document",
       "X.Function",
       "X.Keyboard"
     ],
@@ -1989,6 +1988,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -1999,7 +1999,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 47,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "ViewModel"
     ],
@@ -2128,6 +2128,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -2135,7 +2136,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 28,
+    "transitiveImportsCount": 29,
     "backwardImports": [
       "LaunchBar.View",
       "Msg",
@@ -2193,6 +2194,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -2200,7 +2202,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 27,
+    "transitiveImportsCount": 28,
     "backwardImports": [
       "ExclusiveMode.Types",
       "LaunchBar.Messages",
@@ -2289,6 +2291,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -2299,7 +2302,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 37,
+    "transitiveImportsCount": 38,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -2534,6 +2537,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "Update",
       "Update.AppDrawer",
       "Update.AppHeader",
@@ -2576,7 +2580,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 165,
+    "transitiveImportsCount": 166,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2860,6 +2864,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -2871,7 +2876,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 44,
     "backwardImports": [
       "View.CustomSync"
     ],
@@ -2935,6 +2940,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -2942,7 +2948,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 39,
+    "transitiveImportsCount": 40,
     "backwardImports": [
       "Entity.ListView",
       "Update.Entity"
@@ -2996,6 +3002,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -3003,7 +3010,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 27,
+    "transitiveImportsCount": 28,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.EntityTree",
@@ -3065,13 +3072,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 26,
+    "transitiveImportsCount": 27,
     "backwardImports": [
       "Update.Entity"
     ],
@@ -3167,6 +3175,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -3178,7 +3187,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Main"
     ],
@@ -3260,6 +3269,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -3267,7 +3277,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 34,
+    "transitiveImportsCount": 35,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.EntityTree"
@@ -3312,13 +3322,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 21,
+    "transitiveImportsCount": 22,
     "backwardImports": [
       "Model.Stores",
       "Todo.TimeTracker.View",
@@ -3431,6 +3442,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -3442,7 +3454,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Main",
       "TodoMsg",
@@ -3531,6 +3543,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -3542,7 +3555,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 44,
     "backwardImports": [
       "Msg",
       "Update.CustomSync"
@@ -3602,6 +3615,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -3613,7 +3627,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 44,
     "backwardImports": [
       "Msg",
       "Update.ExclusiveMode"
@@ -3657,13 +3671,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 22,
+    "transitiveImportsCount": 23,
     "backwardImports": [
       "Msg",
       "Update.GroupDoc",
@@ -3753,21 +3768,13 @@
     ],
     "importsCount": 1,
     "transitiveImports": [
-      "Document",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
       "Pages.EntityList",
       "RouteUrl.Builder",
       "Set",
       "Time",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix"
+      "Types.Document"
     ],
-    "transitiveImportsCount": 13,
+    "transitiveImportsCount": 5,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3812,25 +3819,17 @@
     "moduleName": "Pages.EntityList",
     "parentModuleName": "Pages",
     "imports": [
-      "Document",
-      "RouteUrl.Builder"
+      "RouteUrl.Builder",
+      "Types.Document"
     ],
     "importsCount": 2,
     "transitiveImports": [
-      "Document",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
       "RouteUrl.Builder",
       "Set",
       "Time",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix"
+      "Types.Document"
     ],
-    "transitiveImportsCount": 12,
+    "transitiveImportsCount": 4,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3992,6 +3991,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -3999,7 +3999,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 25,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -4093,24 +4093,18 @@
     ],
     "importsCount": 6,
     "transitiveImports": [
-      "Document",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
       "List.Extra",
       "Page",
       "Pages.EntityList",
       "RouteUrl.Builder",
       "Set",
       "Time",
-      "Toolkit.Helpers",
       "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
+      "Types.Document",
       "X.Function.Infix",
       "X.List"
     ],
-    "transitiveImportsCount": 16,
+    "transitiveImportsCount": 10,
     "backwardImports": [
       "Main"
     ],
@@ -4137,11 +4131,12 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Random",
       "X.Record"
     ],
-    "importsCount": 15,
+    "importsCount": 16,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -4158,13 +4153,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 20,
+    "transitiveImportsCount": 21,
     "backwardImports": [
       "GroupDoc",
       "GroupDoc.Types",
@@ -4312,6 +4308,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4323,7 +4320,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 57,
+    "transitiveImportsCount": 58,
     "backwardImports": [
       "Main"
     ],
@@ -4453,6 +4450,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4464,7 +4462,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 64,
+    "transitiveImportsCount": 65,
     "backwardImports": [
       "Main"
     ],
@@ -4490,11 +4488,12 @@
       "Todo.Types",
       "Toolkit.Helpers",
       "Toolkit.Operators",
+      "Types.Document",
       "X.Function",
       "X.Function.Infix",
       "X.Record"
     ],
-    "importsCount": 14,
+    "importsCount": 15,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -4517,13 +4516,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 26,
+    "transitiveImportsCount": 27,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -4624,6 +4624,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4634,7 +4635,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "Update.Todo.Internal"
     ],
@@ -4653,14 +4654,13 @@
     "moduleName": "Todo.FormTypes",
     "parentModuleName": "Todo",
     "imports": [
-      "Document",
       "Menu",
       "Menu.Types",
-      "Time"
+      "Time",
+      "Types.Document"
     ],
     "importsCount": 4,
     "transitiveImports": [
-      "Document",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -4679,6 +4679,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4745,9 +4746,10 @@
       "Html",
       "Menu",
       "Menu.Types",
-      "Model.GroupDocStore"
+      "Model.GroupDocStore",
+      "Types.Document"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
       "Char",
       "Context",
@@ -4779,6 +4781,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4790,7 +4793,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 40,
+    "transitiveImportsCount": 41,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -4873,11 +4876,11 @@
     "moduleName": "Todo.Msg",
     "parentModuleName": "Todo",
     "imports": [
-      "Document",
       "Notification",
       "Todo.FormTypes",
       "Todo.Notification.Model",
-      "Todo.Types"
+      "Todo.Types",
+      "Types.Document"
     ],
     "importsCount": 5,
     "transitiveImports": [
@@ -4917,6 +4920,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4927,7 +4931,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "Msg",
       "Subscriptions.Todo",
@@ -4992,13 +4996,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 30,
+    "transitiveImportsCount": 31,
     "backwardImports": [
       "Model.Internal",
       "Todo.Msg",
@@ -5031,8 +5036,8 @@
     "moduleName": "Todo.Notification.Types",
     "parentModuleName": "Todo.Notification",
     "imports": [
-      "Document",
-      "Todo.Types"
+      "Todo.Types",
+      "Types.Document"
     ],
     "importsCount": 2,
     "transitiveImports": [
@@ -5054,13 +5059,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 23,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "Todo.Notification.Model",
       "Todo.Notification.View",
@@ -5146,6 +5152,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
@@ -5154,7 +5161,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -5198,13 +5205,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 23,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "Todo"
     ],
@@ -5279,13 +5287,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 27,
+    "transitiveImportsCount": 28,
     "backwardImports": [
       "Model.Internal"
     ],
@@ -5303,9 +5312,10 @@
     "imports": [
       "Document",
       "Maybe.Extra",
-      "Time"
+      "Time",
+      "Types.Document"
     ],
-    "importsCount": 3,
+    "importsCount": 4,
     "transitiveImports": [
       "Document",
       "Json.Decode",
@@ -5317,10 +5327,11 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Function",
       "X.Function.Infix"
     ],
-    "transitiveImportsCount": 12,
+    "transitiveImportsCount": 13,
     "backwardImports": [
       "Model.Internal",
       "Todo.TimeTracker.View",
@@ -5405,6 +5416,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Date",
       "X.Debug",
       "X.Function",
@@ -5415,7 +5427,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 50,
     "backwardImports": [
       "View.Header"
     ],
@@ -5433,10 +5445,10 @@
     "moduleName": "Todo.Types",
     "parentModuleName": "Todo",
     "imports": [
-      "Document",
       "GroupDoc.Types",
       "Store",
-      "Time"
+      "Time",
+      "Types.Document"
     ],
     "importsCount": 4,
     "transitiveImports": [
@@ -5457,13 +5469,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 22,
+    "transitiveImportsCount": 23,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -5648,6 +5661,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Date",
       "X.Debug",
       "X.Decode",
@@ -5660,7 +5674,7 @@
       "X.Record",
       "X.Time"
     ],
-    "transitiveImportsCount": 47,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "ViewModel"
     ],
@@ -5743,6 +5757,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5754,7 +5769,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 69,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Update.Config"
     ],
@@ -5771,7 +5786,6 @@
     "parentModuleName": "",
     "imports": [
       "AppDrawer.Model",
-      "Document",
       "EntityListCursor",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
@@ -5783,7 +5797,8 @@
       "Time",
       "Todo.Notification.Types",
       "Todo.TimeTracker",
-      "Todo.Types"
+      "Todo.Types",
+      "Types.Document"
     ],
     "importsCount": 14,
     "transitiveImports": [
@@ -5831,6 +5846,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5842,7 +5858,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 54,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.Internal",
@@ -5861,6 +5877,123 @@
       "ViewModel"
     ],
     "transitiveBackwardImportsCount": 7
+  },
+  "Types.Document": {
+    "fileName": "src/elm/Types/Document.elm",
+    "moduleName": "Types.Document",
+    "parentModuleName": "Types",
+    "imports": [
+      "Set",
+      "Time"
+    ],
+    "importsCount": 2,
+    "transitiveImports": [
+      "Set",
+      "Time"
+    ],
+    "transitiveImportsCount": 2,
+    "backwardImports": [
+      "AppDrawer.GroupViewModel",
+      "Context",
+      "Document",
+      "Entity.Types",
+      "GroupDoc",
+      "GroupDoc.Types",
+      "GroupDoc.ViewModel",
+      "Pages.EntityList",
+      "Store",
+      "Todo",
+      "Todo.FormTypes",
+      "Todo.GroupEditView",
+      "Todo.Msg",
+      "Todo.Notification.Types",
+      "Todo.TimeTracker",
+      "Todo.Types",
+      "Types",
+      "Update.LaunchBar",
+      "Update.Page",
+      "Update.Todo.Internal"
+    ],
+    "backwardImportsCount": 20,
+    "transitiveBackwardImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.View",
+      "Context",
+      "Document",
+      "Entity",
+      "Entity.ListView",
+      "Entity.Tree",
+      "Entity.Types",
+      "EntityId",
+      "EntityListCursor",
+      "ExclusiveMode.Types",
+      "GroupDoc",
+      "GroupDoc.Form",
+      "GroupDoc.FormView",
+      "GroupDoc.Types",
+      "GroupDoc.View",
+      "GroupDoc.ViewModel",
+      "LaunchBar.Messages",
+      "LaunchBar.Models",
+      "LaunchBar.View",
+      "Main",
+      "Model",
+      "Model.EntityTree",
+      "Model.GroupDocStore",
+      "Model.HasStores",
+      "Model.Internal",
+      "Model.Stores",
+      "Model.Todo",
+      "Msg",
+      "Msg.CustomSync",
+      "Msg.ExclusiveMode",
+      "Msg.GroupDoc",
+      "Page",
+      "Pages.EntityList",
+      "Project",
+      "Routes",
+      "Store",
+      "Subscriptions",
+      "Subscriptions.Todo",
+      "Todo",
+      "Todo.Form",
+      "Todo.FormTypes",
+      "Todo.GroupEditView",
+      "Todo.Msg",
+      "Todo.Notification.Model",
+      "Todo.Notification.Types",
+      "Todo.Notification.View",
+      "Todo.Schedule",
+      "Todo.Store",
+      "Todo.TimeTracker",
+      "Todo.TimeTracker.View",
+      "Todo.Types",
+      "Todo.ViewModel",
+      "TodoMsg",
+      "Types",
+      "Update",
+      "Update.AppHeader",
+      "Update.Config",
+      "Update.CustomSync",
+      "Update.Entity",
+      "Update.ExclusiveMode",
+      "Update.Firebase",
+      "Update.GroupDoc",
+      "Update.LaunchBar",
+      "Update.Page",
+      "Update.Subscription",
+      "Update.Todo",
+      "Update.Todo.Internal",
+      "Update.Types",
+      "View",
+      "View.Config",
+      "View.CustomSync",
+      "View.Header",
+      "View.Layout",
+      "View.Overlays",
+      "ViewModel"
+    ],
+    "transitiveBackwardImportsCount": 76
   },
   "Update": {
     "fileName": "src/elm/Update.elm",
@@ -5976,6 +6109,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
@@ -6002,7 +6136,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 114,
+    "transitiveImportsCount": 115,
     "backwardImports": [
       "Main"
     ],
@@ -6098,6 +6232,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6110,7 +6245,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 47,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6194,6 +6329,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6205,7 +6341,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 70,
+    "transitiveImportsCount": 71,
     "backwardImports": [
       "Main"
     ],
@@ -6262,6 +6398,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6274,7 +6411,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 46,
+    "transitiveImportsCount": 47,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6369,6 +6506,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6381,7 +6519,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 62,
+    "transitiveImportsCount": 63,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6444,6 +6582,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6456,7 +6595,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 46,
+    "transitiveImportsCount": 47,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6536,6 +6675,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6548,7 +6688,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 54,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6620,6 +6760,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6632,7 +6773,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 48,
+    "transitiveImportsCount": 49,
     "backwardImports": [
       "Update"
     ],
@@ -6648,7 +6789,6 @@
     "moduleName": "Update.LaunchBar",
     "parentModuleName": "Update",
     "imports": [
-      "Document",
       "ExclusiveMode.Types",
       "Fuzzy",
       "GroupDoc.Types",
@@ -6662,6 +6802,7 @@
       "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
+      "Types.Document",
       "X.Return"
     ],
     "importsCount": 15,
@@ -6706,6 +6847,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6718,7 +6860,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6736,19 +6878,15 @@
     "moduleName": "Update.Page",
     "parentModuleName": "Update",
     "imports": [
-      "Document",
       "Model.Selection",
       "Page",
       "Return",
       "Set",
+      "Types.Document",
       "X.Return"
     ],
     "importsCount": 6,
     "transitiveImports": [
-      "Document",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
       "Model.Selection",
       "Page",
       "Pages.EntityList",
@@ -6760,12 +6898,13 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Return"
     ],
-    "transitiveImportsCount": 19,
+    "transitiveImportsCount": 16,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6842,6 +6981,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6854,7 +6994,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6935,6 +7075,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "Update.Todo.Internal",
       "X.Date",
       "X.Debug",
@@ -6950,7 +7091,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 68,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6990,13 +7131,14 @@
       "Todo.Types",
       "Toolkit.Helpers",
       "Toolkit.Operators",
+      "Types.Document",
       "X.Function",
       "X.Function.Infix",
       "X.Record",
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 27,
+    "importsCount": 28,
     "transitiveImports": [
       "Char",
       "Context",
@@ -7050,6 +7192,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Date",
       "X.Debug",
       "X.Decode",
@@ -7064,7 +7207,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 65,
+    "transitiveImportsCount": 66,
     "backwardImports": [
       "Update.Todo"
     ],
@@ -7177,6 +7320,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.Entity",
@@ -7201,7 +7345,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 102,
+    "transitiveImportsCount": 103,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7317,6 +7461,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "View.Badge",
       "View.CustomSync",
       "View.GetStarted",
@@ -7341,7 +7486,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 116,
+    "transitiveImportsCount": 117,
     "backwardImports": [
       "Main"
     ],
@@ -7469,6 +7614,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -7480,7 +7626,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 69,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Main"
     ],
@@ -7547,6 +7693,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -7559,7 +7706,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 54,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "View"
     ],
@@ -7675,6 +7822,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "X.Date",
       "X.Debug",
       "X.Function",
@@ -7686,7 +7834,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 55,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "View.Layout"
     ],
@@ -7764,6 +7912,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "View.Badge",
       "View.Header",
       "X.Date",
@@ -7777,7 +7926,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 63,
+    "transitiveImportsCount": 64,
     "backwardImports": [
       "View"
     ],
@@ -7974,6 +8123,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.Document",
       "View.GetStarted",
       "View.MainMenu",
       "X.Debug",
@@ -7988,7 +8138,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 76,
+    "transitiveImportsCount": 77,
     "backwardImports": [
       "View"
     ],
@@ -8096,6 +8246,7 @@
       "Toolkit.Operators",
       "Tuple2",
       "Types",
+      "Types.Document",
       "X.Date",
       "X.Debug",
       "X.Decode",
@@ -8111,7 +8262,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 86,
+    "transitiveImportsCount": 87,
     "backwardImports": [
       "View"
     ],
@@ -8402,10 +8553,7 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
-      "Page",
-      "Pages.EntityList",
       "Project",
-      "Routes",
       "Store",
       "Subscriptions",
       "Subscriptions.Todo",
@@ -8454,7 +8602,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 90
+    "transitiveBackwardImportsCount": 87
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -8542,8 +8690,6 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
-      "Page",
-      "Pages.EntityList",
       "Ports.Firebase",
       "Project",
       "Routes",
@@ -8597,7 +8743,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 97
+    "transitiveBackwardImportsCount": 95
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

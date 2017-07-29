@@ -1,8 +1,9 @@
 module Todo.TimeTracker exposing (..)
 
-import Document exposing (DocId)
+import Document
 import Maybe.Extra as Maybe
 import Time exposing (Time)
+import Types.Document exposing (..)
 
 
 type State

@@ -1,7 +1,7 @@
 port module Update.Todo.Internal exposing (..)
 
 import Context
-import Document exposing (DocId)
+import Document
 import DomPorts
 import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
@@ -22,6 +22,7 @@ import Todo.TimeTracker as Tracker
 import Todo.Types exposing (TodoAction(..), TodoStore)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import Types.Document exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
 import X.Record as Record exposing (overReturn, overT2, set)

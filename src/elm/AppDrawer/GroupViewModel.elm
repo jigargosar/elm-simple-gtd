@@ -7,7 +7,7 @@ import Color
 import Context
 import Dict
 import Dict.Extra
-import Document exposing (DocId)
+import Document
 import Entity.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
@@ -21,6 +21,7 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
+import Types.Document exposing (..)
 import X.Function exposing (when)
 import X.Maybe
 

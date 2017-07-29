@@ -1,7 +1,7 @@
 module Pages.EntityList exposing (..)
 
-import Document exposing (DocId)
 import RouteUrl.Builder
+import Types.Document exposing (..)
 
 
 type EntityListPageModel

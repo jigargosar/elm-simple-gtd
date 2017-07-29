@@ -1,11 +1,12 @@
 module Todo.GroupEditView exposing (..)
 
-import Document exposing (DocId, Document)
+import Document
 import GroupDoc
 import Html exposing (..)
 import Menu
 import Menu.Types exposing (MenuState)
 import Model.GroupDocStore
+import Types.Document exposing (..)
 
 
 type alias Config msg =

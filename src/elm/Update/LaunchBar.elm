@@ -1,6 +1,5 @@
 module Update.LaunchBar exposing (Config, update)
 
-import Document exposing (DocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
@@ -14,6 +13,7 @@ import String.Extra
 import Time exposing (Time)
 import Toolkit.Helpers exposing (apply2)
 import Toolkit.Operators exposing (..)
+import Types.Document exposing (..)
 import X.Return exposing (..)
 
 

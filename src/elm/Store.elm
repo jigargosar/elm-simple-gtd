@@ -19,7 +19,7 @@ port module Store
         )
 
 import Dict exposing (Dict)
-import Document exposing (DocId, Document)
+import Document
 import Firebase.Types exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
@@ -30,6 +30,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
+import Types.Document exposing (..)
 import X.Debug
 import X.Random
 import X.Record as Record exposing (get, over, overT2)

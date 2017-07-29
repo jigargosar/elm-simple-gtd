@@ -116,16 +116,8 @@ insertGroupDoc gdType name =
         )
 
 
-
---updateContext : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
-
-
 updateContext id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
-
-
-
---updateProject : DocId -> (GroupDoc -> GroupDoc) -> ModelReturnF
 
 
 updateProject id updateFn =

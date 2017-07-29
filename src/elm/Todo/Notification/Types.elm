@@ -1,7 +1,7 @@
 module Todo.Notification.Types exposing (..)
 
-import Document exposing (DocId)
 import Todo.Types exposing (TodoText)
+import Types.Document exposing (..)
 
 
 type ActiveView

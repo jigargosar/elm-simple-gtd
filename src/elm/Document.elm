@@ -5,35 +5,9 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Set exposing (Set)
 import Time exposing (Time)
+import Types.Document exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-
-
-type alias DocId =
-    String
-
-
-type alias Revision =
-    String
-
-
-type alias DeviceId =
-    String
-
-
-type alias Deleted =
-    Bool
-
-
-type alias Document record =
-    { record
-        | id : DocId
-        , rev : Revision
-        , deleted : Deleted
-        , createdAt : Time
-        , modifiedAt : Time
-        , deviceId : DeviceId
-    }
 
 
 getId =
@@ -54,20 +28,6 @@ type alias DocF record =
 
 defaultRevision =
     ""
-
-
-type alias Model =
-    { id : DocId
-    , rev : Revision
-    , deleted : Bool
-    , createdAt : Time
-    , modifiedAt : Time
-    , deviceId : DeviceId
-    }
-
-
-type alias IdSet =
-    Set DocId
 
 
 encodeModel doc =

@@ -9,7 +9,7 @@ import Html.Events exposing (..)
 import Mat
 import Toolkit.Operators exposing (..)
 import View.Badge
-import ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import X.Function.Infix exposing (..)
 import X.Html
 
@@ -62,7 +62,7 @@ sidebarContent config appVM model =
                         "Done"
                    , onSetEntityListViewItem config (Mat.icon "delete") Entity.Types.BinView "Bin"
                    , Mat.divider
-                   , switchViewItemSmall config "settings" SyncView "Advance Settings"
+                   , switchViewItemSmall config "settings" CustomSyncSettingsPage "Advance Settings"
                    ]
             )
         ]
@@ -74,7 +74,7 @@ entityGroupView config vm viewType =
             vm
 
         isCurrentView =
-            EntityListView vm.viewType == viewType
+            EntityListPage vm.viewType == viewType
 
         fireSwitchView =
             config.switchToEntityListViewTypeMsg vm.viewType

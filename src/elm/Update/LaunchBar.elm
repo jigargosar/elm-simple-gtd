@@ -1,7 +1,7 @@
 module Update.LaunchBar exposing (Config, update)
 
 import Document exposing (DocId, getDocId)
-import Entity.Types exposing (EntityListViewType)
+import Entity.Types exposing (EntityListPageModel)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
@@ -36,7 +36,7 @@ type alias Config msg a =
     { a
         | revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , switchToEntityListViewTypeMsg : EntityListViewType -> msg
+        , switchToEntityListViewTypeMsg : EntityListPageModel -> msg
     }
 
 

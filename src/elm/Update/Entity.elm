@@ -11,12 +11,12 @@ import Model.EntityTree
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
 import Model.Todo
-import Model.ViewType
 import Set
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import Tuple2
+import ViewType
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
@@ -51,7 +51,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
-        , switchToEntityListViewTypeMsg : EntityListViewType -> msg
+        , switchToEntityListViewTypeMsg : EntityListPageModel -> msg
         , onStartEditingTodo : TodoDoc -> msg
     }
 
@@ -168,7 +168,7 @@ setEntityAtCursor maybeEntityIdAtCursor model =
 
 
 createEntityListForCurrentView model =
-    Model.ViewType.maybeGetEntityListViewType model
+    ViewType.maybeGetEntityListViewType model
         ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
         ?= []
 
@@ -188,7 +188,7 @@ onUpdateAction config entityId action =
                 switchToEntityListViewFromEntity entityId model =
                     let
                         maybeEntityListViewType =
-                            Model.ViewType.maybeGetEntityListViewType model
+                            ViewType.maybeGetEntityListViewType model
                     in
                     entityId
                         |> toViewType model maybeEntityListViewType
@@ -223,7 +223,7 @@ toggleSetMember item set =
         Set.insert item set
 
 
-toViewType : SubModel model -> Maybe EntityListViewType -> EntityId -> EntityListViewType
+toViewType : SubModel model -> Maybe EntityListPageModel -> EntityId -> EntityListPageModel
 toViewType appModel maybeCurrentEntityListViewType entityId =
     case entityId of
         ContextId id ->

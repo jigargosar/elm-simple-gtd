@@ -13,7 +13,7 @@ import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
-import ViewType exposing (ViewType(EntityListView))
+import ViewType exposing (Page(EntityListPage))
 
 
 type alias AppConfig =
@@ -34,7 +34,7 @@ type alias AppModelOtherFields =
     , projectStore : ProjectStore
     , contextStore : ContextStore
     , editMode : ExclusiveMode
-    , viewType : ViewType
+    , viewType : Page
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String
     , user : FirebaseUser

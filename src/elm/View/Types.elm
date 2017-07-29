@@ -57,6 +57,6 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
-    , switchToEntityListViewTypeMsg : Entity.Types.EntityListViewType -> msg
-    , switchToView : ViewType.ViewType -> msg
+    , switchToEntityListViewTypeMsg : Entity.Types.EntityListPageModel -> msg
+    , switchToView : ViewType.Page -> msg
     }

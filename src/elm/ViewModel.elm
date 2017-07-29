@@ -13,7 +13,7 @@ import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
 import Types exposing (AppModel)
-import ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 
@@ -79,7 +79,7 @@ getViewInfo viewType projectsVM contextsVM model =
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
     case viewType of
-        EntityListView viewType ->
+        EntityListPage viewType ->
             case viewType of
                 Entity.Types.ContextsView ->
                     ( contextsVM.title, contextsVM.icon.color )
@@ -102,7 +102,7 @@ getViewInfo viewType projectsVM contextsVM model =
                 Entity.Types.RecentView ->
                     ( "Recent", sgtdBlue )
 
-        SyncView ->
+        CustomSyncSettingsPage ->
             ( "Custom Sync", sgtdBlue )
 
 

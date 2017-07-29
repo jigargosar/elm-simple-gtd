@@ -15,7 +15,7 @@ type Entity
     | TodoEntity TodoDoc
 
 
-type EntityListViewType
+type EntityListPageModel
     = ContextsView
     | ContextView DocId
     | ProjectsView

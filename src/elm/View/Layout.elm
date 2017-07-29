@@ -6,10 +6,10 @@ import Entity.ListView
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model.ViewType
+import ViewType
 import View.CustomSync
 import View.Header
-import ViewType exposing (ViewType(..))
+import ViewType exposing (Page(..))
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
 
@@ -26,11 +26,11 @@ appLayoutView config appVM model =
 
         mainViewContainer =
             div [ id "main-view-container" ]
-                [ case Model.ViewType.getViewType model of
-                    EntityListView viewType ->
+                [ case ViewType.getViewType model of
+                    EntityListPage viewType ->
                         Entity.ListView.listView config appVM viewType model
 
-                    SyncView ->
+                    CustomSyncSettingsPage ->
                         View.CustomSync.view config model
                 ]
 

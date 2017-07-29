@@ -586,7 +586,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -636,7 +635,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 76
+    "transitiveBackwardImportsCount": 75
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -944,7 +943,6 @@
       "GroupDoc.ViewModel",
       "Model.EntityTree",
       "Model.Stores",
-      "Model.ViewType",
       "Msg",
       "Routes",
       "Todo.ViewModel",
@@ -956,7 +954,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 20,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -973,7 +971,6 @@
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
-      "Model.ViewType",
       "Msg",
       "Routes",
       "Subscriptions",
@@ -998,7 +995,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 38
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -1419,7 +1416,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -1471,7 +1467,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 81
+    "transitiveBackwardImportsCount": 80
   },
   "Firebase.User": {
     "fileName": "src/elm/Firebase/User.elm",
@@ -1841,7 +1837,6 @@
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -1888,7 +1883,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 71
+    "transitiveBackwardImportsCount": 70
   },
   "GroupDoc.View": {
     "fileName": "src/elm/GroupDoc/View.elm",
@@ -2523,7 +2518,6 @@
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.AppHeader",
       "Msg.CustomSync",
@@ -2617,7 +2611,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 165,
+    "transitiveImportsCount": 164,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -3141,7 +3135,6 @@
       "Json.Encode",
       "LocalPref",
       "Material",
-      "Model.ViewType",
       "Project",
       "Random.Pcg",
       "Set",
@@ -3150,6 +3143,7 @@
       "Todo.Store",
       "Todo.TimeTracker",
       "Types",
+      "ViewType",
       "X.Random"
     ],
     "importsCount": 17,
@@ -3191,7 +3185,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Model.ViewType",
       "Project",
       "Random.Pcg",
       "Return",
@@ -3222,7 +3215,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 66,
     "backwardImports": [
       "Main"
     ],
@@ -3391,62 +3384,6 @@
       "ViewModel"
     ],
     "transitiveBackwardImportsCount": 16
-  },
-  "Model.ViewType": {
-    "fileName": "src/elm/Model/ViewType.elm",
-    "moduleName": "Model.ViewType",
-    "parentModuleName": "Model",
-    "imports": [
-      "Entity.Types",
-      "ViewType"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "Char",
-      "Dict",
-      "Document",
-      "Entity.Types",
-      "Firebase.Types",
-      "GroupDoc.Types",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "List.Extra",
-      "Random.Pcg",
-      "Return",
-      "Set",
-      "Store",
-      "Time",
-      "Todo.Types",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "ViewType",
-      "X.Debug",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Random",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 25,
-    "backwardImports": [
-      "Model.Internal",
-      "Routes",
-      "Update.Entity",
-      "View.Layout"
-    ],
-    "backwardImportsCount": 4,
-    "transitiveBackwardImports": [
-      "Main",
-      "Model.Internal",
-      "Routes",
-      "Update",
-      "Update.Entity",
-      "Update.Types",
-      "View",
-      "View.Layout"
-    ],
-    "transitiveBackwardImportsCount": 8
   },
   "Msg": {
     "fileName": "src/elm/Msg.elm",
@@ -4059,13 +3996,12 @@
     "imports": [
       "Entity.Types",
       "Maybe.Extra",
-      "Model.ViewType",
       "RouteUrl.Builder",
       "ViewType",
       "X.Function.Infix",
       "X.List"
     ],
-    "importsCount": 7,
+    "importsCount": 6,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -4078,7 +4014,6 @@
       "Json.Encode",
       "List.Extra",
       "Maybe.Extra",
-      "Model.ViewType",
       "Random.Pcg",
       "Return",
       "RouteUrl.Builder",
@@ -4097,7 +4032,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 28,
     "backwardImports": [
       "Main"
     ],
@@ -4196,7 +4131,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -4243,7 +4177,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 73
+    "transitiveBackwardImportsCount": 72
   },
   "Subscriptions": {
     "fileName": "src/elm/Subscriptions.elm",
@@ -5500,7 +5434,6 @@
       "Model.HasStores",
       "Model.Internal",
       "Model.Stores",
-      "Model.ViewType",
       "Msg",
       "Routes",
       "Subscriptions",
@@ -5536,7 +5469,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 51
+    "transitiveBackwardImportsCount": 50
   },
   "Todo.View": {
     "fileName": "src/elm/Todo/View.elm",
@@ -5939,7 +5872,6 @@
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.AppHeader",
       "Msg.CustomSync",
@@ -6000,7 +5932,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 113,
+    "transitiveImportsCount": 112,
     "backwardImports": [
       "Main"
     ],
@@ -6299,12 +6231,12 @@
       "Model.HasStores",
       "Model.Selection",
       "Model.Todo",
-      "Model.ViewType",
       "Set",
       "Todo",
       "Todo.Types",
       "Toolkit.Operators",
       "Tuple2",
+      "ViewType",
       "X.Function",
       "X.Function.Infix",
       "X.List",
@@ -6347,7 +6279,6 @@
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Project",
       "Random.Pcg",
       "Return",
@@ -6375,7 +6306,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 61,
+    "transitiveImportsCount": 60,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7091,7 +7022,6 @@
       "Model.Selection",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -7147,7 +7077,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 101,
+    "transitiveImportsCount": 100,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7286,7 +7216,6 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -7339,7 +7268,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 115,
+    "transitiveImportsCount": 114,
     "backwardImports": [
       "Main"
     ],
@@ -7691,7 +7620,7 @@
       "Html",
       "Html.Attributes",
       "Html.Events",
-      "Model.ViewType",
+      "ViewType",
       "View.CustomSync",
       "View.Header",
       "ViewType",
@@ -7753,7 +7682,6 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -7792,7 +7720,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 92,
+    "transitiveImportsCount": 91,
     "backwardImports": [
       "View"
     ],
@@ -8259,23 +8187,23 @@
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
       "Model.HasStores",
-      "Model.ViewType",
+      "Model.Internal",
       "Msg",
       "Routes",
       "Types",
+      "Update.Entity",
       "Update.ViewType",
       "View.Layout",
       "View.Types",
       "ViewModel"
     ],
-    "backwardImportsCount": 11,
+    "backwardImportsCount": 12,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
       "Main",
       "Model.HasStores",
       "Model.Internal",
-      "Model.ViewType",
       "Msg",
       "Routes",
       "Subscriptions",
@@ -8293,7 +8221,7 @@
       "View.Types",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 22
+    "transitiveBackwardImportsCount": 21
   },
   "X.Date": {
     "fileName": "src/elm/X/Date.elm",
@@ -8376,7 +8304,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -8432,7 +8359,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 84
+    "transitiveBackwardImportsCount": 83
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -8578,7 +8505,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -8635,7 +8561,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 91
+    "transitiveBackwardImportsCount": 90
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -8719,7 +8645,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -8779,7 +8704,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 98
+    "transitiveBackwardImportsCount": 97
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -9171,7 +9096,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -9219,7 +9143,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 74
+    "transitiveBackwardImportsCount": 73
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -9286,7 +9210,6 @@
       "Model.Internal",
       "Model.Stores",
       "Model.Todo",
-      "Model.ViewType",
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
@@ -9335,7 +9258,7 @@
       "ViewModel",
       "ViewType"
     ],
-    "transitiveBackwardImportsCount": 79
+    "transitiveBackwardImportsCount": 78
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

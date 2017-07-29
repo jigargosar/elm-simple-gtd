@@ -8,7 +8,7 @@ import Context
 import Dict
 import Dict.Extra
 import Document exposing (DocId)
-import Entity.Types exposing (EntityId(..), EntityListViewType)
+import Entity.Types exposing (EntityId(..), EntityListPageModel)
 import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
@@ -19,7 +19,7 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
-import ViewType exposing (ViewType(EntityListView))
+import ViewType exposing (Page(EntityListPage))
 import X.Function exposing (when)
 import X.Maybe
 
@@ -34,7 +34,7 @@ type alias ViewModel msg =
     { nullVMAsList : List (DocumentWithNameViewModel msg)
     , entityList : List (DocumentWithNameViewModel msg)
     , archivedEntityList : List (DocumentWithNameViewModel msg)
-    , viewType : EntityListViewType
+    , viewType : EntityListPageModel
     , title : String
     , className : String
     , showArchived : Bool
@@ -73,7 +73,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> EntityListViewType
+    , getViewType : DocId -> EntityListPageModel
     , groupDocType : GroupDocType
     }
 
@@ -137,7 +137,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.switchToView (innerConFig.getViewType id |> EntityListView)
+                config.switchToView (innerConFig.getViewType id |> EntityListPage)
             else
                 config.noop
     , icon = icon

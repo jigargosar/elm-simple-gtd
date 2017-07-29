@@ -10,7 +10,7 @@ import X.Return exposing (..)
 
 type alias SubModel model =
     { model
-        | viewType : ViewType
+        | viewType : Page
         , selectedEntityIdSet : Set DocId
     }
 
@@ -37,7 +37,7 @@ update config msg =
                 >> returnMsgAsCmd config.revertExclusiveMode
 
         SwitchToEntityListView listView ->
-            listView |> EntityListView >> SwitchView >> update config
+            listView |> EntityListPage >> SwitchView >> update config
 
 
 setViewType viewType model =

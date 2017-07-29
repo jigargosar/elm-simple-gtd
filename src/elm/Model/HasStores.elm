@@ -2,7 +2,7 @@ module Model.HasStores exposing (..)
 
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Todo.Types exposing (TodoStore)
-import ViewType exposing (ViewType)
+import ViewType exposing (Page)
 
 
 type alias HasStores x =
@@ -15,5 +15,5 @@ type alias HasStores x =
 
 type alias HasViewType x =
     { x
-        | viewType : ViewType
+        | viewType : Page
     }

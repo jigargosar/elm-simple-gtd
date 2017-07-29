@@ -7,7 +7,6 @@ import Firebase
 import Json.Encode as E
 import LocalPref
 import Material
-import Model.ViewType
 import Project
 import Random.Pcg
 import Set
@@ -16,6 +15,7 @@ import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
 import Types exposing (..)
+import ViewType
 import X.Random
 
 
@@ -61,7 +61,7 @@ createAppModel flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = XMNone
-            , viewType = Model.ViewType.defaultView
+            , viewType = ViewType.defaultView
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = firebaseModel.user

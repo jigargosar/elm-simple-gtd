@@ -4,7 +4,7 @@ import AppColors
 import Color
 import Context
 import Document exposing (DocId)
-import Entity.Types exposing (Entity, EntityId(..), EntityListViewType)
+import Entity.Types exposing (Entity, EntityId(..), EntityListPageModel)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Keyboard.Extra as Key exposing (Key)
@@ -60,7 +60,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> EntityListViewType
+    , getViewType : DocId -> EntityListPageModel
     , getTabIndexAVForEntityId : EntityId -> Int
     , groupDocType : GroupDoc.Types.GroupDocType
     }

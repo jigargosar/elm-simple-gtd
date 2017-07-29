@@ -1,13 +1,30 @@
 module ViewType exposing (..)
 
-import Entity.Types exposing (EntityListViewType)
+import Entity.Types exposing (EntityListPageModel)
 
 
-type ViewType
-    = EntityListView EntityListViewType
-    | SyncView
+type Page
+    = EntityListPage EntityListPageModel
+    | CustomSyncSettingsPage
 
 
 type ViewTypeMsg
-    = SwitchView ViewType
-    | SwitchToEntityListView EntityListViewType
+    = SwitchView Page
+    | SwitchToEntityListView EntityListPageModel
+
+
+maybeGetEntityListViewType model =
+    case model.viewType of
+        EntityListPage viewType ->
+            Just viewType
+
+        _ ->
+            Nothing
+
+
+getViewType =
+    .viewType
+
+
+defaultView =
+    EntityListPage Entity.Types.defaultViewType

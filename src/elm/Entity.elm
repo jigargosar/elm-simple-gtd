@@ -1,7 +1,7 @@
 module Entity exposing (..)
 
 import Document exposing (getDocId)
-import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
+import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListPageModel(..), GroupEntityType(..))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

@@ -1,10 +1,9 @@
 module Routes exposing (..)
 
-import Entity.Types exposing (EntityListViewType(..))
+import Entity.Types exposing (EntityListPageModel(..))
 import Maybe.Extra
-import Model.ViewType
 import RouteUrl.Builder
-import ViewType exposing (ViewType(EntityListView, SyncView))
+import ViewType exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import X.Function.Infix exposing (..)
 import X.List
 
@@ -19,11 +18,11 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case Model.ViewType.getViewType model of
-        EntityListView viewType ->
+    case ViewType.getViewType model of
+        EntityListPage viewType ->
             getPathFromViewType viewType
 
-        SyncView ->
+        CustomSyncSettingsPage ->
             [ "custom-sync" ]
 
 
@@ -45,11 +44,11 @@ builder2messages config builder =
             (\_ ->
                 case RouteUrl.Builder.path builder of
                     "custom-sync" :: [] ->
-                        [ config.switchToView SyncView ]
+                        [ config.switchToView CustomSyncSettingsPage ]
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ config.switchToView Model.ViewType.defaultView ]
+                        [ config.switchToView ViewType.defaultView ]
             )
             (config.switchToEntityListViewTypeMsg >> X.List.singleton)
 

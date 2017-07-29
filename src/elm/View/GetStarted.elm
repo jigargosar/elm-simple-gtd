@@ -1,7 +1,7 @@
 module View.GetStarted exposing (..)
 
 import AppUrl
-import Firebase.Types exposing (..)
+import Types.Firebase exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

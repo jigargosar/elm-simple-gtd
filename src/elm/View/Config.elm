@@ -4,7 +4,6 @@ import AppDrawer.Types
 import Document
 import Entity.Types exposing (..)
 import ExclusiveMode.Types
-import Firebase.Types
 import GroupDoc.Types
 import LaunchBar.Messages
 import Material
@@ -19,6 +18,7 @@ import Todo.Msg
 import Todo.Notification.Model
 import Todo.Types
 import Types.Document exposing (..)
+import Types.Firebase
 import X.Function.Infix exposing (..)
 
 
@@ -26,7 +26,7 @@ type alias ViewConfig msg =
     { noop : msg
     , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
     , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
-    , onFirebaseMsg : Firebase.Types.FirebaseMsg -> msg
+    , onFirebaseMsg : Types.Firebase.FirebaseMsg -> msg
     , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg
     , onMdl : Material.Msg msg -> msg

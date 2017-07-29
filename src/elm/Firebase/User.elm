@@ -1,8 +1,8 @@
 module Firebase.User exposing (..)
 
-import Firebase.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
+import Types.Firebase exposing (..)
 
 
 providerDataDecoder =

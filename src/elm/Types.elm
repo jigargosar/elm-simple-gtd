@@ -4,7 +4,6 @@ import AppDrawer.Model
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode)
 import Firebase.SignIn
-import Firebase.Types exposing (..)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
 import Page exposing (Page(EntityListPage))
@@ -14,6 +13,7 @@ import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
 import Types.Document exposing (..)
+import Types.Firebase exposing (..)
 
 
 type alias AppConfig =

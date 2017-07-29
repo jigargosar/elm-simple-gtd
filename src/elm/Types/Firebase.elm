@@ -1,4 +1,4 @@
-module Firebase.Types exposing (..)
+module Types.Firebase exposing (..)
 
 import Json.Encode as E
 

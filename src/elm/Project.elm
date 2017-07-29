@@ -1,10 +1,10 @@
 module Project exposing (..)
 
-import Firebase.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Json.Encode as E
 import Random.Pcg as Random exposing (..)
+import Types.Firebase exposing (..)
 import X.Function exposing (..)
 
 

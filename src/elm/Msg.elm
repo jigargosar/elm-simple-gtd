@@ -4,7 +4,6 @@ import AppDrawer.Types
 import CommonMsg
 import CommonMsg.Types
 import Entity.Types exposing (..)
-import Firebase.Types exposing (..)
 import GroupDoc.Types exposing (GroupDocAction(..), GroupDocIdAction(..))
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import Material
@@ -17,6 +16,7 @@ import Page exposing (PageMsg(..))
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Toolkit.Operators exposing (..)
+import Types.Firebase exposing (..)
 import X.Function.Infix exposing (..)
 
 
@@ -75,15 +75,15 @@ gotoPageMsg =
 
 
 onSwitchToNewUserSetupModeIfNeeded =
-    OnFirebaseMsg Firebase.Types.OnFB_SwitchToNewUserSetupModeIfNeeded
+    OnFirebaseMsg Types.Firebase.OnFB_SwitchToNewUserSetupModeIfNeeded
 
 
 onSignIn =
-    OnFirebaseMsg Firebase.Types.OnFBSignIn
+    OnFirebaseMsg Types.Firebase.OnFBSignIn
 
 
 onSignOut =
-    OnFirebaseMsg Firebase.Types.OnFBSignOut
+    OnFirebaseMsg Types.Firebase.OnFBSignOut
 
 
 

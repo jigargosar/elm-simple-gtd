@@ -5,7 +5,6 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase
 import Firebase.Model
 import Firebase.SignIn
-import Firebase.Types exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Navigation
 import Ports.Firebase exposing (..)
@@ -13,6 +12,7 @@ import Return
 import Store
 import Todo.Types exposing (TodoStore)
 import Toolkit.Operators exposing (..)
+import Types.Firebase exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (over, set)
 import X.Return exposing (..)

@@ -10,13 +10,11 @@ import Html.Attributes exposing (..)
 import Html.Keyed
 import List.Extra
 import Maybe.Extra
-import Model
 import Model.EntityTree
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
 import View.Badge
 import X.Function exposing (..)
-import X.Keyboard exposing (onKeyDown)
 
 
 --type alias KeyedView =

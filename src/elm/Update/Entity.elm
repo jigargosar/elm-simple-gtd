@@ -5,14 +5,11 @@ import Entity.Tree
 import Entity.Types exposing (..)
 import EntityListCursor exposing (..)
 import ExclusiveMode.Types exposing (..)
-import Keyboard.Extra as Key
 import List.Extra
 import Maybe.Extra
-import Model
 import Model.EntityTree
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
-import Model.Stores
 import Model.Todo
 import Model.ViewType
 import Set

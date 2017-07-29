@@ -3,7 +3,6 @@ module Entity.Types exposing (..)
 import Document exposing (DocId)
 import GroupDoc.Types exposing (GroupDoc)
 import Todo.Types exposing (TodoDoc)
-import X.Keyboard
 
 
 type GroupEntityType

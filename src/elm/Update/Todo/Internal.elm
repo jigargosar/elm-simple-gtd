@@ -3,11 +3,9 @@ port module Update.Todo.Internal exposing (..)
 import Context
 import Document exposing (DocId, getDocId)
 import DomPorts
-import Entity
 import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Model
 import Model.Todo exposing (findTodoById, todoStore)
 import Notification
 import Ports.Todo exposing (..)

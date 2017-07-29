@@ -2,12 +2,8 @@ module Entity exposing (..)
 
 import Document exposing (getDocId)
 import Entity.Types exposing (Entity(..), EntityId(ContextId, ProjectId, TodoId), EntityListViewType(..), GroupEntityType(..))
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import X.List as List
 
 
 type alias GroupEntity =

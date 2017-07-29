@@ -1,8 +1,8 @@
-   10160 total
-     449 src/elm/Update/Todo/Internal.elm
+   10147 total
+     447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
-     279 src/elm/Update/Entity.elm
+     276 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
      249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
@@ -22,7 +22,7 @@
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      142 src/elm/GroupDoc.elm
-     142 src/elm/Entity/ListView.elm
+     140 src/elm/Entity/ListView.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
@@ -40,7 +40,7 @@
       91 src/elm/Model/GroupDocStore.elm
       88 src/elm/X/Html.elm
       87 src/elm/View/Layout.elm
-      86 src/elm/Entity/Types.elm
+      85 src/elm/Entity/Types.elm
       84 src/elm/Update/ExclusiveMode.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
@@ -59,7 +59,7 @@
       66 src/elm/Todo/GroupEditView.elm
       64 src/elm/Todo/Notification/View.elm
       62 src/elm/View/Types.elm
-      60 src/elm/Entity.elm
+      56 src/elm/Entity.elm
       55 src/elm/View/Config.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
@@ -91,7 +91,7 @@
       32 src/elm/Ports/Firebase.elm
       27 src/elm/Firebase.elm
       25 src/elm/View.elm
-      25 src/elm/EntityListCursor.elm
+      24 src/elm/EntityListCursor.elm
       22 src/elm/Model.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm

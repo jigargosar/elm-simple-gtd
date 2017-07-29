@@ -18,9 +18,9 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case Page.getViewType model of
-        EntityListPage viewType ->
-            getPathFromViewType viewType
+    case Page.getPage model of
+        EntityListPage page ->
+            getPathFromPage page
 
         CustomSyncSettingsPage ->
             [ "custom-sync" ]
@@ -39,7 +39,7 @@ delta2hash =
 
 
 builder2messages config builder =
-    routeUrlBuilderToMaybeListViewType builder
+    routeUrlBuilderToMaybeListPage builder
         |> Maybe.Extra.unpack
             (\_ ->
                 case RouteUrl.Builder.path builder of
@@ -50,7 +50,7 @@ builder2messages config builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ config.gotoPage Page.initialPage ]
             )
-            (config.switchToEntityListViewTypeMsg >> X.List.singleton)
+            (config.switchToEntityListPageMsg >> X.List.singleton)
 
 
 
@@ -62,10 +62,10 @@ hash2messages config location =
 
 
 
---routeUrlBuilderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe EntityListViewType
+--routeUrlBuilderToMaybeListPage : RouteUrl.Builder.Builder -> Maybe EntityListPage
 
 
-routeUrlBuilderToMaybeListViewType builder =
+routeUrlBuilderToMaybeListPage builder =
     case RouteUrl.Builder.path builder of
         "lists" :: "contexts" :: [] ->
             ContextsView |> Just
@@ -98,8 +98,8 @@ routeUrlBuilderToMaybeListViewType builder =
             Nothing
 
 
-getPathFromViewType viewType =
-    case viewType of
+getPathFromPage page =
+    case page of
         ContextsView ->
             [ "lists", "contexts" ]
 

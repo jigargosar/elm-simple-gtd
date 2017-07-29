@@ -13,7 +13,7 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Msg.Subscription exposing (SubscriptionMsg)
-import Page exposing (ViewTypeMsg(..))
+import Page exposing (PageMsg(..))
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Toolkit.Operators exposing (..)
@@ -23,7 +23,7 @@ import X.Function.Infix exposing (..)
 type AppMsg
     = OnCommonMsg CommonMsg.Types.Msg
     | OnSubscriptionMsg SubscriptionMsg
-    | OnViewTypeMsg ViewTypeMsg
+    | OnPageMsg PageMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
@@ -62,12 +62,12 @@ setDomFocusToFocusInEntityCmd =
 --  view type
 
 
-switchToEntityListViewTypeMsg =
-    SwitchToEntityListView >> OnViewTypeMsg
+switchToEntityListPageMsg =
+    SwitchToEntityListView >> OnPageMsg
 
 
 gotoPage =
-    SwitchView >> OnViewTypeMsg
+    SwitchView >> OnPageMsg
 
 
 

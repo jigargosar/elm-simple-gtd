@@ -31,7 +31,7 @@ update config msg =
         OnMdl msg_ ->
             andThen (Material.update config.onMdl msg_)
 
-        OnViewTypeMsg msg_ ->
+        OnPageMsg msg_ ->
             Update.Page.update config msg_
 
         OnCommonMsg msg_ ->

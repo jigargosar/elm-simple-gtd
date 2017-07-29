@@ -10,7 +10,7 @@ import X.Return exposing (..)
 
 type alias SubModel model =
     { model
-        | viewType : Page
+        | page : Page
         , selectedEntityIdSet : Set DocId
     }
 
@@ -27,12 +27,12 @@ type alias Config msg a =
 
 update :
     Config msg a
-    -> ViewTypeMsg
+    -> PageMsg
     -> SubReturnF msg model
 update config msg =
     case msg of
-        SwitchView viewType ->
-            map (setViewType viewType)
+        SwitchView page ->
+            map (setPage page)
                 >> map Model.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
@@ -40,5 +40,5 @@ update config msg =
             listView |> EntityListPage >> SwitchView >> update config
 
 
-setViewType viewType model =
-    { model | viewType = viewType }
+setPage page model =
+    { model | page = page }

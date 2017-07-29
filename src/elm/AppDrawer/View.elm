@@ -51,8 +51,8 @@ sidebarContent config appVM model =
     div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
         [ ul []
             ([]
-                ++ entityGroupView config contexts model.viewType
-                ++ entityGroupView config projects model.viewType
+                ++ entityGroupView config contexts model.page
+                ++ entityGroupView config projects model.page
                 ++ [ Mat.divider ]
                 ++ [ onSetEntityListViewItem config (Mat.icon "sort") Entity.Types.RecentView "Recent"
                    , onSetEntityListViewItem
@@ -68,16 +68,16 @@ sidebarContent config appVM model =
         ]
 
 
-entityGroupView config vm viewType =
+entityGroupView config vm page =
     let
         { onAddClicked, onToggleExpanded, isExpanded } =
             vm
 
         isCurrentView =
-            EntityListPage vm.viewType == viewType
+            EntityListPage vm.page == page
 
         fireSwitchView =
-            config.switchToEntityListViewTypeMsg vm.viewType
+            config.switchToEntityListPageMsg vm.page
 
         fireSmart =
             if isCurrentView then
@@ -165,20 +165,20 @@ entityListItem vm =
         ]
 
 
-switchViewItemSmall config iconName viewType title =
+switchViewItemSmall config iconName page title =
     li
         [ class ""
-        , onClick (config.gotoPage viewType)
+        , onClick (config.gotoPage page)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]
         ]
 
 
-onSetEntityListViewItem config icon viewType title =
+onSetEntityListViewItem config icon page title =
     li
         [ class ""
-        , onClick (config.switchToEntityListViewTypeMsg viewType)
+        , onClick (config.switchToEntityListPageMsg page)
         ]
         [ icon
         , h5 [] [ text title ]

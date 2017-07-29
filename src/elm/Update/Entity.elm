@@ -8,7 +8,7 @@ import ExclusiveMode.Types exposing (..)
 import List.Extra
 import Maybe.Extra
 import Model.EntityTree
-import Model.HasStores exposing (HasStores, HasViewType)
+import Model.HasStores exposing (HasPage, HasStores)
 import Model.Selection
 import Model.Todo
 import Page
@@ -25,7 +25,7 @@ import X.Return exposing (..)
 
 
 type alias SubModel model =
-    HasViewType
+    HasPage
         (HasStores
             (HasEntityListCursor
                 { model
@@ -51,7 +51,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
-        , switchToEntityListViewTypeMsg : EntityListPageModel -> msg
+        , switchToEntityListPageMsg : EntityListPageModel -> msg
         , onStartEditingTodo : TodoDoc -> msg
     }
 
@@ -168,8 +168,8 @@ setEntityAtCursor maybeEntityIdAtCursor model =
 
 
 createEntityListForCurrentView model =
-    Page.maybeGetEntityListViewType model
-        ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
+    Page.maybeGetEntityListPage model
+        ?|> (Model.EntityTree.createEntityTreeForPage # model >> Entity.Tree.flatten)
         ?= []
 
 
@@ -187,12 +187,12 @@ onUpdateAction config entityId action =
             let
                 switchToEntityListViewFromEntity entityId model =
                     let
-                        maybeEntityListViewType =
-                            Page.maybeGetEntityListViewType model
+                        maybeEntityListPage =
+                            Page.maybeGetEntityListPage model
                     in
                     entityId
-                        |> toViewType model maybeEntityListViewType
-                        |> config.switchToEntityListViewTypeMsg
+                        |> toPage model maybeEntityListPage
+                        |> config.switchToEntityListPageMsg
                         |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
@@ -202,7 +202,7 @@ onUpdateAction config entityId action =
                 (List.Extra.find (Entity.hasId entityId)
                     >> Maybe.Extra.unpack
                         (\_ ->
-                            returnMsgAsCmd (config.switchToEntityListViewTypeMsg ContextsView)
+                            returnMsgAsCmd (config.switchToEntityListPageMsg ContextsView)
                                 >> update config (EM_SetFocusInEntityWithEntityId entityId)
                         )
                         (Entity.toEntityId
@@ -223,8 +223,8 @@ toggleSetMember item set =
         Set.insert item set
 
 
-toViewType : SubModel model -> Maybe EntityListPageModel -> EntityId -> EntityListPageModel
-toViewType appModel maybeCurrentEntityListViewType entityId =
+toPage : SubModel model -> Maybe EntityListPageModel -> EntityId -> EntityListPageModel
+toPage appModel maybeCurrentEntityListPage entityId =
     case entityId of
         ContextId id ->
             ContextView id
@@ -234,14 +234,14 @@ toViewType appModel maybeCurrentEntityListViewType entityId =
 
         TodoId id ->
             let
-                getViewTypeForTodo todo =
-                    maybeCurrentEntityListViewType
+                getPageForTodo todo =
+                    maybeCurrentEntityListPage
                         ?|> getTodoGotoGroupView todo
                         ?= (Todo.getContextId todo |> ContextView)
             in
             Model.Todo.findTodoById id appModel
-                ?|> getViewTypeForTodo
-                |> Maybe.Extra.orElse maybeCurrentEntityListViewType
+                ?|> getPageForTodo
+                |> Maybe.Extra.orElse maybeCurrentEntityListPage
                 ?= ContextsView
 
 

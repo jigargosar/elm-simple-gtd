@@ -34,7 +34,7 @@ type alias ViewModel msg =
     { nullVMAsList : List (DocumentWithNameViewModel msg)
     , entityList : List (DocumentWithNameViewModel msg)
     , archivedEntityList : List (DocumentWithNameViewModel msg)
-    , viewType : EntityListPageModel
+    , entituListPageModel : EntityListPageModel
     , title : String
     , className : String
     , showArchived : Bool
@@ -185,7 +185,7 @@ contexts config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = nullVMAsList
     , archivedEntityList = createList config archivedConfig model
-    , viewType = Entity.Types.ContextsView
+    , page = Entity.Types.ContextsView
     , title = "Contexts"
     , className = "contexts"
     , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
@@ -237,7 +237,7 @@ projects config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = []
     , archivedEntityList = createList config archivedConfig model
-    , viewType = Entity.Types.ProjectsView
+    , page = Entity.Types.ProjectsView
     , title = "Projects"
     , className = "projects"
     , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel

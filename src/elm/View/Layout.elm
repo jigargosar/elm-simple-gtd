@@ -25,9 +25,9 @@ appLayoutView config appVM model =
 
         mainViewContainer =
             div [ id "main-view-container" ]
-                [ case Page.getViewType model of
-                    EntityListPage viewType ->
-                        Entity.ListView.listView config appVM viewType model
+                [ case Page.getPage model of
+                    EntityListPage page ->
+                        Entity.ListView.listView config appVM page model
 
                     CustomSyncSettingsPage ->
                         View.CustomSync.view config model

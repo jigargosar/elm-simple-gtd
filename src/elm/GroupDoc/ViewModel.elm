@@ -60,7 +60,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> EntityListPageModel
+    , getPage : DocId -> EntityListPageModel
     , getTabIndexAVForEntityId : EntityId -> Int
     , groupDocType : GroupDoc.Types.GroupDocType
     }
@@ -183,7 +183,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getViewType = Entity.Types.ContextView
+            , getPage = Entity.Types.ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
@@ -207,7 +207,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getViewType = Entity.Types.ProjectView
+            , getPage = Entity.Types.ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }

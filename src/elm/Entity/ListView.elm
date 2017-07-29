@@ -19,13 +19,13 @@ import X.Function exposing (..)
 
 --type alias KeyedView =
 --    ( String, Html AppMsg )
---list : EntityListViewType -> AppModel -> Html.Html AppMsg
+--list : EntityListPage -> AppModel -> Html.Html AppMsg
 
 
-listView config appVM viewType model =
+listView config appVM page model =
     let
         entityTree =
-            Model.EntityTree.createEntityTreeForViewType viewType model
+            Model.EntityTree.createEntityTreeForPage page model
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"

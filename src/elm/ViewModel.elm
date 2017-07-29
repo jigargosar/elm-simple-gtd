@@ -42,11 +42,11 @@ create config model =
         projectsVM =
             AppDrawer.GroupViewModel.projects config model
 
-        viewType =
-            model.viewType
+        page =
+            model.page
 
         ( viewName, headerBackgroundColor ) =
-            getViewInfo viewType projectsVM contextsVM model
+            getViewInfo page projectsVM contextsVM model
 
         editMode =
             model.editMode
@@ -65,7 +65,7 @@ create config model =
     }
 
 
-getViewInfo viewType projectsVM contextsVM model =
+getViewInfo page projectsVM contextsVM model =
     let
         entityById id =
             List.find (.id >> equals id)
@@ -78,9 +78,9 @@ getViewInfo viewType projectsVM contextsVM model =
                 >>?= { name = "o_O", backgroundColor = sgtdBlue }
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
-    case viewType of
-        EntityListPage viewType ->
-            case viewType of
+    case page of
+        EntityListPage page ->
+            case page of
                 Entity.Types.ContextsView ->
                     ( contextsVM.title, contextsVM.icon.color )
 

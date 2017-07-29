@@ -25,7 +25,7 @@ type EntityListPageModel
     | RecentView
 
 
-defaultViewType =
+defaultPage =
     ContextsView
 
 

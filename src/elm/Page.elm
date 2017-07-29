@@ -8,23 +8,23 @@ type Page
     | CustomSyncSettingsPage
 
 
-type ViewTypeMsg
+type PageMsg
     = SwitchView Page
     | SwitchToEntityListView EntityListPageModel
 
 
-maybeGetEntityListViewType model =
-    case model.viewType of
-        EntityListPage viewType ->
-            Just viewType
+maybeGetEntityListPage model =
+    case model.page of
+        EntityListPage page ->
+            Just page
 
         _ ->
             Nothing
 
 
-getViewType =
-    .viewType
+getPage =
+    .page
 
 
 initialPage =
-    EntityListPage Entity.Types.defaultViewType
+    EntityListPage Entity.Types.defaultPage

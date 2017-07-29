@@ -13,7 +13,7 @@ type alias HasStores x =
     }
 
 
-type alias HasViewType x =
+type alias HasPage x =
     { x
-        | viewType : Page
+        | page : Page
     }

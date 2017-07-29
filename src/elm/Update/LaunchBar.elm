@@ -36,7 +36,7 @@ type alias Config msg a =
     { a
         | revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , switchToEntityListViewTypeMsg : EntityListPageModel -> msg
+        , switchToEntityListPageMsg : EntityListPageModel -> msg
     }
 
 
@@ -67,7 +67,7 @@ update config now msg =
                             Entity.Types.ContextsView
             in
             returnMsgAsCmd config.revertExclusiveMode
-                >> returnMsgAsCmd (config.switchToEntityListViewTypeMsg v)
+                >> returnMsgAsCmd (config.switchToEntityListPageMsg v)
 
         OnLBInputChanged form text ->
             returnWith identity

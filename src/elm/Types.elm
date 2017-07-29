@@ -34,7 +34,7 @@ type alias AppModelOtherFields =
     , projectStore : ProjectStore
     , contextStore : ContextStore
     , editMode : ExclusiveMode
-    , viewType : Page
+    , page : Page
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String
     , user : FirebaseUser

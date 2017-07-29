@@ -73,7 +73,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getViewType : DocId -> EntityListPageModel
+    , getEntityListPageModel : DocId -> EntityListPageModel
     , groupDocType : GroupDocType
     }
 
@@ -137,7 +137,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.gotoPage (innerConFig.getViewType id |> EntityListPage)
+                config.gotoPage (innerConFig.getEntityListPageModel id |> EntityListPage)
             else
                 config.noop
     , icon = icon
@@ -169,7 +169,7 @@ contexts config model =
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
-            , getViewType = Entity.Types.ContextView
+            , getEntityListPageModel = Entity.Types.ContextView
             , groupDocType = ContextGroupDocType
             }
 
@@ -221,7 +221,7 @@ projects config model =
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor
-            , getViewType = Entity.Types.ProjectView
+            , getEntityListPageModel = Entity.Types.ProjectView
             , groupDocType = ProjectGroupDocType
             }
 

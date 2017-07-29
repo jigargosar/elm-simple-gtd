@@ -66,6 +66,7 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Page",
+      "Pages.EntityList",
       "Project",
       "String.Extra",
       "Todo",
@@ -75,7 +76,7 @@
       "X.Function",
       "X.Maybe"
     ],
-    "importsCount": 22,
+    "importsCount": 23,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.Model",
@@ -115,6 +116,7 @@
       "Model.Stores",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -144,7 +146,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 66,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "ViewModel"
     ],
@@ -252,12 +254,13 @@
       "Html.Events",
       "Mat",
       "Page",
+      "Pages.EntityList",
       "Toolkit.Operators",
       "View.Badge",
       "X.Function.Infix",
       "X.Html"
     ],
-    "importsCount": 12,
+    "importsCount": 13,
     "transitiveImports": [
       "AppColors",
       "AppUrl",
@@ -281,7 +284,9 @@
       "Material.Button",
       "Material.Icon",
       "Material.Options",
+      "Maybe.Extra",
       "Page",
+      "Pages.EntityList",
       "Random.Pcg",
       "Return",
       "Set",
@@ -301,7 +306,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 41,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "View.Layout"
     ],
@@ -786,6 +791,7 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Model.Todo",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -814,7 +820,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 64,
+    "transitiveImportsCount": 65,
     "backwardImports": [
       "View.Layout"
     ],
@@ -1970,6 +1976,7 @@
       "GroupDoc.Types",
       "Keyboard.Extra",
       "Material",
+      "Pages.EntityList",
       "Project",
       "String.Extra",
       "Todo",
@@ -1978,7 +1985,7 @@
       "X.Function",
       "X.Keyboard"
     ],
-    "importsCount": 16,
+    "importsCount": 17,
     "transitiveImports": [
       "AppColors",
       "Char",
@@ -2003,6 +2010,7 @@
       "List.Extra",
       "Material",
       "Maybe.Extra",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -2026,7 +2034,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "ViewModel"
     ],
@@ -2519,6 +2527,7 @@
       "Navigation",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Ports",
       "Ports.Firebase",
       "Ports.Todo",
@@ -2603,7 +2612,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 164,
+    "transitiveImportsCount": 165,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2924,13 +2933,14 @@
       "Entity.Types",
       "Model.GroupDocStore",
       "Model.Stores",
+      "Pages.EntityList",
       "Project",
       "Store",
       "Todo",
       "Toolkit.Operators",
       "X.Predicate"
     ],
-    "importsCount": 11,
+    "importsCount": 12,
     "transitiveImports": [
       "Char",
       "Context",
@@ -2951,6 +2961,7 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Model.Todo",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -2970,7 +2981,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 37,
+    "transitiveImportsCount": 38,
     "backwardImports": [
       "Entity.ListView",
       "Update.Entity"
@@ -3084,7 +3095,9 @@
       "Json.Decode.Pipeline",
       "Json.Encode",
       "List.Extra",
+      "Maybe.Extra",
       "Page",
+      "Pages.EntityList",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3100,7 +3113,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 25,
+    "transitiveImportsCount": 27,
     "backwardImports": [
       "Update.Entity"
     ],
@@ -3176,6 +3189,7 @@
       "Menu",
       "Menu.Types",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -3205,7 +3219,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 66,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Main"
     ],
@@ -3441,6 +3455,7 @@
       "Msg.Subscription",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -3468,7 +3483,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 66,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Main",
       "TodoMsg",
@@ -3775,9 +3790,10 @@
     "moduleName": "Page",
     "parentModuleName": "",
     "imports": [
-      "Entity.Types"
+      "Entity.Types",
+      "Pages.EntityList"
     ],
-    "importsCount": 1,
+    "importsCount": 2,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -3789,6 +3805,8 @@
       "Json.Decode.Pipeline",
       "Json.Encode",
       "List.Extra",
+      "Maybe.Extra",
+      "Pages.EntityList",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3804,7 +3822,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 24,
+    "transitiveImportsCount": 26,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3874,10 +3892,47 @@
       "X.Function.Infix"
     ],
     "transitiveImportsCount": 13,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
+    "backwardImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.View",
+      "GroupDoc.ViewModel",
+      "Model.EntityTree",
+      "Page",
+      "Routes",
+      "Update.Entity",
+      "Update.LaunchBar",
+      "View.Config",
+      "ViewModel"
+    ],
+    "backwardImportsCount": 10,
+    "transitiveBackwardImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.View",
+      "Entity.ListView",
+      "GroupDoc.ViewModel",
+      "Main",
+      "Model.EntityTree",
+      "Model.HasStores",
+      "Model.Internal",
+      "Msg",
+      "Page",
+      "Routes",
+      "Subscriptions",
+      "Subscriptions.Todo",
+      "TodoMsg",
+      "Types",
+      "Update",
+      "Update.Config",
+      "Update.Entity",
+      "Update.LaunchBar",
+      "Update.Page",
+      "Update.Types",
+      "View",
+      "View.Config",
+      "View.Layout",
+      "ViewModel"
+    ],
+    "transitiveBackwardImportsCount": 25
   },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
@@ -4095,11 +4150,12 @@
       "Entity.Types",
       "Maybe.Extra",
       "Page",
+      "Pages.EntityList",
       "RouteUrl.Builder",
       "X.Function.Infix",
       "X.List"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
       "Char",
       "Dict",
@@ -4113,6 +4169,7 @@
       "List.Extra",
       "Maybe.Extra",
       "Page",
+      "Pages.EntityList",
       "Random.Pcg",
       "Return",
       "RouteUrl.Builder",
@@ -4130,7 +4187,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 28,
+    "transitiveImportsCount": 29,
     "backwardImports": [
       "Main"
     ],
@@ -4319,6 +4376,7 @@
       "Menu.Types",
       "Msg.Subscription",
       "Page",
+      "Pages.EntityList",
       "Ports",
       "Project",
       "Random.Pcg",
@@ -4345,7 +4403,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 55,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "Main"
     ],
@@ -4454,6 +4512,7 @@
       "Menu.Types",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Ports.Todo",
       "Project",
       "Random.Pcg",
@@ -4484,7 +4543,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 62,
+    "transitiveImportsCount": 63,
     "backwardImports": [
       "Main"
     ],
@@ -5752,6 +5811,7 @@
       "Msg.Subscription",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5779,7 +5839,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 68,
     "backwardImports": [
       "Update.Config"
     ],
@@ -5841,6 +5901,7 @@
       "Menu",
       "Menu.Types",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5865,7 +5926,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 52,
+    "transitiveImportsCount": 53,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.Internal",
@@ -5972,6 +6033,7 @@
       "Navigation",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Ports",
       "Ports.Firebase",
       "Ports.Todo",
@@ -6023,7 +6085,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 112,
+    "transitiveImportsCount": 113,
     "backwardImports": [
       "Main"
     ],
@@ -6196,6 +6258,7 @@
       "Msg.Subscription",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -6224,7 +6287,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Main"
     ],
@@ -6323,6 +6386,7 @@
       "Model.Selection",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Set",
       "Todo",
       "Todo.Types",
@@ -6334,7 +6398,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 22,
+    "importsCount": 23,
     "transitiveImports": [
       "Char",
       "Context",
@@ -6371,6 +6435,7 @@
       "Model.Stores",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -6397,7 +6462,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 60,
+    "transitiveImportsCount": 61,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6672,6 +6737,7 @@
       "LaunchBar.Messages",
       "LaunchBar.Models",
       "Model.GroupDocStore",
+      "Pages.EntityList",
       "Regex",
       "Return",
       "String.Extra",
@@ -6680,7 +6746,7 @@
       "Toolkit.Operators",
       "X.Return"
     ],
-    "importsCount": 15,
+    "importsCount": 16,
     "transitiveImports": [
       "Char",
       "Context",
@@ -6708,6 +6774,7 @@
       "Menu",
       "Menu.Types",
       "Model.GroupDocStore",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -6734,7 +6801,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6771,8 +6838,10 @@
       "Json.Decode.Pipeline",
       "Json.Encode",
       "List.Extra",
+      "Maybe.Extra",
       "Model.Selection",
       "Page",
+      "Pages.EntityList",
       "Random.Pcg",
       "Return",
       "Set",
@@ -6790,7 +6859,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 28,
+    "transitiveImportsCount": 30,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7176,6 +7245,7 @@
       "Navigation",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Ports.Firebase",
       "Ports.Todo",
       "Project",
@@ -7224,7 +7294,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 100,
+    "transitiveImportsCount": 101,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7308,6 +7378,7 @@
       "Model.Stores",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -7359,7 +7430,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 114,
+    "transitiveImportsCount": 115,
     "backwardImports": [
       "Main"
     ],
@@ -7419,6 +7490,7 @@
       "Msg",
       "Msg.GroupDoc",
       "Page",
+      "Pages.EntityList",
       "Todo.FormTypes",
       "Todo.Msg",
       "Todo.Notification.Model",
@@ -7426,7 +7498,7 @@
       "X.Function.Infix",
       "X.Keyboard"
     ],
-    "importsCount": 19,
+    "importsCount": 20,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -7469,6 +7541,7 @@
       "Msg.Subscription",
       "Notification",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Return",
@@ -7496,7 +7569,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 68,
     "backwardImports": [
       "Main"
     ],
@@ -7788,6 +7861,7 @@
       "Model.Stores",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -7825,7 +7899,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 91,
+    "transitiveImportsCount": 92,
     "backwardImports": [
       "View"
     ],
@@ -8062,6 +8136,7 @@
       "Material",
       "Maybe.Extra",
       "Page",
+      "Pages.EntityList",
       "Todo.ItemView",
       "Todo.Types",
       "Todo.ViewModel",
@@ -8069,7 +8144,7 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 16,
+    "importsCount": 17,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -8119,6 +8194,7 @@
       "Model.Stores",
       "Model.Todo",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Random.Pcg",
       "Regex",
@@ -8156,7 +8232,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 84,
+    "transitiveImportsCount": 85,
     "backwardImports": [
       "View"
     ],

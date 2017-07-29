@@ -4,11 +4,12 @@ import AppColors
 import Color
 import Context
 import Document exposing (DocId)
-import Entity.Types exposing (Entity, EntityId(..), EntityListPageModel)
+import Entity.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (..)
 import Keyboard.Extra as Key exposing (Key)
 import Material
+import Pages.EntityList exposing (..)
 import Project
 import String.Extra
 import Todo
@@ -183,7 +184,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getPage = Entity.Types.ContextView
+            , getPage = ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.Types.ContextGroupDocType
             }
@@ -207,7 +208,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getPage = Entity.Types.ProjectView
+            , getPage = ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.Types.ProjectGroupDocType
             }

@@ -13,6 +13,7 @@ import Menu.Types
 import Msg
 import Msg.GroupDoc
 import Page
+import Pages.EntityList exposing (..)
 import Todo.FormTypes
 import Todo.Msg
 import Todo.Notification.Model
@@ -62,7 +63,7 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
-    , switchToEntityListPageMsg : Entity.Types.EntityListPageModel -> msg
+    , switchToEntityListPageMsg : EntityListPageModel -> msg
     , gotoPage : Page.Page -> msg
     }
 

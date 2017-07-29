@@ -1,13 +1,14 @@
 module Update.LaunchBar exposing (Config, update)
 
 import Document exposing (DocId, getDocId)
-import Entity.Types exposing (EntityListPageModel)
+import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
 import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
 import Model.GroupDocStore
+import Pages.EntityList exposing (..)
 import Regex
 import Return
 import String.Extra
@@ -55,16 +56,16 @@ update config now msg =
                 v =
                     case entity of
                         SI_Project project ->
-                            project |> getDocId >> Entity.Types.ProjectView
+                            project |> getDocId >> ProjectView
 
                         SI_Projects ->
-                            Entity.Types.ProjectsView
+                            ProjectsView
 
                         SI_Context context ->
-                            context |> getDocId >> Entity.Types.ContextView
+                            context |> getDocId >> ContextView
 
                         SI_Contexts ->
-                            Entity.Types.ContextsView
+                            ContextsView
             in
             returnMsgAsCmd config.revertExclusiveMode
                 >> returnMsgAsCmd (config.switchToEntityListPageMsg v)

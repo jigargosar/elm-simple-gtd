@@ -8,12 +8,13 @@ import Context
 import Dict
 import Dict.Extra
 import Document exposing (DocId)
-import Entity.Types exposing (EntityId(..), EntityListPageModel)
+import Entity.Types exposing (..)
 import GroupDoc
 import GroupDoc.Types exposing (GroupDocType(..))
 import Model.GroupDocStore
 import Model.Stores
 import Page exposing (Page(EntityListPage))
+import Pages.EntityList exposing (..)
 import Project
 import String.Extra
 import Todo
@@ -168,7 +169,7 @@ contexts config model =
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
-            , getEntityListPageModel = Entity.Types.ContextView
+            , getEntityListPageModel = ContextView
             , groupDocType = ContextGroupDocType
             }
 
@@ -184,7 +185,7 @@ contexts config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = nullVMAsList
     , archivedEntityList = createList config archivedConfig model
-    , page = Entity.Types.ContextsView
+    , page = ContextsView
     , title = "Contexts"
     , className = "contexts"
     , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
@@ -220,7 +221,7 @@ projects config model =
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor
-            , getEntityListPageModel = Entity.Types.ProjectView
+            , getEntityListPageModel = ProjectView
             , groupDocType = ProjectGroupDocType
             }
 
@@ -236,7 +237,7 @@ projects config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = []
     , archivedEntityList = createList config archivedConfig model
-    , page = Entity.Types.ProjectsView
+    , page = ProjectsView
     , title = "Projects"
     , className = "projects"
     , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel

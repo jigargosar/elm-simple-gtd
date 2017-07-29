@@ -1,7 +1,7 @@
 module EntityId exposing (..)
 
 import Document exposing (getDocId)
-import Entity.Types exposing (EntityId(..))
+import Entity.Types exposing (..)
 
 
 fromTodoDocId =

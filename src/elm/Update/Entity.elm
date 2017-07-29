@@ -12,6 +12,7 @@ import Model.HasStores exposing (HasPage, HasStores)
 import Model.Selection
 import Model.Todo
 import Page
+import Pages.EntityList exposing (..)
 import Set
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)

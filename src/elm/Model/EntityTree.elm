@@ -6,6 +6,7 @@ import Entity.Tree
 import Entity.Types exposing (..)
 import Model.GroupDocStore exposing (..)
 import Model.Stores
+import Pages.EntityList exposing (..)
 import Project
 import Store
 import Todo
@@ -67,36 +68,36 @@ createEntityTreeForPage entityListPage model =
             findContextById # model
     in
     case entityListPage of
-        Entity.Types.ContextsView ->
+        ContextsView ->
             getActiveContexts model
                 |> Entity.Tree.initContextForest
                     getActiveTodoListForContextHelp
 
-        Entity.Types.ProjectsView ->
+        ProjectsView ->
             getActiveProjects model
                 |> Entity.Tree.initProjectForest
                     getActiveTodoListForProjectHelp
 
-        Entity.Types.ContextView id ->
+        ContextView id ->
             findContextById id model
                 ?= Context.null
                 |> Entity.Tree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
-        Entity.Types.ProjectView id ->
+        ProjectView id ->
             findProjectById id model
                 ?= Project.null
                 |> Entity.Tree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
-        Entity.Types.BinView ->
+        BinView ->
             Entity.Tree.initTodoForest
                 "Bin"
                 (filterTodosAndSortByLatestModified Document.isDeleted model)
 
-        Entity.Types.DoneView ->
+        DoneView ->
             Entity.Tree.initTodoForest
                 "Done"
                 (filterTodosAndSortByLatestModified
@@ -104,7 +105,7 @@ createEntityTreeForPage entityListPage model =
                     model
                 )
 
-        Entity.Types.RecentView ->
+        RecentView ->
             Entity.Tree.initTodoForest
                 "Recent"
                 (filterTodosAndSortByLatestModified X.Predicate.always model)

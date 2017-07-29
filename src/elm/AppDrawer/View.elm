@@ -8,6 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
+import Pages.EntityList exposing (..)
 import Toolkit.Operators exposing (..)
 import View.Badge
 import X.Function.Infix exposing (..)
@@ -54,13 +55,13 @@ sidebarContent config appVM model =
                 ++ entityGroupView config contexts model.page
                 ++ entityGroupView config projects model.page
                 ++ [ Mat.divider ]
-                ++ [ onSetEntityListViewItem config (Mat.icon "sort") Entity.Types.RecentView "Recent"
+                ++ [ onSetEntityListViewItem config (Mat.icon "sort") RecentView "Recent"
                    , onSetEntityListViewItem
                         config
                         (Mat.iconView "done" [ Mat.cs "done-icon", Mat.cs "is-done" ])
-                        Entity.Types.DoneView
+                        DoneView
                         "Done"
-                   , onSetEntityListViewItem config (Mat.icon "delete") Entity.Types.BinView "Bin"
+                   , onSetEntityListViewItem config (Mat.icon "delete") BinView "Bin"
                    , Mat.divider
                    , switchViewItemSmall config "settings" CustomSyncSettingsPage "Advance Settings"
                    ]

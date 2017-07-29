@@ -1,6 +1,6 @@
 module EntityListCursor exposing (..)
 
-import Entity.Types exposing (EntityId)
+import Entity.Types exposing (..)
 
 
 type alias EntityListCursor =

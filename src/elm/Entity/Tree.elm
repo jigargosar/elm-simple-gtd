@@ -2,7 +2,7 @@ module Entity.Tree exposing (..)
 
 import Context
 import Entity
-import Entity.Types exposing (Entity)
+import Entity.Types exposing (..)
 import List.Extra as List
 import Project
 import Todo

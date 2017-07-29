@@ -1,6 +1,6 @@
 module GroupDoc.FormView exposing (..)
 
-import Entity.Types exposing (EntityId(..))
+import Entity.Types exposing (..)
 import GroupDoc.Types exposing (GroupDocForm, GroupDocFormMode(..), GroupDocType(..))
 import Html exposing (..)
 import Html.Attributes exposing (..)

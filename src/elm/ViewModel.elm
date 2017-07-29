@@ -3,13 +3,14 @@ module ViewModel exposing (..)
 import AppColors
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import Color
-import Entity.Types exposing (EntityId)
+import Entity.Types exposing (..)
 import GroupDoc.Types exposing (..)
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import List.Extra as List
 import Material
 import Maybe.Extra as Maybe
 import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
+import Pages.EntityList exposing (..)
 import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
@@ -81,25 +82,25 @@ getViewInfo page projectsVM contextsVM model =
     case page of
         EntityListPage page ->
             case page of
-                Entity.Types.ContextsView ->
+                ContextsView ->
                     ( contextsVM.title, contextsVM.icon.color )
 
-                Entity.Types.ContextView id ->
+                ContextView id ->
                     appHeaderInfoById id contextsVM
 
-                Entity.Types.ProjectsView ->
+                ProjectsView ->
                     ( projectsVM.title, projectsVM.icon.color )
 
-                Entity.Types.ProjectView id ->
+                ProjectView id ->
                     appHeaderInfoById id projectsVM
 
-                Entity.Types.BinView ->
+                BinView ->
                     ( "Bin", sgtdBlue )
 
-                Entity.Types.DoneView ->
+                DoneView ->
                     ( "Done", sgtdBlue )
 
-                Entity.Types.RecentView ->
+                RecentView ->
                     ( "Recent", sgtdBlue )
 
         CustomSyncSettingsPage ->

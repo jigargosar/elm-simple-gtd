@@ -1,23 +1,23 @@
-   10123 total
+   10133 total
      447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
-     276 src/elm/Update/Entity.elm
+     277 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
-     248 src/elm/AppDrawer/GroupViewModel.elm
+     249 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     219 src/elm/GroupDoc/ViewModel.elm
+     220 src/elm/GroupDoc/ViewModel.elm
      214 src/elm/Msg.elm
      204 src/elm/Update/Subscription.elm
      187 src/elm/Todo/ViewModel.elm
-     185 src/elm/AppDrawer/View.elm
+     186 src/elm/AppDrawer/View.elm
      174 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Update/GroupDoc.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
-     153 src/elm/Update/LaunchBar.elm
+     154 src/elm/Update/LaunchBar.elm
      153 src/elm/Entity/Tree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
@@ -27,11 +27,11 @@
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
      131 src/elm/Document.elm
-     128 src/elm/Routes.elm
-     114 src/elm/View/Config.elm
+     129 src/elm/Routes.elm
+     115 src/elm/View/Config.elm
+     111 src/elm/ViewModel.elm
      111 src/elm/Todo/Form.elm
-     110 src/elm/ViewModel.elm
-     110 src/elm/Model/EntityTree.elm
+     111 src/elm/Model/EntityTree.elm
      105 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
@@ -88,7 +88,7 @@
       35 src/elm/Update/Config.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
-      30 src/elm/Page.elm
+      31 src/elm/Page.elm
       27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
       23 src/elm/Pages/EntityList.elm

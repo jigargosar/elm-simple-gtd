@@ -15,20 +15,6 @@ type Entity
     | TodoEntity TodoDoc
 
 
-type EntityListPageModel
-    = ContextsView
-    | ContextView DocId
-    | ProjectsView
-    | ProjectView DocId
-    | BinView
-    | DoneView
-    | RecentView
-
-
-defaultPage =
-    ContextsView
-
-
 type EntityUpdateAction
     = EUA_ToggleSelection
     | EUA_OnGotoEntity

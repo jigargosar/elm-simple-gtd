@@ -537,6 +537,7 @@
       "GroupDoc.ViewModel",
       "Model.EntityTree",
       "Model.GroupDocStore",
+      "Pages.EntityList",
       "Store",
       "Todo",
       "Todo.Form",
@@ -555,7 +556,7 @@
       "Update.Todo.Internal",
       "View.Config"
     ],
-    "backwardImportsCount": 28,
+    "backwardImportsCount": 29,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -589,6 +590,7 @@
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Routes",
       "Store",
@@ -632,7 +634,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 74
+    "transitiveBackwardImportsCount": 75
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -3841,6 +3843,41 @@
       "ViewModel"
     ],
     "transitiveBackwardImportsCount": 20
+  },
+  "Pages.EntityList": {
+    "fileName": "src/elm/Pages/EntityList.elm",
+    "moduleName": "Pages.EntityList",
+    "parentModuleName": "Pages",
+    "imports": [
+      "Document",
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 7,
+    "transitiveImports": [
+      "Document",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "List.Extra",
+      "Maybe.Extra",
+      "Set",
+      "Time",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 13,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
   },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
@@ -8364,6 +8401,7 @@
       "Mat",
       "Menu",
       "Model.Stores",
+      "Pages.EntityList",
       "Project",
       "Todo",
       "Todo.Notification.Model",
@@ -8373,7 +8411,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 19,
+    "backwardImportsCount": 20,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -8415,6 +8453,7 @@
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
+      "Pages.EntityList",
       "Project",
       "Routes",
       "Store",
@@ -8465,7 +8504,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 89
+    "transitiveBackwardImportsCount": 90
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -8490,6 +8529,7 @@
       "Menu",
       "Model.Stores",
       "Msg",
+      "Pages.EntityList",
       "Routes",
       "Todo",
       "Todo.ItemView",
@@ -8508,7 +8548,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 31,
+    "backwardImportsCount": 32,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -8554,6 +8594,7 @@
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
+      "Pages.EntityList",
       "Ports.Firebase",
       "Project",
       "Routes",
@@ -8607,7 +8648,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 96
+    "transitiveBackwardImportsCount": 97
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

@@ -68,12 +68,12 @@ update config msg =
             command (signIn ())
 
         OnFBSkipSignIn ->
-            Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
+            Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setSkipSignIn)
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
-                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
+                >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
                 >> command (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
@@ -86,7 +86,7 @@ update config msg =
 
                                 SignedIn user ->
                                     Return.map
-                                        (overSignInModel
+                                        (overSignInModelInFirebaseModel
                                             Firebase.SignIn.setStateToSignInSuccess
                                         )
                                         >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
@@ -97,7 +97,7 @@ update config msg =
             D.decodeValue Firebase.Model.userDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\user ->
-                        Return.map (setUser user)
+                        Return.map (setUserInFirebaseModel user)
                             >> update config OnFBAfterUserChanged
                             >> maybeEffect firebaseUpdateClientCmd
                             >> maybeEffect firebaseSetupOnDisconnectCmd
@@ -109,44 +109,40 @@ update config msg =
             D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\token ->
-                        Return.map (setFCMToken token)
+                        Return.map (setFCMTokenInFirebaseModel token)
                             >> maybeEffect firebaseUpdateClientCmd
                     )
                 != identity
 
         OnFBConnectionChanged connected ->
-            Return.map (updateFirebaseConnection connected)
+            Return.map (setClientConnectionStatusInFirebaseModel connected)
                 >> maybeEffect firebaseUpdateClientCmd
 
 
-signInModel =
+signInModelL =
     fieldLens .signInModel (\s b -> { b | signInModel = s })
 
 
-firebaseModel : Field FirebaseModel (SubModel model)
-firebaseModel =
-    fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
-
-
-firebaseClient =
+firebaseClientL =
     fieldLens .firebaseClient (\s b -> { b | firebaseClient = s })
 
 
-user =
+userL =
     fieldLens .user (\s b -> { b | user = s })
 
 
-fcmToken =
+fcmTokenL =
     fieldLens .fcmToken (\s b -> { b | fcmToken = s })
 
 
-overFirebaseModel =
-    over firebaseModel
+firebaseModelL : Field FirebaseModel (SubModel model)
+firebaseModelL =
+    fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
 
 
-overSignInModel : SignInModelF -> SubModelF model
-overSignInModel =
-    over signInModel >> overFirebaseModel
+overSignInModelInFirebaseModel : SignInModelF -> SubModelF model
+overSignInModelInFirebaseModel =
+    over signInModelL >> over firebaseModelL
 
 
 firebaseUpdateClientCmd model =
@@ -163,25 +159,25 @@ startSyncWithFirebase =
     maybeEffect (getMaybeUserId >>? startSyncCmd)
 
 
-setFCMToken fcmToken_ =
-    overFirebaseModel (set fcmToken fcmToken_)
-        >> overFirebaseClient (updateToken fcmToken_)
+setFCMTokenInFirebaseModel fcmToken =
+    over firebaseModelL (set fcmTokenL fcmToken)
+        >> overFirebaseClientInFirebaseModel (\client -> { client | token = fcmToken })
 
 
-overFirebaseClient =
-    over firebaseClient >> overFirebaseModel
+overFirebaseClientInFirebaseModel =
+    over firebaseClientL >> over firebaseModelL
 
 
-updateFirebaseConnection =
-    updateConnection >> overFirebaseClient
+setClientConnectionStatusInFirebaseModel =
+    setClientConnectedStatus >> overFirebaseClientInFirebaseModel
 
 
 getMaybeUserId =
     .firebaseModel >> .user >> Firebase.Model.getMaybeUserId
 
 
-setUser =
-    set user >> overFirebaseModel
+setUserInFirebaseModel =
+    set userL >> over firebaseModelL
 
 
 setupOnDisconnectCmd client uid =
@@ -196,9 +192,5 @@ updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, Firebase.Model.encodeClient client )
 
 
-updateConnection connected client =
+setClientConnectedStatus connected client =
     { client | connected = connected }
-
-
-updateToken token client =
-    { client | token = token }

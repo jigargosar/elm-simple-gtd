@@ -738,6 +738,7 @@
       "Entity.Types",
       "EntityId",
       "EntityListCursor",
+      "Firebase.SignIn",
       "GroupDoc",
       "GroupDoc.View",
       "Html",
@@ -795,7 +796,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "View"
     ],
@@ -828,6 +829,7 @@
       "Document",
       "Entity",
       "Entity.Types",
+      "Firebase.SignIn",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -858,7 +860,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 35,
+    "transitiveImportsCount": 36,
     "backwardImports": [
       "Entity.ListView",
       "Model.EntityTree",
@@ -1093,6 +1095,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -1134,7 +1137,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 44,
+    "transitiveImportsCount": 45,
     "backwardImports": [
       "Model.Internal",
       "Msg.CustomSync",
@@ -1196,15 +1199,19 @@
     "importsCount": 1,
     "transitiveImports": [
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
       "Json.Encode.Extra",
+      "Return",
+      "Toolkit.Operators",
       "Types.Firebase",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Record"
     ],
-    "transitiveImportsCount": 8,
+    "transitiveImportsCount": 12,
     "backwardImports": [
       "Model.Internal",
       "Ports.Firebase",
@@ -1243,15 +1250,19 @@
     ],
     "importsCount": 6,
     "transitiveImports": [
+      "Firebase.SignIn",
       "Firebase.User",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
       "Json.Encode.Extra",
+      "Return",
+      "Toolkit.Operators",
       "Types.Firebase",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Record"
     ],
-    "transitiveImportsCount": 7,
+    "transitiveImportsCount": 11,
     "backwardImports": [
       "Firebase",
       "Update.Firebase"
@@ -1300,26 +1311,66 @@
     "backwardImports": [
       "LocalPref",
       "Types.AppModel",
+      "Types.Firebase",
       "Types.LocalPref",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
+      "Entity.ListView",
+      "Entity.Tree",
+      "ExclusiveMode.Types",
+      "Firebase",
+      "Firebase.Model",
+      "Firebase.User",
+      "GroupDoc.ViewModel",
+      "LaunchBar.Messages",
+      "LaunchBar.Models",
+      "LaunchBar.View",
       "LocalPref",
       "Main",
+      "Model.EntityTree",
+      "Model.GroupDocStore",
       "Model.Internal",
+      "Model.Stores",
+      "Msg",
+      "Msg.CustomSync",
+      "Msg.ExclusiveMode",
+      "Ports.Firebase",
+      "Project",
       "Subscriptions",
+      "Subscriptions.Firebase",
       "Subscriptions.Todo",
+      "Todo.GroupEditView",
+      "Todo.Store",
+      "TodoMsg",
       "Types.AppModel",
+      "Types.Firebase",
       "Types.LocalPref",
       "Update",
+      "Update.AppHeader",
+      "Update.Config",
+      "Update.CustomSync",
+      "Update.Entity",
+      "Update.ExclusiveMode",
       "Update.Firebase",
+      "Update.GroupDoc",
+      "Update.LaunchBar",
+      "Update.Subscription",
+      "Update.Todo",
+      "Update.Todo.Internal",
       "Update.Types",
       "View",
+      "View.Config",
+      "View.CustomSync",
+      "View.Header",
+      "View.Layout",
+      "View.MainMenu",
+      "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 52
   },
   "Firebase.User": {
     "fileName": "src/elm/Firebase/User.elm",
@@ -1332,11 +1383,17 @@
     ],
     "importsCount": 3,
     "transitiveImports": [
+      "Firebase.SignIn",
       "Json.Decode",
       "Json.Decode.Pipeline",
-      "Types.Firebase"
+      "Json.Encode",
+      "Return",
+      "Toolkit.Operators",
+      "Types.Firebase",
+      "X.Function.Infix",
+      "X.Record"
     ],
-    "transitiveImportsCount": 3,
+    "transitiveImportsCount": 9,
     "backwardImports": [
       "Firebase.Model"
     ],
@@ -1718,6 +1775,7 @@
       "Dict",
       "Document",
       "Entity.Types",
+      "Firebase.SignIn",
       "GroupDoc",
       "Html",
       "Html.Attributes",
@@ -1760,7 +1818,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 50,
     "backwardImports": [
       "ViewModel"
     ],
@@ -1871,6 +1929,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Json.Decode",
@@ -1898,7 +1957,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 30,
+    "transitiveImportsCount": 31,
     "backwardImports": [
       "LaunchBar.View",
       "Msg",
@@ -1939,6 +1998,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Json.Decode",
@@ -1965,7 +2025,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 30,
     "backwardImports": [
       "ExclusiveMode.Types",
       "LaunchBar.Messages",
@@ -2029,6 +2089,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -2065,7 +2126,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 39,
+    "transitiveImportsCount": 40,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -2572,6 +2633,7 @@
       "Entity",
       "Entity.Tree",
       "Entity.Types",
+      "Firebase.SignIn",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2607,7 +2669,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 41,
+    "transitiveImportsCount": 42,
     "backwardImports": [
       "Entity.ListView",
       "Update.Entity"
@@ -2644,6 +2706,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2670,7 +2733,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 30,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.EntityTree",
@@ -2906,6 +2969,7 @@
       "Dict",
       "Document",
       "Entity.Types",
+      "Firebase.SignIn",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2938,7 +3002,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 36,
+    "transitiveImportsCount": 37,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Model.EntityTree"
@@ -3057,6 +3121,7 @@
       "DomPorts",
       "Entity.Types",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -3117,7 +3182,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 71,
+    "transitiveImportsCount": 72,
     "backwardImports": [
       "Main",
       "TodoMsg",
@@ -3178,6 +3243,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -3219,7 +3285,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "Msg",
       "Update.CustomSync"
@@ -3251,6 +3317,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -3292,7 +3359,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "Msg",
       "Update.ExclusiveMode"
@@ -3609,15 +3676,19 @@
     "transitiveImports": [
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
       "Json.Encode.Extra",
+      "Return",
+      "Toolkit.Operators",
       "Types.Firebase",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Record"
     ],
-    "transitiveImportsCount": 9,
+    "transitiveImportsCount": 13,
     "backwardImports": [
       "Subscriptions.Firebase",
       "Update.Firebase"
@@ -3676,6 +3747,7 @@
       "Char",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -3700,7 +3772,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 26,
+    "transitiveImportsCount": 27,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
@@ -4046,6 +4118,7 @@
     "transitiveImports": [
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -4053,10 +4126,13 @@
       "Json.Encode.Extra",
       "Msg.Firebase",
       "Ports.Firebase",
+      "Return",
+      "Toolkit.Operators",
       "Types.Firebase",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Record"
     ],
-    "transitiveImportsCount": 11,
+    "transitiveImportsCount": 15,
     "backwardImports": [
       "Main"
     ],
@@ -4435,6 +4511,7 @@
       "Context",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "GroupDoc",
       "Html",
       "Html.Attributes",
@@ -4474,7 +4551,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -4944,6 +5021,7 @@
       "Char",
       "Dict",
       "Document",
+      "Firebase.SignIn",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
@@ -4971,7 +5049,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 30,
     "backwardImports": [
       "Model.Internal"
     ],
@@ -5279,6 +5357,7 @@
       "DomPorts",
       "Entity.Types",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -5340,7 +5419,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 72,
+    "transitiveImportsCount": 73,
     "backwardImports": [
       "Update.Config"
     ],
@@ -5572,10 +5651,21 @@
     "fileName": "src/elm/Types/Firebase.elm",
     "moduleName": "Types.Firebase",
     "parentModuleName": "Types",
-    "imports": [],
-    "importsCount": 0,
-    "transitiveImports": [],
-    "transitiveImportsCount": 0,
+    "imports": [
+      "Firebase.SignIn"
+    ],
+    "importsCount": 1,
+    "transitiveImports": [
+      "Firebase.SignIn",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Return",
+      "Toolkit.Operators",
+      "X.Function.Infix",
+      "X.Record"
+    ],
+    "transitiveImportsCount": 8,
     "backwardImports": [
       "Firebase.Model",
       "Firebase.User",
@@ -6239,6 +6329,7 @@
       "Document",
       "DomPorts",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6283,7 +6374,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 50,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6319,6 +6410,7 @@
       "DomPorts",
       "Entity.Types",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6381,7 +6473,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 73,
+    "transitiveImportsCount": 74,
     "backwardImports": [
       "Main"
     ],
@@ -6408,6 +6500,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6452,7 +6545,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 48,
+    "transitiveImportsCount": 49,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6505,6 +6598,7 @@
       "Entity.Types",
       "EntityListCursor",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6561,7 +6655,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 64,
+    "transitiveImportsCount": 65,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6594,6 +6688,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6638,7 +6733,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 48,
+    "transitiveImportsCount": 49,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6774,6 +6869,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "GroupDoc.Form",
@@ -6820,7 +6916,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 50,
+    "transitiveImportsCount": 51,
     "backwardImports": [
       "Update"
     ],
@@ -6859,6 +6955,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -6908,7 +7005,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 53,
+    "transitiveImportsCount": 54,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -6995,6 +7092,7 @@
       "Document",
       "Entity.Types",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -7043,7 +7141,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 53,
+    "transitiveImportsCount": 54,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7082,6 +7180,7 @@
       "Entity.Types",
       "EntityListCursor",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -7141,7 +7240,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 69,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7201,6 +7300,7 @@
       "Entity.Types",
       "EntityListCursor",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -7258,7 +7358,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 68,
     "backwardImports": [
       "Update.Todo"
     ],
@@ -7621,6 +7721,7 @@
       "DomPorts",
       "Entity.Types",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -7682,7 +7783,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 72,
+    "transitiveImportsCount": 73,
     "backwardImports": [
       "Main"
     ],
@@ -7716,6 +7817,7 @@
       "Dict",
       "Document",
       "ExclusiveMode.Types",
+      "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
       "Html",
@@ -7764,7 +7866,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 55,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "View"
     ],
@@ -7846,6 +7948,7 @@
       "Document",
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Html",
       "Html.Attributes",
@@ -7893,7 +7996,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 57,
+    "transitiveImportsCount": 58,
     "backwardImports": [
       "View.Layout"
     ],
@@ -7934,6 +8037,7 @@
       "Document",
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Html",
       "Html.Attributes",
@@ -7986,7 +8090,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 65,
+    "transitiveImportsCount": 66,
     "backwardImports": [
       "View"
     ],
@@ -8015,6 +8119,7 @@
       "AppUrl",
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Html",
       "Html.Attributes",
@@ -8030,6 +8135,7 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Return",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
@@ -8040,9 +8146,10 @@
       "X.Function.Infix",
       "X.Html",
       "X.Keyboard",
-      "X.List"
+      "X.List",
+      "X.Record"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 32,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -8134,6 +8241,7 @@
       "ExclusiveMode.Types",
       "Firebase",
       "Firebase.Model",
+      "Firebase.SignIn",
       "Firebase.User",
       "Fuzzy",
       "GroupDoc",
@@ -8200,7 +8308,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 79,
+    "transitiveImportsCount": 80,
     "backwardImports": [
       "View"
     ],
@@ -8725,6 +8833,7 @@
       "Firebase",
       "Firebase.Model",
       "Firebase.SignIn",
+      "Firebase.User",
       "Form",
       "GroupDoc",
       "GroupDoc.Form",
@@ -8774,6 +8883,7 @@
       "Todo.ViewModel",
       "TodoMsg",
       "Types.AppModel",
+      "Types.Firebase",
       "Types.GroupDoc",
       "Types.LocalPref",
       "Types.Store",
@@ -8806,7 +8916,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 95
+    "transitiveBackwardImportsCount": 97
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -9277,7 +9387,10 @@
       "EntityId",
       "EntityListCursor",
       "ExclusiveMode.Types",
+      "Firebase",
+      "Firebase.Model",
       "Firebase.SignIn",
+      "Firebase.User",
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
@@ -9298,9 +9411,11 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
+      "Ports.Firebase",
       "Project",
       "Store",
       "Subscriptions",
+      "Subscriptions.Firebase",
       "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
@@ -9315,6 +9430,7 @@
       "Todo.ViewModel",
       "TodoMsg",
       "Types.AppModel",
+      "Types.Firebase",
       "Types.GroupDoc",
       "Types.LocalPref",
       "Types.Store",
@@ -9338,10 +9454,11 @@
       "View.CustomSync",
       "View.Header",
       "View.Layout",
+      "View.MainMenu",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 73
+    "transitiveBackwardImportsCount": 80
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

@@ -1,4 +1,4 @@
-   10100 total
+   10110 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -73,6 +73,7 @@
       48 src/elm/Update/AppDrawer.elm
       47 src/elm/Todo/TimeTracker/View.elm
       47 src/elm/GroupDoc/Form.elm
+      46 src/elm/Types/Firebase.elm
       46 src/elm/Notification.elm
       45 src/elm/Update/AppHeader.elm
       44 src/elm/Update/Page.elm
@@ -84,7 +85,6 @@
       39 src/elm/X/Date.elm
       39 src/elm/Update/Types.elm
       37 src/elm/CommonMsg.elm
-      36 src/elm/Types/Firebase.elm
       36 src/elm/LocalPref.elm
       35 src/elm/Update/Config.elm
       35 src/elm/Types/Document.elm

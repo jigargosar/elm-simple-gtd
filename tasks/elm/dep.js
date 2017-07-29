@@ -17,14 +17,15 @@ const computeDependencies = function () {
       // _.take(2),
       // _.drop(20),
   )(fileNames)
-
+  
   return Modules(moduleList)
 }
 
-export function logTransitiveBackwardImportsOf(moduleName) {
+export function logTransitiveImportsOf(moduleName) {
   const module = computeDependencies()[moduleName]
-  const transitiveBackwardImports = module ? module["transitiveBackwardImports"] : []
-  console.log(JSON.stringify({transitiveBackwardImports}, null, 2 ))
+  const transitiveBackwardImports =
+      module ? _.pick(["transitiveBackwardImports", "transitiveImports"])(module) : []
+  console.log(JSON.stringify({transitiveBackwardImports}, null, 2))
   return transitiveBackwardImports
 }
 

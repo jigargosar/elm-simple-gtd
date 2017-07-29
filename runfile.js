@@ -225,7 +225,7 @@ dummy.help = 'logs all options and args to console'
 export const removeUnusedImports = elm.removeUnusedImports
 export const parseWPD = elm.parseWPD
 export const rui = elm.rui
-export const revDep = ElmDep.logTransitiveBackwardImportsOf
+export const dep = ElmDep.logTransitiveImportsOf
 
 function runFish(command) {
   run(`fish -c '${command}' `)

@@ -21,7 +21,8 @@ const computeDependencies = function () {
   return Modules(moduleList)
 }
 
-export function logTransitiveImportsOf(moduleName) {
+export function logTransitiveImportsOf(fileName) {
+  const moduleName = Module(fileName).moduleName
   const module = computeDependencies()[moduleName]
   const transitiveBackwardImports =
       module ? _.pick([

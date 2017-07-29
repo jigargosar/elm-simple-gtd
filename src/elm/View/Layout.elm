@@ -12,7 +12,7 @@ import View.Header
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
 
-appLayoutView config appVM model =
+appLayoutView config appVM model pageContent =
     let
         layoutSideBarHeader =
             AppDrawer.View.sidebarHeader appVM model
@@ -25,12 +25,7 @@ appLayoutView config appVM model =
 
         mainViewContainer =
             div [ id "main-view-container" ]
-                [ case Page.getPage model of
-                    Page.EntityListPage entityListPageModel ->
-                        Entity.ListView.listView config appVM entityListPageModel model
-
-                    Page.CustomSyncSettingsPage ->
-                        View.CustomSync.view config model
+                [ pageContent
                 ]
 
         isOverlayOpen =

@@ -1,4 +1,4 @@
-   10115 total
+   10121 total
      447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -39,11 +39,11 @@
       93 src/elm/X/Time.elm
       91 src/elm/Model/GroupDocStore.elm
       88 src/elm/X/Html.elm
-      86 src/elm/View/Layout.elm
       84 src/elm/Update/ExclusiveMode.elm
       84 src/elm/Pages/EntityList.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Model/Internal.elm
+      81 src/elm/View/Layout.elm
       81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
       78 src/elm/Update.elm
@@ -87,12 +87,12 @@
       37 src/elm/CommonMsg.elm
       36 src/elm/LocalPref.elm
       35 src/elm/Update/Config.elm
+      33 src/elm/View.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
       30 src/elm/Page.elm
       27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
-      22 src/elm/View.elm
       22 src/elm/Model.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm

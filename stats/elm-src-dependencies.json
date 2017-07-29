@@ -191,8 +191,8 @@
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "LocalPref",
-      "LocalPref.Types",
       "Types.AppModel",
+      "Types.LocalPref",
       "Update.AppDrawer",
       "View.Layout"
     ],
@@ -200,12 +200,12 @@
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "LocalPref",
-      "LocalPref.Types",
       "Main",
       "Model.Internal",
       "Subscriptions",
       "Subscriptions.Todo",
       "Types.AppModel",
+      "Types.LocalPref",
       "Update",
       "Update.AppDrawer",
       "View",
@@ -1299,20 +1299,20 @@
     "transitiveImportsCount": 7,
     "backwardImports": [
       "LocalPref",
-      "LocalPref.Types",
       "Types.AppModel",
+      "Types.LocalPref",
       "Update.Firebase"
     ],
     "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "LocalPref",
-      "LocalPref.Types",
       "Main",
       "Model.Internal",
       "Subscriptions",
       "Subscriptions.Todo",
       "Types.AppModel",
+      "Types.LocalPref",
       "Update",
       "Update.Firebase",
       "Update.Types",
@@ -2087,8 +2087,8 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "LocalPref.Types",
       "Toolkit.Operators",
+      "Types.LocalPref",
       "X.Function.Infix"
     ],
     "importsCount": 8,
@@ -2098,11 +2098,11 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "LocalPref.Types",
       "Return",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Types.LocalPref",
       "X.Function",
       "X.Function.Infix",
       "X.Record"
@@ -2119,42 +2119,6 @@
       "Update"
     ],
     "transitiveBackwardImportsCount": 3
-  },
-  "LocalPref.Types": {
-    "fileName": "src/elm/LocalPref/Types.elm",
-    "moduleName": "LocalPref.Types",
-    "parentModuleName": "LocalPref",
-    "imports": [
-      "AppDrawer.Model",
-      "Firebase.SignIn"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "AppDrawer.Model",
-      "Firebase.SignIn",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Return",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 12,
-    "backwardImports": [
-      "LocalPref"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "LocalPref",
-      "Main",
-      "Model.Internal",
-      "Update"
-    ],
-    "transitiveBackwardImportsCount": 4
   },
   "Main": {
     "fileName": "src/elm/Main.elm",
@@ -2228,7 +2192,6 @@
       "List",
       "List.Extra",
       "LocalPref",
-      "LocalPref.Types",
       "Mat",
       "Material",
       "Material.Button",
@@ -2300,6 +2263,7 @@
       "Types.Document",
       "Types.Firebase",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update",
@@ -2842,7 +2806,6 @@
       "List",
       "List.Extra",
       "LocalPref",
-      "LocalPref.Types",
       "Material",
       "Maybe.Extra",
       "Menu",
@@ -2870,6 +2833,7 @@
       "Types.Document",
       "Types.Firebase",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "X.Debug",
@@ -5801,6 +5765,42 @@
     ],
     "transitiveBackwardImportsCount": 64
   },
+  "Types.LocalPref": {
+    "fileName": "src/elm/Types/LocalPref.elm",
+    "moduleName": "Types.LocalPref",
+    "parentModuleName": "Types",
+    "imports": [
+      "AppDrawer.Model",
+      "Firebase.SignIn"
+    ],
+    "importsCount": 2,
+    "transitiveImports": [
+      "AppDrawer.Model",
+      "Firebase.SignIn",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Return",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix",
+      "X.Record"
+    ],
+    "transitiveImportsCount": 12,
+    "backwardImports": [
+      "LocalPref"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "LocalPref",
+      "Main",
+      "Model.Internal",
+      "Update"
+    ],
+    "transitiveBackwardImportsCount": 4
+  },
   "Types.Store": {
     "fileName": "src/elm/Types/Store.elm",
     "moduleName": "Types.Store",
@@ -6095,7 +6095,6 @@
       "List",
       "List.Extra",
       "LocalPref",
-      "LocalPref.Types",
       "Material",
       "Maybe.Extra",
       "Menu",
@@ -6145,6 +6144,7 @@
       "Types.Document",
       "Types.Firebase",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update.AppDrawer",
@@ -8600,7 +8600,6 @@
       "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
-      "LocalPref.Types",
       "Main",
       "Mat",
       "Menu",
@@ -8636,6 +8635,7 @@
       "TodoMsg",
       "Types.AppModel",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update",
@@ -8737,7 +8737,6 @@
       "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
-      "LocalPref.Types",
       "Main",
       "Mat",
       "Menu",
@@ -8776,6 +8775,7 @@
       "TodoMsg",
       "Types.AppModel",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update",
@@ -9287,7 +9287,6 @@
       "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
-      "LocalPref.Types",
       "Main",
       "Model.EntityTree",
       "Model.GroupDocStore",
@@ -9317,6 +9316,7 @@
       "TodoMsg",
       "Types.AppModel",
       "Types.GroupDoc",
+      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update",

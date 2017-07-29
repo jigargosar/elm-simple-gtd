@@ -1,4 +1,4 @@
-module LocalPref.Types exposing (..)
+module Types.LocalPref exposing (..)
 
 import AppDrawer.Model
 import Firebase.SignIn

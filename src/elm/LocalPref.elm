@@ -5,8 +5,8 @@ import Firebase.SignIn
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import LocalPref.Types exposing (LocalPref)
 import Toolkit.Operators exposing (..)
+import Types.LocalPref exposing (..)
 import X.Function.Infix exposing (..)
 
 

@@ -121,7 +121,7 @@
       11 src/elm/LaunchBar/Messages.elm
       11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm
-      10 src/elm/LocalPref/Types.elm
+      10 src/elm/Types/LocalPref.elm
       10 src/elm/AppDrawer/Types.elm
        9 src/elm/Subscriptions/AppDrawer.elm
        9 src/elm/Msg/ExclusiveMode.elm

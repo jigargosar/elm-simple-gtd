@@ -3,7 +3,7 @@ module Subscriptions.Todo exposing (..)
 import Ports.Todo exposing (..)
 import Time
 import Todo.Msg exposing (TodoMsg(..))
-import Types exposing (AppModel)
+import Types.AppModel exposing (..)
 
 
 subscriptions : AppModel -> Sub TodoMsg

@@ -4,7 +4,7 @@ import Keyboard
 import Msg.Subscription exposing (SubscriptionMsg)
 import Ports
 import Time
-import Types exposing (AppModel)
+import Types.AppModel exposing (..)
 
 
 subscriptions : AppModel -> Sub SubscriptionMsg

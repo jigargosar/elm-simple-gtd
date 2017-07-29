@@ -64,7 +64,7 @@
       54 src/elm/Todo/Types.elm
       53 src/elm/Routes.elm
       53 src/elm/LaunchBar/Models.elm
-      52 src/elm/Types.elm
+      52 src/elm/Types/AppModel.elm
       51 src/elm/View/CustomSync.elm
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/Context.elm

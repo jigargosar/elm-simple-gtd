@@ -13,7 +13,7 @@ import Pages.EntityList exposing (..)
 import Todo.ItemView exposing (TodoViewModel)
 import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
-import Types exposing (AppModel)
+import Types.AppModel exposing (..)
 import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

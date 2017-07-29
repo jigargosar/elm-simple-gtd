@@ -1,4 +1,4 @@
-module Types exposing (AppConfig, AppModel, AppModelOtherFields)
+module Types.AppModel exposing (AppConfig, AppModel, AppModelOtherFields)
 
 import AppDrawer.Model
 import EntityListCursor exposing (HasEntityListCursor)

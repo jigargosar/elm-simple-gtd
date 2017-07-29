@@ -15,7 +15,7 @@ import Time exposing (Time)
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
-import Types exposing (..)
+import Types.AppModel exposing (..)
 import X.Random
 
 

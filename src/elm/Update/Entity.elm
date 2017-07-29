@@ -170,7 +170,7 @@ setEntityAtCursor maybeEntityIdAtCursor model =
 
 createEntityListForCurrentView model =
     Page.maybeGetEntityListPage model
-        ?|> (Model.EntityTree.createEntityTreeForPage # model >> Entity.Tree.flatten)
+        ?|> (Model.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
         ?= []
 
 

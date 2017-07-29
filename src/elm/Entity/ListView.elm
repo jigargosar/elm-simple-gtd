@@ -25,7 +25,7 @@ import X.Function exposing (..)
 listView config appVM page model =
     let
         entityTree =
-            Model.EntityTree.createEntityTreeForPage page model
+            Model.EntityTree.createEntityTreeFromEntityListPageModel page model
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"

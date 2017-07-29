@@ -950,7 +950,6 @@
       "Model.Stores",
       "Msg",
       "Page",
-      "Routes",
       "Todo.ViewModel",
       "Update.Entity",
       "Update.LaunchBar",
@@ -959,7 +958,7 @@
       "View.Config",
       "ViewModel"
     ],
-    "backwardImportsCount": 20,
+    "backwardImportsCount": 19,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -4147,7 +4146,6 @@
     "moduleName": "Routes",
     "parentModuleName": "",
     "imports": [
-      "Entity.Types",
       "Maybe.Extra",
       "Page",
       "Pages.EntityList",
@@ -4155,7 +4153,7 @@
       "X.Function.Infix",
       "X.List"
     ],
-    "importsCount": 7,
+    "importsCount": 6,
     "transitiveImports": [
       "Char",
       "Dict",

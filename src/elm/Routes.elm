@@ -1,6 +1,5 @@
 module Routes exposing (..)
 
-import Entity.Types exposing (..)
 import Maybe.Extra
 import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import Pages.EntityList exposing (..)

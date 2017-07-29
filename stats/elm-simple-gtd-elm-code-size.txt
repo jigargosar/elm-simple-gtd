@@ -1,4 +1,4 @@
-   10133 total
+   10132 total
      447 src/elm/Update/Todo/Internal.elm
      307 src/elm/Todo.elm
      295 src/elm/Store.elm
@@ -27,7 +27,7 @@
      132 src/elm/X/Return.elm
      132 src/elm/TodoMsg.elm
      131 src/elm/Document.elm
-     129 src/elm/Routes.elm
+     128 src/elm/Routes.elm
      115 src/elm/View/Config.elm
      111 src/elm/ViewModel.elm
      111 src/elm/Todo/Form.elm

@@ -3,7 +3,7 @@ import fs from "fs"
 import {runFish} from "../common"
 import {Module, Modules} from "./module"
 
-export function generateDependenciesStatsFile() {
+const computeModuleDependencies = function () {
   const srcGlob = "src/elm/**.elm"
   
   const output = runFish(`find ${srcGlob}`, {stdio: 'pipe'})
@@ -17,8 +17,12 @@ export function generateDependenciesStatsFile() {
       // _.take(2),
       // _.drop(20),
   )(fileNames)
-  
-  const modules = Modules(moduleList)
+
+  return Modules(moduleList)
+}
+
+export function generateDependenciesStatsFile() {
+  const modules = computeModuleDependencies()
   
   fs.writeFileSync(
       "stats/elm-src-dependencies.json",

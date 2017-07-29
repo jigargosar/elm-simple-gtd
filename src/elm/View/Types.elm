@@ -2,7 +2,7 @@ module View.Types exposing (..)
 
 import AppDrawer.Types
 import Document
-import Entity.Types
+import Entity.Types exposing (..)
 import ExclusiveMode.Types
 import Firebase.Types
 import GroupDoc.Types
@@ -19,6 +19,7 @@ import X.Keyboard
 
 type alias ViewConfig msg =
     { noop : msg
+    , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
     , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
     , onFirebaseMsg : Firebase.Types.FirebaseMsg -> msg
     , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg

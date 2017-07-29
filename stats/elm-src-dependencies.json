@@ -2593,6 +2593,7 @@
       "View.MainMenu",
       "View.NewTodoFab",
       "View.Overlays",
+      "View.Types",
       "ViewModel",
       "Window",
       "X.Date",
@@ -2611,7 +2612,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 164,
+    "transitiveImportsCount": 165,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7393,9 +7394,10 @@
       "Msg",
       "Msg.GroupDoc",
       "Todo.Msg",
+      "View.Types",
       "X.Function.Infix"
     ],
-    "importsCount": 4,
+    "importsCount": 5,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -7454,6 +7456,7 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "View.Types",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -7465,7 +7468,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 67,
+    "transitiveImportsCount": 68,
     "backwardImports": [
       "Main"
     ],
@@ -8097,10 +8100,15 @@
       "X.Record"
     ],
     "transitiveImportsCount": 56,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
+    "backwardImports": [
+      "View.Config"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main",
+      "View.Config"
+    ],
+    "transitiveBackwardImportsCount": 2
   },
   "ViewModel": {
     "fileName": "src/elm/ViewModel.elm",

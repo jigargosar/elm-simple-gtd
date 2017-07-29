@@ -3,12 +3,11 @@ module View.Config exposing (..)
 import Msg
 import Msg.GroupDoc
 import Todo.Msg
+import View.Types exposing (ViewConfig)
 import X.Function.Infix exposing (..)
 
 
---viewConfig : ViewConfig Msg.AppMsg
-
-
+viewConfig : ViewConfig Msg.AppMsg
 viewConfig =
     { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> Msg.OnTodoMsg
     , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> Msg.OnTodoMsg

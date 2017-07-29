@@ -57,11 +57,11 @@
       67 src/elm/X/List.elm
       66 src/elm/Todo/GroupEditView.elm
       64 src/elm/Todo/Notification/View.elm
-      62 src/elm/View/Types.elm
+      63 src/elm/View/Types.elm
       56 src/elm/Entity.elm
-      55 src/elm/View/Config.elm
       55 src/elm/Project.elm
       55 src/elm/LaunchBar/View.elm
+      54 src/elm/View/Config.elm
       54 src/elm/Todo/Types.elm
       53 src/elm/LaunchBar/Models.elm
       52 src/elm/Types.elm

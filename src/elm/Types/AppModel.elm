@@ -40,6 +40,7 @@ type alias AppModelOtherFields =
     , user : FirebaseUser
     , fcmToken : FCMToken
     , firebaseClient : FirebaseClient
+    , signInModel : Firebase.SignIn.Model
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
     , appVersion : String
@@ -47,6 +48,5 @@ type alias AppModelOtherFields =
     , timeTracker : Todo.TimeTracker.Model
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
-    , signInModel : Firebase.SignIn.Model
     , mdl : Material.Model
     }

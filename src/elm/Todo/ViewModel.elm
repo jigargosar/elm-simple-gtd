@@ -1,7 +1,7 @@
 module Todo.ViewModel exposing (createTodoViewModel)
 
 import Date
-import Document exposing (getDocId)
+import Document
 import Entity.Types
 import EntityId
 import GroupDoc
@@ -53,7 +53,7 @@ createTodoViewModel config appM isFocusable todo =
             appM.now
 
         todoId =
-            getDocId todo
+            Document.getId todo
 
         truncateName =
             String.Extra.ellipsis 15

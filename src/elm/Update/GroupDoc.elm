@@ -1,6 +1,6 @@
 module Update.GroupDoc exposing (Config, update)
 
-import Document exposing (getDocId)
+import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
@@ -139,7 +139,7 @@ updateGroupDoc gdType id updateFn =
 updateAllGroupDocs gdType updateFn idSet model =
     overReturn (Model.GroupDocStore.storeFieldFromGDType gdType)
         (Store.updateAndPersist
-            (getDocId >> Set.member # idSet)
+            (Document.getId >> Set.member # idSet)
             model.now
             updateFn
         )
@@ -149,7 +149,7 @@ updateAllGroupDocs gdType updateFn idSet model =
 updateAllNamedDocsDocs idSet updateFn store model =
     overReturn store
         (Store.updateAndPersist
-            (getDocId >> Set.member # idSet)
+            (Document.getId >> Set.member # idSet)
             model.now
             updateFn
         )

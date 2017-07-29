@@ -1,6 +1,6 @@
 module EntityId exposing (..)
 
-import Document exposing (getDocId)
+import Document
 import Entity.Types exposing (..)
 
 
@@ -9,7 +9,7 @@ fromTodoDocId =
 
 
 fromTodo =
-    getDocId >> TodoId
+    Document.getId >> TodoId
 
 
 fromProjectDocId =

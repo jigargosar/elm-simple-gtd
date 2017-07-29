@@ -1,6 +1,6 @@
 module Entity exposing (..)
 
-import Document exposing (getDocId)
+import Document
 import Entity.Types exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -37,15 +37,15 @@ type alias Msg =
 toEntityId entity =
     case entity of
         TodoEntity m ->
-            TodoId (getDocId m)
+            TodoId (Document.getId m)
 
         GroupEntity ge ->
             case ge of
                 ProjectEntity m ->
-                    ProjectId (getDocId m)
+                    ProjectId (Document.getId m)
 
                 ContextEntity m ->
-                    ContextId (getDocId m)
+                    ContextId (Document.getId m)
 
 
 equalById =

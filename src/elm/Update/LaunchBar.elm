@@ -1,6 +1,6 @@
 module Update.LaunchBar exposing (Config, update)
 
-import Document exposing (DocId, getDocId)
+import Document exposing (DocId)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import GroupDoc.Types exposing (..)
@@ -55,13 +55,13 @@ update config now msg =
                 v =
                     case entity of
                         SI_Project project ->
-                            project |> getDocId >> ProjectView
+                            project |> Document.getId >> ProjectView
 
                         SI_Projects ->
                             ProjectsView
 
                         SI_Context context ->
-                            context |> getDocId >> ContextView
+                            context |> Document.getId >> ContextView
 
                         SI_Contexts ->
                             ContextsView

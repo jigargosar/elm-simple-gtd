@@ -1,6 +1,6 @@
 module Todo.GroupEditView exposing (..)
 
-import Document exposing (DocId, Document, getDocId)
+import Document exposing (DocId, Document)
 import GroupDoc
 import Html exposing (..)
 import Menu
@@ -63,4 +63,4 @@ context config form model =
 
 getMenuKey : String -> Document x -> String
 getMenuKey prefix =
-    getDocId >> String.append "-menu-key-" >> String.append prefix
+    Document.getId >> String.append "-menu-key-" >> String.append prefix

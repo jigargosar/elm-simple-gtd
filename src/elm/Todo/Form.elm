@@ -7,7 +7,7 @@ module Todo.Form
         )
 
 import Date
-import Document exposing (getDocId)
+import Document
 import Menu
 import Time exposing (Time)
 import Time.Format
@@ -25,7 +25,7 @@ createEditTodoForm editMode now todo =
             Todo.getMaybeReminderTime todo ?= now + Time.hour
 
         form =
-            { id = getDocId todo
+            { id = Document.getId todo
             , text = getTodoText todo
             , contextId = Todo.getContextId todo
             , projectId = Todo.getProjectId todo

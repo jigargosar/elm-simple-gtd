@@ -9,7 +9,7 @@ createEditGroupDocForm : GroupDocType -> GroupDoc -> GroupDocForm
 createEditGroupDocForm groupDocType groupDoc =
     let
         id =
-            getDocId groupDoc
+            Document.getId groupDoc
     in
     { id = id
     , groupDocType = groupDocType

@@ -1,7 +1,7 @@
 port module Update.Todo.Internal exposing (..)
 
 import Context
-import Document exposing (DocId, getDocId)
+import Document exposing (DocId)
 import DomPorts
 import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
@@ -155,7 +155,7 @@ saveAddTodoForm :
     -> SubReturn msg model
 saveAddTodoForm config addMode form model =
     insertTodo (Todo.init model.now form.text) model
-        |> Tuple.mapFirst getDocId
+        |> Tuple.mapFirst Document.getId
         |> uncurry
             (\todoId ->
                 let
@@ -221,7 +221,7 @@ onStartEditingTodo config todo editFormMode =
             Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
 
         positionPopup idPrefix =
-            DomPorts.positionPopupMenu (idPrefix ++ getDocId todo)
+            DomPorts.positionPopupMenu (idPrefix ++ Document.getId todo)
     in
     X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
         >> command

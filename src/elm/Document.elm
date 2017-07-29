@@ -36,12 +36,8 @@ type alias Document record =
     }
 
 
-getDocId =
-    .id
-
-
 getId =
-    getDocId
+    .id
 
 
 hasId id =

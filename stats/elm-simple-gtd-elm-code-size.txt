@@ -1,4 +1,4 @@
-   10100 total
+   10123 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -9,9 +9,9 @@
      221 src/elm/GroupDoc/ViewModel.elm
      214 src/elm/Msg.elm
      204 src/elm/Update/Subscription.elm
+     204 src/elm/Update/Firebase.elm
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
-     177 src/elm/Update/Firebase.elm
      160 src/elm/Todo/ItemView.elm
      159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
@@ -33,7 +33,7 @@
      106 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
-      94 src/elm/Firebase/SignIn.elm
+      98 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm
       91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
@@ -93,7 +93,6 @@
       31 src/elm/View/NewTodoFab.elm
       30 src/elm/Page.elm
       27 src/elm/Types/Store.elm
-      27 src/elm/Firebase.elm
       24 src/elm/EntityListCursor.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
@@ -106,6 +105,7 @@
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
       19 src/elm/Models/HasStores.elm
+      19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       18 src/elm/Subscriptions.elm

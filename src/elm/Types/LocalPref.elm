@@ -6,5 +6,5 @@ import Firebase.SignIn
 
 type alias LocalPref =
     { appDrawer : AppDrawer.Model.AppDrawerModel
-    , signIn : Firebase.SignIn.Model
+    , signIn : Firebase.SignIn.SignInModel
     }

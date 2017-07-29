@@ -42,29 +42,33 @@ stateDecoder =
             )
 
 
-type alias Model =
+type alias SignInModel =
     { state : State
     }
+
+
+type alias SignInModelF =
+    SignInModel -> SignInModel
 
 
 state =
     X.Record.fieldLens .state (\s b -> { b | state = s })
 
 
-decoder : Decoder Model
+decoder : Decoder SignInModel
 decoder =
-    D.succeed Model
+    D.succeed SignInModel
         |> D.required "state" stateDecoder
 
 
-encode : Model -> E.Value
+encode : SignInModel -> E.Value
 encode model =
     E.object
         [ "state" => E.string (toString model.state)
         ]
 
 
-default : Model
+default : SignInModel
 default =
     { state = FirstVisitNotSignedIn
     }

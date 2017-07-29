@@ -7,7 +7,7 @@ type alias FirebaseModel =
     { user : FirebaseUser
     , fcmToken : FCMToken
     , firebaseClient : FirebaseClient
-    , signInModel : Firebase.SignIn.Model
+    , signInModel : Firebase.SignIn.SignInModel
     }
 
 

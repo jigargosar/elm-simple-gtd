@@ -5,6 +5,7 @@ import LocalPref
 import Material
 import Msg exposing (..)
 import Ports
+import Types.AppModel exposing (AppModel)
 import Update.AppDrawer
 import Update.AppHeader
 import Update.CustomSync
@@ -16,12 +17,11 @@ import Update.LaunchBar
 import Update.Page
 import Update.Subscription
 import Update.Todo
+import Update.Types exposing (UpdateConfig)
 import X.Return exposing (..)
 
 
---update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
-
-
+update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
 update config msg =
     let
         onPersistLocalPref =

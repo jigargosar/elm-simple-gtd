@@ -1,22 +1,21 @@
 module Main exposing (main)
 
 import Models.AppModel exposing (Flags)
-import Msg
+import Msg exposing (AppMsg)
 import RouteUrl
 import Routes
 import Subscriptions
 import Subscriptions.AppDrawer
 import Subscriptions.Firebase
 import Subscriptions.Todo
+import Types.AppModel exposing (AppModel)
 import Update
 import Update.Config
 import View
 import View.Config
 
 
---main : RouteUrl.RouteUrlProgram Flags AppModel Msg.AppMsg
-
-
+main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg
 main =
     let
         subscriptions model =
@@ -31,6 +30,7 @@ main =
             Models.AppModel.createAppModel
                 >> update Msg.onSwitchToNewUserSetupModeIfNeeded
 
+        update : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
         update msg model =
             (model ! []) |> Update.update (Update.Config.updateConfig model) msg
     in

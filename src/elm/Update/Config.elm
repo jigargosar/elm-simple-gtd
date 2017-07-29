@@ -3,11 +3,11 @@ module Update.Config exposing (..)
 import Msg exposing (AppMsg)
 import Todo.Msg exposing (TodoMsg)
 import TodoMsg
+import Types.AppModel exposing (AppModel)
+import Update.Types exposing (UpdateConfig)
 
 
---updateConfig : AppModel -> UpdateConfig AppMsg
-
-
+updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
     { noop = Msg.noop
     , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox

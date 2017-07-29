@@ -21,10 +21,7 @@ import X.Return exposing (..)
 
 type alias SubModel model =
     { model
-        | user : FirebaseUser
-        , fcmToken : FCMToken
-        , firebaseClient : FirebaseClient
-        , signInModel : Firebase.SignIn.Model
+        | firebaseModel : FirebaseModel
         , todoStore : TodoStore
     }
 
@@ -47,77 +44,82 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
-        OnFB_NOOP ->
+        --        OnFB_NOOP ->
+        --            identity
+        --
+        --        OnFB_SwitchToNewUserSetupModeIfNeeded ->
+        --            let
+        --                onSwitchToNewUserSetupModeIfNeeded model =
+        --                    if Firebase.SignIn.shouldSkipSignIn model.signInModel then
+        --                        if Store.isEmpty model.todoStore then
+        --                            returnMsgAsCmd config.onStartSetupAddTodo
+        --                        else
+        --                            returnMsgAsCmd config.revertExclusiveMode
+        --                    else
+        --                        config.onSetExclusiveMode XMSignInOverlay |> returnMsgAsCmd
+        --            in
+        --            returnWith identity onSwitchToNewUserSetupModeIfNeeded
+        --
+        --        OnFBSignIn ->
+        --            command (signIn ())
+        --        OnFBSkipSignIn ->
+        --            Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
+        --                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+        --
+        --        OnFBSignOut ->
+        --            Return.command (signOut ())
+        --                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
+        --                >> command (Navigation.load AppUrl.landing)
+        --
+        --        OnFBAfterUserChanged ->
+        --            Return.andThen
+        --                (\model ->
+        --                    Return.singleton model
+        --                        |> (case model.user of
+        --                                SignedOut ->
+        --                                    identity
+        --
+        --                                SignedIn user ->
+        --                                    Return.map
+        --                                        (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
+        --                                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+        --                           )
+        --                )
+        --
+        --        OnFBUserChanged encodedUser ->
+        --            D.decodeValue Firebase.Model.userDecoder encodedUser
+        --                |> Result.mapError (Debug.log "Error decoding User")
+        --                !|> (\user ->
+        --                        Return.map (setUser user)
+        --                            >> update config OnFBAfterUserChanged
+        --                            >> maybeEffect firebaseUpdateClientCmd
+        --                            >> maybeEffect firebaseSetupOnDisconnectCmd
+        --                            >> startSyncWithFirebase
+        --                    )
+        --                != identity
+        --
+        --        OnFBFCMTokenChanged encodedToken ->
+        --            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
+        --                |> Result.mapError (Debug.log "Error decoding User")
+        --                !|> (\token ->
+        --                        Return.map (setFCMToken token)
+        --                            >> maybeEffect firebaseUpdateClientCmd
+        --                    )
+        --                != identity
+        --
+        --        OnFBConnectionChanged connected ->
+        --            Return.map (updateFirebaseConnection connected)
+        --                >> maybeEffect firebaseUpdateClientCmd
+        _ ->
             identity
-
-        OnFB_SwitchToNewUserSetupModeIfNeeded ->
-            let
-                onSwitchToNewUserSetupModeIfNeeded model =
-                    if Firebase.SignIn.shouldSkipSignIn model.signInModel then
-                        if Store.isEmpty model.todoStore then
-                            returnMsgAsCmd config.onStartSetupAddTodo
-                        else
-                            returnMsgAsCmd config.revertExclusiveMode
-                    else
-                        config.onSetExclusiveMode XMSignInOverlay |> returnMsgAsCmd
-            in
-            returnWith identity onSwitchToNewUserSetupModeIfNeeded
-
-        OnFBSignIn ->
-            command (signIn ())
-
-        OnFBSkipSignIn ->
-            Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
-                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
-
-        OnFBSignOut ->
-            Return.command (signOut ())
-                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
-                >> command (Navigation.load AppUrl.landing)
-
-        OnFBAfterUserChanged ->
-            Return.andThen
-                (\model ->
-                    Return.singleton model
-                        |> (case model.user of
-                                SignedOut ->
-                                    identity
-
-                                SignedIn user ->
-                                    Return.map
-                                        (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
-                                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
-                           )
-                )
-
-        OnFBUserChanged encodedUser ->
-            D.decodeValue Firebase.Model.userDecoder encodedUser
-                |> Result.mapError (Debug.log "Error decoding User")
-                !|> (\user ->
-                        Return.map (setUser user)
-                            >> update config OnFBAfterUserChanged
-                            >> maybeEffect firebaseUpdateClientCmd
-                            >> maybeEffect firebaseSetupOnDisconnectCmd
-                            >> startSyncWithFirebase
-                    )
-                != identity
-
-        OnFBFCMTokenChanged encodedToken ->
-            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
-                |> Result.mapError (Debug.log "Error decoding User")
-                !|> (\token ->
-                        Return.map (setFCMToken token)
-                            >> maybeEffect firebaseUpdateClientCmd
-                    )
-                != identity
-
-        OnFBConnectionChanged connected ->
-            Return.map (updateFirebaseConnection connected)
-                >> maybeEffect firebaseUpdateClientCmd
 
 
 signInModel =
     X.Record.fieldLens .signInModel (\s b -> { b | signInModel = s })
+
+
+firebaseModel =
+    X.Record.fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
 
 
 firebaseClient =
@@ -128,8 +130,8 @@ user =
     X.Record.fieldLens .user (\s b -> { b | user = s })
 
 
-overSignInModel =
-    X.Record.over signInModel
+overSignInModel fn model =
+    over firebaseModel (over signInModel fn) model
 
 
 firebaseUpdateClientCmd model =

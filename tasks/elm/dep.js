@@ -24,7 +24,13 @@ const computeDependencies = function () {
 export function logTransitiveImportsOf(moduleName) {
   const module = computeDependencies()[moduleName]
   const transitiveBackwardImports =
-      module ? _.pick(["transitiveBackwardImports", "transitiveImports"])(module) : []
+      module ? _.pick([
+            "transitiveBackwardImports",
+            "transitiveBackwardImportsCount",
+            "transitiveImports",
+            "transitiveImportsCount",
+          ],
+      )(module) : []
   console.log(JSON.stringify({transitiveBackwardImports}, null, 2))
   return transitiveBackwardImports
 }

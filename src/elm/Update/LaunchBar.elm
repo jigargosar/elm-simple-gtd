@@ -5,7 +5,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
-import Model.GroupDocStore
+import Models.GroupDocStore
 import Pages.EntityList exposing (..)
 import Regex
 import Return
@@ -108,8 +108,8 @@ updateInput now input subModel form =
         ( activeContexts, activeProjects ) =
             subModel
                 |> apply2
-                    ( Model.GroupDocStore.getActiveContexts
-                    , Model.GroupDocStore.getActiveProjects
+                    ( Models.GroupDocStore.getActiveContexts
+                    , Models.GroupDocStore.getActiveProjects
                     )
     in
     { form

@@ -37,10 +37,7 @@ type alias AppModelOtherFields =
     , page : Page
     , reminderOverlay : TodoReminderOverlayModel
     , pouchDBRemoteSyncURI : String
-    , user : FirebaseUser
-    , fcmToken : FCMToken
-    , firebaseClient : FirebaseClient
-    , signInModel : Firebase.SignIn.Model
+    , firebaseModel : FirebaseModel
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
     , appVersion : String

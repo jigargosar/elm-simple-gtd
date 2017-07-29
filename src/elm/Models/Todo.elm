@@ -1,4 +1,4 @@
-module Model.Todo exposing (..)
+module Models.Todo exposing (..)
 
 --import Types.Todo exposing (..)
 

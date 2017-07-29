@@ -1,4 +1,4 @@
-module Model.Internal exposing (..)
+module Models.AppModel exposing (..)
 
 import Context
 import EntityListCursor
@@ -48,9 +48,6 @@ createAppModel flags =
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
 
-        firebaseModel =
-            Firebase.init flags.deviceId
-
         localPref =
             LocalPref.decode flags.localPref
 
@@ -64,9 +61,8 @@ createAppModel flags =
             , page = Page.initialPage
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-            , user = firebaseModel.user
-            , fcmToken = firebaseModel.fcmToken
-            , firebaseClient = firebaseModel.firebaseClient
+            , firebaseModel =
+                Firebase.init flags.deviceId localPref.signIn
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
@@ -74,7 +70,6 @@ createAppModel flags =
             , timeTracker = Todo.TimeTracker.none
             , config = flags.config
             , appDrawerModel = localPref.appDrawer
-            , signInModel = localPref.signIn
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
             }

@@ -8,17 +8,11 @@ import Types.Firebase exposing (..)
 import X.Function.Infix exposing (..)
 
 
-type alias Model =
-    { user : FirebaseUser
-    , fcmToken : FCMToken
-    , firebaseClient : FirebaseClient
-    }
-
-
-init deviceId =
+init deviceId signInModel =
     { user = initUser
     , fcmToken = Nothing
     , firebaseClient = initClient deviceId
+    , signInModel = signInModel
     }
 
 

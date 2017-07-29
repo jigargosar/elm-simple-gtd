@@ -6,7 +6,7 @@ import DomPorts
 import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import Model.Todo exposing (findTodoById, todoStore)
+import Models.Todo exposing (findTodoById, todoStore)
 import Notification
 import Ports.Todo exposing (..)
 import Return
@@ -178,7 +178,7 @@ saveAddTodoForm config addMode form model =
                     maybeAction =
                         case referenceEntityId of
                             TodoId todoId ->
-                                Model.Todo.findTodoById todoId model
+                                Models.Todo.findTodoById todoId model
                                     ?|> TA_CopyProjectAndContextId
 
                             ContextId contextId ->

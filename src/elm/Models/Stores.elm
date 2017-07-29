@@ -1,9 +1,9 @@
-module Model.Stores exposing (..)
+module Models.Stores exposing (..)
 
 import Entity.Types exposing (..)
 import GroupDoc
-import Model.GroupDocStore exposing (..)
-import Model.Todo exposing (findTodoById)
+import Models.GroupDocStore exposing (..)
+import Models.Todo exposing (findTodoById)
 import Store
 import Todo
 import X.Function exposing (..)
@@ -12,14 +12,14 @@ import X.Function.Infix exposing (..)
 
 isTodoContextActive model =
     Todo.getContextId
-        >> Model.GroupDocStore.findContextByIdIn model
+        >> Models.GroupDocStore.findContextByIdIn model
         >>? GroupDoc.isActive
         >>?= True
 
 
 isTodoProjectActive model =
     Todo.getProjectId
-        >> Model.GroupDocStore.findProjectByIdIn model
+        >> Models.GroupDocStore.findProjectByIdIn model
         >>? GroupDoc.isActive
         >>?= True
 

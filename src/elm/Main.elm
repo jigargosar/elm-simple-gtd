@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import Model.Internal exposing (Flags)
+import Models.AppModel exposing (Flags)
 import Msg
 import RouteUrl
 import Routes
@@ -28,7 +28,7 @@ main =
                 ]
 
         init =
-            Model.Internal.createAppModel
+            Models.AppModel.createAppModel
                 >> update Msg.onSwitchToNewUserSetupModeIfNeeded
 
         update msg model =

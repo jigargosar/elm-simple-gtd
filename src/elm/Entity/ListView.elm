@@ -10,7 +10,7 @@ import Html.Attributes exposing (..)
 import Html.Keyed
 import List.Extra
 import Maybe.Extra
-import Model.EntityTree
+import Models.EntityTree
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
 import View.Badge
@@ -25,7 +25,7 @@ import X.Function exposing (..)
 listView config appVM page model =
     let
         entityTree =
-            Model.EntityTree.createEntityTreeFromEntityListPageModel page model
+            Models.EntityTree.createEntityTreeFromEntityListPageModel page model
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"

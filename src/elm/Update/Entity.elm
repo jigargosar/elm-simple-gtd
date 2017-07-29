@@ -7,10 +7,10 @@ import EntityListCursor exposing (..)
 import ExclusiveMode.Types exposing (..)
 import List.Extra
 import Maybe.Extra
-import Model.EntityTree
-import Model.HasStores exposing (HasPage, HasStores)
-import Model.Selection
-import Model.Todo
+import Models.EntityTree
+import Models.HasStores exposing (HasPage, HasStores)
+import Models.Selection
+import Models.Todo
 import Page
 import Pages.EntityList exposing (..)
 import Set
@@ -170,7 +170,7 @@ setEntityAtCursor maybeEntityIdAtCursor model =
 
 createEntityListForCurrentView model =
     Page.maybeGetEntityListPage model
-        ?|> (Model.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
+        ?|> (Models.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
         ?= []
 
 
@@ -214,7 +214,7 @@ onUpdateAction config entityId action =
 
 
 toggleEntitySelection entityId =
-    Model.Selection.updateSelectedEntityIdSet (toggleSetMember (getDocIdFromEntityId entityId))
+    Models.Selection.updateSelectedEntityIdSet (toggleSetMember (getDocIdFromEntityId entityId))
 
 
 toggleSetMember item set =
@@ -240,7 +240,7 @@ toPage appModel maybeCurrentEntityListPage entityId =
                         ?|> getTodoGotoGroupView todo
                         ?= (Todo.getContextId todo |> ContextView)
             in
-            Model.Todo.findTodoById id appModel
+            Models.Todo.findTodoById id appModel
                 ?|> getPageForTodo
                 |> Maybe.Extra.orElse maybeCurrentEntityListPage
                 ?= ContextsView

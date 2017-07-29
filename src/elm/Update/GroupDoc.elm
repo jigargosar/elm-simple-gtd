@@ -4,7 +4,7 @@ import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
-import Model.GroupDocStore exposing (contextStore, projectStore)
+import Models.GroupDocStore exposing (contextStore, projectStore)
 import Msg.GroupDoc exposing (..)
 import Return
 import Set
@@ -77,7 +77,7 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
     case groupDocIdAction of
         GDA_StartEditing ->
             X.Return.returnWithMaybe1
-                (Model.GroupDocStore.findGroupDocById groupDocId)
+                (Models.GroupDocStore.findGroupDocById groupDocId)
                 (createEditGroupDocForm gdType
                     >> XMGroupDocForm
                     >> config.onSetExclusiveMode
@@ -108,7 +108,7 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
 insertGroupDoc gdType name =
     let
         store =
-            Model.GroupDocStore.storeFieldFromGDType gdType
+            Models.GroupDocStore.storeFieldFromGDType gdType
     in
     andThen
         (\model ->
@@ -129,7 +129,7 @@ updateGroupDoc gdType id updateFn =
 
 
 updateAllGroupDocs gdType updateFn idSet model =
-    overReturn (Model.GroupDocStore.storeFieldFromGDType gdType)
+    overReturn (Models.GroupDocStore.storeFieldFromGDType gdType)
         (Store.updateAndPersist
             (Document.getId >> Set.member # idSet)
             model.now

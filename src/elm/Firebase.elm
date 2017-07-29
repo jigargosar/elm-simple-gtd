@@ -12,7 +12,7 @@ init =
 
 
 getMaybeUserProfile =
-    .user >> Model.getMaybeUserProfile
+    .firebaseModel >> .user >> Model.getMaybeUserProfile
 
 
 updateConnection connected client =

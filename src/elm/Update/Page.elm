@@ -1,6 +1,6 @@
 module Update.Page exposing (Config, update)
 
-import Model.Selection
+import Models.Selection
 import Page exposing (..)
 import Return
 import Set exposing (Set)
@@ -33,7 +33,7 @@ update config msg =
     case msg of
         SwitchView page ->
             map (setPage page)
-                >> map Model.Selection.clearSelection
+                >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
         SwitchToEntityListView listView ->

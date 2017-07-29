@@ -10,8 +10,8 @@ import Dict.Extra
 import Document
 import Entity.Types exposing (..)
 import GroupDoc
-import Model.GroupDocStore
-import Model.Stores
+import Models.GroupDocStore
+import Models.Stores
 import Page exposing (Page(EntityListPage))
 import Pages.EntityList exposing (..)
 import Project
@@ -149,15 +149,15 @@ create getTodoListByEntityId config innerConFig groupDoc =
 contexts config model =
     let
         archivedFilter =
-            Model.GroupDocStore.filterContexts GroupDoc.archivedButNotDeletedPred
+            Models.GroupDocStore.filterContexts GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.GroupDocStore.filterContexts GroupDoc.isActive
+            Models.GroupDocStore.filterContexts GroupDoc.isActive
 
         innerConfig : Config
         innerConfig =
             { groupByFn = Todo.getContextId
-            , todoList = Model.Stores.getActiveTodoListHavingActiveProject model
+            , todoList = Models.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
             , toEntityId = ContextId
@@ -201,15 +201,15 @@ contexts config model =
 projects config model =
     let
         archivedFilter =
-            Model.GroupDocStore.filterProjects GroupDoc.archivedButNotDeletedPred
+            Models.GroupDocStore.filterProjects GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.GroupDocStore.filterProjects GroupDoc.isActive
+            Models.GroupDocStore.filterProjects GroupDoc.isActive
 
         innerConfig : Config
         innerConfig =
             { groupByFn = Todo.getProjectId
-            , todoList = Model.Stores.getActiveTodoListHavingActiveContext model
+            , todoList = Models.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
             , toEntityId = ProjectId

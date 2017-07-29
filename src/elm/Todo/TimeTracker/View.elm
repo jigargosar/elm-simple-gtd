@@ -3,7 +3,7 @@ module Todo.TimeTracker.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Mat
-import Model.Todo
+import Models.Todo
 import Todo
 import Todo.TimeTracker exposing (State(..))
 import Toolkit.Operators exposing (..)
@@ -20,7 +20,7 @@ createViewModel config appModel tracker =
             Todo.TimeTracker.getElapsedTime appModel.now tracker
 
         todoText =
-            Model.Todo.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
+            Models.Todo.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId
     in
     { displayText = todoText
     , displayTime = X.Time.toHHMMSS elapsedTime

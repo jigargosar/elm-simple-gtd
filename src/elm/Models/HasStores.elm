@@ -1,4 +1,4 @@
-module Model.HasStores exposing (..)
+module Models.HasStores exposing (..)
 
 import Page exposing (Page)
 import Types.GroupDoc exposing (..)

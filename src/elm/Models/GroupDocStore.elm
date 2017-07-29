@@ -1,4 +1,4 @@
-module Model.GroupDocStore exposing (..)
+module Models.GroupDocStore exposing (..)
 
 import Context
 import Document

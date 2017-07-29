@@ -1,4 +1,4 @@
-module Model.Selection
+module Models.Selection
     exposing
         ( clearSelection
         , setSelectedEntityIdSet

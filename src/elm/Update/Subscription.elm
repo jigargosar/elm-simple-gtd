@@ -3,9 +3,9 @@ module Update.Subscription exposing (Config, update)
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
 import Keyboard.Extra as KX exposing (Key)
-import Model.GroupDocStore exposing (contextStore, projectStore)
-import Model.Selection
-import Model.Todo exposing (todoStore)
+import Models.GroupDocStore exposing (contextStore, projectStore)
+import Models.Selection
+import Models.Todo exposing (todoStore)
 import Msg.Subscription exposing (SubscriptionMsg(..))
 import Return
 import Set
@@ -120,7 +120,7 @@ onGlobalKeyUp config key =
                 ( key, XMNone ) ->
                     let
                         clear =
-                            map Model.Selection.clearSelection
+                            map Models.Selection.clearSelection
                                 >> returnMsgAsCmd config.revertExclusiveMode
                     in
                     case key of

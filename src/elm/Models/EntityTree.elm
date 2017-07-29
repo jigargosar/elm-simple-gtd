@@ -1,10 +1,10 @@
-module Model.EntityTree exposing (..)
+module Models.EntityTree exposing (..)
 
 import Context
 import Document
 import Entity.Tree
-import Model.GroupDocStore exposing (..)
-import Model.Stores
+import Models.GroupDocStore exposing (..)
+import Models.Stores
 import Pages.EntityList exposing (..)
 import Project
 import Store
@@ -31,7 +31,7 @@ getActiveTodoListForContext context model =
         (X.Predicate.all
             [ Todo.isActive
             , Todo.contextFilter context
-            , Model.Stores.isTodoProjectActive model
+            , Models.Stores.isTodoProjectActive model
             ]
         )
         model
@@ -42,7 +42,7 @@ getActiveTodoListForProject project model =
         (X.Predicate.all
             [ Todo.isActive
             , Todo.hasProject project
-            , Model.Stores.isTodoContextActive model
+            , Models.Stores.isTodoContextActive model
             ]
         )
         model

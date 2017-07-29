@@ -1,8 +1,6 @@
 port module Store
     exposing
-        ( ChangeList
-        , Store
-        , UpdateAllReturn
+        ( Store
         , asIdDict
         , filterDocs
         , findBy

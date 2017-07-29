@@ -225,7 +225,7 @@ dummy.help = 'logs all options and args to console'
 export const removeUnusedImports = elm.removeUnusedImports
 export const parseWPD = elm.parseWPD
 export const rui = elm.rui
-export const dep = ElmDep.generateDepencencyStatsFile
+export const dep = ElmDep.generateDependenciesStatsFile
 
 function runFish(command) {
   run(`fish -c '${command}' `)
@@ -234,6 +234,6 @@ function runFish(command) {
 export function preCommit() {
   const statsFile = "stats/elm-simple-gtd-elm-code-size.txt"
   runFish(`wc -l src/elm/**.elm | sort -r > ${statsFile}`)
-  ElmDep.generateDepencencyStatsFile()
+  ElmDep.generateDependenciesStatsFile()
   run(`git add stats/*`)
 }

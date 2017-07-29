@@ -6,6 +6,7 @@ import Firebase
 import Firebase.Model
 import Firebase.SignIn
 import Json.Decode as D exposing (Decoder)
+import Msg.Firebase exposing (..)
 import Navigation
 import Ports.Firebase exposing (..)
 import Return

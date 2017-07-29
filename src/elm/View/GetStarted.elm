@@ -1,10 +1,11 @@
 module View.GetStarted exposing (..)
 
 import AppUrl
-import Types.Firebase exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Msg.Firebase exposing (..)
+import Types.Firebase exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
 

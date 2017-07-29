@@ -1332,10 +1332,9 @@
     "transitiveImports": [
       "Json.Decode",
       "Json.Decode.Pipeline",
-      "Json.Encode",
       "Types.Firebase"
     ],
-    "transitiveImportsCount": 4,
+    "transitiveImportsCount": 3,
     "backwardImports": [
       "Firebase.Model"
     ],
@@ -2373,6 +2372,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Navigation",
@@ -2465,7 +2465,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 166,
+    "transitiveImportsCount": 167,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -3256,6 +3256,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Page",
@@ -3265,7 +3266,7 @@
       "Types.Firebase",
       "X.Function.Infix"
     ],
-    "importsCount": 18,
+    "importsCount": 19,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -3302,6 +3303,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Notification",
@@ -3337,7 +3339,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 69,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Main",
       "TodoMsg",
@@ -3527,6 +3529,42 @@
       "View.Config"
     ],
     "transitiveBackwardImportsCount": 8
+  },
+  "Msg.Firebase": {
+    "fileName": "src/elm/Msg/Firebase.elm",
+    "moduleName": "Msg.Firebase",
+    "parentModuleName": "Msg",
+    "imports": [
+      "Json.Encode"
+    ],
+    "importsCount": 1,
+    "transitiveImports": [
+      "Json.Encode"
+    ],
+    "transitiveImportsCount": 1,
+    "backwardImports": [
+      "Msg",
+      "Subscriptions.Firebase",
+      "Update.Firebase",
+      "View.Config",
+      "View.GetStarted"
+    ],
+    "backwardImportsCount": 5,
+    "transitiveBackwardImports": [
+      "Main",
+      "Msg",
+      "Subscriptions.Firebase",
+      "TodoMsg",
+      "Update",
+      "Update.Config",
+      "Update.Firebase",
+      "Update.Types",
+      "View",
+      "View.Config",
+      "View.GetStarted",
+      "View.Overlays"
+    ],
+    "transitiveBackwardImportsCount": 12
   },
   "Msg.GroupDoc": {
     "fileName": "src/elm/Msg/GroupDoc.elm",
@@ -4238,8 +4276,8 @@
     "moduleName": "Subscriptions.Firebase",
     "parentModuleName": "Subscriptions",
     "imports": [
-      "Ports.Firebase",
-      "Types.Firebase"
+      "Msg.Firebase",
+      "Ports.Firebase"
     ],
     "importsCount": 2,
     "transitiveImports": [
@@ -4250,11 +4288,12 @@
       "Json.Decode.Pipeline",
       "Json.Encode",
       "Json.Encode.Extra",
+      "Msg.Firebase",
       "Ports.Firebase",
       "Types.Firebase",
       "X.Function.Infix"
     ],
-    "transitiveImportsCount": 10,
+    "transitiveImportsCount": 11,
     "backwardImports": [
       "Main"
     ],
@@ -5604,6 +5643,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Notification",
@@ -5639,7 +5679,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 70,
+    "transitiveImportsCount": 71,
     "backwardImports": [
       "Update.Config"
     ],
@@ -5870,28 +5910,23 @@
     "fileName": "src/elm/Types/Firebase.elm",
     "moduleName": "Types.Firebase",
     "parentModuleName": "Types",
-    "imports": [
-      "Json.Encode"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "Json.Encode"
-    ],
-    "transitiveImportsCount": 1,
+    "imports": [],
+    "importsCount": 0,
+    "transitiveImports": [],
+    "transitiveImportsCount": 0,
     "backwardImports": [
       "Firebase.Model",
       "Firebase.User",
       "Msg",
       "Ports.Firebase",
       "Project",
-      "Subscriptions.Firebase",
       "Todo.Store",
       "Types",
       "Update.Firebase",
       "View.Config",
       "View.GetStarted"
     ],
-    "backwardImportsCount": 11,
+    "backwardImportsCount": 10,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity.ListView",
@@ -6028,6 +6063,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Navigation",
@@ -6088,7 +6124,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 115,
+    "transitiveImportsCount": 116,
     "backwardImports": [
       "Main"
     ],
@@ -6257,6 +6293,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Notification",
@@ -6293,7 +6330,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 71,
+    "transitiveImportsCount": 72,
     "backwardImports": [
       "Main"
     ],
@@ -6571,6 +6608,7 @@
       "Firebase.Model",
       "Firebase.SignIn",
       "Json.Decode",
+      "Msg.Firebase",
       "Navigation",
       "Ports.Firebase",
       "Return",
@@ -6582,7 +6620,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 16,
+    "importsCount": 17,
     "transitiveImports": [
       "AppUrl",
       "Char",
@@ -6612,6 +6650,7 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Msg.Firebase",
       "Navigation",
       "Ports.Firebase",
       "Project",
@@ -6640,7 +6679,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 55,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "Update",
       "Update.Types"
@@ -7242,6 +7281,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.Subscription",
       "Navigation",
       "Notification",
@@ -7298,7 +7338,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 103,
+    "transitiveImportsCount": 104,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -7383,6 +7423,7 @@
       "Model.GroupDocStore",
       "Model.Stores",
       "Model.Todo",
+      "Msg.Firebase",
       "Page",
       "Pages.EntityList",
       "Project",
@@ -7439,7 +7480,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 117,
+    "transitiveImportsCount": 118,
     "backwardImports": [
       "Main"
     ],
@@ -7496,6 +7537,7 @@
       "Menu",
       "Menu.Types",
       "Msg",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
@@ -7507,7 +7549,7 @@
       "Types.Firebase",
       "X.Function.Infix"
     ],
-    "importsCount": 20,
+    "importsCount": 21,
     "transitiveImports": [
       "AppDrawer.Types",
       "Char",
@@ -7545,6 +7587,7 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
+      "Msg.Firebase",
       "Msg.GroupDoc",
       "Msg.Subscription",
       "Notification",
@@ -7580,7 +7623,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 70,
+    "transitiveImportsCount": 71,
     "backwardImports": [
       "Main"
     ],
@@ -7677,14 +7720,15 @@
     "parentModuleName": "View",
     "imports": [
       "AppUrl",
-      "Types.Firebase",
       "Html",
       "Html.Attributes",
       "Html.Events",
+      "Msg.Firebase",
+      "Types.Firebase",
       "X.Html",
       "X.Keyboard"
     ],
-    "importsCount": 7,
+    "importsCount": 8,
     "transitiveImports": [
       "AppUrl",
       "Html",
@@ -7695,13 +7739,14 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
+      "Msg.Firebase",
       "Types.Firebase",
       "X.Debug",
       "X.Decode",
       "X.Html",
       "X.Keyboard"
     ],
-    "transitiveImportsCount": 14,
+    "transitiveImportsCount": 15,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -8057,6 +8102,7 @@
       "Menu",
       "Menu.Types",
       "Model.GroupDocStore",
+      "Msg.Firebase",
       "Project",
       "Random.Pcg",
       "Return",
@@ -8092,7 +8138,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 77,
+    "transitiveImportsCount": 78,
     "backwardImports": [
       "View"
     ],

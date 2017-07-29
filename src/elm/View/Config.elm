@@ -10,6 +10,7 @@ import Material
 import Menu
 import Menu.Types
 import Msg
+import Msg.Firebase exposing (..)
 import Msg.GroupDoc
 import Page
 import Pages.EntityList exposing (..)
@@ -26,7 +27,7 @@ type alias ViewConfig msg =
     { noop : msg
     , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
     , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
-    , onFirebaseMsg : Types.Firebase.FirebaseMsg -> msg
+    , onFirebaseMsg : FirebaseMsg -> msg
     , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg
     , onMdl : Material.Msg msg -> msg

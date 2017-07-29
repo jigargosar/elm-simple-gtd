@@ -10,6 +10,7 @@ import Material
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
+import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Msg.Subscription exposing (SubscriptionMsg)
 import Page exposing (PageMsg(..))
@@ -75,15 +76,15 @@ gotoPageMsg =
 
 
 onSwitchToNewUserSetupModeIfNeeded =
-    OnFirebaseMsg Types.Firebase.OnFB_SwitchToNewUserSetupModeIfNeeded
+    OnFirebaseMsg OnFB_SwitchToNewUserSetupModeIfNeeded
 
 
 onSignIn =
-    OnFirebaseMsg Types.Firebase.OnFBSignIn
+    OnFirebaseMsg OnFBSignIn
 
 
 onSignOut =
-    OnFirebaseMsg Types.Firebase.OnFBSignOut
+    OnFirebaseMsg OnFBSignOut
 
 
 

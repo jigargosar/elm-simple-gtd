@@ -19,4 +19,4 @@ open http://localhost:8020/app.html
 ```
 ## Powered By
 
-![BrowserStack](github-assets/browser-stack-logo.svg)
+![BrowserStack](github-assets/browser-stack-logo.png)

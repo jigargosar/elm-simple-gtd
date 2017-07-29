@@ -10,16 +10,16 @@ import Update.Entity
 import Update.ExclusiveMode
 import Update.Firebase
 import Update.LaunchBar
+import Update.Page
 import Update.Subscription
 import Update.Todo
-import Update.ViewType
 
 
 type alias UpdateConfig msg =
     Update.LaunchBar.Config msg
         (Update.AppHeader.Config msg
             (Update.ExclusiveMode.Config msg
-                (Update.ViewType.Config msg
+                (Update.Page.Config msg
                     (Update.Firebase.Config msg
                         (Update.CustomSync.Config msg
                             (Update.Entity.Config msg

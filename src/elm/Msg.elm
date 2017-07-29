@@ -13,10 +13,10 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Msg.Subscription exposing (SubscriptionMsg)
+import Page exposing (ViewTypeMsg(..))
 import Time exposing (Time)
 import Todo.Msg exposing (TodoMsg)
 import Toolkit.Operators exposing (..)
-import ViewType exposing (ViewTypeMsg(..))
 import X.Function.Infix exposing (..)
 
 

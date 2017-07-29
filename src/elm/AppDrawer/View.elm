@@ -7,9 +7,9 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
+import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import Toolkit.Operators exposing (..)
 import View.Badge
-import ViewType exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import X.Function.Infix exposing (..)
 import X.Html
 

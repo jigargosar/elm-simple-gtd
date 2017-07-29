@@ -19,7 +19,7 @@ import Todo
 import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types exposing (AppModel)
-import ViewType exposing (Page(EntityListPage))
+import Page exposing (Page(EntityListPage))
 import X.Function exposing (when)
 import X.Maybe
 

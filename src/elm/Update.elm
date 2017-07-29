@@ -13,9 +13,9 @@ import Update.ExclusiveMode
 import Update.Firebase
 import Update.GroupDoc
 import Update.LaunchBar
+import Update.Page
 import Update.Subscription
 import Update.Todo
-import Update.ViewType
 import X.Return exposing (..)
 
 
@@ -32,7 +32,7 @@ update config msg =
             andThen (Material.update config.onMdl msg_)
 
         OnViewTypeMsg msg_ ->
-            Update.ViewType.update config msg_
+            Update.Page.update config msg_
 
         OnCommonMsg msg_ ->
             CommonMsg.update msg_

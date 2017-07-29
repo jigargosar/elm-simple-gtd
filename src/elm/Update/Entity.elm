@@ -11,12 +11,12 @@ import Model.EntityTree
 import Model.HasStores exposing (HasStores, HasViewType)
 import Model.Selection
 import Model.Todo
+import Page
 import Set
 import Todo
 import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import Tuple2
-import ViewType
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
@@ -168,7 +168,7 @@ setEntityAtCursor maybeEntityIdAtCursor model =
 
 
 createEntityListForCurrentView model =
-    ViewType.maybeGetEntityListViewType model
+    Page.maybeGetEntityListViewType model
         ?|> (Model.EntityTree.createEntityTreeForViewType # model >> Entity.Tree.flatten)
         ?= []
 
@@ -188,7 +188,7 @@ onUpdateAction config entityId action =
                 switchToEntityListViewFromEntity entityId model =
                     let
                         maybeEntityListViewType =
-                            ViewType.maybeGetEntityListViewType model
+                            Page.maybeGetEntityListViewType model
                     in
                     entityId
                         |> toViewType model maybeEntityListViewType

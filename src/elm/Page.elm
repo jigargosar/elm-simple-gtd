@@ -1,4 +1,4 @@
-module ViewType exposing (..)
+module Page exposing (..)
 
 import Entity.Types exposing (EntityListPageModel)
 

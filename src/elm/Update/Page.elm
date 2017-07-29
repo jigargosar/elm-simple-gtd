@@ -1,10 +1,10 @@
-module Update.ViewType exposing (Config, update)
+module Update.Page exposing (Config, update)
 
 import Document exposing (DocId)
 import Model.Selection
+import Page exposing (..)
 import Return
 import Set exposing (Set)
-import ViewType exposing (..)
 import X.Return exposing (..)
 
 

@@ -8,12 +8,12 @@ import Firebase.SignIn
 import Firebase.Types exposing (FCMToken, FirebaseClient, FirebaseUser)
 import GroupDoc.Types exposing (ContextStore, ProjectStore)
 import Material
+import Page exposing (Page(EntityListPage))
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
 import Todo.Types exposing (TodoStore)
-import ViewType exposing (Page(EntityListPage))
 
 
 type alias AppConfig =

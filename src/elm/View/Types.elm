@@ -10,10 +10,10 @@ import LaunchBar.Messages
 import Material
 import Menu
 import Menu.Types
+import Page
 import Todo.FormTypes
 import Todo.Notification.Model
 import Todo.Types
-import ViewType
 import X.Keyboard
 
 
@@ -58,5 +58,5 @@ type alias ViewConfig msg =
     , updateGroupDocFromNameMsg :
         GroupDoc.Types.GroupDocForm -> GroupDoc.Types.GroupDocName -> msg
     , switchToEntityListViewTypeMsg : Entity.Types.EntityListPageModel -> msg
-    , switchToView : ViewType.Page -> msg
+    , switchToView : Page.Page -> msg
     }

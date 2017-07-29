@@ -2,8 +2,8 @@ module Routes exposing (..)
 
 import Entity.Types exposing (EntityListPageModel(..))
 import Maybe.Extra
+import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import RouteUrl.Builder
-import ViewType exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import X.Function.Infix exposing (..)
 import X.List
 
@@ -18,7 +18,7 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case ViewType.getViewType model of
+    case Page.getViewType model of
         EntityListPage viewType ->
             getPathFromViewType viewType
 
@@ -48,7 +48,7 @@ builder2messages config builder =
 
                     _ ->
                         -- If nothing provided for this part of the URL, return empty list
-                        [ config.switchToView ViewType.defaultView ]
+                        [ config.switchToView Page.defaultView ]
             )
             (config.switchToEntityListViewTypeMsg >> X.List.singleton)
 

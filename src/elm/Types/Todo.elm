@@ -1,4 +1,4 @@
-module Todo.Types exposing (..)
+module Types.Todo exposing (..)
 
 import Store exposing (Store)
 import Time exposing (Time)
@@ -27,10 +27,6 @@ type TodoSchedule
     = NoReminder Time
     | WithReminder Time Time
     | Unscheduled
-
-
-getTodoText =
-    .text
 
 
 type TodoAction

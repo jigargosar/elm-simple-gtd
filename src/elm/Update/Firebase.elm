@@ -11,9 +11,9 @@ import Navigation
 import Ports.Firebase exposing (..)
 import Return
 import Store
-import Todo.Types exposing (TodoStore)
 import Toolkit.Operators exposing (..)
 import Types.Firebase exposing (..)
+import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (over, set)
 import X.Return exposing (..)

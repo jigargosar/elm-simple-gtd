@@ -3,8 +3,8 @@ module Todo.Msg exposing (..)
 import Notification exposing (Response)
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
-import Todo.Types exposing (..)
 import Types.Document exposing (..)
+import Types.Todo exposing (..)
 
 
 type TodoMsg

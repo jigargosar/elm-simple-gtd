@@ -6,8 +6,8 @@ import Entity.Types exposing (..)
 import List.Extra as List
 import Project
 import Todo
-import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
+import Types.Todo exposing (..)
 
 
 type alias TodoNode =

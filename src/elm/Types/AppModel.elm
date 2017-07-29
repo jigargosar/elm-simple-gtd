@@ -10,10 +10,10 @@ import Set exposing (Set)
 import Time exposing (Time)
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker
-import Todo.Types exposing (TodoStore)
 import Types.Document exposing (..)
 import Types.Firebase exposing (..)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 
 
 type alias AppConfig =

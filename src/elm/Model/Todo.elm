@@ -1,6 +1,6 @@
 module Model.Todo exposing (..)
 
---import Todo.Types exposing (TodoDoc, TodoStore)
+--import Types.Todo exposing (..)
 
 import Store
 import X.Record exposing (..)

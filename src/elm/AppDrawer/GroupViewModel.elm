@@ -17,11 +17,11 @@ import Pages.EntityList exposing (..)
 import Project
 import String.Extra
 import Todo
-import Todo.Types exposing (TodoDoc)
 import Toolkit.Operators exposing (..)
 import Types.AppModel exposing (..)
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import X.Function exposing (when)
 import X.Maybe
 

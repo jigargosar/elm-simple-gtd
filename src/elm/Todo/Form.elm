@@ -13,8 +13,8 @@ import Time exposing (Time)
 import Time.Format
 import Todo
 import Todo.FormTypes exposing (..)
-import Todo.Types exposing (TodoDoc, getTodoText)
 import Toolkit.Operators exposing (..)
+import Types.Todo exposing (..)
 import X.Record exposing (fieldLens, over, overM, set)
 
 
@@ -26,7 +26,7 @@ createEditTodoForm editMode now todo =
 
         form =
             { id = Document.getId todo
-            , text = getTodoText todo
+            , text = Todo.getText todo
             , contextId = Todo.getContextId todo
             , projectId = Todo.getProjectId todo
             , menuState = Menu.initState

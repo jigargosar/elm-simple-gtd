@@ -15,9 +15,9 @@ import Pages.EntityList exposing (..)
 import Todo.FormTypes
 import Todo.Msg
 import Todo.Notification.Model
-import Todo.Types
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 
 
@@ -44,10 +44,10 @@ type alias ViewConfig msg =
     , onStartAddingTodoWithFocusInEntityAsReference : msg
     , onStartCustomRemotePouchSync : ExclusiveMode.Types.SyncForm -> msg
     , onStartEditingGroupDoc : GroupDocId -> msg
-    , onStartEditingReminder : Todo.Types.TodoDoc -> msg
-    , onStartEditingTodoContext : Todo.Types.TodoDoc -> msg
-    , onStartEditingTodoProject : Todo.Types.TodoDoc -> msg
-    , onStartEditingTodoText : Todo.Types.TodoDoc -> msg
+    , onStartEditingReminder : TodoDoc -> msg
+    , onStartEditingTodoContext : TodoDoc -> msg
+    , onStartEditingTodoProject : TodoDoc -> msg
+    , onStartEditingTodoText : TodoDoc -> msg
     , onStopRunningTodoMsg : msg
     , onSwitchOrStartTrackingTodo : DocId -> msg
     , onToggleAppDrawerOverlay : msg

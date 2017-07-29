@@ -15,9 +15,9 @@ import Page
 import Pages.EntityList exposing (..)
 import Set
 import Todo
-import Todo.Types exposing (TodoDoc, TodoStore)
 import Toolkit.Operators exposing (..)
 import Tuple2
+import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List

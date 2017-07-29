@@ -19,10 +19,10 @@ import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.TimeTracker as Tracker
-import Todo.Types exposing (TodoAction(..), TodoStore)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
+import Types.Todo exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
 import X.Record as Record exposing (overReturn, overT2, set)

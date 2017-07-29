@@ -6,7 +6,7 @@ import Document
 import Time exposing (Time)
 import Todo
 import Todo.Notification.Types exposing (..)
-import Todo.Types exposing (TodoDoc)
+import Types.Todo exposing (..)
 import X.Function exposing (..)
 
 

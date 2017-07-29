@@ -11,10 +11,10 @@ import Maybe.Extra as Maybe
 import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import Pages.EntityList exposing (..)
 import Todo.ItemView exposing (TodoViewModel)
-import Todo.Types exposing (TodoDoc)
 import Todo.ViewModel
 import Types.AppModel exposing (..)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

@@ -11,8 +11,8 @@ import Return
 import Set
 import Store
 import Time exposing (Time)
-import Todo.Types exposing (TodoDoc, TodoStore)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)

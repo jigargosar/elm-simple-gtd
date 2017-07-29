@@ -12,7 +12,7 @@ import Pages.EntityList exposing (..)
 import Project
 import String.Extra
 import Todo
-import Todo.Types exposing (TodoDoc)
+import Types.Todo exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)

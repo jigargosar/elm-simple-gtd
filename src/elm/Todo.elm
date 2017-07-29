@@ -8,10 +8,10 @@ import List
 import Maybe.Extra as Maybe
 import Time exposing (Time)
 import Todo.Schedule
-import Todo.Types exposing (TodoAction(..))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
+import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (over, set)

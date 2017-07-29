@@ -3,8 +3,8 @@ module Todo.Schedule exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Time exposing (Time)
-import Todo.Types exposing (TodoSchedule(..))
 import Toolkit.Operators exposing (..)
+import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 
 

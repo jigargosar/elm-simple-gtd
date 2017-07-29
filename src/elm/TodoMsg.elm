@@ -3,7 +3,7 @@ module TodoMsg exposing (..)
 import Msg exposing (AppMsg(OnTodoMsg))
 import Todo.FormTypes exposing (..)
 import Todo.Msg exposing (TodoMsg(..))
-import Todo.Types exposing (TodoAction(..))
+import Types.Todo exposing (..)
 
 
 --onStopRunningTodoMsg : AppMsg

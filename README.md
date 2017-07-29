@@ -19,4 +19,5 @@ open http://localhost:8020/app.html
 ```
 ## Powered By
 
-<img src="github-assets/browser-stack-logo.png" width="150" alt="BrowserStack"/>
+<a target="_blank" href="https://www.browserstack.com/" ><img alt="BrowserStack" src="github-assets/browser-stack-logo.png" width="150" alt="BrowserStack"></img></a>
+

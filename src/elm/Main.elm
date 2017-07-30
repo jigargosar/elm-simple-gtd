@@ -3,6 +3,8 @@ module Main exposing (main)
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import CommonMsg
 import Context
+import Entity.ListView
+import Entity.Types exposing (..)
 import EntityListCursor
 import ExclusiveMode.Types exposing (..)
 import Firebase
@@ -10,11 +12,17 @@ import Json.Encode as E
 import Keyboard
 import LaunchBar.Messages
 import LocalPref
+import Mat exposing (cs)
 import Material
+import Material.Options exposing (div)
+import Menu
+import Menu.Types
 import Msg exposing (..)
 import Msg.Firebase exposing (..)
+import Msg.GroupDoc
 import Msg.Subscription exposing (..)
 import Page
+import Pages.EntityList exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
@@ -24,11 +32,15 @@ import RouteUrl
 import Routes
 import Set
 import Time exposing (Time)
+import Todo.FormTypes
 import Todo.Msg exposing (..)
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
 import Types.AppModel exposing (..)
+import Types.Document exposing (..)
+import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
 import Update.CustomSync
@@ -40,9 +52,13 @@ import Update.LaunchBar
 import Update.Page
 import Update.Subscription
 import Update.Todo
-import View
-import View.Config
+import View.CustomSync
+import View.Layout
+import View.NewTodoFab exposing (newTodoFab)
+import View.Overlays
+import ViewModel
 import Window
+import X.Function.Infix exposing (..)
 import X.Random
 import X.Return exposing (..)
 
@@ -243,6 +259,121 @@ updateConfig model =
     }
 
 
+type alias ViewConfig msg =
+    { noop : msg
+    , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
+    , onAppDrawerMsg : AppDrawer.Types.AppDrawerMsg -> msg
+    , onFirebaseMsg : FirebaseMsg -> msg
+    , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
+    , onMainMenuStateChanged : Menu.Types.MenuState -> msg
+    , onMdl : Material.Msg msg -> msg
+    , onReminderOverlayAction : Todo.Notification.Model.Action -> msg
+    , onSaveExclusiveModeForm : msg
+    , onSetContext : DocId -> ContextDoc -> msg
+    , onSetProject : DocId -> ProjectDoc -> msg
+    , onSetTodoFormMenuState : Todo.FormTypes.TodoForm -> Menu.State -> msg
+    , onSetTodoFormReminderDate : Todo.FormTypes.TodoForm -> String -> msg
+    , onSetTodoFormReminderTime : Todo.FormTypes.TodoForm -> String -> msg
+    , onSetTodoFormText : Todo.FormTypes.TodoForm -> String -> msg
+    , onShowMainMenu : msg
+    , onSignIn : msg
+    , onSignOut : msg
+    , onStartAddingGroupDoc : GroupDocType -> msg
+    , onStartAddingTodoWithFocusInEntityAsReference : msg
+    , onStartCustomRemotePouchSync : ExclusiveMode.Types.SyncForm -> msg
+    , onStartEditingGroupDoc : GroupDocId -> msg
+    , onStartEditingReminder : TodoDoc -> msg
+    , onStartEditingTodoContext : TodoDoc -> msg
+    , onStartEditingTodoProject : TodoDoc -> msg
+    , onStartEditingTodoText : TodoDoc -> msg
+    , onStopRunningTodoMsg : msg
+    , onSwitchOrStartTrackingTodo : DocId -> msg
+    , onToggleAppDrawerOverlay : msg
+    , onToggleDeleted : DocId -> msg
+    , onToggleDeletedAndMaybeSelection : DocId -> msg
+    , onToggleDoneAndMaybeSelection : DocId -> msg
+    , onToggleEntitySelection : Entity.Types.EntityId -> msg
+    , onToggleGroupDocArchived : GroupDocId -> msg
+    , onUpdateCustomSyncFormUri :
+        ExclusiveMode.Types.SyncForm -> String -> msg
+    , revertExclusiveMode : msg
+    , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
+    , updateGroupDocFromNameMsg :
+        GroupDocForm -> GroupDocName -> msg
+    , switchToEntityListPageMsg : EntityListPageModel -> msg
+    , gotoPageMsg : Page.Page -> msg
+    }
+
+
+viewConfig : ViewConfig Msg.AppMsg
+viewConfig =
+    { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> Msg.OnTodoMsg
+    , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> Msg.OnTodoMsg
+    , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> Msg.OnTodoMsg
+    , noop = Msg.noop
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> Msg.OnTodoMsg
+    , onToggleDeleted = Todo.Msg.onToggleDeleted >> Msg.OnTodoMsg
+    , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> Msg.OnTodoMsg
+    , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> Msg.OnTodoMsg
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onEntityUpdateMsg = Msg.onEntityUpdateMsg
+    , onMainMenuStateChanged = Msg.onMainMenuStateChanged
+    , onSignIn = Msg.onSignIn
+    , onSignOut = Msg.onSignOut
+    , onLaunchBarMsg = Msg.OnLaunchBarMsg
+    , onFirebaseMsg = Msg.OnFirebaseMsg
+    , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> Msg.OnTodoMsg
+    , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
+    , onAppDrawerMsg = Msg.onAppDrawerMsg
+    , onStartAddingGroupDoc = Msg.onStartAddingGroupDoc
+    , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
+    , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
+    , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
+    , gotoPageMsg = Msg.gotoPageMsg
+    , onMdl = Msg.onMdl
+    , onShowMainMenu = Msg.onShowMainMenu
+    , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> Msg.OnTodoMsg
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
+    , onToggleEntitySelection = Msg.onToggleEntitySelection
+    , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> Msg.OnTodoMsg
+    , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> Msg.OnTodoMsg
+    , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> Msg.OnTodoMsg
+    , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> Msg.OnTodoMsg
+    , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> Msg.OnTodoMsg
+    , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> Msg.OnTodoMsg
+    , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> Msg.OnTodoMsg
+    , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
+    , updateGroupDocFromNameMsg =
+        Msg.GroupDoc.updateGroupDocFromNameMsg >>> Msg.OnGroupDocMsg
+    , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
+    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
+    }
+
+
+view config model =
+    let
+        appVM =
+            ViewModel.create config model
+
+        pageContent =
+            case Page.getPage model of
+                Page.EntityListPage entityListPageModel ->
+                    Entity.ListView.listView config appVM entityListPageModel model
+
+                Page.CustomSyncSettingsPage ->
+                    View.CustomSync.view config model
+
+        children =
+            [ View.Layout.appLayoutView config appVM model pageContent
+            , newTodoFab config model
+            ]
+                ++ View.Overlays.overlayViews config model
+    in
+    div [ cs "mdl-typography--body-1" ] children
+
+
 main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg
 main =
     let
@@ -256,9 +387,9 @@ main =
     in
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
-        , location2messages = Routes.hash2messages View.Config.viewConfig
+        , location2messages = Routes.hash2messages viewConfig
         , init = init
         , update = update_
-        , view = View.init View.Config.viewConfig
+        , view = view viewConfig
         , subscriptions = subscriptions
         }

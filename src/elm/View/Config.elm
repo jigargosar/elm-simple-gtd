@@ -24,7 +24,7 @@ import X.Function.Infix exposing (..)
 type alias ViewConfig msg =
     { noop : msg
     , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
-    , onAppDrawerMsg : AppDrawer.Types.Msg -> msg
+    , onAppDrawerMsg : AppDrawer.Types.AppDrawerMsg -> msg
     , onFirebaseMsg : FirebaseMsg -> msg
     , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg

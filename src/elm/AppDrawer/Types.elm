@@ -1,7 +1,7 @@
 module AppDrawer.Types exposing (..)
 
 
-type Msg
+type AppDrawerMsg
     = OnToggleProjectsExpanded
     | OnToggleContextsExpanded
     | OnToggleArchivedContexts

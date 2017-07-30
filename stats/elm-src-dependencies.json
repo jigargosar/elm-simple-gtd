@@ -202,8 +202,6 @@
       "LocalPref",
       "Main",
       "Models.AppModel",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Types.AppModel",
       "Types.LocalPref",
       "Update",
@@ -213,7 +211,7 @@
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 14
+    "transitiveBackwardImportsCount": 12
   },
   "AppDrawer.Types": {
     "fileName": "src/elm/AppDrawer/Types.elm",
@@ -225,8 +223,8 @@
     "transitiveImportsCount": 0,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
+      "Main",
       "Msg",
-      "Subscriptions.AppDrawer",
       "Update.AppDrawer",
       "View.Config"
     ],
@@ -235,7 +233,6 @@
       "AppDrawer.GroupViewModel",
       "Main",
       "Msg",
-      "Subscriptions.AppDrawer",
       "TodoMsg",
       "Update",
       "Update.AppDrawer",
@@ -244,7 +241,7 @@
       "View.Config",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 11
+    "transitiveBackwardImportsCount": 10
   },
   "AppDrawer.View": {
     "fileName": "src/elm/AppDrawer/View.elm",
@@ -468,8 +465,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "TodoMsg",
       "Types.AppModel",
@@ -492,7 +487,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 40
+    "transitiveBackwardImportsCount": 38
   },
   "Document": {
     "fileName": "src/elm/Document.elm",
@@ -576,8 +571,6 @@
       "Msg.GroupDoc",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.GroupEditView",
@@ -616,7 +609,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 70
+    "transitiveBackwardImportsCount": 68
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -954,8 +947,6 @@
       "Models.EntityTree",
       "Models.Stores",
       "Msg",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.ViewModel",
       "TodoMsg",
       "Types.AppModel",
@@ -971,7 +962,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 31
+    "transitiveBackwardImportsCount": 29
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -1074,8 +1065,6 @@
       "LocalPref",
       "Main",
       "Models.AppModel",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Types.AppModel",
       "Update",
       "Update.Config",
@@ -1086,7 +1075,7 @@
       "View",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 16
+    "transitiveBackwardImportsCount": 14
   },
   "ExclusiveMode.Types": {
     "fileName": "src/elm/ExclusiveMode/Types.elm",
@@ -1174,8 +1163,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Types.AppModel",
       "Update",
@@ -1197,7 +1184,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 29
+    "transitiveBackwardImportsCount": 27
   },
   "Firebase": {
     "fileName": "src/elm/Firebase.elm",
@@ -1234,7 +1221,6 @@
       "Main",
       "Models.AppModel",
       "Ports.Firebase",
-      "Subscriptions.Firebase",
       "Update",
       "Update.Config",
       "Update.Firebase",
@@ -1245,7 +1231,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 12
   },
   "Firebase.Model": {
     "fileName": "src/elm/Firebase/Model.elm",
@@ -1284,7 +1270,6 @@
       "Main",
       "Models.AppModel",
       "Ports.Firebase",
-      "Subscriptions.Firebase",
       "Update",
       "Update.Config",
       "Update.Firebase",
@@ -1295,7 +1280,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 14
+    "transitiveBackwardImportsCount": 13
   },
   "Firebase.SignIn": {
     "fileName": "src/elm/Firebase/SignIn.elm",
@@ -1351,9 +1336,6 @@
       "Msg.ExclusiveMode",
       "Ports.Firebase",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "Todo.Store",
       "TodoMsg",
@@ -1382,7 +1364,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 52
+    "transitiveBackwardImportsCount": 49
   },
   "Firebase.User": {
     "fileName": "src/elm/Firebase/User.elm",
@@ -1416,7 +1398,6 @@
       "Main",
       "Models.AppModel",
       "Ports.Firebase",
-      "Subscriptions.Firebase",
       "Update",
       "Update.Config",
       "Update.Firebase",
@@ -1427,7 +1408,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 14
   },
   "Form": {
     "fileName": "src/elm/Form.elm",
@@ -1529,8 +1510,6 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "Todo.ViewModel",
       "TodoMsg",
@@ -1554,7 +1533,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 44
+    "transitiveBackwardImportsCount": 42
   },
   "GroupDoc.Form": {
     "fileName": "src/elm/GroupDoc/Form.elm",
@@ -2058,8 +2037,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Types.AppModel",
       "Update",
@@ -2081,7 +2058,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 32
+    "transitiveBackwardImportsCount": 30
   },
   "LaunchBar.View": {
     "fileName": "src/elm/LaunchBar/View.elm",
@@ -2247,21 +2224,27 @@
     "moduleName": "Main",
     "parentModuleName": "",
     "imports": [
+      "AppDrawer.Types",
+      "Keyboard",
       "Models.AppModel",
       "Msg",
+      "Msg.Firebase",
+      "Msg.Subscription",
+      "Ports",
+      "Ports.Firebase",
+      "Ports.Todo",
       "RouteUrl",
       "Routes",
-      "Subscriptions",
-      "Subscriptions.AppDrawer",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
+      "Time",
+      "Todo.Msg",
       "Types.AppModel",
       "Update",
       "Update.Config",
       "View",
-      "View.Config"
+      "View.Config",
+      "Window"
     ],
-    "importsCount": 13,
+    "importsCount": 19,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -2356,10 +2339,6 @@
       "Set",
       "Store",
       "String.Extra",
-      "Subscriptions",
-      "Subscriptions.AppDrawer",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
       "Task",
       "Time",
       "Time.Format",
@@ -2432,7 +2411,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 168,
+    "transitiveImportsCount": 164,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2584,8 +2563,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -2612,7 +2589,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 33
   },
   "Menu.Types": {
     "fileName": "src/elm/Menu/Types.elm",
@@ -2642,8 +2619,6 @@
       "Msg.AppHeader",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -2670,7 +2645,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 37
+    "transitiveBackwardImportsCount": 35
   },
   "Models.AppModel": {
     "fileName": "src/elm/Models/AppModel.elm",
@@ -3461,8 +3436,8 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
+      "Main",
       "Msg",
-      "Subscriptions.Firebase",
       "Update.Firebase",
       "View.Config",
       "View.GetStarted"
@@ -3471,7 +3446,6 @@
     "transitiveBackwardImports": [
       "Main",
       "Msg",
-      "Subscriptions.Firebase",
       "TodoMsg",
       "Update",
       "Update.Config",
@@ -3482,7 +3456,7 @@
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 12
+    "transitiveBackwardImportsCount": 11
   },
   "Msg.GroupDoc": {
     "fileName": "src/elm/Msg/GroupDoc.elm",
@@ -3549,15 +3523,14 @@
     ],
     "transitiveImportsCount": 2,
     "backwardImports": [
+      "Main",
       "Msg",
-      "Subscriptions",
       "Update.Subscription"
     ],
     "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "Main",
       "Msg",
-      "Subscriptions",
       "TodoMsg",
       "Update",
       "Update.Config",
@@ -3565,7 +3538,7 @@
       "Update.Types",
       "View.Config"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 8
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -3585,7 +3558,6 @@
       "Main",
       "Msg",
       "Ports.Todo",
-      "Subscriptions.Todo",
       "Todo.Msg",
       "TodoMsg",
       "Update",
@@ -3595,7 +3567,7 @@
       "Update.Types",
       "View.Config"
     ],
-    "transitiveBackwardImportsCount": 12
+    "transitiveBackwardImportsCount": 11
   },
   "Page": {
     "fileName": "src/elm/Page.elm",
@@ -3637,8 +3609,6 @@
       "Models.HasStores",
       "Msg",
       "Routes",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Types.AppModel",
       "Update",
@@ -3651,7 +3621,7 @@
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 21
+    "transitiveBackwardImportsCount": 19
   },
   "Pages.EntityList": {
     "fileName": "src/elm/Pages/EntityList.elm",
@@ -3695,8 +3665,6 @@
       "Msg",
       "Page",
       "Routes",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Types.AppModel",
       "Update",
@@ -3710,7 +3678,7 @@
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 26
+    "transitiveBackwardImportsCount": 24
   },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
@@ -3725,16 +3693,15 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "Subscriptions",
+      "Main",
       "Update"
     ],
     "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
-      "Subscriptions",
       "Update"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 2
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -3763,19 +3730,18 @@
     ],
     "transitiveImportsCount": 13,
     "backwardImports": [
-      "Subscriptions.Firebase",
+      "Main",
       "Update.Firebase"
     ],
     "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
-      "Subscriptions.Firebase",
       "Update",
       "Update.Config",
       "Update.Firebase",
       "Update.Types"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 5
   },
   "Ports.Todo": {
     "fileName": "src/elm/Ports/Todo.elm",
@@ -3790,20 +3756,19 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "Subscriptions.Todo",
+      "Main",
       "Update.Todo.Internal"
     ],
     "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
-      "Subscriptions.Todo",
       "Update",
       "Update.Config",
       "Update.Todo",
       "Update.Todo.Internal",
       "Update.Types"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 6
   },
   "Project": {
     "fileName": "src/elm/Project.elm",
@@ -3876,8 +3841,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "TodoMsg",
       "Types.AppModel",
@@ -3900,7 +3863,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 40
+    "transitiveBackwardImportsCount": 38
   },
   "RegexHelper": {
     "fileName": "src/elm/RegexHelper.elm",
@@ -4046,8 +4009,6 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "Todo.Store",
       "Todo.TimeTracker.View",
@@ -4075,238 +4036,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 50
-  },
-  "Subscriptions": {
-    "fileName": "src/elm/Subscriptions.elm",
-    "moduleName": "Subscriptions",
-    "parentModuleName": "",
-    "imports": [
-      "Keyboard",
-      "Msg.Subscription",
-      "Ports",
-      "Time",
-      "Types.AppModel"
-    ],
-    "importsCount": 5,
-    "transitiveImports": [
-      "AppDrawer.Model",
-      "Char",
-      "Context",
-      "Dict",
-      "Document",
-      "Entity.Types",
-      "EntityListCursor",
-      "ExclusiveMode.Types",
-      "Firebase.SignIn",
-      "Fuzzy",
-      "GroupDoc",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Html.Keyed",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "LaunchBar.Models",
-      "List.Extra",
-      "Material",
-      "Maybe.Extra",
-      "Menu",
-      "Menu.Types",
-      "Msg.Subscription",
-      "Page",
-      "Pages.EntityList",
-      "Ports",
-      "Project",
-      "Random.Pcg",
-      "Return",
-      "RouteUrl.Builder",
-      "Set",
-      "Store",
-      "Time",
-      "Todo.FormTypes",
-      "Todo.Notification.Types",
-      "Todo.TimeTracker",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.AppModel",
-      "Types.Document",
-      "Types.Firebase",
-      "Types.GroupDoc",
-      "Types.Store",
-      "Types.Todo",
-      "X.Debug",
-      "X.Decode",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.Keyboard",
-      "X.List",
-      "X.Predicate",
-      "X.Random",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 59,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
-  },
-  "Subscriptions.AppDrawer": {
-    "fileName": "src/elm/Subscriptions/AppDrawer.elm",
-    "moduleName": "Subscriptions.AppDrawer",
-    "parentModuleName": "Subscriptions",
-    "imports": [
-      "AppDrawer.Types",
-      "Window"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "AppDrawer.Types",
-      "Window"
-    ],
-    "transitiveImportsCount": 2,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
-  },
-  "Subscriptions.Firebase": {
-    "fileName": "src/elm/Subscriptions/Firebase.elm",
-    "moduleName": "Subscriptions.Firebase",
-    "parentModuleName": "Subscriptions",
-    "imports": [
-      "Msg.Firebase",
-      "Ports.Firebase"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "Firebase",
-      "Firebase.Model",
-      "Firebase.SignIn",
-      "Firebase.User",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Json.Encode.Extra",
-      "Msg.Firebase",
-      "Ports.Firebase",
-      "Return",
-      "Toolkit.Operators",
-      "Types.Firebase",
-      "X.Function.Infix",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 15,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
-  },
-  "Subscriptions.Todo": {
-    "fileName": "src/elm/Subscriptions/Todo.elm",
-    "moduleName": "Subscriptions.Todo",
-    "parentModuleName": "Subscriptions",
-    "imports": [
-      "Ports.Todo",
-      "Time",
-      "Todo.Msg",
-      "Types.AppModel"
-    ],
-    "importsCount": 4,
-    "transitiveImports": [
-      "AppDrawer.Model",
-      "Char",
-      "Context",
-      "Date",
-      "Date.Extra",
-      "Dict",
-      "Document",
-      "Entity.Types",
-      "EntityListCursor",
-      "ExclusiveMode.Types",
-      "Firebase.SignIn",
-      "Fuzzy",
-      "GroupDoc",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Html.Keyed",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "LaunchBar.Models",
-      "List",
-      "List.Extra",
-      "Material",
-      "Maybe.Extra",
-      "Menu",
-      "Menu.Types",
-      "Notification",
-      "Page",
-      "Pages.EntityList",
-      "Ports.Todo",
-      "Project",
-      "Random.Pcg",
-      "Return",
-      "RouteUrl.Builder",
-      "Set",
-      "Store",
-      "Time",
-      "Todo",
-      "Todo.FormTypes",
-      "Todo.Msg",
-      "Todo.Notification.Model",
-      "Todo.Notification.Types",
-      "Todo.Schedule",
-      "Todo.TimeTracker",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.AppModel",
-      "Types.Document",
-      "Types.Firebase",
-      "Types.GroupDoc",
-      "Types.Store",
-      "Types.Todo",
-      "X.Debug",
-      "X.Decode",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.Keyboard",
-      "X.List",
-      "X.Predicate",
-      "X.Random",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 66,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 48
   },
   "Todo": {
     "fileName": "src/elm/Todo.elm",
@@ -4384,7 +4114,6 @@
       "Models.EntityTree",
       "Models.Stores",
       "Msg",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.Msg",
       "Todo.Notification.Model",
@@ -4406,7 +4135,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 30
+    "transitiveBackwardImportsCount": 29
   },
   "Todo.Form": {
     "fileName": "src/elm/Todo/Form.elm",
@@ -4544,8 +4273,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.Msg",
       "TodoMsg",
@@ -4569,7 +4296,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 32
+    "transitiveBackwardImportsCount": 30
   },
   "Todo.GroupEditView": {
     "fileName": "src/elm/Todo/GroupEditView.elm",
@@ -4769,8 +4496,8 @@
     ],
     "transitiveImportsCount": 45,
     "backwardImports": [
+      "Main",
       "Msg",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Update.Config",
       "Update.Todo",
@@ -4781,7 +4508,6 @@
     "transitiveBackwardImports": [
       "Main",
       "Msg",
-      "Subscriptions.Todo",
       "TodoMsg",
       "Update",
       "Update.Config",
@@ -4789,7 +4515,7 @@
       "Update.Types",
       "View.Config"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 8
   },
   "Todo.Notification.Model": {
     "fileName": "src/elm/Todo/Notification/Model.elm",
@@ -4851,7 +4577,6 @@
       "Main",
       "Models.AppModel",
       "Msg",
-      "Subscriptions.Todo",
       "Todo.Msg",
       "Todo.Notification.View",
       "TodoMsg",
@@ -4864,7 +4589,7 @@
       "View.Config",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 14
   },
   "Todo.Notification.Types": {
     "fileName": "src/elm/Todo/Notification/Types.elm",
@@ -4914,8 +4639,6 @@
       "Main",
       "Models.AppModel",
       "Msg",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Msg",
       "Todo.Notification.Model",
       "Todo.Notification.View",
@@ -4931,7 +4654,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 21
+    "transitiveBackwardImportsCount": 19
   },
   "Todo.Notification.View": {
     "fileName": "src/elm/Todo/Notification/View.elm",
@@ -5060,7 +4783,6 @@
       "Models.EntityTree",
       "Models.Stores",
       "Msg",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.Msg",
@@ -5083,7 +4805,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 31
+    "transitiveBackwardImportsCount": 30
   },
   "Todo.Store": {
     "fileName": "src/elm/Todo/Store.elm",
@@ -5180,8 +4902,6 @@
       "LocalPref",
       "Main",
       "Models.AppModel",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.TimeTracker.View",
       "Types.AppModel",
       "Update",
@@ -5194,7 +4914,7 @@
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 17
+    "transitiveBackwardImportsCount": 15
   },
   "Todo.TimeTracker.View": {
     "fileName": "src/elm/Todo/TimeTracker/View.elm",
@@ -5597,26 +5317,22 @@
       "LocalPref",
       "Main",
       "Models.AppModel",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Update",
       "Update.Config",
       "ViewModel"
     ],
-    "backwardImportsCount": 9,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "LocalPref",
       "Main",
       "Models.AppModel",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Update",
       "Update.Config",
       "View",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 8
   },
   "Types.Document": {
     "fileName": "src/elm/Types/Document.elm",
@@ -5693,8 +5409,6 @@
       "Project",
       "Routes",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.FormTypes",
@@ -5735,7 +5449,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 77
+    "transitiveBackwardImportsCount": 75
   },
   "Types.Firebase": {
     "fileName": "src/elm/Types/Firebase.elm",
@@ -5789,9 +5503,6 @@
       "Msg.ExclusiveMode",
       "Ports.Firebase",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "Todo.Store",
       "TodoMsg",
@@ -5818,7 +5529,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 50
+    "transitiveBackwardImportsCount": 47
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -5908,8 +5619,6 @@
       "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.GroupEditView",
@@ -5945,7 +5654,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 65
+    "transitiveBackwardImportsCount": 63
   },
   "Types.LocalPref": {
     "fileName": "src/elm/Types/LocalPref.elm",
@@ -6066,8 +5775,6 @@
       "Msg.GroupDoc",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.GroupEditView",
@@ -6104,7 +5811,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 68
+    "transitiveBackwardImportsCount": 66
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -6183,8 +5890,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Msg",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.Msg",
@@ -6212,7 +5917,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 45
+    "transitiveBackwardImportsCount": 43
   },
   "Update": {
     "fileName": "src/elm/Update.elm",
@@ -8688,8 +8393,6 @@
       "Msg.GroupDoc",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.FormTypes",
@@ -8736,7 +8439,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 80
+    "transitiveBackwardImportsCount": 78
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -8771,8 +8474,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -8804,7 +8505,7 @@
       "ViewModel",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 46
+    "transitiveBackwardImportsCount": 44
   },
   "X.Function": {
     "fileName": "src/elm/X/Function.elm",
@@ -8883,8 +8584,6 @@
       "Msg.GroupDoc",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.FormTypes",
@@ -8933,7 +8632,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 87
+    "transitiveBackwardImportsCount": 85
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -9023,9 +8722,6 @@
       "Project",
       "Routes",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.FormTypes",
@@ -9076,7 +8772,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 97
+    "transitiveBackwardImportsCount": 94
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -9132,8 +8828,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -9170,7 +8864,7 @@
       "ViewModel",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 55
+    "transitiveBackwardImportsCount": 53
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -9229,8 +8923,6 @@
       "Msg",
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -9261,7 +8953,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 45
+    "transitiveBackwardImportsCount": 43
   },
   "X.List": {
     "fileName": "src/elm/X/List.elm",
@@ -9295,8 +8987,6 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Routes",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -9325,7 +9015,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 37
   },
   "X.Maybe": {
     "fileName": "src/elm/X/Maybe.elm",
@@ -9386,8 +9076,6 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Project",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo.GroupEditView",
       "Todo.ViewModel",
       "TodoMsg",
@@ -9411,7 +9099,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 45
+    "transitiveBackwardImportsCount": 43
   },
   "X.Random": {
     "fileName": "src/elm/X/Random.elm",
@@ -9467,8 +9155,6 @@
       "Msg.GroupDoc",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.GroupEditView",
@@ -9506,7 +9192,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 69
+    "transitiveBackwardImportsCount": 67
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -9579,9 +9265,6 @@
       "Ports.Firebase",
       "Project",
       "Store",
-      "Subscriptions",
-      "Subscriptions.Firebase",
-      "Subscriptions.Todo",
       "Todo",
       "Todo.Form",
       "Todo.GroupEditView",
@@ -9623,7 +9306,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 80
+    "transitiveBackwardImportsCount": 77
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

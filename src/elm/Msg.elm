@@ -34,7 +34,7 @@ type AppMsg
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
-    | OnAppDrawerMsg AppDrawer.Types.Msg
+    | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | OnMdl (Material.Msg AppMsg)
 
 

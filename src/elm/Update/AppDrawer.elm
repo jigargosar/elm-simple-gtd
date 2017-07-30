@@ -1,7 +1,7 @@
 module Update.AppDrawer exposing (update)
 
 import AppDrawer.Model exposing (..)
-import AppDrawer.Types exposing (Msg(..))
+import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Return
 import X.Record exposing (..)
 
@@ -25,7 +25,7 @@ mapOver =
 
 
 update :
-    AppDrawer.Types.Msg
+    AppDrawer.Types.AppDrawerMsg
     -> SubReturnF msg model
 update msg =
     case msg of

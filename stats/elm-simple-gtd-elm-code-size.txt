@@ -1,4 +1,4 @@
-   10115 total
+   10087 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -52,6 +52,7 @@
       74 src/elm/View/Header.elm
       72 src/elm/View/GetStarted.elm
       72 src/elm/Update/Todo.elm
+      72 src/elm/Main.elm
       71 src/elm/Entity/Types.elm
       69 src/elm/View/Overlays.elm
       67 src/elm/X/List.elm
@@ -79,7 +80,6 @@
       44 src/elm/Update/Page.elm
       44 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
-      44 src/elm/Main.elm
       41 src/elm/Update/CustomSync.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
@@ -108,13 +108,10 @@
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      18 src/elm/Subscriptions.elm
-      16 src/elm/Subscriptions/Todo.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
       14 src/elm/Msg/GroupDoc.elm
-      13 src/elm/Subscriptions/Firebase.elm
       12 src/elm/Todo/Store.elm
       12 src/elm/Ports.elm
       12 src/elm/Msg/Subscription.elm
@@ -123,7 +120,6 @@
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm
       10 src/elm/AppDrawer/Types.elm
-       9 src/elm/Subscriptions/AppDrawer.elm
        9 src/elm/Msg/ExclusiveMode.elm
        8 src/elm/Msg/CustomSync.elm
        8 src/elm/Msg/AppHeader.elm

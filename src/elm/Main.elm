@@ -2,21 +2,32 @@ module Main exposing (main)
 
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import CommonMsg
+import Context
+import EntityListCursor
+import ExclusiveMode.Types exposing (..)
+import Firebase
+import Json.Encode as E
 import Keyboard
 import LaunchBar.Messages
 import LocalPref
 import Material
-import Models.AppModel exposing (Flags)
 import Msg exposing (..)
 import Msg.Firebase exposing (..)
 import Msg.Subscription exposing (..)
+import Page
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
+import Project
+import Random.Pcg
 import RouteUrl
 import Routes
+import Set
 import Time exposing (Time)
 import Todo.Msg exposing (..)
+import Todo.Notification.Model
+import Todo.Store
+import Todo.TimeTracker
 import Types.AppModel exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
@@ -32,6 +43,7 @@ import Update.Todo
 import View
 import View.Config
 import Window
+import X.Random
 import X.Return exposing (..)
 
 
@@ -62,6 +74,64 @@ subscriptions model =
             [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
             |> Sub.map Msg.OnAppDrawerMsg
         ]
+
+
+type alias Flags =
+    { now : Time
+    , encodedTodoList : List E.Value
+    , encodedProjectList : List E.Value
+    , encodedContextList : List E.Value
+    , pouchDBRemoteSyncURI : String
+    , developmentMode : Bool
+    , appVersion : String
+    , deviceId : String
+    , config : AppConfig
+    , localPref : E.Value
+    }
+
+
+createAppModel : Flags -> AppModel
+createAppModel flags =
+    let
+        { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
+            flags
+
+        storeGenerator =
+            Random.Pcg.map3 (,,)
+                (Todo.Store.generator flags.deviceId encodedTodoList)
+                (Project.storeGenerator flags.deviceId encodedProjectList)
+                (Context.storeGenerator flags.deviceId encodedContextList)
+
+        ( ( todoStore, projectStore, contextStore ), seed ) =
+            Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
+
+        localPref =
+            LocalPref.decode flags.localPref
+
+        model : AppModel
+        model =
+            { now = now
+            , todoStore = todoStore
+            , projectStore = projectStore
+            , contextStore = contextStore
+            , editMode = XMNone
+            , page = Page.initialPage
+            , reminderOverlay = Todo.Notification.Model.none
+            , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
+            , firebaseModel =
+                Firebase.init flags.deviceId localPref.signIn
+            , developmentMode = flags.developmentMode
+            , selectedEntityIdSet = Set.empty
+            , appVersion = flags.appVersion
+            , deviceId = flags.deviceId
+            , timeTracker = Todo.TimeTracker.none
+            , config = flags.config
+            , appDrawerModel = localPref.appDrawer
+            , mdl = Material.model
+            , entityListCursor = EntityListCursor.initialValue
+            }
+    in
+    model
 
 
 type alias UpdateConfig msg =
@@ -177,7 +247,7 @@ main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg
 main =
     let
         init =
-            Models.AppModel.createAppModel
+            createAppModel
                 >> update_ Msg.onSwitchToNewUserSetupModeIfNeeded
 
         update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )

@@ -20,6 +20,7 @@ import Material
 import Material.Options exposing (div)
 import Menu
 import Menu.Types
+import Models.Selection
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
@@ -315,16 +316,79 @@ onSubscriptionMsg config msg =
             map (setNow now)
 
         OnGlobalKeyUp keyCode ->
-            Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)
+            onGlobalKeyUp config (KX.fromCode keyCode)
 
         OnGlobalKeyDown keyCode ->
-            Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
+            onGlobalKeyDown config (KX.fromCode keyCode)
 
         OnPouchDBChange dbName encodedDoc ->
             Update.Subscription.onPouchDBChange config dbName encodedDoc
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             effect (Update.Subscription.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+
+
+onGlobalKeyDown config key =
+    returnWith .editMode
+        (\editMode ->
+            case ( key, editMode ) of
+                ( key, XMNone ) ->
+                    case key of
+                        KX.ArrowUp ->
+                            returnMsgAsCmd
+                                config.entityListFocusPreviousEntityMsg
+
+                        KX.ArrowDown ->
+                            returnMsgAsCmd
+                                config.entityListFocusNextEntityMsg
+
+                        _ ->
+                            identity
+
+                _ ->
+                    identity
+        )
+
+
+onGlobalKeyUp config key =
+    returnWith .editMode
+        (\editMode ->
+            case ( key, editMode ) of
+                ( key, XMNone ) ->
+                    let
+                        clear =
+                            map Models.Selection.clearSelection
+                                >> returnMsgAsCmd config.revertExclusiveMode
+                    in
+                    case key of
+                        KX.Escape ->
+                            clear
+
+                        KX.CharX ->
+                            clear
+
+                        KX.CharQ ->
+                            returnMsgAsCmd
+                                config.onStartAddingTodoWithFocusInEntityAsReference
+
+                        KX.CharI ->
+                            returnMsgAsCmd config.onStartAddingTodoToInbox
+
+                        KX.Slash ->
+                            returnMsgAsCmd config.openLaunchBarMsg
+
+                        KX.CharT ->
+                            returnMsgAsCmd config.onGotoRunningTodoMsg
+
+                        _ ->
+                            identity
+
+                ( KX.Escape, _ ) ->
+                    returnMsgAsCmd config.revertExclusiveMode
+
+                _ ->
+                    identity
+        )
 
 
 updateConfig : AppModel -> UpdateConfig AppMsg

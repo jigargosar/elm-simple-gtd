@@ -193,7 +193,7 @@ export default {
         contentBase: [path.join(__dirname, "static")],
         host: "localhost",
         watchOptions: {
-            aggregateTimeout: 700,
+            aggregateTimeout: 300,
         },
     },
 };

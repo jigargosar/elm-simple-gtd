@@ -126,10 +126,6 @@ updateEntityListCursorMsg =
     EM_UpdateEntityListCursor |> OnEntityMsg
 
 
-bringEntityIdInViewMsg =
-    EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
-
-
 setFocusInEntityWithEntityIdMsg =
     EM_SetFocusInEntityWithEntityId >> OnEntityMsg
 
@@ -371,7 +367,7 @@ updateConfig model =
     , onTodoMsgWithNow = OnTodoMsgWithNow
     , onLaunchBarMsgWithNow = OnLaunchBarMsgWithNow
     , onMdl = OnMdl
-    , bringEntityIdInViewMsg = bringEntityIdInViewMsg
+    , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , entityListFocusPreviousEntityMsg = Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
     , entityListFocusNextEntityMsg = Entity.Types.EM_EntityListFocusNext |> OnEntityMsg

@@ -48,8 +48,6 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
         , onGotoRunningTodoMsg : msg
-        , entityListFocusPreviousEntityMsg : msg
-        , entityListFocusNextEntityMsg : msg
     }
 
 

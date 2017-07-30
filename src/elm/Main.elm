@@ -246,14 +246,17 @@ type alias UpdateConfig msg =
     Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.Page.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
 
 
-update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
-update config msg =
+update : AppMsg -> ReturnF AppMsg AppModel
+update msg =
     let
+        config =
+            updateConfig
+
         onPersistLocalPref =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
 
-        updateEntityListCursor _ =
-            OnEntityMsg EM_UpdateEntityListCursor |> update config
+        updateEntityListCursorMsg =
+            OnEntityMsg EM_UpdateEntityListCursor
     in
     case msg of
         OnMdl msg_ ->
@@ -270,7 +273,7 @@ update config msg =
 
         OnGroupDocMsg msg_ ->
             Update.GroupDoc.update config msg_
-                >> updateEntityListCursor ()
+                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -295,7 +298,7 @@ update config msg =
 
         OnTodoMsgWithNow msg_ now ->
             Update.Todo.update config now msg_
-                >> updateEntityListCursor ()
+                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_
@@ -331,7 +334,10 @@ onSubscriptionMsg config msg =
 onGlobalKeyDown config key =
     let
         entityListFocusPreviousEntityMsg =
-            OnEntityMsg Entity.Types.EM_EntityListFocusPrev |> update config
+            OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+
+        entityListFocusNextEntityMsg =
+            OnEntityMsg Entity.Types.EM_EntityListFocusNext
     in
     returnWith .editMode
         (\editMode ->
@@ -339,11 +345,10 @@ onGlobalKeyDown config key =
                 ( key, XMNone ) ->
                     case key of
                         KX.ArrowUp ->
-                            entityListFocusPreviousEntityMsg
+                            returnMsgAsCmd entityListFocusPreviousEntityMsg
 
                         KX.ArrowDown ->
-                            returnMsgAsCmd
-                                config.entityListFocusNextEntityMsg
+                            returnMsgAsCmd entityListFocusNextEntityMsg
 
                         _ ->
                             identity
@@ -394,8 +399,8 @@ onGlobalKeyUp config key =
         )
 
 
-updateConfig : AppModel -> UpdateConfig AppMsg
-updateConfig model =
+updateConfig : UpdateConfig AppMsg
+updateConfig =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
@@ -412,8 +417,6 @@ updateConfig model =
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
     , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
-    , entityListFocusPreviousEntityMsg = Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
-    , entityListFocusNextEntityMsg = Entity.Types.EM_EntityListFocusNext |> OnEntityMsg
     }
 
 
@@ -541,7 +544,7 @@ main =
 
         update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
         update_ msg model =
-            model |> pure >> update (updateConfig model) msg
+            model |> pure >> update msg
     in
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash

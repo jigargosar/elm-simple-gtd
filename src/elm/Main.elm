@@ -107,26 +107,6 @@ switchToEntityListPageMsg =
 
 
 
---cs
-
-
-onStartCustomRemotePouchSync =
-    OnStartCustomSync >> OnCustomSyncMsg
-
-
-onUpdateCustomSyncFormUri =
-    OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
-
-
-
--- lbm
-
-
-openLaunchBarMsg =
-    LaunchBar.Messages.Open |> OnLaunchBarMsg
-
-
-
 -- ex mode
 
 
@@ -396,7 +376,7 @@ updateConfig model =
     , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
-    , openLaunchBarMsg = openLaunchBarMsg
+    , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = onSetExclusiveMode
     , revertExclusiveMode = revertExclusiveMode
@@ -486,8 +466,8 @@ viewConfig =
     , onToggleAppDrawerOverlay = onToggleAppDrawerOverlay
     , onAppDrawerMsg = onAppDrawerMsg
     , onStartAddingGroupDoc = onStartAddingGroupDoc
-    , onUpdateCustomSyncFormUri = onUpdateCustomSyncFormUri
-    , onStartCustomRemotePouchSync = onStartCustomRemotePouchSync
+    , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
+    , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
     , switchToEntityListPageMsg = switchToEntityListPageMsg
     , gotoPageMsg = SwitchView >> OnPageMsg
     , onMdl = onMdl

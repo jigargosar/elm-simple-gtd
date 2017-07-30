@@ -136,8 +136,7 @@ appendToSequence msg =
 
 
 type SubscriptionMsg
-    = OnNowChanged Time
-    | OnPouchDBChange String E.Value
+    = OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
 
 
@@ -159,6 +158,7 @@ type AppMsg
     | Mdl (Material.Msg AppMsg)
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
+    | OnNowChanged Time
 
 
 
@@ -230,9 +230,9 @@ subscriptions model =
     Sub.batch
         [ Keyboard.ups OnGlobalKeyUp
         , Keyboard.downs OnGlobalKeyDown
+        , everyXSeconds 1 OnNowChanged
         , Sub.batch
-            [ everyXSeconds 1 OnNowChanged
-            , Ports.pouchDBChanges (uncurry OnPouchDBChange)
+            [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
             ]
             |> Sub.map OnSubscriptionMsg
@@ -361,6 +361,13 @@ update msg =
         OnGlobalKeyDown keyCode ->
             onGlobalKeyDown config (KX.fromCode keyCode)
 
+        OnNowChanged now ->
+            let
+                setNow now model =
+                    { model | now = now }
+            in
+            map (setNow now)
+
         OnPageMsg msg_ ->
             Update.Page.update config msg_
 
@@ -412,13 +419,6 @@ update msg =
 
 onSubscriptionMsg config msg =
     case msg of
-        OnNowChanged now ->
-            let
-                setNow now model =
-                    { model | now = now }
-            in
-            map (setNow now)
-
         OnPouchDBChange dbName encodedDoc ->
             Update.Subscription.onPouchDBChange config dbName encodedDoc
 

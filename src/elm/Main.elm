@@ -131,19 +131,7 @@ setFocusInEntityWithEntityIdMsg =
 
 
 
--- tdo
-
-
-onSaveTodoForm =
-    Todo.Msg.OnSaveTodoForm >> OnTodoMsg
-
-
-
 -- gd
-
-
-onSaveGroupDocForm =
-    Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
 
 
 onToggleGroupDocArchived groupDocId =
@@ -362,8 +350,8 @@ updateConfig model =
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , saveTodoForm = onSaveTodoForm
-    , saveGroupDocForm = onSaveGroupDocForm
+    , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
+    , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
     , onTodoMsgWithNow = OnTodoMsgWithNow
     , onLaunchBarMsgWithNow = OnLaunchBarMsgWithNow
     , onMdl = OnMdl

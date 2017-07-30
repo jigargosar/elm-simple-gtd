@@ -662,6 +662,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -700,7 +701,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 71,
+    "transitiveImportsCount": 72,
     "backwardImports": [
       "Main"
     ],
@@ -910,13 +911,14 @@
       "Entity.Tree",
       "Entity.Types",
       "Models.EntityTree",
+      "Models.HasStores",
       "Page",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
       "X.List"
     ],
-    "importsCount": 9,
+    "importsCount": 10,
     "transitiveImports": [
       "Char",
       "Context",
@@ -935,6 +937,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -964,7 +967,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 46,
     "backwardImports": [
       "Entity.ListView",
       "Main",
@@ -2610,14 +2613,17 @@
     ],
     "transitiveImportsCount": 13,
     "backwardImports": [
+      "EntityListCursor",
       "Update.Entity"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
+      "Entity.ListView",
+      "EntityListCursor",
       "Main",
       "Update.Entity"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 4
   },
   "Models.Selection": {
     "fileName": "src/elm/Models/Selection.elm",

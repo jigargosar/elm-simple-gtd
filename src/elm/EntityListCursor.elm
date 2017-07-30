@@ -4,6 +4,7 @@ import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
 import Models.EntityTree
+import Models.HasStores exposing (HasPage, HasStores)
 import Page
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -38,10 +39,9 @@ createEntityListForCurrentView model =
         ?= []
 
 
-
---computeMaybeNewEntityIdAtCursor : SubModel model -> Maybe EntityId
-
-
+computeMaybeNewEntityIdAtCursor :
+    HasPage (HasStores (HasEntityListCursor model))
+    -> Maybe EntityId
 computeMaybeNewEntityIdAtCursor model =
     let
         newEntityIdList =

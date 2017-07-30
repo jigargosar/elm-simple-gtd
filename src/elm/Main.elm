@@ -122,10 +122,6 @@ onSaveExclusiveModeForm =
 -- entityMsg
 
 
-updateEntityListCursorMsg =
-    EM_UpdateEntityListCursor |> OnEntityMsg
-
-
 setFocusInEntityWithEntityIdMsg =
     EM_SetFocusInEntityWithEntityId >> OnEntityMsg
 
@@ -274,6 +270,9 @@ update config msg =
     let
         onPersistLocalPref =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
+
+        updateEntityListCursor _ =
+            OnEntityMsg EM_UpdateEntityListCursor |> update config
     in
     case msg of
         OnMdl msg_ ->
@@ -290,7 +289,7 @@ update config msg =
 
         OnGroupDocMsg msg_ ->
             Update.GroupDoc.update config msg_
-                >> returnMsgAsCmd updateEntityListCursorMsg
+                >> updateEntityListCursor ()
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -315,7 +314,7 @@ update config msg =
 
         OnTodoMsgWithNow msg_ now ->
             Update.Todo.update config now msg_
-                >> returnMsgAsCmd updateEntityListCursorMsg
+                >> updateEntityListCursor ()
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_

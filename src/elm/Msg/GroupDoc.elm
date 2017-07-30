@@ -16,3 +16,7 @@ updateGroupDocFromNameMsg form newName =
 
 onToggleGroupDocArchived groupDocId =
     OnGroupDocIdAction groupDocId GDA_ToggleArchived
+
+
+onStartEditingGroupDoc groupDocId =
+    OnGroupDocIdAction groupDocId GDA_StartEditing

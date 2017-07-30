@@ -134,14 +134,6 @@ setFocusInEntityWithEntityIdMsg =
 -- gd
 
 
-onToggleGroupDocArchived =
-    Msg.GroupDoc.onToggleGroupDocArchived >> OnGroupDocMsg
-
-
-onStartEditingGroupDoc groupDocId =
-    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_StartEditing |> OnGroupDocMsg
-
-
 onStartAddingGroupDoc gdType =
     Msg.GroupDoc.OnGroupDocAction gdType GDA_StartAdding |> OnGroupDocMsg
 
@@ -447,10 +439,10 @@ viewConfig =
     , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> OnTodoMsg
     , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> OnTodoMsg
     , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> OnTodoMsg
-    , onToggleGroupDocArchived = onToggleGroupDocArchived
+    , onToggleGroupDocArchived = Msg.GroupDoc.onToggleGroupDocArchived >> OnGroupDocMsg
     , updateGroupDocFromNameMsg =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
-    , onStartEditingGroupDoc = onStartEditingGroupDoc
+    , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     }
 

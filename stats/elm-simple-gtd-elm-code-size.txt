@@ -1,5 +1,5 @@
-    9795 total
-     498 src/elm/Main.elm
+    9791 total
+     490 src/elm/Main.elm
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -86,6 +86,7 @@
       30 src/elm/Page.elm
       27 src/elm/Types/Store.elm
       24 src/elm/EntityListCursor.elm
+      22 src/elm/Msg/GroupDoc.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
@@ -100,7 +101,6 @@
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      18 src/elm/Msg/GroupDoc.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm

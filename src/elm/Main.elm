@@ -334,6 +334,8 @@ updateConfig =
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
     , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
+    , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
+    , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
     }
 
 
@@ -354,10 +356,10 @@ update msg =
             andThen (Material.update Mdl msg_)
 
         OnGlobalKeyUp keyCode ->
-            onGlobalKeyUp config (KX.fromCode keyCode)
+            Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)
 
         OnGlobalKeyDown keyCode ->
-            onGlobalKeyDown config (KX.fromCode keyCode)
+            Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
 
         OnNowChanged now ->
             let
@@ -422,76 +424,6 @@ onSubscriptionMsg config msg =
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
             effect (Update.Subscription.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
-
-
-onGlobalKeyDown config key =
-    let
-        onEditModeNone =
-            case key of
-                KX.ArrowUp ->
-                    OnEntityMsg Entity.Types.EM_EntityListFocusPrev
-                        |> appendToSequence
-
-                KX.ArrowDown ->
-                    OnEntityMsg Entity.Types.EM_EntityListFocusNext
-                        |> appendToSequence
-
-                _ ->
-                    identity
-    in
-    (\editMode ->
-        case editMode of
-            XMNone ->
-                onEditModeNone
-
-            _ ->
-                identity
-    )
-        |> returnWith .editMode
-
-
-onGlobalKeyUp config key =
-    let
-        clear =
-            map Models.Selection.clearSelection
-                >> returnMsgAsCmd config.revertExclusiveMode
-
-        onEditModeNone =
-            case key of
-                KX.Escape ->
-                    clear
-
-                KX.CharX ->
-                    clear
-
-                KX.CharQ ->
-                    returnMsgAsCmd
-                        config.onStartAddingTodoWithFocusInEntityAsReference
-
-                KX.CharI ->
-                    returnMsgAsCmd config.onStartAddingTodoToInbox
-
-                KX.Slash ->
-                    returnMsgAsCmd config.openLaunchBarMsg
-
-                KX.CharT ->
-                    returnMsgAsCmd config.onGotoRunningTodoMsg
-
-                _ ->
-                    identity
-    in
-    (\editMode ->
-        case ( key, editMode ) of
-            ( _, XMNone ) ->
-                onEditModeNone
-
-            ( KX.Escape, _ ) ->
-                returnMsgAsCmd config.revertExclusiveMode
-
-            _ ->
-                identity
-    )
-        |> returnWith .editMode
 
 
 type alias ViewConfig msg =

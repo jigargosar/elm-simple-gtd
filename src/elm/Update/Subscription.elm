@@ -1,7 +1,10 @@
 module Update.Subscription exposing (..)
 
 import Entity.Types exposing (..)
+import ExclusiveMode.Types
+import Keyboard.Extra exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)
+import Models.Selection
 import Models.Todo exposing (todoStore)
 import Return
 import Store
@@ -40,7 +43,79 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
         , onGotoRunningTodoMsg : msg
+        , focusNextEntityMsg : msg
+        , focusPrevEntityMsg : msg
     }
+
+
+onGlobalKeyDown config key =
+    let
+        onEditModeNone =
+            case key of
+                ArrowUp ->
+                    config.focusPrevEntityMsg
+                        |> returnMsgAsCmd
+
+                ArrowDown ->
+                    config.focusNextEntityMsg
+                        |> returnMsgAsCmd
+
+                _ ->
+                    identity
+    in
+    (\editMode ->
+        case editMode of
+            ExclusiveMode.Types.XMNone ->
+                onEditModeNone
+
+            _ ->
+                identity
+    )
+        |> returnWith .editMode
+
+
+onGlobalKeyUp config key =
+    let
+        clear =
+            map Models.Selection.clearSelection
+                >> returnMsgAsCmd config.revertExclusiveMode
+
+        onEditModeNone =
+            case key of
+                Escape ->
+                    clear
+
+                CharX ->
+                    clear
+
+                CharQ ->
+                    returnMsgAsCmd
+                        config.onStartAddingTodoWithFocusInEntityAsReference
+
+                CharI ->
+                    returnMsgAsCmd config.onStartAddingTodoToInbox
+
+                Slash ->
+                    returnMsgAsCmd config.openLaunchBarMsg
+
+                CharT ->
+                    returnMsgAsCmd config.onGotoRunningTodoMsg
+
+                _ ->
+                    identity
+    in
+    (\editMode ->
+        case ( key, editMode ) of
+            ( _, ExclusiveMode.Types.XMNone ) ->
+                onEditModeNone
+
+            ( Escape, _ ) ->
+                returnMsgAsCmd config.revertExclusiveMode
+
+            _ ->
+                identity
+    )
+        |> returnWith .editMode
 
 
 onPouchDBChange config dbName encodedDoc =

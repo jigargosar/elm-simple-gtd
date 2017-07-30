@@ -329,14 +329,17 @@ onSubscriptionMsg config msg =
 
 
 onGlobalKeyDown config key =
+    let
+        entityListFocusPreviousEntityMsg =
+            OnEntityMsg Entity.Types.EM_EntityListFocusPrev |> update config
+    in
     returnWith .editMode
         (\editMode ->
             case ( key, editMode ) of
                 ( key, XMNone ) ->
                     case key of
                         KX.ArrowUp ->
-                            returnMsgAsCmd
-                                config.entityListFocusPreviousEntityMsg
+                            entityListFocusPreviousEntityMsg
 
                         KX.ArrowDown ->
                             returnMsgAsCmd

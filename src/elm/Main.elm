@@ -2,26 +2,30 @@ module Main exposing (main)
 
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import CommonMsg
+import CommonMsg.Types
 import Context
 import Entity.ListView
 import Entity.Types exposing (..)
 import EntityListCursor
 import ExclusiveMode.Types exposing (..)
-import Firebase
+import Firebase exposing (..)
+import GroupDoc
 import Json.Encode as E
 import Keyboard
-import LaunchBar.Messages
+import LaunchBar.Messages exposing (LaunchBarMsg)
 import LocalPref
 import Mat exposing (cs)
 import Material
 import Material.Options exposing (div)
 import Menu
 import Menu.Types
-import Msg exposing (..)
+import Msg.AppHeader exposing (AppHeaderMsg(..))
+import Msg.CustomSync exposing (CustomSyncMsg(..))
+import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
-import Msg.GroupDoc
-import Msg.Subscription exposing (..)
-import Page
+import Msg.GroupDoc exposing (GroupDocMsg)
+import Msg.Subscription exposing (SubscriptionMsg)
+import Page exposing (PageMsg(..))
 import Pages.EntityList exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
@@ -37,6 +41,7 @@ import Todo.Msg exposing (..)
 import Todo.Notification.Model
 import Todo.Store
 import Todo.TimeTracker
+import Toolkit.Operators exposing (..)
 import Types.AppModel exposing (..)
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
@@ -63,6 +68,160 @@ import X.Random
 import X.Return exposing (..)
 
 
+type AppMsg
+    = OnCommonMsg CommonMsg.Types.Msg
+    | OnSubscriptionMsg SubscriptionMsg
+    | OnPageMsg PageMsg
+    | OnExclusiveModeMsg ExclusiveModeMsg
+    | OnAppHeaderMsg AppHeaderMsg
+    | OnCustomSyncMsg CustomSyncMsg
+    | OnEntityMsg Entity.Types.EntityMsg
+    | OnLaunchBarMsg LaunchBarMsg
+    | OnLaunchBarMsgWithNow LaunchBarMsg Time
+    | OnGroupDocMsg GroupDocMsg
+    | OnTodoMsg TodoMsg
+    | OnTodoMsgWithNow TodoMsg Time
+    | OnFirebaseMsg FirebaseMsg
+    | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
+    | OnMdl (Material.Msg AppMsg)
+
+
+
+-- common
+
+
+commonMsg =
+    CommonMsg.createHelper OnCommonMsg
+
+
+noop =
+    commonMsg.noOp
+
+
+
+--  view type
+
+
+switchToEntityListPageMsg =
+    SwitchToEntityListView >> OnPageMsg
+
+
+
+--cs
+
+
+onStartCustomRemotePouchSync =
+    OnStartCustomSync >> OnCustomSyncMsg
+
+
+onUpdateCustomSyncFormUri =
+    OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
+
+
+
+-- lbm
+
+
+openLaunchBarMsg =
+    LaunchBar.Messages.Open |> OnLaunchBarMsg
+
+
+
+-- ex mode
+
+
+revertExclusiveMode =
+    Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus |> OnExclusiveModeMsg
+
+
+onSetExclusiveMode =
+    Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
+
+
+onSaveExclusiveModeForm =
+    Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
+
+
+
+-- entityMsg
+
+
+updateEntityListCursorMsg =
+    EM_UpdateEntityListCursor |> OnEntityMsg
+
+
+onEntityUpdateMsg =
+    Entity.Types.EM_Update >>> OnEntityMsg
+
+
+entityListFocusPreviousEntityMsg =
+    Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
+
+
+entityListFocusNextEntityMsg =
+    Entity.Types.EM_EntityListFocusNext |> OnEntityMsg
+
+
+onToggleEntitySelection =
+    EM_Update # EUA_ToggleSelection >> OnEntityMsg
+
+
+bringEntityIdInViewMsg =
+    EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
+
+
+setFocusInEntityWithEntityIdMsg =
+    EM_SetFocusInEntityWithEntityId >> OnEntityMsg
+
+
+
+-- tdo
+
+
+onSaveTodoForm =
+    Todo.Msg.OnSaveTodoForm >> OnTodoMsg
+
+
+
+-- gd
+
+
+onSaveGroupDocForm =
+    Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
+
+
+onToggleGroupDocArchived groupDocId =
+    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_ToggleArchived |> OnGroupDocMsg
+
+
+onStartEditingGroupDoc groupDocId =
+    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_StartEditing |> OnGroupDocMsg
+
+
+onStartAddingGroupDoc gdType =
+    Msg.GroupDoc.OnGroupDocAction gdType GDA_StartAdding |> OnGroupDocMsg
+
+
+
+--drawer
+
+
+onToggleAppDrawerOverlay =
+    OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
+
+
+onAppDrawerMsg =
+    OnAppDrawerMsg
+
+
+
+-- mdl
+
+
+onMdl =
+    OnMdl
+
+
 subscriptions model =
     Sub.batch
         [ Sub.batch
@@ -72,23 +231,23 @@ subscriptions model =
             , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
             ]
-            |> Sub.map Msg.OnSubscriptionMsg
+            |> Sub.map OnSubscriptionMsg
         , Sub.batch
             [ notificationClicked OnReminderNotificationClicked
             , onRunningTodoNotificationClicked RunningNotificationResponse
             , Time.every (Time.second * 1 * model.config.debugSecondMultiplier) (\_ -> UpdateTimeTracker)
             , Time.every (Time.second * 30 * model.config.debugSecondMultiplier) (\_ -> OnProcessPendingNotificationCronTick)
             ]
-            |> Sub.map Msg.OnTodoMsg
+            |> Sub.map OnTodoMsg
         , Sub.batch
             [ onFirebaseUserChanged OnFBUserChanged
             , onFCMTokenChanged OnFBFCMTokenChanged
             , onFirebaseConnectionChanged OnFBConnectionChanged
             ]
-            |> Sub.map Msg.OnFirebaseMsg
+            |> Sub.map OnFirebaseMsg
         , Sub.batch
             [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
-            |> Sub.map Msg.OnAppDrawerMsg
+            |> Sub.map OnAppDrawerMsg
         ]
 
 
@@ -195,7 +354,7 @@ update config msg =
 
         OnGroupDocMsg msg_ ->
             Update.GroupDoc.update config msg_
-                >> returnMsgAsCmd Msg.updateEntityListCursorMsg
+                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -220,7 +379,7 @@ update config msg =
 
         OnTodoMsgWithNow msg_ now ->
             Update.Todo.update config now msg_
-                >> returnMsgAsCmd Msg.updateEntityListCursorMsg
+                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_
@@ -233,29 +392,29 @@ update config msg =
 
 updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
-    { noop = Msg.noop
-    , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> Msg.OnTodoMsg
+    { noop = noop
+    , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
-    , openLaunchBarMsg = Msg.openLaunchBarMsg
-    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> Msg.OnTodoMsg
-    , onSetExclusiveMode = Msg.onSetExclusiveMode
-    , revertExclusiveMode = Msg.revertExclusiveMode
-    , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
-    , setDomFocusToFocusInEntityCmd = Msg.setDomFocusToFocusInEntityCmd
-    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> Msg.OnTodoMsg
-    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> Msg.OnTodoMsg
-    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
-    , saveTodoForm = Msg.onSaveTodoForm
-    , saveGroupDocForm = Msg.onSaveGroupDocForm
-    , onTodoMsgWithNow = Msg.OnTodoMsgWithNow
-    , onLaunchBarMsgWithNow = Msg.OnLaunchBarMsgWithNow
-    , onMdl = Msg.OnMdl
-    , bringEntityIdInViewMsg = Msg.bringEntityIdInViewMsg
-    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> Msg.OnTodoMsg
-    , entityListFocusPreviousEntityMsg = Msg.entityListFocusPreviousEntityMsg
-    , entityListFocusNextEntityMsg = Msg.entityListFocusNextEntityMsg
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
+    , openLaunchBarMsg = openLaunchBarMsg
+    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
+    , onSetExclusiveMode = onSetExclusiveMode
+    , revertExclusiveMode = revertExclusiveMode
+    , switchToEntityListPageMsg = switchToEntityListPageMsg
+    , setDomFocusToFocusInEntityCmd = commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]"
+    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
+    , onSaveExclusiveModeForm = onSaveExclusiveModeForm
+    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
+    , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
+    , saveTodoForm = onSaveTodoForm
+    , saveGroupDocForm = onSaveGroupDocForm
+    , onTodoMsgWithNow = OnTodoMsgWithNow
+    , onLaunchBarMsgWithNow = OnLaunchBarMsgWithNow
+    , onMdl = OnMdl
+    , bringEntityIdInViewMsg = bringEntityIdInViewMsg
+    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
+    , entityListFocusPreviousEntityMsg = entityListFocusPreviousEntityMsg
+    , entityListFocusNextEntityMsg = entityListFocusNextEntityMsg
     }
 
 
@@ -305,50 +464,50 @@ type alias ViewConfig msg =
     }
 
 
-viewConfig : ViewConfig Msg.AppMsg
+viewConfig : ViewConfig AppMsg
 viewConfig =
-    { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> Msg.OnTodoMsg
-    , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> Msg.OnTodoMsg
-    , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> Msg.OnTodoMsg
-    , noop = Msg.noop
-    , revertExclusiveMode = Msg.revertExclusiveMode
-    , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> Msg.OnTodoMsg
-    , onToggleDeleted = Todo.Msg.onToggleDeleted >> Msg.OnTodoMsg
-    , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> Msg.OnTodoMsg
-    , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> Msg.OnTodoMsg
-    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-    , onEntityUpdateMsg = Msg.onEntityUpdateMsg
-    , onMainMenuStateChanged = Msg.onMainMenuStateChanged
-    , onSignIn = Msg.onSignIn
-    , onSignOut = Msg.onSignOut
-    , onLaunchBarMsg = Msg.OnLaunchBarMsg
-    , onFirebaseMsg = Msg.OnFirebaseMsg
-    , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> Msg.OnTodoMsg
-    , onToggleAppDrawerOverlay = Msg.onToggleAppDrawerOverlay
-    , onAppDrawerMsg = Msg.onAppDrawerMsg
-    , onStartAddingGroupDoc = Msg.onStartAddingGroupDoc
-    , onUpdateCustomSyncFormUri = Msg.onUpdateCustomSyncFormUri
-    , onStartCustomRemotePouchSync = Msg.onStartCustomRemotePouchSync
-    , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
-    , gotoPageMsg = Msg.gotoPageMsg
-    , onMdl = Msg.onMdl
-    , onShowMainMenu = Msg.onShowMainMenu
-    , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> Msg.OnTodoMsg
+    { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> OnTodoMsg
+    , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> OnTodoMsg
+    , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> OnTodoMsg
+    , noop = noop
+    , revertExclusiveMode = revertExclusiveMode
+    , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> OnTodoMsg
+    , onToggleDeleted = Todo.Msg.onToggleDeleted >> OnTodoMsg
+    , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> OnTodoMsg
+    , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> OnTodoMsg
+    , onSaveExclusiveModeForm = onSaveExclusiveModeForm
+    , onEntityUpdateMsg = onEntityUpdateMsg
+    , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
+    , onSignIn = OnFirebaseMsg OnFBSignIn
+    , onSignOut = OnFirebaseMsg OnFBSignOut
+    , onLaunchBarMsg = OnLaunchBarMsg
+    , onFirebaseMsg = OnFirebaseMsg
+    , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
+    , onToggleAppDrawerOverlay = onToggleAppDrawerOverlay
+    , onAppDrawerMsg = onAppDrawerMsg
+    , onStartAddingGroupDoc = onStartAddingGroupDoc
+    , onUpdateCustomSyncFormUri = onUpdateCustomSyncFormUri
+    , onStartCustomRemotePouchSync = onStartCustomRemotePouchSync
+    , switchToEntityListPageMsg = switchToEntityListPageMsg
+    , gotoPageMsg = SwitchView >> OnPageMsg
+    , onMdl = onMdl
+    , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
+    , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
-    , onToggleEntitySelection = Msg.onToggleEntitySelection
-    , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> Msg.OnTodoMsg
-    , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> Msg.OnTodoMsg
-    , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> Msg.OnTodoMsg
-    , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> Msg.OnTodoMsg
-    , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> Msg.OnTodoMsg
-    , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> Msg.OnTodoMsg
-    , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> Msg.OnTodoMsg
-    , onToggleGroupDocArchived = Msg.onToggleGroupDocArchived
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
+    , onToggleEntitySelection = onToggleEntitySelection
+    , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
+    , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
+    , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> OnTodoMsg
+    , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> OnTodoMsg
+    , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> OnTodoMsg
+    , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> OnTodoMsg
+    , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> OnTodoMsg
+    , onToggleGroupDocArchived = onToggleGroupDocArchived
     , updateGroupDocFromNameMsg =
-        Msg.GroupDoc.updateGroupDocFromNameMsg >>> Msg.OnGroupDocMsg
-    , onStartEditingGroupDoc = Msg.onStartEditingGroupDoc
-    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
+        Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
+    , onStartEditingGroupDoc = onStartEditingGroupDoc
+    , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     }
 
 
@@ -379,7 +538,7 @@ main =
     let
         init =
             createAppModel
-                >> update_ Msg.onSwitchToNewUserSetupModeIfNeeded
+                >> update_ (OnFirebaseMsg OnFB_SwitchToNewUserSetupModeIfNeeded)
 
         update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
         update_ msg model =

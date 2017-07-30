@@ -74,14 +74,13 @@ update config msg =
             let
                 afterEntityUpsertOnPouchDBChange ( entity, model ) =
                     map (\_ -> model)
-                        >> returnMsgAsCmd
-                            (case entity of
+                        >> (case entity of
                                 TodoEntity todo ->
-                                    config.afterTodoUpsert todo
+                                    config.afterTodoUpsert todo |> returnMsgAsCmd
 
                                 _ ->
-                                    config.noop
-                            )
+                                    identity
+                           )
             in
             X.Return.returnWithMaybe2 identity
                 (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)

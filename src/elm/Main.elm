@@ -19,7 +19,6 @@ import Todo.Msg exposing (..)
 import Types.AppModel exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
-import Update.Config
 import Update.CustomSync
 import Update.Entity
 import Update.ExclusiveMode
@@ -122,6 +121,34 @@ update config msg =
                 >> onPersistLocalPref
 
 
+updateConfig : AppModel -> UpdateConfig AppMsg
+updateConfig model =
+    { noop = Msg.noop
+    , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> Msg.OnTodoMsg
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
+    , openLaunchBarMsg = Msg.openLaunchBarMsg
+    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> Msg.OnTodoMsg
+    , onSetExclusiveMode = Msg.onSetExclusiveMode
+    , revertExclusiveMode = Msg.revertExclusiveMode
+    , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
+    , setDomFocusToFocusInEntityCmd = Msg.setDomFocusToFocusInEntityCmd
+    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> Msg.OnTodoMsg
+    , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
+    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> Msg.OnTodoMsg
+    , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
+    , saveTodoForm = Msg.onSaveTodoForm
+    , saveGroupDocForm = Msg.onSaveGroupDocForm
+    , onTodoMsgWithNow = Msg.OnTodoMsgWithNow
+    , onLaunchBarMsgWithNow = Msg.OnLaunchBarMsgWithNow
+    , onMdl = Msg.OnMdl
+    , bringEntityIdInViewMsg = Msg.bringEntityIdInViewMsg
+    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> Msg.OnTodoMsg
+    , entityListFocusPreviousEntityMsg = Msg.entityListFocusPreviousEntityMsg
+    , entityListFocusNextEntityMsg = Msg.entityListFocusNextEntityMsg
+    }
+
+
 main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg
 main =
     let
@@ -131,7 +158,7 @@ main =
 
         update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
         update_ msg model =
-            model |> pure >> update (Update.Config.updateConfig model) msg
+            model |> pure >> update (updateConfig model) msg
     in
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash

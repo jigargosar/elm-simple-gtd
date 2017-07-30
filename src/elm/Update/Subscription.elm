@@ -22,7 +22,6 @@ type alias SubModel model =
         | todoStore : TodoStore
         , projectStore : ProjectStore
         , contextStore : ContextStore
-        , editMode : ExclusiveMode
         , selectedEntityIdSet : Set.Set String
     }
 

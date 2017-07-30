@@ -5,7 +5,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Keyboard exposing (onKeyDownStopPropagation)
 

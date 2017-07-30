@@ -18,9 +18,7 @@ import Project
 import String.Extra
 import Todo
 import Toolkit.Operators exposing (..)
-import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (when)
 import X.Maybe
 

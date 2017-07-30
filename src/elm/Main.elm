@@ -10,8 +10,6 @@ import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
-import Firebase.SignIn
-import GroupDoc
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)

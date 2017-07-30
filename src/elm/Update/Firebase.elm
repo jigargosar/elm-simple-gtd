@@ -2,7 +2,6 @@ module Update.Firebase exposing (Config, update)
 
 import AppUrl
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
-import Firebase
 import Firebase.Model
 import Firebase.SignIn exposing (SignInModel, SignInModelF)
 import Json.Decode as D exposing (Decoder)

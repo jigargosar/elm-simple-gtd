@@ -1,14 +1,14 @@
-    9817 total
-     632 src/elm/Main.elm
+    9790 total
+     630 src/elm/Main.elm
      432 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      277 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
-     243 src/elm/AppDrawer/GroupViewModel.elm
+     241 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
      221 src/elm/GroupDoc/ViewModel.elm
-     196 src/elm/Update/Firebase.elm
+     195 src/elm/Update/Firebase.elm
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
      160 src/elm/Todo/ItemView.elm
@@ -28,11 +28,11 @@
      110 src/elm/X/Record.elm
      110 src/elm/Models/EntityTree.elm
      106 src/elm/Todo/TimeTracker.elm
-     104 src/elm/ViewModel.elm
      103 src/elm/Todo/View.elm
+      98 src/elm/ViewModel.elm
       98 src/elm/Firebase/SignIn.elm
-      97 src/elm/Update/Subscription.elm
       93 src/elm/X/Time.elm
+      92 src/elm/Update/Subscription.elm
       91 src/elm/Update/ExclusiveMode.elm
       91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
@@ -60,7 +60,7 @@
       55 src/elm/LaunchBar/View.elm
       53 src/elm/Routes.elm
       53 src/elm/LaunchBar/Models.elm
-      51 src/elm/View/CustomSync.elm
+      50 src/elm/View/CustomSync.elm
       50 src/elm/Types/Todo.elm
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/Context.elm
@@ -84,7 +84,6 @@
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
       30 src/elm/Page.elm
-      27 src/elm/Types/Store.elm
       24 src/elm/EntityListCursor.elm
       22 src/elm/Msg/GroupDoc.elm
       22 src/elm/ExclusiveMode/Types.elm
@@ -101,6 +100,7 @@
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
+      17 src/elm/Types/Store.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm

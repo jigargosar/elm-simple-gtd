@@ -2,18 +2,12 @@ module ViewModel exposing (..)
 
 import AppColors
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
-import Color
-import Entity.Types exposing (..)
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import List.Extra as List
-import Material
 import Maybe.Extra as Maybe
 import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import Pages.EntityList exposing (..)
-import Todo.ItemView exposing (TodoViewModel)
 import Todo.ViewModel
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

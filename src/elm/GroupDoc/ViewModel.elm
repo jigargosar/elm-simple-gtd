@@ -12,10 +12,10 @@ import Pages.EntityList exposing (..)
 import Project
 import String.Extra
 import Todo
-import Types.Todo exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
+import Types.Todo exposing (..)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
 

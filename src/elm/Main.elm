@@ -185,8 +185,9 @@ switchToEntityListPageMsg =
 -- ex mode
 
 
-revertExclusiveMode =
-    Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus |> OnExclusiveModeMsg
+revertExclusiveModeMsg =
+    Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus
+        |> OnExclusiveModeMsg
 
 
 onSaveExclusiveModeForm =
@@ -311,6 +312,27 @@ createAppModel flags =
 
 type alias UpdateConfig msg =
     Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.Page.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
+
+
+updateConfig : UpdateConfig AppMsg
+updateConfig =
+    { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
+    , onStartAddingTodoWithFocusInEntityAsReference =
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
+    , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
+    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
+    , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
+    , revertExclusiveMode = revertExclusiveModeMsg
+    , switchToEntityListPageMsg = switchToEntityListPageMsg
+    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
+    , onSaveExclusiveModeForm = onSaveExclusiveModeForm
+    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
+    , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
+    , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
+    , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
+    , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
+    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
+    }
 
 
 update : AppMsg -> ReturnF AppMsg AppModel
@@ -470,27 +492,6 @@ onGlobalKeyUp config key =
         |> returnWith .editMode
 
 
-updateConfig : UpdateConfig AppMsg
-updateConfig =
-    { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
-    , onStartAddingTodoWithFocusInEntityAsReference =
-        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
-    , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
-    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
-    , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
-    , revertExclusiveMode = revertExclusiveMode
-    , switchToEntityListPageMsg = switchToEntityListPageMsg
-    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
-    , onSaveExclusiveModeForm = onSaveExclusiveModeForm
-    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
-    , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
-    , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
-    , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
-    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
-    }
-
-
 type alias ViewConfig msg =
     { noop : msg
     , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
@@ -543,7 +544,7 @@ viewConfig =
     , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> OnTodoMsg
     , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> OnTodoMsg
     , noop = noop
-    , revertExclusiveMode = revertExclusiveMode
+    , revertExclusiveMode = revertExclusiveModeMsg
     , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> OnTodoMsg
     , onToggleDeleted = Todo.Msg.onToggleDeleted >> OnTodoMsg
     , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> OnTodoMsg

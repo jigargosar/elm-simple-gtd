@@ -109,43 +109,6 @@ moveFocusBy config offset =
         )
 
 
-computeMaybeNewEntityIdAtCursor : SubModel model -> Maybe EntityId
-computeMaybeNewEntityIdAtCursor model =
-    let
-        newEntityIdList =
-            createEntityListForCurrentView model
-                .|> Entity.toEntityId
-
-        computeMaybeFEI index =
-            X.List.clampAndGetAtIndex index newEntityIdList
-
-        computeNewEntityIdAtCursor focusableEntityId =
-            ( model.entityListCursor.entityIdList, newEntityIdList )
-                |> Tuple2.mapBoth (X.List.firstIndexOf focusableEntityId)
-                |> (\( maybeOldIndex, maybeNewIndex ) ->
-                        case ( maybeOldIndex, maybeNewIndex, focusableEntityId ) of
-                            ( Just oldIndex, Just newIndex, TodoId _ ) ->
-                                case compare oldIndex newIndex of
-                                    LT ->
-                                        computeMaybeFEI oldIndex
-
-                                    GT ->
-                                        computeMaybeFEI (oldIndex + 1)
-
-                                    EQ ->
-                                        Nothing
-
-                            ( Just oldIndex, Nothing, _ ) ->
-                                computeMaybeFEI oldIndex
-
-                            _ ->
-                                Nothing
-                   )
-    in
-    model.entityListCursor.maybeEntityIdAtCursor
-        ?+> computeNewEntityIdAtCursor
-
-
 updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
 updateEntityListCursor config model =
     model
@@ -171,12 +134,6 @@ setEntityAtCursor maybeEntityIdAtCursor model =
             }
     in
     setIn model entityListCursor cursor
-
-
-createEntityListForCurrentView model =
-    Page.maybeGetEntityListPage model
-        ?|> (Models.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
-        ?= []
 
 
 onUpdateAction :

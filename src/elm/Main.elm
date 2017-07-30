@@ -408,64 +408,67 @@ onGlobalKeyDown config key =
         entityListFocusNextEntityMsg =
             OnEntityMsg Entity.Types.EM_EntityListFocusNext
     in
-    returnWith .editMode
-        (\editMode ->
-            case ( key, editMode ) of
-                ( key, XMNone ) ->
-                    case key of
-                        KX.ArrowUp ->
-                            appendToSequence entityListFocusPreviousEntityMsg
+    (\editMode ->
+        case ( key, editMode ) of
+            ( key, XMNone ) ->
+                case key of
+                    KX.ArrowUp ->
+                        appendToSequence entityListFocusPreviousEntityMsg
 
-                        KX.ArrowDown ->
-                            appendToSequence entityListFocusNextEntityMsg
+                    KX.ArrowDown ->
+                        appendToSequence entityListFocusNextEntityMsg
 
-                        _ ->
-                            identity
+                    _ ->
+                        identity
 
-                _ ->
-                    identity
-        )
+            _ ->
+                identity
+    )
+        |> returnWith .editMode
 
 
 onGlobalKeyUp config key =
-    returnWith .editMode
-        (\editMode ->
-            case ( key, editMode ) of
-                ( key, XMNone ) ->
-                    let
-                        clear =
-                            map Models.Selection.clearSelection
-                                >> returnMsgAsCmd config.revertExclusiveMode
-                    in
-                    case key of
-                        KX.Escape ->
-                            clear
+    let
+        clear =
+            map Models.Selection.clearSelection
+                >> returnMsgAsCmd config.revertExclusiveMode
 
-                        KX.CharX ->
-                            clear
+        onEditModeNone =
+            case key of
+                KX.Escape ->
+                    clear
 
-                        KX.CharQ ->
-                            returnMsgAsCmd
-                                config.onStartAddingTodoWithFocusInEntityAsReference
+                KX.CharX ->
+                    clear
 
-                        KX.CharI ->
-                            returnMsgAsCmd config.onStartAddingTodoToInbox
+                KX.CharQ ->
+                    returnMsgAsCmd
+                        config.onStartAddingTodoWithFocusInEntityAsReference
 
-                        KX.Slash ->
-                            returnMsgAsCmd config.openLaunchBarMsg
+                KX.CharI ->
+                    returnMsgAsCmd config.onStartAddingTodoToInbox
 
-                        KX.CharT ->
-                            returnMsgAsCmd config.onGotoRunningTodoMsg
+                KX.Slash ->
+                    returnMsgAsCmd config.openLaunchBarMsg
 
-                        _ ->
-                            identity
-
-                ( KX.Escape, _ ) ->
-                    returnMsgAsCmd config.revertExclusiveMode
+                KX.CharT ->
+                    returnMsgAsCmd config.onGotoRunningTodoMsg
 
                 _ ->
                     identity
-        )
+    in
+    (\editMode ->
+        case ( key, editMode ) of
+            ( key, XMNone ) ->
+                onEditModeNone
+
+            ( KX.Escape, _ ) ->
+                returnMsgAsCmd config.revertExclusiveMode
+
+            _ ->
+                identity
+    )
+        |> returnWith .editMode
 
 
 updateConfig : UpdateConfig AppMsg

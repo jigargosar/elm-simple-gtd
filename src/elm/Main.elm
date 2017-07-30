@@ -242,26 +242,7 @@ createAppModel flags =
 
 
 type alias UpdateConfig msg =
-    Update.LaunchBar.Config msg
-        (Update.AppHeader.Config msg
-            (Update.ExclusiveMode.Config msg
-                (Update.Page.Config msg
-                    (Update.Firebase.Config msg
-                        (Update.CustomSync.Config msg
-                            (Update.Entity.Config msg
-                                (Update.Subscription.Config msg
-                                    (Update.Todo.Config msg
-                                        { onTodoMsgWithNow : TodoMsg -> Time -> msg
-                                        , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
-                                        }
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
+    Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.Page.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
 
 
 update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
@@ -306,10 +287,10 @@ update config msg =
             Update.LaunchBar.update config now msg_
 
         OnLaunchBarMsg msg_ ->
-            returnWithNow (config.onLaunchBarMsgWithNow msg_)
+            returnWithNow (OnLaunchBarMsgWithNow msg_)
 
         OnTodoMsg msg_ ->
-            returnWithNow (config.onTodoMsgWithNow msg_)
+            returnWithNow (OnTodoMsgWithNow msg_)
 
         OnTodoMsgWithNow msg_ now ->
             Update.Todo.update config now msg_
@@ -340,8 +321,6 @@ updateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
-    , onTodoMsgWithNow = OnTodoMsgWithNow
-    , onLaunchBarMsgWithNow = OnLaunchBarMsgWithNow
     , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , entityListFocusPreviousEntityMsg = Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg

@@ -328,8 +328,7 @@ update config msg =
 
 updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
-    { noop = noop
-    , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
+    { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
     , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg

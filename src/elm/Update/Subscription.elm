@@ -43,8 +43,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg a =
     { a
-        | noop : msg
-        , onStartAddingTodoToInbox : msg
+        | onStartAddingTodoToInbox : msg
         , onStartAddingTodoWithFocusInEntityAsReference : msg
         , openLaunchBarMsg : msg
         , revertExclusiveMode : msg

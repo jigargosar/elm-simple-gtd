@@ -71,26 +71,6 @@ import X.Record exposing (..)
 import X.Return exposing (..)
 
 
-type alias SequencerModel msg =
-    { list : List msg
-    }
-
-
-sequencerInitialValue : SequencerModel msg
-sequencerInitialValue =
-    { list = [] }
-
-
-sequencerAppendToSequence msg =
-    \model -> { model | list = model.list ++ [ msg ] }
-
-
-sequencerProcessSequence : ReturnF msg (SequencerModel msg)
-sequencerProcessSequence =
-    returnWithMaybe1 (.list >> List.head) returnMsgAsCmd
-        >> map (\model -> { model | list = List.drop 1 model.list })
-
-
 type alias AppConfig =
     { debugSecondMultiplier : Float
     , deviceId : String
@@ -121,16 +101,7 @@ type alias AppModelOtherFields =
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
-    , sequencer : SequencerModel AppMsg
     }
-
-
-sequencer =
-    fieldLens .sequencer (\s b -> { b | sequencer = s })
-
-
-appendToSequence msg =
-    map (over sequencer (sequencerAppendToSequence msg))
 
 
 type SubscriptionMsg
@@ -306,7 +277,8 @@ createAppModel flags =
             , appDrawerModel = localPref.appDrawer
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
-            , sequencer = sequencerInitialValue
+
+            --            , sequencer = sequencerInitialValue
             }
     in
     model
@@ -351,7 +323,7 @@ update msg =
         updateEntityListCursorMsg =
             OnEntityMsg EM_UpdateEntityListCursor
     in
-    (case msg of
+    case msg of
         Mdl msg_ ->
             andThen (Material.update Mdl msg_)
 
@@ -413,8 +385,6 @@ update msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
-    )
-        >> overReturnF sequencer sequencerProcessSequence
 
 
 onSubscriptionMsg config msg =

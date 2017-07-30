@@ -1,5 +1,5 @@
-    9797 total
-     562 src/elm/Main.elm
+    9806 total
+     532 src/elm/Main.elm
      432 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -79,6 +79,7 @@
       40 src/elm/LocalPref.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
+      39 src/elm/Sequencer.elm
       37 src/elm/CommonMsg.elm
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm

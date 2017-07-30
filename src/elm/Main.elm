@@ -402,24 +402,23 @@ onSubscriptionMsg config msg =
 
 onGlobalKeyDown config key =
     let
-        entityListFocusPreviousEntityMsg =
-            OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+        onEditModeNone =
+            case key of
+                KX.ArrowUp ->
+                    OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+                        |> appendToSequence
 
-        entityListFocusNextEntityMsg =
-            OnEntityMsg Entity.Types.EM_EntityListFocusNext
+                KX.ArrowDown ->
+                    OnEntityMsg Entity.Types.EM_EntityListFocusNext
+                        |> appendToSequence
+
+                _ ->
+                    identity
     in
     (\editMode ->
-        case ( key, editMode ) of
-            ( key, XMNone ) ->
-                case key of
-                    KX.ArrowUp ->
-                        appendToSequence entityListFocusPreviousEntityMsg
-
-                    KX.ArrowDown ->
-                        appendToSequence entityListFocusNextEntityMsg
-
-                    _ ->
-                        identity
+        case editMode of
+            XMNone ->
+                onEditModeNone
 
             _ ->
                 identity
@@ -459,7 +458,7 @@ onGlobalKeyUp config key =
     in
     (\editMode ->
         case ( key, editMode ) of
-            ( key, XMNone ) ->
+            ( _, XMNone ) ->
                 onEditModeNone
 
             ( KX.Escape, _ ) ->

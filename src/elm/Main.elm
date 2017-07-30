@@ -325,7 +325,7 @@ update msg =
         updateEntityListCursorMsg =
             OnEntityMsg EM_UpdateEntityListCursor
     in
-    case msg of
+    (case msg of
         Mdl msg_ ->
             andThen (Material.update Mdl msg_)
 
@@ -374,10 +374,8 @@ update msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
-
-
-
---        >> andThen (overReturn sequencer sequencerProcessSequence)
+    )
+        >> andThen (overReturn sequencer (pure >> sequencerProcessSequence))
 
 
 onSubscriptionMsg config msg =

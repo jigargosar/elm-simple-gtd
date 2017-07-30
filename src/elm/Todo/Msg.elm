@@ -67,7 +67,7 @@ onStartAddingTodoToInbox =
 
 
 onStartAddingTodoWithFocusInEntityAsReference =
-    onStartAdding__ ATFM_AddWithFocusInEntityAsReference
+    ATFM_AddWithFocusInEntityAsReference >> onStartAdding__
 
 
 onStartSetupAddTodo =

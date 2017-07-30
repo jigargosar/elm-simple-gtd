@@ -130,6 +130,12 @@ type AppMsg
     | OnNowChanged Time
 
 
+onStartAddingTodoWithFocusInEntityAsReference model =
+    EntityListCursor.getMaybeEntityIdAtCursor model
+        |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
+        |> OnTodoMsg
+
+
 
 -- common
 
@@ -146,7 +152,7 @@ noop =
 --  view type
 
 
-switchToEntityListPageMsg =
+gotoEntityListPageMsg =
     SwitchToEntityListView >> OnPageMsg
 
 
@@ -288,16 +294,16 @@ type alias UpdateConfig msg =
     Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.Page.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
 
 
-updateConfig : UpdateConfig AppMsg
-updateConfig =
+updateConfig : AppModel -> UpdateConfig AppMsg
+updateConfig model =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
+        onStartAddingTodoWithFocusInEntityAsReference model
     , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
-    , switchToEntityListPageMsg = switchToEntityListPageMsg
+    , gotoEntityListPageMsg = gotoEntityListPageMsg
     , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
@@ -308,15 +314,13 @@ updateConfig =
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
     }
 
 
-update : AppMsg -> ReturnF AppMsg AppModel
-update msg =
+update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
+update config msg =
     let
-        config =
-            updateConfig
-
         onPersistLocalPref =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
 
@@ -437,13 +441,13 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
-    , switchToEntityListPageMsg : EntityListPageModel -> msg
+    , gotoEntityListPageMsg : EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     }
 
 
-viewConfig : ViewConfig AppMsg
-viewConfig =
+viewConfig : AppModel -> ViewConfig AppMsg
+viewConfig model =
     { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> OnTodoMsg
     , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> OnTodoMsg
     , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> OnTodoMsg
@@ -466,13 +470,13 @@ viewConfig =
     , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
-    , switchToEntityListPageMsg = switchToEntityListPageMsg
+    , gotoEntityListPageMsg = gotoEntityListPageMsg
     , gotoPageMsg = SwitchView >> OnPageMsg
     , onMdl = onMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
+        onStartAddingTodoWithFocusInEntityAsReference model
     , onToggleEntitySelection = EM_Update # EUA_ToggleSelection >> OnEntityMsg
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
@@ -520,13 +524,17 @@ main =
 
         update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
         update_ msg model =
-            model |> pure >> update msg
+            model |> pure >> update (updateConfig model) msg
     in
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
-        , location2messages = Routes.hash2messages viewConfig
+        , location2messages =
+            Routes.hash2messages
+                { gotoPageMsg = SwitchView >> OnPageMsg
+                , gotoEntityListPageMsg = gotoEntityListPageMsg
+                }
         , init = init
         , update = update_
-        , view = view viewConfig
+        , view = \model -> view (viewConfig model) model
         , subscriptions = subscriptions
         }

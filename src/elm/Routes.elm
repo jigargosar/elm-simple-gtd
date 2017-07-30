@@ -49,5 +49,5 @@ builder2messages config builder =
 
         _ ->
             routeUrlBuilderToMaybeEntityListPageModel builder
-                ?|> (config.switchToEntityListPageMsg >> X.List.singleton)
+                ?|> (config.gotoEntityListPageMsg >> X.List.singleton)
                 ?= [ config.gotoPageMsg Page.initialPage ]

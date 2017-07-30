@@ -1,5 +1,6 @@
 module Todo.FormTypes exposing (..)
 
+import Entity.Types exposing (EntityId)
 import Menu
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)
@@ -25,7 +26,7 @@ type TodoFormMode
 
 
 type AddTodoFormMode
-    = ATFM_AddWithFocusInEntityAsReference
+    = ATFM_AddWithFocusInEntityAsReference (Maybe EntityId)
     | ATFM_AddToInbox
     | ATFM_SetupFirstTodo
 

@@ -77,7 +77,7 @@ entityGroupView config vm page =
             EntityListPage vm.page == page
 
         fireSwitchView =
-            config.switchToEntityListPageMsg vm.page
+            config.gotoEntityListPageMsg vm.page
 
         fireSmart =
             if isCurrentView then
@@ -178,7 +178,7 @@ switchViewItemSmall config iconName page title =
 onSetEntityListViewItem config icon page title =
     li
         [ class ""
-        , onClick (config.switchToEntityListPageMsg page)
+        , onClick (config.gotoEntityListPageMsg page)
         ]
         [ icon
         , h5 [] [ text title ]

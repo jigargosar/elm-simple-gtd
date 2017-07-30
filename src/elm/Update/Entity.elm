@@ -52,7 +52,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
-        , switchToEntityListPageMsg : EntityListPageModel -> msg
+        , gotoEntityListPageMsg : EntityListPageModel -> msg
         , onStartEditingTodo : TodoDoc -> msg
     }
 
@@ -193,7 +193,7 @@ onUpdateAction config entityId action =
                     in
                     entityId
                         |> toPage model maybeEntityListPage
-                        |> config.switchToEntityListPageMsg
+                        |> config.gotoEntityListPageMsg
                         |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
@@ -203,7 +203,7 @@ onUpdateAction config entityId action =
                 (List.Extra.find (Entity.hasId entityId)
                     >> Maybe.Extra.unpack
                         (\_ ->
-                            returnMsgAsCmd (config.switchToEntityListPageMsg ContextsView)
+                            returnMsgAsCmd (config.gotoEntityListPageMsg ContextsView)
                                 >> update config (EM_SetFocusInEntityWithEntityId entityId)
                         )
                         (Entity.toEntityId

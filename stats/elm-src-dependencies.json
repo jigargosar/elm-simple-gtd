@@ -809,12 +809,13 @@
       "GroupDoc.ViewModel",
       "Main",
       "Models.Stores",
+      "Todo.FormTypes",
       "Todo.ViewModel",
       "Update.Entity",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 13,
+    "backwardImportsCount": 14,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Entity",
@@ -822,22 +823,35 @@
       "Entity.Tree",
       "EntityId",
       "EntityListCursor",
+      "ExclusiveMode.Types",
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.EntityTree",
       "Models.Stores",
+      "Msg.CustomSync",
+      "Msg.ExclusiveMode",
+      "Todo.Form",
+      "Todo.FormTypes",
+      "Todo.Msg",
       "Todo.ViewModel",
       "Types.AppModel",
+      "Update.AppHeader",
+      "Update.CustomSync",
       "Update.Entity",
+      "Update.ExclusiveMode",
+      "Update.Firebase",
+      "Update.GroupDoc",
+      "Update.LaunchBar",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.CustomSync",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 20
+    "transitiveBackwardImportsCount": 33
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -910,19 +924,16 @@
       "Entity.ListView",
       "Main",
       "Types.AppModel",
-      "Update.Entity",
-      "Update.Todo.Internal"
+      "Update.Entity"
     ],
-    "backwardImportsCount": 5,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "Entity.ListView",
       "Main",
       "Types.AppModel",
-      "Update.Entity",
-      "Update.Todo",
-      "Update.Todo.Internal"
+      "Update.Entity"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 4
   },
   "ExclusiveMode.Types": {
     "fileName": "src/elm/ExclusiveMode/Types.elm",
@@ -940,6 +951,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "Firebase.SignIn",
       "Fuzzy",
       "GroupDoc",
@@ -971,6 +983,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -982,7 +995,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 45,
+    "transitiveImportsCount": 47,
     "backwardImports": [
       "Main",
       "Msg.CustomSync",
@@ -2758,6 +2771,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -2790,6 +2804,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -2801,7 +2816,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 46,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "Main",
       "Update.CustomSync"
@@ -2826,6 +2841,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -2858,6 +2874,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -2869,7 +2886,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 46,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "Main",
       "Update.ExclusiveMode"
@@ -3517,6 +3534,7 @@
       "Date",
       "Dict",
       "Document",
+      "Entity.Types",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -3555,7 +3573,7 @@
       "X.List",
       "X.Record"
     ],
-    "transitiveImportsCount": 40,
+    "transitiveImportsCount": 41,
     "backwardImports": [
       "Update.Todo.Internal"
     ],
@@ -3572,13 +3590,16 @@
     "moduleName": "Todo.FormTypes",
     "parentModuleName": "Todo",
     "imports": [
+      "Entity.Types",
       "Menu",
       "Menu.Types",
       "Time",
       "Types.Document"
     ],
-    "importsCount": 4,
+    "importsCount": 5,
     "transitiveImports": [
+      "Dict",
+      "Entity.Types",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -3592,12 +3613,16 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Random.Pcg",
       "Set",
       "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
       "Types.Document",
+      "Types.GroupDoc",
+      "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -3606,7 +3631,7 @@
       "X.Keyboard",
       "X.List"
     ],
-    "transitiveImportsCount": 26,
+    "transitiveImportsCount": 32,
     "backwardImports": [
       "ExclusiveMode.Types",
       "Main",
@@ -3790,6 +3815,7 @@
       "Date.Extra",
       "Dict",
       "Document",
+      "Entity.Types",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -3830,7 +3856,7 @@
       "X.List",
       "X.Record"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 44,
     "backwardImports": [
       "Main",
       "Update.Todo"
@@ -4724,6 +4750,7 @@
       "Project",
       "Todo",
       "Todo.Form",
+      "Todo.FormTypes",
       "Todo.GroupEditView",
       "Todo.Msg",
       "Todo.Notification.Model",
@@ -4751,7 +4778,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 54
+    "transitiveBackwardImportsCount": 55
   },
   "Types.LocalPref": {
     "fileName": "src/elm/Types/LocalPref.elm",
@@ -4846,6 +4873,7 @@
       "Store",
       "Todo",
       "Todo.Form",
+      "Todo.FormTypes",
       "Todo.GroupEditView",
       "Todo.Msg",
       "Todo.Notification.Model",
@@ -4874,7 +4902,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 57
+    "transitiveBackwardImportsCount": 58
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -4927,6 +4955,7 @@
       "Entity.Types",
       "EntityId",
       "EntityListCursor",
+      "ExclusiveMode.Types",
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
@@ -4934,8 +4963,11 @@
       "Models.EntityTree",
       "Models.HasStores",
       "Models.Stores",
+      "Msg.CustomSync",
+      "Msg.ExclusiveMode",
       "Todo",
       "Todo.Form",
+      "Todo.FormTypes",
       "Todo.Msg",
       "Todo.Notification.Model",
       "Todo.Notification.Types",
@@ -4945,17 +4977,23 @@
       "Todo.TimeTracker.View",
       "Todo.ViewModel",
       "Types.AppModel",
+      "Update.AppHeader",
+      "Update.CustomSync",
       "Update.Entity",
+      "Update.ExclusiveMode",
       "Update.Firebase",
+      "Update.GroupDoc",
+      "Update.LaunchBar",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.CustomSync",
       "View.Header",
       "View.Layout",
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 34
+    "transitiveBackwardImportsCount": 44
   },
   "Update.AppDrawer": {
     "fileName": "src/elm/Update/AppDrawer.elm",
@@ -5011,6 +5049,7 @@
       "Dict",
       "Document",
       "DomPorts",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5045,6 +5084,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5057,7 +5097,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 50,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Main"
     ],
@@ -5083,6 +5123,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5117,6 +5158,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5129,7 +5171,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 51,
     "backwardImports": [
       "Main"
     ],
@@ -5267,6 +5309,7 @@
       "Dict",
       "Document",
       "DomPorts",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5301,6 +5344,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5313,7 +5357,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 50,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Main"
     ],
@@ -5352,6 +5396,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase",
       "Firebase.Model",
@@ -5405,7 +5450,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 57,
+    "transitiveImportsCount": 58,
     "backwardImports": [
       "Main"
     ],
@@ -5441,6 +5486,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5477,6 +5523,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5489,7 +5536,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 53,
     "backwardImports": [
       "Main"
     ],
@@ -5526,6 +5573,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5565,6 +5613,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -5577,7 +5626,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 54,
+    "transitiveImportsCount": 56,
     "backwardImports": [
       "Main"
     ],
@@ -5737,7 +5786,6 @@
       "Document",
       "DomPorts",
       "Entity.Types",
-      "EntityListCursor",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5799,7 +5847,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 70,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Main"
     ],
@@ -5818,7 +5866,6 @@
       "Document",
       "DomPorts",
       "Entity.Types",
-      "EntityListCursor",
       "ExclusiveMode.Types",
       "Models.Todo",
       "Notification",
@@ -5843,7 +5890,7 @@
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 28,
+    "importsCount": 27,
     "transitiveImports": [
       "Char",
       "Context",
@@ -5854,7 +5901,6 @@
       "Document",
       "DomPorts",
       "Entity.Types",
-      "EntityListCursor",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5914,7 +5960,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 67,
     "backwardImports": [
       "Update.Todo"
     ],
@@ -5978,6 +6024,7 @@
       "Context",
       "Dict",
       "Document",
+      "Entity.Types",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -6016,6 +6063,7 @@
       "Types.Firebase",
       "Types.GroupDoc",
       "Types.Store",
+      "Types.Todo",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -6028,7 +6076,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 56,
+    "transitiveImportsCount": 58,
     "backwardImports": [
       "Main"
     ],

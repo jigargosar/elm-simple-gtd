@@ -44,7 +44,7 @@ overlayViews config appModel =
                                 ATFM_SetupFirstTodo ->
                                     View.GetStarted.setup config form
 
-                                ATFM_AddWithFocusInEntityAsReference ->
+                                ATFM_AddWithFocusInEntityAsReference _ ->
                                     Todo.View.new config form
 
                                 ATFM_AddToInbox ->

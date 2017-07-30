@@ -1,6 +1,6 @@
-    9806 total
-     532 src/elm/Main.elm
-     432 src/elm/Update/Todo/Internal.elm
+    9814 total
+     540 src/elm/Main.elm
+     431 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      277 src/elm/Update/Entity.elm
@@ -72,8 +72,8 @@
       46 src/elm/Types/Firebase.elm
       46 src/elm/Notification.elm
       45 src/elm/Update/AppHeader.elm
+      45 src/elm/Todo/FormTypes.elm
       44 src/elm/Update/Page.elm
-      44 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
       41 src/elm/Update/CustomSync.elm
       40 src/elm/LocalPref.elm

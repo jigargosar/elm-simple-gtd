@@ -4,7 +4,6 @@ import Context
 import Document
 import DomPorts
 import Entity.Types exposing (..)
-import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Models.Todo exposing (findTodoById, todoStore)
 import Notification
@@ -31,13 +30,12 @@ import X.Time
 
 
 type alias SubModel model =
-    HasEntityListCursor
-        { model
-            | todoStore : TodoStore
-            , reminderOverlay : TodoReminderOverlayModel
-            , timeTracker : Tracker.Model
-            , selectedEntityIdSet : Set DocId
-        }
+    { model
+        | todoStore : TodoStore
+        , reminderOverlay : TodoReminderOverlayModel
+        , timeTracker : Tracker.Model
+        , selectedEntityIdSet : Set DocId
+    }
 
 
 type alias SubReturn msg model =
@@ -54,6 +52,7 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , bringEntityIdInViewMsg : EntityId -> msg
+        , maybeEntityIdAtCursor : Maybe EntityId
     }
 
 
@@ -154,8 +153,8 @@ saveAddTodoForm config addMode form now model =
                             ATFM_SetupFirstTodo ->
                                 inboxEntityId
 
-                            ATFM_AddWithFocusInEntityAsReference ->
-                                EntityListCursor.getMaybeEntityIdAtCursor model
+                            ATFM_AddWithFocusInEntityAsReference maybeEntityIdAtCursor ->
+                                maybeEntityIdAtCursor
                                     ?= inboxEntityId
 
                     maybeAction =

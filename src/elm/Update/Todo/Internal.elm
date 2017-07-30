@@ -33,8 +33,7 @@ import X.Time
 type alias SubModel model =
     HasEntityListCursor
         { model
-            | now : Time
-            , todoStore : TodoStore
+            | todoStore : TodoStore
             , reminderOverlay : TodoReminderOverlayModel
             , timeTracker : Tracker.Model
             , selectedEntityIdSet : Set DocId
@@ -58,36 +57,27 @@ type alias Config msg a =
     }
 
 
-findAndUpdateAllTodos findFn action model =
+findAndUpdateAllTodos findFn action now model =
     let
         updateFn =
             Todo.update action
     in
-    overReturn todoStore (Store.updateAndPersist findFn model.now updateFn) model
+    overReturn todoStore (Store.updateAndPersist findFn now updateFn) model
 
 
-
---updateTodo : TodoAction -> DocId -> ModelReturnF
-
-
-updateTodo action todoId =
-    findAndUpdateAllTodos (Document.hasId todoId) action
+updateTodo action now todoId =
+    findAndUpdateAllTodos (Document.hasId todoId) action now
 
 
-updateTodoWithMaybeAction maybeAction todoId =
-    maybeAction ?|> updateTodo # todoId ?= Return.singleton
+updateTodoWithMaybeAction maybeAction now todoId =
+    maybeAction ?|> updateTodo # now # todoId ?= Return.singleton
 
 
-
---    findAndUpdateAllTodos (Document.hasId todoId) action
---updateAllTodos : TodoAction -> Document.IdSet -> ModelReturnF
-
-
-updateAllTodos action idSet model =
-    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
+updateAllTodos action now idSet model =
+    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action now model
 
 
-updateTodoAndMaybeAlsoSelected action todoId model =
+updateTodoAndMaybeAlsoSelected action now todoId model =
     let
         idSet =
             if model.selectedEntityIdSet |> Set.member todoId then
@@ -95,35 +85,27 @@ updateTodoAndMaybeAlsoSelected action todoId model =
             else
                 Set.singleton todoId
     in
-    model |> updateAllTodos action idSet
+    model |> updateAllTodos action now idSet
 
 
-findTodoWithOverDueReminder model =
-    model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
-
-
-
---findAndSnoozeOverDueTodo : AppModel -> Maybe ( ( TodoDoc, AppModel ), Cmd AppMsg )
-
-
-findAndSnoozeOverDueTodo model =
+findAndSnoozeOverDueTodo now model =
     let
         snooze todoId =
-            updateTodo (TA_AutoSnooze model.now) todoId model
+            updateTodo (TA_AutoSnooze now) now todoId model
                 |> (\( model, cmd ) ->
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
     in
-    Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
+    Store.findBy (Todo.isReminderOverdue now) model.todoStore
         ?+> (Document.getId >> snooze)
 
 
-onSaveTodoForm config form =
+onSaveTodoForm config form now =
     case form.mode of
         TFM_Edit editMode ->
             let
                 updateTodoHelp action =
-                    updateTodo action form.id
+                    updateTodo action now form.id
                         |> andThen
             in
             case editMode of
@@ -137,7 +119,7 @@ onSaveTodoForm config form =
                     identity
 
         TFM_Add addMode ->
-            saveAddTodoForm config addMode form |> andThen
+            saveAddTodoForm config addMode form now |> andThen
 
 
 
@@ -152,10 +134,11 @@ saveAddTodoForm :
     Config msg a
     -> AddTodoFormMode
     -> TodoForm
+    -> Time
     -> SubModel model
     -> SubReturn msg model
-saveAddTodoForm config addMode form model =
-    insertTodo (Todo.init model.now form.text) model
+saveAddTodoForm config addMode form now model =
+    insertTodo (Todo.init now form.text) model
         |> Tuple.mapFirst Document.getId
         |> uncurry
             (\todoId ->
@@ -187,7 +170,7 @@ saveAddTodoForm config addMode form model =
                             ProjectId projectId ->
                                 TA_SetProjectId projectId |> Just
                 in
-                updateTodoWithMaybeAction maybeAction todoId
+                updateTodoWithMaybeAction maybeAction now todoId
                     >> setFocusInEntityWithTodoId config todoId
             )
 
@@ -216,10 +199,10 @@ onUpdateTodoFormAction config form action =
     config.onSetExclusiveMode xMode |> returnMsgAsCmd
 
 
-onStartEditingTodo config todo editFormMode =
+onStartEditingTodo config now todo editFormMode =
     let
         createXMode model =
-            Todo.Form.createEditTodoForm editFormMode model.now todo |> XMTodoForm
+            Todo.Form.createEditTodoForm editFormMode now todo |> XMTodoForm
 
         positionPopup idPrefix =
             DomPorts.positionPopupMenu (idPrefix ++ Document.getId todo)
@@ -281,7 +264,7 @@ onRunningNotificationResponse config res =
         >> command (Notification.closeNotification todoId)
 
 
-onReminderNotificationClicked notif =
+onReminderNotificationClicked now notif =
     let
         { action, data } =
             notif
@@ -290,7 +273,7 @@ onReminderNotificationClicked notif =
             data.id
     in
     if action == "mark-done" then
-        Return.andThen (updateTodo TA_MarkDone todoId)
+        Return.andThen (updateTodo TA_MarkDone now todoId)
             >> command (Notification.closeNotification todoId)
     else
         map (showReminderOverlayForTodoId todoId)
@@ -394,23 +377,24 @@ setReminderOverlayToInitialView todo model =
     { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
 
-reminderOverlayAction : Todo.Notification.Model.Action -> SubReturnF msg model
-reminderOverlayAction action =
-    returnWithMaybe1 .reminderOverlay (onActive action)
+reminderOverlayAction : Todo.Notification.Model.Action -> Time -> SubReturnF msg model
+reminderOverlayAction action now =
+    returnWithMaybe1 .reminderOverlay (onActive action now)
 
 
 onActive :
     Todo.Notification.Model.Action
+    -> Time
     -> Todo.Notification.Types.InnerModel
     -> SubReturnF msg model
-onActive action ( _, todoDetails ) =
+onActive action now ( _, todoDetails ) =
     let
         todoId =
             todoDetails.id
     in
     case action of
         Todo.Notification.Model.Dismiss ->
-            andThen (updateTodo TA_TurnReminderOff todoId)
+            andThen (updateTodo TA_TurnReminderOff now todoId)
                 >> map removeReminderOverlay
                 >> Return.command (Notification.closeNotification todoId)
 
@@ -418,25 +402,25 @@ onActive action ( _, todoDetails ) =
             map (setReminderOverlayToSnoozeView todoDetails)
 
         Todo.Notification.Model.SnoozeTill snoozeOffset ->
-            Return.andThen (snoozeTodoWithOffset snoozeOffset todoId)
+            Return.andThen (snoozeTodoWithOffset snoozeOffset now todoId)
                 >> Return.command (Notification.closeNotification todoId)
 
         Todo.Notification.Model.Close ->
             map removeReminderOverlay
 
         Todo.Notification.Model.MarkDone ->
-            andThen (updateTodo TA_MarkDone todoId)
+            andThen (updateTodo TA_MarkDone now todoId)
                 >> map removeReminderOverlay
                 >> Return.command (Notification.closeNotification todoId)
 
 
-snoozeTodoWithOffset snoozeOffset todoId model =
+snoozeTodoWithOffset snoozeOffset now todoId model =
     let
         time =
-            Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
+            Todo.Notification.Model.addSnoozeOffset now snoozeOffset
     in
     model
-        |> updateTodo (time |> TA_SnoozeTill) todoId
+        |> updateTodo (time |> TA_SnoozeTill) now todoId
         >> Tuple.mapFirst removeReminderOverlay
 
 

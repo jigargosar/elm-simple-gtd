@@ -39,34 +39,34 @@ update config now msg =
             onAfterUpsertTodo todo
 
         OnReminderNotificationClicked notif ->
-            onReminderNotificationClicked notif
+            onReminderNotificationClicked now notif
 
         RunningNotificationResponse res ->
             onRunningNotificationResponse config res
 
         OnProcessPendingNotificationCronTick ->
             returnAndThenMaybe
-                (findAndSnoozeOverDueTodo >>? andThen showReminderNotificationCmd)
+                (findAndSnoozeOverDueTodo now >>? andThen showReminderNotificationCmd)
 
         UpdateTodoOrAllSelected__ todoId action ->
-            (updateTodoAndMaybeAlsoSelected action todoId |> andThen)
+            (updateTodoAndMaybeAlsoSelected action now todoId |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveMode
 
         UpdateTodo__ todoId action ->
-            (updateAllTodos action (Set.singleton todoId) |> andThen)
+            (updateAllTodos action now (Set.singleton todoId) |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveMode
 
         OnTodoReminderOverlayAction action ->
-            reminderOverlayAction action
+            reminderOverlayAction action now
 
         OnStartAddingTodo addFormMode ->
             onStartAddingTodo config addFormMode
 
         OnStartEditingTodo todo editFormMode ->
-            onStartEditingTodo config todo editFormMode
+            onStartEditingTodo config now todo editFormMode
 
         OnUpdateTodoFormAction form action ->
             onUpdateTodoFormAction config form action
 
         OnSaveTodoForm form ->
-            onSaveTodoForm config form
+            onSaveTodoForm config form now

@@ -124,10 +124,6 @@ updateProject id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
-updateGroupDoc gdType id updateFn =
-    updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen
-
-
 updateAllGroupDocs gdType updateFn idSet model =
     overReturn (Models.GroupDocStore.storeFieldFromGDType gdType)
         (Store.updateAndPersist

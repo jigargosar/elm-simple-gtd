@@ -114,10 +114,6 @@ revertExclusiveMode =
     Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus |> OnExclusiveModeMsg
 
 
-onSetExclusiveMode =
-    Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
-
-
 onSaveExclusiveModeForm =
     Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
@@ -378,7 +374,7 @@ updateConfig model =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
     , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
-    , onSetExclusiveMode = onSetExclusiveMode
+    , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveMode
     , switchToEntityListPageMsg = switchToEntityListPageMsg
     , setDomFocusToFocusInEntityCmd = commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]"

@@ -131,7 +131,7 @@ type AppMsg
 
 
 onStartAddingTodoWithFocusInEntityAsReference model =
-    EntityListCursor.getMaybeEntityIdAtCursor model
+    EntityListCursor.computeMaybeNewEntityIdAtCursor model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
@@ -324,9 +324,6 @@ update config msg =
     let
         onPersistLocalPref =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
-
-        updateEntityListCursorMsg =
-            OnEntityMsg EM_UpdateEntityListCursor
     in
     case msg of
         Mdl msg_ ->
@@ -356,7 +353,6 @@ update config msg =
 
         OnGroupDocMsg msg_ ->
             Update.GroupDoc.update config msg_
-                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_
@@ -381,7 +377,6 @@ update config msg =
 
         OnTodoMsgWithNow msg_ now ->
             Update.Todo.update config now msg_
-                >> returnMsgAsCmd updateEntityListCursorMsg
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_
@@ -492,7 +487,7 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
+    , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor model
     }
 
 

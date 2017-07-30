@@ -26,7 +26,6 @@ type EntityMsg
     | EM_Update EntityId EntityUpdateAction
     | EM_EntityListFocusPrev
     | EM_EntityListFocusNext
-    | EM_UpdateEntityListCursor
 
 
 createContextEntity =

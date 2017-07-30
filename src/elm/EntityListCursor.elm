@@ -22,7 +22,7 @@ type alias HasEntityListCursor a =
     { a | entityListCursor : EntityListCursor }
 
 
-getMaybeEntityIdAtCursor model =
+getMaybeEntityIdAtCursor__ model =
     model.entityListCursor.maybeEntityIdAtCursor
 
 
@@ -51,11 +51,11 @@ computeMaybeNewEntityIdAtCursor model =
         computeMaybeFEI index =
             X.List.clampAndGetAtIndex index newEntityIdList
 
-        computeNewEntityIdAtCursor focusableEntityId =
+        computeNewEntityIdAtCursor entityIdAtCursor =
             ( model.entityListCursor.entityIdList, newEntityIdList )
-                |> Tuple2.mapBoth (X.List.firstIndexOf focusableEntityId)
+                |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
                 |> (\( maybeOldIndex, maybeNewIndex ) ->
-                        case ( maybeOldIndex, maybeNewIndex, focusableEntityId ) of
+                        case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
                             ( Just oldIndex, Just newIndex, TodoId _ ) ->
                                 case compare oldIndex newIndex of
                                     LT ->
@@ -65,14 +65,16 @@ computeMaybeNewEntityIdAtCursor model =
                                         computeMaybeFEI (oldIndex + 1)
 
                                     EQ ->
-                                        Nothing
+                                        Just entityIdAtCursor
 
                             ( Just oldIndex, Nothing, _ ) ->
                                 computeMaybeFEI oldIndex
 
                             _ ->
-                                Nothing
+                                Just entityIdAtCursor
                    )
     in
     model.entityListCursor.maybeEntityIdAtCursor
-        ?+> computeNewEntityIdAtCursor
+        ?|> computeNewEntityIdAtCursor
+        ?= List.head newEntityIdList
+        |> Debug.log "computed"

@@ -63,9 +63,6 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
-        EM_UpdateEntityListCursor ->
-            returnWith identity (updateEntityListCursor config)
-
         EM_SetFocusInEntityWithEntityId entityId ->
             map (setEntityAtCursor (entityId |> Just))
 
@@ -96,7 +93,7 @@ moveFocusBy config offset =
         (\model ->
             let
                 maybeEntityIdAtCursor =
-                    EntityListCursor.getMaybeEntityIdAtCursor model
+                    EntityListCursor.computeMaybeNewEntityIdAtCursor model
 
                 entityIdList =
                     createEntityListForCurrentView model
@@ -107,14 +104,6 @@ moveFocusBy config offset =
                 maybeEntityIdAtCursor
                 ?|> (EM_SetFocusInEntityWithEntityId >> update config)
         )
-
-
-updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
-updateEntityListCursor config model =
-    model
-        |> computeMaybeNewEntityIdAtCursor
-        >>? (EM_SetFocusInEntityWithEntityId >> update config)
-        ?= identity
 
 
 entityListCursor =

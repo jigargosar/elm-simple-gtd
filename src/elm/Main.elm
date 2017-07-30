@@ -69,7 +69,35 @@ import ViewModel
 import Window
 import X.Function.Infix exposing (..)
 import X.Random
+import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+type alias SequencerModel msg =
+    { list : List msg
+    }
+
+
+type SequencerMsg msg
+    = AppendToSequence msg
+    | ProcessSequence
+
+
+sequencerInitialValue : SequencerModel msg
+sequencerInitialValue =
+    { list = [] }
+
+
+updateSequencer msg =
+    pure
+        >> (case msg of
+                AppendToSequence msg ->
+                    map (\model -> { model | list = model.list ++ [ msg ] })
+
+                ProcessSequence ->
+                    returnWithMaybe1 (.list >> List.head) returnMsgAsCmd
+                        >> map (\model -> { model | list = List.drop 1 model.list })
+           )
 
 
 type alias AppConfig =
@@ -106,19 +134,12 @@ type alias AppModelOtherFields =
     }
 
 
-type alias SequencerModel msg =
-    { list : List msg
-    }
+sequencer =
+    fieldLens .sequencer (\s b -> { b | sequencer = s })
 
 
-type SequencerMsg msg
-    = AppendToSequence msg
-    | ProcessSequence
-
-
-sequencerInitialValue : SequencerModel msg
-sequencerInitialValue =
-    { list = [] }
+appendToSequence =
+    AppendToSequence >> Sequencer >> returnMsgAsCmd
 
 
 type SubscriptionMsg
@@ -145,7 +166,7 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | Mdl (Material.Msg AppMsg)
-    | Sequencer SequencerMsg
+    | Sequencer (SequencerMsg AppMsg)
 
 
 
@@ -363,8 +384,7 @@ update msg =
                 >> onPersistLocalPref
 
         Sequencer msg_ ->
-            --            updateSequencer msg_
-            identity
+            andThen (overReturn sequencer (updateSequencer msg_))
 
 
 onSubscriptionMsg config msg =

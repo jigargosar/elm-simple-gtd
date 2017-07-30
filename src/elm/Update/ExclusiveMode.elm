@@ -1,5 +1,6 @@
 module Update.ExclusiveMode exposing (Config, update)
 
+import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return
@@ -26,8 +27,7 @@ type alias SubReturnF msg model =
 
 type alias Config msg a =
     { a
-        | setDomFocusToFocusInEntityCmd : msg
-        , saveTodoForm : TodoForm -> msg
+        | saveTodoForm : TodoForm -> msg
         , saveGroupDocForm : GroupDocForm -> msg
     }
 
@@ -42,8 +42,15 @@ update config msg =
             setExclusiveMode mode |> map
 
         OnSetExclusiveModeToNoneAndTryRevertingFocus ->
+            let
+                _ =
+                    Debug.log "revertExclusiveMode-focus-entity-list" ()
+
+                setDomFocusToFocusInEntityCmd =
+                    DomPorts.focusSelector ".entity-list .focusable-list-item[tabindex=0]"
+            in
             map setExclusiveModeToNone
-                >> returnMsgAsCmd config.setDomFocusToFocusInEntityCmd
+                >> command setDomFocusToFocusInEntityCmd
 
         OnSaveExclusiveModeForm ->
             onSaveExclusiveModeForm config

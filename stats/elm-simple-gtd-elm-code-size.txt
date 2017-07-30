@@ -1,5 +1,5 @@
-    9788 total
-     489 src/elm/Main.elm
+    9794 total
+     488 src/elm/Main.elm
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -33,10 +33,10 @@
      101 src/elm/X/Record.elm
       98 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm
+      91 src/elm/Update/ExclusiveMode.elm
       91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
-      84 src/elm/Update/ExclusiveMode.elm
       84 src/elm/Pages/EntityList.elm
       82 src/elm/View/MainMenu.elm
       81 src/elm/GroupDoc/View.elm

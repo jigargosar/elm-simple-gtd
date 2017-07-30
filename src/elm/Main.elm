@@ -336,7 +336,6 @@ updateConfig model =
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveMode
     , switchToEntityListPageMsg = switchToEntityListPageMsg
-    , setDomFocusToFocusInEntityCmd = commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]"
     , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg

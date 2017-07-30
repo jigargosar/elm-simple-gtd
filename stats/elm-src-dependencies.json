@@ -580,17 +580,19 @@
     "backwardImports": [
       "CommonMsg",
       "Update.AppHeader",
+      "Update.ExclusiveMode",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "CommonMsg",
       "Main",
       "Update.AppHeader",
+      "Update.ExclusiveMode",
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 6
   },
   "Entity": {
     "fileName": "src/elm/Entity.elm",
@@ -5544,6 +5546,7 @@
     "moduleName": "Update.ExclusiveMode",
     "parentModuleName": "Update",
     "imports": [
+      "DomPorts",
       "ExclusiveMode.Types",
       "Msg.ExclusiveMode",
       "Return",
@@ -5552,12 +5555,13 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 7,
+    "importsCount": 8,
     "transitiveImports": [
       "Char",
       "Context",
       "Dict",
       "Document",
+      "DomPorts",
       "ExclusiveMode.Types",
       "Firebase.SignIn",
       "Fuzzy",
@@ -5604,7 +5608,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 50,
     "backwardImports": [
       "Main"
     ],

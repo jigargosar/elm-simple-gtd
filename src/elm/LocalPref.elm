@@ -6,7 +6,6 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Toolkit.Operators exposing (..)
-import Types.AppModel exposing (AppModel)
 import Types.LocalPref exposing (..)
 import X.Function.Infix exposing (..)
 
@@ -17,7 +16,10 @@ localPrefDecoder =
         |> D.optional "signIn" Firebase.SignIn.decoder Firebase.SignIn.default
 
 
-encodeLocalPref : AppModel -> E.Value
+
+--encodeLocalPref : AppModel -> E.Value
+
+
 encodeLocalPref model =
     E.object
         [ "appDrawer" => AppDrawer.Model.encoder model.appDrawerModel

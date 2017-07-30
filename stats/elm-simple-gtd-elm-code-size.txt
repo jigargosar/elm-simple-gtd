@@ -1,11 +1,11 @@
-    9757 total
-     556 src/elm/Main.elm
+    9825 total
+     614 src/elm/Main.elm
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      277 src/elm/Update/Entity.elm
      267 src/elm/Mat.elm
-     246 src/elm/AppDrawer/GroupViewModel.elm
+     243 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
      221 src/elm/GroupDoc/ViewModel.elm
      196 src/elm/Update/Firebase.elm
@@ -24,10 +24,10 @@
      140 src/elm/Entity/ListView.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
-     111 src/elm/ViewModel.elm
      111 src/elm/Todo/Form.elm
      110 src/elm/Models/EntityTree.elm
      109 src/elm/Update/Subscription.elm
+     107 src/elm/ViewModel.elm
      106 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
      101 src/elm/X/Record.elm
@@ -53,6 +53,7 @@
       67 src/elm/X/List.elm
       67 src/elm/Todo/GroupEditView.elm
       67 src/elm/Firebase/Model.elm
+      64 src/elm/Types/AppModel.elm
       64 src/elm/Todo/Notification/View.elm
       56 src/elm/Entity.elm
       55 src/elm/Project.elm
@@ -64,7 +65,6 @@
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/Context.elm
       50 src/elm/AppUrl.elm
-      49 src/elm/Types/AppModel.elm
       49 src/elm/Form.elm
       48 src/elm/Update/AppDrawer.elm
       47 src/elm/Todo/TimeTracker/View.elm
@@ -76,9 +76,9 @@
       44 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
       41 src/elm/Update/CustomSync.elm
+      40 src/elm/LocalPref.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
-      38 src/elm/LocalPref.elm
       37 src/elm/CommonMsg.elm
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm

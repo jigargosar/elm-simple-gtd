@@ -18,7 +18,6 @@ import Project
 import String.Extra
 import Todo
 import Toolkit.Operators exposing (..)
-import Types.AppModel exposing (..)
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
@@ -59,23 +58,21 @@ type alias DocumentWithNameViewModel msg =
     }
 
 
-type alias Config =
-    { groupByFn : TodoDoc -> DocId
-    , todoList : List TodoDoc
-    , namePrefix : String
-    , filter : AppModel -> List GroupDoc
-    , toEntityId : DocId -> EntityId
-    , nullEntity : GroupDoc
-    , isNull : GroupDoc -> Bool
-    , nullIcon : IconVM
-    , defaultColor : Color.Color
-    , defaultIconName : String
-    , getEntityListPageModel : DocId -> EntityListPageModel
-    , groupDocType : GroupDocType
-    }
 
-
-
+--type alias Config =
+--    { groupByFn : TodoDoc -> DocId
+--    , todoList : List TodoDoc
+--    , namePrefix : String
+--    , filter : AppModel -> List GroupDoc
+--    , toEntityId : DocId -> EntityId
+--    , nullEntity : GroupDoc
+--    , isNull : GroupDoc -> Bool
+--    , nullIcon : IconVM
+--    , defaultColor : Color.Color
+--    , defaultIconName : String
+--    , getEntityListPageModel : DocId -> EntityListPageModel
+--    , groupDocType : GroupDocType
+--    }
 --createList : Config -> AppModel -> List DocumentWithNameViewModel
 
 
@@ -154,7 +151,7 @@ contexts config model =
         activeFilter =
             Models.GroupDocStore.filterContexts GroupDoc.isActive
 
-        innerConfig : Config
+        --        innerConfig : Config
         innerConfig =
             { groupByFn = Todo.getContextId
             , todoList = Models.Stores.getActiveTodoListHavingActiveProject model
@@ -206,7 +203,7 @@ projects config model =
         activeFilter =
             Models.GroupDocStore.filterProjects GroupDoc.isActive
 
-        innerConfig : Config
+        --        innerConfig : Config
         innerConfig =
             { groupByFn = Todo.getProjectId
             , todoList = Models.Stores.getActiveTodoListHavingActiveContext model

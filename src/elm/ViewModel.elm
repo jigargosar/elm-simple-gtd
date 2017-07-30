@@ -12,26 +12,22 @@ import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
 import Pages.EntityList exposing (..)
 import Todo.ItemView exposing (TodoViewModel)
 import Todo.ViewModel
-import Types.AppModel exposing (..)
 import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 
 
-type alias Model msg =
-    { contexts : AppDrawer.GroupViewModel.ViewModel msg
-    , projects : AppDrawer.GroupViewModel.ViewModel msg
-    , viewName : String
-    , header : { backgroundColor : Color.Color }
-    , mdl : Material.Model
-    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel msg
-    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel msg
-    , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel msg
-    }
-
-
-
+--type alias Model msg =
+--    { contexts : AppDrawer.GroupViewModel.ViewModel msg
+--    , projects : AppDrawer.GroupViewModel.ViewModel msg
+--    , viewName : String
+--    , header : { backgroundColor : Color.Color }
+--    , mdl : Material.Model
+--    , createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel msg
+--    , createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel msg
+--    , createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel msg
+--    }
 --create : AppModel -> Model
 
 

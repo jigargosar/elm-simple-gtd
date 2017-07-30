@@ -1,4 +1,4 @@
-module Types.AppModel exposing (AppConfig, AppModel, AppModelOtherFields)
+module Types.AppModel exposing (..)
 
 import AppDrawer.Model
 import EntityListCursor exposing (HasEntityListCursor)
@@ -46,4 +46,19 @@ type alias AppModelOtherFields =
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
+    , sequencer : Sequencer
     }
+
+
+type alias Sequencer msg =
+    { list : msg
+    }
+
+
+type SequencerMsg msg
+    = AppendToSequence msg
+    | ProcessSequence
+
+
+sequencerInitialValue =
+    { list = [] }

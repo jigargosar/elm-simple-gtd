@@ -1,14 +1,16 @@
 module Main exposing (main)
 
+import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import CommonMsg
 import CommonMsg.Types
 import Context
 import Entity.ListView
 import Entity.Types exposing (..)
-import EntityListCursor
+import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
+import Firebase.SignIn
 import GroupDoc
 import Json.Encode as E
 import Keyboard
@@ -26,7 +28,7 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
-import Page exposing (PageMsg(..))
+import Page exposing (Page(EntityListPage), PageMsg(..))
 import Pages.EntityList exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
@@ -35,16 +37,17 @@ import Project
 import Random.Pcg
 import RouteUrl
 import Routes
-import Set
+import Set exposing (Set)
 import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Msg exposing (..)
 import Todo.Notification.Model
+import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Store
 import Todo.TimeTracker
 import Toolkit.Operators exposing (..)
-import Types.AppModel exposing (..)
 import Types.Document exposing (..)
+import Types.Firebase exposing (..)
 import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import Update.AppDrawer
@@ -67,6 +70,55 @@ import Window
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Return exposing (..)
+
+
+type alias AppConfig =
+    { debugSecondMultiplier : Float
+    , deviceId : String
+    , npmPackageVersion : String
+    , isDevelopmentMode : Bool
+    }
+
+
+type alias AppModel =
+    HasEntityListCursor AppModelOtherFields
+
+
+type alias AppModelOtherFields =
+    { now : Time
+    , todoStore : TodoStore
+    , projectStore : ProjectStore
+    , contextStore : ContextStore
+    , editMode : ExclusiveMode
+    , page : Page
+    , reminderOverlay : TodoReminderOverlayModel
+    , pouchDBRemoteSyncURI : String
+    , firebaseModel : FirebaseModel
+    , developmentMode : Bool
+    , selectedEntityIdSet : Set DocId
+    , appVersion : String
+    , deviceId : String
+    , timeTracker : Todo.TimeTracker.Model
+    , config : AppConfig
+    , appDrawerModel : AppDrawer.Model.AppDrawerModel
+    , mdl : Material.Model
+    , sequencer : Sequencer AppMsg
+    }
+
+
+type alias Sequencer msg =
+    { list : List msg
+    }
+
+
+type SequencerMsg msg
+    = AppendToSequence msg
+    | ProcessSequence
+
+
+sequencerInitialValue : Sequencer msg
+sequencerInitialValue =
+    { list = [] }
 
 
 type SubscriptionMsg
@@ -93,6 +145,7 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | OnMdl (Material.Msg AppMsg)
+    | OnSequencer SequencerMsg
 
 
 
@@ -237,6 +290,7 @@ createAppModel flags =
             , appDrawerModel = localPref.appDrawer
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
+            , sequencer = sequencerInitialValue
             }
     in
     model
@@ -307,6 +361,10 @@ update msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
+
+        OnSequencer msg_ ->
+            --            updateSequencer msg_
+            identity
 
 
 onSubscriptionMsg config msg =

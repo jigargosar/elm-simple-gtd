@@ -61,7 +61,7 @@ update :
 update config msg =
     case msg of
         OnNowChanged now ->
-            map (setNow now)
+            onNowChanged now
 
         OnGlobalKeyUp keyCode ->
             onGlobalKeyUp config (KX.fromCode keyCode)
@@ -70,22 +70,30 @@ update config msg =
             onGlobalKeyDown config (KX.fromCode keyCode)
 
         OnPouchDBChange dbName encodedDoc ->
-            let
-                afterEntityUpsertOnPouchDBChange ( entity, model ) =
-                    map (\_ -> model)
-                        >> (case entity of
-                                TodoEntity todo ->
-                                    config.afterTodoUpsert todo |> returnMsgAsCmd
-
-                                _ ->
-                                    identity
-                           )
-            in
-            X.Return.returnWithMaybe2 identity
-                (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
+            onPouchDBChange config dbName encodedDoc
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
-            Return.effect_ (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+            effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+
+
+onNowChanged now =
+    map (setNow now)
+
+
+onPouchDBChange config dbName encodedDoc =
+    let
+        afterEntityUpsertOnPouchDBChange ( entity, model ) =
+            map (\_ -> model)
+                >> (case entity of
+                        TodoEntity todo ->
+                            config.afterTodoUpsert todo |> returnMsgAsCmd
+
+                        _ ->
+                            identity
+                   )
+    in
+    X.Return.returnWithMaybe2 identity
+        (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
 
 
 onGlobalKeyDown config key =

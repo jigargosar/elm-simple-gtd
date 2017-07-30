@@ -78,26 +78,19 @@ type alias SequencerModel msg =
     }
 
 
-type SequencerMsg msg
-    = AppendToSequence msg
-    | ProcessSequence
-
-
 sequencerInitialValue : SequencerModel msg
 sequencerInitialValue =
     { list = [] }
 
 
-updateSequencer msg =
-    pure
-        >> (case msg of
-                AppendToSequence msg ->
-                    map (\model -> { model | list = model.list ++ [ msg ] })
+sequencerAppendToSequence msg =
+    \model -> { model | list = model.list ++ [ msg ] }
 
-                ProcessSequence ->
-                    returnWithMaybe1 (.list >> List.head) returnMsgAsCmd
-                        >> map (\model -> { model | list = List.drop 1 model.list })
-           )
+
+sequencerProcessSequence : ReturnF msg (SequencerModel msg)
+sequencerProcessSequence =
+    returnWithMaybe1 (.list >> List.head) returnMsgAsCmd
+        >> map (\model -> { model | list = List.drop 1 model.list })
 
 
 type alias AppConfig =
@@ -138,8 +131,8 @@ sequencer =
     fieldLens .sequencer (\s b -> { b | sequencer = s })
 
 
-appendToSequence =
-    AppendToSequence >> Sequencer >> returnMsgAsCmd
+appendToSequence msg =
+    map (over sequencer (sequencerAppendToSequence msg))
 
 
 type SubscriptionMsg
@@ -166,7 +159,6 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | Mdl (Material.Msg AppMsg)
-    | Sequencer (SequencerMsg AppMsg)
 
 
 
@@ -383,8 +375,9 @@ update msg =
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
 
-        Sequencer msg_ ->
-            andThen (overReturn sequencer (updateSequencer msg_))
+
+
+--        >> andThen (overReturn sequencer sequencerProcessSequence)
 
 
 onSubscriptionMsg config msg =
@@ -423,10 +416,10 @@ onGlobalKeyDown config key =
                 ( key, XMNone ) ->
                     case key of
                         KX.ArrowUp ->
-                            returnMsgAsCmd entityListFocusPreviousEntityMsg
+                            appendToSequence entityListFocusPreviousEntityMsg
 
                         KX.ArrowDown ->
-                            returnMsgAsCmd entityListFocusNextEntityMsg
+                            appendToSequence entityListFocusNextEntityMsg
 
                         _ ->
                             identity

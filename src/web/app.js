@@ -137,8 +137,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
            "mutationObserverFocusSelectorStream",
        )]
   Kefir.merge(focusSelectorStreams)
-       // .spy()
-       .debounce(100)
        .observe({
          value(options) {
            const $toFocus = $(options.selector).first()

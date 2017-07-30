@@ -1,4 +1,4 @@
-module Update.Subscription exposing (Config, update)
+module Update.Subscription exposing (..)
 
 import Entity.Types exposing (..)
 import ExclusiveMode.Types exposing (ExclusiveMode(XMNone))
@@ -6,7 +6,6 @@ import Keyboard.Extra as KX exposing (Key)
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Models.Selection
 import Models.Todo exposing (todoStore)
-import Msg.Subscription exposing (SubscriptionMsg(..))
 import Return
 import Set
 import Store
@@ -52,28 +51,6 @@ type alias Config msg a =
         , entityListFocusPreviousEntityMsg : msg
         , entityListFocusNextEntityMsg : msg
     }
-
-
-update :
-    Config msg a
-    -> SubscriptionMsg
-    -> SubReturnF msg model
-update config msg =
-    case msg of
-        OnNowChanged now ->
-            onNowChanged now
-
-        OnGlobalKeyUp keyCode ->
-            onGlobalKeyUp config (KX.fromCode keyCode)
-
-        OnGlobalKeyDown keyCode ->
-            onGlobalKeyDown config (KX.fromCode keyCode)
-
-        OnPouchDBChange dbName encodedDoc ->
-            onPouchDBChange config dbName encodedDoc
-
-        OnFirebaseDatabaseChange dbName encodedDoc ->
-            effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 onNowChanged now =

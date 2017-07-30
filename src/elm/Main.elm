@@ -12,6 +12,7 @@ import Firebase exposing (..)
 import GroupDoc
 import Json.Encode as E
 import Keyboard
+import Keyboard.Extra as KX exposing (Key)
 import LaunchBar.Messages exposing (LaunchBarMsg)
 import LocalPref
 import Mat exposing (cs)
@@ -24,7 +25,6 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
-import Msg.Subscription exposing (SubscriptionMsg)
 import Page exposing (PageMsg(..))
 import Pages.EntityList exposing (..)
 import Ports
@@ -66,6 +66,14 @@ import Window
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Return exposing (..)
+
+
+type SubscriptionMsg
+    = OnNowChanged Time
+    | OnGlobalKeyUp Int
+    | OnGlobalKeyDown Int
+    | OnPouchDBChange String E.Value
+    | OnFirebaseDatabaseChange String E.Value
 
 
 type AppMsg
@@ -127,14 +135,6 @@ setFocusInEntityWithEntityIdMsg =
 
 
 
--- gd
-
-
-onStartAddingGroupDoc gdType =
-    Msg.GroupDoc.OnGroupDocAction gdType GDA_StartAdding |> OnGroupDocMsg
-
-
-
 --drawer
 
 
@@ -157,11 +157,11 @@ onMdl =
 subscriptions model =
     Sub.batch
         [ Sub.batch
-            [ Time.every (Time.second * 1 * model.config.debugSecondMultiplier) Msg.Subscription.OnNowChanged
-            , Keyboard.ups Msg.Subscription.OnGlobalKeyUp
-            , Keyboard.downs Msg.Subscription.OnGlobalKeyDown
-            , Ports.pouchDBChanges (uncurry Msg.Subscription.OnPouchDBChange)
-            , Ports.onFirebaseDatabaseChange (uncurry Msg.Subscription.OnFirebaseDatabaseChange)
+            [ Time.every (Time.second * 1 * model.config.debugSecondMultiplier) OnNowChanged
+            , Keyboard.ups OnGlobalKeyUp
+            , Keyboard.downs OnGlobalKeyDown
+            , Ports.pouchDBChanges (uncurry OnPouchDBChange)
+            , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
             ]
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
@@ -265,7 +265,7 @@ update config msg =
             CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
-            Update.Subscription.update config msg_
+            onSubscriptionMsg config msg_
 
         OnGroupDocMsg msg_ ->
             Update.GroupDoc.update config msg_
@@ -303,6 +303,24 @@ update config msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
+
+
+onSubscriptionMsg config msg =
+    case msg of
+        OnNowChanged now ->
+            Update.Subscription.onNowChanged now
+
+        OnGlobalKeyUp keyCode ->
+            Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)
+
+        OnGlobalKeyDown keyCode ->
+            Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
+
+        OnPouchDBChange dbName encodedDoc ->
+            Update.Subscription.onPouchDBChange config dbName encodedDoc
+
+        OnFirebaseDatabaseChange dbName encodedDoc ->
+            effect (Update.Subscription.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 updateConfig : AppModel -> UpdateConfig AppMsg
@@ -395,7 +413,7 @@ viewConfig =
     , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
     , onToggleAppDrawerOverlay = onToggleAppDrawerOverlay
     , onAppDrawerMsg = onAppDrawerMsg
-    , onStartAddingGroupDoc = onStartAddingGroupDoc
+    , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
     , switchToEntityListPageMsg = switchToEntityListPageMsg

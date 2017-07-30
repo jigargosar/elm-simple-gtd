@@ -1,5 +1,5 @@
-    9778 total
-     464 src/elm/Main.elm
+    9761 total
+     482 src/elm/Main.elm
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -8,8 +8,8 @@
      246 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
      221 src/elm/GroupDoc/ViewModel.elm
-     210 src/elm/Update/Subscription.elm
      196 src/elm/Update/Firebase.elm
+     187 src/elm/Update/Subscription.elm
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
      160 src/elm/Todo/ItemView.elm
@@ -106,7 +106,6 @@
       14 src/elm/View/Badge.elm
       12 src/elm/Todo/Store.elm
       12 src/elm/Ports.elm
-      12 src/elm/Msg/Subscription.elm
       11 src/elm/LaunchBar/Messages.elm
       11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm

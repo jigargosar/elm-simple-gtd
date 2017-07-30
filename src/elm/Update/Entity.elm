@@ -109,8 +109,8 @@ moveFocusBy config offset =
         )
 
 
-updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
-updateEntityListCursor config model =
+computeMaybeNewEntityIdAtCursor : SubModel model -> Maybe EntityId
+computeMaybeNewEntityIdAtCursor model =
     let
         newEntityIdList =
             createEntityListForCurrentView model
@@ -119,7 +119,6 @@ updateEntityListCursor config model =
         computeMaybeFEI index =
             X.List.clampAndGetAtIndex index newEntityIdList
 
-        computeNewEntityIdAtCursor : EntityId -> Maybe EntityId
         computeNewEntityIdAtCursor focusableEntityId =
             ( model.entityListCursor.entityIdList, newEntityIdList )
                 |> Tuple2.mapBoth (X.List.firstIndexOf focusableEntityId)
@@ -145,6 +144,12 @@ updateEntityListCursor config model =
     in
     model.entityListCursor.maybeEntityIdAtCursor
         ?+> computeNewEntityIdAtCursor
+
+
+updateEntityListCursor : Config msg a -> SubModel model -> SubReturnF msg model
+updateEntityListCursor config model =
+    model
+        |> computeMaybeNewEntityIdAtCursor
         >>? (EM_SetFocusInEntityWithEntityId >> update config)
         ?= identity
 

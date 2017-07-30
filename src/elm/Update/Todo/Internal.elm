@@ -52,7 +52,6 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , bringEntityIdInViewMsg : EntityId -> msg
-        , maybeEntityIdAtCursor : Maybe EntityId
     }
 
 

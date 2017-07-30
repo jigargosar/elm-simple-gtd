@@ -30,20 +30,20 @@ listView config appVM page model =
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         ]
-        (keyedViewList appVM entityTree model)
+        (keyedViewList config appVM entityTree model)
 
 
-getMaybeEntityIdAtCursor entityList model =
-    EntityListCursor.getMaybeEntityIdAtCursor model
+getMaybeEntityIdAtCursor config entityList =
+    config.maybeEntityIdAtCursor
         ?+> (Entity.hasId >> List.Extra.find # entityList)
         |> Maybe.Extra.orElse (List.head entityList)
         ?|> Entity.toEntityId
 
 
-keyedViewList appVM entityTree model =
+keyedViewList config appVM entityTree model =
     let
         maybeEntityIdAtCursor =
-            getMaybeEntityIdAtCursor (Entity.Tree.flatten entityTree) model
+            getMaybeEntityIdAtCursor config (Entity.Tree.flatten entityTree)
 
         isCursorAtEntityId entityId =
             maybeEntityIdAtCursor ?|> equals entityId ?= False

@@ -314,7 +314,8 @@ updateConfig model =
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
-    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
+
+    --    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
     }
 
 
@@ -443,6 +444,7 @@ type alias ViewConfig msg =
         GroupDocForm -> GroupDocName -> msg
     , gotoEntityListPageMsg : EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
+    , maybeEntityIdAtCursor : Maybe EntityId
     }
 
 
@@ -490,6 +492,7 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
+    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
     }
 
 

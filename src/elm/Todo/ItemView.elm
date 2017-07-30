@@ -63,6 +63,8 @@ item vm =
             , "can-be-focused" => vm.canBeFocused
             ]
         , X.Html.onFocusIn vm.onFocusIn
+
+        --        , onClick vm.onFocusIn
         , tabindex vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
         , attribute "data-key" vm.key

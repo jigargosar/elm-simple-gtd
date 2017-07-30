@@ -3,6 +3,7 @@ module GroupDoc.View exposing (..)
 import EntityId
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Html.Keyed
 import Mat
 import Toolkit.Operators exposing (..)
@@ -68,6 +69,8 @@ headerItem vm =
     div
         [ tabindex vm.tabindexAV
         , X.Html.onFocusIn vm.onFocusIn
+
+        --        , onClick vm.onFocusIn
         , onKeyDown vm.onKeyDownMsg
         , classList [ "entity-item focusable-list-item collection-item" => True ]
         , attribute "data-key" vm.key

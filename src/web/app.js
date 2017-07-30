@@ -39,7 +39,8 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       
       const autoFocusSummaryAdded = summaries[0].added
       if (!_.isEmpty(autoFocusSummaryAdded)) {
-        emitter.emit(".auto-focus")
+        //note: delaying auto-focus to ensure that it takes priority.
+        setTimeout(() => emitter.emit(".auto-focus"), 0)
       }
       
       const focusInEntitySummary = summaries[1]
@@ -142,7 +143,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
            const $toFocus = $(options.selector).first()
       
            // console.log("[Kefir] focusSelector", _.merge(options, {
-             // dataKey: $toFocus.data("key"),
+           // dataKey: $toFocus.data("key"),
            // }))
       
            $toFocus.focus()

@@ -1,4 +1,4 @@
-    9753 total
+    9758 total
      538 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -12,7 +12,7 @@
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
      167 src/elm/Update/Subscription.elm
-     160 src/elm/Todo/ItemView.elm
+     162 src/elm/Todo/ItemView.elm
      159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
@@ -38,8 +38,8 @@
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
       84 src/elm/Pages/EntityList.elm
+      84 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
-      81 src/elm/GroupDoc/View.elm
       80 src/elm/GroupDoc/FormView.elm
       80 src/elm/EntityListCursor.elm
       79 src/elm/Types/GroupDoc.elm

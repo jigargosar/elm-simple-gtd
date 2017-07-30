@@ -126,10 +126,6 @@ updateEntityListCursorMsg =
     EM_UpdateEntityListCursor |> OnEntityMsg
 
 
-onEntityUpdateMsg =
-    Entity.Types.EM_Update >>> OnEntityMsg
-
-
 entityListFocusPreviousEntityMsg =
     Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
 
@@ -452,7 +448,7 @@ viewConfig =
     , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> OnTodoMsg
     , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
-    , onEntityUpdateMsg = onEntityUpdateMsg
+    , onEntityUpdateMsg = Entity.Types.EM_Update >>> OnEntityMsg
     , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
     , onSignIn = OnFirebaseMsg OnFBSignIn
     , onSignOut = OnFirebaseMsg OnFBSignOut

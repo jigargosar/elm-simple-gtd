@@ -102,11 +102,11 @@ type alias AppModelOtherFields =
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
-    , sequencer : Sequencer AppMsg
+    , sequencer : SequencerModel AppMsg
     }
 
 
-type alias Sequencer msg =
+type alias SequencerModel msg =
     { list : List msg
     }
 
@@ -116,7 +116,7 @@ type SequencerMsg msg
     | ProcessSequence
 
 
-sequencerInitialValue : Sequencer msg
+sequencerInitialValue : SequencerModel msg
 sequencerInitialValue =
     { list = [] }
 
@@ -145,7 +145,7 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | OnMdl (Material.Msg AppMsg)
-    | OnSequencer SequencerMsg
+    | Sequencer SequencerMsg
 
 
 
@@ -362,7 +362,7 @@ update msg =
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
 
-        OnSequencer msg_ ->
+        Sequencer msg_ ->
             --            updateSequencer msg_
             identity
 

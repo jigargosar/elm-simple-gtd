@@ -375,7 +375,7 @@ update msg =
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
     )
-        >> andThen (overReturn sequencer (pure >> sequencerProcessSequence))
+        >> overReturnF sequencer sequencerProcessSequence
 
 
 onSubscriptionMsg config msg =

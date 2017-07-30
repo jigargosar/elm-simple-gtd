@@ -144,7 +144,7 @@ type AppMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
-    | OnMdl (Material.Msg AppMsg)
+    | Mdl (Material.Msg AppMsg)
     | Sequencer SequencerMsg
 
 
@@ -205,7 +205,7 @@ onAppDrawerMsg =
 
 
 onMdl =
-    OnMdl
+    Mdl
 
 
 subscriptions model =
@@ -313,8 +313,8 @@ update msg =
             OnEntityMsg EM_UpdateEntityListCursor
     in
     case msg of
-        OnMdl msg_ ->
-            andThen (Material.update OnMdl msg_)
+        Mdl msg_ ->
+            andThen (Material.update Mdl msg_)
 
         OnPageMsg msg_ ->
             Update.Page.update config msg_

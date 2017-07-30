@@ -12,3 +12,7 @@ type GroupDocMsg
 updateGroupDocFromNameMsg : GroupDocForm -> GroupDocName -> GroupDocMsg
 updateGroupDocFromNameMsg form newName =
     OnGroupDocIdAction form.groupDocId (GDA_UpdateFormName form newName)
+
+
+onToggleGroupDocArchived groupDocId =
+    OnGroupDocIdAction groupDocId GDA_ToggleArchived

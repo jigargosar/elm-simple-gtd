@@ -134,8 +134,8 @@ setFocusInEntityWithEntityIdMsg =
 -- gd
 
 
-onToggleGroupDocArchived groupDocId =
-    Msg.GroupDoc.OnGroupDocIdAction groupDocId GDA_ToggleArchived |> OnGroupDocMsg
+onToggleGroupDocArchived =
+    Msg.GroupDoc.onToggleGroupDocArchived >> OnGroupDocMsg
 
 
 onStartEditingGroupDoc groupDocId =

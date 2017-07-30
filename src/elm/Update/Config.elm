@@ -2,7 +2,6 @@ module Update.Config exposing (..)
 
 import Msg exposing (AppMsg)
 import Todo.Msg exposing (TodoMsg)
-import TodoMsg
 import Types.AppModel exposing (AppModel)
 import Update.Types exposing (UpdateConfig)
 
@@ -10,18 +9,18 @@ import Update.Types exposing (UpdateConfig)
 updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
     { noop = Msg.noop
-    , onStartAddingTodoToInbox = TodoMsg.onStartAddingTodoToInbox
+    , onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> Msg.OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        TodoMsg.onStartAddingTodoWithFocusInEntityAsReference
+        Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> Msg.OnTodoMsg
     , openLaunchBarMsg = Msg.openLaunchBarMsg
-    , afterTodoUpsert = TodoMsg.afterTodoUpsert
+    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> Msg.OnTodoMsg
     , onSetExclusiveMode = Msg.onSetExclusiveMode
     , revertExclusiveMode = Msg.revertExclusiveMode
     , switchToEntityListPageMsg = Msg.switchToEntityListPageMsg
     , setDomFocusToFocusInEntityCmd = Msg.setDomFocusToFocusInEntityCmd
-    , onStartEditingTodo = TodoMsg.onStartEditingTodo
+    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> Msg.OnTodoMsg
     , onSaveExclusiveModeForm = Msg.onSaveExclusiveModeForm
-    , onStartSetupAddTodo = TodoMsg.onStartSetupAddTodo
+    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> Msg.OnTodoMsg
     , setFocusInEntityWithEntityId = Msg.setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Msg.onSaveTodoForm
     , saveGroupDocForm = Msg.onSaveGroupDocForm

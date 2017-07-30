@@ -1,4 +1,4 @@
-   10080 total
+    9947 total
      448 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -26,7 +26,6 @@
      140 src/elm/Entity/ListView.elm
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
-     132 src/elm/TodoMsg.elm
      114 src/elm/View/Config.elm
      111 src/elm/ViewModel.elm
      111 src/elm/Todo/Form.elm
@@ -85,8 +84,8 @@
       39 src/elm/Update/Types.elm
       38 src/elm/LocalPref.elm
       37 src/elm/CommonMsg.elm
-      35 src/elm/Update/Config.elm
       35 src/elm/Types/Document.elm
+      34 src/elm/Update/Config.elm
       33 src/elm/View.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm

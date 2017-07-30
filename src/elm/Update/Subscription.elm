@@ -19,8 +19,7 @@ import X.Return exposing (..)
 
 type alias SubModel model =
     { model
-        | now : Time
-        , todoStore : TodoStore
+        | todoStore : TodoStore
         , projectStore : ProjectStore
         , contextStore : ContextStore
         , editMode : ExclusiveMode
@@ -67,11 +66,6 @@ onPouchDBChange config dbName encodedDoc =
         (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
 
 
-
---updateKeyboardState : (KeyboardState -> KeyboardState) -> SubModelF model
---upsertEncodedDocOnPouchDBChange : String -> E.Value -> SubModel model -> Maybe ( Entity, SubModel model )
-
-
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
@@ -88,10 +82,6 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
 
         _ ->
             \_ -> Nothing
-
-
-
---upsertEncodedDocOnFirebaseDatabaseChange : String -> E.Value -> SubModel model -> Cmd msg
 
 
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =

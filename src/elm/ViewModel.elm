@@ -47,9 +47,6 @@ create config model =
 
         editMode =
             model.editMode
-
-        now =
-            model.now
     in
     { contexts = contextsVM
     , projects = projectsVM

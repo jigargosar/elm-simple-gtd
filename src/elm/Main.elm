@@ -137,8 +137,6 @@ appendToSequence msg =
 
 type SubscriptionMsg
     = OnNowChanged Time
-    | OnGlobalKeyUp Int
-    | OnGlobalKeyDown Int
     | OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
 
@@ -159,6 +157,8 @@ type AppMsg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | Mdl (Material.Msg AppMsg)
+    | OnGlobalKeyUp Int
+    | OnGlobalKeyDown Int
 
 
 
@@ -224,10 +224,10 @@ onMdl =
 
 subscriptions model =
     Sub.batch
-        [ Sub.batch
+        [ Keyboard.ups OnGlobalKeyUp
+        , Keyboard.downs OnGlobalKeyDown
+        , Sub.batch
             [ Time.every (Time.second * 1 * model.config.debugSecondMultiplier) OnNowChanged
-            , Keyboard.ups OnGlobalKeyUp
-            , Keyboard.downs OnGlobalKeyDown
             , Ports.pouchDBChanges (uncurry OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
             ]
@@ -351,6 +351,12 @@ update msg =
         Mdl msg_ ->
             andThen (Material.update Mdl msg_)
 
+        OnGlobalKeyUp keyCode ->
+            onGlobalKeyUp config (KX.fromCode keyCode)
+
+        OnGlobalKeyDown keyCode ->
+            onGlobalKeyDown config (KX.fromCode keyCode)
+
         OnPageMsg msg_ ->
             Update.Page.update config msg_
 
@@ -408,12 +414,6 @@ onSubscriptionMsg config msg =
                     { model | now = now }
             in
             map (setNow now)
-
-        OnGlobalKeyUp keyCode ->
-            onGlobalKeyUp config (KX.fromCode keyCode)
-
-        OnGlobalKeyDown keyCode ->
-            onGlobalKeyDown config (KX.fromCode keyCode)
 
         OnPouchDBChange dbName encodedDoc ->
             Update.Subscription.onPouchDBChange config dbName encodedDoc

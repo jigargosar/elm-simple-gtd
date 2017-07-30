@@ -253,7 +253,6 @@ type alias UpdateConfig msg =
                                     (Update.Todo.Config msg
                                         { onTodoMsgWithNow : TodoMsg -> Time -> msg
                                         , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
-                                        , onMdl : Material.Msg msg -> msg
                                         }
                                     )
                                 )
@@ -276,7 +275,7 @@ update config msg =
     in
     case msg of
         OnMdl msg_ ->
-            andThen (Material.update config.onMdl msg_)
+            andThen (Material.update OnMdl msg_)
 
         OnPageMsg msg_ ->
             Update.Page.update config msg_
@@ -343,7 +342,6 @@ updateConfig model =
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
     , onTodoMsgWithNow = OnTodoMsgWithNow
     , onLaunchBarMsgWithNow = OnLaunchBarMsgWithNow
-    , onMdl = OnMdl
     , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , entityListFocusPreviousEntityMsg = Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg

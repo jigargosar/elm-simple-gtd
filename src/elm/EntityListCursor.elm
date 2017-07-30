@@ -77,4 +77,3 @@ computeMaybeNewEntityIdAtCursor model =
     model.entityListCursor.maybeEntityIdAtCursor
         ?|> computeNewEntityIdAtCursor
         ?= List.head newEntityIdList
-        |> Debug.log "computed"

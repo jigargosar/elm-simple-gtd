@@ -223,11 +223,15 @@ onMdl =
 
 
 subscriptions model =
+    let
+        everyXSeconds x =
+            Time.every (Time.second * x * model.config.debugSecondMultiplier)
+    in
     Sub.batch
         [ Keyboard.ups OnGlobalKeyUp
         , Keyboard.downs OnGlobalKeyDown
         , Sub.batch
-            [ Time.every (Time.second * 1 * model.config.debugSecondMultiplier) OnNowChanged
+            [ everyXSeconds 1 OnNowChanged
             , Ports.pouchDBChanges (uncurry OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
             ]
@@ -235,8 +239,8 @@ subscriptions model =
         , Sub.batch
             [ notificationClicked OnReminderNotificationClicked
             , onRunningTodoNotificationClicked RunningNotificationResponse
-            , Time.every (Time.second * 1 * model.config.debugSecondMultiplier) (\_ -> UpdateTimeTracker)
-            , Time.every (Time.second * 30 * model.config.debugSecondMultiplier) (\_ -> OnProcessPendingNotificationCronTick)
+            , everyXSeconds 1 (\_ -> UpdateTimeTracker)
+            , everyXSeconds 30 (\_ -> OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch

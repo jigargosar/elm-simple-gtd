@@ -126,10 +126,6 @@ updateEntityListCursorMsg =
     EM_UpdateEntityListCursor |> OnEntityMsg
 
 
-onToggleEntitySelection =
-    EM_Update # EUA_ToggleSelection >> OnEntityMsg
-
-
 bringEntityIdInViewMsg =
     EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
 
@@ -459,7 +455,7 @@ viewConfig =
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference |> OnTodoMsg
-    , onToggleEntitySelection = onToggleEntitySelection
+    , onToggleEntitySelection = EM_Update # EUA_ToggleSelection >> OnEntityMsg
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
     , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> OnTodoMsg

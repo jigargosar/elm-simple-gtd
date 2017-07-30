@@ -308,7 +308,11 @@ update config msg =
 onSubscriptionMsg config msg =
     case msg of
         OnNowChanged now ->
-            Update.Subscription.onNowChanged now
+            let
+                setNow now model =
+                    { model | now = now }
+            in
+            map (setNow now)
 
         OnGlobalKeyUp keyCode ->
             Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)

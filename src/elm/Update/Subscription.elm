@@ -53,10 +53,6 @@ type alias Config msg a =
     }
 
 
-onNowChanged now =
-    map (setNow now)
-
-
 onPouchDBChange config dbName encodedDoc =
     let
         afterEntityUpsertOnPouchDBChange ( entity, model ) =
@@ -135,14 +131,6 @@ onGlobalKeyUp config key =
                 _ ->
                     identity
         )
-
-
-
---setNow : Time -> SubModelF model
-
-
-setNow now model =
-    { model | now = now }
 
 
 

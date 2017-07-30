@@ -3,6 +3,7 @@ module Main exposing (main)
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import CommonMsg
 import Keyboard
+import LaunchBar.Messages
 import LocalPref
 import Material
 import Models.AppModel exposing (Flags)
@@ -14,7 +15,7 @@ import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
 import RouteUrl
 import Routes
-import Time
+import Time exposing (Time)
 import Todo.Msg exposing (..)
 import Types.AppModel exposing (..)
 import Update.AppDrawer
@@ -28,7 +29,6 @@ import Update.LaunchBar
 import Update.Page
 import Update.Subscription
 import Update.Todo
-import Update.Types exposing (..)
 import View
 import View.Config
 import Window
@@ -62,6 +62,30 @@ subscriptions model =
             [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
             |> Sub.map Msg.OnAppDrawerMsg
         ]
+
+
+type alias UpdateConfig msg =
+    Update.LaunchBar.Config msg
+        (Update.AppHeader.Config msg
+            (Update.ExclusiveMode.Config msg
+                (Update.Page.Config msg
+                    (Update.Firebase.Config msg
+                        (Update.CustomSync.Config msg
+                            (Update.Entity.Config msg
+                                (Update.Subscription.Config msg
+                                    (Update.Todo.Config msg
+                                        { onTodoMsgWithNow : TodoMsg -> Time -> msg
+                                        , onLaunchBarMsgWithNow : LaunchBar.Messages.LaunchBarMsg -> Time -> msg
+                                        , onMdl : Material.Msg msg -> msg
+                                        }
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
 
 
 update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel

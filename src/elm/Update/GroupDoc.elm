@@ -20,7 +20,6 @@ type alias SubModel model =
     { model
         | projectStore : ProjectStore
         , contextStore : ContextStore
-        , now : Time
     }
 
 
@@ -41,9 +40,10 @@ type alias Config msg a =
 
 update :
     Config msg a
+    -> Time
     -> GroupDocMsg
     -> SubReturnF msg model
-update config msg =
+update config now msg =
     case msg of
         OnGroupDocAction gdType groupDocAction ->
             case groupDocAction of
@@ -54,13 +54,13 @@ update config msg =
                         >> returnMsgAsCmd
 
         OnSaveGroupDocForm form ->
-            onGroupDocIdAction config form.groupDocId (GDA_SaveForm form)
+            onGroupDocIdAction config now form.groupDocId (GDA_SaveForm form)
 
         OnGroupDocIdAction groupDocId groupDocIdAction ->
-            onGroupDocIdAction config groupDocId groupDocIdAction
+            onGroupDocIdAction config now groupDocId groupDocIdAction
 
 
-onGroupDocIdAction config groupDocId groupDocIdAction =
+onGroupDocIdAction config now groupDocId groupDocIdAction =
     let
         ( gdType, id ) =
             case groupDocId of
@@ -71,7 +71,7 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
                     ( ProjectGroupDocType, id )
 
         updateGroupDocHelp updateFn =
-            (updateAllGroupDocs gdType updateFn (Set.singleton id) |> andThen)
+            (updateAllGroupDocs now gdType updateFn (Set.singleton id) |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveMode
     in
     case groupDocIdAction of
@@ -99,46 +99,28 @@ onGroupDocIdAction config groupDocId groupDocIdAction =
         GDA_SaveForm form ->
             case form.mode of
                 GDFM_Add ->
-                    insertGroupDoc form.groupDocType form.name
+                    insertGroupDoc now form.groupDocType form.name
 
                 GDFM_Edit ->
                     updateGroupDocHelp (GroupDoc.setName form.name)
 
 
-insertGroupDoc gdType name =
+insertGroupDoc now gdType name =
     let
         store =
             Models.GroupDocStore.storeFieldFromGDType gdType
     in
     andThen
         (\model ->
-            overReturn store (Store.insertAndPersist (GroupDoc.init name model.now)) model
+            overReturn store (Store.insertAndPersist (GroupDoc.init name now)) model
         )
 
 
-updateContext id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
-
-
-updateProject id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
-
-
-updateAllGroupDocs gdType updateFn idSet model =
+updateAllGroupDocs now gdType updateFn idSet model =
     overReturn (Models.GroupDocStore.storeFieldFromGDType gdType)
         (Store.updateAndPersist
             (Document.getId >> Set.member # idSet)
-            model.now
-            updateFn
-        )
-        model
-
-
-updateAllNamedDocsDocs idSet updateFn store model =
-    overReturn store
-        (Store.updateAndPersist
-            (Document.getId >> Set.member # idSet)
-            model.now
+            now
             updateFn
         )
         model

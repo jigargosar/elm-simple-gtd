@@ -120,6 +120,7 @@ type AppMsg
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnGroupDocMsg GroupDocMsg
+    | OnGroupDocMsgWithNow GroupDocMsg Time
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
@@ -352,7 +353,10 @@ update config msg =
             onSubscriptionMsg config msg_
 
         OnGroupDocMsg msg_ ->
-            Update.GroupDoc.update config msg_
+            returnWithNow (OnGroupDocMsgWithNow msg_)
+
+        OnGroupDocMsgWithNow msg_ now ->
+            Update.GroupDoc.update config now msg_
 
         OnExclusiveModeMsg msg_ ->
             Update.ExclusiveMode.update config msg_

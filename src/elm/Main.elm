@@ -126,14 +126,6 @@ updateEntityListCursorMsg =
     EM_UpdateEntityListCursor |> OnEntityMsg
 
 
-entityListFocusPreviousEntityMsg =
-    Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
-
-
-entityListFocusNextEntityMsg =
-    Entity.Types.EM_EntityListFocusNext |> OnEntityMsg
-
-
 onToggleEntitySelection =
     EM_Update # EUA_ToggleSelection >> OnEntityMsg
 
@@ -385,8 +377,8 @@ updateConfig model =
     , onMdl = OnMdl
     , bringEntityIdInViewMsg = bringEntityIdInViewMsg
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
-    , entityListFocusPreviousEntityMsg = entityListFocusPreviousEntityMsg
-    , entityListFocusNextEntityMsg = entityListFocusNextEntityMsg
+    , entityListFocusPreviousEntityMsg = Entity.Types.EM_EntityListFocusPrev |> OnEntityMsg
+    , entityListFocusNextEntityMsg = Entity.Types.EM_EntityListFocusNext |> OnEntityMsg
     }
 
 

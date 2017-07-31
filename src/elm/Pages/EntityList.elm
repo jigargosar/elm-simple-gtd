@@ -8,7 +8,6 @@ import Html.Keyed
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Models.EntityTree
-import Pages.EntityListOld exposing (Old_EntityListPageModel(DoneView))
 import RouteUrl.Builder
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -41,8 +40,6 @@ view config appVM model =
     let
         entityTree =
             Models.EntityTree.doneTree model
-
-        --            Models.EntityTree.createEntityTreeFromEntityListPageModel DoneView model
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"

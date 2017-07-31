@@ -34,7 +34,7 @@ listView config appVM page model =
 
 
 getMaybeEntityIdAtCursor config entityList =
-    config.maybeEntityIdAtCursor
+    config.maybeEntityIdAtCursorOld
         ?+> (Entity.hasId >> List.Extra.find # entityList)
         |> Maybe.Extra.orElse (List.head entityList)
         ?|> Entity.toEntityId
@@ -42,11 +42,11 @@ getMaybeEntityIdAtCursor config entityList =
 
 keyedViewList config appVM entityTree =
     let
-        maybeEntityIdAtCursor =
+        maybeEntityIdAtCursorOld =
             getMaybeEntityIdAtCursor config (Entity.Tree.flatten entityTree)
 
         isCursorAtEntityId entityId =
-            maybeEntityIdAtCursor ?|> equals entityId ?= False
+            maybeEntityIdAtCursorOld ?|> equals entityId ?= False
 
         getTabIndexForEntityId entityId =
             if isCursorAtEntityId entityId then

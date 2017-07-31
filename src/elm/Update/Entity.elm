@@ -93,7 +93,7 @@ moveFocusBy config offset =
     returnWithMaybe2 identity
         (\model ->
             let
-                maybeEntityIdAtCursor =
+                maybeEntityIdAtCursorOld =
                     EntityListCursor.computeMaybeNewEntityIdAtCursorOld config.maybeEntityListPageModel model
 
                 entityIdList =
@@ -102,7 +102,7 @@ moveFocusBy config offset =
             in
             findEntityIdByOffsetIn offset
                 entityIdList
-                maybeEntityIdAtCursor
+                maybeEntityIdAtCursorOld
                 ?|> (EM_SetFocusInEntityWithEntityId >> update config)
         )
 
@@ -112,7 +112,7 @@ entityListCursor =
 
 
 setEntityAtCursor : Config msg a -> Maybe EntityId -> SubModelF model
-setEntityAtCursor config maybeEntityIdAtCursor model =
+setEntityAtCursor config maybeEntityIdAtCursorOld model =
     let
         entityIdList =
             createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model
@@ -120,7 +120,7 @@ setEntityAtCursor config maybeEntityIdAtCursor model =
 
         cursor =
             { entityIdList = entityIdList
-            , maybeEntityIdAtCursor = maybeEntityIdAtCursor
+            , maybeEntityIdAtCursorOld = maybeEntityIdAtCursorOld
             }
     in
     setIn model entityListCursor cursor

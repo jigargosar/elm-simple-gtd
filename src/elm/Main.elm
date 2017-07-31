@@ -285,7 +285,7 @@ updateConfig model =
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
     , maybeEntityListPageModel = Page.maybeGetEntityListPage model
 
-    --    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
+    --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model
     }
 
 
@@ -408,7 +408,7 @@ type alias ViewConfig msg =
         GroupDocForm -> GroupDocName -> msg
     , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
-    , maybeEntityIdAtCursor : Maybe EntityId
+    , maybeEntityIdAtCursorOld : Maybe EntityId
     , navigateToPathMsg : List String -> msg
     }
 
@@ -457,7 +457,7 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , maybeEntityIdAtCursor =
+    , maybeEntityIdAtCursorOld =
         EntityListCursor.computeMaybeNewEntityIdAtCursorOld
             (Page.maybeGetEntityListPage model)
             model

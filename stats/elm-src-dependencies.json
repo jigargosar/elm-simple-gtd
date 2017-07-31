@@ -3338,14 +3338,13 @@
       "List.Extra",
       "Maybe.Extra",
       "Models.EntityTree",
-      "Pages.EntityListOld",
       "RouteUrl.Builder",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 14,
+    "importsCount": 13,
     "transitiveImports": [
       "AppColors",
       "Char",
@@ -3462,12 +3461,11 @@
       "Main",
       "Models.EntityTree",
       "Page",
-      "Pages.EntityList",
       "Update.Entity",
       "Update.LaunchBar",
       "ViewModel"
     ],
-    "backwardImportsCount": 10,
+    "backwardImportsCount": 9,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",

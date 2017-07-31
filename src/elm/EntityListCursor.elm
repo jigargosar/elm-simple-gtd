@@ -12,7 +12,7 @@ import X.List
 
 type alias EntityListCursor =
     { entityIdList : List EntityId
-    , maybeEntityIdAtCursor : Maybe EntityId
+    , maybeEntityIdAtCursorOld : Maybe EntityId
     }
 
 
@@ -21,13 +21,13 @@ type alias HasEntityListCursor a =
 
 
 getMaybeEntityIdAtCursor__ model =
-    model.entityListCursor.maybeEntityIdAtCursor
+    model.entityListCursor.maybeEntityIdAtCursorOld
 
 
 initialValue : EntityListCursor
 initialValue =
     { entityIdList = []
-    , maybeEntityIdAtCursor = Nothing
+    , maybeEntityIdAtCursorOld = Nothing
     }
 
 
@@ -69,6 +69,6 @@ computeMaybeNewEntityIdAtCursorOld maybeEntityListPageModel model =
                                 Just entityIdAtCursor
                    )
     in
-    model.entityListCursor.maybeEntityIdAtCursor
+    model.entityListCursor.maybeEntityIdAtCursorOld
         ?|> computeNewEntityIdAtCursor
         ?= List.head newEntityIdList

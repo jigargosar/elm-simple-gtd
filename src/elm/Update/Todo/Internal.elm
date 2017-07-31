@@ -152,8 +152,8 @@ saveAddTodoForm config addMode form now model =
                             ATFM_SetupFirstTodo ->
                                 inboxEntityId
 
-                            ATFM_AddWithFocusInEntityAsReference maybeEntityIdAtCursor ->
-                                maybeEntityIdAtCursor
+                            ATFM_AddWithFocusInEntityAsReference maybeEntityIdAtCursorOld ->
+                                maybeEntityIdAtCursorOld
                                     ?= inboxEntityId
 
                     maybeAction =

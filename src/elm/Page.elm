@@ -27,7 +27,7 @@ maybeGetEntityListPage model =
             Nothing
 
 
-getPage =
+getPage__ =
     .page
 
 
@@ -46,7 +46,7 @@ delta2hash =
 
 
 getPathFromModel model =
-    case getPage model of
+    case getPage__ model of
         EntityListPage page ->
             getPathFromEntityListPageModel page
 

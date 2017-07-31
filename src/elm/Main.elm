@@ -136,16 +136,8 @@ onStartAddingTodoWithFocusInEntityAsReference model =
         |> OnTodoMsg
 
 
-
---  view type
-
-
 gotoEntityListPageMsg =
     SwitchToEntityListView >> OnPageMsg
-
-
-
--- ex mode
 
 
 revertExclusiveModeMsg =
@@ -158,27 +150,9 @@ onSaveExclusiveModeForm =
     Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
 
-
--- entityMsg
-
-
 setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
 setFocusInEntityWithEntityIdMsg =
     EM_SetFocusInEntityWithEntityId >> OnEntityMsg
-
-
-
---drawer
-
-
-onToggleAppDrawerOverlay : AppMsg
-onToggleAppDrawerOverlay =
-    OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
-
-
-onAppDrawerMsg : AppDrawerMsg -> AppMsg
-onAppDrawerMsg =
-    OnAppDrawerMsg
 
 
 subscriptions : AppModel -> Sub AppMsg
@@ -455,8 +429,8 @@ viewConfig model =
     , onLaunchBarMsg = OnLaunchBarMsg
     , onFirebaseMsg = OnFirebaseMsg
     , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
-    , onToggleAppDrawerOverlay = onToggleAppDrawerOverlay
-    , onAppDrawerMsg = onAppDrawerMsg
+    , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
+    , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
@@ -491,7 +465,7 @@ view config model =
             ViewModel.create config model
 
         pageContent =
-            case Page.getPage model of
+            case Page.getPage__ model of
                 Page.EntityListPage entityListPageModel ->
                     Entity.ListView.listView config appVM entityListPageModel model
 

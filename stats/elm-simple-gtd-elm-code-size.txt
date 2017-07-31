@@ -1,4 +1,4 @@
-    9778 total
+    9801 total
      560 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -85,6 +85,7 @@
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
       30 src/elm/Page.elm
+      23 src/elm/Data/Debug.elm
       22 src/elm/Msg/GroupDoc.elm
       22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm

@@ -425,6 +425,40 @@
     ],
     "transitiveBackwardImportsCount": 29
   },
+  "Data.Debug": {
+    "fileName": "src/elm/Data/Debug.elm",
+    "moduleName": "Data.Debug",
+    "parentModuleName": "Data",
+    "imports": [
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 9,
+    "transitiveImports": [
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 10,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "Document": {
     "fileName": "src/elm/Document.elm",
     "moduleName": "Document",
@@ -6755,6 +6789,7 @@
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "Context",
+      "Data.Debug",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -6774,12 +6809,13 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 22,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "AppDrawer.View",
       "Context",
+      "Data.Debug",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -6846,7 +6882,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 69
+    "transitiveBackwardImportsCount": 70
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -6859,6 +6895,7 @@
     "backwardImports": [
       "AppDrawer.Model",
       "AppDrawer.View",
+      "Data.Debug",
       "Document",
       "Entity",
       "Firebase.Model",
@@ -6889,12 +6926,13 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 31,
+    "backwardImportsCount": 32,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "AppDrawer.View",
       "Context",
+      "Data.Debug",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -6971,7 +7009,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 79
+    "transitiveBackwardImportsCount": 80
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

@@ -3029,6 +3029,34 @@
     ],
     "transitiveBackwardImportsCount": 10
   },
+  "Pages.EntityList": {
+    "fileName": "src/elm/Pages/EntityList.elm",
+    "moduleName": "Pages.EntityList",
+    "parentModuleName": "Pages",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "Pages.EntityListOld": {
     "fileName": "src/elm/Pages/EntityListOld.elm",
     "moduleName": "Pages.EntityListOld",
@@ -6679,6 +6707,7 @@
       "Mat",
       "Menu",
       "Models.Stores",
+      "Pages.EntityList",
       "Project",
       "Sequencer",
       "Todo",
@@ -6689,7 +6718,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 23,
+    "backwardImportsCount": 24,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -6723,6 +6752,7 @@
       "Msg.CustomSync",
       "Msg.ExclusiveMode",
       "Overlays.LaunchBar",
+      "Pages.EntityList",
       "Project",
       "Sequencer",
       "Store",
@@ -6762,7 +6792,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 70
+    "transitiveBackwardImportsCount": 71
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -6790,6 +6820,7 @@
       "Menu",
       "Models.Stores",
       "Page",
+      "Pages.EntityList",
       "Sequencer",
       "Todo",
       "Todo.ItemView",
@@ -6807,7 +6838,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 33,
+    "backwardImportsCount": 34,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -6848,6 +6879,7 @@
       "Msg.ExclusiveMode",
       "Overlays.LaunchBar",
       "Page",
+      "Pages.EntityList",
       "Ports.Firebase",
       "Project",
       "Sequencer",
@@ -6891,7 +6923,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 81
+    "transitiveBackwardImportsCount": 82
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

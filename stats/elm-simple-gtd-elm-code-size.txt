@@ -1,4 +1,4 @@
-    9718 total
+    9730 total
      514 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -106,6 +106,7 @@
       14 src/elm/View/Badge.elm
       13 src/elm/Links.elm
       12 src/elm/Todo/Store.elm
+      12 src/elm/Pages/EntityList.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm
       10 src/elm/AppDrawer/Types.elm

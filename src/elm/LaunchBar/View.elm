@@ -4,8 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Keyboard.Extra as Key exposing (Key(..))
-import LaunchBar.Models exposing (..)
-import Overlays.LaunchBar exposing (LaunchBarMsg(..))
+import Overlays.LaunchBar exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
@@ -17,10 +16,10 @@ init model =
             model.searchResults
                 |> List.head
                 ?|> Tuple.first
-                ?= LaunchBar.Models.defaultEntity
+                ?= Overlays.LaunchBar.defaultEntity
 
         matchingEntityName =
-            matchingEntity |> LaunchBar.Models.getSearchItemName
+            matchingEntity |> Overlays.LaunchBar.getSearchItemName
 
         keyHandler { key } =
             case key of

@@ -1,4 +1,4 @@
-    9711 total
+    9704 total
      532 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -17,8 +17,8 @@
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
-     153 src/elm/Update/LaunchBar.elm
      153 src/elm/Entity/Tree.elm
+     152 src/elm/Update/LaunchBar.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      140 src/elm/Entity/ListView.elm
@@ -56,10 +56,10 @@
       67 src/elm/Todo/GroupEditView.elm
       67 src/elm/Firebase/Model.elm
       64 src/elm/Todo/Notification/View.elm
+      61 src/elm/Overlays/LaunchBar.elm
       56 src/elm/Entity.elm
       55 src/elm/Project.elm
-      55 src/elm/LaunchBar/View.elm
-      53 src/elm/LaunchBar/Models.elm
+      54 src/elm/LaunchBar/View.elm
       50 src/elm/View/CustomSync.elm
       50 src/elm/Types/Todo.elm
       50 src/elm/Todo/Notification/Model.elm
@@ -85,13 +85,13 @@
       31 src/elm/View/NewTodoFab.elm
       23 src/elm/Data/Debug.elm
       22 src/elm/Msg/GroupDoc.elm
-      22 src/elm/ExclusiveMode/Types.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
       21 src/elm/Models/Todo.elm
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm
       20 src/elm/Firebase/User.elm
+      20 src/elm/ExclusiveMode/Types.elm
       20 src/elm/EntityId.elm
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
@@ -105,7 +105,6 @@
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
       12 src/elm/Todo/Store.elm
-      11 src/elm/Overlays/LaunchBar.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm
       10 src/elm/AppDrawer/Types.elm

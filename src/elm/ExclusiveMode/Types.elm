@@ -1,9 +1,7 @@
 module ExclusiveMode.Types exposing (..)
 
--- small so safe
-
-import LaunchBar.Models
 import Menu.Types exposing (MenuState)
+import Overlays.LaunchBar
 import Todo.FormTypes exposing (..)
 import Types.GroupDoc exposing (..)
 
@@ -15,7 +13,7 @@ type alias SyncForm =
 type ExclusiveMode
     = XMTodoForm TodoForm
     | XMGroupDocForm GroupDocForm
-    | XMLaunchBar LaunchBar.Models.LaunchBarForm
+    | XMLaunchBar Overlays.LaunchBar.LaunchBarForm
     | XMMainMenu MenuState
     | XMSignInOverlay
     | XMCustomSync SyncForm

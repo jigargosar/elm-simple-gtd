@@ -342,10 +342,10 @@
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "Main",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Overlays.LaunchBar",
       "Update.Todo.Internal"
     ],
     "backwardImportsCount": 8,
@@ -356,7 +356,6 @@
       "EntityListCursor",
       "ExclusiveMode.Types",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -380,7 +379,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 29
+    "transitiveBackwardImportsCount": 28
   },
   "Data.Debug": {
     "fileName": "src/elm/Data/Debug.elm",
@@ -478,7 +477,6 @@
       "GroupDoc.Form",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -516,7 +514,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 49
+    "transitiveBackwardImportsCount": 48
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -975,8 +973,8 @@
     "moduleName": "ExclusiveMode.Types",
     "parentModuleName": "ExclusiveMode",
     "imports": [
-      "LaunchBar.Models",
       "Menu.Types",
+      "Overlays.LaunchBar",
       "Todo.FormTypes",
       "Types.GroupDoc"
     ],
@@ -999,11 +997,11 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -1192,7 +1190,6 @@
       "Firebase.Model",
       "Firebase.User",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
       "Main",
@@ -1225,7 +1222,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 41
+    "transitiveBackwardImportsCount": 40
   },
   "Firebase.User": {
     "fileName": "src/elm/Firebase/User.elm",
@@ -1354,7 +1351,6 @@
       "ExclusiveMode.Types",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -1380,7 +1376,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 33
+    "transitiveBackwardImportsCount": 32
   },
   "GroupDoc.Form": {
     "fileName": "src/elm/GroupDoc/Form.elm",
@@ -1742,80 +1738,6 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
-  "LaunchBar.Models": {
-    "fileName": "src/elm/LaunchBar/Models.elm",
-    "moduleName": "LaunchBar.Models",
-    "parentModuleName": "LaunchBar",
-    "imports": [
-      "Context",
-      "Fuzzy",
-      "Project",
-      "Time",
-      "Types.GroupDoc"
-    ],
-    "importsCount": 5,
-    "transitiveImports": [
-      "Char",
-      "Context",
-      "Dict",
-      "Document",
-      "Firebase.SignIn",
-      "Fuzzy",
-      "GroupDoc",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "List.Extra",
-      "Project",
-      "Random.Pcg",
-      "Return",
-      "Set",
-      "Store",
-      "Time",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.Document",
-      "Types.Firebase",
-      "Types.GroupDoc",
-      "Types.Store",
-      "X.Debug",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Predicate",
-      "X.Random",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 30,
-    "backwardImports": [
-      "ExclusiveMode.Types",
-      "LaunchBar.View",
-      "Overlays.LaunchBar",
-      "Update.LaunchBar"
-    ],
-    "backwardImportsCount": 4,
-    "transitiveBackwardImports": [
-      "ExclusiveMode.Types",
-      "LaunchBar.View",
-      "Main",
-      "Msg.CustomSync",
-      "Msg.ExclusiveMode",
-      "Overlays.LaunchBar",
-      "Update.AppHeader",
-      "Update.CustomSync",
-      "Update.Entity",
-      "Update.ExclusiveMode",
-      "Update.Firebase",
-      "Update.GroupDoc",
-      "Update.LaunchBar",
-      "Update.Subscription",
-      "Update.Todo",
-      "Update.Todo.Internal",
-      "View.CustomSync",
-      "View.Overlays"
-    ],
-    "transitiveBackwardImportsCount": 18
-  },
   "LaunchBar.View": {
     "fileName": "src/elm/LaunchBar/View.elm",
     "moduleName": "LaunchBar.View",
@@ -1825,13 +1747,12 @@
       "Html.Attributes",
       "Html.Events",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "Overlays.LaunchBar",
       "Toolkit.Operators",
       "X.Html",
       "X.Keyboard"
     ],
-    "importsCount": 9,
+    "importsCount": 8,
     "transitiveImports": [
       "Char",
       "Context",
@@ -1848,7 +1769,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Overlays.LaunchBar",
       "Project",
@@ -1874,7 +1794,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 40,
+    "transitiveImportsCount": 39,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -2043,7 +1963,6 @@
       "Json.Encode.Extra",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "List",
       "List.Extra",
@@ -2151,7 +2070,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 151,
+    "transitiveImportsCount": 150,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2765,11 +2684,11 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -2835,11 +2754,11 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -2963,9 +2882,13 @@
     "moduleName": "Overlays.LaunchBar",
     "parentModuleName": "Overlays",
     "imports": [
-      "LaunchBar.Models"
+      "Context",
+      "Fuzzy",
+      "Project",
+      "Time",
+      "Types.GroupDoc"
     ],
-    "importsCount": 1,
+    "importsCount": 5,
     "transitiveImports": [
       "Char",
       "Context",
@@ -2977,7 +2900,6 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "LaunchBar.Models",
       "List.Extra",
       "Project",
       "Random.Pcg",
@@ -2999,20 +2921,34 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 31,
+    "transitiveImportsCount": 30,
     "backwardImports": [
+      "ExclusiveMode.Types",
       "LaunchBar.View",
       "Main",
       "Update.LaunchBar"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
+      "ExclusiveMode.Types",
       "LaunchBar.View",
       "Main",
+      "Msg.CustomSync",
+      "Msg.ExclusiveMode",
+      "Update.AppHeader",
+      "Update.CustomSync",
+      "Update.Entity",
+      "Update.ExclusiveMode",
+      "Update.Firebase",
+      "Update.GroupDoc",
       "Update.LaunchBar",
+      "Update.Subscription",
+      "Update.Todo",
+      "Update.Todo.Internal",
+      "View.CustomSync",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 17
   },
   "Page": {
     "fileName": "src/elm/Page.elm",
@@ -3240,10 +3176,10 @@
       "AppDrawer.GroupViewModel",
       "Entity.Tree",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "Main",
       "Models.EntityTree",
-      "Models.GroupDocStore"
+      "Models.GroupDocStore",
+      "Overlays.LaunchBar"
     ],
     "backwardImportsCount": 7,
     "transitiveBackwardImports": [
@@ -3253,7 +3189,6 @@
       "EntityListCursor",
       "ExclusiveMode.Types",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -3277,7 +3212,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 29
+    "transitiveBackwardImportsCount": 28
   },
   "RegexHelper": {
     "fileName": "src/elm/RegexHelper.elm",
@@ -3401,7 +3336,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -3432,7 +3366,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 38
   },
   "Todo": {
     "fileName": "src/elm/Todo.elm",
@@ -4472,7 +4406,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -4521,7 +4454,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 64
+    "transitiveBackwardImportsCount": 63
   },
   "Types.Firebase": {
     "fileName": "src/elm/Types/Firebase.elm",
@@ -4562,7 +4495,6 @@
       "Firebase.Model",
       "Firebase.User",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -4592,7 +4524,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 38
+    "transitiveBackwardImportsCount": 37
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -4623,11 +4555,11 @@
       "GroupDoc.Form",
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "Main",
       "Models.GroupDocStore",
       "Models.HasStores",
       "Msg.GroupDoc",
+      "Overlays.LaunchBar",
       "Project",
       "Types.Todo",
       "Update.ExclusiveMode",
@@ -4651,7 +4583,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -4692,7 +4623,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 54
+    "transitiveBackwardImportsCount": 53
   },
   "Types.LocalPref": {
     "fileName": "src/elm/Types/LocalPref.elm",
@@ -4771,7 +4702,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -4815,7 +4745,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 57
+    "transitiveBackwardImportsCount": 56
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -4974,12 +4904,12 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Msg.AppHeader",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5048,12 +4978,12 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Msg.CustomSync",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5144,7 +5074,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List",
       "List.Extra",
       "Maybe.Extra",
@@ -5156,6 +5085,7 @@
       "Models.Selection",
       "Models.Stores",
       "Models.Todo",
+      "Overlays.LaunchBar",
       "Page",
       "Pages.EntityList",
       "Project",
@@ -5234,12 +5164,12 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Msg.ExclusiveMode",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5325,13 +5255,13 @@
       "Json.Encode.Extra",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Msg.Firebase",
       "Navigation",
+      "Overlays.LaunchBar",
       "Ports.Firebase",
       "Project",
       "Random.Pcg",
@@ -5412,13 +5342,13 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Models.GroupDocStore",
       "Msg.GroupDoc",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5465,7 +5395,6 @@
       "Document",
       "ExclusiveMode.Types",
       "Fuzzy",
-      "LaunchBar.Models",
       "Models.GroupDocStore",
       "Overlays.LaunchBar",
       "Pages.EntityList",
@@ -5478,7 +5407,7 @@
       "Types.GroupDoc",
       "X.Return"
     ],
-    "importsCount": 15,
+    "importsCount": 14,
     "transitiveImports": [
       "Char",
       "Context",
@@ -5498,7 +5427,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
@@ -5537,7 +5465,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 56,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "Main"
     ],
@@ -5629,7 +5557,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Maybe.Extra",
       "Menu",
@@ -5637,6 +5564,7 @@
       "Models.GroupDocStore",
       "Models.Selection",
       "Models.Todo",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -5712,7 +5640,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List",
       "List.Extra",
       "Maybe.Extra",
@@ -5720,6 +5647,7 @@
       "Menu.Types",
       "Models.Todo",
       "Notification",
+      "Overlays.LaunchBar",
       "Ports.Todo",
       "Project",
       "Random.Pcg",
@@ -5827,7 +5755,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List",
       "List.Extra",
       "Maybe.Extra",
@@ -5835,6 +5762,7 @@
       "Menu.Types",
       "Models.Todo",
       "Notification",
+      "Overlays.LaunchBar",
       "Ports.Todo",
       "Project",
       "Random.Pcg",
@@ -5951,7 +5879,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "List.Extra",
       "Mat",
       "Material",
@@ -5961,6 +5888,7 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Overlays.LaunchBar",
       "Project",
       "Random.Pcg",
       "Return",
@@ -6373,7 +6301,6 @@
       "Json.Encode.Extra",
       "Keyboard",
       "Keyboard.Extra",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "List",
       "List.Extra",
@@ -6425,7 +6352,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 80,
+    "transitiveImportsCount": 79,
     "backwardImports": [
       "Main"
     ],
@@ -6593,7 +6520,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Menu",
@@ -6637,7 +6563,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 54
+    "transitiveBackwardImportsCount": 53
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -6755,7 +6681,6 @@
       "GroupDoc.ViewModel",
       "L.Main",
       "L.View",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
       "Main",
@@ -6807,7 +6732,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 70
+    "transitiveBackwardImportsCount": 69
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -6877,7 +6802,6 @@
       "GroupDoc.ViewModel",
       "L.Main",
       "L.View",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
       "Main",
@@ -6935,7 +6859,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 81
+    "transitiveBackwardImportsCount": 80
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -7200,7 +7124,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -7226,7 +7149,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 34
+    "transitiveBackwardImportsCount": 33
   },
   "X.Random": {
     "fileName": "src/elm/X/Random.elm",
@@ -7259,7 +7182,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "Main",
       "Models.EntityTree",
@@ -7291,7 +7213,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 40
+    "transitiveBackwardImportsCount": 39
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -7340,7 +7262,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LaunchBar.Models",
       "LaunchBar.View",
       "LocalPref",
       "Main",
@@ -7383,7 +7304,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 56
+    "transitiveBackwardImportsCount": 55
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

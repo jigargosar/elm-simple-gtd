@@ -3,7 +3,6 @@ module Update.LaunchBar exposing (Config, update)
 import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
-import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
 import Models.GroupDocStore
 import Overlays.LaunchBar exposing (..)
 import Pages.EntityList exposing (..)
@@ -79,7 +78,7 @@ update config now msg =
 
         Open ->
             now
-                |> LaunchBar.Models.initialModel
+                |> Overlays.LaunchBar.initialModel
                 >> XMLaunchBar
                 >> config.onSetExclusiveMode
                 >> returnMsgAsCmd
@@ -126,7 +125,7 @@ fuzzyMatch needle searchItem =
             String.Extra.underscored
 
         boiledHay =
-            searchItem |> LaunchBar.Models.getSearchItemName >> boil
+            searchItem |> Overlays.LaunchBar.getSearchItemName >> boil
 
         boiledNeedle =
             boil needle

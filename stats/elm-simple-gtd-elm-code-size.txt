@@ -1,5 +1,5 @@
-    9788 total
-     547 src/elm/Main.elm
+    9726 total
+     533 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
@@ -80,7 +80,6 @@
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
-      37 src/elm/CommonMsg.elm
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
@@ -108,7 +107,6 @@
       14 src/elm/View/Badge.elm
       12 src/elm/Todo/Store.elm
       11 src/elm/LaunchBar/Messages.elm
-      11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm
       10 src/elm/AppDrawer/Types.elm

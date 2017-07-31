@@ -294,52 +294,6 @@
     ],
     "transitiveBackwardImportsCount": 9
   },
-  "CommonMsg": {
-    "fileName": "src/elm/CommonMsg.elm",
-    "moduleName": "CommonMsg",
-    "parentModuleName": "",
-    "imports": [
-      "CommonMsg.Types",
-      "DomPorts",
-      "Return",
-      "X.Debug"
-    ],
-    "importsCount": 4,
-    "transitiveImports": [
-      "CommonMsg.Types",
-      "DomPorts",
-      "Return",
-      "X.Debug"
-    ],
-    "transitiveImportsCount": 4,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
-  },
-  "CommonMsg.Types": {
-    "fileName": "src/elm/CommonMsg/Types.elm",
-    "moduleName": "CommonMsg.Types",
-    "parentModuleName": "CommonMsg",
-    "imports": [],
-    "importsCount": 0,
-    "transitiveImports": [],
-    "transitiveImportsCount": 0,
-    "backwardImports": [
-      "CommonMsg",
-      "Main"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "CommonMsg",
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 2
-  },
   "Context": {
     "fileName": "src/elm/Context.elm",
     "moduleName": "Context",
@@ -574,21 +528,19 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "CommonMsg",
       "Update.AppHeader",
       "Update.ExclusiveMode",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
-      "CommonMsg",
       "Main",
       "Update.AppHeader",
       "Update.ExclusiveMode",
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 5
   },
   "Entity": {
     "fileName": "src/elm/Entity.elm",
@@ -2033,8 +1985,6 @@
     "imports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
-      "CommonMsg",
-      "CommonMsg.Types",
       "Context",
       "Entity.ListView",
       "Entity.Types",
@@ -2101,7 +2051,7 @@
       "X.Random",
       "X.Return"
     ],
-    "importsCount": 69,
+    "importsCount": 67,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -2112,8 +2062,6 @@
       "Char",
       "Color",
       "Color.Mixing",
-      "CommonMsg",
-      "CommonMsg.Types",
       "Context",
       "Date",
       "Date.Extra",
@@ -2258,7 +2206,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 154,
+    "transitiveImportsCount": 152,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -6649,15 +6597,13 @@
     "transitiveImports": [],
     "transitiveImportsCount": 0,
     "backwardImports": [
-      "CommonMsg",
       "Store",
       "X.Decode",
       "X.Return"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
-      "CommonMsg",
       "Context",
       "Entity.ListView",
       "Entity.Tree",
@@ -6712,7 +6658,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 55
+    "transitiveBackwardImportsCount": 54
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",

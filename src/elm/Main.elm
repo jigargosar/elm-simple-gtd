@@ -2,8 +2,6 @@ module Main exposing (main)
 
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
-import CommonMsg
-import CommonMsg.Types
 import Context
 import Entity.ListView
 import Entity.Types exposing (..)
@@ -111,7 +109,7 @@ type SubscriptionMsg
 
 
 type AppMsg
-    = OnCommonMsg CommonMsg.Types.Msg
+    = NOOP
     | OnSubscriptionMsg SubscriptionMsg
     | OnPageMsg PageMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
@@ -137,18 +135,6 @@ onStartAddingTodoWithFocusInEntityAsReference model =
     EntityListCursor.computeMaybeNewEntityIdAtCursor model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
-
-
-
--- common
-
-
-commonMsg =
-    CommonMsg.createHelper OnCommonMsg
-
-
-noop =
-    commonMsg.noOp
 
 
 
@@ -335,6 +321,9 @@ update config msg =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
     in
     case msg of
+        NOOP ->
+            identity
+
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
 
@@ -349,9 +338,6 @@ update config msg =
 
         OnPageMsg msg_ ->
             Update.Page.update config msg_
-
-        OnCommonMsg msg_ ->
-            CommonMsg.update msg_
 
         OnSubscriptionMsg msg_ ->
             onSubscriptionMsg config msg_
@@ -456,7 +442,7 @@ viewConfig model =
     { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> OnTodoMsg
     , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> OnTodoMsg
     , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> OnTodoMsg
-    , noop = noop
+    , noop = NOOP
     , revertExclusiveMode = revertExclusiveModeMsg
     , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> OnTodoMsg
     , onToggleDeleted = Todo.Msg.onToggleDeleted >> OnTodoMsg

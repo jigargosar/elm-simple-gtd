@@ -37,7 +37,7 @@ createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model =
         ?= []
 
 
-computeMaybeNewEntityIdAtCursor maybeEntityListPageModel model =
+computeMaybeNewEntityIdAtCursorOld maybeEntityListPageModel model =
     let
         newEntityIdList =
             createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model

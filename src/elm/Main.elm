@@ -36,7 +36,7 @@ import RouteUrl
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.FormTypes
-import Todo.Msg exposing (..)
+import Todo.Msg exposing (TodoMsg)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Store
@@ -130,9 +130,9 @@ type AppMsg
     | SetLastKnownTimeStamp Time
 
 
-onStartAddingTodoWithFocusInEntityAsReference : AppModel -> AppMsg
-onStartAddingTodoWithFocusInEntityAsReference model =
-    EntityListCursor.computeMaybeNewEntityIdAtCursor (Page.maybeGetEntityListPage model) model
+onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
+onStartAddingTodoWithFocusInEntityAsReferenceOld model =
+    EntityListCursor.computeMaybeNewEntityIdAtCursorOld (Page.maybeGetEntityListPage model) model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
@@ -178,13 +178,13 @@ subscriptions model =
             ]
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
-            [ notificationClicked OnReminderNotificationClicked
-            , onRunningTodoNotificationClicked RunningNotificationResponse
-            , everyXSeconds 1 (\_ -> UpdateTimeTracker)
+            [ notificationClicked Todo.Msg.OnReminderNotificationClicked
+            , onRunningTodoNotificationClicked Todo.Msg.RunningNotificationResponse
+            , everyXSeconds 1 (\_ -> Todo.Msg.UpdateTimeTracker)
 
             -- note: 30 seconds is so that we can received any updates from firebase
             -- before triggering and changing any stale overdue todos timestamps.
-            , everyXSeconds 30 (\_ -> OnProcessPendingNotificationCronTick)
+            , everyXSeconds 30 (\_ -> Todo.Msg.OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch
@@ -267,7 +267,7 @@ updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        onStartAddingTodoWithFocusInEntityAsReference model
+        onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , openLaunchBarMsg = Overlays.LaunchBar.Open |> OnLaunchBarMsg
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
@@ -443,7 +443,7 @@ viewConfig model =
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
-        onStartAddingTodoWithFocusInEntityAsReference model
+        onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onToggleEntitySelection = EM_Update # EUA_ToggleSelection >> OnEntityMsg
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
@@ -457,7 +457,10 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor (Page.maybeGetEntityListPage model) model
+    , maybeEntityIdAtCursor =
+        EntityListCursor.computeMaybeNewEntityIdAtCursorOld
+            (Page.maybeGetEntityListPage model)
+            model
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     }
 

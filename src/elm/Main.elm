@@ -345,11 +345,7 @@ update config msg =
             Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
 
         SetLastKnownTimeStamp now ->
-            let
-                setNow now model =
-                    { model | lastKnownCurrentTime = now }
-            in
-            map (setNow now)
+            map (\model -> { model | lastKnownCurrentTime = now })
 
         OnPageMsg msg_ ->
             Update.Page.update config msg_

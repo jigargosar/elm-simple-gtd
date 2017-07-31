@@ -217,7 +217,10 @@ subscriptions model =
             [ notificationClicked OnReminderNotificationClicked
             , onRunningTodoNotificationClicked RunningNotificationResponse
             , everyXSeconds 1 (\_ -> UpdateTimeTracker)
-            , everyXSeconds 1 (\_ -> OnProcessPendingNotificationCronTick)
+
+            -- note: 30 seconds is so that we can received any updates from firebase
+            -- before triggering and changing any stale overdue todos timestamps.
+            , everyXSeconds 30 (\_ -> OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch

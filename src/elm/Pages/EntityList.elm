@@ -32,6 +32,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
 import X.Predicate
+import X.Return exposing (..)
 
 
 type Filter
@@ -79,6 +80,38 @@ update config msg =
 
         ArrowDown ->
             identity
+
+
+moveFocusBy config offset =
+    let
+        findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
+            let
+                index =
+                    maybeOffsetFromEntityId
+                        ?+> (equals >> X.List.findIndexIn entityIdList)
+                        ?= 0
+                        |> add offsetIndex
+            in
+            X.List.clampAndGetAtIndex index entityIdList
+                |> Maybe.orElse (List.head entityIdList)
+    in
+    returnWithMaybe2 identity
+        (\model ->
+            let
+                maybeEntityIdAtCursorOld =
+                    EntityListCursor.computeMaybeNewEntityIdAtCursorOld
+                        config.maybeEntityListPageModel
+                        model
+
+                entityIdList =
+                    EntityListCursor.createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model
+                        .|> Entity.toEntityId
+            in
+            findEntityIdByOffsetIn offset
+                entityIdList
+                maybeEntityIdAtCursorOld
+                ?|> (config.setFocusInEntityWithEntityId >> returnMsgAsCmd)
+        )
 
 
 createEntityTree filter model =

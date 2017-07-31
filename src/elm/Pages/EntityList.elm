@@ -67,6 +67,20 @@ initialModel path =
             Nothing
 
 
+type Msg
+    = ArrowUp
+    | ArrowDown
+
+
+update config msg =
+    case msg of
+        ArrowUp ->
+            identity
+
+        ArrowDown ->
+            identity
+
+
 createEntityTree filter model =
     let
         getActiveTodoListForContextHelp =

@@ -45,6 +45,8 @@ type alias Config msg a =
         , onGotoRunningTodoMsg : msg
         , focusNextEntityMsg : msg
         , focusPrevEntityMsg : msg
+        , focusNextEntityMsgNew : msg
+        , focusPrevEntityMsgNew : msg
     }
 
 

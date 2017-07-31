@@ -117,6 +117,7 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsg Entity.Types.EntityMsg
+    | OnEntityMsgNew Pages.EntityList.Msg
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnGroupDocMsg GroupDocMsg
@@ -284,6 +285,8 @@ updateConfig model =
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+    , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
+    , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
     , maybeEntityListPageModel = Page.maybeGetEntityListPage model
 
     --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model
@@ -335,6 +338,9 @@ update config msg =
 
         OnEntityMsg msg_ ->
             Update.Entity.update config msg_
+
+        OnEntityMsgNew msg_ ->
+            Pages.EntityList.update config msg_
 
         OnLaunchBarMsgWithNow msg_ now ->
             Update.LaunchBar.update config now msg_

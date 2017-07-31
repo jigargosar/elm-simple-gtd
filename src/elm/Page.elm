@@ -16,7 +16,7 @@ type Page
 type PageMsg
     = PageMsg_SetPage Page
     | PageMsg_SetEntityListPage EntityListPageModel
-    | PageMsg_Route (List String)
+    | PageMsg_NavigateToPath (List String)
 
 
 maybeGetEntityListPage model =
@@ -62,7 +62,7 @@ hash2messages config location =
     in
     case RouteUrl.Builder.path builder of
         "custom-sync" :: [] ->
-            [ config.gotoPageMsg CustomSyncSettingsPage ]
+            [ config.navigateToPathMsg [ "custom-sync" ] ]
 
         _ ->
             routeUrlBuilderToMaybeEntityListPageModel builder

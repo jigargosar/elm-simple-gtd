@@ -168,7 +168,7 @@ entityListItem vm =
 switchViewItemSmall config iconName path title =
     li
         [ class ""
-        , onClick (config.gotToRouteMsg path)
+        , onClick (config.navigateToPathMsg path)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]

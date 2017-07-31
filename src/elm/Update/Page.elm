@@ -39,7 +39,7 @@ update config msg =
         PageMsg_SetEntityListPage listView ->
             listView |> EntityListPage >> PageMsg_SetPage >> update config
 
-        PageMsg_Route path ->
+        PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->
                     PageMsg_SetPage CustomSyncSettingsPage |> update config

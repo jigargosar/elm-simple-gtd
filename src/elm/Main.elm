@@ -407,7 +407,7 @@ type alias ViewConfig msg =
     , gotoEntityListPageMsg : EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursor : Maybe EntityId
-    , gotToRouteMsg : List String -> msg
+    , navigateToPathMsg : List String -> msg
     }
 
 
@@ -456,7 +456,7 @@ viewConfig model =
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor model
-    , gotToRouteMsg = PageMsg_Route >> OnPageMsg
+    , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     }
 
 
@@ -501,6 +501,7 @@ main =
             Page.hash2messages
                 { gotoPageMsg = PageMsg_SetPage >> OnPageMsg
                 , gotoEntityListPageMsg = gotoEntityListPageMsg
+                , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
                 }
         , init = init
         , update = update_

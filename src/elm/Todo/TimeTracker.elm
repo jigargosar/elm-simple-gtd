@@ -20,6 +20,7 @@ type alias ModelRec =
     { todoId : DocId
     , state : State
     , nextAlarmAt : Time
+    , now : Time
     }
 
 
@@ -60,6 +61,7 @@ initRunning todoId now =
         { todoId = todoId
         , state = Running now
         , nextAlarmAt = now + alarmDelay
+        , now = now
         }
 
 
@@ -74,32 +76,40 @@ getMaybeTodoId =
 
 updateNextAlarmAt : Time -> Model -> ( Maybe Info, Model )
 updateNextAlarmAt now model =
-    case model of
-        Nothing ->
-            ( Nothing, model )
+    model
+        |> Maybe.map (setNow now)
+        |> (\model ->
+                case model of
+                    Nothing ->
+                        ( Nothing, model )
 
-        Just rec ->
-            (if now >= rec.nextAlarmAt then
-                let
-                    newRec =
-                        { rec | nextAlarmAt = now + alarmDelay }
+                    Just rec ->
+                        (if now >= rec.nextAlarmAt then
+                            let
+                                newRec =
+                                    { rec | nextAlarmAt = now + alarmDelay }
 
-                    info =
-                        { todoId = rec.todoId
-                        , elapsedTime = getElapsedTime now newRec
-                        }
-                in
-                ( Just info, newRec )
-             else
-                ( Nothing, rec )
-            )
-                |> Tuple.mapSecond wrap
+                                info =
+                                    { todoId = rec.todoId
+                                    , elapsedTime = getElapsedTime newRec
+                                    }
+                            in
+                            ( Just info, newRec )
+                         else
+                            ( Nothing, rec )
+                        )
+                            |> Tuple.mapSecond wrap
+           )
 
 
-getElapsedTime now rec =
+setNow now rec =
+    { rec | now = now }
+
+
+getElapsedTime rec =
     case rec.state of
         Running startedAt ->
-            now - startedAt
+            rec.now - startedAt
 
 
 isTrackingTodo todo =

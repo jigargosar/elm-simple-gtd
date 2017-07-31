@@ -17,7 +17,7 @@ import X.Time
 createViewModel config appModel tracker =
     let
         elapsedTime =
-            Todo.TimeTracker.getElapsedTime appModel.now tracker
+            Todo.TimeTracker.getElapsedTime tracker
 
         todoText =
             Models.Todo.findTodoById tracker.todoId appModel ?|> Todo.getText ?= tracker.todoId

@@ -1,4 +1,4 @@
-    9743 total
+    9753 total
      542 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -25,10 +25,10 @@
      136 src/elm/L/View.elm
      132 src/elm/X/Return.elm
      126 src/elm/Update/GroupDoc.elm
+     116 src/elm/Todo/TimeTracker.elm
      111 src/elm/Todo/Form.elm
      110 src/elm/X/Record.elm
      110 src/elm/Models/EntityTree.elm
-     106 src/elm/Todo/TimeTracker.elm
      103 src/elm/Todo/View.elm
       98 src/elm/ViewModel.elm
       98 src/elm/Firebase/SignIn.elm

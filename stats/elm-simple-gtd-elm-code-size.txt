@@ -1,9 +1,8 @@
-   10024 total
-     524 src/elm/Main.elm
+   10031 total
+     525 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
-     279 src/elm/Pages/EntityList.elm
      267 src/elm/Mat.elm
      241 src/elm/AppDrawer/GroupViewModel.elm
      231 src/elm/Update/Entity.elm
@@ -13,6 +12,7 @@
      187 src/elm/Todo/ViewModel.elm
      185 src/elm/AppDrawer/View.elm
      167 src/elm/Update/Subscription.elm
+     166 src/elm/Pages/EntityList.elm
      162 src/elm/Todo/ItemView.elm
      159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
@@ -25,6 +25,7 @@
      136 src/elm/L/View.elm
      135 src/elm/Entity/ListView.elm
      132 src/elm/X/Return.elm
+     131 src/elm/Views/EntityList.elm
      126 src/elm/Update/GroupDoc.elm
      116 src/elm/Todo/TimeTracker.elm
      111 src/elm/Todo/Form.elm
@@ -106,7 +107,6 @@
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
       13 src/elm/Links.elm
-      12 src/elm/Views/EntityList.elm
       12 src/elm/Todo/Store.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm

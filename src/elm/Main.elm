@@ -62,6 +62,7 @@ import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
 import ViewModel
+import Views.EntityList
 import Window
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -494,7 +495,7 @@ view config model =
                 |> frame
 
         Page.EntityListPage subModel ->
-            Pages.EntityList.view config appVM model subModel
+            Views.EntityList.view config appVM model subModel
                 |> frame
 
 

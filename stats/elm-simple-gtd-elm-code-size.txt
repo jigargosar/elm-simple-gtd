@@ -1,4 +1,4 @@
-    9737 total
+    9744 total
      514 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -83,6 +83,7 @@
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
+      26 src/elm/Pages/EntityList.elm
       23 src/elm/Data/Debug.elm
       22 src/elm/Msg/GroupDoc.elm
       21 src/elm/X/Predicate.elm
@@ -96,7 +97,6 @@
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
       19 src/elm/Ports.elm
-      19 src/elm/Pages/EntityList.elm
       19 src/elm/Models/HasStores.elm
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm

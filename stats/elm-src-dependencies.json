@@ -18,10 +18,11 @@
       "AppDrawer.View",
       "GroupDoc.ViewModel",
       "Mat",
+      "Pages.EntityList",
       "View.Header",
       "ViewModel"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -33,6 +34,7 @@
       "L.View",
       "Main",
       "Mat",
+      "Pages.EntityList",
       "Todo.ItemView",
       "Todo.Notification.View",
       "Todo.TimeTracker.View",
@@ -44,7 +46,7 @@
       "View.Overlays",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 20
+    "transitiveBackwardImportsCount": 21
   },
   "AppDrawer.GroupViewModel": {
     "fileName": "src/elm/AppDrawer/GroupViewModel.elm",
@@ -3034,6 +3036,7 @@
     "moduleName": "Pages.EntityList",
     "parentModuleName": "Pages",
     "imports": [
+      "AppColors",
       "Color",
       "List.Extra",
       "Maybe.Extra",
@@ -3042,9 +3045,11 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 7,
+    "importsCount": 8,
     "transitiveImports": [
+      "AppColors",
       "Color",
+      "Color.Mixing",
       "List.Extra",
       "Maybe.Extra",
       "Toolkit.Helpers",
@@ -3053,7 +3058,7 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "transitiveImportsCount": 8,
+    "transitiveImportsCount": 10,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],

@@ -1,5 +1,6 @@
 module Pages.EntityList exposing (..)
 
+import AppColors
 import Color exposing (Color)
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -9,11 +10,17 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 
 
-type alias Record =
-    { title : String
+type alias Model =
+    { path : List String
+    , title : String
     , color : Color
     }
 
 
-type Model
-    = Model Record
+initialModel path =
+    case path of
+        "done" :: [] ->
+            { path = [ "done" ]
+            , title = "Done"
+            , color = AppColors.sgtdBlue
+            }

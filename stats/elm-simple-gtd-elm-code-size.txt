@@ -1,4 +1,4 @@
-    9757 total
+    9764 total
      517 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -37,15 +37,15 @@
       91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
-      84 src/elm/Pages/EntityListOld.elm
       84 src/elm/GroupDoc/View.elm
+      83 src/elm/Pages/EntityListOld.elm
       82 src/elm/View/MainMenu.elm
+      82 src/elm/Page.elm
       80 src/elm/GroupDoc/FormView.elm
       79 src/elm/Types/GroupDoc.elm
       79 src/elm/EntityListCursor.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm
-      75 src/elm/Page.elm
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm
       72 src/elm/View/GetStarted.elm
@@ -82,8 +82,8 @@
       39 src/elm/Sequencer.elm
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm
+      32 src/elm/Pages/EntityList.elm
       31 src/elm/View/NewTodoFab.elm
-      31 src/elm/Pages/EntityList.elm
       23 src/elm/Data/Debug.elm
       22 src/elm/Msg/GroupDoc.elm
       21 src/elm/X/Predicate.elm

@@ -60,16 +60,23 @@ getPathFromModel model =
             model.path
 
 
+routeUrlBuilderToMaybeEntityListPageModel builder =
+    case RouteUrl.Builder.path builder of
+        "done" :: [] ->
+            DoneView |> Just
+
+        _ ->
+            Nothing
+
+
 hash2messages config location =
     let
         builder =
             RouteUrl.Builder.fromHash location.href
-    in
-    case RouteUrl.Builder.path builder of
-        "custom-sync" :: [] ->
-            [ config.navigateToPathMsg [ "custom-sync" ] ]
 
-        _ ->
-            routeUrlBuilderToMaybeEntityListPageModel builder
-                ?|> (config.gotoEntityListPageMsg >> X.List.singleton)
-                ?= [ config.gotoPageMsg initialPage ]
+        path =
+            RouteUrl.Builder.path builder
+    in
+    routeUrlBuilderToMaybeEntityListPageModelOld builder
+        ?|> (config.gotoEntityListPageMsg >> X.List.singleton)
+        ?= [ config.navigateToPathMsg path ]

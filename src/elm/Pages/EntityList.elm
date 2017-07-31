@@ -4,6 +4,7 @@ import AppColors
 import Color exposing (Color)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import RouteUrl.Builder
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)

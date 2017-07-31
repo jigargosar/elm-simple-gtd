@@ -18,10 +18,10 @@ initialEntityListPageModel =
     ContextsView
 
 
-routeUrlBuilderToMaybeEntityListPageModel :
+routeUrlBuilderToMaybeEntityListPageModelOld :
     RouteUrl.Builder.Builder
     -> Maybe Old_EntityListPageModel
-routeUrlBuilderToMaybeEntityListPageModel builder =
+routeUrlBuilderToMaybeEntityListPageModelOld builder =
     case RouteUrl.Builder.path builder of
         "contexts" :: [] ->
             ContextsView |> Just
@@ -32,9 +32,8 @@ routeUrlBuilderToMaybeEntityListPageModel builder =
         "bin" :: [] ->
             BinView |> Just
 
-        "done" :: [] ->
-            DoneView |> Just
-
+        --        "done" :: [] ->
+        --            DoneView |> Just
         "recent" :: [] ->
             RecentView |> Just
 

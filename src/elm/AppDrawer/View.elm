@@ -74,7 +74,7 @@ entityGroupView config vm page =
             vm
 
         isCurrentView =
-            EntityListPage vm.page == page
+            Old_EntityListPage vm.page == page
 
         fireSwitchView =
             config.gotoEntityListPageMsg vm.page

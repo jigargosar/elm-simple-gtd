@@ -8,7 +8,7 @@ import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
-import Html exposing (Html)
+import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
@@ -24,7 +24,7 @@ import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Overlays.LaunchBar exposing (LaunchBarMsg)
-import Page exposing (Page(EntityListPage), PageMsg(..))
+import Page exposing (Page(Old_EntityListPage), PageMsg(..))
 import Pages.EntityList exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
@@ -404,7 +404,7 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
-    , gotoEntityListPageMsg : EntityListPageModel -> msg
+    , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursor : Maybe EntityId
     , navigateToPathMsg : List String -> msg
@@ -475,12 +475,16 @@ view config model =
                 )
     in
     case Page.getPage__ model of
-        Page.EntityListPage entityListPageModel ->
+        Page.Old_EntityListPage entityListPageModel ->
             Entity.ListView.listView config appVM entityListPageModel model
                 |> frame
 
         Page.CustomSyncSettingsPage _ ->
             View.CustomSync.view config model
+                |> frame
+
+        Page.EntityListPage ->
+            div [] [ text "EntityListPage" ]
                 |> frame
 
 

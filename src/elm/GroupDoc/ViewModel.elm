@@ -62,7 +62,7 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getPage : DocId -> EntityListPageModel
+    , getPage : DocId -> Old_EntityListPageModel
     , getTabIndexAVForEntityId : EntityId -> Int
     , groupDocType : Types.GroupDoc.GroupDocType
     }

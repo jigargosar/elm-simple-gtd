@@ -12,7 +12,7 @@ import Entity.Types exposing (..)
 import GroupDoc
 import Models.GroupDocStore
 import Models.Stores
-import Page exposing (Page(EntityListPage))
+import Page exposing (Page(Old_EntityListPage))
 import Pages.EntityList exposing (..)
 import Project
 import String.Extra
@@ -129,7 +129,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.gotoPageMsg (innerConFig.getEntityListPageModel id |> EntityListPage)
+                config.gotoPageMsg (innerConFig.getEntityListPageModel id |> Old_EntityListPage)
             else
                 config.noop
     , icon = icon

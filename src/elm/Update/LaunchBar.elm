@@ -35,7 +35,7 @@ type alias Config msg a =
     { a
         | revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , gotoEntityListPageMsg : EntityListPageModel -> msg
+        , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
     }
 
 

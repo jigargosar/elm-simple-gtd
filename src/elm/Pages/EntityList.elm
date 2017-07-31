@@ -4,7 +4,7 @@ import RouteUrl.Builder
 import Types.Document exposing (..)
 
 
-type EntityListPageModel
+type Old_EntityListPageModel
     = ContextsView
     | ContextView DocId
     | ProjectsView
@@ -20,7 +20,7 @@ initialEntityListPageModel =
 
 routeUrlBuilderToMaybeEntityListPageModel :
     RouteUrl.Builder.Builder
-    -> Maybe EntityListPageModel
+    -> Maybe Old_EntityListPageModel
 routeUrlBuilderToMaybeEntityListPageModel builder =
     case RouteUrl.Builder.path builder of
         "contexts" :: [] ->

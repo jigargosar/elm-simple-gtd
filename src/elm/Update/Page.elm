@@ -41,12 +41,15 @@ update config msg =
                 >> returnMsgAsCmd config.revertExclusiveMode
 
         PageMsg_SetEntityListPage listView ->
-            listView |> EntityListPage >> PageMsg_SetPage >> update config
+            listView |> Old_EntityListPage >> PageMsg_SetPage >> update config
 
         PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->
                     CustomSyncSettingsPage "Advance Settings" |> setPage
+
+                "EntityListPage" :: [] ->
+                    EntityListPage |> setPage
 
                 _ ->
                     identity

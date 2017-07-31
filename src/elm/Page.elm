@@ -9,19 +9,20 @@ import X.List
 
 
 type Page
-    = EntityListPage EntityListPageModel
+    = Old_EntityListPage Old_EntityListPageModel
     | CustomSyncSettingsPage String
+    | EntityListPage
 
 
 type PageMsg
     = PageMsg_SetPage Page
-    | PageMsg_SetEntityListPage EntityListPageModel
+    | PageMsg_SetEntityListPage Old_EntityListPageModel
     | PageMsg_NavigateToPath (List String)
 
 
 maybeGetEntityListPage model =
     case getPage__ model of
-        EntityListPage pageModel ->
+        Old_EntityListPage pageModel ->
             Just pageModel
 
         _ ->
@@ -33,7 +34,7 @@ getPage__ =
 
 
 initialPage =
-    EntityListPage Pages.EntityList.initialEntityListPageModel
+    Old_EntityListPage Pages.EntityList.initialEntityListPageModel
 
 
 delta2hash =
@@ -48,11 +49,14 @@ delta2hash =
 
 getPathFromModel model =
     case getPage__ model of
-        EntityListPage pageModel ->
+        Old_EntityListPage pageModel ->
             getPathFromEntityListPageModel pageModel
 
         CustomSyncSettingsPage _ ->
             [ "custom-sync" ]
+
+        EntityListPage ->
+            [ "EntityListPage" ]
 
 
 hash2messages config location =

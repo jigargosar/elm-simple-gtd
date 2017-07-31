@@ -52,7 +52,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveMode : msg
-        , gotoEntityListPageMsg : EntityListPageModel -> msg
+        , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
         , onStartEditingTodo : TodoDoc -> msg
     }
 
@@ -175,7 +175,7 @@ toggleSetMember item set =
         Set.insert item set
 
 
-toPage : SubModel model -> Maybe EntityListPageModel -> EntityId -> EntityListPageModel
+toPage : SubModel model -> Maybe Old_EntityListPageModel -> EntityId -> Old_EntityListPageModel
 toPage appModel maybeCurrentEntityListPage entityId =
     case entityId of
         ContextId id ->

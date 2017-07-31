@@ -30,9 +30,13 @@ update :
     -> PageMsg
     -> SubReturnF msg model
 update config msg =
+    let
+        setPage page =
+            PageMsg_SetPage page |> update config
+    in
     case msg of
         PageMsg_SetPage page ->
-            map (setPage page)
+            map (\model -> { model | page = page })
                 >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
@@ -42,11 +46,7 @@ update config msg =
         PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->
-                    PageMsg_SetPage CustomSyncSettingsPage |> update config
+                    CustomSyncSettingsPage |> setPage
 
                 _ ->
                     identity
-
-
-setPage page model =
-    { model | page = page }

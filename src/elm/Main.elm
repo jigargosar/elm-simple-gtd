@@ -494,7 +494,7 @@ view config model =
                 |> frame
 
         Page.EntityListPage subModel ->
-            Pages.EntityList.view config appVM model
+            Pages.EntityList.view config appVM model subModel
                 |> frame
 
 

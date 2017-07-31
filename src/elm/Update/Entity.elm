@@ -94,7 +94,9 @@ moveFocusBy config offset =
         (\model ->
             let
                 maybeEntityIdAtCursorOld =
-                    EntityListCursor.computeMaybeNewEntityIdAtCursorOld config.maybeEntityListPageModel model
+                    EntityListCursor.computeMaybeNewEntityIdAtCursorOld
+                        config.maybeEntityListPageModel
+                        model
 
                 entityIdList =
                     createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model

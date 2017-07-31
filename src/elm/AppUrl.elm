@@ -26,7 +26,7 @@ contact =
 
 
 getStarted =
-    "/app.html#!/lists/contexts"
+    "/app.html#!/contexts"
 
 
 landing =

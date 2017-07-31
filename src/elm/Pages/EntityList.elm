@@ -23,10 +23,10 @@ routeUrlBuilderToMaybeEntityListPageModel :
     -> Maybe EntityListPageModel
 routeUrlBuilderToMaybeEntityListPageModel builder =
     case RouteUrl.Builder.path builder of
-        "lists" :: "contexts" :: [] ->
+        "contexts" :: [] ->
             ContextsView |> Just
 
-        "lists" :: "projects" :: [] ->
+        "projects" :: [] ->
             ProjectsView |> Just
 
         "bin" :: [] ->
@@ -57,10 +57,10 @@ routeUrlBuilderToMaybeEntityListPageModel builder =
 getPathFromEntityListPageModel page =
     case page of
         ContextsView ->
-            [ "lists", "contexts" ]
+            [ "contexts" ]
 
         ProjectsView ->
-            [ "lists", "projects" ]
+            [ "projects" ]
 
         ProjectView id ->
             if String.isEmpty id then

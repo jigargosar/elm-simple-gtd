@@ -129,7 +129,7 @@ type AppMsg
     | Mdl (Material.Msg AppMsg)
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
-    | OnNowChanged Time
+    | SetLastKnownTimeStamp Time
 
 
 onStartAddingTodoWithFocusInEntityAsReference model =
@@ -207,7 +207,7 @@ subscriptions model =
     Sub.batch
         [ Keyboard.ups OnGlobalKeyUp
         , Keyboard.downs OnGlobalKeyDown
-        , everyXSeconds 1 OnNowChanged
+        , everyXSeconds 1 SetLastKnownTimeStamp
         , Sub.batch
             [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
             , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
@@ -217,7 +217,7 @@ subscriptions model =
             [ notificationClicked OnReminderNotificationClicked
             , onRunningTodoNotificationClicked RunningNotificationResponse
             , everyXSeconds 1 (\_ -> UpdateTimeTracker)
-            , everyXSeconds 30 (\_ -> OnProcessPendingNotificationCronTick)
+            , everyXSeconds 1 (\_ -> OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch
@@ -337,7 +337,7 @@ update config msg =
         OnGlobalKeyDown keyCode ->
             Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
 
-        OnNowChanged now ->
+        SetLastKnownTimeStamp now ->
             let
                 setNow now model =
                     { model | lastKnownCurrentTime = now }

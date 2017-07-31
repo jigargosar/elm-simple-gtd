@@ -1,4 +1,4 @@
-    9771 total
+    9778 total
      560 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -96,6 +96,7 @@
       20 src/elm/EntityId.elm
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
+      19 src/elm/Ports.elm
       19 src/elm/Models/HasStores.elm
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
@@ -105,7 +106,6 @@
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
       12 src/elm/Todo/Store.elm
-      12 src/elm/Ports.elm
       11 src/elm/LaunchBar/Messages.elm
       11 src/elm/CommonMsg/Types.elm
       10 src/elm/X/Maybe.elm

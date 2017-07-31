@@ -17,10 +17,15 @@ type alias Model =
     }
 
 
+initialModel : List String -> Maybe Model
 initialModel path =
     case path of
         "done" :: [] ->
-            { path = [ "done" ]
-            , title = "Done"
-            , color = AppColors.sgtdBlue
-            }
+            Just
+                { path = [ "done" ]
+                , title = "Done"
+                , color = AppColors.sgtdBlue
+                }
+
+        _ ->
+            Nothing

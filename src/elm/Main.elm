@@ -483,8 +483,11 @@ view config model =
             View.CustomSync.view config model
                 |> frame
 
-        Page.EntityListPage ->
-            div [] [ text "EntityListPage" ]
+        Page.EntityListPage model ->
+            div []
+                [ text "EntityListPage"
+                , toString model |> text
+                ]
                 |> frame
 
 

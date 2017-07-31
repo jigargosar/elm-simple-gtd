@@ -1,5 +1,6 @@
 module Page exposing (..)
 
+import Pages.EntityList
 import Pages.EntityListOld exposing (..)
 import RouteUrl.Builder
 import Toolkit.Helpers exposing (..)
@@ -11,7 +12,7 @@ import X.List
 type Page
     = Old_EntityListPage Old_EntityListPageModel
     | CustomSyncSettingsPage String
-    | EntityListPage
+    | EntityListPage Pages.EntityList.Model
 
 
 type PageMsg
@@ -55,8 +56,8 @@ getPathFromModel model =
         CustomSyncSettingsPage _ ->
             [ "custom-sync" ]
 
-        EntityListPage ->
-            [ "EntityListPage" ]
+        EntityListPage model ->
+            model.path
 
 
 hash2messages config location =

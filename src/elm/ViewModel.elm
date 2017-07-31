@@ -93,8 +93,8 @@ getViewInfo page projectsVM contextsVM model =
         CustomSyncSettingsPage title ->
             ( title, sgtdBlue )
 
-        EntityListPage ->
-            ( "EntityListPage", sgtdBlue )
+        EntityListPage model ->
+            ( model.title, model.color )
 
 
 sgtdBlue =

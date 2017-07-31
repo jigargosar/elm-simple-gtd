@@ -2,8 +2,11 @@ module Update.Page exposing (Config, update)
 
 import Models.Selection
 import Page exposing (..)
+import Pages.EntityList
 import Return
 import Set exposing (Set)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
 import X.Return exposing (..)
 
@@ -31,8 +34,8 @@ update :
     -> SubReturnF msg model
 update config msg =
     let
-        setPage page =
-            PageMsg_SetPage page |> update config
+        setMaybePage page =
+            page ?|> (PageMsg_SetPage >> update config) ?= identity
     in
     case msg of
         PageMsg_SetPage page ->
@@ -46,10 +49,11 @@ update config msg =
         PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->
-                    CustomSyncSettingsPage "Advance Settings" |> setPage
-
-                "EntityListPage" :: [] ->
-                    EntityListPage |> setPage
+                    CustomSyncSettingsPage "Advance Settings"
+                        |> Just
+                        |> setMaybePage
 
                 _ ->
-                    identity
+                    Pages.EntityList.initialModel path
+                        ?|> EntityListPage
+                        |> setMaybePage

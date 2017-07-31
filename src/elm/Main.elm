@@ -409,6 +409,7 @@ type alias ViewConfig msg =
     , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursorOld : Maybe EntityId
+    , maybeEntityIdAtCursor : Maybe EntityId
     , navigateToPathMsg : List String -> msg
     }
 
@@ -458,6 +459,10 @@ viewConfig model =
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursorOld =
+        EntityListCursor.computeMaybeNewEntityIdAtCursorOld
+            (Page.maybeGetEntityListPage model)
+            model
+    , maybeEntityIdAtCursor =
         EntityListCursor.computeMaybeNewEntityIdAtCursorOld
             (Page.maybeGetEntityListPage model)
             model

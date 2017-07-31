@@ -17,11 +17,6 @@ import View.Badge
 import X.Function exposing (..)
 
 
---type alias KeyedView =
---    ( String, Html AppMsg )
---list : EntityListPage -> AppModel -> Html.Html AppMsg
-
-
 listView config appVM page model =
     let
         entityTree =

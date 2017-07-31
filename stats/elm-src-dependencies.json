@@ -92,7 +92,6 @@
       "Dict.Extra",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -159,7 +158,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 77,
+    "transitiveImportsCount": 76,
     "backwardImports": [
       "ViewModel"
     ],
@@ -267,7 +266,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -333,7 +331,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 74,
+    "transitiveImportsCount": 73,
     "backwardImports": [
       "View.Layout"
     ],
@@ -666,9 +664,10 @@
       "Entity.ListView",
       "Entity.Tree",
       "EntityListCursor",
+      "Pages.EntityList",
       "Update.Entity"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -783,23 +782,13 @@
     ],
     "transitiveImportsCount": 70,
     "backwardImports": [
-      "Main",
-      "Pages.EntityList"
+      "Main"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
-      "AppDrawer.GroupViewModel",
-      "AppDrawer.View",
-      "Main",
-      "Models.HasStores",
-      "Page",
-      "Pages.EntityList",
-      "Update.Entity",
-      "Update.Page",
-      "View.Layout",
-      "ViewModel"
+      "Main"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 1
   },
   "Entity.Tree": {
     "fileName": "src/elm/Entity/Tree.elm",
@@ -859,9 +848,10 @@
       "Entity.ListView",
       "EntityListCursor",
       "Models.EntityTree",
+      "Pages.EntityList",
       "Update.Entity"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -912,13 +902,14 @@
       "GroupDoc.ViewModel",
       "Main",
       "Models.Stores",
+      "Pages.EntityList",
       "Todo.FormTypes",
       "Todo.ViewModel",
       "Update.Entity",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 14,
+    "backwardImportsCount": 15,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -994,9 +985,10 @@
     "backwardImports": [
       "Entity.ListView",
       "GroupDoc.View",
+      "Pages.EntityList",
       "Todo.ViewModel"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -1079,9 +1071,10 @@
     "backwardImports": [
       "Entity.ListView",
       "Main",
+      "Pages.EntityList",
       "Update.Entity"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -1695,9 +1688,10 @@
     ],
     "transitiveImportsCount": 40,
     "backwardImports": [
-      "Entity.ListView"
+      "Entity.ListView",
+      "Pages.EntityList"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -2653,7 +2647,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -2719,7 +2712,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 73,
+    "transitiveImportsCount": 72,
     "backwardImports": [
       "Update.Entity"
     ],
@@ -3237,7 +3230,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -3302,7 +3294,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 72,
+    "transitiveImportsCount": 71,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3332,19 +3324,29 @@
     "imports": [
       "AppColors",
       "Color",
-      "Entity.ListView",
+      "Entity",
+      "Entity.Tree",
+      "Entity.Types",
+      "EntityId",
+      "EntityListCursor",
+      "GroupDoc.View",
+      "Html",
       "Html.Attributes",
       "Html.Keyed",
       "List.Extra",
       "Maybe.Extra",
       "Models.EntityTree",
       "RouteUrl.Builder",
+      "Todo.ItemView",
       "Toolkit.Helpers",
       "Toolkit.Operators",
+      "Tuple2",
+      "View.Badge",
       "X.Function",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.List"
     ],
-    "importsCount": 13,
+    "importsCount": 23,
     "transitiveImports": [
       "AppColors",
       "Char",
@@ -3354,7 +3356,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -3418,7 +3419,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 71,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Main",
       "Page",
@@ -4194,9 +4195,10 @@
     ],
     "transitiveImportsCount": 30,
     "backwardImports": [
-      "Entity.ListView"
+      "Entity.ListView",
+      "Pages.EntityList"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -5556,7 +5558,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -5632,7 +5633,7 @@
       "X.Return",
       "X.String"
     ],
-    "transitiveImportsCount": 83,
+    "transitiveImportsCount": 82,
     "backwardImports": [
       "Main"
     ],
@@ -6013,7 +6014,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -6082,7 +6082,7 @@
       "X.Return",
       "X.String"
     ],
-    "transitiveImportsCount": 76,
+    "transitiveImportsCount": 75,
     "backwardImports": [
       "Main"
     ],
@@ -6405,9 +6405,10 @@
     "backwardImports": [
       "AppDrawer.View",
       "Entity.ListView",
-      "GroupDoc.View"
+      "GroupDoc.View",
+      "Pages.EntityList"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -6666,7 +6667,6 @@
       "Dict",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -6742,7 +6742,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 89,
+    "transitiveImportsCount": 88,
     "backwardImports": [
       "Main"
     ],
@@ -6999,7 +6999,6 @@
       "Dict.Extra",
       "Document",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -7071,7 +7070,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 86,
+    "transitiveImportsCount": 85,
     "backwardImports": [
       "Main"
     ],
@@ -7691,10 +7690,11 @@
       "EntityListCursor",
       "Menu",
       "Page",
+      "Pages.EntityList",
       "Update.Entity",
       "View.Header"
     ],
-    "backwardImportsCount": 5,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",

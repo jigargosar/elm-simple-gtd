@@ -4,8 +4,6 @@ import Entity
 import Entity.Tree
 import Entity.Types exposing (..)
 import Models.EntityTree
-import Models.HasStores exposing (HasPage, HasStores)
-import Page
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
@@ -33,19 +31,16 @@ initialValue =
     }
 
 
-createEntityListForCurrentView model =
-    Page.maybeGetEntityListPage model
+createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model =
+    maybeEntityListPageModel
         ?|> (Models.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
         ?= []
 
 
-computeMaybeNewEntityIdAtCursor :
-    HasPage (HasStores (HasEntityListCursor model))
-    -> Maybe EntityId
-computeMaybeNewEntityIdAtCursor model =
+computeMaybeNewEntityIdAtCursor maybeEntityListPageModel model =
     let
         newEntityIdList =
-            createEntityListForCurrentView model
+            createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model
                 .|> Entity.toEntityId
 
         computeMaybeFEI index =

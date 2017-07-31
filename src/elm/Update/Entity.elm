@@ -54,6 +54,7 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
         , onStartEditingTodo : TodoDoc -> msg
+        , maybeEntityListPageModel : Maybe Old_EntityListPageModel
     }
 
 
@@ -64,7 +65,7 @@ update :
 update config msg =
     case msg of
         EM_SetFocusInEntityWithEntityId entityId ->
-            map (setEntityAtCursor (entityId |> Just))
+            map (setEntityAtCursor config (entityId |> Just))
 
         EM_Update entityId action ->
             onUpdateAction config entityId action
@@ -93,10 +94,10 @@ moveFocusBy config offset =
         (\model ->
             let
                 maybeEntityIdAtCursor =
-                    EntityListCursor.computeMaybeNewEntityIdAtCursor model
+                    EntityListCursor.computeMaybeNewEntityIdAtCursor config.maybeEntityListPageModel model
 
                 entityIdList =
-                    createEntityListForCurrentView model
+                    createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel model
                         .|> Entity.toEntityId
             in
             findEntityIdByOffsetIn offset
@@ -110,11 +111,11 @@ entityListCursor =
     fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
-setEntityAtCursor : Maybe EntityId -> SubModelF model
-setEntityAtCursor maybeEntityIdAtCursor model =
+setEntityAtCursor : Config msg a -> Maybe EntityId -> SubModelF model
+setEntityAtCursor config maybeEntityIdAtCursor model =
     let
         entityIdList =
-            createEntityListForCurrentView model
+            createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel model
                 .|> Entity.toEntityId
 
         cursor =
@@ -139,18 +140,18 @@ onUpdateAction config entityId action =
             let
                 switchToEntityListViewFromEntity entityId model =
                     let
-                        maybeEntityListPage =
+                        maybeEntityListPageModel =
                             Page.maybeGetEntityListPage model
                     in
                     entityId
-                        |> toPage model maybeEntityListPage
+                        |> toPage model maybeEntityListPageModel
                         |> config.gotoEntityListPageMsg
                         |> returnMsgAsCmd
             in
             returnWith identity (switchToEntityListViewFromEntity entityId)
 
         EUA_BringEntityIdInView ->
-            returnWith createEntityListForCurrentView
+            returnWith (createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel)
                 (List.Extra.find (Entity.hasId entityId)
                     >> Maybe.Extra.unpack
                         (\_ ->

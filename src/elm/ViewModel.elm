@@ -49,7 +49,8 @@ create config model =
     , mdl = model.mdl
     , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
     , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
-    , createTodoViewModel = Todo.ViewModel.createTodoViewModel config
+    , createTodoViewModel =
+        Todo.ViewModel.createTodoViewModel config model
     }
 
 

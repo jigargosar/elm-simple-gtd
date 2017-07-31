@@ -25,6 +25,7 @@ import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Overlays.LaunchBar exposing (LaunchBarMsg)
 import Page exposing (Page(Old_EntityListPage), PageMsg(..))
+import Pages.EntityList
 import Pages.EntityListOld exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
@@ -131,7 +132,7 @@ type AppMsg
 
 onStartAddingTodoWithFocusInEntityAsReference : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReference model =
-    EntityListCursor.computeMaybeNewEntityIdAtCursor model
+    EntityListCursor.computeMaybeNewEntityIdAtCursor (Page.maybeGetEntityListPage model) model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
@@ -282,6 +283,7 @@ updateConfig model =
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
+    , maybeEntityListPageModel = Page.maybeGetEntityListPage model
 
     --    , maybeEntityIdAtCursor = EntityListCursor.getMaybeEntityIdAtCursor model
     }
@@ -455,7 +457,7 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor model
+    , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor (Page.maybeGetEntityListPage model) model
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     }
 
@@ -483,11 +485,8 @@ view config model =
             View.CustomSync.view config model
                 |> frame
 
-        Page.EntityListPage model ->
-            div []
-                [ text "EntityListPage"
-                , toString model |> text
-                ]
+        Page.EntityListPage subModel ->
+            Pages.EntityList.view config appVM model
                 |> frame
 
 

@@ -1,4 +1,4 @@
-module Entity.ListView exposing (listView)
+module Entity.ListView exposing (..)
 
 import Entity
 import Entity.Tree
@@ -30,7 +30,7 @@ listView config appVM page model =
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         ]
-        (keyedViewList config appVM entityTree model)
+        (keyedViewList config appVM entityTree)
 
 
 getMaybeEntityIdAtCursor config entityList =
@@ -40,7 +40,7 @@ getMaybeEntityIdAtCursor config entityList =
         ?|> Entity.toEntityId
 
 
-keyedViewList config appVM entityTree model =
+keyedViewList config appVM entityTree =
     let
         maybeEntityIdAtCursor =
             getMaybeEntityIdAtCursor config (Entity.Tree.flatten entityTree)
@@ -79,7 +79,7 @@ keyedViewList config appVM entityTree model =
                     EntityId.fromTodo todo |> isCursorAtEntityId
             in
             todo
-                |> appVM.createTodoViewModel model isFocusable
+                |> appVM.createTodoViewModel isFocusable
                 |> Todo.ItemView.keyedItem
 
         --        todoListView : List TodoDoc -> List KeyedView

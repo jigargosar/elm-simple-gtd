@@ -48,10 +48,6 @@ getActiveTodoListForProject project model =
         model
 
 
-
---createEntityTreeForPage : EntityListPage -> AppModel -> Entity.Tree.Tree
-
-
 createEntityTreeFromEntityListPageModel entityListPage model =
     let
         getActiveTodoListForContextHelp =
@@ -97,14 +93,18 @@ createEntityTreeFromEntityListPageModel entityListPage model =
                 (filterTodosAndSortByLatestModified Document.isDeleted model)
 
         DoneView ->
-            Entity.Tree.initTodoForest
-                "Done"
-                (filterTodosAndSortByLatestModified
-                    (X.Predicate.all [ Document.isNotDeleted, Todo.isDone ])
-                    model
-                )
+            doneTree model
 
         RecentView ->
             Entity.Tree.initTodoForest
                 "Recent"
                 (filterTodosAndSortByLatestModified X.Predicate.always model)
+
+
+doneTree model =
+    Entity.Tree.initTodoForest
+        "Done"
+        (filterTodosAndSortByLatestModified
+            (X.Predicate.all [ Document.isNotDeleted, Todo.isDone ])
+            model
+        )

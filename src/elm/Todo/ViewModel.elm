@@ -37,7 +37,7 @@ getDisplayText todo =
 --createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
 
 
-createTodoViewModel config appM isFocusable todo =
+createTodoViewModel config appVM isFocusable todo =
     let
         tabindexAV =
             let
@@ -50,7 +50,7 @@ createTodoViewModel config appM isFocusable todo =
             tabindexValue
 
         now =
-            appM.lastKnownCurrentTime
+            appVM.lastKnownCurrentTime
 
         todoId =
             Document.getId todo
@@ -63,7 +63,7 @@ createTodoViewModel config appM isFocusable todo =
 
         projectDisplayName =
             projectId
-                |> (Store.findById # appM.projectStore >>? GroupDoc.getName)
+                |> (Store.findById # appVM.projectStore >>? GroupDoc.getName)
                 ?= ""
                 |> truncateName
                 |> String.append "#"
@@ -73,7 +73,7 @@ createTodoViewModel config appM isFocusable todo =
 
         contextDisplayName =
             contextId
-                |> (Store.findById # appM.contextStore >>? GroupDoc.getName)
+                |> (Store.findById # appVM.contextStore >>? GroupDoc.getName)
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
@@ -149,8 +149,8 @@ createTodoViewModel config appM isFocusable todo =
     , reminder = reminder
     , onFocusIn = config.setFocusInEntityWithEntityId entityId
     , tabindexAV = tabindexAV
-    , isSelected = appM.selectedEntityIdSet |> Set.member todoId
-    , mdl = appM.mdl
+    , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
+    , mdl = appVM.mdl
     , onMdl = config.onMdl
     , noop = config.noop
     }

@@ -3034,6 +3034,7 @@
     "moduleName": "Pages.EntityList",
     "parentModuleName": "Pages",
     "imports": [
+      "Color",
       "List.Extra",
       "Maybe.Extra",
       "Toolkit.Helpers",
@@ -3041,8 +3042,9 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
+      "Color",
       "List.Extra",
       "Maybe.Extra",
       "Toolkit.Helpers",
@@ -3051,7 +3053,7 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "transitiveImportsCount": 7,
+    "transitiveImportsCount": 8,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],

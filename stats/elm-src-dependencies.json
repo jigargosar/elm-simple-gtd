@@ -7097,6 +7097,34 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
+  "Views.EntityList": {
+    "fileName": "src/elm/Views/EntityList.elm",
+    "moduleName": "Views.EntityList",
+    "parentModuleName": "Views",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "X.Date": {
     "fileName": "src/elm/X/Date.elm",
     "moduleName": "X.Date",
@@ -7306,10 +7334,11 @@
       "Update.Entity",
       "Update.Todo.Internal",
       "ViewModel",
+      "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 24,
+    "backwardImportsCount": 25,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -7382,10 +7411,11 @@
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
+      "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 73
+    "transitiveBackwardImportsCount": 74
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -7428,10 +7458,11 @@
       "View.Badge",
       "View.Header",
       "ViewModel",
+      "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 34,
+    "backwardImportsCount": 35,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -7513,10 +7544,11 @@
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel",
+      "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 82
+    "transitiveBackwardImportsCount": 83
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

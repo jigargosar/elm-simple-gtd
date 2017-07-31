@@ -112,21 +112,17 @@ createEntityTree filter model =
                 (Models.EntityTree.filterTodosAndSortByLatestModified Document.isDeleted model)
 
         DoneView ->
-            doneTree model
+            Entity.Tree.initTodoForest
+                "Done"
+                (Models.EntityTree.filterTodosAndSortByLatestModified
+                    (X.Predicate.all [ Document.isNotDeleted, Todo.isDone ])
+                    model
+                )
 
         RecentView ->
             Entity.Tree.initTodoForest
                 "Recent"
                 (Models.EntityTree.filterTodosAndSortByLatestModified X.Predicate.always model)
-
-
-doneTree model =
-    Entity.Tree.initTodoForest
-        "Done"
-        (Models.EntityTree.filterTodosAndSortByLatestModified
-            (X.Predicate.all [ Document.isNotDeleted, Todo.isDone ])
-            model
-        )
 
 
 createEntityList filter model =
@@ -188,18 +184,6 @@ view config appVM appModel model =
         [ class "entity-list focusable-list"
         ]
         (keyedViewList maybeEntityIdAtCursorOld appVM entityTree)
-
-
-
---listView config appVM page model =
---    let
---        entityTree =
---            Models.EntityTree.createEntityTreeFromEntityListPageModel page model
---    in
---    Html.Keyed.node "div"
---        [ class "entity-list focusable-list"
---        ]
---        (keyedViewList config appVM entityTree)
 
 
 keyedViewList maybeEntityIdAtCursorOld appVM entityTree =
@@ -273,10 +257,6 @@ keyedViewList maybeEntityIdAtCursorOld appVM entityTree =
 
 groupView todoView vm =
     GroupDoc.View.initKeyed todoView vm
-
-
-
---groupHeaderView : GroupDocViewModel -> KeyedView
 
 
 groupHeaderView vm =

@@ -97,7 +97,7 @@ moveFocusBy config offset =
                     EntityListCursor.computeMaybeNewEntityIdAtCursorOld config.maybeEntityListPageModel model
 
                 entityIdList =
-                    createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel model
+                    createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model
                         .|> Entity.toEntityId
             in
             findEntityIdByOffsetIn offset
@@ -115,7 +115,7 @@ setEntityAtCursor : Config msg a -> Maybe EntityId -> SubModelF model
 setEntityAtCursor config maybeEntityIdAtCursor model =
     let
         entityIdList =
-            createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel model
+            createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model
                 .|> Entity.toEntityId
 
         cursor =
@@ -151,7 +151,7 @@ onUpdateAction config entityId action =
             returnWith identity (switchToEntityListViewFromEntity entityId)
 
         EUA_BringEntityIdInView ->
-            returnWith (createEntityListFormMaybeEntityListPageModel config.maybeEntityListPageModel)
+            returnWith (createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel)
                 (List.Extra.find (Entity.hasId entityId)
                     >> Maybe.Extra.unpack
                         (\_ ->

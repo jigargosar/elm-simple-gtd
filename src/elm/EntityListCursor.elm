@@ -31,7 +31,7 @@ initialValue =
     }
 
 
-createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model =
+createEntityListFormMaybeEntityListPageModelOld maybeEntityListPageModel model =
     maybeEntityListPageModel
         ?|> (Models.EntityTree.createEntityTreeFromEntityListPageModel # model >> Entity.Tree.flatten)
         ?= []
@@ -40,7 +40,7 @@ createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model =
 computeMaybeNewEntityIdAtCursorOld maybeEntityListPageModel model =
     let
         newEntityIdList =
-            createEntityListFormMaybeEntityListPageModel maybeEntityListPageModel model
+            createEntityListFormMaybeEntityListPageModelOld maybeEntityListPageModel model
                 .|> Entity.toEntityId
 
         computeMaybeFEI index =

@@ -50,7 +50,7 @@ createTodoViewModel config appM isFocusable todo =
             tabindexValue
 
         now =
-            appM.now
+            appM.lastKnownCurrentTime
 
         todoId =
             Document.getId todo

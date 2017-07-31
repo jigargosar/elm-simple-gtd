@@ -10,6 +10,7 @@ import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
+import Html exposing (Html)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
@@ -84,7 +85,7 @@ type alias AppModel =
 
 
 type alias AppModelOtherFields =
-    { now : Time
+    { lastKnownCurrentTime : Time
     , todoStore : TodoStore
     , projectStore : ProjectStore
     , contextStore : ContextStore
@@ -265,7 +266,7 @@ createAppModel flags =
 
         model : AppModel
         model =
-            { now = now
+            { lastKnownCurrentTime = now
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
@@ -339,7 +340,7 @@ update config msg =
         OnNowChanged now ->
             let
                 setNow now model =
-                    { model | now = now }
+                    { model | lastKnownCurrentTime = now }
             in
             map (setNow now)
 
@@ -495,6 +496,7 @@ viewConfig model =
     }
 
 
+view : ViewConfig msg -> AppModel -> Html msg
 view config model =
     let
         appVM =

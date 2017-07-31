@@ -3,9 +3,9 @@ module Update.LaunchBar exposing (Config, update)
 import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
-import LaunchBar.Messages exposing (..)
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem(..))
 import Models.GroupDocStore
+import Overlays.LaunchBar exposing (..)
 import Pages.EntityList exposing (..)
 import Regex
 import Return

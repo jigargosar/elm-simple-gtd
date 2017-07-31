@@ -12,7 +12,6 @@ import Html exposing (Html)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
-import LaunchBar.Messages exposing (LaunchBarMsg)
 import LocalPref
 import Mat exposing (cs)
 import Material
@@ -24,6 +23,7 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
+import Overlays.LaunchBar exposing (LaunchBarMsg)
 import Page exposing (Page(EntityListPage), PageMsg(..))
 import Pages.EntityList exposing (..)
 import Ports
@@ -294,7 +294,7 @@ updateConfig model =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReference model
-    , openLaunchBarMsg = LaunchBar.Messages.Open |> OnLaunchBarMsg
+    , openLaunchBarMsg = Overlays.LaunchBar.Open |> OnLaunchBarMsg
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
@@ -395,7 +395,7 @@ type alias ViewConfig msg =
     , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
     , onAppDrawerMsg : AppDrawer.Types.AppDrawerMsg -> msg
     , onFirebaseMsg : FirebaseMsg -> msg
-    , onLaunchBarMsg : LaunchBar.Messages.LaunchBarMsg -> msg
+    , onLaunchBarMsg : Overlays.LaunchBar.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg
     , onMdl : Material.Msg msg -> msg
     , onReminderOverlayAction : Todo.Notification.Model.Action -> msg

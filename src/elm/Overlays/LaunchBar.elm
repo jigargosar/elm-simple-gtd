@@ -1,4 +1,4 @@
-module LaunchBar.Messages exposing (..)
+module Overlays.LaunchBar exposing (..)
 
 import LaunchBar.Models exposing (LaunchBarForm, SearchItem)
 

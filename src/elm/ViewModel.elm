@@ -5,7 +5,7 @@ import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
+import Page exposing (..)
 import Pages.EntityList exposing (..)
 import Todo.ViewModel
 import X.Function exposing (..)

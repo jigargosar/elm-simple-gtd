@@ -407,6 +407,7 @@ type alias ViewConfig msg =
     , gotoEntityListPageMsg : EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursor : Maybe EntityId
+    , gotToRouteMsg : List String -> msg
     }
 
 
@@ -455,6 +456,7 @@ viewConfig model =
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursor = EntityListCursor.computeMaybeNewEntityIdAtCursor model
+    , gotToRouteMsg = PageMsg_Route >> OnPageMsg
     }
 
 
@@ -464,21 +466,22 @@ view config model =
         appVM =
             ViewModel.create config model
 
-        pageContent =
-            case Page.getPage__ model of
-                Page.EntityListPage entityListPageModel ->
-                    Entity.ListView.listView config appVM entityListPageModel model
-
-                Page.CustomSyncSettingsPage ->
-                    View.CustomSync.view config model
-
-        children =
-            [ View.Layout.appLayoutView config appVM model pageContent
-            , newTodoFab config model
-            ]
-                ++ View.Overlays.overlayViews config model
+        frame pageContent =
+            div [ cs "mdl-typography--body-1" ]
+                ([ View.Layout.appLayoutView config appVM model pageContent
+                 , newTodoFab config model
+                 ]
+                    ++ View.Overlays.overlayViews config model
+                )
     in
-    div [ cs "mdl-typography--body-1" ] children
+    case Page.getPage__ model of
+        Page.EntityListPage entityListPageModel ->
+            Entity.ListView.listView config appVM entityListPageModel model
+                |> frame
+
+        Page.CustomSyncSettingsPage ->
+            View.CustomSync.view config model
+                |> frame
 
 
 main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg

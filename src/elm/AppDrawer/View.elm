@@ -6,7 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
-import Page exposing (Page(CustomSyncSettingsPage, EntityListPage))
+import Page exposing (..)
 import Pages.EntityList exposing (..)
 import Toolkit.Operators exposing (..)
 import View.Badge
@@ -62,7 +62,7 @@ sidebarContent config appVM model =
                         "Done"
                    , onSetEntityListViewItem config (Mat.icon "delete") BinView "Bin"
                    , Mat.divider
-                   , switchViewItemSmall config "settings" CustomSyncSettingsPage "Advance Settings"
+                   , switchViewItemSmall config "settings" [ "custom-sync" ] "Advance Settings"
                    ]
             )
         ]
@@ -165,10 +165,10 @@ entityListItem vm =
         ]
 
 
-switchViewItemSmall config iconName page title =
+switchViewItemSmall config iconName path title =
     li
         [ class ""
-        , onClick (config.gotoPageMsg page)
+        , onClick (config.gotToRouteMsg path)
         ]
         [ Mat.icon iconName
         , div [] [ text title ]

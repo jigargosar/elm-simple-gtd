@@ -16,12 +16,13 @@ type Page
 type PageMsg
     = PageMsg_SetPage Page
     | PageMsg_SetEntityListPage EntityListPageModel
+    | PageMsg_Route (List String)
 
 
 maybeGetEntityListPage model =
-    case model.page of
-        EntityListPage page ->
-            Just page
+    case getPage__ model of
+        EntityListPage pageModel ->
+            Just pageModel
 
         _ ->
             Nothing
@@ -47,8 +48,8 @@ delta2hash =
 
 getPathFromModel model =
     case getPage__ model of
-        EntityListPage page ->
-            getPathFromEntityListPageModel page
+        EntityListPage pageModel ->
+            getPathFromEntityListPageModel pageModel
 
         CustomSyncSettingsPage ->
             [ "custom-sync" ]

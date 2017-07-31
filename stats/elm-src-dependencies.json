@@ -1805,6 +1805,34 @@
     ],
     "transitiveBackwardImportsCount": 2
   },
+  "Links": {
+    "fileName": "src/elm/Links.elm",
+    "moduleName": "Links",
+    "parentModuleName": "",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "LocalPref": {
     "fileName": "src/elm/LocalPref.elm",
     "moduleName": "LocalPref",
@@ -6646,6 +6674,7 @@
       "Entity.ListView",
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
+      "Links",
       "Main",
       "Mat",
       "Menu",
@@ -6660,7 +6689,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 23,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -6682,6 +6711,7 @@
       "L.Main",
       "L.View",
       "LaunchBar.View",
+      "Links",
       "LocalPref",
       "Main",
       "Mat",
@@ -6732,7 +6762,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 69
+    "transitiveBackwardImportsCount": 70
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -6753,6 +6783,7 @@
       "Form",
       "GroupDoc",
       "GroupDoc.View",
+      "Links",
       "LocalPref",
       "Main",
       "Mat",
@@ -6776,7 +6807,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 32,
+    "backwardImportsCount": 33,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -6803,6 +6834,7 @@
       "L.Main",
       "L.View",
       "LaunchBar.View",
+      "Links",
       "LocalPref",
       "Main",
       "Mat",
@@ -6859,7 +6891,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 80
+    "transitiveBackwardImportsCount": 81
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

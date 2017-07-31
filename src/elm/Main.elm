@@ -126,7 +126,7 @@ type AppMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
-    | Mdl (Material.Msg AppMsg)
+    | OnMdl (Material.Msg AppMsg)
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
@@ -194,15 +194,6 @@ onToggleAppDrawerOverlay =
 onAppDrawerMsg : AppDrawerMsg -> AppMsg
 onAppDrawerMsg =
     OnAppDrawerMsg
-
-
-
--- mdl
-
-
-onMdl : Material.Msg AppMsg -> AppMsg
-onMdl =
-    Mdl
 
 
 subscriptions : AppModel -> Sub AppMsg
@@ -344,8 +335,8 @@ update config msg =
             effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
     in
     case msg of
-        Mdl msg_ ->
-            andThen (Material.update Mdl msg_)
+        OnMdl msg_ ->
+            andThen (Material.update OnMdl msg_)
 
         OnGlobalKeyUp keyCode ->
             Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)
@@ -490,7 +481,7 @@ viewConfig model =
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
     , gotoEntityListPageMsg = gotoEntityListPageMsg
     , gotoPageMsg = SwitchView >> OnPageMsg
-    , onMdl = onMdl
+    , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =

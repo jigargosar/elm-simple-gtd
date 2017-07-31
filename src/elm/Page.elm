@@ -1,6 +1,6 @@
 module Page exposing (..)
 
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import RouteUrl.Builder
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -34,7 +34,7 @@ getPage__ =
 
 
 initialPage =
-    Old_EntityListPage Pages.EntityList.initialEntityListPageModel
+    Old_EntityListPage Pages.EntityListOld.initialEntityListPageModel
 
 
 delta2hash =

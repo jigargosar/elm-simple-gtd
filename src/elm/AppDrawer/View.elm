@@ -7,7 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Page exposing (..)
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Toolkit.Operators exposing (..)
 import View.Badge
 import X.Function.Infix exposing (..)

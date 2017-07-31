@@ -13,7 +13,7 @@ import GroupDoc
 import Models.GroupDocStore
 import Models.Stores
 import Page exposing (Page(Old_EntityListPage))
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Project
 import String.Extra
 import Todo

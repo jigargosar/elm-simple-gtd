@@ -1,4 +1,4 @@
-module Pages.EntityList exposing (..)
+module Pages.EntityListOld exposing (..)
 
 import RouteUrl.Builder
 import Types.Document exposing (..)

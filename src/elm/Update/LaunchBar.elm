@@ -5,7 +5,7 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMLaunchBar))
 import Fuzzy
 import Models.GroupDocStore
 import Overlays.LaunchBar exposing (..)
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Regex
 import Return
 import String.Extra

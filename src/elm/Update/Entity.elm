@@ -12,7 +12,7 @@ import Models.HasStores exposing (HasPage, HasStores)
 import Models.Selection
 import Models.Todo
 import Page
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Set
 import Todo
 import Toolkit.Operators exposing (..)

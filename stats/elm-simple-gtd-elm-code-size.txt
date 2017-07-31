@@ -37,7 +37,7 @@
       91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
-      84 src/elm/Pages/EntityList.elm
+      84 src/elm/Pages/EntityListOld.elm
       84 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
       80 src/elm/GroupDoc/FormView.elm

@@ -8,7 +8,7 @@ import Entity.Types exposing (..)
 import GroupDoc
 import Keyboard.Extra as Key exposing (Key)
 import Material
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Project
 import String.Extra
 import Todo

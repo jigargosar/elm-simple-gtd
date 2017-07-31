@@ -5,7 +5,7 @@ import Document
 import Entity.Tree
 import Models.GroupDocStore exposing (..)
 import Models.Stores
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Project
 import Store
 import Todo

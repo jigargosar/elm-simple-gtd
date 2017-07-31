@@ -25,7 +25,7 @@ import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Overlays.LaunchBar exposing (LaunchBarMsg)
 import Page exposing (Page(Old_EntityListPage), PageMsg(..))
-import Pages.EntityList exposing (..)
+import Pages.EntityListOld exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)

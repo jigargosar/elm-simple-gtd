@@ -84,7 +84,7 @@ computeMaybeNewEntityIdAtCursorOld maybeEntityListPageModel model =
                                 Just entityIdAtCursor
                    )
     in
-    model.entityListCursor.maybeEntityIdAtCursorOld
+    model.entityListCursor.maybeEntityIdAtCursor
         ?|> computeNewEntityIdAtCursor
         ?= List.head newEntityIdList
 

@@ -120,7 +120,7 @@ setEntityAtCursor config maybeEntityIdAtCursorOld model =
 
         cursor =
             { entityIdList = entityIdList
-            , maybeEntityIdAtCursorOld = maybeEntityIdAtCursorOld
+            , maybeEntityIdAtCursor = maybeEntityIdAtCursorOld
             }
     in
     setIn model entityListCursor cursor

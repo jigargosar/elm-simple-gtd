@@ -32,7 +32,6 @@ import Ports.Todo exposing (..)
 import Project
 import Random.Pcg
 import RouteUrl
-import Routes
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.FormTypes
@@ -520,9 +519,9 @@ main =
             model |> pure >> update (updateConfig model) msg
     in
     RouteUrl.programWithFlags
-        { delta2url = Routes.delta2hash
+        { delta2url = Page.delta2hash
         , location2messages =
-            Routes.hash2messages
+            Page.hash2messages
                 { gotoPageMsg = SwitchView >> OnPageMsg
                 , gotoEntityListPageMsg = gotoEntityListPageMsg
                 }

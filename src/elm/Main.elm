@@ -21,7 +21,6 @@ import Material
 import Material.Options exposing (div)
 import Menu
 import Menu.Types
-import Models.Selection
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
@@ -66,9 +65,9 @@ import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
 import ViewModel
 import Window
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Random
-import X.Record exposing (..)
 import X.Return exposing (..)
 
 
@@ -77,6 +76,7 @@ type alias AppConfig =
     , deviceId : String
     , npmPackageVersion : String
     , isDevelopmentMode : Bool
+    , debug : Bool
     }
 
 
@@ -132,6 +132,7 @@ type AppMsg
     | SetLastKnownTimeStamp Time
 
 
+onStartAddingTodoWithFocusInEntityAsReference : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReference model =
     EntityListCursor.computeMaybeNewEntityIdAtCursor model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
@@ -167,6 +168,7 @@ revertExclusiveModeMsg =
         |> OnExclusiveModeMsg
 
 
+onSaveExclusiveModeForm : AppMsg
 onSaveExclusiveModeForm =
     Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
@@ -175,6 +177,7 @@ onSaveExclusiveModeForm =
 -- entityMsg
 
 
+setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
 setFocusInEntityWithEntityIdMsg =
     EM_SetFocusInEntityWithEntityId >> OnEntityMsg
 
@@ -183,10 +186,12 @@ setFocusInEntityWithEntityIdMsg =
 --drawer
 
 
+onToggleAppDrawerOverlay : AppMsg
 onToggleAppDrawerOverlay =
     OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
 
 
+onAppDrawerMsg : AppDrawerMsg -> AppMsg
 onAppDrawerMsg =
     OnAppDrawerMsg
 
@@ -195,14 +200,21 @@ onAppDrawerMsg =
 -- mdl
 
 
+onMdl : Material.Msg AppMsg -> AppMsg
 onMdl =
     Mdl
 
 
+subscriptions :
+    { b | config : { a | debugSecondMultiplier : Float } }
+    -> Sub AppMsg
 subscriptions model =
     let
         everyXSeconds x =
-            Time.every (Time.second * x * model.config.debugSecondMultiplier)
+            Time.every (Time.second * x * debugSecondMultiplier)
+
+        debugSecondMultiplier =
+            model.config.debugSecondMultiplier
     in
     Sub.batch
         [ Keyboard.ups OnGlobalKeyUp

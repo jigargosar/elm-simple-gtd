@@ -96,7 +96,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
     deviceId,
-    config: {debugSecondMultiplier, deviceId, npmPackageVersion, isDevelopmentMode},
+    config: {debug: WEBPACK_DEV_SERVER ,debugSecondMultiplier, deviceId, npmPackageVersion, isDevelopmentMode},
     localPref: localPref,
   }, db.allDocsMap)
   

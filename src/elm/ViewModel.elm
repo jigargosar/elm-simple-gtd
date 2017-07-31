@@ -90,8 +90,8 @@ getViewInfo page projectsVM contextsVM model =
                 RecentView ->
                     ( "Recent", sgtdBlue )
 
-        CustomSyncSettingsPage ->
-            ( "Custom Sync", sgtdBlue )
+        CustomSyncSettingsPage title ->
+            ( title, sgtdBlue )
 
 
 sgtdBlue =

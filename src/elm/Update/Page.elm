@@ -46,7 +46,7 @@ update config msg =
         PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->
-                    CustomSyncSettingsPage |> setPage
+                    CustomSyncSettingsPage "Custom Sync" |> setPage
 
                 _ ->
                     identity

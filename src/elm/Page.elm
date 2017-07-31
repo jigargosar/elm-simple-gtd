@@ -10,7 +10,7 @@ import X.List
 
 type Page
     = EntityListPage EntityListPageModel
-    | CustomSyncSettingsPage
+    | CustomSyncSettingsPage String
 
 
 type PageMsg
@@ -51,7 +51,7 @@ getPathFromModel model =
         EntityListPage pageModel ->
             getPathFromEntityListPageModel pageModel
 
-        CustomSyncSettingsPage ->
+        CustomSyncSettingsPage _ ->
             [ "custom-sync" ]
 
 

@@ -479,7 +479,7 @@ view config model =
             Entity.ListView.listView config appVM entityListPageModel model
                 |> frame
 
-        Page.CustomSyncSettingsPage ->
+        Page.CustomSyncSettingsPage _ ->
             View.CustomSync.view config model
                 |> frame
 

@@ -31,13 +31,13 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
-        SwitchView page ->
+        PageMsg_SetPage page ->
             map (setPage page)
                 >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
-        SwitchToEntityListView listView ->
-            listView |> EntityListPage >> SwitchView >> update config
+        PageMsg_SetEntityListPage listView ->
+            listView |> EntityListPage >> PageMsg_SetPage >> update config
 
 
 setPage page model =

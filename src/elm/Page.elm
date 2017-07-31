@@ -14,8 +14,8 @@ type Page
 
 
 type PageMsg
-    = SwitchView Page
-    | SwitchToEntityListView EntityListPageModel
+    = PageMsg_SetPage Page
+    | PageMsg_SetEntityListPage EntityListPageModel
 
 
 maybeGetEntityListPage model =

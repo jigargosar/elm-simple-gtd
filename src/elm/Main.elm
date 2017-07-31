@@ -137,7 +137,7 @@ onStartAddingTodoWithFocusInEntityAsReference model =
 
 
 gotoEntityListPageMsg =
-    SwitchToEntityListView >> OnPageMsg
+    PageMsg_SetEntityListPage >> OnPageMsg
 
 
 revertExclusiveModeMsg =
@@ -435,7 +435,7 @@ viewConfig model =
     , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
     , gotoEntityListPageMsg = gotoEntityListPageMsg
-    , gotoPageMsg = SwitchView >> OnPageMsg
+    , gotoPageMsg = PageMsg_SetPage >> OnPageMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
@@ -496,7 +496,7 @@ main =
         { delta2url = Page.delta2hash
         , location2messages =
             Page.hash2messages
-                { gotoPageMsg = SwitchView >> OnPageMsg
+                { gotoPageMsg = PageMsg_SetPage >> OnPageMsg
                 , gotoEntityListPageMsg = gotoEntityListPageMsg
                 }
         , init = init

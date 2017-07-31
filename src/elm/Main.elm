@@ -205,16 +205,17 @@ onMdl =
     Mdl
 
 
-subscriptions :
-    { b | config : { a | debugSecondMultiplier : Float } }
-    -> Sub AppMsg
+subscriptions : AppModel -> Sub AppMsg
 subscriptions model =
     let
         everyXSeconds x =
             Time.every (Time.second * x * debugSecondMultiplier)
 
         debugSecondMultiplier =
-            model.config.debugSecondMultiplier
+            if model.config.debug then
+                60
+            else
+                1
     in
     Sub.batch
         [ Keyboard.ups OnGlobalKeyUp

@@ -360,15 +360,19 @@ update config msg =
                 >> onPersistLocalPref
 
         _ ->
-            returnWith identity
-                (\model ->
-                    case ( Page.getPage__ model, msg ) of
-                        ( Page.EntityListPage model, OnEntityMsgNew msg_ ) ->
-                            Pages.EntityList.update config msg_ model
+            returnWith identity (Page.getPage__ >> updatePage config msg)
 
-                        _ ->
-                            identity
-                )
+
+updatePage config msg page =
+    case ( page, msg ) of
+        ( Page.EntityListPage model_, OnEntityMsgNew msg_ ) ->
+            Pages.EntityList.update config msg_ model_
+
+        ( _, OnEntityMsgNew msg_ ) ->
+            Pages.EntityList.updateDefault config msg_
+
+        _ ->
+            identity
 
 
 onSubscriptionMsg config msg =

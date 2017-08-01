@@ -149,6 +149,10 @@ entityListCursor =
     fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
+updateDefault config msg =
+    update config msg defaultModel
+
+
 update config msg model =
     case msg of
         SetFocusInEntityWithEntityId entityId ->

@@ -1,10 +1,10 @@
-   10261 total
+   10297 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
+     279 src/elm/Pages/EntityList.elm
      267 src/elm/Mat.elm
-     252 src/elm/Pages/EntityList.elm
      241 src/elm/AppDrawer/GroupViewModel.elm
      231 src/elm/Update/Entity.elm
      223 src/elm/Menu.elm
@@ -34,10 +34,10 @@
      110 src/elm/Models/EntityTree.elm
      103 src/elm/Todo/View.elm
      102 src/elm/ViewModel.elm
+     100 src/elm/Models/GroupDocStore.elm
       98 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm
       91 src/elm/Update/ExclusiveMode.elm
-      91 src/elm/Models/GroupDocStore.elm
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
       84 src/elm/GroupDoc/View.elm

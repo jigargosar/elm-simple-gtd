@@ -74,6 +74,15 @@ getActiveContexts =
     filterContexts GroupDoc.isActive
 
 
+getActiveDocs gdType =
+    case gdType of
+        ProjectGroupDocType ->
+            getActiveProjects
+
+        ContextGroupDocType ->
+            getActiveContexts
+
+
 storeFieldFromGDType :
     GroupDocType
     ->

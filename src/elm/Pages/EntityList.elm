@@ -6,7 +6,7 @@ import Context
 import Data.EntityTree
 import Document
 import Entity
-import Entity.Types exposing (EntityId(TodoId))
+import Entity.Types exposing (..)
 import EntityId
 import EntityListCursor
 import GroupDoc.View
@@ -26,7 +26,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import Types.Document exposing (DocId)
-import Types.GroupDoc exposing (ContextStore, ProjectStore)
+import Types.GroupDoc exposing (..)
 import Types.Todo exposing (TodoStore)
 import View.Badge
 import X.Function exposing (..)
@@ -40,8 +40,8 @@ type FilterType
     = Done
     | Recent
     | Bin
-    | HavingActiveProjectAndContextId DocId
-    | HavingActiveContextAndProjectId DocId
+    | HavingActiveProjectAndContextId
+    | HavingActiveContextAndProjectId
 
 
 type Filter
@@ -50,6 +50,7 @@ type Filter
     | ProjectsView
     | ProjectView DocId
     | Filter FilterType
+    | GroupBy FilterType GroupDocType
 
 
 type alias Model =
@@ -85,6 +86,14 @@ initialModel path =
                 , title = "Recent New"
                 , color = AppColors.sgtdBlue
                 , filter = Filter Recent
+                }
+
+        "context" :: [] ->
+            Just
+                { path = [ "context" ]
+                , title = "Context New"
+                , color = AppColors.sgtdBlue
+                , filter = Filter HavingActiveProjectAndContextId
                 }
 
         _ ->
@@ -176,11 +185,27 @@ createEntityTree model appModel =
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
+        GroupBy filterType groupByType ->
+            case groupByType of
+                ContextGroupDocType ->
+                    Models.GroupDocStore.getActiveContexts appModel
+                        |> Data.EntityTree.initContextForest
+                            getActiveTodoListForContextHelp
+
+                ProjectGroupDocType ->
+                    Models.GroupDocStore.getActiveProjects appModel
+                        |> Data.EntityTree.initProjectForest
+                            getActiveTodoListForProjectHelp
+
         Filter filterType ->
+            let
+                pred =
+                    filterTypeToPredicate filterType appModel
+            in
             Data.EntityTree.initTodoForest
                 model.title
                 (Models.EntityTree.filterTodosAndSortByLatestModified
-                    (filterTypeToPredicate filterType appModel)
+                    (pred "")
                     appModel
                 )
 
@@ -188,27 +213,29 @@ createEntityTree model appModel =
 filterTypeToPredicate filterType model =
     case filterType of
         Done ->
-            X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
+            \_ -> X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
 
         Recent ->
-            X.Predicate.always
+            \_ -> X.Predicate.always
 
         Bin ->
-            Document.isDeleted
+            \_ -> Document.isDeleted
 
-        HavingActiveProjectAndContextId contextId ->
-            X.Predicate.all
-                [ Todo.isActive
-                , Todo.getContextId >> equals contextId
-                , Models.Stores.isTodoProjectActive model
-                ]
+        HavingActiveProjectAndContextId ->
+            \contextId ->
+                X.Predicate.all
+                    [ Todo.isActive
+                    , Todo.getContextId >> equals contextId
+                    , Models.Stores.isTodoProjectActive model
+                    ]
 
-        HavingActiveContextAndProjectId projectId ->
-            X.Predicate.all
-                [ Todo.isActive
-                , Todo.getProjectId >> equals projectId
-                , Models.Stores.isTodoContextActive model
-                ]
+        HavingActiveContextAndProjectId ->
+            \projectId ->
+                X.Predicate.all
+                    [ Todo.isActive
+                    , Todo.getProjectId >> equals projectId
+                    , Models.Stores.isTodoContextActive model
+                    ]
 
 
 createEntityList model appModel =

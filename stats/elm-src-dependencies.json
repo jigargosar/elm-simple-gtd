@@ -502,6 +502,48 @@
     "transitiveBackwardImports": [],
     "transitiveBackwardImportsCount": 0
   },
+  "Data.EntityTree": {
+    "fileName": "src/elm/Data/EntityTree.elm",
+    "moduleName": "Data.EntityTree",
+    "parentModuleName": "Data",
+    "imports": [
+      "Entity.Types",
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Types.GroupDoc",
+      "Types.Todo",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 9,
+    "transitiveImports": [
+      "Dict",
+      "Entity.Types",
+      "Json.Decode",
+      "Json.Encode",
+      "List.Extra",
+      "Maybe.Extra",
+      "Random.Pcg",
+      "Set",
+      "Time",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "Types.Document",
+      "Types.GroupDoc",
+      "Types.Store",
+      "Types.Todo",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 18,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "Document": {
     "fileName": "src/elm/Document.elm",
     "moduleName": "Document",
@@ -907,6 +949,7 @@
     "transitiveImportsCount": 10,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
+      "Data.EntityTree",
       "Entity",
       "Entity.Tree",
       "EntityId",
@@ -922,10 +965,11 @@
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 15,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
+      "Data.EntityTree",
       "Entity",
       "Entity.ListView",
       "Entity.Tree",
@@ -964,7 +1008,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 40
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -4930,6 +4974,7 @@
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
       "Context",
+      "Data.EntityTree",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -4993,7 +5038,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 65
+    "transitiveBackwardImportsCount": 66
   },
   "Types.Firebase": {
     "fileName": "src/elm/Types/Firebase.elm",
@@ -5094,6 +5139,7 @@
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Context",
+      "Data.EntityTree",
       "Entity.Types",
       "ExclusiveMode.Types",
       "GroupDoc",
@@ -5113,11 +5159,12 @@
       "Update.LaunchBar",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 20,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
       "Context",
+      "Data.EntityTree",
       "Entity",
       "Entity.ListView",
       "Entity.Tree",
@@ -5174,7 +5221,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 58
+    "transitiveBackwardImportsCount": 59
   },
   "Types.LocalPref": {
     "fileName": "src/elm/Types/LocalPref.elm",
@@ -5242,6 +5289,7 @@
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
       "Context",
+      "Data.EntityTree",
       "Entity",
       "Entity.ListView",
       "Entity.Tree",
@@ -5301,7 +5349,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 61
+    "transitiveBackwardImportsCount": 62
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -5327,6 +5375,7 @@
     ],
     "transitiveImportsCount": 9,
     "backwardImports": [
+      "Data.EntityTree",
       "Entity.Tree",
       "Entity.Types",
       "GroupDoc.ViewModel",
@@ -5345,10 +5394,11 @@
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 18,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
+      "Data.EntityTree",
       "Entity",
       "Entity.ListView",
       "Entity.Tree",
@@ -5396,7 +5446,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 48
+    "transitiveBackwardImportsCount": 49
   },
   "Update.AppDrawer": {
     "fileName": "src/elm/Update/AppDrawer.elm",
@@ -7452,6 +7502,7 @@
       "AppDrawer.Model",
       "Context",
       "Data.Debug",
+      "Data.EntityTree",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -7474,13 +7525,14 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 25,
+    "backwardImportsCount": 26,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "AppDrawer.View",
       "Context",
       "Data.Debug",
+      "Data.EntityTree",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -7551,7 +7603,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 74
+    "transitiveBackwardImportsCount": 75
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -7565,6 +7617,7 @@
       "AppDrawer.Model",
       "AppDrawer.View",
       "Data.Debug",
+      "Data.EntityTree",
       "Document",
       "Entity",
       "Firebase.Model",
@@ -7598,13 +7651,14 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 35,
+    "backwardImportsCount": 36,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "AppDrawer.View",
       "Context",
       "Data.Debug",
+      "Data.EntityTree",
       "Document",
       "Entity",
       "Entity.ListView",
@@ -7684,7 +7738,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 83
+    "transitiveBackwardImportsCount": 84
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

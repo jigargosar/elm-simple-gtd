@@ -142,7 +142,7 @@ initFromPath path =
 type Msg
     = ArrowUp
     | ArrowDown
-    | SetFocusInEntityWithEntityId EntityId
+    | SetFocusableEntityId EntityId
 
 
 entityListCursor =
@@ -155,7 +155,7 @@ updateDefault config msg =
 
 update config msg model =
     case msg of
-        SetFocusInEntityWithEntityId entityId ->
+        SetFocusableEntityId entityId ->
             map (setEntityAtCursor config (entityId |> Just) model)
 
         ArrowUp ->

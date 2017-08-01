@@ -155,7 +155,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
 setFocusInEntityWithEntityIdMsg =
-    EM_SetFocusInEntityWithEntityId >> OnEntityMsg
+    Pages.EntityList.SetFocusableEntityId >> OnEntityMsgNew
 
 
 subscriptions : AppModel -> Sub AppMsg

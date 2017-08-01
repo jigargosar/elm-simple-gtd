@@ -17,6 +17,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Models.EntityTree
 import Models.GroupDocStore
+import Models.Stores
 import Project
 import RouteUrl.Builder
 import Todo
@@ -39,6 +40,8 @@ type FilterType
     = Done
     | Recent
     | Bin
+    | HavingActiveProjectAndContextId DocId
+    | HavingActiveContextAndProjectId DocId
 
 
 type Filter
@@ -177,12 +180,12 @@ createEntityTree model appModel =
             Data.EntityTree.initTodoForest
                 model.title
                 (Models.EntityTree.filterTodosAndSortByLatestModified
-                    (filterTypeToPredicate filterType)
+                    (filterTypeToPredicate filterType appModel)
                     appModel
                 )
 
 
-filterTypeToPredicate filterType =
+filterTypeToPredicate filterType model =
     case filterType of
         Done ->
             X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
@@ -192,6 +195,20 @@ filterTypeToPredicate filterType =
 
         Bin ->
             Document.isDeleted
+
+        HavingActiveProjectAndContextId contextId ->
+            X.Predicate.all
+                [ Todo.isActive
+                , Todo.getContextId >> equals contextId
+                , Models.Stores.isTodoProjectActive model
+                ]
+
+        HavingActiveContextAndProjectId projectId ->
+            X.Predicate.all
+                [ Todo.isActive
+                , Todo.getProjectId >> equals projectId
+                , Models.Stores.isTodoContextActive model
+                ]
 
 
 createEntityList model appModel =

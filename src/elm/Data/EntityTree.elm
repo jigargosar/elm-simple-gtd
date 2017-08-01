@@ -9,7 +9,7 @@ import Project
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Types.GroupDoc exposing (GroupDoc)
+import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -60,6 +60,15 @@ initProjectNode getTodoList project =
 
 initContextForest getTodoList contexts =
     contexts .|> initContextNode getTodoList |> ContextForest
+
+
+initGroupDocForest groupDocType =
+    case groupDocType of
+        ContextGroupDocType ->
+            initContextForest
+
+        ProjectGroupDocType ->
+            initProjectForest
 
 
 createProjectSubGroups findProjectById tcg =

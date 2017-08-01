@@ -185,8 +185,8 @@ createEntityTree model appModel =
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
-        GroupBy filterType groupByType ->
-            case groupByType of
+        GroupBy filterType groupDocType ->
+            case groupDocType of
                 ContextGroupDocType ->
                     Models.GroupDocStore.getActiveContexts appModel
                         |> Data.EntityTree.initContextForest

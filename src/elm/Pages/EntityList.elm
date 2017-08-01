@@ -231,21 +231,19 @@ update config msg model =
                         |> returnMsgAsCmd
                 )
 
-        --        BringEntityIdInView entityId ->
-        --            returnWith (createEntityList model)
-        --                (List.find (Entity.hasId entityId)
-        --                    >> Maybe.unpack
-        --                        (\_ ->
-        --                            returnMsgAsCmd (defaultModel.path |> config.navigateToPathMsg)
-        --                                >> update config (SetFocusableEntityId entityId) model
-        --                        )
-        --                        (Entity.toEntityId
-        --                            >> SetFocusableEntityId
-        --                            >> (update config # model)
-        --                        )
-        --                )
-        _ ->
-            identity
+        BringEntityIdInView entityId ->
+            returnWith (createEntityList model)
+                (List.find (Entity.hasId entityId)
+                    >> Maybe.unpack
+                        (\_ ->
+                            returnMsgAsCmd (defaultModel.path |> config.navigateToPathMsg)
+                                >> update config (SetFocusableEntityId entityId) model
+                        )
+                        (Entity.toEntityId
+                            >> SetFocusableEntityId
+                            >> (update config # model)
+                        )
+                )
 
 
 setEntityAtCursor config maybeEntityIdAtCursor model appModel =

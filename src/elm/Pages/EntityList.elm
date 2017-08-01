@@ -3,6 +3,7 @@ module Pages.EntityList exposing (..)
 import AppColors
 import Color exposing (Color)
 import Context
+import Data.EntityTree
 import Document
 import Entity
 import Entity.Tree

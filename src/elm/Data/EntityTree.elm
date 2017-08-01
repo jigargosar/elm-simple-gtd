@@ -12,7 +12,7 @@ import X.Function.Infix exposing (..)
 
 
 type Title
-    = GroupEntityTitle GroupEntity
+    = GroupEntityTitle GroupEntityType
     | StringTitle String
 
 
@@ -23,3 +23,7 @@ type Node
 type Tree
     = Root Node
     | Forest List Node
+
+
+initTodoForest stringTitle todoList =
+    Root (Node stringTitle todoList)

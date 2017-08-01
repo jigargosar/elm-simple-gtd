@@ -14,6 +14,7 @@ import json from "jsonfile"
 import * as elm from "./tasks/elm"
 import * as ElmDep from "./tasks/elm/dep"
 import path from "path"
+import {Format} from "./tasks/elm/format"
 
 const runF = (cmd, options = {}) => () => run(cmd, options)
 
@@ -236,4 +237,5 @@ export const removeUnusedImports = elm.removeProjectUnusedImports
 export const parseWPD = elm.parseWPD
 export const rui = elm.ruiFiles
 export const dep = ElmDep.logTransitiveImportsOf
+export const formatBuffer = Format.formatBuffer
 

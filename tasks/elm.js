@@ -122,11 +122,6 @@ const ruiHelp = _.curry((tmpFile, elmFile) =>{
 }
 )
 
-function sleep(ms) {
-    return new Promise(resolve => {
-        setTimeout(resolve, ms)
-    })
-}
 
 
 export async function ruiFiles(...fileNames) {

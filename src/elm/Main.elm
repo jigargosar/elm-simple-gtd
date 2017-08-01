@@ -339,9 +339,6 @@ update config msg =
         OnEntityMsg msg_ ->
             Update.Entity.update config msg_
 
-        OnEntityMsgNew msg_ ->
-            Pages.EntityList.update config msg_
-
         OnLaunchBarMsgWithNow msg_ now ->
             Update.LaunchBar.update config now msg_
 
@@ -361,6 +358,14 @@ update config msg =
         OnAppDrawerMsg msg ->
             Update.AppDrawer.update msg
                 >> onPersistLocalPref
+
+        _ ->
+            returnWith identity
+                (\model ->
+                    case ( Page.getPage__ model, msg ) of
+                        _ ->
+                            identity
+                )
 
 
 onSubscriptionMsg config msg =

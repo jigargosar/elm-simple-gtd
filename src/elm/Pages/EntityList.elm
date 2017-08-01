@@ -10,9 +10,6 @@ import Entity.Types exposing (..)
 import EntityId
 import EntityListCursor
 import GroupDoc.View
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Keyed
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Models.EntityTree
@@ -33,6 +30,7 @@ import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
 import X.Predicate
+import X.Record exposing (..)
 import X.Return exposing (..)
 
 
@@ -141,15 +139,37 @@ initialModel path =
 type Msg
     = ArrowUp
     | ArrowDown
+    | SetFocusInEntityWithEntityId EntityId
 
 
-update config msg =
+entityListCursor =
+    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
+
+
+update config msg model =
     case msg of
+        SetFocusInEntityWithEntityId entityId ->
+            map (setEntityAtCursor config (entityId |> Just) model)
+
         ArrowUp ->
-            identity
+            moveFocusBy config -1
 
         ArrowDown ->
-            identity
+            moveFocusBy config 1
+
+
+setEntityAtCursor config maybeEntityIdAtCursorOld model appModel =
+    let
+        entityIdList =
+            createEntityList model appModel
+                .|> Entity.toEntityId
+
+        cursor =
+            { entityIdList = entityIdList
+            , maybeEntityIdAtCursor = maybeEntityIdAtCursorOld
+            }
+    in
+    setIn appModel entityListCursor cursor
 
 
 moveFocusBy config offset =

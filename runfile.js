@@ -1,3 +1,5 @@
+import {runFish} from "./tasks/common"
+
 process.on('unhandledRejection', error => {
   // Will print "unhandledRejection err is not defined"
   console.log(error)
@@ -222,18 +224,16 @@ export function dummy2(...args) {
 
 dummy.help = 'logs all options and args to console'
 
-export const removeUnusedImports = elm.removeUnusedImports
-export const parseWPD = elm.parseWPD
-export const rui = elm.rui
-export const dep = ElmDep.logTransitiveImportsOf
-
-function runFish(command) {
-  run(`fish -c '${command}' `)
-}
-
 export function preCommit() {
   const statsFile = "stats/elm-simple-gtd-elm-code-size.txt"
   runFish(`wc -l src/elm/**.elm | sort -r > ${statsFile}`)
   ElmDep.generateDependenciesStatsFile()
   run(`git add stats/*`)
 }
+
+
+export const removeUnusedImports = elm.removeProjectUnusedImports
+export const parseWPD = elm.parseWPD
+export const rui = elm.ruiFiles
+export const dep = ElmDep.logTransitiveImportsOf
+

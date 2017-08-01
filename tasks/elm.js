@@ -36,7 +36,7 @@ function fixWarningsFrom(warnFilePath) {
     })*/
 
 }
-export const removeUnusedImports = function() {
+export const removeProjectUnusedImports = function() {
     run("rimraf ./elm-stuff/build-artifacts/0.18.0/jigargosar")
     // run(`fish -c "rm -fv elm-stuff/build-artifacts/0.18.0/jigargosar/**/L-*.* ; or echo no match"`)
 
@@ -129,7 +129,7 @@ function sleep(ms) {
 }
 
 
-export async function rui(...fileNames) {
+export async function ruiFiles(...fileNames) {
     // run(`pkill -laf "/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/nodemon" ;  true`)
     // run("pgrep -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")
     // run("pkill -laf /Users/jigargosar/GitHub/elm-simple-gtd/ && true")

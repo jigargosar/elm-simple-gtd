@@ -138,33 +138,35 @@ onUpdateAction config entityId action =
         EUA_ToggleSelection ->
             map (toggleEntitySelection entityId)
 
-        EUA_OnGotoEntity ->
-            let
-                switchToEntityListViewFromEntity entityId model =
-                    let
-                        maybeEntityListPageModel =
-                            Page.maybeGetEntityListPage model
-                    in
-                    entityId
-                        |> toPage model maybeEntityListPageModel
-                        |> config.gotoEntityListPageMsg
-                        |> returnMsgAsCmd
-            in
-            returnWith identity (switchToEntityListViewFromEntity entityId)
-
-        EUA_BringEntityIdInView ->
-            returnWith (createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel)
-                (List.Extra.find (Entity.hasId entityId)
-                    >> Maybe.Extra.unpack
-                        (\_ ->
-                            returnMsgAsCmd (config.gotoEntityListPageMsg ContextsView)
-                                >> update config (EM_SetFocusInEntityWithEntityId entityId)
-                        )
-                        (Entity.toEntityId
-                            >> EM_SetFocusInEntityWithEntityId
-                            >> update config
-                        )
-                )
+        --        EUA_OnGotoEntity ->
+        --            let
+        --                switchToEntityListViewFromEntity entityId model =
+        --                    let
+        --                        maybeEntityListPageModel =
+        --                            Page.maybeGetEntityListPage model
+        --                    in
+        --                    entityId
+        --                        |> toPage model maybeEntityListPageModel
+        --                        |> config.gotoEntityListPageMsg
+        --                        |> returnMsgAsCmd
+        --            in
+        --            returnWith identity (switchToEntityListViewFromEntity entityId)
+        --
+        --        EUA_BringEntityIdInView ->
+        --            returnWith (createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel)
+        --                (List.Extra.find (Entity.hasId entityId)
+        --                    >> Maybe.Extra.unpack
+        --                        (\_ ->
+        --                            returnMsgAsCmd (config.gotoEntityListPageMsg ContextsView)
+        --                                >> update config (EM_SetFocusInEntityWithEntityId entityId)
+        --                        )
+        --                        (Entity.toEntityId
+        --                            >> EM_SetFocusInEntityWithEntityId
+        --                            >> update config
+        --                        )
+        --                )
+        _ ->
+            identity
 
 
 toggleEntitySelection entityId =

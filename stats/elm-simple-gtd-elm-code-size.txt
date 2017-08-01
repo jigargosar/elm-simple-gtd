@@ -1,12 +1,12 @@
-   10491 total
+   10495 total
      562 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
-     419 src/elm/Pages/EntityList.elm
+     421 src/elm/Pages/EntityList.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      267 src/elm/Mat.elm
      241 src/elm/AppDrawer/GroupViewModel.elm
-     231 src/elm/Update/Entity.elm
+     233 src/elm/Update/Entity.elm
      223 src/elm/Menu.elm
      221 src/elm/GroupDoc/ViewModel.elm
      195 src/elm/Update/Firebase.elm

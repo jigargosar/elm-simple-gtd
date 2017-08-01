@@ -153,7 +153,7 @@ type Msg
     | ArrowDown
     | SetFocusableEntityId EntityId
     | ToggleSelection EntityId
-    | OnGotoEntity EntityId
+    | OnGotoEntity
     | BringEntityIdInView EntityId
 
 
@@ -182,9 +182,9 @@ update config msg model =
                     (toggleSetMember (getDocIdFromEntityId entityId))
                 )
 
-        OnGotoEntity entityId ->
+        OnGotoEntity ->
             let
-                toMaybeNextPageModel appModel =
+                toNextPageModel entityId appModel =
                     case entityId of
                         ContextId id ->
                             contextModel id
@@ -224,11 +224,13 @@ update config msg model =
                                 ?|> getNextPageModelForTodo
                                 ?= model
             in
-            returnWith identity
+            returnWithMaybe2 identity
                 (\appModel ->
-                    toMaybeNextPageModel appModel
-                        |> (.path >> config.navigateToPathMsg)
-                        |> returnMsgAsCmd
+                    computeMaybeNewEntityIdAtCursor model appModel
+                        ?|> (toNextPageModel # appModel)
+                        >> .path
+                        >> config.navigateToPathMsg
+                        >> returnMsgAsCmd
                 )
 
         BringEntityIdInView entityId ->

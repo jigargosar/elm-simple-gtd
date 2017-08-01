@@ -57,8 +57,16 @@ type alias Model =
     }
 
 
-initialModel : List String -> Maybe Model
-initialModel path =
+defaultModel =
+    { path = [ "contexts" ]
+    , title = "Contexts New"
+    , color = AppColors.contextsColor
+    , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
+    }
+
+
+initFromPath : List String -> Maybe Model
+initFromPath path =
     case path of
         "done" :: [] ->
             Just
@@ -85,12 +93,7 @@ initialModel path =
                 }
 
         "contexts" :: [] ->
-            Just
-                { path = [ "contexts" ]
-                , title = "Contexts New"
-                , color = AppColors.contextsColor
-                , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
-                }
+            Just defaultModel
 
         "projects" :: [] ->
             Just

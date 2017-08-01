@@ -54,6 +54,6 @@ update config msg =
                         |> setMaybePage
 
                 _ ->
-                    Pages.EntityList.initialModel path
+                    Pages.EntityList.initFromPath path
                         ?|> EntityListPage
                         |> setMaybePage

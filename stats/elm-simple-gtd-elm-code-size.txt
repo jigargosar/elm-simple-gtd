@@ -1,7 +1,7 @@
-   10360 total
+   10363 total
      539 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
-     331 src/elm/Pages/EntityList.elm
+     334 src/elm/Pages/EntityList.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      267 src/elm/Mat.elm

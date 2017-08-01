@@ -1,6 +1,7 @@
 module Data.EntityTree exposing (..)
 
 import Context
+import Document
 import Entity
 import Entity.Types exposing (..)
 import List.Extra as List
@@ -62,13 +63,24 @@ initContextForest getTodoList contexts =
     contexts .|> initContextNode getTodoList |> ContextForest
 
 
-initGroupDocForest groupDocType =
+initGroupDocForest groupDocType getTodoList groupDocs =
+    let
+        initContextNode context =
+            { context = context
+            , todoList = getTodoList (Document.getId context)
+            }
+
+        initProjectNode project =
+            { project = project
+            , todoList = getTodoList (Document.getId project)
+            }
+    in
     case groupDocType of
         ContextGroupDocType ->
-            initContextForest
+            groupDocs .|> initContextNode |> ContextForest
 
         ProjectGroupDocType ->
-            initProjectForest
+            groupDocs .|> initProjectNode |> ProjectForest
 
 
 createProjectSubGroups findProjectById tcg =

@@ -21,13 +21,13 @@ import X.Function.Infix exposing (..)
 view config appVM appModel model =
     let
         entityTree =
-            Pages.EntityList.createEntityTree model.filter appModel
+            Pages.EntityList.createEntityTree model appModel
 
         entityList =
             Entity.Tree.flatten entityTree
 
         maybeEntityIdAtCursorOld =
-            Pages.EntityList.computeMaybeNewEntityIdAtCursor model.filter appModel
+            Pages.EntityList.computeMaybeNewEntityIdAtCursor model appModel
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId

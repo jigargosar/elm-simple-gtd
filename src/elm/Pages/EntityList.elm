@@ -71,6 +71,22 @@ initialModel path =
                 , filter = Filter Done
                 }
 
+        "bin" :: [] ->
+            Just
+                { path = [ "bin" ]
+                , title = "Bin New"
+                , color = AppColors.sgtdBlue
+                , filter = Filter Bin
+                }
+
+        "recent" :: [] ->
+            Just
+                { path = [ "recent" ]
+                , title = "Recent New"
+                , color = AppColors.sgtdBlue
+                , filter = Filter Recent
+                }
+
         _ ->
             Nothing
 

@@ -1,9 +1,9 @@
-   10320 total
+   10310 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
-     287 src/elm/Pages/EntityList.elm
      283 src/elm/Store.elm
+     277 src/elm/Pages/EntityList.elm
      267 src/elm/Mat.elm
      241 src/elm/AppDrawer/GroupViewModel.elm
      231 src/elm/Update/Entity.elm

@@ -169,16 +169,6 @@ createEntityTree model appModel =
             Models.GroupDocStore.findContextById # appModel
     in
     case model.filter of
-        ContextsView ->
-            Models.GroupDocStore.getActiveContexts appModel
-                |> Data.EntityTree.initContextForest
-                    getActiveTodoListForContextHelp
-
-        ProjectsView ->
-            Models.GroupDocStore.getActiveProjects appModel
-                |> Data.EntityTree.initProjectForest
-                    getActiveTodoListForProjectHelp
-
         ContextView id ->
             Models.GroupDocStore.findContextById id appModel
                 ?= Context.null

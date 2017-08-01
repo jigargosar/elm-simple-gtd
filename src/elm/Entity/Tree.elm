@@ -13,14 +13,12 @@ import Types.Todo exposing (..)
 type alias ContextNode =
     { context : Context.Model
     , todoList : List TodoDoc
-    , groupEntity : Entity.GroupEntity
     }
 
 
 type alias ProjectNode =
     { project : Project.Model
     , todoList : List TodoDoc
-    , groupEntity : Entity.GroupEntity
     }
 
 
@@ -35,14 +33,12 @@ type Tree
 initContextNode getTodoList context =
     { context = context
     , todoList = getTodoList context
-    , groupEntity = Entity.initContextGroup context
     }
 
 
 initProjectNode getTodoList project =
     { project = project
     , todoList = getTodoList project
-    , groupEntity = Entity.initProjectGroup project
     }
 
 

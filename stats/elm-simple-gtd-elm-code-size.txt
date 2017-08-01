@@ -1,4 +1,4 @@
-   10066 total
+   10062 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -23,9 +23,9 @@
      146 src/elm/X/Function.elm
      136 src/elm/L/View.elm
      135 src/elm/Entity/ListView.elm
-     133 src/elm/Entity/Tree.elm
      132 src/elm/X/Return.elm
      131 src/elm/Views/EntityList.elm
+     129 src/elm/Entity/Tree.elm
      126 src/elm/Update/GroupDoc.elm
      116 src/elm/Todo/TimeTracker.elm
      111 src/elm/Todo/Form.elm

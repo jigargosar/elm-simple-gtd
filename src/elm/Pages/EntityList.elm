@@ -45,9 +45,7 @@ type FilterType
 
 
 type Filter
-    = ContextsView
-    | ContextView DocId
-    | ProjectsView
+    = ContextView DocId
     | ProjectView DocId
     | Filter FilterType
     | GroupBy FilterType GroupDocType
@@ -102,6 +100,38 @@ initialModel path =
                 , title = "Projects New"
                 , color = AppColors.projectsColor
                 , filter = GroupBy HavingActiveProjectAndContextId ProjectGroupDocType
+                }
+
+        "Inbox" :: [] ->
+            Just
+                { path = [ "Inbox" ]
+                , title = "Inbox New"
+                , color = AppColors.nullContextColor
+                , filter = ContextView ""
+                }
+
+        "context" :: id :: [] ->
+            Just
+                { path = path
+                , title = "Context"
+                , color = AppColors.defaultContextColor
+                , filter = ContextView id
+                }
+
+        "project" :: "NotAssigned" :: [] ->
+            Just
+                { path = path
+                , title = "No Project"
+                , color = AppColors.defaultProjectColor
+                , filter = ProjectView ""
+                }
+
+        "project" :: id :: [] ->
+            Just
+                { path = path
+                , title = "Project"
+                , color = AppColors.defaultProjectColor
+                , filter = ProjectView id
                 }
 
         _ ->

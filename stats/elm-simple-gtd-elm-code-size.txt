@@ -1,7 +1,7 @@
-   10371 total
-     543 src/elm/Main.elm
+   10493 total
+     562 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
-     338 src/elm/Pages/EntityList.elm
+     421 src/elm/Pages/EntityList.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      267 src/elm/Mat.elm
@@ -23,9 +23,9 @@
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      144 src/elm/Views/EntityList.elm
+     136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
      135 src/elm/Entity/ListView.elm
-     132 src/elm/X/Return.elm
      129 src/elm/Entity/Tree.elm
      126 src/elm/Update/GroupDoc.elm
      116 src/elm/Todo/TimeTracker.elm
@@ -104,6 +104,7 @@
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       17 src/elm/Types/Store.elm
+      16 src/elm/X/Set.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm

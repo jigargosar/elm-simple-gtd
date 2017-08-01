@@ -120,6 +120,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -160,9 +161,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 79,
+    "transitiveImportsCount": 81,
     "backwardImports": [
       "ViewModel"
     ],
@@ -297,6 +299,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -336,9 +339,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 76,
+    "transitiveImportsCount": 78,
     "backwardImports": [
       "View.Layout"
     ],
@@ -2355,10 +2359,11 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 153,
+    "transitiveImportsCount": 154,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2793,6 +2798,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -2832,9 +2838,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 75,
+    "transitiveImportsCount": 77,
     "backwardImports": [
       "Update.Entity"
     ],
@@ -2858,18 +2865,27 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
+      "Pages.EntityList",
       "Update.Entity",
       "Update.Page",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.View",
       "Main",
+      "Models.HasStores",
+      "Page",
+      "Pages.EntityList",
       "Update.Entity",
       "Update.Page",
-      "Update.Subscription"
+      "Update.Subscription",
+      "View.Layout",
+      "ViewModel",
+      "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 12
   },
   "Models.Stores": {
     "fileName": "src/elm/Models/Stores.elm",
@@ -2986,12 +3002,13 @@
     "transitiveImportsCount": 22,
     "backwardImports": [
       "Models.Stores",
+      "Pages.EntityList",
       "Todo.TimeTracker.View",
       "Update.Entity",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 5,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3382,6 +3399,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Pages.EntityList",
@@ -3420,9 +3438,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 74,
+    "transitiveImportsCount": 76,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -3464,7 +3483,9 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
+      "Models.Todo",
       "Project",
       "RouteUrl.Builder",
       "Todo",
@@ -3481,9 +3502,10 @@
       "X.List",
       "X.Predicate",
       "X.Record",
-      "X.Return"
+      "X.Return",
+      "X.Set"
     ],
-    "importsCount": 32,
+    "importsCount": 35,
     "transitiveImports": [
       "AppColors",
       "Char",
@@ -3520,6 +3542,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Pages.EntityListOld",
@@ -3557,9 +3580,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 73,
+    "transitiveImportsCount": 75,
     "backwardImports": [
       "Main",
       "Page",
@@ -5805,9 +5829,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 83,
+    "transitiveImportsCount": 84,
     "backwardImports": [
       "Main"
     ],
@@ -6255,9 +6280,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 76,
+    "transitiveImportsCount": 77,
     "backwardImports": [
       "Main"
     ],
@@ -6875,6 +6901,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -6919,10 +6946,11 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 91,
+    "transitiveImportsCount": 93,
     "backwardImports": [
       "Main"
     ],
@@ -7207,6 +7235,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Page",
@@ -7250,10 +7279,11 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 88,
+    "transitiveImportsCount": 90,
     "backwardImports": [
       "Main"
     ],
@@ -7323,6 +7353,7 @@
       "Maybe.Extra",
       "Models.EntityTree",
       "Models.GroupDocStore",
+      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Pages.EntityList",
@@ -7361,9 +7392,10 @@
       "X.Random",
       "X.Record",
       "X.Return",
+      "X.Set",
       "X.String"
     ],
-    "transitiveImportsCount": 74,
+    "transitiveImportsCount": 76,
     "backwardImports": [
       "Main"
     ],
@@ -7588,9 +7620,10 @@
       "ViewModel",
       "Views.EntityList",
       "X.Return",
+      "X.Set",
       "X.Time"
     ],
-    "backwardImportsCount": 26,
+    "backwardImportsCount": 27,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -7666,9 +7699,10 @@
       "ViewModel",
       "Views.EntityList",
       "X.Return",
+      "X.Set",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 75
+    "transitiveBackwardImportsCount": 76
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -7714,9 +7748,10 @@
       "ViewModel",
       "Views.EntityList",
       "X.Return",
+      "X.Set",
       "X.Time"
     ],
-    "backwardImportsCount": 36,
+    "backwardImportsCount": 37,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -7801,9 +7836,10 @@
       "ViewModel",
       "Views.EntityList",
       "X.Return",
+      "X.Set",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 84
+    "transitiveBackwardImportsCount": 85
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -8356,6 +8392,50 @@
       "Views.EntityList"
     ],
     "transitiveBackwardImportsCount": 20
+  },
+  "X.Set": {
+    "fileName": "src/elm/X/Set.elm",
+    "moduleName": "X.Set",
+    "parentModuleName": "X",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Set",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 7,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Set",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 8,
+    "backwardImports": [
+      "Pages.EntityList"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.View",
+      "Main",
+      "Models.HasStores",
+      "Page",
+      "Pages.EntityList",
+      "Update.Entity",
+      "Update.Page",
+      "View.Layout",
+      "ViewModel",
+      "Views.EntityList"
+    ],
+    "transitiveBackwardImportsCount": 11
   },
   "X.String": {
     "fileName": "src/elm/X/String.elm",

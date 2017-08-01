@@ -100,6 +100,10 @@ returnMsgAsCmd msg =
     Task.perform (\_ -> msg) (Task.succeed msg) |> Return.command
 
 
+returnMaybeMsgAsCmd =
+    Maybe.withDefault Cmd.none >> returnMsgAsCmd
+
+
 command =
     Return.command
 

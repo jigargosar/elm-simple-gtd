@@ -262,7 +262,25 @@ createAppModel flags =
 
 
 type alias UpdateConfig msg =
-    Update.LaunchBar.Config msg (Update.AppHeader.Config msg (Update.ExclusiveMode.Config msg (Update.Page.Config msg (Update.Firebase.Config msg (Update.CustomSync.Config msg (Update.Entity.Config msg (Update.Subscription.Config msg (Update.Todo.Config msg {}))))))))
+    Update.LaunchBar.Config msg
+        (Update.AppHeader.Config msg
+            (Update.ExclusiveMode.Config msg
+                (Update.Page.Config msg
+                    (Update.Firebase.Config msg
+                        (Update.CustomSync.Config msg
+                            (Update.Entity.Config msg
+                                (Update.Subscription.Config msg
+                                    (Update.Todo.Config msg
+                                        { navigateToPathMsg : List String -> msg
+                                        }
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
 
 
 updateConfig : AppModel -> UpdateConfig AppMsg
@@ -288,6 +306,7 @@ updateConfig model =
     , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
     , maybeEntityListPageModel = Page.maybeGetEntityListPage model
+    , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
 
     --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model
     }

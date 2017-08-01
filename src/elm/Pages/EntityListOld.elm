@@ -29,14 +29,6 @@ routeUrlBuilderToMaybeEntityListPageModelOld builder =
         "projects" :: [] ->
             ProjectsView |> Just
 
-        "bin" :: [] ->
-            BinView |> Just
-
-        --        "done" :: [] ->
-        --            DoneView |> Just
-        "recent" :: [] ->
-            RecentView |> Just
-
         "Inbox" :: [] ->
             ContextView "" |> Just
 

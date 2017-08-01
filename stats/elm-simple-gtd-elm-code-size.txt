@@ -1,4 +1,4 @@
-   10126 total
+   10118 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -40,13 +40,13 @@
       88 src/elm/X/Html.elm
       86 src/elm/Document.elm
       84 src/elm/GroupDoc/View.elm
-      83 src/elm/Pages/EntityListOld.elm
       82 src/elm/View/MainMenu.elm
       82 src/elm/Page.elm
       80 src/elm/GroupDoc/FormView.elm
       79 src/elm/Types/GroupDoc.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm
+      75 src/elm/Pages/EntityListOld.elm
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm
       74 src/elm/EntityListCursor.elm

@@ -92,7 +92,7 @@ initialModel path =
             Just
                 { path = [ "contexts" ]
                 , title = "Contexts New"
-                , color = AppColors.sgtdBlue
+                , color = AppColors.contextsColor
                 , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
                 }
 
@@ -100,7 +100,7 @@ initialModel path =
             Just
                 { path = [ "projects" ]
                 , title = "Projects New"
-                , color = AppColors.sgtdBlue
+                , color = AppColors.projectsColor
                 , filter = GroupBy HavingActiveProjectAndContextId ProjectGroupDocType
                 }
 

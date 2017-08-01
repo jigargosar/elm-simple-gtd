@@ -1,4 +1,4 @@
-   10086 total
+   10066 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -18,12 +18,12 @@
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
      156 src/elm/Todo/Msg.elm
-     153 src/elm/Entity/Tree.elm
      152 src/elm/Update/LaunchBar.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      136 src/elm/L/View.elm
      135 src/elm/Entity/ListView.elm
+     133 src/elm/Entity/Tree.elm
      132 src/elm/X/Return.elm
      131 src/elm/Views/EntityList.elm
      126 src/elm/Update/GroupDoc.elm

@@ -10,46 +10,26 @@ import Toolkit.Operators exposing (..)
 import Types.Todo exposing (..)
 
 
-type alias TodoNode =
-    TodoDoc
-
-
-type alias TodoNodeList =
-    List TodoDoc
-
-
 type alias ContextNode =
     { context : Context.Model
-    , todoList : TodoNodeList
+    , todoList : List TodoDoc
     , groupEntity : Entity.GroupEntity
     }
 
 
 type alias ProjectNode =
     { project : Project.Model
-    , todoList : TodoNodeList
+    , todoList : List TodoDoc
     , groupEntity : Entity.GroupEntity
     }
 
 
-type alias ProjectNodeList =
-    List ProjectNode
-
-
-type alias ContextNodeList =
-    List ContextNode
-
-
-type alias TitleNode =
-    String
-
-
 type Tree
-    = ContextRoot ContextNode ProjectNodeList
-    | ProjectRoot ProjectNode ContextNodeList
-    | ContextForest ContextNodeList
-    | ProjectForest ProjectNodeList
-    | TodoForest TitleNode TodoNodeList
+    = ContextRoot ContextNode (List ProjectNode)
+    | ProjectRoot ProjectNode (List ContextNode)
+    | ContextForest (List ContextNode)
+    | ProjectForest (List ProjectNode)
+    | TodoForest String (List TodoDoc)
 
 
 initContextNode getTodoList context =
@@ -120,7 +100,7 @@ initProjectRoot getTodoList findProjectById project =
         |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 
-initTodoForest : String -> TodoNodeList -> Tree
+initTodoForest : String -> List TodoDoc -> Tree
 initTodoForest =
     TodoForest
 

@@ -286,7 +286,7 @@ updateConfig model =
     , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
     , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
     , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
-    , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
+    , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
     , maybeEntityListPageModel = Page.maybeGetEntityListPage model
 
     --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model

@@ -152,27 +152,31 @@ update config msg model =
             map (setEntityAtCursor config (entityId |> Just) model)
 
         ArrowUp ->
-            moveFocusBy config -1
+            moveFocusBy config -1 model
 
         ArrowDown ->
-            moveFocusBy config 1
+            moveFocusBy config 1 model
 
 
-setEntityAtCursor config maybeEntityIdAtCursorOld model appModel =
+setEntityAtCursor config maybeEntityIdAtCursor model appModel =
     let
         entityIdList =
             createEntityList model appModel
                 .|> Entity.toEntityId
 
+        _ =
+            maybeEntityIdAtCursor
+                |> Debug.log "maybeEntityIdAtCursor"
+
         cursor =
             { entityIdList = entityIdList
-            , maybeEntityIdAtCursor = maybeEntityIdAtCursorOld
+            , maybeEntityIdAtCursor = maybeEntityIdAtCursor
             }
     in
     setIn appModel entityListCursor cursor
 
 
-moveFocusBy config offset =
+moveFocusBy config offset model =
     let
         findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
             let
@@ -186,15 +190,15 @@ moveFocusBy config offset =
                 |> Maybe.orElse (List.head entityIdList)
     in
     returnWithMaybe2 identity
-        (\model ->
+        (\appModel ->
             let
                 maybeEntityIdAtCursorOld =
-                    EntityListCursor.computeMaybeNewEntityIdAtCursorOld
-                        config.maybeEntityListPageModel
+                    computeMaybeNewEntityIdAtCursor
                         model
+                        appModel
 
                 entityIdList =
-                    EntityListCursor.createEntityListFormMaybeEntityListPageModelOld config.maybeEntityListPageModel model
+                    createEntityList model appModel
                         .|> Entity.toEntityId
             in
             findEntityIdByOffsetIn offset

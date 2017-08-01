@@ -55,12 +55,12 @@ onGlobalKeyDown config key =
         onEditModeNone =
             case key of
                 ArrowUp ->
-                    config.focusPrevEntityMsg
-                        |> returnMsgAsCmd
+                    returnMsgAsCmd config.focusPrevEntityMsgNew
+                        >> returnMsgAsCmd config.focusPrevEntityMsg
 
                 ArrowDown ->
-                    config.focusNextEntityMsg
-                        |> returnMsgAsCmd
+                    returnMsgAsCmd config.focusNextEntityMsgNew
+                        >> returnMsgAsCmd config.focusNextEntityMsg
 
                 _ ->
                     identity

@@ -38,6 +38,8 @@ import X.Return exposing (..)
 
 type FilterType
     = Done
+    | Recent
+    | Bin
 
 
 type Filter
@@ -181,6 +183,12 @@ filterTypeToPredicate filterType =
     case filterType of
         Done ->
             X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
+
+        Recent ->
+            X.Predicate.always
+
+        Bin ->
+            Document.isDeleted
 
 
 createEntityList model appModel =

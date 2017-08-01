@@ -140,7 +140,12 @@ flatten tree =
             todoList .|> Entity.Types.TodoEntity
 
         Root node ->
-            []
+            case node of
+                Node (StringTitle title) todoList ->
+                    todoList .|> Entity.Types.TodoEntity
+
+                _ ->
+                    []
 
         Forest list node ->
             []

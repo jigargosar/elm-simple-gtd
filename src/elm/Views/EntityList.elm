@@ -108,7 +108,13 @@ keyedViewList maybeEntityIdAtCursorOld appVM entityTree =
                 |> flatTodoListView title
 
         Data.EntityTree.Root node ->
-            [ ( "0", div [] [] ) ]
+            case node of
+                Data.EntityTree.Node (Data.EntityTree.StringTitle title) todoList ->
+                    todoListView todoList
+                        |> flatTodoListView title
+
+                _ ->
+                    [ ( "0", div [] [] ) ]
 
         Data.EntityTree.Forest list node ->
             [ ( "0", div [] [] ) ]

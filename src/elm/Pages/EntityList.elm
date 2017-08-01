@@ -36,7 +36,7 @@ import X.Predicate
 import X.Return exposing (..)
 
 
-type TodoFilter
+type FilterType
     = Done
 
 
@@ -47,7 +47,7 @@ type Filter
     | ProjectView DocId
     | BinView
     | RecentView
-    | Filter TodoFilter
+    | Filter FilterType
 
 
 type alias Model =
@@ -168,18 +168,19 @@ createEntityTree model appModel =
                 "Recent"
                 (Models.EntityTree.filterTodosAndSortByLatestModified X.Predicate.always appModel)
 
-        Filter todoFilter ->
+        Filter filterType ->
             Entity.Tree.initTodoForest
                 model.title
                 (Models.EntityTree.filterTodosAndSortByLatestModified
-                    (X.Predicate.all [ Document.isNotDeleted, Todo.isDone ])
+                    (filterTypeToPredicate filterType)
                     appModel
                 )
 
 
-
---filterToPredicate =
---    case
+filterTypeToPredicate filterType =
+    case filterType of
+        Done ->
+            X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
 
 
 createEntityList model appModel =

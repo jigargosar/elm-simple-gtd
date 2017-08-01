@@ -47,8 +47,6 @@ type Filter
     | ContextView DocId
     | ProjectsView
     | ProjectView DocId
-    | BinView
-    | RecentView
     | Filter FilterType
 
 
@@ -175,16 +173,6 @@ createEntityTree model appModel =
                 |> Entity.Tree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
-
-        BinView ->
-            Entity.Tree.initTodoForest
-                "Bin"
-                (Models.EntityTree.filterTodosAndSortByLatestModified Document.isDeleted appModel)
-
-        RecentView ->
-            Entity.Tree.initTodoForest
-                "Recent"
-                (Models.EntityTree.filterTodosAndSortByLatestModified X.Predicate.always appModel)
 
         Filter filterType ->
             Entity.Tree.initTodoForest

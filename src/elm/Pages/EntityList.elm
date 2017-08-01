@@ -8,11 +8,12 @@ import Document
 import Entity
 import Entity.Types exposing (..)
 import Maybe.Extra as Maybe
-import Models.EntityTree
-import Models.GroupDocStore
+import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
+import Pages.EntityListOld exposing (..)
 import Project
+import Store
 import Todo
 import Toolkit.Operators exposing (..)
 import Tuple2
@@ -298,13 +299,48 @@ moveFocusBy config offset model =
         )
 
 
+filterTodosAndSortBy pred sortBy model =
+    Store.filterDocs pred model.todoStore
+        |> List.sortBy sortBy
+
+
+filterTodosAndSortByLatestCreated pred =
+    filterTodosAndSortBy pred (Todo.getCreatedAt >> negate)
+
+
+filterTodosAndSortByLatestModified pred =
+    filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
+
+
+getActiveTodoListForContext context model =
+    filterTodosAndSortByLatestCreated
+        (X.Predicate.all
+            [ Todo.isActive
+            , Todo.contextFilter context
+            , Models.Stores.isTodoProjectActive model
+            ]
+        )
+        model
+
+
+getActiveTodoListForProject project model =
+    filterTodosAndSortByLatestCreated
+        (X.Predicate.all
+            [ Todo.isActive
+            , Todo.hasProject project
+            , Models.Stores.isTodoContextActive model
+            ]
+        )
+        model
+
+
 createEntityTree model appModel =
     let
         getActiveTodoListForContextHelp =
-            Models.EntityTree.getActiveTodoListForContext # appModel
+            getActiveTodoListForContext # appModel
 
         getActiveTodoListForProjectHelp =
-            Models.EntityTree.getActiveTodoListForProject # appModel
+            getActiveTodoListForProject # appModel
 
         findProjectByIdHelp =
             Models.GroupDocStore.findProjectById # appModel
@@ -346,7 +382,7 @@ createEntityTree model appModel =
             in
             Data.EntityTree.initTodoForest
                 model.title
-                (Models.EntityTree.filterTodosAndSortByLatestModified
+                (filterTodosAndSortByLatestModified
                     (pred "")
                     appModel
                 )

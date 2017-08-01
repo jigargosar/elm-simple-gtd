@@ -43,8 +43,6 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
         , onGotoRunningTodoMsg : msg
-        , focusNextEntityMsg : msg
-        , focusPrevEntityMsg : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
         , gotoNextViewForFocusableEntityId : msg
@@ -57,11 +55,9 @@ onGlobalKeyDown config key =
             case key of
                 ArrowUp ->
                     returnMsgAsCmd config.focusPrevEntityMsgNew
-                        >> returnMsgAsCmd config.focusPrevEntityMsg
 
                 ArrowDown ->
                     returnMsgAsCmd config.focusNextEntityMsgNew
-                        >> returnMsgAsCmd config.focusNextEntityMsg
 
                 _ ->
                     identity

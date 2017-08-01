@@ -81,9 +81,6 @@ createTodoViewModel config appVM isFocusable todo =
         entityId =
             EntityId.fromTodoDocId todoId
 
-        createEntityUpdateMsg =
-            config.onEntityUpdateMsg (EntityId.fromTodoDocId todoId)
-
         reminder =
             createScheduleViewModel config now todo
 
@@ -110,9 +107,6 @@ createTodoViewModel config appVM isFocusable todo =
 
                     Key.CharR ->
                         reminder.startEditingMsg
-
-                    Key.CharG ->
-                        createEntityUpdateMsg Entity.Types.EUA_OnGotoEntity
 
                     Key.CharS ->
                         config.onSwitchOrStartTrackingTodo todoId

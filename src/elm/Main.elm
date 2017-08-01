@@ -3,7 +3,6 @@ module Main exposing (main)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Context
-import Entity.ListView
 import Entity.Types exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
@@ -24,7 +23,7 @@ import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Overlays.LaunchBar exposing (LaunchBarMsg)
-import Page exposing (Page(Old_EntityListPage), PageMsg(..))
+import Page exposing (Page, PageMsg(..))
 import Pages.EntityList
 import Pages.EntityListOld exposing (..)
 import Ports
@@ -49,7 +48,6 @@ import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
 import Update.CustomSync
-import Update.Entity
 import Update.ExclusiveMode
 import Update.Firebase
 import Update.GroupDoc
@@ -116,7 +114,6 @@ type AppMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
-    | OnEntityMsg Entity.Types.EntityMsg
     | OnEntityMsgNew Pages.EntityList.Msg
     | OnLaunchBarMsg LaunchBarMsg
     | OnLaunchBarMsgWithNow LaunchBarMsg Time
@@ -134,13 +131,9 @@ type AppMsg
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
-    EntityListCursor.computeMaybeNewEntityIdAtCursorOld (Page.maybeGetEntityListPage model) model
+    model.entityListCursor.maybeEntityIdAtCursor
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
-
-
-gotoEntityListPageMsg =
-    PageMsg_SetEntityListPage >> OnPageMsg
 
 
 revertExclusiveModeMsg =
@@ -240,7 +233,7 @@ createAppModel flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = XMNone
-            , page = Page.initialPage
+            , page = Page.initialModel
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
@@ -268,12 +261,10 @@ type alias UpdateConfig msg =
                 (Update.Page.Config msg
                     (Update.Firebase.Config msg
                         (Update.CustomSync.Config msg
-                            (Update.Entity.Config msg
-                                (Update.Subscription.Config msg
-                                    (Update.Todo.Config msg
-                                        { navigateToPathMsg : List String -> msg
-                                        }
-                                    )
+                            (Update.Subscription.Config msg
+                                (Update.Todo.Config msg
+                                    { navigateToPathMsg : List String -> msg
+                                    }
                                 )
                             )
                         )
@@ -292,20 +283,15 @@ updateConfig model =
     , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
-    , gotoEntityListPageMsg = gotoEntityListPageMsg
-    , onStartEditingTodo = Todo.Msg.onStartEditingTodo >> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
-    , bringEntityIdInViewMsg = EM_Update # EUA_BringEntityIdInView >> OnEntityMsg
+    , bringEntityIdInViewMsg = Pages.EntityList.BringEntityIdInView >> OnEntityMsgNew
     , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
-    , focusNextEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusNext
-    , focusPrevEntityMsg = OnEntityMsg Entity.Types.EM_EntityListFocusPrev
     , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
-    , maybeEntityListPageModel = Page.maybeGetEntityListPage model
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     , gotoNextViewForFocusableEntityId =
         Pages.EntityList.GotoNextViewForFocusableEntityId |> OnEntityMsgNew
@@ -357,9 +343,6 @@ update config msg =
         OnCustomSyncMsg msg_ ->
             Update.CustomSync.update config msg_
 
-        OnEntityMsg msg_ ->
-            Update.Entity.update config msg_
-
         OnLaunchBarMsgWithNow msg_ now ->
             Update.LaunchBar.update config now msg_
 
@@ -407,7 +390,6 @@ onSubscriptionMsg config msg =
 
 type alias ViewConfig msg =
     { noop : msg
-    , onEntityUpdateMsg : EntityId -> EntityUpdateAction -> msg
     , onAppDrawerMsg : AppDrawer.Types.AppDrawerMsg -> msg
     , onFirebaseMsg : FirebaseMsg -> msg
     , onLaunchBarMsg : Overlays.LaunchBar.LaunchBarMsg -> msg
@@ -446,7 +428,6 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
-    , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
     , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursorOld : Maybe EntityId
     , maybeEntityIdAtCursor : Maybe EntityId
@@ -466,7 +447,6 @@ viewConfig model =
     , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> OnTodoMsg
     , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
-    , onEntityUpdateMsg = Entity.Types.EM_Update >>> OnEntityMsg
     , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
     , onSignIn = OnFirebaseMsg OnFBSignIn
     , onSignOut = OnFirebaseMsg OnFBSignOut
@@ -478,14 +458,13 @@ viewConfig model =
     , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
     , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
-    , gotoEntityListPageMsg = gotoEntityListPageMsg
     , gotoPageMsg = PageMsg_SetPage >> OnPageMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onToggleEntitySelection = EM_Update # EUA_ToggleSelection >> OnEntityMsg
+    , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> OnEntityMsgNew
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
     , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> OnTodoMsg
@@ -498,14 +477,8 @@ viewConfig model =
         Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
     , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , maybeEntityIdAtCursorOld =
-        EntityListCursor.computeMaybeNewEntityIdAtCursorOld
-            (Page.maybeGetEntityListPage model)
-            model
-    , maybeEntityIdAtCursor =
-        EntityListCursor.computeMaybeNewEntityIdAtCursorOld
-            (Page.maybeGetEntityListPage model)
-            model
+    , maybeEntityIdAtCursorOld = Nothing
+    , maybeEntityIdAtCursor = Nothing
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     }
 
@@ -525,10 +498,6 @@ view config model =
                 )
     in
     case Page.getPage__ model of
-        Page.Old_EntityListPage entityListPageModel ->
-            Entity.ListView.listView config appVM entityListPageModel model
-                |> frame
-
         Page.CustomSyncSettingsPage _ ->
             View.CustomSync.view config model
                 |> frame
@@ -554,7 +523,6 @@ main =
         , location2messages =
             Page.hash2messages
                 { gotoPageMsg = PageMsg_SetPage >> OnPageMsg
-                , gotoEntityListPageMsg = gotoEntityListPageMsg
                 , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
                 }
         , init = init

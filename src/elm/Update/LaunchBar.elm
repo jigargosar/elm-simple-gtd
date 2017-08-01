@@ -35,7 +35,7 @@ type alias Config msg a =
     { a
         | revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , gotoEntityListPageMsg : Old_EntityListPageModel -> msg
+        , navigateToPathMsg : List String -> msg
     }
 
 
@@ -51,22 +51,22 @@ update config now msg =
 
         OnLBEnter entity ->
             let
-                v =
+                path =
                     case entity of
                         SI_Project project ->
-                            project |> Document.getId >> ProjectView
+                            [ "project", Document.getId project ]
 
                         SI_Projects ->
-                            ProjectsView
+                            [ "projects" ]
 
                         SI_Context context ->
-                            context |> Document.getId >> ContextView
+                            [ "context", Document.getId context ]
 
                         SI_Contexts ->
-                            ContextsView
+                            [ "contexts" ]
             in
             returnMsgAsCmd config.revertExclusiveMode
-                >> returnMsgAsCmd (config.gotoEntityListPageMsg v)
+                >> returnMsgAsCmd (config.navigateToPathMsg path)
 
         OnLBInputChanged form text ->
             returnWith identity

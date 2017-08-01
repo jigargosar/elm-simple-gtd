@@ -12,7 +12,8 @@ import Entity.Types exposing (..)
 import GroupDoc
 import Models.GroupDocStore
 import Models.Stores
-import Page exposing (Page(Old_EntityListPage))
+import Page exposing (Page)
+import Pages.EntityList
 import Pages.EntityListOld exposing (..)
 import Project
 import String.Extra
@@ -94,9 +95,6 @@ create getTodoListByEntityId config innerConFig groupDoc =
         id =
             Document.getId groupDoc
 
-        createEntityActionMsg =
-            config.onEntityUpdateMsg (innerConFig.toEntityId id)
-
         count =
             getTodoListByEntityId id |> List.length
 
@@ -129,7 +127,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.gotoPageMsg (innerConFig.getEntityListPageModel id |> Old_EntityListPage)
+                config.navigateToPathMsg [ innerConFig.getEntityListPageModel, id ]
             else
                 config.noop
     , icon = icon
@@ -161,7 +159,7 @@ contexts config model =
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
-            , getEntityListPageModel = ContextView
+            , getEntityListPageModel = "context"
             , groupDocType = ContextGroupDocType
             }
 
@@ -177,7 +175,7 @@ contexts config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = nullVMAsList
     , archivedEntityList = createList config archivedConfig model
-    , page = ContextsView
+    , page = [ "contexts" ]
     , title = "Contexts"
     , className = "contexts"
     , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
@@ -213,7 +211,7 @@ projects config model =
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor
-            , getEntityListPageModel = ProjectView
+            , getEntityListPageModel = "project"
             , groupDocType = ProjectGroupDocType
             }
 
@@ -229,7 +227,7 @@ projects config model =
     { entityList = entityList |> List.drop 1
     , nullVMAsList = []
     , archivedEntityList = createList config archivedConfig model
-    , page = ProjectsView
+    , page = [ "projects" ]
     , title = "Projects"
     , className = "projects"
     , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel

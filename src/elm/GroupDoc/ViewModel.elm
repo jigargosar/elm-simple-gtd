@@ -83,9 +83,6 @@ create config configInner todoList groupDoc =
         groupDocId =
             GroupDoc.createGroupDocIdFromType configInner.groupDocType id
 
-        onEntityAction =
-            config.onEntityUpdateMsg entityId
-
         isNull =
             configInner.isNull groupDoc
 
@@ -124,9 +121,6 @@ create config configInner todoList groupDoc =
 
                 Key.Delete ->
                     toggleDeleteMsg
-
-                Key.CharG ->
-                    onEntityAction Entity.Types.EUA_OnGotoEntity
 
                 _ ->
                     config.noop

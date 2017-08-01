@@ -71,6 +71,7 @@
       "Models.GroupDocStore",
       "Models.Stores",
       "Page",
+      "Pages.EntityList",
       "Pages.EntityListOld",
       "Project",
       "String.Extra",
@@ -80,7 +81,7 @@
       "X.Function",
       "X.Maybe"
     ],
-    "importsCount": 21,
+    "importsCount": 22,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.Model",
@@ -884,14 +885,10 @@
       "X.String"
     ],
     "transitiveImportsCount": 70,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
   },
   "Entity.Tree": {
     "fileName": "src/elm/Entity/Tree.elm",
@@ -2140,7 +2137,6 @@
       "AppDrawer.Model",
       "AppDrawer.Types",
       "Context",
-      "Entity.ListView",
       "Entity.Types",
       "EntityListCursor",
       "ExclusiveMode.Types",
@@ -2186,7 +2182,6 @@
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
-      "Update.Entity",
       "Update.ExclusiveMode",
       "Update.Firebase",
       "Update.GroupDoc",
@@ -2206,7 +2201,7 @@
       "X.Random",
       "X.Return"
     ],
-    "importsCount": 68,
+    "importsCount": 66,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -2227,7 +2222,6 @@
       "Document",
       "DomPorts",
       "Entity",
-      "Entity.ListView",
       "Entity.Tree",
       "Entity.Types",
       "EntityId",
@@ -2268,7 +2262,6 @@
       "Menu.Types",
       "Models.EntityTree",
       "Models.GroupDocStore",
-      "Models.HasStores",
       "Models.Selection",
       "Models.Stores",
       "Models.Todo",
@@ -2326,7 +2319,6 @@
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
-      "Update.Entity",
       "Update.ExclusiveMode",
       "Update.Firebase",
       "Update.GroupDoc",
@@ -2363,7 +2355,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 154,
+    "transitiveImportsCount": 151,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2847,10 +2839,9 @@
     ],
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
-      "Main",
       "Update.Entity"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 1
   },
   "Models.Selection": {
     "fileName": "src/elm/Models/Selection.elm",
@@ -3585,12 +3576,13 @@
     ],
     "transitiveImportsCount": 75,
     "backwardImports": [
+      "AppDrawer.GroupViewModel",
       "Main",
       "Page",
       "Update.Page",
       "Views.EntityList"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.View",
@@ -5833,14 +5825,10 @@
       "X.String"
     ],
     "transitiveImportsCount": 84,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
   },
   "Update.ExclusiveMode": {
     "fileName": "src/elm/Update/ExclusiveMode.elm",

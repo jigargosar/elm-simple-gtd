@@ -28,9 +28,6 @@ init config form =
             )
                 |> Tuple2.mapEach (apply form.id) (String.append # " Name")
 
-        toMsg =
-            config.onEntityUpdateMsg entityId
-
         fireNameChanged =
             config.updateGroupDocFromNameMsg form
 

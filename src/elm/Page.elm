@@ -10,32 +10,21 @@ import X.List
 
 
 type Page
-    = Old_EntityListPage Old_EntityListPageModel
-    | CustomSyncSettingsPage String
+    = CustomSyncSettingsPage String
     | EntityListPage Pages.EntityList.Model
 
 
 type PageMsg
     = PageMsg_SetPage Page
-    | PageMsg_SetEntityListPage Old_EntityListPageModel
     | PageMsg_NavigateToPath (List String)
 
 
-maybeGetEntityListPage model =
-    case getPage__ model of
-        Old_EntityListPage pageModel ->
-            Just pageModel
-
-        _ ->
-            Nothing
+initialModel =
+    EntityListPage Pages.EntityList.defaultModel
 
 
 getPage__ =
     .page
-
-
-initialPage =
-    Old_EntityListPage Pages.EntityListOld.initialEntityListPageModel
 
 
 delta2hash =
@@ -50,9 +39,6 @@ delta2hash =
 
 getPathFromModel model =
     case getPage__ model of
-        Old_EntityListPage pageModel ->
-            getPathFromEntityListPageModel pageModel
-
         CustomSyncSettingsPage _ ->
             [ "custom-sync" ]
 
@@ -77,6 +63,4 @@ hash2messages config location =
         path =
             RouteUrl.Builder.path builder
     in
-    routeUrlBuilderToMaybeEntityListPageModelOld builder
-        ?|> (config.gotoEntityListPageMsg >> X.List.singleton)
-        ?= [ config.navigateToPathMsg path ]
+    [ config.navigateToPathMsg path ]

@@ -68,29 +68,6 @@ getViewInfo page projectsVM contextsVM model =
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
     case page of
-        Old_EntityListPage page ->
-            case page of
-                ContextsView ->
-                    ( contextsVM.title, contextsVM.icon.color )
-
-                ContextView id ->
-                    appHeaderInfoById id contextsVM
-
-                ProjectsView ->
-                    ( projectsVM.title, projectsVM.icon.color )
-
-                ProjectView id ->
-                    appHeaderInfoById id projectsVM
-
-                BinView ->
-                    ( "Bin", sgtdBlue )
-
-                DoneView ->
-                    ( "Done", sgtdBlue )
-
-                RecentView ->
-                    ( "Recent", sgtdBlue )
-
         CustomSyncSettingsPage title ->
             ( title, sgtdBlue )
 

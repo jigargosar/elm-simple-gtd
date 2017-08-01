@@ -43,9 +43,6 @@ update config msg =
                 >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
-        PageMsg_SetEntityListPage listView ->
-            listView |> Old_EntityListPage >> PageMsg_SetPage >> update config
-
         PageMsg_NavigateToPath path ->
             case path of
                 "custom-sync" :: [] ->

@@ -54,15 +54,27 @@ sidebarContent config appVM model =
                 ++ entityGroupView config contexts model.page
                 ++ entityGroupView config projects model.page
                 ++ [ Mat.divider ]
-                ++ [ onSetEntityListViewItem config (Mat.icon "sort") RecentView "Recent"
+                ++ [ onSetEntityListViewItem
+                        config
+                        (Mat.icon "sort")
+                        [ "recent" ]
+                        "Recent"
                    , onSetEntityListViewItem
                         config
                         (Mat.iconView "done" [ Mat.cs "done-icon", Mat.cs "is-done" ])
-                        DoneView
+                        [ "done" ]
                         "Done"
-                   , onSetEntityListViewItem config (Mat.icon "delete") BinView "Bin"
+                   , onSetEntityListViewItem
+                        config
+                        (Mat.icon "delete")
+                        [ "bin" ]
+                        "Bin"
                    , Mat.divider
-                   , switchViewItemSmall config "settings" [ "custom-sync" ] "Advance Settings"
+                   , switchViewItemSmall
+                        config
+                        "settings"
+                        [ "custom-sync" ]
+                        "Advance Settings"
                    ]
             )
         ]
@@ -74,10 +86,12 @@ entityGroupView config vm page =
             vm
 
         isCurrentView =
-            Old_EntityListPage vm.page == page
+            -- todo: cleanup
+            -- Old_EntityListPage vm.page == page
+            False
 
         fireSwitchView =
-            config.gotoEntityListPageMsg vm.page
+            config.navigateToPathMsg vm.page
 
         fireSmart =
             if isCurrentView then
@@ -178,7 +192,7 @@ switchViewItemSmall config iconName path title =
 onSetEntityListViewItem config icon page title =
     li
         [ class ""
-        , onClick (config.gotoEntityListPageMsg page)
+        , onClick (config.navigateToPathMsg page)
         ]
         [ icon
         , h5 [] [ text title ]

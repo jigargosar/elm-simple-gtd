@@ -64,17 +64,18 @@ update :
     -> SubReturnF msg model
 update config msg =
     case msg of
-        EM_SetFocusInEntityWithEntityId entityId ->
-            map (setEntityAtCursor config (entityId |> Just))
-
+        --        EM_SetFocusInEntityWithEntityId entityId ->
+        --            map (setEntityAtCursor config (entityId |> Just))
         EM_Update entityId action ->
             onUpdateAction config entityId action
 
-        EM_EntityListFocusPrev ->
-            moveFocusBy config -1
-
-        EM_EntityListFocusNext ->
-            moveFocusBy config 1
+        --        EM_EntityListFocusPrev ->
+        --            moveFocusBy config -1
+        --
+        --        EM_EntityListFocusNext ->
+        --            moveFocusBy config 1
+        _ ->
+            identity
 
 
 moveFocusBy config offset =

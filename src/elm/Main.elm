@@ -307,6 +307,8 @@ updateConfig model =
     , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
     , maybeEntityListPageModel = Page.maybeGetEntityListPage model
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+    , gotoNextViewForFocusableEntityId =
+        Pages.EntityList.GotoNextViewForFocusableEntityId |> OnEntityMsgNew
 
     --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model
     }

@@ -47,6 +47,7 @@ type alias Config msg a =
         , focusPrevEntityMsg : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
+        , gotoNextViewForFocusableEntityId : msg
     }
 
 
@@ -102,6 +103,9 @@ onGlobalKeyUp config key =
 
                 CharT ->
                     returnMsgAsCmd config.onGotoRunningTodoMsg
+
+                CharG ->
+                    returnMsgAsCmd config.gotoNextViewForFocusableEntityId
 
                 _ ->
                     identity

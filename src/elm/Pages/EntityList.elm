@@ -153,7 +153,7 @@ type Msg
     | ArrowDown
     | SetFocusableEntityId EntityId
     | ToggleSelection EntityId
-    | OnGotoEntity
+    | GotoNextViewForFocusableEntityId
     | BringEntityIdInView EntityId
 
 
@@ -182,70 +182,82 @@ update config msg model =
                     (toggleSetMember (getDocIdFromEntityId entityId))
                 )
 
-        OnGotoEntity ->
-            let
-                toNextPageModel entityId appModel =
-                    case entityId of
-                        ContextId id ->
-                            contextModel id
-
-                        ProjectId id ->
-                            projectModel id
-
-                        TodoId id ->
-                            let
-                                getNextPageModelForTodo todo =
-                                    let
-                                        contextView =
-                                            Todo.getContextId todo |> contextModel
-
-                                        projectView =
-                                            Todo.getProjectId todo |> projectModel
-                                    in
-                                    case model.filter of
-                                        GroupBy _ groupDocType ->
-                                            case groupDocType of
-                                                ContextGroupDocType ->
-                                                    projectView
-
-                                                ProjectGroupDocType ->
-                                                    contextView
-
-                                        ProjectView _ ->
-                                            contextView
-
-                                        ContextView _ ->
-                                            projectView
-
-                                        _ ->
-                                            model
-                            in
-                            Models.Todo.findTodoById id appModel
-                                ?|> getNextPageModelForTodo
-                                ?= model
-            in
-            returnWithMaybe2 identity
-                (\appModel ->
-                    computeMaybeNewEntityIdAtCursor model appModel
-                        ?|> (toNextPageModel # appModel)
-                        >> .path
-                        >> config.navigateToPathMsg
-                        >> returnMsgAsCmd
-                )
+        GotoNextViewForFocusableEntityId ->
+            --            let
+            --                toNextPageModel entityId appModel =
+            --                    case entityId of
+            --                        ContextId id ->
+            --                            contextModel id
+            --
+            --                        ProjectId id ->
+            --                            projectModel id
+            --
+            --                        TodoId id ->
+            --                            let
+            --                                getNextPageModelForTodo todo =
+            --                                    let
+            --                                        contextView =
+            --                                            Todo.getContextId todo |> contextModel
+            --
+            --                                        projectView =
+            --                                            Todo.getProjectId todo |> projectModel
+            --                                    in
+            --                                    case model.filter of
+            --                                        GroupBy _ groupDocType ->
+            --                                            case groupDocType of
+            --                                                ContextGroupDocType ->
+            --                                                    projectView
+            --
+            --                                                ProjectGroupDocType ->
+            --                                                    contextView
+            --
+            --                                        ProjectView _ ->
+            --                                            contextView
+            --
+            --                                        ContextView _ ->
+            --                                            projectView
+            --
+            --                                        _ ->
+            --                                            model
+            --                            in
+            --                            Models.Todo.findTodoById id appModel
+            --                                ?|> getNextPageModelForTodo
+            --                                ?= model
+            --            in
+            --            returnWithMaybe2 identity
+            --                (\appModel ->
+            --                    let
+            --                        maybeNewEntityIdAtCursor =
+            --                            computeMaybeNewEntityIdAtCursor model appModel
+            --
+            --                        --                            appModel.entityListCursor.maybeEntityIdAtCursor
+            --                    in
+            --                    maybeNewEntityIdAtCursor
+            --                        ?|> (\entityId ->
+            --                                update config (SetFocusableEntityId entityId) model
+            --                                    >> (toNextPageModel entityId appModel
+            --                                            |> .path
+            --                                            |> config.navigateToPathMsg
+            --                                            |> returnMsgAsCmd
+            --                                       )
+            --                            )
+            --                )
+            identity
 
         BringEntityIdInView entityId ->
-            returnWith (createEntityList model)
-                (List.find (Entity.hasId entityId)
-                    >> Maybe.unpack
-                        (\_ ->
-                            returnMsgAsCmd (defaultModel.path |> config.navigateToPathMsg)
-                                >> update config (SetFocusableEntityId entityId) model
-                        )
-                        (Entity.toEntityId
-                            >> SetFocusableEntityId
-                            >> (update config # model)
-                        )
-                )
+            --            returnWith (createEntityList model)
+            --                (List.find (Entity.hasId entityId)
+            --                    >> Maybe.unpack
+            --                        (\_ ->
+            --                            returnMsgAsCmd (defaultModel.path |> config.navigateToPathMsg)
+            --                                >> update config (SetFocusableEntityId entityId) model
+            --                        )
+            --                        (Entity.toEntityId
+            --                            >> SetFocusableEntityId
+            --                            >> (update config # model)
+            --                        )
+            --                )
+            identity
 
 
 setEntityAtCursor config maybeEntityIdAtCursor model appModel =
@@ -254,10 +266,9 @@ setEntityAtCursor config maybeEntityIdAtCursor model appModel =
             createEntityList model appModel
                 .|> Entity.toEntityId
 
-        _ =
-            maybeEntityIdAtCursor
-                |> Debug.log "maybeEntityIdAtCursor"
-
+        --        _ =
+        --            maybeEntityIdAtCursor
+        --                |> Debug.log "maybeEntityIdAtCursor"
         cursor =
             { entityIdList = entityIdList
             , maybeEntityIdAtCursor = maybeEntityIdAtCursor

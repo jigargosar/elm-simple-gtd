@@ -363,6 +363,9 @@ update config msg =
             returnWith identity
                 (\model ->
                     case ( Page.getPage__ model, msg ) of
+                        ( Page.EntityListPage model, OnEntityMsgNew msg_ ) ->
+                            Pages.EntityList.update config msg_ model
+
                         _ ->
                             identity
                 )

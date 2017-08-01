@@ -6,7 +6,6 @@ import Context
 import Data.EntityTree
 import Document
 import Entity
-import Entity.Tree
 import Entity.Types exposing (EntityId(TodoId))
 import EntityId
 import EntityListCursor
@@ -152,30 +151,30 @@ createEntityTree model appModel =
     case model.filter of
         ContextsView ->
             Models.GroupDocStore.getActiveContexts appModel
-                |> Entity.Tree.initContextForest
+                |> Data.EntityTree.initContextForest
                     getActiveTodoListForContextHelp
 
         ProjectsView ->
             Models.GroupDocStore.getActiveProjects appModel
-                |> Entity.Tree.initProjectForest
+                |> Data.EntityTree.initProjectForest
                     getActiveTodoListForProjectHelp
 
         ContextView id ->
             Models.GroupDocStore.findContextById id appModel
                 ?= Context.null
-                |> Entity.Tree.initContextRoot
+                |> Data.EntityTree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
         ProjectView id ->
             Models.GroupDocStore.findProjectById id appModel
                 ?= Project.null
-                |> Entity.Tree.initProjectRoot
+                |> Data.EntityTree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
         Filter filterType ->
-            Entity.Tree.initTodoForest
+            Data.EntityTree.initTodoForest
                 model.title
                 (Models.EntityTree.filterTodosAndSortByLatestModified
                     (filterTypeToPredicate filterType)
@@ -196,7 +195,7 @@ filterTypeToPredicate filterType =
 
 
 createEntityList model appModel =
-    createEntityTree model appModel |> Entity.Tree.flatten
+    createEntityTree model appModel |> Data.EntityTree.flatten
 
 
 computeMaybeNewEntityIdAtCursor model appModel =

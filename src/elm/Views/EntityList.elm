@@ -1,5 +1,6 @@
 module Views.EntityList exposing (..)
 
+import Data.EntityTree
 import Entity
 import Entity.Tree
 import EntityId
@@ -24,7 +25,7 @@ view config appVM appModel model =
             Pages.EntityList.createEntityTree model appModel
 
         entityList =
-            Entity.Tree.flatten entityTree
+            Data.EntityTree.flatten entityTree
 
         maybeEntityIdAtCursorOld =
             Pages.EntityList.computeMaybeNewEntityIdAtCursor model appModel
@@ -82,29 +83,35 @@ keyedViewList maybeEntityIdAtCursorOld appVM entityTree =
             List.map todoViewFromTodo
     in
     case entityTree of
-        Entity.Tree.ContextRoot contextGroup subGroupList ->
+        Data.EntityTree.ContextRoot contextGroup subGroupList ->
             let
                 header =
                     createContextVM contextGroup |> groupHeaderView
             in
             header :: multiProjectView subGroupList
 
-        Entity.Tree.ProjectRoot projectGroup subGroupList ->
+        Data.EntityTree.ProjectRoot projectGroup subGroupList ->
             let
                 header =
                     createProjectVM projectGroup |> groupHeaderView
             in
             header :: multiContextView subGroupList
 
-        Entity.Tree.ContextForest groupList ->
+        Data.EntityTree.ContextForest groupList ->
             multiContextView groupList
 
-        Entity.Tree.ProjectForest groupList ->
+        Data.EntityTree.ProjectForest groupList ->
             multiProjectView groupList
 
-        Entity.Tree.TodoForest title todoList ->
+        Data.EntityTree.TodoForest title todoList ->
             todoListView todoList
                 |> flatTodoListView title
+
+        Data.EntityTree.Root node ->
+            [ ( "0", div [] [] ) ]
+
+        Data.EntityTree.Forest list node ->
+            [ ( "0", div [] [] ) ]
 
 
 groupView todoView vm =

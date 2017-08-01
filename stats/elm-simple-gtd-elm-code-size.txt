@@ -1,9 +1,9 @@
-   10306 total
+   10308 total
      531 src/elm/Main.elm
      430 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
+     287 src/elm/Pages/EntityList.elm
      283 src/elm/Store.elm
-     279 src/elm/Pages/EntityList.elm
      267 src/elm/Mat.elm
      241 src/elm/AppDrawer/GroupViewModel.elm
      231 src/elm/Update/Entity.elm
@@ -47,7 +47,6 @@
       79 src/elm/Types/GroupDoc.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm
-      75 src/elm/Pages/EntityListOld.elm
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm
       74 src/elm/EntityListCursor.elm
@@ -55,6 +54,7 @@
       72 src/elm/Update/Todo.elm
       70 src/elm/Entity/Types.elm
       69 src/elm/View/Overlays.elm
+      69 src/elm/Pages/EntityListOld.elm
       67 src/elm/X/List.elm
       67 src/elm/Todo/GroupEditView.elm
       67 src/elm/Firebase/Model.elm

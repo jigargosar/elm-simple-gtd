@@ -88,12 +88,20 @@ initialModel path =
                 , filter = Filter Recent
                 }
 
-        "context" :: [] ->
+        "contexts" :: [] ->
             Just
-                { path = [ "context" ]
-                , title = "Context New"
+                { path = [ "contexts" ]
+                , title = "Contexts New"
                 , color = AppColors.sgtdBlue
-                , filter = Filter HavingActiveProjectAndContextId
+                , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
+                }
+
+        "projects" :: [] ->
+            Just
+                { path = [ "projects" ]
+                , title = "Projects New"
+                , color = AppColors.sgtdBlue
+                , filter = GroupBy HavingActiveProjectAndContextId ProjectGroupDocType
                 }
 
         _ ->

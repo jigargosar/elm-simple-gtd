@@ -23,12 +23,6 @@ routeUrlBuilderToMaybeEntityListPageModelOld :
     -> Maybe Old_EntityListPageModel
 routeUrlBuilderToMaybeEntityListPageModelOld builder =
     case RouteUrl.Builder.path builder of
-        "contexts" :: [] ->
-            ContextsView |> Just
-
-        "projects" :: [] ->
-            ProjectsView |> Just
-
         "Inbox" :: [] ->
             ContextView "" |> Just
 

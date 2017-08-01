@@ -6,7 +6,6 @@ import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Page exposing (..)
-import Pages.EntityListOld exposing (..)
 import Todo.ViewModel
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

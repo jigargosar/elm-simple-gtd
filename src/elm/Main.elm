@@ -25,7 +25,6 @@ import Msg.GroupDoc exposing (GroupDocMsg)
 import Overlays.LaunchBar exposing (LaunchBarMsg)
 import Page exposing (Page, PageMsg(..))
 import Pages.EntityList
-import Pages.EntityListOld exposing (..)
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
@@ -62,7 +61,6 @@ import View.Overlays
 import ViewModel
 import Views.EntityList
 import Window
-import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Return exposing (..)

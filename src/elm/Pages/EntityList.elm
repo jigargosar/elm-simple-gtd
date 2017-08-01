@@ -7,29 +7,18 @@ import Data.EntityTree
 import Document
 import Entity
 import Entity.Types exposing (..)
-import EntityId
-import EntityListCursor
-import GroupDoc.View
-import List.Extra as List
 import Maybe.Extra as Maybe
 import Models.EntityTree
 import Models.GroupDocStore
 import Models.Selection
 import Models.Stores
-import Models.Todo
 import Project
-import RouteUrl.Builder
 import Todo
-import Todo.ItemView
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import Types.Document exposing (DocId)
 import Types.GroupDoc exposing (..)
-import Types.Todo exposing (TodoStore)
-import View.Badge
 import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import X.List
 import X.Predicate
 import X.Record exposing (..)

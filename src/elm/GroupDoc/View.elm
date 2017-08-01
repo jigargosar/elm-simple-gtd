@@ -3,7 +3,6 @@ module GroupDoc.View exposing (..)
 import EntityId
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
 import Html.Keyed
 import Mat
 import Toolkit.Operators exposing (..)

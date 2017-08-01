@@ -2,7 +2,6 @@ module Todo.ViewModel exposing (createTodoViewModel)
 
 import Date
 import Document
-import Entity.Types
 import EntityId
 import GroupDoc
 import Keyboard.Extra as Key

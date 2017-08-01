@@ -2,7 +2,6 @@ module Views.EntityList exposing (..)
 
 import Data.EntityTree
 import Entity
-import Entity.Tree
 import EntityId
 import GroupDoc.View
 import Html exposing (div, h5)
@@ -12,11 +11,9 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Pages.EntityList
 import Todo.ItemView
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import View.Badge
 import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 
 
 view config appVM appModel model =

@@ -1,11 +1,16 @@
-module Update.AppHeader exposing (Config, update)
+module Update.AppHeader exposing (..)
 
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))
 import Menu
-import Msg.AppHeader exposing (AppHeaderMsg(..))
+import Menu.Types exposing (MenuState)
 import Return
 import X.Return exposing (..)
+
+
+type AppHeaderMsg
+    = OnShowMainMenu
+    | OnMainMenuStateChanged MenuState
 
 
 type alias SubModel model =

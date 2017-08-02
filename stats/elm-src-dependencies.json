@@ -1390,7 +1390,6 @@
       "Menu",
       "Menu.Types",
       "Models.Todo",
-      "Msg.AppHeader",
       "Msg.Firebase",
       "Msg.GroupDoc",
       "Page",
@@ -1429,7 +1428,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 56,
+    "importsCount": 55,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -1486,7 +1485,6 @@
       "Models.Selection",
       "Models.Stores",
       "Models.Todo",
-      "Msg.AppHeader",
       "Msg.Firebase",
       "Msg.GroupDoc",
       "Navigation",
@@ -1563,7 +1561,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 131,
+    "transitiveImportsCount": 130,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -1731,16 +1729,15 @@
       "ExclusiveMode.Types",
       "Main",
       "Menu",
-      "Msg.AppHeader",
       "Todo.FormTypes",
-      "Todo.GroupEditView"
+      "Todo.GroupEditView",
+      "Update.AppHeader"
     ],
     "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "ExclusiveMode.Types",
       "Main",
       "Menu",
-      "Msg.AppHeader",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -1755,7 +1752,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 17
+    "transitiveBackwardImportsCount": 16
   },
   "Models.GroupDocStore": {
     "fileName": "src/elm/Models/GroupDocStore.elm",
@@ -2049,29 +2046,6 @@
       "Views.EntityList"
     ],
     "transitiveBackwardImportsCount": 12
-  },
-  "Msg.AppHeader": {
-    "fileName": "src/elm/Msg/AppHeader.elm",
-    "moduleName": "Msg.AppHeader",
-    "parentModuleName": "Msg",
-    "imports": [
-      "Menu.Types"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "Menu.Types"
-    ],
-    "transitiveImportsCount": 1,
-    "backwardImports": [
-      "Main",
-      "Update.AppHeader"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "Main",
-      "Update.AppHeader"
-    ],
-    "transitiveBackwardImportsCount": 2
   },
   "Msg.Firebase": {
     "fileName": "src/elm/Msg/Firebase.elm",
@@ -3745,7 +3719,7 @@
       "DomPorts",
       "ExclusiveMode.Types",
       "Menu",
-      "Msg.AppHeader",
+      "Menu.Types",
       "Return",
       "X.Return"
     ],
@@ -3770,7 +3744,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Msg.AppHeader",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3793,7 +3766,7 @@
       "X.List",
       "X.Return"
     ],
-    "transitiveImportsCount": 41,
+    "transitiveImportsCount": 40,
     "backwardImports": [
       "Main"
     ],

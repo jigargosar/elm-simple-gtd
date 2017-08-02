@@ -6,6 +6,7 @@ import Context
 import Data.EntityTree
 import Document
 import Entity exposing (..)
+import EntityListCursor
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection
@@ -142,8 +143,6 @@ type Msg
     | ArrowDown
     | SetFocusableEntityId EntityId
     | ToggleSelection EntityId
-    | GotoNextViewForFocusableEntityId
-    | BringEntityIdInView EntityId
 
 
 entityListCursor =
@@ -170,83 +169,6 @@ update config msg model =
                 (Models.Selection.updateSelectedEntityIdSet
                     (toggleSetMember (getDocIdFromEntityId entityId))
                 )
-
-        GotoNextViewForFocusableEntityId ->
-            --            let
-            --                toNextPageModel entityId appModel =
-            --                    case entityId of
-            --                        ContextId id ->
-            --                            contextModel id
-            --
-            --                        ProjectId id ->
-            --                            projectModel id
-            --
-            --                        TodoId id ->
-            --                            let
-            --                                getNextPageModelForTodo todo =
-            --                                    let
-            --                                        contextView =
-            --                                            Todo.getContextId todo |> contextModel
-            --
-            --                                        projectView =
-            --                                            Todo.getProjectId todo |> projectModel
-            --                                    in
-            --                                    case model.filter of
-            --                                        GroupBy _ groupDocType ->
-            --                                            case groupDocType of
-            --                                                ContextGroupDocType ->
-            --                                                    projectView
-            --
-            --                                                ProjectGroupDocType ->
-            --                                                    contextView
-            --
-            --                                        ProjectView _ ->
-            --                                            contextView
-            --
-            --                                        ContextView _ ->
-            --                                            projectView
-            --
-            --                                        _ ->
-            --                                            model
-            --                            in
-            --                            Models.Todo.findTodoById id appModel
-            --                                ?|> getNextPageModelForTodo
-            --                                ?= model
-            --            in
-            --            returnWithMaybe2 identity
-            --                (\appModel ->
-            --                    let
-            --                        maybeNewEntityIdAtCursor =
-            --                            computeMaybeNewEntityIdAtCursor model appModel
-            --
-            --                        --                            appModel.entityListCursor.maybeEntityIdAtCursor
-            --                    in
-            --                    maybeNewEntityIdAtCursor
-            --                        ?|> (\entityId ->
-            --                                update config (SetFocusableEntityId entityId) model
-            --                                    >> (toNextPageModel entityId appModel
-            --                                            |> .path
-            --                                            |> config.navigateToPathMsg
-            --                                            |> returnMsgAsCmd
-            --                                       )
-            --                            )
-            --                )
-            identity
-
-        BringEntityIdInView entityId ->
-            --            returnWith (createEntityList model)
-            --                (List.find (Entity.hasId entityId)
-            --                    >> Maybe.unpack
-            --                        (\_ ->
-            --                            returnMsgAsCmd (defaultModel.path |> config.navigateToPathMsg)
-            --                                >> update config (SetFocusableEntityId entityId) model
-            --                        )
-            --                        (Entity.toEntityId
-            --                            >> SetFocusableEntityId
-            --                            >> (update config # model)
-            --                        )
-            --                )
-            identity
 
 
 setEntityAtCursor config maybeEntityIdAtCursor model appModel =
@@ -451,6 +373,6 @@ computeMaybeNewEntityIdAtCursor model appModel =
                                 Just entityIdAtCursor
                    )
     in
-    appModel.entityListCursor.maybeEntityIdAtCursor
+    EntityListCursor.getMaybeEntityIdAtCursor__ appModel
         ?|> computeNewEntityIdAtCursor
         ?= List.head newEntityIdList

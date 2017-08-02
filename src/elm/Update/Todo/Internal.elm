@@ -51,7 +51,6 @@ type alias Config msg a =
         | setFocusInEntityWithEntityId : EntityId -> msg
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , bringEntityIdInViewMsg : EntityId -> msg
     }
 
 
@@ -238,11 +237,6 @@ onStopRunningTodoMsg =
     mapSet timeTracker Tracker.none
 
 
-onGotoRunningTodo : Config msg a -> SubReturnF msg model
-onGotoRunningTodo config =
-    returnWith identity (gotoRunningTodo config)
-
-
 onRunningNotificationResponse : Config msg a -> Notification.Response -> SubReturnF msg model
 onRunningNotificationResponse config res =
     let
@@ -257,7 +251,7 @@ onRunningNotificationResponse config res =
             identity
 
         _ ->
-            onGotoRunningTodo config
+            identity
     )
         >> command (Notification.closeNotification todoId)
 
@@ -343,19 +337,6 @@ updateTimeTracker now =
     overT2 timeTracker (Tracker.updateNextAlarmAt now)
         >> apply2 ( Tuple.second, showRunningNotificationCmd )
         |> andThen
-
-
-gotoRunningTodo : Config msg a -> SubModel model -> SubReturnF msg model
-gotoRunningTodo config model =
-    Tracker.getMaybeTodoId model.timeTracker
-        ?|> gotoTodoWithId config model
-        ?= identity
-
-
-gotoTodoWithId : Config msg a -> SubModel model -> DocId -> SubReturnF msg model
-gotoTodoWithId config model todoId =
-    config.bringEntityIdInViewMsg (createTodoEntityId todoId)
-        |> returnMsgAsCmd
 
 
 setFocusInEntityWithTodoId config =

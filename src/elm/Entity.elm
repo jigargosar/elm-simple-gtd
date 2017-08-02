@@ -37,18 +37,6 @@ createTodoEntity =
     TodoEntity
 
 
-fromContext =
-    createContextEntity
-
-
-fromProject =
-    createProjectEntity
-
-
-fromTodo =
-    TodoEntity
-
-
 type EntityId
     = ContextId DocId
     | ProjectId DocId

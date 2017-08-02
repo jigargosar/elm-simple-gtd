@@ -13,7 +13,6 @@ type TodoMsg
     | OnStopRunningTodo
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | OnGotoRunningTodo
     | UpdateTimeTracker
     | AfterUpsert TodoDoc
     | OnProcessPendingNotificationCronTick
@@ -26,24 +25,8 @@ type TodoMsg
     | OnSaveTodoForm TodoForm
 
 
-
---onStopRunningTodoMsg : AppMsg
-
-
 onStopRunningTodoMsg =
     OnStopRunningTodo
-
-
-
---onGotoRunningTodo : AppMsg
-
-
-onGotoRunningTodoMsg =
-    OnGotoRunningTodo
-
-
-
---onReminderOverlayAction : Todo.Notification.Model.Action -> AppMsg
 
 
 onReminderOverlayAction =

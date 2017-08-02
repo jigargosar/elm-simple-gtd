@@ -1,7 +1,7 @@
-    9725 total
-     530 src/elm/Main.elm
-     456 src/elm/Pages/EntityList.elm
-     430 src/elm/Update/Todo/Internal.elm
+    9582 total
+     524 src/elm/Main.elm
+     411 src/elm/Update/Todo/Internal.elm
+     378 src/elm/Pages/EntityList.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      267 src/elm/Mat.elm
@@ -12,16 +12,16 @@
      195 src/elm/Update/Firebase.elm
      180 src/elm/Todo/ViewModel.elm
      171 src/elm/Data/EntityTree.elm
-     169 src/elm/Update/Subscription.elm
      162 src/elm/Todo/ItemView.elm
+     161 src/elm/Update/Subscription.elm
      159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Todo/Schedule.elm
-     156 src/elm/Todo/Msg.elm
      151 src/elm/Update/LaunchBar.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      141 src/elm/Views/EntityList.elm
+     139 src/elm/Todo/Msg.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
      126 src/elm/Update/GroupDoc.elm
@@ -30,11 +30,11 @@
      110 src/elm/X/Record.elm
      103 src/elm/Todo/View.elm
      100 src/elm/Models/GroupDocStore.elm
-      99 src/elm/Entity.elm
       98 src/elm/Firebase/SignIn.elm
       93 src/elm/X/Time.elm
       91 src/elm/Update/ExclusiveMode.elm
       88 src/elm/X/Html.elm
+      87 src/elm/Entity.elm
       86 src/elm/Document.elm
       83 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
@@ -46,8 +46,8 @@
       74 src/elm/X/Function/Infix.elm
       74 src/elm/View/Header.elm
       72 src/elm/View/GetStarted.elm
-      72 src/elm/Update/Todo.elm
       69 src/elm/View/Overlays.elm
+      69 src/elm/Update/Todo.elm
       67 src/elm/X/List.elm
       67 src/elm/Todo/GroupEditView.elm
       67 src/elm/Firebase/Model.elm

@@ -129,7 +129,7 @@ type AppMsg
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
-    model.entityListCursor.maybeEntityIdAtCursor
+    EntityListCursor.getMaybeEntityIdAtCursor__ model
         |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
@@ -286,15 +286,9 @@ updateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
-    , bringEntityIdInViewMsg = Pages.EntityList.BringEntityIdInView >> OnEntityMsgNew
-    , onGotoRunningTodoMsg = Todo.Msg.onGotoRunningTodoMsg |> OnTodoMsg
     , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
-    , gotoNextViewForFocusableEntityId =
-        Pages.EntityList.GotoNextViewForFocusableEntityId |> OnEntityMsgNew
-
-    --    , maybeEntityIdAtCursorOld = EntityListCursor.getMaybeEntityIdAtCursor model
     }
 
 

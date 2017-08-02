@@ -132,23 +132,23 @@ flatten : Tree -> List Entity
 flatten tree =
     case tree of
         ContextRoot node nodeList ->
-            Entity.fromContext node.context
+            Entity.createContextEntity node.context
                 :: flatten (ProjectForest nodeList)
 
         ProjectRoot node nodeList ->
-            Entity.fromProject node.project
+            Entity.createProjectEntity node.project
                 :: flatten (ContextForest nodeList)
 
         ContextForest nodeList ->
             nodeList
                 |> List.concatMap
-                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.TodoEntity))
+                    (\node -> Entity.createContextEntity node.context :: (node.todoList .|> Entity.TodoEntity))
 
         ProjectForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
-                        Entity.fromProject g.project
+                        Entity.createProjectEntity g.project
                             :: (g.todoList .|> Entity.TodoEntity)
                     )
 

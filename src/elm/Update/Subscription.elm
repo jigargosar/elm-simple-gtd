@@ -42,10 +42,8 @@ type alias Config msg a =
         , openLaunchBarMsg : msg
         , revertExclusiveMode : msg
         , afterTodoUpsert : TodoDoc -> msg
-        , onGotoRunningTodoMsg : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
-        , gotoNextViewForFocusableEntityId : msg
     }
 
 
@@ -96,12 +94,6 @@ onGlobalKeyUp config key =
 
                 Slash ->
                     returnMsgAsCmd config.openLaunchBarMsg
-
-                CharT ->
-                    returnMsgAsCmd config.onGotoRunningTodoMsg
-
-                CharG ->
-                    returnMsgAsCmd config.gotoNextViewForFocusableEntityId
 
                 _ ->
                     identity

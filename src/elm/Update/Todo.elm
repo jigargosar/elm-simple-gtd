@@ -29,9 +29,6 @@ update config now msg =
         OnStopRunningTodo ->
             onStopRunningTodoMsg
 
-        OnGotoRunningTodo ->
-            onGotoRunningTodo config
-
         UpdateTimeTracker ->
             updateTimeTracker now
 

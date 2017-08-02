@@ -23,7 +23,6 @@ import X.Return exposing (..)
 type alias SubModel model =
     { model
         | firebaseModel : FirebaseModel
-        , todoStore : TodoStore
     }
 
 
@@ -58,7 +57,7 @@ update config msg =
                 onSwitchToNewUserSetupModeIfNeeded model =
                     if model.firebaseModel.showSignInDialog then
                         config.onSetExclusiveMode XMSignInOverlay |> returnMsgAsCmd
-                    else if Store.isEmpty model.todoStore then
+                    else if config.isTodoStoreEmpty then
                         returnMsgAsCmd config.onStartSetupAddTodo
                     else
                         returnMsgAsCmd config.revertExclusiveMode

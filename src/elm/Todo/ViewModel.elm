@@ -1,5 +1,6 @@
 module Todo.ViewModel exposing (createTodoViewModel)
 
+import Data.TodoDoc
 import Date
 import Document
 import EntityId
@@ -9,7 +10,6 @@ import Regex
 import Set
 import Store
 import String.Extra
-import TodoDoc
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Keyboard
@@ -24,7 +24,7 @@ getDisplayText todo =
         trimAndReplaceEmptyWithDefault =
             String.trim >> String.Extra.nonEmpty >>?= "< empty >"
     in
-    TodoDoc.getText todo
+    Data.TodoDoc.getText todo
         |> trimAndReplaceEmptyWithDefault
         |> Regex.replace
             (Regex.AtMost 1)
@@ -58,7 +58,7 @@ createTodoViewModel config appVM isFocusable todo =
             String.Extra.ellipsis 15
 
         projectId =
-            TodoDoc.getProjectId todo
+            Data.TodoDoc.getProjectId todo
 
         projectDisplayName =
             projectId
@@ -68,7 +68,7 @@ createTodoViewModel config appVM isFocusable todo =
                 |> String.append "#"
 
         contextId =
-            TodoDoc.getContextId todo
+            Data.TodoDoc.getContextId todo
 
         contextDisplayName =
             contextId
@@ -124,7 +124,7 @@ createTodoViewModel config appVM isFocusable todo =
         toggleDoneMsg =
             config.onToggleDoneAndMaybeSelection todoId
     in
-    { isDone = TodoDoc.isDone todo
+    { isDone = Data.TodoDoc.isDone todo
     , key = todoId
     , isDeleted = Document.isDeleted todo
     , onKeyDownMsg = onKeyDownMsg
@@ -169,7 +169,7 @@ createScheduleViewModel config now todo =
                 X.Time.smartFormat now time
 
         displayText =
-            TodoDoc.getMaybeTime todo ?|> formatReminderTime ?= ""
+            Data.TodoDoc.getMaybeTime todo ?|> formatReminderTime ?= ""
     in
     { displayText = displayText
     , isOverDue = displayText == overDueText

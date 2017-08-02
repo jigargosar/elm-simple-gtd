@@ -1,8 +1,8 @@
 module Entity exposing (..)
 
+import Data.TodoDoc exposing (TodoDoc)
 import Document exposing (..)
 import GroupDoc exposing (..)
-import TodoDoc exposing (TodoDoc)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

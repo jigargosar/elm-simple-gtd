@@ -1,11 +1,11 @@
 module Todo.Notification.Model exposing (..)
 
+import Data.TodoDoc exposing (..)
 import Date
 import Date.Extra as Date
 import Document
 import Time exposing (Time)
 import Todo.Notification.Types exposing (..)
-import TodoDoc exposing (..)
 import X.Function exposing (..)
 
 
@@ -37,7 +37,7 @@ initialView =
 
 
 createTodoDetails todo =
-    TodoDetails (Document.getId todo) (TodoDoc.getText todo)
+    TodoDetails (Document.getId todo) (Data.TodoDoc.getText todo)
 
 
 none =

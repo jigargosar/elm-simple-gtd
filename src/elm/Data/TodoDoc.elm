@@ -1,4 +1,4 @@
-module TodoDoc exposing (..)
+module Data.TodoDoc exposing (..)
 
 import Data.DeviceId exposing (DeviceId)
 import Document exposing (..)

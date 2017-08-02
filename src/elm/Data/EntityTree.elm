@@ -1,10 +1,10 @@
 module Data.EntityTree exposing (..)
 
+import Data.TodoDoc exposing (..)
 import Document
 import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra as List
-import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 
 
@@ -79,7 +79,7 @@ createProjectSubGroups findProjectById tcg =
     let
         projects =
             tcg.todoList
-                .|> TodoDoc.getProjectId
+                .|> Data.TodoDoc.getProjectId
                 |> List.unique
                 .|> findProjectById
                 |> List.filterMap identity
@@ -87,7 +87,7 @@ createProjectSubGroups findProjectById tcg =
 
         filterTodoForProject project =
             tcg.todoList
-                |> List.filter (TodoDoc.hasProject project)
+                |> List.filter (Data.TodoDoc.hasProject project)
     in
     projects .|> initProjectNode filterTodoForProject
 
@@ -106,7 +106,7 @@ createContextSubGroups findContextById tcg =
     let
         contexts =
             tcg.todoList
-                .|> TodoDoc.getContextId
+                .|> Data.TodoDoc.getContextId
                 |> List.unique
                 .|> findContextById
                 |> List.filterMap identity
@@ -114,7 +114,7 @@ createContextSubGroups findContextById tcg =
 
         filterTodoForContext context =
             tcg.todoList
-                |> List.filter (TodoDoc.contextFilter context)
+                |> List.filter (Data.TodoDoc.contextFilter context)
     in
     contexts .|> initContextNode filterTodoForContext
 

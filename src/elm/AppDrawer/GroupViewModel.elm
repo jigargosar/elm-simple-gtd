@@ -4,6 +4,7 @@ import AppColors
 import AppDrawer.Model
 import AppDrawer.Types
 import Color
+import Data.TodoDoc
 import Dict
 import Dict.Extra
 import Document
@@ -12,7 +13,6 @@ import GroupDoc exposing (..)
 import Models.GroupDocStore
 import Models.Stores
 import String.Extra
-import TodoDoc
 import Toolkit.Operators exposing (..)
 import X.Function exposing (when)
 import X.Maybe
@@ -143,7 +143,7 @@ contexts config model =
 
         --        innerConfig : Config
         innerConfig =
-            { groupByFn = TodoDoc.getContextId
+            { groupByFn = Data.TodoDoc.getContextId
             , todoList = Models.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
@@ -195,7 +195,7 @@ projects config model =
 
         --        innerConfig : Config
         innerConfig =
-            { groupByFn = TodoDoc.getProjectId
+            { groupByFn = Data.TodoDoc.getProjectId
             , todoList = Models.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter

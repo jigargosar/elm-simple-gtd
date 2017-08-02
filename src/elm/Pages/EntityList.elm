@@ -3,6 +3,7 @@ module Pages.EntityList exposing (..)
 import AppColors
 import Color exposing (Color)
 import Data.EntityTree
+import Data.TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
 import EntityListCursor
@@ -12,7 +13,6 @@ import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
 import Store
-import TodoDoc
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)
@@ -222,18 +222,18 @@ filterTodosAndSortBy pred sortBy model =
 
 
 filterTodosAndSortByLatestCreated pred =
-    filterTodosAndSortBy pred (TodoDoc.getCreatedAt >> negate)
+    filterTodosAndSortBy pred (Data.TodoDoc.getCreatedAt >> negate)
 
 
 filterTodosAndSortByLatestModified pred =
-    filterTodosAndSortBy pred (TodoDoc.getModifiedAt >> negate)
+    filterTodosAndSortBy pred (Data.TodoDoc.getModifiedAt >> negate)
 
 
 getActiveTodoListForContext context model =
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ TodoDoc.isActive
-            , TodoDoc.contextFilter context
+            [ Data.TodoDoc.isActive
+            , Data.TodoDoc.contextFilter context
             , Models.Stores.isTodoProjectActive model
             ]
         )
@@ -243,8 +243,8 @@ getActiveTodoListForContext context model =
 getActiveTodoListForProject project model =
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ TodoDoc.isActive
-            , TodoDoc.hasProject project
+            [ Data.TodoDoc.isActive
+            , Data.TodoDoc.hasProject project
             , Models.Stores.isTodoContextActive model
             ]
         )
@@ -308,7 +308,7 @@ createEntityTree model appModel =
 filterTypeToPredicate filterType model =
     case filterType of
         Done ->
-            \_ -> X.Predicate.all [ Document.isNotDeleted, TodoDoc.isDone ]
+            \_ -> X.Predicate.all [ Document.isNotDeleted, Data.TodoDoc.isDone ]
 
         Recent ->
             \_ -> X.Predicate.always
@@ -319,16 +319,16 @@ filterTypeToPredicate filterType model =
         HavingActiveProjectAndContextId ->
             \contextId ->
                 X.Predicate.all
-                    [ TodoDoc.isActive
-                    , TodoDoc.getContextId >> equals contextId
+                    [ Data.TodoDoc.isActive
+                    , Data.TodoDoc.getContextId >> equals contextId
                     , Models.Stores.isTodoProjectActive model
                     ]
 
         HavingActiveContextAndProjectId ->
             \projectId ->
                 X.Predicate.all
-                    [ TodoDoc.isActive
-                    , TodoDoc.getProjectId >> equals projectId
+                    [ Data.TodoDoc.isActive
+                    , Data.TodoDoc.getProjectId >> equals projectId
                     , Models.Stores.isTodoContextActive model
                     ]
 

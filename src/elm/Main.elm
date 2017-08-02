@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
+import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
@@ -31,7 +32,6 @@ import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
@@ -191,7 +191,7 @@ createAppModel flags =
 
         storeGenerator =
             Random.Pcg.map3 (,,)
-                (TodoDoc.storeGenerator deviceId encodedTodoList)
+                (Data.TodoDoc.storeGenerator deviceId encodedTodoList)
                 (GroupDoc.projectStoreGenerator deviceId encodedProjectList)
                 (GroupDoc.contextStoreGenerator deviceId encodedContextList)
 

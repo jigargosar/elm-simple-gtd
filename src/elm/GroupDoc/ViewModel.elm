@@ -2,13 +2,13 @@ module GroupDoc.ViewModel exposing (..)
 
 import AppColors
 import Color
+import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
 import Keyboard.Extra as Key exposing (Key)
 import Material
 import String.Extra
-import TodoDoc exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
@@ -160,7 +160,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
     let
         configInner : Config
         configInner =
-            { groupByFn = TodoDoc.getContextId
+            { groupByFn = Data.TodoDoc.getContextId
             , namePrefix = "@"
             , toEntityId = ContextId
             , nullEntity = GroupDoc.nullContext
@@ -179,7 +179,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
     let
         configInner : Config
         configInner =
-            { groupByFn = TodoDoc.getProjectId
+            { groupByFn = Data.TodoDoc.getProjectId
             , namePrefix = "#"
             , toEntityId = ProjectId
             , nullEntity = GroupDoc.nullProject

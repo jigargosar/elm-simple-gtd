@@ -1,12 +1,12 @@
 module Update.Todo exposing (..)
 
+import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Notification exposing (Response)
 import Set
 import Time
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
-import TodoDoc exposing (..)
 import Update.Todo.Internal exposing (..)
 import X.Function.Infix exposing (..)
 import X.Return exposing (..)

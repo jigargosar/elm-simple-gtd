@@ -1,5 +1,5 @@
-    8452 total
-     467 src/elm/Main.elm
+    8447 total
+     466 src/elm/Main.elm
      376 src/elm/Pages/EntityList.elm
      357 src/elm/Update/Todo/Internal.elm
      316 src/elm/Todo.elm
@@ -29,8 +29,8 @@
      103 src/elm/Todo/View.elm
       98 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
+      92 src/elm/Update/ExclusiveMode.elm
       88 src/elm/X/Html.elm
-      87 src/elm/Update/ExclusiveMode.elm
       87 src/elm/Entity.elm
       87 src/elm/Document.elm
       83 src/elm/GroupDoc/View.elm
@@ -91,7 +91,6 @@
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm
-       9 src/elm/Msg/ExclusiveMode.elm
        8 src/elm/Msg/AppHeader.elm
        7 src/elm/X/String.elm
        6 src/elm/Menu/Types.elm

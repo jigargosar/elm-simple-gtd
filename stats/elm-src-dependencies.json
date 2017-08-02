@@ -315,7 +315,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
@@ -350,7 +349,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 53
+    "transitiveBackwardImportsCount": 52
   },
   "Data.EntityTree": {
     "fileName": "src/elm/Data/EntityTree.elm",
@@ -518,7 +517,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Store",
@@ -542,7 +540,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 38
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -633,7 +631,6 @@
       "Main",
       "Models.HasStores",
       "Models.Stores",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Todo.Form",
@@ -652,7 +649,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 29
+    "transitiveBackwardImportsCount": 28
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -799,7 +796,6 @@
     "transitiveImportsCount": 35,
     "backwardImports": [
       "Main",
-      "Msg.ExclusiveMode",
       "Update.AppHeader",
       "Update.ExclusiveMode",
       "Update.Firebase",
@@ -808,10 +804,9 @@
       "Update.Todo.Internal",
       "View.Overlays"
     ],
-    "backwardImportsCount": 9,
+    "backwardImportsCount": 8,
     "transitiveBackwardImports": [
       "Main",
-      "Msg.ExclusiveMode",
       "Update.AppHeader",
       "Update.ExclusiveMode",
       "Update.Firebase",
@@ -821,7 +816,7 @@
       "Update.Todo.Internal",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 9
   },
   "Firebase": {
     "fileName": "src/elm/Firebase.elm",
@@ -1396,7 +1391,6 @@
       "Menu.Types",
       "Models.Todo",
       "Msg.AppHeader",
-      "Msg.ExclusiveMode",
       "Msg.Firebase",
       "Msg.GroupDoc",
       "Page",
@@ -1435,7 +1429,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 57,
+    "importsCount": 56,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -1493,7 +1487,6 @@
       "Models.Stores",
       "Models.Todo",
       "Msg.AppHeader",
-      "Msg.ExclusiveMode",
       "Msg.Firebase",
       "Msg.GroupDoc",
       "Navigation",
@@ -1570,7 +1563,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 132,
+    "transitiveImportsCount": 131,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -1710,7 +1703,6 @@
     "transitiveBackwardImports": [
       "ExclusiveMode.Types",
       "Main",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -1725,7 +1717,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 16
+    "transitiveBackwardImportsCount": 15
   },
   "Menu.Types": {
     "fileName": "src/elm/Menu/Types.elm",
@@ -1749,7 +1741,6 @@
       "Main",
       "Menu",
       "Msg.AppHeader",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -1764,7 +1755,7 @@
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 18
+    "transitiveBackwardImportsCount": 17
   },
   "Models.GroupDocStore": {
     "fileName": "src/elm/Models/GroupDocStore.elm",
@@ -2079,64 +2070,6 @@
     "transitiveBackwardImports": [
       "Main",
       "Update.AppHeader"
-    ],
-    "transitiveBackwardImportsCount": 2
-  },
-  "Msg.ExclusiveMode": {
-    "fileName": "src/elm/Msg/ExclusiveMode.elm",
-    "moduleName": "Msg.ExclusiveMode",
-    "parentModuleName": "Msg",
-    "imports": [
-      "ExclusiveMode.Types"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "Data.DeviceId",
-      "Dict",
-      "Document",
-      "Entity",
-      "ExclusiveMode.Types",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Html.Keyed",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "List.Extra",
-      "Maybe.Extra",
-      "Menu",
-      "Menu.Types",
-      "Random.Pcg",
-      "Set",
-      "Time",
-      "Todo.FormTypes",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.Document",
-      "Types.GroupDoc",
-      "Types.Store",
-      "Types.Todo",
-      "X.Debug",
-      "X.Decode",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.Keyboard",
-      "X.List"
-    ],
-    "transitiveImportsCount": 36,
-    "backwardImports": [
-      "Main",
-      "Update.ExclusiveMode"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "Main",
-      "Update.ExclusiveMode"
     ],
     "transitiveBackwardImportsCount": 2
   },
@@ -2843,7 +2776,6 @@
     "transitiveBackwardImports": [
       "ExclusiveMode.Types",
       "Main",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.Msg",
       "Update.AppHeader",
@@ -2855,7 +2787,7 @@
       "Update.Todo.Internal",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 12
   },
   "Todo.GroupEditView": {
     "fileName": "src/elm/Todo/GroupEditView.elm",
@@ -3491,7 +3423,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
@@ -3521,7 +3452,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 46
+    "transitiveBackwardImportsCount": 45
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -3580,7 +3511,6 @@
       "Models.GroupDocStore",
       "Models.HasStores",
       "Models.Stores",
-      "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
@@ -3607,7 +3537,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 41
+    "transitiveBackwardImportsCount": 40
   },
   "Types.Store": {
     "fileName": "src/elm/Types/Store.elm",
@@ -3656,7 +3586,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
@@ -3685,7 +3614,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 44
+    "transitiveBackwardImportsCount": 43
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -3740,7 +3669,6 @@
       "Main",
       "Models.HasStores",
       "Models.Stores",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Todo",
@@ -3764,7 +3692,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 34
   },
   "Update.AppDrawer": {
     "fileName": "src/elm/Update/AppDrawer.elm",
@@ -3882,14 +3810,13 @@
     "imports": [
       "DomPorts",
       "ExclusiveMode.Types",
-      "Msg.ExclusiveMode",
       "Return",
       "Todo.FormTypes",
       "Types.GroupDoc",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 8,
+    "importsCount": 7,
     "transitiveImports": [
       "Data.DeviceId",
       "Dict",
@@ -3910,7 +3837,6 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
-      "Msg.ExclusiveMode",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3934,7 +3860,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 41,
     "backwardImports": [
       "Main"
     ],
@@ -5110,7 +5036,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Store",
@@ -5142,7 +5067,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 45
+    "transitiveBackwardImportsCount": 44
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -5169,7 +5094,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Menu",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -5191,7 +5115,7 @@
       "Views.EntityList",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 27
+    "transitiveBackwardImportsCount": 26
   },
   "X.Function": {
     "fileName": "src/elm/X/Function.elm",
@@ -5257,7 +5181,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Sequencer",
@@ -5291,7 +5214,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 57
+    "transitiveBackwardImportsCount": 56
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -5358,7 +5281,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Sequencer",
@@ -5394,7 +5316,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 61
+    "transitiveBackwardImportsCount": 60
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -5441,7 +5363,6 @@
       "Main",
       "Mat",
       "Menu",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -5467,7 +5388,7 @@
       "Views.EntityList",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 34
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -5516,7 +5437,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Menu",
-      "Msg.ExclusiveMode",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -5537,7 +5457,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 26
+    "transitiveBackwardImportsCount": 25
   },
   "X.List": {
     "fileName": "src/elm/X/List.elm",
@@ -5563,7 +5483,6 @@
       "Main",
       "Menu",
       "Models.HasStores",
-      "Msg.ExclusiveMode",
       "Page",
       "Pages.EntityList",
       "Todo.Form",
@@ -5583,7 +5502,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 23
+    "transitiveBackwardImportsCount": 22
   },
   "X.Maybe": {
     "fileName": "src/elm/X/Maybe.elm",

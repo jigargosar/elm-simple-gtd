@@ -19,7 +19,6 @@ import Menu
 import Menu.Types
 import Models.Todo
 import Msg.AppHeader exposing (AppHeaderMsg(..))
-import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Page exposing (Page, PageMsg(..))
@@ -42,7 +41,7 @@ import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
-import Update.ExclusiveMode
+import Update.ExclusiveMode exposing (ExclusiveModeMsg)
 import Update.Firebase
 import Update.GroupDoc
 import Update.Page
@@ -123,13 +122,13 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld model =
 
 
 revertExclusiveModeMsg =
-    Msg.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus
+    Update.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus
         |> OnExclusiveModeMsg
 
 
 onSaveExclusiveModeForm : AppMsg
 onSaveExclusiveModeForm =
-    Msg.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
+    Update.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
 
 setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
@@ -250,7 +249,7 @@ updateConfig model =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
+    , onSetExclusiveMode = Update.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg

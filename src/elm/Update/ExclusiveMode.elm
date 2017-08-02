@@ -1,13 +1,18 @@
-module Update.ExclusiveMode exposing (Config, update)
+module Update.ExclusiveMode exposing (..)
 
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
-import Msg.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import Return
 import Todo.FormTypes exposing (..)
 import Types.GroupDoc exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+type ExclusiveModeMsg
+    = OnSetExclusiveMode ExclusiveMode
+    | OnSetExclusiveModeToNoneAndTryRevertingFocus
+    | OnSaveExclusiveModeForm
 
 
 type alias SubModel model =

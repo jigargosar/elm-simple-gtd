@@ -1,11 +1,14 @@
 module Todo exposing (..)
 
+import Data.DeviceId exposing (DeviceId)
 import Document
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import List
 import Maybe.Extra as Maybe
+import Random.Pcg
+import Store
 import Time exposing (Time)
 import Todo.Schedule
 import Toolkit.Helpers exposing (..)
@@ -306,3 +309,8 @@ toAllPassPredicate predicateList =
 
 toAnyPassPredicate predicateList =
     applyList predicateList >> List.any identity
+
+
+storeGenerator : DeviceId -> List Encoded -> Random.Pcg.Generator TodoStore
+storeGenerator =
+    Store.generator "todo-db" encodeOtherFields decoder

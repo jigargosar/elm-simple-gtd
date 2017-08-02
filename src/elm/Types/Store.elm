@@ -1,5 +1,6 @@
 module Types.Store exposing (..)
 
+import Data.DeviceId exposing (DeviceId)
 import Dict exposing (Dict)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E

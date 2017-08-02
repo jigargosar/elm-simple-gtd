@@ -118,10 +118,6 @@ onSaveTodoForm config form now =
             saveAddTodoForm config addMode form now |> andThen
 
 
-
---insertTodo : (DeviceId -> DocId -> TodoDoc) -> AppModel -> ( TodoDoc, AppModel )
-
-
 insertTodo constructWithId =
     overT2 todoStore (Store.insert constructWithId)
 

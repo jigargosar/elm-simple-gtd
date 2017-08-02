@@ -6,6 +6,7 @@ import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
+import Firebase.Model exposing (..)
 import GroupDoc
 import Html exposing (Html, text)
 import Json.Encode as E
@@ -32,14 +33,13 @@ import RouteUrl
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
+import Todo
 import Todo.FormTypes
 import Todo.Msg exposing (TodoMsg)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import Todo.Store
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
-import Types.Firebase exposing (..)
 import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import Update.AppDrawer
@@ -206,7 +206,7 @@ createAppModel flags =
 
         storeGenerator =
             Random.Pcg.map3 (,,)
-                (Todo.Store.generator flags.deviceId encodedTodoList)
+                (Todo.storeGenerator flags.deviceId encodedTodoList)
                 (GroupDoc.projectStoreGenerator flags.deviceId encodedProjectList)
                 (GroupDoc.contextStoreGenerator flags.deviceId encodedContextList)
 
@@ -233,8 +233,6 @@ createAppModel flags =
             , appDrawerModel = AppDrawer.Model.initialValue flags.config.initialOfflineStore
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
-
-            --            , sequencer = sequencerInitialValue
             }
     in
     model

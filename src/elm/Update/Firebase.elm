@@ -1,8 +1,9 @@
 module Update.Firebase exposing (Config, update)
 
 import AppUrl
+import Data.User
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
-import Firebase.Model
+import Firebase.Model exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -14,7 +15,6 @@ import Ports.Firebase exposing (..)
 import Return
 import Store
 import Toolkit.Operators exposing (..)
-import Types.Firebase exposing (..)
 import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
@@ -77,7 +77,7 @@ update config msg =
                 )
 
         OnFBUserChanged encodedUser ->
-            D.decodeValue Firebase.Model.userDecoder encodedUser
+            D.decodeValue Data.User.maybeUserDecoder encodedUser
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\userV ->
                         Return.map (set userL userV)

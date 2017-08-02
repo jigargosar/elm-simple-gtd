@@ -1,5 +1,6 @@
 module GroupDoc exposing (..)
 
+import Data.DeviceId exposing (DeviceId)
 import Document
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D

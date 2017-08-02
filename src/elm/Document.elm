@@ -1,5 +1,6 @@
 module Document exposing (..)
 
+import Data.DeviceId exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E

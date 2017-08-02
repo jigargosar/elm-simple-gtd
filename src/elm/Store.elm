@@ -15,6 +15,7 @@ port module Store
         , upsertOnPouchDBChange
         )
 
+import Data.DeviceId exposing (DeviceId)
 import Dict exposing (Dict)
 import Document
 import Json.Decode as D exposing (Decoder)

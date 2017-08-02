@@ -1,5 +1,6 @@
 module Types.Document exposing (..)
 
+import Data.DeviceId exposing (DeviceId)
 import Set exposing (Set)
 import Time exposing (Time)
 
@@ -9,10 +10,6 @@ type alias DocId =
 
 
 type alias Revision =
-    String
-
-
-type alias DeviceId =
     String
 
 

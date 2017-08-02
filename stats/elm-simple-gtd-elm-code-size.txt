@@ -1,4 +1,4 @@
-    8880 total
+    8887 total
      499 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      362 src/elm/Update/Todo/Internal.elm
@@ -38,12 +38,12 @@
       79 src/elm/Types/GroupDoc.elm
       78 src/elm/ViewModel.elm
       77 src/elm/GroupDoc/FormView.elm
+      77 src/elm/Firebase/Model.elm
       77 src/elm/AppColors.elm
       75 src/elm/View/Layout.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
       71 src/elm/View/Header.elm
-      70 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm

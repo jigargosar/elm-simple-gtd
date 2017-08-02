@@ -83,7 +83,9 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   const getOfflineStore = async () => {
     const storeKeys = await store.keys()
-    const storeValues = await _.compose(ps => Promise.all(ps), _.map(k => store.getItem(k)))(storeKeys)
+    const storeValues = await _.compose(
+        ps => Promise.all(ps), _.map(k => store.getItem(k)),
+    )(storeKeys)
     return _.zipObj(storeKeys, storeValues)
   }
   const initialOfflineStore = await getOfflineStore()

@@ -1,4 +1,4 @@
-module Todo.Schedule exposing (..)
+module Data.Todo.Schedule exposing (..)
 
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E

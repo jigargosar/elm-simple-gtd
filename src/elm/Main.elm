@@ -233,7 +233,7 @@ createAppModel flags =
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , config = flags.config
-            , appDrawerModel = localPref.appDrawer
+            , appDrawerModel = AppDrawer.Model.initialValue flags.config.initialOfflineStore
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
 

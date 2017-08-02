@@ -137,11 +137,13 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
       "X.Function",
       "X.Function.Infix",
       "X.Record"
     ],
-    "importsCount": 6,
+    "importsCount": 8,
     "transitiveImports": [
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2518,14 +2520,16 @@
     "transitiveImportsCount": 1,
     "backwardImports": [
       "Main",
+      "Update.AppDrawer",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "Main",
+      "Update.AppDrawer",
       "Update.Firebase"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -3988,25 +3992,31 @@
     "imports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
-      "Return",
-      "X.Record"
+      "Ports",
+      "X.Record",
+      "X.Return"
     ],
-    "importsCount": 4,
+    "importsCount": 5,
     "transitiveImports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
+      "Ports",
       "Return",
+      "Task",
+      "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "X.Debug",
       "X.Function",
       "X.Function.Infix",
-      "X.Record"
+      "X.Record",
+      "X.Return"
     ],
-    "transitiveImportsCount": 12,
+    "transitiveImportsCount": 17,
     "backwardImports": [
       "Main"
     ],
@@ -5472,6 +5482,7 @@
       "Todo.Store",
       "Todo.View",
       "Todo.ViewModel",
+      "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.ExclusiveMode",
@@ -5491,7 +5502,7 @@
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 45
+    "transitiveBackwardImportsCount": 46
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -6181,6 +6192,7 @@
     "backwardImports": [
       "Main",
       "Pages.EntityList",
+      "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.ExclusiveMode",
@@ -6191,12 +6203,13 @@
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 11,
+    "backwardImportsCount": 12,
     "transitiveBackwardImports": [
       "Main",
       "Models.HasStores",
       "Page",
       "Pages.EntityList",
+      "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
       "Update.ExclusiveMode",
@@ -6209,7 +6222,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 16
   },
   "X.Set": {
     "fileName": "src/elm/X/Set.elm",

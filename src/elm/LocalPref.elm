@@ -11,7 +11,7 @@ import X.Function.Infix exposing (..)
 
 localPrefDecoder =
     D.succeed LocalPref
-        |> D.optional "appDrawer" AppDrawer.Model.decoder AppDrawer.Model.default
+        |> D.optional "appDrawer" AppDrawer.Model.decoder AppDrawer.Model.defaultValue
 
 
 
@@ -20,13 +20,13 @@ localPrefDecoder =
 
 encodeLocalPref model =
     E.object
-        [ "appDrawer" => AppDrawer.Model.encoder model.appDrawerModel
+        [ "appDrawer" => AppDrawer.Model.encode model.appDrawerModel
         ]
 
 
 defaultLocalPref : LocalPref
 defaultLocalPref =
-    { appDrawer = AppDrawer.Model.default
+    { appDrawer = AppDrawer.Model.defaultValue
     }
 
 

@@ -2,8 +2,9 @@ module Update.AppDrawer exposing (update)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (AppDrawerMsg(..))
-import Return
+import Ports
 import X.Record exposing (..)
+import X.Return exposing (..)
 
 
 type alias SubModel model =
@@ -13,7 +14,7 @@ type alias SubModel model =
 
 
 type alias SubReturnF msg model =
-    Return.ReturnF msg (SubModel model)
+    ReturnF msg (SubModel model)
 
 
 appDrawerModel =
@@ -21,7 +22,12 @@ appDrawerModel =
 
 
 mapOver =
-    over appDrawerModel >> Return.map
+    over appDrawerModel >> map
+
+
+mapOverAndPersist fn =
+    map (over appDrawerModel fn)
+        >> effect (get appDrawerModel >> AppDrawer.Model.getOfflineStoreKeyValue >> Ports.persistToOfflineStore)
 
 
 update :
@@ -30,7 +36,7 @@ update :
 update msg =
     case msg of
         OnToggleContextsExpanded ->
-            mapOver (toggleGroupListExpanded contexts)
+            mapOverAndPersist (toggleGroupListExpanded contexts)
 
         OnToggleProjectsExpanded ->
             mapOver (toggleGroupListExpanded projects)

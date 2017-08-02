@@ -3,6 +3,8 @@ module AppDrawer.Model exposing (..)
 import Json.Decode as D
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (get, over, set, toggle)
@@ -77,7 +79,7 @@ decoder =
         |> D.optional "isOverlayOpen" D.bool defaultIsOverlayOpen
 
 
-encoder model =
+encode model =
     E.object
         [ "contexts" => groupModelEncoder model.contexts
         , "projects" => groupModelEncoder model.projects
@@ -85,12 +87,21 @@ encoder model =
         ]
 
 
-default : AppDrawerModel
-default =
+initialValue initialOfflineStore =
+    D.decodeValue (D.field "appDrawerPref" decoder) initialOfflineStore
+        != defaultValue
+
+
+defaultValue : AppDrawerModel
+defaultValue =
     { contexts = defaultGroupModel
     , projects = defaultGroupModel
     , isOverlayOpen = defaultIsOverlayOpen
     }
+
+
+getOfflineStoreKeyValue =
+    encode >> tuple2 "appDrawerPref"
 
 
 contexts =

@@ -26,7 +26,3 @@ type alias Document record =
         , modifiedAt : Time
         , deviceId : DeviceId
     }
-
-
-type alias IdSet =
-    Set DocId

@@ -1,5 +1,7 @@
 module Main exposing (main)
 
+import AppColors
+import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Data.TodoDoc exposing (..)
@@ -10,29 +12,33 @@ import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
+import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
+import List.Extra as List
 import Mat exposing (cs)
 import Material
 import Material.Options exposing (div)
+import Maybe.Extra as Maybe
 import Menu
 import Menu.Types
 import Models.Selection
 import Models.Todo
-import Page exposing (..)
 import Pages.EntityList
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
 import Random.Pcg
 import RouteUrl
+import RouteUrl.Builder
 import Set exposing (Set)
 import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import Todo.ViewModel
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
@@ -44,12 +50,49 @@ import Update.Todo exposing (TodoMsg)
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
-import ViewModel
 import Views.EntityList
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+type Page
+    = EntityListPage Pages.EntityList.Model
+
+
+initialPage =
+    EntityListPage Pages.EntityList.defaultModel
+
+
+getPage__ =
+    .page
+
+
+delta2hash =
+    let
+        getPathFromModel model =
+            case getPage__ model of
+                EntityListPage model ->
+                    model.path
+
+        delta2builder previousModel currentModel =
+            RouteUrl.Builder.builder
+                |> RouteUrl.Builder.replacePath (getPathFromModel currentModel)
+    in
+    delta2builder >>> RouteUrl.Builder.toHashChange >> Just
+
+
+hash2messages config location =
+    let
+        builder =
+            RouteUrl.Builder.fromHash location.href
+
+        path =
+            RouteUrl.Builder.path builder
+    in
+    [ config.navigateToPathMsg path ]
 
 
 type alias AppConfig =
@@ -205,7 +248,7 @@ createAppModel flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = XMNone
-            , page = Page.initialModel
+            , page = initialPage
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
@@ -324,12 +367,12 @@ update config msg =
             overReturnFMapCmd appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
         _ ->
-            returnWith identity (Page.getPage__ >> updatePage config msg)
+            returnWith identity (getPage__ >> updatePage config msg)
 
 
 updatePage config msg page =
     case ( page, msg ) of
-        ( Page.EntityListPage model_, EntityListMsg msg_ ) ->
+        ( EntityListPage model_, EntityListMsg msg_ ) ->
             Pages.EntityList.update config msg_ model_
 
         _ ->
@@ -430,8 +473,56 @@ viewConfig model =
 view : ViewConfig msg -> AppModel -> Html msg
 view config model =
     let
+        createAppViewModel config model =
+            let
+                contextsVM =
+                    AppDrawer.GroupViewModel.contexts config model
+
+                projectsVM =
+                    AppDrawer.GroupViewModel.projects config model
+
+                page =
+                    model.page
+
+                ( viewName, headerBackgroundColor ) =
+                    getViewInfo page projectsVM contextsVM model
+
+                editMode =
+                    model.editMode
+            in
+            { contexts = contextsVM
+            , projects = projectsVM
+            , viewName = viewName
+            , header = { backgroundColor = headerBackgroundColor }
+            , mdl = model.mdl
+            , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
+            , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
+            , createTodoViewModel =
+                Todo.ViewModel.createTodoViewModel config model
+            }
+
+        getViewInfo page projectsVM contextsVM model =
+            let
+                entityById id =
+                    List.find (.id >> equals id)
+
+                appHeaderInfoById id vm =
+                    entityById id vm.entityList
+                        |> Maybe.orElseLazy (\_ -> entityById id vm.archivedEntityList)
+                        |> Maybe.orElseLazy (\_ -> entityById id vm.nullVMAsList)
+                        >>? .appHeader
+                        >>?= { name = "o_O", backgroundColor = sgtdBlue }
+                        >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
+            in
+            case page of
+                EntityListPage model ->
+                    ( model.title, model.color )
+
+        sgtdBlue =
+            AppColors.sgtdBlue
+
         appVM =
-            ViewModel.create config model
+            createAppViewModel config model
 
         frame pageContent =
             div [ cs "mdl-typography--body-1" ]
@@ -441,8 +532,8 @@ view config model =
                     ++ View.Overlays.overlayViews config model
                 )
     in
-    case Page.getPage__ model of
-        Page.EntityListPage subModel ->
+    case getPage__ model of
+        EntityListPage subModel ->
             Views.EntityList.view config appVM model subModel
                 |> frame
 
@@ -459,9 +550,9 @@ main =
             model |> pure >> update (updateConfig model) msg
     in
     RouteUrl.programWithFlags
-        { delta2url = Page.delta2hash
+        { delta2url = delta2hash
         , location2messages =
-            Page.hash2messages
+            hash2messages
                 { navigateToPathMsg = PageMsg_NavigateToPath
                 }
         , init = init

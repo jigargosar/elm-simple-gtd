@@ -1,5 +1,5 @@
-    8334 total
-     471 src/elm/Main.elm
+    8306 total
+     562 src/elm/Main.elm
      374 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -37,7 +37,6 @@
       82 src/elm/View/MainMenu.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/AppColors.elm
-      75 src/elm/ViewModel.elm
       75 src/elm/View/Layout.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
@@ -54,7 +53,6 @@
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Todo/FormTypes.elm
-      44 src/elm/Page.elm
       44 src/elm/Models/Stores.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm

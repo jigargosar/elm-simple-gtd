@@ -13,7 +13,7 @@ port persistLocalPref : E.Value -> Cmd msg
 
 
 
--- debug ports
+-- local storage
 
 
-port onDebugAction : (E.Value -> msg) -> Sub msg
+port persistToLocalStorage : ( String, E.Value ) -> Cmd msg

@@ -8,6 +8,7 @@ type alias FirebaseModel =
     , fcmToken : FCMToken
     , firebaseClient : FirebaseClient
     , signInModel : Firebase.SignIn.SignInModel
+    , showSignInDialog : Bool
     }
 
 

@@ -1,4 +1,4 @@
-    8865 total
+    8881 total
      498 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      362 src/elm/Update/Todo/Internal.elm
@@ -43,8 +43,8 @@
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
       71 src/elm/View/Header.elm
+      70 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
-      67 src/elm/Firebase/Model.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Todo/GroupEditView.elm
@@ -58,8 +58,8 @@
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/AppUrl.elm
       48 src/elm/Update/AppDrawer.elm
+      47 src/elm/Types/Firebase.elm
       47 src/elm/GroupDoc/Form.elm
-      46 src/elm/Types/Firebase.elm
       46 src/elm/Notification.elm
       45 src/elm/Update/AppHeader.elm
       45 src/elm/Todo/FormTypes.elm
@@ -95,6 +95,7 @@
       14 src/elm/View/Badge.elm
       13 src/elm/Links.elm
       12 src/elm/Todo/Store.elm
+      12 src/elm/LocalStorage.elm
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/Types/LocalPref.elm

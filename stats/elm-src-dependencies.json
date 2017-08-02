@@ -774,6 +774,7 @@
     "moduleName": "Firebase.Model",
     "parentModuleName": "Firebase",
     "imports": [
+      "Firebase.SignIn",
       "Firebase.User",
       "Json.Decode",
       "Json.Encode",
@@ -781,7 +782,7 @@
       "Types.Firebase",
       "X.Function.Infix"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
       "Firebase.SignIn",
       "Firebase.User",
@@ -837,12 +838,13 @@
     ],
     "transitiveImportsCount": 7,
     "backwardImports": [
+      "Firebase.Model",
       "LocalPref",
       "Types.Firebase",
       "Types.LocalPref",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Firebase",
       "Firebase.Model",
@@ -1408,6 +1410,34 @@
       "Main"
     ],
     "transitiveBackwardImportsCount": 1
+  },
+  "LocalStorage": {
+    "fileName": "src/elm/LocalStorage.elm",
+    "moduleName": "LocalStorage",
+    "parentModuleName": "",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
   },
   "Main": {
     "fileName": "src/elm/Main.elm",
@@ -5621,6 +5651,7 @@
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
       "Links",
+      "LocalStorage",
       "Mat",
       "Menu",
       "Models.Stores",
@@ -5634,7 +5665,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 20,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5654,6 +5685,7 @@
       "L.View",
       "Links",
       "LocalPref",
+      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -5700,7 +5732,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 63
+    "transitiveBackwardImportsCount": 64
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -5721,6 +5753,7 @@
       "GroupDoc.View",
       "Links",
       "LocalPref",
+      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -5741,7 +5774,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 30,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5765,6 +5798,7 @@
       "L.View",
       "Links",
       "LocalPref",
+      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -5815,7 +5849,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 71
+    "transitiveBackwardImportsCount": 72
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

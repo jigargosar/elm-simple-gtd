@@ -1,5 +1,6 @@
 module Firebase.Model exposing (..)
 
+import Firebase.SignIn
 import Firebase.User
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
@@ -8,11 +9,13 @@ import Types.Firebase exposing (..)
 import X.Function.Infix exposing (..)
 
 
+init : String -> Firebase.SignIn.SignInModel -> FirebaseModel
 init deviceId signInModel =
     { user = initUser
     , fcmToken = Nothing
     , firebaseClient = initClient deviceId
     , signInModel = signInModel
+    , showSignInDialog = True
     }
 
 

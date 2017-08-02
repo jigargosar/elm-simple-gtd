@@ -50,7 +50,7 @@ type alias Model =
 
 defaultModel =
     { path = [ "contexts" ]
-    , title = "Contexts New"
+    , title = "Contexts"
     , color = AppColors.contextsColor
     , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
     }
@@ -78,7 +78,7 @@ initFromPath path =
         "done" :: [] ->
             Just
                 { path = [ "done" ]
-                , title = "Done New"
+                , title = "Done"
                 , color = AppColors.sgtdBlue
                 , filter = Filter Done
                 }
@@ -86,7 +86,7 @@ initFromPath path =
         "bin" :: [] ->
             Just
                 { path = [ "bin" ]
-                , title = "Bin New"
+                , title = "Bin"
                 , color = AppColors.sgtdBlue
                 , filter = Filter Bin
                 }
@@ -94,7 +94,7 @@ initFromPath path =
         "recent" :: [] ->
             Just
                 { path = [ "recent" ]
-                , title = "Recent New"
+                , title = "Recent"
                 , color = AppColors.sgtdBlue
                 , filter = Filter Recent
                 }
@@ -105,7 +105,7 @@ initFromPath path =
         "projects" :: [] ->
             Just
                 { path = [ "projects" ]
-                , title = "Projects New"
+                , title = "Projects"
                 , color = AppColors.projectsColor
                 , filter = GroupBy HavingActiveProjectAndContextId ProjectGroupDocType
                 }
@@ -113,7 +113,7 @@ initFromPath path =
         "Inbox" :: [] ->
             Just
                 { path = [ "Inbox" ]
-                , title = "Inbox New"
+                , title = "Inbox"
                 , color = AppColors.nullContextColor
                 , filter = ContextView ""
                 }

@@ -4,7 +4,6 @@ import Data.DeviceId exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Set exposing (Set)
 import Time exposing (Time)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

@@ -73,10 +73,10 @@ toEntityId entity =
             TodoId (Document.getId m)
 
         GroupDocEntityW (GroupDocEntity ContextGroupDocType gd) ->
-            ProjectId (Document.getId gd)
+            ContextId (Document.getId gd)
 
         GroupDocEntityW (GroupDocEntity ProjectGroupDocType gd) ->
-            ContextId (Document.getId gd)
+            ProjectId (Document.getId gd)
 
 
 equalById =

@@ -77,6 +77,7 @@ create config configInner todoList groupDoc =
 
         entityId =
             configInner.toEntityId id
+                |> Debug.log "entityId"
 
         groupDocId =
             GroupDoc.createGroupDocIdFromType configInner.groupDocType id
@@ -154,15 +155,11 @@ create config configInner todoList groupDoc =
     , icon = icon
     , onFocusIn = config.setFocusInEntityWithEntityId entityId
     , onKeyDownMsg = onKeyDownMsg
-    , tabindexAV = configInner.getTabIndexAVForEntityId entityId
+    , tabindexAV = configInner.getTabIndexAVForEntityId entityId |> Debug.log "tabindexAV"
     , todoList = todoList
     , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
     , onMdl = config.onMdl
     }
-
-
-
---createContextGroupVM : (EntityId -> Int) -> List TodoDoc -> ContextDoc -> GroupDocViewModel
 
 
 createContextGroupVM config getTabIndexAVForEntityId todoList context =
@@ -183,10 +180,6 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             }
     in
     create config configInner todoList context
-
-
-
---createProjectGroupVM : (EntityId -> Int) -> List TodoDoc -> ProjectDoc -> GroupDocViewModel
 
 
 createProjectGroupVM config getTabIndexAVForEntityId todoList project =

@@ -24,22 +24,23 @@ view config appVM appModel model =
         entityList =
             Data.EntityTree.flatten entityTree
 
-        maybeEntityIdAtCursorOld =
+        maybeEntityIdAtCursor =
             Pages.EntityList.computeMaybeNewEntityIdAtCursor model appModel
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId
+                |> Debug.log ""
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         ]
-        (keyedViewList maybeEntityIdAtCursorOld appVM entityTree)
+        (keyedViewList maybeEntityIdAtCursor appVM entityTree)
 
 
-keyedViewList maybeEntityIdAtCursorOld appVM entityTree =
+keyedViewList maybeEntityIdAtCursor appVM entityTree =
     let
         isCursorAtEntityId entityId =
-            maybeEntityIdAtCursorOld ?|> equals entityId ?= False
+            maybeEntityIdAtCursor ?|> equals entityId ?= False
 
         getTabIndexForEntityId entityId =
             if isCursorAtEntityId entityId then

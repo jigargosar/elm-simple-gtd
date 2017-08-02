@@ -189,8 +189,6 @@ type alias Flags =
     , encodedProjectList : List E.Value
     , encodedContextList : List E.Value
     , pouchDBRemoteSyncURI : String
-    , developmentMode : Bool
-    , appVersion : String
     , config : AppConfig
     }
 
@@ -201,7 +199,7 @@ createAppModel flags =
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
             flags
 
-        { deviceId, initialOfflineStore } =
+        { deviceId, initialOfflineStore, npmPackageVersion, isDevelopmentMode } =
             flags.config
 
         storeGenerator =
@@ -225,9 +223,9 @@ createAppModel flags =
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
                 Firebase.init deviceId initialOfflineStore
-            , developmentMode = flags.developmentMode
+            , developmentMode = isDevelopmentMode
             , selectedEntityIdSet = Set.empty
-            , appVersion = flags.appVersion
+            , appVersion = npmPackageVersion
             , config = flags.config
             , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
             , mdl = Material.model

@@ -80,7 +80,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
     now: Date.now(),
     pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
     developmentMode: isDevelopmentMode,
-    appVersion: npmPackageVersion,
     config: {
       debug: WEBPACK_DEV_SERVER,
       deviceId,

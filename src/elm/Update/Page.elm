@@ -44,11 +44,6 @@ update config msg =
 
         PageMsg_NavigateToPath path ->
             case path of
-                "custom-sync" :: [] ->
-                    CustomSyncSettingsPage "Advance Settings"
-                        |> Just
-                        |> setMaybePage
-
                 _ ->
                     Pages.EntityList.initFromPath path
                         ?|> EntityListPage

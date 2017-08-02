@@ -7,8 +7,7 @@ import X.Function.Infix exposing (..)
 
 
 type Page
-    = CustomSyncSettingsPage String
-    | EntityListPage Pages.EntityList.Model
+    = EntityListPage Pages.EntityList.Model
 
 
 type PageMsg
@@ -36,9 +35,6 @@ delta2hash =
 
 getPathFromModel model =
     case getPage__ model of
-        CustomSyncSettingsPage _ ->
-            [ "custom-sync" ]
-
         EntityListPage model ->
             model.path
 

@@ -83,9 +83,5 @@ saveExclusiveModeForm config exMode =
         XMTodoForm form ->
             config.saveTodoForm form |> returnMsgAsCmd
 
-        XMCustomSync form ->
-            (\model -> { model | pouchDBRemoteSyncURI = form.uri })
-                |> map
-
         _ ->
             identity

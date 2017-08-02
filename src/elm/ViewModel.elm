@@ -67,9 +67,6 @@ getViewInfo page projectsVM contextsVM model =
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
     case page of
-        CustomSyncSettingsPage title ->
-            ( title, sgtdBlue )
-
         EntityListPage model ->
             ( model.title, model.color )
 

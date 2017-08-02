@@ -19,7 +19,6 @@ import Menu
 import Menu.Types
 import Models.Todo
 import Msg.AppHeader exposing (AppHeaderMsg(..))
-import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
@@ -44,14 +43,12 @@ import Types.GroupDoc exposing (..)
 import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader
-import Update.CustomSync
 import Update.ExclusiveMode
 import Update.Firebase
 import Update.GroupDoc
 import Update.Page
 import Update.Subscription
 import Update.Todo
-import View.CustomSync
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
@@ -107,7 +104,6 @@ type AppMsg
     | OnPageMsg PageMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
-    | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsgNew Pages.EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
@@ -240,12 +236,10 @@ type alias UpdateConfig msg =
         (Update.ExclusiveMode.Config msg
             (Update.Page.Config msg
                 (Update.Firebase.Config msg
-                    (Update.CustomSync.Config msg
-                        (Update.Subscription.Config msg
-                            (Update.Todo.Config msg
-                                { navigateToPathMsg : List String -> msg
-                                }
-                            )
+                    (Update.Subscription.Config msg
+                        (Update.Todo.Config msg
+                            { navigateToPathMsg : List String -> msg
+                            }
                         )
                     )
                 )
@@ -260,7 +254,6 @@ updateConfig model =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
-    , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
@@ -308,9 +301,6 @@ update config msg =
         OnAppHeaderMsg msg_ ->
             Update.AppHeader.update config msg_
 
-        OnCustomSyncMsg msg_ ->
-            Update.CustomSync.update config msg_
-
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
 
@@ -340,9 +330,8 @@ updatePage config msg page =
         ( Page.EntityListPage model_, OnEntityMsgNew msg_ ) ->
             Pages.EntityList.update config msg_ model_
 
-        ( _, OnEntityMsgNew msg_ ) ->
-            Pages.EntityList.updateDefault config msg_
-
+        --        ( _, OnEntityMsgNew msg_ ) ->
+        --            Pages.EntityList.updateDefault config msg_
         _ ->
             identity
 
@@ -375,7 +364,6 @@ type alias ViewConfig msg =
     , onSignOut : msg
     , onStartAddingGroupDoc : GroupDocType -> msg
     , onStartAddingTodoWithFocusInEntityAsReference : msg
-    , onStartCustomRemotePouchSync : ExclusiveMode.Types.SyncForm -> msg
     , onStartEditingGroupDoc : GroupDocId -> msg
     , onStartEditingReminder : TodoDoc -> msg
     , onStartEditingTodoContext : TodoDoc -> msg
@@ -387,8 +375,6 @@ type alias ViewConfig msg =
     , onToggleDoneAndMaybeSelection : DocId -> msg
     , onToggleEntitySelection : Entity.EntityId -> msg
     , onToggleGroupDocArchived : GroupDocId -> msg
-    , onUpdateCustomSyncFormUri :
-        ExclusiveMode.Types.SyncForm -> String -> msg
     , revertExclusiveMode : msg
     , setFocusInEntityWithEntityId : Entity.EntityId -> msg
     , updateGroupDocFromNameMsg :
@@ -420,8 +406,6 @@ viewConfig model =
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
     , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
-    , onUpdateCustomSyncFormUri = OnUpdateCustomSyncFormUri >>> OnCustomSyncMsg
-    , onStartCustomRemotePouchSync = OnStartCustomSync >> OnCustomSyncMsg
     , gotoPageMsg = PageMsg_SetPage >> OnPageMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
@@ -460,10 +444,6 @@ view config model =
                 )
     in
     case Page.getPage__ model of
-        Page.CustomSyncSettingsPage _ ->
-            View.CustomSync.view config model
-                |> frame
-
         Page.EntityListPage subModel ->
             Views.EntityList.view config appVM model subModel
                 |> frame

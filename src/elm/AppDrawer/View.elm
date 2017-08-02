@@ -67,12 +67,6 @@ sidebarContent config appVM model =
                         (Mat.icon "delete")
                         [ "bin" ]
                         "Bin"
-                   , Mat.divider
-                   , switchViewItemSmall
-                        config
-                        "settings"
-                        [ "custom-sync" ]
-                        "Advance Settings"
                    ]
             )
         ]
@@ -174,16 +168,6 @@ entityListItem vm =
         ]
         [ Mat.iconM vm.icon
         , div [ class "font-nowrap" ] [ View.Badge.badge vm.name vm.count ]
-        ]
-
-
-switchViewItemSmall config iconName path title =
-    li
-        [ class ""
-        , onClick (config.navigateToPathMsg path)
-        ]
-        [ Mat.icon iconName
-        , div [] [ text title ]
         ]
 
 

@@ -1,5 +1,5 @@
-    8728 total
-     494 src/elm/Main.elm
+    8559 total
+     474 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      358 src/elm/Update/Todo/Internal.elm
      316 src/elm/Todo.elm
@@ -9,7 +9,7 @@
      223 src/elm/Menu.elm
      213 src/elm/GroupDoc.elm
      205 src/elm/GroupDoc/ViewModel.elm
-     197 src/elm/AppDrawer/View.elm
+     181 src/elm/AppDrawer/View.elm
      177 src/elm/Todo/ViewModel.elm
      170 src/elm/Update/Firebase.elm
      170 src/elm/Data/EntityTree.elm
@@ -29,16 +29,16 @@
      103 src/elm/Todo/View.elm
       98 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
-      91 src/elm/Update/ExclusiveMode.elm
       88 src/elm/X/Html.elm
+      87 src/elm/Update/ExclusiveMode.elm
       87 src/elm/Entity.elm
       87 src/elm/Document.elm
       83 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
       79 src/elm/Types/GroupDoc.elm
-      78 src/elm/ViewModel.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/AppColors.elm
+      75 src/elm/ViewModel.elm
       75 src/elm/View/Layout.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
@@ -48,11 +48,10 @@
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Todo/GroupEditView.elm
-      63 src/elm/Page.elm
+      59 src/elm/Page.elm
       57 src/elm/Pages/EntityListOld.elm
-      55 src/elm/Update/Page.elm
-      50 src/elm/View/CustomSync.elm
       50 src/elm/Update/Todo.elm
+      50 src/elm/Update/Page.elm
       50 src/elm/Types/Todo.elm
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/AppUrl.elm
@@ -62,7 +61,6 @@
       45 src/elm/Update/AppHeader.elm
       45 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
-      41 src/elm/Update/CustomSync.elm
       40 src/elm/Data/User.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
@@ -83,13 +81,12 @@
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       18 src/elm/Types/Store.elm
-      18 src/elm/ExclusiveMode/Types.elm
       16 src/elm/Ports.elm
       16 src/elm/Models/Todo.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
-      13 src/elm/Links.elm
+      13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm
       12 src/elm/Data/DeviceId.elm
       11 src/elm/Firebase.elm
@@ -97,7 +94,6 @@
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm
        9 src/elm/Msg/ExclusiveMode.elm
-       8 src/elm/Msg/CustomSync.elm
        8 src/elm/Msg/AppHeader.elm
        7 src/elm/X/String.elm
        6 src/elm/Menu/Types.elm

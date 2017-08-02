@@ -35,12 +35,6 @@ export default async function () {
             }
         ))(dbMap)
 
-        app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
-            localStorage.setItem("pouchdb.remote-sync-uri", uri)
-            _.map(db => db.startRemoteSync(uri, "sgtd2-"))(dbMap)
-        })
-
-
         app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
             dbMap[dbName].upsert(id, doc).catch(console.error)
         });

@@ -8,43 +8,27 @@ import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 
 
-type alias Model =
-    Types.GroupDoc.GroupDoc
+nullContext : GroupDoc
+nullContext =
+    GroupDoc.constructor nullContextId "" 0 0 False "" "Inbox" False
 
 
-constructor =
-    GroupDoc.constructor
-
-
-null : Model
-null =
-    constructor nullId "" 0 0 False "" "Inbox" False
-
-
-nullId =
+nullContextId =
     ""
 
 
-isNullId =
-    equals nullId
+filterNullContext pred =
+    [ nullContext ] |> List.filter pred
 
 
-filterNull pred =
-    [ null ] |> List.filter pred
+sortContexts =
+    GroupDoc.sort isNullContext
 
 
-sort =
-    GroupDoc.sort isNull
+isNullContext =
+    equals nullContext
 
 
-isNull =
-    equals null
-
-
-getName =
-    .name
-
-
-storeGenerator : DeviceId -> List E.Value -> Random.Generator ContextStore
-storeGenerator =
+contextStoreGenerator : DeviceId -> List E.Value -> Random.Generator ContextStore
+contextStoreGenerator =
     GroupDoc.storeGenerator "context-db"

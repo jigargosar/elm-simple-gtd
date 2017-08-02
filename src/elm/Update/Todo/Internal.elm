@@ -139,7 +139,7 @@ saveAddTodoForm config addMode form now model =
             (\todoId ->
                 let
                     inboxEntityId =
-                        Entity.createContextEntityId Context.nullId
+                        Entity.createContextEntityId Context.nullContextId
 
                     referenceEntityId =
                         case addMode of

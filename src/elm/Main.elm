@@ -207,8 +207,8 @@ createAppModel flags =
         storeGenerator =
             Random.Pcg.map3 (,,)
                 (Todo.Store.generator flags.deviceId encodedTodoList)
-                (Project.storeGenerator flags.deviceId encodedProjectList)
-                (Context.storeGenerator flags.deviceId encodedContextList)
+                (Project.projectStoreGenerator flags.deviceId encodedProjectList)
+                (Context.contextStoreGenerator flags.deviceId encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)

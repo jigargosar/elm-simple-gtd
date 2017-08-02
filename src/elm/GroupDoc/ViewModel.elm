@@ -174,8 +174,8 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
             , toEntityId = ContextId
-            , nullEntity = Context.null
-            , isNull = Context.isNull
+            , nullEntity = Context.nullContext
+            , isNull = Context.isNullContext
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
@@ -198,8 +198,8 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
             , toEntityId = ProjectId
-            , nullEntity = Project.null
-            , isNull = Project.isNull
+            , nullEntity = Project.nullProject
+            , isNull = Project.isNullProject
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"

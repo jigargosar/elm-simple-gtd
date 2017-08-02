@@ -12,13 +12,13 @@ import Types.Todo exposing (..)
 
 
 type alias ContextNode =
-    { context : Context.Model
+    { context : ContextDoc
     , todoList : List TodoDoc
     }
 
 
 type alias ProjectNode =
-    { project : Project.Model
+    { project : ProjectDoc
     , todoList : List TodoDoc
     }
 
@@ -86,7 +86,7 @@ createProjectSubGroups findProjectById tcg =
                 |> List.unique
                 .|> findProjectById
                 |> List.filterMap identity
-                |> Project.sort
+                |> Project.sortProjects
 
         filterTodoForProject project =
             tcg.todoList
@@ -113,7 +113,7 @@ createContextSubGroups findContextById tcg =
                 |> List.unique
                 .|> findContextById
                 |> List.filterMap identity
-                |> Context.sort
+                |> Context.sortContexts
 
         filterTodoForContext context =
             tcg.todoList

@@ -8,48 +8,27 @@ import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 
 
-type alias Model =
-    Types.GroupDoc.GroupDoc
+nullProject : GroupDoc
+nullProject =
+    let
+        nullId =
+            ""
+    in
+    GroupDoc.constructor nullId "" 0 0 False "" "No Project" False
 
 
-type alias ModelF =
-    Model -> Model
+filterNullProject pred =
+    [ nullProject ] |> List.filter pred
 
 
-storeGenerator : DeviceId -> List E.Value -> Random.Generator ProjectStore
-storeGenerator =
+isNullProject =
+    equals nullProject
+
+
+sortProjects =
+    GroupDoc.sort isNullProject
+
+
+projectStoreGenerator : DeviceId -> List E.Value -> Random.Generator ProjectStore
+projectStoreGenerator =
     GroupDoc.storeGenerator "project-db"
-
-
-getName : Model -> GroupDocName
-getName =
-    .name
-
-
-constructor =
-    GroupDoc.constructor
-
-
-null : Model
-null =
-    constructor nullId "" 0 0 False "" "No Project" False
-
-
-nullId =
-    ""
-
-
-isNullId =
-    equals nullId
-
-
-filterNull pred =
-    [ null ] |> List.filter pred
-
-
-isNull =
-    equals null
-
-
-sort =
-    GroupDoc.sort isNull

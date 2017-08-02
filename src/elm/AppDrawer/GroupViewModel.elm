@@ -154,8 +154,8 @@ contexts config model =
             , namePrefix = "@"
             , filter = activeFilter
             , toEntityId = ContextId
-            , nullEntity = Context.null
-            , isNull = Context.isNull
+            , nullEntity = Context.nullContext
+            , isNull = Context.isNullContext
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
@@ -206,8 +206,8 @@ projects config model =
             , namePrefix = "#"
             , filter = activeFilter
             , toEntityId = ProjectId
-            , nullEntity = Project.null
-            , isNull = Project.isNull
+            , nullEntity = Project.nullProject
+            , isNull = Project.isNullProject
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor

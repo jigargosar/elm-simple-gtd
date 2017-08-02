@@ -18,10 +18,6 @@ type alias Config msg =
     }
 
 
-
---createProjectMenuConfig : TodoForm -> AppModel -> Menu.Config Project.Model Msg.AppMsg
-
-
 createProjectMenuConfig config form =
     { onSelect = config.onSetProject form.id
     , isSelected = Document.hasId form.projectId

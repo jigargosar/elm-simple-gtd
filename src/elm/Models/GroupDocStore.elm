@@ -21,20 +21,20 @@ projectStore =
 
 filterContexts pred model =
     Store.filterDocs pred model.contextStore
-        |> List.append (Context.filterNull pred)
-        |> Context.sort
+        |> List.append (Context.filterNullContext pred)
+        |> Context.sortContexts
 
 
 filterProjects pred model =
     Store.filterDocs pred model.projectStore
-        |> List.append (Project.filterNull pred)
-        |> Project.sort
+        |> List.append (Project.filterNullProject pred)
+        |> Project.sortProjects
 
 
 findProjectById id =
     .projectStore
         >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> [ Project.null ] |> List.find (Document.hasId id))
+        >> Maybe.orElseLazy (\_ -> [ Project.nullProject ] |> List.find (Document.hasId id))
 
 
 findProjectByIdIn =
@@ -44,7 +44,7 @@ findProjectByIdIn =
 findContextById id =
     .contextStore
         >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> [ Context.null ] |> List.find (Document.hasId id))
+        >> Maybe.orElseLazy (\_ -> [ Context.nullContext ] |> List.find (Document.hasId id))
 
 
 findContextByIdIn =
@@ -56,10 +56,10 @@ findGroupDocById groupDocId =
         ( getStore, id, null ) =
             case groupDocId of
                 ContextGroupDocId id ->
-                    ( .contextStore, id, Context.null )
+                    ( .contextStore, id, Context.nullContext )
 
                 ProjectGroupDocId id ->
-                    ( .projectStore, id, Project.null )
+                    ( .projectStore, id, Project.nullProject )
     in
     getStore
         >> Store.findById id

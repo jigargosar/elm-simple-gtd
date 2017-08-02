@@ -272,14 +272,14 @@ createEntityTree model appModel =
     case model.filter of
         ContextView id ->
             Models.GroupDocStore.findContextById id appModel
-                ?= Context.null
+                ?= Context.nullContext
                 |> Data.EntityTree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
         ProjectView id ->
             Models.GroupDocStore.findProjectById id appModel
-                ?= Project.null
+                ?= Project.nullProject
                 |> Data.EntityTree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp

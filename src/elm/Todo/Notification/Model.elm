@@ -4,8 +4,8 @@ import Date
 import Date.Extra as Date
 import Document
 import Time exposing (Time)
-import Todo exposing (..)
 import Todo.Notification.Types exposing (..)
+import TodoDoc exposing (..)
 import X.Function exposing (..)
 
 
@@ -37,7 +37,7 @@ initialView =
 
 
 createTodoDetails todo =
-    TodoDetails (Document.getId todo) (Todo.getText todo)
+    TodoDetails (Document.getId todo) (TodoDoc.getText todo)
 
 
 none =

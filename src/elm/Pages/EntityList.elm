@@ -12,7 +12,7 @@ import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
 import Store
-import Todo
+import TodoDoc
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)
@@ -222,18 +222,18 @@ filterTodosAndSortBy pred sortBy model =
 
 
 filterTodosAndSortByLatestCreated pred =
-    filterTodosAndSortBy pred (Todo.getCreatedAt >> negate)
+    filterTodosAndSortBy pred (TodoDoc.getCreatedAt >> negate)
 
 
 filterTodosAndSortByLatestModified pred =
-    filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
+    filterTodosAndSortBy pred (TodoDoc.getModifiedAt >> negate)
 
 
 getActiveTodoListForContext context model =
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ Todo.isActive
-            , Todo.contextFilter context
+            [ TodoDoc.isActive
+            , TodoDoc.contextFilter context
             , Models.Stores.isTodoProjectActive model
             ]
         )
@@ -243,8 +243,8 @@ getActiveTodoListForContext context model =
 getActiveTodoListForProject project model =
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ Todo.isActive
-            , Todo.hasProject project
+            [ TodoDoc.isActive
+            , TodoDoc.hasProject project
             , Models.Stores.isTodoContextActive model
             ]
         )
@@ -308,7 +308,7 @@ createEntityTree model appModel =
 filterTypeToPredicate filterType model =
     case filterType of
         Done ->
-            \_ -> X.Predicate.all [ Document.isNotDeleted, Todo.isDone ]
+            \_ -> X.Predicate.all [ Document.isNotDeleted, TodoDoc.isDone ]
 
         Recent ->
             \_ -> X.Predicate.always
@@ -319,16 +319,16 @@ filterTypeToPredicate filterType model =
         HavingActiveProjectAndContextId ->
             \contextId ->
                 X.Predicate.all
-                    [ Todo.isActive
-                    , Todo.getContextId >> equals contextId
+                    [ TodoDoc.isActive
+                    , TodoDoc.getContextId >> equals contextId
                     , Models.Stores.isTodoProjectActive model
                     ]
 
         HavingActiveContextAndProjectId ->
             \projectId ->
                 X.Predicate.all
-                    [ Todo.isActive
-                    , Todo.getProjectId >> equals projectId
+                    [ TodoDoc.isActive
+                    , TodoDoc.getProjectId >> equals projectId
                     , Models.Stores.isTodoContextActive model
                     ]
 

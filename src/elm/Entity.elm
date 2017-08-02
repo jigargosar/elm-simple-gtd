@@ -2,7 +2,7 @@ module Entity exposing (..)
 
 import Document exposing (..)
 import GroupDoc exposing (..)
-import Todo exposing (TodoDoc)
+import TodoDoc exposing (TodoDoc)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

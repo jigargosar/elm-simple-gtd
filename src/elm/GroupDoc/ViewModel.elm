@@ -8,7 +8,7 @@ import GroupDoc exposing (..)
 import Keyboard.Extra as Key exposing (Key)
 import Material
 import String.Extra
-import Todo exposing (..)
+import TodoDoc exposing (..)
 import Toolkit.Helpers exposing (apply2)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
@@ -160,7 +160,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
     let
         configInner : Config
         configInner =
-            { groupByFn = Todo.getContextId
+            { groupByFn = TodoDoc.getContextId
             , namePrefix = "@"
             , toEntityId = ContextId
             , nullEntity = GroupDoc.nullContext
@@ -179,7 +179,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
     let
         configInner : Config
         configInner =
-            { groupByFn = Todo.getProjectId
+            { groupByFn = TodoDoc.getProjectId
             , namePrefix = "#"
             , toEntityId = ProjectId
             , nullEntity = GroupDoc.nullProject

@@ -13,11 +13,11 @@ import Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
-import Todo exposing (..)
 import Todo.Form
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
@@ -53,7 +53,7 @@ type alias Config msg a =
 findAndUpdateAllTodos findFn action now model =
     let
         updateFn =
-            Todo.update action
+            TodoDoc.update action
     in
     overReturn todoStore (Store.updateAndPersist findFn now updateFn) model
 
@@ -89,7 +89,7 @@ findAndSnoozeOverDueTodo now model =
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
     in
-    Store.findBy (Todo.isReminderOverdue now) model.todoStore
+    Store.findBy (TodoDoc.isReminderOverdue now) model.todoStore
         ?+> (Document.getId >> snooze)
 
 
@@ -127,7 +127,7 @@ saveAddTodoForm :
     -> SubModel model
     -> SubReturn msg model
 saveAddTodoForm config addMode form now model =
-    insertTodo (Todo.init now form.text) model
+    insertTodo (TodoDoc.init now form.text) model
         |> Tuple.mapFirst Document.getId
         |> uncurry
             (\todoId ->
@@ -243,7 +243,7 @@ showReminderNotificationCmd ( todo, model ) =
                 id =
                     Document.getId todo
             in
-            { title = Todo.getText todo, tag = id, data = { id = id } }
+            { title = TodoDoc.getText todo, tag = id, data = { id = id } }
 
         cmds =
             [ createNotification
@@ -266,7 +266,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
             in
             { tag = todoId
             , title = "You have been working for " ++ formattedDuration
-            , body = Todo.getText todo
+            , body = TodoDoc.getText todo
             , actions =
                 [ { title = "Continue", action = "continue" }
                 , { title = "Stop", action = "stop" }

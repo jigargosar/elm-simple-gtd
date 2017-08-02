@@ -9,7 +9,7 @@ import Regex
 import Set
 import Store
 import String.Extra
-import Todo
+import TodoDoc
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Keyboard
@@ -24,7 +24,7 @@ getDisplayText todo =
         trimAndReplaceEmptyWithDefault =
             String.trim >> String.Extra.nonEmpty >>?= "< empty >"
     in
-    Todo.getText todo
+    TodoDoc.getText todo
         |> trimAndReplaceEmptyWithDefault
         |> Regex.replace
             (Regex.AtMost 1)
@@ -58,7 +58,7 @@ createTodoViewModel config appVM isFocusable todo =
             String.Extra.ellipsis 15
 
         projectId =
-            Todo.getProjectId todo
+            TodoDoc.getProjectId todo
 
         projectDisplayName =
             projectId
@@ -68,7 +68,7 @@ createTodoViewModel config appVM isFocusable todo =
                 |> String.append "#"
 
         contextId =
-            Todo.getContextId todo
+            TodoDoc.getContextId todo
 
         contextDisplayName =
             contextId
@@ -124,7 +124,7 @@ createTodoViewModel config appVM isFocusable todo =
         toggleDoneMsg =
             config.onToggleDoneAndMaybeSelection todoId
     in
-    { isDone = Todo.isDone todo
+    { isDone = TodoDoc.isDone todo
     , key = todoId
     , isDeleted = Document.isDeleted todo
     , onKeyDownMsg = onKeyDownMsg
@@ -169,7 +169,7 @@ createScheduleViewModel config now todo =
                 X.Time.smartFormat now time
 
         displayText =
-            Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
+            TodoDoc.getMaybeTime todo ?|> formatReminderTime ?= ""
     in
     { displayText = displayText
     , isOverDue = displayText == overDueText

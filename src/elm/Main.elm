@@ -28,11 +28,10 @@ import Random.Pcg
 import RouteUrl
 import Set exposing (Set)
 import Time exposing (Time)
-import Todo exposing (..)
 import Todo.FormTypes
-import Update.Todo exposing (TodoMsg)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
@@ -41,7 +40,7 @@ import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Page
 import Update.Subscription
-import Update.Todo
+import Update.Todo exposing (TodoMsg)
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
@@ -192,7 +191,7 @@ createAppModel flags =
 
         storeGenerator =
             Random.Pcg.map3 (,,)
-                (Todo.storeGenerator deviceId encodedTodoList)
+                (TodoDoc.storeGenerator deviceId encodedTodoList)
                 (GroupDoc.projectStoreGenerator deviceId encodedProjectList)
                 (GroupDoc.contextStoreGenerator deviceId encodedContextList)
 

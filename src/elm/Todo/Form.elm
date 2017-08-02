@@ -11,8 +11,8 @@ import Document
 import Menu
 import Time exposing (Time)
 import Time.Format
-import Todo exposing (..)
 import Todo.FormTypes exposing (..)
+import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Record exposing (fieldLens, over, overM, set)
 
@@ -21,13 +21,13 @@ createEditTodoForm : EditTodoFormMode -> Time -> TodoDoc -> TodoForm
 createEditTodoForm editMode now todo =
     let
         timeInMilli =
-            Todo.getMaybeReminderTime todo ?= now + Time.hour
+            TodoDoc.getMaybeReminderTime todo ?= now + Time.hour
 
         form =
             { id = Document.getId todo
-            , text = Todo.getText todo
-            , contextId = Todo.getContextId todo
-            , projectId = Todo.getProjectId todo
+            , text = TodoDoc.getText todo
+            , contextId = TodoDoc.getContextId todo
+            , projectId = TodoDoc.getProjectId todo
             , menuState = Menu.initState
             , date = Time.Format.format "%Y-%m-%d" timeInMilli
             , time = Time.Format.format "%H:%M" timeInMilli

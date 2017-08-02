@@ -4,7 +4,7 @@ import Document
 import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra as List
-import Todo exposing (..)
+import TodoDoc exposing (..)
 import Toolkit.Operators exposing (..)
 
 
@@ -79,7 +79,7 @@ createProjectSubGroups findProjectById tcg =
     let
         projects =
             tcg.todoList
-                .|> Todo.getProjectId
+                .|> TodoDoc.getProjectId
                 |> List.unique
                 .|> findProjectById
                 |> List.filterMap identity
@@ -87,7 +87,7 @@ createProjectSubGroups findProjectById tcg =
 
         filterTodoForProject project =
             tcg.todoList
-                |> List.filter (Todo.hasProject project)
+                |> List.filter (TodoDoc.hasProject project)
     in
     projects .|> initProjectNode filterTodoForProject
 
@@ -106,7 +106,7 @@ createContextSubGroups findContextById tcg =
     let
         contexts =
             tcg.todoList
-                .|> Todo.getContextId
+                .|> TodoDoc.getContextId
                 |> List.unique
                 .|> findContextById
                 |> List.filterMap identity
@@ -114,7 +114,7 @@ createContextSubGroups findContextById tcg =
 
         filterTodoForContext context =
             tcg.todoList
-                |> List.filter (Todo.contextFilter context)
+                |> List.filter (TodoDoc.contextFilter context)
     in
     contexts .|> initContextNode filterTodoForContext
 

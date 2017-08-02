@@ -12,7 +12,7 @@ import GroupDoc exposing (..)
 import Models.GroupDocStore
 import Models.Stores
 import String.Extra
-import Todo
+import TodoDoc
 import Toolkit.Operators exposing (..)
 import X.Function exposing (when)
 import X.Maybe
@@ -143,7 +143,7 @@ contexts config model =
 
         --        innerConfig : Config
         innerConfig =
-            { groupByFn = Todo.getContextId
+            { groupByFn = TodoDoc.getContextId
             , todoList = Models.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
@@ -195,7 +195,7 @@ projects config model =
 
         --        innerConfig : Config
         innerConfig =
-            { groupByFn = Todo.getProjectId
+            { groupByFn = TodoDoc.getProjectId
             , todoList = Models.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter

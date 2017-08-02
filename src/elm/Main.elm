@@ -68,6 +68,7 @@ type alias AppConfig =
     , npmPackageVersion : String
     , isDevelopmentMode : Bool
     , debug : Bool
+    , initialOfflineStore : E.Value
     }
 
 

@@ -77,7 +77,6 @@ create config configInner todoList groupDoc =
 
         entityId =
             configInner.toEntityId id
-                |> Debug.log "entityId"
 
         groupDocId =
             GroupDoc.createGroupDocIdFromType configInner.groupDocType id
@@ -155,7 +154,7 @@ create config configInner todoList groupDoc =
     , icon = icon
     , onFocusIn = config.setFocusInEntityWithEntityId entityId
     , onKeyDownMsg = onKeyDownMsg
-    , tabindexAV = configInner.getTabIndexAVForEntityId entityId |> Debug.log "tabindexAV"
+    , tabindexAV = configInner.getTabIndexAVForEntityId entityId
     , todoList = todoList
     , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
     , onMdl = config.onMdl

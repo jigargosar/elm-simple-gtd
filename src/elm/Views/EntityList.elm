@@ -29,7 +29,6 @@ view config appVM appModel model =
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId
-                |> Debug.log ""
     in
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"

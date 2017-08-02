@@ -49,16 +49,16 @@ update msg =
             mapOverAndPersist (toggleGroupListExpanded contexts)
 
         OnToggleProjectsExpanded ->
-            mapOver (toggleGroupListExpanded projects)
+            mapOverAndPersist (toggleGroupListExpanded projects)
 
         OnToggleArchivedContexts ->
-            mapOver (toggleGroupArchivedListExpanded contexts)
+            mapOverAndPersist (toggleGroupArchivedListExpanded contexts)
 
         OnToggleArchivedProjects ->
-            mapOver (toggleGroupArchivedListExpanded projects)
+            mapOverAndPersist (toggleGroupArchivedListExpanded projects)
 
         OnToggleOverlay ->
-            mapOver toggleOverlay
+            mapOverAndPersist toggleOverlay
 
         OnWindowResizeTurnOverlayOff ->
             mapOver (set isOverlayOpen False)

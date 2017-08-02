@@ -90,7 +90,6 @@ type alias AppModelOtherFields =
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
     , appVersion : String
-    , deviceId : String
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
@@ -192,7 +191,6 @@ type alias Flags =
     , pouchDBRemoteSyncURI : String
     , developmentMode : Bool
     , appVersion : String
-    , deviceId : String
     , config : AppConfig
     }
 
@@ -203,11 +201,14 @@ createAppModel flags =
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
             flags
 
+        { deviceId, initialOfflineStore } =
+            flags.config
+
         storeGenerator =
             Random.Pcg.map3 (,,)
-                (Todo.storeGenerator flags.deviceId encodedTodoList)
-                (GroupDoc.projectStoreGenerator flags.deviceId encodedProjectList)
-                (GroupDoc.contextStoreGenerator flags.deviceId encodedContextList)
+                (Todo.storeGenerator deviceId encodedTodoList)
+                (GroupDoc.projectStoreGenerator deviceId encodedProjectList)
+                (GroupDoc.contextStoreGenerator deviceId encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
@@ -223,13 +224,12 @@ createAppModel flags =
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
-                Firebase.init flags.deviceId flags.config.initialOfflineStore
+                Firebase.init deviceId initialOfflineStore
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
-            , deviceId = flags.deviceId
             , config = flags.config
-            , appDrawerModel = AppDrawer.Model.initialValue flags.config.initialOfflineStore
+            , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
             , mdl = Material.model
             , entityListCursor = EntityListCursor.initialValue
             }

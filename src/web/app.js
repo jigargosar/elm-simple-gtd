@@ -6,28 +6,14 @@ import $ from "jquery"
 import _ from "ramda"
 import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
-// import autosize from "autosize"
 import localforage from "localforage"
 import MutationSummary from "mutation-summary"
 import {Kefir} from "kefir"
-
-// noinspection NpmUsedModulesInstalled
 import {Main} from "elm/Main.elm"
 
-//noinspection JSUnresolvedVariable
 const isDevelopmentMode = process.env["NODE_ENV"] === "development"
 const env = process.env
 const npmPackageVersion = env["npm_package_version"]
-
-//test
-
-/*global.xhot = module.hot
-
- if(module.hot){
- module.hot.addStatusHandler(status => {
- console.warn("hot status", status);
- })
- }*/
 
 const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
   
@@ -95,7 +81,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
     pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
-    deviceId,
     config: {
       debug: WEBPACK_DEV_SERVER,
       deviceId,

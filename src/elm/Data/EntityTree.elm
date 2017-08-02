@@ -1,6 +1,5 @@
 module Data.EntityTree exposing (..)
 
-import Context
 import Document
 import Entity exposing (..)
 import GroupDoc
@@ -113,7 +112,7 @@ createContextSubGroups findContextById tcg =
                 |> List.unique
                 .|> findContextById
                 |> List.filterMap identity
-                |> Context.sortContexts
+                |> GroupDoc.sortContexts
 
         filterTodoForContext context =
             tcg.todoList

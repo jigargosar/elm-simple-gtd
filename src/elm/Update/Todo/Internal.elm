@@ -1,11 +1,11 @@
 port module Update.Todo.Internal exposing (..)
 
-import Context
 import Document
 import DomPorts
 import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
+import GroupDoc
 import Models.Todo exposing (findTodoById, todoStore)
 import Notification
 import Ports.Todo exposing (..)
@@ -140,7 +140,7 @@ saveAddTodoForm config addMode form now model =
             (\todoId ->
                 let
                     inboxEntityId =
-                        EntityId.fromContext Context.nullContext
+                        EntityId.fromContext GroupDoc.nullContext
 
                     referenceEntityId =
                         case addMode of

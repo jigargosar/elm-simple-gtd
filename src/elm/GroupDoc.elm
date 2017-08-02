@@ -184,3 +184,29 @@ sortProjects =
 projectStoreGenerator : DeviceId -> List E.Value -> Random.Pcg.Generator ProjectStore
 projectStoreGenerator =
     storeGenerator "project-db"
+
+
+nullContext : GroupDoc
+nullContext =
+    let
+        nullContextId =
+            ""
+    in
+    constructor nullContextId "" 0 0 False "" "Inbox" False
+
+
+filterNullContext pred =
+    [ nullContext ] |> List.filter pred
+
+
+sortContexts =
+    sort isNullContext
+
+
+isNullContext =
+    equals nullContext
+
+
+contextStoreGenerator : DeviceId -> List E.Value -> Random.Pcg.Generator ContextStore
+contextStoreGenerator =
+    storeGenerator "context-db"

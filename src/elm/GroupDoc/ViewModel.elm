@@ -2,7 +2,6 @@ module GroupDoc.ViewModel exposing (..)
 
 import AppColors
 import Color
-import Context
 import Document
 import Entity exposing (..)
 import GroupDoc
@@ -173,8 +172,8 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
             , toEntityId = ContextId
-            , nullEntity = Context.nullContext
-            , isNull = Context.isNullContext
+            , nullEntity = GroupDoc.nullContext
+            , isNull = GroupDoc.isNullContext
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"

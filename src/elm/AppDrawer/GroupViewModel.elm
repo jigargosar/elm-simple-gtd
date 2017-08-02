@@ -4,7 +4,6 @@ import AppColors
 import AppDrawer.Model
 import AppDrawer.Types
 import Color
-import Context
 import Dict
 import Dict.Extra
 import Document
@@ -150,8 +149,8 @@ contexts config model =
             , namePrefix = "@"
             , filter = activeFilter
             , toEntityId = ContextId
-            , nullEntity = Context.nullContext
-            , isNull = Context.isNullContext
+            , nullEntity = GroupDoc.nullContext
+            , isNull = GroupDoc.isNullContext
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor

@@ -2,7 +2,6 @@ module Pages.EntityList exposing (..)
 
 import AppColors
 import Color exposing (Color)
-import Context
 import Data.EntityTree
 import Document
 import Entity exposing (..)
@@ -272,7 +271,7 @@ createEntityTree model appModel =
     case model.filter of
         ContextView id ->
             Models.GroupDocStore.findContextById id appModel
-                ?= Context.nullContext
+                ?= GroupDoc.nullContext
                 |> Data.EntityTree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp

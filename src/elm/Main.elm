@@ -2,7 +2,6 @@ module Main exposing (main)
 
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
-import Context
 import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
@@ -208,7 +207,7 @@ createAppModel flags =
             Random.Pcg.map3 (,,)
                 (Todo.Store.generator flags.deviceId encodedTodoList)
                 (GroupDoc.projectStoreGenerator flags.deviceId encodedProjectList)
-                (Context.contextStoreGenerator flags.deviceId encodedContextList)
+                (GroupDoc.contextStoreGenerator flags.deviceId encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)

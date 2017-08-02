@@ -159,23 +159,19 @@
     "transitiveImportsCount": 10,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
-      "LocalPref",
       "Main",
-      "Types.LocalPref",
       "Update.AppDrawer",
       "View.Layout"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
-      "LocalPref",
       "Main",
-      "Types.LocalPref",
       "Update.AppDrawer",
       "View.Layout",
       "ViewModel"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 5
   },
   "AppDrawer.Types": {
     "fileName": "src/elm/AppDrawer/Types.elm",
@@ -1315,44 +1311,6 @@
     "transitiveBackwardImports": [],
     "transitiveBackwardImportsCount": 0
   },
-  "LocalPref": {
-    "fileName": "src/elm/LocalPref.elm",
-    "moduleName": "LocalPref",
-    "parentModuleName": "",
-    "imports": [
-      "AppDrawer.Model",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Toolkit.Operators",
-      "Types.LocalPref",
-      "X.Function.Infix"
-    ],
-    "importsCount": 7,
-    "transitiveImports": [
-      "AppDrawer.Model",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Return",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.LocalPref",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 12,
-    "backwardImports": [
-      "Main"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 1
-  },
   "LocalStorage": {
     "fileName": "src/elm/LocalStorage.elm",
     "moduleName": "LocalStorage",
@@ -1397,7 +1355,6 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "LocalPref",
       "Mat",
       "Material",
       "Material.Options",
@@ -1448,7 +1405,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 61,
+    "importsCount": 60,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -1491,7 +1448,6 @@
       "Keyboard.Extra",
       "List",
       "List.Extra",
-      "LocalPref",
       "Mat",
       "Material",
       "Material.Button",
@@ -1549,7 +1505,6 @@
       "Types.Document",
       "Types.Firebase",
       "Types.GroupDoc",
-      "Types.LocalPref",
       "Types.Store",
       "Types.Todo",
       "Update.AppDrawer",
@@ -1590,7 +1545,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 139,
+    "transitiveImportsCount": 137,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -3790,38 +3745,6 @@
     ],
     "transitiveBackwardImportsCount": 45
   },
-  "Types.LocalPref": {
-    "fileName": "src/elm/Types/LocalPref.elm",
-    "moduleName": "Types.LocalPref",
-    "parentModuleName": "Types",
-    "imports": [
-      "AppDrawer.Model"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "AppDrawer.Model",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Return",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Record"
-    ],
-    "transitiveImportsCount": 11,
-    "backwardImports": [
-      "LocalPref"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "LocalPref",
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 2
-  },
   "Types.Store": {
     "fileName": "src/elm/Types/Store.elm",
     "moduleName": "Types.Store",
@@ -5617,7 +5540,6 @@
       "L.Main",
       "L.View",
       "Links",
-      "LocalPref",
       "LocalStorage",
       "Main",
       "Mat",
@@ -5643,7 +5565,6 @@
       "Todo.Store",
       "Todo.View",
       "Todo.ViewModel",
-      "Types.LocalPref",
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
@@ -5665,7 +5586,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 64
+    "transitiveBackwardImportsCount": 62
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -5684,7 +5605,6 @@
       "GroupDoc",
       "GroupDoc.View",
       "Links",
-      "LocalPref",
       "LocalStorage",
       "Main",
       "Mat",
@@ -5706,7 +5626,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 28,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5727,7 +5647,6 @@
       "L.Main",
       "L.View",
       "Links",
-      "LocalPref",
       "LocalStorage",
       "Main",
       "Mat",
@@ -5755,7 +5674,6 @@
       "Todo.Store",
       "Todo.View",
       "Todo.ViewModel",
-      "Types.LocalPref",
       "Update.AppDrawer",
       "Update.AppHeader",
       "Update.CustomSync",
@@ -5778,7 +5696,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 69
+    "transitiveBackwardImportsCount": 67
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -6134,7 +6052,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.ViewModel",
-      "LocalPref",
       "Main",
       "Models.GroupDocStore",
       "Models.HasStores",
@@ -6151,7 +6068,6 @@
       "Todo.Notification.View",
       "Todo.Store",
       "Todo.ViewModel",
-      "Types.LocalPref",
       "Update.AppDrawer",
       "Update.ExclusiveMode",
       "Update.Firebase",
@@ -6165,7 +6081,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 36
+    "transitiveBackwardImportsCount": 34
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",

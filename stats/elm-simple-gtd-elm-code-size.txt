@@ -1,5 +1,5 @@
-    8841 total
-     503 src/elm/Main.elm
+    8783 total
+     492 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      362 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -67,7 +67,6 @@
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
-      36 src/elm/LocalPref.elm
       35 src/elm/Types/Document.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
@@ -82,13 +81,13 @@
       20 src/elm/Firebase/User.elm
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
-      19 src/elm/Ports.elm
       19 src/elm/Models/HasStores.elm
       19 src/elm/Firebase.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
       18 src/elm/ExclusiveMode/Types.elm
       17 src/elm/Types/Store.elm
+      16 src/elm/Ports.elm
       15 src/elm/Ports/Todo.elm
       15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
@@ -99,7 +98,6 @@
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm
        9 src/elm/Msg/ExclusiveMode.elm
-       8 src/elm/Types/LocalPref.elm
        8 src/elm/Msg/CustomSync.elm
        8 src/elm/Msg/AppHeader.elm
        7 src/elm/X/String.elm

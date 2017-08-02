@@ -11,7 +11,6 @@ import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
-import LocalPref
 import Mat exposing (cs)
 import Material
 import Material.Options exposing (div)
@@ -198,7 +197,6 @@ type alias Flags =
     , appVersion : String
     , deviceId : String
     , config : AppConfig
-    , localPref : E.Value
     }
 
 
@@ -216,9 +214,6 @@ createAppModel flags =
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
-
-        localPref =
-            LocalPref.decode flags.localPref
 
         model : AppModel
         model =
@@ -285,10 +280,6 @@ updateConfig model =
 
 update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
 update config msg =
-    let
-        onPersistLocalPref =
-            effect (LocalPref.encodeLocalPref >> Ports.persistLocalPref)
-    in
     case msg of
         NOOP ->
             identity
@@ -334,12 +325,10 @@ update config msg =
 
         OnFirebaseMsg msg_ ->
             Update.Firebase.update config msg_
-                >> onPersistLocalPref
 
         OnAppDrawerMsg msg_ ->
             overReturnF appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
-        --                >> onPersistLocalPref
         _ ->
             returnWith identity (Page.getPage__ >> updatePage config msg)
 

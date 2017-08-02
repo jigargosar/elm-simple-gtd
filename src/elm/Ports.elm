@@ -9,9 +9,6 @@ port pouchDBChanges : (( String, E.Value ) -> msg) -> Sub msg
 port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
 
 
-port persistLocalPref : E.Value -> Cmd msg
-
-
 
 -- local storage
 

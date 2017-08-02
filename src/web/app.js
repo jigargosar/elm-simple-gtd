@@ -79,7 +79,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
     name: "SimpleGTD.com offline store",
   });
   
-  const localPref = await store.getItem("local-pref")
   
   const getOfflineStore = async () => {
     const storeKeys = await store.keys()
@@ -113,7 +112,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
       isDevelopmentMode,
       initialOfflineStore,
     },
-    localPref: localPref,
   }, db.allDocsMap)
   
   
@@ -125,10 +123,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   db.setupApp(app)
   
-  app.ports["persistLocalPref"].subscribe(async (localPref) => {
-    store.setItem("local-pref", localPref)
-         .catch(console.error)
-  });
   
   app.ports["persistToOfflineStore"].subscribe(([key, value]) => {
     store.setItem(key, value).catch(console.error)

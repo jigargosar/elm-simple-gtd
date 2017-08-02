@@ -29,8 +29,8 @@ type alias FirebaseClient =
     }
 
 
-init : String -> E.Value -> FirebaseModel
-init deviceId initialOfflineStore =
+initialValue : String -> E.Value -> FirebaseModel
+initialValue deviceId initialOfflineStore =
     let
         showSignInDialog =
             D.decodeValue (D.field "showSignInDialog" D.bool) initialOfflineStore

@@ -335,7 +335,6 @@
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
-      "Pages.EntityListOld",
       "Ports.Firebase",
       "Store",
       "Todo",
@@ -367,7 +366,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 54
+    "transitiveBackwardImportsCount": 53
   },
   "Data.EntityTree": {
     "fileName": "src/elm/Data/EntityTree.elm",
@@ -2467,35 +2466,6 @@
     ],
     "transitiveBackwardImportsCount": 6
   },
-  "Pages.EntityListOld": {
-    "fileName": "src/elm/Pages/EntityListOld.elm",
-    "moduleName": "Pages.EntityListOld",
-    "parentModuleName": "Pages",
-    "imports": [
-      "RouteUrl.Builder",
-      "Types.Document"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "Data.DeviceId",
-      "List.Extra",
-      "Maybe.Extra",
-      "RouteUrl.Builder",
-      "Set",
-      "Time",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "Types.Document",
-      "X.Function",
-      "X.Function.Infix"
-    ],
-    "transitiveImportsCount": 12,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
-  },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
     "moduleName": "Ports",
@@ -3600,7 +3570,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Pages.EntityList",
-      "Pages.EntityListOld",
       "Store",
       "Todo",
       "Todo.FormTypes",
@@ -3613,7 +3582,7 @@
       "Update.Page",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 18,
+    "backwardImportsCount": 17,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityTree",
@@ -3636,7 +3605,6 @@
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
-      "Pages.EntityListOld",
       "Store",
       "Todo",
       "Todo.Form",
@@ -3663,7 +3631,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 47
+    "transitiveBackwardImportsCount": 46
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -5448,7 +5416,6 @@
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
-      "Pages.EntityListOld",
       "Ports.Firebase",
       "Sequencer",
       "Store",
@@ -5487,7 +5454,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 70
+    "transitiveBackwardImportsCount": 69
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -5562,7 +5529,6 @@
       "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
-      "Pages.EntityListOld",
       "Ports.Firebase",
       "Sequencer",
       "Store",
@@ -5602,7 +5568,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 71
+    "transitiveBackwardImportsCount": 70
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

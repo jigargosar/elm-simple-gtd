@@ -4,7 +4,7 @@ import Firebase.Model as Model
 
 
 init =
-    Model.init
+    Model.initialValue
 
 
 getMaybeUserProfile =

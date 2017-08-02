@@ -1,4 +1,4 @@
-    8541 total
+    8484 total
      471 src/elm/Main.elm
      376 src/elm/Pages/EntityList.elm
      358 src/elm/Update/Todo/Internal.elm
@@ -48,7 +48,6 @@
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Todo/GroupEditView.elm
-      57 src/elm/Pages/EntityListOld.elm
       50 src/elm/Update/Todo.elm
       50 src/elm/Update/Page.elm
       50 src/elm/Types/Todo.elm

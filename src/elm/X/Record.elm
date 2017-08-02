@@ -12,6 +12,7 @@ module X.Record
         , overM
         , overReturn
         , overReturnF
+        , overReturnFMapCmd
         , overT2
         , set
         , setIn
@@ -102,13 +103,21 @@ overReturn field smallToReturn b =
         |> Tuple.mapFirst (setIn b field)
 
 
-overReturnF :
+overReturnFMapCmd :
     Field small big
     -> (msgS -> msgB)
     -> Return.ReturnF msgS small
     -> Return.ReturnF msgB big
-overReturnF field lift smallReturnF =
+overReturnFMapCmd field lift smallReturnF =
     Return.andThen
         (overReturn field (Return.singleton >> smallReturnF)
             >> Return.mapCmd lift
         )
+
+
+overReturnF :
+    Field small big
+    -> Return.ReturnF msg small
+    -> Return.ReturnF msg big
+overReturnF field smallReturnF =
+    Return.andThen (overReturn field (Return.singleton >> smallReturnF))

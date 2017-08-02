@@ -98,10 +98,6 @@ type alias AppModelOtherFields =
     }
 
 
-appDrawerModel =
-    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
-
-
 type SubscriptionMsg
     = OnPouchDBChange String E.Value
     | OnFirebaseDatabaseChange String E.Value
@@ -327,10 +323,18 @@ update config msg =
             Update.Todo.update config now msg_
 
         OnFirebaseMsg msg_ ->
-            Update.Firebase.update config msg_
+            let
+                firebaseModel =
+                    fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
+            in
+            overReturnF firebaseModel (Update.Firebase.update config msg_)
 
         OnAppDrawerMsg msg_ ->
-            overReturnF appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
+            let
+                appDrawerModel =
+                    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
+            in
+            overReturnFMapCmd appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
         _ ->
             returnWith identity (Page.getPage__ >> updatePage config msg)

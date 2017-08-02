@@ -16,6 +16,7 @@ init deviceId signInModel initialOfflineStore =
     let
         showSignInDialog =
             D.decodeValue (D.field "showSignInDialog" D.bool) initialOfflineStore
+                |> Debug.log "showSignInDialog decoded"
                 != True
     in
     { user = initUser

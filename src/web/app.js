@@ -81,10 +81,10 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   const localPref = await store.getItem("local-pref")
   
-  const getOfflineStore = async ()=>{
+  const getOfflineStore = async () => {
     const storeKeys = await store.keys()
-    const storeValues = await _.compose(ps => Promise.all(ps), _.map(k=>store.getItem(k)))(storeKeys)
-    return JSON.stringify(_.zipObj(storeKeys, storeValues))
+    const storeValues = await _.compose(ps => Promise.all(ps), _.map(k => store.getItem(k)))(storeKeys)
+    return _.zipObj(storeKeys, storeValues)
   }
   const initialOfflineStore = await getOfflineStore()
   // console.log(initialOfflineStore)
@@ -103,7 +103,14 @@ window.appBoot = async function appBoot(elmMain = Main) {
     developmentMode: isDevelopmentMode,
     appVersion: npmPackageVersion,
     deviceId,
-    config: {debug: WEBPACK_DEV_SERVER ,debugSecondMultiplier, deviceId, npmPackageVersion, isDevelopmentMode, initialOfflineStore },
+    config: {
+      debug: WEBPACK_DEV_SERVER,
+      debugSecondMultiplier,
+      deviceId,
+      npmPackageVersion,
+      isDevelopmentMode,
+      initialOfflineStore,
+    },
     localPref: localPref,
   }, db.allDocsMap)
   
@@ -119,6 +126,10 @@ window.appBoot = async function appBoot(elmMain = Main) {
   app.ports["persistLocalPref"].subscribe(async (localPref) => {
     store.setItem("local-pref", localPref)
          .catch(console.error)
+  });
+  
+  app.ports["persistToOfflineStore"].subscribe(([key, value]) => {
+    store.setItem(key, value).catch(console.error)
   });
   
   

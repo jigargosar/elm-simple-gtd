@@ -5,8 +5,11 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase.Model
 import Firebase.SignIn exposing (SignInModel, SignInModelF)
 import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 import Msg.Firebase exposing (..)
 import Navigation
+import Ports
 import Ports.Firebase exposing (..)
 import Return
 import Store
@@ -53,28 +56,30 @@ update config msg =
         OnFB_SwitchToNewUserSetupModeIfNeeded ->
             let
                 onSwitchToNewUserSetupModeIfNeeded model =
-                    if Firebase.SignIn.shouldSkipSignIn model.firebaseModel.signInModel then
-                        if Store.isEmpty model.todoStore then
-                            returnMsgAsCmd config.onStartSetupAddTodo
-                        else
-                            returnMsgAsCmd config.revertExclusiveMode
-                    else
+                    if model.firebaseModel.showSignInDialog then
                         config.onSetExclusiveMode XMSignInOverlay |> returnMsgAsCmd
+                    else if Store.isEmpty model.todoStore then
+                        returnMsgAsCmd config.onStartSetupAddTodo
+                    else
+                        returnMsgAsCmd config.revertExclusiveMode
             in
             returnWith identity onSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignIn ->
             command (signIn ())
                 >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
+                >> setAndPersistShowSignInDialog True
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSkipSignIn ->
             Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setSkipSignIn)
+                >> setAndPersistShowSignInDialog False
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
+                >> setAndPersistShowSignInDialog True
                 >> command (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
@@ -90,6 +95,7 @@ update config msg =
                                         (overSignInModelInFirebaseModel
                                             Firebase.SignIn.setStateToSignInSuccess
                                         )
+                                        >> setAndPersistShowSignInDialog False
                                         >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
                            )
                 )
@@ -120,6 +126,10 @@ update config msg =
                 >> maybeEffect firebaseUpdateClientCmd
 
 
+showSignInDialog =
+    fieldLens .showSignInDialog (\s b -> { b | showSignInDialog = s })
+
+
 signInModelL =
     fieldLens .signInModel (\s b -> { b | signInModel = s })
 
@@ -144,6 +154,11 @@ firebaseModelL =
 overSignInModelInFirebaseModel : SignInModelF -> SubModelF model
 overSignInModelInFirebaseModel =
     over signInModelL >> over firebaseModelL
+
+
+setAndPersistShowSignInDialog bool =
+    map (set showSignInDialog bool |> over firebaseModelL)
+        >> command (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
 
 
 firebaseUpdateClientCmd model =

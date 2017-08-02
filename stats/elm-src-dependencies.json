@@ -2582,13 +2582,15 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "Main"
+      "Main",
+      "Update.Firebase"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Main"
+      "Main",
+      "Update.Firebase"
     ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 2
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -4301,8 +4303,11 @@
       "Firebase.Model",
       "Firebase.SignIn",
       "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
       "Msg.Firebase",
       "Navigation",
+      "Ports",
       "Ports.Firebase",
       "Return",
       "Store",
@@ -4313,7 +4318,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 16,
+    "importsCount": 19,
     "transitiveImports": [
       "AppUrl",
       "Char",
@@ -4341,6 +4346,7 @@
       "Menu.Types",
       "Msg.Firebase",
       "Navigation",
+      "Ports",
       "Ports.Firebase",
       "Random.Pcg",
       "Return",
@@ -4368,7 +4374,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 52,
+    "transitiveImportsCount": 53,
     "backwardImports": [
       "Main"
     ],

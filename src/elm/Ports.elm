@@ -16,4 +16,4 @@ port persistLocalPref : E.Value -> Cmd msg
 -- local storage
 
 
-port persistToLocalStorage : ( String, E.Value ) -> Cmd msg
+port persistToOfflineStore : ( String, E.Value ) -> Cmd msg

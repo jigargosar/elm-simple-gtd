@@ -11,7 +11,6 @@ import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
-import Pages.EntityListOld exposing (..)
 import Store
 import Todo
 import Toolkit.Operators exposing (..)

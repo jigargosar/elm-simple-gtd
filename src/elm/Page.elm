@@ -1,7 +1,6 @@
 module Page exposing (..)
 
 import Pages.EntityList
-import Pages.EntityListOld exposing (..)
 import RouteUrl.Builder
 import X.Function.Infix exposing (..)
 
@@ -37,15 +36,6 @@ getPathFromModel model =
     case getPage__ model of
         EntityListPage model ->
             model.path
-
-
-routeUrlBuilderToMaybeEntityListPageModel builder =
-    case RouteUrl.Builder.path builder of
-        "done" :: [] ->
-            DoneView |> Just
-
-        _ ->
-            Nothing
 
 
 hash2messages config location =

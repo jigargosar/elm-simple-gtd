@@ -379,7 +379,6 @@ type alias ViewConfig msg =
     , setFocusInEntityWithEntityId : Entity.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
-    , gotoPageMsg : Page.Page -> msg
     , maybeEntityIdAtCursorOld : Maybe EntityId
     , maybeEntityIdAtCursor : Maybe EntityId
     , navigateToPathMsg : List String -> msg
@@ -406,7 +405,6 @@ viewConfig model =
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
     , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
-    , gotoPageMsg = PageMsg_SetPage >> OnPageMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
@@ -464,8 +462,7 @@ main =
         { delta2url = Page.delta2hash
         , location2messages =
             Page.hash2messages
-                { gotoPageMsg = PageMsg_SetPage >> OnPageMsg
-                , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+                { navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
                 }
         , init = init
         , update = update_

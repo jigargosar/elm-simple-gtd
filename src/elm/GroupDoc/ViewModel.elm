@@ -7,7 +7,6 @@ import Entity exposing (..)
 import GroupDoc
 import Keyboard.Extra as Key exposing (Key)
 import Material
-import Pages.EntityListOld exposing (..)
 import String.Extra
 import Todo
 import Toolkit.Helpers exposing (apply2)
@@ -60,7 +59,6 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getPage : DocId -> Old_EntityListPageModel
     , getTabIndexAVForEntityId : EntityId -> Int
     , groupDocType : Types.GroupDoc.GroupDocType
     }
@@ -173,7 +171,6 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getPage = ContextView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = Types.GroupDoc.ContextGroupDocType
             }
@@ -193,7 +190,6 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
-            , getPage = ProjectView
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = Types.GroupDoc.ProjectGroupDocType
             }

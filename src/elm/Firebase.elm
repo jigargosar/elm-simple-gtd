@@ -12,7 +12,7 @@ init =
 
 
 getMaybeUserProfile =
-    .firebaseModel >> .user >> Model.getMaybeUserProfile
+    .firebaseModel >> .maybeUser >> Model.getMaybeUserProfile
 
 
 type alias AppAttributes =

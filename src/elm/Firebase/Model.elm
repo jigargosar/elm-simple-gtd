@@ -18,7 +18,7 @@ init deviceId initialOfflineStore =
                 |> Debug.log "showSignInDialog decoded"
                 != True
     in
-    { user = initUser
+    { maybeUser = Nothing
     , fcmToken = Nothing
     , firebaseClient = initClient deviceId
     , showSignInDialog = showSignInDialog
@@ -46,31 +46,14 @@ encodeClient client =
         ]
 
 
-initUser =
-    SignedOut
-
-
-userDecoder : Decoder FirebaseUser
+userDecoder : Decoder MaybeUser
 userDecoder =
-    D.oneOf
-        [ Firebase.User.decoder |> D.map SignedIn
-        , D.succeed SignedOut
-        ]
+    D.maybe Firebase.User.decoder
 
 
-getMaybeUserProfile user =
-    case user of
-        SignedOut ->
-            Nothing
-
-        SignedIn userModel ->
-            userModel.providerData |> List.head
+getMaybeUserProfile maybeUser =
+    maybeUser ?+> (.providerData >> List.head)
 
 
-getMaybeUserId user =
-    case user of
-        SignedOut ->
-            Nothing
-
-        SignedIn userModel ->
-            userModel.id |> Just
+getMaybeUserId maybeUser =
+    maybeUser ?|> .id

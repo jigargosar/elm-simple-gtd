@@ -15,6 +15,6 @@ providerDataDecoder =
 
 
 decoder =
-    D.succeed UserInfo
+    D.succeed User
         |> D.required "uid" D.string
         |> D.required "providerData" (D.list providerDataDecoder)

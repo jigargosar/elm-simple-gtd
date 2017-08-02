@@ -2,19 +2,18 @@ module Types.Firebase exposing (..)
 
 
 type alias FirebaseModel =
-    { user : FirebaseUser
+    { maybeUser : MaybeUser
     , fcmToken : FCMToken
     , firebaseClient : FirebaseClient
     , showSignInDialog : Bool
     }
 
 
-type FirebaseUser
-    = SignedOut
-    | SignedIn UserInfo
+type alias MaybeUser =
+    Maybe User
 
 
-type alias UserInfo =
+type alias User =
     { id : String
     , providerData : List Provider
     }

@@ -4162,6 +4162,7 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
+      "Maybe.Extra",
       "Msg.Firebase",
       "Navigation",
       "Ports",
@@ -4175,7 +4176,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 18,
+    "importsCount": 19,
     "transitiveImports": [
       "AppUrl",
       "Char",

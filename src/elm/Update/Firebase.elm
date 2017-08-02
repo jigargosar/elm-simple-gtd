@@ -6,6 +6,7 @@ import Firebase.Model
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Maybe.Extra
 import Msg.Firebase exposing (..)
 import Navigation
 import Ports
@@ -56,29 +57,27 @@ update config msg =
 
         OnFBSignIn ->
             command (signIn ())
-                >> setAndPersistShowSignInDialog True
+                >> setAndPersistShowSignInDialogValue True
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSkipSignIn ->
-            setAndPersistShowSignInDialog False
+            setAndPersistShowSignInDialogValue False
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
-                >> setAndPersistShowSignInDialog True
+                >> setAndPersistShowSignInDialogValue True
                 >> command (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
             Return.andThen
                 (\model ->
                     Return.singleton model
-                        |> (case model.user of
-                                SignedOut ->
-                                    identity
-
-                                SignedIn user ->
-                                    setAndPersistShowSignInDialog False
-                                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+                        |> (if Maybe.Extra.isJust model.maybeUser then
+                                setAndPersistShowSignInDialogValue False
+                                    >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+                            else
+                                identity
                            )
                 )
 
@@ -121,14 +120,14 @@ firebaseClientL =
 
 
 userL =
-    fieldLens .user (\s b -> { b | user = s })
+    fieldLens .maybeUser (\s b -> { b | maybeUser = s })
 
 
 fcmTokenL =
     fieldLens .fcmToken (\s b -> { b | fcmToken = s })
 
 
-setAndPersistShowSignInDialog bool =
+setAndPersistShowSignInDialogValue bool =
     map (set showSignInDialog bool)
         >> command (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
 
@@ -157,7 +156,7 @@ setClientConnectionStatus =
 
 
 getMaybeUserId =
-    .user >> Firebase.Model.getMaybeUserId
+    .maybeUser >> Firebase.Model.getMaybeUserId
 
 
 setupOnDisconnectCmd client uid =

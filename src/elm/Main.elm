@@ -18,7 +18,6 @@ import Material.Options exposing (div)
 import Menu
 import Menu.Types
 import Models.Todo
-import Msg.GroupDoc exposing (GroupDocMsg)
 import Page exposing (Page, PageMsg(..))
 import Pages.EntityList
 import Ports
@@ -41,7 +40,7 @@ import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.ExclusiveMode exposing (ExclusiveModeMsg)
 import Update.Firebase exposing (..)
-import Update.GroupDoc
+import Update.GroupDoc exposing (..)
 import Update.Page
 import Update.Subscription
 import Update.Todo
@@ -252,7 +251,7 @@ updateConfig model =
     , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
-    , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
+    , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
@@ -397,7 +396,7 @@ viewConfig model =
     , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
     , onAppDrawerMsg = OnAppDrawerMsg
-    , onStartAddingGroupDoc = Msg.GroupDoc.OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
+    , onStartAddingGroupDoc = OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
@@ -409,10 +408,10 @@ viewConfig model =
     , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> OnTodoMsg
     , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> OnTodoMsg
     , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> OnTodoMsg
-    , onToggleGroupDocArchived = Msg.GroupDoc.onToggleGroupDocArchived >> OnGroupDocMsg
+    , onToggleGroupDocArchived = toggleGroupDocArchivedMsg >> OnGroupDocMsg
     , updateGroupDocFromNameMsg =
-        Msg.GroupDoc.updateGroupDocFromNameMsg >>> OnGroupDocMsg
-    , onStartEditingGroupDoc = Msg.GroupDoc.onStartEditingGroupDoc >> OnGroupDocMsg
+        updateGroupDocFromNameMsg >>> OnGroupDocMsg
+    , onStartEditingGroupDoc = startEditingGroupDocMsg >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursorOld = Nothing
     , maybeEntityIdAtCursor = Nothing

@@ -1,5 +1,5 @@
-    8438 total
-     464 src/elm/Main.elm
+    8433 total
+     463 src/elm/Main.elm
      376 src/elm/Pages/EntityList.elm
      357 src/elm/Update/Todo/Internal.elm
      316 src/elm/Todo.elm
@@ -19,10 +19,10 @@
      156 src/elm/Todo/Schedule.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
+     144 src/elm/Update/GroupDoc.elm
      141 src/elm/Views/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
-     126 src/elm/Update/GroupDoc.elm
      123 src/elm/X/Record.elm
      121 src/elm/Todo/Msg.elm
      111 src/elm/Todo/Form.elm
@@ -69,7 +69,6 @@
       31 src/elm/View/NewTodoFab.elm
       24 src/elm/EntityListCursor.elm
       24 src/elm/EntityId.elm
-      22 src/elm/Msg/GroupDoc.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
       20 src/elm/Models/Selection.elm

@@ -315,7 +315,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
       "Ports.Firebase",
@@ -350,7 +349,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 53
+    "transitiveBackwardImportsCount": 52
   },
   "Data.EntityTree": {
     "fileName": "src/elm/Data/EntityTree.elm",
@@ -1396,7 +1395,6 @@
       "Menu",
       "Menu.Types",
       "Models.Todo",
-      "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
       "Ports",
@@ -1433,7 +1431,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 54,
+    "importsCount": 53,
     "transitiveImports": [
       "AppColors",
       "AppDrawer.GroupViewModel",
@@ -1490,7 +1488,6 @@
       "Models.Selection",
       "Models.Stores",
       "Models.Todo",
-      "Msg.GroupDoc",
       "Navigation",
       "Notification",
       "Page",
@@ -1565,7 +1562,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 129,
+    "transitiveImportsCount": 128,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -2052,38 +2049,6 @@
       "Views.EntityList"
     ],
     "transitiveBackwardImportsCount": 12
-  },
-  "Msg.GroupDoc": {
-    "fileName": "src/elm/Msg/GroupDoc.elm",
-    "moduleName": "Msg.GroupDoc",
-    "parentModuleName": "Msg",
-    "imports": [
-      "Types.GroupDoc"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "Data.DeviceId",
-      "Dict",
-      "Json.Decode",
-      "Json.Encode",
-      "Random.Pcg",
-      "Set",
-      "Time",
-      "Types.Document",
-      "Types.GroupDoc",
-      "Types.Store"
-    ],
-    "transitiveImportsCount": 10,
-    "backwardImports": [
-      "Main",
-      "Update.GroupDoc"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "Main",
-      "Update.GroupDoc"
-    ],
-    "transitiveBackwardImportsCount": 2
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -3382,7 +3347,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
       "Store",
@@ -3412,7 +3376,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 46
+    "transitiveBackwardImportsCount": 45
   },
   "Types.GroupDoc": {
     "fileName": "src/elm/Types/GroupDoc.elm",
@@ -3447,14 +3411,13 @@
       "Main",
       "Models.GroupDocStore",
       "Models.HasStores",
-      "Msg.GroupDoc",
       "Pages.EntityList",
       "Types.Todo",
       "Update.ExclusiveMode",
       "Update.GroupDoc",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityTree",
@@ -3471,7 +3434,6 @@
       "Models.GroupDocStore",
       "Models.HasStores",
       "Models.Stores",
-      "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
       "Todo",
@@ -3498,7 +3460,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 41
+    "transitiveBackwardImportsCount": 40
   },
   "Types.Store": {
     "fileName": "src/elm/Types/Store.elm",
@@ -3547,7 +3509,6 @@
       "Models.HasStores",
       "Models.Stores",
       "Models.Todo",
-      "Msg.GroupDoc",
       "Page",
       "Pages.EntityList",
       "Store",
@@ -3576,7 +3537,7 @@
       "ViewModel",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 44
+    "transitiveBackwardImportsCount": 43
   },
   "Types.Todo": {
     "fileName": "src/elm/Types/Todo.elm",
@@ -3925,7 +3886,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "Models.GroupDocStore",
-      "Msg.GroupDoc",
       "Return",
       "Set",
       "Store",
@@ -3935,7 +3895,7 @@
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 14,
+    "importsCount": 13,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -3959,7 +3919,6 @@
       "Menu",
       "Menu.Types",
       "Models.GroupDocStore",
-      "Msg.GroupDoc",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3986,7 +3945,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 48,
+    "transitiveImportsCount": 47,
     "backwardImports": [
       "Main"
     ],

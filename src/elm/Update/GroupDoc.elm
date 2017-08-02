@@ -1,11 +1,10 @@
-module Update.GroupDoc exposing (Config, update)
+module Update.GroupDoc exposing (..)
 
 import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
 import GroupDoc
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
 import Models.GroupDocStore exposing (contextStore, projectStore)
-import Msg.GroupDoc exposing (..)
 import Return
 import Set
 import Store
@@ -14,6 +13,25 @@ import Toolkit.Operators exposing (..)
 import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
 import X.Return exposing (..)
+
+
+type GroupDocMsg
+    = OnGroupDocAction GroupDocType GroupDocAction
+    | OnSaveGroupDocForm GroupDocForm
+    | OnGroupDocIdAction GroupDocId GroupDocIdAction
+
+
+updateGroupDocFromNameMsg : GroupDocForm -> GroupDocName -> GroupDocMsg
+updateGroupDocFromNameMsg form newName =
+    OnGroupDocIdAction form.groupDocId (GDA_UpdateFormName form newName)
+
+
+toggleGroupDocArchivedMsg groupDocId =
+    OnGroupDocIdAction groupDocId GDA_ToggleArchived
+
+
+startEditingGroupDocMsg groupDocId =
+    OnGroupDocIdAction groupDocId GDA_StartEditing
 
 
 type alias SubModel model =

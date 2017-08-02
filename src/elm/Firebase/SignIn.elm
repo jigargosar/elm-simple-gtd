@@ -5,45 +5,11 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import X.Record
-
-
-type State
-    = FirstVisitNotSignedIn
-    | SkipSignIn
-    | SignInSuccess
-    | TriedSignOut
-
-
-stringToMaybeState string =
-    case string of
-        "SkipSignIn" ->
-            Just SkipSignIn
-
-        "TriedSignOut" ->
-            Just TriedSignOut
-
-        "SignInSuccess" ->
-            Just SignInSuccess
-
-        "FirstVisitNotSignedIn" ->
-            Just FirstVisitNotSignedIn
-
-        _ ->
-            Nothing
-
-
-stateDecoder : Decoder State
-stateDecoder =
-    D.string
-        |> D.andThen
-            (\string ->
-                string |> stringToMaybeState ?|> D.succeed ?= D.fail ("Unknown State: " ++ string)
-            )
+import X.Record exposing (..)
 
 
 type alias SignInModel =
-    { state : State
+    { showSignInDialog : Bool
     }
 
 
@@ -51,48 +17,40 @@ type alias SignInModelF =
     SignInModel -> SignInModel
 
 
-state =
-    X.Record.fieldLens .state (\s b -> { b | state = s })
+showSignInDialog =
+    X.Record.fieldLens .showSignInDialog (\s b -> { b | showSignInDialog = s })
 
 
 decoder : Decoder SignInModel
 decoder =
     D.succeed SignInModel
-        |> D.required "state" stateDecoder
+        |> D.optional "showSignInDialog" D.bool True
 
 
 encode : SignInModel -> E.Value
 encode model =
     E.object
-        [ "state" => E.string (toString model.state)
+        [ "showSignInDialog" => E.bool model.showSignInDialog
         ]
 
 
 default : SignInModel
 default =
-    { state = FirstVisitNotSignedIn
+    { showSignInDialog = True
     }
 
 
 shouldSkipSignIn model =
-    case model.state of
-        SignInSuccess ->
-            True
-
-        SkipSignIn ->
-            True
-
-        _ ->
-            False
+    not model.showSignInDialog
 
 
 setSkipSignIn =
-    X.Record.set state SkipSignIn
+    set showSignInDialog False
 
 
 setStateToTriedSignOut =
-    X.Record.set state TriedSignOut
+    set showSignInDialog True
 
 
 setStateToSignInSuccess =
-    X.Record.set state SignInSuccess
+    set showSignInDialog False

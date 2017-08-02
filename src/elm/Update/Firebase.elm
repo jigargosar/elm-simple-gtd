@@ -65,6 +65,8 @@ update config msg =
 
         OnFBSignIn ->
             command (signIn ())
+                >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
+                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSkipSignIn ->
             Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setSkipSignIn)

@@ -1,8 +1,8 @@
 module Models.HasStores exposing (..)
 
+import GroupDoc exposing (..)
 import Page exposing (Page)
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
+import Todo exposing (..)
 
 
 type alias HasStores x =

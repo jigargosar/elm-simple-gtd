@@ -1,20 +1,93 @@
 module GroupDoc exposing (..)
 
 import Data.DeviceId exposing (DeviceId)
-import Document
+import Document exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg
-import Store
+import Store exposing (..)
 import Time exposing (Time)
 import Tuple2
-import Types.Document exposing (..)
-import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Predicate
 import X.Record
+
+
+type GroupDocType
+    = ContextGroupDocType
+    | ProjectGroupDocType
+
+
+type GroupDocId
+    = ContextGroupDocId DocId
+    | ProjectGroupDocId DocId
+
+
+type GroupDocAction
+    = GDA_StartAdding
+
+
+type GroupDocIdAction
+    = GDA_StartEditing
+    | GDA_ToggleArchived
+    | GDA_ToggleDeleted
+    | GDA_UpdateFormName GroupDocForm GroupDocName
+    | GDA_SaveForm GroupDocForm
+
+
+type alias GroupDocForm =
+    { id : DocId
+    , groupDocType : GroupDocType
+    , groupDocId : GroupDocId
+    , name : GroupDocName
+    , isArchived : Bool
+    , mode : GroupDocFormMode
+    }
+
+
+type GroupDocFormMode
+    = GDFM_Add
+    | GDFM_Edit
+
+
+type alias GroupDocName =
+    String
+
+
+type alias Archived =
+    Bool
+
+
+type alias Record =
+    { name : GroupDocName
+    , archived : Bool
+    }
+
+
+type alias GroupDoc =
+    Document Record
+
+
+type alias ContextDoc =
+    GroupDoc
+
+
+type alias ProjectDoc =
+    GroupDoc
+
+
+type alias GroupDocStore =
+    Store Record
+
+
+type alias ProjectStore =
+    GroupDocStore
+
+
+type alias ContextStore =
+    GroupDocStore
 
 
 createGroupDocIdFromType gdType =

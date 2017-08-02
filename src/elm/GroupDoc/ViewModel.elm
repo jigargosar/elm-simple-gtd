@@ -2,17 +2,14 @@ module GroupDoc.ViewModel exposing (..)
 
 import AppColors
 import Color
-import Document
+import Document exposing (..)
 import Entity exposing (..)
-import GroupDoc
+import GroupDoc exposing (..)
 import Keyboard.Extra as Key exposing (Key)
 import Material
 import String.Extra
-import Todo
+import Todo exposing (..)
 import Toolkit.Helpers exposing (apply2)
-import Types.Document exposing (..)
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (when)
 import X.Keyboard exposing (KeyboardEvent)
 
@@ -47,7 +44,7 @@ type alias GroupDocViewModel msg =
 
 
 type alias GroupDoc =
-    Types.GroupDoc.GroupDoc
+    GroupDoc.GroupDoc
 
 
 type alias Config =
@@ -60,7 +57,7 @@ type alias Config =
     , defaultColor : Color.Color
     , defaultIconName : String
     , getTabIndexAVForEntityId : EntityId -> Int
-    , groupDocType : Types.GroupDoc.GroupDocType
+    , groupDocType : GroupDoc.GroupDocType
     }
 
 
@@ -172,7 +169,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = Types.GroupDoc.ContextGroupDocType
+            , groupDocType = GroupDoc.ContextGroupDocType
             }
     in
     create config configInner todoList context
@@ -191,7 +188,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
-            , groupDocType = Types.GroupDoc.ProjectGroupDocType
+            , groupDocType = GroupDoc.ProjectGroupDocType
             }
     in
     create config configInner todoList project

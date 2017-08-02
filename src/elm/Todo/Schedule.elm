@@ -4,8 +4,13 @@ import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
+
+
+type TodoSchedule
+    = NoReminder Time
+    | WithReminder Time Time
+    | Unscheduled
 
 
 type alias Model =

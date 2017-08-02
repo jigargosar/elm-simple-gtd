@@ -1,6 +1,6 @@
 port module Update.Todo.Internal exposing (..)
 
-import Document
+import Document exposing (..)
 import DomPorts
 import Entity exposing (..)
 import EntityId
@@ -13,14 +13,12 @@ import Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
-import Todo
+import Todo exposing (..)
 import Todo.Form
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
-import Types.Document exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
 import X.Record as Record exposing (overReturn, overT2, set)

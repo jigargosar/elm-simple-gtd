@@ -1,41 +1,41 @@
-    8429 total
-     463 src/elm/Main.elm
-     376 src/elm/Pages/EntityList.elm
-     357 src/elm/Update/Todo/Internal.elm
-     316 src/elm/Todo.elm
-     284 src/elm/Store.elm
+    8500 total
+     461 src/elm/Main.elm
+     374 src/elm/Pages/EntityList.elm
+     355 src/elm/Update/Todo/Internal.elm
+     353 src/elm/Todo.elm
+     293 src/elm/Store.elm
+     286 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
-     234 src/elm/AppDrawer/GroupViewModel.elm
+     233 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     213 src/elm/GroupDoc.elm
-     201 src/elm/GroupDoc/ViewModel.elm
+     198 src/elm/GroupDoc/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      177 src/elm/Update/Firebase.elm
      177 src/elm/Todo/ViewModel.elm
-     170 src/elm/Data/EntityTree.elm
+     168 src/elm/Update/Todo.elm
+     168 src/elm/Data/EntityTree.elm
      167 src/elm/AppDrawer/Model.elm
      162 src/elm/Todo/ItemView.elm
+     161 src/elm/Todo/Schedule.elm
      156 src/elm/Update/Subscription.elm
-     156 src/elm/Todo/Schedule.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     144 src/elm/Update/GroupDoc.elm
+     143 src/elm/Update/GroupDoc.elm
      141 src/elm/Views/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
      123 src/elm/X/Record.elm
      121 src/elm/Todo/Msg.elm
-     111 src/elm/Todo/Form.elm
+     110 src/elm/Todo/Form.elm
+     110 src/elm/Document.elm
      103 src/elm/Todo/View.elm
-      98 src/elm/Models/GroupDocStore.elm
+      97 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
       92 src/elm/Update/ExclusiveMode.elm
       88 src/elm/X/Html.elm
-      87 src/elm/Entity.elm
-      87 src/elm/Document.elm
+      86 src/elm/Entity.elm
       83 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
-      79 src/elm/Types/GroupDoc.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/AppColors.elm
       75 src/elm/ViewModel.elm
@@ -47,17 +47,15 @@
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
-      63 src/elm/Todo/GroupEditView.elm
-      50 src/elm/Update/Todo.elm
+      62 src/elm/Todo/GroupEditView.elm
       50 src/elm/Update/Page.elm
       50 src/elm/Update/AppHeader.elm
-      50 src/elm/Types/Todo.elm
-      50 src/elm/Todo/Notification/Model.elm
       50 src/elm/AppUrl.elm
+      49 src/elm/Todo/Notification/Model.elm
       49 src/elm/Page.elm
       47 src/elm/Update/AppDrawer.elm
-      47 src/elm/GroupDoc/Form.elm
       46 src/elm/Notification.elm
+      46 src/elm/GroupDoc/Form.elm
       45 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
       39 src/elm/X/Random.elm
@@ -66,7 +64,6 @@
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
-      28 src/elm/Types/Document.elm
       24 src/elm/EntityListCursor.elm
       24 src/elm/EntityId.elm
       21 src/elm/X/Predicate.elm
@@ -78,7 +75,6 @@
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      18 src/elm/Types/Store.elm
       16 src/elm/Ports.elm
       16 src/elm/Models/Todo.elm
       15 src/elm/Ports/Todo.elm

@@ -1,23 +1,60 @@
 module Todo exposing (..)
 
 import Data.DeviceId exposing (DeviceId)
-import Document
+import Document exposing (..)
+import GroupDoc exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import List
 import Maybe.Extra as Maybe
 import Random.Pcg
-import Store
+import Store exposing (..)
 import Time exposing (Time)
-import Todo.Schedule
+import Todo.Schedule exposing (TodoSchedule)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Types.Document exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (over, set)
+
+
+type alias TodoText =
+    String
+
+
+type alias TodoRecord =
+    { done : Bool
+    , text : TodoText
+    , schedule : TodoSchedule
+    , projectId : DocId
+    , contextId : DocId
+    }
+
+
+type alias TodoDoc =
+    Document TodoRecord
+
+
+type TodoAction
+    = TA_MarkDone
+    | TA_SetText TodoText
+    | TA_SetContextId DocId
+    | TA_SetScheduleFromMaybeTime (Maybe Time)
+    | TA_SetContext ContextDoc
+    | TA_SetProjectId DocId
+    | TA_CopyProjectAndContextId TodoDoc
+    | TA_SetProject ProjectDoc
+    | TA_ToggleDone
+    | TA_ToggleDeleted
+    | TA_TurnReminderOff
+    | TA_SetSchedule TodoSchedule
+    | TA_SnoozeTill Time
+    | TA_AutoSnooze Time
+
+
+type alias TodoStore =
+    Store TodoRecord
 
 
 type alias Text =

@@ -1,6 +1,7 @@
 port module Store
     exposing
-        ( asIdDict
+        ( Store
+        , asIdDict
         , filterDocs
         , findBy
         , findById
@@ -17,7 +18,7 @@ port module Store
 
 import Data.DeviceId exposing (DeviceId)
 import Dict exposing (Dict)
-import Document
+import Document exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import List.Extra as List
@@ -27,11 +28,19 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
-import Types.Document exposing (..)
-import Types.Store exposing (..)
 import X.Debug
 import X.Random
 import X.Record as Record exposing (get, over, overT2)
+
+
+type alias Store x =
+    { seed : Random.Pcg.Seed
+    , dict : Dict DocId (Document x)
+    , otherFieldsEncoder : Document x -> List ( String, E.Value )
+    , decoder : Decoder (Document x)
+    , name : String
+    , deviceId : DeviceId
+    }
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg

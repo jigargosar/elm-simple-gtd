@@ -4,9 +4,8 @@ import Date
 import Date.Extra as Date
 import Document
 import Time exposing (Time)
-import Todo
+import Todo exposing (..)
 import Todo.Notification.Types exposing (..)
-import Types.Todo exposing (..)
 import X.Function exposing (..)
 
 

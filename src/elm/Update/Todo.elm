@@ -1,11 +1,129 @@
-module Update.Todo exposing (Config, update)
+module Update.Todo exposing (..)
 
+import Document exposing (..)
+import Notification exposing (Response)
 import Set
 import Time
-import Todo.Msg exposing (TodoMsg(..))
+import Todo exposing (..)
+import Todo.FormTypes exposing (..)
+import Todo.Notification.Model
 import Update.Todo.Internal exposing (..)
 import X.Function.Infix exposing (..)
 import X.Return exposing (..)
+
+
+type TodoMsg
+    = OnReminderNotificationClicked Notification.TodoNotificationEvent
+    | OnProcessPendingNotificationCronTick
+    | UpdateTodoOrAllSelected__ DocId TodoAction
+    | UpdateTodo__ DocId TodoAction
+    | OnTodoReminderOverlayAction Todo.Notification.Model.Action
+    | OnStartAddingTodo AddTodoFormMode
+    | OnStartEditingTodo TodoDoc EditTodoFormMode
+    | OnUpdateTodoFormAction TodoForm TodoFormAction
+    | OnSaveTodoForm TodoForm
+
+
+onReminderOverlayActionMsg =
+    OnTodoReminderOverlayAction
+
+
+
+-- form add
+
+
+onStartAdding__ =
+    OnStartAddingTodo
+
+
+onStartAddingTodoToInbox =
+    onStartAdding__ ATFM_AddToInbox
+
+
+onStartAddingTodoWithFocusInEntityAsReference =
+    ATFM_AddWithFocusInEntityAsReference >> onStartAdding__
+
+
+onStartSetupAddTodo =
+    onStartAdding__ ATFM_SetupFirstTodo
+
+
+
+-- form edit
+
+
+onStartEditingMsg__ editMode todo =
+    OnStartEditingTodo todo editMode
+
+
+onStartEditingTodoMsg =
+    onStartEditingTodoTextMsg
+
+
+onStartEditingTodoTextMsg =
+    onStartEditingMsg__ ETFM_EditTodoText
+
+
+onStartEditingTodoContextMsg =
+    onStartEditingMsg__ ETFM_EditTodoContext
+
+
+onStartEditingTodoProjectMsg =
+    onStartEditingMsg__ ETFM_EditTodoProject
+
+
+onStartEditingReminderMsg =
+    onStartEditingMsg__ ETFM_EditTodoSchedule
+
+
+
+-- form update
+
+
+onUpdateFormActionMsg__ setterAction form =
+    setterAction >> OnUpdateTodoFormAction form
+
+
+onSetTodoFormMenuStateMsg =
+    onUpdateFormActionMsg__ SetTodoMenuState
+
+
+onSetTodoFormReminderDateMsg =
+    onUpdateFormActionMsg__ SetTodoReminderDate
+
+
+onSetTodoFormReminderTimeMsg =
+    onUpdateFormActionMsg__ SetTodoReminderTime
+
+
+onSetTodoFormTextMsg =
+    onUpdateFormActionMsg__ SetTodoText
+
+
+
+-- direct
+
+
+onToggleDeletedMsg id =
+    UpdateTodo__ id TA_ToggleDeleted
+
+
+onToggleDeletedAndMaybeSelectionMsg id =
+    UpdateTodoOrAllSelected__ id TA_ToggleDeleted
+
+
+onToggleDoneAndMaybeSelectionMsg id =
+    UpdateTodoOrAllSelected__ id TA_ToggleDone
+
+
+onSetProjectAndMaybeSelectionMsg id =
+    TA_SetProject
+        >> UpdateTodoOrAllSelected__ id
+
+
+onSetContextAndMaybeSelectionMsg id =
+    TA_SetContext
+        >> UpdateTodoOrAllSelected__ id
 
 
 type alias Config msg a =

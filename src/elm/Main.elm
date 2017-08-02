@@ -2,12 +2,13 @@ module Main exposing (main)
 
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
+import Document exposing (..)
 import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
-import GroupDoc
+import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
@@ -27,15 +28,12 @@ import Random.Pcg
 import RouteUrl
 import Set exposing (Set)
 import Time exposing (Time)
-import Todo
+import Todo exposing (..)
 import Todo.FormTypes
-import Todo.Msg exposing (TodoMsg)
+import Update.Todo exposing (TodoMsg)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
-import Types.Document exposing (..)
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.ExclusiveMode exposing (ExclusiveModeMsg)
@@ -114,7 +112,7 @@ type AppMsg
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     EntityListCursor.getMaybeEntityIdAtCursor__ model
-        |> Todo.Msg.onStartAddingTodoWithFocusInEntityAsReference
+        |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
 
@@ -155,11 +153,11 @@ subscriptions model =
             ]
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
-            [ notificationClicked Todo.Msg.OnReminderNotificationClicked
+            [ notificationClicked Update.Todo.OnReminderNotificationClicked
 
             -- note: 30 seconds is so that we can received any updates from firebase
             -- before triggering and changing any stale overdue todos timestamps.
-            , everyXSeconds 30 (\_ -> Todo.Msg.OnProcessPendingNotificationCronTick)
+            , everyXSeconds 30 (\_ -> Update.Todo.OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch
@@ -243,14 +241,14 @@ type alias UpdateConfig msg =
 
 updateConfig : AppModel -> UpdateConfig AppMsg
 updateConfig model =
-    { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
+    { onStartAddingTodoToInbox = Update.Todo.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onSetExclusiveMode = Update.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
-    , onStartSetupAddTodo = Todo.Msg.onStartSetupAddTodo |> OnTodoMsg
+    , onStartSetupAddTodo = Update.Todo.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
-    , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
+    , saveTodoForm = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
@@ -379,21 +377,21 @@ type alias ViewConfig msg =
 
 viewConfig : AppModel -> ViewConfig AppMsg
 viewConfig model =
-    { onSetProject = Todo.Msg.onSetProjectAndMaybeSelection >>> OnTodoMsg
-    , onSetContext = Todo.Msg.onSetContextAndMaybeSelection >>> OnTodoMsg
-    , onSetTodoFormMenuState = Todo.Msg.onSetTodoFormMenuState >>> OnTodoMsg
+    { onSetProject = Update.Todo.onSetProjectAndMaybeSelectionMsg >>> OnTodoMsg
+    , onSetContext = Update.Todo.onSetContextAndMaybeSelectionMsg >>> OnTodoMsg
+    , onSetTodoFormMenuState = Update.Todo.onSetTodoFormMenuStateMsg >>> OnTodoMsg
     , noop = NOOP
     , revertExclusiveMode = revertExclusiveModeMsg
-    , onSetTodoFormText = Todo.Msg.onSetTodoFormText >>> OnTodoMsg
-    , onToggleDeleted = Todo.Msg.onToggleDeleted >> OnTodoMsg
-    , onSetTodoFormReminderDate = Todo.Msg.onSetTodoFormReminderDate >>> OnTodoMsg
-    , onSetTodoFormReminderTime = Todo.Msg.onSetTodoFormReminderTime >>> OnTodoMsg
+    , onSetTodoFormText = Update.Todo.onSetTodoFormTextMsg >>> OnTodoMsg
+    , onToggleDeleted = Update.Todo.onToggleDeletedMsg >> OnTodoMsg
+    , onSetTodoFormReminderDate = Update.Todo.onSetTodoFormReminderDateMsg >>> OnTodoMsg
+    , onSetTodoFormReminderTime = Update.Todo.onSetTodoFormReminderTimeMsg >>> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
     , onSignIn = OnFirebaseMsg OnFBSignIn
     , onSignOut = OnFirebaseMsg OnFBSignOut
     , onFirebaseMsg = OnFirebaseMsg
-    , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
+    , onReminderOverlayAction = Update.Todo.onReminderOverlayActionMsg >> OnTodoMsg
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
     , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
@@ -402,12 +400,12 @@ viewConfig model =
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> EntityListMsg
-    , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
-    , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
-    , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> OnTodoMsg
-    , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> OnTodoMsg
-    , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> OnTodoMsg
-    , onToggleDoneAndMaybeSelection = Todo.Msg.onToggleDoneAndMaybeSelection >> OnTodoMsg
+    , onStartEditingTodoProject = Update.Todo.onStartEditingTodoProjectMsg >> OnTodoMsg
+    , onStartEditingTodoContext = Update.Todo.onStartEditingTodoContextMsg >> OnTodoMsg
+    , onStartEditingTodoText = Update.Todo.onStartEditingTodoTextMsg >> OnTodoMsg
+    , onStartEditingReminder = Update.Todo.onStartEditingReminderMsg >> OnTodoMsg
+    , onToggleDeletedAndMaybeSelection = Update.Todo.onToggleDeletedAndMaybeSelectionMsg >> OnTodoMsg
+    , onToggleDoneAndMaybeSelection = Update.Todo.onToggleDoneAndMaybeSelectionMsg >> OnTodoMsg
     , onToggleGroupDocArchived = toggleGroupDocArchivedMsg >> OnGroupDocMsg
     , updateGroupDocFromNameMsg =
         updateGroupDocFromNameMsg >>> OnGroupDocMsg

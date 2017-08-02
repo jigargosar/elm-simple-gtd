@@ -1,10 +1,10 @@
-module Todo.Msg exposing (..)
+module Update.Todo exposing (..)
 
+import Document exposing (..)
 import Notification exposing (Response)
+import Todo exposing (..)
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
-import Types.Document exposing (..)
-import Types.Todo exposing (..)
 
 
 type TodoMsg

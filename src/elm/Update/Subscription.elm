@@ -2,14 +2,14 @@ module Update.Subscription exposing (..)
 
 import Entity exposing (..)
 import ExclusiveMode.Types
+import GroupDoc exposing (..)
 import Keyboard.Extra exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Models.Selection
 import Models.Todo exposing (todoStore)
 import Return
 import Store
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
+import Todo exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)

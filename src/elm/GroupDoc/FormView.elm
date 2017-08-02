@@ -1,13 +1,13 @@
 module GroupDoc.FormView exposing (..)
 
 import Entity exposing (..)
+import GroupDoc exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Toolkit.Operators exposing (..)
 import Tuple2
-import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)

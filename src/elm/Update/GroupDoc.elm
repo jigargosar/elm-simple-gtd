@@ -2,7 +2,7 @@ module Update.GroupDoc exposing (..)
 
 import Document
 import ExclusiveMode.Types exposing (ExclusiveMode(XMGroupDocForm))
-import GroupDoc
+import GroupDoc exposing (..)
 import GroupDoc.Form exposing (createAddGroupDocForm, createEditContextForm, createEditGroupDocForm)
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Return
@@ -10,7 +10,6 @@ import Set
 import Store
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens, overReturn, overT2)
 import X.Return exposing (..)
 

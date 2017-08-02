@@ -4,10 +4,33 @@ import Data.DeviceId exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Set exposing (Set)
 import Time exposing (Time)
-import Types.Document exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
+
+
+type alias DocId =
+    String
+
+
+type alias Revision =
+    String
+
+
+type alias Deleted =
+    Bool
+
+
+type alias Document record =
+    { record
+        | id : DocId
+        , rev : Revision
+        , deleted : Deleted
+        , createdAt : Time
+        , modifiedAt : Time
+        , deviceId : DeviceId
+    }
 
 
 getId =

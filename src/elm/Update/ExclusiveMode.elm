@@ -2,9 +2,9 @@ module Update.ExclusiveMode exposing (..)
 
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
+import GroupDoc exposing (..)
 import Return
 import Todo.FormTypes exposing (..)
-import Types.GroupDoc exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
 

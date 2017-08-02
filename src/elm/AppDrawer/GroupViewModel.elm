@@ -8,13 +8,12 @@ import Dict
 import Dict.Extra
 import Document
 import Entity exposing (..)
-import GroupDoc
+import GroupDoc exposing (..)
 import Models.GroupDocStore
 import Models.Stores
 import String.Extra
 import Todo
 import Toolkit.Operators exposing (..)
-import Types.GroupDoc exposing (..)
 import X.Function exposing (when)
 import X.Maybe
 

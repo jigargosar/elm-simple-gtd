@@ -3,10 +3,10 @@ module Pages.EntityList exposing (..)
 import AppColors
 import Color exposing (Color)
 import Data.EntityTree
-import Document
+import Document exposing (..)
 import Entity exposing (..)
 import EntityListCursor
-import GroupDoc
+import GroupDoc exposing (..)
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection
@@ -15,8 +15,6 @@ import Store
 import Todo
 import Toolkit.Operators exposing (..)
 import Tuple2
-import Types.Document exposing (DocId)
-import Types.GroupDoc exposing (..)
 import X.Function exposing (..)
 import X.List
 import X.Predicate

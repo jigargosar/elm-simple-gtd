@@ -2,12 +2,10 @@ module Data.EntityTree exposing (..)
 
 import Document
 import Entity exposing (..)
-import GroupDoc
+import GroupDoc exposing (..)
 import List.Extra as List
-import Todo
+import Todo exposing (..)
 import Toolkit.Operators exposing (..)
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (..)
 
 
 type alias ContextNode =

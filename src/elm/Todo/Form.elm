@@ -11,10 +11,9 @@ import Document
 import Menu
 import Time exposing (Time)
 import Time.Format
-import Todo
+import Todo exposing (..)
 import Todo.FormTypes exposing (..)
 import Toolkit.Operators exposing (..)
-import Types.Todo exposing (..)
 import X.Record exposing (fieldLens, over, overM, set)
 
 

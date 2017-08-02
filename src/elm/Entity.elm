@@ -1,9 +1,8 @@
 module Entity exposing (..)
 
-import Document
-import Types.Document exposing (DocId)
-import Types.GroupDoc exposing (..)
-import Types.Todo exposing (TodoDoc)
+import Document exposing (..)
+import GroupDoc exposing (..)
+import Todo exposing (TodoDoc)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 

@@ -1,12 +1,12 @@
 module Update.Page exposing (Config, update)
 
+import Document exposing (..)
 import Models.Selection
 import Page exposing (..)
 import Pages.EntityList
 import Return
 import Set exposing (Set)
 import Toolkit.Operators exposing (..)
-import Types.Document exposing (..)
 import X.Return exposing (..)
 
 

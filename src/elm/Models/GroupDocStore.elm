@@ -1,11 +1,10 @@
 module Models.GroupDocStore exposing (..)
 
 import Document
-import GroupDoc
+import GroupDoc exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Store
-import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens)
 
 

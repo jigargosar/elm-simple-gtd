@@ -3,7 +3,6 @@ module AppDrawer.Model exposing (..)
 import Json.Decode as D
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

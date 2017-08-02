@@ -30,7 +30,6 @@ import Ports.Todo exposing (..)
 import Random.Pcg
 import RouteUrl
 import Set exposing (Set)
-import Store
 import Time exposing (Time)
 import Todo
 import Todo.FormTypes
@@ -54,7 +53,6 @@ import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
 import ViewModel
 import Views.EntityList
-import Window
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)
@@ -104,7 +102,7 @@ type AppMsg
     | OnPageMsg PageMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
-    | OnEntityMsgNew Pages.EntityList.Msg
+    | EntityListMsg Pages.EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
     | OnTodoMsg TodoMsg
@@ -136,7 +134,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
 setFocusInEntityWithEntityIdMsg =
-    Pages.EntityList.SetFocusableEntityId >> OnEntityMsgNew
+    Pages.EntityList.SetFocusableEntityId >> EntityListMsg
 
 
 subscriptions : AppModel -> Sub AppMsg
@@ -258,8 +256,8 @@ updateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Todo.Msg.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = Msg.GroupDoc.OnSaveGroupDocForm >> OnGroupDocMsg
-    , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
-    , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
+    , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
+    , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }
@@ -327,11 +325,9 @@ update config msg =
 
 updatePage config msg page =
     case ( page, msg ) of
-        ( Page.EntityListPage model_, OnEntityMsgNew msg_ ) ->
+        ( Page.EntityListPage model_, EntityListMsg msg_ ) ->
             Pages.EntityList.update config msg_ model_
 
-        --        ( _, OnEntityMsgNew msg_ ) ->
-        --            Pages.EntityList.updateDefault config msg_
         _ ->
             identity
 
@@ -409,7 +405,7 @@ viewConfig model =
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> OnEntityMsgNew
+    , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> EntityListMsg
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
     , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> OnTodoMsg

@@ -1,9 +1,6 @@
 module EntityListCursor exposing (..)
 
 import Entity exposing (..)
-import Toolkit.Operators exposing (..)
-import Tuple2
-import X.List
 
 
 type alias EntityListCursor =

@@ -6,9 +6,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
-import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
-import X.List
 
 
 appMainHeader config viewModel m =

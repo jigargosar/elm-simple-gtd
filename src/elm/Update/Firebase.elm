@@ -5,17 +5,13 @@ import Data.User
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase.Model exposing (..)
 import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
-import Maybe.Extra
 import Msg.Firebase exposing (..)
 import Navigation
 import Ports
 import Ports.Firebase exposing (..)
 import Return
-import Store
 import Toolkit.Operators exposing (..)
-import Types.Todo exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)

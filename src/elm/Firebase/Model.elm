@@ -5,7 +5,6 @@ import Data.User exposing (MaybeUser)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
 import Json.Encode.Extra as E
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 

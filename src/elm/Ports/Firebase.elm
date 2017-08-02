@@ -2,8 +2,6 @@ port module Ports.Firebase exposing (..)
 
 import Data.DeviceId exposing (DeviceId)
 import Data.User
-import Firebase
-import Firebase.Model
 import Json.Encode as E
 
 

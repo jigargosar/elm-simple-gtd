@@ -1,7 +1,7 @@
-    8484 total
-     471 src/elm/Main.elm
+    8452 total
+     467 src/elm/Main.elm
      376 src/elm/Pages/EntityList.elm
-     358 src/elm/Update/Todo/Internal.elm
+     357 src/elm/Update/Todo/Internal.elm
      316 src/elm/Todo.elm
      284 src/elm/Store.elm
      267 src/elm/Mat.elm
@@ -11,9 +11,9 @@
      201 src/elm/GroupDoc/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
      177 src/elm/Todo/ViewModel.elm
-     170 src/elm/Update/Firebase.elm
      170 src/elm/Data/EntityTree.elm
-     168 src/elm/AppDrawer/Model.elm
+     167 src/elm/AppDrawer/Model.elm
+     166 src/elm/Update/Firebase.elm
      162 src/elm/Todo/ItemView.elm
      156 src/elm/Update/Subscription.elm
      156 src/elm/Todo/Schedule.elm
@@ -42,8 +42,8 @@
       75 src/elm/View/Layout.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
-      71 src/elm/View/Header.elm
-      69 src/elm/Firebase/Model.elm
+      69 src/elm/View/Header.elm
+      68 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
@@ -60,14 +60,14 @@
       45 src/elm/Update/AppHeader.elm
       45 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
-      40 src/elm/Data/User.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
-      34 src/elm/Ports/Firebase.elm
+      33 src/elm/Data/User.elm
       32 src/elm/Types/Document.elm
+      32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
-      27 src/elm/EntityListCursor.elm
+      24 src/elm/EntityListCursor.elm
       24 src/elm/EntityId.elm
       22 src/elm/Msg/GroupDoc.elm
       21 src/elm/X/Predicate.elm
@@ -87,7 +87,6 @@
       14 src/elm/View/Badge.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm
-      12 src/elm/Data/DeviceId.elm
       11 src/elm/Firebase.elm
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
@@ -96,3 +95,4 @@
        8 src/elm/Msg/AppHeader.elm
        7 src/elm/X/String.elm
        6 src/elm/Menu/Types.elm
+       5 src/elm/Data/DeviceId.elm

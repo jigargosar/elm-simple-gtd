@@ -18,7 +18,6 @@ import Todo.Form
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
 import Types.Todo exposing (..)

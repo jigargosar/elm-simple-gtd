@@ -1,5 +1,5 @@
-    8443 total
-     465 src/elm/Main.elm
+    8438 total
+     464 src/elm/Main.elm
      376 src/elm/Pages/EntityList.elm
      357 src/elm/Update/Todo/Internal.elm
      316 src/elm/Todo.elm
@@ -10,10 +10,10 @@
      213 src/elm/GroupDoc.elm
      201 src/elm/GroupDoc/ViewModel.elm
      181 src/elm/AppDrawer/View.elm
+     177 src/elm/Update/Firebase.elm
      177 src/elm/Todo/ViewModel.elm
      170 src/elm/Data/EntityTree.elm
      167 src/elm/AppDrawer/Model.elm
-     166 src/elm/Update/Firebase.elm
      162 src/elm/Todo/ItemView.elm
      156 src/elm/Update/Subscription.elm
      156 src/elm/Todo/Schedule.elm
@@ -83,7 +83,6 @@
       16 src/elm/Ports.elm
       16 src/elm/Models/Todo.elm
       15 src/elm/Ports/Todo.elm
-      15 src/elm/Msg/Firebase.elm
       14 src/elm/View/Badge.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm

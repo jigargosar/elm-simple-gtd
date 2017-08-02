@@ -1,4 +1,4 @@
-module Update.Firebase exposing (Config, update)
+module Update.Firebase exposing (..)
 
 import AppUrl
 import Data.User
@@ -6,7 +6,6 @@ import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase.Model exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
-import Msg.Firebase exposing (..)
 import Navigation
 import Ports
 import Ports.Firebase exposing (..)
@@ -15,6 +14,18 @@ import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+type FirebaseMsg
+    = OnFB_NOOP
+    | OnFB_SwitchToNewUserSetupModeIfNeeded
+    | OnFBSignIn
+    | OnFBSignOut
+    | OnFBAfterUserChanged
+    | OnFBSkipSignIn
+    | OnFBUserChanged E.Value
+    | OnFBFCMTokenChanged E.Value
+    | OnFBConnectionChanged Bool
 
 
 type alias SubReturnF msg =

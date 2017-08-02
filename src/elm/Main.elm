@@ -18,7 +18,6 @@ import Material.Options exposing (div)
 import Menu
 import Menu.Types
 import Models.Todo
-import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
 import Page exposing (Page, PageMsg(..))
 import Pages.EntityList
@@ -41,7 +40,7 @@ import Types.Todo exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.ExclusiveMode exposing (ExclusiveModeMsg)
-import Update.Firebase
+import Update.Firebase exposing (..)
 import Update.GroupDoc
 import Update.Page
 import Update.Subscription

@@ -39,7 +39,6 @@ type alias Config msg a =
     { a
         | onStartAddingTodoToInbox : msg
         , onStartAddingTodoWithFocusInEntityAsReference : msg
-        , openLaunchBarMsg : msg
         , revertExclusiveMode : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
@@ -90,9 +89,6 @@ onGlobalKeyUp config key =
 
                 CharI ->
                     returnMsgAsCmd config.onStartAddingTodoToInbox
-
-                Slash ->
-                    returnMsgAsCmd config.openLaunchBarMsg
 
                 _ ->
                     identity

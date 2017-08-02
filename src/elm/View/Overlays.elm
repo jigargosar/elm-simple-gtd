@@ -3,7 +3,6 @@ module View.Overlays exposing (overlayViews)
 import ExclusiveMode.Types exposing (..)
 import GroupDoc.FormView
 import Html exposing (..)
-import LaunchBar.View
 import Todo.FormTypes exposing (..)
 import Todo.GroupEditView
 import Todo.Notification.View exposing (maybeOverlay)
@@ -19,10 +18,6 @@ overlayViews config appModel =
 
         editModeOverlayView =
             case appModel.editMode of
-                XMLaunchBar launchBar ->
-                    LaunchBar.View.init launchBar
-                        |> Html.map config.onLaunchBarMsg
-
                 XMTodoForm form ->
                     case form.mode of
                         TFM_Edit editMode ->

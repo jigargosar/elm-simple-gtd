@@ -22,7 +22,6 @@ import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
 import Msg.Firebase exposing (..)
 import Msg.GroupDoc exposing (GroupDocMsg)
-import Overlays.LaunchBar exposing (LaunchBarMsg)
 import Page exposing (Page, PageMsg(..))
 import Pages.EntityList
 import Ports
@@ -49,7 +48,6 @@ import Update.CustomSync
 import Update.ExclusiveMode
 import Update.Firebase
 import Update.GroupDoc
-import Update.LaunchBar
 import Update.Page
 import Update.Subscription
 import Update.Todo
@@ -111,8 +109,6 @@ type AppMsg
     | OnAppHeaderMsg AppHeaderMsg
     | OnCustomSyncMsg CustomSyncMsg
     | OnEntityMsgNew Pages.EntityList.Msg
-    | OnLaunchBarMsg LaunchBarMsg
-    | OnLaunchBarMsgWithNow LaunchBarMsg Time
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
     | OnTodoMsg TodoMsg
@@ -248,17 +244,15 @@ createAppModel flags =
 
 
 type alias UpdateConfig msg =
-    Update.LaunchBar.Config msg
-        (Update.AppHeader.Config msg
-            (Update.ExclusiveMode.Config msg
-                (Update.Page.Config msg
-                    (Update.Firebase.Config msg
-                        (Update.CustomSync.Config msg
-                            (Update.Subscription.Config msg
-                                (Update.Todo.Config msg
-                                    { navigateToPathMsg : List String -> msg
-                                    }
-                                )
+    Update.AppHeader.Config msg
+        (Update.ExclusiveMode.Config msg
+            (Update.Page.Config msg
+                (Update.Firebase.Config msg
+                    (Update.CustomSync.Config msg
+                        (Update.Subscription.Config msg
+                            (Update.Todo.Config msg
+                                { navigateToPathMsg : List String -> msg
+                                }
                             )
                         )
                     )
@@ -272,7 +266,6 @@ updateConfig model =
     { onStartAddingTodoToInbox = Todo.Msg.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , openLaunchBarMsg = Overlays.LaunchBar.Open |> OnLaunchBarMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
@@ -329,12 +322,6 @@ update config msg =
         OnCustomSyncMsg msg_ ->
             Update.CustomSync.update config msg_
 
-        OnLaunchBarMsgWithNow msg_ now ->
-            Update.LaunchBar.update config now msg_
-
-        OnLaunchBarMsg msg_ ->
-            returnWithNow (OnLaunchBarMsgWithNow msg_)
-
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)
 
@@ -378,7 +365,6 @@ type alias ViewConfig msg =
     { noop : msg
     , onAppDrawerMsg : AppDrawer.Types.AppDrawerMsg -> msg
     , onFirebaseMsg : FirebaseMsg -> msg
-    , onLaunchBarMsg : Overlays.LaunchBar.LaunchBarMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg
     , onMdl : Material.Msg msg -> msg
     , onReminderOverlayAction : Todo.Notification.Model.Action -> msg
@@ -434,7 +420,6 @@ viewConfig model =
     , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
     , onSignIn = OnFirebaseMsg OnFBSignIn
     , onSignOut = OnFirebaseMsg OnFBSignOut
-    , onLaunchBarMsg = OnLaunchBarMsg
     , onFirebaseMsg = OnFirebaseMsg
     , onReminderOverlayAction = Todo.Msg.onReminderOverlayAction >> OnTodoMsg
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay

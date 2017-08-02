@@ -40,6 +40,7 @@ type alias Config msg a =
         | onStartSetupAddTodo : msg
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
+        , isTodoStoreEmpty : Bool
     }
 
 

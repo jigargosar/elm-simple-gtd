@@ -16,6 +16,7 @@ import Material
 import Material.Options exposing (div)
 import Menu
 import Menu.Types
+import Models.Todo
 import Msg.AppHeader exposing (AppHeaderMsg(..))
 import Msg.CustomSync exposing (CustomSyncMsg(..))
 import Msg.ExclusiveMode exposing (ExclusiveModeMsg)
@@ -29,6 +30,7 @@ import Ports.Todo exposing (..)
 import Random.Pcg
 import RouteUrl
 import Set exposing (Set)
+import Store
 import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Msg exposing (TodoMsg)
@@ -275,6 +277,7 @@ updateConfig model =
     , focusNextEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = OnEntityMsgNew Pages.EntityList.ArrowUp
     , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+    , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }
 
 

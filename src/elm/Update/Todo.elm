@@ -3,7 +3,6 @@ module Update.Todo exposing (Config, update)
 import Set
 import Time
 import Todo.Msg exposing (TodoMsg(..))
-import Todo.TimeTracker as Tracker
 import Update.Todo.Internal exposing (..)
 import X.Function.Infix exposing (..)
 import X.Return exposing (..)
@@ -20,26 +19,8 @@ update :
     -> SubReturnF msg model
 update config now msg =
     case msg of
-        ToggleRunning todoId ->
-            mapOver timeTracker (Tracker.toggleStartStop todoId now)
-
-        OnSwitchOrStartTrackingTodo todoId ->
-            mapOver timeTracker (Tracker.switchOrStartRunning todoId now)
-
-        OnStopRunningTodo ->
-            onStopRunningTodoMsg
-
-        UpdateTimeTracker ->
-            updateTimeTracker now
-
-        AfterUpsert todo ->
-            onAfterUpsertTodo todo
-
         OnReminderNotificationClicked notif ->
             onReminderNotificationClicked now notif
-
-        RunningNotificationResponse res ->
-            onRunningNotificationResponse config res
 
         OnProcessPendingNotificationCronTick ->
             returnAndThenMaybe

@@ -8,13 +8,7 @@ import Types.Todo exposing (..)
 
 
 type TodoMsg
-    = ToggleRunning DocId
-    | OnSwitchOrStartTrackingTodo DocId
-    | OnStopRunningTodo
-    | RunningNotificationResponse Response
-    | OnReminderNotificationClicked Notification.TodoNotificationEvent
-    | UpdateTimeTracker
-    | AfterUpsert TodoDoc
+    = OnReminderNotificationClicked Notification.TodoNotificationEvent
     | OnProcessPendingNotificationCronTick
     | UpdateTodoOrAllSelected__ DocId TodoAction
     | UpdateTodo__ DocId TodoAction
@@ -25,16 +19,8 @@ type TodoMsg
     | OnSaveTodoForm TodoForm
 
 
-onStopRunningTodoMsg =
-    OnStopRunningTodo
-
-
 onReminderOverlayAction =
     OnTodoReminderOverlayAction
-
-
-onSwitchOrStartTrackingTodo =
-    OnSwitchOrStartTrackingTodo
 
 
 
@@ -133,7 +119,3 @@ onSetProjectAndMaybeSelection id =
 onSetContextAndMaybeSelection id =
     TA_SetContext
         >> UpdateTodoOrAllSelected__ id
-
-
-afterTodoUpsert todo =
-    AfterUpsert todo

@@ -38,7 +38,6 @@ import Todo.Msg exposing (TodoMsg)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
 import Todo.Store
-import Todo.TimeTracker
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
 import Types.Firebase exposing (..)
@@ -93,7 +92,6 @@ type alias AppModelOtherFields =
     , selectedEntityIdSet : Set DocId
     , appVersion : String
     , deviceId : String
-    , timeTracker : Todo.TimeTracker.Model
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
@@ -172,8 +170,6 @@ subscriptions model =
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
             [ notificationClicked Todo.Msg.OnReminderNotificationClicked
-            , onRunningTodoNotificationClicked Todo.Msg.RunningNotificationResponse
-            , everyXSeconds 1 (\_ -> Todo.Msg.UpdateTimeTracker)
 
             -- note: 30 seconds is so that we can received any updates from firebase
             -- before triggering and changing any stale overdue todos timestamps.
@@ -240,7 +236,6 @@ createAppModel flags =
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
-            , timeTracker = Todo.TimeTracker.none
             , config = flags.config
             , appDrawerModel = localPref.appDrawer
             , mdl = Material.model
@@ -278,7 +273,6 @@ updateConfig model =
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , openLaunchBarMsg = Overlays.LaunchBar.Open |> OnLaunchBarMsg
-    , afterTodoUpsert = Todo.Msg.afterTodoUpsert >> OnTodoMsg
     , onSetExclusiveMode = Msg.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
@@ -406,8 +400,6 @@ type alias ViewConfig msg =
     , onStartEditingTodoContext : TodoDoc -> msg
     , onStartEditingTodoProject : TodoDoc -> msg
     , onStartEditingTodoText : TodoDoc -> msg
-    , onStopRunningTodoMsg : msg
-    , onSwitchOrStartTrackingTodo : DocId -> msg
     , onToggleAppDrawerOverlay : msg
     , onToggleDeleted : DocId -> msg
     , onToggleDeletedAndMaybeSelection : DocId -> msg
@@ -453,13 +445,11 @@ viewConfig model =
     , gotoPageMsg = PageMsg_SetPage >> OnPageMsg
     , onMdl = OnMdl
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
-    , onStopRunningTodoMsg = Todo.Msg.onStopRunningTodoMsg |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> OnEntityMsgNew
     , onStartEditingTodoProject = Todo.Msg.onStartEditingTodoProject >> OnTodoMsg
     , onStartEditingTodoContext = Todo.Msg.onStartEditingTodoContext >> OnTodoMsg
-    , onSwitchOrStartTrackingTodo = Todo.Msg.onSwitchOrStartTrackingTodo >> OnTodoMsg
     , onStartEditingTodoText = Todo.Msg.onStartEditingTodoText >> OnTodoMsg
     , onStartEditingReminder = Todo.Msg.onStartEditingReminder >> OnTodoMsg
     , onToggleDeletedAndMaybeSelection = Todo.Msg.onToggleDeletedAndMaybeSelection >> OnTodoMsg

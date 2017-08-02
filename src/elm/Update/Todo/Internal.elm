@@ -17,7 +17,6 @@ import Todo.Form
 import Todo.FormTypes exposing (..)
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import Todo.TimeTracker as Tracker
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Types.Document exposing (..)
@@ -33,7 +32,6 @@ type alias SubModel model =
     { model
         | todoStore : TodoStore
         , reminderOverlay : TodoReminderOverlayModel
-        , timeTracker : Tracker.Model
         , selectedEntityIdSet : Set DocId
     }
 
@@ -229,33 +227,6 @@ onStartAddingTodo config addFormMode =
     X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
 
 
-
---            >> autoFocusInputRCmd
-
-
-onStopRunningTodoMsg =
-    mapSet timeTracker Tracker.none
-
-
-onRunningNotificationResponse : Config msg a -> Notification.Response -> SubReturnF msg model
-onRunningNotificationResponse config res =
-    let
-        todoId =
-            res.data.id
-    in
-    (case res.action of
-        "stop" ->
-            onStopRunningTodoMsg
-
-        "continue" ->
-            identity
-
-        _ ->
-            identity
-    )
-        >> command (Notification.closeNotification todoId)
-
-
 onReminderNotificationClicked now notif =
     let
         { action, data } =
@@ -269,21 +240,6 @@ onReminderNotificationClicked now notif =
             >> command (Notification.closeNotification todoId)
     else
         map (showReminderOverlayForTodoId todoId)
-
-
-onAfterUpsertTodo todo =
-    map
-        (\model ->
-            let
-                isTrackerTodoInactive =
-                    Todo.isInActive todo
-                        && Tracker.isTrackingTodo todo model.timeTracker
-            in
-            if isTrackerTodoInactive then
-                set timeTracker Tracker.none model
-            else
-                model
-        )
 
 
 showReminderNotificationCmd ( todo, model ) =
@@ -331,12 +287,6 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
     maybeTrackerInfo
         ?+> (\info -> findTodoById info.todoId model ?|> createRequest info)
         |> maybeMapToCmd showRunningTodoNotification
-
-
-updateTimeTracker now =
-    overT2 timeTracker (Tracker.updateNextAlarmAt now)
-        >> apply2 ( Tuple.second, showRunningNotificationCmd )
-        |> andThen
 
 
 setFocusInEntityWithTodoId config =

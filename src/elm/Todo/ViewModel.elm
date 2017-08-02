@@ -107,9 +107,6 @@ createTodoViewModel config appVM isFocusable todo =
                     Key.CharR ->
                         reminder.startEditingMsg
 
-                    Key.CharS ->
-                        config.onSwitchOrStartTrackingTodo todoId
-
                     _ ->
                         config.noop
             else

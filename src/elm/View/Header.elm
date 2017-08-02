@@ -6,7 +6,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
-import Todo.TimeTracker.View
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.List
@@ -15,9 +14,7 @@ import X.List
 appMainHeader config viewModel m =
     let
         content =
-            Todo.TimeTracker.View.maybe config m
-                ?|> X.List.singleton
-                ?= titleHeaderContent viewModel
+            titleHeaderContent viewModel
     in
     div
         [ id "layout-main-header"

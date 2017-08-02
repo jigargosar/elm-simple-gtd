@@ -41,7 +41,6 @@ type alias Config msg a =
         , onStartAddingTodoWithFocusInEntityAsReference : msg
         , openLaunchBarMsg : msg
         , revertExclusiveMode : msg
-        , afterTodoUpsert : TodoDoc -> msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
     }
@@ -118,7 +117,7 @@ onPouchDBChange config dbName encodedDoc =
             map (\_ -> model)
                 >> (case entity of
                         TodoEntity todo ->
-                            config.afterTodoUpsert todo |> returnMsgAsCmd
+                            identity
 
                         _ ->
                             identity

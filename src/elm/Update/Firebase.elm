@@ -70,15 +70,10 @@ update config msg =
                 >> command (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
-            Return.andThen
-                (\model ->
-                    Return.singleton model
-                        |> (if Maybe.Extra.isJust model.maybeUser then
-                                setAndPersistShowSignInDialogValue False
-                                    >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
-                            else
-                                identity
-                           )
+            returnWithMaybe1 .maybeUser
+                (\_ ->
+                    setAndPersistShowSignInDialogValue False
+                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
                 )
 
         OnFBUserChanged encodedUser ->

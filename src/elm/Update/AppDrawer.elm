@@ -1,10 +1,16 @@
-module Update.AppDrawer exposing (update)
+module Update.AppDrawer exposing (..)
 
 import AppDrawer.Model exposing (..)
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Ports
+import Window
 import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+subscriptions =
+    Sub.batch
+        [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
 
 
 type alias SubModel model =
@@ -26,8 +32,12 @@ mapOver =
 
 
 mapOverAndPersist fn =
-    map (over appDrawerModel fn)
-        >> effect (get appDrawerModel >> AppDrawer.Model.getOfflineStoreKeyValue >> Ports.persistToOfflineStore)
+    mapOver fn
+        >> effect
+            (get appDrawerModel
+                >> AppDrawer.Model.getOfflineStoreKeyValue
+                >> Ports.persistToOfflineStore
+            )
 
 
 update :

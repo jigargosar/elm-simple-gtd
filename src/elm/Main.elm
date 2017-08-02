@@ -178,8 +178,7 @@ subscriptions model =
             , onFirebaseConnectionChanged OnFBConnectionChanged
             ]
             |> Sub.map OnFirebaseMsg
-        , Sub.batch
-            [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
+        , Update.AppDrawer.subscriptions
             |> Sub.map OnAppDrawerMsg
         ]
 

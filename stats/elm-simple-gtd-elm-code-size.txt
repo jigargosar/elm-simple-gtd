@@ -1,5 +1,5 @@
-    8840 total
-     499 src/elm/Main.elm
+    8849 total
+     498 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      362 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -46,12 +46,12 @@
       71 src/elm/View/Header.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
+      64 src/elm/Update/AppDrawer.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Todo/GroupEditView.elm
       63 src/elm/Page.elm
       57 src/elm/Pages/EntityListOld.elm
       55 src/elm/Update/Page.elm
-      54 src/elm/Update/AppDrawer.elm
       50 src/elm/View/CustomSync.elm
       50 src/elm/Update/Todo.elm
       50 src/elm/Types/Todo.elm

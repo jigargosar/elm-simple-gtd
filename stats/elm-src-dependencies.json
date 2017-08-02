@@ -3993,10 +3993,11 @@
       "AppDrawer.Model",
       "AppDrawer.Types",
       "Ports",
+      "Window",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 5,
+    "importsCount": 6,
     "transitiveImports": [
       "AppDrawer.Model",
       "AppDrawer.Types",
@@ -4010,13 +4011,14 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "Window",
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 17,
+    "transitiveImportsCount": 18,
     "backwardImports": [
       "Main"
     ],

@@ -90,14 +90,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
   const initialOfflineStore = await getOfflineStore()
   // console.log(initialOfflineStore)
   
-  const debugSecondMultiplier = (() => {
-    if (WEBPACK_DEV_SERVER) {
-      return 1
-    } else {
-      return 1
-    }
-  })()
-  
   const flags = _.merge({
     now: Date.now(),
     pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
@@ -106,7 +98,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
     deviceId,
     config: {
       debug: WEBPACK_DEV_SERVER,
-      debugSecondMultiplier,
       deviceId,
       npmPackageVersion,
       isDevelopmentMode,

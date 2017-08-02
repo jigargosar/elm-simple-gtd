@@ -65,8 +65,7 @@ import X.Return exposing (..)
 
 
 type alias AppConfig =
-    { debugSecondMultiplier : Float
-    , deviceId : String
+    { deviceId : String
     , npmPackageVersion : String
     , isDevelopmentMode : Bool
     , debug : Bool

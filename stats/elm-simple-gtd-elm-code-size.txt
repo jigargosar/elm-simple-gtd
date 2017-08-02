@@ -1,5 +1,5 @@
-    8849 total
-     498 src/elm/Main.elm
+    8841 total
+     503 src/elm/Main.elm
      377 src/elm/Pages/EntityList.elm
      362 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
@@ -24,8 +24,8 @@
      136 src/elm/L/View.elm
      126 src/elm/Update/GroupDoc.elm
      121 src/elm/Todo/Msg.elm
+     114 src/elm/X/Record.elm
      111 src/elm/Todo/Form.elm
-     110 src/elm/X/Record.elm
      103 src/elm/Todo/View.elm
       98 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
@@ -46,7 +46,6 @@
       71 src/elm/View/Header.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
-      64 src/elm/Update/AppDrawer.elm
       64 src/elm/Todo/Notification/View.elm
       63 src/elm/Todo/GroupEditView.elm
       63 src/elm/Page.elm
@@ -57,6 +56,7 @@
       50 src/elm/Types/Todo.elm
       50 src/elm/Todo/Notification/Model.elm
       50 src/elm/AppUrl.elm
+      47 src/elm/Update/AppDrawer.elm
       47 src/elm/GroupDoc/Form.elm
       46 src/elm/Notification.elm
       45 src/elm/Update/AppHeader.elm

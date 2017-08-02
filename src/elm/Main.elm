@@ -59,6 +59,7 @@ import Views.EntityList
 import Window
 import X.Function.Infix exposing (..)
 import X.Random
+import X.Record exposing (..)
 import X.Return exposing (..)
 
 
@@ -94,6 +95,10 @@ type alias AppModelOtherFields =
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
     }
+
+
+appDrawerModel =
+    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
 
 
 type SubscriptionMsg
@@ -331,10 +336,10 @@ update config msg =
             Update.Firebase.update config msg_
                 >> onPersistLocalPref
 
-        OnAppDrawerMsg msg ->
-            Update.AppDrawer.update msg
-                >> onPersistLocalPref
+        OnAppDrawerMsg msg_ ->
+            overReturnF appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
+        --                >> onPersistLocalPref
         _ ->
             returnWith identity (Page.getPage__ >> updatePage config msg)
 

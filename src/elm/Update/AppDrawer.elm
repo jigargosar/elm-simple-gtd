@@ -13,36 +13,19 @@ subscriptions =
         [ Window.resizes (\_ -> OnWindowResizeTurnOverlayOff) ]
 
 
-type alias SubModel model =
-    { model
-        | appDrawerModel : AppDrawer.Model.AppDrawerModel
-    }
-
-
-type alias SubReturnF msg model =
-    ReturnF msg (SubModel model)
-
-
-appDrawerModel =
-    fieldLens .appDrawerModel (\s b -> { b | appDrawerModel = s })
-
-
-mapOver =
-    over appDrawerModel >> map
+type alias ReturnF =
+    X.Return.ReturnF AppDrawerMsg AppDrawerModel
 
 
 mapOverAndPersist fn =
-    mapOver fn
+    map fn
         >> effect
-            (get appDrawerModel
-                >> AppDrawer.Model.getOfflineStoreKeyValue
+            (AppDrawer.Model.getOfflineStoreKeyValue
                 >> Ports.persistToOfflineStore
             )
 
 
-update :
-    AppDrawer.Types.AppDrawerMsg
-    -> SubReturnF msg model
+update : AppDrawerMsg -> ReturnF
 update msg =
     case msg of
         OnToggleContextsExpanded ->

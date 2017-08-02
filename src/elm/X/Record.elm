@@ -104,7 +104,11 @@ overReturn field smallToReturn b =
 
 overReturnF :
     Field small big
-    -> Return.ReturnF msg small
-    -> Return.ReturnF msg big
-overReturnF field smallReturnF =
-    Return.andThen (overReturn field (Return.singleton >> smallReturnF))
+    -> (msgS -> msgB)
+    -> Return.ReturnF msgS small
+    -> Return.ReturnF msgB big
+overReturnF field lift smallReturnF =
+    Return.andThen
+        (overReturn field (Return.singleton >> smallReturnF)
+            >> Return.mapCmd lift
+        )

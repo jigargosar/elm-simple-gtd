@@ -8,7 +8,7 @@ import Context
 import Dict
 import Dict.Extra
 import Document
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import GroupDoc
 import Models.GroupDocStore
 import Models.Stores

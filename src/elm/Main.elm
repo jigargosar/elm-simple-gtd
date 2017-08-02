@@ -3,7 +3,7 @@ module Main exposing (main)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Context
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
@@ -418,12 +418,12 @@ type alias ViewConfig msg =
     , onToggleDeleted : DocId -> msg
     , onToggleDeletedAndMaybeSelection : DocId -> msg
     , onToggleDoneAndMaybeSelection : DocId -> msg
-    , onToggleEntitySelection : Entity.Types.EntityId -> msg
+    , onToggleEntitySelection : Entity.EntityId -> msg
     , onToggleGroupDocArchived : GroupDocId -> msg
     , onUpdateCustomSyncFormUri :
         ExclusiveMode.Types.SyncForm -> String -> msg
     , revertExclusiveMode : msg
-    , setFocusInEntityWithEntityId : Entity.Types.EntityId -> msg
+    , setFocusInEntityWithEntityId : Entity.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
     , gotoPageMsg : Page.Page -> msg

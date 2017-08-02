@@ -1,6 +1,6 @@
 module Update.Subscription exposing (..)
 
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import ExclusiveMode.Types
 import Keyboard.Extra exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)

@@ -1,6 +1,6 @@
 module Models.Stores exposing (..)
 
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import GroupDoc
 import Models.GroupDocStore exposing (..)
 import Models.Todo exposing (findTodoById)

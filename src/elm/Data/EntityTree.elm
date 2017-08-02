@@ -2,8 +2,7 @@ module Data.EntityTree exposing (..)
 
 import Context
 import Document
-import Entity
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import List.Extra as List
 import Project
 import Todo
@@ -25,7 +24,7 @@ type alias ProjectNode =
 
 
 type Title
-    = GroupEntityTitle GroupEntityType
+    = GroupEntityTitle GroupDocEntity
     | StringTitle String
 
 
@@ -143,23 +142,23 @@ flatten tree =
         ContextForest nodeList ->
             nodeList
                 |> List.concatMap
-                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Types.TodoEntity))
+                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.TodoEntity))
 
         ProjectForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
                         Entity.fromProject g.project
-                            :: (g.todoList .|> Entity.Types.TodoEntity)
+                            :: (g.todoList .|> Entity.TodoEntity)
                     )
 
         TodoForest title todoList ->
-            todoList .|> Entity.Types.TodoEntity
+            todoList .|> Entity.TodoEntity
 
         Root node ->
             case node of
                 Node (StringTitle title) todoList ->
-                    todoList .|> Entity.Types.TodoEntity
+                    todoList .|> Entity.TodoEntity
 
                 _ ->
                     []

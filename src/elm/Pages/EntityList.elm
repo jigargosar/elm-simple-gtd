@@ -5,8 +5,7 @@ import Color exposing (Color)
 import Context
 import Data.EntityTree
 import Document
-import Entity
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection

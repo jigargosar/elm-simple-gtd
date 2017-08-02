@@ -1,37 +1,82 @@
 module Entity exposing (..)
 
 import Document
-import Entity.Types exposing (..)
+import Types.Document exposing (DocId)
+import Types.GroupDoc exposing (..)
+import Types.Todo exposing (TodoDoc)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 
 
-type alias GroupEntity =
-    Entity.Types.GroupEntityType
+type GroupDocEntity
+    = GroupDocEntity GroupDocType GroupDoc
+
+
+type Entity
+    = GroupDocEntityW GroupDocEntity
+    | TodoEntity TodoDoc
+
+
+initProjectGroup =
+    GroupDocEntity ProjectGroupDocType
+
+
+initContextGroup =
+    GroupDocEntity ContextGroupDocType
+
+
+createContextEntity =
+    initContextGroup >> GroupDocEntityW
+
+
+createProjectEntity =
+    initProjectGroup >> GroupDocEntityW
+
+
+createTodoEntity =
+    TodoEntity
 
 
 fromContext =
-    ContextEntity >> GroupEntity
+    createContextEntity
 
 
 fromProject =
-    ProjectEntity >> GroupEntity
+    createProjectEntity
 
 
 fromTodo =
     TodoEntity
 
 
-initProjectGroup =
-    ProjectEntity
+type EntityId
+    = ContextId DocId
+    | ProjectId DocId
+    | TodoId DocId
 
 
-initContextGroup =
-    ContextEntity
+getDocIdFromEntityId entityId =
+    case entityId of
+        ContextId id ->
+            id
+
+        ProjectId id ->
+            id
+
+        TodoId id ->
+            id
 
 
-type alias Msg =
-    Entity.Types.EntityUpdateAction
+createTodoEntityId =
+    TodoId
+
+
+createContextEntityId =
+    ContextId
+
+
+createProjectEntityId =
+    ProjectId
 
 
 toEntityId entity =
@@ -39,13 +84,11 @@ toEntityId entity =
         TodoEntity m ->
             TodoId (Document.getId m)
 
-        GroupEntity ge ->
-            case ge of
-                ProjectEntity m ->
-                    ProjectId (Document.getId m)
+        GroupDocEntityW (GroupDocEntity ContextGroupDocType gd) ->
+            ProjectId (Document.getId gd)
 
-                ContextEntity m ->
-                    ContextId (Document.getId m)
+        GroupDocEntityW (GroupDocEntity ProjectGroupDocType gd) ->
+            ContextId (Document.getId gd)
 
 
 equalById =

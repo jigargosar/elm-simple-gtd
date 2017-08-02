@@ -1,6 +1,6 @@
 module Todo.FormTypes exposing (..)
 
-import Entity.Types exposing (EntityId)
+import Entity exposing (EntityId)
 import Menu
 import Menu.Types exposing (MenuState)
 import Time exposing (Time)

@@ -1,7 +1,6 @@
 module EntityListCursor exposing (..)
 
-import Entity
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.List

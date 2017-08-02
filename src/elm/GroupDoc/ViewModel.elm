@@ -4,7 +4,7 @@ import AppColors
 import Color
 import Context
 import Document
-import Entity.Types exposing (..)
+import Entity exposing (..)
 import GroupDoc
 import Keyboard.Extra as Key exposing (Key)
 import Material

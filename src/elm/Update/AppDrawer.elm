@@ -61,4 +61,4 @@ update msg =
             mapOverAndPersist toggleOverlay
 
         OnWindowResizeTurnOverlayOff ->
-            mapOver (set isOverlayOpen False)
+            mapOverAndPersist (set isOverlayOpen False)

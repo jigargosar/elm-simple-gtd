@@ -227,7 +227,7 @@ createAppModel flags =
             , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
-                Firebase.init flags.deviceId localPref.signIn flags.config.initialOfflineStore
+                Firebase.init flags.deviceId flags.config.initialOfflineStore
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , appVersion = flags.appVersion

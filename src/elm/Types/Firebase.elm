@@ -1,13 +1,10 @@
 module Types.Firebase exposing (..)
 
-import Firebase.SignIn
-
 
 type alias FirebaseModel =
     { user : FirebaseUser
     , fcmToken : FCMToken
     , firebaseClient : FirebaseClient
-    , signInModel : Firebase.SignIn.SignInModel
     , showSignInDialog : Bool
     }
 

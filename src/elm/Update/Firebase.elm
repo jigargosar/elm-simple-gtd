@@ -3,7 +3,6 @@ module Update.Firebase exposing (Config, update)
 import AppUrl
 import ExclusiveMode.Types exposing (ExclusiveMode(XMSignInOverlay))
 import Firebase.Model
-import Firebase.SignIn exposing (SignInModel, SignInModelF)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -67,18 +66,15 @@ update config msg =
 
         OnFBSignIn ->
             command (signIn ())
-                >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
                 >> setAndPersistShowSignInDialog True
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSkipSignIn ->
-            Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setSkipSignIn)
-                >> setAndPersistShowSignInDialog False
+            setAndPersistShowSignInDialog False
                 >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
-                >> Return.map (overSignInModelInFirebaseModel Firebase.SignIn.setStateToTriedSignOut)
                 >> setAndPersistShowSignInDialog True
                 >> command (Navigation.load AppUrl.landing)
 
@@ -91,11 +87,7 @@ update config msg =
                                     identity
 
                                 SignedIn user ->
-                                    Return.map
-                                        (overSignInModelInFirebaseModel
-                                            Firebase.SignIn.setStateToSignInSuccess
-                                        )
-                                        >> setAndPersistShowSignInDialog False
+                                    setAndPersistShowSignInDialog False
                                         >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
                            )
                 )
@@ -149,11 +141,6 @@ fcmTokenL =
 firebaseModelL : Field FirebaseModel (SubModel model)
 firebaseModelL =
     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
-
-
-overSignInModelInFirebaseModel : SignInModelF -> SubModelF model
-overSignInModelInFirebaseModel =
-    over signInModelL >> over firebaseModelL
 
 
 setAndPersistShowSignInDialog bool =

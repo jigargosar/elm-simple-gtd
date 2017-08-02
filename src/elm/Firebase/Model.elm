@@ -1,6 +1,5 @@
 module Firebase.Model exposing (..)
 
-import Firebase.SignIn
 import Firebase.User
 import Json.Decode as D exposing (Decoder)
 import Json.Encode as E
@@ -11,8 +10,8 @@ import Types.Firebase exposing (..)
 import X.Function.Infix exposing (..)
 
 
-init : String -> Firebase.SignIn.SignInModel -> E.Value -> FirebaseModel
-init deviceId signInModel initialOfflineStore =
+init : String -> E.Value -> FirebaseModel
+init deviceId initialOfflineStore =
     let
         showSignInDialog =
             D.decodeValue (D.field "showSignInDialog" D.bool) initialOfflineStore
@@ -22,7 +21,6 @@ init deviceId signInModel initialOfflineStore =
     { user = initUser
     , fcmToken = Nothing
     , firebaseClient = initClient deviceId
-    , signInModel = signInModel
     , showSignInDialog = showSignInDialog
     }
 

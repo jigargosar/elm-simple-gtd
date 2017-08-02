@@ -19,8 +19,9 @@ import Material
 import Material.Options exposing (div)
 import Menu
 import Menu.Types
+import Models.Selection
 import Models.Todo
-import Page exposing (Page, PageMsg(..))
+import Page exposing (..)
 import Pages.EntityList
 import Ports
 import Ports.Firebase exposing (..)
@@ -38,7 +39,6 @@ import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.ExclusiveMode exposing (ExclusiveModeMsg)
 import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
-import Update.Page
 import Update.Subscription
 import Update.Todo exposing (TodoMsg)
 import View.Layout
@@ -92,7 +92,6 @@ type SubscriptionMsg
 type AppMsg
     = NOOP
     | OnSubscriptionMsg SubscriptionMsg
-    | OnPageMsg PageMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
     | EntityListMsg Pages.EntityList.Msg
@@ -106,6 +105,7 @@ type AppMsg
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
+    | PageMsg_NavigateToPath (List String)
 
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
@@ -225,13 +225,11 @@ createAppModel flags =
 type alias UpdateConfig msg =
     Update.AppHeader.Config msg
         (Update.ExclusiveMode.Config msg
-            (Update.Page.Config msg
-                (Update.Firebase.Config msg
-                    (Update.Subscription.Config msg
-                        (Update.Todo.Config msg
-                            { navigateToPathMsg : List String -> msg
-                            }
-                        )
+            (Update.Firebase.Config msg
+                (Update.Subscription.Config msg
+                    (Update.Todo.Config msg
+                        { navigateToPathMsg : List String -> msg
+                        }
                     )
                 )
             )
@@ -251,7 +249,7 @@ updateConfig model =
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
-    , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+    , navigateToPathMsg = PageMsg_NavigateToPath
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }
 
@@ -261,6 +259,22 @@ update config msg =
     case msg of
         NOOP ->
             identity
+
+        PageMsg_NavigateToPath path ->
+            let
+                setPage page =
+                    map (\model -> { model | page = page })
+                        >> map Models.Selection.clearSelection
+                        >> returnMsgAsCmd config.revertExclusiveMode
+
+                setMaybePage page =
+                    page ?|> setPage ?= identity
+            in
+            case path of
+                _ ->
+                    Pages.EntityList.initFromPath path
+                        ?|> EntityListPage
+                        |> setMaybePage
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
@@ -273,9 +287,6 @@ update config msg =
 
         SetLastKnownTimeStamp now ->
             map (\model -> { model | lastKnownCurrentTime = now })
-
-        OnPageMsg msg_ ->
-            Update.Page.update config msg_
 
         OnSubscriptionMsg msg_ ->
             onSubscriptionMsg config msg_
@@ -412,7 +423,7 @@ viewConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursorOld = Nothing
     , maybeEntityIdAtCursor = Nothing
-    , navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+    , navigateToPathMsg = PageMsg_NavigateToPath
     }
 
 
@@ -451,7 +462,7 @@ main =
         { delta2url = Page.delta2hash
         , location2messages =
             Page.hash2messages
-                { navigateToPathMsg = PageMsg_NavigateToPath >> OnPageMsg
+                { navigateToPathMsg = PageMsg_NavigateToPath
                 }
         , init = init
         , update = update_

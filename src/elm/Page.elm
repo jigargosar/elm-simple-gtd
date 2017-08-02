@@ -9,10 +9,6 @@ type Page
     = EntityListPage Pages.EntityList.Model
 
 
-type PageMsg
-    = PageMsg_NavigateToPath (List String)
-
-
 initialModel =
     EntityListPage Pages.EntityList.defaultModel
 

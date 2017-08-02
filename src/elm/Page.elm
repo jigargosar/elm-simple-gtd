@@ -10,8 +10,7 @@ type Page
 
 
 type PageMsg
-    = PageMsg_SetPage Page
-    | PageMsg_NavigateToPath (List String)
+    = PageMsg_NavigateToPath (List String)
 
 
 initialModel =

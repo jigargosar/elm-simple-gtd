@@ -33,15 +33,15 @@ update :
     -> SubReturnF msg model
 update config msg =
     let
-        setMaybePage page =
-            page ?|> (PageMsg_SetPage >> update config) ?= identity
-    in
-    case msg of
-        PageMsg_SetPage page ->
+        setPage page =
             map (\model -> { model | page = page })
                 >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode
 
+        setMaybePage page =
+            page ?|> setPage ?= identity
+    in
+    case msg of
         PageMsg_NavigateToPath path ->
             case path of
                 _ ->

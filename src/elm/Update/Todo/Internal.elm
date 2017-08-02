@@ -4,6 +4,7 @@ import Context
 import Document
 import DomPorts
 import Entity exposing (..)
+import EntityId
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import Models.Todo exposing (findTodoById, todoStore)
 import Notification
@@ -139,7 +140,7 @@ saveAddTodoForm config addMode form now model =
             (\todoId ->
                 let
                     inboxEntityId =
-                        Entity.createContextEntityId Context.nullContextId
+                        EntityId.fromContext Context.nullContext
 
                     referenceEntityId =
                         case addMode of

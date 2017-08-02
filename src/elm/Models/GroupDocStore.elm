@@ -5,7 +5,7 @@ import Document
 import GroupDoc
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Project
+import GroupDoc
 import Store
 import Types.GroupDoc exposing (..)
 import X.Record exposing (Field, fieldLens)
@@ -27,14 +27,14 @@ filterContexts pred model =
 
 filterProjects pred model =
     Store.filterDocs pred model.projectStore
-        |> List.append (Project.filterNullProject pred)
-        |> Project.sortProjects
+        |> List.append (GroupDoc.filterNullProject pred)
+        |> GroupDoc.sortProjects
 
 
 findProjectById id =
     .projectStore
         >> Store.findById id
-        >> Maybe.orElseLazy (\_ -> [ Project.nullProject ] |> List.find (Document.hasId id))
+        >> Maybe.orElseLazy (\_ -> [ GroupDoc.nullProject ] |> List.find (Document.hasId id))
 
 
 findProjectByIdIn =
@@ -59,7 +59,7 @@ findGroupDocById groupDocId =
                     ( .contextStore, id, Context.nullContext )
 
                 ProjectGroupDocId id ->
-                    ( .projectStore, id, Project.nullProject )
+                    ( .projectStore, id, GroupDoc.nullProject )
     in
     getStore
         >> Store.findById id

@@ -12,10 +12,6 @@ import Entity exposing (..)
 import GroupDoc
 import Models.GroupDocStore
 import Models.Stores
-
-
-
-import Project
 import String.Extra
 import Todo
 import Toolkit.Operators exposing (..)
@@ -206,8 +202,8 @@ projects config model =
             , namePrefix = "#"
             , filter = activeFilter
             , toEntityId = ProjectId
-            , nullEntity = Project.nullProject
-            , isNull = Project.isNullProject
+            , nullEntity = GroupDoc.nullProject
+            , isNull = GroupDoc.isNullProject
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , defaultColor = AppColors.defaultProjectColor

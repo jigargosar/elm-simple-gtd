@@ -1,19 +1,19 @@
-    8982 total
+    8975 total
      499 src/elm/Main.elm
      378 src/elm/Pages/EntityList.elm
-     361 src/elm/Update/Todo/Internal.elm
+     362 src/elm/Update/Todo/Internal.elm
      308 src/elm/Todo.elm
      283 src/elm/Store.elm
      267 src/elm/Mat.elm
-     239 src/elm/AppDrawer/GroupViewModel.elm
+     235 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     215 src/elm/GroupDoc/ViewModel.elm
+     214 src/elm/GroupDoc/ViewModel.elm
      197 src/elm/AppDrawer/View.elm
      195 src/elm/Update/Firebase.elm
+     186 src/elm/GroupDoc.elm
      177 src/elm/Todo/ViewModel.elm
      171 src/elm/Data/EntityTree.elm
      162 src/elm/Todo/ItemView.elm
-     159 src/elm/GroupDoc.elm
      157 src/elm/AppDrawer/Model.elm
      156 src/elm/Update/Subscription.elm
      156 src/elm/Todo/Schedule.elm
@@ -71,11 +71,11 @@
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
       35 src/elm/Types/Document.elm
-      34 src/elm/Project.elm
       34 src/elm/Context.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
       27 src/elm/EntityListCursor.elm
+      24 src/elm/EntityId.elm
       22 src/elm/Msg/GroupDoc.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
@@ -83,7 +83,6 @@
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm
       20 src/elm/Firebase/User.elm
-      20 src/elm/EntityId.elm
       20 src/elm/DomPorts.elm
       19 src/elm/RegexHelper.elm
       19 src/elm/Ports.elm

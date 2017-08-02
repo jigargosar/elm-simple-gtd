@@ -10,11 +10,11 @@ import X.Function exposing (..)
 
 nullContext : GroupDoc
 nullContext =
+    let
+        nullContextId =
+            ""
+    in
     GroupDoc.constructor nullContextId "" 0 0 False "" "Inbox" False
-
-
-nullContextId =
-    ""
 
 
 filterNullContext pred =

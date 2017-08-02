@@ -3,8 +3,8 @@ module Data.EntityTree exposing (..)
 import Context
 import Document
 import Entity exposing (..)
+import GroupDoc
 import List.Extra as List
-import Project
 import Todo
 import Toolkit.Operators exposing (..)
 import Types.GroupDoc exposing (..)
@@ -86,7 +86,7 @@ createProjectSubGroups findProjectById tcg =
                 |> List.unique
                 .|> findProjectById
                 |> List.filterMap identity
-                |> Project.sortProjects
+                |> GroupDoc.sortProjects
 
         filterTodoForProject project =
             tcg.todoList

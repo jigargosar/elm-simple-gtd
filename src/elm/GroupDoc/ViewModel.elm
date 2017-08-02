@@ -9,7 +9,6 @@ import GroupDoc
 import Keyboard.Extra as Key exposing (Key)
 import Material
 import Pages.EntityListOld exposing (..)
-import Project
 import String.Extra
 import Todo
 import Toolkit.Helpers exposing (apply2)
@@ -198,8 +197,8 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
             , toEntityId = ProjectId
-            , nullEntity = Project.nullProject
-            , isNull = Project.isNullProject
+            , nullEntity = GroupDoc.nullProject
+            , isNull = GroupDoc.isNullProject
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"

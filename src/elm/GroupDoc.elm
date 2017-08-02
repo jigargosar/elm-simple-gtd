@@ -10,6 +10,7 @@ import Time exposing (Time)
 import Tuple2
 import Types.Document exposing (..)
 import Types.GroupDoc exposing (..)
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Predicate
 import X.Record
@@ -157,3 +158,29 @@ archivedButNotDeletedPred =
 
 setName name model =
     { model | name = name }
+
+
+nullProject : GroupDoc
+nullProject =
+    let
+        nullId =
+            ""
+    in
+    constructor nullId "" 0 0 False "" "No Project" False
+
+
+filterNullProject pred =
+    [ nullProject ] |> List.filter pred
+
+
+isNullProject =
+    equals nullProject
+
+
+sortProjects =
+    sort isNullProject
+
+
+projectStoreGenerator : DeviceId -> List E.Value -> Random.Pcg.Generator ProjectStore
+projectStoreGenerator =
+    storeGenerator "project-db"

@@ -4,12 +4,12 @@ import Document
 import Entity exposing (..)
 
 
-fromTodoDocId =
-    TodoId
-
-
 fromTodo =
-    Document.getId >> TodoId
+    Document.getId >> createTodoEntityId
+
+
+fromContext =
+    Document.getId >> createContextEntityId
 
 
 fromProjectDocId =
@@ -18,3 +18,7 @@ fromProjectDocId =
 
 fromContextDocId =
     ContextId
+
+
+fromTodoDocId =
+    TodoId

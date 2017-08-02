@@ -7,12 +7,12 @@ import Data.EntityTree
 import Document
 import Entity exposing (..)
 import EntityListCursor
+import GroupDoc
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
 import Pages.EntityListOld exposing (..)
-import Project
 import Store
 import Todo
 import Toolkit.Operators exposing (..)
@@ -279,7 +279,7 @@ createEntityTree model appModel =
 
         ProjectView id ->
             Models.GroupDocStore.findProjectById id appModel
-                ?= Project.nullProject
+                ?= GroupDoc.nullProject
                 |> Data.EntityTree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp

@@ -7,6 +7,7 @@ import Entity exposing (..)
 import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
+import GroupDoc
 import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
@@ -27,7 +28,6 @@ import Pages.EntityList
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
-import Project
 import Random.Pcg
 import RouteUrl
 import Set exposing (Set)
@@ -207,7 +207,7 @@ createAppModel flags =
         storeGenerator =
             Random.Pcg.map3 (,,)
                 (Todo.Store.generator flags.deviceId encodedTodoList)
-                (Project.projectStoreGenerator flags.deviceId encodedProjectList)
+                (GroupDoc.projectStoreGenerator flags.deviceId encodedProjectList)
                 (Context.contextStoreGenerator flags.deviceId encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =

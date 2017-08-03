@@ -1,9 +1,9 @@
 module AppDrawer.GroupViewModel exposing (..)
 
-import AppColors
 import AppDrawer.Model
 import AppDrawer.Types
 import Color
+import Colors
 import Data.TodoDoc
 import Dict
 import Dict.Extra
@@ -150,9 +150,9 @@ contexts config model =
             , toEntityId = ContextEntityId
             , nullEntity = GroupDoc.nullContext
             , isNull = GroupDoc.isNullContext
-            , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
+            , nullIcon = { name = "inbox", color = Colors.nullContext }
             , defaultIconName = "fiber_manual_record"
-            , defaultColor = AppColors.defaultContextColor
+            , defaultColor = Colors.defaultContext
             , getEntityListPageModel = "context"
             , groupDocType = ContextGroupDocType
             }
@@ -174,7 +174,7 @@ contexts config model =
     , className = "contexts"
     , showArchived = AppDrawer.Model.getArchivedContextsExpanded model.appDrawerModel
     , onAddClicked = config.onStartAddingGroupDoc ContextGroupDocType
-    , icon = { name = "group_work", color = AppColors.contextsColor }
+    , icon = { name = "group_work", color = Colors.contexts }
     , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleContextsExpanded
     , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedContexts
     , isExpanded = AppDrawer.Model.getContextExpanded model.appDrawerModel
@@ -202,9 +202,9 @@ projects config model =
             , toEntityId = ProjectEntityId
             , nullEntity = GroupDoc.nullProject
             , isNull = GroupDoc.isNullProject
-            , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
+            , nullIcon = { name = "apps", color = Colors.nullProject }
             , defaultIconName = "apps"
-            , defaultColor = AppColors.defaultProjectColor
+            , defaultColor = Colors.defaultProject
             , getEntityListPageModel = "project"
             , groupDocType = ProjectGroupDocType
             }
@@ -226,7 +226,7 @@ projects config model =
     , className = "projects"
     , showArchived = AppDrawer.Model.getArchivedProjectsExpanded model.appDrawerModel
     , onAddClicked = config.onStartAddingGroupDoc ProjectGroupDocType
-    , icon = { name = "group_work", color = AppColors.projectsColor }
+    , icon = { name = "group_work", color = Colors.projects }
     , onToggleExpanded = config.onAppDrawerMsg AppDrawer.Types.OnToggleProjectsExpanded
     , onToggleShowArchived = config.onAppDrawerMsg AppDrawer.Types.OnToggleArchivedProjects
     , isExpanded = AppDrawer.Model.getProjectsExpanded model.appDrawerModel

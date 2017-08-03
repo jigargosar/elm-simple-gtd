@@ -11,7 +11,7 @@ function parseModuleName(line) {
 
 // tests
 assert.equal("aSomePortMod.a.x", parseModuleName("port module aSomePortMod.a.x e"))
-assert.equal("AppColors.a.x", parseModuleName("module AppColors.a.x e"))
+assert.equal("Colors.a.x", parseModuleName("module Colors.a.x e"))
 
 const getParentModuleName =
     _.compose(

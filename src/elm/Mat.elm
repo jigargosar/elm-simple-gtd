@@ -1,6 +1,6 @@
 module Mat exposing (..)
 
-import AppColors
+import Colors
 import Html exposing (..)
 import Html.Attributes as HA
 import Html.Events as HE
@@ -99,7 +99,7 @@ iconSmall iconName =
 
 
 iconM icon =
-    Material.Icon.view icon.name [ css "color" (AppColors.encode icon.color) ]
+    Material.Icon.view icon.name [ css "color" (Colors.toRBGAString icon.color) ]
 
 
 fab msg mdl opts =

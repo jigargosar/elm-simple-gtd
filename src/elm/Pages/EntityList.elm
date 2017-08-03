@@ -1,7 +1,8 @@
 module Pages.EntityList exposing (..)
 
-import AppColors
 import Color exposing (Color)
+import Colors
+import Data.EntityList
 import Data.EntityTree
 import Data.TodoDoc
 import Document exposing (..)
@@ -22,16 +23,6 @@ import X.Predicate
 import X.Record exposing (..)
 import X.Return exposing (..)
 import X.Set exposing (toggleSetMember)
-
-
-type NamedFilter
-    = NF_FL_Done
-    | NF_FL_Recent
-    | NF_FL_Bin
-    | NF_GB_ActiveContexts
-    | NF_GB_ActiveProjects
-    | NF_WithContextId_GB_Projects DocId
-    | NF_WithProjectId_GB_Contexts DocId
 
 
 type FlatFilterName
@@ -58,7 +49,7 @@ type alias Model =
 defaultModel =
     { path = [ "contexts" ]
     , title = "Contexts"
-    , color = AppColors.contextsColor
+    , color = Colors.contexts
     , filter = GroupByFilter ContextGroupDocType
     }
 
@@ -66,7 +57,7 @@ defaultModel =
 contextModel id =
     { path = "context" :: id :: []
     , title = "Context"
-    , color = AppColors.defaultContextColor
+    , color = Colors.defaultContext
     , filter = ContextView id
     }
 
@@ -74,7 +65,7 @@ contextModel id =
 projectModel id =
     { path = "project" :: id :: []
     , title = "Project"
-    , color = AppColors.defaultProjectColor
+    , color = Colors.defaultProject
     , filter = ProjectView id
     }
 
@@ -86,7 +77,7 @@ initFromPath path =
             Just
                 { path = [ "done" ]
                 , title = "Done"
-                , color = AppColors.sgtdBlue
+                , color = Colors.sgtdBlue
                 , filter = FlatListFilter Done
                 }
 
@@ -94,7 +85,7 @@ initFromPath path =
             Just
                 { path = [ "bin" ]
                 , title = "Bin"
-                , color = AppColors.sgtdBlue
+                , color = Colors.sgtdBlue
                 , filter = FlatListFilter Bin
                 }
 
@@ -102,7 +93,7 @@ initFromPath path =
             Just
                 { path = [ "recent" ]
                 , title = "Recent"
-                , color = AppColors.sgtdBlue
+                , color = Colors.sgtdBlue
                 , filter = FlatListFilter Recent
                 }
 
@@ -113,7 +104,7 @@ initFromPath path =
             Just
                 { path = [ "projects" ]
                 , title = "Projects"
-                , color = AppColors.projectsColor
+                , color = Colors.projects
                 , filter = GroupByFilter ProjectGroupDocType
                 }
 

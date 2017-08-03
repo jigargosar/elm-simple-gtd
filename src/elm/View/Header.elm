@@ -1,6 +1,6 @@
 module View.Header exposing (appMainHeader)
 
-import AppColors
+import Colors
 import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -18,7 +18,7 @@ appMainHeader config viewModel m =
         [ id "layout-main-header"
         , style
             [ "color" => "white"
-            , "background-color" => AppColors.encode viewModel.header.backgroundColor
+            , "background-color" => Colors.toRBGAString viewModel.header.backgroundColor
             ]
         ]
         (headerWithContent config content m)

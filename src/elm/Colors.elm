@@ -1,4 +1,4 @@
-module AppColors exposing (..)
+module Colors exposing (..)
 
 import Color
 import Color.Mixing
@@ -20,28 +20,28 @@ sgtdBlue =
 -- group colors
 
 
-contextsColor =
+contexts =
     primaryColor
 
 
-nullContextColor =
+nullContext =
     sgtdBlue
 
 
-defaultContextColor =
-    mixDefaultGroupColor contextsColor
+defaultContext =
+    mixDefaultGroupColor contexts
 
 
-projectsColor =
+projects =
     Color.rgb 124 77 255
 
 
-nullProjectColor =
+nullProject =
     Color.rgb 179 157 219
 
 
-defaultProjectColor =
-    mixDefaultGroupColor projectsColor
+defaultProject =
+    mixDefaultGroupColor projects
 
 
 mixDefaultGroupColor =
@@ -58,7 +58,7 @@ mixNullGroupColor =
 --    CssBasics.Col >> CssBasics.encodeCssValue
 
 
-encode =
+toRBGAString =
     let
         _ =
             1

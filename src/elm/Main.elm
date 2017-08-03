@@ -1,6 +1,6 @@
 module Main exposing (main)
 
-import AppColors
+import Colors
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
@@ -519,7 +519,7 @@ view config model =
                     ( model.title, model.color )
 
         sgtdBlue =
-            AppColors.sgtdBlue
+            Colors.sgtdBlue
 
         appVM =
             createAppViewModel config model

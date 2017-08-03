@@ -1,6 +1,6 @@
 module AppDrawer.View exposing (..)
 
-import AppColors
+import Colors
 import AppUrl
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -24,7 +24,7 @@ sidebarHeader appVM m =
         [ id "layout-sidebar-header"
         , style
             [ "color" => "white"
-            , "background-color" => AppColors.encode appVM.header.backgroundColor
+            , "background-color" => Colors.toRBGAString appVM.header.backgroundColor
             ]
         ]
         [ div [ class "detail" ]

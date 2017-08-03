@@ -1,7 +1,7 @@
 module GroupDoc.ViewModel exposing (..)
 
-import AppColors
 import Color
+import Colors
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
@@ -166,7 +166,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , nullEntity = GroupDoc.nullContext
             , isNull = GroupDoc.isNullContext
             , nullIcon = { name = "inbox", color = inboxColor }
-            , defaultColor = AppColors.defaultProjectColor
+            , defaultColor = Colors.defaultProject
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.ContextGroupDocType
@@ -185,7 +185,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , nullEntity = GroupDoc.nullProject
             , isNull = GroupDoc.isNullProject
             , nullIcon = { name = "inbox", color = inboxColor }
-            , defaultColor = AppColors.defaultProjectColor
+            , defaultColor = Colors.defaultProject
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexAVForEntityId = getTabIndexAVForEntityId
             , groupDocType = GroupDoc.ProjectGroupDocType
@@ -195,4 +195,4 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
 
 
 inboxColor =
-    AppColors.nullContextColor
+    Colors.nullContext

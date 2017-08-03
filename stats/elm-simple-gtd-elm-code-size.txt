@@ -1,8 +1,8 @@
-    8299 total
+    8437 total
      562 src/elm/Main.elm
-     356 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
+     347 src/elm/Pages/EntityList.elm
      293 src/elm/Store.elm
      286 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
@@ -28,6 +28,7 @@
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
+     103 src/elm/Data/EntityList.elm
       97 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
       92 src/elm/Update/ExclusiveMode.elm
@@ -36,7 +37,7 @@
       83 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
       77 src/elm/GroupDoc/FormView.elm
-      77 src/elm/AppColors.elm
+      77 src/elm/Colors.elm
       75 src/elm/View/Layout.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
@@ -54,6 +55,7 @@
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Todo/FormTypes.elm
       44 src/elm/Models/Stores.elm
+      44 src/elm/IconNames.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm

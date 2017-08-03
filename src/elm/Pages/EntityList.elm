@@ -69,26 +69,13 @@ defaultPageModel =
     PageModel activeContextsNamedFilter.pathPrefix activeContextsNamedFilter
 
 
-getNamedFilterModelFromPathOrDefault : List String -> NamedFilterModel
-getNamedFilterModelFromPathOrDefault path =
-    let
-        matchesPath model =
-            path
-                |> List.reverse
-                |> List.drop model.pathArgumentsCount
-                |> equals (List.reverse model.pathPrefix)
-    in
-    List.Extra.find matchesPath namedFilterList
-        ?= activeContextsNamedFilter
-
-
-initFromPath : List String -> PageModel
+initFromPath : List String -> Maybe PageModel
 initFromPath path =
-    getNamedFilterModelFromPathOrDefault path
-        |> PageModel path
+    Data.EntityList.getMaybeNamedFilterModelFromPath path
+        ?|> PageModel path
 
 
-getPath (PageModel path _) =
+getFullPath (PageModel path _) =
     path
 
 

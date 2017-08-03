@@ -25,6 +25,7 @@ import Menu
 import Menu.Types
 import Models.Selection
 import Models.Todo
+import Navigation
 import Pages.EntityList exposing (HasEntityListCursor)
 import Ports
 import Ports.Firebase exposing (..)
@@ -285,13 +286,21 @@ update config msg =
                         >> returnMsgAsCmd config.revertExclusiveMode
 
                 setMaybePage page =
-                    page ?|> setPage ?= identity
+                    page ?|> setPage ?= effect revertHref
+
+                revertHref model =
+                    case model.page of
+                        EntityListPage pageModel ->
+                            Pages.EntityList.getFullPath pageModel
+                                |> String.join "/"
+                                |> (++) "#!/"
+                                |> Navigation.modifyUrl
             in
             case path of
                 _ ->
                     Pages.EntityList.initFromPath path
-                        |> EntityListPage
-                        |> setPage
+                        ?|> EntityListPage
+                        |> setMaybePage
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
@@ -494,7 +503,7 @@ delta2hash =
         getPathFromModel model =
             case getPage__ model of
                 EntityListPage pageModel ->
-                    Pages.EntityList.getPath pageModel
+                    Pages.EntityList.getFullPath pageModel
 
         delta2builder previousModel currentModel =
             RouteUrl.Builder.builder

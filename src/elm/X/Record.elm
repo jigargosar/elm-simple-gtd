@@ -1,9 +1,12 @@
 module X.Record
     exposing
-        ( Field
+        ( FieldLens
         , bool
+        , composeInnerOuterFieldLens
         , fieldLens
         , get
+        , getAndMaybeApply
+        , mapFieldValue
         , maybeOver
         , maybeOverT2
         , maybeSet
@@ -23,26 +26,34 @@ import Return
 import Toolkit.Operators exposing (..)
 
 
-type alias FieldModel small big =
+type alias FieldLensModel small big =
     { get : big -> small, set : small -> big -> big }
 
 
-type Field small big
-    = Field (FieldModel small big)
+type FieldLens small big
+    = FieldLens (FieldLensModel small big)
 
 
 type alias BoolField big =
-    Field Bool big
+    FieldLens Bool big
 
 
-fieldLens : (big -> small) -> (small -> big -> big) -> Field small big
+fieldLens : (big -> small) -> (small -> big -> big) -> FieldLens small big
 fieldLens getter setter =
-    Field { get = getter, set = setter }
+    FieldLens { get = getter, set = setter }
 
 
-bool : (big -> Bool) -> (Bool -> big -> big) -> Field Bool big
+composeInnerOuterFieldLens : FieldLens s m -> FieldLens m b -> FieldLens s b
+composeInnerOuterFieldLens s2mLens m2bLens =
+    FieldLens
+        { get = \big -> get m2bLens big |> get s2mLens
+        , set = \small big -> over m2bLens (set s2mLens small) big
+        }
+
+
+bool : (big -> Bool) -> (Bool -> big -> big) -> FieldLens Bool big
 bool getter setter =
-    Field { get = getter, set = setter }
+    FieldLens { get = getter, set = setter }
 
 
 toggle : BoolField big -> big -> big
@@ -50,11 +61,19 @@ toggle boolField big =
     over boolField not big
 
 
-get (Field field) big =
+mapFieldValue fieldLens fn big =
+    get fieldLens big |> fn
+
+
+getAndMaybeApply fieldLens fn =
+    mapFieldValue fieldLens (Maybe.map fn)
+
+
+get (FieldLens field) big =
     field.get big
 
 
-set (Field field) small big =
+set (FieldLens field) small big =
     field.set small big
 
 
@@ -96,7 +115,7 @@ maybeOverT2 field smallToReturn b =
         ?|> Tuple.mapSecond (setIn b field)
 
 
-overReturn : Field small big -> (small -> Return.Return msg small) -> big -> Return.Return msg big
+overReturn : FieldLens small big -> (small -> Return.Return msg small) -> big -> Return.Return msg big
 overReturn field smallToReturn b =
     get field b
         |> smallToReturn
@@ -104,7 +123,7 @@ overReturn field smallToReturn b =
 
 
 overReturnFMapCmd :
-    Field small big
+    FieldLens small big
     -> (msgS -> msgB)
     -> Return.ReturnF msgS small
     -> Return.ReturnF msgB big
@@ -116,7 +135,7 @@ overReturnFMapCmd field lift smallReturnF =
 
 
 overReturnF :
-    Field small big
+    FieldLens small big
     -> Return.ReturnF msg small
     -> Return.ReturnF msg big
 overReturnF field smallReturnF =

@@ -133,7 +133,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
            // even in focus selector port.
            // we need to completely control focus on entity list.
            // can't depended on mutation observer for the same.
-           // setTimeout(()=>{
+           // requestAnimationFrame(()=>{
              const $toFocus = $(options.selector).first()
   
              // console.log("[Kefir] focusSelector", _.merge(options, {
@@ -141,7 +141,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
              // }))
   
              $toFocus.focus()
-           // },0)
+           // })
          },
        })
   

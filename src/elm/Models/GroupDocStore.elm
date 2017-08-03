@@ -5,7 +5,7 @@ import GroupDoc exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Store
-import X.Record exposing (Field, fieldLens)
+import X.Record exposing (FieldLens, fieldLens)
 
 
 contextStore =
@@ -83,7 +83,7 @@ getActiveDocs gdType =
 storeFieldFromGDType :
     GroupDocType
     ->
-        Field GroupDocStore
+        FieldLens GroupDocStore
             { model
                 | projectStore : GroupDocStore
                 , contextStore : GroupDocStore

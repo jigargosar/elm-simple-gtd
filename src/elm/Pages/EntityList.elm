@@ -13,6 +13,7 @@ import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
 import Store
+import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)
@@ -23,19 +24,17 @@ import X.Return exposing (..)
 import X.Set exposing (toggleSetMember)
 
 
-type FilterType
+type FlatFilterName
     = Done
     | Recent
     | Bin
-    | HavingActiveProjectAndContextId
-    | HavingActiveContextAndProjectId
 
 
 type Filter
     = ContextView DocId
     | ProjectView DocId
-    | Filter FilterType
-    | GroupBy FilterType GroupDocType
+    | FlatListFilter FlatFilterName
+    | GroupByFilter GroupDocType
 
 
 type alias Model =
@@ -50,7 +49,7 @@ defaultModel =
     { path = [ "contexts" ]
     , title = "Contexts"
     , color = AppColors.contextsColor
-    , filter = GroupBy HavingActiveContextAndProjectId ContextGroupDocType
+    , filter = GroupByFilter ContextGroupDocType
     }
 
 
@@ -78,7 +77,7 @@ initFromPath path =
                 { path = [ "done" ]
                 , title = "Done"
                 , color = AppColors.sgtdBlue
-                , filter = Filter Done
+                , filter = FlatListFilter Done
                 }
 
         "bin" :: [] ->
@@ -86,7 +85,7 @@ initFromPath path =
                 { path = [ "bin" ]
                 , title = "Bin"
                 , color = AppColors.sgtdBlue
-                , filter = Filter Bin
+                , filter = FlatListFilter Bin
                 }
 
         "recent" :: [] ->
@@ -94,7 +93,7 @@ initFromPath path =
                 { path = [ "recent" ]
                 , title = "Recent"
                 , color = AppColors.sgtdBlue
-                , filter = Filter Recent
+                , filter = FlatListFilter Recent
                 }
 
         "contexts" :: [] ->
@@ -105,7 +104,7 @@ initFromPath path =
                 { path = [ "projects" ]
                 , title = "Projects"
                 , color = AppColors.projectsColor
-                , filter = GroupBy HavingActiveProjectAndContextId ProjectGroupDocType
+                , filter = GroupByFilter ProjectGroupDocType
                 }
 
         "Inbox" :: [] ->
@@ -141,18 +140,27 @@ type Msg
     | ToggleSelection EntityId
 
 
-entityListCursor =
+entityListCursorFL =
     fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
 
 
-updateDefault config msg =
-    update config msg defaultModel
+maybeEntityIdAtCursorFL =
+    let
+        maybeEntityIdAtCursorFL =
+            fieldLens .maybeEntityIdAtCursor (\s b -> { b | maybeEntityIdAtCursor = s })
+    in
+    composeInnerOuterFieldLens maybeEntityIdAtCursorFL entityListCursorFL
+
+
+
+--updateDefault config msg =
+--    update config msg defaultModel
 
 
 update config msg model =
     case msg of
         SetFocusableEntityId entityId ->
-            map (setEntityAtCursor config (entityId |> Just) model)
+            map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) model)
 
         ArrowUp ->
             moveFocusBy config -1 model
@@ -167,7 +175,7 @@ update config msg model =
                 )
 
 
-setEntityAtCursor config maybeEntityIdAtCursor model appModel =
+updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor model appModel =
     let
         entityIdList =
             createEntityList model appModel
@@ -181,7 +189,7 @@ setEntityAtCursor config maybeEntityIdAtCursor model appModel =
             , maybeEntityIdAtCursor = maybeEntityIdAtCursor
             }
     in
-    setIn appModel entityListCursor cursor
+    setIn appModel entityListCursorFL cursor
 
 
 moveFocusBy config offset model =
@@ -280,7 +288,7 @@ createEntityTree model appModel =
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
-        GroupBy filterType groupDocType ->
+        GroupByFilter groupDocType ->
             case groupDocType of
                 ContextGroupDocType ->
                     Models.GroupDocStore.getActiveContexts appModel
@@ -292,45 +300,26 @@ createEntityTree model appModel =
                         |> Data.EntityTree.initProjectForest
                             getActiveTodoListForProjectHelp
 
-        Filter filterType ->
+        FlatListFilter namedFilter ->
             let
                 pred =
-                    filterTypeToPredicate filterType appModel
+                    namedFilterToPredicate namedFilter
             in
             Data.EntityTree.initTodoForest
                 model.title
-                (filterTodosAndSortByLatestModified
-                    (pred "")
-                    appModel
-                )
+                (filterTodosAndSortByLatestModified pred appModel)
 
 
-filterTypeToPredicate filterType model =
+namedFilterToPredicate filterType =
     case filterType of
         Done ->
-            \_ -> X.Predicate.all [ Document.isNotDeleted, Data.TodoDoc.isDone ]
+            X.Predicate.all [ Document.isNotDeleted, Data.TodoDoc.isDone ]
 
         Recent ->
-            \_ -> X.Predicate.always
+            X.Predicate.always
 
         Bin ->
-            \_ -> Document.isDeleted
-
-        HavingActiveProjectAndContextId ->
-            \contextId ->
-                X.Predicate.all
-                    [ Data.TodoDoc.isActive
-                    , Data.TodoDoc.getContextId >> equals contextId
-                    , Models.Stores.isTodoProjectActive model
-                    ]
-
-        HavingActiveContextAndProjectId ->
-            \projectId ->
-                X.Predicate.all
-                    [ Data.TodoDoc.isActive
-                    , Data.TodoDoc.getProjectId >> equals projectId
-                    , Models.Stores.isTodoContextActive model
-                    ]
+            Document.isDeleted
 
 
 createEntityList model appModel =
@@ -369,6 +358,5 @@ computeMaybeNewEntityIdAtCursor model appModel =
                                 Just entityIdAtCursor
                    )
     in
-    EntityListCursor.getMaybeEntityIdAtCursor__ appModel
-        ?|> computeNewEntityIdAtCursor
+    getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor appModel
         ?= List.head newEntityIdList

@@ -10,7 +10,7 @@ import Set
 import Store
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-import X.Record exposing (Field, fieldLens, overReturn, overT2)
+import X.Record exposing (FieldLens, fieldLens, overReturn, overT2)
 import X.Return exposing (..)
 
 

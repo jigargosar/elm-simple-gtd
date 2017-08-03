@@ -110,7 +110,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       Kefir.stream(emitter => {
         app.ports["focusSelector"].subscribe((selector) => {
           // console.log("port: focusSelector received selector", selector)
-          emitter.emit(selector)
+            emitter.emit(selector)
         })
       })
   
@@ -129,13 +129,20 @@ window.appBoot = async function appBoot(elmMain = Main) {
   Kefir.merge(focusSelectorStreams)
        .observe({
          value(options) {
-           const $toFocus = $(options.selector).first()
-      
-           // console.log("[Kefir] focusSelector", _.merge(options, {
-           // dataKey: $toFocus.data("key"),
-           // }))
-      
-           $toFocus.focus()
+           // todo: adding any delay causes entity list focus to go haywire.
+           // even in focus selector port.
+           // we need to completely control focus on entity list.
+           // can't depended on mutation observer for the same.
+           // can't have
+           // setTimeout(()=>{
+             const $toFocus = $(options.selector).first()
+  
+             // console.log("[Kefir] focusSelector", _.merge(options, {
+             // dataKey: $toFocus.data("key"),
+             // }))
+  
+             $toFocus.focus()
+           // },0)
          },
        })
   

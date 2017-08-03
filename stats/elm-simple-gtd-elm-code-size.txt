@@ -1,4 +1,4 @@
-    8435 total
+    8424 total
      547 src/elm/Main.elm
      359 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
@@ -22,10 +22,10 @@
      146 src/elm/X/Function.elm
      143 src/elm/Update/GroupDoc.elm
      142 src/elm/X/Record.elm
-     138 src/elm/Data/EntityList.elm
      137 src/elm/Views/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
+     127 src/elm/Data/EntityList.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm

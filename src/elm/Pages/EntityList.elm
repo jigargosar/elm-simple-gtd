@@ -2,8 +2,8 @@ module Pages.EntityList exposing (..)
 
 import Color exposing (Color)
 import Colors
-import Data.EntityList exposing (..)
 import Data.EntityTree
+import Data.NamedFilter exposing (..)
 import Data.TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
@@ -71,7 +71,7 @@ defaultPageModel =
 
 initFromPath : List String -> Maybe PageModel
 initFromPath path =
-    Data.EntityList.getMaybeNamedFilterModelFromPath path
+    getMaybeNamedFilterModelFromPath path
         ?|> PageModel path
 
 

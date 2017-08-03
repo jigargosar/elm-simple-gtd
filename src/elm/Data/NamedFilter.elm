@@ -1,4 +1,4 @@
-module Data.EntityList exposing (..)
+module Data.NamedFilter exposing (..)
 
 --import X.List as List
 
@@ -123,7 +123,7 @@ type2Model namedFilterType =
                 0
 
 
-namedFilterList =
+namedFilterModelList =
     namedFilterTypeList
         .|> type2Model
 
@@ -141,4 +141,4 @@ getMaybeNamedFilterModelFromPath path =
                 |> List.drop model.pathArgumentsCount
                 |> equals (List.reverse model.pathPrefix)
     in
-    List.find matchesPath namedFilterList
+    List.find matchesPath namedFilterModelList

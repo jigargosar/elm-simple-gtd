@@ -20,7 +20,7 @@
      156 src/elm/Update/Subscription.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
-     144 src/elm/Data/EntityList.elm
+     144 src/elm/Data/NamedFilter.elm
      143 src/elm/Update/GroupDoc.elm
      142 src/elm/X/Record.elm
      137 src/elm/Views/EntityList.elm

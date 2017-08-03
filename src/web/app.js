@@ -19,7 +19,7 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
   
   const focusableEntityListItemSelector = ".focusable-list-item[tabindex=0]"
   const autoFocusSelector = ".auto-focus"
-  const observer = new MutationSummary({
+  new MutationSummary({
     callback: summaries => {
       // console.log(summaries)
       
@@ -28,18 +28,39 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
         //note: delaying auto-focus to ensure that it takes priority.
         setTimeout(() => emitter.emit(".auto-focus"), 0)
       }
+    },
+    queries: [{element: autoFocusSelector},
+    ],
+  })
+  
+  
+  new MutationSummary({
+    callback: summaries => {
+      // console.log(summaries)
       
-      const focusInEntitySummary = summaries[1]
-      const focusInEntitySummaryAdded = focusInEntitySummary.added
-      if (!_.isEmpty(focusInEntitySummaryAdded)) {
-        // console.log("focusInEntitySummary.added", focusInEntitySummaryAdded)
+      const entityListItemSummary = summaries[0]
+      console.log(".entity-list", entityListItemSummary)
+      const entityListItemAdded = entityListItemSummary.added
+      if (!_.isEmpty(entityListItemAdded) || entityListItemSummary.attributeChanged) {
+        // console.log("entityListItemSummary.added", entityListItemAdded)
+        // new MutationSummary({
+        //   rootNode: entityListItemAdded[0],
+        //   callback(summaries) {
+        //     console.log(".entity-list all", summaries)
+        //     emitter.emit(".focusable-list-item[tabindex=0]")
+        //   },
+        //   queries:[{all:true}]
+        // })
         emitter.emit(".focusable-list-item[tabindex=0]")
       }
     },
-    queries: [{element: autoFocusSelector},
-      {element: focusableEntityListItemSelector},
+    queries: [
+      {element: ".focusable-list-item", elementAttributes: "tabindex"},
+      {element: ".overlay"},
     ],
   })
+  
+  
 })
 
 window.appBoot = async function appBoot(elmMain = Main) {
@@ -110,7 +131,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       Kefir.stream(emitter => {
         app.ports["focusSelector"].subscribe((selector) => {
           // console.log("port: focusSelector received selector", selector)
-            emitter.emit(selector)
+          // emitter.emit(selector)
         })
       })
   
@@ -134,13 +155,13 @@ window.appBoot = async function appBoot(elmMain = Main) {
            // we need to completely control focus on entity list.
            // can't depended on mutation observer for the same.
            // requestAnimationFrame(()=>{
-             const $toFocus = $(options.selector).first()
-  
-             // console.log("[Kefir] focusSelector", _.merge(options, {
-             // dataKey: $toFocus.data("key"),
-             // }))
-  
-             $toFocus.focus()
+           const $toFocus = $(options.selector).first()
+      
+           // console.log("[Kefir] focusSelector", _.merge(options, {
+           // dataKey: $toFocus.data("key"),
+           // }))
+      
+           $toFocus.focus()
            // })
          },
        })

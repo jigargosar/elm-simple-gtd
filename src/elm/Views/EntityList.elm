@@ -16,16 +16,16 @@ import View.Badge
 import X.Function exposing (..)
 
 
-view config appVM appModel model =
+view config appVM appModel pageModel =
     let
         entityTree =
-            Pages.EntityList.createEntityTree model appModel
+            Pages.EntityList.createEntityTree pageModel appModel
 
         entityList =
             Data.EntityTree.flatten entityTree
 
         maybeEntityIdAtCursor =
-            Pages.EntityList.computeMaybeNewEntityIdAtCursor model appModel
+            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel appModel
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId

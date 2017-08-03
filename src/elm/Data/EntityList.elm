@@ -1,5 +1,7 @@
 module Data.EntityList exposing (..)
 
+--import X.List as List
+
 import Color exposing (Color)
 import Colors exposing (..)
 import IconNames
@@ -69,13 +71,6 @@ namedFilterList =
       , [ "bin" ]
       , 0
       )
-    , ( NF_GB_ActiveContexts
-      , "Contexts"
-      , IconNames.contexts
-      , Colors.contexts
-      , [ "contexts" ]
-      , 0
-      )
     , ( NF_GB_ActiveProjects
       , "Projects"
       , IconNames.projects
@@ -87,17 +82,57 @@ namedFilterList =
       , "Context"
       , IconNames.context
       , Colors.defaultContext
-      , [ "contexts" ]
+      , [ "context" ]
       , 1
       )
     , ( NF_WithProjectId_GB_Contexts
       , "Project"
       , IconNames.project
       , Colors.defaultProject
-      , [ "projects" ]
+      , [ "project" ]
       , 1
       )
     ]
-        .|> (\( namedFilter, displayName, iconName, headerColor, pathPrefix, pathArgumentsCount ) ->
-                NamedFilterModel namedFilter displayName iconName headerColor pathPrefix pathArgumentsCount
-            )
+        .|> uncurryNamedFilterModelFrom
+        |> (::) activeContextsNamedFilter
+
+
+activeContextsNamedFilter =
+    ( NF_GB_ActiveContexts
+    , "Contexts"
+    , IconNames.contexts
+    , Colors.contexts
+    , [ "contexts" ]
+    , 0
+    )
+        |> uncurryNamedFilterModelFrom
+
+
+uncurryNamedFilterModelFrom =
+    \( namedFilter, displayName, iconName, headerColor, pathPrefix, pathArgumentsCount ) ->
+        NamedFilterModel namedFilter displayName iconName headerColor pathPrefix pathArgumentsCount
+
+
+getMaybeNamedFilterModelFromPath : List String -> Maybe NamedFilterModel
+getMaybeNamedFilterModelFromPath path =
+    let
+        matchesPath model =
+            path
+                |> List.reverse
+                |> List.drop model.pathArgumentsCount
+                |> equals (List.reverse model.pathPrefix)
+    in
+    List.find matchesPath namedFilterList
+
+
+getMaybeNamedFilterModelFromType namedFilterType =
+    let
+        matchesFilterType model =
+            model.namedFilter == namedFilterType
+    in
+    List.find matchesFilterType namedFilterList
+
+
+getMaybeTitleColourTuple namedFilterType =
+    getMaybeNamedFilterModelFromType namedFilterType
+        ?|> (\model -> ( model.displayName, model.headerColor ))

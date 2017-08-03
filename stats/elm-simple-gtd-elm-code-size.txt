@@ -1,8 +1,8 @@
-    8437 total
-     562 src/elm/Main.elm
+    8435 total
+     549 src/elm/Main.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
-     347 src/elm/Pages/EntityList.elm
+     323 src/elm/Pages/EntityList.elm
      293 src/elm/Store.elm
      286 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
@@ -23,12 +23,12 @@
      143 src/elm/Update/GroupDoc.elm
      142 src/elm/X/Record.elm
      141 src/elm/Views/EntityList.elm
+     138 src/elm/Data/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
-     103 src/elm/Data/EntityList.elm
       97 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
       92 src/elm/Update/ExclusiveMode.elm

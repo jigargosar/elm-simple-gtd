@@ -1623,10 +1623,10 @@
     "moduleName": "Main",
     "parentModuleName": "",
     "imports": [
-      "Colors",
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "AppDrawer.Types",
+      "Colors",
       "Data.TodoDoc",
       "Document",
       "Entity",
@@ -2281,6 +2281,7 @@
       "Entity",
       "EntityListCursor",
       "GroupDoc",
+      "List.Extra",
       "Maybe.Extra",
       "Models.GroupDocStore",
       "Models.Selection",
@@ -2296,7 +2297,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 23,
+    "importsCount": 24,
     "transitiveImports": [
       "Char",
       "Color",

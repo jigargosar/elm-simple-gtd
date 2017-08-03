@@ -2,13 +2,14 @@ module Pages.EntityList exposing (..)
 
 import Color exposing (Color)
 import Colors
-import Data.EntityList
+import Data.EntityList exposing (..)
 import Data.EntityTree
 import Data.TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
 import EntityListCursor
 import GroupDoc exposing (..)
+import List.Extra
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Selection
@@ -32,90 +33,70 @@ type FlatFilterName
 
 
 type Filter
-    = ContextView DocId
-    | ProjectView DocId
+    = ContextIdFilter DocId
+    | ProjectIdFilter DocId
     | FlatListFilter FlatFilterName
     | GroupByFilter GroupDocType
 
 
-type alias Model =
-    { path : List String
-    , title : String
-    , color : Color
-    , filter : Filter
-    }
+type PageModel
+    = PageModel (List String) NamedFilterModel
 
 
-defaultModel =
-    { path = [ "contexts" ]
-    , title = "Contexts"
-    , color = Colors.contexts
-    , filter = GroupByFilter ContextGroupDocType
-    }
+defaultPageModel =
+    PageModel activeContextsNamedFilter.pathPrefix activeContextsNamedFilter
 
 
-contextModel id =
-    { path = "context" :: id :: []
-    , title = "Context"
-    , color = Colors.defaultContext
-    , filter = ContextView id
-    }
-
-
-projectModel id =
-    { path = "project" :: id :: []
-    , title = "Project"
-    , color = Colors.defaultProject
-    , filter = ProjectView id
-    }
-
-
-initFromPath : List String -> Maybe Model
+initFromPath : List String -> Maybe PageModel
 initFromPath path =
-    case path of
-        "done" :: [] ->
-            Just
-                { path = [ "done" ]
-                , title = "Done"
-                , color = Colors.sgtdBlue
-                , filter = FlatListFilter Done
-                }
+    Data.EntityList.getMaybeNamedFilterModelFromPath path
+        ?|> PageModel path
 
-        "bin" :: [] ->
-            Just
-                { path = [ "bin" ]
-                , title = "Bin"
-                , color = Colors.sgtdBlue
-                , filter = FlatListFilter Bin
-                }
 
-        "recent" :: [] ->
-            Just
-                { path = [ "recent" ]
-                , title = "Recent"
-                , color = Colors.sgtdBlue
-                , filter = FlatListFilter Recent
-                }
+getPath (PageModel path _) =
+    path
 
-        "contexts" :: [] ->
-            Just defaultModel
 
-        "projects" :: [] ->
-            Just
-                { path = [ "projects" ]
-                , title = "Projects"
-                , color = Colors.projects
-                , filter = GroupByFilter ProjectGroupDocType
-                }
+getTitleColourTuple (PageModel _ namedFilterModel) =
+    namedFilterModel |> (\model -> ( model.displayName, model.headerColor ))
 
-        "context" :: id :: [] ->
-            contextModel id |> Just
 
-        "project" :: id :: [] ->
-            projectModel id |> Just
+getTitle (PageModel path namedFilterModel) =
+    namedFilterModel.displayName
 
-        _ ->
-            Nothing
+
+getFilter (PageModel path namedFilterModel) =
+    case namedFilterModel.namedFilter of
+        NF_WithNullContext ->
+            ContextIdFilter ""
+
+        NF_WithNullProject ->
+            ProjectIdFilter ""
+
+        NF_FL_Done ->
+            FlatListFilter Done
+
+        NF_FL_Recent ->
+            FlatListFilter Recent
+
+        NF_FL_Bin ->
+            FlatListFilter Bin
+
+        NF_GB_ActiveContexts ->
+            GroupByFilter ContextGroupDocType
+
+        NF_GB_ActiveProjects ->
+            GroupByFilter ProjectGroupDocType
+
+        NF_WithContextId_GB_Projects ->
+            ContextIdFilter (List.Extra.last path ?= "")
+
+        NF_WithProjectId_GB_Contexts ->
+            ProjectIdFilter (List.Extra.last path ?= "")
+
+
+getNamedFilterModel (PageModel path namedFilterModel) =
+    namedFilterModel
 
 
 type Msg
@@ -123,23 +104,6 @@ type Msg
     | ArrowDown
     | SetFocusableEntityId EntityId
     | ToggleSelection EntityId
-
-
-entityListCursorFL =
-    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
-
-
-maybeEntityIdAtCursorFL =
-    let
-        maybeEntityIdAtCursorFL =
-            fieldLens .maybeEntityIdAtCursor (\s b -> { b | maybeEntityIdAtCursor = s })
-    in
-    composeInnerOuterFieldLens maybeEntityIdAtCursorFL entityListCursorFL
-
-
-
---updateDefault config msg =
---    update config msg defaultModel
 
 
 update config msg model =
@@ -160,15 +124,24 @@ update config msg model =
                 )
 
 
+entityListCursorFL =
+    fieldLens .entityListCursor (\s b -> { b | entityListCursor = s })
+
+
+maybeEntityIdAtCursorFL =
+    let
+        maybeEntityIdAtCursorFL =
+            fieldLens .maybeEntityIdAtCursor (\s b -> { b | maybeEntityIdAtCursor = s })
+    in
+    composeInnerOuterFieldLens maybeEntityIdAtCursorFL entityListCursorFL
+
+
 updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor model appModel =
     let
         entityIdList =
             createEntityList model appModel
                 .|> Entity.toEntityId
 
-        --        _ =
-        --            maybeEntityIdAtCursor
-        --                |> Debug.log "maybeEntityIdAtCursor"
         cursor =
             { entityIdList = entityIdList
             , maybeEntityIdAtCursor = maybeEntityIdAtCursor
@@ -244,7 +217,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createEntityTree model appModel =
+createEntityTree pageModel appModel =
     let
         getActiveTodoListForContextHelp =
             getActiveTodoListForContext # appModel
@@ -257,16 +230,19 @@ createEntityTree model appModel =
 
         findContextByIdHelp =
             Models.GroupDocStore.findContextById # appModel
+
+        maybeNameFilterModel =
+            getMaybeNamedFilterModelFromType
     in
-    case model.filter of
-        ContextView id ->
+    case getFilter pageModel of
+        ContextIdFilter id ->
             Models.GroupDocStore.findContextById id appModel
                 ?= GroupDoc.nullContext
                 |> Data.EntityTree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
-        ProjectView id ->
+        ProjectIdFilter id ->
             Models.GroupDocStore.findProjectById id appModel
                 ?= GroupDoc.nullProject
                 |> Data.EntityTree.initProjectRoot
@@ -285,13 +261,13 @@ createEntityTree model appModel =
                         |> Data.EntityTree.initProjectForest
                             getActiveTodoListForProjectHelp
 
-        FlatListFilter namedFilter ->
+        FlatListFilter flatFilterName ->
             let
                 pred =
-                    namedFilterToPredicate namedFilter
+                    namedFilterToPredicate flatFilterName
             in
             Data.EntityTree.initTodoForest
-                model.title
+                (getTitle pageModel)
                 (filterTodosAndSortByLatestModified pred appModel)
 
 

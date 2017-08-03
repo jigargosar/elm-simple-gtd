@@ -1,9 +1,9 @@
 module Main exposing (main)
 
-import Colors
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
+import Colors
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
@@ -59,11 +59,11 @@ import X.Return exposing (..)
 
 
 type Page
-    = EntityListPage Pages.EntityList.Model
+    = EntityListPage Pages.EntityList.PageModel
 
 
 initialPage =
-    EntityListPage Pages.EntityList.defaultModel
+    EntityListPage Pages.EntityList.defaultPageModel
 
 
 getPage__ =
@@ -74,8 +74,8 @@ delta2hash =
     let
         getPathFromModel model =
             case getPage__ model of
-                EntityListPage model ->
-                    model.path
+                EntityListPage pageModel ->
+                    Pages.EntityList.getPath pageModel
 
         delta2builder previousModel currentModel =
             RouteUrl.Builder.builder
@@ -149,6 +149,10 @@ type AppMsg
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
     | PageMsg_NavigateToPath (List String)
+
+
+navigateToPathMsg =
+    PageMsg_NavigateToPath
 
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
@@ -292,7 +296,7 @@ updateConfig model =
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
     , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
-    , navigateToPathMsg = PageMsg_NavigateToPath
+    , navigateToPathMsg = navigateToPathMsg
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }
 
@@ -466,7 +470,7 @@ viewConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursorOld = Nothing
     , maybeEntityIdAtCursor = Nothing
-    , navigateToPathMsg = PageMsg_NavigateToPath
+    , navigateToPathMsg = navigateToPathMsg
     }
 
 
@@ -481,11 +485,8 @@ view config model =
                 projectsVM =
                     AppDrawer.GroupViewModel.projects config model
 
-                page =
-                    model.page
-
                 ( viewName, headerBackgroundColor ) =
-                    getViewInfo page projectsVM contextsVM model
+                    getViewInfo projectsVM contextsVM model
 
                 editMode =
                     model.editMode
@@ -501,26 +502,12 @@ view config model =
                 Todo.ViewModel.createTodoViewModel config model
             }
 
-        getViewInfo page projectsVM contextsVM model =
-            let
-                entityById id =
-                    List.find (.id >> equals id)
+        getViewInfo projectsVM contextsVM model =
+            case model.page of
+                EntityListPage pageModel ->
+                    Pages.EntityList.getTitleColourTuple pageModel
 
-                appHeaderInfoById id vm =
-                    entityById id vm.entityList
-                        |> Maybe.orElseLazy (\_ -> entityById id vm.archivedEntityList)
-                        |> Maybe.orElseLazy (\_ -> entityById id vm.nullVMAsList)
-                        >>? .appHeader
-                        >>?= { name = "o_O", backgroundColor = sgtdBlue }
-                        >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
-            in
-            case page of
-                EntityListPage model ->
-                    ( model.title, model.color )
-
-        sgtdBlue =
-            Colors.sgtdBlue
-
+        --                        ?= ( "o_O", Colors.sgtdBlue )
         appVM =
             createAppViewModel config model
 
@@ -532,9 +519,9 @@ view config model =
                     ++ View.Overlays.overlayViews config model
                 )
     in
-    case getPage__ model of
-        EntityListPage subModel ->
-            Views.EntityList.view config appVM model subModel
+    case model.page of
+        EntityListPage pageModel ->
+            Views.EntityList.view config appVM model pageModel
                 |> frame
 
 
@@ -553,7 +540,7 @@ main =
         { delta2url = delta2hash
         , location2messages =
             hash2messages
-                { navigateToPathMsg = PageMsg_NavigateToPath
+                { navigateToPathMsg = navigateToPathMsg
                 }
         , init = init
         , update = update_

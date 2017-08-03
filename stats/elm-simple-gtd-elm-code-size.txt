@@ -1,8 +1,8 @@
-    8437 total
+    8427 total
      538 src/elm/Main.elm
+     362 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
-     346 src/elm/Pages/EntityList.elm
      293 src/elm/Store.elm
      286 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
@@ -62,7 +62,6 @@
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm
-      26 src/elm/EntityListCursor.elm
       24 src/elm/EntityId.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm

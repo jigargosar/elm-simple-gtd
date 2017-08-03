@@ -158,6 +158,14 @@ maybeEntityIdAtCursorFL =
     composeInnerOuterFieldLens maybeEntityIdAtCursorFL entityListCursorFL
 
 
+entityListCursorPageModelFL =
+    let
+        entityListPageModelFL =
+            fieldLens .entityListPageModel (\s b -> { b | entityListPageModel = s })
+    in
+    composeInnerOuterFieldLens entityListPageModelFL entityListCursorFL
+
+
 updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor pageModel appModel =
     let
         entityIdList =
@@ -306,14 +314,14 @@ flatFilterNameToPredicate filterType =
             Document.isDeleted
 
 
-createEntityList model appModel =
-    createEntityTree model appModel |> Data.EntityTree.flatten
+createEntityList pageModel appModel =
+    createEntityTree pageModel appModel |> Data.EntityTree.flatten
 
 
-computeMaybeNewEntityIdAtCursor model appModel =
+computeMaybeNewEntityIdAtCursor pageModel appModel =
     let
         newEntityIdList =
-            createEntityList model appModel
+            createEntityList pageModel appModel
                 .|> Entity.toEntityId
 
         computeMaybeFEI index =
@@ -341,6 +349,14 @@ computeMaybeNewEntityIdAtCursor model appModel =
                             _ ->
                                 Just entityIdAtCursor
                    )
+
+        maybeCompute : Maybe EntityId
+        maybeCompute =
+            if get entityListCursorPageModelFL appModel == pageModel then
+                getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor appModel
+                    |> Maybe.join
+            else
+                get maybeEntityIdAtCursorFL appModel
     in
-    getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor appModel
-        ?= List.head newEntityIdList
+    maybeCompute
+        |> Maybe.orElseLazy (\_ -> List.head newEntityIdList)

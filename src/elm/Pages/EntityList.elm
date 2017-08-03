@@ -261,9 +261,6 @@ createEntityTree pageModel appModel =
 
         findContextByIdHelp =
             Models.GroupDocStore.findContextById # appModel
-
-        maybeNameFilterModel =
-            getMaybeNamedFilterModelFromType
     in
     case getFilter pageModel of
         ContextIdFilter id ->

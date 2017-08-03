@@ -8,6 +8,7 @@ import Data.EntityTree
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
+import EntityId
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
@@ -496,12 +497,28 @@ view config model =
                                 ?+> (Entity.hasId >> List.find # entityList)
                                 |> Maybe.orElse (List.head entityList)
                                 ?|> Entity.toEntityId
+
+                        isCursorAtEntityId entityId =
+                            maybeEntityIdAtCursor ?|> equals entityId ?= False
+
+                        getTabIndexForEntityId entityId =
+                            if isCursorAtEntityId entityId then
+                                0
+                            else
+                                -1
+
+                        createTodoViewModel todo =
+                            let
+                                isFocusable =
+                                    EntityId.fromTodo todo |> isCursorAtEntityId
+                            in
+                            todo
+                                |> Todo.ViewModel.createTodoViewModel config model isFocusable
                     in
-                    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
-                    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
-                    , createTodoViewModel = Todo.ViewModel.createTodoViewModel config model
+                    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config getTabIndexForEntityId
+                    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config getTabIndexForEntityId
+                    , createTodoViewModel = createTodoViewModel
                     , entityTree = entityTree
-                    , maybeEntityIdAtCursor = maybeEntityIdAtCursor
                     }
             in
             Views.EntityList.view pageVM

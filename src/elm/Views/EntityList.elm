@@ -25,18 +25,8 @@ view pageVM =
 
 keyedViewList pageVM =
     let
-        isCursorAtEntityId entityId =
-            pageVM.maybeEntityIdAtCursor ?|> equals entityId ?= False
-
-        getTabIndexForEntityId entityId =
-            if isCursorAtEntityId entityId then
-                0
-            else
-                -1
-
         createContextVM { context, todoList } =
             pageVM.createContextGroupVM
-                getTabIndexForEntityId
                 todoList
                 context
 
@@ -45,7 +35,6 @@ keyedViewList pageVM =
 
         createProjectVM { project, todoList } =
             pageVM.createProjectGroupVM
-                getTabIndexForEntityId
                 todoList
                 project
 
@@ -53,12 +42,8 @@ keyedViewList pageVM =
             list .|> (createProjectVM >> groupView createTodoView)
 
         createTodoView todo =
-            let
-                isFocusable =
-                    EntityId.fromTodo todo |> isCursorAtEntityId
-            in
             todo
-                |> pageVM.createTodoViewModel isFocusable
+                |> pageVM.createTodoViewModel
                 |> Todo.ItemView.keyedItem
     in
     case pageVM.entityTree of

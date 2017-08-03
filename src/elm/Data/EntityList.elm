@@ -40,14 +40,14 @@ namedFilterList =
       , "Inbox"
       , IconNames.nullContext
       , Colors.nullContext
-      , [ "context", "" ]
+      , [ "context" ]
       , 0
       )
     , ( NF_WithNullProject
       , "No Project Assigned"
       , IconNames.nullProject
       , Colors.nullProject
-      , [ "project", "" ]
+      , [ "project" ]
       , 0
       )
     , ( NF_FL_Done

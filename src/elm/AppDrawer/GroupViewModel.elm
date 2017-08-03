@@ -95,11 +95,13 @@ create getTodoListByEntityId config innerConFig groupDoc =
         isNull =
             innerConFig.isNull groupDoc
 
-        icon =
+        ( icon, path ) =
             if isNull then
-                innerConFig.nullIcon
+                ( innerConFig.nullIcon, [ innerConFig.getEntityListPageModel ] )
             else
-                { name = innerConFig.defaultIconName, color = innerConFig.defaultColor }
+                ( { name = innerConFig.defaultIconName, color = innerConFig.defaultColor }
+                , [ innerConFig.getEntityListPageModel, id ]
+                )
 
         name =
             when String.Extra.isBlank (\_ -> "<no name>") groupDoc.name
@@ -121,7 +123,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
     , onActiveStateChanged =
         \bool ->
             if bool then
-                config.navigateToPathMsg [ innerConFig.getEntityListPageModel, id ]
+                config.navigateToPathMsg path
             else
                 config.noop
     , icon = icon

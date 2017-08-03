@@ -456,13 +456,6 @@ viewConfig model =
 view : ViewConfig msg -> AppModel -> Html msg
 view config model =
     let
-        pageVM =
-            { mdl = model.mdl
-            , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
-            , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
-            , createTodoViewModel = Todo.ViewModel.createTodoViewModel config model
-            }
-
         frameVM =
             let
                 ( viewName, headerBackgroundColor ) =
@@ -487,6 +480,13 @@ view config model =
     in
     case getPage__ model of
         EntityListPage pageModel ->
+            let
+                pageVM =
+                    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
+                    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
+                    , createTodoViewModel = Todo.ViewModel.createTodoViewModel config model
+                    }
+            in
             Views.EntityList.view config pageVM model pageModel
                 |> frame
 

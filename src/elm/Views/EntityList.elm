@@ -16,7 +16,7 @@ import View.Badge
 import X.Function exposing (..)
 
 
-view config appVM appModel pageModel =
+view config pageVM appModel pageModel =
     let
         entityTree =
             Pages.EntityList.createEntityTree pageModel appModel
@@ -33,10 +33,10 @@ view config appVM appModel pageModel =
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         ]
-        (keyedViewList maybeEntityIdAtCursor appVM entityTree)
+        (keyedViewList maybeEntityIdAtCursor pageVM entityTree)
 
 
-keyedViewList maybeEntityIdAtCursor appVM entityTree =
+keyedViewList maybeEntityIdAtCursor pageVM entityTree =
     let
         isCursorAtEntityId entityId =
             maybeEntityIdAtCursor ?|> equals entityId ?= False
@@ -48,7 +48,7 @@ keyedViewList maybeEntityIdAtCursor appVM entityTree =
                 -1
 
         createContextVM { context, todoList } =
-            appVM.createContextGroupVM
+            pageVM.createContextGroupVM
                 getTabIndexForEntityId
                 todoList
                 context
@@ -57,7 +57,7 @@ keyedViewList maybeEntityIdAtCursor appVM entityTree =
             list .|> (createContextVM >> groupView todoViewFromTodo)
 
         createProjectVM { project, todoList } =
-            appVM.createProjectGroupVM
+            pageVM.createProjectGroupVM
                 getTabIndexForEntityId
                 todoList
                 project
@@ -72,7 +72,7 @@ keyedViewList maybeEntityIdAtCursor appVM entityTree =
                     EntityId.fromTodo todo |> isCursorAtEntityId
             in
             todo
-                |> appVM.createTodoViewModel isFocusable
+                |> pageVM.createTodoViewModel isFocusable
                 |> Todo.ItemView.keyedItem
 
         --        todoListView : List TodoDoc -> List KeyedView

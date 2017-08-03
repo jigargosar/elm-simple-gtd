@@ -66,7 +66,7 @@ type PageModel
 
 
 defaultPageModel =
-    PageModel activeContextsNamedFilter.pathPrefix activeContextsNamedFilter
+    PageModel defaultNamedFilterModel.pathPrefix defaultNamedFilterModel
 
 
 initFromPath : List String -> Maybe PageModel

@@ -29,7 +29,8 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
         setTimeout(() => emitter.emit(".auto-focus"), 0)
       }
     },
-    queries: [{element: autoFocusSelector},
+    queries: [
+      {element: autoFocusSelector},
     ],
   })
   
@@ -40,17 +41,8 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       
       const entityListItemSummary = summaries[0]
       console.log(".entity-list", entityListItemSummary)
-      const entityListItemAdded = entityListItemSummary.added
-      if (!_.isEmpty(entityListItemAdded) || entityListItemSummary.attributeChanged) {
-        // console.log("entityListItemSummary.added", entityListItemAdded)
-        // new MutationSummary({
-        //   rootNode: entityListItemAdded[0],
-        //   callback(summaries) {
-        //     console.log(".entity-list all", summaries)
-        //     emitter.emit(".focusable-list-item[tabindex=0]")
-        //   },
-        //   queries:[{all:true}]
-        // })
+      if (entityListItemSummary.added.length !== 0
+          || entityListItemSummary.attributeChanged.tabindex.length !== 0) {
         emitter.emit(".focusable-list-item[tabindex=0]")
       }
     },

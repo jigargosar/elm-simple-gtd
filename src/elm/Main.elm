@@ -456,33 +456,30 @@ viewConfig model =
 view : ViewConfig msg -> AppModel -> Html msg
 view config model =
     let
-        createAppViewModel config model =
+        pageVM =
+            { mdl = model.mdl
+            , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
+            , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
+            , createTodoViewModel = Todo.ViewModel.createTodoViewModel config model
+            }
+
+        frameVM =
             let
                 ( viewName, headerBackgroundColor ) =
                     case getPage__ model of
                         EntityListPage pageModel ->
                             Pages.EntityList.getTitleColourTuple pageModel
-
-                editMode =
-                    model.editMode
             in
             { contexts = AppDrawer.GroupViewModel.contexts config model
             , projects = AppDrawer.GroupViewModel.projects config model
             , viewName = viewName
             , header = { backgroundColor = headerBackgroundColor }
             , mdl = model.mdl
-            , createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
-            , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
-            , createTodoViewModel =
-                Todo.ViewModel.createTodoViewModel config model
             }
-
-        appVM =
-            createAppViewModel config model
 
         frame pageContent =
             div [ cs "mdl-typography--body-1" ]
-                ([ View.Layout.appLayoutView config appVM model pageContent
+                ([ View.Layout.appLayoutView config frameVM model pageContent
                  , newTodoFab config model
                  ]
                     ++ View.Overlays.overlayViews config model
@@ -490,7 +487,7 @@ view config model =
     in
     case getPage__ model of
         EntityListPage pageModel ->
-            Views.EntityList.view config appVM model pageModel
+            Views.EntityList.view config pageVM model pageModel
                 |> frame
 
 

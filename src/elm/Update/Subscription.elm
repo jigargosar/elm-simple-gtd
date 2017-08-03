@@ -93,8 +93,8 @@ onGlobalKeyUp config key =
                 _ ->
                     identity
     in
-    (\editMode ->
-        case ( key, editMode ) of
+    (\exMode ->
+        case ( key, exMode ) of
             ( _, ExclusiveMode.Types.XMNone ) ->
                 onEditModeNone
 

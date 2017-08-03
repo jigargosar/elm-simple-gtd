@@ -9,16 +9,16 @@ import View.Header
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
 
-appLayoutView config appVM model pageContent =
+appLayoutView config frameVM model pageContent =
     let
         layoutSideBarHeader =
-            AppDrawer.View.sidebarHeader appVM model
+            AppDrawer.View.sidebarHeader frameVM model
 
         layoutSideBarContent =
-            AppDrawer.View.sidebarContent config appVM model
+            AppDrawer.View.sidebarContent config frameVM model
 
         layoutMainHeader =
-            View.Header.appMainHeader config appVM model
+            View.Header.appMainHeader config frameVM model
 
         isOverlayOpen =
             AppDrawer.Model.getIsOverlayOpen model.appDrawerModel

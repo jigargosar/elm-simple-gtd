@@ -13,12 +13,12 @@ fromContext =
 
 
 fromProjectDocId =
-    ProjectId
+    ProjectEntityId
 
 
 fromContextDocId =
-    ContextId
+    ContextEntityId
 
 
 fromTodoDocId =
-    TodoId
+    TodoEntityId

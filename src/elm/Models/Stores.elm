@@ -34,11 +34,11 @@ getActiveTodoListHavingActiveProject model =
 
 findByEntityId entityId =
     case entityId of
-        ContextId id ->
+        ContextEntityId id ->
             findContextById id >>? createContextEntity
 
-        ProjectId id ->
+        ProjectEntityId id ->
             findProjectById id >>? createProjectEntity
 
-        TodoId id ->
+        TodoEntityId id ->
             findTodoById id >>? createTodoEntity

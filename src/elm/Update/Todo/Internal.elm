@@ -149,14 +149,14 @@ saveAddTodoForm config addMode form now model =
 
                     maybeAction =
                         case referenceEntityId of
-                            TodoId todoId ->
+                            TodoEntityId todoId ->
                                 Models.Todo.findTodoById todoId model
                                     ?|> TA_CopyProjectAndContextId
 
-                            ContextId contextId ->
+                            ContextEntityId contextId ->
                                 TA_SetContextId contextId |> Just
 
-                            ProjectId projectId ->
+                            ProjectEntityId projectId ->
                                 TA_SetProjectId projectId |> Just
                 in
                 updateTodoWithMaybeAction maybeAction now todoId

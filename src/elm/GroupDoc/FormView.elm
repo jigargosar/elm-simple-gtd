@@ -21,10 +21,10 @@ init config form =
         ( entityId, nameLabel ) =
             (case form.groupDocType of
                 ContextGroupDocType ->
-                    ( ContextId, "Context" )
+                    ( ContextEntityId, "Context" )
 
                 ProjectGroupDocType ->
-                    ( ProjectId, "Project" )
+                    ( ProjectEntityId, "Project" )
             )
                 |> Tuple2.mapEach (apply form.id) (String.append # " Name")
 

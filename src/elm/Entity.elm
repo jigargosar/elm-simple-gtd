@@ -37,45 +37,45 @@ createTodoEntity =
 
 
 type EntityId
-    = ContextId DocId
-    | ProjectId DocId
-    | TodoId DocId
+    = ContextEntityId DocId
+    | ProjectEntityId DocId
+    | TodoEntityId DocId
 
 
 getDocIdFromEntityId entityId =
     case entityId of
-        ContextId id ->
+        ContextEntityId id ->
             id
 
-        ProjectId id ->
+        ProjectEntityId id ->
             id
 
-        TodoId id ->
+        TodoEntityId id ->
             id
 
 
 createTodoEntityId =
-    TodoId
+    TodoEntityId
 
 
 createContextEntityId =
-    ContextId
+    ContextEntityId
 
 
 createProjectEntityId =
-    ProjectId
+    ProjectEntityId
 
 
 toEntityId entity =
     case entity of
         TodoEntity m ->
-            TodoId (Document.getId m)
+            TodoEntityId (Document.getId m)
 
         GroupDocEntityW (GroupDocEntity ContextGroupDocType gd) ->
-            ContextId (Document.getId gd)
+            ContextEntityId (Document.getId gd)
 
         GroupDocEntityW (GroupDocEntity ProjectGroupDocType gd) ->
-            ProjectId (Document.getId gd)
+            ProjectEntityId (Document.getId gd)
 
 
 equalById =

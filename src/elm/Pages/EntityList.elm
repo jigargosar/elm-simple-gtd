@@ -24,6 +24,16 @@ import X.Return exposing (..)
 import X.Set exposing (toggleSetMember)
 
 
+type NamedFilter
+    = NF_FL_Done
+    | NF_FL_Recent
+    | NF_FL_Bin
+    | NF_GB_ActiveContexts
+    | NF_GB_ActiveProjects
+    | NF_WithContextId_GB_Projects DocId
+    | NF_WithProjectId_GB_Contexts DocId
+
+
 type FlatFilterName
     = Done
     | Recent
@@ -107,24 +117,8 @@ initFromPath path =
                 , filter = GroupByFilter ProjectGroupDocType
                 }
 
-        "Inbox" :: [] ->
-            Just
-                { path = [ "Inbox" ]
-                , title = "Inbox"
-                , color = AppColors.nullContextColor
-                , filter = ContextView ""
-                }
-
         "context" :: id :: [] ->
             contextModel id |> Just
-
-        "project" :: "NotAssigned" :: [] ->
-            Just
-                { path = path
-                , title = "No Project"
-                , color = AppColors.defaultProjectColor
-                , filter = ProjectView ""
-                }
 
         "project" :: id :: [] ->
             projectModel id |> Just
@@ -340,7 +334,7 @@ computeMaybeNewEntityIdAtCursor model appModel =
                 |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
                 |> (\( maybeOldIndex, maybeNewIndex ) ->
                         case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
-                            ( Just oldIndex, Just newIndex, TodoId _ ) ->
+                            ( Just oldIndex, Just newIndex, TodoEntityId _ ) ->
                                 case compare oldIndex newIndex of
                                     LT ->
                                         computeMaybeFEI oldIndex

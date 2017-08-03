@@ -162,7 +162,7 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
         configInner =
             { groupByFn = Data.TodoDoc.getContextId
             , namePrefix = "@"
-            , toEntityId = ContextId
+            , toEntityId = ContextEntityId
             , nullEntity = GroupDoc.nullContext
             , isNull = GroupDoc.isNullContext
             , nullIcon = { name = "inbox", color = inboxColor }
@@ -181,7 +181,7 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
         configInner =
             { groupByFn = Data.TodoDoc.getProjectId
             , namePrefix = "#"
-            , toEntityId = ProjectId
+            , toEntityId = ProjectEntityId
             , nullEntity = GroupDoc.nullProject
             , isNull = GroupDoc.isNullProject
             , nullIcon = { name = "inbox", color = inboxColor }

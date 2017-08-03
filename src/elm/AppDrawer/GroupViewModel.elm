@@ -147,7 +147,7 @@ contexts config model =
             , todoList = Models.Stores.getActiveTodoListHavingActiveProject model
             , namePrefix = "@"
             , filter = activeFilter
-            , toEntityId = ContextId
+            , toEntityId = ContextEntityId
             , nullEntity = GroupDoc.nullContext
             , isNull = GroupDoc.isNullContext
             , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
@@ -199,7 +199,7 @@ projects config model =
             , todoList = Models.Stores.getActiveTodoListHavingActiveContext model
             , namePrefix = "#"
             , filter = activeFilter
-            , toEntityId = ProjectId
+            , toEntityId = ProjectEntityId
             , nullEntity = GroupDoc.nullProject
             , isNull = GroupDoc.isNullProject
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }

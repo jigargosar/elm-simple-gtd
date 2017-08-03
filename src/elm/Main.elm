@@ -66,35 +66,6 @@ initialPage =
     EntityListPage Pages.EntityList.defaultPageModel
 
 
-getPage__ =
-    .page
-
-
-delta2hash =
-    let
-        getPathFromModel model =
-            case getPage__ model of
-                EntityListPage pageModel ->
-                    Pages.EntityList.getPath pageModel
-
-        delta2builder previousModel currentModel =
-            RouteUrl.Builder.builder
-                |> RouteUrl.Builder.replacePath (getPathFromModel currentModel)
-    in
-    delta2builder >>> RouteUrl.Builder.toHashChange >> Just
-
-
-hash2messages config location =
-    let
-        builder =
-            RouteUrl.Builder.fromHash location.href
-
-        path =
-            RouteUrl.Builder.path builder
-    in
-    [ config.navigateToPathMsg path ]
-
-
 type alias AppConfig =
     { deviceId : String
     , npmPackageVersion : String
@@ -479,20 +450,16 @@ view config model =
     let
         createAppViewModel config model =
             let
-                contextsVM =
-                    AppDrawer.GroupViewModel.contexts config model
-
-                projectsVM =
-                    AppDrawer.GroupViewModel.projects config model
-
                 ( viewName, headerBackgroundColor ) =
-                    getViewInfo projectsVM contextsVM model
+                    case getPage__ model of
+                        EntityListPage pageModel ->
+                            Pages.EntityList.getTitleColourTuple pageModel
 
                 editMode =
                     model.editMode
             in
-            { contexts = contextsVM
-            , projects = projectsVM
+            { contexts = AppDrawer.GroupViewModel.contexts config model
+            , projects = AppDrawer.GroupViewModel.projects config model
             , viewName = viewName
             , header = { backgroundColor = headerBackgroundColor }
             , mdl = model.mdl
@@ -502,12 +469,6 @@ view config model =
                 Todo.ViewModel.createTodoViewModel config model
             }
 
-        getViewInfo projectsVM contextsVM model =
-            case model.page of
-                EntityListPage pageModel ->
-                    Pages.EntityList.getTitleColourTuple pageModel
-
-        --                        ?= ( "o_O", Colors.sgtdBlue )
         appVM =
             createAppViewModel config model
 
@@ -519,10 +480,39 @@ view config model =
                     ++ View.Overlays.overlayViews config model
                 )
     in
-    case model.page of
+    case getPage__ model of
         EntityListPage pageModel ->
             Views.EntityList.view config appVM model pageModel
                 |> frame
+
+
+getPage__ =
+    .page
+
+
+delta2hash =
+    let
+        getPathFromModel model =
+            case getPage__ model of
+                EntityListPage pageModel ->
+                    Pages.EntityList.getPath pageModel
+
+        delta2builder previousModel currentModel =
+            RouteUrl.Builder.builder
+                |> RouteUrl.Builder.replacePath (getPathFromModel currentModel)
+    in
+    delta2builder >>> RouteUrl.Builder.toHashChange >> Just
+
+
+hash2messages config location =
+    let
+        builder =
+            RouteUrl.Builder.fromHash location.href
+
+        path =
+            RouteUrl.Builder.path builder
+    in
+    [ config.navigateToPathMsg path ]
 
 
 main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg

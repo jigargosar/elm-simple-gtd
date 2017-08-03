@@ -141,8 +141,8 @@
     "moduleName": "AppDrawer.View",
     "parentModuleName": "AppDrawer",
     "imports": [
-      "Colors",
       "AppUrl",
+      "Colors",
       "Html",
       "Html.Attributes",
       "Html.Events",

@@ -1,7 +1,7 @@
 module AppDrawer.View exposing (..)
 
-import Colors
 import AppUrl
+import Colors
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -42,15 +42,11 @@ sidebarHeader appVM m =
 
 
 sidebarContent config appVM model =
-    let
-        { contexts, projects } =
-            appVM
-    in
     div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
         [ ul []
             ([]
-                ++ entityGroupView config contexts model.page
-                ++ entityGroupView config projects model.page
+                ++ entityGroupView config appVM.contexts model.page
+                ++ entityGroupView config appVM.projects model.page
                 ++ [ Mat.divider ]
                 ++ [ onSetEntityListViewItem
                         config

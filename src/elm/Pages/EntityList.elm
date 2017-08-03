@@ -264,14 +264,14 @@ createEntityTree pageModel appModel =
         FlatListFilter flatFilterName ->
             let
                 pred =
-                    namedFilterToPredicate flatFilterName
+                    flatFilterNameToPredicate flatFilterName
             in
             Data.EntityTree.initTodoForest
                 (getTitle pageModel)
                 (filterTodosAndSortByLatestModified pred appModel)
 
 
-namedFilterToPredicate filterType =
+flatFilterNameToPredicate filterType =
     case filterType of
         Done ->
             X.Predicate.all [ Document.isNotDeleted, Data.TodoDoc.isDone ]

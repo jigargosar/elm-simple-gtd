@@ -100,10 +100,6 @@ keyedViewList maybeEntityIdAtCursor appVM entityTree =
         Data.EntityTree.ProjectForest groupList ->
             multiProjectView groupList
 
-        Data.EntityTree.TodoForest title todoList ->
-            todoListView todoList
-                |> flatTodoListView title
-
         Data.EntityTree.Root node ->
             case node of
                 Data.EntityTree.Node (Data.EntityTree.StringTitle title) todoList ->

@@ -34,7 +34,6 @@ type Tree
     | ProjectRoot ProjectNode (List ContextNode)
     | ContextForest (List ContextNode)
     | ProjectForest (List ProjectNode)
-    | TodoForest String (List TodoDoc)
     | Root Node
     | Forest List Node
 
@@ -148,9 +147,6 @@ flatten tree =
                         Entity.createProjectEntity g.project
                             :: (g.todoList .|> Entity.TodoEntity)
                     )
-
-        TodoForest title todoList ->
-            todoList .|> Entity.TodoEntity
 
         Root node ->
             case node of

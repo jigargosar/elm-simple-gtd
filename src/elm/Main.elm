@@ -290,8 +290,8 @@ update config msg =
             case path of
                 _ ->
                     Pages.EntityList.initFromPath path
-                        ?|> EntityListPage
-                        |> setMaybePage
+                        |> EntityListPage
+                        |> setPage
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)

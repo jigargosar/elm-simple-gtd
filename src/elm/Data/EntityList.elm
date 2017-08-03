@@ -113,18 +113,6 @@ uncurryNamedFilterModelFrom =
         NamedFilterModel namedFilter displayName iconName headerColor pathPrefix pathArgumentsCount
 
 
-getMaybeNamedFilterModelFromPath : List String -> Maybe NamedFilterModel
-getMaybeNamedFilterModelFromPath path =
-    let
-        matchesPath model =
-            path
-                |> List.reverse
-                |> List.drop model.pathArgumentsCount
-                |> equals (List.reverse model.pathPrefix)
-    in
-    List.find matchesPath namedFilterList
-
-
 getMaybeNamedFilterModelFromType namedFilterType =
     let
         matchesFilterType model =

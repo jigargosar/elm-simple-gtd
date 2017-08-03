@@ -88,7 +88,7 @@ getTitle (PageModel path namedFilterModel) =
 
 
 getFilter (PageModel path namedFilterModel) =
-    case namedFilterModel.namedFilter of
+    case namedFilterModel.namedFilterType of
         NF_WithNullContext ->
             ContextIdFilter ""
 

@@ -26,7 +26,7 @@ type NamedFilterType
 
 
 type alias NamedFilterModel =
-    { namedFilter : NamedFilterType
+    { namedFilterType : NamedFilterType
     , displayName : String
     , iconName : String
     , headerColor : Color
@@ -109,8 +109,8 @@ activeContextsNamedFilter =
 
 
 uncurryNamedFilterModelFrom =
-    \( namedFilter, displayName, iconName, headerColor, pathPrefix, pathArgumentsCount ) ->
-        NamedFilterModel namedFilter displayName iconName headerColor pathPrefix pathArgumentsCount
+    \( namedFilterType, displayName, iconName, headerColor, pathPrefix, pathArgumentsCount ) ->
+        NamedFilterModel namedFilterType displayName iconName headerColor pathPrefix pathArgumentsCount
 
 
 getMaybeNamedFilterModelFromPath : List String -> Maybe NamedFilterModel
@@ -128,7 +128,7 @@ getMaybeNamedFilterModelFromPath path =
 getMaybeNamedFilterModelFromType namedFilterType =
     let
         matchesFilterType model =
-            model.namedFilter == namedFilterType
+            model.namedFilterType == namedFilterType
     in
     List.find matchesFilterType namedFilterList
 

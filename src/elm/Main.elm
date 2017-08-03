@@ -4,6 +4,7 @@ import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Colors
+import Data.EntityTree
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
@@ -482,12 +483,28 @@ view config model =
         EntityListPage pageModel ->
             let
                 pageVM =
+                    let
+                        entityTree =
+                            Pages.EntityList.createEntityTree pageModel model
+
+                        maybeEntityIdAtCursor =
+                            let
+                                entityList =
+                                    Data.EntityTree.flatten entityTree
+                            in
+                            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
+                                ?+> (Entity.hasId >> List.find # entityList)
+                                |> Maybe.orElse (List.head entityList)
+                                ?|> Entity.toEntityId
+                    in
                     { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config
                     , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config
                     , createTodoViewModel = Todo.ViewModel.createTodoViewModel config model
+                    , entityTree = entityTree
+                    , maybeEntityIdAtCursor = maybeEntityIdAtCursor
                     }
             in
-            Views.EntityList.view config pageVM model pageModel
+            Views.EntityList.view pageVM
                 |> frame
 
 

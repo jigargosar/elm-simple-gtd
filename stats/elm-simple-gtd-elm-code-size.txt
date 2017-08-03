@@ -1,5 +1,5 @@
-    8438 total
-     544 src/elm/Main.elm
+    8444 total
+     561 src/elm/Main.elm
      359 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -23,9 +23,9 @@
      144 src/elm/Data/NamedFilter.elm
      143 src/elm/Update/GroupDoc.elm
      142 src/elm/X/Record.elm
-     137 src/elm/Views/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
+     126 src/elm/Views/EntityList.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm

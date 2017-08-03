@@ -16,30 +16,17 @@ import View.Badge
 import X.Function exposing (..)
 
 
-view config pageVM appModel pageModel =
-    let
-        entityTree =
-            Pages.EntityList.createEntityTree pageModel appModel
-
-        entityList =
-            Data.EntityTree.flatten entityTree
-
-        maybeEntityIdAtCursor =
-            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel appModel
-                ?+> (Entity.hasId >> List.find # entityList)
-                |> Maybe.orElse (List.head entityList)
-                ?|> Entity.toEntityId
-    in
+view pageVM =
     Html.Keyed.node "div"
         [ class "entity-list focusable-list"
         ]
-        (keyedViewList maybeEntityIdAtCursor pageVM entityTree)
+        (keyedViewList pageVM)
 
 
-keyedViewList maybeEntityIdAtCursor pageVM entityTree =
+keyedViewList pageVM =
     let
         isCursorAtEntityId entityId =
-            maybeEntityIdAtCursor ?|> equals entityId ?= False
+            pageVM.maybeEntityIdAtCursor ?|> equals entityId ?= False
 
         getTabIndexForEntityId entityId =
             if isCursorAtEntityId entityId then
@@ -54,7 +41,7 @@ keyedViewList maybeEntityIdAtCursor pageVM entityTree =
                 context
 
         multiContextView list =
-            list .|> (createContextVM >> groupView todoViewFromTodo)
+            list .|> (createContextVM >> groupView createTodoView)
 
         createProjectVM { project, todoList } =
             pageVM.createProjectGroupVM
@@ -63,10 +50,9 @@ keyedViewList maybeEntityIdAtCursor pageVM entityTree =
                 project
 
         multiProjectView list =
-            list .|> (createProjectVM >> groupView todoViewFromTodo)
+            list .|> (createProjectVM >> groupView createTodoView)
 
-        --        todoViewFromTodo : TodoDoc -> KeyedView
-        todoViewFromTodo todo =
+        createTodoView todo =
             let
                 isFocusable =
                     EntityId.fromTodo todo |> isCursorAtEntityId
@@ -74,12 +60,8 @@ keyedViewList maybeEntityIdAtCursor pageVM entityTree =
             todo
                 |> pageVM.createTodoViewModel isFocusable
                 |> Todo.ItemView.keyedItem
-
-        --        todoListView : List TodoDoc -> List KeyedView
-        todoListView =
-            List.map todoViewFromTodo
     in
-    case entityTree of
+    case pageVM.entityTree of
         Data.EntityTree.ContextRoot contextGroup subGroupList ->
             let
                 header =
@@ -103,7 +85,7 @@ keyedViewList maybeEntityIdAtCursor pageVM entityTree =
         Data.EntityTree.Root node ->
             case node of
                 Data.EntityTree.Node (Data.EntityTree.StringTitle title) todoList ->
-                    todoListView todoList
+                    List.map createTodoView todoList
                         |> flatTodoListView title
 
                 _ ->
@@ -123,15 +105,22 @@ groupHeaderView vm =
 
 flatTodoListView title todoListView =
     let
-        count =
-            todoListView |> List.length
+        titleKeyedView =
+            let
+                count =
+                    todoListView |> List.length
+            in
+            ( title
+            , div [ class "collection-item" ]
+                [ h5 [] [ View.Badge.badge title count ] ]
+            )
 
-        truncatedList =
+        truncatedKeyedViewList =
             todoListView |> List.take 75
+
+        view =
+            Html.Keyed.node "div"
+                [ class "todo-list collection" ]
+                (titleKeyedView :: truncatedKeyedViewList)
     in
-    [ ( title
-      , Html.Keyed.node "div"
-            [ class "todo-list collection" ]
-            (( title, div [ class "collection-item" ] [ h5 [] [ View.Badge.badge title count ] ] ) :: truncatedList)
-      )
-    ]
+    [ ( title, view ) ]

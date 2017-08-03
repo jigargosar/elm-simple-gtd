@@ -133,7 +133,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
            // even in focus selector port.
            // we need to completely control focus on entity list.
            // can't depended on mutation observer for the same.
-           // can't have
            // setTimeout(()=>{
              const $toFocus = $(options.selector).first()
   

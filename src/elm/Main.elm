@@ -7,7 +7,6 @@ import Colors
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
-import EntityListCursor exposing (HasEntityListCursor)
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
@@ -26,7 +25,7 @@ import Menu
 import Menu.Types
 import Models.Selection
 import Models.Todo
-import Pages.EntityList
+import Pages.EntityList exposing (HasEntityListCursor)
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
@@ -128,7 +127,7 @@ navigateToPathMsg =
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
-    EntityListCursor.getMaybeEntityIdAtCursor__ model
+    Pages.EntityList.getMaybeEntityIdAtCursor__ model
         |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
         |> OnTodoMsg
 
@@ -234,7 +233,7 @@ createAppModel flags =
             , config = flags.config
             , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
             , mdl = Material.model
-            , entityListCursor = EntityListCursor.initialValue
+            , entityListCursor = Pages.EntityList.entityListCursorInitialValue
             }
     in
     model

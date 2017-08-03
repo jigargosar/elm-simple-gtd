@@ -1,11 +1,13 @@
 module EntityListCursor exposing (..)
 
 import Entity exposing (..)
+import Pages.EntityList
 
 
 type alias EntityListCursor =
     { entityIdList : List EntityId
     , maybeEntityIdAtCursor : Maybe EntityId
+    , entityListPageModel : Pages.EntityList.PageModel
     }
 
 
@@ -17,8 +19,8 @@ getMaybeEntityIdAtCursor__ model =
     model.entityListCursor.maybeEntityIdAtCursor
 
 
-initialValue : EntityListCursor
-initialValue =
+entityListCursorInitialValue : EntityListCursor
+entityListCursorInitialValue =
     { entityIdList = []
     , maybeEntityIdAtCursor = Nothing
     }

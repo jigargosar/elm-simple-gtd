@@ -7,7 +7,6 @@ import Data.EntityTree
 import Data.TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
-import EntityListCursor
 import GroupDoc exposing (..)
 import List.Extra
 import Maybe.Extra as Maybe
@@ -24,6 +23,29 @@ import X.Predicate
 import X.Record exposing (..)
 import X.Return exposing (..)
 import X.Set exposing (toggleSetMember)
+
+
+type alias EntityListCursor =
+    { entityIdList : List EntityId
+    , maybeEntityIdAtCursor : Maybe EntityId
+    , entityListPageModel : PageModel
+    }
+
+
+type alias HasEntityListCursor a =
+    { a | entityListCursor : EntityListCursor }
+
+
+getMaybeEntityIdAtCursor__ model =
+    model.entityListCursor.maybeEntityIdAtCursor
+
+
+entityListCursorInitialValue : EntityListCursor
+entityListCursorInitialValue =
+    { entityIdList = []
+    , maybeEntityIdAtCursor = Nothing
+    , entityListPageModel = defaultPageModel
+    }
 
 
 type FlatFilterName
@@ -106,16 +128,16 @@ type Msg
     | ToggleSelection EntityId
 
 
-update config msg model =
+update config msg pageModel =
     case msg of
         SetFocusableEntityId entityId ->
-            map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) model)
+            map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) pageModel)
 
         ArrowUp ->
-            moveFocusBy config -1 model
+            moveFocusBy config -1 pageModel
 
         ArrowDown ->
-            moveFocusBy config 1 model
+            moveFocusBy config 1 pageModel
 
         ToggleSelection entityId ->
             map
@@ -136,21 +158,22 @@ maybeEntityIdAtCursorFL =
     composeInnerOuterFieldLens maybeEntityIdAtCursorFL entityListCursorFL
 
 
-updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor model appModel =
+updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor pageModel appModel =
     let
         entityIdList =
-            createEntityList model appModel
+            createEntityList pageModel appModel
                 .|> Entity.toEntityId
 
         cursor =
             { entityIdList = entityIdList
             , maybeEntityIdAtCursor = maybeEntityIdAtCursor
+            , entityListPageModel = pageModel
             }
     in
     setIn appModel entityListCursorFL cursor
 
 
-moveFocusBy config offset model =
+moveFocusBy config offset pageModel =
     let
         findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
             let
@@ -168,17 +191,17 @@ moveFocusBy config offset model =
             let
                 maybeEntityIdAtCursorOld =
                     computeMaybeNewEntityIdAtCursor
-                        model
+                        pageModel
                         appModel
 
                 entityIdList =
-                    createEntityList model appModel
+                    createEntityList pageModel appModel
                         .|> Entity.toEntityId
             in
             findEntityIdByOffsetIn offset
                 entityIdList
                 maybeEntityIdAtCursorOld
-                ?|> (SetFocusableEntityId >> update config # model)
+                ?|> (SetFocusableEntityId >> update config # pageModel)
         )
 
 

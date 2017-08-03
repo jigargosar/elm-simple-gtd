@@ -139,14 +139,6 @@ window.appBoot = async function appBoot(elmMain = Main) {
          },
        })
   
-  app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {
-    const $focus = $(":focus, [focused]")
-    // console.log($focus, $focus.length)
-    if ($focus.length === 0) {
-      $(selector).focus()
-    }
-  })
-  
   app.ports["positionPopupMenu"].subscribe((ofSelector) => {
     requestAnimationFrame(() => {
       const $popup = $("#popup-menu")

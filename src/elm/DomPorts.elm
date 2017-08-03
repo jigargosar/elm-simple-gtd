@@ -10,11 +10,4 @@ type alias DomSelector =
 port focusSelector : DomSelector -> Cmd msg
 
 
-port focusSelectorIfNoFocus : DomSelector -> Cmd msg
-
-
-focusSelectorIfNoFocusRCmd =
-    focusSelectorIfNoFocus >> Return.command
-
-
 port positionPopupMenu : DomSelector -> Cmd msg

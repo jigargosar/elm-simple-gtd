@@ -153,6 +153,14 @@ entityListCursorPageModelFL =
     composeInnerOuterFieldLens entityListPageModelFL entityListCursorFL
 
 
+entityListCursorEntityIdListFL =
+    let
+        entityIdListFL =
+            fieldLens .entityIdList (\s b -> { b | entityIdList = s })
+    in
+    composeInnerOuterFieldLens entityIdListFL entityListCursorFL
+
+
 updateEntityListCursorWithMaybeEntityId config maybeEntityIdAtCursor pageModel appModel =
     let
         entityIdList =
@@ -190,8 +198,7 @@ moveFocusBy config offset pageModel =
                         appModel
 
                 entityIdList =
-                    createEntityList pageModel appModel
-                        .|> Entity.toEntityId
+                    get entityListCursorEntityIdListFL appModel
             in
             findEntityIdByOffsetIn offset
                 entityIdList

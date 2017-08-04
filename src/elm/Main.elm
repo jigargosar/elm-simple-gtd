@@ -19,7 +19,7 @@ import Menu.Types
 import Models.Selection
 import Models.Todo
 import Navigation
-import Pages.EntityList exposing (HasEntityListCursor)
+import Pages.EntityList
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
@@ -68,7 +68,7 @@ type alias AppConfig =
 
 
 type alias Model =
-    HasEntityListCursor AppModelOtherFields
+    AppModelOtherFields
 
 
 type alias AppModelOtherFields =
@@ -122,7 +122,7 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     case model.page of
         EntityListPage pageModel ->
-            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel model
+            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
 
@@ -226,7 +226,6 @@ createAppModel flags =
             , config = flags.config
             , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
             , mdl = Material.model
-            , entityListCursor = Pages.EntityList.entityListCursorInitialValue
             }
     in
     model
@@ -348,13 +347,27 @@ update config msg =
             overReturnFMapCmd appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
         _ ->
-            returnWith identity (getPage__ >> updatePage config msg)
+            returnWith .page (updatePage config msg)
+
+
+pageFL =
+    fieldLens .page (\s b -> { b | page = s })
 
 
 updatePage config msg page =
     case ( page, msg ) of
         ( EntityListPage model_, EntityListMsg msg_ ) ->
-            Pages.EntityList.update config msg_ model_
+            andThen
+                (\model ->
+                    let
+                        ( pageModel, cmd ) =
+                            Pages.EntityList.update config
+                                model
+                                msg_
+                                (pure model_)
+                    in
+                    ( { model | page = EntityListPage pageModel }, Cmd.map EntityListMsg cmd )
+                )
 
         _ ->
             identity

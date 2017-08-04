@@ -1,5 +1,5 @@
     8445 total
-     535 src/elm/Main.elm
+     542 src/elm/Main.elm
      356 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -11,7 +11,7 @@
      198 src/elm/GroupDoc/ViewModel.elm
      177 src/elm/Update/Firebase.elm
      177 src/elm/Todo/ViewModel.elm
-     177 src/elm/AppDrawer/View.elm
+     170 src/elm/AppDrawer/View.elm
      168 src/elm/Update/Todo.elm
      167 src/elm/AppDrawer/Model.elm
      164 src/elm/Data/EntityTree.elm

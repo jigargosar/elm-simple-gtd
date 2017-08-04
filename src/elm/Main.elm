@@ -463,6 +463,13 @@ view config model =
             , mainHeaderTitle = mainHeaderTitle
             , headerBackgroundColor = headerBackgroundColor
             , mdl = model.mdl
+            , maybeUser = Firebase.getMaybeUser model
+            , sidebarHeaderTitle =
+                if model.developmentMode then
+                    "Dev v" ++ model.appVersion
+                else
+                    "SimpleGTD.com"
+            , appVersionString = "v" ++ model.appVersion
             }
 
         frame pageContent =

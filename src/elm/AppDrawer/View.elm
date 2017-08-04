@@ -12,14 +12,7 @@ import X.Function.Infix exposing (..)
 import X.Html
 
 
-sidebarHeader frameVM m =
-    let
-        sidebarHeaderTitle =
-            if m.developmentMode then
-                "Dev v" ++ m.appVersion
-            else
-                "SimpleGTD.com"
-    in
+sidebarHeader frameVM =
     div
         [ id "layout-sidebar-header"
         , style
@@ -28,10 +21,10 @@ sidebarHeader frameVM m =
             ]
         ]
         [ div [ class "detail" ]
-            [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text sidebarHeaderTitle ] ]
+            [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text frameVM.sidebarHeaderTitle ] ]
             , div [ class "small layout horizontal " ]
                 [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
-                    [ "v" ++ m.appVersion |> text ]
+                    [ frameVM.appVersionString |> text ]
                 , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
                     [ text "Discuss" ]
                 , a [ target "_blank", href AppUrl.contact, tabindex -1 ]

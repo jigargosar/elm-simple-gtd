@@ -12,7 +12,7 @@ import X.Html exposing (boolProperty, onClickStopPropagation)
 appLayoutView config frameVM model pageContent =
     let
         layoutSideBarHeader =
-            AppDrawer.View.sidebarHeader frameVM model
+            AppDrawer.View.sidebarHeader frameVM
 
         layoutSideBarContent =
             AppDrawer.View.sidebarContent config frameVM model

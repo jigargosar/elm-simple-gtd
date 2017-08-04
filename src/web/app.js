@@ -41,10 +41,12 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       
       const entityListItemSummary = summaries[0]
       console.log(".entity-list", entityListItemSummary)
-      if (entityListItemSummary.added.length !== 0
-          || entityListItemSummary.attributeChanged.tabindex.length !== 0) {
-        emitter.emit(".focusable-list-item[tabindex=0]")
-      }
+      
+      // if (!(entityListItemSummary.added.length !== 0
+      //       || entityListItemSummary.attributeChanged.tabindex.length !== 0)) {
+      //   return
+      // }
+      emitter.emit(".focusable-list-item[tabindex=0]")
     },
     queries: [
       {element: ".focusable-list-item", elementAttributes: "tabindex"},

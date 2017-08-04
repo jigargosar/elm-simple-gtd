@@ -146,19 +146,11 @@ window.appBoot = async function appBoot(elmMain = Main) {
   Kefir.merge(focusSelectorStreams)
        .observe({
          value(options) {
-           // todo: adding any delay causes entity list focus to go haywire.
-           // even in focus selector port.
-           // we need to completely control focus on entity list.
-           // can't depended on mutation observer for the same.
-           // requestAnimationFrame(()=>{
            const $toFocus = $(options.selector).first()
-      
            // console.log("[Kefir] focusSelector", _.merge(options, {
            // dataKey: $toFocus.data("key"),
            // }))
-      
            $toFocus.focus()
-           // })
          },
        })
   

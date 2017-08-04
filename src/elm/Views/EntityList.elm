@@ -1,19 +1,13 @@
 module Views.EntityList exposing (..)
 
 import Data.EntityTree
-import Entity
-import EntityId
 import GroupDoc.View
 import Html exposing (div, h5)
 import Html.Attributes exposing (class)
 import Html.Keyed
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Pages.EntityList
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
 import View.Badge
-import X.Function exposing (..)
 
 
 view pageVM =

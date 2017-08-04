@@ -1,7 +1,5 @@
 module Pages.EntityList exposing (..)
 
-import Color exposing (Color)
-import Colors
 import Data.EntityTree
 import Data.NamedFilter exposing (..)
 import Data.TodoDoc
@@ -14,7 +12,6 @@ import Models.GroupDocStore exposing (..)
 import Models.Selection
 import Models.Stores
 import Store
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)

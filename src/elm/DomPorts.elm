@@ -1,7 +1,5 @@
 port module DomPorts exposing (..)
 
-import Return
-
 
 type alias DomSelector =
     String

@@ -3,26 +3,20 @@ module Main exposing (main)
 import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
-import Colors
-import Data.EntityTree
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
-import EntityId
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
-import GroupDoc.ViewModel exposing (GroupDocViewModel)
 import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
-import List.Extra as List
 import Mat exposing (cs)
 import Material
 import Material.Options exposing (div)
-import Maybe.Extra as Maybe
 import Menu
 import Menu.Types
 import Models.Selection
@@ -40,7 +34,6 @@ import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Notification.Model
 import Todo.Notification.Types exposing (TodoReminderOverlayModel)
-import Todo.ViewModel
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
@@ -54,7 +47,6 @@ import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
 import ViewModel.EntityList
 import Views.EntityList
-import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)

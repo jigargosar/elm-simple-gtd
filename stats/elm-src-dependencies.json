@@ -676,10 +676,11 @@
       "Todo.Notification.Types",
       "Todo.ViewModel",
       "Update.GroupDoc",
+      "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 22,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityTree",
@@ -1579,8 +1580,6 @@
       "GroupDoc",
       "Html",
       "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
       "Material",
       "Maybe.Extra",
       "Menu",
@@ -1589,8 +1588,6 @@
       "Models.Todo",
       "Navigation",
       "Pages.EntityList",
-      "Ports",
-      "Ports.Firebase",
       "Ports.Todo",
       "Random.Pcg",
       "RouteUrl",
@@ -1618,7 +1615,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 49,
+    "importsCount": 45,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -2064,17 +2061,14 @@
     "transitiveImportsCount": 1,
     "backwardImports": [
       "Main",
-      "Pages.EntityList",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
-      "Pages.EntityList",
-      "Update.Subscription",
-      "ViewModel.EntityList"
+      "Update.Subscription"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 2
   },
   "Models.Stores": {
     "fileName": "src/elm/Models/Stores.elm",
@@ -2227,7 +2221,6 @@
       "List.Extra",
       "Maybe.Extra",
       "Models.GroupDocStore",
-      "Models.Selection",
       "Models.Stores",
       "Store",
       "Toolkit.Operators",
@@ -2236,10 +2229,9 @@
       "X.List",
       "X.Predicate",
       "X.Record",
-      "X.Return",
-      "X.Set"
+      "X.Return"
     ],
-    "importsCount": 20,
+    "importsCount": 18,
     "transitiveImports": [
       "Char",
       "Color",
@@ -2262,7 +2254,6 @@
       "List.Extra",
       "Maybe.Extra",
       "Models.GroupDocStore",
-      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Random.Pcg",
@@ -2281,10 +2272,9 @@
       "X.Predicate",
       "X.Random",
       "X.Record",
-      "X.Return",
-      "X.Set"
+      "X.Return"
     ],
-    "transitiveImportsCount": 42,
+    "transitiveImportsCount": 40,
     "backwardImports": [
       "Main",
       "ViewModel.EntityList"
@@ -2309,20 +2299,21 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "Main",
       "Update.AppDrawer",
-      "Update.Firebase"
+      "Update.Firebase",
+      "Update.Subscription"
     ],
     "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "Main",
       "Update.AppDrawer",
       "Update.Firebase",
+      "Update.Subscription",
       "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 7
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -2343,10 +2334,9 @@
     ],
     "transitiveImportsCount": 5,
     "backwardImports": [
-      "Main",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
       "Update.Firebase",
@@ -3495,20 +3485,25 @@
     "parentModuleName": "Update",
     "imports": [
       "Data.TodoDoc",
+      "Document",
       "Entity",
       "ExclusiveMode.Types",
       "GroupDoc",
+      "Json.Encode",
+      "Keyboard",
       "Keyboard.Extra",
       "Models.GroupDocStore",
       "Models.Selection",
       "Models.Todo",
+      "Ports",
       "Return",
+      "Set",
       "Store",
       "X.Function.Infix",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 13,
+    "importsCount": 18,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -3536,6 +3531,7 @@
       "Models.GroupDocStore",
       "Models.Selection",
       "Models.Todo",
+      "Ports",
       "Random.Pcg",
       "Return",
       "Set",
@@ -3558,7 +3554,7 @@
       "X.Record",
       "X.Return"
     ],
-    "transitiveImportsCount": 47,
+    "transitiveImportsCount": 48,
     "backwardImports": [
       "Main"
     ],
@@ -4331,7 +4327,6 @@
       "Material",
       "Maybe.Extra",
       "Models.GroupDocStore",
-      "Models.Selection",
       "Models.Stores",
       "Models.Todo",
       "Pages.EntityList",
@@ -4360,10 +4355,9 @@
       "X.Random",
       "X.Record",
       "X.Return",
-      "X.Set",
       "X.Time"
     ],
-    "transitiveImportsCount": 63,
+    "transitiveImportsCount": 61,
     "backwardImports": [
       "Main"
     ],
@@ -5330,16 +5324,13 @@
     ],
     "transitiveImportsCount": 1,
     "backwardImports": [
-      "Main",
-      "Pages.EntityList"
+      "Main"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
-      "Main",
-      "Pages.EntityList",
-      "ViewModel.EntityList"
+      "Main"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 1
   },
   "X.String": {
     "fileName": "src/elm/X/String.elm",

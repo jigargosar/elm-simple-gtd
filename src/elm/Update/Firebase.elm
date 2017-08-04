@@ -28,6 +28,14 @@ type FirebaseMsg
     | OnFBConnectionChanged Bool
 
 
+subscriptions =
+    Sub.batch
+        [ Ports.Firebase.onFirebaseUserChanged OnFBUserChanged
+        , Ports.Firebase.onFCMTokenChanged OnFBFCMTokenChanged
+        , Ports.Firebase.onFirebaseConnectionChanged OnFBConnectionChanged
+        ]
+
+
 type alias SubReturnF msg =
     Return.ReturnF msg FirebaseModel
 

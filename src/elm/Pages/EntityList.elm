@@ -9,7 +9,6 @@ import GroupDoc exposing (..)
 import List.Extra
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
-import Models.Selection
 import Models.Stores
 import Store
 import Toolkit.Operators exposing (..)
@@ -19,7 +18,6 @@ import X.List
 import X.Predicate
 import X.Record exposing (..)
 import X.Return exposing (..)
-import X.Set exposing (toggleSetMember)
 
 
 type alias EntityListCursor =

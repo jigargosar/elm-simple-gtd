@@ -11,8 +11,6 @@ import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
-import Keyboard
-import Keyboard.Extra as KX exposing (Key)
 import Material
 import Maybe.Extra
 import Menu
@@ -21,8 +19,6 @@ import Models.Selection
 import Models.Todo
 import Navigation
 import Pages.EntityList as EntityList
-import Ports
-import Ports.Firebase
 import Ports.Todo
 import Random.Pcg
 import RouteUrl
@@ -38,7 +34,7 @@ import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.ExclusiveMode exposing (ExclusiveModeMsg)
 import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
-import Update.Subscription
+import Update.Subscription exposing (SubscriptionMsg)
 import Update.Todo exposing (TodoMsg)
 import View.Frame
 import ViewModel.EntityList
@@ -86,11 +82,6 @@ type alias Model =
     }
 
 
-type SubscriptionMsg
-    = OnPouchDBChange String E.Value
-    | OnFirebaseDatabaseChange String E.Value
-
-
 type Msg
     = NOOP
     | OnSubscriptionMsg SubscriptionMsg
@@ -104,8 +95,6 @@ type Msg
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
     | OnMdl (Material.Msg Msg)
-    | OnGlobalKeyUp Int
-    | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
     | NavigateToPath (List String)
     | ToggleEntityIdSelection EntityId
@@ -152,13 +141,8 @@ subscriptions model =
                 1
     in
     Sub.batch
-        [ Keyboard.ups OnGlobalKeyUp
-        , Keyboard.downs OnGlobalKeyDown
-        , everyXSeconds 1 SetLastKnownTimeStamp
-        , Sub.batch
-            [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
-            , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
-            ]
+        [ everyXSeconds 1 SetLastKnownTimeStamp
+        , Update.Subscription.subscriptions
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
             [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
@@ -168,14 +152,8 @@ subscriptions model =
             , everyXSeconds 30 (\_ -> Update.Todo.OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
-        , Sub.batch
-            [ Ports.Firebase.onFirebaseUserChanged OnFBUserChanged
-            , Ports.Firebase.onFCMTokenChanged OnFBFCMTokenChanged
-            , Ports.Firebase.onFirebaseConnectionChanged OnFBConnectionChanged
-            ]
-            |> Sub.map OnFirebaseMsg
-        , Update.AppDrawer.subscriptions
-            |> Sub.map OnAppDrawerMsg
+        , Update.Firebase.subscriptions |> Sub.map OnFirebaseMsg
+        , Update.AppDrawer.subscriptions |> Sub.map OnAppDrawerMsg
         ]
 
 
@@ -299,17 +277,11 @@ update config msg =
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)
 
-        OnGlobalKeyUp keyCode ->
-            Update.Subscription.onGlobalKeyUp config (KX.fromCode keyCode)
-
-        OnGlobalKeyDown keyCode ->
-            Update.Subscription.onGlobalKeyDown config (KX.fromCode keyCode)
-
         SetLastKnownTimeStamp now ->
             map (\model -> { model | lastKnownCurrentTime = now })
 
         OnSubscriptionMsg msg_ ->
-            onSubscriptionMsg config msg_
+            Update.Subscription.update config msg_
 
         OnGroupDocMsg msg_ ->
             returnWithNow (OnGroupDocMsgWithNow msg_)
@@ -368,15 +340,6 @@ updatePage config msg page =
 
         _ ->
             identity
-
-
-onSubscriptionMsg config msg =
-    case msg of
-        OnPouchDBChange dbName encodedDoc ->
-            Update.Subscription.onPouchDBChange config dbName encodedDoc
-
-        OnFirebaseDatabaseChange dbName encodedDoc ->
-            effect (Update.Subscription.upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 type alias ViewConfig msg =

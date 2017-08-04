@@ -1,18 +1,39 @@
 module Update.Subscription exposing (..)
 
 import Data.TodoDoc exposing (..)
+import Document exposing (DocId)
 import Entity exposing (..)
-import ExclusiveMode.Types
+import ExclusiveMode.Types exposing (ExclusiveMode)
 import GroupDoc exposing (..)
-import Keyboard.Extra exposing (Key(..))
+import Json.Encode as E
+import Keyboard
+import Keyboard.Extra as KX exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Models.Selection
 import Models.Todo exposing (todoStore)
+import Ports
 import Return
+import Set exposing (Set)
 import Store
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
+
+
+type SubscriptionMsg
+    = OnPouchDBChange String E.Value
+    | OnFirebaseDatabaseChange String E.Value
+    | OnGlobalKeyUp Int
+    | OnGlobalKeyDown Int
+
+
+subscriptions =
+    Sub.batch
+        [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
+        , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
+        , Keyboard.ups OnGlobalKeyUp
+        , Keyboard.downs OnGlobalKeyDown
+        ]
 
 
 type alias SubModel model =
@@ -20,6 +41,8 @@ type alias SubModel model =
         | todoStore : TodoStore
         , projectStore : ProjectStore
         , contextStore : ContextStore
+        , selectedEntityIdSet : Set DocId
+        , editMode : ExclusiveMode
     }
 
 
@@ -43,6 +66,22 @@ type alias Config msg a =
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
     }
+
+
+update : Config msg a -> SubscriptionMsg -> SubReturnF msg model
+update config msg =
+    case msg of
+        OnPouchDBChange dbName encodedDoc ->
+            onPouchDBChange config dbName encodedDoc
+
+        OnFirebaseDatabaseChange dbName encodedDoc ->
+            effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+
+        OnGlobalKeyUp keyCode ->
+            onGlobalKeyUp config (KX.fromCode keyCode)
+
+        OnGlobalKeyDown keyCode ->
+            onGlobalKeyDown config (KX.fromCode keyCode)
 
 
 onGlobalKeyDown config key =

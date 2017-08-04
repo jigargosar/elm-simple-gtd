@@ -34,12 +34,12 @@ sidebarHeader frameVM =
         ]
 
 
-sidebarContent config appVM model =
+sidebarContent config frameVM model =
     div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
         [ ul []
             ([]
-                ++ entityGroupView config appVM.contexts model.page
-                ++ entityGroupView config appVM.projects model.page
+                ++ entityGroupView config frameVM.contexts model.page
+                ++ entityGroupView config frameVM.projects model.page
                 ++ [ Mat.divider ]
                 ++ [ onSetEntityListViewItem
                         config

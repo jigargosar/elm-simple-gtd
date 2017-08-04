@@ -1,4 +1,4 @@
-## Upcoming
+## v0.19.2 - 2017-08-04
 * fix: fixing enter key closing group edit form overlay
 * fix: remove unused focusSelector port 
 

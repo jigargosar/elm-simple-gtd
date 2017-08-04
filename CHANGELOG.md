@@ -1,5 +1,6 @@
 ## Upcoming
-* fix: fixing enter key closing group edit form overlay 
+* fix: fixing enter key closing group edit form overlay
+* fix: remove unused focusSelector port 
 
 ## v0.19.0 - 2017-07-26
 * [minor] Lots of changes & long gap. Elm compile opt. compile-stats.md

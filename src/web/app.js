@@ -122,34 +122,10 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   Notifications.setup(fire, app).catch(console.error)
   
-  const portFocusSelectorStream =
-      Kefir.stream(emitter => {
-        app.ports["focusSelector"].subscribe((selector) => {
-          // console.log("port: focusSelector received selector", selector)
-          // emitter.emit(selector)
-        })
-      })
-  
-  const addMetadataToFocusSelectorStream =
-      (stream, streamName) => stream.map(selector => ({streamName, selector}))
-  
-  const focusSelectorStreams =
-      [addMetadataToFocusSelectorStream(
-          portFocusSelectorStream,
-          "portFocusSelectorStream",
-      ),
-       addMetadataToFocusSelectorStream(
-           mutationObserverFocusSelectorStream,
-           "mutationObserverFocusSelectorStream",
-       )]
-  Kefir.merge(focusSelectorStreams)
+  mutationObserverFocusSelectorStream
        .observe({
-         value(options) {
-           const $toFocus = $(options.selector).first()
-           // console.log("[Kefir] focusSelector", _.merge(options, {
-           // dataKey: $toFocus.data("key"),
-           // }))
-           $toFocus.focus()
+         value(selector) {
+           $(selector).first().focus()
          },
        })
   

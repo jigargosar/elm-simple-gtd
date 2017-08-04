@@ -11,7 +11,7 @@ import X.Return exposing (..)
 
 type ExclusiveModeMsg
     = OnSetExclusiveMode ExclusiveMode
-    | OnSetExclusiveModeToNoneAndTryRevertingFocus
+    | OnRevertExclusiveMode
     | OnSaveExclusiveModeForm
 
 
@@ -43,18 +43,10 @@ update :
 update config msg =
     case msg of
         OnSetExclusiveMode mode ->
-            setExclusiveMode mode |> map
+            set exclusiveMode mode |> map
 
-        OnSetExclusiveModeToNoneAndTryRevertingFocus ->
-            let
-                _ =
-                    Debug.log "revertExclusiveMode-focus-entity-list" ()
-
-                setDomFocusToFocusInEntityCmd =
-                    DomPorts.focusSelector ".entity-list .focusable-list-item[tabindex=0]"
-            in
-            map setExclusiveModeToNone
-                >> command setDomFocusToFocusInEntityCmd
+        OnRevertExclusiveMode ->
+            OnSetExclusiveMode XMNone |> update config
 
         OnSaveExclusiveModeForm ->
             onSaveExclusiveModeForm config
@@ -67,15 +59,7 @@ exclusiveMode =
 onSaveExclusiveModeForm : Config msg a -> SubReturnF msg model
 onSaveExclusiveModeForm config =
     returnWith .editMode (saveExclusiveModeForm config)
-        >> update config OnSetExclusiveModeToNoneAndTryRevertingFocus
-
-
-setExclusiveMode =
-    set exclusiveMode
-
-
-setExclusiveModeToNone =
-    setExclusiveMode XMNone
+        >> update config OnRevertExclusiveMode
 
 
 saveExclusiveModeForm : Config msg a -> ExclusiveMode -> SubReturnF msg model

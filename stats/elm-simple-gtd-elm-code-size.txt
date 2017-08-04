@@ -1,4 +1,4 @@
-    8483 total
+    8464 total
      501 src/elm/Main.elm
      364 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
@@ -31,13 +31,13 @@
      103 src/elm/Todo/View.elm
       97 src/elm/Models/GroupDocStore.elm
       93 src/elm/X/Time.elm
-      91 src/elm/Update/ExclusiveMode.elm
       88 src/elm/X/Html.elm
       86 src/elm/Entity.elm
       83 src/elm/GroupDoc/View.elm
       82 src/elm/View/MainMenu.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/Colors.elm
+      75 src/elm/Update/ExclusiveMode.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/View/GetStarted.elm
       68 src/elm/View/Layout.elm
@@ -81,10 +81,10 @@
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm
       11 src/elm/Firebase.elm
-      11 src/elm/DomPorts.elm
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm
+       8 src/elm/DomPorts.elm
        7 src/elm/X/String.elm
        6 src/elm/Menu/Types.elm
        5 src/elm/Data/DeviceId.elm

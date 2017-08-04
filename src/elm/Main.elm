@@ -112,7 +112,7 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld model =
 
 
 revertExclusiveModeMsg =
-    Update.ExclusiveMode.OnSetExclusiveModeToNoneAndTryRevertingFocus
+    Update.ExclusiveMode.OnRevertExclusiveMode
         |> OnExclusiveModeMsg
 
 

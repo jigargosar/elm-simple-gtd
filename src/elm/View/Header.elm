@@ -52,7 +52,7 @@ headerWithContent config content m =
 
 
 menuIcon config m =
-    case Firebase.getMaybeUserProfile m of
+    case Firebase.getMaybeUser m of
         Nothing ->
             Mat.headerIconBtn config.onMdl
                 m.mdl

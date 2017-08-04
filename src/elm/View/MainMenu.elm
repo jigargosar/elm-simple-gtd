@@ -59,7 +59,7 @@ onItemSelect config ( _, itemType ) =
 getItems config appModel =
     let
         maybeUserProfile =
-            Firebase.getMaybeUserProfile appModel
+            Firebase.getMaybeUser appModel
 
         signInMenuItem =
             maybeUserProfile

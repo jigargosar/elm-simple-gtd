@@ -7,5 +7,5 @@ init =
     Model.initialValue
 
 
-getMaybeUserProfile =
+getMaybeUser =
     .firebaseModel >> .maybeUser

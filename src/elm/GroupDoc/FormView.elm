@@ -10,7 +10,7 @@ import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)
 import X.Html exposing (onClickStopPropagation)
-import X.Keyboard exposing (onEnter, onKeyDownStopPropagation)
+import X.Keyboard exposing (onEnterKeyPress, onKeyDownStopPropagation)
 
 
 --init : GroupDocForm -> Html Msg.AppMsg
@@ -64,7 +64,7 @@ init config form =
                         [ class "auto-focus"
                         , autofocus True
                         , defaultValue form.name
-                        , onEnter fireSaveForm
+                        , onEnterKeyPress fireSaveForm
                         , onInput fireNameChanged
                         , placeholder "E.g. Trip Planning, Home Decoration"
                         ]

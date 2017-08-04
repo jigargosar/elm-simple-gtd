@@ -90,9 +90,9 @@ onEscape msg =
     Events.on "keyup" (succeedIfDecodedKeyEquals KX.Escape msg)
 
 
-onEnter : msg -> Attribute msg
-onEnter msg =
-    Events.on "keyup" (succeedIfDecodedKeyEquals KX.Enter msg)
+onEnterKeyPress : msg -> Attribute msg
+onEnterKeyPress msg =
+    Events.on "keypress" (succeedIfDecodedKeyEquals KX.Enter msg)
 
 
 ups toMsg =

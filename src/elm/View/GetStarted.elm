@@ -56,7 +56,7 @@ setup config form =
                         [ input
                             [ autofocus True
                             , placeholder "E.g. Get Milk, Check Email"
-                            , X.Keyboard.onEnter addTodoMsg
+                            , X.Keyboard.onEnterKeyPress addTodoMsg
                             , onInput updateSetupFormTodoText
                             ]
                             []

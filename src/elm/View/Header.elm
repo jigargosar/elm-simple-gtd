@@ -9,25 +9,25 @@ import Mat
 import X.Function.Infix exposing (..)
 
 
-appMainHeader config viewModel m =
+appMainHeader config frameVM m =
     let
         content =
-            titleHeaderContent viewModel
+            titleHeaderContent frameVM
     in
     div
         [ id "layout-main-header"
         , style
             [ "color" => "white"
-            , "background-color" => Colors.toRBGAString viewModel.header.backgroundColor
+            , "background-color" => Colors.toRBGAString frameVM.headerBackgroundColor
             ]
         ]
         (headerWithContent config content m)
 
 
-titleHeaderContent viewModel =
+titleHeaderContent frameVM =
     let
         titleText =
-            viewModel.viewName
+            frameVM.viewName
     in
     [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]
     ]

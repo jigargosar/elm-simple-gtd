@@ -12,9 +12,9 @@ import X.Function.Infix exposing (..)
 import X.Html
 
 
-sidebarHeader appVM m =
+sidebarHeader frameVM m =
     let
-        t1 =
+        sidebarHeaderTitle =
             if m.developmentMode then
                 "Dev v" ++ m.appVersion
             else
@@ -24,11 +24,11 @@ sidebarHeader appVM m =
         [ id "layout-sidebar-header"
         , style
             [ "color" => "white"
-            , "background-color" => Colors.toRBGAString appVM.header.backgroundColor
+            , "background-color" => Colors.toRBGAString frameVM.headerBackgroundColor
             ]
         ]
         [ div [ class "detail" ]
-            [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text t1 ] ]
+            [ h5 [] [ a [ href AppUrl.landing, tabindex -1 ] [ text sidebarHeaderTitle ] ]
             , div [ class "small layout horizontal " ]
                 [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
                     [ "v" ++ m.appVersion |> text ]

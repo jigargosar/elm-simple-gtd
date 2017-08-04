@@ -461,7 +461,7 @@ view config model =
             { contexts = AppDrawer.GroupViewModel.contexts config model
             , projects = AppDrawer.GroupViewModel.projects config model
             , viewName = viewName
-            , header = { backgroundColor = headerBackgroundColor }
+            , headerBackgroundColor = headerBackgroundColor
             , mdl = model.mdl
             }
 

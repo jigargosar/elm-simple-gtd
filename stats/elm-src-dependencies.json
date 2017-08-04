@@ -4244,6 +4244,34 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
+  "ViewModel.Frame": {
+    "fileName": "src/elm/ViewModel/Frame.elm",
+    "moduleName": "ViewModel.Frame",
+    "parentModuleName": "ViewModel",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "Views.EntityList": {
     "fileName": "src/elm/Views/EntityList.elm",
     "moduleName": "Views.EntityList",
@@ -4499,10 +4527,11 @@
       "Todo.Notification.Model",
       "Update.Todo.Internal",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 20,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4556,11 +4585,12 @@
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 55
+    "transitiveBackwardImportsCount": 56
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4594,10 +4624,11 @@
       "Update.Todo.Internal",
       "View.Badge",
       "View.Header",
+      "ViewModel.Frame",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 25,
+    "backwardImportsCount": 26,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4654,11 +4685,12 @@
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 58
+    "transitiveBackwardImportsCount": 59
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

@@ -1,6 +1,5 @@
 module View.Layout exposing (..)
 
-import AppDrawer.Model
 import AppDrawer.View
 import Html exposing (..)
 import Html.Attributes exposing (..)

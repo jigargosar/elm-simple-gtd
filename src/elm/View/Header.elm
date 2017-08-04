@@ -1,7 +1,6 @@
 module View.Header exposing (appMainHeader)
 
 import Colors
-import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

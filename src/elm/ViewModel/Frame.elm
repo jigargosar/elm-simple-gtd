@@ -3,12 +3,6 @@ module ViewModel.Frame exposing (..)
 import AppDrawer.GroupViewModel
 import AppDrawer.Model
 import Firebase
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 
 
 frameVM config model ( mainHeaderTitle, headerBackgroundColor ) pageContent =

@@ -1,6 +1,5 @@
 module Main exposing (main)
 
-import AppDrawer.GroupViewModel exposing (DocumentWithNameViewModel)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Data.TodoDoc exposing (..)
@@ -14,9 +13,7 @@ import Html exposing (Html, text)
 import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
-import Mat exposing (cs)
 import Material
-import Material.Options exposing (div)
 import Menu
 import Menu.Types
 import Models.Selection
@@ -43,9 +40,6 @@ import Update.GroupDoc exposing (..)
 import Update.Subscription
 import Update.Todo exposing (TodoMsg)
 import View.Frame
-import View.Layout
-import View.NewTodoFab exposing (newTodoFab)
-import View.Overlays
 import ViewModel.EntityList
 import ViewModel.Frame
 import Views.EntityList
@@ -72,7 +66,7 @@ type alias AppConfig =
     }
 
 
-type alias AppModel =
+type alias Model =
     HasEntityListCursor AppModelOtherFields
 
 
@@ -100,7 +94,7 @@ type SubscriptionMsg
     | OnFirebaseDatabaseChange String E.Value
 
 
-type AppMsg
+type Msg
     = NOOP
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
@@ -112,7 +106,7 @@ type AppMsg
     | OnTodoMsgWithNow TodoMsg Time
     | OnFirebaseMsg FirebaseMsg
     | OnAppDrawerMsg AppDrawer.Types.AppDrawerMsg
-    | OnMdl (Material.Msg AppMsg)
+    | OnMdl (Material.Msg Msg)
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
@@ -123,7 +117,7 @@ navigateToPathMsg =
     PageMsg_NavigateToPath
 
 
-onStartAddingTodoWithFocusInEntityAsReferenceOld : AppModel -> AppMsg
+onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     Pages.EntityList.getMaybeEntityIdAtCursor__ model
         |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
@@ -135,17 +129,17 @@ revertExclusiveModeMsg =
         |> OnExclusiveModeMsg
 
 
-onSaveExclusiveModeForm : AppMsg
+onSaveExclusiveModeForm : Msg
 onSaveExclusiveModeForm =
     Update.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
 
-setFocusInEntityWithEntityIdMsg : EntityId -> AppMsg
+setFocusInEntityWithEntityIdMsg : EntityId -> Msg
 setFocusInEntityWithEntityIdMsg =
     Pages.EntityList.SetFocusableEntityId >> EntityListMsg
 
 
-subscriptions : AppModel -> Sub AppMsg
+subscriptions : Model -> Sub Msg
 subscriptions model =
     let
         everyXSeconds x =
@@ -195,7 +189,7 @@ type alias Flags =
     }
 
 
-createAppModel : Flags -> AppModel
+createAppModel : Flags -> Model
 createAppModel flags =
     let
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
@@ -213,7 +207,7 @@ createAppModel flags =
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
 
-        model : AppModel
+        model : Model
         model =
             { lastKnownCurrentTime = now
             , todoStore = todoStore
@@ -251,8 +245,8 @@ type alias UpdateConfig msg =
         )
 
 
-updateConfig : AppModel -> UpdateConfig AppMsg
-updateConfig model =
+createUpdateConfig : Model -> UpdateConfig Msg
+createUpdateConfig model =
     { onStartAddingTodoToInbox = Update.Todo.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
@@ -269,7 +263,7 @@ updateConfig model =
     }
 
 
-update : UpdateConfig AppMsg -> AppMsg -> ReturnF AppMsg AppModel
+update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 update config msg =
     case msg of
         NOOP ->
@@ -408,8 +402,8 @@ type alias ViewConfig msg =
     }
 
 
-viewConfig : AppModel -> ViewConfig AppMsg
-viewConfig model =
+createViewConfig : Model -> ViewConfig Msg
+createViewConfig model =
     { onSetProject = Update.Todo.onSetProjectAndMaybeSelectionMsg >>> OnTodoMsg
     , onSetContext = Update.Todo.onSetContextAndMaybeSelectionMsg >>> OnTodoMsg
     , onSetTodoFormMenuState = Update.Todo.onSetTodoFormMenuStateMsg >>> OnTodoMsg
@@ -450,9 +444,12 @@ viewConfig model =
     }
 
 
-view : ViewConfig msg -> AppModel -> Html msg
-view config model =
+view : Model -> Html Msg
+view model =
     let
+        config =
+            createViewConfig model
+
         frame titleColorTuple pageContent =
             let
                 frameVM =
@@ -501,16 +498,20 @@ hash2messages config location =
     [ config.navigateToPathMsg path ]
 
 
-main : RouteUrl.RouteUrlProgram Flags AppModel AppMsg
+main : RouteUrl.RouteUrlProgram Flags Model Msg
 main =
     let
         init =
             createAppModel
                 >> update_ (OnFirebaseMsg OnFB_SwitchToNewUserSetupModeIfNeeded)
 
-        update_ : AppMsg -> AppModel -> ( AppModel, Cmd AppMsg )
+        update_ : Msg -> Model -> ( Model, Cmd Msg )
         update_ msg model =
-            model |> pure >> update (updateConfig model) msg
+            let
+                updateConfig =
+                    createUpdateConfig model
+            in
+            model |> pure >> update updateConfig msg
     in
     RouteUrl.programWithFlags
         { delta2url = delta2hash
@@ -520,6 +521,6 @@ main =
                 }
         , init = init
         , update = update_
-        , view = \model -> view (viewConfig model) model
+        , view = view
         , subscriptions = subscriptions
         }

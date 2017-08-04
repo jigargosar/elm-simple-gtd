@@ -26,10 +26,10 @@ appMainHeader config frameVM m =
 
 titleHeaderContent frameVM =
     let
-        titleText =
-            frameVM.viewName
+        mainHeaderTitle =
+            frameVM.mainHeaderTitle
     in
-    [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]
+    [ h5 [ class "ellipsis title", title mainHeaderTitle ] [ mainHeaderTitle |> text ]
     ]
 
 

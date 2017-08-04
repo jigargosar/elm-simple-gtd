@@ -453,14 +453,14 @@ view config model =
     let
         frameVM =
             let
-                ( viewName, headerBackgroundColor ) =
+                ( mainHeaderTitle, headerBackgroundColor ) =
                     case getPage__ model of
                         EntityListPage pageModel ->
                             Pages.EntityList.getTitleColourTuple pageModel
             in
             { contexts = AppDrawer.GroupViewModel.contexts config model
             , projects = AppDrawer.GroupViewModel.projects config model
-            , viewName = viewName
+            , mainHeaderTitle = mainHeaderTitle
             , headerBackgroundColor = headerBackgroundColor
             , mdl = model.mdl
             }

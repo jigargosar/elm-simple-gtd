@@ -98,6 +98,7 @@ type Msg
     | SetLastKnownTimeStamp Time
     | NavigateToPath (List String)
     | ToggleEntityIdSelection EntityId
+    | StoresMsg Stores.Msg
 
 
 navigateToPathMsg =
@@ -276,6 +277,13 @@ update config msg =
                                     (\_ -> revertPath (EntityList.getFullPath pageModel))
                                     (EntityList >> setPage)
                 )
+
+        StoresMsg storeMsg ->
+            let
+                storesFL =
+                    fieldLens .stores (\s b -> { b | stores = s })
+            in
+            Stores.update storeMsg |> overReturnFMapCmd storesFL StoresMsg
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)

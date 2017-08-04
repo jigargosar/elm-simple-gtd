@@ -73,9 +73,7 @@ type alias Model =
     , page : Page
     , reminderOverlay : TodoReminderOverlayModel
     , firebaseModel : FirebaseModel
-    , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
-    , appVersion : String
     , config : AppConfig
     , appDrawerModel : AppDrawer.Model.AppDrawerModel
     , mdl : Material.Model
@@ -193,11 +191,8 @@ createAppModel flags =
             , editMode = XMNone
             , page = initialPage
             , reminderOverlay = Todo.Notification.Model.none
-            , firebaseModel =
-                Firebase.init deviceId initialOfflineStore
-            , developmentMode = isDevelopmentMode
+            , firebaseModel = Firebase.init deviceId initialOfflineStore
             , selectedEntityIdSet = Set.empty
-            , appVersion = npmPackageVersion
             , config = flags.config
             , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
             , mdl = Material.model

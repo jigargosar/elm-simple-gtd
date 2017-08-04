@@ -69,7 +69,7 @@ getItems config appModel =
 
         linkMenuItems =
             [ ( "Forums", URLItem AppUrl.forumsURL )
-            , ( "Changelog v" ++ appModel.appVersion, URLItem AppUrl.changeLogURL )
+            , ( "Changelog v" ++ appModel.config.npmPackageVersion, URLItem AppUrl.changeLogURL )
             , ( "Github", URLItem AppUrl.github )
             ]
     in

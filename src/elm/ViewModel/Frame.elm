@@ -13,11 +13,11 @@ frameVM config model ( mainHeaderTitle, headerBackgroundColor ) pageContent =
     , mdl = model.mdl
     , maybeUser = Firebase.getMaybeUser model
     , sidebarHeaderTitle =
-        if model.developmentMode then
-            "Dev v" ++ model.appVersion
+        if model.config.isDevelopmentMode then
+            "Dev v" ++ model.config.npmPackageVersion
         else
             "SimpleGTD.com"
-    , appVersionString = "v" ++ model.appVersion
+    , appVersionString = "v" ++ model.config.npmPackageVersion
     , isSideBarOverlayOpen = AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
     , config = config
     , model = model

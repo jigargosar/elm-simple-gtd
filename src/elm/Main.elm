@@ -42,10 +42,12 @@ import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Subscription
 import Update.Todo exposing (TodoMsg)
+import View.Frame
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
 import ViewModel.EntityList
+import ViewModel.Frame
 import Views.EntityList
 import X.Function.Infix exposing (..)
 import X.Random
@@ -451,43 +453,23 @@ viewConfig model =
 view : ViewConfig msg -> AppModel -> Html msg
 view config model =
     let
-        frameVM =
+        frame titleColorTuple pageContent =
             let
-                ( mainHeaderTitle, headerBackgroundColor ) =
-                    case getPage__ model of
-                        EntityListPage pageModel ->
-                            Pages.EntityList.getTitleColourTuple pageModel
+                frameVM =
+                    ViewModel.Frame.frameVM config model titleColorTuple pageContent
             in
-            { contexts = AppDrawer.GroupViewModel.contexts config model
-            , projects = AppDrawer.GroupViewModel.projects config model
-            , mainHeaderTitle = mainHeaderTitle
-            , headerBackgroundColor = headerBackgroundColor
-            , mdl = model.mdl
-            , maybeUser = Firebase.getMaybeUser model
-            , sidebarHeaderTitle =
-                if model.developmentMode then
-                    "Dev v" ++ model.appVersion
-                else
-                    "SimpleGTD.com"
-            , appVersionString = "v" ++ model.appVersion
-            , isSideBarOverlayOpen = AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
-            }
-
-        frame pageContent =
-            div [ cs "mdl-typography--body-1" ]
-                ([ View.Layout.appLayoutView config frameVM model pageContent
-                 , newTodoFab config model
-                 ]
-                    ++ View.Overlays.overlayViews config model
-                )
+            View.Frame.frame frameVM
     in
     case getPage__ model of
         EntityListPage pageModel ->
             let
                 pageVM =
-                    ViewModel.EntityList.pageVM config pageModel model
+                    ViewModel.EntityList.pageVM config model pageModel
+
+                titleColorTuple =
+                    Pages.EntityList.getTitleColourTuple pageModel
             in
-            Views.EntityList.view pageVM |> frame
+            Views.EntityList.view pageVM |> frame titleColorTuple
 
 
 getPage__ =

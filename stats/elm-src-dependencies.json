@@ -65,13 +65,15 @@
     ],
     "transitiveImportsCount": 39,
     "backwardImports": [
-      "Main"
+      "Main",
+      "ViewModel.Frame"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Main"
+      "Main",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 2
   },
   "AppDrawer.Model": {
     "fileName": "src/elm/AppDrawer/Model.elm",
@@ -104,16 +106,19 @@
       "AppDrawer.GroupViewModel",
       "Main",
       "Update.AppDrawer",
-      "View.Layout"
+      "View.Layout",
+      "ViewModel.Frame"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
       "Update.AppDrawer",
-      "View.Layout"
+      "View.Frame",
+      "View.Layout",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 6
   },
   "AppDrawer.Types": {
     "fileName": "src/elm/AppDrawer/Types.elm",
@@ -132,9 +137,10 @@
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
-      "Update.AppDrawer"
+      "Update.AppDrawer",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 4
   },
   "AppDrawer.View": {
     "fileName": "src/elm/AppDrawer/View.elm",
@@ -185,9 +191,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Layout"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "AppUrl": {
     "fileName": "src/elm/AppUrl.elm",
@@ -211,12 +218,13 @@
       "L.View",
       "Main",
       "Update.Firebase",
+      "View.Frame",
       "View.GetStarted",
       "View.Layout",
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 10
   },
   "Colors": {
     "fileName": "src/elm/Colors.elm",
@@ -256,14 +264,16 @@
       "Todo.ItemView",
       "Todo.Notification.View",
       "Todo.View",
+      "View.Frame",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 20
+    "transitiveBackwardImportsCount": 22
   },
   "Data.DeviceId": {
     "fileName": "src/elm/Data/DeviceId.elm",
@@ -319,15 +329,17 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.MainMenu",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 43
+    "transitiveBackwardImportsCount": 45
   },
   "Data.EntityTree": {
     "fileName": "src/elm/Data/EntityTree.elm",
@@ -474,12 +486,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 30
+    "transitiveBackwardImportsCount": 32
   },
   "Data.TodoDoc": {
     "fileName": "src/elm/Data/TodoDoc.elm",
@@ -578,12 +592,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 29
+    "transitiveBackwardImportsCount": 31
   },
   "Data.User": {
     "fileName": "src/elm/Data/User.elm",
@@ -611,13 +627,15 @@
       "Main",
       "Ports.Firebase",
       "Update.Firebase",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.MainMenu",
-      "View.Overlays"
+      "View.Overlays",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 12
   },
   "Document": {
     "fileName": "src/elm/Document.elm",
@@ -703,12 +721,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 36
+    "transitiveBackwardImportsCount": 38
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -811,12 +831,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 24
+    "transitiveBackwardImportsCount": 26
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -950,10 +972,11 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 11
   },
   "Firebase": {
     "fileName": "src/elm/Firebase.elm",
@@ -978,17 +1001,20 @@
     "backwardImports": [
       "Main",
       "View.Header",
-      "View.MainMenu"
+      "View.MainMenu",
+      "ViewModel.Frame"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Header",
       "View.Layout",
       "View.MainMenu",
-      "View.Overlays"
+      "View.Overlays",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 7
   },
   "Firebase.Model": {
     "fileName": "src/elm/Firebase/Model.elm",
@@ -1025,13 +1051,15 @@
       "Firebase",
       "Main",
       "Update.Firebase",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.MainMenu",
-      "View.Overlays"
+      "View.Overlays",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 10
   },
   "GroupDoc": {
     "fileName": "src/elm/GroupDoc.elm",
@@ -1130,12 +1158,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 33
+    "transitiveBackwardImportsCount": 35
   },
   "GroupDoc.Form": {
     "fileName": "src/elm/GroupDoc/Form.elm",
@@ -1255,9 +1285,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "GroupDoc.View": {
     "fileName": "src/elm/GroupDoc/View.elm",
@@ -1592,17 +1623,19 @@
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo",
+      "View.Frame",
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList",
       "X.Function.Infix",
       "X.Random",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 51,
+    "importsCount": 53,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -1701,6 +1734,7 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "View.Badge",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
@@ -1708,6 +1742,7 @@
       "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList",
       "Window",
       "X.Date",
@@ -1727,7 +1762,7 @@
       "X.String",
       "X.Time"
     ],
-    "transitiveImportsCount": 122,
+    "transitiveImportsCount": 124,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -1800,13 +1835,14 @@
       "Todo.ItemView",
       "Todo.Notification.View",
       "Todo.View",
+      "View.Frame",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 14
+    "transitiveBackwardImportsCount": 15
   },
   "Menu": {
     "fileName": "src/elm/Menu.elm",
@@ -1877,11 +1913,12 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 16
   },
   "Menu.Types": {
     "fileName": "src/elm/Menu/Types.elm",
@@ -1914,11 +1951,12 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 16
+    "transitiveBackwardImportsCount": 17
   },
   "Models.GroupDocStore": {
     "fileName": "src/elm/Models/GroupDocStore.elm",
@@ -1977,10 +2015,12 @@
       "Todo.GroupEditView",
       "Update.GroupDoc",
       "Update.Subscription",
+      "View.Frame",
       "View.Overlays",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 11
   },
   "Models.HasStores": {
     "fileName": "src/elm/Models/HasStores.elm",
@@ -2111,9 +2151,10 @@
       "AppDrawer.GroupViewModel",
       "Main",
       "Pages.EntityList",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 5
   },
   "Models.Todo": {
     "fileName": "src/elm/Models/Todo.elm",
@@ -2163,9 +2204,10 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 9
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -2294,10 +2336,11 @@
       "Main",
       "Update.AppDrawer",
       "Update.Firebase",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 6
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -2325,10 +2368,11 @@
     "transitiveBackwardImports": [
       "Main",
       "Update.Firebase",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 5
   },
   "Ports.Todo": {
     "fileName": "src/elm/Ports/Todo.elm",
@@ -2495,12 +2539,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 37
   },
   "Todo.Form": {
     "fileName": "src/elm/Todo/Form.elm",
@@ -2651,10 +2697,11 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 12
+    "transitiveBackwardImportsCount": 13
   },
   "Todo.GroupEditView": {
     "fileName": "src/elm/Todo/GroupEditView.elm",
@@ -2715,9 +2762,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "Todo.ItemView": {
     "fileName": "src/elm/Todo/ItemView.elm",
@@ -2841,9 +2889,10 @@
       "Todo.Notification.View",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 6
   },
   "Todo.Notification.Types": {
     "fileName": "src/elm/Todo/Notification/Types.elm",
@@ -2897,9 +2946,10 @@
       "Todo.Notification.View",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 7
   },
   "Todo.Notification.View": {
     "fileName": "src/elm/Todo/Notification/View.elm",
@@ -2970,9 +3020,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "Todo.View": {
     "fileName": "src/elm/Todo/View.elm",
@@ -3023,9 +3074,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "Todo.ViewModel": {
     "fileName": "src/elm/Todo/ViewModel.elm",
@@ -3372,10 +3424,11 @@
     "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 4
   },
   "Update.GroupDoc": {
     "fileName": "src/elm/Update/GroupDoc.elm",
@@ -3749,10 +3802,122 @@
       "AppDrawer.View",
       "GroupDoc.View",
       "Main",
+      "View.Frame",
       "View.Layout",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 6
+  },
+  "View.Frame": {
+    "fileName": "src/elm/View/Frame.elm",
+    "moduleName": "View.Frame",
+    "parentModuleName": "View",
+    "imports": [
+      "List.Extra",
+      "Material.Options",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "View.Layout",
+      "View.NewTodoFab",
+      "View.Overlays",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 10,
+    "transitiveImports": [
+      "AppDrawer.Model",
+      "AppDrawer.View",
+      "AppUrl",
+      "Char",
+      "Color",
+      "Color.Mixing",
+      "Colors",
+      "Data.DeviceId",
+      "Data.Todo.Schedule",
+      "Data.TodoDoc",
+      "Data.User",
+      "Date",
+      "Date.Extra",
+      "Dict",
+      "Document",
+      "Entity",
+      "ExclusiveMode.Types",
+      "Firebase",
+      "Firebase.Model",
+      "GroupDoc",
+      "GroupDoc.FormView",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "Html.Keyed",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Json.Encode.Extra",
+      "Keyboard",
+      "Keyboard.Extra",
+      "List",
+      "List.Extra",
+      "Mat",
+      "Material",
+      "Material.Button",
+      "Material.Icon",
+      "Material.Options",
+      "Material.Tooltip",
+      "Maybe.Extra",
+      "Menu",
+      "Menu.Types",
+      "Models.GroupDocStore",
+      "Navigation",
+      "Ports",
+      "Ports.Firebase",
+      "Random.Pcg",
+      "Return",
+      "Set",
+      "Store",
+      "String.Extra",
+      "Task",
+      "Time",
+      "Todo.FormTypes",
+      "Todo.GroupEditView",
+      "Todo.Notification.Model",
+      "Todo.Notification.Types",
+      "Todo.Notification.View",
+      "Todo.View",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "Update.Firebase",
+      "View.Badge",
+      "View.GetStarted",
+      "View.Header",
+      "View.Layout",
+      "View.MainMenu",
+      "View.NewTodoFab",
+      "View.Overlays",
+      "X.Debug",
+      "X.Decode",
+      "X.Function",
+      "X.Function.Infix",
+      "X.Html",
+      "X.Keyboard",
+      "X.List",
+      "X.Predicate",
+      "X.Random",
+      "X.Record",
+      "X.Return",
+      "X.String"
+    ],
+    "transitiveImportsCount": 82,
+    "backwardImports": [
+      "Main"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main"
+    ],
+    "transitiveBackwardImportsCount": 1
   },
   "View.GetStarted": {
     "fileName": "src/elm/View/GetStarted.elm",
@@ -3829,9 +3994,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "View.Header": {
     "fileName": "src/elm/View/Header.elm",
@@ -3883,9 +4049,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Layout"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "View.Layout": {
     "fileName": "src/elm/View/Layout.elm",
@@ -3939,13 +4106,15 @@
     ],
     "transitiveImportsCount": 34,
     "backwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 2
   },
   "View.MainMenu": {
     "fileName": "src/elm/View/MainMenu.elm",
@@ -3999,9 +4168,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
+      "View.Frame",
       "View.Overlays"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "View.NewTodoFab": {
     "fileName": "src/elm/View/NewTodoFab.elm",
@@ -4042,13 +4212,15 @@
     ],
     "transitiveImportsCount": 22,
     "backwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 2
   },
   "View.Overlays": {
     "fileName": "src/elm/View/Overlays.elm",
@@ -4144,13 +4316,15 @@
     ],
     "transitiveImportsCount": 74,
     "backwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Main"
+      "Main",
+      "View.Frame"
     ],
-    "transitiveBackwardImportsCount": 1
+    "transitiveBackwardImportsCount": 2
   },
   "ViewModel.EntityList": {
     "fileName": "src/elm/ViewModel/EntityList.elm",
@@ -4249,6 +4423,9 @@
     "moduleName": "ViewModel.Frame",
     "parentModuleName": "ViewModel",
     "imports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.Model",
+      "Firebase",
       "List.Extra",
       "Maybe.Extra",
       "Toolkit.Helpers",
@@ -4256,21 +4433,62 @@
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 6,
+    "importsCount": 9,
     "transitiveImports": [
+      "AppDrawer.GroupViewModel",
+      "AppDrawer.Model",
+      "AppDrawer.Types",
+      "Char",
+      "Color",
+      "Color.Mixing",
+      "Colors",
+      "Data.DeviceId",
+      "Data.Todo.Schedule",
+      "Data.TodoDoc",
+      "Data.User",
+      "Dict",
+      "Dict.Extra",
+      "Document",
+      "Entity",
+      "Firebase",
+      "Firebase.Model",
+      "GroupDoc",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Json.Encode.Extra",
+      "List",
       "List.Extra",
       "Maybe.Extra",
+      "Models.GroupDocStore",
+      "Models.Stores",
+      "Models.Todo",
+      "Random.Pcg",
+      "Return",
+      "Set",
+      "Store",
+      "String.Extra",
+      "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
+      "X.Debug",
       "X.Function",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Maybe",
+      "X.Predicate",
+      "X.Random",
+      "X.Record"
     ],
-    "transitiveImportsCount": 7,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
+    "transitiveImportsCount": 44,
+    "backwardImports": [
+      "Main"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main"
+    ],
+    "transitiveBackwardImportsCount": 1
   },
   "Views.EntityList": {
     "fileName": "src/elm/Views/EntityList.elm",
@@ -4434,16 +4652,18 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList",
       "X.Decode",
       "X.Keyboard",
       "X.Return"
     ],
-    "transitiveBackwardImportsCount": 44
+    "transitiveBackwardImportsCount": 46
   },
   "X.Decode": {
     "fileName": "src/elm/X/Decode.elm",
@@ -4483,6 +4703,7 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays",
@@ -4490,7 +4711,7 @@
       "Views.EntityList",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 25
+    "transitiveBackwardImportsCount": 26
   },
   "X.Function": {
     "fileName": "src/elm/X/Function.elm",
@@ -4526,12 +4747,13 @@
       "Sequencer",
       "Todo.Notification.Model",
       "Update.Todo.Internal",
+      "View.Frame",
       "ViewModel.EntityList",
       "ViewModel.Frame",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 22,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4578,6 +4800,7 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
@@ -4590,7 +4813,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 56
+    "transitiveBackwardImportsCount": 57
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4623,12 +4846,13 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "View.Badge",
+      "View.Frame",
       "View.Header",
       "ViewModel.Frame",
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 26,
+    "backwardImportsCount": 27,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4678,6 +4902,7 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "View.Badge",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
@@ -4690,7 +4915,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 59
+    "transitiveBackwardImportsCount": 60
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -4751,6 +4976,7 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Header",
       "View.Layout",
@@ -4761,7 +4987,7 @@
       "Views.EntityList",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 33
+    "transitiveBackwardImportsCount": 34
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -4823,13 +5049,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 24
+    "transitiveBackwardImportsCount": 25
   },
   "X.List": {
     "fileName": "src/elm/X/List.elm",
@@ -4865,12 +5092,13 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.MainMenu",
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 18
+    "transitiveBackwardImportsCount": 19
   },
   "X.Maybe": {
     "fileName": "src/elm/X/Maybe.elm",
@@ -4886,9 +5114,10 @@
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
-      "Main"
+      "Main",
+      "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "X.Predicate": {
     "fileName": "src/elm/X/Predicate.elm",
@@ -4938,12 +5167,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 34
+    "transitiveBackwardImportsCount": 36
   },
   "X.Random": {
     "fileName": "src/elm/X/Random.elm",
@@ -4999,12 +5230,14 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 36
+    "transitiveBackwardImportsCount": 38
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -5073,13 +5306,15 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Layout",
       "View.Overlays",
       "ViewModel.EntityList",
+      "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 41
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",
@@ -5131,11 +5366,12 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
+      "View.Frame",
       "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 13
+    "transitiveBackwardImportsCount": 14
   },
   "X.Set": {
     "fileName": "src/elm/X/Set.elm",
@@ -5187,13 +5423,14 @@
       "Todo.ItemView",
       "Todo.Notification.View",
       "Todo.View",
+      "View.Frame",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 16
   },
   "X.Time": {
     "fileName": "src/elm/X/Time.elm",

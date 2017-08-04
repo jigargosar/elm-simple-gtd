@@ -1,5 +1,5 @@
-    8432 total
-     543 src/elm/Main.elm
+    8454 total
+     525 src/elm/Main.elm
      356 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -62,9 +62,11 @@
       37 src/elm/IconNames.elm
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
+      31 src/elm/ViewModel/Frame.elm
       31 src/elm/View/NewTodoFab.elm
       24 src/elm/EntityId.elm
       21 src/elm/X/Predicate.elm
+      21 src/elm/View/Frame.elm
       21 src/elm/Todo/Notification/Types.elm
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm
@@ -77,7 +79,6 @@
       15 src/elm/Ports/Todo.elm
       14 src/elm/View/Badge.elm
       13 src/elm/ExclusiveMode/Types.elm
-      12 src/elm/ViewModel/Frame.elm
       12 src/elm/LocalStorage.elm
       11 src/elm/Firebase.elm
       11 src/elm/DomPorts.elm

@@ -12,7 +12,7 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 
 
-pageVM config pageModel model =
+pageVM config model pageModel =
     let
         entityTree =
             Pages.EntityList.createEntityTree pageModel model

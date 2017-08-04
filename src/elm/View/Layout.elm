@@ -9,7 +9,7 @@ import View.Header
 import X.Html exposing (boolProperty, onClickStopPropagation)
 
 
-appLayoutView config frameVM model pageContent =
+appLayoutView config frameVM pageContent =
     let
         layoutSideBarHeader =
             AppDrawer.View.sidebarHeader frameVM

@@ -115,8 +115,7 @@ getNamedFilterModel (PageModel path namedFilterModel) =
 
 
 type Msg
-    = ArrowUp
-    | ArrowDown
+    = MoveFocusBy Int
     | SetCursorEntityId EntityId
 
 
@@ -126,11 +125,8 @@ update config msg pageModel =
             -- note: this is automatically called by focusIn event of list item.
             map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) pageModel)
 
-        ArrowUp ->
-            moveFocusBy config -1 pageModel
-
-        ArrowDown ->
-            moveFocusBy config 1 pageModel
+        MoveFocusBy offset ->
+            moveFocusBy config offset pageModel
 
 
 entityListCursorFL =

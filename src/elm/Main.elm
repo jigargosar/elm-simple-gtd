@@ -122,7 +122,9 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     case model.page of
         EntityListPage pageModel ->
-            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
+            --Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
+            -- todo: this is causing slowdown on cursor movement. or something else is.
+            Nothing
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
 
@@ -257,8 +259,8 @@ createUpdateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
-    , focusNextEntityMsgNew = EntityListMsg Pages.EntityList.ArrowDown
-    , focusPrevEntityMsgNew = EntityListMsg Pages.EntityList.ArrowUp
+    , focusNextEntityMsgNew = Pages.EntityList.MoveFocusBy 1 |> EntityListMsg
+    , focusPrevEntityMsgNew = Pages.EntityList.MoveFocusBy -1 |> EntityListMsg
     , navigateToPathMsg = navigateToPathMsg
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }

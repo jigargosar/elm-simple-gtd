@@ -483,7 +483,7 @@ main =
     let
         init =
             createAppModel
-                >> update_ (OnFirebaseMsg OnFB_SwitchToNewUserSetupModeIfNeeded)
+                >> update_ (OnFirebaseMsg OnFBSwitchToNewUserSetupModeIfNeeded)
 
         update_ : Msg -> Model -> ( Model, Cmd Msg )
         update_ msg model =

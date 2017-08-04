@@ -17,8 +17,8 @@ import X.Return exposing (..)
 
 
 type FirebaseMsg
-    = OnFB_NOOP
-    | OnFB_SwitchToNewUserSetupModeIfNeeded
+    = OnFBNoOP
+    | OnFBSwitchToNewUserSetupModeIfNeeded
     | OnFBSignIn
     | OnFBSignOut
     | OnFBAfterUserChanged
@@ -55,10 +55,10 @@ update :
     -> SubReturnF msg
 update config msg =
     case msg of
-        OnFB_NOOP ->
+        OnFBNoOP ->
             identity
 
-        OnFB_SwitchToNewUserSetupModeIfNeeded ->
+        OnFBSwitchToNewUserSetupModeIfNeeded ->
             let
                 onSwitchToNewUserSetupModeIfNeeded model =
                     if model.showSignInDialog then
@@ -73,11 +73,11 @@ update config msg =
         OnFBSignIn ->
             command (signIn ())
                 >> setAndPersistShowSignInDialogValue True
-                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+                >> update config OnFBSwitchToNewUserSetupModeIfNeeded
 
         OnFBSkipSignIn ->
             setAndPersistShowSignInDialogValue False
-                >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+                >> update config OnFBSwitchToNewUserSetupModeIfNeeded
 
         OnFBSignOut ->
             Return.command (signOut ())
@@ -88,7 +88,7 @@ update config msg =
             returnWithMaybe1 .maybeUser
                 (\_ ->
                     setAndPersistShowSignInDialogValue False
-                        >> update config OnFB_SwitchToNewUserSetupModeIfNeeded
+                        >> update config OnFBSwitchToNewUserSetupModeIfNeeded
                 )
 
         OnFBUserChanged encodedUser ->

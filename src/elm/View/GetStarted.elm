@@ -12,7 +12,7 @@ import X.Keyboard
 signInOverlay =
     div
         [ class "overlay"
-        , onClickStopPropagation OnFB_NOOP
+        , onClickStopPropagation OnFBNoOP
         ]
         [ div [ class "modal fixed-center" ]
             [ div [ class "modal-content" ]

@@ -128,6 +128,7 @@ type Msg
 update config msg pageModel =
     case msg of
         SetCursorEntityId entityId ->
+            -- note: this is automatically called by focusIn event of list item.
             map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) pageModel)
 
         ArrowUp ->

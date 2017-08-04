@@ -118,7 +118,6 @@ type Msg
     = ArrowUp
     | ArrowDown
     | SetCursorEntityId EntityId
-    | ToggleSelection EntityId
 
 
 update config msg pageModel =
@@ -132,12 +131,6 @@ update config msg pageModel =
 
         ArrowDown ->
             moveFocusBy config 1 pageModel
-
-        ToggleSelection entityId ->
-            map
-                (Models.Selection.updateSelectedEntityIdSet
-                    (toggleSetMember (getDocIdFromEntityId entityId))
-                )
 
 
 entityListCursorFL =

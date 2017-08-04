@@ -47,6 +47,7 @@ import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)
 import X.Return exposing (..)
+import X.Set
 
 
 type Page
@@ -110,6 +111,7 @@ type Msg
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
     | PageMsg_NavigateToPath (List String)
+    | ToggleEntityIdSelection EntityId
 
 
 navigateToPathMsg =
@@ -268,6 +270,12 @@ update config msg =
         NOOP ->
             identity
 
+        ToggleEntityIdSelection entityId ->
+            map
+                (Models.Selection.updateSelectedEntityIdSet
+                    (X.Set.toggleSetMember (getDocIdFromEntityId entityId))
+                )
+
         PageMsg_NavigateToPath path ->
             let
                 setPage page =
@@ -425,7 +433,7 @@ createViewConfig model =
     , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onToggleEntitySelection = Pages.EntityList.ToggleSelection >> EntityListMsg
+    , onToggleEntitySelection = ToggleEntityIdSelection
     , onStartEditingTodoProject = Update.Todo.onStartEditingTodoProjectMsg >> OnTodoMsg
     , onStartEditingTodoContext = Update.Todo.onStartEditingTodoContextMsg >> OnTodoMsg
     , onStartEditingTodoText = Update.Todo.onStartEditingTodoTextMsg >> OnTodoMsg

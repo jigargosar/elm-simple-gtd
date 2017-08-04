@@ -122,7 +122,7 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     case model.page of
         EntityListPage pageModel ->
-            Pages.EntityList.getLastKnownFocusedEntityId pageModel model
+            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel model
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
 

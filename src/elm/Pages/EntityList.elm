@@ -114,7 +114,7 @@ getNamedFilterModel (PageModel path namedFilterModel) =
     namedFilterModel
 
 
-getLastKnownFocusedEntityId pageModel model =
+getMaybeLastKnownFocusedEntityId pageModel model =
     get maybeEntityIdAtCursorFL model
 
 
@@ -184,8 +184,8 @@ moveFocusBy config offset pageModel =
     returnWithMaybe2 identity
         (\appModel ->
             let
-                maybeEntityIdAtCursorOld =
-                    computeMaybeNewEntityIdAtCursor
+                maybeLastKnownFocusedEntityId =
+                    getMaybeLastKnownFocusedEntityId
                         pageModel
                         appModel
 
@@ -195,7 +195,7 @@ moveFocusBy config offset pageModel =
             in
             findEntityIdByOffsetIn offset
                 entityIdList
-                maybeEntityIdAtCursorOld
+                maybeLastKnownFocusedEntityId
                 ?|> (SetCursorEntityId >> update config # pageModel)
         )
 

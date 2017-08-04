@@ -50,6 +50,6 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="WebPackConfiguration">
-    <option name="path" value="$PROJECT_DIR$/webpack.config.babel.js" />
+    <option name="path" value="" />
   </component>
 </project>

@@ -2,9 +2,12 @@ import webpack from "webpack"
 import path from "path"
 import ServiceWorkerWebpackPlugin from "serviceworker-webpack-plugin"
 import _ from "ramda"
-import HtmlWebpackPlugin from "html-webpack-plugin"
-import ExtractTextPlugin from "extract-text-webpack-plugin"
+// import HtmlWebpackPlugin from "html-webpack-plugin"
+// import ExtractTextPlugin from "extract-text-webpack-plugin"
 import SWPrecacheWebpackPlugin from "sw-precache-webpack-plugin"
+
+// idea setting: /Users/jigargosar/GitHub/elm-simple-gtd/webpack.config.babel.js
+//todo: refactor https://github.com/simonh1000/elm-webpack-starter/blob/master/webpack.config.js
 
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER === "true"

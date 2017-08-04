@@ -114,6 +114,10 @@ getNamedFilterModel (PageModel path namedFilterModel) =
     namedFilterModel
 
 
+getLastKnownFocusedEntityId pageModel model =
+    get maybeEntityIdAtCursorFL model
+
+
 type Msg
     = MoveFocusBy Int
     | SetCursorEntityId EntityId

@@ -122,9 +122,7 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     case model.page of
         EntityListPage pageModel ->
-            --Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
-            -- todo: this is causing slowdown on cursor movement. or something else is.
-            Nothing
+            Pages.EntityList.getLastKnownFocusedEntityId pageModel model
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
 

@@ -1,6 +1,6 @@
 {
   "name": "simplegtd.com",
-  "version": "0.19.0",
+  "version": "0.19.1",
   "main": "index.js",
   "license": "MIT",
   "engines": {
@@ -85,7 +85,9 @@
         "run preCommit"
       ],
       "pre-push": [],
-      "post-commit": ["git unstage stats/*"],
+      "post-commit": [
+        "git unstage stats/*"
+      ],
       "post-checkout": [],
       "post-merge": []
     }

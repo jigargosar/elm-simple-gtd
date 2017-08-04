@@ -92,10 +92,11 @@ window.appBoot = async function appBoot(elmMain = Main) {
   const initialOfflineStore = await getOfflineStore()
   // console.log(initialOfflineStore)
   
-  const flags = _.merge({
+  const flags = {
     now: Date.now(),
     pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
     developmentMode: isDevelopmentMode,
+    encodedLists: db.allDocsMap,
     config: {
       debug: WEBPACK_DEV_SERVER,
       deviceId,
@@ -103,7 +104,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       isDevelopmentMode,
       initialOfflineStore,
     },
-  }, db.allDocsMap)
+  }
   
   
   const app = elmMain

@@ -22,9 +22,9 @@ export default async function () {
     const allDocsPMap = _.map(db => db.findAll())(dbMap)
 
     const allDocsMap = {
-        encodedTodoList: await allDocsPMap["todo-db"],
-        encodedProjectList: await allDocsPMap["project-db"],
-        encodedContextList: await allDocsPMap["context-db"],
+        todo: await allDocsPMap["todo-db"],
+        project: await allDocsPMap["project-db"],
+        context: await allDocsPMap["context-db"],
     }
 
     function setupApp(app) {

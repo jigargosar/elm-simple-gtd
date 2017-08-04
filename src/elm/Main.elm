@@ -24,6 +24,7 @@ import Random.Pcg
 import RouteUrl
 import RouteUrl.Builder
 import Set exposing (Set)
+import Stores
 import Time exposing (Time)
 import Todo.FormTypes
 import Todo.Notification.Model
@@ -69,6 +70,7 @@ type alias Model =
     , todoStore : TodoStore
     , projectStore : ProjectStore
     , contextStore : ContextStore
+    , stores : Stores.Model
     , editMode : ExclusiveMode
     , page : Page
     , reminderOverlay : TodoReminderOverlayModel
@@ -157,9 +159,11 @@ subscriptions model =
 
 type alias Flags =
     { now : Time
-    , encodedTodoList : List E.Value
-    , encodedProjectList : List E.Value
-    , encodedContextList : List E.Value
+    , encodedLists :
+        { todo : List E.Value
+        , project : List E.Value
+        , context : List E.Value
+        }
     , config : AppConfig
     }
 
@@ -167,17 +171,20 @@ type alias Flags =
 createAppModel : Flags -> Model
 createAppModel flags =
     let
-        { now, encodedTodoList, encodedProjectList, encodedContextList } =
+        { now } =
             flags
 
         { deviceId, initialOfflineStore, npmPackageVersion, isDevelopmentMode } =
             flags.config
 
+        encodedLists =
+            flags.encodedLists
+
         storeGenerator =
             Random.Pcg.map3 (,,)
-                (Data.TodoDoc.storeGenerator deviceId encodedTodoList)
-                (GroupDoc.projectStoreGenerator deviceId encodedProjectList)
-                (GroupDoc.contextStoreGenerator deviceId encodedContextList)
+                (Data.TodoDoc.storeGenerator deviceId encodedLists.todo)
+                (GroupDoc.projectStoreGenerator deviceId encodedLists.project)
+                (GroupDoc.contextStoreGenerator deviceId encodedLists.context)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
@@ -188,6 +195,7 @@ createAppModel flags =
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
+            , stores = Stores.initialValue now deviceId encodedLists
             , editMode = XMNone
             , page = initialPage
             , reminderOverlay = Todo.Notification.Model.none

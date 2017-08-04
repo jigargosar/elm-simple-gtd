@@ -34,12 +34,12 @@ sidebarHeader frameVM =
         ]
 
 
-sidebarContent config frameVM model =
+sidebarContent config frameVM =
     div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
         [ ul []
             ([]
-                ++ entityGroupView config frameVM.contexts model.page
-                ++ entityGroupView config frameVM.projects model.page
+                ++ entityGroupView config frameVM.contexts
+                ++ entityGroupView config frameVM.projects
                 ++ [ Mat.divider ]
                 ++ [ onSetEntityListViewItem
                         config
@@ -61,7 +61,7 @@ sidebarContent config frameVM model =
         ]
 
 
-entityGroupView config vm page =
+entityGroupView config vm =
     let
         { onAddClicked, onToggleExpanded, isExpanded } =
             vm

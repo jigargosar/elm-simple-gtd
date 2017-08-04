@@ -15,7 +15,7 @@ appLayoutView config frameVM model pageContent =
             AppDrawer.View.sidebarHeader frameVM
 
         layoutSideBarContent =
-            AppDrawer.View.sidebarContent config frameVM model
+            AppDrawer.View.sidebarContent config frameVM
 
         layoutMainHeader =
             View.Header.appMainHeader config frameVM model

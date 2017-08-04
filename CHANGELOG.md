@@ -1,4 +1,4 @@
-## Upcoming
+## v0.19.3 - 2017-08-04
 * fix: add slack link and rename feedback to contact. 
 
 ## v0.19.2 - 2017-08-04

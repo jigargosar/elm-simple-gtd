@@ -68,24 +68,34 @@ type alias Config msg a =
     }
 
 
-update : Config msg a -> SubscriptionMsg -> SubReturnF msg model
+
+--update : Config msg a -> SubscriptionMsg -> SubReturnF msg model
+
+
 update config msg =
     case msg of
         OnPouchDBChange dbName encodedDoc ->
             onPouchDBChange config dbName encodedDoc
 
         OnFirebaseDatabaseChange dbName encodedDoc ->
-            effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+            onFirebaseDatabaseChange dbName encodedDoc
 
         OnGlobalKeyUp keyCode ->
-            onGlobalKeyUp config (KX.fromCode keyCode)
+            onGlobalKeyUp config keyCode
 
         OnGlobalKeyDown keyCode ->
-            onGlobalKeyDown config (KX.fromCode keyCode)
+            onGlobalKeyDown config keyCode
 
 
-onGlobalKeyDown config key =
+onFirebaseDatabaseChange dbName encodedDoc =
+    effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
+
+
+onGlobalKeyDown config keyCode =
     let
+        key =
+            KX.fromCode keyCode
+
         onEditModeNone =
             case key of
                 ArrowUp ->
@@ -108,8 +118,11 @@ onGlobalKeyDown config key =
         |> returnWith .editMode
 
 
-onGlobalKeyUp config key =
+onGlobalKeyUp config keyCode =
     let
+        key =
+            KX.fromCode keyCode
+
         clear =
             map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveMode

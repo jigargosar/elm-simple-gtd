@@ -50,51 +50,51 @@ type Filter
     | GroupByFilter GroupDocType
 
 
-type alias PageModelRecord =
+type alias ModelRecord =
     { path : List String
     , namedFilterModel : NamedFilterModel
     , cursor : EntityListCursor
     }
 
 
-type PageModel
-    = PageModel PageModelRecord
+type Model
+    = Model ModelRecord
 
 
-defaultPageModel =
+initialValue =
     pageModelConstructor defaultNamedFilterModel.pathPrefix
         defaultNamedFilterModel
         entityListCursorInitialValue
 
 
 pageModelConstructor path namedFilterModel cursor =
-    PageModelRecord path namedFilterModel cursor
-        |> PageModel
+    ModelRecord path namedFilterModel cursor
+        |> Model
 
 
-maybeInitFromPath : List String -> PageModel -> Maybe PageModel
-maybeInitFromPath path (PageModel pageModelRecord) =
+maybeInitFromPath : List String -> Model -> Maybe Model
+maybeInitFromPath path (Model pageModelRecord) =
     getMaybeNamedFilterModelFromPath path
         ?|> (pageModelConstructor path # pageModelRecord.cursor)
 
 
-getFullPath (PageModel pageModel) =
+getFullPath (Model pageModel) =
     pageModel.path
 
 
-getTitleColourTuple (PageModel pageModel) =
+getTitleColourTuple (Model pageModel) =
     pageModel.namedFilterModel |> (\model -> ( model.displayName, model.headerColor ))
 
 
-getTitle (PageModel pageModel) =
+getTitle (Model pageModel) =
     pageModel.namedFilterModel.displayName
 
 
-getCursorFilter (PageModel pageModel) =
+getCursorFilter (Model pageModel) =
     pageModel.cursor.filter
 
 
-getFilter (PageModel pageModel) =
+getFilter (Model pageModel) =
     case pageModel.namedFilterModel.namedFilterType of
         NF_WithNullContext ->
             ContextIdFilter ""
@@ -124,11 +124,11 @@ getFilter (PageModel pageModel) =
             ProjectIdFilter (List.Extra.last pageModel.path ?= "")
 
 
-getNamedFilterModel (PageModel pageModelRecord) =
+getNamedFilterModel (Model pageModelRecord) =
     pageModelRecord.namedFilterModel
 
 
-getMaybeLastKnownFocusedEntityId (PageModel pageModelRecord) =
+getMaybeLastKnownFocusedEntityId (Model pageModelRecord) =
     get maybeEntityIdAtCursorFL pageModelRecord
 
 
@@ -176,7 +176,7 @@ entityListCursorEntityIdListFL =
     composeInnerOuterFieldLens entityIdListFL cursorFL
 
 
-updateEntityListCursorWithMaybeEntityId config appModel maybeEntityIdAtCursor ((PageModel pageModelRecord) as pageModel) =
+updateEntityListCursorWithMaybeEntityId config appModel maybeEntityIdAtCursor ((Model pageModelRecord) as pageModel) =
     let
         entityIdList =
             createEntityList pageModel appModel
@@ -188,7 +188,7 @@ updateEntityListCursorWithMaybeEntityId config appModel maybeEntityIdAtCursor ((
             , filter = getFilter pageModel
             }
     in
-    set cursorFL cursor pageModelRecord |> PageModel
+    set cursorFL cursor pageModelRecord |> Model
 
 
 moveFocusBy config offset appModel =
@@ -205,7 +205,7 @@ moveFocusBy config offset appModel =
                 |> Maybe.orElse (List.head entityIdList)
     in
     returnWithMaybe2 identity
-        (\((PageModel pageModelRecord) as pageModel) ->
+        (\((Model pageModelRecord) as pageModel) ->
             let
                 maybeLastKnownFocusedEntityId =
                     getMaybeLastKnownFocusedEntityId pageModel
@@ -322,7 +322,7 @@ createEntityList pageModel appModel =
     createEntityTree pageModel appModel |> Data.EntityTree.flatten
 
 
-computeMaybeNewEntityIdAtCursor ((PageModel pageModelRecord) as pageModel) appModel =
+computeMaybeNewEntityIdAtCursor ((Model pageModelRecord) as pageModel) appModel =
     let
         newEntityIdList =
             createEntityList pageModel appModel

@@ -20,7 +20,7 @@ import Menu.Types
 import Models.Selection
 import Models.Todo
 import Navigation
-import Pages.EntityList
+import Pages.EntityList as EntityList
 import Ports
 import Ports.Firebase exposing (..)
 import Ports.Todo exposing (..)
@@ -52,11 +52,11 @@ import X.Set
 
 
 type Page
-    = EntityListPage Pages.EntityList.PageModel
+    = EntityList EntityList.Model
 
 
 initialPage =
-    EntityListPage Pages.EntityList.defaultPageModel
+    EntityList EntityList.initialValue
 
 
 type alias AppConfig =
@@ -69,10 +69,6 @@ type alias AppConfig =
 
 
 type alias Model =
-    AppModelOtherFields
-
-
-type alias AppModelOtherFields =
     { lastKnownCurrentTime : Time
     , todoStore : TodoStore
     , projectStore : ProjectStore
@@ -100,7 +96,7 @@ type Msg
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
-    | EntityListMsg Pages.EntityList.Msg
+    | EntityListMsg EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
     | OnTodoMsg TodoMsg
@@ -122,8 +118,8 @@ navigateToPathMsg =
 onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
     case model.page of
-        EntityListPage pageModel ->
-            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel
+        EntityList pageModel ->
+            EntityList.getMaybeLastKnownFocusedEntityId pageModel
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
 
@@ -140,7 +136,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
 setFocusInEntityWithEntityIdMsg =
-    Pages.EntityList.SetCursorEntityId >> EntityListMsg
+    EntityList.SetCursorEntityId >> EntityListMsg
 
 
 subscriptions : Model -> Sub Msg
@@ -257,8 +253,8 @@ createUpdateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
-    , focusNextEntityMsgNew = Pages.EntityList.MoveFocusBy 1 |> EntityListMsg
-    , focusPrevEntityMsgNew = Pages.EntityList.MoveFocusBy -1 |> EntityListMsg
+    , focusNextEntityMsgNew = EntityList.MoveFocusBy 1 |> EntityListMsg
+    , focusPrevEntityMsgNew = EntityList.MoveFocusBy -1 |> EntityListMsg
     , navigateToPathMsg = navigateToPathMsg
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
     }
@@ -293,11 +289,11 @@ update config msg =
             returnWith .page
                 (\page ->
                     case page of
-                        EntityListPage pageModel ->
-                            Pages.EntityList.maybeInitFromPath path pageModel
+                        EntityList pageModel ->
+                            EntityList.maybeInitFromPath path pageModel
                                 |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (Pages.EntityList.getFullPath pageModel))
-                                    (EntityListPage >> setPage)
+                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                    (EntityList >> setPage)
                 )
 
         OnMdl msg_ ->
@@ -357,17 +353,17 @@ pageFL =
 
 updatePage config msg page =
     case ( page, msg ) of
-        ( EntityListPage model_, EntityListMsg msg_ ) ->
+        ( EntityList model_, EntityListMsg msg_ ) ->
             andThen
                 (\model ->
                     let
                         ( pageModel, cmd ) =
-                            Pages.EntityList.update config
+                            EntityList.update config
                                 model
                                 msg_
                                 (pure model_)
                     in
-                    ( { model | page = EntityListPage pageModel }, Cmd.map EntityListMsg cmd )
+                    ( { model | page = EntityList pageModel }, Cmd.map EntityListMsg cmd )
                 )
 
         _ ->
@@ -479,13 +475,13 @@ view model =
             View.Frame.frame frameVM
     in
     case getPage__ model of
-        EntityListPage pageModel ->
+        EntityList pageModel ->
             let
                 pageVM =
                     ViewModel.EntityList.pageVM config model pageModel
 
                 titleColorTuple =
-                    Pages.EntityList.getTitleColourTuple pageModel
+                    EntityList.getTitleColourTuple pageModel
             in
             Views.EntityList.view pageVM |> frame titleColorTuple
 
@@ -498,8 +494,8 @@ delta2hash =
     let
         getPathFromModel model =
             case getPage__ model of
-                EntityListPage pageModel ->
-                    Pages.EntityList.getFullPath pageModel
+                EntityList pageModel ->
+                    EntityList.getFullPath pageModel
 
         delta2builder previousModel currentModel =
             RouteUrl.Builder.builder

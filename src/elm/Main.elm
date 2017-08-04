@@ -110,12 +110,12 @@ type Msg
     | OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
     | SetLastKnownTimeStamp Time
-    | PageMsg_NavigateToPath (List String)
+    | NavigateToPath (List String)
     | ToggleEntityIdSelection EntityId
 
 
 navigateToPathMsg =
-    PageMsg_NavigateToPath
+    NavigateToPath
 
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
@@ -275,29 +275,27 @@ update config msg =
                     (X.Set.toggleSetMember (getDocIdFromEntityId entityId))
                 )
 
-        PageMsg_NavigateToPath path ->
+        NavigateToPath path ->
             let
                 setPage page =
-                    map (\model -> { model | page = page })
+                    map (set pageFL page)
                         >> map Models.Selection.clearSelection
                         >> returnMsgAsCmd config.revertExclusiveMode
 
-                setMaybePage page =
-                    page ?|> setPage ?= effect revertHref
-
-                revertHref model =
-                    case model.page of
-                        EntityListPage pageModel ->
-                            Pages.EntityList.getFullPath pageModel
-                                |> String.join "/"
-                                |> (++) "#!/"
-                                |> Navigation.modifyUrl
+                revertPath path =
+                    path
+                        |> String.join "/"
+                        |> (++) "#!/"
+                        |> Navigation.modifyUrl
             in
-            case path of
-                _ ->
-                    Pages.EntityList.initFromPath path
-                        ?|> EntityListPage
-                        |> setMaybePage
+            returnWith .page
+                (\page ->
+                    case page of
+                        EntityListPage pageModel ->
+                            Pages.EntityList.initFromPath path pageModel
+                                ?|> (EntityListPage >> setPage)
+                                ?= command (revertPath (Pages.EntityList.getFullPath pageModel))
+                )
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)

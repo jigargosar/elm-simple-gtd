@@ -72,10 +72,10 @@ pageModelConstructor path namedFilterModel cursor =
         |> PageModel
 
 
-initFromPath : List String -> Maybe PageModel
-initFromPath path =
+initFromPath : List String -> PageModel -> Maybe PageModel
+initFromPath path (PageModel pageModelRecord) =
     getMaybeNamedFilterModelFromPath path
-        ?|> (pageModelConstructor path # entityListCursorInitialValue)
+        ?|> (pageModelConstructor path # pageModelRecord.cursor)
 
 
 getFullPath (PageModel pageModel) =

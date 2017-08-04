@@ -22,8 +22,8 @@ import Models.Todo
 import Navigation
 import Pages.EntityList as EntityList
 import Ports
-import Ports.Firebase exposing (..)
-import Ports.Todo exposing (..)
+import Ports.Firebase
+import Ports.Todo
 import Random.Pcg
 import RouteUrl
 import RouteUrl.Builder
@@ -161,7 +161,7 @@ subscriptions model =
             ]
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
-            [ notificationClicked Update.Todo.OnReminderNotificationClicked
+            [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
 
             -- note: 30 seconds is so that we can received any updates from firebase
             -- before triggering and changing any stale overdue todos timestamps.
@@ -169,9 +169,9 @@ subscriptions model =
             ]
             |> Sub.map OnTodoMsg
         , Sub.batch
-            [ onFirebaseUserChanged OnFBUserChanged
-            , onFCMTokenChanged OnFBFCMTokenChanged
-            , onFirebaseConnectionChanged OnFBConnectionChanged
+            [ Ports.Firebase.onFirebaseUserChanged OnFBUserChanged
+            , Ports.Firebase.onFCMTokenChanged OnFBFCMTokenChanged
+            , Ports.Firebase.onFirebaseConnectionChanged OnFBConnectionChanged
             ]
             |> Sub.map OnFirebaseMsg
         , Update.AppDrawer.subscriptions

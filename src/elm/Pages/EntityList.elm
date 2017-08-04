@@ -121,13 +121,13 @@ getNamedFilterModel (PageModel path namedFilterModel) =
 type Msg
     = ArrowUp
     | ArrowDown
-    | SetFocusableEntityId EntityId
+    | SetCursorEntityId EntityId
     | ToggleSelection EntityId
 
 
 update config msg pageModel =
     case msg of
-        SetFocusableEntityId entityId ->
+        SetCursorEntityId entityId ->
             map (updateEntityListCursorWithMaybeEntityId config (entityId |> Just) pageModel)
 
         ArrowUp ->
@@ -206,7 +206,7 @@ moveFocusBy config offset pageModel =
             findEntityIdByOffsetIn offset
                 entityIdList
                 maybeEntityIdAtCursorOld
-                ?|> (SetFocusableEntityId >> update config # pageModel)
+                ?|> (SetCursorEntityId >> update config # pageModel)
         )
 
 

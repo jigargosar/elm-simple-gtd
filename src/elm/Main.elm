@@ -136,7 +136,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
 setFocusInEntityWithEntityIdMsg =
-    Pages.EntityList.SetFocusableEntityId >> EntityListMsg
+    Pages.EntityList.SetCursorEntityId >> EntityListMsg
 
 
 subscriptions : Model -> Sub Msg

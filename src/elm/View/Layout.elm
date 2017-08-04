@@ -20,9 +20,6 @@ appLayoutView config frameVM model pageContent =
         layoutMainHeader =
             View.Header.appMainHeader config frameVM model
 
-        isOverlayOpen =
-            AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
-
         onClickStopPropagationAV =
             X.Html.onClickStopPropagation config.noop
 
@@ -30,46 +27,43 @@ appLayoutView config frameVM model pageContent =
             div [ id "layout-main-content" ]
                 [ div [ id "page-container" ] [ pageContent ]
                 ]
+
+        layoutContent =
+            if frameVM.isSideBarOverlayOpen then
+                [ div
+                    [ id "layout-sidebar", onClickStopPropagationAV ]
+                    [ div [ class "bottom-shadow" ] [ layoutSideBarHeader ]
+                    , layoutSideBarContent
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick config.onToggleAppDrawerOverlay
+                    ]
+                    [ div [ onClickStopPropagationAV ]
+                        [ div [ class "bottom-shadow" ] [ layoutMainHeader ]
+                        , layoutMainContent
+                        ]
+                    ]
+                ]
+            else
+                [ div [ class "bottom-shadow" ]
+                    [ layoutSideBarHeader
+                    , layoutMainHeader
+                    ]
+                , div
+                    [ id "layout-sidebar", onClickStopPropagationAV ]
+                    [ layoutSideBarContent
+                    ]
+                , div
+                    [ id "layout-main"
+                    , onClick config.onToggleAppDrawerOverlay
+                    ]
+                    [ div [ onClickStopPropagationAV ] [ layoutMainContent ]
+                    ]
+                ]
     in
-    if isOverlayOpen then
-        div
-            [ id "app-layout"
-            , classList [ ( "sidebar-overlay", isOverlayOpen ) ]
-            ]
-            [ div
-                [ id "layout-sidebar", onClickStopPropagationAV ]
-                [ div [ class "bottom-shadow" ] [ layoutSideBarHeader ]
-                , layoutSideBarContent
-                ]
-            , div
-                [ id "layout-main"
-                , onClick config.onToggleAppDrawerOverlay
-                ]
-                [ div [ onClickStopPropagationAV ]
-                    [ div [ class "bottom-shadow" ] [ layoutMainHeader ]
-                    , layoutMainContent
-                    ]
-                ]
-            ]
-    else
-        div
-            [ id "app-layout"
-            , classList [ ( "sidebar-overlay", isOverlayOpen ) ]
-            ]
-            [ div [ class "bottom-shadow" ]
-                [ layoutSideBarHeader
-                , layoutMainHeader
-                ]
-            , div
-                [ id "layout-sidebar", onClickStopPropagationAV ]
-                [ layoutSideBarContent
-                ]
-            , div
-                [ id "layout-main"
-                , onClick config.onToggleAppDrawerOverlay
-                ]
-                [ div [ onClickStopPropagationAV ]
-                    [ layoutMainContent
-                    ]
-                ]
-            ]
+    div
+        [ id "app-layout"
+        , classList [ ( "sidebar-overlay", frameVM.isSideBarOverlayOpen ) ]
+        ]
+        layoutContent

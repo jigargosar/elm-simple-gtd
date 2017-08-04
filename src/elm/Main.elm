@@ -470,6 +470,7 @@ view config model =
                 else
                     "SimpleGTD.com"
             , appVersionString = "v" ++ model.appVersion
+            , isSideBarOverlayOpen = AppDrawer.Model.getIsOverlayOpen model.appDrawerModel
             }
 
         frame pageContent =

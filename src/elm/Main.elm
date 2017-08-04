@@ -52,6 +52,7 @@ import Update.Todo exposing (TodoMsg)
 import View.Layout
 import View.NewTodoFab exposing (newTodoFab)
 import View.Overlays
+import ViewModel.EntityList
 import Views.EntityList
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -484,45 +485,9 @@ view config model =
         EntityListPage pageModel ->
             let
                 pageVM =
-                    let
-                        entityTree =
-                            Pages.EntityList.createEntityTree pageModel model
-
-                        maybeEntityIdAtCursor =
-                            let
-                                entityList =
-                                    Data.EntityTree.flatten entityTree
-                            in
-                            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
-                                ?+> (Entity.hasId >> List.find # entityList)
-                                |> Maybe.orElse (List.head entityList)
-                                ?|> Entity.toEntityId
-
-                        isCursorAtEntityId entityId =
-                            maybeEntityIdAtCursor ?|> equals entityId ?= False
-
-                        getTabIndexForEntityId entityId =
-                            if isCursorAtEntityId entityId then
-                                0
-                            else
-                                -1
-
-                        createTodoViewModel todo =
-                            let
-                                isFocusable =
-                                    EntityId.fromTodo todo |> isCursorAtEntityId
-                            in
-                            todo
-                                |> Todo.ViewModel.createTodoViewModel config model isFocusable
-                    in
-                    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config getTabIndexForEntityId
-                    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config getTabIndexForEntityId
-                    , createTodoViewModel = createTodoViewModel
-                    , entityTree = entityTree
-                    }
+                    ViewModel.EntityList.pageVM config pageModel model
             in
-            Views.EntityList.view pageVM
-                |> frame
+            Views.EntityList.view pageVM |> frame
 
 
 getPage__ =

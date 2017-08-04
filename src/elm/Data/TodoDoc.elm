@@ -16,7 +16,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import X.Record exposing (over, set)
+import X.Record exposing (..)
 
 
 type alias TodoText =
@@ -175,13 +175,13 @@ update action =
             Document.getId context |> set contextId
 
         TA_ToggleDone ->
-            over done not
+            toggle done
 
         TA_MarkDone ->
             set done True
 
         TA_ToggleDeleted ->
-            over deleted not
+            toggle deleted
 
         TA_SetScheduleFromMaybeTime maybeTime ->
             set schedule (Data.Todo.Schedule.fromMaybeTime maybeTime)

@@ -1582,6 +1582,7 @@
       "Keyboard",
       "Keyboard.Extra",
       "Material",
+      "Maybe.Extra",
       "Menu",
       "Menu.Types",
       "Models.Selection",
@@ -1617,7 +1618,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 48,
+    "importsCount": 49,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

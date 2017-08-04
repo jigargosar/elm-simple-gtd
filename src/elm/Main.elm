@@ -14,6 +14,7 @@ import Json.Encode as E
 import Keyboard
 import Keyboard.Extra as KX exposing (Key)
 import Material
+import Maybe.Extra
 import Menu
 import Menu.Types
 import Models.Selection
@@ -287,14 +288,16 @@ update config msg =
                         |> String.join "/"
                         |> (++) "#!/"
                         |> Navigation.modifyUrl
+                        |> command
             in
             returnWith .page
                 (\page ->
                     case page of
                         EntityListPage pageModel ->
-                            Pages.EntityList.initFromPath path pageModel
-                                ?|> (EntityListPage >> setPage)
-                                ?= command (revertPath (Pages.EntityList.getFullPath pageModel))
+                            Pages.EntityList.maybeInitFromPath path pageModel
+                                |> Maybe.Extra.unpack
+                                    (\_ -> revertPath (Pages.EntityList.getFullPath pageModel))
+                                    (EntityListPage >> setPage)
                 )
 
         OnMdl msg_ ->

@@ -13,6 +13,10 @@ newPostURL =
     "https://groups.google.com/forum/#!newtopic/simplegtd"
 
 
+joinSlack =
+    "https://join.slack.com/t/simplegtd/shared_invite/MjIzMTE5OTMwODcwLTE1MDE4NDYxMTAtYjY4NGI3YzRlZg"
+
+
 newIssueURL =
     "https://github.com/jigargosar/elm-simple-gtd/issues/new"
 

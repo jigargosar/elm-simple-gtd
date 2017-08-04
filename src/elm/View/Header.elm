@@ -9,11 +9,7 @@ import Mat
 import X.Function.Infix exposing (..)
 
 
-appMainHeader config frameVM m =
-    let
-        content =
-            titleHeaderContent frameVM
-    in
+appMainHeader config frameVM =
     div
         [ id "layout-main-header"
         , style
@@ -21,41 +17,37 @@ appMainHeader config frameVM m =
             , "background-color" => Colors.toRBGAString frameVM.headerBackgroundColor
             ]
         ]
-        (headerWithContent config content m)
+        [ sidebarMenuButton config frameVM
+        , div [ class "flex-auto font-nowrap" ] [ headerTitle frameVM ]
+        , div [ id "main-menu-button", onClick config.onShowMainMenu ]
+            [ mainMenuProfileIcon config frameVM ]
+        ]
 
 
-titleHeaderContent frameVM =
+headerTitle frameVM =
     let
         mainHeaderTitle =
             frameVM.mainHeaderTitle
     in
-    [ h5 [ class "ellipsis title", title mainHeaderTitle ] [ mainHeaderTitle |> text ]
-    ]
+    h5 [ class "ellipsis title", title mainHeaderTitle ] [ mainHeaderTitle |> text ]
 
 
-headerWithContent config content m =
-    let
-        menuButton =
-            Mat.headerIconBtn config.onMdl
-                m.mdl
-                [ Mat.resourceId "center-header-menu"
-                , Mat.tabIndex -1
-                , Mat.cs "menu-btn"
-                , Mat.onClickStopPropagation config.onToggleAppDrawerOverlay
-                ]
-                [ Mat.icon "menu" ]
-    in
-    [ menuButton
-    , div [ class "flex-auto font-nowrap" ] content
-    , div [ id "main-menu-button", onClick config.onShowMainMenu ] [ menuIcon config m ]
-    ]
+sidebarMenuButton config frameVM =
+    Mat.headerIconBtn config.onMdl
+        frameVM.mdl
+        [ Mat.resourceId "center-header-menu"
+        , Mat.tabIndex -1
+        , Mat.cs "menu-btn"
+        , Mat.onClickStopPropagation config.onToggleAppDrawerOverlay
+        ]
+        [ Mat.icon "menu" ]
 
 
-menuIcon config m =
-    case Firebase.getMaybeUser m of
+mainMenuProfileIcon config frameVM =
+    case frameVM.maybeUser of
         Nothing ->
             Mat.headerIconBtn config.onMdl
-                m.mdl
+                frameVM.mdl
                 [ Mat.resourceId "account-menu-not-signed-in"
                 , Mat.tabIndex -1
                 ]

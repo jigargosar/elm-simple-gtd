@@ -18,7 +18,7 @@ appLayoutView config frameVM model pageContent =
             AppDrawer.View.sidebarContent config frameVM
 
         layoutMainHeader =
-            View.Header.appMainHeader config frameVM model
+            View.Header.appMainHeader config frameVM
 
         onClickStopPropagationAV =
             X.Html.onClickStopPropagation config.noop

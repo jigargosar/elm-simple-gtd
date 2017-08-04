@@ -78,7 +78,6 @@ type alias AppModelOtherFields =
     , editMode : ExclusiveMode
     , page : Page
     , reminderOverlay : TodoReminderOverlayModel
-    , pouchDBRemoteSyncURI : String
     , firebaseModel : FirebaseModel
     , developmentMode : Bool
     , selectedEntityIdSet : Set DocId
@@ -119,9 +118,11 @@ navigateToPathMsg =
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
 onStartAddingTodoWithFocusInEntityAsReferenceOld model =
-    Pages.EntityList.getMaybeEntityIdAtCursor__ model
-        |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
-        |> OnTodoMsg
+    case model.page of
+        EntityListPage pageModel ->
+            Pages.EntityList.computeMaybeNewEntityIdAtCursor pageModel model
+                |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
+                |> OnTodoMsg
 
 
 revertExclusiveModeMsg =
@@ -184,7 +185,6 @@ type alias Flags =
     , encodedTodoList : List E.Value
     , encodedProjectList : List E.Value
     , encodedContextList : List E.Value
-    , pouchDBRemoteSyncURI : String
     , config : AppConfig
     }
 
@@ -192,7 +192,7 @@ type alias Flags =
 createAppModel : Flags -> Model
 createAppModel flags =
     let
-        { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
+        { now, encodedTodoList, encodedProjectList, encodedContextList } =
             flags
 
         { deviceId, initialOfflineStore, npmPackageVersion, isDevelopmentMode } =
@@ -216,7 +216,6 @@ createAppModel flags =
             , editMode = XMNone
             , page = initialPage
             , reminderOverlay = Todo.Notification.Model.none
-            , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , firebaseModel =
                 Firebase.init deviceId initialOfflineStore
             , developmentMode = isDevelopmentMode

@@ -33,10 +33,6 @@ type alias HasEntityListCursor a =
     { a | entityListCursor : EntityListCursor }
 
 
-getMaybeEntityIdAtCursor__ model =
-    model.entityListCursor.maybeEntityIdAtCursor
-
-
 entityListCursorInitialValue : EntityListCursor
 entityListCursorInitialValue =
     { entityIdList = []

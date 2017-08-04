@@ -18,7 +18,6 @@ type ExclusiveModeMsg
 type alias SubModel model =
     { model
         | editMode : ExclusiveMode
-        , pouchDBRemoteSyncURI : String
     }
 
 

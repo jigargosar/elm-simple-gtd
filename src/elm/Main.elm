@@ -11,6 +11,7 @@ import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
+import L.View
 import Material
 import Maybe.Extra
 import Menu
@@ -50,6 +51,7 @@ import X.Set
 
 type Page
     = EntityList EntityList.Model
+    | LandingPage
 
 
 initialPage =
@@ -112,6 +114,9 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld model =
             EntityList.getMaybeLastKnownFocusedEntityId pageModel
                 |> Update.Todo.onStartAddingTodoWithFocusInEntityAsReference
                 |> OnTodoMsg
+
+        LandingPage ->
+            NOOP
 
 
 revertExclusiveModeMsg =
@@ -270,12 +275,27 @@ update config msg =
             in
             returnWith .page
                 (\page ->
-                    case page of
-                        EntityList pageModel ->
-                            EntityList.maybeInitFromPath path pageModel
-                                |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
-                                    (EntityList >> setPage)
+                    case path of
+                        [] ->
+                            setPage LandingPage
+
+                        _ ->
+                            case page of
+                                EntityList pageModel ->
+                                    EntityList.maybeInitFromPath path pageModel
+                                        |> Maybe.Extra.unpack
+                                            (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                            (EntityList >> setPage)
+
+                                LandingPage ->
+                                    let
+                                        pageModel =
+                                            EntityList.initialValue
+                                    in
+                                    EntityList.maybeInitFromPath path pageModel
+                                        |> Maybe.Extra.unpack
+                                            (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                            (EntityList >> setPage)
                 )
 
         StoresMsg storeMsg ->
@@ -449,6 +469,9 @@ view model =
             View.Frame.frame frameVM
     in
     case getPage__ model of
+        LandingPage ->
+            L.View.view
+
         EntityList pageModel ->
             let
                 pageVM =
@@ -470,6 +493,9 @@ delta2hash =
             case getPage__ model of
                 EntityList pageModel ->
                     EntityList.getFullPath pageModel
+
+                LandingPage ->
+                    [ "" ]
 
         delta2builder previousModel currentModel =
             RouteUrl.Builder.builder

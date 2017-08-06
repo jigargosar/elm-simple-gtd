@@ -75,7 +75,7 @@ const excludeInDevServerModePlugins = [
 ]
 const plugins = _.concat(commonPlugins, isWebPackDevServer ? [] : excludeInDevServerModePlugins)
 
-const disableLanding = true
+const disableLanding = false
 const extraEntry = isWebPackDevServer && disableLanding ? {} : {"landing": ["./landing.js"],}
 
 export default {

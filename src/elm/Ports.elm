@@ -14,3 +14,6 @@ port onFirebaseDatabaseChange : (( String, E.Value ) -> msg) -> Sub msg
 
 
 port persistToOfflineStore : ( String, E.Value ) -> Cmd msg
+
+
+port debugPort : (String -> msg) -> Sub msg

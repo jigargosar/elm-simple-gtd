@@ -110,6 +110,8 @@ window.appBoot = async function appBoot(elmMain = Main) {
   const app = elmMain
       .embed(document.getElementById("elm-container"), flags)
   
+  global.__debug__port = cmdString =>
+        app.ports["debugPort"].send(cmdString)
   
   const fire = Fire.setup(app, _.values(db.list), deviceId)
   

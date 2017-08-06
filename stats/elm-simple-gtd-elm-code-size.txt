@@ -1,5 +1,5 @@
-    8578 total
-     543 src/elm/Main.elm
+    8595 total
+     556 src/elm/Main.elm
      364 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -48,7 +48,7 @@
       64 src/elm/Todo/Notification/View.elm
       62 src/elm/Todo/GroupEditView.elm
       60 src/elm/View/Header.elm
-      54 src/elm/AppUrl.elm
+      55 src/elm/AppUrl.elm
       51 src/elm/ViewModel/EntityList.elm
       50 src/elm/Update/AppHeader.elm
       49 src/elm/Todo/Notification/Model.elm
@@ -71,10 +71,10 @@
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm
       19 src/elm/RegexHelper.elm
+      19 src/elm/Ports.elm
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      16 src/elm/Ports.elm
       16 src/elm/Models/Todo.elm
       15 src/elm/View/Frame.elm
       15 src/elm/Ports/Todo.elm

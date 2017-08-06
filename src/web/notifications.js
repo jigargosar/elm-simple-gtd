@@ -15,7 +15,7 @@ async function setupNotifications(fire, app) {
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
-        // console.log("JS: serviceWorker.onMessage", event.data, event)
+        console.log("JS: serviceWorker.onMessage", event.data, event)
         if (data["firebase-messaging-msg-type"]) {
             // console.info("FBJS: ignoring message event received", data, event)
         } else {

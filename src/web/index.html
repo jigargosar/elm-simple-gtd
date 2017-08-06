@@ -2,7 +2,8 @@
 <head>
     <!--@formatter:off-->
 
-<!-- Google Tag Manager -->
+<!--suppress ES6ConvertVarToLetConst, EqualityComparisonWithCoercionJS -->
+<!-- Google Tag Manager, EqualityComparisonWithCoercionJS -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -18,6 +19,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <title>SimpleGTD - alpha </title>
 
+    <!--<link rel="stylesheet" href="hack.css"/>-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.teal-red.min.css"/>
+
 </head>
 <body>
 <!--@formatter:off-->
@@ -32,10 +36,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="elm-container"></div>
 
 <script src="/common.bundle.js"></script>
-<script src="/landing.bundle.js"></script>
+<script src="/app.bundle.js"></script>
 <script>
-    window.landingBoot().catch(console.error)
+    window.appBoot().catch(console.error)
 </script>
-<script async src="/app.bundle.js"></script>
+<!--<script async src="/landing.bundle.js"></script>-->
 </body>
 </html>

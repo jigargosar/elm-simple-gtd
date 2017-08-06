@@ -30,12 +30,13 @@ contact =
 
 
 getStarted =
-    "/app.html#!/contexts"
+    --    "/app.html#!/contexts"
+    "#!/contexts"
 
 
 landing =
     --    "/?landing=true"
-    "/"
+    "#!/"
 
 
 googleSignInImage =

@@ -20,6 +20,7 @@ import Models.Selection
 import Models.Todo
 import Navigation
 import Pages.EntityList as EntityList
+import Ports
 import Ports.Todo
 import Random.Pcg
 import RouteUrl
@@ -86,6 +87,7 @@ type alias Model =
 
 type Msg
     = NOOP
+    | OnDebugPort String
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
@@ -147,7 +149,8 @@ subscriptions model =
                 1
     in
     Sub.batch
-        [ everyXSeconds 1 SetLastKnownTimeStamp
+        [ Ports.debugPort OnDebugPort
+        , everyXSeconds 1 SetLastKnownTimeStamp
         , Update.Subscription.subscriptions
             |> Sub.map OnSubscriptionMsg
         , Sub.batch
@@ -252,6 +255,16 @@ update config msg =
     case msg of
         NOOP ->
             identity
+
+        OnDebugPort cmdString ->
+            case cmdString of
+                "startOverdueCron" ->
+                    Update.Todo.OnProcessPendingNotificationCronTick
+                        |> OnTodoMsg
+                        |> returnMsgAsCmd
+
+                _ ->
+                    identity
 
         ToggleEntityIdSelection entityId ->
             map

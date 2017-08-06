@@ -1,4 +1,4 @@
-## Upcoming
+## v0.20.0 - 2017-08-06
 * minor: merge landing page, to speed up compile time. 
 
 ## v0.19.3 - 2017-08-04

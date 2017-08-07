@@ -1,6 +1,6 @@
 module Pages.EntityList exposing (..)
 
-import Data.EntityListCursor as EntityListCursor
+import Data.EntityListCursor as Cursor
 import Data.EntityListFilter exposing (..)
 import Data.EntityTree
 import Data.TodoDoc as TodoDoc
@@ -21,13 +21,12 @@ import X.Function.Infix exposing (..)
 import X.List
 import X.Predicate
 import X.Record exposing (..)
-import X.Return exposing (..)
 
 
 type alias ModelRecord =
     { path : List String
     , namedFilterModel : NamedFilterModel
-    , cursor : EntityListCursor.Model
+    , cursor : Cursor.Model
     }
 
 
@@ -38,7 +37,7 @@ type Model
 initialValue =
     pageModelConstructor defaultNamedFilterModel.pathPrefix
         defaultNamedFilterModel
-        EntityListCursor.initialValue
+        Cursor.initialValue
 
 
 pageModelConstructor path namedFilterModel cursor =
@@ -85,6 +84,10 @@ type Msg
     | SetCursorEntityId EntityId
 
 
+pure model =
+    model ! []
+
+
 update config appModel msg pageModel =
     let
         dispatchMsg msg =
@@ -101,7 +104,7 @@ update config appModel msg pageModel =
                     createEntityIdList appModel pageModel
 
                 cursor =
-                    EntityListCursor.create entityIdList
+                    Cursor.create entityIdList
                         (Just entityId)
                         (getFilter pageModel)
             in
@@ -112,7 +115,7 @@ update config appModel msg pageModel =
                 cursor =
                     get cursorFL pageModel
             in
-            EntityListCursor.findEntityIdByOffsetIndex offset cursor
+            Cursor.findEntityIdByOffsetIndex offset cursor
                 ?|> SetCursorEntityId
                 |> dispatchMaybeMsg
 

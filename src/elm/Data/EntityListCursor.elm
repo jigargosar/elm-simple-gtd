@@ -33,12 +33,6 @@ create entityIdList maybeCursorEntityId filter =
     }
 
 
-getMaybeEntityIdAtIndexOrHead : Int -> Model -> Maybe EntityId
-getMaybeEntityIdAtIndexOrHead index { entityIdList } =
-    X.List.clampAndGetAtIndex index entityIdList
-        |> Maybe.orElse (List.head entityIdList)
-
-
 findEntityIdByOffsetIndex : Int -> Model -> Maybe EntityId
 findEntityIdByOffsetIndex offsetIndex model =
     let
@@ -50,5 +44,10 @@ findEntityIdByOffsetIndex offsetIndex model =
             getMaybeIndex model
                 ?= 0
                 |> add offsetIndex
+
+        getMaybeEntityIdAtIndexOrHead : Int -> Model -> Maybe EntityId
+        getMaybeEntityIdAtIndexOrHead index { entityIdList } =
+            X.List.clampAndGetAtIndex index entityIdList
+                |> Maybe.orElse (List.head entityIdList)
     in
     getMaybeEntityIdAtIndexOrHead index model

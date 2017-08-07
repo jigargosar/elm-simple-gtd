@@ -86,7 +86,7 @@ update config appModel msg =
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            map (updateEntityListCursorWithMaybeEntityId config appModel (entityId |> Just))
+            map (updateEntityListCursorWithMaybeEntityId appModel (entityId |> Just))
 
         MoveFocusBy offset ->
             moveFocusBy config offset appModel
@@ -112,7 +112,7 @@ entityListCursorEntityIdListFL =
     composeInnerOuterFieldLens entityIdListFL cursorFL
 
 
-updateEntityListCursorWithMaybeEntityId config appModel maybeEntityIdAtCursor ((Model pageModelRecord) as pageModel) =
+updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor ((Model pageModelRecord) as pageModel) =
     let
         entityIdList =
             createEntityList pageModel appModel

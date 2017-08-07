@@ -2,10 +2,10 @@ module Data.EntityListCursor exposing (..)
 
 import Data.EntityListFilter exposing (Filter(GroupByFilter))
 import Document exposing (DocId)
-import Entity exposing (EntityId)
+import Entity exposing (EntityId(TodoEntityId))
 import GroupDoc exposing (GroupDocType(ContextGroupDocType))
-import List.Extra as List
-import Maybe.Extra as Maybe
+import List.Extra
+import Maybe.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -33,6 +33,11 @@ create entityIdList maybeCursorEntityId filter =
     }
 
 
+getMaybeCursorEntityIdIndex : Model -> Maybe Int
+getMaybeCursorEntityIdIndex { maybeCursorEntityId, entityIdList } =
+    maybeCursorEntityId ?+> X.List.firstIndexOf # entityIdList
+
+
 findEntityIdByOffsetIndex : Int -> Model -> Maybe EntityId
 findEntityIdByOffsetIndex offsetIndex model =
     let
@@ -48,6 +53,49 @@ findEntityIdByOffsetIndex offsetIndex model =
         getMaybeEntityIdAtIndexOrHead : Int -> Model -> Maybe EntityId
         getMaybeEntityIdAtIndexOrHead index { entityIdList } =
             X.List.clampAndGetAtIndex index entityIdList
-                |> Maybe.orElse (List.head entityIdList)
+                |> Maybe.Extra.orElse (List.head entityIdList)
     in
     getMaybeEntityIdAtIndexOrHead index model
+
+
+computeNewEntityIdAtCursor newFilter newEntityIdList cursor =
+    let
+        maybeCursorEntityId =
+            cursor.maybeCursorEntityId
+
+        maybeOldIndex =
+            cursor
+                |> getMaybeCursorEntityIdIndex
+
+        maybeNewIndex =
+            maybeCursorEntityId
+                ?+> (X.List.firstIndexOf # newEntityIdList)
+
+        computeMaybeFEI index =
+            X.List.clampAndGetAtIndex index newEntityIdList
+
+        newMaybeCursorEntityId =
+            case ( maybeOldIndex, maybeNewIndex, maybeCursorEntityId ) of
+                ( Just oldIndex, Just newIndex, Just (TodoEntityId _) ) ->
+                    case compare oldIndex newIndex of
+                        LT ->
+                            computeMaybeFEI oldIndex
+
+                        GT ->
+                            computeMaybeFEI (oldIndex + 1)
+
+                        EQ ->
+                            maybeCursorEntityId
+
+                ( Just oldIndex, Nothing, _ ) ->
+                    computeMaybeFEI oldIndex
+
+                _ ->
+                    maybeCursorEntityId
+    in
+    (if newFilter == cursor.filter then
+        newMaybeCursorEntityId
+     else
+        cursor.maybeCursorEntityId
+    )
+        |> Maybe.Extra.orElse (List.head newEntityIdList)

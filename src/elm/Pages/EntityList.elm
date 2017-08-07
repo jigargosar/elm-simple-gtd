@@ -270,48 +270,13 @@ createEntityIdList appModel pageModel =
         .|> Entity.toEntityId
 
 
-computeMaybeNewEntityIdAtCursor pageModel appModel =
+computeMaybeNewEntityIdAtCursor appModel pageModel =
     let
         newEntityIdList =
             createEntityIdList appModel pageModel
 
-        computeNewEntityIdAtCursor newEntityIdList maybeCursorEntityId =
-            let
-                computeMaybeFEI index =
-                    X.List.clampAndGetAtIndex index newEntityIdList
-
-                getMaybeNewCursorEntityId entityIdAtCursor =
-                    ( get entityListCursorEntityIdListFL pageModel, newEntityIdList )
-                        |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
-                        |> (\( maybeOldIndex, maybeNewIndex ) ->
-                                case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
-                                    ( Just oldIndex, Just newIndex, TodoEntityId _ ) ->
-                                        case compare oldIndex newIndex of
-                                            LT ->
-                                                computeMaybeFEI oldIndex
-
-                                            GT ->
-                                                computeMaybeFEI (oldIndex + 1)
-
-                                            EQ ->
-                                                Just entityIdAtCursor
-
-                                    ( Just oldIndex, Nothing, _ ) ->
-                                        computeMaybeFEI oldIndex
-
-                                    _ ->
-                                        Just entityIdAtCursor
-                           )
-            in
-            maybeCursorEntityId ?|> getMaybeNewCursorEntityId ?= Nothing
-
-        maybeCompute : Maybe EntityId
-        maybeCompute =
-            if getFilter pageModel == getCursorFilter pageModel then
-                get maybeEntityIdAtCursorFL pageModel
-                    |> computeNewEntityIdAtCursor newEntityIdList
-            else
-                get maybeEntityIdAtCursorFL pageModel
+        newFilter =
+            getFilter pageModel
     in
-    maybeCompute
-        |> Maybe.orElseLazy (\_ -> List.head newEntityIdList)
+    get cursorFL pageModel
+        |> Cursor.computeNewEntityIdAtCursor newFilter newEntityIdList

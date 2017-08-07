@@ -69,12 +69,12 @@ getFilter (Model pageModel) =
     namedFilterTypeToFilter pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
-getNamedFilterModel (Model pageModelRecord) =
-    pageModelRecord.namedFilterModel
+getNamedFilterModel =
+    overModel .namedFilterModel
 
 
-getMaybeLastKnownFocusedEntityId (Model pageModelRecord) =
-    get maybeEntityIdAtCursorFL pageModelRecord
+getMaybeLastKnownFocusedEntityId =
+    get maybeEntityIdAtCursorFL
 
 
 type Msg
@@ -92,8 +92,16 @@ update config appModel msg =
             moveFocusBy config offset appModel
 
 
+overModel fn (Model model) =
+    fn model
+
+
+overModelF fn (Model model) =
+    fn model |> Model
+
+
 cursorFL =
-    fieldLens .cursor (\s b -> { b | cursor = s })
+    fieldLens (overModel .cursor) (\s b -> overModelF (\b -> { b | cursor = s }) b)
 
 
 maybeEntityIdAtCursorFL =
@@ -112,7 +120,7 @@ entityListCursorEntityIdListFL =
     composeInnerOuterFieldLens entityIdListFL cursorFL
 
 
-updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor ((Model pageModelRecord) as pageModel) =
+updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor pageModel =
     let
         entityIdList =
             createEntityIdList appModel pageModel
@@ -123,7 +131,7 @@ updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor ((Model p
             , filter = getFilter pageModel
             }
     in
-    set cursorFL cursor pageModelRecord |> Model
+    set cursorFL cursor pageModel
 
 
 moveFocusBy config offset appModel =
@@ -140,13 +148,13 @@ moveFocusBy config offset appModel =
                 |> Maybe.orElse (List.head entityIdList)
     in
     returnWithMaybe2 identity
-        (\((Model pageModelRecord) as pageModel) ->
+        (\pageModel ->
             let
                 maybeLastKnownFocusedEntityId =
                     getMaybeLastKnownFocusedEntityId pageModel
 
                 entityIdList =
-                    get entityListCursorEntityIdListFL pageModelRecord
+                    get entityListCursorEntityIdListFL pageModel
             in
             findEntityIdByOffsetIn offset
                 entityIdList
@@ -259,7 +267,7 @@ createEntityIdList appModel pageModel =
         .|> Entity.toEntityId
 
 
-computeMaybeNewEntityIdAtCursor ((Model pageModelRecord) as pageModel) appModel =
+computeMaybeNewEntityIdAtCursor pageModel appModel =
     let
         newEntityIdList =
             createEntityIdList appModel pageModel
@@ -268,7 +276,7 @@ computeMaybeNewEntityIdAtCursor ((Model pageModelRecord) as pageModel) appModel 
             X.List.clampAndGetAtIndex index newEntityIdList
 
         computeNewEntityIdAtCursor entityIdAtCursor =
-            ( get entityListCursorEntityIdListFL pageModelRecord, newEntityIdList )
+            ( get entityListCursorEntityIdListFL pageModel, newEntityIdList )
                 |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
                 |> (\( maybeOldIndex, maybeNewIndex ) ->
                         case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
@@ -293,10 +301,10 @@ computeMaybeNewEntityIdAtCursor ((Model pageModelRecord) as pageModel) appModel 
         maybeCompute : Maybe EntityId
         maybeCompute =
             if getFilter pageModel == getCursorFilter pageModel then
-                getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor pageModelRecord
+                getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor pageModel
                     |> Maybe.join
             else
-                get maybeEntityIdAtCursorFL pageModelRecord
+                get maybeEntityIdAtCursorFL pageModel
     in
     maybeCompute
         |> Maybe.orElseLazy (\_ -> List.head newEntityIdList)

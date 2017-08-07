@@ -1,6 +1,5 @@
 module Update.ExclusiveMode exposing (..)
 
-import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(..))
 import GroupDoc exposing (..)
 import Return

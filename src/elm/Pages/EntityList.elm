@@ -7,18 +7,10 @@ import Data.TodoDoc as TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
-import List.Extra
-import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
-import Models.Stores
 import Set
 import Store
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Tuple2
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import X.List
 import X.Predicate
 import X.Record exposing (..)
 

@@ -1,15 +1,11 @@
 module Data.EntityListCursor exposing (..)
 
 import Data.EntityListFilter exposing (Filter(GroupByFilter))
-import Document exposing (DocId)
 import Entity exposing (EntityId(TodoEntityId))
 import GroupDoc exposing (GroupDocType(ContextGroupDocType))
-import List.Extra
 import Maybe.Extra
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
-import X.Function.Infix exposing (..)
 import X.List
 
 

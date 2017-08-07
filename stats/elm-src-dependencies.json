@@ -354,9 +354,10 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "X.Function",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.List"
     ],
-    "importsCount": 10,
+    "importsCount": 11,
     "transitiveImports": [
       "Char",
       "Color",
@@ -388,11 +389,12 @@
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
+      "X.List",
       "X.Predicate",
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 33,
+    "transitiveImportsCount": 34,
     "backwardImports": [
       "Pages.EntityList"
     ],
@@ -5217,11 +5219,13 @@
     ],
     "transitiveImportsCount": 2,
     "backwardImports": [
+      "Data.EntityListCursor",
       "Menu",
       "Pages.EntityList"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
+      "Data.EntityListCursor",
       "ExclusiveMode.Types",
       "Main",
       "Menu",
@@ -5242,7 +5246,7 @@
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 19
+    "transitiveBackwardImportsCount": 20
   },
   "X.Maybe": {
     "fileName": "src/elm/X/Maybe.elm",

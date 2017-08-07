@@ -10,6 +10,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
+import X.List
 
 
 type alias EntityListCursor =
@@ -30,3 +31,8 @@ create entityIdList maybeEntityIdAtCursor filter =
     , maybeEntityIdAtCursor = maybeEntityIdAtCursor
     , filter = filter
     }
+
+
+getMaybeIndex : EntityListCursor -> Maybe Int
+getMaybeIndex model =
+    model.maybeEntityIdAtCursor ?+> X.List.firstIndexOfIn model.entityIdList

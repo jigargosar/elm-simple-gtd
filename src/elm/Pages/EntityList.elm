@@ -1,7 +1,8 @@
 module Pages.EntityList exposing (..)
 
+import Data.EntityListCursor as EntityListCursor exposing (EntityListCursor)
+import Data.EntityListFilter exposing (..)
 import Data.EntityTree
-import Data.NamedFilter exposing (..)
 import Data.TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
@@ -20,34 +21,6 @@ import X.Record exposing (..)
 import X.Return exposing (..)
 
 
-type alias EntityListCursor =
-    { entityIdList : List EntityId
-    , maybeEntityIdAtCursor : Maybe EntityId
-    , filter : Filter
-    }
-
-
-entityListCursorInitialValue : EntityListCursor
-entityListCursorInitialValue =
-    { entityIdList = []
-    , maybeEntityIdAtCursor = Nothing
-    , filter = GroupByFilter ContextGroupDocType
-    }
-
-
-type FlatFilter
-    = Done
-    | Recent
-    | Bin
-
-
-type Filter
-    = ContextIdFilter DocId
-    | ProjectIdFilter DocId
-    | FlatListFilter FlatFilter
-    | GroupByFilter GroupDocType
-
-
 type alias ModelRecord =
     { path : List String
     , namedFilterModel : NamedFilterModel
@@ -62,7 +35,7 @@ type Model
 initialValue =
     pageModelConstructor defaultNamedFilterModel.pathPrefix
         defaultNamedFilterModel
-        entityListCursorInitialValue
+        EntityListCursor.initialValue
 
 
 pageModelConstructor path namedFilterModel cursor =
@@ -93,33 +66,7 @@ getCursorFilter (Model pageModel) =
 
 
 getFilter (Model pageModel) =
-    case pageModel.namedFilterModel.namedFilterType of
-        NF_WithNullContext ->
-            ContextIdFilter ""
-
-        NF_WithNullProject ->
-            ProjectIdFilter ""
-
-        NF_FL_Done ->
-            FlatListFilter Done
-
-        NF_FL_Recent ->
-            FlatListFilter Recent
-
-        NF_FL_Bin ->
-            FlatListFilter Bin
-
-        NF_GB_ActiveContexts ->
-            GroupByFilter ContextGroupDocType
-
-        NF_GB_ActiveProjects ->
-            GroupByFilter ProjectGroupDocType
-
-        NF_WithContextId_GB_Projects ->
-            ContextIdFilter (List.Extra.last pageModel.path ?= "")
-
-        NF_WithProjectId_GB_Contexts ->
-            ProjectIdFilter (List.Extra.last pageModel.path ?= "")
+    namedFilterTypeToFilter pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
 getNamedFilterModel (Model pageModelRecord) =
@@ -155,15 +102,6 @@ maybeEntityIdAtCursorFL =
             fieldLens .maybeEntityIdAtCursor (\s b -> { b | maybeEntityIdAtCursor = s })
     in
     composeInnerOuterFieldLens maybeEntityIdAtCursorFL cursorFL
-
-
-
---entityListCursorPageModelFL =
---    let
---        entityListPageModelFL =
---            fieldLens .entityListPageModel (\s b -> { b | entityListPageModel = s })
---    in
---    composeInnerOuterFieldLens entityListPageModelFL entityListCursorFL
 
 
 entityListCursorEntityIdListFL =

@@ -1,13 +1,58 @@
-module Data.NamedFilter exposing (..)
+module Data.EntityListFilter exposing (..)
 
 --import X.List as List
 
 import Color exposing (Color)
 import Colors exposing (..)
+import Document exposing (DocId)
+import GroupDoc exposing (GroupDocType(..))
 import IconNames
-import List.Extra as List
+import List.Extra
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
+
+
+type FlatFilter
+    = Done
+    | Recent
+    | Bin
+
+
+type Filter
+    = ContextIdFilter DocId
+    | ProjectIdFilter DocId
+    | FlatListFilter FlatFilter
+    | GroupByFilter GroupDocType
+
+
+namedFilterTypeToFilter namedFilterType path =
+    case namedFilterType of
+        NF_WithNullContext ->
+            ContextIdFilter ""
+
+        NF_WithNullProject ->
+            ProjectIdFilter ""
+
+        NF_FL_Done ->
+            FlatListFilter Done
+
+        NF_FL_Recent ->
+            FlatListFilter Recent
+
+        NF_FL_Bin ->
+            FlatListFilter Bin
+
+        NF_GB_ActiveContexts ->
+            GroupByFilter ContextGroupDocType
+
+        NF_GB_ActiveProjects ->
+            GroupByFilter ProjectGroupDocType
+
+        NF_WithContextId_GB_Projects ->
+            ContextIdFilter (List.Extra.last path ?= "")
+
+        NF_WithProjectId_GB_Contexts ->
+            ProjectIdFilter (List.Extra.last path ?= "")
 
 
 type NamedFilterType
@@ -45,7 +90,7 @@ namedFilterTypeList =
     ]
 
 
-type2Model namedFilterType =
+filterType2Model namedFilterType =
     case namedFilterType of
         NF_WithNullContext ->
             NamedFilterModel NF_WithNullContext
@@ -122,11 +167,11 @@ type2Model namedFilterType =
 
 namedFilterModelList =
     namedFilterTypeList
-        .|> type2Model
+        .|> filterType2Model
 
 
 defaultNamedFilterModel =
-    type2Model NF_GB_ActiveContexts
+    filterType2Model NF_GB_ActiveContexts
 
 
 getMaybeNamedFilterModelFromPath : List String -> Maybe NamedFilterModel
@@ -138,4 +183,4 @@ getMaybeNamedFilterModelFromPath path =
                 |> List.drop model.pathArgumentsCount
                 |> equals (List.reverse model.pathPrefix)
     in
-    List.find matchesPath namedFilterModelList
+    List.Extra.find matchesPath namedFilterModelList

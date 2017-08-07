@@ -25,3 +25,10 @@ initialValue =
     , maybeEntityIdAtCursor = Nothing
     , filter = GroupByFilter ContextGroupDocType
     }
+
+
+create entityIdList maybeEntityIdAtCursor filter =
+    { entityIdList = entityIdList
+    , maybeEntityIdAtCursor = maybeEntityIdAtCursor
+    , filter = filter
+    }

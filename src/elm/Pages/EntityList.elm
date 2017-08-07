@@ -127,10 +127,7 @@ updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor pageModel
             createEntityIdList appModel pageModel
 
         cursor =
-            { entityIdList = entityIdList
-            , maybeEntityIdAtCursor = maybeEntityIdAtCursor
-            , filter = getFilter pageModel
-            }
+            EntityListCursor.create entityIdList maybeEntityIdAtCursor (getFilter pageModel)
     in
     set cursorFL cursor pageModel
 

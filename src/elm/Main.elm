@@ -372,14 +372,15 @@ updatePage config msg page =
         ( EntityList model_, EntityListMsg msg_ ) ->
             andThen
                 (\model ->
-                    let
-                        ( pageModel, cmd ) =
-                            EntityList.update config
-                                model
-                                msg_
-                                (pure model_)
-                    in
-                    ( { model | page = EntityList pageModel }, Cmd.map EntityListMsg cmd )
+                    EntityList.update config
+                        model
+                        msg_
+                        (pure model_)
+                        |> (\( pageModel, cmd ) ->
+                                ( { model | page = EntityList pageModel }
+                                , Cmd.map EntityListMsg cmd
+                                )
+                           )
                 )
 
         _ ->

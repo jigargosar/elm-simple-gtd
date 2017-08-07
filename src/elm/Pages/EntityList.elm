@@ -118,10 +118,7 @@ update config appModel msg =
                         ?|> (SetCursorEntityId >> updateMsg # pageModel)
                         ?= ( pageModel, Cmd.none )
             in
-            returnWithMaybe2 (get cursorFL)
-                (EntityListCursor.findEntityIdByOffsetIndex offset
-                    >>? (SetCursorEntityId >> update config appModel)
-                )
+            andThen onMoveFocusBy
 
 
 overModel fn (Model model) =

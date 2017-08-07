@@ -86,6 +86,10 @@ type Msg
 
 
 update config appModel msg =
+    let
+        updateMsg msg pageModel =
+            pageModel |> pure |> update config appModel msg
+    in
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
@@ -105,12 +109,14 @@ update config appModel msg =
 
         MoveFocusBy offset ->
             let
-                onMoveFocusBy =
+                onMoveFocusBy pageModel =
                     let
-                        _ =
-                            1
+                        cursor =
+                            get cursorFL pageModel
                     in
-                    1
+                    EntityListCursor.findEntityIdByOffsetIndex offset cursor
+                        ?|> (SetCursorEntityId >> updateMsg # pageModel)
+                        ?= ( pageModel, Cmd.none )
             in
             returnWithMaybe2 (get cursorFL)
                 (EntityListCursor.findEntityIdByOffsetIndex offset

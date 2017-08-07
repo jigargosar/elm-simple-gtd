@@ -89,7 +89,20 @@ update config appModel msg =
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            map (updateEntityListCursorWithMaybeEntityId appModel (entityId |> Just))
+            let
+                onSetCursorEntityId pageModel =
+                    let
+                        entityIdList =
+                            createEntityIdList appModel pageModel
+
+                        cursor =
+                            EntityListCursor.create entityIdList
+                                (Just entityId)
+                                (getFilter pageModel)
+                    in
+                    set cursorFL cursor pageModel
+            in
+            map onSetCursorEntityId
 
         MoveFocusBy offset ->
             returnWithMaybe2 (get cursorFL)
@@ -113,7 +126,7 @@ cursorFL =
 maybeEntityIdAtCursorFL =
     let
         maybeEntityIdAtCursorFL =
-            fieldLens .maybeEntityIdAtCursor (\s b -> { b | maybeEntityIdAtCursor = s })
+            fieldLens .maybeCursorEntityId (\s b -> { b | maybeCursorEntityId = s })
     in
     composeInnerOuterFieldLens maybeEntityIdAtCursorFL cursorFL
 
@@ -124,17 +137,6 @@ entityListCursorEntityIdListFL =
             fieldLens .entityIdList (\s b -> { b | entityIdList = s })
     in
     composeInnerOuterFieldLens entityIdListFL cursorFL
-
-
-updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor pageModel =
-    let
-        entityIdList =
-            createEntityIdList appModel pageModel
-
-        cursor =
-            EntityListCursor.create entityIdList maybeEntityIdAtCursor (getFilter pageModel)
-    in
-    set cursorFL cursor pageModel
 
 
 filterTodosAndSortBy pred sortBy model =

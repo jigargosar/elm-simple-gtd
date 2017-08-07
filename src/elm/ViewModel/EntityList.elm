@@ -17,7 +17,7 @@ pageVM config model pageModel =
         entityTree =
             Pages.EntityList.createEntityTree pageModel model
 
-        maybeEntityIdAtCursor =
+        maybeCursorEntityId =
             let
                 entityList =
                     Data.EntityTree.flatten entityTree
@@ -28,7 +28,7 @@ pageVM config model pageModel =
                 ?|> Entity.toEntityId
 
         isCursorAtEntityId entityId =
-            maybeEntityIdAtCursor ?|> equals entityId ?= False
+            maybeCursorEntityId ?|> equals entityId ?= False
 
         getTabIndexForEntityId entityId =
             if isCursorAtEntityId entityId then

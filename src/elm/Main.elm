@@ -421,7 +421,7 @@ type alias ViewConfig msg =
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
     , maybeEntityIdAtCursorOld : Maybe EntityId
-    , maybeEntityIdAtCursor : Maybe EntityId
+    , maybeCursorEntityId : Maybe EntityId
     , navigateToPathMsg : List String -> msg
     }
 
@@ -463,7 +463,7 @@ createViewConfig model =
     , onStartEditingGroupDoc = startEditingGroupDocMsg >> OnGroupDocMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , maybeEntityIdAtCursorOld = Nothing
-    , maybeEntityIdAtCursor = Nothing
+    , maybeCursorEntityId = Nothing
     , navigateToPathMsg = navigateToPathMsg
     }
 

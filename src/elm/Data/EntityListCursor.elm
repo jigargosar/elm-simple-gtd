@@ -15,7 +15,7 @@ import X.List
 
 type alias Model =
     { entityIdList : List EntityId
-    , maybeEntityIdAtCursor : Maybe EntityId
+    , maybeCursorEntityId : Maybe EntityId
     , filter : Filter
     }
 
@@ -26,9 +26,9 @@ initialValue =
 
 
 create : List EntityId -> Maybe EntityId -> Filter -> Model
-create entityIdList maybeEntityIdAtCursor filter =
+create entityIdList maybeCursorEntityId filter =
     { entityIdList = entityIdList
-    , maybeEntityIdAtCursor = maybeEntityIdAtCursor
+    , maybeCursorEntityId = maybeCursorEntityId
     , filter = filter
     }
 
@@ -44,7 +44,7 @@ findEntityIdByOffsetIndex offsetIndex model =
     let
         getMaybeIndex : Model -> Maybe Int
         getMaybeIndex model =
-            model.maybeEntityIdAtCursor ?+> X.List.firstIndexOfIn model.entityIdList
+            model.maybeCursorEntityId ?+> X.List.firstIndexOfIn model.entityIdList
 
         index =
             getMaybeIndex model

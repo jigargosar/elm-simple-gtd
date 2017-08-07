@@ -3,7 +3,7 @@ module Pages.EntityList exposing (..)
 import Data.EntityListCursor as EntityListCursor exposing (EntityListCursor)
 import Data.EntityListFilter exposing (..)
 import Data.EntityTree
-import Data.TodoDoc
+import Data.TodoDoc as TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
@@ -11,6 +11,7 @@ import List.Extra
 import Maybe.Extra as Maybe
 import Models.GroupDocStore exposing (..)
 import Models.Stores
+import Set
 import Store
 import Toolkit.Operators exposing (..)
 import Tuple2
@@ -169,33 +170,51 @@ filterTodosAndSortBy pred sortBy model =
 
 
 filterTodosAndSortByLatestCreated pred =
-    filterTodosAndSortBy pred (Data.TodoDoc.getCreatedAt >> negate)
+    filterTodosAndSortBy pred (TodoDoc.getCreatedAt >> negate)
 
 
 filterTodosAndSortByLatestModified pred =
-    filterTodosAndSortBy pred (Data.TodoDoc.getModifiedAt >> negate)
+    filterTodosAndSortBy pred (TodoDoc.getModifiedAt >> negate)
 
 
-getActiveTodoListForContext context model =
+getActiveTodoListForContext context appModel =
+    let
+        activeProjectIdSet =
+            Models.GroupDocStore.getActiveProjects appModel
+                .|> Document.getId
+                |> Set.fromList
+
+        isTodoProjectActive =
+            TodoDoc.getProjectId >> Set.member # activeProjectIdSet
+    in
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ Data.TodoDoc.isActive
-            , Data.TodoDoc.contextFilter context
-            , Models.Stores.isTodoProjectActive model
+            [ TodoDoc.isActive
+            , TodoDoc.contextFilter context
+            , isTodoProjectActive
             ]
         )
-        model
+        appModel
 
 
-getActiveTodoListForProject project model =
+getActiveTodoListForProject project appModel =
+    let
+        activeContextIdSet =
+            Models.GroupDocStore.getActiveContexts appModel
+                .|> Document.getId
+                |> Set.fromList
+
+        isTodoContextActive =
+            TodoDoc.getContextId >> Set.member # activeContextIdSet
+    in
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ Data.TodoDoc.isActive
-            , Data.TodoDoc.hasProject project
-            , Models.Stores.isTodoContextActive model
+            [ TodoDoc.isActive
+            , TodoDoc.hasProject project
+            , isTodoContextActive
             ]
         )
-        model
+        appModel
 
 
 createEntityTree pageModel appModel =
@@ -252,7 +271,7 @@ createEntityTree pageModel appModel =
 flatFilterNameToPredicate filterType =
     case filterType of
         Done ->
-            X.Predicate.all [ Document.isNotDeleted, Data.TodoDoc.isDone ]
+            X.Predicate.all [ Document.isNotDeleted, TodoDoc.isDone ]
 
         Recent ->
             X.Predicate.always

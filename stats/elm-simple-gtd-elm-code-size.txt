@@ -1,4 +1,4 @@
-    8660 total
+    8656 total
      557 src/elm/Main.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
@@ -29,8 +29,8 @@
      109 src/elm/Document.elm
      105 src/elm/Views/EntityList.elm
      103 src/elm/Todo/View.elm
-     101 src/elm/Data/EntityListCursor.elm
       97 src/elm/Models/GroupDocStore.elm
+      97 src/elm/Data/EntityListCursor.elm
       93 src/elm/X/Time.elm
       88 src/elm/X/Html.elm
       86 src/elm/Entity.elm

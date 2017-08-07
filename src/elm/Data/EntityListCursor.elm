@@ -60,38 +60,34 @@ findEntityIdByOffsetIndex offsetIndex model =
 
 computeNewEntityIdAtCursor newFilter newEntityIdList cursor =
     let
-        maybeCursorEntityId =
-            cursor.maybeCursorEntityId
-
         maybeOldIndex =
-            cursor
-                |> getMaybeCursorEntityIdIndex
+            getMaybeCursorEntityIdIndex cursor
 
         maybeNewIndex =
-            maybeCursorEntityId
+            cursor.maybeCursorEntityId
                 ?+> (X.List.firstIndexOf # newEntityIdList)
 
-        computeMaybeFEI index =
+        getMaybeEntityIdAtIndex index =
             X.List.clampAndGetAtIndex index newEntityIdList
 
         newMaybeCursorEntityId =
-            case ( maybeOldIndex, maybeNewIndex, maybeCursorEntityId ) of
+            case ( maybeOldIndex, maybeNewIndex, cursor.maybeCursorEntityId ) of
                 ( Just oldIndex, Just newIndex, Just (TodoEntityId _) ) ->
                     case compare oldIndex newIndex of
                         LT ->
-                            computeMaybeFEI oldIndex
+                            getMaybeEntityIdAtIndex oldIndex
 
                         GT ->
-                            computeMaybeFEI (oldIndex + 1)
+                            getMaybeEntityIdAtIndex (oldIndex + 1)
 
                         EQ ->
-                            maybeCursorEntityId
+                            cursor.maybeCursorEntityId
 
                 ( Just oldIndex, Nothing, _ ) ->
-                    computeMaybeFEI oldIndex
+                    getMaybeEntityIdAtIndex oldIndex
 
                 _ ->
-                    maybeCursorEntityId
+                    cursor.maybeCursorEntityId
     in
     (if newFilter == cursor.filter then
         newMaybeCursorEntityId

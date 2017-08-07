@@ -89,6 +89,9 @@ update config appModel msg pageModel =
     let
         dispatchMsg msg =
             update config appModel msg pageModel
+
+        dispatchMaybeMsg msg =
+            msg ?|> dispatchMsg ?= pure pageModel
     in
     case msg of
         SetCursorEntityId entityId ->
@@ -110,8 +113,8 @@ update config appModel msg pageModel =
                     get cursorFL pageModel
             in
             EntityListCursor.findEntityIdByOffsetIndex offset cursor
-                ?|> (SetCursorEntityId >> dispatchMsg)
-                ?= pure pageModel
+                ?|> SetCursorEntityId
+                |> dispatchMaybeMsg
 
 
 overModel fn (Model model) =

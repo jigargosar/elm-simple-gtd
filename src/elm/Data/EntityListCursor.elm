@@ -13,19 +13,19 @@ import X.Function.Infix exposing (..)
 import X.List
 
 
-type alias EntityListCursor =
+type alias Model =
     { entityIdList : List EntityId
     , maybeEntityIdAtCursor : Maybe EntityId
     , filter : Filter
     }
 
 
-initialValue : EntityListCursor
+initialValue : Model
 initialValue =
     create [] Nothing (GroupByFilter ContextGroupDocType)
 
 
-create : List EntityId -> Maybe EntityId -> Filter -> EntityListCursor
+create : List EntityId -> Maybe EntityId -> Filter -> Model
 create entityIdList maybeEntityIdAtCursor filter =
     { entityIdList = entityIdList
     , maybeEntityIdAtCursor = maybeEntityIdAtCursor
@@ -33,6 +33,22 @@ create entityIdList maybeEntityIdAtCursor filter =
     }
 
 
-getMaybeIndex : EntityListCursor -> Maybe Int
-getMaybeIndex model =
-    model.maybeEntityIdAtCursor ?+> X.List.firstIndexOfIn model.entityIdList
+getMaybeEntityIdAtIndexOrHead : Int -> Model -> Maybe EntityId
+getMaybeEntityIdAtIndexOrHead index { entityIdList } =
+    X.List.clampAndGetAtIndex index entityIdList
+        |> Maybe.orElse (List.head entityIdList)
+
+
+findEntityIdByOffsetIndex : Int -> Model -> Maybe EntityId
+findEntityIdByOffsetIndex offsetIndex model =
+    let
+        getMaybeIndex : Model -> Maybe Int
+        getMaybeIndex model =
+            model.maybeEntityIdAtCursor ?+> X.List.firstIndexOfIn model.entityIdList
+
+        index =
+            getMaybeIndex model
+                ?= 0
+                |> add offsetIndex
+    in
+    getMaybeEntityIdAtIndexOrHead index model

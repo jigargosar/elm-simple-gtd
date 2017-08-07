@@ -2346,15 +2346,17 @@
       "Models.Stores",
       "Set",
       "Store",
+      "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
       "X.Function",
+      "X.Function.Infix",
       "X.List",
       "X.Predicate",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 20,
+    "importsCount": 22,
     "transitiveImports": [
       "Char",
       "Color",
@@ -4982,6 +4984,7 @@
       "Mat",
       "Menu",
       "Models.Stores",
+      "Pages.EntityList",
       "Sequencer",
       "Stores",
       "Todo.ItemView",
@@ -4995,7 +4998,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 27,
+    "backwardImportsCount": 28,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

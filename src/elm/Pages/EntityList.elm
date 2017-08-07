@@ -1,6 +1,6 @@
 module Pages.EntityList exposing (..)
 
-import Data.EntityListCursor as EntityListCursor exposing (EntityListCursor)
+import Data.EntityListCursor as EntityListCursor
 import Data.EntityListFilter exposing (..)
 import Data.EntityTree
 import Data.TodoDoc as TodoDoc
@@ -13,9 +13,11 @@ import Models.GroupDocStore exposing (..)
 import Models.Stores
 import Set
 import Store
+import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Tuple2
 import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import X.List
 import X.Predicate
 import X.Record exposing (..)
@@ -25,7 +27,7 @@ import X.Return exposing (..)
 type alias ModelRecord =
     { path : List String
     , namedFilterModel : NamedFilterModel
-    , cursor : EntityListCursor
+    , cursor : EntityListCursor.Model
     }
 
 
@@ -90,7 +92,10 @@ update config appModel msg =
             map (updateEntityListCursorWithMaybeEntityId appModel (entityId |> Just))
 
         MoveFocusBy offset ->
-            moveFocusBy config offset appModel
+            returnWithMaybe2 (get cursorFL)
+                (EntityListCursor.findEntityIdByOffsetIndex offset
+                    >>? (SetCursorEntityId >> update config appModel)
+                )
 
 
 overModel fn (Model model) =
@@ -130,35 +135,6 @@ updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor pageModel
             EntityListCursor.create entityIdList maybeEntityIdAtCursor (getFilter pageModel)
     in
     set cursorFL cursor pageModel
-
-
-moveFocusBy config offset appModel =
-    let
-        findEntityIdByOffsetIn offsetIndex entityIdList maybeOffsetFromEntityId =
-            let
-                index =
-                    maybeOffsetFromEntityId
-                        ?+> (equals >> X.List.findIndexIn entityIdList)
-                        ?= 0
-                        |> add offsetIndex
-            in
-            X.List.clampAndGetAtIndex index entityIdList
-                |> Maybe.orElse (List.head entityIdList)
-    in
-    returnWithMaybe2 identity
-        (\pageModel ->
-            let
-                maybeLastKnownFocusedEntityId =
-                    getMaybeLastKnownFocusedEntityId pageModel
-
-                entityIdList =
-                    get entityListCursorEntityIdListFL pageModel
-            in
-            findEntityIdByOffsetIn offset
-                entityIdList
-                maybeLastKnownFocusedEntityId
-                ?|> (SetCursorEntityId >> update config appModel)
-        )
 
 
 filterTodosAndSortBy pred sortBy model =

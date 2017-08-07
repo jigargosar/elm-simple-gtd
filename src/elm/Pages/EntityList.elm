@@ -275,37 +275,41 @@ computeMaybeNewEntityIdAtCursor pageModel appModel =
         newEntityIdList =
             createEntityIdList appModel pageModel
 
-        computeMaybeFEI index =
-            X.List.clampAndGetAtIndex index newEntityIdList
+        computeNewEntityIdAtCursor newEntityIdList maybeCursorEntityId =
+            let
+                computeMaybeFEI index =
+                    X.List.clampAndGetAtIndex index newEntityIdList
 
-        computeNewEntityIdAtCursor entityIdAtCursor =
-            ( get entityListCursorEntityIdListFL pageModel, newEntityIdList )
-                |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
-                |> (\( maybeOldIndex, maybeNewIndex ) ->
-                        case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
-                            ( Just oldIndex, Just newIndex, TodoEntityId _ ) ->
-                                case compare oldIndex newIndex of
-                                    LT ->
+                getMaybeNewCursorEntityId entityIdAtCursor =
+                    ( get entityListCursorEntityIdListFL pageModel, newEntityIdList )
+                        |> Tuple2.mapBoth (X.List.firstIndexOf entityIdAtCursor)
+                        |> (\( maybeOldIndex, maybeNewIndex ) ->
+                                case ( maybeOldIndex, maybeNewIndex, entityIdAtCursor ) of
+                                    ( Just oldIndex, Just newIndex, TodoEntityId _ ) ->
+                                        case compare oldIndex newIndex of
+                                            LT ->
+                                                computeMaybeFEI oldIndex
+
+                                            GT ->
+                                                computeMaybeFEI (oldIndex + 1)
+
+                                            EQ ->
+                                                Just entityIdAtCursor
+
+                                    ( Just oldIndex, Nothing, _ ) ->
                                         computeMaybeFEI oldIndex
 
-                                    GT ->
-                                        computeMaybeFEI (oldIndex + 1)
-
-                                    EQ ->
+                                    _ ->
                                         Just entityIdAtCursor
-
-                            ( Just oldIndex, Nothing, _ ) ->
-                                computeMaybeFEI oldIndex
-
-                            _ ->
-                                Just entityIdAtCursor
-                   )
+                           )
+            in
+            maybeCursorEntityId ?|> getMaybeNewCursorEntityId ?= Nothing
 
         maybeCompute : Maybe EntityId
         maybeCompute =
             if getFilter pageModel == getCursorFilter pageModel then
-                getAndMaybeApply maybeEntityIdAtCursorFL computeNewEntityIdAtCursor pageModel
-                    |> Maybe.join
+                get maybeEntityIdAtCursorFL pageModel
+                    |> computeNewEntityIdAtCursor newEntityIdList
             else
                 get maybeEntityIdAtCursorFL pageModel
     in

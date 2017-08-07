@@ -85,40 +85,33 @@ type Msg
     | SetCursorEntityId EntityId
 
 
-update config appModel msg =
+update config appModel msg pageModel =
     let
-        updateMsg msg pageModel =
-            pageModel |> pure |> update config appModel msg
+        dispatchMsg msg =
+            update config appModel msg pageModel
     in
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            (\pageModel ->
-                let
-                    entityIdList =
-                        createEntityIdList appModel pageModel
+            let
+                entityIdList =
+                    createEntityIdList appModel pageModel
 
-                    cursor =
-                        EntityListCursor.create entityIdList
-                            (Just entityId)
-                            (getFilter pageModel)
-                in
-                set cursorFL cursor pageModel
-            )
-                |> map
+                cursor =
+                    EntityListCursor.create entityIdList
+                        (Just entityId)
+                        (getFilter pageModel)
+            in
+            set cursorFL cursor pageModel |> pure
 
         MoveFocusBy offset ->
             let
-                onMoveFocusBy pageModel =
-                    let
-                        cursor =
-                            get cursorFL pageModel
-                    in
-                    EntityListCursor.findEntityIdByOffsetIndex offset cursor
-                        ?|> (SetCursorEntityId >> updateMsg # pageModel)
-                        ?= ( pageModel, Cmd.none )
+                cursor =
+                    get cursorFL pageModel
             in
-            andThen onMoveFocusBy
+            EntityListCursor.findEntityIdByOffsetIndex offset cursor
+                ?|> (SetCursorEntityId >> dispatchMsg)
+                ?= pure pageModel
 
 
 overModel fn (Model model) =

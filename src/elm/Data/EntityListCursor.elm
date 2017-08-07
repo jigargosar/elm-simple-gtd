@@ -21,12 +21,10 @@ type alias EntityListCursor =
 
 initialValue : EntityListCursor
 initialValue =
-    { entityIdList = []
-    , maybeEntityIdAtCursor = Nothing
-    , filter = GroupByFilter ContextGroupDocType
-    }
+    create [] Nothing (GroupByFilter ContextGroupDocType)
 
 
+create : List EntityId -> Maybe EntityId -> Filter -> EntityListCursor
 create entityIdList maybeEntityIdAtCursor filter =
     { entityIdList = entityIdList
     , maybeEntityIdAtCursor = maybeEntityIdAtCursor

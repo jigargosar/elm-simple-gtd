@@ -89,22 +89,29 @@ update config appModel msg =
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            let
-                onSetCursorEntityId pageModel =
-                    let
-                        entityIdList =
-                            createEntityIdList appModel pageModel
+            (\pageModel ->
+                let
+                    entityIdList =
+                        createEntityIdList appModel pageModel
 
-                        cursor =
-                            EntityListCursor.create entityIdList
-                                (Just entityId)
-                                (getFilter pageModel)
-                    in
-                    set cursorFL cursor pageModel
-            in
-            map onSetCursorEntityId
+                    cursor =
+                        EntityListCursor.create entityIdList
+                            (Just entityId)
+                            (getFilter pageModel)
+                in
+                set cursorFL cursor pageModel
+            )
+                |> map
 
         MoveFocusBy offset ->
+            let
+                onMoveFocusBy =
+                    let
+                        _ =
+                            1
+                    in
+                    1
+            in
             returnWithMaybe2 (get cursorFL)
                 (EntityListCursor.findEntityIdByOffsetIndex offset
                     >>? (SetCursorEntityId >> update config appModel)

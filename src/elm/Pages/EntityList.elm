@@ -115,8 +115,7 @@ entityListCursorEntityIdListFL =
 updateEntityListCursorWithMaybeEntityId appModel maybeEntityIdAtCursor ((Model pageModelRecord) as pageModel) =
     let
         entityIdList =
-            createEntityList pageModel appModel
-                .|> Entity.toEntityId
+            createEntityIdList appModel pageModel
 
         cursor =
             { entityIdList = entityIdList
@@ -254,15 +253,16 @@ flatFilterNameToPredicate filterType =
             Document.isDeleted
 
 
-createEntityList pageModel appModel =
-    createEntityTree pageModel appModel |> Data.EntityTree.flatten
+createEntityIdList appModel pageModel =
+    createEntityTree pageModel appModel
+        |> Data.EntityTree.flatten
+        .|> Entity.toEntityId
 
 
 computeMaybeNewEntityIdAtCursor ((Model pageModelRecord) as pageModel) appModel =
     let
         newEntityIdList =
-            createEntityList pageModel appModel
-                .|> Entity.toEntityId
+            createEntityIdList appModel pageModel
 
         computeMaybeFEI index =
             X.List.clampAndGetAtIndex index newEntityIdList

@@ -35,7 +35,7 @@ entityListCursorInitialValue =
     }
 
 
-type FlatFilterName
+type FlatFilter
     = Done
     | Recent
     | Bin
@@ -44,7 +44,7 @@ type FlatFilterName
 type Filter
     = ContextIdFilter DocId
     | ProjectIdFilter DocId
-    | FlatListFilter FlatFilterName
+    | FlatListFilter FlatFilter
     | GroupByFilter GroupDocType
 
 

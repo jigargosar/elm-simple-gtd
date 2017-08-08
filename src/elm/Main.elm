@@ -247,6 +247,7 @@ createUpdateConfig model =
     , focusPrevEntityMsgNew = EntityList.MoveFocusBy -1 |> EntityListMsg
     , navigateToPathMsg = navigateToPathMsg
     , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
+    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> EntityListMsg
     }
 
 
@@ -326,7 +327,8 @@ update config msg =
         _ ->
             returnWith .page (updatePage config msg)
     )
-        >> andThen (updateEntityListCursor config)
+        --        >> andThen (updateEntityListCursor config)
+        >> identity
 
 
 updateEntityListCursor config model =

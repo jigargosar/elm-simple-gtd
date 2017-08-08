@@ -65,6 +65,7 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
+        , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
     }
 
 
@@ -171,22 +172,23 @@ onPouchDBChange config dbName encodedDoc =
                             identity
                    )
     in
-    X.Return.returnWithMaybe2 identity
+    returnWithMaybe2 identity
         (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
+        >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
 
 
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
+            maybeOverT2 todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createTodoEntity
 
         "project-db" ->
-            maybeOverT2 projectStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
+            maybeOverT2 projectStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createProjectEntity
 
         "context-db" ->
-            maybeOverT2 contextStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
+            maybeOverT2 contextStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createContextEntity
 
         _ ->

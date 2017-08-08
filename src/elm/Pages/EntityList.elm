@@ -153,9 +153,9 @@ update config appModel msg pageModel =
                             _ =
                                 Debug.log "UpdateEntityListCursor Called " entityId
                         in
-                        SetCursorEntityIdAndDomFocus entityId
+                        ( pageModel, Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId) )
                     )
-                |> dispatchMaybeMsg
+                ?= noop
 
 
 overModel fn (Model model) =

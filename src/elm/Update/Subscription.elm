@@ -178,15 +178,15 @@ onPouchDBChange config dbName encodedDoc =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 todoStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createTodoEntity
 
         "project-db" ->
-            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 projectStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createProjectEntity
 
         "context-db" ->
-            maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 contextStore (Store.upsertInMemortOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createContextEntity
 
         _ ->
@@ -196,13 +196,13 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
 upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            .todoStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
+            .todoStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
 
         "project-db" ->
-            .projectStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
+            .projectStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
 
         "context-db" ->
-            .contextStore >> Store.upsertInPouchDbOnFirebaseChange encodedEntity
+            .contextStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
 
         _ ->
             \_ -> Cmd.none

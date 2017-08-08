@@ -6,14 +6,14 @@ port module Store
         , findBy
         , findById
         , generator
+        , getUpsertInPouchDbOnFirebaseChangeCmd
         , insert
         , insertAndPersist
         , isEmpty
         , mapDocs
         , rejectDocs
         , updateAndPersist
-        , upsertInPouchDbOnFirebaseChange
-        , upsertOnPouchDBChange
+        , upsertInMemortOnPouchDBChange
         )
 
 import Data.DeviceId exposing (DeviceId)
@@ -183,15 +183,15 @@ decode encodedDoc store =
         |> Result.toMaybe
 
 
-upsertInPouchDbOnFirebaseChange : D.Value -> Store x -> Cmd msg
-upsertInPouchDbOnFirebaseChange jsonValue store =
+getUpsertInPouchDbOnFirebaseChangeCmd : D.Value -> Store x -> Cmd msg
+getUpsertInPouchDbOnFirebaseChangeCmd jsonValue store =
     decode jsonValue store
         ?|> upsertIn store
         ?= Cmd.none
 
 
-upsertOnPouchDBChange : D.Value -> Store x -> Maybe ( Document x, Store x )
-upsertOnPouchDBChange encodedDoc store =
+upsertInMemortOnPouchDBChange : D.Value -> Store x -> Maybe ( Document x, Store x )
+upsertInMemortOnPouchDBChange encodedDoc store =
     decode encodedDoc store
         ?|> (\doc -> ( doc, insertDocInDict doc store ))
 

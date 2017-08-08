@@ -332,7 +332,18 @@ update config msg =
 updateEntityListCursor config model =
     case model.page of
         EntityList pageModel ->
-            pure model
+            EntityList.computeMaybeNewEntityIdAtCursor model pageModel
+                ?|> (\entityId ->
+                        let
+                            _ =
+                                Debug.log "UpdateEntityListCursor Called " entityId
+                        in
+                        pure model
+                            |> updatePage config
+                                (config.setFocusInEntityWithEntityId entityId)
+                                model.page
+                    )
+                ?= pure model
 
         _ ->
             pure model

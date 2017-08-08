@@ -105,9 +105,6 @@ flatTodoListView title todoListView =
         view =
             Html.Keyed.node "div"
                 [ class "todo-list collection" ]
-                ([--titleKeyedView
-                 ]
-                    ++ truncatedKeyedViewList
-                )
+                (titleKeyedView :: truncatedKeyedViewList)
     in
     [ ( title, view ) ]

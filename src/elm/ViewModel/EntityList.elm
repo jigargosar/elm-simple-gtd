@@ -22,7 +22,7 @@ pageVM config model pageModel =
                 entityList =
                     Data.EntityTree.flatten entityTree
             in
-            Pages.EntityList.computeMaybeNewEntityIdAtCursor model pageModel
+            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId

@@ -234,7 +234,7 @@ createEntityTree pageModel appModel =
                         |> Data.EntityTree.initProjectForest
                             getActiveTodoListForProjectHelp
 
-        FlatListFilter flatFilterName ->
+        FlatFilter flatFilterName ->
             let
                 pred =
                     flatFilterNameToPredicate flatFilterName

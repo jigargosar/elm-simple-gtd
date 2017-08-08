@@ -12,49 +12,6 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 
 
-type FlatFilter
-    = Done
-    | Recent
-    | Bin
-
-
-type Filter
-    = ContextIdFilter DocId
-    | ProjectIdFilter DocId
-    | FlatListFilter FlatFilter
-    | GroupByFilter GroupDocType
-
-
-namedFilterTypeToFilter namedFilterType path =
-    case namedFilterType of
-        NF_WithNullContext ->
-            ContextIdFilter ""
-
-        NF_WithNullProject ->
-            ProjectIdFilter ""
-
-        NF_FL_Done ->
-            FlatListFilter Done
-
-        NF_FL_Recent ->
-            FlatListFilter Recent
-
-        NF_FL_Bin ->
-            FlatListFilter Bin
-
-        NF_GB_ActiveContexts ->
-            GroupByFilter ContextGroupDocType
-
-        NF_GB_ActiveProjects ->
-            GroupByFilter ProjectGroupDocType
-
-        NF_WithContextId_GB_Projects ->
-            ContextIdFilter (List.Extra.last path ?= "")
-
-        NF_WithProjectId_GB_Contexts ->
-            ProjectIdFilter (List.Extra.last path ?= "")
-
-
 type NamedFilterType
     = NF_WithNullContext
     | NF_WithNullProject
@@ -65,16 +22,6 @@ type NamedFilterType
     | NF_GB_ActiveProjects
     | NF_WithContextId_GB_Projects
     | NF_WithProjectId_GB_Contexts
-
-
-type alias NamedFilterModel =
-    { namedFilterType : NamedFilterType
-    , displayName : String
-    , iconName : String
-    , headerColor : Color
-    , pathPrefix : List String
-    , pathArgumentsCount : Int
-    }
 
 
 namedFilterTypeList =
@@ -88,6 +35,59 @@ namedFilterTypeList =
     , NF_WithContextId_GB_Projects
     , NF_WithProjectId_GB_Contexts
     ]
+
+
+type FlatFilterType
+    = Done
+    | Recent
+    | Bin
+
+
+type Filter
+    = ContextIdFilter DocId
+    | ProjectIdFilter DocId
+    | FlatFilter FlatFilterType
+    | GroupByFilter GroupDocType
+
+
+type alias NamedFilterModel =
+    { namedFilterType : NamedFilterType
+    , displayName : String
+    , iconName : String
+    , headerColor : Color
+    , pathPrefix : List String
+    , pathArgumentsCount : Int
+    }
+
+
+namedFilterTypeToFilter namedFilterType path =
+    case namedFilterType of
+        NF_WithNullContext ->
+            ContextIdFilter ""
+
+        NF_WithNullProject ->
+            ProjectIdFilter ""
+
+        NF_FL_Done ->
+            FlatFilter Done
+
+        NF_FL_Recent ->
+            FlatFilter Recent
+
+        NF_FL_Bin ->
+            FlatFilter Bin
+
+        NF_GB_ActiveContexts ->
+            GroupByFilter ContextGroupDocType
+
+        NF_GB_ActiveProjects ->
+            GroupByFilter ProjectGroupDocType
+
+        NF_WithContextId_GB_Projects ->
+            ContextIdFilter (List.Extra.last path ?= "")
+
+        NF_WithProjectId_GB_Contexts ->
+            ProjectIdFilter (List.Extra.last path ?= "")
 
 
 filterType2Model namedFilterType =

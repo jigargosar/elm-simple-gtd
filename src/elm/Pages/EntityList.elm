@@ -27,8 +27,8 @@ type Model
 
 
 initialValue =
-    pageModelConstructor defaultNamedFilterModel.pathPrefix
-        defaultNamedFilterModel
+    pageModelConstructor initialNamedFilterModel.pathPrefix
+        initialNamedFilterModel
         Cursor.initialValue
 
 

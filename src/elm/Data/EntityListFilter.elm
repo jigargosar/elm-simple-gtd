@@ -1,4 +1,14 @@
-module Data.EntityListFilter exposing (..)
+module Data.EntityListFilter
+    exposing
+        ( Filter(..)
+        , FlatFilterType(..)
+        , NamedFilterModel
+        , NamedFilterType(..)
+        , getFilterFromNamedFilterTypeAndPath
+        , getMaybeNamedFilterModelFromPath
+        , initialNamedFilterModel
+        , namedFilterTypeToModel
+        )
 
 --import X.List as List
 
@@ -127,7 +137,7 @@ namedFilterTypeToModel namedFilterType =
                 0
 
 
-defaultNamedFilterModel =
+initialNamedFilterModel =
     namedFilterTypeToModel NF_GB_ActiveContexts
 
 

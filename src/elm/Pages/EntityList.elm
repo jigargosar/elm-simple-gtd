@@ -32,25 +32,27 @@ type Model
     = Model ModelRecord
 
 
-initialValue =
-    let
-        namedFilterModel =
-            Filter.initialNamedFilterModel
-    in
-    pageModelConstructor namedFilterModel.pathPrefix
-        namedFilterModel
-        Cursor.initialValue
-
-
-pageModelConstructor path namedFilterModel cursor =
+constructor : List String -> NamedFilterModel -> Cursor.Model -> Model
+constructor path namedFilterModel cursor =
     ModelRecord path namedFilterModel cursor
         |> Model
+
+
+initialValue =
+    let
+        ({ pathPrefix } as namedFilterModel) =
+            Filter.initialNamedFilterModel
+
+        cursor =
+            Cursor.initialValue (GroupByFilter ContextGroupDocType)
+    in
+    constructor pathPrefix namedFilterModel cursor
 
 
 maybeInitFromPath : List String -> Model -> Maybe Model
 maybeInitFromPath path (Model pageModelRecord) =
     Filter.getMaybeNamedFilterModelFromPath path
-        ?|> (pageModelConstructor path # pageModelRecord.cursor)
+        ?|> (constructor path # pageModelRecord.cursor)
 
 
 getFullPath (Model pageModel) =
@@ -63,10 +65,6 @@ getTitleColourTuple (Model pageModel) =
 
 getTitle (Model pageModel) =
     pageModel.namedFilterModel.displayName
-
-
-getCursorFilter (Model pageModel) =
-    pageModel.cursor.filter
 
 
 getFilter (Model pageModel) =

@@ -16,9 +16,9 @@ type alias Model =
     }
 
 
-initialValue : Model
-initialValue =
-    create [] Nothing (GroupByFilter ContextGroupDocType)
+initialValue : Filter -> Model
+initialValue initialFilter =
+    create [] Nothing initialFilter
 
 
 create : List EntityId -> Maybe EntityId -> Filter -> Model

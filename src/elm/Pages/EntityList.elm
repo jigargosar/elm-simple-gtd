@@ -1,7 +1,13 @@
 module Pages.EntityList exposing (..)
 
 import Data.EntityListCursor as Cursor
-import Data.EntityListFilter exposing (..)
+import Data.EntityListFilter as Filter
+    exposing
+        ( Filter(..)
+        , FlatFilterType(..)
+        , NamedFilterModel
+        , NamedFilterType(..)
+        )
 import Data.EntityTree
 import Data.TodoDoc as TodoDoc
 import Document exposing (..)
@@ -27,8 +33,12 @@ type Model
 
 
 initialValue =
-    pageModelConstructor initialNamedFilterModel.pathPrefix
-        initialNamedFilterModel
+    let
+        namedFilterModel =
+            Filter.initialNamedFilterModel
+    in
+    pageModelConstructor namedFilterModel.pathPrefix
+        namedFilterModel
         Cursor.initialValue
 
 
@@ -39,7 +49,7 @@ pageModelConstructor path namedFilterModel cursor =
 
 maybeInitFromPath : List String -> Model -> Maybe Model
 maybeInitFromPath path (Model pageModelRecord) =
-    getMaybeNamedFilterModelFromPath path
+    Filter.getMaybeNamedFilterModelFromPath path
         ?|> (pageModelConstructor path # pageModelRecord.cursor)
 
 
@@ -60,7 +70,7 @@ getCursorFilter (Model pageModel) =
 
 
 getFilter (Model pageModel) =
-    getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
+    Filter.getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
 getMaybeLastKnownFocusedEntityId =

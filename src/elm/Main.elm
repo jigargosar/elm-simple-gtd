@@ -376,7 +376,7 @@ onNavigateToPath config path =
                         setEntityListPageOrRevertPath maybePageModel =
                             EntityList.maybeInitFromPath path maybePageModel
                                 |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPath maybePageModel))
+                                    (\_ -> revertPath (EntityList.getFullPathOrDefault maybePageModel))
                                     (EntityList >> setPage)
                     in
                     case page of
@@ -531,7 +531,7 @@ delta2hash =
         getPathFromModel model =
             case getPage__ model of
                 EntityList pageModel ->
-                    EntityList.getFullPath (Just pageModel)
+                    EntityList.getFullPath pageModel
 
                 LandingPage ->
                     [ "" ]

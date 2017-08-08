@@ -72,11 +72,11 @@ maybeInitFromPath path maybeModel =
             )
 
 
-getFullPath maybeModel =
-    let
-        (Model pageModel) =
-            maybeModel ?= initialValue
-    in
+getFullPathOrDefault maybeModel =
+    maybeModel ?= initialValue |> getFullPath
+
+
+getFullPath (Model pageModel) =
     pageModel.path
 
 

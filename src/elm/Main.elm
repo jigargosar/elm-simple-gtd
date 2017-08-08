@@ -273,43 +273,7 @@ update config msg =
                 )
 
         NavigateToPath path ->
-            let
-                setPage page =
-                    map (set pageFL page)
-                        >> map Models.Selection.clearSelection
-                        >> returnMsgAsCmd config.revertExclusiveMode
-
-                revertPath path =
-                    path
-                        |> String.join "/"
-                        |> (++) "#!/"
-                        |> Navigation.modifyUrl
-                        |> command
-            in
-            returnWith .page
-                (\page ->
-                    case path of
-                        [] ->
-                            setPage LandingPage
-
-                        _ ->
-                            case page of
-                                EntityList pageModel ->
-                                    EntityList.maybeInitFromPath path pageModel
-                                        |> Maybe.Extra.unpack
-                                            (\_ -> revertPath (EntityList.getFullPath pageModel))
-                                            (EntityList >> setPage)
-
-                                LandingPage ->
-                                    let
-                                        pageModel =
-                                            EntityList.initialValue
-                                    in
-                                    EntityList.maybeInitFromPath path pageModel
-                                        |> Maybe.Extra.unpack
-                                            (\_ -> revertPath (EntityList.getFullPath pageModel))
-                                            (EntityList >> setPage)
-                )
+            onNavigateToPath config path
 
         StoresMsg storeMsg ->
             let
@@ -361,6 +325,46 @@ update config msg =
 
         _ ->
             returnWith .page (updatePage config msg)
+
+
+onNavigateToPath config path =
+    let
+        setPage page =
+            map (set pageFL page)
+                >> map Models.Selection.clearSelection
+                >> returnMsgAsCmd config.revertExclusiveMode
+
+        revertPath path =
+            path
+                |> String.join "/"
+                |> (++) "#!/"
+                |> Navigation.modifyUrl
+                |> command
+    in
+    returnWith .page
+        (\page ->
+            case path of
+                [] ->
+                    setPage LandingPage
+
+                _ ->
+                    case page of
+                        EntityList pageModel ->
+                            EntityList.maybeInitFromPath path pageModel
+                                |> Maybe.Extra.unpack
+                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                    (EntityList >> setPage)
+
+                        LandingPage ->
+                            let
+                                pageModel =
+                                    EntityList.initialValue
+                            in
+                            EntityList.maybeInitFromPath path pageModel
+                                |> Maybe.Extra.unpack
+                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                    (EntityList >> setPage)
+        )
 
 
 pageFL =

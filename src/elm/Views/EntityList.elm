@@ -99,12 +99,13 @@ flatTodoListView title todoListView =
             )
 
         truncatedKeyedViewList =
-            todoListView |> List.take 75
+            todoListView
+                |> List.take 75
 
         view =
             Html.Keyed.node "div"
                 [ class "todo-list collection" ]
-                ([ titleKeyedView
+                ([--titleKeyedView
                  ]
                     ++ truncatedKeyedViewList
                 )

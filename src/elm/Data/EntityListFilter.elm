@@ -60,7 +60,7 @@ type alias NamedFilterModel =
     }
 
 
-namedFilterTypeToFilter namedFilterType path =
+getFilterFromNamedFilterTypeAndPath namedFilterType path =
     case namedFilterType of
         NF_WithNullContext ->
             ContextIdFilter ""

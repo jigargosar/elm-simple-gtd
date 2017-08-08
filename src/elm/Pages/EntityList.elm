@@ -60,7 +60,7 @@ getCursorFilter (Model pageModel) =
 
 
 getFilter (Model pageModel) =
-    namedFilterTypeToFilter pageModel.namedFilterModel.namedFilterType pageModel.path
+    getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
 getNamedFilterModel =

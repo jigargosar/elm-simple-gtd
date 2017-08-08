@@ -67,6 +67,10 @@ keyedViewList pageVM =
                     List.map createTodoView todoList
                         |> flatTodoListView title
 
+                Data.EntityTree.Node Data.EntityTree.NoTitle todoList ->
+                    List.map createTodoView todoList
+                        |> flatTodoListView ""
+
                 _ ->
                     [ ( "0", div [] [] ) ]
 
@@ -100,6 +104,9 @@ flatTodoListView title todoListView =
         view =
             Html.Keyed.node "div"
                 [ class "todo-list collection" ]
-                (titleKeyedView :: truncatedKeyedViewList)
+                ([ titleKeyedView
+                 ]
+                    ++ truncatedKeyedViewList
+                )
     in
     [ ( title, view ) ]

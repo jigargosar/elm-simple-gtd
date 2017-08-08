@@ -23,6 +23,7 @@ type alias ProjectNode =
 type Title
     = GroupEntityTitle GroupDocEntity
     | StringTitle String
+    | NoTitle
 
 
 type Node
@@ -150,11 +151,8 @@ flatten tree =
 
         Root node ->
             case node of
-                Node (StringTitle title) todoList ->
+                Node _ todoList ->
                     todoList .|> Entity.TodoEntity
-
-                _ ->
-                    []
 
         Forest list node ->
             []

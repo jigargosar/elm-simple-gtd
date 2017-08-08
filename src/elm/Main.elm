@@ -364,6 +364,17 @@ onNavigateToPath config path =
                 |> (++) "#!/"
                 |> Navigation.modifyUrl
                 |> command
+
+        currentPagePath page =
+            case page of
+                EntityList pageModel ->
+                    EntityList.getFullPath pageModel
+
+                LandingPage ->
+                    []
+
+        revertPathOnNoMatchCommand page =
+            currentPagePath page |> revertPath
     in
     returnWith .page
         (\page ->
@@ -376,7 +387,7 @@ onNavigateToPath config path =
                         setEntityListPageOrRevertPath maybePageModel =
                             EntityList.maybeInitFromPath path maybePageModel
                                 |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPathOrDefault maybePageModel))
+                                    (\_ -> revertPathOnNoMatchCommand page)
                                     (EntityList >> setPage)
                     in
                     case page of

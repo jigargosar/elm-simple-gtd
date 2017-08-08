@@ -528,8 +528,8 @@ getPage__ =
 
 delta2hash =
     let
-        getPathFromModel model =
-            case getPage__ model of
+        getPathFromModel previousModel currentModel =
+            case currentModel.page of
                 EntityList pageModel ->
                     EntityList.getFullPath pageModel
 
@@ -538,7 +538,7 @@ delta2hash =
 
         delta2builder previousModel currentModel =
             RouteUrl.Builder.builder
-                |> RouteUrl.Builder.replacePath (getPathFromModel currentModel)
+                |> RouteUrl.Builder.replacePath (getPathFromModel previousModel currentModel)
     in
     delta2builder >>> RouteUrl.Builder.toHashChange >> Just
 

@@ -373,18 +373,18 @@ onNavigateToPath config path =
 
                 _ ->
                     let
-                        foo pageModel =
-                            EntityList.maybeInitFromPath path pageModel
+                        setEntityListPageOrRevertPath maybePageModel =
+                            EntityList.maybeInitFromPath path maybePageModel
                                 |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                    (\_ -> revertPath (EntityList.getFullPath maybePageModel))
                                     (EntityList >> setPage)
                     in
                     case page of
                         EntityList pageModel ->
-                            foo (Just pageModel)
+                            setEntityListPageOrRevertPath (Just pageModel)
 
                         _ ->
-                            foo Nothing
+                            setEntityListPageOrRevertPath Nothing
         )
 
 

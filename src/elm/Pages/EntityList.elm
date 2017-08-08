@@ -246,10 +246,20 @@ createEntityTree pageModel appModel =
             let
                 pred =
                     flatFilterTypeToPredicate flatFilterType
+
+                todoList =
+                    filterTodosAndSortByLatestModified pred appModel
+
+                totalCount =
+                    List.length todoList
+
+                truncatedTodoList =
+                    List.take maxDisplayCount todoList
             in
             Data.EntityTree.initTodoForest
                 (getTitle pageModel)
-                (filterTodosAndSortByLatestModified pred appModel)
+                truncatedTodoList
+                totalCount
 
 
 flatFilterTypeToPredicate filterType =

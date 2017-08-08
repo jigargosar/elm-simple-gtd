@@ -1,10 +1,10 @@
-    8672 total
+    8692 total
      557 src/elm/Main.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
      293 src/elm/Store.elm
+     292 src/elm/Pages/EntityList.elm
      286 src/elm/GroupDoc.elm
-     282 src/elm/Pages/EntityList.elm
      267 src/elm/Mat.elm
      235 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
@@ -25,7 +25,7 @@
      142 src/elm/X/Record.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
-     110 src/elm/Views/EntityList.elm
+     111 src/elm/Views/EntityList.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
@@ -67,6 +67,7 @@
       31 src/elm/View/NewTodoFab.elm
       25 src/elm/ViewModel/Frame.elm
       24 src/elm/EntityId.elm
+      23 src/elm/View/Badge.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
       20 src/elm/Models/Selection.elm
@@ -79,7 +80,6 @@
       16 src/elm/Models/Todo.elm
       15 src/elm/View/Frame.elm
       15 src/elm/Ports/Todo.elm
-      14 src/elm/View/Badge.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm
       11 src/elm/Firebase.elm

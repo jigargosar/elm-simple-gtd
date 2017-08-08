@@ -61,15 +61,11 @@ keyedViewList pageVM =
         Data.EntityTree.ProjectForest groupList ->
             multiProjectView groupList
 
-        Data.EntityTree.Root node ->
+        Data.EntityTree.Root node totalCount ->
             case node of
                 Data.EntityTree.Node (Data.EntityTree.StringTitle title) todoList ->
                     List.map createTodoView todoList
-                        |> flatTodoListView title
-
-                Data.EntityTree.Node Data.EntityTree.NoTitle todoList ->
-                    List.map createTodoView todoList
-                        |> flatTodoListView ""
+                        |> flatTodoListView title totalCount
 
                 _ ->
                     [ ( "0", div [] [] ) ]
@@ -86,25 +82,30 @@ groupHeaderView vm =
     GroupDoc.View.initHeaderKeyed vm
 
 
-flatTodoListView title todoListView =
+flatTodoListView title totalCount todoListView =
     let
         titleKeyedView =
             let
                 count =
                     todoListView |> List.length
+
+                titleSuffix =
+                    [ count, totalCount ]
+                        .|> toString
+                        |> String.join "/"
             in
             ( title
             , div [ class "collection-item" ]
-                [ h5 [] [ View.Badge.badge title count ] ]
+                [ h5 [] [ View.Badge.badgeStringSuffix title titleSuffix ] ]
             )
 
         truncatedKeyedViewList =
             todoListView
-                |> List.take 75
+                |> List.take totalCount
 
         view =
             Html.Keyed.node "div"
                 [ class "todo-list collection" ]
-                (titleKeyedView :: truncatedKeyedViewList)
+                (titleKeyedView :: todoListView)
     in
     [ ( title, view ) ]

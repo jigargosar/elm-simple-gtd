@@ -35,7 +35,7 @@ type Tree
     | ProjectRoot ProjectNode (List ContextNode)
     | ContextForest (List ContextNode)
     | ProjectForest (List ProjectNode)
-    | Root Node
+    | Root Node Int
     | Forest List Node
 
 
@@ -149,7 +149,7 @@ flatten tree =
                             :: (g.todoList .|> Entity.TodoEntity)
                     )
 
-        Root node ->
+        Root node _ ->
             case node of
                 Node _ todoList ->
                     todoList .|> Entity.TodoEntity
@@ -158,5 +158,5 @@ flatten tree =
             []
 
 
-initTodoForest stringTitle todoList =
-    Root (Node (StringTitle stringTitle) todoList)
+initTodoForest stringTitle todoList totalCount =
+    Root (Node (StringTitle stringTitle) todoList) totalCount

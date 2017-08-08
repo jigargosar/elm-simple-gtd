@@ -167,10 +167,18 @@ type FlatFilterType
     | Bin
 
 
+type alias MaxDisplayCount =
+    Int
+
+
+defaultMaxDisplayCount =
+    25
+
+
 type Filter
     = ContextIdFilter DocId
     | ProjectIdFilter DocId
-    | FlatFilter FlatFilterType
+    | FlatFilter FlatFilterType MaxDisplayCount
     | GroupByFilter GroupDocType
 
 
@@ -183,13 +191,13 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
             ProjectIdFilter ""
 
         NF_FL_Done ->
-            FlatFilter Done
+            FlatFilter Done defaultMaxDisplayCount
 
         NF_FL_Recent ->
-            FlatFilter Recent
+            FlatFilter Recent defaultMaxDisplayCount
 
         NF_FL_Bin ->
-            FlatFilter Bin
+            FlatFilter Bin defaultMaxDisplayCount
 
         NF_GB_ActiveContexts ->
             GroupByFilter ContextGroupDocType

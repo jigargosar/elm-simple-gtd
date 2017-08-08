@@ -242,17 +242,17 @@ createEntityTree pageModel appModel =
                         |> Data.EntityTree.initProjectForest
                             getActiveTodoListForProjectHelp
 
-        FlatFilter flatFilterName ->
+        FlatFilter flatFilterType maxDisplayCount ->
             let
                 pred =
-                    flatFilterNameToPredicate flatFilterName
+                    flatFilterTypeToPredicate flatFilterType
             in
             Data.EntityTree.initTodoForest
                 (getTitle pageModel)
                 (filterTodosAndSortByLatestModified pred appModel)
 
 
-flatFilterNameToPredicate filterType =
+flatFilterTypeToPredicate filterType =
     case filterType of
         Done ->
             X.Predicate.all [ Document.isNotDeleted, TodoDoc.isDone ]

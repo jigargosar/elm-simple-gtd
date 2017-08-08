@@ -89,6 +89,18 @@ getMaybeLastKnownFocusedEntityId =
     get cursorFL >> .maybeCursorEntityId
 
 
+getEntityListDomIdFromEntityId entityId =
+    case entityId of
+        ContextEntityId docId ->
+            "entity-list-context-id-" ++ docId
+
+        ProjectEntityId docId ->
+            "entity-list-project-id-" ++ docId
+
+        TodoEntityId docId ->
+            "entity-list-todo-id-" ++ docId
+
+
 type Msg
     = MoveFocusBy Int
     | SetCursorEntityId EntityId

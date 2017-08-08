@@ -6,7 +6,7 @@ import EntityId
 import GroupDoc.ViewModel
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Pages.EntityList
+import Pages.EntityList as EntityList
 import Todo.ViewModel
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -15,14 +15,14 @@ import X.Function exposing (..)
 pageVM config model pageModel =
     let
         entityTree =
-            Pages.EntityList.createEntityTree pageModel model
+            EntityList.createEntityTree pageModel model
 
         maybeCursorEntityId =
             let
                 entityList =
                     Data.EntityTree.flatten entityTree
             in
-            Pages.EntityList.getMaybeLastKnownFocusedEntityId pageModel
+            EntityList.getMaybeLastKnownFocusedEntityId pageModel
                 ?+> (Entity.hasId >> List.find # entityList)
                 |> Maybe.orElse (List.head entityList)
                 ?|> Entity.toEntityId
@@ -42,7 +42,11 @@ pageVM config model pageModel =
                     EntityId.fromTodo todo |> isCursorAtEntityId
             in
             todo
-                |> Todo.ViewModel.createTodoViewModel config model isFocusable
+                |> Todo.ViewModel.createTodoViewModel
+                    config
+                    EntityList.getEntityListDomIdFromEntityId
+                    model
+                    isFocusable
     in
     { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config getTabIndexForEntityId
     , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config getTabIndexForEntityId

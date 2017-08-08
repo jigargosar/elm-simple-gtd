@@ -36,7 +36,7 @@ getDisplayText todo =
 --createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
 
 
-createTodoViewModel config appVM isFocusable todo =
+createTodoViewModel config getEntityListDomIdFromEntityId appModel isFocusable todo =
     let
         tabindexAV =
             let
@@ -49,7 +49,7 @@ createTodoViewModel config appVM isFocusable todo =
             tabindexValue
 
         now =
-            appVM.lastKnownCurrentTime
+            appModel.lastKnownCurrentTime
 
         todoId =
             Document.getId todo
@@ -62,7 +62,7 @@ createTodoViewModel config appVM isFocusable todo =
 
         projectDisplayName =
             projectId
-                |> (Store.findById # appVM.projectStore >>? GroupDoc.getName)
+                |> (Store.findById # appModel.projectStore >>? GroupDoc.getName)
                 ?= ""
                 |> truncateName
                 |> String.append "#"
@@ -72,7 +72,7 @@ createTodoViewModel config appVM isFocusable todo =
 
         contextDisplayName =
             contextId
-                |> (Store.findById # appVM.contextStore >>? GroupDoc.getName)
+                |> (Store.findById # appModel.contextStore >>? GroupDoc.getName)
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
@@ -124,8 +124,9 @@ createTodoViewModel config appVM isFocusable todo =
         toggleDoneMsg =
             config.onToggleDoneAndMaybeSelection todoId
     in
-    { isDone = Data.TodoDoc.isDone todo
-    , key = todoId
+    { key = todoId
+    , domId = getEntityListDomIdFromEntityId entityId
+    , isDone = Data.TodoDoc.isDone todo
     , isDeleted = Document.isDeleted todo
     , onKeyDownMsg = onKeyDownMsg
     , displayText = getDisplayText todo
@@ -139,8 +140,8 @@ createTodoViewModel config appVM isFocusable todo =
     , reminder = reminder
     , onFocusIn = config.setFocusInEntityWithEntityId entityId
     , tabindexAV = tabindexAV
-    , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
-    , mdl = appVM.mdl
+    , isSelected = appModel.selectedEntityIdSet |> Set.member todoId
+    , mdl = appModel.mdl
     , onMdl = config.onMdl
     , noop = config.noop
     }

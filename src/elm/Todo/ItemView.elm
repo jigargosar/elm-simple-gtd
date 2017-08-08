@@ -17,6 +17,7 @@ import X.Keyboard exposing (KeyboardEvent, onKeyDown)
 
 type alias TodoViewModel msg =
     { key : String
+    , domId : String
     , displayText : String
     , isDone : Bool
     , isDeleted : Bool

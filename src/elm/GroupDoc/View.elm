@@ -25,10 +25,6 @@ initKeyed todoView vm =
 
 
 item todoView vm =
-    let
-        getTabIndexAVForTodo =
-            EntityId.fromTodo >> vm.getTabIndexAVForEntityId
-    in
     Html.Keyed.node "div"
         [ class "collection" ]
         (( vm.key, headerItem vm ) :: (vm.todoList .|> todoView))
@@ -66,7 +62,8 @@ headerItem vm =
                 editButton
     in
     div
-        [ tabindex vm.tabindexAV
+        [ id vm.domId
+        , tabindex vm.tabindexAV
         , X.Html.onFocusIn vm.onFocusIn
 
         --        , onClick vm.onFocusIn

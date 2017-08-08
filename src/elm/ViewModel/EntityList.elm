@@ -47,9 +47,15 @@ pageVM config model pageModel =
                     EntityList.getEntityListDomIdFromEntityId
                     model
                     isFocusable
+
+        groupVMConfig =
+            { config = config
+            , getTabIndexForEntityId = getTabIndexForEntityId
+            , getEntityListDomIdFromEntityId = EntityList.getEntityListDomIdFromEntityId
+            }
     in
-    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM config getTabIndexForEntityId
-    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM config getTabIndexForEntityId
+    { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM groupVMConfig
+    , createContextGroupVM = GroupDoc.ViewModel.createContextGroupVM groupVMConfig
     , createTodoViewModel = createTodoViewModel
     , entityTree = entityTree
     }

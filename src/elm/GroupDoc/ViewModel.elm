@@ -38,7 +38,7 @@ type alias GroupDocViewModel msg =
     , onKeyDownMsg : KeyboardEvent -> msg
     , tabindexAV : Int
     , todoList : List TodoDoc
-    , getTabIndexAVForEntityId : EntityId -> Int
+    , getTabIndexForEntityId : EntityId -> Int
     , onMdl : Material.Msg msg -> msg
     }
 
@@ -56,8 +56,9 @@ type alias Config =
     , nullIcon : IconVM
     , defaultColor : Color.Color
     , defaultIconName : String
-    , getTabIndexAVForEntityId : EntityId -> Int
+    , getTabIndexForEntityId : EntityId -> Int
     , groupDocType : GroupDoc.GroupDocType
+    , getEntityListDomIdFromEntityId : EntityId -> String
     }
 
 
@@ -134,8 +135,8 @@ create config configInner todoList groupDoc =
             , isArchived = isArchived
             }
     in
-    { id = id
-    , key = toString groupDocId
+    { key = toString groupDocId
+    , domId = configInner.getEntityListDomIdFromEntityId entityId
     , name = name
     , namePrefix = configInner.namePrefix
     , count = todoList |> List.length
@@ -149,14 +150,13 @@ create config configInner todoList groupDoc =
     , icon = icon
     , onFocusIn = config.setFocusInEntityWithEntityId entityId
     , onKeyDownMsg = onKeyDownMsg
-    , tabindexAV = configInner.getTabIndexAVForEntityId entityId
+    , tabindexAV = configInner.getTabIndexForEntityId entityId
     , todoList = todoList
-    , getTabIndexAVForEntityId = configInner.getTabIndexAVForEntityId
     , onMdl = config.onMdl
     }
 
 
-createContextGroupVM config getTabIndexAVForEntityId todoList context =
+createContextGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEntityId } todoList context =
     let
         configInner : Config
         configInner =
@@ -168,14 +168,15 @@ createContextGroupVM config getTabIndexAVForEntityId todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = Colors.defaultProject
             , defaultIconName = "av:fiber-manual-record"
-            , getTabIndexAVForEntityId = getTabIndexAVForEntityId
+            , getTabIndexForEntityId = getTabIndexForEntityId
             , groupDocType = GroupDoc.ContextGroupDocType
+            , getEntityListDomIdFromEntityId = getEntityListDomIdFromEntityId
             }
     in
     create config configInner todoList context
 
 
-createProjectGroupVM config getTabIndexAVForEntityId todoList project =
+createProjectGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEntityId } todoList project =
     let
         configInner : Config
         configInner =
@@ -187,8 +188,9 @@ createProjectGroupVM config getTabIndexAVForEntityId todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultColor = Colors.defaultProject
             , defaultIconName = "av:fiber-manual-record"
-            , getTabIndexAVForEntityId = getTabIndexAVForEntityId
+            , getTabIndexForEntityId = getTabIndexForEntityId
             , groupDocType = GroupDoc.ProjectGroupDocType
+            , getEntityListDomIdFromEntityId = getEntityListDomIdFromEntityId
             }
     in
     create config configInner todoList project

@@ -372,22 +372,19 @@ onNavigateToPath config path =
                     setPage LandingPage
 
                 _ ->
+                    let
+                        foo pageModel =
+                            EntityList.maybeInitFromPath path pageModel
+                                |> Maybe.Extra.unpack
+                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
+                                    (EntityList >> setPage)
+                    in
                     case page of
                         EntityList pageModel ->
-                            EntityList.maybeInitFromPath path pageModel
-                                |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
-                                    (EntityList >> setPage)
+                            foo (Just pageModel)
 
-                        LandingPage ->
-                            let
-                                pageModel =
-                                    EntityList.initialValue
-                            in
-                            EntityList.maybeInitFromPath path pageModel
-                                |> Maybe.Extra.unpack
-                                    (\_ -> revertPath (EntityList.getFullPath pageModel))
-                                    (EntityList >> setPage)
+                        _ ->
+                            foo Nothing
         )
 
 
@@ -534,7 +531,7 @@ delta2hash =
         getPathFromModel model =
             case getPage__ model of
                 EntityList pageModel ->
-                    EntityList.getFullPath pageModel
+                    EntityList.getFullPath (Just pageModel)
 
                 LandingPage ->
                     [ "" ]

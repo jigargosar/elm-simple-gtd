@@ -58,8 +58,12 @@ initialValue =
     constructor pathPrefix namedFilterModel cursor
 
 
-maybeInitFromPath : List String -> Model -> Maybe Model
-maybeInitFromPath path (Model model) =
+maybeInitFromPath : List String -> Maybe Model -> Maybe Model
+maybeInitFromPath path maybeModel =
+    let
+        (Model model) =
+            maybeModel ?= initialValue
+    in
     Filter.getMaybeNamedFilterModelFromPath path
         ?|> (\namedFilterModel ->
                 constructor path
@@ -68,7 +72,11 @@ maybeInitFromPath path (Model model) =
             )
 
 
-getFullPath (Model pageModel) =
+getFullPath maybeModel =
+    let
+        (Model pageModel) =
+            maybeModel ?= initialValue
+    in
     pageModel.path
 
 

@@ -14,6 +14,8 @@ import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
 import Models.GroupDocStore exposing (..)
+import Ports
+import Return
 import Set
 import Store
 import Toolkit.Operators exposing (..)
@@ -124,7 +126,8 @@ update config appModel msg pageModel =
             set cursorFL cursor pageModel |> pure
 
         SetCursorEntityIdAndDomFocus entityId ->
-            noop
+            dispatchMsg (SetCursorEntityId entityId)
+                |> Return.command (Ports.focusSelector "")
 
         MoveFocusBy offset ->
             let

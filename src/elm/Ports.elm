@@ -17,3 +17,6 @@ port persistToOfflineStore : ( String, E.Value ) -> Cmd msg
 
 
 port debugPort : (String -> msg) -> Sub msg
+
+
+port focusSelector : String -> Cmd msg

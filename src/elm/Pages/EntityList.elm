@@ -63,10 +63,6 @@ getFilter (Model pageModel) =
     getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
-getNamedFilterModel =
-    overModel .namedFilterModel
-
-
 getMaybeLastKnownFocusedEntityId =
     get maybeEntityIdAtCursorFL
 

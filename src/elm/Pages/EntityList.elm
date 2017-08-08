@@ -71,8 +71,9 @@ getFilter (Model pageModel) =
     Filter.getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
 
 
+getMaybeLastKnownFocusedEntityId : Model -> Maybe EntityId
 getMaybeLastKnownFocusedEntityId =
-    get maybeEntityIdAtCursorFL
+    get cursorFL >> .maybeCursorEntityId
 
 
 type Msg
@@ -126,14 +127,6 @@ overModelF fn (Model model) =
 
 cursorFL =
     fieldLens (overModel .cursor) (\s b -> overModelF (\b -> { b | cursor = s }) b)
-
-
-maybeEntityIdAtCursorFL =
-    let
-        maybeEntityIdAtCursorFL =
-            fieldLens .maybeCursorEntityId (\s b -> { b | maybeCursorEntityId = s })
-    in
-    composeInnerOuterFieldLens maybeEntityIdAtCursorFL cursorFL
 
 
 entityListCursorEntityIdListFL =

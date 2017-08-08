@@ -25,6 +25,7 @@ type alias ModelRecord =
     { path : List String
     , namedFilterModel : NamedFilterModel
     , cursor : Cursor.Model
+    , filter : Filter
     }
 
 
@@ -34,7 +35,10 @@ type Model
 
 constructor : List String -> NamedFilterModel -> Cursor.Model -> Model
 constructor path namedFilterModel cursor =
-    ModelRecord path namedFilterModel cursor
+    ModelRecord path
+        namedFilterModel
+        cursor
+        (Filter.getFilterFromNamedFilterTypeAndPath namedFilterModel.namedFilterType path)
         |> Model
 
 
@@ -43,16 +47,23 @@ initialValue =
         ({ pathPrefix } as namedFilterModel) =
             Filter.initialNamedFilterModel
 
+        filter =
+            GroupByFilter ContextGroupDocType
+
         cursor =
-            Cursor.initialValue (GroupByFilter ContextGroupDocType)
+            Cursor.initialValue filter
     in
     constructor pathPrefix namedFilterModel cursor
 
 
 maybeInitFromPath : List String -> Model -> Maybe Model
-maybeInitFromPath path (Model pageModelRecord) =
+maybeInitFromPath path (Model model) =
     Filter.getMaybeNamedFilterModelFromPath path
-        ?|> (constructor path # pageModelRecord.cursor)
+        ?|> (\namedFilterModel ->
+                constructor path
+                    namedFilterModel
+                    model.cursor
+            )
 
 
 getFullPath (Model pageModel) =

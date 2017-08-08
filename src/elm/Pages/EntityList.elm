@@ -127,7 +127,7 @@ update config appModel msg pageModel =
 
         SetCursorEntityIdAndDomFocus entityId ->
             dispatchMsg (SetCursorEntityId entityId)
-                |> Return.command (Ports.focusSelector "")
+                |> Return.command (Ports.focusSelector ".focusable-list-item[tabindex=0]")
 
         MoveFocusBy offset ->
             let

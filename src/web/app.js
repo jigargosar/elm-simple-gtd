@@ -111,7 +111,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       .embed(document.getElementById("elm-container"), flags)
   
   global.__debug__port = cmdString =>
-        app.ports["debugPort"].send(cmdString)
+      app.ports["debugPort"].send(cmdString)
   
   const fire = Fire.setup(app, _.values(db.list), deviceId)
   
@@ -122,15 +122,21 @@ window.appBoot = async function appBoot(elmMain = Main) {
     store.setItem(key, value).catch(console.error)
   });
   
+  app.ports["focusSelector"].subscribe((selector) => {
+    const firstSelected = $(selector).first()
+    console.log("port: focusSelector: $(selector).first()", firstSelected)
+    setTimeout(() => firstSelected.focus(), 0)
+  });
+  
   
   Notifications.setup(fire, app).catch(console.error)
   
   mutationObserverFocusSelectorStream
-       .observe({
-         value(selector) {
-           $(selector).first().focus()
-         },
-       })
+      .observe({
+        value(selector) {
+          $(selector).first().focus()
+        },
+      })
   
   app.ports["positionPopupMenu"].subscribe((ofSelector) => {
     requestAnimationFrame(() => {

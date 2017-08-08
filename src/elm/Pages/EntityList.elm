@@ -15,12 +15,12 @@ import Entity exposing (..)
 import GroupDoc exposing (..)
 import Models.GroupDocStore exposing (..)
 import Ports
-import Return
 import Set
 import Store
 import Toolkit.Operators exposing (..)
 import X.Predicate
 import X.Record exposing (..)
+import X.Return exposing (..)
 
 
 type alias ModelRecord =
@@ -96,10 +96,6 @@ type Msg
     | RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
 
 
-pure model =
-    model ! []
-
-
 update config appModel msg pageModel =
     let
         dispatchMsg msg =
@@ -127,7 +123,7 @@ update config appModel msg pageModel =
 
         SetCursorEntityIdAndDomFocus entityId ->
             dispatchMsg (SetCursorEntityId entityId)
-                |> Return.command (Ports.focusSelector ".focusable-list-item[tabindex=0]")
+                |> command (Ports.focusSelector ".focusable-list-item[tabindex=0]")
 
         MoveFocusBy offset ->
             let

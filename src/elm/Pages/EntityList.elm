@@ -90,6 +90,7 @@ getMaybeLastKnownFocusedEntityId =
 type Msg
     = MoveFocusBy Int
     | SetCursorEntityId EntityId
+    | SetCursorEntityIdAndDomFocus EntityId
     | RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
 
 
@@ -104,6 +105,9 @@ update config appModel msg pageModel =
 
         dispatchMaybeMsg msg =
             msg ?|> dispatchMsg ?= pure pageModel
+
+        noop =
+            pure pageModel
     in
     case msg of
         SetCursorEntityId entityId ->
@@ -118,6 +122,9 @@ update config appModel msg pageModel =
                         (getFilter pageModel)
             in
             set cursorFL cursor pageModel |> pure
+
+        SetCursorEntityIdAndDomFocus entityId ->
+            noop
 
         MoveFocusBy offset ->
             let
@@ -135,7 +142,7 @@ update config appModel msg pageModel =
                             _ =
                                 Debug.log "UpdateEntityListCursor Called " entityId
                         in
-                        SetCursorEntityId entityId
+                        SetCursorEntityIdAndDomFocus entityId
                     )
                 |> dispatchMaybeMsg
 

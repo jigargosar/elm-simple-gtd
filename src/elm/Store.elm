@@ -171,9 +171,24 @@ findAndUpdateAll pred now updateFn_ store =
 
 
 updateAndPersist pred now updateFn_ store =
-    findAndUpdateAll pred now updateFn_ store
-        |> Tuple2.mapFirst (List.map (Tuple.second >> upsertIn store) >> Cmd.batch)
-        |> Tuple2.swap
+    let
+        ( result, newStore ) =
+            findAndUpdateAll pred now updateFn_ store
+
+        persistCmd =
+            result
+                |> List.map (Tuple.second >> upsertIn store)
+                >> Cmd.batch
+    in
+    ( store, persistCmd )
+
+
+
+--updateAndPersist pred now updateFn_ store =
+--    findAndUpdateAll pred now updateFn_ store
+--        |> Tuple2.mapFirst (List.map (Tuple.second >> upsertIn store) >> Cmd.batch)
+--        |> Tuple2.swap
+--
 
 
 decode : D.Value -> Store x -> Maybe (Document x)

@@ -252,7 +252,7 @@ createUpdateConfig model =
 
 update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 update config msg =
-    case msg of
+    (case msg of
         NOOP ->
             identity
 
@@ -325,6 +325,17 @@ update config msg =
 
         _ ->
             returnWith .page (updatePage config msg)
+    )
+        >> andThen (updateEntityListCursor config)
+
+
+updateEntityListCursor config model =
+    case model.page of
+        EntityList pageModel ->
+            pure model
+
+        _ ->
+            pure model
 
 
 onNavigateToPath config path =

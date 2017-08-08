@@ -37,10 +37,15 @@ type Model
 
 constructor : List String -> NamedFilterModel -> Cursor.Model -> Model
 constructor path namedFilterModel cursor =
+    let
+        filter =
+            Filter.getFilterFromNamedFilterTypeAndPath namedFilterModel.namedFilterType path
+    in
     ModelRecord path
         namedFilterModel
         cursor
-        (Filter.getFilterFromNamedFilterTypeAndPath namedFilterModel.namedFilterType path)
+        -- (Cursor.initialValue filter)
+        filter
         |> Model
 
 

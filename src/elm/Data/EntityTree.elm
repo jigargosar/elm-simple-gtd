@@ -153,3 +153,8 @@ createGroupDocEntityNode gdEntity todoList totalCount =
 createForest : List Node -> Tree
 createForest =
     Forest
+
+
+createNestedNode : Node -> Node
+createNestedNode =
+    NestedNode

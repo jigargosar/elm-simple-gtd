@@ -325,8 +325,8 @@ getDocIdFromGroupDocType gdType =
             getProjectId
 
 
-groupDocIdFilter : GroupDocId -> TodoDoc -> Bool
-groupDocIdFilter groupDocId =
+hasGroupDocId : GroupDocId -> TodoDoc -> Bool
+hasGroupDocId groupDocId =
     case groupDocId of
         GroupDocId gdType docId ->
             getDocIdFromGroupDocType gdType >> equals docId

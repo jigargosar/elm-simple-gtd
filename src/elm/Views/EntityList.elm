@@ -1,6 +1,6 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (Node(..), Title(GroupDocEntityTitle, StringTitle))
+import Data.EntityTree exposing (Node(..), Title(..), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
@@ -23,7 +23,7 @@ keyedViewList pageVM =
     let
         createNodeView node =
             case node of
-                Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
+                LeafNode (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
                     let
                         vm =
                             case gdType of
@@ -39,9 +39,12 @@ keyedViewList pageVM =
                     in
                     [ groupView createTodoView vm ]
 
-                Node (StringTitle title) todoList totalCount ->
+                LeafNode (StringTitle title) todoList totalCount ->
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
+
+                NestedNode node ->
+                    createNodeView node
 
         createContextVM { context, todoList } =
             pageVM.createContextGroupVM
@@ -79,10 +82,10 @@ keyedViewList pageVM =
             in
             header :: multiContextView subGroupList
 
-        Data.EntityTree.Root node ->
+        Root node ->
             createNodeView node
 
-        Data.EntityTree.Forest nodeList ->
+        Forest nodeList ->
             nodeList |> List.concatMap createNodeView
 
 

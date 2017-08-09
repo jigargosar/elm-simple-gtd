@@ -21,13 +21,18 @@ type alias ProjectNode =
     }
 
 
+type GroupDocNode
+    = GroupDocNode GroupDocEntity (List TodoDoc)
+
+
 type Title
     = GroupDocEntityTitle GroupDocEntity
     | StringTitle String
 
 
 type Node
-    = Node Title (List TodoDoc) Int
+    = LeafNode Title (List TodoDoc) Int
+    | NestedNode Node
 
 
 type Tree
@@ -100,11 +105,14 @@ flatten tree =
     let
         getNodeEntityList node =
             case node of
-                Node (GroupDocEntityTitle gdEntity) todoList _ ->
+                LeafNode (GroupDocEntityTitle gdEntity) todoList _ ->
                     Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
 
-                Node (StringTitle _) todoList _ ->
+                LeafNode (StringTitle _) todoList _ ->
                     todoList .|> Entity.TodoEntity
+
+                NestedNode node ->
+                    getNodeEntityList node
     in
     case tree of
         ContextRoot node nodeList ->
@@ -135,11 +143,11 @@ flatten tree =
 
 
 createRootWithStringTitle stringTitle todoList totalCount =
-    Root (Node (StringTitle stringTitle) todoList totalCount)
+    Root (LeafNode (StringTitle stringTitle) todoList totalCount)
 
 
 createGroupDocEntityNode gdEntity todoList totalCount =
-    Node (GroupDocEntityTitle gdEntity) todoList totalCount
+    LeafNode (GroupDocEntityTitle gdEntity) todoList totalCount
 
 
 createForest : List Node -> Tree

@@ -190,8 +190,12 @@ entityListCursorEntityIdListFL =
     composeInnerOuterFieldLens entityIdListFL cursorFL
 
 
-filterTodosAndSortBy pred sortBy model =
+filterTodoDocs pred model =
     Store.filterDocs pred model.todoStore
+
+
+filterTodosAndSortBy pred sortBy model =
+    filterTodoDocs pred model
         |> List.sortBy sortBy
 
 

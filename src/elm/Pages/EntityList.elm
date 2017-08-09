@@ -284,8 +284,7 @@ createEntityTree pageModel appModel =
                         |> Tree.initProjectForest
                             getActiveTodoListForProjectHelp
 
-                _ ->
-                    --( ContextGroupDocType, SingleGroupDoc groupDocId ) ->
+                SingleGroupDoc groupDocId ->
                     Tree.createRootWithStringTitle (getTitle pageModel)
                         []
                         0

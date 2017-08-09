@@ -36,6 +36,10 @@ contextIdFromDoc =
     Document.getId >> contextIdFromDocId
 
 
+idFromDoc gdType gdDoc =
+    GroupDocId gdType (Document.getId gdDoc)
+
+
 projectIdFromDoc =
     Document.getId >> projectIdFromDocId
 

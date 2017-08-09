@@ -129,8 +129,18 @@ getNullFromGroupDocType gdType =
             nullProject
 
 
+getActiveDocs gdType =
+    filter gdType GroupDoc.isActive
+
+
 
 --getActiveDocs gdType =
+--    case gdType of
+--        ProjectGroupDocType ->
+--            getActiveProjects
+--
+--        ContextGroupDocType ->
+--            getActiveContexts
 
 
 getActiveProjects =
@@ -145,15 +155,6 @@ getActiveProjectIdSet appModel =
 
 getActiveContexts =
     filterContexts GroupDoc.isActive
-
-
-getActiveDocs gdType =
-    case gdType of
-        ProjectGroupDocType ->
-            getActiveProjects
-
-        ContextGroupDocType ->
-            getActiveContexts
 
 
 storeFieldFromGDType :

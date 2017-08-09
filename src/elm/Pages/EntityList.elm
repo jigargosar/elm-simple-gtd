@@ -216,6 +216,9 @@ activeTodoListPredicateForGroupDocId groupDocId =
 
 getActiveTodoListForContext context appModel =
     let
+        groupDocId =
+            GroupDoc.idFromDoc ContextGroupDocType context
+
         activeProjectIdSet =
             Models.GroupDocStore.getActiveProjectIdSet appModel
 
@@ -224,7 +227,7 @@ getActiveTodoListForContext context appModel =
 
         pred =
             X.Predicate.all
-                [ activeTodoListPredicateForGroupDocId (GroupDoc.contextIdFromDoc context)
+                [ activeTodoListPredicateForGroupDocId groupDocId
                 , isTodoProjectActive
                 ]
     in

@@ -78,12 +78,6 @@ keyedViewList pageVM =
             in
             header :: multiContextView subGroupList
 
-        Data.EntityTree.ContextForest groupList ->
-            multiContextView groupList
-
-        Data.EntityTree.ProjectForest groupList ->
-            multiProjectView groupList
-
         Data.EntityTree.Root node totalCount ->
             case node of
                 Node (StringTitle title) todoList ->

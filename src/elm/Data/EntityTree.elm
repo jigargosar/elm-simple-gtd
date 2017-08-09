@@ -33,8 +33,6 @@ type Node
 type Tree
     = ContextRoot ContextNode (List ProjectNode)
     | ProjectRoot ProjectNode (List ContextNode)
-    | ContextForest (List ContextNode)
-    | ProjectForest (List ProjectNode)
     | Root Node Int
     | Forest (List Node)
 
@@ -49,30 +47,6 @@ initProjectNode getTodoList project =
     { project = project
     , todoList = getTodoList project
     }
-
-
-initContextForest getTodoList contexts =
-    contexts .|> initContextNode getTodoList |> ContextForest
-
-
-initGroupDocForest groupDocType getTodoList groupDocs =
-    let
-        initContextNode context =
-            { context = context
-            , todoList = getTodoList (Document.getId context)
-            }
-
-        initProjectNode project =
-            { project = project
-            , todoList = getTodoList (Document.getId project)
-            }
-    in
-    case groupDocType of
-        ContextGroupDocType ->
-            groupDocs .|> initContextNode |> ContextForest
-
-        ProjectGroupDocType ->
-            groupDocs .|> initProjectNode |> ProjectForest
 
 
 createProjectSubGroups findProjectById tcg =
@@ -96,10 +70,6 @@ initContextRoot getTodoList findContextById context =
     context
         |> initContextNode getTodoList
         |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
-
-
-initProjectForest getTodoList projects =
-    projects .|> initProjectNode getTodoList |> ProjectForest
 
 
 createContextSubGroups findContextById tcg =
@@ -139,24 +109,23 @@ flatten tree =
     case tree of
         ContextRoot node nodeList ->
             Entity.createContextEntity node.context
-                :: flatten (ProjectForest nodeList)
+                :: (nodeList
+                        |> List.concatMap
+                            (\node ->
+                                Entity.createProjectEntity node.project
+                                    :: (node.todoList .|> Entity.TodoEntity)
+                            )
+                   )
 
         ProjectRoot node nodeList ->
             Entity.createProjectEntity node.project
-                :: flatten (ContextForest nodeList)
-
-        ContextForest nodeList ->
-            nodeList
-                |> List.concatMap
-                    (\node -> Entity.createContextEntity node.context :: (node.todoList .|> Entity.TodoEntity))
-
-        ProjectForest groupList ->
-            groupList
-                |> List.concatMap
-                    (\g ->
-                        Entity.createProjectEntity g.project
-                            :: (g.todoList .|> Entity.TodoEntity)
-                    )
+                :: (nodeList
+                        |> List.concatMap
+                            (\node ->
+                                Entity.createContextEntity node.context
+                                    :: (node.todoList .|> Entity.TodoEntity)
+                            )
+                   )
 
         Root node _ ->
             getNodeEntityList node

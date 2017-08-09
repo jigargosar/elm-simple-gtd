@@ -167,3 +167,12 @@ flatten tree =
 
 createRootWithStringTitle stringTitle todoList totalCount =
     Root (Node (StringTitle stringTitle) todoList) totalCount
+
+
+createGroupDocEntityNode gdEntity todoList =
+    Node (GroupDocEntityTitle gdEntity) todoList
+
+
+createForest : List Node -> Tree
+createForest =
+    Forest

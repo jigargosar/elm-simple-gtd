@@ -16,20 +16,20 @@ type Entity
     | TodoEntity TodoDoc
 
 
-initProjectGroup =
+createProjectGroupDocEntity =
     GroupDocEntity ProjectGroupDocType
 
 
-initContextGroup =
+createContextGroupDocEntity =
     GroupDocEntity ContextGroupDocType
 
 
 createContextEntity =
-    initContextGroup >> GroupDocEntityW
+    createContextGroupDocEntity >> GroupDocEntityW
 
 
 createProjectEntity =
-    initProjectGroup >> GroupDocEntityW
+    createProjectGroupDocEntity >> GroupDocEntityW
 
 
 createTodoEntity =

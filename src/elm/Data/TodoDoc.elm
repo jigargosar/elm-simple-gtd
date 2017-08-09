@@ -1,7 +1,7 @@
 module Data.TodoDoc exposing (..)
 
 import Data.DeviceId exposing (DeviceId)
-import Data.Todo.Schedule exposing (TodoSchedule)
+import Data.Todo.Schedule as Schedule
 import Document exposing (..)
 import GroupDoc exposing (..)
 import Json.Decode as D exposing (Decoder)
@@ -26,7 +26,7 @@ type alias TodoText =
 type alias TodoRecord =
     { done : Bool
     , text : TodoText
-    , schedule : TodoSchedule
+    , schedule : Schedule.Model
     , projectId : DocId
     , contextId : DocId
     }
@@ -48,7 +48,7 @@ type TodoAction
     | TA_ToggleDone
     | TA_ToggleDeleted
     | TA_TurnReminderOff
-    | TA_SetSchedule TodoSchedule
+    | TA_SetSchedule Schedule.Model
     | TA_SnoozeTill Time
     | TA_AutoSnooze Time
 
@@ -64,7 +64,7 @@ type alias Text =
 type alias Record =
     { done : Bool
     , text : Text
-    , schedule : Data.Todo.Schedule.Model
+    , schedule : Schedule.Model
     , projectId : DocId
     , contextId : DocId
     }
@@ -88,11 +88,11 @@ type alias ModelF =
 
 getMaybeDueAt : Model -> Maybe Time
 getMaybeDueAt =
-    .schedule >> Data.Todo.Schedule.getMaybeDueAt
+    .schedule >> Schedule.getMaybeDueAt
 
 
 getMaybeReminderTime =
-    .schedule >> Data.Todo.Schedule.getMaybeReminderTime
+    .schedule >> Schedule.getMaybeReminderTime
 
 
 isActive =
@@ -184,20 +184,20 @@ update action =
             toggle deleted
 
         TA_SetScheduleFromMaybeTime maybeTime ->
-            set schedule (Data.Todo.Schedule.fromMaybeTime maybeTime)
+            set schedule (Schedule.fromMaybeTime maybeTime)
 
         TA_TurnReminderOff ->
-            updateSchedule Data.Todo.Schedule.turnReminderOff
+            updateSchedule Schedule.turnReminderOff
 
         TA_SnoozeTill time ->
-            updateSchedule (Data.Todo.Schedule.snoozeTill time)
+            updateSchedule (Schedule.snoozeTill time)
 
         TA_AutoSnooze now ->
-            updateSchedule (Data.Todo.Schedule.autoSnooze now)
+            updateSchedule (Schedule.autoSnooze now)
 
 
 hasReminderChanged ( old, new ) =
-    Data.Todo.Schedule.hasReminderChanged old.schedule new.schedule
+    Schedule.hasReminderChanged old.schedule new.schedule
 
 
 isReminderOverdue now model =
@@ -258,7 +258,7 @@ todoConstructor id rev createdAt modifiedAt deleted deviceId done text schedule 
 todoRecordDecoder =
     D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
-        >> D.custom Data.Todo.Schedule.decode
+        >> D.custom Schedule.decode
         >> D.optional "projectId" D.string defaultProjectId
         >> D.optional "contextId" D.string defaultContextId
 
@@ -275,7 +275,7 @@ encodeOtherFields todo =
     , "text" => E.string (getText todo)
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
-    , "schedule" => Data.Todo.Schedule.encode todo.schedule
+    , "schedule" => Schedule.encode todo.schedule
     ]
 
 
@@ -293,7 +293,7 @@ init createdAt text deviceId id =
         deviceId
         defaultDone
         text
-        Data.Todo.Schedule.unscheduled
+        Schedule.unscheduled
         defaultProjectId
         defaultContextId
 
@@ -313,6 +313,23 @@ getContextId =
 
 contextFilter context =
     getContextId >> equals (Document.getId context)
+
+
+getDocIdFromGroupDocType : GroupDocType -> TodoDoc -> DocId
+getDocIdFromGroupDocType gdType =
+    case gdType of
+        ContextGroupDocType ->
+            getContextId
+
+        ProjectGroupDocType ->
+            getProjectId
+
+
+groupDocIdFilter : GroupDocId -> TodoDoc -> Bool
+groupDocIdFilter groupDocId =
+    case groupDocId of
+        GroupDocId gdType docId ->
+            getDocIdFromGroupDocType gdType >> equals docId
 
 
 hasProject project =

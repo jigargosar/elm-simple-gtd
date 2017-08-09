@@ -4,6 +4,7 @@ import Document
 import GroupDoc exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Set
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -92,6 +93,12 @@ getNullFromGroupDocType gdType =
 
 getActiveProjects =
     filterProjects GroupDoc.isActive
+
+
+getActiveProjectIdSet appModel =
+    getActiveProjects appModel
+        .|> Document.getId
+        |> Set.fromList
 
 
 getActiveContexts =

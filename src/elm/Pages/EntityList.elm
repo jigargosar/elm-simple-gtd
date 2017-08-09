@@ -206,21 +206,19 @@ filterTodosAndSortByLatestModified pred =
 getActiveTodoListForContext context appModel =
     let
         activeProjectIdSet =
-            Models.GroupDocStore.getActiveProjects appModel
-                .|> Document.getId
-                |> Set.fromList
+            Models.GroupDocStore.getActiveProjectIdSet appModel
 
         isTodoProjectActive =
             TodoDoc.getProjectId >> Set.member # activeProjectIdSet
+
+        pred =
+            X.Predicate.all
+                [ TodoDoc.isActive
+                , TodoDoc.contextFilter context
+                , isTodoProjectActive
+                ]
     in
-    filterTodosAndSortByLatestCreated
-        (X.Predicate.all
-            [ TodoDoc.isActive
-            , TodoDoc.contextFilter context
-            , isTodoProjectActive
-            ]
-        )
-        appModel
+    filterTodosAndSortByLatestCreated pred appModel
 
 
 getActiveTodoListForProject project appModel =

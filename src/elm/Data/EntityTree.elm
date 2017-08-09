@@ -24,7 +24,6 @@ type alias ProjectNode =
 type Title
     = GroupDocEntityTitle GroupDocEntity
     | StringTitle String
-    | NoTitle
 
 
 type Node
@@ -134,7 +133,7 @@ flatten tree =
                 Node (GroupDocEntityTitle gdEntity) todoList ->
                     Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
 
-                Node _ todoList ->
+                Node (StringTitle _) todoList ->
                     todoList .|> Entity.TodoEntity
     in
     case tree of

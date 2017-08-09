@@ -161,6 +161,11 @@ update config appModel msg pageModel =
                 ?= noop
 
         GoToEntityId entityId ->
+            let
+                _ =
+                    --config.navigateToPath
+                    1
+            in
             noop
 
 

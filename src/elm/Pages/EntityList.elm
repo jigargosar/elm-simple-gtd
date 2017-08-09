@@ -219,16 +219,19 @@ getActiveTodoListForContext context appModel =
         groupDocId =
             GroupDoc.idFromDoc ContextGroupDocType context
 
-        activeProjectIdSet =
-            Models.GroupDocStore.getActiveProjectIdSet appModel
+        secondaryGroupDocType =
+            ProjectGroupDocType
 
-        isTodoProjectActive =
-            TodoDoc.getProjectId >> Set.member # activeProjectIdSet
+        activeSecondaryGroupDocIdSet =
+            Models.GroupDocStore.getActiveDocIdSet secondaryGroupDocType appModel
+
+        isTodoSecondaryGroupDocActive =
+            TodoDoc.hasGroupDocIdInSet secondaryGroupDocType activeSecondaryGroupDocIdSet
 
         pred =
             X.Predicate.all
                 [ activeTodoListPredicateForGroupDocId groupDocId
-                , isTodoProjectActive
+                , isTodoSecondaryGroupDocActive
                 ]
     in
     filterTodosAndSortByLatestCreated pred appModel
@@ -239,18 +242,19 @@ getActiveTodoListForProject project appModel =
         groupDocId =
             GroupDoc.idFromDoc ProjectGroupDocType project
 
-        activeContextIdSet =
-            Models.GroupDocStore.getActiveContexts appModel
-                .|> Document.getId
-                |> Set.fromList
+        secondaryGroupDocType =
+            ContextGroupDocType
 
-        isTodoContextActive =
-            TodoDoc.getContextId >> Set.member # activeContextIdSet
+        activeSecondaryGroupDocIdSet =
+            Models.GroupDocStore.getActiveDocIdSet secondaryGroupDocType appModel
+
+        isTodoSecondaryGroupDocActive =
+            TodoDoc.hasGroupDocIdInSet secondaryGroupDocType activeSecondaryGroupDocIdSet
     in
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ activeTodoListPredicateForGroupDocId (GroupDoc.projectIdFromDoc project)
-            , isTodoContextActive
+            [ activeTodoListPredicateForGroupDocId groupDocId
+            , isTodoSecondaryGroupDocActive
             ]
         )
         appModel

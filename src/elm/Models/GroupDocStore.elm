@@ -1,16 +1,23 @@
 module Models.GroupDocStore exposing (..)
 
-import Document
+import Document exposing (DocId)
 import GroupDoc exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Set
+import Set exposing (Set)
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
+
+
+type alias HasGroupDocStores model =
+    { model
+        | projectStore : GroupDocStore
+        , contextStore : GroupDocStore
+    }
 
 
 contextStore =
@@ -131,6 +138,13 @@ getNullFromGroupDocType gdType =
 
 getActiveDocs gdType =
     filter gdType GroupDoc.isActive
+
+
+getActiveDocIdSet : GroupDocType -> HasGroupDocStores x -> Set DocId
+getActiveDocIdSet =
+    getActiveDocs
+        >>> List.map Document.getId
+        >> Set.fromList
 
 
 

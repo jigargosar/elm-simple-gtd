@@ -156,3 +156,7 @@ flatten tree =
 
         Forest list node ->
             []
+
+
+createRootWithStringTitle stringTitle todoList totalCount =
+    Root (Node (StringTitle stringTitle) todoList) totalCount

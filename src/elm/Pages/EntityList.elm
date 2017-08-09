@@ -296,12 +296,8 @@ createEntityTree pageModel appModel =
 
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
-
-                initTodoForest stringTitle todoList totalCount =
-                    Tree.Root (Tree.Node (Tree.StringTitle stringTitle) todoList) totalCount
             in
-            initTodoForest
-                (getTitle pageModel)
+            Tree.createRootWithStringTitle (getTitle pageModel)
                 truncatedTodoList
                 totalCount
 

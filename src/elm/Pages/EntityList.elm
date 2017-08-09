@@ -293,7 +293,9 @@ createEntityTree pageModel appModel =
                             Tree.createGroupDocEntityNode groupDocEntity
                                 (getActiveTodoListForGroupDocEntity groupDocEntity)
                     in
-                    1
+                    activeGroupDocEntityList
+                        .|> createNode
+                        |> Tree.createForest
             in
             case groupByType of
                 ActiveGroupDocList ContextGroupDocType ->

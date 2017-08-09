@@ -298,17 +298,8 @@ createEntityTree pageModel appModel =
                         |> Tree.createForest
             in
             case groupByType of
-                ActiveGroupDocList ContextGroupDocType ->
-                    {- Models.GroupDocStore.getActiveContexts appModel
-                       |> Tree.initContextForest
-                           getActiveTodoListForContextHelp
-                    -}
-                    createActiveGroupDocForest ContextGroupDocType
-
-                ActiveGroupDocList ProjectGroupDocType ->
-                    Models.GroupDocStore.getActiveProjects appModel
-                        |> Tree.initProjectForest
-                            getActiveTodoListForProjectHelp
+                ActiveGroupDocList gdType ->
+                    createActiveGroupDocForest gdType
 
                 SingleGroupDoc groupDocId ->
                     Tree.createRootWithStringTitle (getTitle pageModel)

@@ -214,6 +214,26 @@ activeTodoListPredicateForGroupDocId groupDocId =
         ]
 
 
+getActiveTodoListForGroupDoc gdType secondaryGDType groupDoc appModel =
+    let
+        groupDocId =
+            GroupDoc.idFromDoc gdType groupDoc
+
+        activeSecondaryGroupDocIdSet =
+            Models.GroupDocStore.getActiveDocIdSet secondaryGDType appModel
+
+        isTodoSecondaryGroupDocActive =
+            TodoDoc.hasGroupDocIdInSet secondaryGDType activeSecondaryGroupDocIdSet
+
+        pred =
+            X.Predicate.all
+                [ activeTodoListPredicateForGroupDocId groupDocId
+                , isTodoSecondaryGroupDocActive
+                ]
+    in
+    filterTodosAndSortByLatestCreated pred appModel
+
+
 getActiveTodoListForContext context appModel =
     let
         groupDocId =
@@ -262,8 +282,13 @@ getActiveTodoListForProject project appModel =
 
 createEntityTree pageModel appModel =
     let
-        getActiveTodoListForContextHelp =
-            getActiveTodoListForContext # appModel
+        getActiveTodoListForContextHelp context =
+            -- getActiveTodoListForContext # appModel
+            getActiveTodoListForGroupDoc
+                ContextGroupDocType
+                ProjectGroupDocType
+                context
+                appModel
 
         getActiveTodoListForProjectHelp =
             getActiveTodoListForProject # appModel

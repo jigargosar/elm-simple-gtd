@@ -202,6 +202,11 @@ sortWithIsNull isNull =
         )
 
 
+sort : List GroupDoc -> List GroupDoc
+sort =
+    List.sortWith ((,) >>> compareNotNulls)
+
+
 compareNotNulls tuple =
     let
         compareName =

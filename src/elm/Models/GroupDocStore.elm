@@ -8,6 +8,7 @@ import Set
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 
@@ -46,10 +47,15 @@ filter gdType pred model =
     let
         store =
             getStore gdType model
+
+        sortWithNullIncluded =
+            GroupDoc.sortWithIsNull (equals (getNullDoc gdType))
     in
     Store.filterDocs pred store
-        |> List.append (filterNullContext gdType pred)
-        |> GroupDoc.sortContexts
+        --|> List.append (filterNull gdType pred)
+        --|> sortWithNullIncluded
+        |> GroupDoc.sort
+        |> List.append (filterNull gdType pred)
 
 
 filterContexts pred model =

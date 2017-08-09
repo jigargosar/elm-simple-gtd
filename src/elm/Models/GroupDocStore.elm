@@ -147,24 +147,8 @@ getActiveDocIdSet =
         >> Set.fromList
 
 
-
---getActiveDocs gdType =
---    case gdType of
---        ProjectGroupDocType ->
---            getActiveProjects
---
---        ContextGroupDocType ->
---            getActiveContexts
-
-
 getActiveProjects =
     filterProjects GroupDoc.isActive
-
-
-getActiveProjectIdSet appModel =
-    getActiveProjects appModel
-        .|> Document.getId
-        |> Set.fromList
 
 
 getActiveContexts =

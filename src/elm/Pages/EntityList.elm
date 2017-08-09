@@ -234,64 +234,22 @@ getActiveTodoListForGroupDoc gdType secondaryGDType groupDoc appModel =
     filterTodosAndSortByLatestCreated pred appModel
 
 
-getActiveTodoListForContext context appModel =
-    let
-        groupDocId =
-            GroupDoc.idFromDoc ContextGroupDocType context
-
-        secondaryGroupDocType =
-            ProjectGroupDocType
-
-        activeSecondaryGroupDocIdSet =
-            Models.GroupDocStore.getActiveDocIdSet secondaryGroupDocType appModel
-
-        isTodoSecondaryGroupDocActive =
-            TodoDoc.hasGroupDocIdInSet secondaryGroupDocType activeSecondaryGroupDocIdSet
-
-        pred =
-            X.Predicate.all
-                [ activeTodoListPredicateForGroupDocId groupDocId
-                , isTodoSecondaryGroupDocActive
-                ]
-    in
-    filterTodosAndSortByLatestCreated pred appModel
-
-
-getActiveTodoListForProject project appModel =
-    let
-        groupDocId =
-            GroupDoc.idFromDoc ProjectGroupDocType project
-
-        secondaryGroupDocType =
-            ContextGroupDocType
-
-        activeSecondaryGroupDocIdSet =
-            Models.GroupDocStore.getActiveDocIdSet secondaryGroupDocType appModel
-
-        isTodoSecondaryGroupDocActive =
-            TodoDoc.hasGroupDocIdInSet secondaryGroupDocType activeSecondaryGroupDocIdSet
-    in
-    filterTodosAndSortByLatestCreated
-        (X.Predicate.all
-            [ activeTodoListPredicateForGroupDocId groupDocId
-            , isTodoSecondaryGroupDocActive
-            ]
-        )
-        appModel
-
-
 createEntityTree pageModel appModel =
     let
-        getActiveTodoListForContextHelp context =
+        getActiveTodoListForContextHelp groupDoc =
             -- getActiveTodoListForContext # appModel
             getActiveTodoListForGroupDoc
                 ContextGroupDocType
                 ProjectGroupDocType
-                context
+                groupDoc
                 appModel
 
-        getActiveTodoListForProjectHelp =
-            getActiveTodoListForProject # appModel
+        getActiveTodoListForProjectHelp groupDoc =
+            getActiveTodoListForGroupDoc
+                ProjectGroupDocType
+                ContextGroupDocType
+                groupDoc
+                appModel
 
         findProjectByIdHelp =
             Models.GroupDocStore.findProjectById # appModel

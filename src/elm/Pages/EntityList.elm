@@ -113,20 +113,20 @@ getEntityListDomIdFromEntityId entityId =
 type Msg
     = MoveFocusBy Int
     | SetCursorEntityId EntityId
-    | SetCursorEntityIdAndDomFocus EntityId
     | RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+    | GoToEntityId EntityId
 
 
 update config appModel msg pageModel =
     let
+        noop =
+            pure pageModel
+
         dispatchMsg msg =
             update config appModel msg pageModel
 
         dispatchMaybeMsg msg =
-            msg ?|> dispatchMsg ?= pure pageModel
-
-        noop =
-            pure pageModel
+            msg ?|> dispatchMsg ?= noop
     in
     case msg of
         SetCursorEntityId entityId ->
@@ -142,10 +142,6 @@ update config appModel msg pageModel =
             in
             set cursorFL cursor pageModel |> pure
 
-        SetCursorEntityIdAndDomFocus entityId ->
-            dispatchMsg (SetCursorEntityId entityId)
-                |> command (Ports.focusSelector ".focusable-list-item[tabindex=0]")
-
         MoveFocusBy offset ->
             let
                 cursor =
@@ -158,13 +154,14 @@ update config appModel msg pageModel =
         RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel pageModel
                 ?|> (\entityId ->
-                        let
-                            _ =
-                                Debug.log "UpdateEntityListCursor Called " entityId
-                        in
-                        ( pageModel, Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId) )
+                        ( pageModel
+                        , Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
+                        )
                     )
                 ?= noop
+
+        GoToEntityId entityId ->
+            noop
 
 
 overModel fn (Model model) =

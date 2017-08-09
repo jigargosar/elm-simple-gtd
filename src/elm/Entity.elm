@@ -16,12 +16,16 @@ type Entity
     | TodoEntity TodoDoc
 
 
+createGroupDocEntity =
+    GroupDocEntity
+
+
 createProjectGroupDocEntity =
-    GroupDocEntity ProjectGroupDocType
+    createGroupDocEntity ProjectGroupDocType
 
 
 createContextGroupDocEntity =
-    GroupDocEntity ContextGroupDocType
+    createGroupDocEntity ContextGroupDocType
 
 
 createContextEntity =

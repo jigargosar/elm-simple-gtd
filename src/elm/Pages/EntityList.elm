@@ -9,7 +9,7 @@ import Data.EntityListFilter as Filter
         , NamedFilterModel
         , NamedFilterType(..)
         )
-import Data.EntityTree as Tree
+import Data.EntityTree as Tree exposing (Node, Tree)
 import Data.TodoDoc as TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
@@ -251,6 +251,14 @@ createEntityTree pageModel appModel =
                 groupDoc
                 appModel
 
+        getActiveTodoListForGroupDocEntity gdEntity =
+            case gdEntity of
+                GroupDocEntity ContextGroupDocType groupDoc ->
+                    getActiveTodoListForContextHelp groupDoc
+
+                GroupDocEntity ProjectGroupDocType groupDoc ->
+                    getActiveTodoListForProjectHelp groupDoc
+
         findProjectByIdHelp =
             Models.GroupDocStore.findProjectById # appModel
 
@@ -273,6 +281,20 @@ createEntityTree pageModel appModel =
                     findContextByIdHelp
 
         GroupByFilter groupByType ->
+            let
+                createActiveGroupDocForest gdType =
+                    let
+                        activeGroupDocEntityList =
+                            Models.GroupDocStore.getActiveDocs gdType appModel
+                                .|> Entity.createGroupDocEntity gdType
+
+                        createNode : GroupDocEntity -> Node
+                        createNode groupDocEntity =
+                            Tree.createGroupDocEntityNode groupDocEntity
+                                (getActiveTodoListForGroupDocEntity groupDocEntity)
+                    in
+                    1
+            in
             case groupByType of
                 ActiveGroupDocList ContextGroupDocType ->
                     Models.GroupDocStore.getActiveContexts appModel

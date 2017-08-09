@@ -1,8 +1,8 @@
-    8941 total
+    8967 total
      593 src/elm/Main.elm
      376 src/elm/Data/TodoDoc.elm
+     360 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
-     338 src/elm/Pages/EntityList.elm
      308 src/elm/Store.elm
      301 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
@@ -32,8 +32,8 @@
      103 src/elm/Todo/View.elm
       93 src/elm/X/Time.elm
       93 src/elm/Data/EntityListCursor.elm
+      90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
-      86 src/elm/Entity.elm
       82 src/elm/View/MainMenu.elm
       80 src/elm/GroupDoc/View.elm
       77 src/elm/GroupDoc/FormView.elm

@@ -142,7 +142,7 @@ flatten tree =
             nodeList |> List.concatMap getNodeEntityList
 
 
-createRootWithStringTitle stringTitle todoList totalCount =
+createRootLeafNodeWithStringTitle stringTitle todoList totalCount =
     Root (LeafNode (StringTitle stringTitle) todoList totalCount)
 
 

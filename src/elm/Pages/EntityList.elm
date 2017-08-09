@@ -307,7 +307,7 @@ createEntityTree pageModel appModel =
                     createActiveGroupDocForest gdType
 
                 SingleGroupDoc groupDocId ->
-                    Tree.createRootWithStringTitle (getTitle pageModel)
+                    Tree.createRootLeafNodeWithStringTitle (getTitle pageModel)
                         []
                         0
 
@@ -325,7 +325,7 @@ createEntityTree pageModel appModel =
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
             in
-            Tree.createRootWithStringTitle (getTitle pageModel)
+            Tree.createRootLeafNodeWithStringTitle (getTitle pageModel)
                 truncatedTodoList
                 totalCount
 

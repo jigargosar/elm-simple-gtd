@@ -1,8 +1,8 @@
-    8801 total
+    8800 total
      593 src/elm/Main.elm
      355 src/elm/Update/Todo/Internal.elm
      353 src/elm/Data/TodoDoc.elm
-     333 src/elm/Pages/EntityList.elm
+     336 src/elm/Pages/EntityList.elm
      308 src/elm/Store.elm
      286 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
@@ -17,8 +17,8 @@
      168 src/elm/Update/Todo.elm
      167 src/elm/AppDrawer/Model.elm
      164 src/elm/Todo/ItemView.elm
-     162 src/elm/Data/EntityTree.elm
      161 src/elm/Data/Todo/Schedule.elm
+     158 src/elm/Data/EntityTree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      143 src/elm/Update/GroupDoc.elm

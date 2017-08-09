@@ -156,7 +156,3 @@ flatten tree =
 
         Forest list node ->
             []
-
-
-initTodoForest stringTitle todoList totalCount =
-    Root (Node (StringTitle stringTitle) todoList) totalCount

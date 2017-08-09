@@ -8,7 +8,7 @@ import Data.EntityListFilter as Filter
         , NamedFilterModel
         , NamedFilterType(..)
         )
-import Data.EntityTree
+import Data.EntityTree as Tree
 import Data.TodoDoc as TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
@@ -260,14 +260,14 @@ createEntityTree pageModel appModel =
         ContextIdFilter id ->
             Models.GroupDocStore.findContextById id appModel
                 ?= GroupDoc.nullContext
-                |> Data.EntityTree.initContextRoot
+                |> Tree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
         ProjectIdFilter id ->
             Models.GroupDocStore.findProjectById id appModel
                 ?= GroupDoc.nullProject
-                |> Data.EntityTree.initProjectRoot
+                |> Tree.initProjectRoot
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
@@ -275,12 +275,12 @@ createEntityTree pageModel appModel =
             case groupDocType of
                 ContextGroupDocType ->
                     Models.GroupDocStore.getActiveContexts appModel
-                        |> Data.EntityTree.initContextForest
+                        |> Tree.initContextForest
                             getActiveTodoListForContextHelp
 
                 ProjectGroupDocType ->
                     Models.GroupDocStore.getActiveProjects appModel
-                        |> Data.EntityTree.initProjectForest
+                        |> Tree.initProjectForest
                             getActiveTodoListForProjectHelp
 
         FlatFilter flatFilterType maxDisplayCount ->
@@ -296,8 +296,11 @@ createEntityTree pageModel appModel =
 
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
+
+                initTodoForest stringTitle todoList totalCount =
+                    Tree.Root (Tree.Node (Tree.StringTitle stringTitle) todoList) totalCount
             in
-            Data.EntityTree.initTodoForest
+            initTodoForest
                 (getTitle pageModel)
                 truncatedTodoList
                 totalCount
@@ -317,7 +320,7 @@ flatFilterTypeToPredicate filterType =
 
 createEntityIdList appModel pageModel =
     createEntityTree pageModel appModel
-        |> Data.EntityTree.flatten
+        |> Tree.flatten
         .|> Entity.toEntityId
 
 

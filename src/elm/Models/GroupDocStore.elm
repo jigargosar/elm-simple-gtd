@@ -5,15 +5,18 @@ import GroupDoc exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Store
-import X.Record exposing (FieldLens, fieldLens)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
+import X.Record exposing (..)
 
 
 contextStore =
-    X.Record.fieldLens .contextStore (\s b -> { b | contextStore = s })
+    fieldLens .contextStore (\s b -> { b | contextStore = s })
 
 
 projectStore =
-    X.Record.fieldLens .projectStore (\s b -> { b | projectStore = s })
+    fieldLens .projectStore (\s b -> { b | projectStore = s })
 
 
 filterContexts pred model =
@@ -61,6 +64,30 @@ findByGroupDocId groupDocId =
     getStore
         >> Store.findById id
         >> Maybe.orElseLazy (\_ -> [ null ] |> List.find (Document.hasId id))
+
+
+findByGroupDocIdOrNull groupDocId =
+    findByGroupDocId groupDocId
+        >>?= getNullFromGroupDocId groupDocId
+
+
+getNullFromGroupDocId =
+    getTypeFromGroupDocId >> getNullFromGroupDocType
+
+
+getTypeFromGroupDocId groupDocId =
+    case groupDocId of
+        GroupDocId gdType _ ->
+            gdType
+
+
+getNullFromGroupDocType gdType =
+    case gdType of
+        ContextGroupDocType ->
+            nullContext
+
+        ProjectGroupDocType ->
+            nullProject
 
 
 getActiveProjects =

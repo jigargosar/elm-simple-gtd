@@ -24,6 +24,14 @@ type GroupDocId
     = GroupDocId GroupDocType DocId
 
 
+contextIdFromDocId =
+    GroupDocId ContextGroupDocType
+
+
+projectIdFromDocId =
+    GroupDocId ProjectGroupDocType
+
+
 type GroupDocAction
     = GDA_StartAdding
 

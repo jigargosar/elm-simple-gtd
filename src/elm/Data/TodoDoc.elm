@@ -10,6 +10,7 @@ import Json.Encode as E
 import List
 import Maybe.Extra as Maybe
 import Random.Pcg
+import Set exposing (Set)
 import Store exposing (..)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -330,6 +331,11 @@ hasGroupDocId groupDocId =
     case groupDocId of
         GroupDocId gdType docId ->
             getDocIdFromGroupDocType gdType >> equals docId
+
+
+hasGroupDocIdInSet : GroupDocType -> Set DocId -> TodoDoc -> Bool
+hasGroupDocIdInSet gdType idSet model =
+    Set.member (getDocIdFromGroupDocType gdType model) idSet
 
 
 hasProject project =

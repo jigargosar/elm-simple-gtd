@@ -48,7 +48,7 @@ findContextByIdIn =
     flip findContextById
 
 
-findGroupDocById groupDocId =
+findByGroupDocId groupDocId =
     let
         ( getStore, id, null ) =
             case groupDocId of

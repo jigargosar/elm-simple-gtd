@@ -94,7 +94,7 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
     case groupDocIdAction of
         GDA_StartEditing ->
             X.Return.returnWithMaybe1
-                (Models.GroupDocStore.findGroupDocById groupDocId)
+                (Models.GroupDocStore.findByGroupDocId groupDocId)
                 (createEditGroupDocForm gdType
                     >> XMGroupDocForm
                     >> config.onSetExclusiveMode

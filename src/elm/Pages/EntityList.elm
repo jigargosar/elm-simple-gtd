@@ -264,6 +264,9 @@ createEntityTree pageModel appModel =
 
         findContextByIdHelp =
             Models.GroupDocStore.findContextById # appModel
+
+        findByGroupDocId groupDocId =
+            Models.GroupDocStore.findByGroupDocId groupDocId appModel
     in
     case getFilter pageModel of
         ContextIdFilter id ->
@@ -301,6 +304,16 @@ createEntityTree pageModel appModel =
                     activeGroupDocEntityList
                         .|> createNode
                         |> Tree.createForest
+
+                createGroupDocTree gdType gDoc =
+                    let
+                        groupDocId =
+                            GroupDoc.idFromDoc gdType gDoc
+
+                        groupDoc =
+                            Models.GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
+                    in
+                    1
             in
             case groupByType of
                 ActiveGroupDocList gdType ->

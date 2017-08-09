@@ -32,7 +32,7 @@ type Title
 
 type Node
     = LeafNode Title (List TodoDoc) Int
-    | NestedNode Node
+    | NodeList (List Node)
 
 
 type Tree
@@ -111,8 +111,8 @@ flatten tree =
                 LeafNode (StringTitle _) todoList _ ->
                     todoList .|> Entity.TodoEntity
 
-                NestedNode node ->
-                    getNodeEntityList node
+                NodeList nodeList ->
+                    nodeList |> List.concatMap getNodeEntityList
     in
     case tree of
         ContextRoot node nodeList ->
@@ -155,6 +155,6 @@ createForest =
     Forest
 
 
-createNestedNode : Node -> Node
-createNestedNode =
-    NestedNode
+createNodeList : List Node -> Node
+createNodeList =
+    NodeList

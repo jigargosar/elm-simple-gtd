@@ -128,6 +128,15 @@ initProjectRoot getTodoList findProjectById project =
 
 flatten : Tree -> List Entity
 flatten tree =
+    let
+        getNodeEntityList node =
+            case node of
+                Node (GroupDocEntityTitle gdEntity) todoList ->
+                    Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
+
+                Node _ todoList ->
+                    todoList .|> Entity.TodoEntity
+    in
     case tree of
         ContextRoot node nodeList ->
             Entity.createContextEntity node.context
@@ -151,20 +160,9 @@ flatten tree =
                     )
 
         Root node _ ->
-            case node of
-                Node _ todoList ->
-                    todoList .|> Entity.TodoEntity
+            getNodeEntityList node
 
         Forest nodeList ->
-            let
-                getNodeEntityList node =
-                    case node of
-                        Node (GroupDocEntityTitle gdEntity) todoList ->
-                            Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
-
-                        _ ->
-                            []
-            in
             nodeList |> List.concatMap getNodeEntityList
 
 

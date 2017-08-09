@@ -75,7 +75,7 @@ create config configInner todoList groupDoc =
             configInner.toEntityId id
 
         groupDocId =
-            GroupDoc.createGroupDocIdFromType configInner.groupDocType id
+            GroupDocId configInner.groupDocType id
 
         isNull =
             configInner.isNull groupDoc

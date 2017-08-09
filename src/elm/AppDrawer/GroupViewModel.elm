@@ -110,7 +110,7 @@ create getTodoListByEntityId config innerConFig groupDoc =
             { name = innerConFig.namePrefix ++ name, backgroundColor = icon.color }
 
         groupDocId =
-            GroupDoc.createGroupDocIdFromType innerConFig.groupDocType id
+            GroupDocId innerConFig.groupDocType id
 
         startEditingMsg =
             config.onStartEditingGroupDoc groupDocId

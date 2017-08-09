@@ -21,8 +21,7 @@ type GroupDocType
 
 
 type GroupDocId
-    = ContextGroupDocId DocId
-    | ProjectGroupDocId DocId
+    = GroupDocId GroupDocType DocId
 
 
 type GroupDocAction
@@ -88,15 +87,6 @@ type alias ProjectStore =
 
 type alias ContextStore =
     GroupDocStore
-
-
-createGroupDocIdFromType gdType =
-    case gdType of
-        ContextGroupDocType ->
-            ContextGroupDocId
-
-        ProjectGroupDocType ->
-            ProjectGroupDocId
 
 
 getGroupDocName =

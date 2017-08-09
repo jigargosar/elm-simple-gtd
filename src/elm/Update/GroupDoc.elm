@@ -81,10 +81,10 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
     let
         ( gdType, id ) =
             case groupDocId of
-                ContextGroupDocId id ->
+                GroupDocId ContextGroupDocType id ->
                     ( ContextGroupDocType, id )
 
-                ProjectGroupDocId id ->
+                GroupDocId ProjectGroupDocType id ->
                     ( ProjectGroupDocType, id )
 
         updateGroupDocHelp updateFn =

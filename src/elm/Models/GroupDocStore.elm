@@ -52,10 +52,10 @@ findByGroupDocId groupDocId =
     let
         ( getStore, id, null ) =
             case groupDocId of
-                ContextGroupDocId id ->
+                GroupDocId ContextGroupDocType id ->
                     ( .contextStore, id, GroupDoc.nullContext )
 
-                ProjectGroupDocId id ->
+                GroupDocId ProjectGroupDocType id ->
                     ( .projectStore, id, GroupDoc.nullProject )
     in
     getStore

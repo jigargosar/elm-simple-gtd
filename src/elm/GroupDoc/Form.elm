@@ -12,7 +12,7 @@ createEditGroupDocForm groupDocType groupDoc =
     in
     { id = id
     , groupDocType = groupDocType
-    , groupDocId = GroupDoc.createGroupDocIdFromType groupDocType id
+    , groupDocId = GroupDocId groupDocType id
     , name = GroupDoc.getGroupDocName groupDoc
     , isArchived = GroupDoc.isGroupDocArchived groupDoc
     , mode = GDFM_Edit
@@ -28,7 +28,7 @@ createAddGroupDocForm groupDocType =
     { id = id
     , name = ""
     , groupDocType = groupDocType
-    , groupDocId = GroupDoc.createGroupDocIdFromType groupDocType id
+    , groupDocId = GroupDocId groupDocType id
     , isArchived = False
     , mode = GDFM_Add
     }

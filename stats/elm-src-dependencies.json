@@ -900,9 +900,10 @@
       "Todo.FormTypes",
       "Update.Subscription",
       "Update.Todo.Internal",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "Views.EntityList"
     ],
-    "backwardImportsCount": 13,
+    "backwardImportsCount": 14,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -1217,9 +1218,10 @@
       "Update.ExclusiveMode",
       "Update.GroupDoc",
       "Update.Subscription",
-      "Update.Todo.Internal"
+      "Update.Todo.Internal",
+      "Views.EntityList"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 23,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -4615,6 +4617,8 @@
     "parentModuleName": "Views",
     "imports": [
       "Data.EntityTree",
+      "Entity",
+      "GroupDoc",
       "GroupDoc.View",
       "Html",
       "Html.Attributes",
@@ -4623,7 +4627,7 @@
       "Toolkit.Operators",
       "View.Badge"
     ],
-    "importsCount": 8,
+    "importsCount": 10,
     "transitiveImports": [
       "Char",
       "Color",

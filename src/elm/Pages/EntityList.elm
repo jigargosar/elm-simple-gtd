@@ -299,9 +299,11 @@ createEntityTree pageModel appModel =
             in
             case groupByType of
                 ActiveGroupDocList ContextGroupDocType ->
-                    Models.GroupDocStore.getActiveContexts appModel
-                        |> Tree.initContextForest
-                            getActiveTodoListForContextHelp
+                    {- Models.GroupDocStore.getActiveContexts appModel
+                       |> Tree.initContextForest
+                           getActiveTodoListForContextHelp
+                    -}
+                    createActiveGroupDocForest ContextGroupDocType
 
                 ActiveGroupDocList ProjectGroupDocType ->
                     Models.GroupDocStore.getActiveProjects appModel

@@ -1,6 +1,8 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree
+import Data.EntityTree exposing (Node(..), Title(GroupDocEntityTitle, StringTitle))
+import Entity exposing (GroupDocEntity(..))
+import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
 import Html exposing (div, h5)
 import Html.Attributes exposing (class)
@@ -19,6 +21,27 @@ view pageVM =
 
 keyedViewList pageVM =
     let
+        createNodeView node =
+            case node of
+                Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList ->
+                    let
+                        vm =
+                            case gdType of
+                                ContextGroupDocType ->
+                                    pageVM.createContextGroupVM
+                                        todoList
+                                        gDoc
+
+                                ProjectGroupDocType ->
+                                    pageVM.createProjectGroupVM
+                                        todoList
+                                        gDoc
+                    in
+                    groupView createTodoView vm
+
+                Node (StringTitle title) todoList ->
+                    ( "0", div [] [] )
+
         createContextVM { context, todoList } =
             pageVM.createContextGroupVM
                 todoList
@@ -63,7 +86,7 @@ keyedViewList pageVM =
 
         Data.EntityTree.Root node totalCount ->
             case node of
-                Data.EntityTree.Node (Data.EntityTree.StringTitle title) todoList ->
+                Node (StringTitle title) todoList ->
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
 
@@ -71,7 +94,7 @@ keyedViewList pageVM =
                     [ ( "0", div [] [] ) ]
 
         Data.EntityTree.Forest nodeList ->
-            [ ( "0", div [] [] ) ]
+            nodeList .|> createNodeView
 
 
 groupView todoView vm =

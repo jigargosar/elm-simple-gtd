@@ -5,6 +5,7 @@ import Data.EntityListFilter as Filter
     exposing
         ( Filter(..)
         , FlatFilterType(..)
+        , GroupByType(..)
         , NamedFilterModel
         , NamedFilterType(..)
         )
@@ -55,7 +56,7 @@ initialValue =
             Filter.initialNamedFilterModel
 
         filter =
-            GroupByFilter ContextGroupDocType
+            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
 
         cursor =
             Cursor.initialValue filter
@@ -271,17 +272,23 @@ createEntityTree pageModel appModel =
                     getActiveTodoListForProjectHelp
                     findContextByIdHelp
 
-        GroupByFilter groupDocType ->
-            case groupDocType of
-                ContextGroupDocType ->
+        GroupByFilter groupByType ->
+            case groupByType of
+                ActiveGroupDocList ContextGroupDocType ->
                     Models.GroupDocStore.getActiveContexts appModel
                         |> Tree.initContextForest
                             getActiveTodoListForContextHelp
 
-                ProjectGroupDocType ->
+                ActiveGroupDocList ProjectGroupDocType ->
                     Models.GroupDocStore.getActiveProjects appModel
                         |> Tree.initProjectForest
                             getActiveTodoListForProjectHelp
+
+                _ ->
+                    --( ContextGroupDocType, SingleGroupDoc groupDocId ) ->
+                    Tree.createRootWithStringTitle (getTitle pageModel)
+                        []
+                        0
 
         FlatFilter flatFilterType maxDisplayCount ->
             let

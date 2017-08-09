@@ -2,6 +2,7 @@ module Data.EntityListFilter
     exposing
         ( Filter(..)
         , FlatFilterType(..)
+        , GroupByType(..)
         , NamedFilterModel
         , NamedFilterType(..)
         , getFilterFromNamedFilterTypeAndPath
@@ -15,7 +16,7 @@ module Data.EntityListFilter
 import Color exposing (Color)
 import Colors exposing (..)
 import Document exposing (DocId)
-import GroupDoc exposing (GroupDocType(..))
+import GroupDoc exposing (GroupDocId, GroupDocType(..))
 import IconNames
 import List.Extra
 import Toolkit.Operators exposing (..)
@@ -175,11 +176,16 @@ defaultMaxDisplayCount =
     25
 
 
+type GroupByType
+    = ActiveGroupDocList GroupDocType
+    | SingleGroupDoc GroupDocId
+
+
 type Filter
     = ContextIdFilter DocId
     | ProjectIdFilter DocId
     | FlatFilter FlatFilterType MaxDisplayCount
-    | GroupByFilter GroupDocType
+    | GroupByFilter GroupByType
 
 
 getFilterFromNamedFilterTypeAndPath namedFilterType path =
@@ -200,10 +206,10 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
             FlatFilter Bin defaultMaxDisplayCount
 
         NF_GB_ActiveContexts ->
-            GroupByFilter ContextGroupDocType
+            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
 
         NF_GB_ActiveProjects ->
-            GroupByFilter ProjectGroupDocType
+            GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
 
         NF_WithContextId_GB_Projects ->
             ContextIdFilter (List.Extra.last path ?= "")

@@ -1,10 +1,10 @@
-    8869 total
+    8882 total
      593 src/elm/Main.elm
      376 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
-     340 src/elm/Pages/EntityList.elm
+     345 src/elm/Pages/EntityList.elm
      308 src/elm/Store.elm
-     284 src/elm/GroupDoc.elm
+     292 src/elm/GroupDoc.elm
      267 src/elm/Mat.elm
      235 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm

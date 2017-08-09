@@ -207,6 +207,13 @@ filterTodosAndSortByLatestModified pred =
     filterTodosAndSortBy pred (TodoDoc.getModifiedAt >> negate)
 
 
+activeTodoListPredicateForGroupDocId groupDocId =
+    X.Predicate.all
+        [ TodoDoc.isActive
+        , TodoDoc.hasGroupDocId groupDocId
+        ]
+
+
 getActiveTodoListForContext context appModel =
     let
         activeProjectIdSet =
@@ -217,8 +224,7 @@ getActiveTodoListForContext context appModel =
 
         pred =
             X.Predicate.all
-                [ TodoDoc.isActive
-                , TodoDoc.contextFilter context
+                [ activeTodoListPredicateForGroupDocId (GroupDoc.contextIdFromDoc context)
                 , isTodoProjectActive
                 ]
     in
@@ -237,8 +243,7 @@ getActiveTodoListForProject project appModel =
     in
     filterTodosAndSortByLatestCreated
         (X.Predicate.all
-            [ TodoDoc.isActive
-            , TodoDoc.hasProject project
+            [ activeTodoListPredicateForGroupDocId (GroupDoc.projectIdFromDoc project)
             , isTodoContextActive
             ]
         )

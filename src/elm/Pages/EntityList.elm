@@ -290,8 +290,13 @@ createEntityTree pageModel appModel =
 
                         createNode : GroupDocEntity -> Node
                         createNode groupDocEntity =
+                            let
+                                todoList =
+                                    getActiveTodoListForGroupDocEntity groupDocEntity
+                            in
                             Tree.createGroupDocEntityNode groupDocEntity
-                                (getActiveTodoListForGroupDocEntity groupDocEntity)
+                                todoList
+                                (List.length todoList)
                     in
                     activeGroupDocEntityList
                         .|> createNode

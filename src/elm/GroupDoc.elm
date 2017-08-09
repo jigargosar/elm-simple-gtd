@@ -184,7 +184,7 @@ isNotArchived =
     isArchived >> not
 
 
-sort isNull =
+sortWithIsNull isNull =
     List.sortWith
         (\v1 v2 ->
             case ( isNull v1, isNull v2 ) of
@@ -258,7 +258,7 @@ isNullProject =
 
 
 sortProjects =
-    sort isNullProject
+    sortWithIsNull isNullProject
 
 
 projectStoreGenerator : DeviceId -> List E.Value -> Random.Pcg.Generator ProjectStore
@@ -280,7 +280,7 @@ filterNullContext pred =
 
 
 sortContexts =
-    sort isNullContext
+    sortWithIsNull isNullContext
 
 
 isNullContext =

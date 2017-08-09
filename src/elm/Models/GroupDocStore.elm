@@ -20,6 +20,38 @@ projectStore =
     fieldLens .projectStore (\s b -> { b | projectStore = s })
 
 
+getStore gdType =
+    case gdType of
+        ContextGroupDocType ->
+            .contextStore
+
+        ProjectGroupDocType ->
+            .projectStore
+
+
+getNullDoc gdType =
+    case gdType of
+        ContextGroupDocType ->
+            nullContext
+
+        ProjectGroupDocType ->
+            nullProject
+
+
+filterNull gdType pred =
+    [ getNullDoc gdType ] |> List.filter pred
+
+
+filter gdType pred model =
+    let
+        store =
+            getStore gdType model
+    in
+    Store.filterDocs pred store
+        |> List.append (filterNullContext gdType pred)
+        |> GroupDoc.sortContexts
+
+
 filterContexts pred model =
     Store.filterDocs pred model.contextStore
         |> List.append (GroupDoc.filterNullContext pred)
@@ -89,6 +121,10 @@ getNullFromGroupDocType gdType =
 
         ProjectGroupDocType ->
             nullProject
+
+
+
+--getActiveDocs gdType =
 
 
 getActiveProjects =

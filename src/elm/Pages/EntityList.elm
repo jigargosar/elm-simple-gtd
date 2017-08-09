@@ -236,6 +236,9 @@ getActiveTodoListForContext context appModel =
 
 getActiveTodoListForProject project appModel =
     let
+        groupDocId =
+            GroupDoc.idFromDoc ProjectGroupDocType project
+
         activeContextIdSet =
             Models.GroupDocStore.getActiveContexts appModel
                 .|> Document.getId

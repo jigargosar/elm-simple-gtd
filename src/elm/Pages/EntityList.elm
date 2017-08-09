@@ -77,10 +77,6 @@ maybeInitFromPath path maybeModel =
             )
 
 
-getFullPathOrDefault maybeModel =
-    maybeModel ?= initialValue |> getFullPath
-
-
 getFullPath (Model pageModel) =
     pageModel.path
 

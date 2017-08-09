@@ -1,4 +1,4 @@
-    8925 total
+    8935 total
      593 src/elm/Main.elm
      376 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
@@ -14,11 +14,11 @@
      185 src/elm/Update/Firebase.elm
      178 src/elm/Todo/ViewModel.elm
      172 src/elm/Models/GroupDocStore.elm
+     172 src/elm/Data/EntityTree.elm
      170 src/elm/AppDrawer/View.elm
      168 src/elm/Update/Todo.elm
      167 src/elm/AppDrawer/Model.elm
      164 src/elm/Todo/ItemView.elm
-     162 src/elm/Data/EntityTree.elm
      161 src/elm/Data/Todo/Schedule.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm

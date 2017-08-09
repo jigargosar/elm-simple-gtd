@@ -70,7 +70,7 @@ keyedViewList pageVM =
                 _ ->
                     [ ( "0", div [] [] ) ]
 
-        Data.EntityTree.Forest list node ->
+        Data.EntityTree.Forest nodeList ->
             [ ( "0", div [] [] ) ]
 
 

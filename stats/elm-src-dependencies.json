@@ -470,9 +470,10 @@
       "Entity",
       "GroupDoc",
       "List.Extra",
-      "Toolkit.Operators"
+      "Toolkit.Operators",
+      "X.Function"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -4855,6 +4856,7 @@
       "AppDrawer.Model",
       "Data.EntityListCursor",
       "Data.EntityListFilter",
+      "Data.EntityTree",
       "Data.TodoDoc",
       "Document",
       "Entity",
@@ -4873,7 +4875,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 21,
+    "backwardImportsCount": 22,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

@@ -6,6 +6,7 @@ import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra as List
 import Toolkit.Operators exposing (..)
+import X.Function exposing (..)
 
 
 type alias ContextNode =
@@ -21,7 +22,7 @@ type alias ProjectNode =
 
 
 type Title
-    = GroupEntityTitle GroupDocEntity
+    = GroupDocEntityTitle GroupDocEntity
     | StringTitle String
     | NoTitle
 
@@ -36,7 +37,7 @@ type Tree
     | ContextForest (List ContextNode)
     | ProjectForest (List ProjectNode)
     | Root Node Int
-    | Forest List Node
+    | Forest (List Node)
 
 
 initContextNode getTodoList context =
@@ -154,8 +155,17 @@ flatten tree =
                 Node _ todoList ->
                     todoList .|> Entity.TodoEntity
 
-        Forest list node ->
-            []
+        Forest nodeList ->
+            let
+                getNodeEntityList node =
+                    case node of
+                        Node (GroupDocEntityTitle gdEntity) todoList ->
+                            Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
+
+                        _ ->
+                            []
+            in
+            nodeList |> List.concatMap getNodeEntityList
 
 
 createRootWithStringTitle stringTitle todoList totalCount =

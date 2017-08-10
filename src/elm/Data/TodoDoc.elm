@@ -104,10 +104,6 @@ isInActive =
     anyPass [ Document.isDeleted, isDone ]
 
 
-getProjectId =
-    .projectId
-
-
 getCreatedAt : Model -> Time
 getCreatedAt =
     .createdAt
@@ -312,6 +308,18 @@ getContextId =
     .contextId
 
 
+getContextGroupDocId =
+    getContextId >> GroupDoc.contextIdFromDocId
+
+
+getProjectId =
+    .projectId
+
+
+getProjectGroupDocId =
+    getProjectId >> GroupDoc.projectIdFromDocId
+
+
 contextFilter context =
     getContextId >> equals (Document.getId context)
 
@@ -324,6 +332,16 @@ getDocIdFromGroupDocType gdType =
 
         ProjectGroupDocType ->
             getProjectId
+
+
+getGroupDocId : GroupDocType -> TodoDoc -> GroupDocId
+getGroupDocId gdType =
+    case gdType of
+        ContextGroupDocType ->
+            getContextGroupDocId
+
+        ProjectGroupDocType ->
+            getProjectGroupDocId
 
 
 hasGroupDocId : GroupDocId -> TodoDoc -> Bool

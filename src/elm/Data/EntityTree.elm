@@ -150,6 +150,10 @@ createGroupDocEntityNode gdEntity todoList totalCount =
     LeafNode (GroupDocEntityTitle gdEntity) todoList totalCount
 
 
+createRootGroupDocEntityNode gdEntity todoList totalCount =
+    LeafNode (GroupDocEntityTitle gdEntity) todoList totalCount
+
+
 createForest : List Node -> Tree
 createForest =
     Forest

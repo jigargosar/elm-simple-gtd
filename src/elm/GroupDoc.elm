@@ -5,6 +5,7 @@ import Document exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import List.Extra
 import Random.Pcg
 import Store exposing (..)
 import Time exposing (Time)
@@ -38,6 +39,10 @@ contextIdFromDoc =
 
 idFromDoc gdType gdDoc =
     GroupDocId gdType (Document.getId gdDoc)
+
+
+toComparable =
+    toString >> Debug.log "toString"
 
 
 projectIdFromDoc =
@@ -264,6 +269,15 @@ filterNullProject pred =
 
 isNullProject =
     equals nullProject
+
+
+isNull gdType =
+    case gdType of
+        ContextGroupDocType ->
+            isNullContext
+
+        ProjectGroupDocType ->
+            isNullProject
 
 
 sortProjects =

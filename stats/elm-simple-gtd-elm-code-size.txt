@@ -1,6 +1,6 @@
-    9082 total
+    8932 total
      593 src/elm/Main.elm
-     429 src/elm/Pages/EntityList.elm
+     415 src/elm/Pages/EntityList.elm
      394 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
      319 src/elm/GroupDoc.elm
@@ -8,7 +8,7 @@
      267 src/elm/Mat.elm
      235 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Menu.elm
-     220 src/elm/Data/EntityListFilter.elm
+     218 src/elm/Data/EntityListFilter.elm
      210 src/elm/Update/Subscription.elm
      200 src/elm/GroupDoc/ViewModel.elm
      185 src/elm/Update/Firebase.elm
@@ -19,17 +19,16 @@
      167 src/elm/AppDrawer/Model.elm
      164 src/elm/Todo/ItemView.elm
      161 src/elm/Data/Todo/Schedule.elm
-     159 src/elm/Data/EntityTree.elm
      148 src/elm/X/Keyboard.elm
      146 src/elm/X/Function.elm
      143 src/elm/Update/GroupDoc.elm
      142 src/elm/X/Record.elm
-     138 src/elm/Views/EntityList.elm
      136 src/elm/X/Return.elm
      136 src/elm/L/View.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
+      96 src/elm/Views/EntityList.elm
       93 src/elm/X/Time.elm
       93 src/elm/Data/EntityListCursor.elm
       90 src/elm/Entity.elm
@@ -44,6 +43,7 @@
       68 src/elm/View/Layout.elm
       68 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
+      67 src/elm/Data/EntityTree.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
       62 src/elm/Todo/GroupEditView.elm

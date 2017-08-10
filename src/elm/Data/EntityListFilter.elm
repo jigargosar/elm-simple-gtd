@@ -182,19 +182,17 @@ type GroupByType
 
 
 type Filter
-    = ContextIdFilter DocId
-    | ProjectIdFilter DocId
-    | FlatFilter FlatFilterType MaxDisplayCount
+    = FlatFilter FlatFilterType MaxDisplayCount
     | GroupByFilter GroupByType
 
 
 getFilterFromNamedFilterTypeAndPath namedFilterType path =
     case namedFilterType of
         NF_WithNullContext ->
-            ContextIdFilter ""
+            getFilterFromNamedFilterTypeAndPath NF_WithContextId_GB_Projects [ "" ]
 
         NF_WithNullProject ->
-            ProjectIdFilter ""
+            getFilterFromNamedFilterTypeAndPath NF_WithProjectId_GB_Contexts [ "" ]
 
         NF_FL_Done ->
             FlatFilter Done defaultMaxDisplayCount

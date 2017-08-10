@@ -1,6 +1,6 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (GroupDocRoot(..), Node(..), Title(..), Tree(..))
+import Data.EntityTree exposing (GroupDocNode(..), Node(..), Title(..), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
@@ -21,7 +21,7 @@ view pageVM =
 
 keyedViewList pageVM =
     let
-        createGroupDocVM gdType todoList gDoc =
+        createGroupDocVM gdType gDoc todoList =
             case gdType of
                 ContextGroupDocType ->
                     pageVM.createContextGroupVM
@@ -36,39 +36,11 @@ keyedViewList pageVM =
         createNodeView node =
             case node of
                 Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
-                    [ groupView createTodoView (createGroupDocVM gdType todoList gDoc) ]
+                    [ groupView createTodoView (createGroupDocVM gdType gDoc todoList) ]
 
                 Node (StringTitle title) todoList totalCount ->
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
-
-        createRootNodeView node nodeList =
-            case node of
-                Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
-                    [ groupHeaderView (createGroupDocVM gdType todoList gDoc) ]
-                        ++ (nodeList |> List.concatMap createNodeView)
-
-                Node (StringTitle title) todoList totalCount ->
-                    {- List.map createTodoView todoList
-                       |> flatTodoListView title totalCount
-                    -}
-                    []
-
-        createContextVM { context, todoList } =
-            pageVM.createContextGroupVM
-                todoList
-                context
-
-        multiContextView list =
-            list .|> (createContextVM >> groupView createTodoView)
-
-        createProjectVM { project, todoList } =
-            pageVM.createProjectGroupVM
-                todoList
-                project
-
-        multiProjectView list =
-            list .|> (createProjectVM >> groupView createTodoView)
 
         createTodoView todo =
             todo
@@ -76,25 +48,11 @@ keyedViewList pageVM =
                 |> Todo.ItemView.keyedItem
     in
     case pageVM.entityTree of
-        Data.EntityTree.ContextRoot contextGroup subGroupList ->
-            let
-                header =
-                    createContextVM contextGroup |> groupHeaderView
-            in
-            header :: multiProjectView subGroupList
-
-        Data.EntityTree.ProjectRoot projectGroup subGroupList ->
-            let
-                header =
-                    createProjectVM projectGroup |> groupHeaderView
-            in
-            header :: multiContextView subGroupList
-
         SingleNode node ->
             createNodeView node
 
-        RootNode (GroupDocRoot (GroupDocEntity gdType gDoc) todoList) nodeList ->
-            [ groupHeaderView (createGroupDocVM gdType todoList gDoc) ]
+        RootNode (GroupDocNode (GroupDocEntity gdType gDoc) todoList) nodeList ->
+            [ groupHeaderView (createGroupDocVM gdType gDoc todoList) ]
                 ++ (nodeList |> List.concatMap createNodeView)
 
         Forest nodeList ->

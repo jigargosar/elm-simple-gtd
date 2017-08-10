@@ -286,20 +286,6 @@ createEntityTree pageModel appModel =
             GroupDocStore.findByGroupDocId groupDocId appModel
     in
     case getFilter pageModel of
-        ContextIdFilter id ->
-            GroupDocStore.findContextById id appModel
-                ?= GroupDoc.nullContext
-                |> Tree.initContextRoot
-                    getActiveTodoListForContextHelp
-                    findProjectByIdHelp
-
-        ProjectIdFilter id ->
-            GroupDocStore.findProjectById id appModel
-                ?= GroupDoc.nullProject
-                |> Tree.initProjectRoot
-                    getActiveTodoListForProjectHelp
-                    findContextByIdHelp
-
         GroupByFilter groupByType ->
             let
                 createActiveGroupDocForest gdType =

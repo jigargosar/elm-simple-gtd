@@ -277,3 +277,10 @@ getFilterFromPath path =
 
         _ ->
             NoFilter
+
+
+getNamedFilterModelFromFilter : Filter -> NamedFilterModel
+getNamedFilterModelFromFilter filter =
+    case filter of
+        _ ->
+            namedFilterTypeToModel NF_GB_ActiveContexts

@@ -7,6 +7,8 @@ module Data.EntityListFilter
         , NamedFilterType(..)
         , getFilterFromNamedFilterTypeAndPath
         , getMaybeNamedFilterModelFromPath
+        , getNamedFilterModelFromFilter
+        , initialFilter
         , initialNamedFilterModel
         , namedFilterTypeToModel
         )
@@ -219,6 +221,18 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
             GroupByFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))
 
 
+initialFilter =
+    groupByActiveContextsFilter
+
+
+groupByActiveContextsFilter =
+    GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+
+
+groupByActiveProjectsFilter =
+    GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
+
+
 inboxFilter =
     contextFilter ""
 
@@ -252,7 +266,7 @@ getFilterFromPath path =
             inboxFilter
 
         "contexts" :: [] ->
-            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+            groupByActiveContextsFilter
 
         "project" :: "" :: [] ->
             noProjectFilter
@@ -261,7 +275,7 @@ getFilterFromPath path =
             projectFilter projectDocId
 
         "projects" :: [] ->
-            GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
+            groupByActiveProjectsFilter
 
         "no-project" :: [] ->
             noProjectFilter

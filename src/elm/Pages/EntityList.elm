@@ -53,14 +53,14 @@ constructor path namedFilterModel cursor =
 
 initialValue =
     let
-        ({ pathPrefix } as namedFilterModel) =
-            Filter.initialNamedFilterModel
-
         filter =
-            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+            Filter.initialFilter
 
         cursor =
             Cursor.initialValue filter
+
+        ({ pathPrefix } as namedFilterModel) =
+            Filter.getNamedFilterModelFromFilter filter
     in
     constructor pathPrefix namedFilterModel cursor
 

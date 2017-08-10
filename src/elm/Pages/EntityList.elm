@@ -222,8 +222,11 @@ activeTodoListPredicateForGroupDocId groupDocId =
         ]
 
 
-getActiveTodoListForGroupDoc gdType secondaryGDType groupDoc appModel =
+getActiveTodoListForGroupDoc gdType groupDoc appModel =
     let
+        secondaryGDType =
+            computeSecondaryGroupDocType gdType
+
         groupDocId =
             GroupDoc.idFromDoc gdType groupDoc
 
@@ -253,27 +256,8 @@ computeSecondaryGroupDocType gdType =
 
 createEntityTree pageModel appModel =
     let
-        getActiveTodoListForContextHelp groupDoc =
-            getActiveTodoListForGroupDoc
-                ContextGroupDocType
-                ProjectGroupDocType
-                groupDoc
-                appModel
-
-        getActiveTodoListForProjectHelp groupDoc =
-            getActiveTodoListForGroupDoc
-                ProjectGroupDocType
-                ContextGroupDocType
-                groupDoc
-                appModel
-
-        getActiveTodoListForGroupDocEntity gdEntity =
-            case gdEntity of
-                GroupDocEntity ContextGroupDocType groupDoc ->
-                    getActiveTodoListForContextHelp groupDoc
-
-                GroupDocEntity ProjectGroupDocType groupDoc ->
-                    getActiveTodoListForProjectHelp groupDoc
+        getActiveTodoListForGroupDocEntity (GroupDocEntity gdType groupDoc) =
+            getActiveTodoListForGroupDoc gdType groupDoc appModel
 
         findByGroupDocId groupDocId =
             GroupDocStore.findByGroupDocId groupDocId appModel

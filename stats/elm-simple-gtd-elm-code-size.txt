@@ -1,7 +1,7 @@
-    8895 total
+    8879 total
      593 src/elm/Main.elm
-     406 src/elm/Pages/EntityList.elm
      394 src/elm/Data/TodoDoc.elm
+     390 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      319 src/elm/GroupDoc.elm
      308 src/elm/Store.elm

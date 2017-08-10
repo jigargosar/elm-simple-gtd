@@ -42,7 +42,6 @@ type alias NamedFilterModel =
     { displayName : String
     , iconName : String
     , headerColor : Color
-    , pathPrefix : List String
     }
 
 
@@ -54,63 +53,54 @@ namedFilterTypeToModel namedFilterType =
                 "Inbox"
                 IconNames.nullContext
                 Colors.nullContext
-                [ "context" ]
 
         NF_WithNullProject ->
             NamedFilterModel
                 "No Project Assigned"
                 IconNames.nullProject
                 Colors.nullProject
-                [ "project" ]
 
         NF_FL_Done ->
             NamedFilterModel
                 "Done"
                 IconNames.done
                 Colors.sgtdBlue
-                [ "done" ]
 
         NF_FL_Recent ->
             NamedFilterModel
                 "Recent"
                 IconNames.recent
                 Colors.sgtdBlue
-                [ "recent" ]
 
         NF_FL_Bin ->
             NamedFilterModel
                 "Bin"
                 IconNames.bin
                 Colors.sgtdBlue
-                [ "bin" ]
 
         NF_GB_ActiveProjects ->
             NamedFilterModel
                 "Projects"
                 IconNames.projects
                 Colors.projects
-                [ "projects" ]
 
         NF_GB_ActiveContexts ->
             NamedFilterModel
                 "Contexts"
                 IconNames.contexts
                 Colors.contexts
-                [ "contexts" ]
 
         NF_WithProjectId_GB_Contexts ->
             NamedFilterModel
                 "Project"
                 IconNames.project
                 Colors.defaultProject
-                [ "project" ]
 
         NF_WithContextId_GB_Projects ->
             NamedFilterModel
                 "Context"
                 IconNames.context
                 Colors.defaultContext
-                [ "context" ]
 
 
 

@@ -5,12 +5,9 @@ module Data.EntityListFilter
         , GroupByType(..)
         , NamedFilterModel
         , NamedFilterType(..)
-          --        , getFilterFromNamedFilterTypeAndPath
         , getMaybeFilterFromPath
-        , getMaybeNamedFilterModelFromPath
         , getNamedFilterModelFromFilter
         , initialFilter
-        , initialNamedFilterModel
         , namedFilterTypeToModel
         )
 
@@ -49,20 +46,6 @@ type alias NamedFilterModel =
     , pathPrefix : List String
     , pathArgumentsCount : Int
     }
-
-
-namedFilterTypeList : List NamedFilterType
-namedFilterTypeList =
-    [ NF_WithNullContext
-    , NF_WithNullProject
-    , NF_FL_Done
-    , NF_FL_Recent
-    , NF_FL_Bin
-    , NF_GB_ActiveContexts
-    , NF_GB_ActiveProjects
-    , NF_WithContextId_GB_Projects
-    , NF_WithProjectId_GB_Contexts
-    ]
 
 
 namedFilterTypeToModel : NamedFilterType -> NamedFilterModel
@@ -141,26 +124,6 @@ namedFilterTypeToModel namedFilterType =
                 0
 
 
-initialNamedFilterModel =
-    namedFilterTypeToModel NF_GB_ActiveContexts
-
-
-namedFilterModelList =
-    namedFilterTypeList .|> namedFilterTypeToModel
-
-
-getMaybeNamedFilterModelFromPath : List String -> Maybe NamedFilterModel
-getMaybeNamedFilterModelFromPath path =
-    let
-        matchesPath model =
-            path
-                |> List.reverse
-                |> List.drop model.pathArgumentsCount
-                |> equals (List.reverse model.pathPrefix)
-    in
-    List.Extra.find matchesPath namedFilterModelList
-
-
 
 -- Filters
 
@@ -188,39 +151,6 @@ type Filter
     = FlatFilter FlatFilterType MaxDisplayCount
     | GroupByGroupDocFilter GroupDocType GroupByType
     | NoFilter
-
-
-
-{-
-   getFilterFromNamedFilterTypeAndPath namedFilterType path =
-       case namedFilterType of
-           NF_WithNullContext ->
-               getFilterFromNamedFilterTypeAndPath NF_WithContextId_GB_Projects [ "" ]
-
-           NF_WithNullProject ->
-               getFilterFromNamedFilterTypeAndPath NF_WithProjectId_GB_Contexts [ "" ]
-
-           NF_FL_Done ->
-               FlatFilter Done defaultMaxDisplayCount
-
-           NF_FL_Recent ->
-               FlatFilter Recent defaultMaxDisplayCount
-
-           NF_FL_Bin ->
-               FlatFilter Bin defaultMaxDisplayCount
-
-           NF_GB_ActiveContexts ->
-               GroupByGroupDocFilter ContextGroupDocType ActiveGroupDocList
-
-           NF_GB_ActiveProjects ->
-               GroupByGroupDocFilter ProjectGroupDocType ActiveGroupDocList
-
-           NF_WithContextId_GB_Projects ->
-               GroupByGroupDocFilter ContextGroupDocType (SingleGroupDoc (List.Extra.last path ?= ""))
-
-           NF_WithProjectId_GB_Contexts ->
-               GroupByGroupDocFilter ProjectGroupDocType (SingleGroupDoc (List.Extra.last path ?= ""))
--}
 
 
 initialFilter =

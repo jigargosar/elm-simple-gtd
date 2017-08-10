@@ -330,7 +330,7 @@ createGroupDocTree gdType docId appModel =
 
 createEntityTree pageModel appModel =
     case getFilter pageModel of
-        GroupByFilter groupByType ->
+        GroupByGroupDocFilter groupByType ->
             case groupByType of
                 ActiveGroupDocList gdType ->
                     createActiveGroupDocForest gdType appModel

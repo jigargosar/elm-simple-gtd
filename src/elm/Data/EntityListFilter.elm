@@ -186,7 +186,7 @@ type GroupByType
 
 type Filter
     = FlatFilter FlatFilterType MaxDisplayCount
-    | GroupByFilter GroupByType
+    | GroupByGroupDocFilter GroupByType
     | NoFilter
 
 
@@ -208,18 +208,18 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
             FlatFilter Bin defaultMaxDisplayCount
 
         NF_GB_ActiveContexts ->
-            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+            GroupByGroupDocFilter (ActiveGroupDocList ContextGroupDocType)
 
         NF_GB_ActiveProjects ->
-            GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
+            GroupByGroupDocFilter (ActiveGroupDocList ProjectGroupDocType)
 
         NF_WithContextId_GB_Projects ->
             -- ContextIdFilter (List.Extra.last path ?= "")
-            GroupByFilter (SingleGroupDoc ContextGroupDocType (List.Extra.last path ?= ""))
+            GroupByGroupDocFilter (SingleGroupDoc ContextGroupDocType (List.Extra.last path ?= ""))
 
         NF_WithProjectId_GB_Contexts ->
             --ProjectIdFilter (List.Extra.last path ?= "")
-            GroupByFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))
+            GroupByGroupDocFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))
 
 
 initialFilter =
@@ -227,11 +227,11 @@ initialFilter =
 
 
 groupByActiveContextsFilter =
-    GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+    GroupByGroupDocFilter (ActiveGroupDocList ContextGroupDocType)
 
 
 groupByActiveProjectsFilter =
-    GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
+    GroupByGroupDocFilter (ActiveGroupDocList ProjectGroupDocType)
 
 
 inboxFilter =
@@ -243,11 +243,11 @@ noProjectFilter =
 
 
 contextFilter contextDocId =
-    GroupByFilter (SingleGroupDoc ContextGroupDocType contextDocId)
+    GroupByGroupDocFilter (SingleGroupDoc ContextGroupDocType contextDocId)
 
 
 projectFilter projectDocId =
-    GroupByFilter (SingleGroupDoc ProjectGroupDocType projectDocId)
+    GroupByGroupDocFilter (SingleGroupDoc ProjectGroupDocType projectDocId)
 
 
 flatFilter flatFilterType =
@@ -257,7 +257,7 @@ flatFilter flatFilterType =
 getFilterFromPath : List String -> Filter
 getFilterFromPath path =
     case path of
-        "context" :: "" :: [] ->
+        "context" :: [] ->
             inboxFilter
 
         "context" :: contextDocId :: [] ->
@@ -326,18 +326,24 @@ getNamedFilterModelFromFilter filter =
                 Bin ->
                     namedFilterTypeToModel NF_FL_Bin
 
-        GroupByFilter groupByType ->
+        GroupByGroupDocFilter groupByType ->
             case groupByType of
                 ActiveGroupDocList ContextGroupDocType ->
                     namedFilterTypeToModel NF_GB_ActiveContexts
 
+                SingleGroupDoc ContextGroupDocType "" ->
+                    namedFilterTypeToModel NF_WithNullContext
+
+                SingleGroupDoc ContextGroupDocType contextDocId ->
+                    namedFilterTypeToModel NF_WithContextId_GB_Projects
+
                 ActiveGroupDocList ProjectGroupDocType ->
                     namedFilterTypeToModel NF_GB_ActiveProjects
 
-                SingleGroupDoc ProjectGroupDocType projectDocId ->
-                    namedFilterTypeToModel NF_WithProjectId_GB_Contexts
+                SingleGroupDoc ProjectGroupDocType "" ->
+                    namedFilterTypeToModel NF_WithNullProject
 
-                SingleGroupDoc ContextGroupDocType contextDocId ->
+                SingleGroupDoc ProjectGroupDocType projectDocId ->
                     namedFilterTypeToModel NF_WithProjectId_GB_Contexts
 
         NoFilter ->

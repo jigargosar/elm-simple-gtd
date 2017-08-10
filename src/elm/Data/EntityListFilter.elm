@@ -212,7 +212,9 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
             GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
 
         NF_WithContextId_GB_Projects ->
-            ContextIdFilter (List.Extra.last path ?= "")
+            -- ContextIdFilter (List.Extra.last path ?= "")
+            GroupByFilter (SingleGroupDoc ContextGroupDocType (List.Extra.last path ?= ""))
 
         NF_WithProjectId_GB_Contexts ->
-            ProjectIdFilter (List.Extra.last path ?= "")
+            --ProjectIdFilter (List.Extra.last path ?= "")
+            GroupByFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))

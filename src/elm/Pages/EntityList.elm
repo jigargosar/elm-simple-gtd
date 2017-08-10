@@ -312,6 +312,12 @@ createEntityTree pageModel appModel =
 
                         groupDoc =
                             Models.GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
+
+                        groupDocEntity =
+                            Entity.createGroupDocEntity gdType gDoc
+
+                        todoList =
+                            getActiveTodoListForGroupDocEntity groupDocEntity
                     in
                     1
             in

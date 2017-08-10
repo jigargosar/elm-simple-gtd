@@ -1,7 +1,7 @@
-    9011 total
+    9009 total
      593 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
-     392 src/elm/Pages/EntityList.elm
+     390 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      348 src/elm/Data/EntityListFilter.elm
      319 src/elm/GroupDoc.elm

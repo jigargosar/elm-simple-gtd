@@ -27,9 +27,8 @@ import X.Return exposing (..)
 
 type alias ModelRecord =
     { path : List String
-    , namedFilterModel : NamedFilterModel
-    , cursor : Cursor.Model
     , filter : Filter
+    , cursor : Cursor.Model
     }
 
 
@@ -39,14 +38,9 @@ type Model
 
 constructor : List String -> Filter -> Cursor.Model -> Model
 constructor path filter cursor =
-    let
-        namedFilterModel =
-            Filter.getNamedFilterModelFromFilter filter
-    in
     ModelRecord path
-        namedFilterModel
-        cursor
         filter
+        cursor
         |> Model
 
 
@@ -82,16 +76,20 @@ getFullPath (Model pageModel) =
     pageModel.path
 
 
-getTitleColourTuple (Model pageModel) =
-    pageModel.namedFilterModel |> (\model -> ( model.displayName, model.headerColor ))
+getNamedFilterModel (Model pageModel) =
+    Filter.getNamedFilterModelFromFilter pageModel.filter
 
 
-getTitle (Model pageModel) =
-    pageModel.namedFilterModel.displayName
+getTitleColourTuple =
+    getNamedFilterModel >> (\filterModel -> ( filterModel.displayName, filterModel.headerColor ))
+
+
+getTitle =
+    getNamedFilterModel >> .displayName
 
 
 getFilter (Model pageModel) =
-    Filter.getFilterFromNamedFilterTypeAndPath pageModel.namedFilterModel.namedFilterType pageModel.path
+    pageModel.filter
 
 
 getMaybeLastKnownFocusedEntityId : Model -> Maybe EntityId

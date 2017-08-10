@@ -4,10 +4,9 @@ import Data.EntityListCursor as Cursor
 import Data.EntityListFilter as Filter
     exposing
         ( Filter(..)
+        , FilterViewModel
         , FlatFilterType(..)
         , GroupByType(..)
-        , NamedFilterModel
-        , NamedFilterType(..)
         )
 import Data.EntityTree as Tree exposing (GroupDocNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)

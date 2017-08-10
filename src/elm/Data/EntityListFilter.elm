@@ -1,14 +1,12 @@
 module Data.EntityListFilter
     exposing
         ( Filter(..)
+        , FilterViewModel
         , FlatFilterType(..)
         , GroupByType(..)
-        , NamedFilterModel
-        , NamedFilterType(..)
         , getMaybeFilterFromPath
         , getNamedFilterModelFromFilter
         , initialFilterPathTuple
-        , namedFilterTypeToModel
         )
 
 --import X.List as List
@@ -26,81 +24,15 @@ import X.Function exposing (..)
 -- Named Filters
 
 
-type NamedFilterType
-    = NF_WithNullContext
-    | NF_WithNullProject
-    | NF_FL_Done
-    | NF_FL_Recent
-    | NF_FL_Bin
-    | NF_GB_ActiveContexts
-    | NF_GB_ActiveProjects
-    | NF_WithContextId_GB_Projects
-    | NF_WithProjectId_GB_Contexts
-
-
-type alias NamedFilterModel =
+type alias FilterViewModel =
     { displayName : String
     , iconName : String
     , headerColor : Color
     }
 
 
-namedFilterTypeToModel : NamedFilterType -> NamedFilterModel
-namedFilterTypeToModel namedFilterType =
-    case namedFilterType of
-        NF_WithNullContext ->
-            NamedFilterModel
-                "Inbox"
-                IconNames.nullContext
-                Colors.nullContext
-
-        NF_WithNullProject ->
-            NamedFilterModel
-                "No Project Assigned"
-                IconNames.nullProject
-                Colors.nullProject
-
-        NF_FL_Done ->
-            NamedFilterModel
-                "Done"
-                IconNames.done
-                Colors.sgtdBlue
-
-        NF_FL_Recent ->
-            NamedFilterModel
-                "Recent"
-                IconNames.recent
-                Colors.sgtdBlue
-
-        NF_FL_Bin ->
-            NamedFilterModel
-                "Bin"
-                IconNames.bin
-                Colors.sgtdBlue
-
-        NF_GB_ActiveProjects ->
-            NamedFilterModel
-                "Projects"
-                IconNames.projects
-                Colors.projects
-
-        NF_GB_ActiveContexts ->
-            NamedFilterModel
-                "Contexts"
-                IconNames.contexts
-                Colors.contexts
-
-        NF_WithProjectId_GB_Contexts ->
-            NamedFilterModel
-                "Project"
-                IconNames.project
-                Colors.defaultProject
-
-        NF_WithContextId_GB_Projects ->
-            NamedFilterModel
-                "Context"
-                IconNames.context
-                Colors.defaultContext
+type alias Path =
+    List String
 
 
 
@@ -132,14 +64,6 @@ type Filter
     | NoFilter
 
 
-activeContextsPath =
-    "contexts" :: []
-
-
-initialFilterPathTuple =
-    ( groupByActiveContextsFilter, activeContextsPath )
-
-
 groupByActiveContextsFilter =
     GroupByGroupDocFilter ContextGroupDocType ActiveGroupDocList
 
@@ -166,6 +90,18 @@ projectFilter projectDocId =
 
 flatFilter flatFilterType =
     FlatFilter flatFilterType defaultMaxDisplayCount
+
+
+initialFilterPath =
+    "contexts" :: []
+
+
+initialFilter =
+    groupByActiveContextsFilter
+
+
+initialFilterPathTuple =
+    ( initialFilter, initialFilterPath )
 
 
 getFilterFromPath : List String -> Filter
@@ -208,10 +144,6 @@ getFilterFromPath path =
             NoFilter
 
 
-type alias Path =
-    List String
-
-
 getMaybeFilterFromPath : Path -> Maybe Filter
 getMaybeFilterFromPath path =
     let
@@ -226,47 +158,70 @@ getMaybeFilterFromPath path =
             Just filter
 
 
-getNamedFilterModelFromFilter : Filter -> NamedFilterModel
+getNamedFilterModelFromFilter : Filter -> FilterViewModel
 getNamedFilterModelFromFilter filter =
     case filter of
         FlatFilter flatFilterType maxDisplayCount ->
             case flatFilterType of
                 Done ->
-                    namedFilterTypeToModel NF_FL_Done
+                    FilterViewModel
+                        "Done"
+                        IconNames.done
+                        Colors.sgtdBlue
 
                 Recent ->
-                    namedFilterTypeToModel NF_FL_Recent
+                    FilterViewModel
+                        "Recent"
+                        IconNames.recent
+                        Colors.sgtdBlue
 
                 Bin ->
-                    namedFilterTypeToModel NF_FL_Bin
+                    FilterViewModel
+                        "Bin"
+                        IconNames.bin
+                        Colors.sgtdBlue
 
         GroupByGroupDocFilter gdType groupByType ->
             case gdType of
                 ContextGroupDocType ->
                     case groupByType of
                         ActiveGroupDocList ->
-                            namedFilterTypeToModel NF_GB_ActiveContexts
+                            FilterViewModel
+                                "Contexts"
+                                IconNames.contexts
+                                Colors.contexts
 
                         SingleGroupDoc "" ->
-                            namedFilterTypeToModel NF_WithNullContext
+                            FilterViewModel
+                                "Inbox"
+                                IconNames.nullContext
+                                Colors.nullContext
 
                         SingleGroupDoc contextDocId ->
-                            namedFilterTypeToModel NF_WithContextId_GB_Projects
+                            FilterViewModel
+                                "Context"
+                                IconNames.context
+                                Colors.defaultContext
 
                 ProjectGroupDocType ->
                     case groupByType of
                         ActiveGroupDocList ->
-                            namedFilterTypeToModel NF_GB_ActiveProjects
+                            FilterViewModel
+                                "Projects"
+                                IconNames.projects
+                                Colors.projects
 
                         SingleGroupDoc "" ->
-                            namedFilterTypeToModel NF_WithNullProject
+                            FilterViewModel
+                                "No Project Assigned"
+                                IconNames.nullProject
+                                Colors.nullProject
 
                         SingleGroupDoc projectDocId ->
-                            namedFilterTypeToModel NF_WithProjectId_GB_Contexts
+                            FilterViewModel
+                                "Project"
+                                IconNames.project
+                                Colors.defaultProject
 
         NoFilter ->
-            namedFilterTypeToModel NF_GB_ActiveContexts
-
-
-getPathFromFilter filter =
-    getNamedFilterModelFromFilter
+            getNamedFilterModelFromFilter initialFilter

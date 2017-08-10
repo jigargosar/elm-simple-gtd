@@ -276,12 +276,6 @@ createEntityTree pageModel appModel =
                 GroupDocEntity ProjectGroupDocType groupDoc ->
                     getActiveTodoListForProjectHelp groupDoc
 
-        findProjectByIdHelp =
-            GroupDocStore.findProjectById # appModel
-
-        findContextByIdHelp =
-            GroupDocStore.findContextById # appModel
-
         findByGroupDocId groupDocId =
             GroupDocStore.findByGroupDocId groupDocId appModel
     in

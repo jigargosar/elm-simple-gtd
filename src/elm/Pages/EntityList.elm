@@ -9,7 +9,7 @@ import Data.EntityListFilter as Filter
         , NamedFilterModel
         , NamedFilterType(..)
         )
-import Data.EntityTree as Tree exposing (Node, Tree)
+import Data.EntityTree as Tree exposing (GroupDocNode(..), Node, Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
 import Document exposing (..)
 import Entity exposing (..)
@@ -294,7 +294,7 @@ createEntityTree pageModel appModel =
                             GroupDocStore.getActiveDocs gdType appModel
                                 .|> Entity.createGroupDocEntity gdType
 
-                        createNode : GroupDocEntity -> Node
+                        createNode : GroupDocEntity -> GroupDocNode
                         createNode groupDocEntity =
                             let
                                 todoList =
@@ -302,7 +302,6 @@ createEntityTree pageModel appModel =
                             in
                             Tree.createGroupDocEntityNode groupDocEntity
                                 todoList
-                                (List.length todoList)
                     in
                     activeGroupDocEntityList
                         .|> createNode
@@ -353,7 +352,6 @@ createEntityTree pageModel appModel =
                                     Tree.createGroupDocEntityNode
                                         (createEntity gDoc)
                                         (filterTodoList gDoc)
-                                        0
                             in
                             secondaryGDList .|> createGroupDocEntityNode
                     in

@@ -1,6 +1,6 @@
-    8932 total
+    8939 total
      593 src/elm/Main.elm
-     415 src/elm/Pages/EntityList.elm
+     413 src/elm/Pages/EntityList.elm
      394 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
      319 src/elm/GroupDoc.elm
@@ -28,7 +28,7 @@
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
-      96 src/elm/Views/EntityList.elm
+     102 src/elm/Views/EntityList.elm
       93 src/elm/X/Time.elm
       93 src/elm/Data/EntityListCursor.elm
       90 src/elm/Entity.elm
@@ -40,10 +40,10 @@
       74 src/elm/X/Function/Infix.elm
       74 src/elm/Update/ExclusiveMode.elm
       72 src/elm/View/GetStarted.elm
+      70 src/elm/Data/EntityTree.elm
       68 src/elm/View/Layout.elm
       68 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
-      67 src/elm/Data/EntityTree.elm
       64 src/elm/View/Overlays.elm
       64 src/elm/Todo/Notification/View.elm
       62 src/elm/Todo/GroupEditView.elm

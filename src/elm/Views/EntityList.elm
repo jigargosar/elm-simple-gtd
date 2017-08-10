@@ -33,6 +33,12 @@ keyedViewList pageVM =
                         todoList
                         gDoc
 
+        createGroupDocHeaderView (GroupDocNode (GroupDocEntity gdType gDoc) todoList) =
+            groupHeaderView (createGroupDocVM gdType gDoc todoList)
+
+        createGroupDocView (GroupDocNode (GroupDocEntity gdType gDoc) todoList) =
+            groupView createTodoView (createGroupDocVM gdType gDoc todoList)
+
         createNodeView node =
             case node of
                 Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
@@ -51,12 +57,12 @@ keyedViewList pageVM =
         SingleNode node ->
             createNodeView node
 
-        RootNode (GroupDocNode (GroupDocEntity gdType gDoc) todoList) nodeList ->
-            [ groupHeaderView (createGroupDocVM gdType gDoc todoList) ]
-                ++ (nodeList |> List.concatMap createNodeView)
+        RootNode gdNode nodeList ->
+            [ createGroupDocHeaderView gdNode ]
+                ++ (nodeList .|> createGroupDocView)
 
         Forest nodeList ->
-            nodeList |> List.concatMap createNodeView
+            nodeList .|> createGroupDocView
 
 
 groupView todoView vm =

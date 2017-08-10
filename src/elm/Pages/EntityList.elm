@@ -254,7 +254,6 @@ computeSecondaryGroupDocType gdType =
 createEntityTree pageModel appModel =
     let
         getActiveTodoListForContextHelp groupDoc =
-            -- getActiveTodoListForContext # appModel
             getActiveTodoListForGroupDoc
                 ContextGroupDocType
                 ProjectGroupDocType

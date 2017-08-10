@@ -15,7 +15,7 @@ import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra
-import Models.GroupDocStore as GroupDocStore exposing (..)
+import Models.GroupDocStore as GroupDocStore
 import Ports
 import Set exposing (Set)
 import Store
@@ -191,13 +191,6 @@ entityListCursorEntityIdListFL =
     composeInnerOuterFieldLens entityIdListFL cursorFL
 
 
-todoListToUniqueGroupDocIdList : GroupDocType -> List TodoDoc -> List GroupDocId
-todoListToUniqueGroupDocIdList gdType todoList =
-    todoList
-        .|> TodoDoc.getGroupDocId gdType
-        |> List.Extra.uniqueBy GroupDoc.toComparable
-
-
 filterTodoDocs pred model =
     Store.filterDocs pred model.todoStore
 
@@ -254,92 +247,99 @@ computeSecondaryGroupDocType gdType =
             ContextGroupDocType
 
 
-createEntityTree pageModel appModel =
-    let
-        getActiveTodoListForGroupDocEntity (GroupDocEntity gdType groupDoc) =
-            getActiveTodoListForGroupDoc gdType groupDoc appModel
+getActiveTodoListForGroupDocEntity (GroupDocEntity gdType groupDoc) =
+    getActiveTodoListForGroupDoc gdType groupDoc
 
-        findByGroupDocId groupDocId =
-            GroupDocStore.findByGroupDocId groupDocId appModel
+
+createActiveGroupDocForest gdType appModel =
+    let
+        activeGroupDocEntityList =
+            GroupDocStore.getActiveDocs gdType appModel
+                .|> Entity.createGroupDocEntity gdType
+
+        createNode : GroupDocEntity -> GroupDocNode
+        createNode groupDocEntity =
+            let
+                todoList =
+                    getActiveTodoListForGroupDocEntity groupDocEntity appModel
+            in
+            Tree.createGroupDocEntityNode groupDocEntity
+                todoList
     in
+    activeGroupDocEntityList
+        .|> createNode
+        |> Tree.createForest
+
+
+createGroupDocTree gdType docId appModel =
+    let
+        gDoc =
+            let
+                groupDocId =
+                    GroupDoc.createId gdType docId
+            in
+            GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
+
+        groupDocEntity =
+            Entity.createGroupDocEntity gdType gDoc
+
+        todoList =
+            -- use Id we do not need entity
+            getActiveTodoListForGroupDocEntity groupDocEntity appModel
+
+        secondaryGDType =
+            computeSecondaryGroupDocType gdType
+
+        todoListToUniqueGroupDocIdList : GroupDocType -> List TodoDoc -> List GroupDocId
+        todoListToUniqueGroupDocIdList gdType todoList =
+            todoList
+                .|> TodoDoc.getGroupDocId gdType
+                |> List.Extra.uniqueBy GroupDoc.toComparable
+
+        secondaryGDList =
+            let
+                isNull =
+                    GroupDoc.isNull secondaryGDType
+
+                findByGroupDocId groupDocId =
+                    GroupDocStore.findByGroupDocId groupDocId appModel
+            in
+            todoList
+                |> todoListToUniqueGroupDocIdList secondaryGDType
+                .|> findByGroupDocId
+                |> List.filterMap identity
+                |> GroupDoc.sortWithIsNull isNull
+
+        nodeList =
+            let
+                idFromDoc doc =
+                    GroupDoc.idFromDoc secondaryGDType doc
+
+                createEntity gDoc =
+                    Entity.createGroupDocEntity secondaryGDType gDoc
+
+                filterTodoList gDoc =
+                    List.filter (TodoDoc.hasGroupDocId (idFromDoc gDoc)) todoList
+
+                createGroupDocEntityNode gDoc =
+                    Tree.createGroupDocEntityNode
+                        (createEntity gDoc)
+                        (filterTodoList gDoc)
+            in
+            secondaryGDList .|> createGroupDocEntityNode
+    in
+    Tree.createGroupDocTree groupDocEntity todoList nodeList
+
+
+createEntityTree pageModel appModel =
     case getFilter pageModel of
         GroupByFilter groupByType ->
-            let
-                createActiveGroupDocForest gdType =
-                    let
-                        activeGroupDocEntityList =
-                            GroupDocStore.getActiveDocs gdType appModel
-                                .|> Entity.createGroupDocEntity gdType
-
-                        createNode : GroupDocEntity -> GroupDocNode
-                        createNode groupDocEntity =
-                            let
-                                todoList =
-                                    getActiveTodoListForGroupDocEntity groupDocEntity
-                            in
-                            Tree.createGroupDocEntityNode groupDocEntity
-                                todoList
-                    in
-                    activeGroupDocEntityList
-                        .|> createNode
-                        |> Tree.createForest
-
-                createGroupDocTree gdType docId =
-                    let
-                        gDoc =
-                            let
-                                groupDocId =
-                                    GroupDoc.createId gdType docId
-                            in
-                            GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
-
-                        groupDocEntity =
-                            Entity.createGroupDocEntity gdType gDoc
-
-                        todoList =
-                            -- use Id we do not need entity
-                            getActiveTodoListForGroupDocEntity groupDocEntity
-
-                        secondaryGDType =
-                            computeSecondaryGroupDocType gdType
-
-                        secondaryGDList =
-                            let
-                                isNull =
-                                    GroupDoc.isNull secondaryGDType
-                            in
-                            todoList
-                                |> todoListToUniqueGroupDocIdList secondaryGDType
-                                .|> findByGroupDocId
-                                |> List.filterMap identity
-                                |> GroupDoc.sortWithIsNull isNull
-
-                        nodeList =
-                            let
-                                idFromDoc doc =
-                                    GroupDoc.idFromDoc secondaryGDType doc
-
-                                createEntity gDoc =
-                                    Entity.createGroupDocEntity secondaryGDType gDoc
-
-                                filterTodoList gDoc =
-                                    List.filter (TodoDoc.hasGroupDocId (idFromDoc gDoc)) todoList
-
-                                createGroupDocEntityNode gDoc =
-                                    Tree.createGroupDocEntityNode
-                                        (createEntity gDoc)
-                                        (filterTodoList gDoc)
-                            in
-                            secondaryGDList .|> createGroupDocEntityNode
-                    in
-                    Tree.createGroupDocTree groupDocEntity todoList nodeList
-            in
             case groupByType of
                 ActiveGroupDocList gdType ->
-                    createActiveGroupDocForest gdType
+                    createActiveGroupDocForest gdType appModel
 
                 SingleGroupDoc gdType docId ->
-                    createGroupDocTree gdType docId
+                    createGroupDocTree gdType docId appModel
 
         FlatFilter flatFilterType maxDisplayCount ->
             let

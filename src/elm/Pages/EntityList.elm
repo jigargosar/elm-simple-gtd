@@ -37,16 +37,15 @@ type Model
     = Model ModelRecord
 
 
-constructor : List String -> NamedFilterModel -> Cursor.Model -> Model
-constructor path namedFilterModel cursor =
+constructor : List String -> Filter -> Cursor.Model -> Model
+constructor path filter cursor =
     let
-        filter =
-            Filter.getFilterFromNamedFilterTypeAndPath namedFilterModel.namedFilterType path
+        namedFilterModel =
+            Filter.getNamedFilterModelFromFilter filter
     in
     ModelRecord path
         namedFilterModel
         cursor
-        -- (Cursor.initialValue filter)
         filter
         |> Model
 
@@ -59,22 +58,22 @@ initialValue =
         cursor =
             Cursor.initialValue filter
 
-        ({ pathPrefix } as namedFilterModel) =
+        { pathPrefix } =
             Filter.getNamedFilterModelFromFilter filter
     in
-    constructor pathPrefix namedFilterModel cursor
+    constructor pathPrefix filter cursor
 
 
 maybeInitFromPath : List String -> Maybe Model -> Maybe Model
-maybeInitFromPath path maybeModel =
+maybeInitFromPath path maybePreviousModel =
     let
         (Model model) =
-            maybeModel ?= initialValue
+            maybePreviousModel ?= initialValue
     in
-    Filter.getMaybeNamedFilterModelFromPath path
-        ?|> (\namedFilterModel ->
+    Filter.getMaybeFilterFromPath path
+        ?|> (\filter ->
                 constructor path
-                    namedFilterModel
+                    filter
                     model.cursor
             )
 

@@ -6,6 +6,7 @@ module Data.EntityListFilter
         , NamedFilterModel
         , NamedFilterType(..)
         , getFilterFromNamedFilterTypeAndPath
+        , getMaybeFilterFromPath
         , getMaybeNamedFilterModelFromPath
         , getNamedFilterModelFromFilter
         , initialFilter
@@ -341,3 +342,7 @@ getNamedFilterModelFromFilter filter =
 
         NoFilter ->
             namedFilterTypeToModel NF_GB_ActiveContexts
+
+
+getPathFromFilter filter =
+    getNamedFilterModelFromFilter

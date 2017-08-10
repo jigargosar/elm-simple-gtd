@@ -119,7 +119,7 @@ getFilterFromPath path =
         "contexts" :: [] ->
             groupByActiveContextsFilter
 
-        "project" :: "" :: [] ->
+        "project" :: [] ->
             noProjectFilter
 
         "project" :: projectDocId :: [] ->

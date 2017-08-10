@@ -1,4 +1,4 @@
-    8914 total
+    8902 total
      593 src/elm/Main.elm
      413 src/elm/Pages/EntityList.elm
      394 src/elm/Data/TodoDoc.elm
@@ -57,13 +57,13 @@
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Todo/FormTypes.elm
-      44 src/elm/Models/Stores.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
       37 src/elm/IconNames.elm
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
+      32 src/elm/Models/Stores.elm
       31 src/elm/View/NewTodoFab.elm
       25 src/elm/ViewModel/Frame.elm
       24 src/elm/EntityId.elm

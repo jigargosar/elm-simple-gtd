@@ -30,15 +30,3 @@ getActiveTodoListHavingActiveContext model =
 
 getActiveTodoListHavingActiveProject model =
     model.todoStore |> Store.filterDocs (allPass [ Data.TodoDoc.isActive, isTodoProjectActive model ])
-
-
-findByEntityId entityId =
-    case entityId of
-        ContextEntityId id ->
-            findContextById id >>? createContextEntity
-
-        ProjectEntityId id ->
-            findProjectById id >>? createProjectEntity
-
-        TodoEntityId id ->
-            TodoDocStore.findTodoById id >>? createTodoEntity

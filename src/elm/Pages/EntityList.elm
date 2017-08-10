@@ -355,7 +355,7 @@ createEntityTree pageModel appModel =
                             in
                             secondaryGDList .|> createGroupDocEntityNode
                     in
-                    Tree.createRootGroupDocEntityNode groupDocEntity todoList nodeList
+                    Tree.createGroupDocTree groupDocEntity todoList nodeList
             in
             case groupByType of
                 ActiveGroupDocList gdType ->

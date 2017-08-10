@@ -44,7 +44,7 @@ createGroupDocEntityNode gdEntity todoList =
     GroupDocNode gdEntity todoList
 
 
-createRootGroupDocEntityNode gdEntity todoList nodeList =
+createGroupDocTree gdEntity todoList nodeList =
     GroupDocTree (GroupDocNode gdEntity todoList) nodeList
 
 

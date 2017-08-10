@@ -7,7 +7,7 @@ import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import GroupDoc
-import Models.Todo as TodoDocStore
+import Models.TodoDocStore as TodoDocStore
 import Notification
 import Ports.Todo exposing (..)
 import Return

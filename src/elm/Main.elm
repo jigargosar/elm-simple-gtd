@@ -17,7 +17,7 @@ import Maybe.Extra
 import Menu
 import Menu.Types
 import Models.Selection
-import Models.Todo as TodoDocStore
+import Models.TodoDocStore as TodoDocStore
 import Navigation
 import Pages.EntityList as EntityList
 import Ports

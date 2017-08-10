@@ -77,7 +77,7 @@
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      16 src/elm/Models/Todo.elm
+      16 src/elm/Models/TodoDocStore.elm
       15 src/elm/View/Frame.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm

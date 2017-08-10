@@ -1,4 +1,4 @@
-module Models.Todo exposing (..)
+module Models.TodoDocStore exposing (..)
 
 import Store
 import X.Record exposing (..)

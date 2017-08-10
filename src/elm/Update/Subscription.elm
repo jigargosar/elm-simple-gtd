@@ -10,7 +10,7 @@ import Keyboard
 import Keyboard.Extra as KX exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Models.Selection
-import Models.Todo as TodoDocStore
+import Models.TodoDocStore as TodoDocStore
 import Ports
 import Return
 import Set exposing (Set)

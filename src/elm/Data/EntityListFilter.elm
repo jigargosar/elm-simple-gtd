@@ -279,6 +279,24 @@ getFilterFromPath path =
             NoFilter
 
 
+type alias Path =
+    List String
+
+
+getMaybeFilterFromPath : Path -> Maybe Filter
+getMaybeFilterFromPath path =
+    let
+        filter =
+            getFilterFromPath path
+    in
+    case filter of
+        NoFilter ->
+            Nothing
+
+        _ ->
+            Just filter
+
+
 getNamedFilterModelFromFilter : Filter -> NamedFilterModel
 getNamedFilterModelFromFilter filter =
     case filter of

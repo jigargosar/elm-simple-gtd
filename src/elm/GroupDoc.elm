@@ -46,7 +46,7 @@ createId gdType gdDocId =
 
 
 toComparable =
-    toString >> Debug.log "toString"
+    toString
 
 
 projectIdFromDoc =

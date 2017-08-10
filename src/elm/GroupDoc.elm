@@ -41,6 +41,10 @@ idFromDoc gdType gdDoc =
     GroupDocId gdType (Document.getId gdDoc)
 
 
+createId gdType gdDocId =
+    GroupDocId gdType gdDocId
+
+
 toComparable =
     toString >> Debug.log "toString"
 

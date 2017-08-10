@@ -178,7 +178,7 @@ defaultMaxDisplayCount =
 
 type GroupByType
     = ActiveGroupDocList GroupDocType
-    | SingleGroupDoc GroupDocId
+    | SingleGroupDoc GroupDocType DocId
 
 
 type Filter

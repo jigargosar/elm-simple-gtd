@@ -322,12 +322,12 @@ createEntityTree pageModel appModel =
                         .|> createNode
                         |> Tree.createForest
 
-                createGroupDocTree gdType gDoc =
+                createGroupDocTree gdType docId =
                     let
-                        groupDoc =
+                        gDoc =
                             let
                                 groupDocId =
-                                    GroupDoc.idFromDoc gdType gDoc
+                                    GroupDoc.createId gdType docId
                             in
                             GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
 
@@ -352,7 +352,7 @@ createEntityTree pageModel appModel =
                                 |> List.filterMap identity
                                 |> GroupDoc.sortWithIsNull isNull
 
-                        _ =
+                        nodeList =
                             let
                                 idFromDoc doc =
                                     GroupDoc.idFromDoc secondaryGDType doc
@@ -363,24 +363,22 @@ createEntityTree pageModel appModel =
                                 filterTodoList gDoc =
                                     List.filter (TodoDoc.hasGroupDocId (idFromDoc gDoc)) todoList
 
-                                createLeafNode gDoc =
+                                createGroupDocEntityNode gDoc =
                                     Tree.createGroupDocEntityNode
                                         (createEntity gDoc)
                                         (filterTodoList gDoc)
                                         0
                             in
-                            secondaryGDList .|> createLeafNode
+                            secondaryGDList .|> createGroupDocEntityNode
                     in
-                    1
+                    Tree.createRootGroupDocEntityNode groupDocEntity todoList nodeList
             in
             case groupByType of
                 ActiveGroupDocList gdType ->
                     createActiveGroupDocForest gdType
 
-                SingleGroupDoc groupDocId ->
-                    Tree.createRootLeafNodeWithStringTitle (getTitle pageModel)
-                        []
-                        0
+                SingleGroupDoc gdType docId ->
+                    createGroupDocTree gdType docId
 
         FlatFilter flatFilterType maxDisplayCount ->
             let

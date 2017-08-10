@@ -10,7 +10,7 @@ import Keyboard
 import Keyboard.Extra as KX exposing (Key(..))
 import Models.GroupDocStore exposing (contextStore, projectStore)
 import Models.Selection
-import Models.Todo exposing (todoStore)
+import Models.Todo as TodoDocStore
 import Ports
 import Return
 import Set exposing (Set)
@@ -180,7 +180,7 @@ onPouchDBChange config dbName encodedDoc =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
+            maybeOverT2 TodoDocStore.todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst createTodoEntity
 
         "project-db" ->

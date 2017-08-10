@@ -17,7 +17,7 @@ import Maybe.Extra
 import Menu
 import Menu.Types
 import Models.Selection
-import Models.Todo
+import Models.Todo as TodoDocStore
 import Navigation
 import Pages.EntityList as EntityList
 import Ports
@@ -246,7 +246,7 @@ createUpdateConfig model =
     , focusNextEntityMsgNew = EntityList.MoveFocusBy 1 |> EntityListMsg
     , focusPrevEntityMsgNew = EntityList.MoveFocusBy -1 |> EntityListMsg
     , navigateToPathMsg = navigateToPathMsg
-    , isTodoStoreEmpty = Models.Todo.isStoreEmpty model
+    , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
     , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> EntityListMsg
     }
 

@@ -4,7 +4,7 @@ import Data.TodoDoc
 import Entity exposing (..)
 import GroupDoc
 import Models.GroupDocStore exposing (..)
-import Models.Todo exposing (findTodoById)
+import Models.Todo as TodoDocStore
 import Store
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -41,4 +41,4 @@ findByEntityId entityId =
             findProjectById id >>? createProjectEntity
 
         TodoEntityId id ->
-            findTodoById id >>? createTodoEntity
+            TodoDocStore.findTodoById id >>? createTodoEntity

@@ -7,7 +7,7 @@ import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
 import GroupDoc
-import Models.Todo exposing (findTodoById, todoStore)
+import Models.Todo as TodoDocStore
 import Notification
 import Ports.Todo exposing (..)
 import Return
@@ -55,7 +55,7 @@ findAndUpdateAllTodos findFn action now model =
         updateFn =
             Data.TodoDoc.update action
     in
-    overReturn todoStore (Store.updateAndPersist findFn now updateFn) model
+    overReturn TodoDocStore.todoStore (Store.updateAndPersist findFn now updateFn) model
 
 
 updateTodo action now todoId =
@@ -86,7 +86,7 @@ findAndSnoozeOverDueTodo now model =
         snooze todoId =
             updateTodo (TA_AutoSnooze now) now todoId model
                 |> (\( model, cmd ) ->
-                        findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
+                        TodoDocStore.findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
     in
     Store.findBy (Data.TodoDoc.isReminderOverdue now) model.todoStore
@@ -116,7 +116,7 @@ onSaveTodoForm config form now =
 
 
 insertTodo constructWithId =
-    overT2 todoStore (Store.insert constructWithId)
+    overT2 TodoDocStore.todoStore (Store.insert constructWithId)
 
 
 saveAddTodoForm :
@@ -150,7 +150,7 @@ saveAddTodoForm config addMode form now model =
                     maybeAction =
                         case referenceEntityId of
                             TodoEntityId todoId ->
-                                Models.Todo.findTodoById todoId model
+                                TodoDocStore.findTodoById todoId model
                                     ?|> TA_CopyProjectAndContextId
 
                             ContextEntityId contextId ->
@@ -221,10 +221,10 @@ onStartAddingTodo config addFormMode =
     X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
 
 
-onReminderNotificationClicked now notif =
+onReminderNotificationClicked now notification =
     let
         { action, data } =
-            notif
+            notification
 
         todoId =
             data.id
@@ -279,7 +279,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
             }
     in
     maybeTrackerInfo
-        ?+> (\info -> findTodoById info.todoId model ?|> createRequest info)
+        ?+> (\info -> TodoDocStore.findTodoById info.todoId model ?|> createRequest info)
         |> maybeMapToCmd showRunningTodoNotification
 
 
@@ -292,7 +292,7 @@ positionMoreMenuCmd todoId =
 
 
 showReminderOverlayForTodoId todoId =
-    applyMaybeWith (findTodoById todoId)
+    applyMaybeWith (TodoDocStore.findTodoById todoId)
         setReminderOverlayToInitialView
 
 

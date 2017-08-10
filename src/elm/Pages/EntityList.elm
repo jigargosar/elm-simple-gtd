@@ -9,7 +9,7 @@ import Data.EntityListFilter as Filter
         , NamedFilterModel
         , NamedFilterType(..)
         )
-import Data.EntityTree as Tree exposing (GroupDocNode(..), Node, Tree)
+import Data.EntityTree as Tree exposing (GroupDocNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
 import Document exposing (..)
 import Entity exposing (..)

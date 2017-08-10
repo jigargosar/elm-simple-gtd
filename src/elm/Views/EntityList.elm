@@ -1,6 +1,6 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (GroupDocNode(..), Node(..), Title(..), Tree(..))
+import Data.EntityTree exposing (GroupDocNode(..), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
@@ -39,29 +39,21 @@ keyedViewList pageVM =
         createGroupDocView (GroupDocNode (GroupDocEntity gdType gDoc) todoList) =
             groupView createTodoView (createGroupDocVM gdType gDoc todoList)
 
-        createNodeView node =
-            case node of
-                Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
-                    [ groupView createTodoView (createGroupDocVM gdType gDoc todoList) ]
-
-                Node (StringTitle title) todoList totalCount ->
-                    List.map createTodoView todoList
-                        |> flatTodoListView title totalCount
-
         createTodoView todo =
             todo
                 |> pageVM.createTodoViewModel
                 |> Todo.ItemView.keyedItem
     in
     case pageVM.entityTree of
-        SingleNode node ->
-            createNodeView node
+        FlatTodoList title todoList totalCount ->
+            List.map createTodoView todoList
+                |> flatTodoListView title totalCount
 
-        RootNode gdNode nodeList ->
+        GroupDocTree gdNode nodeList ->
             [ createGroupDocHeaderView gdNode ]
                 ++ (nodeList .|> createGroupDocView)
 
-        Forest nodeList ->
+        GroupDocForest nodeList ->
             nodeList .|> createGroupDocView
 
 

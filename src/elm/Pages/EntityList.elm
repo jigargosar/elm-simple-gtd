@@ -330,12 +330,12 @@ createGroupDocTree gdType docId appModel =
 
 createEntityTree pageModel appModel =
     case getFilter pageModel of
-        GroupByGroupDocFilter groupByType ->
+        GroupByGroupDocFilter gdType groupByType ->
             case groupByType of
-                ActiveGroupDocList gdType ->
+                ActiveGroupDocList ->
                     createActiveGroupDocForest gdType appModel
 
-                SingleGroupDoc gdType docId ->
+                SingleGroupDoc docId ->
                     createGroupDocTree gdType docId appModel
 
         FlatFilter flatFilterType maxDisplayCount ->

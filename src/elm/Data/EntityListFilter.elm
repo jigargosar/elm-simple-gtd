@@ -5,7 +5,7 @@ module Data.EntityListFilter
         , GroupByType(..)
         , NamedFilterModel
         , NamedFilterType(..)
-        , getFilterFromNamedFilterTypeAndPath
+          --        , getFilterFromNamedFilterTypeAndPath
         , getMaybeFilterFromPath
         , getMaybeNamedFilterModelFromPath
         , getNamedFilterModelFromFilter
@@ -108,7 +108,7 @@ namedFilterTypeToModel namedFilterType =
                 [ "bin" ]
                 0
 
-        NF_GB_ActiveContexts ->
+        NF_GB_ActiveProjects ->
             NamedFilterModel NF_GB_ActiveProjects
                 "Projects"
                 IconNames.projects
@@ -116,15 +116,15 @@ namedFilterTypeToModel namedFilterType =
                 [ "projects" ]
                 0
 
-        NF_GB_ActiveProjects ->
+        NF_GB_ActiveContexts ->
             NamedFilterModel NF_WithContextId_GB_Projects
-                "Context"
-                IconNames.context
-                Colors.defaultContext
-                [ "context" ]
+                "Contexts"
+                IconNames.contexts
+                Colors.contexts
+                [ "contexts" ]
                 1
 
-        NF_WithContextId_GB_Projects ->
+        NF_WithProjectId_GB_Contexts ->
             NamedFilterModel NF_WithProjectId_GB_Contexts
                 "Project"
                 IconNames.project
@@ -132,12 +132,12 @@ namedFilterTypeToModel namedFilterType =
                 [ "project" ]
                 1
 
-        NF_WithProjectId_GB_Contexts ->
+        NF_WithContextId_GB_Projects ->
             NamedFilterModel NF_GB_ActiveContexts
-                "Contexts"
-                IconNames.contexts
-                Colors.contexts
-                [ "contexts" ]
+                "Context"
+                IconNames.context
+                Colors.defaultContext
+                [ "context" ]
                 0
 
 
@@ -180,46 +180,47 @@ defaultMaxDisplayCount =
 
 
 type GroupByType
-    = ActiveGroupDocList GroupDocType
-    | SingleGroupDoc GroupDocType DocId
+    = ActiveGroupDocList
+    | SingleGroupDoc DocId
 
 
 type Filter
     = FlatFilter FlatFilterType MaxDisplayCount
-    | GroupByGroupDocFilter GroupByType
+    | GroupByGroupDocFilter GroupDocType GroupByType
     | NoFilter
 
 
-getFilterFromNamedFilterTypeAndPath namedFilterType path =
-    case namedFilterType of
-        NF_WithNullContext ->
-            getFilterFromNamedFilterTypeAndPath NF_WithContextId_GB_Projects [ "" ]
 
-        NF_WithNullProject ->
-            getFilterFromNamedFilterTypeAndPath NF_WithProjectId_GB_Contexts [ "" ]
+{-
+   getFilterFromNamedFilterTypeAndPath namedFilterType path =
+       case namedFilterType of
+           NF_WithNullContext ->
+               getFilterFromNamedFilterTypeAndPath NF_WithContextId_GB_Projects [ "" ]
 
-        NF_FL_Done ->
-            FlatFilter Done defaultMaxDisplayCount
+           NF_WithNullProject ->
+               getFilterFromNamedFilterTypeAndPath NF_WithProjectId_GB_Contexts [ "" ]
 
-        NF_FL_Recent ->
-            FlatFilter Recent defaultMaxDisplayCount
+           NF_FL_Done ->
+               FlatFilter Done defaultMaxDisplayCount
 
-        NF_FL_Bin ->
-            FlatFilter Bin defaultMaxDisplayCount
+           NF_FL_Recent ->
+               FlatFilter Recent defaultMaxDisplayCount
 
-        NF_GB_ActiveContexts ->
-            GroupByGroupDocFilter (ActiveGroupDocList ContextGroupDocType)
+           NF_FL_Bin ->
+               FlatFilter Bin defaultMaxDisplayCount
 
-        NF_GB_ActiveProjects ->
-            GroupByGroupDocFilter (ActiveGroupDocList ProjectGroupDocType)
+           NF_GB_ActiveContexts ->
+               GroupByGroupDocFilter ContextGroupDocType ActiveGroupDocList
 
-        NF_WithContextId_GB_Projects ->
-            -- ContextIdFilter (List.Extra.last path ?= "")
-            GroupByGroupDocFilter (SingleGroupDoc ContextGroupDocType (List.Extra.last path ?= ""))
+           NF_GB_ActiveProjects ->
+               GroupByGroupDocFilter ProjectGroupDocType ActiveGroupDocList
 
-        NF_WithProjectId_GB_Contexts ->
-            --ProjectIdFilter (List.Extra.last path ?= "")
-            GroupByGroupDocFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))
+           NF_WithContextId_GB_Projects ->
+               GroupByGroupDocFilter ContextGroupDocType (SingleGroupDoc (List.Extra.last path ?= ""))
+
+           NF_WithProjectId_GB_Contexts ->
+               GroupByGroupDocFilter ProjectGroupDocType (SingleGroupDoc (List.Extra.last path ?= ""))
+-}
 
 
 initialFilter =
@@ -227,11 +228,11 @@ initialFilter =
 
 
 groupByActiveContextsFilter =
-    GroupByGroupDocFilter (ActiveGroupDocList ContextGroupDocType)
+    GroupByGroupDocFilter ContextGroupDocType ActiveGroupDocList
 
 
 groupByActiveProjectsFilter =
-    GroupByGroupDocFilter (ActiveGroupDocList ProjectGroupDocType)
+    GroupByGroupDocFilter ProjectGroupDocType ActiveGroupDocList
 
 
 inboxFilter =
@@ -243,11 +244,11 @@ noProjectFilter =
 
 
 contextFilter contextDocId =
-    GroupByGroupDocFilter (SingleGroupDoc ContextGroupDocType contextDocId)
+    GroupByGroupDocFilter ContextGroupDocType (SingleGroupDoc contextDocId)
 
 
 projectFilter projectDocId =
-    GroupByGroupDocFilter (SingleGroupDoc ProjectGroupDocType projectDocId)
+    GroupByGroupDocFilter ProjectGroupDocType (SingleGroupDoc projectDocId)
 
 
 flatFilter flatFilterType =
@@ -326,25 +327,29 @@ getNamedFilterModelFromFilter filter =
                 Bin ->
                     namedFilterTypeToModel NF_FL_Bin
 
-        GroupByGroupDocFilter groupByType ->
-            case groupByType of
-                ActiveGroupDocList ContextGroupDocType ->
-                    namedFilterTypeToModel NF_GB_ActiveContexts
+        GroupByGroupDocFilter gdType groupByType ->
+            case gdType of
+                ContextGroupDocType ->
+                    case groupByType of
+                        ActiveGroupDocList ->
+                            namedFilterTypeToModel NF_GB_ActiveContexts
 
-                SingleGroupDoc ContextGroupDocType "" ->
-                    namedFilterTypeToModel NF_WithNullContext
+                        SingleGroupDoc "" ->
+                            namedFilterTypeToModel NF_WithNullContext
 
-                SingleGroupDoc ContextGroupDocType contextDocId ->
-                    namedFilterTypeToModel NF_WithContextId_GB_Projects
+                        SingleGroupDoc contextDocId ->
+                            namedFilterTypeToModel NF_WithContextId_GB_Projects
 
-                ActiveGroupDocList ProjectGroupDocType ->
-                    namedFilterTypeToModel NF_GB_ActiveProjects
+                ProjectGroupDocType ->
+                    case groupByType of
+                        ActiveGroupDocList ->
+                            namedFilterTypeToModel NF_GB_ActiveProjects
 
-                SingleGroupDoc ProjectGroupDocType "" ->
-                    namedFilterTypeToModel NF_WithNullProject
+                        SingleGroupDoc "" ->
+                            namedFilterTypeToModel NF_WithNullProject
 
-                SingleGroupDoc ProjectGroupDocType projectDocId ->
-                    namedFilterTypeToModel NF_WithProjectId_GB_Contexts
+                        SingleGroupDoc projectDocId ->
+                            namedFilterTypeToModel NF_WithProjectId_GB_Contexts
 
         NoFilter ->
             namedFilterTypeToModel NF_GB_ActiveContexts

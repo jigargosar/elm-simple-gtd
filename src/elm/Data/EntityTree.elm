@@ -36,7 +36,7 @@ flatten tree =
             nodeList |> List.concatMap getGroupDocNodeEntityList
 
 
-createRootLeafNodeWithStringTitle stringTitle todoList totalCount =
+createFlatTodoListNode stringTitle todoList totalCount =
     FlatTodoList stringTitle todoList totalCount
 
 

@@ -378,7 +378,7 @@ createEntityTree pageModel appModel =
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
             in
-            Tree.createRootLeafNodeWithStringTitle (getTitle pageModel)
+            Tree.createFlatTodoListNode (getTitle pageModel)
                 truncatedTodoList
                 totalCount
 

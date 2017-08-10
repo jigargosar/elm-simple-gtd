@@ -184,6 +184,7 @@ type GroupByType
 type Filter
     = FlatFilter FlatFilterType MaxDisplayCount
     | GroupByFilter GroupByType
+    | NoFilter
 
 
 getFilterFromNamedFilterTypeAndPath namedFilterType path =
@@ -216,3 +217,63 @@ getFilterFromNamedFilterTypeAndPath namedFilterType path =
         NF_WithProjectId_GB_Contexts ->
             --ProjectIdFilter (List.Extra.last path ?= "")
             GroupByFilter (SingleGroupDoc ProjectGroupDocType (List.Extra.last path ?= ""))
+
+
+inboxFilter =
+    contextFilter ""
+
+
+noProjectFilter =
+    projectFilter ""
+
+
+contextFilter contextDocId =
+    GroupByFilter (SingleGroupDoc ContextGroupDocType contextDocId)
+
+
+projectFilter projectDocId =
+    GroupByFilter (SingleGroupDoc ProjectGroupDocType projectDocId)
+
+
+flatFilter flatFilterType =
+    FlatFilter flatFilterType defaultMaxDisplayCount
+
+
+getFilterFromPath : List String -> Filter
+getFilterFromPath path =
+    case path of
+        "context" :: "" :: [] ->
+            inboxFilter
+
+        "context" :: contextDocId :: [] ->
+            contextFilter contextDocId
+
+        "inbox" :: [] ->
+            inboxFilter
+
+        "contexts" :: [] ->
+            GroupByFilter (ActiveGroupDocList ContextGroupDocType)
+
+        "project" :: "" :: [] ->
+            noProjectFilter
+
+        "project" :: projectDocId :: [] ->
+            projectFilter projectDocId
+
+        "projects" :: [] ->
+            GroupByFilter (ActiveGroupDocList ProjectGroupDocType)
+
+        "no-project" :: [] ->
+            noProjectFilter
+
+        "done" :: [] ->
+            flatFilter Done
+
+        "recent" :: [] ->
+            flatFilter Recent
+
+        "bin" :: [] ->
+            flatFilter Bin
+
+        _ ->
+            NoFilter

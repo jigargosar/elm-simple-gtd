@@ -359,6 +359,9 @@ createEntityTree pageModel appModel =
                 truncatedTodoList
                 totalCount
 
+        NoFilter ->
+            Tree.createForest []
+
 
 flatFilterTypeToPredicate filterType =
     case filterType of

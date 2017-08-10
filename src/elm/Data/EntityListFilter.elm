@@ -39,12 +39,10 @@ type NamedFilterType
 
 
 type alias NamedFilterModel =
-    { namedFilterType : NamedFilterType
-    , displayName : String
+    { displayName : String
     , iconName : String
     , headerColor : Color
     , pathPrefix : List String
-    , pathArgumentsCount : Int
     }
 
 
@@ -52,76 +50,67 @@ namedFilterTypeToModel : NamedFilterType -> NamedFilterModel
 namedFilterTypeToModel namedFilterType =
     case namedFilterType of
         NF_WithNullContext ->
-            NamedFilterModel NF_WithNullContext
+            NamedFilterModel
                 "Inbox"
                 IconNames.nullContext
                 Colors.nullContext
                 [ "context" ]
-                0
 
         NF_WithNullProject ->
-            NamedFilterModel NF_WithNullProject
+            NamedFilterModel
                 "No Project Assigned"
                 IconNames.nullProject
                 Colors.nullProject
                 [ "project" ]
-                0
 
         NF_FL_Done ->
-            NamedFilterModel NF_FL_Done
+            NamedFilterModel
                 "Done"
                 IconNames.done
                 Colors.sgtdBlue
                 [ "done" ]
-                0
 
         NF_FL_Recent ->
-            NamedFilterModel NF_FL_Recent
+            NamedFilterModel
                 "Recent"
                 IconNames.recent
                 Colors.sgtdBlue
                 [ "recent" ]
-                0
 
         NF_FL_Bin ->
-            NamedFilterModel NF_FL_Bin
+            NamedFilterModel
                 "Bin"
                 IconNames.bin
                 Colors.sgtdBlue
                 [ "bin" ]
-                0
 
         NF_GB_ActiveProjects ->
-            NamedFilterModel NF_GB_ActiveProjects
+            NamedFilterModel
                 "Projects"
                 IconNames.projects
                 Colors.projects
                 [ "projects" ]
-                0
 
         NF_GB_ActiveContexts ->
-            NamedFilterModel NF_WithContextId_GB_Projects
+            NamedFilterModel
                 "Contexts"
                 IconNames.contexts
                 Colors.contexts
                 [ "contexts" ]
-                1
 
         NF_WithProjectId_GB_Contexts ->
-            NamedFilterModel NF_WithProjectId_GB_Contexts
+            NamedFilterModel
                 "Project"
                 IconNames.project
                 Colors.defaultProject
                 [ "project" ]
-                1
 
         NF_WithContextId_GB_Projects ->
-            NamedFilterModel NF_GB_ActiveContexts
+            NamedFilterModel
                 "Context"
                 IconNames.context
                 Colors.defaultContext
                 [ "context" ]
-                0
 
 
 

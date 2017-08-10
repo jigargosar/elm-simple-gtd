@@ -73,7 +73,7 @@ getFullPath (Model pageModel) =
 
 
 getNamedFilterModel (Model pageModel) =
-    Filter.getNamedFilterModelFromFilter pageModel.filter
+    Filter.getFilterViewModel pageModel.filter
 
 
 getTitleColourTuple =

@@ -4,8 +4,8 @@ module Data.EntityListFilter
         , FilterViewModel
         , FlatFilterType(..)
         , GroupByType(..)
+        , getFilterViewModel
         , getMaybeFilterFromPath
-        , getNamedFilterModelFromFilter
         , initialFilterPathTuple
         )
 
@@ -158,8 +158,8 @@ getMaybeFilterFromPath path =
             Just filter
 
 
-getNamedFilterModelFromFilter : Filter -> FilterViewModel
-getNamedFilterModelFromFilter filter =
+getFilterViewModel : Filter -> FilterViewModel
+getFilterViewModel filter =
     case filter of
         FlatFilter flatFilterType maxDisplayCount ->
             case flatFilterType of
@@ -224,4 +224,4 @@ getNamedFilterModelFromFilter filter =
                                 Colors.defaultProject
 
         NoFilter ->
-            getNamedFilterModelFromFilter initialFilter
+            getFilterViewModel initialFilter

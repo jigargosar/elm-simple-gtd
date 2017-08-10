@@ -14,7 +14,7 @@ import Data.TodoDoc as TodoDoc
 import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
-import Models.GroupDocStore exposing (..)
+import Models.GroupDocStore as GroupDocStore exposing (..)
 import Ports
 import Set
 import Store
@@ -220,7 +220,7 @@ getActiveTodoListForGroupDoc gdType secondaryGDType groupDoc appModel =
             GroupDoc.idFromDoc gdType groupDoc
 
         activeSecondaryGroupDocIdSet =
-            Models.GroupDocStore.getActiveDocIdSet secondaryGDType appModel
+            GroupDocStore.getActiveDocIdSet secondaryGDType appModel
 
         isTodoSecondaryGroupDocActive =
             TodoDoc.hasGroupDocIdInSet secondaryGDType activeSecondaryGroupDocIdSet
@@ -260,24 +260,24 @@ createEntityTree pageModel appModel =
                     getActiveTodoListForProjectHelp groupDoc
 
         findProjectByIdHelp =
-            Models.GroupDocStore.findProjectById # appModel
+            GroupDocStore.findProjectById # appModel
 
         findContextByIdHelp =
-            Models.GroupDocStore.findContextById # appModel
+            GroupDocStore.findContextById # appModel
 
         findByGroupDocId groupDocId =
-            Models.GroupDocStore.findByGroupDocId groupDocId appModel
+            GroupDocStore.findByGroupDocId groupDocId appModel
     in
     case getFilter pageModel of
         ContextIdFilter id ->
-            Models.GroupDocStore.findContextById id appModel
+            GroupDocStore.findContextById id appModel
                 ?= GroupDoc.nullContext
                 |> Tree.initContextRoot
                     getActiveTodoListForContextHelp
                     findProjectByIdHelp
 
         ProjectIdFilter id ->
-            Models.GroupDocStore.findProjectById id appModel
+            GroupDocStore.findProjectById id appModel
                 ?= GroupDoc.nullProject
                 |> Tree.initProjectRoot
                     getActiveTodoListForProjectHelp
@@ -288,7 +288,7 @@ createEntityTree pageModel appModel =
                 createActiveGroupDocForest gdType =
                     let
                         activeGroupDocEntityList =
-                            Models.GroupDocStore.getActiveDocs gdType appModel
+                            GroupDocStore.getActiveDocs gdType appModel
                                 .|> Entity.createGroupDocEntity gdType
 
                         createNode : GroupDocEntity -> Node
@@ -311,7 +311,7 @@ createEntityTree pageModel appModel =
                             GroupDoc.idFromDoc gdType gDoc
 
                         groupDoc =
-                            Models.GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
+                            GroupDocStore.findByGroupDocIdOrNull groupDocId appModel
 
                         groupDocEntity =
                             Entity.createGroupDocEntity gdType gDoc

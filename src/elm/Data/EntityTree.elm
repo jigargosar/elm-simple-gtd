@@ -32,7 +32,6 @@ type Title
 
 type Node
     = LeafNode Title (List TodoDoc) Int
-    | NodeList (List Node)
 
 
 type Tree
@@ -110,9 +109,6 @@ flatten tree =
 
                 LeafNode (StringTitle _) todoList _ ->
                     todoList .|> Entity.TodoEntity
-
-                NodeList nodeList ->
-                    nodeList |> List.concatMap getNodeEntityList
     in
     case tree of
         ContextRoot node nodeList ->
@@ -157,8 +153,3 @@ createRootGroupDocEntityNode gdEntity todoList totalCount =
 createForest : List Node -> Tree
 createForest =
     Forest
-
-
-createNodeList : List Node -> Node
-createNodeList =
-    NodeList

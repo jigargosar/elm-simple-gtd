@@ -43,9 +43,6 @@ keyedViewList pageVM =
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
 
-                NodeList nodeList ->
-                    nodeList |> List.concatMap createNodeView
-
         createContextVM { context, todoList } =
             pageVM.createContextGroupVM
                 todoList

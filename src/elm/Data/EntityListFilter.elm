@@ -282,5 +282,30 @@ getFilterFromPath path =
 getNamedFilterModelFromFilter : Filter -> NamedFilterModel
 getNamedFilterModelFromFilter filter =
     case filter of
-        _ ->
+        FlatFilter flatFilterType maxDisplayCount ->
+            case flatFilterType of
+                Done ->
+                    namedFilterTypeToModel NF_FL_Done
+
+                Recent ->
+                    namedFilterTypeToModel NF_FL_Recent
+
+                Bin ->
+                    namedFilterTypeToModel NF_FL_Bin
+
+        GroupByFilter groupByType ->
+            case groupByType of
+                ActiveGroupDocList ContextGroupDocType ->
+                    namedFilterTypeToModel NF_GB_ActiveContexts
+
+                ActiveGroupDocList ProjectGroupDocType ->
+                    namedFilterTypeToModel NF_GB_ActiveProjects
+
+                SingleGroupDoc ProjectGroupDocType projectDocId ->
+                    namedFilterTypeToModel NF_WithProjectId_GB_Contexts
+
+                SingleGroupDoc ContextGroupDocType contextDocId ->
+                    namedFilterTypeToModel NF_WithProjectId_GB_Contexts
+
+        NoFilter ->
             namedFilterTypeToModel NF_GB_ActiveContexts

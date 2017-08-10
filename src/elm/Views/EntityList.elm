@@ -23,7 +23,7 @@ keyedViewList pageVM =
     let
         createNodeView node =
             case node of
-                LeafNode (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
+                Node (GroupDocEntityTitle (GroupDocEntity gdType gDoc)) todoList totalCount ->
                     let
                         vm =
                             case gdType of
@@ -39,7 +39,7 @@ keyedViewList pageVM =
                     in
                     [ groupView createTodoView vm ]
 
-                LeafNode (StringTitle title) todoList totalCount ->
+                Node (StringTitle title) todoList totalCount ->
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
 
@@ -79,7 +79,7 @@ keyedViewList pageVM =
             in
             header :: multiContextView subGroupList
 
-        Root node ->
+        SingleNode node ->
             createNodeView node
 
         Forest nodeList ->

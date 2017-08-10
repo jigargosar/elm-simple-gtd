@@ -31,13 +31,13 @@ type Title
 
 
 type Node
-    = LeafNode Title (List TodoDoc) Int
+    = Node Title (List TodoDoc) Int
 
 
 type Tree
     = ContextRoot ContextNode (List ProjectNode)
     | ProjectRoot ProjectNode (List ContextNode)
-    | Root Node
+    | SingleNode Node
     | Forest (List Node)
 
 
@@ -104,10 +104,10 @@ flatten tree =
     let
         getNodeEntityList node =
             case node of
-                LeafNode (GroupDocEntityTitle gdEntity) todoList _ ->
+                Node (GroupDocEntityTitle gdEntity) todoList _ ->
                     Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
 
-                LeafNode (StringTitle _) todoList _ ->
+                Node (StringTitle _) todoList _ ->
                     todoList .|> Entity.TodoEntity
     in
     case tree of
@@ -131,7 +131,7 @@ flatten tree =
                             )
                    )
 
-        Root node ->
+        SingleNode node ->
             getNodeEntityList node
 
         Forest nodeList ->
@@ -139,15 +139,15 @@ flatten tree =
 
 
 createRootLeafNodeWithStringTitle stringTitle todoList totalCount =
-    Root (LeafNode (StringTitle stringTitle) todoList totalCount)
+    SingleNode (Node (StringTitle stringTitle) todoList totalCount)
 
 
 createGroupDocEntityNode gdEntity todoList totalCount =
-    LeafNode (GroupDocEntityTitle gdEntity) todoList totalCount
+    Node (GroupDocEntityTitle gdEntity) todoList totalCount
 
 
 createRootGroupDocEntityNode gdEntity todoList totalCount =
-    LeafNode (GroupDocEntityTitle gdEntity) todoList totalCount
+    Node (GroupDocEntityTitle gdEntity) todoList totalCount
 
 
 createForest : List Node -> Tree

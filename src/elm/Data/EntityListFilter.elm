@@ -7,7 +7,7 @@ module Data.EntityListFilter
         , NamedFilterType(..)
         , getMaybeFilterFromPath
         , getNamedFilterModelFromFilter
-        , initialFilter
+        , initialFilterPathTuple
         , namedFilterTypeToModel
         )
 
@@ -142,8 +142,12 @@ type Filter
     | NoFilter
 
 
-initialFilter =
-    groupByActiveContextsFilter
+activeContextsPath =
+    "contexts" :: []
+
+
+initialFilterPathTuple =
+    ( groupByActiveContextsFilter, activeContextsPath )
 
 
 groupByActiveContextsFilter =

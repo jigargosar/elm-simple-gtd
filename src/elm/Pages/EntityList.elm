@@ -46,16 +46,13 @@ constructor path filter cursor =
 
 initialValue =
     let
-        filter =
-            Filter.initialFilter
+        ( filter, path ) =
+            Filter.initialFilterPathTuple
 
         cursor =
             Cursor.initialValue filter
-
-        { pathPrefix } =
-            Filter.getNamedFilterModelFromFilter filter
     in
-    constructor pathPrefix filter cursor
+    constructor path filter cursor
 
 
 maybeInitFromPath : List String -> Maybe Model -> Maybe Model

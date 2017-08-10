@@ -82,6 +82,9 @@ keyedViewList pageVM =
         SingleNode node ->
             createNodeView node
 
+        RootNode node nodeList ->
+            createNodeView node
+
         Forest nodeList ->
             nodeList |> List.concatMap createNodeView
 

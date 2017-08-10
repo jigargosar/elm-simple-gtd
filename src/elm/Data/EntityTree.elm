@@ -37,6 +37,7 @@ type Node
 type Tree
     = ContextRoot ContextNode (List ProjectNode)
     | ProjectRoot ProjectNode (List ContextNode)
+    | RootNode Node (List Node)
     | SingleNode Node
     | Forest (List Node)
 
@@ -133,6 +134,18 @@ flatten tree =
 
         SingleNode node ->
             getNodeEntityList node
+
+        RootNode node nodeList ->
+            let
+                getNodeEntityList node =
+                    case node of
+                        Node (GroupDocEntityTitle gdEntity) todoList _ ->
+                            [ Entity.GroupDocEntityW gdEntity ]
+
+                        Node (StringTitle _) todoList _ ->
+                            todoList .|> Entity.TodoEntity
+            in
+            getNodeEntityList node ++ (nodeList |> List.concatMap getNodeEntityList)
 
         Forest nodeList ->
             nodeList |> List.concatMap getNodeEntityList

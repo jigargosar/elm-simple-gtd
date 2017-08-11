@@ -235,7 +235,10 @@ onReminderNotificationClicked config now notificationEvent =
             >> command (Notification.closeNotification todoId)
     else
         map (showReminderOverlayForTodoId todoId)
-            >> command (config.gotoEntityIdCmd (EntityId.fromTodoDocId todoId))
+
+
+
+-->> command (config.gotoEntityIdCmd (EntityId.fromTodoDocId todoId))
 
 
 showReminderNotificationCmd ( todo, model ) =

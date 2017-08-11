@@ -129,7 +129,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       const firstSelected = $(selector).first()
       console.log("port: focusSelector: $(selector).first()", firstSelected)
       return firstSelected.focus()
-    }, 100)
+    }, 0)
   });
   
   

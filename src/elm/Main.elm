@@ -257,6 +257,11 @@ createUpdateConfig model =
     }
 
 
+updateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
+updateAll config msgList =
+    List.foldl (update config) # msgList
+
+
 update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 update config msg =
     (case msg of
@@ -422,6 +427,7 @@ updatePage config msg page =
                                 ( { model | page = EntityList pageModel }
                                 , Cmd.batch cmdList |> Cmd.map OnEntityListMsg
                                 )
+                                    |> updateAll config msgList
                            )
                 )
 

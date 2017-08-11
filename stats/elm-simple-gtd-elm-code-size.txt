@@ -1,4 +1,4 @@
-    8950 total
+    8951 total
      593 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
@@ -11,7 +11,7 @@
      219 src/elm/Pages/EntityList.elm
      210 src/elm/Update/Subscription.elm
      200 src/elm/GroupDoc/ViewModel.elm
-     196 src/elm/Pages/EntityList/TreeBuilder.elm
+     193 src/elm/Pages/EntityList/TreeBuilder.elm
      185 src/elm/Update/Firebase.elm
      178 src/elm/Todo/ViewModel.elm
      170 src/elm/Models/GroupDocStore.elm
@@ -72,13 +72,13 @@
       22 src/elm/Ports.elm
       21 src/elm/X/Predicate.elm
       21 src/elm/Todo/Notification/Types.elm
+      20 src/elm/Models/TodoDocStore.elm
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm
       19 src/elm/RegexHelper.elm
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      16 src/elm/Models/TodoDocStore.elm
       15 src/elm/View/Frame.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm

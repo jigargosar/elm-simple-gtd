@@ -8,17 +8,14 @@ import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra
 import Models.GroupDocStore as GroupDocStore
+import Models.TodoDocStore as TodoDocStore
 import Store
 import Toolkit.Operators exposing (..)
 import X.Predicate
 
 
-filterTodoDocs pred model =
-    Store.filterDocs pred model.todoStore
-
-
 filterTodosAndSortBy pred sortBy model =
-    filterTodoDocs pred model
+    TodoDocStore.filterTodoDocs pred model
         |> List.sortBy sortBy
 
 

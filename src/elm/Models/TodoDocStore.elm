@@ -8,6 +8,10 @@ todoStore =
     fieldLens .todoStore (\s b -> { b | todoStore = s })
 
 
+filterTodoDocs pred model =
+    Store.filterDocs pred model.todoStore
+
+
 findTodoById id =
     .todoStore >> Store.findById id
 

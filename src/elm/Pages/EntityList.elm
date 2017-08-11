@@ -114,10 +114,10 @@ getEntityListDomIdFromEntityId entityId =
 
 
 type Msg
-    = MoveFocusBy Int
-    | SetCursorEntityId EntityId
-    | RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
-    | GoToEntityId EntityId
+    = OnMoveFocusBy Int
+    | OnSetCursorEntityId EntityId
+    | OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+    | OnGoToEntityId EntityId
 
 
 type alias HasStores x =
@@ -140,11 +140,11 @@ update config appModel msg model =
             pure model
     in
     case msg of
-        SetCursorEntityId entityId ->
+        OnSetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
             onSetCursorEntityId entityId appModel model
 
-        MoveFocusBy offset ->
+        OnMoveFocusBy offset ->
             let
                 cursor =
                     get cursorL model
@@ -153,7 +153,7 @@ update config appModel msg model =
                 ?|> (\entityId -> onSetCursorEntityId entityId appModel model)
                 ?= noop
 
-        RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
+        OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
                         ( model
@@ -162,7 +162,7 @@ update config appModel msg model =
                     )
                 ?= noop
 
-        GoToEntityId entityId ->
+        OnGoToEntityId entityId ->
             let
                 filter =
                     --config.navigateToPath

@@ -133,7 +133,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
 setFocusInEntityWithEntityIdMsg =
-    EntityList.SetCursorEntityId >> EntityListMsg
+    EntityList.OnSetCursorEntityId >> EntityListMsg
 
 
 subscriptions : Model -> Sub Msg
@@ -243,11 +243,11 @@ createUpdateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
-    , focusNextEntityMsgNew = EntityList.MoveFocusBy 1 |> EntityListMsg
-    , focusPrevEntityMsgNew = EntityList.MoveFocusBy -1 |> EntityListMsg
+    , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> EntityListMsg
+    , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> EntityListMsg
     , navigateToPathMsg = navigateToPathMsg >> toCmd
     , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
-    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> EntityListMsg
+    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> EntityListMsg
     }
 
 

@@ -128,27 +128,27 @@ type alias HasStores x =
     }
 
 
-type alias PartReturn model msg =
-    ( model, List (Cmd msg), List msg )
+type alias PartReturn model msg otherMsg =
+    ( model, List (Cmd msg), List otherMsg )
 
 
-type alias PartReturnF model msg =
-    PartReturn model msg -> PartReturn model msg
+type alias PartReturnF model msg otherMsg =
+    PartReturn model msg otherMsg -> PartReturn model msg otherMsg
 
 
-pure : model -> PartReturn model msg
+pure : model -> PartReturn model msg otherMsg
 pure model =
     ( model, [], [] )
 
 
-addCmd : Cmd msg -> PartReturnF model msg
+addCmd : Cmd msg -> PartReturnF model msg otherMsg
 addCmd cmd ( model, cmdList, msgList ) =
     ( model, cmd :: cmdList, msgList )
 
 
-addMsg : msg -> PartReturnF model msg
-addMsg msg ( model, cmdList, msgList ) =
-    ( model, cmdList, msgList ++ [ msg ] )
+addMsg : otherMsg -> PartReturnF model msg otherMsg
+addMsg otherMsg ( model, cmdList, msgList ) =
+    ( model, cmdList, msgList ++ [ otherMsg ] )
 
 
 update :
@@ -156,7 +156,7 @@ update :
     -> HasStores x
     -> Msg
     -> Model
-    -> ( Model, List (Cmd msg), List msg )
+    -> PartReturn Model msg msg
 update config appModel msg model =
     let
         noop : ( Model, List (Cmd msg), List msg )

@@ -2,7 +2,7 @@ module Pages.EntityList exposing (..)
 
 import Data.EntityListCursor as Cursor
 import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
-import Data.EntityTree as Tree exposing (GroupDocNode(..), Tree)
+import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
 import Document exposing (..)
 import Entity exposing (..)
@@ -269,7 +269,6 @@ createGroupDocTree gdType docId appModel =
             Entity.createGroupDocEntity gdType gDoc
 
         todoList =
-            -- use Id we do not need entity
             getActiveTodoListForGroupDocEntity groupDocEntity appModel
 
         secondaryGDType =

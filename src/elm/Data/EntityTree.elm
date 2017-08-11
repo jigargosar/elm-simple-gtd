@@ -9,13 +9,13 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 
 
-type GroupDocNode
+type GroupDocEntityNode
     = GroupDocNode GroupDocEntity (List TodoDoc)
 
 
 type Tree
     = GroupDocTree GroupDocNode (List GroupDocNode)
-    | FlatTodoList String (List TodoDoc) Int
+    | NamedTodoList String (List TodoDoc) Int
     | GroupDocForest (List GroupDocNode)
 
 
@@ -26,7 +26,7 @@ flatten tree =
             Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
     in
     case tree of
-        FlatTodoList _ todoList _ ->
+        NamedTodoList _ todoList _ ->
             todoList .|> Entity.TodoEntity
 
         GroupDocTree (GroupDocNode gdEntity todoList) nodeList ->
@@ -37,7 +37,7 @@ flatten tree =
 
 
 createFlatTodoListNode stringTitle todoList totalCount =
-    FlatTodoList stringTitle todoList totalCount
+    NamedTodoList stringTitle todoList totalCount
 
 
 createGroupDocEntityNode gdEntity todoList =

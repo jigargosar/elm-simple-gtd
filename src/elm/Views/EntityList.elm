@@ -1,6 +1,6 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (GroupDocNode(..), Tree(..))
+import Data.EntityTree exposing (GroupDocEntityNode(..), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
@@ -45,7 +45,7 @@ keyedViewList pageVM =
                 |> Todo.ItemView.keyedItem
     in
     case pageVM.entityTree of
-        FlatTodoList title todoList totalCount ->
+        NamedTodoList title todoList totalCount ->
             List.map createTodoView todoList
                 |> flatTodoListView title totalCount
 

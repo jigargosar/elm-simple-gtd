@@ -118,13 +118,13 @@ type Msg
     | GoToEntityId EntityId
 
 
-update config appModel msg pageModel =
+update config appModel msg model =
     let
         noop =
-            pure pageModel
+            pure model
 
         dispatchMsg msg =
-            update config appModel msg pageModel
+            update config appModel msg model
 
         dispatchMaybeMsg msg =
             msg ?|> dispatchMsg ?= noop
@@ -134,28 +134,28 @@ update config appModel msg pageModel =
             -- note: this is automatically called by focusIn event of list item.
             let
                 entityIdList =
-                    createEntityIdList pageModel appModel
+                    createEntityIdList model appModel
 
                 cursor =
                     Cursor.create entityIdList
                         (Just entityId)
-                        (getFilter pageModel)
+                        (getFilter model)
             in
-            set cursorL cursor pageModel |> pure
+            set cursorL cursor model |> pure
 
         MoveFocusBy offset ->
             let
                 cursor =
-                    get cursorL pageModel
+                    get cursorL model
             in
             Cursor.findEntityIdByOffsetIndex offset cursor
                 ?|> SetCursorEntityId
                 |> dispatchMaybeMsg
 
         RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
-            computeMaybeNewEntityIdAtCursor appModel pageModel
+            computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
-                        ( pageModel
+                        ( model
                         , Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
                         )
                     )
@@ -170,21 +170,21 @@ update config appModel msg pageModel =
             noop
 
 
-createEntityTree pageModel appModel =
-    TreeBuilder.createEntityTree_ (getFilter pageModel) (getTitle pageModel) appModel
+createEntityTree model appModel =
+    TreeBuilder.createEntityTree_ (getFilter model) (getTitle model) appModel
 
 
-createEntityIdList pageModel appModel =
-    createEntityTree pageModel appModel |> Tree.toEntityIdList
+createEntityIdList model appModel =
+    createEntityTree model appModel |> Tree.toEntityIdList
 
 
-computeMaybeNewEntityIdAtCursor appModel pageModel =
+computeMaybeNewEntityIdAtCursor appModel model =
     let
         newEntityIdList =
-            createEntityIdList pageModel appModel
+            createEntityIdList model appModel
 
         newFilter =
-            getFilter pageModel
+            getFilter model
     in
-    get cursorL pageModel
+    get cursorL model
         |> Cursor.computeNewEntityIdAtCursor newFilter newEntityIdList

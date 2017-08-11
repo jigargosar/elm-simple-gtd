@@ -6,7 +6,9 @@ import Data.EntityTree as Tree
 import Entity exposing (..)
 import Pages.EntityList.TreeBuilder as TreeBuilder
 import Ports
+import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
 
@@ -22,12 +24,39 @@ type Model
     = Model ModelRecord
 
 
+unwrap (Model a) =
+    a
+
+
+getPath =
+    unwrap >> .path
+
+
+getFilter =
+    unwrap >> .filter
+
+
+toModelLens lens =
+    let
+        modelRecordL : FieldLens ModelRecord Model
+        modelRecordL =
+            fieldLens (\(Model b) -> b) (\s _ -> Model s)
+    in
+    composeLens lens modelRecordL
+
+
+cursorL =
+    fieldLens (\b -> b.cursor) (\s b -> { b | cursor = s })
+        |> toModelLens
+
+
 constructor : Filter.Path -> Filter -> Cursor.Model -> Model
 constructor path filter cursor =
     ModelRecord path filter cursor
         |> Model
 
 
+initialValue : Model
 initialValue =
     let
         ( filter, path ) =
@@ -53,24 +82,16 @@ maybeInitFromPath path maybePreviousModel =
         ?|> initFromFilter
 
 
-getPath (Model pageModel) =
-    pageModel.path
-
-
-getFilterViewModel (Model pageModel) =
-    Filter.getFilterViewModel pageModel.filter
+getFilterViewModel =
+    getFilter >> Filter.getFilterViewModel
 
 
 getTitleColourTuple =
-    getFilterViewModel >> (\filterModel -> ( filterModel.displayName, filterModel.headerColor ))
+    getFilterViewModel >> apply2 ( .displayName, .headerColor )
 
 
 getTitle =
     getFilterViewModel >> .displayName
-
-
-getFilter (Model pageModel) =
-    pageModel.filter
 
 
 getMaybeLastKnownFocusedEntityId : Model -> Maybe EntityId
@@ -147,18 +168,6 @@ update config appModel msg pageModel =
                     1
             in
             noop
-
-
-toRecord (Model a) =
-    a
-
-
-map fn (Model a) =
-    fn a |> Model
-
-
-cursorL =
-    fieldLens (toRecord >> .cursor) (\s -> map (\b -> { b | cursor = s }))
 
 
 createEntityTree pageModel appModel =

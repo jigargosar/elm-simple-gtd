@@ -2,7 +2,7 @@ module X.Record
     exposing
         ( FieldLens
         , bool
-        , composeInnerOuterFieldLens
+        , composeLens
         , fieldLens
         , get
         , getAndMaybeApply
@@ -43,8 +43,8 @@ fieldLens getter setter =
     FieldLens { get = getter, set = setter }
 
 
-composeInnerOuterFieldLens : FieldLens s m -> FieldLens m b -> FieldLens s b
-composeInnerOuterFieldLens s2mLens m2bLens =
+composeLens : FieldLens s m -> FieldLens m b -> FieldLens s b
+composeLens s2mLens m2bLens =
     FieldLens
         { get = \big -> get m2bLens big |> get s2mLens
         , set = \small big -> over m2bLens (set s2mLens small) big

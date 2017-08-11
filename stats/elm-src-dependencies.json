@@ -2297,11 +2297,13 @@
       "Entity",
       "Pages.EntityList.TreeBuilder",
       "Ports",
+      "Toolkit.Helpers",
       "Toolkit.Operators",
+      "X.Function.Infix",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 9,
+    "importsCount": 11,
     "transitiveImports": [
       "Char",
       "Color",
@@ -4989,6 +4991,7 @@
       "Menu",
       "Models.GroupDocStore",
       "Models.Stores",
+      "Pages.EntityList",
       "Sequencer",
       "Todo.ItemView",
       "Todo.ViewModel",
@@ -5001,7 +5004,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 26,
+    "backwardImportsCount": 27,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

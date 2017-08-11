@@ -1,4 +1,4 @@
-## Upcoming
+## v0.21.0 - 2017-08-11
 * [minor]: implement goto entity. Clicking on todo text in reminder overlay, navigates it into focus.  
 
 ## v0.20.0 - 2017-08-06

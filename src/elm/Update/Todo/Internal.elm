@@ -221,10 +221,10 @@ onStartAddingTodo config addFormMode =
     X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
 
 
-onReminderNotificationClicked now notification =
+onReminderNotificationClicked now notificationEvent =
     let
         { action, data } =
-            notification
+            notificationEvent
 
         todoId =
             data.id

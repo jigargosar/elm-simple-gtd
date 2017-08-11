@@ -137,8 +137,8 @@ update :
     -> SubReturnF msg model
 update config now msg =
     case msg of
-        OnReminderNotificationClicked notif ->
-            onReminderNotificationClicked now notif
+        OnReminderNotificationClicked notificationEvent ->
+            onReminderNotificationClicked now notificationEvent
 
         OnProcessPendingNotificationCronTick ->
             returnAndThenMaybe

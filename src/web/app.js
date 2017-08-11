@@ -17,7 +17,7 @@ const npmPackageVersion = env["npm_package_version"]
 
 const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
   
-  const focusableEntityListItemSelector = ".focusable-list-item[tabindex=0]"
+  // const focusableEntityListItemSelector = ".focusable-list-item[tabindex=0]"
   const autoFocusSelector = ".auto-focus"
   new MutationSummary({
     callback: summaries => {
@@ -124,12 +124,32 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   app.ports["focusSelector"].subscribe((selector) => {
     console.log("port: focusSelector: selector", selector)
-    
-    setTimeout(() => {
-      const firstSelected = $(selector).first()
-      console.log("port: focusSelector: $(selector).first()", firstSelected)
-      return firstSelected.focus()
-    }, 0)
+    const $toFocus = $(selector).first().get(0)
+    if($toFocus){
+      $toFocus.focus()
+    }else{
+      let timeoutId = null
+      
+      const observer = new MutationSummary({
+        callback: summaries => {
+          // console.log(summaries)
+      
+          const added = summaries[0].added
+          if (!_.isEmpty(added)) {
+            $(added[0]).focus()
+            observer.disconnect()
+            clearTimeout(timeoutId)
+          }
+        },
+        queries: [
+          {element: selector},
+        ],
+      })
+      
+      timeoutId = setTimeout(()=>{
+        observer.disconnect()
+      },3000)
+    }
   });
   
   
@@ -138,6 +158,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
   mutationObserverFocusSelectorStream
       .observe({
         value(selector) {
+          console.log("mutationObserverFocusSelectorStream: selector", selector)
           $(selector).first().focus()
         },
       })

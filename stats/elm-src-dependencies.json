@@ -2403,6 +2403,34 @@
     ],
     "transitiveBackwardImportsCount": 2
   },
+  "Pages.EntityList.Tree": {
+    "fileName": "src/elm/Pages/EntityList/Tree.elm",
+    "moduleName": "Pages.EntityList.Tree",
+    "parentModuleName": "Pages.EntityList",
+    "imports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "List.Extra",
+      "Maybe.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix"
+    ],
+    "transitiveImportsCount": 7,
+    "backwardImports": [],
+    "backwardImportsCount": 0,
+    "transitiveBackwardImports": [],
+    "transitiveBackwardImportsCount": 0
+  },
   "Ports": {
     "fileName": "src/elm/Ports.elm",
     "moduleName": "Ports",
@@ -4874,6 +4902,7 @@
       "Menu",
       "Models.GroupDocStore",
       "Models.Stores",
+      "Pages.EntityList.Tree",
       "Sequencer",
       "Todo.Notification.Model",
       "Update.Todo.Internal",
@@ -4881,7 +4910,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 23,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4910,6 +4939,7 @@
       "Models.Stores",
       "Models.TodoDocStore",
       "Pages.EntityList",
+      "Pages.EntityList.Tree",
       "Sequencer",
       "Store",
       "Stores",
@@ -4943,7 +4973,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 59
+    "transitiveBackwardImportsCount": 60
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4969,6 +4999,7 @@
       "Menu",
       "Models.GroupDocStore",
       "Models.Stores",
+      "Pages.EntityList.Tree",
       "Sequencer",
       "Todo.ItemView",
       "Todo.ViewModel",
@@ -4981,7 +5012,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 26,
+    "backwardImportsCount": 27,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5013,6 +5044,7 @@
       "Models.Stores",
       "Models.TodoDocStore",
       "Pages.EntityList",
+      "Pages.EntityList.Tree",
       "Sequencer",
       "Store",
       "Stores",
@@ -5047,7 +5079,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 63
+    "transitiveBackwardImportsCount": 64
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

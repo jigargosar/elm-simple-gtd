@@ -315,8 +315,8 @@ createGroupDocTree gdType docId appModel =
     Tree.createGroupDocTree groupDocEntity todoList nodeList
 
 
-createEntityTree pageModel appModel =
-    case getFilter pageModel of
+createEntityTree_ filter title appModel =
+    case filter of
         GroupByGroupDocFilter gdType groupByType ->
             case groupByType of
                 ActiveGroupDocList ->
@@ -339,12 +339,16 @@ createEntityTree pageModel appModel =
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
             in
-            Tree.createFlatTodoListNode (getTitle pageModel)
+            Tree.createFlatTodoListNode title
                 truncatedTodoList
                 totalCount
 
         NoFilter ->
             Tree.createForest []
+
+
+createEntityTree pageModel appModel =
+    createEntityTree_ (getFilter pageModel) (getTitle pageModel) appModel
 
 
 flatFilterTypeToPredicate filterType =

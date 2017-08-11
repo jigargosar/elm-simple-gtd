@@ -1,7 +1,7 @@
-    8876 total
+    8892 total
      593 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
-     377 src/elm/Pages/EntityList.elm
+     381 src/elm/Pages/EntityList.elm
      355 src/elm/Update/Todo/Internal.elm
      319 src/elm/GroupDoc.elm
      308 src/elm/Store.elm
@@ -81,6 +81,7 @@
       15 src/elm/View/Frame.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm
+      12 src/elm/Pages/EntityList/Tree.elm
       12 src/elm/LocalStorage.elm
       11 src/elm/Firebase.elm
       10 src/elm/X/Set.elm

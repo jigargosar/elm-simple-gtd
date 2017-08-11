@@ -1,3 +1,6 @@
+## Upcoming
+* [minor]: implement goto entity. Clicking on todo text in reminder overlay, navigates it into focus.  
+
 ## v0.20.0 - 2017-08-06
 * minor: merge landing page, to speed up compile time. 
 

@@ -1,12 +1,8 @@
 module Data.EntityTree exposing (..)
 
 import Data.TodoDoc exposing (..)
-import Document
 import Entity exposing (..)
-import GroupDoc exposing (..)
-import List.Extra as List
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
 
 
 type GroupDocEntityNode

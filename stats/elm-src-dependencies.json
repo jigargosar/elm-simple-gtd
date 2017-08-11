@@ -45,7 +45,6 @@
       "Maybe.Extra",
       "Models.GroupDocStore",
       "Models.Stores",
-      "Models.TodoDocStore",
       "Random.Pcg",
       "Return",
       "Set",
@@ -63,7 +62,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 39,
+    "transitiveImportsCount": 38,
     "backwardImports": [
       "ViewModel.Frame"
     ],
@@ -306,7 +305,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -340,7 +338,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 47
+    "transitiveBackwardImportsCount": 46
   },
   "Data.EntityListCursor": {
     "fileName": "src/elm/Data/EntityListCursor.elm",
@@ -349,13 +347,12 @@
     "imports": [
       "Data.EntityListFilter",
       "Entity",
-      "GroupDoc",
       "Maybe.Extra",
       "Toolkit.Operators",
       "X.Function",
       "X.List"
     ],
-    "importsCount": 7,
+    "importsCount": 6,
     "transitiveImports": [
       "Char",
       "Color",
@@ -394,17 +391,15 @@
     ],
     "transitiveImportsCount": 34,
     "backwardImports": [
-      "Pages.EntityList",
-      "Pages.EntityList.Tree"
+      "Pages.EntityList"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 4
+    "transitiveBackwardImportsCount": 3
   },
   "Data.EntityListFilter": {
     "fileName": "src/elm/Data/EntityListFilter.elm",
@@ -415,12 +410,9 @@
       "Colors",
       "Document",
       "GroupDoc",
-      "IconNames",
-      "List.Extra",
-      "Toolkit.Operators",
-      "X.Function"
+      "IconNames"
     ],
-    "importsCount": 8,
+    "importsCount": 5,
     "transitiveImports": [
       "Char",
       "Color",
@@ -472,14 +464,10 @@
     "parentModuleName": "Data",
     "imports": [
       "Data.TodoDoc",
-      "Document",
       "Entity",
-      "GroupDoc",
-      "List.Extra",
-      "Toolkit.Operators",
-      "X.Function"
+      "Toolkit.Operators"
     ],
-    "importsCount": 7,
+    "importsCount": 3,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -560,7 +548,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.HasStores",
@@ -588,7 +575,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 34
   },
   "Data.TodoDoc": {
     "fileName": "src/elm/Data/TodoDoc.elm",
@@ -652,7 +639,6 @@
       "Main",
       "Models.HasStores",
       "Models.Stores",
-      "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Stores",
       "Todo.Form",
@@ -663,7 +649,7 @@
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 17,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -672,7 +658,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.HasStores",
@@ -700,7 +685,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 34
+    "transitiveBackwardImportsCount": 33
   },
   "Data.User": {
     "fileName": "src/elm/Data/User.elm",
@@ -766,7 +751,6 @@
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListFilter",
-      "Data.EntityTree",
       "Data.TodoDoc",
       "Entity",
       "EntityId",
@@ -775,7 +759,6 @@
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
-      "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Store",
       "Stores",
@@ -790,7 +773,7 @@
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 25,
+    "backwardImportsCount": 23,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -803,7 +786,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -835,7 +817,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 42
+    "transitiveBackwardImportsCount": 41
   },
   "DomPorts": {
     "fileName": "src/elm/DomPorts.elm",
@@ -908,7 +890,6 @@
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
       "Main",
-      "Models.Stores",
       "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Todo.FormTypes",
@@ -917,7 +898,7 @@
       "ViewModel.EntityList",
       "Views.EntityList"
     ],
-    "backwardImportsCount": 15,
+    "backwardImportsCount": 14,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -925,10 +906,8 @@
       "EntityId",
       "ExclusiveMode.Types",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
-      "Models.Stores",
       "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Todo.Form",
@@ -948,7 +927,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 28
+    "transitiveBackwardImportsCount": 26
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -991,22 +970,19 @@
     ],
     "transitiveImportsCount": 28,
     "backwardImports": [
-      "GroupDoc.View",
       "Todo.ViewModel",
       "Update.Todo.Internal",
       "ViewModel.EntityList"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
-      "GroupDoc.View",
       "Main",
       "Todo.ViewModel",
       "Update.Todo",
       "Update.Todo.Internal",
-      "ViewModel.EntityList",
-      "Views.EntityList"
+      "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 5
   },
   "ExclusiveMode.Types": {
     "fileName": "src/elm/ExclusiveMode/Types.elm",
@@ -1176,7 +1152,6 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "List.Extra",
       "Random.Pcg",
       "Store",
       "Time",
@@ -1186,7 +1161,7 @@
       "X.Predicate",
       "X.Record"
     ],
-    "importsCount": 14,
+    "importsCount": 13,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -1214,9 +1189,7 @@
     "transitiveImportsCount": 22,
     "backwardImports": [
       "AppDrawer.GroupViewModel",
-      "Data.EntityListCursor",
       "Data.EntityListFilter",
-      "Data.EntityTree",
       "Data.TodoDoc",
       "Entity",
       "ExclusiveMode.Types",
@@ -1227,7 +1200,6 @@
       "Models.GroupDocStore",
       "Models.HasStores",
       "Models.Stores",
-      "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Stores",
       "Todo.GroupEditView",
@@ -1238,7 +1210,7 @@
       "Update.Todo.Internal",
       "Views.EntityList"
     ],
-    "backwardImportsCount": 24,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -1250,7 +1222,6 @@
       "ExclusiveMode.Types",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -1280,7 +1251,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 39
+    "transitiveBackwardImportsCount": 38
   },
   "GroupDoc.Form": {
     "fileName": "src/elm/GroupDoc/Form.elm",
@@ -1410,7 +1381,6 @@
     "moduleName": "GroupDoc.View",
     "parentModuleName": "GroupDoc",
     "imports": [
-      "EntityId",
       "Html",
       "Html.Attributes",
       "Html.Keyed",
@@ -1421,20 +1391,11 @@
       "X.Html",
       "X.Keyboard"
     ],
-    "importsCount": 10,
+    "importsCount": 9,
     "transitiveImports": [
-      "Char",
       "Color",
       "Color.Mixing",
       "Colors",
-      "Data.DeviceId",
-      "Data.Todo.Schedule",
-      "Data.TodoDoc",
-      "Dict",
-      "Document",
-      "Entity",
-      "EntityId",
-      "GroupDoc",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -1444,20 +1405,12 @@
       "Json.Encode",
       "Keyboard",
       "Keyboard.Extra",
-      "List",
-      "List.Extra",
       "Mat",
       "Material",
       "Material.Button",
       "Material.Icon",
       "Material.Options",
-      "Maybe.Extra",
-      "Random.Pcg",
-      "Return",
-      "Set",
-      "Store",
       "String.Extra",
-      "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
@@ -1468,12 +1421,9 @@
       "X.Function.Infix",
       "X.Html",
       "X.Keyboard",
-      "X.Predicate",
-      "X.Random",
-      "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 49,
+    "transitiveImportsCount": 29,
     "backwardImports": [
       "Views.EntityList"
     ],
@@ -2086,13 +2036,11 @@
       "Maybe.Extra",
       "Set",
       "Store",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
       "X.Function",
       "X.Function.Infix",
       "X.Record"
     ],
-    "importsCount": 11,
+    "importsCount": 9,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -2123,13 +2071,12 @@
     "backwardImports": [
       "AppDrawer.GroupViewModel",
       "Models.Stores",
-      "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Todo.GroupEditView",
       "Update.GroupDoc",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
@@ -2221,15 +2168,13 @@
     "parentModuleName": "Models",
     "imports": [
       "Data.TodoDoc",
-      "Entity",
       "GroupDoc",
       "Models.GroupDocStore",
-      "Models.TodoDocStore",
       "Store",
       "X.Function",
       "X.Function.Infix"
     ],
-    "importsCount": 8,
+    "importsCount": 6,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -2237,7 +2182,6 @@
       "Data.TodoDoc",
       "Dict",
       "Document",
-      "Entity",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2246,7 +2190,6 @@
       "List.Extra",
       "Maybe.Extra",
       "Models.GroupDocStore",
-      "Models.TodoDocStore",
       "Random.Pcg",
       "Return",
       "Set",
@@ -2262,7 +2205,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 30,
+    "transitiveImportsCount": 28,
     "backwardImports": [
       "AppDrawer.GroupViewModel"
     ],
@@ -2309,21 +2252,17 @@
     "transitiveImportsCount": 21,
     "backwardImports": [
       "Main",
-      "Models.Stores",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
-      "AppDrawer.GroupViewModel",
       "Main",
-      "Models.Stores",
       "Update.Subscription",
       "Update.Todo",
-      "Update.Todo.Internal",
-      "ViewModel.Frame"
+      "Update.Todo.Internal"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 4
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -2355,22 +2294,14 @@
       "Data.EntityListCursor",
       "Data.EntityListFilter",
       "Data.EntityTree",
-      "Data.TodoDoc",
-      "Document",
       "Entity",
-      "GroupDoc",
-      "List.Extra",
-      "Models.GroupDocStore",
       "Pages.EntityList.Tree",
       "Ports",
-      "Set",
-      "Store",
       "Toolkit.Operators",
-      "X.Predicate",
       "X.Record",
       "X.Return"
     ],
-    "importsCount": 17,
+    "importsCount": 9,
     "transitiveImports": [
       "Char",
       "Color",
@@ -2431,7 +2362,6 @@
     "moduleName": "Pages.EntityList.Tree",
     "parentModuleName": "Pages.EntityList",
     "imports": [
-      "Data.EntityListCursor",
       "Data.EntityListFilter",
       "Data.EntityTree",
       "Data.TodoDoc",
@@ -2440,22 +2370,17 @@
       "GroupDoc",
       "List.Extra",
       "Models.GroupDocStore",
-      "Ports",
-      "Set",
       "Store",
       "Toolkit.Operators",
-      "X.Predicate",
-      "X.Record",
-      "X.Return"
+      "X.Predicate"
     ],
-    "importsCount": 16,
+    "importsCount": 11,
     "transitiveImports": [
       "Char",
       "Color",
       "Color.Mixing",
       "Colors",
       "Data.DeviceId",
-      "Data.EntityListCursor",
       "Data.EntityListFilter",
       "Data.EntityTree",
       "Data.Todo.Schedule",
@@ -2472,12 +2397,10 @@
       "List.Extra",
       "Maybe.Extra",
       "Models.GroupDocStore",
-      "Ports",
       "Random.Pcg",
       "Return",
       "Set",
       "Store",
-      "Task",
       "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
@@ -2485,13 +2408,11 @@
       "X.Debug",
       "X.Function",
       "X.Function.Infix",
-      "X.List",
       "X.Predicate",
       "X.Random",
-      "X.Record",
-      "X.Return"
+      "X.Record"
     ],
-    "transitiveImportsCount": 40,
+    "transitiveImportsCount": 35,
     "backwardImports": [
       "Pages.EntityList"
     ],
@@ -2518,16 +2439,14 @@
     "backwardImports": [
       "Main",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Update.AppDrawer",
       "Update.Firebase",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Main",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Update.AppDrawer",
       "Update.Firebase",
       "Update.Subscription",
@@ -2536,7 +2455,7 @@
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 9
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -2695,14 +2614,13 @@
       "Models.GroupDocStore",
       "Models.Stores",
       "Models.TodoDocStore",
-      "Pages.EntityList",
       "Pages.EntityList.Tree",
       "Todo.ViewModel",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 11,
+    "backwardImportsCount": 10,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -2715,7 +2633,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -2746,7 +2663,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 41
+    "transitiveBackwardImportsCount": 40
   },
   "Stores": {
     "fileName": "src/elm/Stores.elm",
@@ -4690,7 +4607,6 @@
       "Maybe.Extra",
       "Models.GroupDocStore",
       "Models.Stores",
-      "Models.TodoDocStore",
       "Random.Pcg",
       "Return",
       "Set",
@@ -4708,7 +4624,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 44,
+    "transitiveImportsCount": 43,
     "backwardImports": [
       "Main"
     ],
@@ -4747,7 +4663,6 @@
       "Dict",
       "Document",
       "Entity",
-      "EntityId",
       "GroupDoc",
       "GroupDoc.View",
       "Html",
@@ -4791,7 +4706,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 54,
+    "transitiveImportsCount": 53,
     "backwardImports": [
       "Main"
     ],
@@ -4967,8 +4882,6 @@
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
       "Data.EntityListCursor",
-      "Data.EntityListFilter",
-      "Data.EntityTree",
       "Data.TodoDoc",
       "Document",
       "Entity",
@@ -4987,7 +4900,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 20,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5323,7 +5236,6 @@
       "Main",
       "Menu",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.GroupEditView",
@@ -5340,7 +5252,7 @@
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 21
+    "transitiveBackwardImportsCount": 20
   },
   "X.Maybe": {
     "fileName": "src/elm/X/Maybe.elm",
@@ -5375,10 +5287,9 @@
     "transitiveImportsCount": 1,
     "backwardImports": [
       "GroupDoc",
-      "Pages.EntityList",
       "Pages.EntityList.Tree"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -5391,7 +5302,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -5421,7 +5331,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 40
+    "transitiveBackwardImportsCount": 39
   },
   "X.Random": {
     "fileName": "src/elm/X/Random.elm",
@@ -5457,7 +5367,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -5489,7 +5398,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 42
+    "transitiveBackwardImportsCount": 41
   },
   "X.Record": {
     "fileName": "src/elm/X/Record.elm",
@@ -5513,7 +5422,6 @@
       "Models.GroupDocStore",
       "Models.TodoDocStore",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Store",
       "Todo.Form",
       "Update.AppDrawer",
@@ -5523,7 +5431,7 @@
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 16,
+    "backwardImportsCount": 15,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5537,7 +5445,6 @@
       "GroupDoc",
       "GroupDoc.Form",
       "GroupDoc.FormView",
-      "GroupDoc.View",
       "GroupDoc.ViewModel",
       "Main",
       "Models.GroupDocStore",
@@ -5570,7 +5477,7 @@
       "ViewModel.Frame",
       "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 44
+    "transitiveBackwardImportsCount": 43
   },
   "X.Return": {
     "fileName": "src/elm/X/Return.elm",
@@ -5601,7 +5508,6 @@
     "backwardImports": [
       "Main",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Stores",
       "Update.AppDrawer",
       "Update.AppHeader",
@@ -5612,11 +5518,10 @@
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 12,
+    "backwardImportsCount": 11,
     "transitiveBackwardImports": [
       "Main",
       "Pages.EntityList",
-      "Pages.EntityList.Tree",
       "Stores",
       "Update.AppDrawer",
       "Update.AppHeader",
@@ -5631,7 +5536,7 @@
       "View.Overlays",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 16
+    "transitiveBackwardImportsCount": 15
   },
   "X.Set": {
     "fileName": "src/elm/X/Set.elm",

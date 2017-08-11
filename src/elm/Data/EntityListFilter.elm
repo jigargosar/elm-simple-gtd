@@ -17,9 +17,6 @@ import Colors exposing (..)
 import Document exposing (DocId)
 import GroupDoc exposing (GroupDocId, GroupDocType(..))
 import IconNames
-import List.Extra
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
 
 
 -- Named Filters

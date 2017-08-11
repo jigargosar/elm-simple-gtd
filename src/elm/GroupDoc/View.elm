@@ -1,6 +1,5 @@
 module GroupDoc.View exposing (..)
 
-import EntityId
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Keyed

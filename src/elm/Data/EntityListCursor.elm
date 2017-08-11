@@ -2,7 +2,6 @@ module Data.EntityListCursor exposing (..)
 
 import Data.EntityListFilter exposing (Filter(GroupByGroupDocFilter))
 import Entity exposing (EntityId(TodoEntityId))
-import GroupDoc exposing (GroupDocType(ContextGroupDocType))
 import Maybe.Extra
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)

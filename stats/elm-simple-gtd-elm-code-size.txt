@@ -1,20 +1,20 @@
-    8899 total
+    8872 total
      593 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      355 src/elm/Update/Todo/Internal.elm
-     319 src/elm/GroupDoc.elm
+     318 src/elm/GroupDoc.elm
      308 src/elm/Store.elm
      267 src/elm/Mat.elm
      235 src/elm/AppDrawer/GroupViewModel.elm
-     228 src/elm/Data/EntityListFilter.elm
+     225 src/elm/Data/EntityListFilter.elm
      223 src/elm/Menu.elm
      210 src/elm/Update/Subscription.elm
-     201 src/elm/Pages/EntityList/Tree.elm
      200 src/elm/GroupDoc/ViewModel.elm
-     199 src/elm/Pages/EntityList.elm
+     196 src/elm/Pages/EntityList/Tree.elm
+     191 src/elm/Pages/EntityList.elm
      185 src/elm/Update/Firebase.elm
      178 src/elm/Todo/ViewModel.elm
-     172 src/elm/Models/GroupDocStore.elm
+     170 src/elm/Models/GroupDocStore.elm
      170 src/elm/AppDrawer/View.elm
      168 src/elm/Update/Todo.elm
      167 src/elm/AppDrawer/Model.elm
@@ -31,11 +31,11 @@
      103 src/elm/Todo/View.elm
       94 src/elm/Views/EntityList.elm
       93 src/elm/X/Time.elm
-      93 src/elm/Data/EntityListCursor.elm
+      92 src/elm/Data/EntityListCursor.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
       82 src/elm/View/MainMenu.elm
-      80 src/elm/GroupDoc/View.elm
+      79 src/elm/GroupDoc/View.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/Colors.elm
       74 src/elm/X/Function/Infix.elm
@@ -51,9 +51,9 @@
       60 src/elm/View/Header.elm
       60 src/elm/Stores.elm
       55 src/elm/AppUrl.elm
-      53 src/elm/Data/EntityTree.elm
       50 src/elm/Update/AppHeader.elm
       49 src/elm/Todo/Notification/Model.elm
+      49 src/elm/Data/EntityTree.elm
       47 src/elm/Update/AppDrawer.elm
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
@@ -64,8 +64,8 @@
       37 src/elm/IconNames.elm
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
-      32 src/elm/Models/Stores.elm
       31 src/elm/View/NewTodoFab.elm
+      30 src/elm/Models/Stores.elm
       25 src/elm/ViewModel/Frame.elm
       24 src/elm/EntityId.elm
       23 src/elm/View/Badge.elm

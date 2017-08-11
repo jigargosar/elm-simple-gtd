@@ -3,18 +3,10 @@ module Pages.EntityList exposing (..)
 import Data.EntityListCursor as Cursor
 import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
 import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)
-import Data.TodoDoc as TodoDoc exposing (TodoDoc)
-import Document exposing (..)
 import Entity exposing (..)
-import GroupDoc exposing (..)
-import List.Extra
-import Models.GroupDocStore as GroupDocStore
 import Pages.EntityList.Tree
 import Ports
-import Set exposing (Set)
-import Store
 import Toolkit.Operators exposing (..)
-import X.Predicate
 import X.Record exposing (..)
 import X.Return exposing (..)
 

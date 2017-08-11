@@ -1,10 +1,8 @@
 module Models.Stores exposing (..)
 
 import Data.TodoDoc
-import Entity exposing (..)
 import GroupDoc
 import Models.GroupDocStore exposing (..)
-import Models.TodoDocStore as TodoDocStore
 import Store
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)

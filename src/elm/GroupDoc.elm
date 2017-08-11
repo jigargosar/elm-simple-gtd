@@ -5,7 +5,6 @@ import Document exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
-import List.Extra
 import Random.Pcg
 import Store exposing (..)
 import Time exposing (Time)

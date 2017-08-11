@@ -96,8 +96,12 @@ mapTapLog =
     X.Debug.tapLog >>> Return.map
 
 
-returnMsgAsCmd msg =
-    Task.perform (\_ -> msg) (Task.succeed msg) |> Return.command
+returnMsgAsCmd =
+    toCmd >> Return.command
+
+
+toCmd msg =
+    Task.perform (\_ -> msg) (Task.succeed msg)
 
 
 returnMaybeMsgAsCmd =

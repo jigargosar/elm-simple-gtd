@@ -414,7 +414,7 @@ updatePage config msg page =
                         model_
                         |> (\( pageModel, cmd ) ->
                                 ( { model | page = EntityList pageModel }
-                                , Cmd.map EntityListMsg cmd
+                                , cmd
                                 )
                            )
                 )
@@ -562,7 +562,7 @@ hash2messages config location =
         path =
             RouteUrl.Builder.path builder
     in
-    [ config.navigateToPathMsg path ]
+    [ navigateToPathMsg path ]
 
 
 main : RouteUrl.RouteUrlProgram Flags Model Msg

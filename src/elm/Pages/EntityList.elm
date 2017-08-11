@@ -3,7 +3,9 @@ module Pages.EntityList exposing (..)
 import Data.EntityListCursor as Cursor
 import Data.EntityListFilter as Filter exposing (Filter)
 import Data.EntityTree as Tree
+import Data.TodoDoc exposing (TodoStore)
 import Entity exposing (..)
+import GroupDoc exposing (ContextStore, ProjectStore)
 import Pages.EntityList.TreeBuilder as TreeBuilder
 import Ports
 import Toolkit.Helpers exposing (..)
@@ -78,12 +80,12 @@ maybeInitFromPath path maybePreviousModel =
             in
             constructor path filter (get cursorL model)
     in
-    Filter.getMaybeFilterFromPath path
+    Filter.maybeFromPath path
         ?|> initFromFilter
 
 
 getFilterViewModel =
-    getFilter >> Filter.getFilterViewModel
+    getFilter >> Filter.toViewModel
 
 
 getTitleColourTuple =
@@ -118,30 +120,29 @@ type Msg
     | GoToEntityId EntityId
 
 
+type alias HasStores x =
+    { x
+        | todoStore : TodoStore
+        , projectStore : ProjectStore
+        , contextStore : ContextStore
+    }
+
+
+update :
+    { a | navigateToPathMsg : Filter.Path -> msg }
+    -> HasStores x
+    -> Msg
+    -> Model
+    -> ( Model, Cmd msg )
 update config appModel msg model =
     let
         noop =
             pure model
-
-        dispatchMsg msg =
-            update config appModel msg model
-
-        dispatchMaybeMsg msg =
-            msg ?|> dispatchMsg ?= noop
     in
     case msg of
         SetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            let
-                entityIdList =
-                    createEntityIdList model appModel
-
-                cursor =
-                    Cursor.create entityIdList
-                        (Just entityId)
-                        (getFilter model)
-            in
-            set cursorL cursor model |> pure
+            onSetCursorEntityId entityId appModel model
 
         MoveFocusBy offset ->
             let
@@ -149,25 +150,53 @@ update config appModel msg model =
                     get cursorL model
             in
             Cursor.findEntityIdByOffsetIndex offset cursor
-                ?|> SetCursorEntityId
-                |> dispatchMaybeMsg
+                ?|> (\entityId -> onSetCursorEntityId entityId appModel model)
+                ?= noop
 
         RecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
                         ( model
-                        , Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
+                        , focusEntityIdCmd entityId
                         )
                     )
                 ?= noop
 
         GoToEntityId entityId ->
             let
-                _ =
+                filter =
                     --config.navigateToPath
-                    1
+                    case entityId of
+                        ProjectEntityId docId ->
+                            Filter.projectFilter docId
+
+                        ContextEntityId docId ->
+                            Filter.contextFilter docId
+
+                        TodoEntityId docId ->
+                            Filter.groupByActiveContextsFilter
+
+                path =
+                    Filter.toPath filter
             in
-            noop
+            model ! [ config.navigateToPathMsg path |> toCmd, focusEntityIdCmd entityId ]
+
+
+onSetCursorEntityId entityId appModel model =
+    let
+        entityIdList =
+            createEntityIdList model appModel
+
+        cursor =
+            Cursor.create entityIdList
+                (Just entityId)
+                (getFilter model)
+    in
+    set cursorL cursor model |> pure
+
+
+focusEntityIdCmd entityId =
+    Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
 
 
 createEntityTree model appModel =

@@ -5,9 +5,13 @@ module Data.EntityListFilter
         , FlatFilterType(..)
         , GroupByType(..)
         , Path
-        , getFilterViewModel
-        , getMaybeFilterFromPath
+        , contextFilter
+        , groupByActiveContextsFilter
         , initialFilterPathTuple
+        , maybeFromPath
+        , projectFilter
+        , toPath
+        , toViewModel
         )
 
 --import X.List as List
@@ -102,8 +106,8 @@ initialFilterPathTuple =
     ( initialFilter, initialFilterPath )
 
 
-getFilterFromPath : List String -> Filter
-getFilterFromPath path =
+fromPath : List String -> Filter
+fromPath path =
     case path of
         "context" :: [] ->
             inboxFilter
@@ -142,11 +146,49 @@ getFilterFromPath path =
             NoFilter
 
 
-getMaybeFilterFromPath : Path -> Maybe Filter
-getMaybeFilterFromPath path =
+toPath filter =
+    case filter of
+        FlatFilter flatFilterType maxDisplayCount ->
+            case flatFilterType of
+                Done ->
+                    [ "done" ]
+
+                Recent ->
+                    [ "recent" ]
+
+                Bin ->
+                    [ "bin" ]
+
+        GroupByGroupDocFilter gdType groupByType ->
+            case gdType of
+                ContextGroupDocType ->
+                    case groupByType of
+                        ActiveGroupDocList ->
+                            [ "contexts" ]
+
+                        SingleGroupDoc "" ->
+                            [ "inbox" ]
+
+                        SingleGroupDoc contextDocId ->
+                            [ "context", contextDocId ]
+
+                ProjectGroupDocType ->
+                    case groupByType of
+                        ActiveGroupDocList ->
+                            [ "projects" ]
+
+                        SingleGroupDoc projectDocId ->
+                            [ "project", projectDocId ]
+
+        NoFilter ->
+            toPath initialFilter
+
+
+maybeFromPath : Path -> Maybe Filter
+maybeFromPath path =
     let
         filter =
-            getFilterFromPath path
+            fromPath path
     in
     case filter of
         NoFilter ->
@@ -156,8 +198,8 @@ getMaybeFilterFromPath path =
             Just filter
 
 
-getFilterViewModel : Filter -> FilterViewModel
-getFilterViewModel filter =
+toViewModel : Filter -> FilterViewModel
+toViewModel filter =
     case filter of
         FlatFilter flatFilterType maxDisplayCount ->
             case flatFilterType of
@@ -222,4 +264,4 @@ getFilterViewModel filter =
                                 Colors.defaultProject
 
         NoFilter ->
-            getFilterViewModel initialFilter
+            toViewModel initialFilter

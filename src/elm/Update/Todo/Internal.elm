@@ -254,6 +254,39 @@ showReminderNotificationCmd ( todo, model ) =
     model ! cmds
 
 
+
+-- todo: use this template to create reminder notification
+
+
+showRunningNotificationCmd ( maybeTrackerInfo, model ) =
+    let
+        createRequest info todo =
+            let
+                todoId =
+                    Document.getId todo
+
+                formattedDuration =
+                    X.Time.toHHMMSSMin info.elapsedTime
+            in
+            { tag = todoId
+            , title = "You have been working for " ++ formattedDuration
+            , body = Data.TodoDoc.getText todo
+            , actions =
+                [ { title = "Continue", action = "continue" }
+                , { title = "Stop", action = "stop" }
+                ]
+            , data =
+                { id = todoId
+                , notificationClickedPort = "onRunningTodoNotificationClicked"
+                , skipFocusActionList = [ "continue" ]
+                }
+            }
+    in
+    maybeTrackerInfo
+        ?+> (\info -> TodoDocStore.findTodoById info.todoId model ?|> createRequest info)
+        |> maybeMapToCmd showRunningTodoNotification
+
+
 setFocusInEntityWithTodoId config =
     createTodoEntityId >> config.setFocusInEntityWithEntityId >> returnMsgAsCmd
 

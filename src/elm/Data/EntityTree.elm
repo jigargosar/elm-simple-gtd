@@ -47,3 +47,7 @@ createGroupDocTree gdEntity todoList nodeList =
 createForest : List GroupDocEntityNode -> Tree
 createForest =
     GroupDocForest
+
+
+toEntityIdList tree =
+    tree |> flatten .|> Entity.toEntityId

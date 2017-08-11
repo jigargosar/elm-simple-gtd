@@ -1,10 +1,10 @@
 module Pages.EntityList exposing (..)
 
 import Data.EntityListCursor as Cursor
-import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
-import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)
+import Data.EntityListFilter as Filter exposing (Filter)
+import Data.EntityTree as Tree
 import Entity exposing (..)
-import Pages.EntityList.Tree
+import Pages.EntityList.TreeBuilder as TreeBuilder
 import Ports
 import Toolkit.Operators exposing (..)
 import X.Record exposing (..)
@@ -13,7 +13,7 @@ import X.Return exposing (..)
 
 type alias ModelRecord =
     { path : List String
-    , filter : Filter
+    , filter : Filter.Filter
     , cursor : Cursor.Model
     }
 
@@ -22,7 +22,7 @@ type Model
     = Model ModelRecord
 
 
-constructor : Path -> Filter -> Cursor.Model -> Model
+constructor : Filter.Path -> Filter -> Cursor.Model -> Model
 constructor path filter cursor =
     ModelRecord path filter cursor
         |> Model
@@ -42,15 +42,15 @@ initialValue =
 maybeInitFromPath : List String -> Maybe Model -> Maybe Model
 maybeInitFromPath path maybePreviousModel =
     let
-        (Model model) =
-            maybePreviousModel ?= initialValue
+        initFromFilter filter =
+            let
+                model =
+                    maybePreviousModel ?= initialValue
+            in
+            constructor path filter (get cursorL model)
     in
     Filter.getMaybeFilterFromPath path
-        ?|> (\filter ->
-                constructor path
-                    filter
-                    model.cursor
-            )
+        ?|> initFromFilter
 
 
 getPath (Model pageModel) =
@@ -75,7 +75,7 @@ getFilter (Model pageModel) =
 
 getMaybeLastKnownFocusedEntityId : Model -> Maybe EntityId
 getMaybeLastKnownFocusedEntityId =
-    get cursorFL >> .maybeCursorEntityId
+    get cursorL >> .maybeCursorEntityId
 
 
 getEntityListDomIdFromEntityId entityId =
@@ -113,19 +113,19 @@ update config appModel msg pageModel =
             -- note: this is automatically called by focusIn event of list item.
             let
                 entityIdList =
-                    createEntityIdList appModel pageModel
+                    createEntityIdList pageModel appModel
 
                 cursor =
                     Cursor.create entityIdList
                         (Just entityId)
                         (getFilter pageModel)
             in
-            set cursorFL cursor pageModel |> pure
+            set cursorL cursor pageModel |> pure
 
         MoveFocusBy offset ->
             let
                 cursor =
-                    get cursorFL pageModel
+                    get cursorL pageModel
             in
             Cursor.findEntityIdByOffsetIndex offset cursor
                 ?|> SetCursorEntityId
@@ -149,43 +149,33 @@ update config appModel msg pageModel =
             noop
 
 
-overModel fn (Model model) =
-    fn model
+toRecord (Model a) =
+    a
 
 
-overModelF fn (Model model) =
-    fn model |> Model
+map fn (Model a) =
+    fn a |> Model
 
 
-cursorFL =
-    fieldLens (overModel .cursor) (\s b -> overModelF (\b -> { b | cursor = s }) b)
-
-
-entityListCursorEntityIdListFL =
-    let
-        entityIdListFL =
-            fieldLens .entityIdList (\s b -> { b | entityIdList = s })
-    in
-    composeInnerOuterFieldLens entityIdListFL cursorFL
+cursorL =
+    fieldLens (toRecord >> .cursor) (\s -> map (\b -> { b | cursor = s }))
 
 
 createEntityTree pageModel appModel =
-    Pages.EntityList.Tree.createEntityTree_ (getFilter pageModel) (getTitle pageModel) appModel
+    TreeBuilder.createEntityTree_ (getFilter pageModel) (getTitle pageModel) appModel
 
 
-createEntityIdList appModel pageModel =
-    createEntityTree pageModel appModel
-        |> Tree.flatten
-        .|> Entity.toEntityId
+createEntityIdList pageModel appModel =
+    createEntityTree pageModel appModel |> Tree.toEntityIdList
 
 
 computeMaybeNewEntityIdAtCursor appModel pageModel =
     let
         newEntityIdList =
-            createEntityIdList appModel pageModel
+            createEntityIdList pageModel appModel
 
         newFilter =
             getFilter pageModel
     in
-    get cursorFL pageModel
+    get cursorL pageModel
         |> Cursor.computeNewEntityIdAtCursor newFilter newEntityIdList

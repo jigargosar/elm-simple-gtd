@@ -1,4 +1,4 @@
-module Pages.EntityList.Tree exposing (..)
+module Pages.EntityList.TreeBuilder exposing (..)
 
 import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
 import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)

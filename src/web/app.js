@@ -123,9 +123,13 @@ window.appBoot = async function appBoot(elmMain = Main) {
   });
   
   app.ports["focusSelector"].subscribe((selector) => {
-    const firstSelected = $(selector).first()
-    console.log("port: focusSelector: $(selector).first()", firstSelected)
-    setTimeout(() => firstSelected.focus(), 0)
+    console.log("port: focusSelector: selector", selector)
+    
+    setTimeout(() => {
+      const firstSelected = $(selector).first()
+      console.log("port: focusSelector: $(selector).first()", firstSelected)
+      return firstSelected.focus()
+    }, 100)
   });
   
   

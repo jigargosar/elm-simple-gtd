@@ -128,14 +128,38 @@ type alias HasStores x =
     }
 
 
+type alias PartReturn model msg =
+    ( model, List (Cmd msg), List msg )
+
+
+type alias PartReturnF model msg =
+    PartReturn model msg -> PartReturn model msg
+
+
+pure : model -> PartReturn model msg
+pure model =
+    ( model, [], [] )
+
+
+addCmd : Cmd msg -> PartReturnF model msg
+addCmd cmd ( model, cmdList, msgList ) =
+    ( model, cmd :: cmdList, msgList )
+
+
+addMsg : msg -> PartReturnF model msg
+addMsg msg ( model, cmdList, msgList ) =
+    ( model, cmdList, msgList ++ [ msg ] )
+
+
 update :
-    { a | navigateToPathMsg : Filter.Path -> Cmd msg }
+    { a | navigateToPathMsg : Filter.Path -> msg }
     -> HasStores x
     -> Msg
     -> Model
-    -> ( Model, Cmd msg )
+    -> ( Model, List (Cmd msg), List msg )
 update config appModel msg model =
     let
+        noop : ( Model, List (Cmd msg), List msg )
         noop =
             pure model
     in
@@ -156,9 +180,7 @@ update config appModel msg model =
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
-                        ( model
-                        , focusEntityIdCmd entityId
-                        )
+                        noop |> addCmd (focusEntityIdCmd entityId)
                     )
                 ?= noop
 
@@ -179,7 +201,7 @@ update config appModel msg model =
                 path =
                     Filter.toPath filter
             in
-            model ! [ config.navigateToPathMsg path, focusEntityIdCmd entityId ]
+            noop |> addCmd (focusEntityIdCmd entityId) |> addMsg (config.navigateToPathMsg path)
 
 
 onSetCursorEntityId entityId appModel model =

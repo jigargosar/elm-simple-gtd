@@ -229,7 +229,7 @@ type alias UpdateConfig msg =
             (Update.Firebase.Config msg
                 (Update.Subscription.Config msg
                     (Update.Todo.Config msg
-                        { navigateToPathMsg : List String -> Cmd msg
+                        { navigateToPathMsg : List String -> msg
                         }
                     )
                 )
@@ -250,7 +250,7 @@ createUpdateConfig model =
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> OnEntityListMsg
     , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> OnEntityListMsg
-    , navigateToPathMsg = navigateToPathMsg >> toCmd
+    , navigateToPathMsg = navigateToPathMsg
     , goToEntityIdCmd = onGoToEntityIdMsg >> toCmd
     , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
     , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> OnEntityListMsg
@@ -418,9 +418,9 @@ updatePage config msg page =
                         model
                         msg_
                         model_
-                        |> (\( pageModel, cmd ) ->
+                        |> (\( pageModel, cmdList, msgList ) ->
                                 ( { model | page = EntityList pageModel }
-                                , cmd
+                                , Cmd.batch cmdList
                                 )
                            )
                 )

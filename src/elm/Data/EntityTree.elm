@@ -10,26 +10,26 @@ import X.Function exposing (..)
 
 
 type GroupDocEntityNode
-    = GroupDocNode GroupDocEntity (List TodoDoc)
+    = GroupDocEntityNode GroupDocEntity (List TodoDoc)
 
 
 type Tree
-    = GroupDocTree GroupDocNode (List GroupDocNode)
+    = GroupDocTree GroupDocEntityNode (List GroupDocEntityNode)
     | NamedTodoList String (List TodoDoc) Int
-    | GroupDocForest (List GroupDocNode)
+    | GroupDocForest (List GroupDocEntityNode)
 
 
 flatten : Tree -> List Entity
 flatten tree =
     let
-        getGroupDocNodeEntityList (GroupDocNode gdEntity todoList) =
+        getGroupDocNodeEntityList (GroupDocEntityNode gdEntity todoList) =
             Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
     in
     case tree of
         NamedTodoList _ todoList _ ->
             todoList .|> Entity.TodoEntity
 
-        GroupDocTree (GroupDocNode gdEntity todoList) nodeList ->
+        GroupDocTree (GroupDocEntityNode gdEntity todoList) nodeList ->
             [ Entity.GroupDocEntityW gdEntity ] ++ (nodeList |> List.concatMap getGroupDocNodeEntityList)
 
         GroupDocForest nodeList ->
@@ -41,13 +41,13 @@ createFlatTodoListNode stringTitle todoList totalCount =
 
 
 createGroupDocEntityNode gdEntity todoList =
-    GroupDocNode gdEntity todoList
+    GroupDocEntityNode gdEntity todoList
 
 
 createGroupDocTree gdEntity todoList nodeList =
-    GroupDocTree (GroupDocNode gdEntity todoList) nodeList
+    GroupDocTree (GroupDocEntityNode gdEntity todoList) nodeList
 
 
-createForest : List GroupDocNode -> Tree
+createForest : List GroupDocEntityNode -> Tree
 createForest =
     GroupDocForest

@@ -33,10 +33,10 @@ keyedViewList pageVM =
                         todoList
                         gDoc
 
-        createGroupDocHeaderView (GroupDocNode (GroupDocEntity gdType gDoc) todoList) =
+        createGroupDocHeaderView (GroupDocEntityNode (GroupDocEntity gdType gDoc) todoList) =
             groupHeaderView (createGroupDocVM gdType gDoc todoList)
 
-        createGroupDocView (GroupDocNode (GroupDocEntity gdType gDoc) todoList) =
+        createGroupDocView (GroupDocEntityNode (GroupDocEntity gdType gDoc) todoList) =
             groupView createTodoView (createGroupDocVM gdType gDoc todoList)
 
         createTodoView todo =

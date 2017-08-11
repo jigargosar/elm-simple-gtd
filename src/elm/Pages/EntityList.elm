@@ -242,7 +242,7 @@ createActiveGroupDocForest gdType appModel =
             GroupDocStore.getActiveDocs gdType appModel
                 .|> Entity.createGroupDocEntity gdType
 
-        createNode : GroupDocEntity -> GroupDocNode
+        createNode : GroupDocEntity -> GroupDocEntityNode
         createNode groupDocEntity =
             let
                 todoList =

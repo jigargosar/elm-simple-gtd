@@ -4,6 +4,7 @@ module Data.EntityListFilter
         , FilterViewModel
         , FlatFilterType(..)
         , GroupByType(..)
+        , Path
         , getFilterViewModel
         , getMaybeFilterFromPath
         , initialFilterPathTuple

@@ -368,7 +368,7 @@ onNavigateToPath config path =
         currentPagePath page =
             case page of
                 EntityList pageModel ->
-                    EntityList.getFullPath pageModel
+                    EntityList.getPath pageModel
 
                 LandingPage ->
                     []
@@ -542,7 +542,7 @@ delta2hash =
         getPathFromModel previousModel currentModel =
             case currentModel.page of
                 EntityList pageModel ->
-                    EntityList.getFullPath pageModel
+                    EntityList.getPath pageModel
 
                 LandingPage ->
                     [ "" ]

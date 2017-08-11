@@ -1,13 +1,7 @@
 module Pages.EntityList exposing (..)
 
 import Data.EntityListCursor as Cursor
-import Data.EntityListFilter as Filter
-    exposing
-        ( Filter(..)
-        , FilterViewModel
-        , FlatFilterType(..)
-        , GroupByType(..)
-        )
+import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
 import Data.EntityTree as Tree exposing (GroupDocNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
 import Document exposing (..)
@@ -35,11 +29,9 @@ type Model
     = Model ModelRecord
 
 
-constructor : List String -> Filter -> Cursor.Model -> Model
+constructor : Path -> Filter -> Cursor.Model -> Model
 constructor path filter cursor =
-    ModelRecord path
-        filter
-        cursor
+    ModelRecord path filter cursor
         |> Model
 
 
@@ -68,20 +60,20 @@ maybeInitFromPath path maybePreviousModel =
             )
 
 
-getFullPath (Model pageModel) =
+getPath (Model pageModel) =
     pageModel.path
 
 
-getNamedFilterModel (Model pageModel) =
+getFilterViewModel (Model pageModel) =
     Filter.getFilterViewModel pageModel.filter
 
 
 getTitleColourTuple =
-    getNamedFilterModel >> (\filterModel -> ( filterModel.displayName, filterModel.headerColor ))
+    getFilterViewModel >> (\filterModel -> ( filterModel.displayName, filterModel.headerColor ))
 
 
 getTitle =
-    getNamedFilterModel >> .displayName
+    getFilterViewModel >> .displayName
 
 
 getFilter (Model pageModel) =

@@ -103,7 +103,7 @@ const showTodoReminderNotification = reg => async (msg) => {
         icon: "/logo.png",
         actions: [
             {title: "Mark Done", action: "mark-done"},
-            {title: "Snooze", action: "snooze"},
+            // {title: "Snooze", action: "snooze"},
         ],
         body: title,
         data

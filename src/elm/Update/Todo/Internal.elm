@@ -47,6 +47,7 @@ type alias Config msg a =
         | setFocusInEntityWithEntityId : EntityId -> msg
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
+        , gotoEntityIdCmd : EntityId -> Cmd msg
     }
 
 
@@ -221,7 +222,7 @@ onStartAddingTodo config addFormMode =
     X.Return.returnWith createXMode (config.onSetExclusiveMode >> returnMsgAsCmd)
 
 
-onReminderNotificationClicked now notificationEvent =
+onReminderNotificationClicked config now notificationEvent =
     let
         { action, data } =
             notificationEvent
@@ -234,6 +235,7 @@ onReminderNotificationClicked now notificationEvent =
             >> command (Notification.closeNotification todoId)
     else
         map (showReminderOverlayForTodoId todoId)
+            >> command (config.gotoEntityIdCmd (EntityId.fromTodoDocId todoId))
 
 
 showReminderNotificationCmd ( todo, model ) =

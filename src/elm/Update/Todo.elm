@@ -138,7 +138,7 @@ update :
 update config now msg =
     case msg of
         OnReminderNotificationClicked notificationEvent ->
-            onReminderNotificationClicked now notificationEvent
+            onReminderNotificationClicked config now notificationEvent
 
         OnProcessPendingNotificationCronTick ->
             returnAndThenMaybe

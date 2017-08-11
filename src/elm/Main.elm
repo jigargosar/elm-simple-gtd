@@ -91,7 +91,7 @@ type Msg
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg AppHeaderMsg
-    | EntityListMsg EntityList.Msg
+    | OnEntityListMsg EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
     | OnTodoMsg TodoMsg
@@ -133,7 +133,7 @@ onSaveExclusiveModeForm =
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
 setFocusInEntityWithEntityIdMsg =
-    EntityList.OnSetCursorEntityId >> EntityListMsg
+    EntityList.OnSetCursorEntityId >> OnEntityListMsg
 
 
 subscriptions : Model -> Sub Msg
@@ -243,11 +243,12 @@ createUpdateConfig model =
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoForm = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocForm = OnSaveGroupDocForm >> OnGroupDocMsg
-    , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> EntityListMsg
-    , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> EntityListMsg
+    , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> OnEntityListMsg
+    , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> OnEntityListMsg
     , navigateToPathMsg = navigateToPathMsg >> toCmd
+    , gotoEntityIdCmd = EntityList.OnGoToEntityId >> OnEntityListMsg >> toCmd
     , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
-    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> EntityListMsg
+    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> OnEntityListMsg
     }
 
 
@@ -405,7 +406,7 @@ pageFL =
 
 updatePage config msg page =
     case ( page, msg ) of
-        ( EntityList model_, EntityListMsg msg_ ) ->
+        ( EntityList model_, OnEntityListMsg msg_ ) ->
             andThen
                 (\model ->
                     EntityList.update config

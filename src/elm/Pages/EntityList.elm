@@ -156,10 +156,10 @@ update :
     -> HasStores x
     -> Msg
     -> Model
-    -> PartReturn Model msg msg
+    -> PartReturn Model Msg msg
 update config appModel msg model =
     let
-        noop : ( Model, List (Cmd msg), List msg )
+        noop : ( Model, List (Cmd Msg), List msg )
         noop =
             pure model
     in

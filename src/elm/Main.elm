@@ -411,16 +411,16 @@ pageFL =
 
 updatePage config msg page =
     case ( page, msg ) of
-        ( EntityList model_, OnEntityListMsg msg_ ) ->
+        ( EntityList pageModel, OnEntityListMsg pageMsg ) ->
             andThen
                 (\model ->
                     EntityList.update config
                         model
-                        msg_
-                        model_
+                        pageMsg
+                        pageModel
                         |> (\( pageModel, cmdList, msgList ) ->
                                 ( { model | page = EntityList pageModel }
-                                , Cmd.batch cmdList
+                                , Cmd.batch cmdList |> Cmd.map OnEntityListMsg
                                 )
                            )
                 )

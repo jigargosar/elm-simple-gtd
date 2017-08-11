@@ -5,7 +5,7 @@ import GroupDoc.FormView
 import Html exposing (..)
 import Todo.FormTypes exposing (..)
 import Todo.GroupEditView
-import Todo.Notification.View exposing (maybeOverlay)
+import Todo.ReminderOverlay.View exposing (maybeOverlay)
 import Todo.View
 import View.GetStarted
 import View.MainMenu
@@ -59,6 +59,6 @@ overlayViews config appModel =
                     def
     in
     [ Just editModeOverlayView
-    , Todo.Notification.View.maybeOverlay config appModel
+    , Todo.ReminderOverlay.View.maybeOverlay config appModel
     ]
         |> List.filterMap identity

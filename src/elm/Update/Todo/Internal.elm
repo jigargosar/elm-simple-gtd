@@ -16,8 +16,8 @@ import Store
 import Time exposing (Time)
 import Todo.Form
 import Todo.FormTypes exposing (..)
-import Todo.Notification.Model
-import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import Todo.ReminderOverlay.Model
+import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
@@ -47,7 +47,7 @@ type alias Config msg a =
         | setFocusInEntityWithEntityId : EntityId -> msg
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
-        , gotoEntityIdCmd : EntityId -> Cmd msg
+        , goToEntityIdCmd : EntityId -> Cmd msg
     }
 
 
@@ -238,7 +238,7 @@ onReminderNotificationClicked config now notificationEvent =
 
 
 
--->> command (config.gotoEntityIdCmd (EntityId.fromTodoDocId todoId))
+-->> command (config.goToEntityIdCmd (EntityId.fromTodoDocId todoId))
 
 
 showReminderNotificationCmd ( todo, model ) =
@@ -306,18 +306,18 @@ showReminderOverlayForTodoId todoId =
 
 
 setReminderOverlayToInitialView todo model =
-    { model | reminderOverlay = Todo.Notification.Model.initialView todo }
+    { model | reminderOverlay = Todo.ReminderOverlay.Model.initialView todo }
 
 
-reminderOverlayAction : Todo.Notification.Model.Action -> Time -> SubReturnF msg model
+reminderOverlayAction : Todo.ReminderOverlay.Model.Action -> Time -> SubReturnF msg model
 reminderOverlayAction action now =
     returnWithMaybe1 .reminderOverlay (onActive action now)
 
 
 onActive :
-    Todo.Notification.Model.Action
+    Todo.ReminderOverlay.Model.Action
     -> Time
-    -> Todo.Notification.Types.InnerModel
+    -> Todo.ReminderOverlay.Types.InnerModel
     -> SubReturnF msg model
 onActive action now ( _, todoDetails ) =
     let
@@ -325,22 +325,22 @@ onActive action now ( _, todoDetails ) =
             todoDetails.id
     in
     case action of
-        Todo.Notification.Model.Dismiss ->
+        Todo.ReminderOverlay.Model.Dismiss ->
             andThen (updateTodo TA_TurnReminderOff now todoId)
                 >> map removeReminderOverlay
                 >> Return.command (Notification.closeNotification todoId)
 
-        Todo.Notification.Model.ShowSnoozeOptions ->
+        Todo.ReminderOverlay.Model.ShowSnoozeOptions ->
             map (setReminderOverlayToSnoozeView todoDetails)
 
-        Todo.Notification.Model.SnoozeTill snoozeOffset ->
+        Todo.ReminderOverlay.Model.SnoozeTill snoozeOffset ->
             Return.andThen (snoozeTodoWithOffset snoozeOffset now todoId)
                 >> Return.command (Notification.closeNotification todoId)
 
-        Todo.Notification.Model.Close ->
+        Todo.ReminderOverlay.Model.Close ->
             map removeReminderOverlay
 
-        Todo.Notification.Model.MarkDone ->
+        Todo.ReminderOverlay.Model.MarkDone ->
             andThen (updateTodo TA_MarkDone now todoId)
                 >> map removeReminderOverlay
                 >> Return.command (Notification.closeNotification todoId)
@@ -349,7 +349,7 @@ onActive action now ( _, todoDetails ) =
 snoozeTodoWithOffset snoozeOffset now todoId model =
     let
         time =
-            Todo.Notification.Model.addSnoozeOffset now snoozeOffset
+            Todo.ReminderOverlay.Model.addSnoozeOffset now snoozeOffset
     in
     model
         |> updateTodo (time |> TA_SnoozeTill) now todoId
@@ -357,8 +357,8 @@ snoozeTodoWithOffset snoozeOffset now todoId model =
 
 
 removeReminderOverlay model =
-    { model | reminderOverlay = Todo.Notification.Model.none }
+    { model | reminderOverlay = Todo.ReminderOverlay.Model.none }
 
 
 setReminderOverlayToSnoozeView details model =
-    { model | reminderOverlay = Todo.Notification.Model.snoozeView details }
+    { model | reminderOverlay = Todo.ReminderOverlay.Model.snoozeView details }

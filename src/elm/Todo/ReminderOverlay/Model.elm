@@ -1,11 +1,11 @@
-module Todo.Notification.Model exposing (..)
+module Todo.ReminderOverlay.Model exposing (..)
 
 import Data.TodoDoc exposing (..)
 import Date
 import Date.Extra as Date
 import Document
 import Time exposing (Time)
-import Todo.Notification.Types exposing (..)
+import Todo.ReminderOverlay.Types exposing (..)
 import X.Function exposing (..)
 
 

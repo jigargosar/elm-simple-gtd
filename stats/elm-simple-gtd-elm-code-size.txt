@@ -1,5 +1,5 @@
-    8961 total
-     594 src/elm/Main.elm
+    8972 total
+     601 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      364 src/elm/Update/Todo/Internal.elm
      318 src/elm/GroupDoc.elm
@@ -42,10 +42,10 @@
       74 src/elm/Update/ExclusiveMode.elm
       72 src/elm/View/GetStarted.elm
       68 src/elm/View/Layout.elm
+      68 src/elm/Todo/ReminderOverlay/View.elm
       68 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
-      64 src/elm/Todo/Notification/View.elm
       62 src/elm/Todo/GroupEditView.elm
       61 src/elm/ViewModel/EntityList.elm
       60 src/elm/View/Header.elm
@@ -53,7 +53,7 @@
       55 src/elm/AppUrl.elm
       53 src/elm/Data/EntityTree.elm
       50 src/elm/Update/AppHeader.elm
-      49 src/elm/Todo/Notification/Model.elm
+      49 src/elm/Todo/ReminderOverlay/Model.elm
       47 src/elm/Update/AppDrawer.elm
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
@@ -71,7 +71,7 @@
       23 src/elm/View/Badge.elm
       22 src/elm/Ports.elm
       21 src/elm/X/Predicate.elm
-      21 src/elm/Todo/Notification/Types.elm
+      21 src/elm/Todo/ReminderOverlay/Types.elm
       20 src/elm/Models/TodoDocStore.elm
       20 src/elm/Models/Selection.elm
       20 src/elm/L/Main.elm

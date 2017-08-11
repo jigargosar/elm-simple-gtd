@@ -1,4 +1,4 @@
-module Todo.Notification.Types exposing (..)
+module Todo.ReminderOverlay.Types exposing (..)
 
 import Data.TodoDoc exposing (..)
 import Document exposing (..)

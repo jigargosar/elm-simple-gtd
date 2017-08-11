@@ -1,11 +1,11 @@
-module Todo.Notification.View exposing (..)
+module Todo.ReminderOverlay.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Mat
 import Time
-import Todo.Notification.Model
-import Todo.Notification.Types
+import Todo.ReminderOverlay.Model
+import Todo.ReminderOverlay.Types
 import Toolkit.Operators exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
@@ -19,23 +19,27 @@ reminderOverlayActiveView config ( activeView, todoDetails ) =
         activeViewShell children =
             let
                 onOutsideMouseDown =
-                    config.onReminderOverlayAction Todo.Notification.Model.Close
+                    config.onReminderOverlayAction Todo.ReminderOverlay.Model.Close
             in
             div [ class "notification overlay", onClickStopPropagation onOutsideMouseDown ]
                 [ div [ class "fixed-bottom top-shadow static", onClickStopPropagation config.noop ]
-                    [ h5 [] [ text todoDetails.text ]
+                    [ h5
+                        [ class "todo-text"
+                        , config.onGoToTodoDocIdMsg todoDetails.id |> onClickStopPropagation
+                        ]
+                        [ text todoDetails.text ]
                     , div [ class "layout horizontal wrap flex-auto-children " ]
                         children
                     ]
                 ]
     in
     case activeView of
-        Todo.Notification.Types.InitialView ->
+        Todo.ReminderOverlay.Types.InitialView ->
             let
                 vm =
-                    { onDismissClicked = config.onReminderOverlayAction Todo.Notification.Model.Dismiss
-                    , onDoneClicked = config.onReminderOverlayAction Todo.Notification.Model.MarkDone
-                    , onSnoozeClicked = config.onReminderOverlayAction Todo.Notification.Model.ShowSnoozeOptions
+                    { onDismissClicked = config.onReminderOverlayAction Todo.ReminderOverlay.Model.Dismiss
+                    , onDoneClicked = config.onReminderOverlayAction Todo.ReminderOverlay.Model.MarkDone
+                    , onSnoozeClicked = config.onReminderOverlayAction Todo.ReminderOverlay.Model.ShowSnoozeOptions
                     }
             in
             activeViewShell
@@ -44,16 +48,16 @@ reminderOverlayActiveView config ( activeView, todoDetails ) =
                 , Mat.bigIconTextBtn "done" "done!" vm.onDoneClicked
                 ]
 
-        Todo.Notification.Types.SnoozeView ->
+        Todo.ReminderOverlay.Types.SnoozeView ->
             let
                 msg =
-                    Todo.Notification.Model.SnoozeTill >> config.onReminderOverlayAction
+                    Todo.ReminderOverlay.Model.SnoozeTill >> config.onReminderOverlayAction
 
                 vm =
-                    { snoozeFor15Min = msg (Todo.Notification.Model.SnoozeForMilli (Time.minute * 15))
-                    , snoozeFor1Hour = msg (Todo.Notification.Model.SnoozeForMilli Time.hour)
-                    , snoozeFor3Hours = msg (Todo.Notification.Model.SnoozeForMilli (Time.hour * 3))
-                    , snoozeTillTomorrow = msg Todo.Notification.Model.SnoozeTillTomorrow
+                    { snoozeFor15Min = msg (Todo.ReminderOverlay.Model.SnoozeForMilli (Time.minute * 15))
+                    , snoozeFor1Hour = msg (Todo.ReminderOverlay.Model.SnoozeForMilli Time.hour)
+                    , snoozeFor3Hours = msg (Todo.ReminderOverlay.Model.SnoozeForMilli (Time.hour * 3))
+                    , snoozeTillTomorrow = msg Todo.ReminderOverlay.Model.SnoozeTillTomorrow
                     }
             in
             activeViewShell

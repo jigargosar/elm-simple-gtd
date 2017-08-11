@@ -6,7 +6,7 @@ import Notification exposing (Response)
 import Set
 import Time
 import Todo.FormTypes exposing (..)
-import Todo.Notification.Model
+import Todo.ReminderOverlay.Model
 import Update.Todo.Internal exposing (..)
 import X.Function.Infix exposing (..)
 import X.Return exposing (..)
@@ -17,7 +17,7 @@ type TodoMsg
     | OnProcessPendingNotificationCronTick
     | UpdateTodoOrAllSelected__ DocId TodoAction
     | UpdateTodo__ DocId TodoAction
-    | OnTodoReminderOverlayAction Todo.Notification.Model.Action
+    | OnTodoReminderOverlayAction Todo.ReminderOverlay.Model.Action
     | OnStartAddingTodo AddTodoFormMode
     | OnStartEditingTodo TodoDoc EditTodoFormMode
     | OnUpdateTodoFormAction TodoForm TodoFormAction

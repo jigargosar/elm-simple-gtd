@@ -5,6 +5,7 @@ import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Data.TodoDoc exposing (..)
 import Document exposing (..)
 import Entity exposing (..)
+import EntityId
 import ExclusiveMode.Types exposing (..)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
@@ -29,8 +30,8 @@ import Set exposing (Set)
 import Stores
 import Time exposing (Time)
 import Todo.FormTypes
-import Todo.Notification.Model
-import Todo.Notification.Types exposing (TodoReminderOverlayModel)
+import Todo.ReminderOverlay.Model
+import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
@@ -107,6 +108,10 @@ type Msg
 
 navigateToPathMsg =
     NavigateToPath
+
+
+onGoToEntityIdMsg =
+    EntityList.OnGoToEntityId >> OnEntityListMsg
 
 
 onStartAddingTodoWithFocusInEntityAsReferenceOld : Model -> Msg
@@ -207,7 +212,7 @@ createAppModel flags =
             , stores = Stores.initialValue now deviceId encodedLists
             , editMode = XMNone
             , page = initialPage
-            , reminderOverlay = Todo.Notification.Model.none
+            , reminderOverlay = Todo.ReminderOverlay.Model.none
             , firebaseModel = Firebase.init deviceId initialOfflineStore
             , selectedEntityIdSet = Set.empty
             , config = flags.config
@@ -246,7 +251,7 @@ createUpdateConfig model =
     , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> OnEntityListMsg
     , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> OnEntityListMsg
     , navigateToPathMsg = navigateToPathMsg >> toCmd
-    , gotoEntityIdCmd = EntityList.OnGoToEntityId >> OnEntityListMsg >> toCmd
+    , goToEntityIdCmd = onGoToEntityIdMsg >> toCmd
     , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
     , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg |> OnEntityListMsg
     }
@@ -430,7 +435,8 @@ type alias ViewConfig msg =
     , onFirebaseMsg : FirebaseMsg -> msg
     , onMainMenuStateChanged : Menu.Types.MenuState -> msg
     , onMdl : Material.Msg msg -> msg
-    , onReminderOverlayAction : Todo.Notification.Model.Action -> msg
+    , onReminderOverlayAction : Todo.ReminderOverlay.Model.Action -> msg
+    , onGoToTodoDocIdMsg : DocId -> msg
     , onSaveExclusiveModeForm : msg
     , onSetContext : DocId -> ContextDoc -> msg
     , onSetProject : DocId -> ProjectDoc -> msg
@@ -481,6 +487,7 @@ createViewConfig model =
     , onSignOut = OnFirebaseMsg OnFBSignOut
     , onFirebaseMsg = OnFirebaseMsg
     , onReminderOverlayAction = Update.Todo.onReminderOverlayActionMsg >> OnTodoMsg
+    , onGoToTodoDocIdMsg = EntityId.fromTodoDocId >> onGoToEntityIdMsg
     , onToggleAppDrawerOverlay = OnAppDrawerMsg AppDrawer.Types.OnToggleOverlay
     , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg

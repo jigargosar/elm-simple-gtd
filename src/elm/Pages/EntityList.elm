@@ -129,7 +129,7 @@ type alias HasStores x =
 
 
 update :
-    { a | navigateToPathMsg : Filter.Path -> msg }
+    { a | navigateToPathMsg : Filter.Path -> Cmd msg }
     -> HasStores x
     -> Msg
     -> Model
@@ -179,7 +179,7 @@ update config appModel msg model =
                 path =
                     Filter.toPath filter
             in
-            model ! [ config.navigateToPathMsg path |> toCmd, focusEntityIdCmd entityId ]
+            model ! [ config.navigateToPathMsg path, focusEntityIdCmd entityId ]
 
 
 onSetCursorEntityId entityId appModel model =

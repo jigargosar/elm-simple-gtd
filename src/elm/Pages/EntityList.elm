@@ -137,7 +137,7 @@ update :
     -> HasStores x
     -> Msg
     -> Model
-    -> XUpdate.XReturn Model Msg msg
+    -> XUpdate.Return Model Msg msg
 update config appModel msg model =
     let
         defRet : ( Model, List (Cmd Msg), List msg )

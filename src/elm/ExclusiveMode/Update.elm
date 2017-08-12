@@ -34,7 +34,7 @@ update :
     Config msg a
     -> ExclusiveModeMsg
     -> Model
-    -> XUpdate.XReturn ExclusiveMode ExclusiveModeMsg msg
+    -> XUpdate.Return ExclusiveMode ExclusiveModeMsg msg
 update config msg model =
     case msg of
         OnSetExclusiveMode newModel ->

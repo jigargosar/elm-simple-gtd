@@ -1182,9 +1182,10 @@
       "Toolkit.Operators",
       "X.Function.Infix",
       "X.Record",
-      "X.Return"
+      "X.Return",
+      "XUpdate"
     ],
-    "importsCount": 14,
+    "importsCount": 15,
     "transitiveImports": [
       "AppUrl",
       "Char",
@@ -1236,9 +1237,10 @@
       "X.Predicate",
       "X.Random",
       "X.Record",
-      "X.Return"
+      "X.Return",
+      "XUpdate"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 52,
     "backwardImports": [
       "Main"
     ],

@@ -46,3 +46,12 @@ addMsgList otherMsgList ( model, cmdList, msgList ) =
 
 map modelF  ( model, cmdList, msgList ) =
     ( modelF model, cmdList, msgList )
+
+andThen: (model -> XReturn model msg otherMsg) -> XReturnF model msg otherMsg
+andThen fn ( model, cmdList, msgList ) =
+
+        let
+            (newModel, newCmdList, newMsgList) =
+                fn model
+        in
+               (newModel, cmdList ++ newCmdList, msgList ++ newMsgList)

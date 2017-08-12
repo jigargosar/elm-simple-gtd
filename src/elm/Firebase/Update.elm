@@ -14,6 +14,7 @@ import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import X.Return exposing (..)
+import XUpdate
 
 
 type FirebaseMsg
@@ -46,6 +47,79 @@ type alias Config msg a =
         , onSetExclusiveMode : ExclusiveMode -> msg
         , isTodoStoreEmpty : Bool
     }
+
+
+update_ :
+    Config msg a
+    -> FirebaseMsg
+    -> FirebaseModel
+    -> XUpdate.XReturn FirebaseModel FirebaseMsg msg
+update_ config msg model =
+    let
+        defRet =
+            XUpdate.pure model
+    in
+    case msg of
+        OnFBSwitchToNewUserSetupModeIfNeeded ->
+            let
+                onSwitchToNewUserSetupModeIfNeeded =
+                    if model.showSignInDialog then
+                        config.onSetExclusiveMode XMSignInOverlay
+                    else if config.isTodoStoreEmpty then
+                        config.onStartSetupAddTodo
+                    else
+                        config.revertExclusiveMode
+            in
+            defRet |> XUpdate.addMsg onSwitchToNewUserSetupModeIfNeeded
+
+        OnFBSignIn ->
+            defRet
+                |> XUpdate.addCmd (signIn ())
+                |> setAndPersistShowSignInDialogValue2 True
+                |> XUpdate.andThen (update_ config OnFBSwitchToNewUserSetupModeIfNeeded)
+
+        --        OnFBSkipSignIn ->
+        --            setAndPersistShowSignInDialogValue False
+        --                >> update config OnFBSwitchToNewUserSetupModeIfNeeded
+        --
+        --        OnFBSignOut ->
+        --            Return.command (signOut ())
+        --                >> setAndPersistShowSignInDialogValue True
+        --                >> command (Navigation.load AppUrl.landing)
+        --
+        --        OnFBAfterUserChanged ->
+        --            returnWithMaybe1 .maybeUser
+        --                (\_ ->
+        --                    setAndPersistShowSignInDialogValue False
+        --                        >> update config OnFBSwitchToNewUserSetupModeIfNeeded
+        --                )
+        --
+        --        OnFBUserChanged encodedUser ->
+        --            D.decodeValue Data.User.maybeUserDecoder encodedUser
+        --                |> Result.mapError (Debug.log "Error decoding User")
+        --                !|> (\userV ->
+        --                        Return.map (set userL userV)
+        --                            >> update config OnFBAfterUserChanged
+        --                            >> maybeEffect firebaseUpdateClientCmd
+        --                            >> maybeEffect firebaseSetupOnDisconnectCmd
+        --                            >> startSyncWithFirebase
+        --                    )
+        --                != identity
+        --
+        --        OnFBFCMTokenChanged encodedToken ->
+        --            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
+        --                |> Result.mapError (Debug.log "Error decoding User")
+        --                !|> (\token ->
+        --                        Return.map (setFCMToken token)
+        --                            >> maybeEffect firebaseUpdateClientCmd
+        --                    )
+        --                != identity
+        --
+        --        OnFBConnectionChanged connected ->
+        --            Return.map (setClientConnectionStatus connected)
+        --                >> maybeEffect firebaseUpdateClientCmd
+        _ ->
+            defRet
 
 
 update :
@@ -131,6 +205,12 @@ userL =
 
 fcmTokenL =
     fieldLens .fcmToken (\s b -> { b | fcmToken = s })
+
+
+setAndPersistShowSignInDialogValue2 : Bool -> XUpdate.XReturnF FirebaseModel FirebaseMsg msg
+setAndPersistShowSignInDialogValue2 bool =
+    XUpdate.map (set showSignInDialog bool)
+        >> XUpdate.addCmd (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
 
 
 setAndPersistShowSignInDialogValue bool =

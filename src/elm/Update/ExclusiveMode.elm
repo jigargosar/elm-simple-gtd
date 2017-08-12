@@ -30,8 +30,8 @@ type alias SubReturnF msg model =
 
 type alias Config msg a =
     { a
-        | saveTodoForm : TodoForm -> msg
-        , saveGroupDocForm : GroupDocForm -> msg
+        | saveTodoFormMsg : TodoForm -> msg
+        , saveGroupDocFormMsg : GroupDocForm -> msg
     }
 
 
@@ -65,10 +65,10 @@ saveExclusiveModeForm : Config msg a -> ExclusiveMode -> SubReturnF msg model
 saveExclusiveModeForm config exMode =
     case exMode of
         XMGroupDocForm form ->
-            config.saveGroupDocForm form |> returnMsgAsCmd
+            config.saveGroupDocFormMsg form |> returnMsgAsCmd
 
         XMTodoForm form ->
-            config.saveTodoForm form |> returnMsgAsCmd
+            config.saveTodoFormMsg form |> returnMsgAsCmd
 
         _ ->
             identity

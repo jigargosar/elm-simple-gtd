@@ -120,7 +120,7 @@ getEntityListDomIdFromEntityId entityId =
 type Msg
     = OnMoveFocusBy Int
     | OnSetCursorEntityId EntityId
-    | OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+    | OnFocusListCursorAfterChangesReceivedFromPouchDBMsg
     | OnGoToEntityId EntityId
 
 
@@ -167,7 +167,7 @@ update config appModel msg model =
                 ?|> (\entityId -> updateDefRet (OnSetCursorEntityId entityId))
                 ?= defRet
 
-        OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
+        OnFocusListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeNewMaybeCursorEntityId appModel model
                 ?|> focusEntityIdCmd
                 |> XUpdate.addMaybeCmdIn defRet

@@ -267,6 +267,16 @@ updateAll config msgList =
     List.foldl (update config) # msgList
 
 
+updateChild childMsgWrapper childUpdateFn childL config model =
+    childUpdateFn (get childL model)
+        |> (\( childModel, cmdList, msgList ) ->
+                ( set childL childModel model
+                , Cmd.batch cmdList |> Cmd.map childMsgWrapper
+                )
+                    |> updateAll config msgList
+           )
+
+
 update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 update config msg =
     (case msg of

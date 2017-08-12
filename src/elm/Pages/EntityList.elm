@@ -133,7 +133,7 @@ update :
     -> HasStores x
     -> Msg
     -> Model
-    -> XUpdate.PartReturn Model Msg msg
+    -> XUpdate.XReturn Model Msg msg
 update config appModel msg model =
     let
         noop : ( Model, List (Cmd Msg), List msg )
@@ -160,7 +160,7 @@ update config appModel msg model =
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
-                        noop |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                        addFocusEntityIdCmd entityId noop
                     )
                 ?= noop
 
@@ -182,7 +182,7 @@ update config appModel msg model =
                     Filter.toPath filter
             in
             noop
-                |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                |> addFocusEntityIdCmd entityId
                 |> XUpdate.addMsg (config.navigateToPathMsg path)
 
 
@@ -197,6 +197,10 @@ onSetCursorEntityId entityId appModel model =
                 (getFilter model)
     in
     set cursorL cursor model |> XUpdate.pure
+
+
+addFocusEntityIdCmd =
+    focusEntityIdCmd >> XUpdate.addCmd
 
 
 focusEntityIdCmd entityId =

@@ -303,7 +303,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "ExclusiveMode.Update",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "GroupDoc.Form",
@@ -338,10 +337,9 @@
       "ViewModel.Frame",
       "Views.EntityList",
       "Views.Frame",
-      "Views.MainMenuOverlay",
       "Views.SignInOverlay"
     ],
-    "transitiveBackwardImportsCount": 47
+    "transitiveBackwardImportsCount": 45
   },
   "Data.EntityListCursor": {
     "fileName": "src/elm/Data/EntityListCursor.elm",
@@ -715,7 +713,6 @@
     ],
     "backwardImportsCount": 4,
     "transitiveBackwardImports": [
-      "Firebase",
       "Firebase.Model",
       "Main",
       "Ports.Firebase",
@@ -723,10 +720,9 @@
       "View.GetStarted",
       "View.Overlays",
       "Views.Frame",
-      "Views.MainMenuOverlay",
       "Views.SignInOverlay"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 8
   },
   "Document": {
     "fileName": "src/elm/Document.elm",
@@ -1148,39 +1144,6 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
-  "Firebase": {
-    "fileName": "src/elm/Firebase.elm",
-    "moduleName": "Firebase",
-    "parentModuleName": "",
-    "imports": [
-      "Firebase.Model"
-    ],
-    "importsCount": 1,
-    "transitiveImports": [
-      "Data.DeviceId",
-      "Data.User",
-      "Firebase.Model",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Json.Encode.Extra",
-      "Toolkit.Operators",
-      "X.Function.Infix"
-    ],
-    "transitiveImportsCount": 9,
-    "backwardImports": [
-      "Main",
-      "Views.MainMenuOverlay"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "Main",
-      "View.Overlays",
-      "Views.Frame",
-      "Views.MainMenuOverlay"
-    ],
-    "transitiveBackwardImportsCount": 4
-  },
   "Firebase.Model": {
     "fileName": "src/elm/Firebase/Model.elm",
     "moduleName": "Firebase.Model",
@@ -1207,22 +1170,19 @@
     ],
     "transitiveImportsCount": 8,
     "backwardImports": [
-      "Firebase",
       "Main",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
-      "Firebase",
       "Main",
       "Update.Firebase",
       "View.GetStarted",
       "View.Overlays",
       "Views.Frame",
-      "Views.MainMenuOverlay",
       "Views.SignInOverlay"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 6
   },
   "GroupDoc": {
     "fileName": "src/elm/GroupDoc.elm",
@@ -1743,7 +1703,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "ExclusiveMode.Update",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "Html",
@@ -1785,7 +1744,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 50,
+    "importsCount": 49,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -1814,7 +1773,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "ExclusiveMode.Update",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "GroupDoc.Form",
@@ -1918,7 +1876,7 @@
       "X.Time",
       "XUpdate"
     ],
-    "transitiveImportsCount": 130,
+    "transitiveImportsCount": 129,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -4290,7 +4248,6 @@
       "Document",
       "Entity",
       "ExclusiveMode.Types",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "GroupDoc.FormView",
@@ -4351,7 +4308,7 @@
       "X.Return",
       "X.String"
     ],
-    "transitiveImportsCount": 75,
+    "transitiveImportsCount": 74,
     "backwardImports": [
       "Views.Frame"
     ],
@@ -4623,7 +4580,6 @@
       "Document",
       "Entity",
       "ExclusiveMode.Types",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "GroupDoc.FormView",
@@ -4690,7 +4646,7 @@
       "X.Return",
       "X.String"
     ],
-    "transitiveImportsCount": 82,
+    "transitiveImportsCount": 81,
     "backwardImports": [
       "Main"
     ],
@@ -4706,20 +4662,15 @@
     "parentModuleName": "Views",
     "imports": [
       "AppUrl",
-      "Firebase",
       "Html",
       "Html.Attributes",
       "Menu",
       "Toolkit.Operators",
       "Tuple2"
     ],
-    "importsCount": 7,
+    "importsCount": 6,
     "transitiveImports": [
       "AppUrl",
-      "Data.DeviceId",
-      "Data.User",
-      "Firebase",
-      "Firebase.Model",
       "Html",
       "Html.Attributes",
       "Html.Events",
@@ -4727,7 +4678,6 @@
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "Json.Encode.Extra",
       "Keyboard",
       "Keyboard.Extra",
       "List.Extra",
@@ -4745,7 +4695,7 @@
       "X.Keyboard",
       "X.List"
     ],
-    "transitiveImportsCount": 29,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -5145,7 +5095,6 @@
       "EntityId",
       "ExclusiveMode.Types",
       "ExclusiveMode.Update",
-      "Firebase",
       "Firebase.Model",
       "GroupDoc",
       "GroupDoc.Form",
@@ -5198,7 +5147,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 65
+    "transitiveBackwardImportsCount": 64
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

@@ -66,3 +66,7 @@ encodeClient client =
 
 getMaybeUserId maybeUser =
     maybeUser ?|> .id
+
+
+getMaybeUser =
+    .maybeUser

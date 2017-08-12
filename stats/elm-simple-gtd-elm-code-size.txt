@@ -1,5 +1,5 @@
-    9020 total
-     636 src/elm/Main.elm
+    9011 total
+     635 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      364 src/elm/Update/Todo/Internal.elm
      318 src/elm/GroupDoc.elm
@@ -34,14 +34,14 @@
       92 src/elm/Data/EntityListCursor.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
-      82 src/elm/Views/MainMenuOverlay.elm
+      81 src/elm/Views/MainMenuOverlay.elm
       79 src/elm/GroupDoc/View.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/Colors.elm
       74 src/elm/X/Function/Infix.elm
+      72 src/elm/Firebase/Model.elm
       68 src/elm/View/Layout.elm
       68 src/elm/Todo/ReminderOverlay/View.elm
-      68 src/elm/Firebase/Model.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
       62 src/elm/Todo/GroupEditView.elm
@@ -84,7 +84,6 @@
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm
-      11 src/elm/Firebase.elm
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm

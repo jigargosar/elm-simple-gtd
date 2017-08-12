@@ -1,7 +1,6 @@
 module Views.MainMenuOverlay exposing (..)
 
 import AppUrl
-import Firebase
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Menu

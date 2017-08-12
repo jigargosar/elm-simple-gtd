@@ -9,8 +9,7 @@ import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (..)
 import ExclusiveMode.Update exposing (ExclusiveModeMsg)
-import Firebase exposing (..)
-import Firebase.Model exposing (..)
+import Firebase.Model exposing (FirebaseModel)
 import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
@@ -218,7 +217,7 @@ createAppModel flags =
             , editMode = XMNone
             , page = initialPage
             , reminderOverlay = Todo.ReminderOverlay.Model.none
-            , firebaseModel = Firebase.init deviceId initialOfflineStore
+            , firebaseModel = Firebase.Model.initialValue deviceId initialOfflineStore
             , selectedEntityIdSet = Set.empty
             , config = flags.config
             , appDrawerModel = AppDrawer.Model.initialValue initialOfflineStore
@@ -542,7 +541,7 @@ createViewConfig model =
     , maybeEntityIdAtCursorOld = Nothing
     , maybeCursorEntityId = Nothing
     , navigateToPathMsg = navigateToPathMsg
-    , maybeUser = Firebase.getMaybeUser model
+    , maybeUser = Firebase.Model.getMaybeUser model.firebaseModel
 
     --          , maybeUserId =  Firebase.getMaybeUser
     }

@@ -1182,10 +1182,9 @@
       "Toolkit.Operators",
       "X.Function.Infix",
       "X.Record",
-      "XUpdate",
-      "XUpdate.Infix"
+      "XUpdate"
     ],
-    "importsCount": 15,
+    "importsCount": 14,
     "transitiveImports": [
       "AppUrl",
       "Char",
@@ -1236,10 +1235,9 @@
       "X.Predicate",
       "X.Random",
       "X.Record",
-      "XUpdate",
-      "XUpdate.Infix"
+      "XUpdate"
     ],
-    "transitiveImportsCount": 51,
+    "transitiveImportsCount": 50,
     "backwardImports": [
       "Main"
     ],
@@ -1937,10 +1935,9 @@
       "X.Set",
       "X.String",
       "X.Time",
-      "XUpdate",
-      "XUpdate.Infix"
+      "XUpdate"
     ],
-    "transitiveImportsCount": 130,
+    "transitiveImportsCount": 129,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],

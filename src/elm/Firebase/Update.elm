@@ -14,7 +14,6 @@ import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 import XUpdate
-import XUpdate.Infix exposing (..)
 
 
 type FirebaseMsg
@@ -70,27 +69,27 @@ update config msg model =
 
         OnFBSignIn ->
             defRet
-                +> signIn ()
+                |> XUpdate.addCmd (signIn ())
                 |> setAndPersistShowSignInDialogValue True
-                ::> update config OnFBSwitchToNewUserSetupModeIfNeeded
+                |> XUpdate.andThen (update config OnFBSwitchToNewUserSetupModeIfNeeded)
 
         OnFBSkipSignIn ->
             defRet
                 |> setAndPersistShowSignInDialogValue False
-                ::> update config OnFBSwitchToNewUserSetupModeIfNeeded
+                |> XUpdate.andThen (update config OnFBSwitchToNewUserSetupModeIfNeeded)
 
         OnFBSignOut ->
             defRet
-                +> signOut ()
+                |> XUpdate.addCmd (signOut ())
                 |> setAndPersistShowSignInDialogValue True
-                +> Navigation.load AppUrl.landing
+                |> XUpdate.addCmd (Navigation.load AppUrl.landing)
 
         OnFBAfterUserChanged ->
             model.maybeUser
                 ?|> (\_ ->
                         defRet
                             |> setAndPersistShowSignInDialogValue False
-                            ::> update config OnFBSwitchToNewUserSetupModeIfNeeded
+                            |> XUpdate.andThen (update config OnFBSwitchToNewUserSetupModeIfNeeded)
                     )
                 ?= defRet
 
@@ -99,11 +98,11 @@ update config msg model =
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\userV ->
                         defRet
-                            :> set userL userV
-                            ::> update config OnFBAfterUserChanged
-                            ?+:> firebaseUpdateClientCmd
-                            ?+:> firebaseSetupOnDisconnectCmd
-                            ?+:> (getMaybeUserId >>? startSyncCmd)
+                            |> XUpdate.map (set userL userV)
+                            |> XUpdate.andThen (update config OnFBAfterUserChanged)
+                            |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
+                            |> XUpdate.maybeAddEffect firebaseSetupOnDisconnectCmd
+                            |> XUpdate.maybeAddEffect (getMaybeUserId >>? startSyncCmd)
                     )
                 != defRet
 
@@ -112,18 +111,18 @@ update config msg model =
                 |> Result.mapError (Debug.log "Error decoding User")
                 !|> (\token ->
                         defRet
-                            :> setFCMToken token
-                            ?+:> firebaseUpdateClientCmd
+                            |> XUpdate.map (setFCMToken token)
+                            |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
                     )
                 != defRet
 
         OnFBConnectionChanged connected ->
             defRet
-                :> setClientConnectionStatus connected
-                ?+:> firebaseUpdateClientCmd
+                |> XUpdate.map (setClientConnectionStatus connected)
+                |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
 
 
-showSignInDialogL =
+showSignInDialog =
     fieldLens .showSignInDialog (\s b -> { b | showSignInDialog = s })
 
 
@@ -144,10 +143,9 @@ fcmTokenL =
 
 
 setAndPersistShowSignInDialogValue : Bool -> XUpdate.XReturnF FirebaseModel FirebaseMsg msg
-setAndPersistShowSignInDialogValue bool ret =
-    ret
-        :> set showSignInDialogL bool
-        +> Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool )
+setAndPersistShowSignInDialogValue bool =
+    XUpdate.map (set showSignInDialog bool)
+        >> XUpdate.addCmd (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
 
 
 firebaseUpdateClientCmd model =

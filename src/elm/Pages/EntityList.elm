@@ -190,12 +190,8 @@ update config appModel msg model =
                     Filter.toPath filter
             in
             defRet
-                |> addFocusEntityIdCmd entityId
+                |> XUpdate.addCmd (focusEntityIdCmd entityId)
                 |> XUpdate.addMsg (config.navigateToPathMsg path)
-
-
-addFocusEntityIdCmd =
-    focusEntityIdCmd >> XUpdate.addCmd
 
 
 focusEntityIdCmd entityId =

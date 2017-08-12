@@ -162,6 +162,9 @@ update config appModel msg model =
         noop : ( Model, List (Cmd Msg), List msg )
         noop =
             pure model
+
+        updateSelf msg model =
+            update config appModel msg model
     in
     case msg of
         OnSetCursorEntityId entityId ->
@@ -174,7 +177,7 @@ update config appModel msg model =
                     get cursorL model
             in
             Cursor.findEntityIdByOffsetIndex offset cursor
-                ?|> (\entityId -> onSetCursorEntityId entityId appModel model)
+                ?|> (\entityId -> updateSelf (OnSetCursorEntityId entityId) model)
                 ?= noop
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->

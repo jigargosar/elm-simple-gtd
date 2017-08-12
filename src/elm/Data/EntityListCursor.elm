@@ -2,7 +2,9 @@ module Data.EntityListCursor exposing (..)
 
 import Data.EntityListFilter exposing (Filter(GroupByGroupDocFilter))
 import Entity exposing (EntityId(TodoEntityId))
+import List.Extra
 import Maybe.Extra
+import Set
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.List
@@ -83,9 +85,13 @@ computeNewEntityIdAtCursor newFilter newEntityIdList cursor =
 
                 _ ->
                     cursor.maybeCursorEntityId
+
+        maybeAddedEntityId =
+            newEntityIdList
+                |> List.Extra.find (List.Extra.notMember # cursor.entityIdList)
     in
     (if newFilter == cursor.filter then
-        newMaybeCursorEntityId
+        maybeAddedEntityId |> Maybe.Extra.orElse newMaybeCursorEntityId
      else
         cursor.maybeCursorEntityId
     )

@@ -269,7 +269,7 @@ updateChild childMsgWrapper childUpdateFn childL config model =
 
 update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 update config msg =
-    (case msg of
+    case msg of
         NOOP ->
             identity
 
@@ -368,29 +368,6 @@ update config msg =
 
         _ ->
             returnWith .page (updatePage config msg)
-    )
-        --        >> andThen (updateEntityListCursor config)
-        >> identity
-
-
-updateEntityListCursor config model =
-    case model.page of
-        EntityList pageModel ->
-            EntityList.computeNewMaybeCursorEntityId model pageModel
-                ?|> (\entityId ->
-                        let
-                            _ =
-                                Debug.log "UpdateEntityListCursor Called " entityId
-                        in
-                        pure model
-                            |> updatePage config
-                                (config.setFocusInEntityWithEntityId entityId)
-                                model.page
-                    )
-                ?= pure model
-
-        _ ->
-            pure model
 
 
 onNavigateToPath config path =

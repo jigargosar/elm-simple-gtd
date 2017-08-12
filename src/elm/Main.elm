@@ -87,6 +87,10 @@ type alias Model =
     }
 
 
+editModeL =
+    fieldLens .editMode (\s b -> { b | editMode = s })
+
+
 type Msg
     = NOOP
     | OnDebugPort String

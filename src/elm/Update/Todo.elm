@@ -166,3 +166,4 @@ update config now msg =
 
         OnSaveTodoForm form ->
             onSaveTodoForm config form now
+                >> returnMsgAsCmd config.revertExclusiveMode

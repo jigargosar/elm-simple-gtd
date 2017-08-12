@@ -1,4 +1,4 @@
-port module Update.Todo.Internal exposing (..)
+module Update.Todo.Internal exposing (..)
 
 import Data.TodoDoc exposing (..)
 import Document exposing (..)

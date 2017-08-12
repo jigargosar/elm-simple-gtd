@@ -10,9 +10,16 @@ import X.Keyboard
 
 
 signInOverlay =
+    let
+        config =
+            { noop = OnFBNoOP
+            , onSignInClicked = OnFBSignIn
+            , onSkipSignInClicked = OnFBSkipSignIn
+            }
+    in
     div
         [ class "overlay"
-        , onClickStopPropagation OnFBNoOP
+        , onClickStopPropagation config.noop
         ]
         [ div [ class "modal fixed-center" ]
             [ div [ class "modal-content" ]
@@ -20,7 +27,7 @@ signInOverlay =
                     [ text "One click sign in" ]
                 , div [ class "section layout horizontal center-center" ]
                     [ div []
-                        [ a [ class "google-sign-in btn", onClick OnFBSignIn ]
+                        [ a [ class "google-sign-in btn", onClick config.onSignInClicked ]
                             [ div [ class "left" ] [ img [ class "google-logo", src AppUrl.googleIconSvg ] [] ]
                             , text "Sign in with Google Account"
                             ]
@@ -28,7 +35,7 @@ signInOverlay =
                     ]
                 ]
             , div [ class "right-align" ]
-                [ a [ class "btn btn-flat", onClick OnFBSkipSignIn ]
+                [ a [ class "btn btn-flat", onClick config.onSkipSignInClicked ]
                     [ text "Skip" ]
                 ]
             ]

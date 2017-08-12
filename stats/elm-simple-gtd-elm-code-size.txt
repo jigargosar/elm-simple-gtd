@@ -1,4 +1,4 @@
-    8993 total
+    9000 total
      627 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      364 src/elm/Update/Todo/Internal.elm
@@ -58,11 +58,11 @@
       46 src/elm/Notification.elm
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/Todo/FormTypes.elm
+      42 src/elm/Views/SignInOverlay.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
       37 src/elm/IconNames.elm
-      35 src/elm/Views/SignInOverlay.elm
       33 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
       31 src/elm/View/NewTodoFab.elm

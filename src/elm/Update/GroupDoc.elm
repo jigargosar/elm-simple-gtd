@@ -51,6 +51,7 @@ type alias SubReturnF msg model =
 type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
+        , revertExclusiveMode : msg
     }
 
 
@@ -87,7 +88,8 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
                     ( ProjectGroupDocType, id )
 
         updateGroupDocHelp updateFn =
-            updateAllGroupDocs now gdType updateFn (Set.singleton id) |> andThen
+            (updateAllGroupDocs now gdType updateFn (Set.singleton id) |> andThen)
+                >> returnMsgAsCmd config.revertExclusiveMode
     in
     case groupDocIdAction of
         GDA_StartEditing ->
@@ -115,6 +117,7 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
             case form.mode of
                 GDFM_Add ->
                     insertGroupDoc now form.groupDocType form.name
+                        >> returnMsgAsCmd config.revertExclusiveMode
 
                 GDFM_Edit ->
                     updateGroupDocHelp (GroupDoc.setName form.name)

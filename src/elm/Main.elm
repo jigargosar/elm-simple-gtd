@@ -471,8 +471,9 @@ type alias ViewConfig msg =
     , onSetTodoFormReminderTime : Todo.FormTypes.TodoForm -> String -> msg
     , onSetTodoFormText : Todo.FormTypes.TodoForm -> String -> msg
     , onShowMainMenu : msg
-    , onSignIn : msg
-    , onSignOut : msg
+    , onSignInMsg : msg
+    , onSignOutMsg : msg
+    , onSkipSignInMsg : msg
     , onStartAddingGroupDoc : GroupDocType -> msg
     , onStartAddingTodoWithFocusInEntityAsReference : msg
     , onStartEditingGroupDoc : GroupDocId -> msg
@@ -509,8 +510,9 @@ createViewConfig model =
     , onSetTodoFormReminderTime = Update.Todo.onSetTodoFormReminderTimeMsg >>> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
     , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
-    , onSignIn = OnFirebaseMsg OnFBSignIn
-    , onSignOut = OnFirebaseMsg OnFBSignOut
+    , onSignInMsg = OnFirebaseMsg OnFBSignIn
+    , onSkipSignInMsg = OnFirebaseMsg OnFBSkipSignIn
+    , onSignOutMsg = OnFirebaseMsg OnFBSignOut
     , onFirebaseMsg = OnFirebaseMsg
     , onReminderOverlayAction = Update.Todo.onReminderOverlayActionMsg >> OnTodoMsg
     , onGoToTodoDocIdMsg = EntityId.fromTodoDocId >> onGoToEntityIdMsg

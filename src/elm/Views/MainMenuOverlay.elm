@@ -63,8 +63,8 @@ getItems config appModel =
 
         signInMenuItem =
             maybeUserProfile
-                ?|> (\_ -> ( "SignOut", config.onSignOut ))
-                ?= ( "SignIn", config.onSignIn )
+                ?|> (\_ -> ( "SignOut", config.onSignOutMsg ))
+                ?= ( "SignIn", config.onSignInMsg )
                 |> Tuple2.mapSecond MsgItem
 
         linkMenuItems =

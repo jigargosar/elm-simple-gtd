@@ -13,7 +13,6 @@ import Return
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
-import X.Return exposing (..)
 import XUpdate
 
 
@@ -123,7 +122,7 @@ update config msg model =
                 |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
 
 
-showSignInDialog =
+showSignInDialogL =
     fieldLens .showSignInDialog (\s b -> { b | showSignInDialog = s })
 
 
@@ -145,7 +144,7 @@ fcmTokenL =
 
 setAndPersistShowSignInDialogValue : Bool -> XUpdate.XReturnF FirebaseModel FirebaseMsg msg
 setAndPersistShowSignInDialogValue bool =
-    XUpdate.map (set showSignInDialog bool)
+    XUpdate.map (set showSignInDialogL bool)
         >> XUpdate.addCmd (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
 
 
@@ -157,10 +156,6 @@ firebaseUpdateClientCmd model =
 firebaseSetupOnDisconnectCmd model =
     getMaybeUserId model
         ?|> setupOnDisconnectCmd model.firebaseClient
-
-
-startSyncWithFirebase =
-    maybeEffect (getMaybeUserId >>? startSyncCmd)
 
 
 setFCMToken fcmToken =

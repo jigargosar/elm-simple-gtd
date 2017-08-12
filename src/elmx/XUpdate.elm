@@ -36,8 +36,12 @@ addMaybeCmdIn =
 
 
 addMsg : otherMsg -> XReturnF model msg otherMsg
-addMsg otherMsg ( model, cmdList, msgList ) =
-    ( model, cmdList, msgList ++ [ otherMsg ] )
+addMsg =
+    List.singleton >> addMsgList
+
+addMsgList : List otherMsg -> XReturnF model msg otherMsg
+addMsgList otherMsgList ( model, cmdList, msgList ) =
+    ( model, cmdList, msgList ++ otherMsgList )
 
 
 map modelF  ( model, cmdList, msgList ) =

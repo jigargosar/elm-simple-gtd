@@ -26,7 +26,11 @@ type alias EncodedLists =
     }
 
 
-initialValue : Time -> DeviceId -> EncodedLists -> Model
+fromStores todoStore contextStore projectStore =
+    Model todoStore projectStore contextStore
+
+
+initialValue : Time -> DeviceId -> EncodedLists -> ( Model, Random.Pcg.Seed )
 initialValue now deviceId encodedLists =
     let
         storeGenerator =
@@ -38,10 +42,12 @@ initialValue now deviceId encodedLists =
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
     in
-    { todoStore = todoStore
-    , projectStore = projectStore
-    , contextStore = contextStore
-    }
+    ( { todoStore = todoStore
+      , projectStore = projectStore
+      , contextStore = contextStore
+      }
+    , seed
+    )
 
 
 type Msg

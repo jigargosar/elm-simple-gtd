@@ -74,7 +74,6 @@ type alias Model =
     , todoStore : TodoStore
     , projectStore : ProjectStore
     , contextStore : ContextStore
-    , stores : Stores.Model
     , editMode : ExclusiveMode
     , page : Page
     , reminderOverlay : TodoReminderOverlayModel
@@ -192,20 +191,11 @@ createAppModel flags =
         { now } =
             flags
 
-        { deviceId, initialOfflineStore, npmPackageVersion, isDevelopmentMode } =
+        { deviceId, initialOfflineStore } =
             flags.config
 
-        encodedLists =
-            flags.encodedLists
-
-        storeGenerator =
-            Random.Pcg.map3 (,,)
-                (Data.TodoDoc.storeGenerator deviceId encodedLists.todo)
-                (GroupDoc.projectStoreGenerator deviceId encodedLists.project)
-                (GroupDoc.contextStoreGenerator deviceId encodedLists.context)
-
-        ( ( todoStore, projectStore, contextStore ), seed ) =
-            Random.Pcg.step storeGenerator (X.Random.seedFromTime now)
+        ( { todoStore, projectStore, contextStore }, seed ) =
+            Stores.initialValue now deviceId flags.encodedLists
 
         model : Model
         model =
@@ -213,7 +203,6 @@ createAppModel flags =
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
-            , stores = Stores.initialValue now deviceId encodedLists
             , editMode = XMNone
             , page = initialPage
             , reminderOverlay = Todo.ReminderOverlay.Model.none
@@ -303,8 +292,18 @@ update config msg =
 
         OnStoresMsg storeMsg ->
             let
+                toStoreModel { todoStore, contextStore, projectStore } =
+                    Stores.fromStores todoStore contextStore projectStore
+
                 storesF =
-                    fieldLens .stores (\s b -> { b | stores = s })
+                    fieldLens toStoreModel
+                        (\s b ->
+                            { b
+                                | todoStore = s.todoStore
+                                , contextStore = s.contextStore
+                                , projectStore = s.projectStore
+                            }
+                        )
             in
             andThen
                 (updateChild OnStoresMsg

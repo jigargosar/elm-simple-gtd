@@ -7,7 +7,7 @@ import Document exposing (..)
 import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (..)
-import ExclusiveMode.Update
+import ExclusiveMode.Update exposing (ExclusiveModeMsg)
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
@@ -36,7 +36,6 @@ import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.AppHeader exposing (AppHeaderMsg(..))
-import Update.ExclusiveMode exposing (ExclusiveModeMsg)
 import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Subscription exposing (SubscriptionMsg)
@@ -132,13 +131,13 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld model =
 
 
 revertExclusiveModeMsg =
-    Update.ExclusiveMode.OnRevertExclusiveMode
+    ExclusiveMode.Update.OnRevertExclusiveMode
         |> OnExclusiveModeMsg
 
 
 onSaveExclusiveModeForm : Msg
 onSaveExclusiveModeForm =
-    Update.ExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
+    ExclusiveMode.Update.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
@@ -230,7 +229,7 @@ createAppModel flags =
 
 type alias UpdateConfig msg =
     Update.AppHeader.Config msg
-        (Update.ExclusiveMode.Config msg
+        (ExclusiveMode.Update.Config msg
             (Update.Firebase.Config msg
                 (Update.Subscription.Config msg
                     (Update.Todo.Config msg
@@ -247,7 +246,7 @@ createUpdateConfig model =
     { onStartAddingTodoToInbox = Update.Todo.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onSetExclusiveMode = Update.ExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
+    , onSetExclusiveMode = ExclusiveMode.Update.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveMode = revertExclusiveModeMsg
     , onStartSetupAddTodo = Update.Todo.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
@@ -325,7 +324,7 @@ update config msg =
             Update.GroupDoc.update config now msg_
 
         OnExclusiveModeMsg msg_ ->
-            --Update.ExclusiveMode.update config msg_
+            --ExclusiveMode.Update.update config msg_
             andThen
                 (updateChild OnExclusiveModeMsg
                     (ExclusiveMode.Update.update config msg_)

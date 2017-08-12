@@ -1,5 +1,5 @@
-    9053 total
-     628 src/elm/Main.elm
+    8983 total
+     627 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      364 src/elm/Update/Todo/Internal.elm
      318 src/elm/GroupDoc.elm
@@ -39,7 +39,6 @@
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/Colors.elm
       74 src/elm/X/Function/Infix.elm
-      74 src/elm/Update/ExclusiveMode.elm
       72 src/elm/View/GetStarted.elm
       68 src/elm/View/Layout.elm
       68 src/elm/Todo/ReminderOverlay/View.elm
@@ -50,7 +49,7 @@
       61 src/elm/ViewModel/EntityList.elm
       60 src/elm/View/Header.elm
       60 src/elm/Stores.elm
-      55 src/elm/ExclusiveMode/Update.elm
+      60 src/elm/ExclusiveMode/Update.elm
       55 src/elm/AppUrl.elm
       53 src/elm/Data/EntityTree.elm
       50 src/elm/Update/AppHeader.elm

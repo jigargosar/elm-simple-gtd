@@ -7,11 +7,16 @@ import Maybe.Extra as Maybe
 import Todo.FormTypes exposing (TodoForm)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Update.ExclusiveMode exposing (ExclusiveModeMsg(..))
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (set)
 import XUpdate
+
+
+type ExclusiveModeMsg
+    = OnSetExclusiveMode ExclusiveMode
+    | OnRevertExclusiveMode
+    | OnSaveExclusiveModeForm
 
 
 type alias Model =

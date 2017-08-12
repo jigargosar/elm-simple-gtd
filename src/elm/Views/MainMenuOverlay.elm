@@ -76,7 +76,7 @@ getItems config appModel =
     signInMenuItem :: linkMenuItems
 
 
-init config menuState appModel =
+view config menuState appModel =
     Menu.view (getItems config appModel)
         menuState
         (menuConfig config menuState)

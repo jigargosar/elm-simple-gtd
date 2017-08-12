@@ -53,7 +53,7 @@ overlayViews config appModel =
                     GroupDoc.FormView.init config form
 
                 XMMainMenu menuState ->
-                    Views.MainMenuOverlay.init config menuState appModel
+                    Views.MainMenuOverlay.view config menuState appModel
 
                 XMNone ->
                     def

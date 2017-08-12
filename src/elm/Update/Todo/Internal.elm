@@ -161,7 +161,7 @@ saveAddTodoForm config addMode form now model =
                                 TA_SetProjectId projectId |> Just
                 in
                 updateTodoWithMaybeAction maybeAction now todoId
-                    >> setFocusInEntityWithTodoId config todoId
+             --                    >> setFocusInEntityWithTodoId config todoId
             )
 
 

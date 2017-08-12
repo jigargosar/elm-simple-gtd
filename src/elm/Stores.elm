@@ -3,12 +3,23 @@ module Stores exposing (..)
 import Data.DeviceId exposing (DeviceId)
 import Data.TodoDoc as TodoDoc exposing (TodoStore)
 import Document exposing (DocId)
+import Entity exposing (Entity(..))
 import GroupDoc exposing (ContextStore, ProjectStore)
 import Json.Encode as E
+import Models.GroupDocStore exposing (contextStore, projectStore)
+import Models.Selection
+import Models.TodoDocStore as TodoDocStore
+import Ports
 import Random.Pcg
 import Set exposing (Set)
+import Store
 import Time exposing (Time)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 import X.Random
+import X.Record exposing (..)
+import X.Return exposing (..)
 import XUpdate as U
 
 
@@ -53,18 +64,72 @@ initialValue now deviceId encodedLists =
 type Msg
     = UpdateTodo DocId TodoDoc.TodoAction
     | UpdateAllTodo (Set DocId) TodoDoc.TodoAction
-    | Noop
+    | OnPouchDBChange String E.Value
+    | OnFirebaseDatabaseChange String E.Value
 
 
-update : Msg -> Model -> U.Return Model Msg msg
-update msg model =
+subscriptions =
+    Sub.batch
+        [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
+        , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
+        ]
+
+
+type alias Config msg a =
+    { a
+        | recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
+    }
+
+
+update : Config msg a -> Msg -> Model -> U.Return Model Msg msg
+update config msg model =
     let
         defRet =
             U.pure model
     in
     case msg of
-        UpdateTodo id action ->
+        OnPouchDBChange dbName encodedDoc ->
+            upsertEncodedDocOnPouchDBChange dbName encodedDoc model
+                ?|> (Tuple.second >> U.pure)
+                ?= defRet
+                |> U.addMsg config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+
+        OnFirebaseDatabaseChange dbName encodedDoc ->
             defRet
+                |> U.addEffect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
         _ ->
             defRet
+
+
+upsertEncodedDocOnPouchDBChange dbName encodedEntity =
+    case dbName of
+        "todo-db" ->
+            maybeOverT2 TodoDocStore.todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.createTodoEntity
+
+        "project-db" ->
+            maybeOverT2 projectStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.createProjectEntity
+
+        "context-db" ->
+            maybeOverT2 contextStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.createContextEntity
+
+        _ ->
+            \_ -> Nothing
+
+
+upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
+    case dbName of
+        "todo-db" ->
+            .todoStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
+
+        "project-db" ->
+            .projectStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
+
+        "context-db" ->
+            .contextStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
+
+        _ ->
+            \_ -> Cmd.none

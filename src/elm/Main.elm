@@ -159,8 +159,8 @@ subscriptions model =
     Sub.batch
         [ Ports.debugPort OnDebugPort
         , everyXSeconds 1 SetLastKnownTimeStamp
-        , Update.Subscription.subscriptions
-            |> Sub.map OnSubscriptionMsg
+        , Update.Subscription.subscriptions |> Sub.map OnSubscriptionMsg
+        , Stores.subscriptions |> Sub.map OnStoresMsg
         , Sub.batch
             [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
 
@@ -309,7 +309,7 @@ update config msg =
             in
             andThen
                 (updateChild OnStoresMsg
-                    (Stores.update storeMsg)
+                    (Stores.update config storeMsg)
                     storesF
                     config
                 )

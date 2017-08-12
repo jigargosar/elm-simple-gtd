@@ -884,13 +884,14 @@
       "Main",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Todo.FormTypes",
       "Update.Subscription",
       "Update.Todo.Internal",
       "ViewModel.EntityList",
       "Views.EntityList"
     ],
-    "backwardImportsCount": 14,
+    "backwardImportsCount": 15,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -905,6 +906,7 @@
       "Overlays.MainMenu",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Todo.Form",
       "Todo.FormTypes",
       "Todo.ViewModel",
@@ -918,7 +920,7 @@
       "Views.EntityList",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 25
+    "transitiveBackwardImportsCount": 26
   },
   "EntityId": {
     "fileName": "src/elm/EntityId.elm",
@@ -2177,17 +2179,19 @@
       "AppDrawer.GroupViewModel",
       "Models.Stores",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Todo.GroupEditView",
       "Update.GroupDoc",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 6,
+    "backwardImportsCount": 7,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
       "Models.Stores",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Todo.GroupEditView",
       "Update.GroupDoc",
       "Update.Subscription",
@@ -2196,7 +2200,7 @@
       "ViewModel.Frame",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 12
+    "transitiveBackwardImportsCount": 13
   },
   "Models.HasStores": {
     "fileName": "src/elm/Models/HasStores.elm",
@@ -2258,14 +2262,16 @@
     "transitiveImportsCount": 1,
     "backwardImports": [
       "Main",
+      "Stores",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "Main",
+      "Stores",
       "Update.Subscription"
     ],
-    "transitiveBackwardImportsCount": 2
+    "transitiveBackwardImportsCount": 3
   },
   "Models.Stores": {
     "fileName": "src/elm/Models/Stores.elm",
@@ -2358,20 +2364,22 @@
     "backwardImports": [
       "Main",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 4,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Main",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 8
   },
   "Notification": {
     "fileName": "src/elm/Notification.elm",
@@ -2631,19 +2639,21 @@
       "Firebase.Update",
       "Main",
       "Pages.EntityList",
+      "Stores",
       "Update.AppDrawer",
       "Update.Subscription"
     ],
-    "backwardImportsCount": 5,
+    "backwardImportsCount": 6,
     "transitiveBackwardImports": [
       "Firebase.Update",
       "Main",
       "Pages.EntityList",
+      "Stores",
       "Update.AppDrawer",
       "Update.Subscription",
       "ViewModel.EntityList"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 7
   },
   "Ports.Firebase": {
     "fileName": "src/elm/Ports/Firebase.elm",
@@ -2800,12 +2810,13 @@
       "Models.Stores",
       "Models.TodoDocStore",
       "Pages.EntityList.TreeBuilder",
+      "Stores",
       "Todo.ViewModel",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 10,
+    "backwardImportsCount": 11,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",
@@ -2857,15 +2868,26 @@
       "Data.DeviceId",
       "Data.TodoDoc",
       "Document",
+      "Entity",
       "GroupDoc",
       "Json.Encode",
+      "Models.GroupDocStore",
+      "Models.Selection",
+      "Models.TodoDocStore",
+      "Ports",
       "Random.Pcg",
       "Set",
+      "Store",
       "Time",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "X.Function.Infix",
       "X.Random",
+      "X.Record",
+      "X.Return",
       "XUpdate"
     ],
-    "importsCount": 10,
+    "importsCount": 21,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -2873,6 +2895,7 @@
       "Data.TodoDoc",
       "Dict",
       "Document",
+      "Entity",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
@@ -2880,10 +2903,15 @@
       "List",
       "List.Extra",
       "Maybe.Extra",
+      "Models.GroupDocStore",
+      "Models.Selection",
+      "Models.TodoDocStore",
+      "Ports",
       "Random.Pcg",
       "Return",
       "Set",
       "Store",
+      "Task",
       "Time",
       "Toolkit.Helpers",
       "Toolkit.Operators",
@@ -2894,9 +2922,10 @@
       "X.Predicate",
       "X.Random",
       "X.Record",
+      "X.Return",
       "XUpdate"
     ],
-    "transitiveImportsCount": 28,
+    "transitiveImportsCount": 35,
     "backwardImports": [
       "Main"
     ],
@@ -4924,6 +4953,7 @@
       "Overlays.MainMenu",
       "Pages.EntityList",
       "Sequencer",
+      "Stores",
       "Todo.ItemView",
       "Todo.ViewModel",
       "Update.Subscription",
@@ -4934,7 +4964,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 30,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5357,13 +5387,14 @@
       "Models.TodoDocStore",
       "Pages.EntityList",
       "Store",
+      "Stores",
       "Todo.Form",
       "Update.AppDrawer",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 15,
+    "backwardImportsCount": 16,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -5439,23 +5470,25 @@
     "backwardImports": [
       "Main",
       "Overlays.MainMenu",
+      "Stores",
       "Update.AppDrawer",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "backwardImportsCount": 7,
+    "backwardImportsCount": 8,
     "transitiveBackwardImports": [
       "Main",
       "Overlays.MainMenu",
+      "Stores",
       "Update.AppDrawer",
       "Update.GroupDoc",
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal"
     ],
-    "transitiveBackwardImportsCount": 7
+    "transitiveBackwardImportsCount": 8
   },
   "X.Set": {
     "fileName": "src/elm/X/Set.elm",

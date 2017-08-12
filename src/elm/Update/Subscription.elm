@@ -29,9 +29,7 @@ type SubscriptionMsg
 
 subscriptions =
     Sub.batch
-        [ Ports.pouchDBChanges (uncurry OnPouchDBChange)
-        , Ports.onFirebaseDatabaseChange (uncurry OnFirebaseDatabaseChange)
-        , Keyboard.ups OnGlobalKeyUp
+        [ Keyboard.ups OnGlobalKeyUp
         , Keyboard.downs OnGlobalKeyDown
         ]
 

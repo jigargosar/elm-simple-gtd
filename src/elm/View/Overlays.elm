@@ -9,6 +9,7 @@ import Todo.ReminderOverlay.View exposing (maybeOverlay)
 import Todo.View
 import View.GetStarted
 import Views.MainMenuOverlay
+import Views.SignInOverlay
 
 
 overlayViews config appModel =
@@ -46,7 +47,7 @@ overlayViews config appModel =
                                     Todo.View.new config form
 
                 XMSignInOverlay ->
-                    View.GetStarted.signInOverlay
+                    Views.SignInOverlay.signInOverlay
                         |> Html.map config.onFirebaseMsg
 
                 XMGroupDocForm form ->

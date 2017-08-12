@@ -203,9 +203,9 @@
       "AppDrawer.View",
       "L.View",
       "Update.Firebase",
-      "View.GetStarted",
       "Views.FBSignInOverlay",
-      "Views.MainMenuOverlay"
+      "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay"
     ],
     "backwardImportsCount": 6,
     "transitiveBackwardImports": [
@@ -214,12 +214,12 @@
       "L.View",
       "Main",
       "Update.Firebase",
-      "View.GetStarted",
       "View.Layout",
       "View.Overlays",
       "Views.FBSignInOverlay",
       "Views.Frame",
-      "Views.MainMenuOverlay"
+      "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay"
     ],
     "transitiveBackwardImportsCount": 11
   },
@@ -1824,7 +1824,6 @@
       "Update.Todo",
       "Update.Todo.Internal",
       "View.Badge",
-      "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
@@ -1835,6 +1834,7 @@
       "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "Window",
       "X.Date",
       "X.Debug",
@@ -3944,46 +3944,6 @@
     ],
     "transitiveBackwardImportsCount": 6
   },
-  "View.GetStarted": {
-    "fileName": "src/elm/Views/TDGetStartedOverlay.elm",
-    "moduleName": "View.GetStarted",
-    "parentModuleName": "View",
-    "imports": [
-      "AppUrl",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "X.Html",
-      "X.Keyboard"
-    ],
-    "importsCount": 6,
-    "transitiveImports": [
-      "AppUrl",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "X.Debug",
-      "X.Decode",
-      "X.Html",
-      "X.Keyboard"
-    ],
-    "transitiveImportsCount": 13,
-    "backwardImports": [
-      "View.Overlays"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main",
-      "View.Overlays",
-      "Views.Frame"
-    ],
-    "transitiveBackwardImportsCount": 3
-  },
   "View.Header": {
     "fileName": "src/elm/View/Header.elm",
     "moduleName": "View.Header",
@@ -4143,9 +4103,9 @@
       "Todo.GroupEditView",
       "Todo.ReminderOverlay.View",
       "Todo.View",
-      "View.GetStarted",
       "Views.FBSignInOverlay",
-      "Views.MainMenuOverlay"
+      "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay"
     ],
     "importsCount": 10,
     "transitiveImports": [
@@ -4200,9 +4160,9 @@
       "Toolkit.Helpers",
       "Toolkit.Operators",
       "Tuple2",
-      "View.GetStarted",
       "Views.FBSignInOverlay",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4565,13 +4525,13 @@
       "Toolkit.Operators",
       "Tuple2",
       "View.Badge",
-      "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
       "Views.FBSignInOverlay",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4634,6 +4594,46 @@
       "X.List"
     ],
     "transitiveImportsCount": 24,
+    "backwardImports": [
+      "View.Overlays"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main",
+      "View.Overlays",
+      "Views.Frame"
+    ],
+    "transitiveBackwardImportsCount": 3
+  },
+  "Views.TDGetStartedOverlay": {
+    "fileName": "src/elm/Views/TDGetStartedOverlay.elm",
+    "moduleName": "Views.TDGetStartedOverlay",
+    "parentModuleName": "Views",
+    "imports": [
+      "AppUrl",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "X.Html",
+      "X.Keyboard"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "AppUrl",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Keyboard",
+      "Keyboard.Extra",
+      "X.Debug",
+      "X.Decode",
+      "X.Html",
+      "X.Keyboard"
+    ],
+    "transitiveImportsCount": 13,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -4730,7 +4730,6 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
-      "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
       "ViewModel.Frame",
@@ -4738,6 +4737,7 @@
       "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Decode",
       "X.Keyboard",
       "X.Return"
@@ -4782,13 +4782,13 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
-      "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
       "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
     "transitiveBackwardImportsCount": 27
@@ -5032,9 +5032,9 @@
       "Todo.ItemView",
       "Todo.ReminderOverlay.View",
       "Todo.View",
-      "View.GetStarted",
       "View.Layout",
       "Views.FBSignInOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
     "backwardImportsCount": 12,
@@ -5063,7 +5063,6 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
-      "View.GetStarted",
       "View.Header",
       "View.Layout",
       "View.NewTodoFab",
@@ -5073,6 +5072,7 @@
       "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
     "transitiveBackwardImportsCount": 35
@@ -5114,8 +5114,8 @@
       "Todo.ItemView",
       "Todo.View",
       "Todo.ViewModel",
-      "View.GetStarted",
-      "Views.FBSignInOverlay"
+      "Views.FBSignInOverlay",
+      "Views.TDGetStartedOverlay"
     ],
     "backwardImportsCount": 9,
     "transitiveBackwardImports": [
@@ -5138,13 +5138,13 @@
       "Update.Subscription",
       "Update.Todo",
       "Update.Todo.Internal",
-      "View.GetStarted",
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
       "Views.FBSignInOverlay",
       "Views.Frame",
-      "Views.MainMenuOverlay"
+      "Views.MainMenuOverlay",
+      "Views.TDGetStartedOverlay"
     ],
     "transitiveBackwardImportsCount": 26
   },

@@ -7,9 +7,9 @@ import Todo.FormTypes exposing (..)
 import Todo.GroupEditView
 import Todo.ReminderOverlay.View exposing (maybeOverlay)
 import Todo.View
-import View.GetStarted
 import Views.FBSignInOverlay
 import Views.MainMenuOverlay
+import Views.TDGetStartedOverlay
 
 
 overlayViews config appModel =
@@ -38,7 +38,7 @@ overlayViews config appModel =
                         TFM_Add addMode ->
                             case addMode of
                                 ATFM_SetupFirstTodo ->
-                                    View.GetStarted.setup config form
+                                    Views.TDGetStartedOverlay.setup config form
 
                                 ATFM_AddWithFocusInEntityAsReference _ ->
                                     Todo.View.new config form

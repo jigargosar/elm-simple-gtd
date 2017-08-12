@@ -1,4 +1,4 @@
-module View.GetStarted exposing (..)
+module Views.TDGetStartedOverlay exposing (..)
 
 import AppUrl
 import Html exposing (..)

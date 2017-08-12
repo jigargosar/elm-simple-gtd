@@ -144,9 +144,10 @@ fcmTokenL =
 
 
 setAndPersistShowSignInDialogValue : Bool -> XUpdate.XReturnF FirebaseModel FirebaseMsg msg
-setAndPersistShowSignInDialogValue bool =
-    XUpdate.map (set showSignInDialogL bool)
-        >> XUpdate.addCmd (Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool ))
+setAndPersistShowSignInDialogValue bool ret =
+    ret
+        :> set showSignInDialogL bool
+        +> Ports.persistToOfflineStore ( "showSignInDialog", E.bool bool )
 
 
 firebaseUpdateClientCmd model =

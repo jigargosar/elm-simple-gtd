@@ -140,11 +140,11 @@ update :
     -> XUpdate.XReturn Model Msg msg
 update config appModel msg model =
     let
-        noop : ( Model, List (Cmd Msg), List msg )
-        noop =
+        defRet : ( Model, List (Cmd Msg), List msg )
+        defRet =
             XUpdate.pure model
 
-        updateSelf msg =
+        updateDefRet msg =
             update config appModel msg model
     in
     case msg of
@@ -159,18 +159,18 @@ update config appModel msg model =
                         (Just entityId)
                         (getFilter model)
             in
-            noop
+            defRet
                 |> XUpdate.map (set cursorL cursor)
 
         OnMoveFocusBy offset ->
             Cursor.findEntityIdByOffsetIndex offset (getCursor model)
-                ?|> (\entityId -> updateSelf (OnSetCursorEntityId entityId))
-                ?= noop
+                ?|> (\entityId -> updateDefRet (OnSetCursorEntityId entityId))
+                ?= defRet
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeNewMaybeCursorEntityId appModel model
                 ?|> focusEntityIdCmd
-                |> XUpdate.addMaybeCmdIn noop
+                |> XUpdate.addMaybeCmdIn defRet
 
         OnGoToEntityId entityId ->
             let
@@ -189,7 +189,7 @@ update config appModel msg model =
                 path =
                     Filter.toPath filter
             in
-            noop
+            defRet
                 |> addFocusEntityIdCmd entityId
                 |> XUpdate.addMsg (config.navigateToPathMsg path)
 

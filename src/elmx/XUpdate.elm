@@ -1,5 +1,7 @@
 module XUpdate exposing (..)
 
+import Maybe.Extra
+
 
 type alias XReturn model msg otherMsg =
     ( model, List (Cmd msg), List otherMsg )
@@ -55,3 +57,11 @@ andThen fn ( model, cmdList, msgList ) =
             fn model
     in
     ( newModel, cmdList ++ newCmdList, msgList ++ newMsgList )
+
+
+maybeAddEffect fn ( model, cmdList, msgList ) =
+    ( model, cmdList ++ (fn model |> Maybe.Extra.toList), msgList )
+
+
+addEffect fn ( model, cmdList, msgList ) =
+    ( model, cmdList ++ [ fn model ], msgList )

@@ -98,32 +98,33 @@ update_ config msg model =
                     )
                 ?= defRet
 
-        --        OnFBUserChanged encodedUser ->
-        --            D.decodeValue Data.User.maybeUserDecoder encodedUser
-        --                |> Result.mapError (Debug.log "Error decoding User")
-        --                !|> (\userV ->
-        --                        Return.map (set userL userV)
-        --                            >> update config OnFBAfterUserChanged
-        --                            >> maybeEffect firebaseUpdateClientCmd
-        --                            >> maybeEffect firebaseSetupOnDisconnectCmd
-        --                            >> startSyncWithFirebase
-        --                    )
-        --                != identity
-        --
-        --        OnFBFCMTokenChanged encodedToken ->
-        --            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
-        --                |> Result.mapError (Debug.log "Error decoding User")
-        --                !|> (\token ->
-        --                        Return.map (setFCMToken token)
-        --                            >> maybeEffect firebaseUpdateClientCmd
-        --                    )
-        --                != identity
-        --
-        --        OnFBConnectionChanged connected ->
-        --            Return.map (setClientConnectionStatus connected)
-        --                >> maybeEffect firebaseUpdateClientCmd
-        _ ->
+        OnFBUserChanged encodedUser ->
+            D.decodeValue Data.User.maybeUserDecoder encodedUser
+                |> Result.mapError (Debug.log "Error decoding User")
+                !|> (\userV ->
+                        defRet
+                            |> XUpdate.map (set userL userV)
+                            |> XUpdate.andThen (update_ config OnFBAfterUserChanged)
+                            |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
+                            |> XUpdate.maybeAddEffect firebaseSetupOnDisconnectCmd
+                            |> XUpdate.maybeAddEffect (getMaybeUserId >>? startSyncCmd)
+                    )
+                != defRet
+
+        OnFBFCMTokenChanged encodedToken ->
+            D.decodeValue Firebase.Model.fcmTokenDecoder encodedToken
+                |> Result.mapError (Debug.log "Error decoding User")
+                !|> (\token ->
+                        defRet
+                            |> XUpdate.map (setFCMToken token)
+                            |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
+                    )
+                != defRet
+
+        OnFBConnectionChanged connected ->
             defRet
+                |> XUpdate.map (setClientConnectionStatus connected)
+                |> XUpdate.maybeAddEffect firebaseUpdateClientCmd
 
 
 update :

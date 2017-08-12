@@ -47,7 +47,7 @@ overlayViews config appModel =
                                     Todo.View.new config form
 
                 XMSignInOverlay ->
-                    Views.SignInOverlay.signInOverlay
+                    Views.SignInOverlay.init
                         |> Html.map config.onFirebaseMsg
 
                 XMGroupDocForm form ->

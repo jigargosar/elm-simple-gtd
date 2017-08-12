@@ -9,7 +9,14 @@ import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
 
 
-signInOverlay =
+type alias Config msg =
+    { noop : msg
+    , onSignInClicked : msg
+    , onSkipSignInClicked : msg
+    }
+
+
+init =
     let
         config =
             { noop = OnFBNoOP
@@ -17,6 +24,10 @@ signInOverlay =
             , onSkipSignInClicked = OnFBSkipSignIn
             }
     in
+    init_ config
+
+
+init_ config =
     div
         [ class "overlay"
         , onClickStopPropagation config.noop

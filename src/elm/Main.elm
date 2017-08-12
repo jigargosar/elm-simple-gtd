@@ -343,10 +343,16 @@ update config msg =
 
         OnFirebaseMsg msg_ ->
             let
-                firebaseModel =
+                firebaseModelL =
                     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
             in
-            overReturnF firebaseModel (Firebase.Update.update config msg_)
+            --overReturnF firebaseModel (Firebase.Update.update config msg_)
+            andThen
+                (updateChild OnFirebaseMsg
+                    (Firebase.Update.update_ config msg_)
+                    firebaseModelL
+                    config
+                )
 
         OnAppDrawerMsg msg_ ->
             let

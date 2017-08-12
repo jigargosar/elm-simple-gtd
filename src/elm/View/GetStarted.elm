@@ -4,7 +4,6 @@ import AppUrl
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Update.Firebase exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard
 

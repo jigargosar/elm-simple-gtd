@@ -345,7 +345,7 @@ update config msg =
 updateEntityListCursor config model =
     case model.page of
         EntityList pageModel ->
-            EntityList.computeMaybeNewEntityIdAtCursor model pageModel
+            EntityList.computeNewMaybeCursorEntityId model pageModel
                 ?|> (\entityId ->
                         let
                             _ =

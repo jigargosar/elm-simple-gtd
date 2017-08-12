@@ -168,7 +168,7 @@ update config appModel msg model =
                 ?= noop
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
-            computeMaybeNewEntityIdAtCursor appModel model
+            computeNewMaybeCursorEntityId appModel model
                 ?|> focusEntityIdCmd
                 |> XUpdate.addMaybeCmdIn noop
 
@@ -210,7 +210,7 @@ createEntityIdList model appModel =
     createEntityTree model appModel |> Tree.toEntityIdList
 
 
-computeMaybeNewEntityIdAtCursor appModel model =
+computeNewMaybeCursorEntityId appModel model =
     let
         newEntityIdList =
             createEntityIdList model appModel

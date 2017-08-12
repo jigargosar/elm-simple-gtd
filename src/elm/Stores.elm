@@ -9,7 +9,7 @@ import Random.Pcg
 import Set exposing (Set)
 import Time exposing (Time)
 import X.Random
-import X.Return exposing (..)
+import XUpdate as U
 
 
 type alias Model =
@@ -50,11 +50,15 @@ type Msg
     | Noop
 
 
-update : Msg -> ReturnF Msg Model
-update msg =
+update : Msg -> Model -> U.Return Model Msg msg
+update msg model =
+    let
+        defRet =
+            U.pure model
+    in
     case msg of
         UpdateTodo id action ->
-            identity
+            defRet
 
         _ ->
-            identity
+            defRet

@@ -107,7 +107,7 @@ type Msg
     | SetLastKnownTimeStamp Time
     | NavigateToPath (List String)
     | ToggleEntityIdSelection EntityId
-    | StoresMsg Stores.Msg
+    | OnStoresMsg Stores.Msg
 
 
 navigateToPathMsg =
@@ -301,12 +301,17 @@ update config msg =
         NavigateToPath path ->
             onNavigateToPath config path
 
-        StoresMsg storeMsg ->
+        OnStoresMsg storeMsg ->
             let
-                storesFL =
+                storesF =
                     fieldLens .stores (\s b -> { b | stores = s })
             in
-            Stores.update storeMsg |> overReturnFMapCmd storesFL StoresMsg
+            andThen
+                (updateChild OnStoresMsg
+                    (Stores.update storeMsg)
+                    storesF
+                    config
+                )
 
         OnMdl msg_ ->
             andThen (Material.update OnMdl msg_)

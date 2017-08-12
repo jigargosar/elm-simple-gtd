@@ -3945,7 +3945,7 @@
     "transitiveBackwardImportsCount": 6
   },
   "View.GetStarted": {
-    "fileName": "src/elm/View/GetStarted.elm",
+    "fileName": "src/elm/Views/TDGetStartedOverlay.elm",
     "moduleName": "View.GetStarted",
     "parentModuleName": "View",
     "imports": [

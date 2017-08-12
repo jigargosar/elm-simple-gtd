@@ -314,8 +314,15 @@ update config msg =
             let
                 foo model =
                     ExclusiveMode.Update.update config msg_ model.editMode
+                        |> (\( editMode, cmdList, msgList ) ->
+                                ( { model | editMode = editMode }
+                                , Cmd.batch cmdList |> Cmd.map OnExclusiveModeMsg
+                                )
+                                    |> updateAll config msgList
+                           )
             in
-            Update.ExclusiveMode.update config msg_
+            --Update.ExclusiveMode.update config msg_
+            andThen foo
 
         OnAppHeaderMsg msg_ ->
             Update.AppHeader.update config msg_

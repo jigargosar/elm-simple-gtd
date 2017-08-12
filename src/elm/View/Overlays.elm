@@ -8,7 +8,7 @@ import Todo.GroupEditView
 import Todo.ReminderOverlay.View exposing (maybeOverlay)
 import Todo.View
 import View.GetStarted
-import View.MainMenu
+import Views.MainMenuOverlay
 
 
 overlayViews config appModel =
@@ -53,9 +53,9 @@ overlayViews config appModel =
                     GroupDoc.FormView.init config form
 
                 XMMainMenu menuState ->
-                    View.MainMenu.init config menuState appModel
+                    Views.MainMenuOverlay.init config menuState appModel
 
-                _ ->
+                XMNone ->
                     def
     in
     [ Just editModeOverlayView

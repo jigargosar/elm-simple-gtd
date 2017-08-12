@@ -40,10 +40,10 @@ import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Subscription exposing (SubscriptionMsg)
 import Update.Todo exposing (TodoMsg)
-import View.Frame
 import ViewModel.EntityList
 import ViewModel.Frame
 import Views.EntityList
+import Views.Frame
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)
@@ -550,7 +550,7 @@ view model =
                 frameVM =
                     ViewModel.Frame.frameVM config model titleColorTuple pageContent
             in
-            View.Frame.frame frameVM
+            Views.Frame.frame frameVM
     in
     case getPage__ model of
         LandingPage ->

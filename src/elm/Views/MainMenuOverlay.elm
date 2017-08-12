@@ -1,4 +1,4 @@
-module View.MainMenu exposing (..)
+module Views.MainMenuOverlay exposing (..)
 
 import AppUrl
 import Firebase

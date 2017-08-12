@@ -34,7 +34,7 @@
       92 src/elm/Data/EntityListCursor.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
-      82 src/elm/View/MainMenu.elm
+      82 src/elm/Views/MainMenuOverlay.elm
       79 src/elm/GroupDoc/View.elm
       77 src/elm/GroupDoc/FormView.elm
       77 src/elm/Colors.elm
@@ -79,7 +79,7 @@
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      15 src/elm/View/Frame.elm
+      15 src/elm/Views/Frame.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm

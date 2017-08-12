@@ -1,4 +1,4 @@
-module View.Frame exposing (..)
+module Views.Frame exposing (..)
 
 import Material.Options exposing (..)
 import View.Layout

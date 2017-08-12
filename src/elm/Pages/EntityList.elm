@@ -158,10 +158,12 @@ update config appModel msg model =
                 ?= noop
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
-            computeMaybeNewEntityIdAtCursor appModel model
-                ?|> (\entityId ->
-                        addFocusEntityIdCmd entityId noop
-                    )
+            let
+                maybeEntityId =
+                    computeMaybeNewEntityIdAtCursor appModel model
+            in
+            maybeEntityId
+                ?|> (addFocusEntityIdCmd # noop)
                 ?= noop
 
         OnGoToEntityId entityId ->

@@ -52,6 +52,10 @@ cursorL =
         |> toModelLens
 
 
+getCursor =
+    get cursorL
+
+
 constructor : Filter.Path -> Filter -> Cursor.Model -> Model
 constructor path filter cursor =
     ModelRecord path filter cursor
@@ -78,7 +82,7 @@ maybeInitFromPath path maybePreviousModel =
                 model =
                     maybePreviousModel ?= initialValue
             in
-            constructor path filter (get cursorL model)
+            constructor path filter (getCursor model)
     in
     Filter.maybeFromPath path
         ?|> initFromFilter
@@ -146,25 +150,27 @@ update config appModel msg model =
     case msg of
         OnSetCursorEntityId entityId ->
             -- note: this is automatically called by focusIn event of list item.
-            onSetCursorEntityId entityId appModel model
+            let
+                entityIdList =
+                    createEntityIdList model appModel
+
+                cursor =
+                    Cursor.create entityIdList
+                        (Just entityId)
+                        (getFilter model)
+            in
+            noop
+                |> XUpdate.map (set cursorL cursor)
 
         OnMoveFocusBy offset ->
-            let
-                cursor =
-                    get cursorL model
-            in
-            Cursor.findEntityIdByOffsetIndex offset cursor
+            Cursor.findEntityIdByOffsetIndex offset (getCursor model)
                 ?|> (\entityId -> updateSelf (OnSetCursorEntityId entityId) model)
                 ?= noop
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
-            let
-                maybeEntityId =
-                    computeMaybeNewEntityIdAtCursor appModel model
-            in
-            maybeEntityId
-                ?|> (addFocusEntityIdCmd # noop)
-                ?= noop
+            computeMaybeNewEntityIdAtCursor appModel model
+                ?|> focusEntityIdCmd
+                |> XUpdate.addMaybeCmdIn noop
 
         OnGoToEntityId entityId ->
             let
@@ -186,19 +192,6 @@ update config appModel msg model =
             noop
                 |> addFocusEntityIdCmd entityId
                 |> XUpdate.addMsg (config.navigateToPathMsg path)
-
-
-onSetCursorEntityId entityId appModel model =
-    let
-        entityIdList =
-            createEntityIdList model appModel
-
-        cursor =
-            Cursor.create entityIdList
-                (Just entityId)
-                (getFilter model)
-    in
-    set cursorL cursor model |> XUpdate.pure
 
 
 addFocusEntityIdCmd =
@@ -225,5 +218,5 @@ computeMaybeNewEntityIdAtCursor appModel model =
         newFilter =
             getFilter model
     in
-    get cursorL model
+    getCursor model
         |> Cursor.computeNewEntityIdAtCursor newFilter newEntityIdList

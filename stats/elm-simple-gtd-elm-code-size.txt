@@ -12,7 +12,7 @@
      210 src/elm/Update/Subscription.elm
      200 src/elm/GroupDoc/ViewModel.elm
      193 src/elm/Pages/EntityList/TreeBuilder.elm
-     181 src/elm/Update/Firebase.elm
+     181 src/elm/Firebase/Update.elm
      178 src/elm/Todo/ViewModel.elm
      170 src/elm/Models/GroupDocStore.elm
      170 src/elm/AppDrawer/View.elm

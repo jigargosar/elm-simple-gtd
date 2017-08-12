@@ -10,6 +10,7 @@ import EntityId
 import ExclusiveMode.Types exposing (..)
 import ExclusiveMode.Update exposing (ExclusiveModeMsg)
 import Firebase.Model exposing (FirebaseModel)
+import Firebase.Update exposing (..)
 import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
@@ -36,7 +37,6 @@ import Todo.ReminderOverlay.Model
 import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
-import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Subscription exposing (SubscriptionMsg)
 import Update.Todo exposing (TodoMsg)
@@ -170,7 +170,7 @@ subscriptions model =
             , everyXSeconds 30 (\_ -> Update.Todo.OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
-        , Update.Firebase.subscriptions |> Sub.map OnFirebaseMsg
+        , Firebase.Update.subscriptions |> Sub.map OnFirebaseMsg
         , Update.AppDrawer.subscriptions |> Sub.map OnAppDrawerMsg
         ]
 
@@ -230,7 +230,7 @@ createAppModel flags =
 type alias UpdateConfig msg =
     Overlays.MainMenu.Config msg
         (ExclusiveMode.Update.Config msg
-            (Update.Firebase.Config msg
+            (Firebase.Update.Config msg
                 (Update.Subscription.Config msg
                     (Update.Todo.Config msg
                         { navigateToPathMsg : List String -> msg
@@ -346,7 +346,7 @@ update config msg =
                 firebaseModel =
                     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
             in
-            overReturnF firebaseModel (Update.Firebase.update config msg_)
+            overReturnF firebaseModel (Firebase.Update.update config msg_)
 
         OnAppDrawerMsg msg_ ->
             let

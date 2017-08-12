@@ -1,4 +1,4 @@
-module Update.Firebase exposing (..)
+module Firebase.Update exposing (..)
 
 import AppUrl
 import Data.User

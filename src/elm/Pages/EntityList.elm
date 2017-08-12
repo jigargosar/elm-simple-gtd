@@ -144,7 +144,7 @@ update config appModel msg model =
         noop =
             XUpdate.pure model
 
-        updateSelf msg model =
+        updateSelf msg =
             update config appModel msg model
     in
     case msg of
@@ -164,7 +164,7 @@ update config appModel msg model =
 
         OnMoveFocusBy offset ->
             Cursor.findEntityIdByOffsetIndex offset (getCursor model)
-                ?|> (\entityId -> updateSelf (OnSetCursorEntityId entityId) model)
+                ?|> (\entityId -> updateSelf (OnSetCursorEntityId entityId))
                 ?= noop
 
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->

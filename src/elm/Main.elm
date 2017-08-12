@@ -325,18 +325,13 @@ update config msg =
             Update.GroupDoc.update config now msg_
 
         OnExclusiveModeMsg msg_ ->
-            let
-                foo model =
-                    ExclusiveMode.Update.update config msg_ model.editMode
-                        |> (\( editMode, cmdList, msgList ) ->
-                                ( { model | editMode = editMode }
-                                , Cmd.batch cmdList |> Cmd.map OnExclusiveModeMsg
-                                )
-                                    |> updateAll config msgList
-                           )
-            in
             --Update.ExclusiveMode.update config msg_
-            andThen foo
+            andThen
+                (updateChild OnExclusiveModeMsg
+                    (ExclusiveMode.Update.update config msg_)
+                    editModeL
+                    config
+                )
 
         OnAppHeaderMsg msg_ ->
             Update.AppHeader.update config msg_

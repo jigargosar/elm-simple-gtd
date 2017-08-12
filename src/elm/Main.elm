@@ -3,6 +3,7 @@ module Main exposing (main)
 import AppDrawer.Model
 import AppDrawer.Types exposing (AppDrawerMsg(..))
 import Data.TodoDoc exposing (..)
+import Data.User
 import Document exposing (..)
 import Entity exposing (..)
 import EntityId
@@ -494,6 +495,9 @@ type alias ViewConfig msg =
     , maybeEntityIdAtCursorOld : Maybe EntityId
     , maybeCursorEntityId : Maybe EntityId
     , navigateToPathMsg : List String -> msg
+    , maybeUser : Data.User.MaybeUser
+
+    --    , maybeUserId: Data.User.MaybeUID
     }
 
 
@@ -538,6 +542,9 @@ createViewConfig model =
     , maybeEntityIdAtCursorOld = Nothing
     , maybeCursorEntityId = Nothing
     , navigateToPathMsg = navigateToPathMsg
+    , maybeUser = Firebase.getMaybeUser model
+
+    --          , maybeUserId =  Firebase.getMaybeUser
     }
 
 

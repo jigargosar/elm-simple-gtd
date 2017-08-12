@@ -2,7 +2,6 @@ module ViewModel.Frame exposing (..)
 
 import AppDrawer.GroupViewModel
 import AppDrawer.Model
-import Firebase
 
 
 frameVM config model ( mainHeaderTitle, headerBackgroundColor ) pageContent =
@@ -11,7 +10,7 @@ frameVM config model ( mainHeaderTitle, headerBackgroundColor ) pageContent =
     , mainHeaderTitle = mainHeaderTitle
     , headerBackgroundColor = headerBackgroundColor
     , mdl = model.mdl
-    , maybeUser = Firebase.getMaybeUser model
+    , maybeUser = config.maybeUser
     , sidebarHeaderTitle =
         if model.config.isDevelopmentMode then
             "Dev v" ++ model.config.npmPackageVersion

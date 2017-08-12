@@ -12,6 +12,10 @@ type alias UID =
     String
 
 
+type alias MaybeUID =
+    Maybe UID
+
+
 type alias User =
     { id : UID
     , displayName : String

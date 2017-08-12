@@ -709,10 +709,11 @@
     "transitiveImportsCount": 2,
     "backwardImports": [
       "Firebase.Model",
+      "Main",
       "Ports.Firebase",
       "Update.Firebase"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "Firebase",
       "Firebase.Model",
@@ -721,12 +722,11 @@
       "Update.Firebase",
       "View.GetStarted",
       "View.Overlays",
-      "ViewModel.Frame",
       "Views.Frame",
       "Views.MainMenuOverlay",
       "Views.SignInOverlay"
     ],
-    "transitiveBackwardImportsCount": 11
+    "transitiveBackwardImportsCount": 10
   },
   "Document": {
     "fileName": "src/elm/Document.elm",
@@ -1170,18 +1170,16 @@
     "transitiveImportsCount": 9,
     "backwardImports": [
       "Main",
-      "ViewModel.Frame",
       "Views.MainMenuOverlay"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "Main",
       "View.Overlays",
-      "ViewModel.Frame",
       "Views.Frame",
       "Views.MainMenuOverlay"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 4
   },
   "Firebase.Model": {
     "fileName": "src/elm/Firebase/Model.elm",
@@ -1220,12 +1218,11 @@
       "Update.Firebase",
       "View.GetStarted",
       "View.Overlays",
-      "ViewModel.Frame",
       "Views.Frame",
       "Views.MainMenuOverlay",
       "Views.SignInOverlay"
     ],
-    "transitiveBackwardImportsCount": 9
+    "transitiveBackwardImportsCount": 8
   },
   "GroupDoc": {
     "fileName": "src/elm/GroupDoc.elm",
@@ -1740,6 +1737,7 @@
       "AppDrawer.Model",
       "AppDrawer.Types",
       "Data.TodoDoc",
+      "Data.User",
       "Document",
       "Entity",
       "EntityId",
@@ -1787,7 +1785,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 49,
+    "importsCount": 50,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4461,10 +4459,9 @@
     "parentModuleName": "ViewModel",
     "imports": [
       "AppDrawer.GroupViewModel",
-      "AppDrawer.Model",
-      "Firebase"
+      "AppDrawer.Model"
     ],
-    "importsCount": 3,
+    "importsCount": 2,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4476,18 +4473,14 @@
       "Data.DeviceId",
       "Data.Todo.Schedule",
       "Data.TodoDoc",
-      "Data.User",
       "Dict",
       "Dict.Extra",
       "Document",
       "Entity",
-      "Firebase",
-      "Firebase.Model",
       "GroupDoc",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
-      "Json.Encode.Extra",
       "List",
       "List.Extra",
       "Maybe.Extra",
@@ -4510,7 +4503,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 39,
     "backwardImports": [
       "Main"
     ],

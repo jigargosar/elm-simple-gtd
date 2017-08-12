@@ -7,6 +7,7 @@ import Document exposing (..)
 import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (..)
+import ExclusiveMode.Update
 import Firebase exposing (..)
 import Firebase.Model exposing (..)
 import GroupDoc exposing (..)
@@ -310,6 +311,10 @@ update config msg =
             Update.GroupDoc.update config now msg_
 
         OnExclusiveModeMsg msg_ ->
+            let
+                foo model =
+                    ExclusiveMode.Update.update config msg_ model.editMode
+            in
             Update.ExclusiveMode.update config msg_
 
         OnAppHeaderMsg msg_ ->

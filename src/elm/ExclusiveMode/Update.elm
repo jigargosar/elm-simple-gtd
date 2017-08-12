@@ -28,6 +28,7 @@ type alias Config msg a =
 update :
     Config msg a
     -> ExclusiveModeMsg
+    -> Model
     -> XUpdate.XReturn ExclusiveMode ExclusiveModeMsg msg
 update config msg model =
     case msg of
@@ -35,7 +36,7 @@ update config msg model =
             XUpdate.pure newModel
 
         OnRevertExclusiveMode ->
-            OnSetExclusiveMode XMNone |> update config
+            update config (OnSetExclusiveMode XMNone) model
 
         OnSaveExclusiveModeForm ->
             let

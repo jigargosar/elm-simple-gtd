@@ -1141,10 +1141,14 @@
       "XUpdate"
     ],
     "transitiveImportsCount": 46,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
+    "backwardImports": [
+      "Main"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main"
+    ],
+    "transitiveBackwardImportsCount": 1
   },
   "Firebase": {
     "fileName": "src/elm/Firebase.elm",
@@ -1742,6 +1746,7 @@
       "Entity",
       "EntityId",
       "ExclusiveMode.Types",
+      "ExclusiveMode.Update",
       "Firebase",
       "Firebase.Model",
       "GroupDoc",
@@ -1785,7 +1790,7 @@
       "X.Return",
       "X.Set"
     ],
-    "importsCount": 49,
+    "importsCount": 50,
     "transitiveImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -1813,6 +1818,7 @@
       "Entity",
       "EntityId",
       "ExclusiveMode.Types",
+      "ExclusiveMode.Update",
       "Firebase",
       "Firebase.Model",
       "GroupDoc",
@@ -1917,7 +1923,7 @@
       "X.Time",
       "XUpdate"
     ],
-    "transitiveImportsCount": 129,
+    "transitiveImportsCount": 130,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],

@@ -78,22 +78,26 @@ update_ config msg model =
                 |> setAndPersistShowSignInDialogValue2 True
                 |> XUpdate.andThen (update_ config OnFBSwitchToNewUserSetupModeIfNeeded)
 
-        --        OnFBSkipSignIn ->
-        --            setAndPersistShowSignInDialogValue False
-        --                >> update config OnFBSwitchToNewUserSetupModeIfNeeded
-        --
-        --        OnFBSignOut ->
-        --            Return.command (signOut ())
-        --                >> setAndPersistShowSignInDialogValue True
-        --                >> command (Navigation.load AppUrl.landing)
-        --
-        --        OnFBAfterUserChanged ->
-        --            returnWithMaybe1 .maybeUser
-        --                (\_ ->
-        --                    setAndPersistShowSignInDialogValue False
-        --                        >> update config OnFBSwitchToNewUserSetupModeIfNeeded
-        --                )
-        --
+        OnFBSkipSignIn ->
+            defRet
+                |> setAndPersistShowSignInDialogValue2 False
+                |> XUpdate.andThen (update_ config OnFBSwitchToNewUserSetupModeIfNeeded)
+
+        OnFBSignOut ->
+            defRet
+                |> XUpdate.addCmd (signOut ())
+                |> setAndPersistShowSignInDialogValue2 True
+                |> XUpdate.addCmd (Navigation.load AppUrl.landing)
+
+        OnFBAfterUserChanged ->
+            model.maybeUser
+                ?|> (\_ ->
+                        defRet
+                            |> setAndPersistShowSignInDialogValue2 False
+                            |> XUpdate.andThen (update_ config OnFBSwitchToNewUserSetupModeIfNeeded)
+                    )
+                ?= defRet
+
         --        OnFBUserChanged encodedUser ->
         --            D.decodeValue Data.User.maybeUserDecoder encodedUser
         --                |> Result.mapError (Debug.log "Error decoding User")

@@ -24,4 +24,5 @@ addMsg otherMsg ( model, cmdList, msgList ) =
     ( model, cmdList, msgList ++ [ otherMsg ] )
 
 
---andThen modelF  ( model, cmdList, msgList ) =
+andThen modelF  ( model, cmdList, msgList ) =
+    ( modelF model, cmdList, msgList )

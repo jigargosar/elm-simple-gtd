@@ -346,10 +346,9 @@ update config msg =
                 firebaseModelL =
                     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
             in
-            --overReturnF firebaseModel (Firebase.Update.update config msg_)
             andThen
                 (updateChild OnFirebaseMsg
-                    (Firebase.Update.update_ config msg_)
+                    (Firebase.Update.update config msg_)
                     firebaseModelL
                     config
                 )

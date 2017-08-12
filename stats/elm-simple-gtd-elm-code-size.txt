@@ -58,7 +58,7 @@
       46 src/elm/GroupDoc/Form.elm
       45 src/elm/View/GetStarted.elm
       45 src/elm/Todo/FormTypes.elm
-      44 src/elm/Views/SignInOverlay.elm
+      44 src/elm/Views/FBSignInOverlay.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm

@@ -8,8 +8,8 @@ import Todo.GroupEditView
 import Todo.ReminderOverlay.View exposing (maybeOverlay)
 import Todo.View
 import View.GetStarted
+import Views.FBSignInOverlay
 import Views.MainMenuOverlay
-import Views.SignInOverlay
 
 
 overlayViews config appModel =
@@ -47,7 +47,7 @@ overlayViews config appModel =
                                     Todo.View.new config form
 
                 XMSignInOverlay ->
-                    Views.SignInOverlay.init config
+                    Views.FBSignInOverlay.init config
 
                 XMGroupDocForm form ->
                     GroupDoc.FormView.init config form

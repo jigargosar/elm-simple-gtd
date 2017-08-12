@@ -1,4 +1,4 @@
-module Views.SignInOverlay exposing (..)
+module Views.FBSignInOverlay exposing (..)
 
 import AppUrl
 import Html exposing (..)

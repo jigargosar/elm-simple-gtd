@@ -204,8 +204,8 @@
       "L.View",
       "Update.Firebase",
       "View.GetStarted",
-      "Views.MainMenuOverlay",
-      "Views.SignInOverlay"
+      "Views.FBSignInOverlay",
+      "Views.MainMenuOverlay"
     ],
     "backwardImportsCount": 6,
     "transitiveBackwardImports": [
@@ -217,9 +217,9 @@
       "View.GetStarted",
       "View.Layout",
       "View.Overlays",
+      "Views.FBSignInOverlay",
       "Views.Frame",
-      "Views.MainMenuOverlay",
-      "Views.SignInOverlay"
+      "Views.MainMenuOverlay"
     ],
     "transitiveBackwardImportsCount": 11
   },
@@ -1832,9 +1832,9 @@
       "ViewModel.EntityList",
       "ViewModel.Frame",
       "Views.EntityList",
+      "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "Window",
       "X.Date",
       "X.Debug",
@@ -4144,8 +4144,8 @@
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.GetStarted",
-      "Views.MainMenuOverlay",
-      "Views.SignInOverlay"
+      "Views.FBSignInOverlay",
+      "Views.MainMenuOverlay"
     ],
     "importsCount": 10,
     "transitiveImports": [
@@ -4201,8 +4201,8 @@
       "Toolkit.Operators",
       "Tuple2",
       "View.GetStarted",
+      "Views.FBSignInOverlay",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4459,6 +4459,46 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
+  "Views.FBSignInOverlay": {
+    "fileName": "src/elm/Views/FBSignInOverlay.elm",
+    "moduleName": "Views.FBSignInOverlay",
+    "parentModuleName": "Views",
+    "imports": [
+      "AppUrl",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "X.Html",
+      "X.Keyboard"
+    ],
+    "importsCount": 6,
+    "transitiveImports": [
+      "AppUrl",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "Json.Decode",
+      "Json.Decode.Pipeline",
+      "Json.Encode",
+      "Keyboard",
+      "Keyboard.Extra",
+      "X.Debug",
+      "X.Decode",
+      "X.Html",
+      "X.Keyboard"
+    ],
+    "transitiveImportsCount": 13,
+    "backwardImports": [
+      "View.Overlays"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main",
+      "View.Overlays",
+      "Views.Frame"
+    ],
+    "transitiveBackwardImportsCount": 3
+  },
   "Views.Frame": {
     "fileName": "src/elm/Views/Frame.elm",
     "moduleName": "Views.Frame",
@@ -4530,8 +4570,8 @@
       "View.Layout",
       "View.NewTodoFab",
       "View.Overlays",
+      "Views.FBSignInOverlay",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "X.Debug",
       "X.Decode",
       "X.Function",
@@ -4594,46 +4634,6 @@
       "X.List"
     ],
     "transitiveImportsCount": 24,
-    "backwardImports": [
-      "View.Overlays"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main",
-      "View.Overlays",
-      "Views.Frame"
-    ],
-    "transitiveBackwardImportsCount": 3
-  },
-  "Views.SignInOverlay": {
-    "fileName": "src/elm/Views/SignInOverlay.elm",
-    "moduleName": "Views.SignInOverlay",
-    "parentModuleName": "Views",
-    "imports": [
-      "AppUrl",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "X.Html",
-      "X.Keyboard"
-    ],
-    "importsCount": 6,
-    "transitiveImports": [
-      "AppUrl",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Decode.Pipeline",
-      "Json.Encode",
-      "Keyboard",
-      "Keyboard.Extra",
-      "X.Debug",
-      "X.Decode",
-      "X.Html",
-      "X.Keyboard"
-    ],
-    "transitiveImportsCount": 13,
     "backwardImports": [
       "View.Overlays"
     ],
@@ -4735,9 +4735,9 @@
       "ViewModel.EntityList",
       "ViewModel.Frame",
       "Views.EntityList",
+      "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "X.Decode",
       "X.Keyboard",
       "X.Return"
@@ -4786,9 +4786,9 @@
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
+      "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "X.Keyboard"
     ],
     "transitiveBackwardImportsCount": 27
@@ -5034,7 +5034,7 @@
       "Todo.View",
       "View.GetStarted",
       "View.Layout",
-      "Views.SignInOverlay",
+      "Views.FBSignInOverlay",
       "X.Keyboard"
     ],
     "backwardImportsCount": 12,
@@ -5070,9 +5070,9 @@
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
+      "Views.FBSignInOverlay",
       "Views.Frame",
       "Views.MainMenuOverlay",
-      "Views.SignInOverlay",
       "X.Keyboard"
     ],
     "transitiveBackwardImportsCount": 35
@@ -5115,7 +5115,7 @@
       "Todo.View",
       "Todo.ViewModel",
       "View.GetStarted",
-      "Views.SignInOverlay"
+      "Views.FBSignInOverlay"
     ],
     "backwardImportsCount": 9,
     "transitiveBackwardImports": [
@@ -5142,9 +5142,9 @@
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
+      "Views.FBSignInOverlay",
       "Views.Frame",
-      "Views.MainMenuOverlay",
-      "Views.SignInOverlay"
+      "Views.MainMenuOverlay"
     ],
     "transitiveBackwardImportsCount": 26
   },

@@ -4,7 +4,8 @@
     "repository": "https://github.com/jigargosar/elm-simple-gtd.git",
     "license": "BSD3",
     "source-directories": [
-        "src/elm"
+        "src/elm",
+        "src/elmx"
     ],
     "exposed-modules": [],
     "dependencies": {

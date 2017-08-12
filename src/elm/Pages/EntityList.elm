@@ -12,7 +12,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
-import X.Return exposing (..)
+import XUpdate
 
 
 type alias ModelRecord =
@@ -128,40 +128,17 @@ type alias HasStores x =
     }
 
 
-type alias PartReturn model msg otherMsg =
-    ( model, List (Cmd msg), List otherMsg )
-
-
-type alias PartReturnF model msg otherMsg =
-    PartReturn model msg otherMsg -> PartReturn model msg otherMsg
-
-
-pure : model -> PartReturn model msg otherMsg
-pure model =
-    ( model, [], [] )
-
-
-addCmd : Cmd msg -> PartReturnF model msg otherMsg
-addCmd cmd ( model, cmdList, msgList ) =
-    ( model, cmd :: cmdList, msgList )
-
-
-addMsg : otherMsg -> PartReturnF model msg otherMsg
-addMsg otherMsg ( model, cmdList, msgList ) =
-    ( model, cmdList, msgList ++ [ otherMsg ] )
-
-
 update :
     { a | navigateToPathMsg : Filter.Path -> msg }
     -> HasStores x
     -> Msg
     -> Model
-    -> PartReturn Model Msg msg
+    -> XUpdate.PartReturn Model Msg msg
 update config appModel msg model =
     let
         noop : ( Model, List (Cmd Msg), List msg )
         noop =
-            pure model
+            XUpdate.pure model
 
         updateSelf msg model =
             update config appModel msg model
@@ -183,7 +160,7 @@ update config appModel msg model =
         OnRecomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeMaybeNewEntityIdAtCursor appModel model
                 ?|> (\entityId ->
-                        noop |> addCmd (focusEntityIdCmd entityId)
+                        noop |> XUpdate.addCmd (focusEntityIdCmd entityId)
                     )
                 ?= noop
 
@@ -204,7 +181,9 @@ update config appModel msg model =
                 path =
                     Filter.toPath filter
             in
-            noop |> addCmd (focusEntityIdCmd entityId) |> addMsg (config.navigateToPathMsg path)
+            noop
+                |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                |> XUpdate.addMsg (config.navigateToPathMsg path)
 
 
 onSetCursorEntityId entityId appModel model =
@@ -217,7 +196,7 @@ onSetCursorEntityId entityId appModel model =
                 (Just entityId)
                 (getFilter model)
     in
-    set cursorL cursor model |> pure
+    set cursorL cursor model |> XUpdate.pure
 
 
 focusEntityIdCmd entityId =

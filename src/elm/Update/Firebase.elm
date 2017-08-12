@@ -17,8 +17,7 @@ import X.Return exposing (..)
 
 
 type FirebaseMsg
-    = OnFBNoOP
-    | OnFBSwitchToNewUserSetupModeIfNeeded
+    = OnFBSwitchToNewUserSetupModeIfNeeded
     | OnFBSignIn
     | OnFBSignOut
     | OnFBAfterUserChanged
@@ -55,9 +54,6 @@ update :
     -> SubReturnF msg
 update config msg =
     case msg of
-        OnFBNoOP ->
-            identity
-
         OnFBSwitchToNewUserSetupModeIfNeeded ->
             let
                 onSwitchToNewUserSetupModeIfNeeded model =

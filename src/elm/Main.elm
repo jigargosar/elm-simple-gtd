@@ -222,8 +222,10 @@ type alias UpdateConfig msg =
             (Firebase.Update.Config msg
                 (Update.Subscription.Config msg
                     (Update.Todo.Config msg
-                        { navigateToPathMsg : List String -> msg
-                        }
+                        (Update.GroupDoc.Config msg
+                            { navigateToPathMsg : List String -> msg
+                            }
+                        )
                     )
                 )
             )

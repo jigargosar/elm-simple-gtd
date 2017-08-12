@@ -27,6 +27,7 @@ init =
     init_ config
 
 
+init_ : Config msg -> Html msg
 init_ config =
     div
         [ class "overlay"

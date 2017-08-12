@@ -1,14 +1,20 @@
-module Update.AppHeader exposing (..)
+module Overlays.MainMenu exposing (..)
 
 import DomPorts
 import ExclusiveMode.Types exposing (ExclusiveMode(XMMainMenu))
+import List.Extra as List
+import Maybe.Extra as Maybe
 import Menu
 import Menu.Types exposing (MenuState)
 import Return
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import X.Return exposing (..)
 
 
-type AppHeaderMsg
+type MainMenuMsg
     = OnShowMainMenu
     | OnMainMenuStateChanged MenuState
 
@@ -29,7 +35,7 @@ type alias Config msg a =
 
 update :
     Config msg a
-    -> AppHeaderMsg
+    -> MainMenuMsg
     -> SubReturnF msg model
 update config msg =
     case msg of

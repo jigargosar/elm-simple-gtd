@@ -21,6 +21,7 @@ import Menu.Types
 import Models.Selection
 import Models.TodoDocStore as TodoDocStore
 import Navigation
+import Overlays.MainMenu exposing (MainMenuMsg(..))
 import Pages.EntityList as EntityList
 import Ports
 import Ports.Todo
@@ -35,7 +36,6 @@ import Todo.ReminderOverlay.Model
 import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
-import Update.AppHeader exposing (AppHeaderMsg(..))
 import Update.Firebase exposing (..)
 import Update.GroupDoc exposing (..)
 import Update.Subscription exposing (SubscriptionMsg)
@@ -95,7 +95,7 @@ type Msg
     | OnDebugPort String
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
-    | OnAppHeaderMsg AppHeaderMsg
+    | OnAppHeaderMsg MainMenuMsg
     | OnEntityListMsg EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
@@ -228,7 +228,7 @@ createAppModel flags =
 
 
 type alias UpdateConfig msg =
-    Update.AppHeader.Config msg
+    Overlays.MainMenu.Config msg
         (ExclusiveMode.Update.Config msg
             (Update.Firebase.Config msg
                 (Update.Subscription.Config msg
@@ -333,7 +333,7 @@ update config msg =
                 )
 
         OnAppHeaderMsg msg_ ->
-            Update.AppHeader.update config msg_
+            Overlays.MainMenu.update config msg_
 
         OnTodoMsg msg_ ->
             returnWithNow (OnTodoMsgWithNow msg_)

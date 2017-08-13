@@ -58,6 +58,7 @@ type alias Config msg a =
         , revertExclusiveModeMsg : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
+        , clearSelectionMsg : msg
     }
 
 

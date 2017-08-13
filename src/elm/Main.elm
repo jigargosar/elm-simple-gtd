@@ -117,6 +117,7 @@ type Msg
     | SetLastKnownTimeStamp Time
     | NavigateToPath (List String)
     | ToggleEntityIdSelection EntityId
+    | OnClearEntitySelection
     | OnStoresMsg Stores.Msg
 
 
@@ -257,6 +258,7 @@ createUpdateConfig model =
     , saveTodoFormMsg = Update.Todo.OnSaveTodoForm >> OnTodoMsg
     , saveGroupDocFormMsg = OnSaveGroupDocForm >> OnGroupDocMsg
     , focusNextEntityMsgNew = EntityList.OnMoveFocusBy 1 |> OnEntityListMsg
+    , clearSelectionMsg = OnClearEntitySelection
     , focusPrevEntityMsgNew = EntityList.OnMoveFocusBy -1 |> OnEntityListMsg
     , navigateToPathMsg = navigateToPathMsg
     , goToEntityIdCmd = onGoToEntityIdMsg >> toCmd
@@ -335,6 +337,9 @@ updateReturnF config msg =
                 (Models.Selection.updateSelectedEntityIdSet
                     (X.Set.toggleSetMember (getDocIdFromEntityId entityId))
                 )
+
+        OnClearEntitySelection ->
+            map Models.Selection.clearSelection
 
         NavigateToPath path ->
             onNavigateToPath path

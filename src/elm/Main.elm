@@ -251,18 +251,18 @@ createUpdateConfig model =
     }
 
 
-updateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
-updateAll config msgList =
+mainUpdateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
+mainUpdateAll config msgList =
     List.foldl (mainUpdate config) # msgList
 
 
-updateChild childMsgWrapper childUpdateFn childL config model =
+mainUpdateChild childMsgWrapper childUpdateFn childL config model =
     childUpdateFn (get childL model)
         |> (\( childModel, cmdList, msgList ) ->
                 ( set childL childModel model
                 , Cmd.batch cmdList |> Cmd.map childMsgWrapper
                 )
-                    |> updateAll config msgList
+                    |> mainUpdateAll config msgList
            )
 
 
@@ -320,7 +320,7 @@ mainUpdate config msg =
                         )
             in
             andThen
-                (updateChild OnStoresMsg
+                (mainUpdateChild OnStoresMsg
                     (Stores.update config storeMsg)
                     storesF
                     config
@@ -344,7 +344,7 @@ mainUpdate config msg =
         OnExclusiveModeMsg msg_ ->
             --ExclusiveMode.Update.update config msg_
             andThen
-                (updateChild OnExclusiveModeMsg
+                (mainUpdateChild OnExclusiveModeMsg
                     (ExclusiveMode.Update.update config msg_)
                     editModeL
                     config
@@ -365,7 +365,7 @@ mainUpdate config msg =
                     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
             in
             andThen
-                (updateChild OnFirebaseMsg
+                (mainUpdateChild OnFirebaseMsg
                     (Firebase.Update.update config msg_)
                     firebaseModelL
                     config
@@ -450,7 +450,7 @@ updatePage config msg page =
                                 ( { model | page = EntityList pageModel }
                                 , Cmd.batch cmdList |> Cmd.map OnEntityListMsg
                                 )
-                                    |> updateAll config msgList
+                                    |> mainUpdateAll config msgList
                            )
                 )
 

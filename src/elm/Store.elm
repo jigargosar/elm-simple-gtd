@@ -195,6 +195,7 @@ addUpsertDocCmd doc store =
     ( store, upsertInCmd store doc )
 
 
+update : DocId -> Time -> (Document x -> Document x) -> Store x -> Maybe ( Store x, Cmd msg )
 update id now updateFn store =
     let
         updateHelp doc =
@@ -207,6 +208,7 @@ update id now updateFn store =
     findById id store ?|> updateHelp
 
 
+updateAll : Set DocId -> Time -> (Document x -> Document x) -> Store x -> ( Store x, Cmd msg )
 updateAll idSet now updateFn store =
     let
         ( newStore, persistCmd ) =

@@ -100,7 +100,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
   });
   
   app.ports["focusSelector"].subscribe((selector) => {
-    console.log("port: focusSelector: selector", selector)
+    // console.log("port: focusSelector: selector", selector)
     let focusSelector = function () {
       const $toFocus = $(selector).first().get(0)
       if ($toFocus) {

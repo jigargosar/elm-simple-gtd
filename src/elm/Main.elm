@@ -518,6 +518,7 @@ type alias ViewConfig msg =
     , maybeCursorEntityId : Maybe EntityId
     , navigateToPathMsg : List String -> msg
     , maybeUser : Data.User.MaybeUser
+    , mdl : Material.Model
 
     --    , maybeUserId: Data.User.MaybeUID
     }
@@ -565,6 +566,7 @@ createViewConfig model =
     , maybeCursorEntityId = Nothing
     , navigateToPathMsg = navigateToPathMsg
     , maybeUser = Firebase.Model.getMaybeUser model.firebaseModel
+    , mdl = model.mdl
 
     --          , maybeUserId =  Firebase.getMaybeUser
     }

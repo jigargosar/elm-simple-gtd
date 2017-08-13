@@ -24,9 +24,9 @@ import X.Function.Infix exposing (..)
 init frameVM =
     div [ cs "mdl-typography--body-1" ]
         ([ appLayoutView frameVM
-         , newTodoFab frameVM.config frameVM.model
+         , newTodoFab frameVM.config
          ]
-            ++ overlayViews frameVM.config frameVM.model
+            ++ overlayViews frameVM
         )
 
 
@@ -76,8 +76,14 @@ mainMenuProfileIcon config frameVM =
                 [ src photoURL ]
 
 
-overlayViews config appModel =
+overlayViews frameVM =
     let
+        config =
+            frameVM.config
+
+        appModel =
+            frameVM.model
+
         def =
             span [] []
 
@@ -194,11 +200,11 @@ appLayoutView frameVM =
         layoutContent
 
 
-newTodoFab config model =
+newTodoFab config =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach config.onMdl [ 0 ] ]
             [ Mat.fab config.onMdl
-                model.mdl
+                config.mdl
                 [ id "add-fab"
                 , Material.Button.colored
                 , Mat.onClickStopPropagation
@@ -209,7 +215,7 @@ newTodoFab config model =
             ]
         , Material.Tooltip.render config.onMdl
             [ 0 ]
-            model.mdl
+            config.mdl
             [ Material.Tooltip.left ]
             [ div [ cs "mdl-typography--body-2" ] [ text "Quick Add Task (q)" ]
             , div [ cs "mdl-typography--body-1" ] [ text "Add To Inbox (i)" ]

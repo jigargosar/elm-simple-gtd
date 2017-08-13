@@ -142,18 +142,18 @@ update config now msg =
 
         OnProcessPendingNotificationCronTick ->
             returnAndThenMaybe
-                (findAndSnoozeOverDueTodo now >>? andThen showReminderNotificationCmd)
+                (findAndSnoozeOverDueTodo config now >>? andThen showReminderNotificationCmd)
 
         UpdateTodoOrAllSelected__ todoId action ->
-            (updateTodoAndMaybeAlsoSelected action now todoId |> andThen)
+            (updateTodoAndMaybeAlsoSelected config action now todoId |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         UpdateTodo__ todoId action ->
-            (updateAllTodos action now (Set.singleton todoId) |> andThen)
+            (updateAllTodos config action now (Set.singleton todoId) |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         OnTodoReminderOverlayAction action ->
-            reminderOverlayAction action now
+            reminderOverlayAction config action now
 
         OnStartAddingTodo addFormMode ->
             onStartAddingTodo config addFormMode

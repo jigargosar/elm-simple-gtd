@@ -1610,34 +1610,6 @@
     ],
     "transitiveBackwardImportsCount": 6
   },
-  "LocalStorage": {
-    "fileName": "src/elm/LocalStorage.elm",
-    "moduleName": "LocalStorage",
-    "parentModuleName": "",
-    "imports": [
-      "List.Extra",
-      "Maybe.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "X.Function",
-      "X.Function.Infix"
-    ],
-    "importsCount": 6,
-    "transitiveImports": [
-      "List.Extra",
-      "Maybe.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix"
-    ],
-    "transitiveImportsCount": 7,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
-  },
   "Main": {
     "fileName": "src/elm/Main.elm",
     "moduleName": "Main",
@@ -4417,7 +4389,6 @@
       "GroupDoc",
       "GroupDoc.FormView",
       "GroupDoc.ViewModel",
-      "LocalStorage",
       "Mat",
       "Menu",
       "Models.GroupDocStore",
@@ -4430,7 +4401,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 22,
+    "backwardImportsCount": 21,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4450,7 +4421,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -4486,7 +4456,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 53
+    "transitiveBackwardImportsCount": 52
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4508,7 +4478,6 @@
       "Firebase.Update",
       "GroupDoc",
       "GroupDoc.View",
-      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -4527,7 +4496,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 29,
+    "backwardImportsCount": 28,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",
@@ -4549,7 +4518,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "LocalStorage",
       "Main",
       "Mat",
       "Menu",
@@ -4586,7 +4554,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 56
+    "transitiveBackwardImportsCount": 55
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",

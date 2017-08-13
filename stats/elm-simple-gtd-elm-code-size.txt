@@ -1,4 +1,4 @@
-    9067 total
+    9055 total
      652 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
@@ -77,7 +77,6 @@
       18 src/elm/X/Debug.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm
-      12 src/elm/LocalStorage.elm
       10 src/elm/X/Set.elm
       10 src/elm/X/Maybe.elm
       10 src/elm/AppDrawer/Types.elm

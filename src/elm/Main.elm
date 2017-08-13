@@ -168,15 +168,15 @@ subscriptions model =
     in
     Sub.batch
         [ Ports.debugPort OnDebugPort
-        , everyXSeconds 1 SetLastKnownTimeStamp
+        , everyXSeconds 60 SetLastKnownTimeStamp
         , Update.Subscription.subscriptions |> Sub.map OnSubscriptionMsg
         , Stores.subscriptions |> Sub.map OnStoresMsg
         , Sub.batch
             [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
 
-            -- note: 30 seconds is so that we can received any updates from firebase
+            -- note: 60 seconds is so that we can received any updates from firebase
             -- before triggering and changing any stale overdue todos timestamps.
-            , everyXSeconds 30 (\_ -> Update.Todo.OnProcessPendingNotificationCronTick)
+            , everyXSeconds 60 (\_ -> Update.Todo.OnProcessPendingNotificationCronTick)
             ]
             |> Sub.map OnTodoMsg
         , Firebase.Update.subscriptions |> Sub.map OnFirebaseMsg

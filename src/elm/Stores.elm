@@ -77,7 +77,7 @@ subscriptions =
 
 type alias Config msg a =
     { a
-        | recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
+        | recomputeEntityListCursorAfterStoreUpdated : msg
     }
 
 
@@ -93,7 +93,7 @@ update config msg model =
                 ?|> (Tuple.second >> U.pure)
                 ?= defRet
 
-        --                |> U.addMsg config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+        --                |> U.addMsg config.recomputeEntityListCursorAfterStoreUpdated
         OnFirebaseDatabaseChange dbName encodedDoc ->
             defRet
                 |> U.addEffect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)

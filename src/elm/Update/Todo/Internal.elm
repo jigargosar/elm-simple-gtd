@@ -48,7 +48,7 @@ type alias Config msg a =
         , revertExclusiveModeMsg : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , goToEntityIdCmd : EntityId -> Cmd msg
-        , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
+        , recomputeEntityListCursorAfterStoreUpdated : msg
     }
 
 
@@ -65,7 +65,7 @@ findAndUpdateAllTodos config findFn action now model =
             Data.TodoDoc.update action
     in
     overReturn TodoDocStore.todoStore (Store.updateAndPersist findFn now updateFn) model
-        |> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+        |> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
 
 
 updateTodo config action now todoId =
@@ -170,7 +170,7 @@ saveAddTodoForm config addMode form now model =
                                 TA_SetProjectId projectId |> Just
                 in
                 updateTodoWithMaybeAction config maybeAction now todoId
-                    >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+                    >> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
              --                    >> setFocusInEntityWithTodoId config todoId
             )
 

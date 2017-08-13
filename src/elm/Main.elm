@@ -247,7 +247,7 @@ createUpdateConfig model =
     , navigateToPathMsg = navigateToPathMsg
     , goToEntityIdCmd = onGoToEntityIdMsg >> toCmd
     , isTodoStoreEmpty = TodoDocStore.isStoreEmpty model
-    , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg = EntityList.OnFocusListCursorAfterChangesReceivedFromPouchDBMsg |> OnEntityListMsg
+    , recomputeEntityListCursorAfterStoreUpdated = EntityList.OnFocusListCursorAfterChangesReceivedFromPouchDBMsg |> OnEntityListMsg
     }
 
 

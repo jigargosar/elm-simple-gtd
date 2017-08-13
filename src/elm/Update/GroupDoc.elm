@@ -52,7 +52,7 @@ type alias Config msg a =
     { a
         | onSetExclusiveMode : ExclusiveMode -> msg
         , revertExclusiveModeMsg : msg
-        , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
+        , recomputeEntityListCursorAfterStoreUpdated : msg
     }
 
 
@@ -91,7 +91,7 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
         updateGroupDocHelp updateFn =
             (updateAllGroupDocs now gdType updateFn (Set.singleton id) |> andThen)
                 >> returnMsgAsCmd config.revertExclusiveModeMsg
-                >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+                >> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
     in
     case groupDocIdAction of
         GDA_StartEditing ->
@@ -120,7 +120,7 @@ onGroupDocIdAction config now groupDocId groupDocIdAction =
                 GDFM_Add ->
                     insertGroupDoc now form.groupDocType form.name
                         >> returnMsgAsCmd config.revertExclusiveModeMsg
-                        >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
+                        >> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
 
                 GDFM_Edit ->
                     updateGroupDocHelp (GroupDoc.setName form.name)

@@ -4,7 +4,7 @@ import Store
 import X.Record exposing (..)
 
 
-todoStore =
+todoStoreL =
     fieldLens .todoStore (\s b -> { b | todoStore = s })
 
 

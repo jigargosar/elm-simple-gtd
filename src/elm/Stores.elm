@@ -105,7 +105,7 @@ update config msg model =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 TodoDocStore.todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
+            maybeOverT2 TodoDocStore.todoStoreL (Store.upsertInMemoryOnPouchDBChange encodedEntity)
                 >>? Tuple.mapFirst Entity.createTodoEntity
 
         "project-db" ->

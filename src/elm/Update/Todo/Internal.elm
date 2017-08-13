@@ -21,7 +21,7 @@ import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
-import X.Record as Record exposing (overReturn, overT2, set)
+import X.Record as Record exposing (..)
 import X.Return exposing (..)
 import X.Time
 
@@ -63,11 +63,9 @@ findAndUpdateAllTodos config findFn action now model =
     let
         updateFn =
             Data.TodoDoc.update action
-
-        ( store, cmd ) =
-            Store.updateAndPersist findFn now updateFn model.todoStore
     in
-    ( set TodoDocStore.todoStore store model, cmd )
+    Store.updateAndPersist findFn now updateFn model.todoStore
+        |> Tuple.mapFirst (setIn model TodoDocStore.todoStoreL)
         |> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
 
 
@@ -129,7 +127,7 @@ onSaveTodoForm config form now =
 
 
 insertTodo constructWithId =
-    overT2 TodoDocStore.todoStore (Store.insert constructWithId)
+    overT2 TodoDocStore.todoStoreL (Store.insert constructWithId)
 
 
 saveAddTodoForm :

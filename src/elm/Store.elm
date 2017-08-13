@@ -231,7 +231,7 @@ updateExternalHelp newDoc store =
         ?= add
 
 
-generate : Random.Pcg.Generator (Document x) -> Store x -> ( Document x, Store x )
+generate : Random.Pcg.Generator a -> Store x -> ( a, Store x )
 generate generator m =
     Random.Pcg.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)

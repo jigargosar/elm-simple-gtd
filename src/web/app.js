@@ -101,32 +101,35 @@ window.appBoot = async function appBoot(elmMain = Main) {
   
   app.ports["focusSelector"].subscribe((selector) => {
     console.log("port: focusSelector: selector", selector)
-    const $toFocus = $(selector).first().get(0)
-    if($toFocus){
-      $toFocus.focus()
-    }else{
-      let timeoutId = null
-      
-      const observer = new MutationSummary({
-        callback: summaries => {
-          // console.log(summaries)
-      
-          const added = summaries[0].added
-          if (!_.isEmpty(added)) {
-            $(added[0]).focus()
-            observer.disconnect()
-            clearTimeout(timeoutId)
-          }
-        },
-        queries: [
-          {element: selector},
-        ],
-      })
-      
-      timeoutId = setTimeout(()=>{
-        observer.disconnect()
-      },3000)
+    let focusSelector = function () {
+      const $toFocus = $(selector).first().get(0)
+      if ($toFocus) {
+        $toFocus.focus()
+      } else {
+        let timeoutId = null
+    
+        const observer = new MutationSummary({
+          callback: summaries => {
+            // console.log(summaries)
+        
+            const added = summaries[0].added
+            if (!_.isEmpty(added)) {
+              $(added[0]).focus()
+              observer.disconnect()
+              clearTimeout(timeoutId)
+            }
+          },
+          queries: [
+            {element: selector},
+          ],
+        })
+    
+        timeoutId = setTimeout(() => {
+          observer.disconnect()
+        }, 3000)
+      }
     }
+    setTimeout(focusSelector, 100)
   });
   
   

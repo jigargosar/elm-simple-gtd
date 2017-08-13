@@ -63,8 +63,11 @@ findAndUpdateAllTodos config findFn action now model =
     let
         updateFn =
             Data.TodoDoc.update action
+
+        ( store, cmd ) =
+            Store.updateAndPersist findFn now updateFn model.todoStore
     in
-    overReturn TodoDocStore.todoStore (Store.updateAndPersist findFn now updateFn) model
+    ( set TodoDocStore.todoStore store model, cmd )
         |> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
 
 

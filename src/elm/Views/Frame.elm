@@ -23,7 +23,7 @@ import X.Function.Infix exposing (..)
 
 init frameVM =
     div [ cs "mdl-typography--body-1" ]
-        ([ appLayoutView frameVM.config frameVM frameVM.pageContent
+        ([ appLayoutView frameVM
          , newTodoFab frameVM.config frameVM.model
          ]
             ++ overlayViews frameVM.config frameVM.model
@@ -128,8 +128,11 @@ overlayViews config appModel =
         |> List.filterMap identity
 
 
-appLayoutView config frameVM pageContent =
+appLayoutView frameVM =
     let
+        config =
+            frameVM.config
+
         layoutSideBarHeader =
             AppDrawer.View.sidebarHeader frameVM
 
@@ -144,7 +147,7 @@ appLayoutView config frameVM pageContent =
 
         layoutMainContent =
             div [ id "layout-main-content" ]
-                [ div [ id "page-container" ] [ pageContent ]
+                [ div [ id "page-container" ] [ frameVM.pageContent ]
                 ]
 
         layoutContent =
@@ -191,11 +194,11 @@ appLayoutView config frameVM pageContent =
         layoutContent
 
 
-newTodoFab config m =
+newTodoFab config model =
     div [ cs "primary-fab-container" ]
         [ div [ Material.Tooltip.attach config.onMdl [ 0 ] ]
             [ Mat.fab config.onMdl
-                m.mdl
+                model.mdl
                 [ id "add-fab"
                 , Material.Button.colored
                 , Mat.onClickStopPropagation
@@ -206,7 +209,7 @@ newTodoFab config m =
             ]
         , Material.Tooltip.render config.onMdl
             [ 0 ]
-            m.mdl
+            model.mdl
             [ Material.Tooltip.left ]
             [ div [ cs "mdl-typography--body-2" ] [ text "Quick Add Task (q)" ]
             , div [ cs "mdl-typography--body-1" ] [ text "Add To Inbox (i)" ]

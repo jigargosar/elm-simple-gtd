@@ -33,29 +33,6 @@ const mutationObserverFocusSelectorStream = Kefir.stream(emitter => {
       {element: autoFocusSelector},
     ],
   })
-  
-  
-  new MutationSummary({
-    callback: summaries => {
-      // console.log(summaries)
-      // const entityListItemSummary = summaries[0]
-      // console.log(".entity-list", entityListItemSummary)
-      // if (!(entityListItemSummary.added.length !== 0
-      //       || entityListItemSummary.attributeChanged.tabindex.length !== 0)) {
-      //   return
-      // }
-      
-      // todo: this is a lazy way to ensure that after overlay is closed
-      // we focus on EL, and since auto-focus takes priority. check above.
-      emitter.emit(".focusable-list-item[tabindex=0]")
-    },
-    queries: [
-      {element: ".focusable-list-item", elementAttributes: "tabindex"},
-      {element: ".overlay"},
-    ],
-  })
-  
-  
 })
 
 window.appBoot = async function appBoot(elmMain = Main) {

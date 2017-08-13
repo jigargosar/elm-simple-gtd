@@ -56,10 +56,6 @@ type Page
     | LandingPage
 
 
-initialPage =
-    EntityList EntityList.initialValue
-
-
 type alias AppConfig =
     { deviceId : String
     , npmPackageVersion : String
@@ -185,8 +181,8 @@ type alias Flags =
     }
 
 
-createAppModel : Flags -> Model
-createAppModel flags =
+initModel : Flags -> ( Model, Cmd msg )
+initModel flags =
     let
         { now } =
             flags
@@ -196,6 +192,9 @@ createAppModel flags =
 
         ( { todoStore, projectStore, contextStore }, seed ) =
             Stores.initialValue now deviceId flags.encodedLists
+
+        ( initialPage, entityListCmd ) =
+            EntityList.initialValue |> Tuple.mapFirst EntityList
 
         model : Model
         model =
@@ -213,7 +212,7 @@ createAppModel flags =
             , mdl = Material.model
             }
     in
-    model
+    ( model, entityListCmd )
 
 
 type alias UpdateConfig msg =
@@ -407,7 +406,10 @@ onNavigateToPath config path =
                             EntityList.maybeInitFromPath path maybePageModel
                                 |> Maybe.Extra.unpack
                                     (\_ -> revertPathOnNoMatchCommand page)
-                                    (EntityList >> setPage)
+                                    (\( pageModel, pageCmd ) ->
+                                        setPage (EntityList pageModel)
+                                            >> command pageCmd
+                                    )
                     in
                     case page of
                         EntityList pageModel ->
@@ -598,9 +600,13 @@ hash2messages config location =
 main : RouteUrl.RouteUrlProgram Flags Model Msg
 main =
     let
-        init =
-            createAppModel
-                >> update_ (OnFirebaseMsg OnFBSwitchToNewUserSetupModeIfNeeded)
+        init flags =
+            let
+                ( model, cmd ) =
+                    initModel flags
+            in
+            update_ (OnFirebaseMsg OnFBSwitchToNewUserSetupModeIfNeeded) model
+                |> command cmd
 
         update_ : Msg -> Model -> ( Model, Cmd Msg )
         update_ msg model =

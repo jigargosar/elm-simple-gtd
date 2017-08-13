@@ -48,6 +48,7 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , goToEntityIdCmd : EntityId -> Cmd msg
+        , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
     }
 
 
@@ -161,6 +162,7 @@ saveAddTodoForm config addMode form now model =
                                 TA_SetProjectId projectId |> Just
                 in
                 updateTodoWithMaybeAction maybeAction now todoId
+                    >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
              --                    >> setFocusInEntityWithTodoId config todoId
             )
 

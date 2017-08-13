@@ -62,7 +62,7 @@ constructor path filter cursor =
         |> Model
 
 
-initialValue : Model
+initialValue : ( Model, Cmd msg )
 initialValue =
     let
         ( filter, path ) =
@@ -71,18 +71,18 @@ initialValue =
         cursor =
             Cursor.initialValue filter
     in
-    constructor path filter cursor
+    ( constructor path filter cursor, focusEntityListCmd )
 
 
-maybeInitFromPath : List String -> Maybe Model -> Maybe Model
+maybeInitFromPath : List String -> Maybe Model -> Maybe ( Model, Cmd msg )
 maybeInitFromPath path maybePreviousModel =
     let
         initFromFilter filter =
             let
                 model =
-                    maybePreviousModel ?= initialValue
+                    maybePreviousModel ?= (initialValue |> Tuple.first)
             in
-            constructor path filter (getCursor model)
+            ( constructor path filter (getCursor model), focusEntityListCmd )
     in
     Filter.maybeFromPath path
         ?|> initFromFilter
@@ -164,13 +164,19 @@ update config appModel msg model =
 
         OnMoveFocusBy offset ->
             Cursor.findEntityIdByOffsetIndex offset (getCursor model)
-                ?|> (\entityId -> updateDefRet (OnSetCursorEntityId entityId))
+                ?|> (\entityId ->
+                        updateDefRet (OnSetCursorEntityId entityId)
+                            |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                    )
                 ?= defRet
 
         OnFocusListCursorAfterChangesReceivedFromPouchDBMsg ->
             computeNewMaybeCursorEntityId appModel model
-                ?|> focusEntityIdCmd
-                |> XUpdate.addMaybeCmdIn defRet
+                ?|> (\entityId ->
+                        updateDefRet (OnSetCursorEntityId entityId)
+                            |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                    )
+                ?= defRet
 
         OnGoToEntityId entityId ->
             let
@@ -196,6 +202,10 @@ update config appModel msg model =
 
 focusEntityIdCmd entityId =
     Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
+
+
+focusEntityListCmd =
+    Ports.focusSelector ".focusable-list-item[tabindex=0]"
 
 
 createEntityTree model appModel =

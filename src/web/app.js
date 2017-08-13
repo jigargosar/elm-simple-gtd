@@ -130,7 +130,7 @@ window.appBoot = async function appBoot(elmMain = Main) {
       }
     }
     // requestAnimationFrame(() => { requestAnimationFrame(focusSelector)})
-    requestAnimationFrame(() => { requestAnimationFrame(focusSelector)})
+    requestAnimationFrame(focusSelector)
   });
   
   

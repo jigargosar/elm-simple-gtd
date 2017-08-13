@@ -210,22 +210,14 @@ update id now updateFn store =
 
 updateAll : Set DocId -> Time -> (Document x -> Document x) -> Store x -> ( Store x, Cmd msg )
 updateAll idSet now updateFn store =
-    let
-        ( newStore, persistCmd ) =
-            let
-                _ =
-                    idSet
-                        |> Set.foldl
-                            (\docId ( store, cmd ) ->
-                                update docId now updateFn store
-                                    ?|> Tuple.mapSecond (\newCmd -> Cmd.batch [ cmd, newCmd ])
-                                    ?= ( store, cmd )
-                            )
-                            ( store, Cmd.none )
-            in
+    idSet
+        |> Set.foldl
+            (\docId ( store, cmd ) ->
+                update docId now updateFn store
+                    ?|> Tuple.mapSecond (\newCmd -> Cmd.batch [ cmd, newCmd ])
+                    ?= ( store, cmd )
+            )
             ( store, Cmd.none )
-    in
-    ( newStore, persistCmd )
 
 
 decode : D.Value -> Store x -> Maybe (Document x)

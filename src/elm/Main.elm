@@ -105,7 +105,7 @@ type Msg
     | OnDebugPort String
     | OnKeyboardMsg UKeyboard.Msg
     | OnExclusiveModeMsg UExclusiveMode.Msg
-    | OnAppHeaderMsg MainMenuMsg
+    | OnMainMenuMsg MainMenuMsg
     | OnEntityListMsg EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
     | OnGroupDocMsgWithNow GroupDocMsg Time
@@ -391,7 +391,7 @@ updateReturnF config msg =
                     editModeL
                 )
 
-        OnAppHeaderMsg msg_ ->
+        OnMainMenuMsg msg_ ->
             Overlays.MainMenu.update config msg_
 
         OnTodoMsg msg_ ->
@@ -544,7 +544,7 @@ createViewConfig model =
     , onSetTodoFormReminderDate = Update.Todo.onSetTodoFormReminderDateMsg >>> OnTodoMsg
     , onSetTodoFormReminderTime = Update.Todo.onSetTodoFormReminderTimeMsg >>> OnTodoMsg
     , onSaveExclusiveModeForm = onSaveExclusiveModeForm
-    , onMainMenuStateChanged = OnMainMenuStateChanged >> OnAppHeaderMsg
+    , onMainMenuStateChanged = OnMainMenuStateChanged >> OnMainMenuMsg
     , onSignInMsg = OnFirebaseMsg OnFBSignIn
     , onSkipSignInMsg = OnFirebaseMsg OnFBSkipSignIn
     , onSignOutMsg = OnFirebaseMsg OnFBSignOut
@@ -555,7 +555,7 @@ createViewConfig model =
     , onAppDrawerMsg = OnAppDrawerMsg
     , onStartAddingGroupDoc = OnGroupDocAction # GDA_StartAdding >> OnGroupDocMsg
     , onMdl = OnMdl
-    , onShowMainMenu = OnShowMainMenu |> OnAppHeaderMsg
+    , onShowMainMenu = OnShowMainMenu |> OnMainMenuMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onToggleEntitySelection = ToggleEntityIdSelection

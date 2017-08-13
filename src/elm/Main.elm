@@ -581,9 +581,9 @@ view model =
                 frameVM =
                     ViewModel.Frame.frameVM config model titleColorTuple pageContent
             in
-            Views.Frame.frame frameVM
+            Views.Frame.init frameVM
     in
-    case getPage__ model of
+    case model.page of
         LandingPage ->
             L.View.view
 
@@ -596,10 +596,6 @@ view model =
                     EntityList.getTitleColourTuple pageModel
             in
             Views.EntityList.view pageVM |> frame titleColorTuple
-
-
-getPage__ =
-    .page
 
 
 delta2hash =

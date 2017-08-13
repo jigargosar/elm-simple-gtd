@@ -261,7 +261,7 @@ updateAll msgList ret =
     List.foldl (\msg ret -> ret |> andThenUpdate msg) ret msgList
 
 
-mainUpdateChild childMsgWrapper childUpdateFn childL model =
+updateChild childMsgWrapper childUpdateFn childL model =
     childUpdateFn (get childL model)
         |> (\( childModel, cmdList, msgList ) ->
                 ( set childL childModel model
@@ -332,7 +332,7 @@ updateReturnF config msg =
                         )
             in
             andThen
-                (mainUpdateChild OnStoresMsg
+                (updateChild OnStoresMsg
                     (Stores.update config storeMsg)
                     storesF
                 )
@@ -355,7 +355,7 @@ updateReturnF config msg =
         OnExclusiveModeMsg msg_ ->
             --ExclusiveMode.Update.update config msg_
             andThen
-                (mainUpdateChild OnExclusiveModeMsg
+                (updateChild OnExclusiveModeMsg
                     (ExclusiveMode.Update.update config msg_)
                     editModeL
                 )
@@ -375,7 +375,7 @@ updateReturnF config msg =
                     fieldLens .firebaseModel (\s b -> { b | firebaseModel = s })
             in
             andThen
-                (mainUpdateChild OnFirebaseMsg
+                (updateChild OnFirebaseMsg
                     (Firebase.Update.update config msg_)
                     firebaseModelL
                 )
@@ -459,7 +459,7 @@ updatePage config msg page =
                                 ( { model | page = EntityList pageModel }
                                 , Cmd.batch cmdList |> Cmd.map OnEntityListMsg
                                 )
-                                    |> mainUpdateAll config msgList
+                                    |> updateAll msgList
                            )
                 )
 

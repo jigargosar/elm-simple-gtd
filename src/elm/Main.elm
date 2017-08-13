@@ -456,16 +456,17 @@ pageFL =
     fieldLens .page (\s b -> { b | page = s })
 
 
+setEntityListPageModel pageModel model =
+    { model | page = EntityList pageModel }
+
+
 updatePage config msg model =
     case ( model.page, msg ) of
         ( EntityList pageModel, OnEntityListMsg pageMsg ) ->
-            updateChildHelp OnEntityListMsg
-                (EntityList.update config
-                    model
-                    pageMsg
-                    pageModel
-                )
-                (\pageModel model -> { model | page = EntityList pageModel })
+            updateChildHelp
+                OnEntityListMsg
+                (EntityList.update config model pageMsg pageModel)
+                setEntityListPageModel
                 model
 
         _ ->

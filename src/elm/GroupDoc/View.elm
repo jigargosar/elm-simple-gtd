@@ -5,7 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Keyed
 import Mat
 import Toolkit.Operators exposing (..)
-import View.Badge
+import Views.Badge
 import X.Function.Infix exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
@@ -72,7 +72,7 @@ headerItem vm =
         ]
         [ div [ class "layout horizontal justified center" ]
             [ h5 [ class "font-nowrap ellipsis" ]
-                [ View.Badge.badge (vm.namePrefix ++ vm.name) vm.count
+                [ Views.Badge.badge (vm.namePrefix ++ vm.name) vm.count
                 ]
             , div [ class "layout horizontal center" ] [ editOrArchiveButton ]
             ]

@@ -9,7 +9,7 @@ import Html.Attributes exposing (class)
 import Html.Keyed
 import Todo.ItemView
 import Toolkit.Operators exposing (..)
-import View.Badge
+import Views.Badge
 
 
 view pageVM =
@@ -79,7 +79,7 @@ flatTodoListView title totalCount todoListView =
             in
             ( title
             , div [ class "collection-item" ]
-                [ h5 [] [ View.Badge.badgeStringSuffix title titleSuffix ] ]
+                [ h5 [] [ Views.Badge.badgeStringSuffix title titleSuffix ] ]
             )
 
         truncatedKeyedViewList =

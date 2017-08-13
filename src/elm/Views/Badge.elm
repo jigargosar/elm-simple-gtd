@@ -1,4 +1,4 @@
-module View.Badge exposing (..)
+module Views.Badge exposing (..)
 
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)

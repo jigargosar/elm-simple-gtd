@@ -7,7 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Mat
 import Toolkit.Operators exposing (..)
-import View.Badge
+import Views.Badge
 import X.Function.Infix exposing (..)
 import X.Html
 
@@ -139,7 +139,7 @@ archivedItems vm =
         ]
         [ Mat.icon iconName
         , div [ class "font-nowrap" ]
-            [ View.Badge.badge buttonText badgeCount
+            [ Views.Badge.badge buttonText badgeCount
             ]
         ]
     , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
@@ -156,7 +156,7 @@ entityListItem vm =
         [ onClick (vm.onActiveStateChanged True)
         ]
         [ Mat.iconM vm.icon
-        , div [ class "font-nowrap" ] [ View.Badge.badge vm.name vm.count ]
+        , div [ class "font-nowrap" ] [ Views.Badge.badge vm.name vm.count ]
         ]
 
 

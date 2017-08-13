@@ -161,10 +161,10 @@ subscriptions model =
             Time.every (Time.second * x * debugSecondMultiplier)
 
         debugSecondMultiplier =
-            if model.config.debug then
-                60
-            else
-                1
+            --            if model.config.debug then
+            --                60
+            --            else
+            1
     in
     Sub.batch
         [ Ports.debugPort OnDebugPort

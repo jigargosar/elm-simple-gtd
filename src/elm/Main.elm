@@ -289,6 +289,22 @@ update msg model =
                     (OnExclusiveModeMsg ExclusiveMode.Update.OnRevertExclusiveMode)
                 |> andThenUpdate (OnEntityListMsg EntityList.OnFocusEntityList)
 
+        OnDebugPort cmdString ->
+            case cmdString of
+                "startOverdueCron" ->
+                    defRet
+                        |> andThenUpdate (OnTodoMsg Update.Todo.OnProcessPendingNotificationCronTick)
+
+                _ ->
+                    defRet
+
+        ToggleEntityIdSelection entityId ->
+            defRet
+                |> map
+                    (Models.Selection.updateSelectedEntityIdSet
+                        (X.Set.toggleSetMember (getDocIdFromEntityId entityId))
+                    )
+
         _ ->
             defRet |> mainUpdate config msg
 

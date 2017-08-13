@@ -34,10 +34,7 @@ subscriptions =
 
 type alias SubModel model =
     { model
-        | todoStore : TodoStore
-        , projectStore : ProjectStore
-        , contextStore : ContextStore
-        , selectedEntityIdSet : Set DocId
+        | selectedEntityIdSet : Set DocId
         , editMode : ExclusiveMode
     }
 

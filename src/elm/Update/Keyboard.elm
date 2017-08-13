@@ -20,7 +20,7 @@ import X.Record exposing (..)
 import X.Return exposing (..)
 
 
-type KeyboardMsg
+type Msg
     = OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
 
@@ -32,23 +32,20 @@ subscriptions =
         ]
 
 
-type alias SubModel model =
-    { model
-        | selectedEntityIdSet : Set DocId
-        , editMode : ExclusiveMode
-    }
+type alias SubModel =
+    ()
 
 
-type alias SubModelF model =
-    SubModel model -> SubModel model
+type alias SubModelF =
+    SubModel -> SubModel
 
 
-type alias SubReturn msg model =
-    Return.Return msg (SubModel model)
+type alias SubReturn msg =
+    Return.Return msg SubModel
 
 
-type alias SubReturnF msg model =
-    SubReturn msg model -> SubReturn msg model
+type alias SubReturnF msg =
+    SubReturn msg -> SubReturn msg
 
 
 type alias Config msg a =
@@ -62,20 +59,17 @@ type alias Config msg a =
     }
 
 
-
---update : Config msg a -> SubscriptionMsg -> SubReturnF msg model
-
-
-update config msg =
+update : Config msg a -> { b | editMode : ExclusiveMode } -> Msg -> List msg
+update config appModel msg =
     case msg of
         OnGlobalKeyUp keyCode ->
-            onGlobalKeyUp config keyCode
+            onGlobalKeyUp config appModel.editMode keyCode
 
         OnGlobalKeyDown keyCode ->
-            onGlobalKeyDown config keyCode
+            onGlobalKeyDown config appModel.editMode keyCode
 
 
-onGlobalKeyDown config keyCode =
+onGlobalKeyDown config xMode keyCode =
     let
         key =
             KX.fromCode keyCode
@@ -83,33 +77,31 @@ onGlobalKeyDown config keyCode =
         onEditModeNone =
             case key of
                 ArrowUp ->
-                    returnMsgAsCmd config.focusPrevEntityMsgNew
+                    [ config.focusPrevEntityMsgNew ]
 
                 ArrowDown ->
-                    returnMsgAsCmd config.focusNextEntityMsgNew
+                    [ config.focusNextEntityMsgNew ]
 
                 _ ->
-                    identity
+                    []
     in
-    (\editMode ->
-        case editMode of
-            ExclusiveMode.Types.XMNone ->
-                onEditModeNone
+    case xMode of
+        ExclusiveMode.Types.XMNone ->
+            onEditModeNone
 
-            _ ->
-                identity
-    )
-        |> returnWith .editMode
+        _ ->
+            []
 
 
-onGlobalKeyUp config keyCode =
+onGlobalKeyUp config exMode keyCode =
     let
         key =
             KX.fromCode keyCode
 
         clear =
-            map Models.Selection.clearSelection
-                >> returnMsgAsCmd config.revertExclusiveModeMsg
+            [ config.clearSelectionMsg
+            , config.revertExclusiveModeMsg
+            ]
 
         onEditModeNone =
             case key of
@@ -120,24 +112,20 @@ onGlobalKeyUp config keyCode =
                     clear
 
                 CharQ ->
-                    returnMsgAsCmd
-                        config.onStartAddingTodoWithFocusInEntityAsReference
+                    [ config.onStartAddingTodoWithFocusInEntityAsReference ]
 
                 CharI ->
-                    returnMsgAsCmd config.onStartAddingTodoToInbox
+                    [ config.onStartAddingTodoToInbox ]
 
                 _ ->
-                    identity
+                    []
     in
-    (\exMode ->
-        case ( key, exMode ) of
-            ( _, ExclusiveMode.Types.XMNone ) ->
-                onEditModeNone
+    case ( key, exMode ) of
+        ( _, ExclusiveMode.Types.XMNone ) ->
+            onEditModeNone
 
-            ( Escape, _ ) ->
-                returnMsgAsCmd config.revertExclusiveModeMsg
+        ( Escape, _ ) ->
+            [ config.revertExclusiveModeMsg ]
 
-            _ ->
-                identity
-    )
-        |> returnWith .editMode
+        _ ->
+            []

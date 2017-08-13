@@ -13,7 +13,7 @@ import X.Record exposing (set)
 import XUpdate as U
 
 
-type ExclusiveModeMsg
+type Msg
     = OnSetExclusiveMode ExclusiveMode
     | OnRevertExclusiveMode
     | OnSaveExclusiveModeForm
@@ -32,9 +32,9 @@ type alias Config msg a =
 
 update :
     Config msg a
-    -> ExclusiveModeMsg
+    -> Msg
     -> Model
-    -> U.Return ExclusiveMode ExclusiveModeMsg msg
+    -> U.Return ExclusiveMode Msg msg
 update config msg model =
     case msg of
         OnSetExclusiveMode newModel ->

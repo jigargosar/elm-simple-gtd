@@ -1,5 +1,5 @@
-    9058 total
-     657 src/elm/Main.elm
+    9049 total
+     660 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
      337 src/elm/Store.elm
@@ -22,11 +22,11 @@
      148 src/elm/X/Keyboard.elm
      147 src/elm/Update/GroupDoc.elm
      146 src/elm/X/Function.elm
-     143 src/elm/Update/Keyboard.elm
      142 src/elm/X/Record.elm
      140 src/elm/X/Return.elm
      136 src/elm/Views/Landing.elm
      135 src/elm/Stores.elm
+     131 src/elm/Update/Keyboard.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm

@@ -8,7 +8,7 @@ import Document exposing (..)
 import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (..)
-import ExclusiveMode.Update exposing (ExclusiveModeMsg)
+import ExclusiveMode.Update as UExclusiveMode
 import Firebase.Model exposing (FirebaseModel)
 import Firebase.Update exposing (..)
 import GroupDoc exposing (..)
@@ -37,7 +37,7 @@ import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.GroupDoc exposing (..)
-import Update.Keyboard exposing (KeyboardMsg)
+import Update.Keyboard as UKeyboard
 import Update.Todo exposing (TodoMsg)
 import ViewModel.EntityList
 import ViewModel.Frame
@@ -103,8 +103,8 @@ type Msg
     = NOOP
     | OnRevertExclusiveMode
     | OnDebugPort String
-    | OnKeyboardMsg KeyboardMsg
-    | OnExclusiveModeMsg ExclusiveModeMsg
+    | OnKeyboardMsg UKeyboard.Msg
+    | OnExclusiveModeMsg UExclusiveMode.Msg
     | OnAppHeaderMsg MainMenuMsg
     | OnEntityListMsg EntityList.Msg
     | OnGroupDocMsg GroupDocMsg
@@ -147,7 +147,7 @@ revertExclusiveModeMsg =
 
 onSaveExclusiveModeForm : Msg
 onSaveExclusiveModeForm =
-    ExclusiveMode.Update.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
+    UExclusiveMode.OnSaveExclusiveModeForm |> OnExclusiveModeMsg
 
 
 setFocusInEntityWithEntityIdMsg : EntityId -> Msg
@@ -170,7 +170,7 @@ subscriptions model =
     Sub.batch
         [ Ports.debugPort OnDebugPort
         , everyXSeconds 60 SetLastKnownTimeStamp
-        , Update.Keyboard.subscriptions |> Sub.map OnKeyboardMsg
+        , UKeyboard.subscriptions |> Sub.map OnKeyboardMsg
         , Stores.subscriptions |> Sub.map OnStoresMsg
         , Sub.batch
             [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
@@ -232,9 +232,9 @@ initModel flags =
 
 type alias UpdateConfig msg =
     Overlays.MainMenu.Config msg
-        (ExclusiveMode.Update.Config msg
+        (UExclusiveMode.Config msg
             (Firebase.Update.Config msg
-                (Update.Keyboard.Config msg
+                (UKeyboard.Config msg
                     (Update.Todo.Config msg
                         (Update.GroupDoc.Config msg
                             { navigateToPathMsg : List String -> msg
@@ -251,7 +251,7 @@ createUpdateConfig model =
     { onStartAddingTodoToInbox = Update.Todo.onStartAddingTodoToInbox |> OnTodoMsg
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
-    , onSetExclusiveMode = ExclusiveMode.Update.OnSetExclusiveMode >> OnExclusiveModeMsg
+    , onSetExclusiveMode = UExclusiveMode.OnSetExclusiveMode >> OnExclusiveModeMsg
     , revertExclusiveModeMsg = revertExclusiveModeMsg
     , onStartSetupAddTodo = Update.Todo.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
@@ -319,7 +319,7 @@ updateReturnF config msg =
             identity
 
         OnRevertExclusiveMode ->
-            returnMsgAsCmd (OnExclusiveModeMsg ExclusiveMode.Update.OnRevertExclusiveMode)
+            returnMsgAsCmd (OnExclusiveModeMsg UExclusiveMode.OnRevertExclusiveMode)
                 >> returnMsgAsCmd (OnEntityListMsg EntityList.OnFocusEntityList)
 
         OnDebugPort cmdString ->
@@ -372,7 +372,10 @@ updateReturnF config msg =
             map (\model -> { model | lastKnownCurrentTime = now })
 
         OnKeyboardMsg msg_ ->
-            Update.Keyboard.update config msg_
+            andThen
+                (\model ->
+                    pure model |> updateAll (UKeyboard.update config model msg_)
+                )
 
         OnGroupDocMsg msg_ ->
             returnWithNow (OnGroupDocMsgWithNow msg_)
@@ -381,10 +384,10 @@ updateReturnF config msg =
             Update.GroupDoc.update config now msg_
 
         OnExclusiveModeMsg msg_ ->
-            --ExclusiveMode.Update.update config msg_
+            --UExclusiveMode.update config msg_
             andThen
                 (updateChild OnExclusiveModeMsg
-                    (ExclusiveMode.Update.update config msg_)
+                    (UExclusiveMode.update config msg_)
                     editModeL
                 )
 

@@ -37,7 +37,7 @@ import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import Update.AppDrawer
 import Update.GroupDoc exposing (..)
-import Update.Subscription exposing (SubscriptionMsg)
+import Update.Keyboard exposing (KeyboardMsg)
 import Update.Todo exposing (TodoMsg)
 import ViewModel.EntityList
 import ViewModel.Frame
@@ -103,7 +103,7 @@ type Msg
     = NOOP
     | OnRevertExclusiveMode
     | OnDebugPort String
-    | OnSubscriptionMsg SubscriptionMsg
+    | OnKeyboardMsg KeyboardMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
     | OnAppHeaderMsg MainMenuMsg
     | OnEntityListMsg EntityList.Msg
@@ -169,7 +169,7 @@ subscriptions model =
     Sub.batch
         [ Ports.debugPort OnDebugPort
         , everyXSeconds 60 SetLastKnownTimeStamp
-        , Update.Subscription.subscriptions |> Sub.map OnSubscriptionMsg
+        , Update.Keyboard.subscriptions |> Sub.map OnKeyboardMsg
         , Stores.subscriptions |> Sub.map OnStoresMsg
         , Sub.batch
             [ Ports.Todo.notificationClicked Update.Todo.OnReminderNotificationClicked
@@ -233,7 +233,7 @@ type alias UpdateConfig msg =
     Overlays.MainMenu.Config msg
         (ExclusiveMode.Update.Config msg
             (Firebase.Update.Config msg
-                (Update.Subscription.Config msg
+                (Update.Keyboard.Config msg
                     (Update.Todo.Config msg
                         (Update.GroupDoc.Config msg
                             { navigateToPathMsg : List String -> msg
@@ -366,8 +366,8 @@ updateReturnF config msg =
         SetLastKnownTimeStamp now ->
             map (\model -> { model | lastKnownCurrentTime = now })
 
-        OnSubscriptionMsg msg_ ->
-            Update.Subscription.update config msg_
+        OnKeyboardMsg msg_ ->
+            Update.Keyboard.update config msg_
 
         OnGroupDocMsg msg_ ->
             returnWithNow (OnGroupDocMsgWithNow msg_)

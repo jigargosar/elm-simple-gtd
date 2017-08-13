@@ -1,4 +1,4 @@
-module Update.Subscription exposing (..)
+module Update.Keyboard exposing (..)
 
 import Data.TodoDoc exposing (..)
 import Document exposing (DocId)
@@ -20,7 +20,7 @@ import X.Record exposing (..)
 import X.Return exposing (..)
 
 
-type SubscriptionMsg
+type KeyboardMsg
     = OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
 

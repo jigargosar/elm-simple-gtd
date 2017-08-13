@@ -69,6 +69,23 @@ findAndUpdateAllTodos config findFn action now model =
         |> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
 
 
+updateAll :
+    Config msg a
+    -> Set DocId
+    -> TodoAction
+    -> Time
+    -> SubModel model
+    -> SubReturn msg model
+updateAll config docIdSet action now model =
+    let
+        updateFn =
+            Data.TodoDoc.update action
+    in
+    Store.updateAndPersist (always False) now updateFn model.todoStore
+        |> Tuple.mapFirst (setIn model TodoDocStore.todoStoreL)
+        |> returnMsgAsCmd config.recomputeEntityListCursorAfterStoreUpdated
+
+
 updateTodo config action now todoId =
     findAndUpdateAllTodos config (Document.hasId todoId) action now
 

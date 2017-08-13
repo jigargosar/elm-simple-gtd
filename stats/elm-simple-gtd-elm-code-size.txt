@@ -1,9 +1,9 @@
-    9045 total
+    9097 total
      633 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
-     376 src/elm/Update/Todo/Internal.elm
+     393 src/elm/Update/Todo/Internal.elm
+     335 src/elm/Store.elm
      318 src/elm/GroupDoc.elm
-     300 src/elm/Store.elm
      267 src/elm/Mat.elm
      267 src/elm/Data/EntityListFilter.elm
      235 src/elm/AppDrawer/GroupViewModel.elm

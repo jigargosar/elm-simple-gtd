@@ -95,7 +95,7 @@ generator name otherFieldsEncoder decoder deviceId encodedList =
         )
 
 
-upsertIn store doc =
+upsertInCmd store doc =
     pouchDBUpsert ( store.name, doc.id, Document.encode store.otherFieldsEncoder doc )
 
 
@@ -132,14 +132,17 @@ type alias UpdateAllReturnF x =
     UpdateAllReturn x -> UpdateAllReturn x
 
 
-updateAll :
-    Set DocId
-    -> Time
-    -> (Document x -> Document x)
-    -> Store x
-    -> UpdateAllReturn x
-updateAll idSet =
-    findAndUpdateAll (Document.getId >> Set.member # idSet)
+
+{-
+   updateAll :
+       Set DocId
+       -> Time
+       -> (Document x -> Document x)
+       -> Store x
+       -> UpdateAllReturn x
+   updateAll idSet =
+       findAndUpdateAll (Document.getId >> Set.member # idSet)
+-}
 
 
 findAndUpdateAll :
@@ -177,8 +180,40 @@ updateAndPersist pred now updateFn_ store =
 
         persistCmd =
             result
-                |> List.map (Tuple.second >> upsertIn store)
+                |> List.map (Tuple.second >> upsertInCmd store)
                 >> Cmd.batch
+    in
+    ( newStore, persistCmd )
+
+
+upsertDoc doc store =
+    over dict (Dict.insert (Document.getId doc) doc) store
+        |> addUpsertDocCmd doc
+
+
+addUpsertDocCmd doc store =
+    ( store, upsertInCmd store doc )
+
+
+update id now updateFn store =
+    let
+        decoratedUpdateFn =
+            getUpdateFnDecorator updateFn now store
+
+        updateHelp doc =
+            upsertDoc (decoratedUpdateFn doc) store
+    in
+    findById id store ?|> updateHelp
+
+
+updateAll idSet now updateFn store =
+    let
+        ( newStore, persistCmd ) =
+            let
+                _ =
+                    1
+            in
+            ( store, Cmd.none )
     in
     ( newStore, persistCmd )
 
@@ -193,7 +228,7 @@ decode encodedDoc store =
 getUpsertInPouchDbOnFirebaseChangeCmd : D.Value -> Store x -> Cmd msg
 getUpsertInPouchDbOnFirebaseChangeCmd jsonValue store =
     decode jsonValue store
-        ?|> upsertIn store
+        ?|> upsertInCmd store
         ?= Cmd.none
 
 
@@ -241,7 +276,7 @@ insert constructor store =
 insertAndPersist : (DeviceId -> DocId -> Document x) -> Store x -> ( Store x, Cmd msg )
 insertAndPersist constructor store =
     insert constructor store
-        |> Tuple2.mapFirst (upsertIn store)
+        |> Tuple2.mapFirst (upsertInCmd store)
         |> Tuple2.swap
 
 

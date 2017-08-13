@@ -256,6 +256,11 @@ mainUpdateAll config msgList =
     List.foldl (updateReturnF config) # msgList
 
 
+updateAll : List Msg -> Model -> Return Msg Model
+updateAll msgList model =
+    List.foldl (\msg ret -> ret |> andThenUpdate msg) ( model, Cmd.none ) msgList
+
+
 mainUpdateChild childMsgWrapper childUpdateFn childL config model =
     childUpdateFn (get childL model)
         |> (\( childModel, cmdList, msgList ) ->
@@ -270,7 +275,7 @@ andThenUpdate =
     update >> andThen
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Return Msg Model
 update msg model =
     let
         config =

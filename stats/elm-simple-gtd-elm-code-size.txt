@@ -1,5 +1,5 @@
-    9107 total
-     641 src/elm/Main.elm
+    9112 total
+     646 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      393 src/elm/Update/Todo/Internal.elm
      337 src/elm/Store.elm

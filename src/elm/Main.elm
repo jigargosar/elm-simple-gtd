@@ -266,13 +266,31 @@ mainUpdateChild childMsgWrapper childUpdateFn childL config model =
            )
 
 
+andThenUpdate =
+    update >> andThen
+
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     let
-        updateConfig =
+        config =
             createUpdateConfig model
+
+        defRet =
+            pure model
     in
-    model |> pure >> mainUpdate updateConfig msg
+    case msg of
+        NOOP ->
+            defRet
+
+        OnRevertExclusiveMode ->
+            defRet
+                |> andThenUpdate
+                    (OnExclusiveModeMsg ExclusiveMode.Update.OnRevertExclusiveMode)
+                |> andThenUpdate (OnEntityListMsg EntityList.OnFocusEntityList)
+
+        _ ->
+            defRet |> mainUpdate config msg
 
 
 mainUpdate : UpdateConfig Msg -> Msg -> ReturnF Msg Model

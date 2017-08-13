@@ -197,10 +197,11 @@ addUpsertDocCmd doc store =
 
 update id now updateFn store =
     let
-        decoratedUpdateFn =
-            getUpdateFnDecorator updateFn now store
-
         updateHelp doc =
+            let
+                decoratedUpdateFn =
+                    getUpdateFnDecorator updateFn now store
+            in
             upsertDoc (decoratedUpdateFn doc) store
     in
     findById id store ?|> updateHelp
@@ -211,7 +212,14 @@ updateAll idSet now updateFn store =
         ( newStore, persistCmd ) =
             let
                 _ =
-                    1
+                    idSet
+                        |> Set.foldl
+                            (\docId ( store, cmd ) ->
+                                update docId now updateFn store
+                                    ?|> Tuple.mapSecond (\newCmd -> Cmd.batch [ cmd, newCmd ])
+                                    ?= ( store, cmd )
+                            )
+                            ( store, Cmd.none )
             in
             ( store, Cmd.none )
     in

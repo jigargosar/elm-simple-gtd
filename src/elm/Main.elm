@@ -256,18 +256,18 @@ mainUpdateAll config msgList =
     List.foldl (updateReturnF config) # msgList
 
 
-updateAll : List Msg -> Model -> Return Msg Model
-updateAll msgList model =
-    List.foldl (\msg ret -> ret |> andThenUpdate msg) ( model, Cmd.none ) msgList
+updateAll : List Msg -> ReturnF Msg Model
+updateAll msgList ret =
+    List.foldl (\msg ret -> ret |> andThenUpdate msg) ret msgList
 
 
-mainUpdateChild childMsgWrapper childUpdateFn childL config model =
+mainUpdateChild childMsgWrapper childUpdateFn childL model =
     childUpdateFn (get childL model)
         |> (\( childModel, cmdList, msgList ) ->
                 ( set childL childModel model
                 , Cmd.batch cmdList |> Cmd.map childMsgWrapper
                 )
-                    |> mainUpdateAll config msgList
+                    |> updateAll msgList
            )
 
 
@@ -335,7 +335,6 @@ updateReturnF config msg =
                 (mainUpdateChild OnStoresMsg
                     (Stores.update config storeMsg)
                     storesF
-                    config
                 )
 
         OnMdl msg_ ->
@@ -359,7 +358,6 @@ updateReturnF config msg =
                 (mainUpdateChild OnExclusiveModeMsg
                     (ExclusiveMode.Update.update config msg_)
                     editModeL
-                    config
                 )
 
         OnAppHeaderMsg msg_ ->
@@ -380,7 +378,6 @@ updateReturnF config msg =
                 (mainUpdateChild OnFirebaseMsg
                     (Firebase.Update.update config msg_)
                     firebaseModelL
-                    config
                 )
 
         OnAppDrawerMsg msg_ ->

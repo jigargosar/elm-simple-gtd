@@ -127,8 +127,7 @@ onStartAddingTodoWithFocusInEntityAsReferenceOld model =
 
 
 revertExclusiveModeMsg =
-    ExclusiveMode.Update.OnRevertExclusiveMode
-        |> OnExclusiveModeMsg
+    OnRevertExclusiveMode
 
 
 onSaveExclusiveModeForm : Msg
@@ -274,7 +273,7 @@ mainUpdate config msg =
             identity
 
         OnRevertExclusiveMode ->
-            returnMsgAsCmd config.revertExclusiveModeMsg
+            returnMsgAsCmd (OnExclusiveModeMsg ExclusiveMode.Update.OnRevertExclusiveMode)
                 >> returnMsgAsCmd (OnEntityListMsg EntityList.OnFocusEntityList)
 
         OnDebugPort cmdString ->

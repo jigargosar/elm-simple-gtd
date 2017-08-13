@@ -49,6 +49,7 @@ import X.Random
 import X.Record exposing (..)
 import X.Return exposing (..)
 import X.Set
+import XUpdate
 
 
 type Page
@@ -251,20 +252,29 @@ createUpdateConfig model =
     }
 
 
-mainUpdateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
-mainUpdateAll config msgList =
-    List.foldl (updateReturnF config) # msgList
-
-
 updateAll : List Msg -> ReturnF Msg Model
 updateAll msgList ret =
     List.foldl (\msg ret -> ret |> andThenUpdate msg) ret msgList
 
 
 updateChild childMsgWrapper childUpdateFn childL model =
-    childUpdateFn (get childL model)
+    updateChildHelp
+        childMsgWrapper
+        (childUpdateFn (get childL model))
+        (set childL)
+        model
+
+
+updateChildHelp :
+    (msg -> Msg)
+    -> XUpdate.Return model msg Msg
+    -> (model -> Model -> Model)
+    -> Model
+    -> Return Msg Model
+updateChildHelp childMsgWrapper childReturn setChild model =
+    childReturn
         |> (\( childModel, cmdList, msgList ) ->
-                ( set childL childModel model
+                ( setChild childModel model
                 , Cmd.batch cmdList |> Cmd.map childMsgWrapper
                 )
                     |> updateAll msgList
@@ -388,7 +398,7 @@ updateReturnF config msg =
             overReturnFMapCmd appDrawerModel OnAppDrawerMsg (Update.AppDrawer.update msg_)
 
         _ ->
-            returnWith .page (updatePage config msg)
+            andThen (updatePage config msg)
 
 
 onNavigateToPath config path =
@@ -446,25 +456,20 @@ pageFL =
     fieldLens .page (\s b -> { b | page = s })
 
 
-updatePage config msg page =
-    case ( page, msg ) of
+updatePage config msg model =
+    case ( model.page, msg ) of
         ( EntityList pageModel, OnEntityListMsg pageMsg ) ->
-            andThen
-                (\model ->
-                    EntityList.update config
-                        model
-                        pageMsg
-                        pageModel
-                        |> (\( pageModel, cmdList, msgList ) ->
-                                ( { model | page = EntityList pageModel }
-                                , Cmd.batch cmdList |> Cmd.map OnEntityListMsg
-                                )
-                                    |> updateAll msgList
-                           )
+            updateChildHelp OnEntityListMsg
+                (EntityList.update config
+                    model
+                    pageMsg
+                    pageModel
                 )
+                (\pageModel model -> { model | page = EntityList pageModel })
+                model
 
         _ ->
-            identity
+            model ! []
 
 
 type alias ViewConfig msg =

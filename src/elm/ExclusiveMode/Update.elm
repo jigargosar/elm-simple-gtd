@@ -10,7 +10,7 @@ import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (set)
-import XUpdate
+import XUpdate as U
 
 
 type ExclusiveModeMsg
@@ -34,11 +34,11 @@ update :
     Config msg a
     -> ExclusiveModeMsg
     -> Model
-    -> XUpdate.Return ExclusiveMode ExclusiveModeMsg msg
+    -> U.Return ExclusiveMode ExclusiveModeMsg msg
 update config msg model =
     case msg of
         OnSetExclusiveMode newModel ->
-            XUpdate.pure newModel
+            U.pure newModel
 
         OnRevertExclusiveMode ->
             update config (OnSetExclusiveMode XMNone) model
@@ -56,5 +56,5 @@ update config msg model =
                         _ ->
                             []
             in
-            XUpdate.pure model
-                |> XUpdate.addMsgList configMsgList
+            U.pure model
+                |> U.addMsgList configMsgList

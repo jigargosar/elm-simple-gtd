@@ -38,7 +38,7 @@ subscriptions =
 type alias Config msg a =
     { a
         | onStartSetupAddTodo : msg
-        , revertExclusiveMode : msg
+        , revertExclusiveModeMsg : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , isTodoStoreEmpty : Bool
     }
@@ -63,7 +63,7 @@ update config msg model =
                     else if config.isTodoStoreEmpty then
                         config.onStartSetupAddTodo
                     else
-                        config.revertExclusiveMode
+                        config.revertExclusiveModeMsg
             in
             defRet |> U.addMsg onSwitchToNewUserSetupModeIfNeeded
 

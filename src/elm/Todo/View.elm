@@ -24,7 +24,7 @@ editTodoTextView config form =
     in
     div
         [ class "overlay"
-        , onClickStopPropagation config.revertExclusiveMode
+        , onClickStopPropagation config.revertExclusiveModeMsg
         , onKeyDownStopPropagation (\_ -> config.noop)
         ]
         [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
@@ -47,7 +47,7 @@ editTodoTextView config form =
 new config form =
     div
         [ class "overlay"
-        , onClickStopPropagation config.revertExclusiveMode
+        , onClickStopPropagation config.revertExclusiveModeMsg
         , onKeyDownStopPropagation (\_ -> config.noop)
         ]
         [ div [ class "modal fixed-center", onClickStopPropagation config.noop ]
@@ -70,7 +70,7 @@ new config form =
 editTodoSchedulePopupView config form =
     div
         [ class "overlay"
-        , onClickStopPropagation config.revertExclusiveMode
+        , onClickStopPropagation config.revertExclusiveModeMsg
         , onKeyDownStopPropagation (\_ -> config.noop)
         ]
         [ div

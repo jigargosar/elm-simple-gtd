@@ -239,7 +239,7 @@ okCancelArchiveButtons config isArchived archiveMsg =
 okCancelButtonsWith config list =
     div [ HA.class "layout horizontal-reverse" ]
         ([ okButton config.onSaveExclusiveModeForm
-         , cancelButton config.revertExclusiveMode
+         , cancelButton config.revertExclusiveModeMsg
          ]
             ++ list
         )

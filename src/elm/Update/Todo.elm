@@ -146,11 +146,11 @@ update config now msg =
 
         UpdateTodoOrAllSelected__ todoId action ->
             (updateTodoAndMaybeAlsoSelected action now todoId |> andThen)
-                >> returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         UpdateTodo__ todoId action ->
             (updateAllTodos action now (Set.singleton todoId) |> andThen)
-                >> returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         OnTodoReminderOverlayAction action ->
             reminderOverlayAction action now
@@ -166,4 +166,4 @@ update config now msg =
 
         OnSaveTodoForm form ->
             onSaveTodoForm config form now
-                >> returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveModeMsg

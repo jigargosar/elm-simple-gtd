@@ -58,7 +58,7 @@ type alias Config msg a =
     { a
         | onStartAddingTodoToInbox : msg
         , onStartAddingTodoWithFocusInEntityAsReference : msg
-        , revertExclusiveMode : msg
+        , revertExclusiveModeMsg : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
     }
@@ -111,7 +111,7 @@ onGlobalKeyUp config keyCode =
 
         clear =
             map Models.Selection.clearSelection
-                >> returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         onEditModeNone =
             case key of
@@ -137,7 +137,7 @@ onGlobalKeyUp config keyCode =
                 onEditModeNone
 
             ( Escape, _ ) ->
-                returnMsgAsCmd config.revertExclusiveMode
+                returnMsgAsCmd config.revertExclusiveModeMsg
 
             _ ->
                 identity

@@ -87,6 +87,7 @@ editModeL =
 
 type Msg
     = NOOP
+    | OnRevertExclusiveMode
     | OnDebugPort String
     | OnSubscriptionMsg SubscriptionMsg
     | OnExclusiveModeMsg ExclusiveModeMsg
@@ -237,7 +238,7 @@ createUpdateConfig model =
     , onStartAddingTodoWithFocusInEntityAsReference =
         onStartAddingTodoWithFocusInEntityAsReferenceOld model
     , onSetExclusiveMode = ExclusiveMode.Update.OnSetExclusiveMode >> OnExclusiveModeMsg
-    , revertExclusiveMode = revertExclusiveModeMsg
+    , revertExclusiveModeMsg = revertExclusiveModeMsg
     , onStartSetupAddTodo = Update.Todo.onStartSetupAddTodo |> OnTodoMsg
     , setFocusInEntityWithEntityId = setFocusInEntityWithEntityIdMsg
     , saveTodoFormMsg = Update.Todo.OnSaveTodoForm >> OnTodoMsg
@@ -253,7 +254,7 @@ createUpdateConfig model =
 
 updateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
 updateAll config msgList =
-    List.foldl (update config) # msgList
+    List.foldl (mainUpdate config) # msgList
 
 
 updateChild childMsgWrapper childUpdateFn childL config model =
@@ -266,11 +267,15 @@ updateChild childMsgWrapper childUpdateFn childL config model =
            )
 
 
-update : UpdateConfig Msg -> Msg -> ReturnF Msg Model
-update config msg =
+mainUpdate : UpdateConfig Msg -> Msg -> ReturnF Msg Model
+mainUpdate config msg =
     case msg of
         NOOP ->
             identity
+
+        OnRevertExclusiveMode ->
+            returnMsgAsCmd config.revertExclusiveModeMsg
+                >> returnMsgAsCmd (OnEntityListMsg EntityList.OnFocusEntityList)
 
         OnDebugPort cmdString ->
             case cmdString of
@@ -374,7 +379,7 @@ onNavigateToPath config path =
         setPage page =
             map (set pageFL page)
                 >> map Models.Selection.clearSelection
-                >> returnMsgAsCmd config.revertExclusiveMode
+                >> returnMsgAsCmd config.revertExclusiveModeMsg
 
         revertPath path =
             path
@@ -477,7 +482,7 @@ type alias ViewConfig msg =
     , onToggleDoneAndMaybeSelection : DocId -> msg
     , onToggleEntitySelection : Entity.EntityId -> msg
     , onToggleGroupDocArchived : GroupDocId -> msg
-    , revertExclusiveMode : msg
+    , revertExclusiveModeMsg : msg
     , setFocusInEntityWithEntityId : Entity.EntityId -> msg
     , updateGroupDocFromNameMsg :
         GroupDocForm -> GroupDocName -> msg
@@ -496,7 +501,7 @@ createViewConfig model =
     , onSetContext = Update.Todo.onSetContextAndMaybeSelectionMsg >>> OnTodoMsg
     , onSetTodoFormMenuState = Update.Todo.onSetTodoFormMenuStateMsg >>> OnTodoMsg
     , noop = NOOP
-    , revertExclusiveMode = revertExclusiveModeMsg
+    , revertExclusiveModeMsg = revertExclusiveModeMsg
     , onSetTodoFormText = Update.Todo.onSetTodoFormTextMsg >>> OnTodoMsg
     , onToggleDeleted = Update.Todo.onToggleDeletedMsg >> OnTodoMsg
     , onSetTodoFormReminderDate = Update.Todo.onSetTodoFormReminderDateMsg >>> OnTodoMsg
@@ -614,7 +619,7 @@ main =
                 updateConfig =
                     createUpdateConfig model
             in
-            model |> pure >> update updateConfig msg
+            model |> pure >> mainUpdate updateConfig msg
     in
     RouteUrl.programWithFlags
         { delta2url = delta2hash

@@ -45,7 +45,7 @@ type alias SubReturnF msg model =
 type alias Config msg a =
     { a
         | setFocusInEntityWithEntityId : EntityId -> msg
-        , revertExclusiveMode : msg
+        , revertExclusiveModeMsg : msg
         , onSetExclusiveMode : ExclusiveMode -> msg
         , goToEntityIdCmd : EntityId -> Cmd msg
         , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg

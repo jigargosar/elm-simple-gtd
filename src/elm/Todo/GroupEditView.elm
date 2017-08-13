@@ -13,7 +13,7 @@ type alias Config msg =
     , onSetContext : DocId -> msg
     , onSetTodoFormMenuState : MenuState -> msg
     , noop : msg
-    , revertExclusiveMode : msg
+    , revertExclusiveModeMsg : msg
     }
 
 
@@ -25,7 +25,7 @@ createProjectMenuConfig config form =
     , itemView = GroupDoc.getName >> text
     , onStateChanged = config.onSetTodoFormMenuState form
     , noOp = config.noop
-    , onOutsideMouseDown = config.revertExclusiveMode
+    , onOutsideMouseDown = config.revertExclusiveModeMsg
     }
 
 
@@ -41,7 +41,7 @@ createContextMenuConfig config form =
     , itemView = GroupDoc.getName >> text
     , onStateChanged = config.onSetTodoFormMenuState form
     , noOp = config.noop
-    , onOutsideMouseDown = config.revertExclusiveMode
+    , onOutsideMouseDown = config.revertExclusiveModeMsg
     }
 
 

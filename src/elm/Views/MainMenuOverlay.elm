@@ -29,7 +29,7 @@ menuConfig config menuState =
     , itemView = itemView
     , onStateChanged = config.onMainMenuStateChanged
     , noOp = config.noop
-    , onOutsideMouseDown = config.revertExclusiveMode
+    , onOutsideMouseDown = config.revertExclusiveModeMsg
     }
 
 
@@ -45,7 +45,7 @@ itemView ( textV, itemType ) =
 onItemSelect config ( _, itemType ) =
     case itemType of
         URLItem url ->
-            config.revertExclusiveMode
+            config.revertExclusiveModeMsg
 
         MsgItem msg ->
             msg

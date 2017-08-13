@@ -35,7 +35,7 @@ init config form =
             config.onSaveExclusiveModeForm
 
         fireCancel =
-            config.revertExclusiveMode
+            config.revertExclusiveModeMsg
 
         fireToggleArchive =
             config.onToggleGroupDocArchived form.groupDocId

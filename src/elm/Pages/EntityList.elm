@@ -12,7 +12,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
 import X.Record exposing (..)
-import XUpdate
+import XUpdate as U
 
 
 type alias ModelRecord =
@@ -122,6 +122,7 @@ type Msg
     | OnSetCursorEntityId EntityId
     | OnFocusListCursorAfterChangesReceivedFromPouchDBMsg
     | OnGoToEntityId EntityId
+    | OnFocusEntityList
 
 
 type alias HasStores x =
@@ -137,12 +138,12 @@ update :
     -> HasStores x
     -> Msg
     -> Model
-    -> XUpdate.Return Model Msg msg
+    -> U.Return Model Msg msg
 update config appModel msg model =
     let
         defRet : ( Model, List (Cmd Msg), List msg )
         defRet =
-            XUpdate.pure model
+            U.pure model
 
         updateDefRet msg =
             update config appModel msg model
@@ -160,13 +161,16 @@ update config appModel msg model =
                         (getFilter model)
             in
             defRet
-                |> XUpdate.map (set cursorL cursor)
+                |> U.map (set cursorL cursor)
+
+        OnFocusEntityList ->
+            defRet |> U.addCmd focusEntityListCmd
 
         OnMoveFocusBy offset ->
             Cursor.findEntityIdByOffsetIndex offset (getCursor model)
                 ?|> (\entityId ->
                         updateDefRet (OnSetCursorEntityId entityId)
-                            |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                            |> U.addCmd (focusEntityIdCmd entityId)
                     )
                 ?= defRet
 
@@ -174,7 +178,7 @@ update config appModel msg model =
             computeNewMaybeCursorEntityId appModel model
                 ?|> (\entityId ->
                         updateDefRet (OnSetCursorEntityId entityId)
-                            |> XUpdate.addCmd (focusEntityIdCmd entityId)
+                            |> U.addCmd (focusEntityIdCmd entityId)
                     )
                 ?= defRet
 
@@ -196,8 +200,8 @@ update config appModel msg model =
                     Filter.toPath filter
             in
             defRet
-                |> XUpdate.addCmd (focusEntityIdCmd entityId)
-                |> XUpdate.addMsg (config.navigateToPathMsg path)
+                |> U.addCmd (focusEntityIdCmd entityId)
+                |> U.addMsg (config.navigateToPathMsg path)
 
 
 focusEntityIdCmd entityId =

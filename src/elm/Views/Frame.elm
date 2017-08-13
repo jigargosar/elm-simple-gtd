@@ -21,6 +21,15 @@ import Views.TDGetStartedOverlay
 import X.Function.Infix exposing (..)
 
 
+init frameVM =
+    div [ cs "mdl-typography--body-1" ]
+        ([ appLayoutView frameVM.config frameVM frameVM.pageContent
+         , newTodoFab frameVM.config frameVM.model
+         ]
+            ++ overlayViews frameVM.config frameVM.model
+        )
+
+
 appMainHeader config frameVM =
     div
         [ id "layout-main-header"
@@ -203,12 +212,3 @@ newTodoFab config m =
             , div [ cs "mdl-typography--body-1" ] [ text "Add To Inbox (i)" ]
             ]
         ]
-
-
-init frameVM =
-    div [ cs "mdl-typography--body-1" ]
-        ([ appLayoutView frameVM.config frameVM frameVM.pageContent
-         , newTodoFab frameVM.config frameVM.model
-         ]
-            ++ overlayViews frameVM.config frameVM.model
-        )

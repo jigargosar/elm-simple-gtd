@@ -21,9 +21,7 @@ import X.Return exposing (..)
 
 
 type SubscriptionMsg
-    = OnPouchDBChange String E.Value
-    | OnFirebaseDatabaseChange String E.Value
-    | OnGlobalKeyUp Int
+    = OnGlobalKeyUp Int
     | OnGlobalKeyDown Int
 
 
@@ -63,7 +61,6 @@ type alias Config msg a =
         , revertExclusiveMode : msg
         , focusNextEntityMsgNew : msg
         , focusPrevEntityMsgNew : msg
-        , recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg : msg
     }
 
 
@@ -73,21 +70,11 @@ type alias Config msg a =
 
 update config msg =
     case msg of
-        OnPouchDBChange dbName encodedDoc ->
-            onPouchDBChange config dbName encodedDoc
-
-        OnFirebaseDatabaseChange dbName encodedDoc ->
-            onFirebaseDatabaseChange dbName encodedDoc
-
         OnGlobalKeyUp keyCode ->
             onGlobalKeyUp config keyCode
 
         OnGlobalKeyDown keyCode ->
             onGlobalKeyDown config keyCode
-
-
-onFirebaseDatabaseChange dbName encodedDoc =
-    effect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)
 
 
 onGlobalKeyDown config keyCode =
@@ -156,53 +143,3 @@ onGlobalKeyUp config keyCode =
                 identity
     )
         |> returnWith .editMode
-
-
-onPouchDBChange config dbName encodedDoc =
-    let
-        afterEntityUpsertOnPouchDBChange ( entity, model ) =
-            map (\_ -> model)
-                >> (case entity of
-                        TodoEntity todo ->
-                            identity
-
-                        _ ->
-                            identity
-                   )
-    in
-    returnWithMaybe2 identity
-        (upsertEncodedDocOnPouchDBChange dbName encodedDoc >>? afterEntityUpsertOnPouchDBChange)
-        >> returnMsgAsCmd config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
-
-
-upsertEncodedDocOnPouchDBChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            maybeOverT2 TodoDocStore.todoStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createTodoEntity
-
-        "project-db" ->
-            maybeOverT2 projectStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createProjectEntity
-
-        "context-db" ->
-            maybeOverT2 contextStore (Store.upsertInMemoryOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst createContextEntity
-
-        _ ->
-            \_ -> Nothing
-
-
-upsertEncodedDocOnFirebaseDatabaseChange dbName encodedEntity =
-    case dbName of
-        "todo-db" ->
-            .todoStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
-
-        "project-db" ->
-            .projectStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
-
-        "context-db" ->
-            .contextStore >> Store.getUpsertInPouchDbOnFirebaseChangeCmd encodedEntity
-
-        _ ->
-            \_ -> Cmd.none

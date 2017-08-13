@@ -92,8 +92,8 @@ update config msg model =
             upsertEncodedDocOnPouchDBChange dbName encodedDoc model
                 ?|> (Tuple.second >> U.pure)
                 ?= defRet
-                |> U.addMsg config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
 
+        --                |> U.addMsg config.recomputeEntityListCursorAfterChangesReceivedFromPouchDBMsg
         OnFirebaseDatabaseChange dbName encodedDoc ->
             defRet
                 |> U.addEffect (upsertEncodedDocOnFirebaseDatabaseChange dbName encodedDoc)

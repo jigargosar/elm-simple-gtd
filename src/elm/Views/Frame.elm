@@ -85,7 +85,7 @@ overlayViews frameVM =
             frameVM.model
 
         def =
-            span [] []
+            text ""
 
         editModeOverlayView =
             case appModel.editMode of

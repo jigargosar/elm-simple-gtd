@@ -337,7 +337,7 @@ updateReturnF config msg =
                 )
 
         NavigateToPath path ->
-            onNavigateToPath config path
+            onNavigateToPath path
 
         OnStoresMsg storeMsg ->
             let
@@ -414,12 +414,12 @@ updateReturnF config msg =
             andThen (updatePage config msg)
 
 
-onNavigateToPath config path =
+onNavigateToPath path =
     let
         setPage page =
             map (set pageL page)
                 >> map Models.Selection.clearSelection
-                >> returnMsgAsCmd config.revertExclusiveModeMsg
+                >> andThenUpdate revertExclusiveModeMsg
 
         revertPath path =
             path

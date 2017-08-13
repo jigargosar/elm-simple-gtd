@@ -266,6 +266,15 @@ updateChild childMsgWrapper childUpdateFn childL config model =
            )
 
 
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    let
+        updateConfig =
+            createUpdateConfig model
+    in
+    model |> pure >> mainUpdate updateConfig msg
+
+
 mainUpdate : UpdateConfig Msg -> Msg -> ReturnF Msg Model
 mainUpdate config msg =
     case msg of
@@ -609,16 +618,8 @@ main =
                 ( model, cmd ) =
                     initModel flags
             in
-            update_ (OnFirebaseMsg OnFBSwitchToNewUserSetupModeIfNeeded) model
+            update (OnFirebaseMsg OnFBSwitchToNewUserSetupModeIfNeeded) model
                 |> command cmd
-
-        update_ : Msg -> Model -> ( Model, Cmd Msg )
-        update_ msg model =
-            let
-                updateConfig =
-                    createUpdateConfig model
-            in
-            model |> pure >> mainUpdate updateConfig msg
     in
     RouteUrl.programWithFlags
         { delta2url = delta2hash
@@ -627,7 +628,7 @@ main =
                 { navigateToPathMsg = navigateToPathMsg
                 }
         , init = init
-        , update = update_
+        , update = update
         , view = view
         , subscriptions = subscriptions
         }

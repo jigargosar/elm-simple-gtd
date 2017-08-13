@@ -1,4 +1,4 @@
-    9080 total
+    9072 total
      650 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
@@ -28,6 +28,7 @@
      135 src/elm/Stores.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
+     106 src/elm/Views/Frame.elm
      103 src/elm/Todo/View.elm
       98 src/elm/Data/EntityListCursor.elm
       94 src/elm/Views/EntityList.elm
@@ -40,7 +41,6 @@
       77 src/elm/Colors.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/Firebase/Model.elm
-      68 src/elm/View/Layout.elm
       68 src/elm/Todo/ReminderOverlay/View.elm
       67 src/elm/X/List.elm
       64 src/elm/View/Overlays.elm
@@ -64,7 +64,6 @@
       37 src/elm/IconNames.elm
       37 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
-      31 src/elm/View/NewTodoFab.elm
       30 src/elm/Models/Stores.elm
       24 src/elm/ViewModel/Frame.elm
       24 src/elm/EntityId.elm
@@ -78,7 +77,6 @@
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm
       18 src/elm/X/Debug.elm
-      15 src/elm/Views/Frame.elm
       15 src/elm/Ports/Todo.elm
       13 src/elm/ExclusiveMode/Types.elm
       12 src/elm/LocalStorage.elm

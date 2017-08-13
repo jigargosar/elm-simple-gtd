@@ -181,15 +181,14 @@
     ],
     "transitiveImportsCount": 23,
     "backwardImports": [
-      "View.Layout"
+      "Views.Frame"
     ],
     "backwardImportsCount": 1,
     "transitiveBackwardImports": [
       "Main",
-      "View.Layout",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 2
   },
   "AppUrl": {
     "fileName": "src/elm/AppUrl.elm",
@@ -212,7 +211,6 @@
       "AppDrawer.View",
       "Firebase.Update",
       "Main",
-      "View.Layout",
       "View.Overlays",
       "Views.FBSignInOverlay",
       "Views.Frame",
@@ -220,7 +218,7 @@
       "Views.MainMenuOverlay",
       "Views.TDGetStartedOverlay"
     ],
-    "transitiveBackwardImportsCount": 10
+    "transitiveBackwardImportsCount": 9
   },
   "Colors": {
     "fileName": "src/elm/Colors.elm",
@@ -261,8 +259,6 @@
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
       "ViewModel.Frame",
@@ -270,7 +266,7 @@
       "Views.Frame",
       "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 23
+    "transitiveBackwardImportsCount": 21
   },
   "Data.DeviceId": {
     "fileName": "src/elm/Data/DeviceId.elm",
@@ -1810,8 +1806,6 @@
       "Update.Todo",
       "View.Badge",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
       "ViewModel.Frame",
@@ -1840,7 +1834,7 @@
       "X.Time",
       "XUpdate"
     ],
-    "transitiveImportsCount": 128,
+    "transitiveImportsCount": 126,
     "backwardImports": [],
     "backwardImportsCount": 0,
     "transitiveBackwardImports": [],
@@ -1898,7 +1892,7 @@
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.Header",
-      "View.NewTodoFab",
+      "Views.Frame",
       "Views.Landing"
     ],
     "backwardImportsCount": 9,
@@ -1911,14 +1905,12 @@
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList",
       "Views.Frame",
       "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 14
+    "transitiveBackwardImportsCount": 12
   },
   "Menu": {
     "fileName": "src/elm/Menu.elm",
@@ -3763,11 +3755,10 @@
       "AppDrawer.View",
       "GroupDoc.View",
       "Main",
-      "View.Layout",
       "Views.EntityList",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 5
   },
   "View.Header": {
     "fileName": "src/elm/View/Header.elm",
@@ -3806,106 +3797,6 @@
       "X.String"
     ],
     "transitiveImportsCount": 21,
-    "backwardImports": [
-      "View.Layout"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main",
-      "View.Layout",
-      "Views.Frame"
-    ],
-    "transitiveBackwardImportsCount": 3
-  },
-  "View.Layout": {
-    "fileName": "src/elm/View/Layout.elm",
-    "moduleName": "View.Layout",
-    "parentModuleName": "View",
-    "imports": [
-      "AppDrawer.View",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "View.Header",
-      "X.Html"
-    ],
-    "importsCount": 6,
-    "transitiveImports": [
-      "AppDrawer.View",
-      "AppUrl",
-      "Color",
-      "Color.Mixing",
-      "Colors",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Encode",
-      "Mat",
-      "Material",
-      "Material.Button",
-      "Material.Icon",
-      "Material.Options",
-      "String.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "View.Badge",
-      "View.Header",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.String"
-    ],
-    "transitiveImportsCount": 25,
-    "backwardImports": [
-      "Views.Frame"
-    ],
-    "backwardImportsCount": 1,
-    "transitiveBackwardImports": [
-      "Main",
-      "Views.Frame"
-    ],
-    "transitiveBackwardImportsCount": 2
-  },
-  "View.NewTodoFab": {
-    "fileName": "src/elm/View/NewTodoFab.elm",
-    "moduleName": "View.NewTodoFab",
-    "parentModuleName": "View",
-    "imports": [
-      "Color",
-      "Html",
-      "Mat",
-      "Material.Button",
-      "Material.Options",
-      "Material.Tooltip"
-    ],
-    "importsCount": 6,
-    "transitiveImports": [
-      "Color",
-      "Color.Mixing",
-      "Colors",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Encode",
-      "Mat",
-      "Material",
-      "Material.Button",
-      "Material.Icon",
-      "Material.Options",
-      "Material.Tooltip",
-      "String.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.String"
-    ],
-    "transitiveImportsCount": 22,
     "backwardImports": [
       "Views.Frame"
     ],
@@ -4289,12 +4180,17 @@
     "moduleName": "Views.Frame",
     "parentModuleName": "Views",
     "imports": [
+      "AppDrawer.View",
+      "Color",
+      "Html",
+      "Mat",
+      "Material.Button",
       "Material.Options",
-      "View.Layout",
-      "View.NewTodoFab",
+      "Material.Tooltip",
+      "View.Header",
       "View.Overlays"
     ],
-    "importsCount": 4,
+    "importsCount": 9,
     "transitiveImports": [
       "AppDrawer.View",
       "AppUrl",
@@ -4351,8 +4247,6 @@
       "Tuple2",
       "View.Badge",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "Views.FBSignInOverlay",
       "Views.MainMenuOverlay",
@@ -4369,7 +4263,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 72,
+    "transitiveImportsCount": 70,
     "backwardImports": [
       "Main"
     ],
@@ -4749,8 +4643,6 @@
       "Update.Subscription",
       "Update.Todo",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
       "ViewModel.Frame",
@@ -4761,7 +4653,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 57
+    "transitiveBackwardImportsCount": 55
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4853,8 +4745,6 @@
       "Update.Todo",
       "View.Badge",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
       "ViewModel.Frame",
@@ -4865,7 +4755,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 60
+    "transitiveBackwardImportsCount": 58
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -4896,12 +4786,11 @@
       "Todo.ItemView",
       "Todo.ReminderOverlay.View",
       "Todo.View",
-      "View.Layout",
       "Views.FBSignInOverlay",
       "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
-    "backwardImportsCount": 12,
+    "backwardImportsCount": 11,
     "transitiveBackwardImports": [
       "AppDrawer.View",
       "ExclusiveMode.Types",
@@ -4925,8 +4814,6 @@
       "Update.Subscription",
       "Update.Todo",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "ViewModel.EntityList",
       "Views.EntityList",
@@ -4937,7 +4824,7 @@
       "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 33
+    "transitiveBackwardImportsCount": 31
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -5364,14 +5251,12 @@
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.Header",
-      "View.Layout",
-      "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList",
       "Views.Frame",
       "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 13
   },
   "X.Time": {
     "fileName": "src/elm/X/Time.elm",

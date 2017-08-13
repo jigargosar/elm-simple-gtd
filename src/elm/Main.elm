@@ -82,8 +82,21 @@ type alias Model =
     }
 
 
+type alias ModelF =
+    Model -> Model
+
+
 editModeL =
     fieldLens .editMode (\s b -> { b | editMode = s })
+
+
+pageL =
+    fieldLens .page (\s b -> { b | page = s })
+
+
+setEntityListPageModel : EntityList.Model -> ModelF
+setEntityListPageModel pageModel =
+    set pageL (EntityList pageModel)
 
 
 type Msg
@@ -268,7 +281,7 @@ updateChild childMsgWrapper childUpdateFn childL model =
 updateChildHelp :
     (msg -> Msg)
     -> XUpdate.Return model msg Msg
-    -> (model -> Model -> Model)
+    -> (model -> ModelF)
     -> Model
     -> Return Msg Model
 updateChildHelp childMsgWrapper childReturn setChild model =
@@ -404,7 +417,7 @@ updateReturnF config msg =
 onNavigateToPath config path =
     let
         setPage page =
-            map (set pageFL page)
+            map (set pageL page)
                 >> map Models.Selection.clearSelection
                 >> returnMsgAsCmd config.revertExclusiveModeMsg
 
@@ -450,14 +463,6 @@ onNavigateToPath config path =
                         _ ->
                             setEntityListPageOrRevertPath Nothing
         )
-
-
-pageFL =
-    fieldLens .page (\s b -> { b | page = s })
-
-
-setEntityListPageModel pageModel model =
-    { model | page = EntityList pageModel }
 
 
 updatePage config msg model =

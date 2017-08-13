@@ -1,4 +1,4 @@
-    9116 total
+    9096 total
      650 src/elm/Main.elm
      394 src/elm/Data/TodoDoc.elm
      393 src/elm/Update/Todo/Internal.elm
@@ -25,7 +25,7 @@
      145 src/elm/Update/Subscription.elm
      142 src/elm/X/Record.elm
      140 src/elm/X/Return.elm
-     136 src/elm/L/View.elm
+     136 src/elm/Views/Landing.elm
      135 src/elm/Stores.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
@@ -75,7 +75,6 @@
       21 src/elm/Todo/ReminderOverlay/Types.elm
       20 src/elm/Models/TodoDocStore.elm
       20 src/elm/Models/Selection.elm
-      20 src/elm/L/Main.elm
       19 src/elm/RegexHelper.elm
       19 src/elm/Models/HasStores.elm
       18 src/elm/X/Decode.elm

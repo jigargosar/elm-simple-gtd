@@ -202,8 +202,8 @@
     "backwardImports": [
       "AppDrawer.View",
       "Firebase.Update",
-      "L.View",
       "Views.FBSignInOverlay",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "Views.TDGetStartedOverlay"
     ],
@@ -211,17 +211,16 @@
     "transitiveBackwardImports": [
       "AppDrawer.View",
       "Firebase.Update",
-      "L.Main",
-      "L.View",
       "Main",
       "View.Layout",
       "View.Overlays",
       "Views.FBSignInOverlay",
       "Views.Frame",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "Views.TDGetStartedOverlay"
     ],
-    "transitiveBackwardImportsCount": 11
+    "transitiveBackwardImportsCount": 10
   },
   "Colors": {
     "fileName": "src/elm/Colors.elm",
@@ -254,8 +253,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "L.Main",
-      "L.View",
       "Main",
       "Mat",
       "Pages.EntityList",
@@ -270,9 +267,10 @@
       "ViewModel.EntityList",
       "ViewModel.Frame",
       "Views.EntityList",
-      "Views.Frame"
+      "Views.Frame",
+      "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 24
+    "transitiveBackwardImportsCount": 23
   },
   "Data.DeviceId": {
     "fileName": "src/elm/Data/DeviceId.elm",
@@ -1638,94 +1636,6 @@
     ],
     "transitiveBackwardImportsCount": 6
   },
-  "L.Main": {
-    "fileName": "src/elm/L/Main.elm",
-    "moduleName": "L.Main",
-    "parentModuleName": "L",
-    "imports": [
-      "Html",
-      "L.View"
-    ],
-    "importsCount": 2,
-    "transitiveImports": [
-      "AppUrl",
-      "Color",
-      "Color.Mixing",
-      "Colors",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Encode",
-      "L.View",
-      "Mat",
-      "Material",
-      "Material.Button",
-      "Material.Icon",
-      "Material.Options",
-      "String.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.String"
-    ],
-    "transitiveImportsCount": 23,
-    "backwardImports": [],
-    "backwardImportsCount": 0,
-    "transitiveBackwardImports": [],
-    "transitiveBackwardImportsCount": 0
-  },
-  "L.View": {
-    "fileName": "src/elm/L/View.elm",
-    "moduleName": "L.View",
-    "parentModuleName": "L",
-    "imports": [
-      "AppUrl",
-      "Html",
-      "Html.Attributes",
-      "Mat",
-      "Toolkit.Operators"
-    ],
-    "importsCount": 5,
-    "transitiveImports": [
-      "AppUrl",
-      "Color",
-      "Color.Mixing",
-      "Colors",
-      "Html",
-      "Html.Attributes",
-      "Html.Events",
-      "Json.Decode",
-      "Json.Encode",
-      "Mat",
-      "Material",
-      "Material.Button",
-      "Material.Icon",
-      "Material.Options",
-      "String.Extra",
-      "Toolkit.Helpers",
-      "Toolkit.Operators",
-      "Tuple2",
-      "X.Function",
-      "X.Function.Infix",
-      "X.Html",
-      "X.String"
-    ],
-    "transitiveImportsCount": 22,
-    "backwardImports": [
-      "L.Main",
-      "Main"
-    ],
-    "backwardImportsCount": 2,
-    "transitiveBackwardImports": [
-      "L.Main",
-      "Main"
-    ],
-    "transitiveBackwardImportsCount": 2
-  },
   "LocalStorage": {
     "fileName": "src/elm/LocalStorage.elm",
     "moduleName": "LocalStorage",
@@ -1773,7 +1683,6 @@
       "GroupDoc",
       "Html",
       "Json.Encode",
-      "L.View",
       "Material",
       "Maybe.Extra",
       "Menu",
@@ -1803,6 +1712,7 @@
       "ViewModel.Frame",
       "Views.EntityList",
       "Views.Frame",
+      "Views.Landing",
       "X.Function.Infix",
       "X.Random",
       "X.Record",
@@ -1857,7 +1767,6 @@
       "Json.Encode.Extra",
       "Keyboard",
       "Keyboard.Extra",
-      "L.View",
       "List",
       "List.Extra",
       "Mat",
@@ -1921,6 +1830,7 @@
       "Views.EntityList",
       "Views.FBSignInOverlay",
       "Views.Frame",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "Views.TDGetStartedOverlay",
       "Window",
@@ -1996,20 +1906,18 @@
       "AppDrawer.View",
       "GroupDoc.FormView",
       "GroupDoc.View",
-      "L.View",
       "Todo.ItemView",
       "Todo.ReminderOverlay.View",
       "Todo.View",
       "View.Header",
-      "View.NewTodoFab"
+      "View.NewTodoFab",
+      "Views.Landing"
     ],
     "backwardImportsCount": 9,
     "transitiveBackwardImports": [
       "AppDrawer.View",
       "GroupDoc.FormView",
       "GroupDoc.View",
-      "L.Main",
-      "L.View",
       "Main",
       "Todo.ItemView",
       "Todo.ReminderOverlay.View",
@@ -2019,9 +1927,10 @@
       "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList",
-      "Views.Frame"
+      "Views.Frame",
+      "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 15
+    "transitiveBackwardImportsCount": 14
   },
   "Menu": {
     "fileName": "src/elm/Menu.elm",
@@ -4584,6 +4493,52 @@
     ],
     "transitiveBackwardImportsCount": 1
   },
+  "Views.Landing": {
+    "fileName": "src/elm/Views/Landing.elm",
+    "moduleName": "Views.Landing",
+    "parentModuleName": "Views",
+    "imports": [
+      "AppUrl",
+      "Html",
+      "Html.Attributes",
+      "Mat",
+      "Toolkit.Operators"
+    ],
+    "importsCount": 5,
+    "transitiveImports": [
+      "AppUrl",
+      "Color",
+      "Color.Mixing",
+      "Colors",
+      "Html",
+      "Html.Attributes",
+      "Html.Events",
+      "Json.Decode",
+      "Json.Encode",
+      "Mat",
+      "Material",
+      "Material.Button",
+      "Material.Icon",
+      "Material.Options",
+      "String.Extra",
+      "Toolkit.Helpers",
+      "Toolkit.Operators",
+      "Tuple2",
+      "X.Function",
+      "X.Function.Infix",
+      "X.Html",
+      "X.String"
+    ],
+    "transitiveImportsCount": 22,
+    "backwardImports": [
+      "Main"
+    ],
+    "backwardImportsCount": 1,
+    "transitiveBackwardImports": [
+      "Main"
+    ],
+    "transitiveBackwardImportsCount": 1
+  },
   "Views.MainMenuOverlay": {
     "fileName": "src/elm/Views/MainMenuOverlay.elm",
     "moduleName": "Views.MainMenuOverlay",
@@ -4883,8 +4838,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "L.Main",
-      "L.View",
       "LocalStorage",
       "Main",
       "Mat",
@@ -4921,11 +4874,12 @@
       "ViewModel.Frame",
       "Views.EntityList",
       "Views.Frame",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 59
+    "transitiveBackwardImportsCount": 58
   },
   "X.Function.Infix": {
     "fileName": "src/elm/X/Function/Infix.elm",
@@ -4989,8 +4943,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "L.Main",
-      "L.View",
       "LocalStorage",
       "Main",
       "Mat",
@@ -5028,11 +4980,12 @@
       "ViewModel.Frame",
       "Views.EntityList",
       "Views.Frame",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "X.Return",
       "X.Time"
     ],
-    "transitiveBackwardImportsCount": 62
+    "transitiveBackwardImportsCount": 61
   },
   "X.Html": {
     "fileName": "src/elm/X/Html.elm",
@@ -5077,8 +5030,6 @@
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
-      "L.Main",
-      "L.View",
       "Main",
       "Mat",
       "Menu",
@@ -5102,11 +5053,12 @@
       "Views.EntityList",
       "Views.FBSignInOverlay",
       "Views.Frame",
+      "Views.Landing",
       "Views.MainMenuOverlay",
       "Views.TDGetStartedOverlay",
       "X.Keyboard"
     ],
-    "transitiveBackwardImportsCount": 35
+    "transitiveBackwardImportsCount": 34
   },
   "X.Keyboard": {
     "fileName": "src/elm/X/Keyboard.elm",
@@ -5534,8 +5486,6 @@
       "AppDrawer.View",
       "GroupDoc.FormView",
       "GroupDoc.View",
-      "L.Main",
-      "L.View",
       "Main",
       "Mat",
       "Todo.ItemView",
@@ -5546,9 +5496,10 @@
       "View.NewTodoFab",
       "View.Overlays",
       "Views.EntityList",
-      "Views.Frame"
+      "Views.Frame",
+      "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 16
+    "transitiveBackwardImportsCount": 15
   },
   "X.Time": {
     "fileName": "src/elm/X/Time.elm",

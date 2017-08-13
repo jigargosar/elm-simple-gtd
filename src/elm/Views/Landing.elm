@@ -1,4 +1,4 @@
-module L.View exposing (..)
+module Views.Landing exposing (..)
 
 import AppUrl
 import Html exposing (..)

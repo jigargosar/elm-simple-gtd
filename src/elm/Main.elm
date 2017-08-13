@@ -14,7 +14,6 @@ import Firebase.Update exposing (..)
 import GroupDoc exposing (..)
 import Html exposing (Html, text)
 import Json.Encode as E
-import L.View
 import Material
 import Maybe.Extra
 import Menu
@@ -44,6 +43,7 @@ import ViewModel.EntityList
 import ViewModel.Frame
 import Views.EntityList
 import Views.Frame
+import Views.Landing
 import X.Function.Infix exposing (..)
 import X.Random
 import X.Record exposing (..)
@@ -585,7 +585,7 @@ view model =
     in
     case model.page of
         LandingPage ->
-            L.View.view
+            Views.Landing.view
 
         EntityList pageModel ->
             let

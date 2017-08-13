@@ -253,7 +253,7 @@ createUpdateConfig model =
 
 mainUpdateAll : UpdateConfig Msg -> List Msg -> ReturnF Msg Model
 mainUpdateAll config msgList =
-    List.foldl (mainUpdate config) # msgList
+    List.foldl (updateReturnF config) # msgList
 
 
 mainUpdateChild childMsgWrapper childUpdateFn childL config model =
@@ -279,11 +279,11 @@ update msg model =
         defRet =
             pure model
     in
-    defRet |> mainUpdate config msg
+    defRet |> updateReturnF config msg
 
 
-mainUpdate : UpdateConfig Msg -> Msg -> ReturnF Msg Model
-mainUpdate config msg =
+updateReturnF : UpdateConfig Msg -> Msg -> ReturnF Msg Model
+updateReturnF config msg =
     case msg of
         NOOP ->
             identity

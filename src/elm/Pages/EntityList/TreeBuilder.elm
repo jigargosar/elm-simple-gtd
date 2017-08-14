@@ -161,7 +161,7 @@ flatFilterTypeToPredicate filterType =
             Document.isDeleted
 
 
-createEntityTree_ filter title appModel =
+createEntityTree filter title appModel =
     case filter of
         GroupByGroupDocFilter gdType groupByType ->
             case groupByType of

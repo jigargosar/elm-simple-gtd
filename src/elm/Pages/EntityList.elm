@@ -225,7 +225,7 @@ focusEntityListCmd =
 
 
 createEntityTree model appModel =
-    TreeBuilder.createEntityTree_ (getFilter model) (getTitle model) appModel
+    TreeBuilder.createEntityTree (getFilter model) (getTitle model) appModel
 
 
 createEntityIdList model appModel =

@@ -1,4 +1,4 @@
-    9075 total
+    9078 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
@@ -30,8 +30,8 @@
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
+     100 src/elm/Views/EntityList.elm
       98 src/elm/Data/EntityListCursor.elm
-      97 src/elm/Views/EntityList.elm
       93 src/elm/X/Time.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm

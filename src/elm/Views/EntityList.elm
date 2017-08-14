@@ -43,21 +43,24 @@ keyedViewList pageVM =
             todo
                 |> pageVM.createTodoViewModel
                 |> Todo.ItemView.keyedItem
+
+        createKeyedViewList tree =
+            case tree of
+                GroupDocTree gdNode nodeList ->
+                    [ createGroupDocHeaderView gdNode ]
+                        ++ (nodeList .|> createGroupDocView)
+
+                GroupDocForest nodeList ->
+                    nodeList .|> createGroupDocView
+
+                TodoList (TodoListNode title todoList totalCount) ->
+                    List.map createTodoView todoList
+                        |> flatTodoListView title totalCount
+
+                TodoListForest nodeList ->
+                    nodeList |> List.concatMap (TodoList >> createKeyedViewList)
     in
-    case pageVM.entityTree of
-        TodoList (TodoListNode title todoList totalCount) ->
-            List.map createTodoView todoList
-                |> flatTodoListView title totalCount
-
-        GroupDocTree gdNode nodeList ->
-            [ createGroupDocHeaderView gdNode ]
-                ++ (nodeList .|> createGroupDocView)
-
-        GroupDocForest nodeList ->
-            nodeList .|> createGroupDocView
-
-        TodoListForest _ ->
-            [ ( "0", Html.text "" ) ]
+    createKeyedViewList pageVM.entityTree
 
 
 groupView todoView vm =

@@ -238,8 +238,8 @@ createEntityTree filter title appModel =
                     TodoDocStore.filterTodoDocs TodoDoc.isScheduled appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
 
-                todoListTitleDict : Dict String (List TodoDoc)
-                todoListTitleDict =
+                scheduleTitleToTodoListDict : Dict String (List TodoDoc)
+                scheduleTitleToTodoListDict =
                     scheduledTodoList
                         |> Dict.Extra.groupBy
                             (toScheduleTitleString appModel.lastKnownCurrentTime)
@@ -247,7 +247,7 @@ createEntityTree filter title appModel =
                 nodeList =
                     scheduleGroupModelList
                         .|> (\{ name } ->
-                                todoListTitleDict
+                                scheduleTitleToTodoListDict
                                     |> Dict.get name
                                     ?= []
                                     |> (\todoList ->

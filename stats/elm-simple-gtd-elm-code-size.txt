@@ -1,4 +1,4 @@
-    9194 total
+    9203 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -38,10 +38,10 @@
       81 src/elm/Views/MainMenuOverlay.elm
       81 src/elm/Colors.elm
       79 src/elm/GroupDoc/View.elm
+      79 src/elm/Data/EntityTree.elm
       77 src/elm/GroupDoc/FormView.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/Firebase/Model.elm
-      70 src/elm/Data/EntityTree.elm
       68 src/elm/Todo/ReminderOverlay/View.elm
       67 src/elm/X/List.elm
       62 src/elm/Todo/GroupEditView.elm

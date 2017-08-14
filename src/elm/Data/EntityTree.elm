@@ -2,6 +2,7 @@ module Data.EntityTree exposing (..)
 
 import Data.TodoDoc exposing (..)
 import Entity exposing (..)
+import Time exposing (Time)
 import Toolkit.Operators exposing (..)
 
 
@@ -9,8 +10,16 @@ type GroupDocEntityNode
     = GroupDocEntityNode GroupDocEntity (List TodoDoc)
 
 
+type TodoListNodeTitle
+    = TitleWithTotalCount String Int
+
+
+
+--| TitleWithTime Time
+
+
 type TodoListNode
-    = TodoListNode String (List TodoDoc) Int
+    = TodoListNode TodoListNodeTitle (List TodoDoc)
 
 
 type Tree
@@ -27,7 +36,7 @@ flatten tree =
             Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
     in
     case tree of
-        TodoList (TodoListNode _ todoList _) ->
+        TodoList (TodoListNode title todoList) ->
             todoList .|> Entity.TodoEntity
 
         GroupDocTree (GroupDocEntityNode gdEntity todoList) nodeList ->
@@ -45,8 +54,8 @@ createTodoList stringTitle todoList totalCount =
         |> TodoList
 
 
-createTodoListNode =
-    TodoListNode
+createTodoListNode stringTitle todoList totalCount =
+    TodoListNode (TitleWithTotalCount stringTitle totalCount) todoList
 
 
 createGroupDocEntityNode gdEntity todoList =

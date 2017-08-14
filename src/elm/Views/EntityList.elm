@@ -1,6 +1,6 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (GroupDocEntityNode(..), TodoListNode(..), Tree(..))
+import Data.EntityTree exposing (GroupDocEntityNode(..), TodoListNode(..), TodoListNodeTitle(TitleWithTotalCount), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
@@ -53,7 +53,7 @@ keyedViewList pageVM =
                 GroupDocForest nodeList ->
                     nodeList .|> createGroupDocView
 
-                TodoList (TodoListNode title todoList totalCount) ->
+                TodoList (TodoListNode (TitleWithTotalCount title totalCount) todoList) ->
                     List.map createTodoView todoList
                         |> flatTodoListView title totalCount
 

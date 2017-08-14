@@ -191,6 +191,19 @@ scheduleGroupModelList =
     ]
 
 
+toScheduleTitleString now todo =
+    let
+        scheduleTime =
+            TodoDoc.getMaybeTime todo ?= 0
+
+        { name } =
+            scheduleGroupModelList
+                |> List.Extra.find (\{ filter } -> filter now scheduleTime)
+                ?= defaultScheduleGroupModel
+    in
+    name
+
+
 createEntityTree filter title appModel =
     case filter of
         GroupByGroupDocFilter gdType groupByType ->
@@ -225,30 +238,17 @@ createEntityTree filter title appModel =
                     TodoDocStore.filterTodoDocs TodoDoc.isScheduled appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
 
-                toScheduleTitleString todo =
-                    let
-                        scheduleTime =
-                            TodoDoc.getMaybeTime todo ?= 0
-
-                        now =
-                            appModel.lastKnownCurrentTime
-
-                        { name } =
-                            scheduleGroupModelList
-                                |> List.Extra.find (\{ filter } -> filter now scheduleTime)
-                                ?= defaultScheduleGroupModel
-                    in
-                    name
-
                 todoListTitleDict : Dict String (List TodoDoc)
                 todoListTitleDict =
                     scheduledTodoList
-                        |> Dict.Extra.groupBy toScheduleTitleString
+                        |> Dict.Extra.groupBy
+                            (toScheduleTitleString appModel.lastKnownCurrentTime)
 
                 nodeList =
                     scheduleGroupModelList
                         .|> (\{ name } ->
-                                Dict.get name todoListTitleDict
+                                todoListTitleDict
+                                    |> Dict.get name
                                     ?= []
                                     |> (\todoList ->
                                             Tree.createTodoListNode name todoList 0

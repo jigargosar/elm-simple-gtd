@@ -40,9 +40,13 @@ flatten tree =
             nodeList |> List.concatMap (TodoList >> flatten)
 
 
-createFlatTodoListNode stringTitle todoList totalCount =
-    TodoListNode stringTitle todoList totalCount
+createTodoList stringTitle todoList totalCount =
+    createTodoListNode stringTitle todoList totalCount
         |> TodoList
+
+
+createTodoListNode =
+    TodoListNode
 
 
 createGroupDocEntityNode gdEntity todoList =
@@ -60,3 +64,7 @@ createForest =
 
 toEntityIdList tree =
     tree |> flatten .|> Entity.toEntityId
+
+
+createTodoListForest nodeList =
+    TodoListForest nodeList

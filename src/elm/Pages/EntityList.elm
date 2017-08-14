@@ -20,6 +20,7 @@ import Entity exposing (..)
 import GroupDoc exposing (ContextStore, ProjectStore)
 import Pages.EntityList.TreeBuilder as TreeBuilder
 import Ports
+import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -145,9 +146,15 @@ type alias HasStores x =
     }
 
 
+type alias HasLastKnownCurrentTime x =
+    { x
+        | lastKnownCurrentTime : Time
+    }
+
+
 update :
     { a | navigateToPathMsg : Filter.Path -> msg }
-    -> HasStores x
+    -> HasLastKnownCurrentTime (HasStores x)
     -> Msg
     -> Model
     -> U.Return Model Msg msg

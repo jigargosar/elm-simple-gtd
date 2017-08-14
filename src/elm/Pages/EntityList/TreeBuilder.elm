@@ -3,6 +3,8 @@ module Pages.EntityList.TreeBuilder exposing (..)
 import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
 import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
+import Dict exposing (Dict)
+import Dict.Extra
 import Document exposing (..)
 import Entity exposing (..)
 import GroupDoc exposing (..)
@@ -187,7 +189,7 @@ createEntityTree filter title appModel =
                 truncatedTodoList =
                     List.take maxDisplayCount todoList
             in
-            Tree.createFlatTodoListNode title
+            Tree.createTodoList title
                 truncatedTodoList
                 totalCount
 
@@ -196,8 +198,33 @@ createEntityTree filter title appModel =
                 scheduledTodoList =
                     TodoDocStore.filterTodoDocs TodoDoc.isScheduled appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
+
+                toScheduleTitleString todo =
+                    TodoDoc.getMaybeTime todo
+                        ?= 0
+                        |> (\time ->
+                                if time < appModel.lastKnownCurrentTime then
+                                    "Overdue"
+                                else
+                                    "Coming Up"
+                           )
+
+                todoListTitleDict : Dict String (List TodoDoc)
+                todoListTitleDict =
+                    scheduledTodoList
+                        |> Dict.Extra.groupBy toScheduleTitleString
+
+                overDueList =
+                    todoListTitleDict |> Dict.get "Overdue" ?= []
+
+                comingUpList =
+                    todoListTitleDict |> Dict.get "Coming Up" ?= []
             in
-            Tree.createFlatTodoListNode "scheduled" scheduledTodoList 0
+            --Tree.createFlatTodoListNode "scheduled" scheduledTodoList 0
+            Tree.createTodoListForest
+                [ Tree.createTodoListNode "Overdue" overDueList 0
+                , Tree.createTodoListNode "Coming Up" comingUpList 0
+                ]
 
         NoFilter ->
             Tree.createForest []

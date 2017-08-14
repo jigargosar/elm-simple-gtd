@@ -1,4 +1,4 @@
-    9063 total
+    9075 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
@@ -31,7 +31,7 @@
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm
       98 src/elm/Data/EntityListCursor.elm
-      94 src/elm/Views/EntityList.elm
+      97 src/elm/Views/EntityList.elm
       93 src/elm/X/Time.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
@@ -44,11 +44,11 @@
       68 src/elm/Todo/ReminderOverlay/View.elm
       67 src/elm/X/List.elm
       62 src/elm/Todo/GroupEditView.elm
+      62 src/elm/Data/EntityTree.elm
       61 src/elm/ViewModel/EntityList.elm
       60 src/elm/ExclusiveMode/Update.elm
       56 src/elm/Overlays/MainMenu.elm
       55 src/elm/AppUrl.elm
-      53 src/elm/Data/EntityTree.elm
       49 src/elm/Todo/ReminderOverlay/Model.elm
       47 src/elm/Update/AppDrawer.elm
       46 src/elm/Notification.elm

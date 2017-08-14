@@ -1,10 +1,10 @@
 module Views.EntityList exposing (..)
 
-import Data.EntityTree exposing (GroupDocEntityNode(..), Tree(..))
+import Data.EntityTree exposing (GroupDocEntityNode(..), TodoListNode(..), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
 import GroupDoc.View
-import Html exposing (div, h5)
+import Html
 import Html.Attributes exposing (class)
 import Html.Keyed
 import Todo.ItemView
@@ -45,7 +45,7 @@ keyedViewList pageVM =
                 |> Todo.ItemView.keyedItem
     in
     case pageVM.entityTree of
-        NamedTodoList title todoList totalCount ->
+        TodoList (TodoListNode title todoList totalCount) ->
             List.map createTodoView todoList
                 |> flatTodoListView title totalCount
 
@@ -55,6 +55,9 @@ keyedViewList pageVM =
 
         GroupDocForest nodeList ->
             nodeList .|> createGroupDocView
+
+        TodoListForest _ ->
+            [ ( "0", Html.text "" ) ]
 
 
 groupView todoView vm =
@@ -78,8 +81,8 @@ flatTodoListView title totalCount todoListView =
                         |> String.join "/"
             in
             ( title
-            , div [ class "collection-item" ]
-                [ h5 [] [ Views.Badge.badgeStringSuffix title titleSuffix ] ]
+            , Html.div [ class "collection-item" ]
+                [ Html.h5 [] [ Views.Badge.badgeStringSuffix title titleSuffix ] ]
             )
 
         truncatedKeyedViewList =

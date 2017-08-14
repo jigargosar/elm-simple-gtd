@@ -9,10 +9,15 @@ type GroupDocEntityNode
     = GroupDocEntityNode GroupDocEntity (List TodoDoc)
 
 
+type TodoListNode
+    = TodoListNode String (List TodoDoc) Int
+
+
 type Tree
     = GroupDocTree GroupDocEntityNode (List GroupDocEntityNode)
-    | NamedTodoList String (List TodoDoc) Int
+    | TodoList TodoListNode
     | GroupDocForest (List GroupDocEntityNode)
+    | TodoListForest (List TodoListNode)
 
 
 flatten : Tree -> List Entity
@@ -22,7 +27,7 @@ flatten tree =
             Entity.GroupDocEntityW gdEntity :: (todoList .|> Entity.TodoEntity)
     in
     case tree of
-        NamedTodoList _ todoList _ ->
+        TodoList (TodoListNode _ todoList _) ->
             todoList .|> Entity.TodoEntity
 
         GroupDocTree (GroupDocEntityNode gdEntity todoList) nodeList ->
@@ -31,9 +36,13 @@ flatten tree =
         GroupDocForest nodeList ->
             nodeList |> List.concatMap getGroupDocNodeEntityList
 
+        TodoListForest nodeList ->
+            nodeList |> List.concatMap (TodoList >> flatten)
+
 
 createFlatTodoListNode stringTitle todoList totalCount =
-    NamedTodoList stringTitle todoList totalCount
+    TodoListNode stringTitle todoList totalCount
+        |> TodoList
 
 
 createGroupDocEntityNode gdEntity todoList =

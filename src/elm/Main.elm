@@ -563,8 +563,10 @@ createViewConfig model =
     , onStartEditingTodoContext = Update.Todo.onStartEditingTodoContextMsg >> OnTodoMsg
     , onStartEditingTodoText = Update.Todo.onStartEditingTodoTextMsg >> OnTodoMsg
     , onStartEditingReminder = Update.Todo.onStartEditingReminderMsg >> OnTodoMsg
-    , onToggleDeletedAndMaybeSelection = Update.Todo.onToggleDeletedAndMaybeSelectionMsg >> OnTodoMsg
-    , onToggleDoneAndMaybeSelection = Update.Todo.onToggleDoneAndMaybeSelectionMsg >> OnTodoMsg
+    , onToggleDeletedAndMaybeSelection =
+        Update.Todo.onToggleDeletedAndMaybeSelectionMsg >> OnTodoMsg
+    , onToggleDoneAndMaybeSelection =
+        Update.Todo.onToggleDoneAndMaybeSelectionMsg >> OnTodoMsg
     , onToggleGroupDocArchived = toggleGroupDocArchivedMsg >> OnGroupDocMsg
     , updateGroupDocFromNameMsg =
         updateGroupDocFromNameMsg >>> OnGroupDocMsg

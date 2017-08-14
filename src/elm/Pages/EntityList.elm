@@ -169,8 +169,8 @@ update config appModel msg model =
         OnMoveFocusBy offset ->
             Cursor.findEntityIdByOffsetIndex offset (getCursor model)
                 ?|> (\entityId ->
-                        updateDefRet (OnSetCursorEntityId entityId)
-                            |> U.addCmd (focusEntityIdCmd entityId)
+                        --updateDefRet (OnSetCursorEntityId entityId)
+                        defRet |> U.addCmd (focusEntityIdCmd entityId)
                     )
                 ?= defRet
 

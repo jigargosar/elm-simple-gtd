@@ -147,13 +147,14 @@
       "Html",
       "Html.Attributes",
       "Html.Events",
+      "IconNames",
       "Mat",
       "Toolkit.Operators",
       "Views.Badge",
       "X.Function.Infix",
       "X.Html"
     ],
-    "importsCount": 10,
+    "importsCount": 11,
     "transitiveImports": [
       "AppUrl",
       "Color",
@@ -162,6 +163,7 @@
       "Html",
       "Html.Attributes",
       "Html.Events",
+      "IconNames",
       "Json.Decode",
       "Json.Encode",
       "Mat",
@@ -179,7 +181,7 @@
       "X.Html",
       "X.String"
     ],
-    "transitiveImportsCount": 23,
+    "transitiveImportsCount": 24,
     "backwardImports": [
       "Views.Frame"
     ],
@@ -1597,18 +1599,21 @@
     "transitiveImports": [],
     "transitiveImportsCount": 0,
     "backwardImports": [
+      "AppDrawer.View",
       "Data.EntityListFilter"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
+      "AppDrawer.View",
       "Data.EntityListCursor",
       "Data.EntityListFilter",
       "Main",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 6
+    "transitiveBackwardImportsCount": 8
   },
   "Main": {
     "fileName": "src/elm/Main.elm",
@@ -4026,6 +4031,7 @@
       "Html.Attributes",
       "Html.Events",
       "Html.Keyed",
+      "IconNames",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
@@ -4074,7 +4080,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 68,
+    "transitiveImportsCount": 69,
     "backwardImports": [
       "Main"
     ],

@@ -5,6 +5,7 @@ import Colors
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import IconNames
 import Mat
 import Toolkit.Operators exposing (..)
 import Views.Badge
@@ -37,7 +38,14 @@ sidebarHeader frameVM =
 sidebarContent config frameVM =
     div [ id "layout-sidebar-content", class "app-drawer-list-container" ]
         [ ul []
-            ([]
+            ([ onSetEntityListViewItem
+                config
+                (Mat.iconView IconNames.scheduled
+                    [ Mat.css "color" (Colors.toRBGAString Colors.scheduled) ]
+                )
+                [ "scheduled" ]
+                "Schedule"
+             ]
                 ++ entityGroupView config frameVM.contexts
                 ++ entityGroupView config frameVM.projects
                 ++ [ Mat.divider ]

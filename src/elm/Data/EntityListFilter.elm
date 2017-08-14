@@ -272,7 +272,7 @@ toViewModel filter =
 
         ScheduledFilter ->
             FilterViewModel
-                "Scheduled"
+                "Schedule"
                 IconNames.scheduled
                 Colors.scheduled
 

@@ -105,7 +105,7 @@ getMaybeLastKnownFocusedEntityId =
     get cursorL >> .maybeCursorEntityId
 
 
-getEntityListDomIdFromEntityId entityId =
+getEntityListItemDomIdFromEntityId entityId =
     case entityId of
         ContextEntityId docId ->
             "entity-list-context-id-" ++ docId
@@ -205,7 +205,7 @@ update config appModel msg model =
 
 
 focusEntityIdCmd entityId =
-    Ports.focusSelector ("#" ++ getEntityListDomIdFromEntityId entityId)
+    Ports.focusSelector ("#" ++ getEntityListItemDomIdFromEntityId entityId)
 
 
 focusEntityListCmd =

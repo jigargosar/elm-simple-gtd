@@ -58,7 +58,7 @@ type alias Config =
     , defaultIconName : String
     , getTabIndexForEntityId : EntityId -> Int
     , groupDocType : GroupDoc.GroupDocType
-    , getEntityListDomIdFromEntityId : EntityId -> String
+    , getEntityListItemDomIdFromEntityId : EntityId -> String
     }
 
 
@@ -136,7 +136,7 @@ create config configInner todoList groupDoc =
             }
     in
     { key = toString groupDocId
-    , domId = configInner.getEntityListDomIdFromEntityId entityId
+    , domId = configInner.getEntityListItemDomIdFromEntityId entityId
     , name = name
     , namePrefix = configInner.namePrefix
     , count = todoList |> List.length
@@ -156,7 +156,7 @@ create config configInner todoList groupDoc =
     }
 
 
-createContextGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEntityId } todoList context =
+createContextGroupVM { config, getTabIndexForEntityId, getEntityListItemDomIdFromEntityId } todoList context =
     let
         configInner : Config
         configInner =
@@ -170,13 +170,13 @@ createContextGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEnt
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexForEntityId = getTabIndexForEntityId
             , groupDocType = GroupDoc.ContextGroupDocType
-            , getEntityListDomIdFromEntityId = getEntityListDomIdFromEntityId
+            , getEntityListItemDomIdFromEntityId = getEntityListItemDomIdFromEntityId
             }
     in
     create config configInner todoList context
 
 
-createProjectGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEntityId } todoList project =
+createProjectGroupVM { config, getTabIndexForEntityId, getEntityListItemDomIdFromEntityId } todoList project =
     let
         configInner : Config
         configInner =
@@ -190,7 +190,7 @@ createProjectGroupVM { config, getTabIndexForEntityId, getEntityListDomIdFromEnt
             , defaultIconName = "av:fiber-manual-record"
             , getTabIndexForEntityId = getTabIndexForEntityId
             , groupDocType = GroupDoc.ProjectGroupDocType
-            , getEntityListDomIdFromEntityId = getEntityListDomIdFromEntityId
+            , getEntityListItemDomIdFromEntityId = getEntityListItemDomIdFromEntityId
             }
     in
     create config configInner todoList project

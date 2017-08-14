@@ -44,14 +44,14 @@ pageVM config model pageModel =
             todo
                 |> Todo.ViewModel.createTodoViewModel
                     config
-                    EntityList.getEntityListDomIdFromEntityId
+                    EntityList.getEntityListItemDomIdFromEntityId
                     model
                     isFocusable
 
         groupVMConfig =
             { config = config
             , getTabIndexForEntityId = getTabIndexForEntityId
-            , getEntityListDomIdFromEntityId = EntityList.getEntityListDomIdFromEntityId
+            , getEntityListItemDomIdFromEntityId = EntityList.getEntityListItemDomIdFromEntityId
             }
     in
     { createProjectGroupVM = GroupDoc.ViewModel.createProjectGroupVM groupVMConfig

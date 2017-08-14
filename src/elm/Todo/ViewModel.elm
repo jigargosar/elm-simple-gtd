@@ -36,7 +36,7 @@ getDisplayText todo =
 --createTodoViewModel : AppModel -> Bool -> TodoDoc -> TodoViewModel AppMsg
 
 
-createTodoViewModel config getEntityListDomIdFromEntityId appModel isFocusable todo =
+createTodoViewModel config getEntityListItemDomIdFromEntityId appModel isFocusable todo =
     let
         tabindexAV =
             let
@@ -125,7 +125,7 @@ createTodoViewModel config getEntityListDomIdFromEntityId appModel isFocusable t
             config.onToggleDoneAndMaybeSelection todoId
     in
     { key = todoId
-    , domId = getEntityListDomIdFromEntityId entityId
+    , domId = getEntityListItemDomIdFromEntityId entityId
     , isDone = Data.TodoDoc.isDone todo
     , isDeleted = Document.isDeleted todo
     , onKeyDownMsg = onKeyDownMsg

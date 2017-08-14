@@ -245,17 +245,17 @@ createEntityTree filter title appModel =
                     scheduledTodoList
                         |> Dict.Extra.groupBy toScheduleTitleString
 
-                overDueList =
-                    todoListTitleDict |> Dict.get "Overdue" ?= []
-
-                comingUpList =
-                    todoListTitleDict |> Dict.get "Later" ?= []
+                nodeList =
+                    scheduleGroupModelList
+                        .|> (\{ name } ->
+                                Dict.get name todoListTitleDict
+                                    ?= []
+                                    |> (\todoList ->
+                                            Tree.createTodoListNode name todoList 0
+                                       )
+                            )
             in
-            --Tree.createFlatTodoListNode "scheduled" scheduledTodoList 0
-            Tree.createTodoListForest
-                [ Tree.createTodoListNode "Overdue" overDueList 0
-                , Tree.createTodoListNode "Later" comingUpList 0
-                ]
+            Tree.createTodoListForest nodeList
 
         NoFilter ->
             Tree.createForest []

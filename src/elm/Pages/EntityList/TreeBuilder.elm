@@ -12,6 +12,7 @@ import List.Extra
 import Models.GroupDocStore as GroupDocStore
 import Models.TodoDocStore as TodoDocStore
 import Store
+import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function.Infix exposing (..)
@@ -165,6 +166,31 @@ flatFilterTypeToPredicate filterType =
             Document.isDeleted
 
 
+scheduleGroupNames =
+    [ "Overdue", "Later" ]
+
+
+type ScheduleGroup
+    = OverDue
+    | Later
+
+
+type alias ScheduleGroupModel =
+    { name : String
+    , filter : Time -> Time -> Bool
+    }
+
+
+defaultScheduleGroupModel =
+    ScheduleGroupModel "Later" (\now scheduleTime -> True)
+
+
+scheduleGroupModelList =
+    [ ScheduleGroupModel "Overdue" (\now scheduleTime -> scheduleTime < now)
+    , defaultScheduleGroupModel
+    ]
+
+
 createEntityTree filter title appModel =
     case filter of
         GroupByGroupDocFilter gdType groupByType ->
@@ -200,14 +226,19 @@ createEntityTree filter title appModel =
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
 
                 toScheduleTitleString todo =
-                    TodoDoc.getMaybeTime todo
-                        ?= 0
-                        |> (\time ->
-                                if time < appModel.lastKnownCurrentTime then
-                                    "Overdue"
-                                else
-                                    "Coming Up"
-                           )
+                    let
+                        scheduleTime =
+                            TodoDoc.getMaybeTime todo ?= 0
+
+                        now =
+                            appModel.lastKnownCurrentTime
+
+                        { name } =
+                            scheduleGroupModelList
+                                |> List.Extra.find (\{ filter } -> filter now scheduleTime)
+                                ?= defaultScheduleGroupModel
+                    in
+                    name
 
                 todoListTitleDict : Dict String (List TodoDoc)
                 todoListTitleDict =
@@ -218,12 +249,12 @@ createEntityTree filter title appModel =
                     todoListTitleDict |> Dict.get "Overdue" ?= []
 
                 comingUpList =
-                    todoListTitleDict |> Dict.get "Coming Up" ?= []
+                    todoListTitleDict |> Dict.get "Later" ?= []
             in
             --Tree.createFlatTodoListNode "scheduled" scheduledTodoList 0
             Tree.createTodoListForest
                 [ Tree.createTodoListNode "Overdue" overDueList 0
-                , Tree.createTodoListNode "Coming Up" comingUpList 0
+                , Tree.createTodoListNode "Later" comingUpList 0
                 ]
 
         NoFilter ->

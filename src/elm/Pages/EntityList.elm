@@ -1,4 +1,16 @@
-module Pages.EntityList exposing (..)
+module Pages.EntityList
+    exposing
+        ( Model
+        , Msg(..)
+        , createEntityTree
+        , getEntityListItemDomIdFromEntityId
+        , getMaybeLastKnownFocusedEntityId
+        , getPath
+        , getTitleColourTuple
+        , initialValue
+        , maybeInitFromPath
+        , update
+        )
 
 import Data.EntityListCursor as Cursor
 import Data.EntityListFilter as Filter exposing (Filter)

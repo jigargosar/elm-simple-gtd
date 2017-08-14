@@ -1,17 +1,17 @@
-    9078 total
+    9102 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      394 src/elm/Data/TodoDoc.elm
      337 src/elm/Store.elm
      318 src/elm/GroupDoc.elm
+     280 src/elm/Data/EntityListFilter.elm
      267 src/elm/Mat.elm
-     267 src/elm/Data/EntityListFilter.elm
      244 src/elm/Pages/EntityList.elm
      235 src/elm/AppDrawer/GroupViewModel.elm
      223 src/elm/Views/Frame.elm
      223 src/elm/Menu.elm
      200 src/elm/GroupDoc/ViewModel.elm
-     193 src/elm/Pages/EntityList/TreeBuilder.elm
+     196 src/elm/Pages/EntityList/TreeBuilder.elm
      187 src/elm/Firebase/Update.elm
      178 src/elm/Todo/ViewModel.elm
      170 src/elm/Models/GroupDocStore.elm
@@ -36,9 +36,9 @@
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
       81 src/elm/Views/MainMenuOverlay.elm
+      81 src/elm/Colors.elm
       79 src/elm/GroupDoc/View.elm
       77 src/elm/GroupDoc/FormView.elm
-      77 src/elm/Colors.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/Firebase/Model.elm
       68 src/elm/Todo/ReminderOverlay/View.elm
@@ -56,10 +56,10 @@
       45 src/elm/Todo/FormTypes.elm
       44 src/elm/Views/FBSignInOverlay.elm
       42 src/elm/Views/TDGetStartedOverlay.elm
+      41 src/elm/IconNames.elm
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
-      37 src/elm/IconNames.elm
       37 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
       30 src/elm/Models/Stores.elm

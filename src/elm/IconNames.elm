@@ -25,6 +25,10 @@ projects =
     "group_work"
 
 
+scheduled =
+    "schedule"
+
+
 bin =
     "delete"
 

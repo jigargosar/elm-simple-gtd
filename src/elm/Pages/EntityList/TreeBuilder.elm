@@ -189,5 +189,8 @@ createEntityTree filter title appModel =
                 truncatedTodoList
                 totalCount
 
+        ScheduledFilter ->
+            Tree.createForest []
+
         NoFilter ->
             Tree.createForest []

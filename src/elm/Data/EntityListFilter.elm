@@ -63,6 +63,7 @@ type GroupByType
 type Filter
     = FlatFilter FlatFilterType MaxDisplayCount
     | GroupByGroupDocFilter GroupDocType GroupByType
+    | ScheduledFilter
     | NoFilter
 
 
@@ -142,6 +143,9 @@ fromPath path =
         "bin" :: [] ->
             flatFilter Bin
 
+        "scheduled" :: [] ->
+            ScheduledFilter
+
         _ ->
             NoFilter
 
@@ -179,6 +183,9 @@ toPath filter =
 
                         SingleGroupDoc projectDocId ->
                             [ "project", projectDocId ]
+
+        ScheduledFilter ->
+            [ "scheduled" ]
 
         NoFilter ->
             toPath initialFilter
@@ -262,6 +269,12 @@ toViewModel filter =
                                 "Project"
                                 IconNames.project
                                 Colors.defaultProject
+
+        ScheduledFilter ->
+            FilterViewModel
+                "Scheduled"
+                IconNames.scheduled
+                Colors.scheduled
 
         NoFilter ->
             toViewModel initialFilter

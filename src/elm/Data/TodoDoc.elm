@@ -118,6 +118,10 @@ getMaybeTime model =
     getMaybeReminderTime model |> Maybe.orElse (getMaybeDueAt model)
 
 
+isScheduled model =
+    isActive model && (getMaybeTime model |> Maybe.isJust)
+
+
 done =
     X.Record.fieldLens .done (\s b -> { b | done = s })
 

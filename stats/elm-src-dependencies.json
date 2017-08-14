@@ -2414,10 +2414,12 @@
       "Models.GroupDocStore",
       "Models.TodoDocStore",
       "Store",
+      "Toolkit.Helpers",
       "Toolkit.Operators",
+      "X.Function.Infix",
       "X.Predicate"
     ],
-    "importsCount": 12,
+    "importsCount": 14,
     "transitiveImports": [
       "Char",
       "Color",
@@ -4491,6 +4493,7 @@
       "Models.Stores",
       "Overlays.MainMenu",
       "Pages.EntityList",
+      "Pages.EntityList.TreeBuilder",
       "Sequencer",
       "Stores",
       "Todo.ItemView",
@@ -4502,7 +4505,7 @@
       "X.Return",
       "X.Time"
     ],
-    "backwardImportsCount": 28,
+    "backwardImportsCount": 29,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "AppDrawer.Model",

@@ -10,7 +10,9 @@ import List.Extra
 import Models.GroupDocStore as GroupDocStore
 import Models.TodoDocStore as TodoDocStore
 import Store
+import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import X.Function.Infix exposing (..)
 import X.Predicate
 
 
@@ -190,7 +192,12 @@ createEntityTree filter title appModel =
                 totalCount
 
         ScheduledFilter ->
-            Tree.createForest []
+            let
+                scheduledTodoList =
+                    TodoDocStore.filterTodoDocs TodoDoc.isScheduled appModel
+                        |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
+            in
+            Tree.createFlatTodoListNode "scheduled" scheduledTodoList 0
 
         NoFilter ->
             Tree.createForest []

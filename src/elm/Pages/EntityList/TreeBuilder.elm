@@ -184,25 +184,33 @@ type alias ScheduleGroupModel =
     }
 
 
-defaultScheduleGroupModel =
+laterScheduleGroupModel =
     ScheduleGroupModel "Later" (\now scheduleTime -> True)
 
 
-scheduleGroupModelList =
-    [ ScheduleGroupModel "Overdue" (\now scheduleTime -> scheduleTime < now)
-    , ScheduleGroupModel "Today"
+todayScheduleGroupModel =
+    ScheduleGroupModel "Today"
         (\now scheduleTime ->
             Date.Extra.equalBy Date.Extra.Day
                 (Date.fromTime now)
                 (Date.fromTime scheduleTime)
         )
-    , ScheduleGroupModel "Tomorrow"
+
+
+tomorrowScheduleGroupModel =
+    ScheduleGroupModel "Tomorrow"
         (\now scheduleTime ->
             Date.Extra.equalBy Date.Extra.Day
                 (Date.fromTime now |> Date.Extra.add Date.Extra.Day 1)
                 (Date.fromTime scheduleTime)
         )
-    , defaultScheduleGroupModel
+
+
+scheduleGroupModelList =
+    [ ScheduleGroupModel "Overdue" (\now scheduleTime -> scheduleTime < now)
+    , todayScheduleGroupModel
+    , tomorrowScheduleGroupModel
+    , laterScheduleGroupModel
     ]
 
 
@@ -214,7 +222,7 @@ toScheduleTitleString now todo =
         { name } =
             scheduleGroupModelList
                 |> List.Extra.find (\{ filter } -> filter now scheduleTime)
-                ?= defaultScheduleGroupModel
+                ?= laterScheduleGroupModel
     in
     name
 

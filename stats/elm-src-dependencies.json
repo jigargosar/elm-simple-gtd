@@ -2365,6 +2365,8 @@
       "Data.EntityTree",
       "Data.Todo.Schedule",
       "Data.TodoDoc",
+      "Date",
+      "Date.Extra",
       "Dict",
       "Dict.Extra",
       "Document",
@@ -2399,7 +2401,7 @@
       "X.Record",
       "XUpdate"
     ],
-    "transitiveImportsCount": 43,
+    "transitiveImportsCount": 45,
     "backwardImports": [
       "Main",
       "ViewModel.EntityList"
@@ -2419,6 +2421,8 @@
       "Data.EntityListFilter",
       "Data.EntityTree",
       "Data.TodoDoc",
+      "Date",
+      "Date.Extra",
       "Dict",
       "Dict.Extra",
       "Document",
@@ -2435,7 +2439,7 @@
       "X.Function.Infix",
       "X.Predicate"
     ],
-    "importsCount": 18,
+    "importsCount": 20,
     "transitiveImports": [
       "Char",
       "Color",
@@ -2446,6 +2450,8 @@
       "Data.EntityTree",
       "Data.Todo.Schedule",
       "Data.TodoDoc",
+      "Date",
+      "Date.Extra",
       "Dict",
       "Dict.Extra",
       "Document",
@@ -2476,7 +2482,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 38,
+    "transitiveImportsCount": 40,
     "backwardImports": [
       "Pages.EntityList"
     ],

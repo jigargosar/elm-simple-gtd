@@ -3,6 +3,8 @@ module Pages.EntityList.TreeBuilder exposing (..)
 import Data.EntityListFilter as Filter exposing (Filter(..), FilterViewModel, FlatFilterType(..), GroupByType(..), Path)
 import Data.EntityTree as Tree exposing (GroupDocEntityNode(..), Tree)
 import Data.TodoDoc as TodoDoc exposing (TodoDoc)
+import Date
+import Date.Extra
 import Dict exposing (Dict)
 import Dict.Extra
 import Document exposing (..)
@@ -188,6 +190,12 @@ defaultScheduleGroupModel =
 
 scheduleGroupModelList =
     [ ScheduleGroupModel "Overdue" (\now scheduleTime -> scheduleTime < now)
+    , ScheduleGroupModel "Today"
+        (\now scheduleTime ->
+            Date.Extra.equalBy Date.Extra.Day
+                (Date.fromTime now)
+                (Date.fromTime scheduleTime)
+        )
     , defaultScheduleGroupModel
     ]
 

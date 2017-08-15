@@ -1,4 +1,4 @@
-## Upcoming
+## v0.22.0 - 2017-08-15
 * fix: landing header style
 * feat: add scheduled entityList filter
 * patch: multiple fixes.  

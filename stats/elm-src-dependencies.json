@@ -2132,9 +2132,10 @@
       "Models.GroupDocStore",
       "Store",
       "X.Function",
-      "X.Function.Infix"
+      "X.Function.Infix",
+      "X.Predicate"
     ],
-    "importsCount": 6,
+    "importsCount": 7,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -4782,9 +4783,10 @@
     "transitiveImportsCount": 1,
     "backwardImports": [
       "GroupDoc",
+      "Models.Stores",
       "Pages.EntityList.TreeBuilder"
     ],
-    "backwardImportsCount": 2,
+    "backwardImportsCount": 3,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",

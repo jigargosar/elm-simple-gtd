@@ -1,4 +1,4 @@
-    9200 total
+    9214 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -49,6 +49,7 @@
       60 src/elm/ExclusiveMode/Update.elm
       56 src/elm/Overlays/MainMenu.elm
       55 src/elm/AppUrl.elm
+      52 src/elm/Models/Stores.elm
       49 src/elm/Todo/ReminderOverlay/Model.elm
       47 src/elm/Update/AppDrawer.elm
       46 src/elm/Notification.elm
@@ -60,7 +61,6 @@
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
-      38 src/elm/Models/Stores.elm
       37 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
       24 src/elm/ViewModel/Frame.elm

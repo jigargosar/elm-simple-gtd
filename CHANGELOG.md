@@ -1,3 +1,8 @@
+## Upcoming
+* fix: landing header style
+* feat: add scheduled entityList filter
+* patch: multiple fixes.  
+
 ## v0.21.0 - 2017-08-11
 * [minor]: implement goto entity. Clicking on todo text in reminder overlay, navigates it into focus.  
 

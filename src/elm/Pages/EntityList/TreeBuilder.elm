@@ -245,12 +245,12 @@ getScheduleGroupForTodo now todo =
         scheduleTime =
             TodoDoc.getMaybeTime todo ?= 0
 
-        { scheduleGroup } =
+        scheduleGroupModel =
             scheduleGroupModelList
                 |> List.Extra.find (\{ filter } -> filter now scheduleTime)
                 ?= scheduleGroupToModel Later
     in
-    scheduleGroup
+    scheduleGroupModel.scheduleGroup
 
 
 createEntityTree filter title appModel =

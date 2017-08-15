@@ -10,6 +10,7 @@ import Entity exposing (..)
 import GroupDoc exposing (..)
 import List.Extra
 import Models.GroupDocStore as GroupDocStore
+import Models.Stores
 import Models.TodoDocStore as TodoDocStore
 import Store
 import Time exposing (Time)
@@ -234,8 +235,14 @@ createEntityTree filter title appModel =
 
         ScheduledFilter ->
             let
+                scheduledTodoPredicate =
+                    X.Predicate.all
+                        [ TodoDoc.isScheduled
+                        , Models.Stores.allTodoGroupDocActivePredicate appModel
+                        ]
+
                 scheduledTodoList =
-                    TodoDocStore.filterTodoDocs TodoDoc.isScheduled appModel
+                    TodoDocStore.filterTodoDocs scheduledTodoPredicate appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
 
                 scheduleTitleToTodoListDict : Dict String (List TodoDoc)

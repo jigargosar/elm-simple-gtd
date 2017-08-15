@@ -1,4 +1,4 @@
-## Upcoming
+## v0.22.3 - 2017-08-15
 * fix: schedule view order 
 
 ## v0.22.2 - 2017-08-15

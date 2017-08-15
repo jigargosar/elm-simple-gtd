@@ -1,10 +1,10 @@
-    9298 total
+    9279 total
      662 src/elm/Main.elm
      556 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
      337 src/elm/Store.elm
-     333 src/elm/Pages/EntityList/TreeBuilder.elm
      318 src/elm/GroupDoc.elm
+     314 src/elm/Pages/EntityList/TreeBuilder.elm
      280 src/elm/Data/EntityListFilter.elm
      267 src/elm/Mat.elm
      251 src/elm/Pages/EntityList.elm

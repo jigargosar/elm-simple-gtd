@@ -223,15 +223,6 @@ scheduleGroupToModel scheduleGroup =
                 Later
 
 
-defaultScheduleGroupModel =
-    scheduleGroupToModel Later
-
-
-scheduleGroupModelList : List ScheduleGroupModel
-scheduleGroupModelList =
-    scheduleGroupList .|> scheduleGroupToModel
-
-
 scheduleGroupToInt scheduleGroup =
     case scheduleGroup of
         OverDue ->
@@ -247,13 +238,12 @@ scheduleGroupToInt scheduleGroup =
             3
 
 
-scheduleGroupDict : AllDictList ScheduleGroup ScheduleGroupModel Int
-scheduleGroupDict =
-    scheduleGroupModelList
-        |> AllDictList.fromListBy scheduleGroupToInt .scheduleGroup
+scheduleGroupModelList : List ScheduleGroupModel
+scheduleGroupModelList =
+    scheduleGroupList .|> scheduleGroupToModel
 
 
-scheduleGroupFromTodo now todo =
+getScheduleGroupForTodo now todo =
     let
         scheduleTime =
             TodoDoc.getMaybeTime todo ?= 0
@@ -261,7 +251,7 @@ scheduleGroupFromTodo now todo =
         { scheduleGroup } =
             scheduleGroupModelList
                 |> List.Extra.find (\{ filter } -> filter now scheduleTime)
-                ?= defaultScheduleGroupModel
+                ?= scheduleGroupToModel Later
     in
     scheduleGroup
 
@@ -302,25 +292,16 @@ createEntityTree filter title appModel =
                         , Models.Stores.allTodoGroupDocActivePredicate appModel
                         ]
 
-                scheduledTodoList =
+                nodeList =
                     TodoDocStore.filterTodoDocs scheduledTodoPredicate appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
-
-                scheduleGroupToTodoListDict : AllDictList ScheduleGroup (List TodoDoc) Int
-                scheduleGroupToTodoListDict =
-                    scheduledTodoList
                         |> AllDictList.groupBy scheduleGroupToInt
-                            (scheduleGroupFromTodo appModel.lastKnownCurrentTime)
-
-                nodeList =
-                    scheduleGroupToTodoListDict
+                            (getScheduleGroupForTodo appModel.lastKnownCurrentTime)
                         |> AllDictList.map
                             (\scheduleGroup todoList ->
                                 let
                                     name =
-                                        scheduleGroupDict
-                                            |> AllDictList.get scheduleGroup
-                                            ?= defaultScheduleGroupModel
+                                        scheduleGroupToModel scheduleGroup
                                             |> .name
                                 in
                                 Tree.createTodoListNode name todoList 0

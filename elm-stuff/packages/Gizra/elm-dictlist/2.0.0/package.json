@@ -1,0 +1,27 @@
+{
+  "name": "elm-dictlist",
+  "version": "1.0.0",
+  "description": "Dict with arbitrarily ordered keys",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "elm": "^0.18.0",
+    "elm-test": "^0.18.0"
+  },
+  "scripts": {
+    "test": "elm-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gizra/elm-dictlist.git"
+  },
+  "author": "Ryan Rempel <ryan@gizra.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gizra/elm-dictlist/issues"
+  },
+  "homepage": "https://github.com/Gizra/elm-dictlist#readme"
+}

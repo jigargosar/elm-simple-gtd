@@ -12,6 +12,7 @@
         "Fresheyeball/elm-function-extra": "3.0.0 <= v < 4.0.0",
         "Fresheyeball/elm-return": "6.0.3 <= v < 7.0.0",
         "Fresheyeball/elm-tuple-extra": "3.0.0 <= v < 4.0.0",
+        "Gizra/elm-dictlist": "2.0.0 <= v < 3.0.0",
         "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
         "danielnarey/elm-css-basics": "3.0.0 <= v < 4.0.0",
         "danielnarey/elm-toolkit": "5.1.0 <= v < 6.0.0",

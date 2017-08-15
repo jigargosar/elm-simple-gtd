@@ -1,6 +1,6 @@
 module Update.Todo exposing (..)
 
-import Data.TodoDoc exposing (..)
+import Data.TodoDoc as TodoDoc exposing (TodoAction(..), TodoDoc, TodoStore)
 import Document exposing (..)
 import DomPorts
 import Entity exposing (..)
@@ -215,7 +215,7 @@ findAndUpdateAllTodos :
 findAndUpdateAllTodos config findFn action now model =
     let
         updateFn =
-            Data.TodoDoc.update action
+            TodoDoc.update action
     in
     Store.updateAndPersist findFn now updateFn model.todoStore
         |> Tuple.mapFirst (setIn model TodoDocStore.todoStoreL)
@@ -232,7 +232,7 @@ updateAll :
 updateAll config docIdSet action now model =
     let
         updateFn =
-            Data.TodoDoc.update action
+            TodoDoc.update action
     in
     Store.updateAndPersist (always False) now updateFn model.todoStore
         |> Tuple.mapFirst (setIn model TodoDocStore.todoStoreL)
@@ -270,7 +270,9 @@ findAndSnoozeOverDueTodo config now model =
                         TodoDocStore.findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
     in
-    Store.findBy (Data.TodoDoc.isReminderOverdue now) model.todoStore
+    Store.findBy
+        (TodoDoc.isReminderOverdue now)
+        model.todoStore
         ?+> (Document.getId >> snooze)
 
 
@@ -308,7 +310,7 @@ saveAddTodoForm :
     -> SubModel model
     -> SubReturn msg model
 saveAddTodoForm config addMode form now model =
-    insertTodo (Data.TodoDoc.init now form.text) model
+    insertTodo (TodoDoc.init now form.text) model
         |> Tuple.mapFirst Document.getId
         |> uncurry
             (\todoId ->
@@ -429,7 +431,7 @@ showReminderNotificationCmd ( todo, model ) =
                 id =
                     Document.getId todo
             in
-            { title = Data.TodoDoc.getText todo, tag = id, data = { id = id } }
+            { title = TodoDoc.getText todo, tag = id, data = { id = id } }
 
         cmds =
             [ createNotification
@@ -456,7 +458,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
             in
             { tag = todoId
             , title = "You have been working for " ++ formattedDuration
-            , body = Data.TodoDoc.getText todo
+            , body = TodoDoc.getText todo
             , actions =
                 [ { title = "Continue", action = "continue" }
                 , { title = "Stop", action = "stop" }

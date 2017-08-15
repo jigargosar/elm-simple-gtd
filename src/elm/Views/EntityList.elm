@@ -63,18 +63,27 @@ keyedViewList pageVM =
 
                 EmptyTree filter ->
                     case filter of
-                        ScheduledFilter ->
+                        {- ScheduledFilter ->
+                           [ ( "0"
+                             , Html.div
+                                   [ class "todo-list collection" ]
+                                   [ Html.div [ class "collection-item" ]
+                                       [ Html.h5 [] [ Html.text "No Items Scheduled" ] ]
+                                   ]
+                             )
+                           ]
+                        -}
+                        _ ->
                             [ ( "0"
                               , Html.div
                                     [ class "todo-list collection" ]
                                     [ Html.div [ class "collection-item" ]
-                                        [ Html.h5 [] [ Html.text "No Items Scheduled" ] ]
+                                        [ Html.h5 []
+                                            [ Html.text "No Results" ]
+                                        ]
                                     ]
                               )
                             ]
-
-                        _ ->
-                            []
     in
     createKeyedViewList pageVM.entityTree
 

@@ -1,4 +1,4 @@
-    9306 total
+    9315 total
      662 src/elm/Main.elm
      556 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -27,7 +27,7 @@
      135 src/elm/Stores.elm
      134 src/elm/Views/Landing.elm
      131 src/elm/Update/Keyboard.elm
-     121 src/elm/Views/EntityList.elm
+     130 src/elm/Views/EntityList.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
      103 src/elm/Todo/View.elm

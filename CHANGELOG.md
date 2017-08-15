@@ -1,5 +1,7 @@
 ## Upcoming
-* fix: schedule view count display 
+* fix: schedule view count display
+* feat: empty schedule view
+* feat: schedule view: add today and tomorrow 
 
 ## v0.22.0 - 2017-08-15
 * fix: landing header style

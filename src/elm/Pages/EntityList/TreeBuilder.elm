@@ -267,13 +267,13 @@ createEntityTree filter title appModel =
 
                 nodeList =
                     scheduleGroupModelList
-                        |> List.filterMap
-                            (\{ name } ->
+                        .|> (\{ name } ->
                                 scheduleTitleToTodoListDict
                                     |> Dict.get name
-                                    ?|> (\todoList ->
+                                    ?= []
+                                    |> (\todoList ->
                                             Tree.createTodoListNode name todoList 0
-                                        )
+                                       )
                             )
             in
             Tree.createTodoListForest nodeList

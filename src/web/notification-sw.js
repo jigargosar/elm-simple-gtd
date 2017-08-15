@@ -26,7 +26,7 @@ let extracted = async function (event, skipFocus) {
     if (clients.openWindow) {
       return clients
       // .openWindow(url)
-          .openWindow("#!/contexts")
+          .openWindow("/#!/contexts")
           .then(function (client) {
             setTimeout(function () {
               postMessage(client, event)

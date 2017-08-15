@@ -1,4 +1,4 @@
-## Upcoming
+## v0.22.4 - 2017-08-15
 * fix: link todo link click 
 
 ## v0.22.3 - 2017-08-15

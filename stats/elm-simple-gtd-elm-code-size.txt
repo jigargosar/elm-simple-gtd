@@ -1,4 +1,4 @@
-    9317 total
+    9318 total
      662 src/elm/Main.elm
      556 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -16,7 +16,7 @@
      178 src/elm/Todo/ViewModel.elm
      178 src/elm/AppDrawer/View.elm
      167 src/elm/AppDrawer/Model.elm
-     164 src/elm/Todo/ItemView.elm
+     165 src/elm/Todo/ItemView.elm
      161 src/elm/Data/Todo/Schedule.elm
      159 src/elm/Models/GroupDocStore.elm
      148 src/elm/X/Keyboard.elm

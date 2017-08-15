@@ -150,32 +150,6 @@ i {
 
 }
 
-.focusable-list .focusable-list-item {
-  outline: none;
-  position: relative;
-
-  &:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    pointer-events: none;
-  }
-
-  &.selected:before {
-    background-color: rgb(255, 255, 0);
-    opacity: 0.1;
-  }
-
-  &[tabindex="0"]:before {
-    background-color: black;
-    opacity: 0.1;
-  }
-
-}
 
 .ellipsis, .font-nowrap {
   @apply --font-nowrap;
@@ -233,24 +207,6 @@ paper-item, .has-hover-elements {
   }
 }
 
-.focusable-list .entity-item {
-  padding: 0.5rem 1rem;
-  border-left: 2px solid transparent;
-  background-color: white;
-
-  &:not(.selected):before {
-    background-color: transparent;
-  }
-
-  &[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.44);
-  }
-
-  &:focus[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.77);
-  }
-
-}
 
 #popup-menu {
 //position: absolute; position: fixed;
@@ -279,63 +235,6 @@ paper-item, .has-hover-elements {
   margin-right: 1rem;
 }
 
-.focusable-list .todo-item {
-  & .display-text-container {
-    cursor: pointer;
-    & .display-text a {
-      text-decoration: underline;
-      color: rgba(0, 0, 0, 0.60);
-    }
-    & .display-text a:hover {
-      color: rgba(0, 0, 0, 0.77);
-      text-decoration: underline;
-    }
-  }
-  &.can-be-focused .display-text-container {
-    cursor: pointer;
-  }
-}
-
-.focusable-list .todo-item.collection-item {
-  border-left: 2px solid transparent;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  &:not(.selected):before {
-    background-color: transparent;
-  }
-
-  &[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.44);
-  }
-
-  &:focus[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.77);
-  }
-
-  &.editing {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  & .display-text {
-    padding: 0 8px;
-    flex: 1 1;
-    /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
-    /* when indenting items using star, whitespace should not be lost*/
-  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
-  }
-
-  & .reminder-text.overdue {
-    text-decoration: underline red;
-  }
-
-  & .reminder-text {
-    text-decoration: underline black;
-    cursor: pointer;
-  }
-
-}
 
 .big-dialog {
   position: absolute;

@@ -111,6 +111,7 @@ parseDisplayText vm =
                 [ href url
                 , target "_blank"
                 , onMouseDownStopPropagation vm.noop
+                , onClickStopPropagation vm.noop
                 , tabindex vm.tabindexAV
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]

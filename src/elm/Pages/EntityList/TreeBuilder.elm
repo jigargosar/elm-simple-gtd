@@ -303,7 +303,9 @@ createEntityTree filter title appModel =
                                 in
                                 Tree.createTodoListNode name todoList 0
                             )
-                        |> AllDictList.values
+                        |> AllDictList.toList
+                        |> List.sortBy (Tuple.first >> scheduleGroupToComparable)
+                        .|> Tuple.second
             in
             case nodeList of
                 [] ->

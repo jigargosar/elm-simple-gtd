@@ -305,7 +305,12 @@ createEntityTree filter title appModel =
                             )
                         |> AllDictList.values
             in
-            Tree.createTodoListForest nodeList
+            case nodeList of
+                [] ->
+                    Tree.createEmptyTree filter
+
+                _ ->
+                    Tree.createTodoListForest nodeList
 
         NoFilter ->
             Tree.createForest []

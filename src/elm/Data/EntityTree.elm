@@ -1,5 +1,6 @@
 module Data.EntityTree exposing (..)
 
+import Data.EntityListFilter
 import Data.TodoDoc exposing (..)
 import Entity exposing (..)
 import Time exposing (Time)
@@ -27,6 +28,7 @@ type Tree
     | TodoList TodoListNode
     | GroupDocForest (List GroupDocEntityNode)
     | TodoListForest (List TodoListNode)
+    | EmptyTree Data.EntityListFilter.Filter
 
 
 flatten : Tree -> List Entity
@@ -47,6 +49,9 @@ flatten tree =
 
         TodoListForest nodeList ->
             nodeList |> List.concatMap (TodoList >> flatten)
+
+        EmptyTree filter ->
+            []
 
 
 createTodoList stringTitle todoList totalCount =
@@ -77,3 +82,7 @@ toEntityIdList tree =
 
 createTodoListForest nodeList =
     TodoListForest nodeList
+
+
+createEmptyTree filter =
+    EmptyTree filter

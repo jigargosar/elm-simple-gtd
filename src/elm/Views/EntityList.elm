@@ -1,5 +1,6 @@
 module Views.EntityList exposing (..)
 
+import Data.EntityListFilter exposing (Filter(ScheduledFilter))
 import Data.EntityTree exposing (GroupDocEntityNode(..), TodoListNode(..), TodoListNodeTitle(TitleWithTotalCount), Tree(..))
 import Entity exposing (GroupDocEntity(..))
 import GroupDoc exposing (GroupDocType(..))
@@ -59,6 +60,21 @@ keyedViewList pageVM =
 
                 TodoListForest nodeList ->
                     nodeList |> List.concatMap (TodoList >> createKeyedViewList)
+
+                EmptyTree filter ->
+                    case filter of
+                        ScheduledFilter ->
+                            [ ( "0"
+                              , Html.div
+                                    [ class "todo-list collection" ]
+                                    [ Html.div [ class "collection-item" ]
+                                        [ Html.h5 [] [ Html.text "No Items Scheduled" ] ]
+                                    ]
+                              )
+                            ]
+
+                        _ ->
+                            []
     in
     createKeyedViewList pageVM.entityTree
 

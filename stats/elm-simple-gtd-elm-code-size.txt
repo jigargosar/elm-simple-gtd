@@ -1,10 +1,10 @@
-    9276 total
+    9306 total
      662 src/elm/Main.elm
      556 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
      337 src/elm/Store.elm
      318 src/elm/GroupDoc.elm
-     311 src/elm/Pages/EntityList/TreeBuilder.elm
+     316 src/elm/Pages/EntityList/TreeBuilder.elm
      280 src/elm/Data/EntityListFilter.elm
      267 src/elm/Mat.elm
      251 src/elm/Pages/EntityList.elm
@@ -27,18 +27,18 @@
      135 src/elm/Stores.elm
      134 src/elm/Views/Landing.elm
      131 src/elm/Update/Keyboard.elm
+     121 src/elm/Views/EntityList.elm
      110 src/elm/Todo/Form.elm
      109 src/elm/Document.elm
-     105 src/elm/Views/EntityList.elm
      103 src/elm/Todo/View.elm
       98 src/elm/Data/EntityListCursor.elm
       93 src/elm/X/Time.elm
       90 src/elm/Entity.elm
       88 src/elm/X/Html.elm
+      88 src/elm/Data/EntityTree.elm
       81 src/elm/Views/MainMenuOverlay.elm
       81 src/elm/Colors.elm
       79 src/elm/GroupDoc/View.elm
-      79 src/elm/Data/EntityTree.elm
       77 src/elm/GroupDoc/FormView.elm
       74 src/elm/X/Function/Infix.elm
       72 src/elm/Firebase/Model.elm

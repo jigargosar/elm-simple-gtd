@@ -249,6 +249,7 @@
       "AppDrawer.View",
       "Data.EntityListCursor",
       "Data.EntityListFilter",
+      "Data.EntityTree",
       "GroupDoc.FormView",
       "GroupDoc.View",
       "GroupDoc.ViewModel",
@@ -265,7 +266,7 @@
       "Views.Frame",
       "Views.Landing"
     ],
-    "transitiveBackwardImportsCount": 19
+    "transitiveBackwardImportsCount": 20
   },
   "Data.DeviceId": {
     "fileName": "src/elm/Data/DeviceId.elm",
@@ -437,39 +438,49 @@
     "transitiveImportsCount": 27,
     "backwardImports": [
       "Data.EntityListCursor",
+      "Data.EntityTree",
       "Pages.EntityList",
-      "Pages.EntityList.TreeBuilder"
+      "Pages.EntityList.TreeBuilder",
+      "Views.EntityList"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 5,
     "transitiveBackwardImports": [
       "Data.EntityListCursor",
+      "Data.EntityTree",
       "Main",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
-      "ViewModel.EntityList"
+      "ViewModel.EntityList",
+      "Views.EntityList"
     ],
-    "transitiveBackwardImportsCount": 5
+    "transitiveBackwardImportsCount": 7
   },
   "Data.EntityTree": {
     "fileName": "src/elm/Data/EntityTree.elm",
     "moduleName": "Data.EntityTree",
     "parentModuleName": "Data",
     "imports": [
+      "Data.EntityListFilter",
       "Data.TodoDoc",
       "Entity",
       "Time",
       "Toolkit.Operators"
     ],
-    "importsCount": 4,
+    "importsCount": 5,
     "transitiveImports": [
       "Char",
+      "Color",
+      "Color.Mixing",
+      "Colors",
       "Data.DeviceId",
+      "Data.EntityListFilter",
       "Data.Todo.Schedule",
       "Data.TodoDoc",
       "Dict",
       "Document",
       "Entity",
       "GroupDoc",
+      "IconNames",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
@@ -491,7 +502,7 @@
       "X.Random",
       "X.Record"
     ],
-    "transitiveImportsCount": 28,
+    "transitiveImportsCount": 33,
     "backwardImports": [
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
@@ -1608,13 +1619,15 @@
       "AppDrawer.View",
       "Data.EntityListCursor",
       "Data.EntityListFilter",
+      "Data.EntityTree",
       "Main",
       "Pages.EntityList",
       "Pages.EntityList.TreeBuilder",
       "ViewModel.EntityList",
+      "Views.EntityList",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 8
+    "transitiveBackwardImportsCount": 10
   },
   "Main": {
     "fileName": "src/elm/Main.elm",
@@ -3904,6 +3917,7 @@
     "moduleName": "Views.EntityList",
     "parentModuleName": "Views",
     "imports": [
+      "Data.EntityListFilter",
       "Data.EntityTree",
       "Entity",
       "GroupDoc",
@@ -3915,13 +3929,14 @@
       "Toolkit.Operators",
       "Views.Badge"
     ],
-    "importsCount": 10,
+    "importsCount": 11,
     "transitiveImports": [
       "Char",
       "Color",
       "Color.Mixing",
       "Colors",
       "Data.DeviceId",
+      "Data.EntityListFilter",
       "Data.EntityTree",
       "Data.Todo.Schedule",
       "Data.TodoDoc",
@@ -3934,6 +3949,7 @@
       "Html.Attributes",
       "Html.Events",
       "Html.Keyed",
+      "IconNames",
       "Json.Decode",
       "Json.Decode.Pipeline",
       "Json.Encode",
@@ -3971,7 +3987,7 @@
       "X.Record",
       "X.String"
     ],
-    "transitiveImportsCount": 53,
+    "transitiveImportsCount": 55,
     "backwardImports": [
       "Main"
     ],

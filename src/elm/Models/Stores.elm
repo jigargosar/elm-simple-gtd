@@ -9,44 +9,43 @@ import X.Function.Infix exposing (..)
 import X.Predicate
 
 
-isTodoContextActive model =
-    TodoDoc.getContextId
-        >> GDStore.findContextByIdIn model
-        >>? GroupDoc.isActive
-        >>?= True
-
-
-isTodoProjectActive model =
-    TodoDoc.getProjectId
-        >> GDStore.findProjectByIdIn model
-        >>? GroupDoc.isActive
-        >>?= True
-
-
 getActiveTodoListHavingActiveContext model =
-    model.todoStore |> Store.filterDocs (allPass [ TodoDoc.isActive, isTodoContextActive model ])
+    model.todoStore
+        |> Store.filterDocs
+            (allPass
+                [ TodoDoc.isActive
+                , todoGroupDocActivePredicate ContextGroupDocType model
+                ]
+            )
 
 
 getActiveTodoListHavingActiveProject model =
-    model.todoStore |> Store.filterDocs (allPass [ TodoDoc.isActive, isTodoProjectActive model ])
+    model.todoStore
+        |> Store.filterDocs
+            (allPass
+                [ TodoDoc.isActive
+                , todoGroupDocActivePredicate ProjectGroupDocType model
+                ]
+            )
 
 
 todoGroupDocActivePredicate : GroupDocType -> HasGroupDocStores a -> (TodoDoc -> Bool)
 todoGroupDocActivePredicate gdType model =
     let
-        activeProjectIdSet =
+        match =
             GDStore.getActiveDocIdSet gdType model
+                |> TodoDoc.hasGroupDocIdInSet gdType
     in
-    TodoDoc.hasGroupDocIdInSet gdType activeProjectIdSet
+    \todoDoc -> match todoDoc
 
 
 allTodoGroupDocActivePredicate : HasGroupDocStores a -> (TodoDoc -> Bool)
 allTodoGroupDocActivePredicate model =
     let
-        _ =
-            1
+        match =
+            X.Predicate.all
+                [ todoGroupDocActivePredicate ProjectGroupDocType model
+                , todoGroupDocActivePredicate ContextGroupDocType model
+                ]
     in
-    X.Predicate.all
-        [ todoGroupDocActivePredicate ProjectGroupDocType model
-        , todoGroupDocActivePredicate ContextGroupDocType model
-        ]
+    \todoDoc -> match todoDoc

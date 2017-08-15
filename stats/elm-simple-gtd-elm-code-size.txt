@@ -1,4 +1,4 @@
-    9214 total
+    9213 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -49,7 +49,7 @@
       60 src/elm/ExclusiveMode/Update.elm
       56 src/elm/Overlays/MainMenu.elm
       55 src/elm/AppUrl.elm
-      52 src/elm/Models/Stores.elm
+      51 src/elm/Models/Stores.elm
       49 src/elm/Todo/ReminderOverlay/Model.elm
       47 src/elm/Update/AppDrawer.elm
       46 src/elm/Notification.elm

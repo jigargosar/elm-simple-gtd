@@ -196,6 +196,12 @@ scheduleGroupModelList =
                 (Date.fromTime now)
                 (Date.fromTime scheduleTime)
         )
+    , ScheduleGroupModel "Tomorrow"
+        (\now scheduleTime ->
+            Date.Extra.equalBy Date.Extra.Day
+                (Date.fromTime now |> Date.Extra.add Date.Extra.Day 1)
+                (Date.fromTime scheduleTime)
+        )
     , defaultScheduleGroupModel
     ]
 

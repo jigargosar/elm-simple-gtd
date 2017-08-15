@@ -79,7 +79,12 @@ flatTodoListView title totalCount todoListView =
                     todoListView |> List.length
 
                 titleSuffix =
-                    [ count, totalCount ]
+                    count
+                        :: (if totalCount > 0 then
+                                [ totalCount ]
+                            else
+                                []
+                           )
                         .|> toString
                         |> String.join "/"
             in

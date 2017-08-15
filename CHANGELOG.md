@@ -1,3 +1,6 @@
+## Upcoming
+* fix: schedule view count display 
+
 ## v0.22.0 - 2017-08-15
 * fix: landing header style
 * feat: add scheduled entityList filter

@@ -177,14 +177,6 @@ type ScheduleGroup
     | Later
 
 
-scheduleGroupList =
-    [ OverDue
-    , Today
-    , Tomorrow
-    , Later
-    ]
-
-
 type alias ScheduleGroupModel =
     { name : String
     , filter : Time -> Time -> Bool
@@ -223,7 +215,7 @@ scheduleGroupToModel scheduleGroup =
                 Later
 
 
-scheduleGroupToInt scheduleGroup =
+scheduleGroupToComparable scheduleGroup =
     case scheduleGroup of
         OverDue ->
             0
@@ -240,7 +232,12 @@ scheduleGroupToInt scheduleGroup =
 
 scheduleGroupModelList : List ScheduleGroupModel
 scheduleGroupModelList =
-    scheduleGroupList .|> scheduleGroupToModel
+    [ OverDue
+    , Today
+    , Tomorrow
+    , Later
+    ]
+        .|> scheduleGroupToModel
 
 
 getScheduleGroupForTodo now todo =
@@ -295,7 +292,7 @@ createEntityTree filter title appModel =
                 nodeList =
                     TodoDocStore.filterTodoDocs scheduledTodoPredicate appModel
                         |> List.sortBy (TodoDoc.getMaybeTime >>?= 0)
-                        |> AllDictList.groupBy scheduleGroupToInt
+                        |> AllDictList.groupBy scheduleGroupToComparable
                             (getScheduleGroupForTodo appModel.lastKnownCurrentTime)
                         |> AllDictList.map
                             (\scheduleGroup todoList ->

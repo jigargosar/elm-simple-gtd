@@ -169,49 +169,65 @@ flatFilterTypeToPredicate filterType =
             Document.isDeleted
 
 
-scheduleGroupNames =
-    [ "Overdue", "Later" ]
-
-
 type ScheduleGroup
     = OverDue
+    | Today
+    | Tomorrow
     | Later
+
+
+scheduleGroupList =
+    [ OverDue
+    , Today
+    , Tomorrow
+    , Later
+    ]
 
 
 type alias ScheduleGroupModel =
     { name : String
     , filter : Time -> Time -> Bool
+    , scheduleGroup : ScheduleGroup
     }
 
 
-laterScheduleGroupModel =
-    ScheduleGroupModel "Later" (\now scheduleTime -> True)
+scheduleGroupToModel scheduleGroup =
+    case scheduleGroup of
+        OverDue ->
+            ScheduleGroupModel "Overdue"
+                (\now scheduleTime -> scheduleTime < now)
+                OverDue
+
+        Today ->
+            ScheduleGroupModel "Today"
+                (\now scheduleTime ->
+                    Date.Extra.equalBy Date.Extra.Day
+                        (Date.fromTime now)
+                        (Date.fromTime scheduleTime)
+                )
+                Today
+
+        Tomorrow ->
+            ScheduleGroupModel "Tomorrow"
+                (\now scheduleTime ->
+                    Date.Extra.equalBy Date.Extra.Day
+                        (Date.fromTime now |> Date.Extra.add Date.Extra.Day 1)
+                        (Date.fromTime scheduleTime)
+                )
+                Tomorrow
+
+        Later ->
+            ScheduleGroupModel "Later"
+                (\now scheduleTime -> True)
+                Later
 
 
-todayScheduleGroupModel =
-    ScheduleGroupModel "Today"
-        (\now scheduleTime ->
-            Date.Extra.equalBy Date.Extra.Day
-                (Date.fromTime now)
-                (Date.fromTime scheduleTime)
-        )
-
-
-tomorrowScheduleGroupModel =
-    ScheduleGroupModel "Tomorrow"
-        (\now scheduleTime ->
-            Date.Extra.equalBy Date.Extra.Day
-                (Date.fromTime now |> Date.Extra.add Date.Extra.Day 1)
-                (Date.fromTime scheduleTime)
-        )
+defaultScheduleGroupModel =
+    scheduleGroupToModel Later
 
 
 scheduleGroupModelList =
-    [ ScheduleGroupModel "Overdue" (\now scheduleTime -> scheduleTime < now)
-    , todayScheduleGroupModel
-    , tomorrowScheduleGroupModel
-    , laterScheduleGroupModel
-    ]
+    scheduleGroupList .|> scheduleGroupToModel
 
 
 toScheduleTitleString now todo =
@@ -222,7 +238,7 @@ toScheduleTitleString now todo =
         { name } =
             scheduleGroupModelList
                 |> List.Extra.find (\{ filter } -> filter now scheduleTime)
-                ?= laterScheduleGroupModel
+                ?= defaultScheduleGroupModel
     in
     name
 

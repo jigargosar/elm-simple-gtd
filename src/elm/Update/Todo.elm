@@ -6,7 +6,8 @@ import DomPorts
 import Entity exposing (..)
 import EntityId
 import ExclusiveMode.Types exposing (ExclusiveMode(XMTodoForm))
-import GroupDoc
+import GroupDoc exposing (GroupDocStore)
+import Models.Stores
 import Models.TodoDocStore as TodoDocStore
 import Notification exposing (Response)
 import Ports.Todo
@@ -21,6 +22,7 @@ import Todo.ReminderOverlay.Types exposing (TodoReminderOverlayModel)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (applyMaybeWith)
 import X.Function.Infix exposing (..)
+import X.Predicate
 import X.Record as Record exposing (..)
 import X.Return exposing (..)
 import X.Time
@@ -143,6 +145,8 @@ onSetContextAndMaybeSelectionMsg id =
 type alias SubModel model =
     { model
         | todoStore : TodoStore
+        , projectStore : GroupDocStore
+        , contextStore : GroupDocStore
         , reminderOverlay : TodoReminderOverlayModel
         , selectedEntityIdSet : Set DocId
     }
@@ -271,7 +275,11 @@ findAndSnoozeOverDueTodo config now model =
                    )
     in
     Store.findBy
-        (TodoDoc.isReminderOverdue now)
+        (X.Predicate.all
+            [ TodoDoc.isReminderOverdue now
+            , Models.Stores.allTodoGroupDocActivePredicate model
+            ]
+        )
         model.todoStore
         ?+> (Document.getId >> snooze)
 

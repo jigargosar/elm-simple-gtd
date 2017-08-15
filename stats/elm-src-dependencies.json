@@ -2045,11 +2045,12 @@
       "Todo.GroupEditView",
       "Update.GroupDoc",
       "Update.Keyboard",
+      "Update.Todo",
       "ViewModel.EntityList",
       "ViewModel.Frame",
       "Views.Frame"
     ],
-    "transitiveBackwardImportsCount": 12
+    "transitiveBackwardImportsCount": 13
   },
   "Models.HasStores": {
     "fileName": "src/elm/Models/HasStores.elm",
@@ -2168,15 +2169,17 @@
     ],
     "transitiveImportsCount": 28,
     "backwardImports": [
-      "AppDrawer.GroupViewModel"
+      "AppDrawer.GroupViewModel",
+      "Update.Todo"
     ],
-    "backwardImportsCount": 1,
+    "backwardImportsCount": 2,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Main",
+      "Update.Todo",
       "ViewModel.Frame"
     ],
-    "transitiveBackwardImportsCount": 3
+    "transitiveBackwardImportsCount": 4
   },
   "Models.TodoDocStore": {
     "fileName": "src/elm/Models/TodoDocStore.elm",
@@ -3601,6 +3604,7 @@
       "EntityId",
       "ExclusiveMode.Types",
       "GroupDoc",
+      "Models.Stores",
       "Models.TodoDocStore",
       "Notification",
       "Ports.Todo",
@@ -3615,11 +3619,12 @@
       "Toolkit.Operators",
       "X.Function",
       "X.Function.Infix",
+      "X.Predicate",
       "X.Record",
       "X.Return",
       "X.Time"
     ],
-    "importsCount": 24,
+    "importsCount": 26,
     "transitiveImports": [
       "Char",
       "Data.DeviceId",
@@ -3649,6 +3654,8 @@
       "Maybe.Extra",
       "Menu",
       "Menu.Types",
+      "Models.GroupDocStore",
+      "Models.Stores",
       "Models.TodoDocStore",
       "Notification",
       "Ports.Todo",
@@ -3680,7 +3687,7 @@
       "X.Return",
       "X.Time"
     ],
-    "transitiveImportsCount": 58,
+    "transitiveImportsCount": 60,
     "backwardImports": [
       "Main"
     ],
@@ -4784,9 +4791,10 @@
     "backwardImports": [
       "GroupDoc",
       "Models.Stores",
-      "Pages.EntityList.TreeBuilder"
+      "Pages.EntityList.TreeBuilder",
+      "Update.Todo"
     ],
-    "backwardImportsCount": 3,
+    "backwardImportsCount": 4,
     "transitiveBackwardImports": [
       "AppDrawer.GroupViewModel",
       "Data.EntityListCursor",

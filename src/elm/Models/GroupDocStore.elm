@@ -11,8 +11,8 @@ import X.Function.Infix exposing (..)
 import X.Record exposing (..)
 
 
-type alias HasGroupDocStores model =
-    { model
+type alias HasGroupDocStores a =
+    { a
         | projectStore : GroupDocStore
         , contextStore : GroupDocStore
     }
@@ -48,17 +48,10 @@ filterNull gdType pred =
     [ getNullDoc gdType ] |> List.filter pred
 
 
+filter : GroupDocType -> (GroupDoc -> Bool) -> HasGroupDocStores a -> List GroupDoc
 filter gdType pred model =
-    let
-        store =
-            getStore gdType model
-
-        sortWithNullIncluded =
-            GroupDoc.sortWithIsNull (equals (getNullDoc gdType))
-    in
-    Store.filterDocs pred store
-        --|> List.append (filterNull gdType pred)
-        --|> sortWithNullIncluded
+    getStore gdType model
+        |> Store.filterDocs pred
         |> GroupDoc.sort
         |> List.append (filterNull gdType pred)
 
@@ -134,11 +127,12 @@ getNullFromGroupDocType gdType =
             nullProject
 
 
+getActiveDocs : GroupDocType -> HasGroupDocStores a -> List GroupDoc
 getActiveDocs gdType =
     filter gdType GroupDoc.isActive
 
 
-getActiveDocIdSet : GroupDocType -> HasGroupDocStores x -> Set DocId
+getActiveDocIdSet : GroupDocType -> HasGroupDocStores a -> Set DocId
 getActiveDocIdSet =
     getActiveDocs
         >>> List.map Document.getId
@@ -155,12 +149,7 @@ getActiveContexts =
 
 storeFieldFromGDType :
     GroupDocType
-    ->
-        FieldLens GroupDocStore
-            { model
-                | projectStore : GroupDocStore
-                , contextStore : GroupDocStore
-            }
+    -> FieldLens GroupDocStore (HasGroupDocStores a)
 storeFieldFromGDType gdType =
     case gdType of
         ProjectGroupDocType ->

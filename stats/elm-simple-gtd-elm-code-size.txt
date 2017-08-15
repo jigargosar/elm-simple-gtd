@@ -1,4 +1,4 @@
-    9203 total
+    9200 total
      662 src/elm/Main.elm
      546 src/elm/Update/Todo.elm
      398 src/elm/Data/TodoDoc.elm
@@ -15,10 +15,10 @@
      187 src/elm/Firebase/Update.elm
      178 src/elm/Todo/ViewModel.elm
      178 src/elm/AppDrawer/View.elm
-     170 src/elm/Models/GroupDocStore.elm
      167 src/elm/AppDrawer/Model.elm
      164 src/elm/Todo/ItemView.elm
      161 src/elm/Data/Todo/Schedule.elm
+     159 src/elm/Models/GroupDocStore.elm
      148 src/elm/X/Keyboard.elm
      147 src/elm/Update/GroupDoc.elm
      146 src/elm/X/Function.elm
@@ -60,9 +60,9 @@
       39 src/elm/X/Random.elm
       39 src/elm/X/Date.elm
       39 src/elm/Sequencer.elm
+      38 src/elm/Models/Stores.elm
       37 src/elm/Data/User.elm
       32 src/elm/Ports/Firebase.elm
-      30 src/elm/Models/Stores.elm
       24 src/elm/ViewModel/Frame.elm
       24 src/elm/EntityId.elm
       23 src/elm/Views/Badge.elm
